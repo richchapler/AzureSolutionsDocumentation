@@ -3,10 +3,8 @@
 *Note: To demonstrate sharing data to a target, you must instantiate a second Data Explorer instance*
 
 Complete the following steps:
-
-Complete the “**Create Data Share**” form
-
-Click the “**Review + create**” button, validate settings, and then click the **Create** button
+- Complete the “**Create Data Share**” form
+- Click the “**Review + create**” button, validate settings, and then click the **Create** button
 
 #### Sent Shares
 
