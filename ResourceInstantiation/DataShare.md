@@ -1,4 +1,4 @@
-# Data Share
+# Resource Instantiation >> Data Share
 
 *Note: To demonstrate sharing data to a target, you must instantiate a second Data Explorer instance*
 
