@@ -1,6 +1,6 @@
 ### Data Share
 
-Note: To demonstrate sharing data to a target, you must instantiate a second Data Explorer instance.
+*Note: To demonstrate sharing data to a target, you must instantiate a second Data Explorer instance*
 
 Complete the following steps:
 
