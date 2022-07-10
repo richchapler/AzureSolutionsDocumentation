@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "microsoft.storagesync/storageSyncServices",
+      "apiVersion": "[providers('Microsoft.StorageSync','storageSyncServices').apiVersions[0]]",
+      "name": "[concat(resourceGroup().name,'sss')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "incomingTrafficPolicy": "AllowAllTraffic"
+      }
+    }
+  ]
+}
