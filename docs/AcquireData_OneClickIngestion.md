@@ -1,3 +1,5 @@
+[Acquire Data](AcquireData.md) > No Code > "One-Click" Ingestion
+
 ## Use Case
 
 Requirement statements:
