@@ -1,4 +1,4 @@
-This section includes only a few of the countless combinations of source, target, and method.
+## Contents
 
 ### No Code
 
