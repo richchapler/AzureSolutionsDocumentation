@@ -1,4 +1,4 @@
-[Acquire Data](AcquireData.md) > **No Code** > **"One-Click" Ingestion**
+[Acquire Data](AcquireData.md) > No Code > **"One-Click" Ingestion**
 
 ## Use Case
 
