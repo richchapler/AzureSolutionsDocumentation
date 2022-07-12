@@ -8,7 +8,7 @@ I have tried to keep these instructions free of the obvious:
 * When the interface asks for a **Name**, enter a meaningful name aligned with standards
 * When I mention that you need to use a resource {e.g., a Key Vault}, this should imply that you will need to have instantiated a Key Vault
 
-### ...by Resource Type
+### Contents
 
 > [Application Registration](https://github.com/richchapler/AzureDataSolutions/wiki/Application-Registration)
 
