@@ -1,3 +1,5 @@
+# "One-Click" Ingestion
+
 ## Use Case
 
 Requirement statements:
