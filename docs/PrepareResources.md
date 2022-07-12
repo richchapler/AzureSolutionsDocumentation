@@ -1,4 +1,4 @@
-## Resource Instantiation
+## Prepare Resources
 
 I have tried to keep these instructions free of the obvious:
 
@@ -7,6 +7,8 @@ I have tried to keep these instructions free of the obvious:
 * When the interface says **Region** (or something similar like **Location**), select the same region used by the resource group (or a different value, if appropriate)
 * When the interface asks for a **Name**, enter a meaningful name aligned with standards
 * When I mention that you need to use a resource {e.g., a Key Vault}, this should imply that you will need to have instantiated a Key Vault
+
+### Resource Instantiation
 
 > [Application Registration](https://github.com/richchapler/AzureDataSolutions/wiki/Application-Registration)
 
