@@ -20,4 +20,4 @@ _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 * Click the **Next: Security >** button and then select the **Use only Azure Active Directory (Azure AD) authentication** radio button
   _Note: Though local authentication may be appropriate to some use cases, I do not typically recommend it_
 
-* Click the **Review + create** button, review configuration, and then click **Create**
+* Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
