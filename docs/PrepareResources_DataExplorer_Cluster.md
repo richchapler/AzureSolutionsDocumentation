@@ -1,4 +1,4 @@
-[Prepare Resources](PrepareResources.md) > **Data Explorer Cluster**
+[Prepare Resources](PrepareResources.md) > Data Explorer > **Cluster**
 
 _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused with Data Explorer Pool functionality in Synapse)_
 
