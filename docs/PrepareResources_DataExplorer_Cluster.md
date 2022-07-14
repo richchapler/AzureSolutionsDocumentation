@@ -15,7 +15,3 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused w
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
 * Click **Review + create**, review configuration, and then click **Create**
-
-### See Also
-
-> [Database](PrepareResources_DataExplorer_Database.md)
