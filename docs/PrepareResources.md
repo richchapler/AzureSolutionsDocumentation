@@ -14,7 +14,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [Data Explorer Cluster](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Explorer-Cluster)
 
-> [Data Lake](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Lake)
+> [Data Lake](PrepareResources_DataLake.md)
 
 > [Data Migration Assistant](https://www.microsoft.com/en-us/download/details.aspx?id=53595)
 
