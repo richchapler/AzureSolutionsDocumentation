@@ -1,4 +1,4 @@
-[Prepare Resources](PrepareResources.md) > Data Explorer > [Cluster](PrepareResources_DataExplorer_Cluster.md) > **Database**
+[Prepare Resources](PrepareResources.md) > Data Explorer > **Database**
 
 _Note: These instructions can apply to either Data Explorer Clusters or Data Explorer Pools_
 
