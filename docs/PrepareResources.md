@@ -1,6 +1,6 @@
-**Prepare Resources**
+## Prepare Resources
 
-## Resource Instantiation
+### Resource Instantiation
 
 I have tried to keep these instructions free of the obvious:
 
