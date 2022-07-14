@@ -2,8 +2,15 @@
 
 Requirement statements might include:
 
-* "Devices running Application X, running around the world, continuously drop files into the Data Lake"
-* “We want to automatically ingest data files as they appear”
+Cost Management
+•	“We tried using the Power BI, Cost Management connector but lack sufficient permissions at the billing account (and that is not going to change because of corporate policy)”
+Log Analytics
+•	“We capture logs from various device and apps to Log Analytics”
+•	“We want to capture Log Analytics data and maintain an extended history”
+Purview
+•	“We want to use Purview to collect source metadata from Azure resources”
+•	“Can we port Purview-collected metadata into our corporate-approved solution?”
+
 
 ### Step 1: Prepare Resources
 
