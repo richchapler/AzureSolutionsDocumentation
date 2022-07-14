@@ -7,6 +7,8 @@
 * Click **+ New**
 * Complete the **New linked service…** pop-out form, following the instructions below depending on the Linked Service Type
 
-#### Azure Data Lake Storage Gen2
+  #### Azure Data Lake Storage Gen2
 
-![image](https://user-images.githubusercontent.com/44923999/179088852-b85eca3f-4ea3-4e53-80d0-a19e47bf5fd3.png)
+  <img src="https://user-images.githubusercontent.com/44923999/179089406-89004791-8bc1-4dc3-ab4d-33f624238e65.png" width="800" title="Snipped: July 14, 2022" />
+  
+* Click **Test connection** to confirm successful connection and then click **Create**
