@@ -1,3 +1,5 @@
+[Prepare Resources](PrepareResources.md) > **Application Registration**
+
 _(aka "Client", "Service Principal")_
 
 ## Create with Azure Portal
