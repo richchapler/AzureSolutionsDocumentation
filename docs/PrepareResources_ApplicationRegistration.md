@@ -9,6 +9,6 @@ _(aka "Client", "Service Principal")_
 
   <img src="https://user-images.githubusercontent.com/44923999/178037482-52960bbb-3b19-4950-9e44-646d98e9d3a4.png" width="600" title="Snipped: July 8, 2022" />
   
-  * Click **Register**
+* Click **Register**
 
 _Note: Consider generating a Key Vault Secret for both Client Identifier and Client Secret values_
