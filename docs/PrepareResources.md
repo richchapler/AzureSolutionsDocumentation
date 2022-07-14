@@ -14,9 +14,9 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Application Registration**](PrepareResources_ApplicationRegistration.md)
 
-> **Data Explorer** >> [Cluster](PrepareResources_DataExplorer_Cluster.md) | [Database](PrepareResources_DataExplorer_Database.md)
+> **Data Explorer** >> [Cluster](PrepareResources_DataExplorer_Cluster.md) > [Database](PrepareResources_DataExplorer_Database.md)
 
-> [**Data Lake**](PrepareResources_DataLake.md) >> [Container](PrepareResources_DataLake_Container.md) | [Sample Data](PrepareResources_DataLake_SampleData.md)
+> [**Data Lake**](PrepareResources_DataLake.md) >> [Container](PrepareResources_DataLake_Container.md) > [Sample Data](PrepareResources_DataLake_SampleData.md)
 
 > [**Data Migration Assistant**](https://www.microsoft.com/en-us/download/details.aspx?id=53595)
 
