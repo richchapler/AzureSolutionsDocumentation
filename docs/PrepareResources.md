@@ -22,6 +22,6 @@ I have tried to keep these instructions free of the obvious:
 
 > [Event Hub](PrepareResources_EventHub.md)
 
-> [Resource Group](https://github.com/richchapler/AzureDataSolutions/wiki/Resource-Group)
+> [Resource Group](PrepareResources_ResourceGroup.md)
 
 > [Storage Account](https://github.com/richchapler/AzureDataSolutions/wiki/Storage-Account)
