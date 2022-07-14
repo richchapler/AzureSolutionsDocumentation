@@ -2,7 +2,7 @@
 
 _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused with Data Explorer Pool functionality in Synapse)_
 
-## Create with Azure Portal
+### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
@@ -16,6 +16,6 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused w
 
 * Click **Review + create**, review configuration, and then click **Create**
 
-## See Also
-> [Data Explorer Database](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Explorer-Database)
+### See Also
 
+> [Database](PrepareResources_DataExplorer_Database.md)
