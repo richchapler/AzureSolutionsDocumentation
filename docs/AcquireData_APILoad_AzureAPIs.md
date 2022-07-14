@@ -1,4 +1,4 @@
-## "One-Click" Ingestion
+## Source from Azure APIs
 
 Requirement statements might include:
 
