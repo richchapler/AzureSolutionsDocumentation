@@ -1,16 +1,18 @@
-# "One-Click" Ingestion
+## "One-Click" Ingestion
 
-Use case / requirement statements might include:
+Requirement statements might include:
 
 * "Devices running Application X, running around the world, continuously drop files into the Data Lake"
 * “We want to automatically ingest data files as they appear”
+
+### Step 1: Prepare Resources
 
 This solution requires the following resources:
 
 * [Data Explorer Cluster](PrepareResources_DataExplorer_Cluster.md) (with [database](PrepareResources_DataExplorer_Database.md))
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md) and downloaded [sample data](https://github.com/richchapler/AzureDataSolutions/wiki/Sample-Data))
 
-## One-Time Ingestion
+### Step 2: One-Time Ingestion
 
 Complete the following steps:
 
@@ -43,24 +45,7 @@ Complete the following steps:
 
 * Allow time for processing, then on the resulting **Data ingestion completed** page, confirm successful Ingestion Preparation, Ingestion and Data Preview
 
-You have completed the One-Time Ingestion.
-
-**BUT WAIT, you are not yet configured for continuous ingestion... do not click Close yet!**
-
-## Continuous Ingestion
-
-Complete the following steps:
-* Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header
-
-  <img src="https://user-images.githubusercontent.com/44923999/178315981-baca4ff4-65cb-46c1-8a7f-29ba9a7bad6e.png" width="500" title="Snipped: July 11, 2022" />
-
-* Complete the **Data connection** pop-out form
-* Click **Next: Ingest properties >** and then review default values on the **Ingest properties** tab
-* Click **Next: Review + create >**, confirm configuration and then click **Create**
-
-## Confirm Success
-
-### One-Time Ingestion
+#### Confirm Success
 
 Complete the following steps:
 * Navigate to https://dataexplorer.azure.com/ and then click **Query** in the navigation pane
@@ -71,7 +56,22 @@ Complete the following steps:
 
 You should see the data from the One-Time Ingestion.
 
-### Continuous Ingestion
+You have completed the One-Time Ingestion.
+
+**BUT WAIT, you are not yet configured for continuous ingestion... do not click Close yet!**
+
+### Step 3: Continuous Ingestion
+
+Complete the following steps:
+* Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header
+
+  <img src="https://user-images.githubusercontent.com/44923999/178315981-baca4ff4-65cb-46c1-8a7f-29ba9a7bad6e.png" width="500" title="Snipped: July 11, 2022" />
+
+* Complete the **Data connection** pop-out form
+* Click **Next: Ingest properties >** and then review default values on the **Ingest properties** tab
+* Click **Next: Review + create >**, confirm configuration and then click **Create**
+
+#### Confirm Success
 
 Complete the following steps:
 * Navigate to your Data Lake, then **Storage Browser…** in the navigation pane
@@ -86,7 +86,9 @@ Complete the following steps:
 
 You should see the old data plus new data from the copy of the sample1.csv file.
 
-## Pro Tips
+### Bonus Content
+
+#### Pro Tips
 
 * Ingestion can be delayed by system processing... be patient (but not too patient!)
 * Consider increasing the speed of ingestion (for testing) by executing the following KQL:<br />
@@ -95,5 +97,5 @@ You should see the old data plus new data from the copy of the sample1.csv file.
 `.show ingestion failures | take 10`
 * Last, but not least… if you have **Auto-Stop** activated, it can negatively impact continuous ingestion
 
-## Reference
+### Reference
 > https://docs.microsoft.com/en-us/azure/data-explorer/ingest-data-one-click
