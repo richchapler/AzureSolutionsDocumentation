@@ -17,6 +17,6 @@ _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
-* Click **Review + create**, review configuration, and then click **Create**
+* Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
 _Note: When a Storage Account is configured for Data Lake Storage, you will see **Hierarchical Namespace**: Enabled on the Overview page_
