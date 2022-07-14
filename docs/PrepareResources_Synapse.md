@@ -3,11 +3,10 @@ _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 
 ## Create with Azure Portal
 
-Complete the “Create Synapse workspace” form, including:
-* Navigate to **Azure Active Directory** and click on **App Registrations** in the Manage group of the navigation pane
-* Click **+ New Registration**
-* Complete the **Register an application** form, and then click **Register**
+* Click the menu button in the upper-left corner of the Azure Portal
+* Click **+ Create a resource** in the resulting dropdown
+* Use the **Search services and marketplace** textbox to search for "synapse" and select the appropriate dropdown value
+* Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
+* Complete the **Create Synapse workspace** form
 
-  <img src="https://user-images.githubusercontent.com/44923999/178037482-52960bbb-3b19-4950-9e44-646d98e9d3a4.png" width="600" title="Snipped: July 8, 2022" />
-
-_Note: Consider generating a Key Vault Secret for both Client Identifier and Client Secret values_
+  <img src="https://user-images.githubusercontent.com/44923999/179077930-cd2745c0-3d14-4db8-b8ae-a37cb18295a1.png" width="800" title="Snipped: July 14, 2022" />
