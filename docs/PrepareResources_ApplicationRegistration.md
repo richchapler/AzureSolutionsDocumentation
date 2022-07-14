@@ -1,5 +1,4 @@
-[Prepare Resources](PrepareResources.md) > **Application Registration**
-
+## Application Registration
 _(aka "Client", "Service Principal")_
 
 ## Create with Azure Portal
@@ -8,6 +7,6 @@ _(aka "Client", "Service Principal")_
 * Click **+ New Registration**
 * Complete the **Register an application** form, and then click **Register**
 
-  <img src="https://user-images.githubusercontent.com/44923999/178037482-52960bbb-3b19-4950-9e44-646d98e9d3a4.png" width="800" title="Snipped: July 8, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178037482-52960bbb-3b19-4950-9e44-646d98e9d3a4.png" width="600" title="Snipped: July 8, 2022" />
 
 _Note: Consider generating a Key Vault Secret for both Client Identifier and Client Secret values_
