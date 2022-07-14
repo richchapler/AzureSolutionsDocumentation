@@ -26,4 +26,4 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Storage Account**](PrepareResources_StorageAccount.md)
 
-> [**Synapse**](PrepareResources_Synapse.md) >> Linked Service
+> [**Synapse**](PrepareResources_Synapse.md) >> [Linked Service](PrepareResources_Synapse_LinkedService.md)
