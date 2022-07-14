@@ -22,7 +22,7 @@ _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 _Note: When a Storage Account is configured for Data Lake Storage, you will see **Hierarchical Namespace**: Enabled on the Overview page_
 
 ## See Also
-> [Data Lake Container](PrepareResources_DataLake_Container.md)
+> [Container](PrepareResources_DataLake_Container.md)
 
 > [Sample Data](PrepareResources_DataLake_SampleData.md)
 
