@@ -25,6 +25,6 @@ _Note: When a Storage Account is configured for Data Lake Storage, you will see 
 ## See Also
 > [Data Lake Container](PrepareResources_DataLake_Container.md)
 
-> [Sample Data](https://github.com/richchapler/AzureDataSolutions/wiki/Sample-Data)
+> [Sample Data](PrepareResources_DataLake_SampleData.md)
 
-> [Storage Explorer](https://azure.microsoft.com/en-us/features/storage-explorer/)
+> [Storage Explorer](PrepareResources_StorageAccount.md)
