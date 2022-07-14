@@ -25,4 +25,4 @@
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
-* Click the **Review + create** button, review configuration, and then click **Create**
+* Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
