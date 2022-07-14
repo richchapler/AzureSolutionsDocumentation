@@ -20,10 +20,3 @@ _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 * Click **Review + create**, review configuration, and then click **Create**
 
 _Note: When a Storage Account is configured for Data Lake Storage, you will see **Hierarchical Namespace**: Enabled on the Overview page_
-
-### See Also
-> [Container](PrepareResources_DataLake_Container.md)
-
-> [Sample Data](PrepareResources_DataLake_SampleData.md)
-
-> [Storage Explorer](PrepareResources_StorageAccount.md)
