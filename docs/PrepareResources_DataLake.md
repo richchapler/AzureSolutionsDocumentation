@@ -1,7 +1,7 @@
 ## Data Lake
 _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 
-## Create with Azure Portal
+### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
@@ -21,7 +21,7 @@ _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 
 _Note: When a Storage Account is configured for Data Lake Storage, you will see **Hierarchical Namespace**: Enabled on the Overview page_
 
-## See Also
+### See Also
 > [Container](PrepareResources_DataLake_Container.md)
 
 > [Sample Data](PrepareResources_DataLake_SampleData.md)
