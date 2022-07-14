@@ -24,4 +24,4 @@ I have tried to keep these instructions free of the obvious:
 
 > [Resource Group](PrepareResources_ResourceGroup.md)
 
-> [Storage Account](https://github.com/richchapler/AzureDataSolutions/wiki/Storage-Account)
+> [Storage Account](PrepareResources_StorageAccount.md)
