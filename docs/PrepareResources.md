@@ -14,7 +14,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [Application Registration](PrepareResources_ApplicationRegistration.md)
 
-> [Data Explorer Cluster](PrepareResources_DataExplorerCluster.md)
+> [Data Explorer Cluster](PrepareResources_DataExplorer_Cluster.md)
 
 > [Data Lake](PrepareResources_DataLake.md)
 
