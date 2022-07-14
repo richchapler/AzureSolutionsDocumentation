@@ -1,6 +1,6 @@
-[Prepare Resources](PrepareResources.md) > [Data Lake](PrepareResources_DataLake.md) > **Container**
+## Data Lake, Container
 
-## Create with Azure Portal
+### Create with Azure Portal
 
 * Navigate to your Data Lake, and then **Containers** in the **Data storage** group
 * Click **+ Container** and complete the resulting **New container** pop-out form
