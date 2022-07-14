@@ -11,8 +11,8 @@ Requirement statements:
 
 This solution requires the following resources:
 
-* [Data Explorer Cluster](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Explorer-Cluster) (with [database](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Explorer-Database))
-* [Data Lake](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Lake) (with [container](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Lake-Container) and downloaded [sample data](https://github.com/richchapler/AzureDataSolutions/wiki/Sample-Data))
+* [Data Explorer Cluster](PrepareResources_DataExplorerCluster.md) (with [database](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Explorer-Database))
+* [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md) and downloaded [sample data](https://github.com/richchapler/AzureDataSolutions/wiki/Sample-Data))
 
 ## One-Time Ingestion
 
