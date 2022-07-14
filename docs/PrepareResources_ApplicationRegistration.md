@@ -1,7 +1,7 @@
 ## Application Registration
 _(aka "Client", "Service Principal")_
 
-## Create with Azure Portal
+### Create with Azure Portal
 
 * Navigate to **Azure Active Directory** and click on **App Registrations** in the Manage group of the navigation pane
 * Click **+ New Registration**
