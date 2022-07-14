@@ -1,6 +1,6 @@
-[Prepare Resources](PrepareResources.md) > **Resource Group**
+## Resource Group
 
-## Create with Azure Portal
+### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
@@ -12,9 +12,9 @@
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
-* Click **Review + create**, review configuration, and then click **Create**
+* Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
-## Create with ARM Template
+### Create with ARM Template
 
 Resource Groups must be deployed at the subscription-level {i.e., scope = "subscription"}.
 
