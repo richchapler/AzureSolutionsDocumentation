@@ -20,7 +20,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [Data Migration Assistant](https://www.microsoft.com/en-us/download/details.aspx?id=53595)
 
-> [Event Hub](https://github.com/richchapler/AzureDataSolutions/wiki/Event-Hub)
+> [Event Hub](PrepareResources_EventHub.md)
 
 > [Resource Group](https://github.com/richchapler/AzureDataSolutions/wiki/Resource-Group)
 
