@@ -1,6 +1,4 @@
-**Prepare Resources**
-
-## Contents
+**Acquire Data**
 
 ### No Code
 
