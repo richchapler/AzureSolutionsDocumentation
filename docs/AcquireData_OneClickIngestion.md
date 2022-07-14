@@ -19,11 +19,11 @@ Complete the following steps:
 * Navigate to https://dataexplorer.azure.com/ and then click **Data** in the navigation pane
 * Click **Ingest Data** on the resulting **Data Management** page
 
-  <img src="https://user-images.githubusercontent.com/44923999/178302280-6dad3275-e252-4368-8f69-fa5b098dd1bb.png" width="750" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178302280-6dad3275-e252-4368-8f69-fa5b098dd1bb.png" width="800" title="Snipped: July 11, 2022" />
 
 * On the resulting **Ingest data** page, **1. Destination** tab, select your Data Explorer cluster and database, then select the **New table** radio button, enter the name **sample1** (to match our downloaded sample file) and finally, click **Next: Source**
 
-  <img src="https://user-images.githubusercontent.com/44923999/178302589-c0843482-0d4d-4626-a224-28cac8771f85.png" width="750" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178302589-c0843482-0d4d-4626-a224-28cac8771f85.png" width="800" title="Snipped: July 11, 2022" />
 
 * On the resulting **Ingest data** page, **2. Source** tab, complete the form, including:
 
@@ -37,7 +37,7 @@ Complete the following steps:
 
 * Review the resulting **Schema defining file** list, confirm selection of **sample1.csv**, and then click **Next: Schema**
 
-  <img src="https://user-images.githubusercontent.com/44923999/178303001-e318752e-5869-40d3-9298-f936fd8d0cd9.png" width="750" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178303001-e318752e-5869-40d3-9298-f936fd8d0cd9.png" width="800" title="Snipped: July 11, 2022" />
 
 * Confirm the generated schema definition on the resulting **Ingest data** page, **3. Schema** tab, modify as needed and then click **Next: Start Ingestion**
 
@@ -65,7 +65,7 @@ You have completed the One-Time Ingestion.
 Complete the following steps:
 * Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header
 
-  <img src="https://user-images.githubusercontent.com/44923999/178315981-baca4ff4-65cb-46c1-8a7f-29ba9a7bad6e.png" width="500" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178315981-baca4ff4-65cb-46c1-8a7f-29ba9a7bad6e.png" width="400" title="Snipped: July 11, 2022" />
 
 * Complete the **Data connection** pop-out form
 * Click **Next: Ingest properties >** and then review default values on the **Ingest properties** tab
