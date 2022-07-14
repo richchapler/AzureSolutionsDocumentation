@@ -14,4 +14,4 @@ This solution requires the following resources:
 
 * [Application Registration](PrepareResources_ApplicationRegistration.md)
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md))
-* Synapse
+* [Synapse](PrepareResources_Synapse.md)
