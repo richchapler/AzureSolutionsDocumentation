@@ -12,14 +12,6 @@ Requirement statements might include:
 
 This solution requires the following resources:
 
-* [Application Registration](PrepareResources_ApplicationRegistration.md) (with a client [secret](PrepareResources_DataExplorer_Database.md))
-* [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md) and downloaded [sample data](https://github.com/richchapler/AzureDataSolutions/wiki/Sample-Data))
-
-### Step 2: One-Time Ingestion
-
-Complete the following steps:
-
-* Navigate to https://dataexplorer.azure.com/ and then click **Data** in the navigation pane
-* Click **Ingest Data** on the resulting **Data Management** page
-
-  <img src="https://user-images.githubusercontent.com/44923999/178302280-6dad3275-e252-4368-8f69-fa5b098dd1bb.png" width="800" title="Snipped: July 11, 2022" />
+* [Application Registration](PrepareResources_ApplicationRegistration.md)
+* [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md))
+* Synapse
