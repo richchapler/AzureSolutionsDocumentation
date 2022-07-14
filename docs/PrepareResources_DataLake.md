@@ -1,5 +1,4 @@
-[Prepare Resources](PrepareResources.md) > **Data Lake**
-
+## Data Lake
 _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 
 ## Create with Azure Portal
@@ -10,11 +9,11 @@ _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 * Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
 * Complete the **Create a storage account** form, **Basics** tab
  
-  <img src="https://user-images.githubusercontent.com/44923999/178049387-11585534-df7f-430e-9d71-e8414692e66e.png" width="800" title="Snipped: July 8, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178049387-11585534-df7f-430e-9d71-e8414692e66e.png" width="600" title="Snipped: July 8, 2022" />
 
 * On the **Create a Storage Account** form, **Advanced** tab, check **Enable Hierarchical Namespace** in the **Data Lake Storage Gen2** grouping
 
-  <img src="https://user-images.githubusercontent.com/44923999/178049285-9539e65a-4cdb-4b70-a4f0-593cf3c10d46.png" width="800" title="Snipped: July 8, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178049285-9539e65a-4cdb-4b70-a4f0-593cf3c10d46.png" width="600" title="Snipped: July 8, 2022" />
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
