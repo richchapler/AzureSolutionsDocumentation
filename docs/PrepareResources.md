@@ -10,7 +10,7 @@ I have tried to keep these instructions free of the obvious:
 
 ### Contents
 
-> [Application Registration](https://github.com/richchapler/AzureDataSolutions/wiki/Application-Registration)
+> [Application Registration](PrepareResources_ApplicationRegistration.md)
 
 > [Data Explorer Cluster](https://github.com/richchapler/AzureDataSolutions/wiki/Data-Explorer-Cluster)
 
