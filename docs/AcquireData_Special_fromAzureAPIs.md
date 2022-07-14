@@ -14,4 +14,4 @@ This solution requires the following resources:
 
 * [Application Registration](PrepareResources_ApplicationRegistration.md)
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md))
-* [Synapse](PrepareResources_Synapse.md)
+* [Synapse](PrepareResources_Synapse.md) (with linked service and dataset for your Data Lake)
