@@ -1,13 +1,9 @@
-[Acquire Data](AcquireData.md) > No Code > **"One-Click" Ingestion**
+# "One-Click" Ingestion
 
-## Use Case
-
-Requirement statements:
+Use case / requirement statements might include:
 
 * "Devices running Application X, running around the world, continuously drop files into the Data Lake"
 * “We want to automatically ingest data files as they appear”
-
-## Prerequisites
 
 This solution requires the following resources:
 
