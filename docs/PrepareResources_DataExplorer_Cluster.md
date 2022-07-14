@@ -10,7 +10,7 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused w
 * Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
 * Complete the **Create an Azure Data Explorer Cluster** form
 
-  <img src="https://user-images.githubusercontent.com/44923999/178290844-95e498e4-f8a4-4b89-8fcf-eb9f035c312c.png" width="800" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/178290844-95e498e4-f8a4-4b89-8fcf-eb9f035c312c.png" width="600" title="Snipped: July 11, 2022" />
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
