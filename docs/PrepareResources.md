@@ -25,3 +25,5 @@ I have tried to keep these instructions free of the obvious:
 > [**Resource Group**](PrepareResources_ResourceGroup.md)
 
 > [**Storage Account**](PrepareResources_StorageAccount.md)
+
+> [**Synapse**](PrepareResources_Synapse.md)
