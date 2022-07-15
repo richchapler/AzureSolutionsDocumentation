@@ -1,12 +1,12 @@
 ## Dataset
+_(aka "Integration Dataset")_
 
 ### Create with Azure Portal
 
 * Navigate to **Synapse Studio**
-* Click the **Manage** navigation icon
-* Select **Linked services** from the **External connections** grouping in the resulting navigation
-* Click **+ New**
-* Complete the **New linked service…** pop-out form using the instructions below (for the appropriate Linked Service Type)
+* Click the **Data** navigation icon
+* Click **+** and select **Integration dataset** from the resulting dropdown menu
+* Complete the **New integration dataset** pop-out form using the instructions below (for the appropriate Dataset Type)
 
   #### Azure Data Lake Storage Gen2
 
