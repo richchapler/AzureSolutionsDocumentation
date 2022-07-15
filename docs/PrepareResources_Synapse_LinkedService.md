@@ -14,8 +14,10 @@
   
   #### REST
 
-  <img src="https://user-images.githubusercontent.com/44923999/179222060-d5ec7a7b-b1fa-40c3-9d78-fbb6cf6c7de4.png" width="800" title="Snipped: July 14, 2022" />
-
+  <img src="https://user-images.githubusercontent.com/44923999/179222060-d5ec7a7b-b1fa-40c3-9d78-fbb6cf6c7de4.png" width="800" title="Snipped: July 15, 2022" />
+  
+  Prompt | Entry
+  ------ | ------
   **Connect via…** | Confirm default selection, **AutoResolveIntegrationRuntime**
   **Base URL** | ...for Cost Management, modify and enter:<br>
       https://management.azure.com/subscriptions/{Subscription Id}/providers/Microsoft.CostManagement/query?api-version=2021-10-01
