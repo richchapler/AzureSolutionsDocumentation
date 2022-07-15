@@ -37,3 +37,9 @@ Complete the following steps:
 * Complete the form on the **Settings** tab
 
   <img src="https://user-images.githubusercontent.com/44923999/179229885-810ac78b-b59c-4ce6-a2c5-6e12047011b7.png" width="800" title="Snipped: July 15, 2022" />
+
+  Prompt | Entry
+  ------ | ------
+  **URL** | Modify and enter:<br>https://login.microsoftonline.com/{TenantId}/oauth2/token
+
+  
