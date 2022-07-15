@@ -1,8 +1,8 @@
-## Acquiring Data from Azure API, Cost Management
+## Acquiring Data from Azure API, Purview
 
 Requirement statements might include:
 
-_"We tried using the Power BI, Cost Management connector but lack sufficient permissions at the billing account (and that is not going to change because of corporate policy)"_
+* "We tried using the Power BI, Cost Management connector but lack sufficient permissions at the billing account (and that is not going to change because of corporate policy)"
 
 ### Step 1: Prepare Resources
 
