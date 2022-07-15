@@ -20,3 +20,7 @@ Depending on the Azure API you choose, this solution might also require:
 *	Application Registration + **Cost Management Reader** role assignment (granted at subscription-level)
 *	Log Analytics (with on-prem agent installed and custom logs configured)
 *	Purview (with collection role assignments **Collection admins**, **Data source admins**, and **Data curators** for your Application Registration)
+
+### Step 2: Create Pipeline
+
+Lorem Ipsum
