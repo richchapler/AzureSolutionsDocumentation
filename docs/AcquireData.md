@@ -14,4 +14,4 @@ Only a few use cases are included below:
 
   Use Case | Source | Target | Method
   :----- | :----- | :----- | :-----
-  [Azure Cost Monitoring](AcquireData_LowCode_AzureAPI_CostManagement.md) | Azure API | Data Lake | Synapse Pipeline
+  [Azure Purview Extraction](AcquireData_LowCode_AzureAPI_Purview.md) | Azure API | Data Lake | Synapse Pipeline
