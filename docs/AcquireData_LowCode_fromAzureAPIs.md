@@ -60,10 +60,10 @@ Complete the following steps:
 
     <img src="https://user-images.githubusercontent.com/44923999/179236666-66456de7-73f3-4867-967e-c04289bff466.png" width="800" title="Snipped: July 15, 2022" />
 
-  Prompt | Entry
-  ------ | ------
-  **Source Dataset** | Select your REST dataset
-  **Body** | ...for Cost Management, select **POST**<br>...for Log Analytics,  select **POST**<br>...for Purview, select **GET**
+    Prompt | Entry
+    ------ | ------
+    **Source Dataset** | Select your REST dataset
+    **Body** | ...for Cost Management, select **POST**<br>...for Log Analytics,  select **POST**<br>...for Purview, select **GET**
   
   
   and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
