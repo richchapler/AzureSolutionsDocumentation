@@ -45,3 +45,12 @@ Complete the following steps:
   **Method** | Select **POST**  
   **Headers** | Click **+ Add** and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
   **Body** | ...for Cost Management, modify and enter:<br>`grant_type=client_credentials&client_id={ClientId}&client_secret={ClientSecret}&resource=https://management.azure.com/`<br><br>...for Log Analytics, modify and enter:<br>`grant_type=client_credentials&client_id={ClientId}&client_secret={ClientSecret}&resource=https://api.loganalytics.io/`<br><br>...for Purview, modify and enter:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://purview.azure.net`
+
+* Click **Debug** and monitor to confirm success
+
+#### Activity 2: Get Data
+
+This activity will make a REST API call and capture the response as a delimited file in the Data Lake.
+
+Complete the following steps:
+* Expand **Move & Transform** in the **Activities** bar
