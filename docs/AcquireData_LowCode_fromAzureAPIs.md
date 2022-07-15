@@ -63,7 +63,28 @@ Complete the following steps:
     Prompt | Entry
     ------ | ------
     **Source Dataset** | Select your REST dataset
-    **Body** | ...for Cost Management, select **POST**<br>...for Log Analytics,  select **POST**<br>...for Purview, select **GET**
+    **Request Method** | ...for Cost Management, select **POST**<br>...for Log Analytics,  select **POST**<br>...for Purview, select **GET**
+    **Request Body** | ...for Cost Management, enter:<br>
+`{
+  "type": "Usage",
+  "timeframe": "TheLastMonth",
+  "dataset": {
+    "granularity": "None",
+    "aggregation": {
+      "totalCost": {
+        "name": "PreTaxCost",
+        "function": "Sum"
+      }
+    },
+    "grouping": [
+      {
+        "type": "Dimension",
+        "name": "ResourceGroup"
+      }
+    ]
+  }
+}`
+<br><br>...for Log Analytics, enter:<br>`{ "query": "Sample_CL | take 10" }`
   
   
   and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
