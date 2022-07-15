@@ -1,4 +1,4 @@
-## Acquiring Data from Azure API, Purview
+## Extracting Data from Purview via REST API
 
 Requirement statements might include:
 
@@ -11,11 +11,9 @@ This solution requires the following resources:
 * [Application Registration](PrepareResources_ApplicationRegistration.md)
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md))
 * [Synapse](PrepareResources_Synapse.md) (with [linked services](PrepareResources_Synapse_LinkedService.md) and [datasets](PrepareResources_Synapse_Dataset.md) for your source Azure API and target Data Lake, delimited output)
-
-Depending on the Azure API you choose, this solution might also require:
-*	Application Registration + **Cost Management Reader** role assignment (granted at subscription-level)
-*	Log Analytics (with on-prem agent installed and custom logs configured)
 *	Purview (with collection role assignments **Collection admins**, **Data source admins**, and **Data curators** for your Application Registration)
+
+# RESUME HERE!
 
 ### Step 2: Create Pipeline
 
