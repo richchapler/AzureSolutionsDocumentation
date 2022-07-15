@@ -41,5 +41,5 @@ Complete the following steps:
 
   Prompt | Entry
   ------ | ------
-  **URL** | Modify and enter:<br>`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
+  **URL** | Modify and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
   **Method** | Select **POST**  
