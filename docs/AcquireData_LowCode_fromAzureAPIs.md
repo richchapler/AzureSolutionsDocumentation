@@ -31,4 +31,4 @@ Depending on the Azure API you choose, this solution might also require:
 
 This activity will make a REST API call to http://login.microsoftonline.com and get a bearer token.
 
-![image](https://user-images.githubusercontent.com/44923999/179229885-810ac78b-b59c-4ce6-a2c5-6e12047011b7.png)
+  <img src="https://user-images.githubusercontent.com/44923999/179229885-810ac78b-b59c-4ce6-a2c5-6e12047011b7.png" width="800" title="Snipped: July 15, 2022" />
