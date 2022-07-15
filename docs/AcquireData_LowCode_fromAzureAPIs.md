@@ -23,4 +23,12 @@ Depending on the Azure API you choose, this solution might also require:
 
 ### Step 2: Create Pipeline
 
-Lorem Ipsum
+* Navigate to **Synapse Studio**
+* Click the **Integrate** navigation icon
+* Click **+** and select **Pipeline** from the resulting dropdown menu
+
+#### Activity 1: Get Token
+
+This activity will make a REST API call to http://login.microsoftonline.com and get a bearer token.
+
+![image](https://user-images.githubusercontent.com/44923999/179229885-810ac78b-b59c-4ce6-a2c5-6e12047011b7.png)
