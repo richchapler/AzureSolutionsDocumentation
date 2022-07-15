@@ -23,6 +23,7 @@ Depending on the Azure API you choose, this solution might also require:
 
 ### Step 2: Create Pipeline
 
+Complete the following steps:
 * Navigate to **Synapse Studio**
 * Click the **Integrate** navigation icon
 * Click **+** and select **Pipeline** from the resulting dropdown menu
@@ -40,6 +41,5 @@ Complete the following steps:
 
   Prompt | Entry
   ------ | ------
-  **URL** | Modify and enter:<br>https://login.microsoftonline.com/{TenantId}/oauth2/token
-
-  
+  **URL** | Modify and enter:<br>`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
+  **Method** | Select **POST**  
