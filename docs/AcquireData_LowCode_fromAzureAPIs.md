@@ -54,3 +54,6 @@ This activity will make a REST API call and capture the response as a delimited 
 
 Complete the following steps:
 * Expand **Move & Transform** in the **Activities** bar
+*	Drag-and-drop a **Copy data** component into the activity window
+•	Create a dependency from the **Get Token* component to the **Copy data**
+•	Complete the form on the **Source tab**
