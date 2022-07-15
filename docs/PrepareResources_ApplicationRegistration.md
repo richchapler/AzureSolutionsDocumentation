@@ -1,5 +1,5 @@
 ## Application Registration
-_(aka "Client", "Service Principal")_
+_(aka "Application", "Client", "Service Principal")_
 
 ### Create with Azure Portal
 
