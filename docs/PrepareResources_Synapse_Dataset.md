@@ -10,11 +10,11 @@ _(aka "Integration Dataset")_
 
   #### Azure Data Lake Storage Gen2
 
-  <img src="https://user-images.githubusercontent.com/44923999/179089406-89004791-8bc1-4dc3-ab4d-33f624238e65.png" width="800" title="Snipped: July 14, 2022" />
-  
+  <img src="https://user-images.githubusercontent.com/44923999/179225093-b4edee7b-1e39-4e6c-b710-7d07fe9a29ff.png" width="800" title="Snipped: July 15, 2022" />
+
   #### REST
 
-  <img src="https://user-images.githubusercontent.com/44923999/179222060-d5ec7a7b-b1fa-40c3-9d78-fbb6cf6c7de4.png" width="800" title="Snipped: July 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/179225093-b4edee7b-1e39-4e6c-b710-7d07fe9a29ff.png" width="800" title="Snipped: July 15, 2022" />
   
   Prompt | Entry
   ------ | ------
