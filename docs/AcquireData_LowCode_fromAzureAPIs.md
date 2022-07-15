@@ -57,3 +57,5 @@ Complete the following steps:
 *	Drag-and-drop a **Copy data** component into the activity window
 •	Create a dependency from the **Get Token* component to the **Copy data**
 •	Complete the form on the **Source tab**
+
+  <img src="https://user-images.githubusercontent.com/44923999/179236666-66456de7-73f3-4867-967e-c04289bff466.png" width="800" title="Snipped: July 15, 2022" />
