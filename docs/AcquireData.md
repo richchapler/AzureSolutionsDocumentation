@@ -7,4 +7,4 @@
 
 ### Low Code
 
-  Azure APIs (WIP) | Azure API | Data Lake | Synapse Pipeline
+  [Azure APIs (WIP)](AcquireData_LowCode_fromAzureAPIs.md) | Azure API | Data Lake | Synapse Pipeline
