@@ -20,6 +20,8 @@ _(aka “Azure SQL”, “Azure SQL Database”, “Azure SQL Database Server”
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
+* Navigate to the **Networking** tab and set **Allow Azure services** to Yes (if appropriate for your environment and use case)
+
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
 #### Database
