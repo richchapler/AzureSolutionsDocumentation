@@ -11,12 +11,26 @@ This solution requires the following resources:
 
 * [Application Registration](PrepareResources_ApplicationRegistration.md)
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md))
-*	[Purview](PrepareResources_Purview.md) (with collection role assignments **Collection admins**, **Data source admins**, and **Data curators** for your Application Registration)
-* [Synapse](PrepareResources_Synapse.md) (with [linked services](PrepareResources_Synapse_LinkedService.md) and [datasets](PrepareResources_Synapse_Dataset.md) for your source Azure API and target Data Lake, delimited output)
+*	[Purview](PrepareResources_Purview.md) (with [collection role assignments](PrepareResources_Purview_CollectionRoleAssignment.md) **Collection admins**, **Data source admins**, and **Data curators** for your Application Registration)
+* [Synapse](PrepareResources_Synapse.md)
+
+### Step 2: Create Linked Service
+
+*	Open **Synapse Studio** and click the **Manage** navigation icon
+*	Click **Linked services** from the **External connections** grouping in the resulting navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/180606347-670321a8-896f-41fe-afe6-0dfdb7d87d61.png" width="800" title="Snipped: July 23, 2022" />
+
+*	Click **+ New**
+
+  <img src="https://user-images.githubusercontent.com/44923999/180606430-36d57546-9a80-463a-9977-0d6875fa4d3a.png" width="800" title="Snipped: July 23, 2022" />
+
+* Search for and select "REST" in the first page of the **New linked service** pop-out and then click **Continue**
+* Complete the resulting **New linked service…**” pop-out, including:
 
 # RESUME HERE!
 
-### Step 2: Create Pipeline
+### Step 3: Create Pipeline
 
 Complete the following steps:
 * Navigate to **Synapse Studio**
