@@ -10,11 +10,13 @@ _(aka “Azure SQL”, “Azure SQL Server”, “Azure SQL Database”)_
 * Use the **Search services and marketplace** textbox to search for "azure sql" and select the appropriate dropdown value
 * Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
 
-  <img src="https://user-images.githubusercontent.com/44923999/180610279-81399964-d1fb-44e9-9732-5620e71c912c.png" width="600" title="Snipped: July 23, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180610756-3263f92c-a42d-4d2e-b841-2a5d32432237.png" width="600" title="Snipped: July 23, 2022" />
 
-* Complete the **Create a storage account** form, **Basics** tab
+* On the **Select SQL deployment option** > **How do you plan to use the service?** page, select **Database server** from the **Resource type** dropdown and then click **Create**<br>
  
+  <img src="https://user-images.githubusercontent.com/44923999/180610666-c30e773c-7184-40c6-8669-84deea5252ed.png" width="600" title="Snipped: July 23, 2022" />
 
+* Complete the form on the **Create SQL Database Server** page, **Basics** tab.
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
