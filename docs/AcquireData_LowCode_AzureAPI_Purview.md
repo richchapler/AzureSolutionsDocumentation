@@ -2,7 +2,8 @@
 
 Requirement statements might include:
 
-* "We tried using the Power BI, Cost Management connector but lack sufficient permissions at the billing account (and that is not going to change because of corporate policy)"
+* "We have a corporate-approved governance solution, but it doesn't have connectors for Azure resources"
+* "We want to use Purview to collect the best possible source metadata from Azure resources"
 
 ### Step 1: Prepare Resources
 
@@ -10,8 +11,8 @@ This solution requires the following resources:
 
 * [Application Registration](PrepareResources_ApplicationRegistration.md)
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md))
-* [Synapse](PrepareResources_Synapse.md) (with [linked services](PrepareResources_Synapse_LinkedService.md) and [datasets](PrepareResources_Synapse_Dataset.md) for your source Azure API and target Data Lake, delimited output)
 *	Purview (with collection role assignments **Collection admins**, **Data source admins**, and **Data curators** for your Application Registration)
+* [Synapse](PrepareResources_Synapse.md) (with [linked services](PrepareResources_Synapse_LinkedService.md) and [datasets](PrepareResources_Synapse_Dataset.md) for your source Azure API and target Data Lake, delimited output)
 
 # RESUME HERE!
 
