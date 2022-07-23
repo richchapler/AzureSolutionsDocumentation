@@ -32,5 +32,8 @@ _(aka “Azure SQL”, “Azure SQL Database”, “Azure SQL Database Server”
 * Complete the form on the **Create SQL Database** page, **Basics** tab
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
-
+  
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
+
+#### Sample Data
+You can find sample data (and instructions for use) at https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms
