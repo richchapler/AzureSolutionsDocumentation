@@ -22,6 +22,8 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Event Hub**](PrepareResources_EventHub.md)
 
+> [**Purview**](PrepareResources_Purview.md)
+> 
 > [**Resource Group**](PrepareResources_ResourceGroup.md)
 
 > [**Storage Account**](PrepareResources_StorageAccount.md)
