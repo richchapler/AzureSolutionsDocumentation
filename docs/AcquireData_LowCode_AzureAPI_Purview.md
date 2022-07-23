@@ -11,7 +11,7 @@ This solution requires the following resources:
 
 * [Application Registration](PrepareResources_ApplicationRegistration.md)
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md))
-*	Purview (with collection role assignments **Collection admins**, **Data source admins**, and **Data curators** for your Application Registration)
+*	[Purview](PrepareResources_Purview.md) (with collection role assignments **Collection admins**, **Data source admins**, and **Data curators** for your Application Registration)
 * [Synapse](PrepareResources_Synapse.md) (with [linked services](PrepareResources_Synapse_LinkedService.md) and [datasets](PrepareResources_Synapse_Dataset.md) for your source Azure API and target Data Lake, delimited output)
 
 # RESUME HERE!
