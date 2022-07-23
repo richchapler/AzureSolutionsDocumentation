@@ -8,10 +8,10 @@ Only a few use cases are included below:
   Use Case | Source | Target | Method
   :----- | :----- | :----- | :-----
   ["One-Click" Ingestion](AcquireData_NoCode_OneClickIngestion.md) | Data Lake | Data Explorer | "One-Click Ingestion Wizard"<br>
-  "Copy Data Tool" (WIP) | Data Lake | Synapse, Dedicated SQL Pool | "Built-in copy task"
+  "Copy Data Tool" (coming soon...) | Data Lake | Synapse, Dedicated SQL Pool | "Built-in copy task"
 
 ### Low Code
 
   Use Case | Source | Target | Method
   :----- | :----- | :----- | :-----
-  [Azure Purview Extraction](AcquireData_LowCode_AzureAPI_Purview.md) | Azure API | Data Lake | Synapse Pipeline
+  Azure Purview Extraction (coming soon...) | Azure API | Data Lake | Synapse Pipeline
