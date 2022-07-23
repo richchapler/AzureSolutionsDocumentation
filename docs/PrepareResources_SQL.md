@@ -10,8 +10,7 @@ _(aka “Azure SQL”, “Azure SQL Server”, “Azure SQL Database”)_
 * Use the **Search services and marketplace** textbox to search for "azure sql" and select the appropriate dropdown value
 * Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
 
-
-  <img src="https://user-images.githubusercontent.com/44923999/178049387-11585534-df7f-430e-9d71-e8414692e66e.png" width="600" title="Snipped: July 8, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180610279-81399964-d1fb-44e9-9732-5620e71c912c.png" width="600" title="Snipped: July 23, 2022" />
 
 * Complete the **Create a storage account** form, **Basics** tab
  
