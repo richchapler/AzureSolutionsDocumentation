@@ -16,7 +16,12 @@ _(aka “Azure SQL”, “Azure SQL Database”, “Azure SQL Database Server”
  
   <img src="https://user-images.githubusercontent.com/44923999/180610666-c30e773c-7184-40c6-8669-84deea5252ed.png" width="600" title="Snipped: July 23, 2022" />
 
-* Complete the form on the **Create SQL Database Server** page, **Basics** tab
+* Complete the form on the **Create SQL Database Server** page, **Basics** tab, including:
+
+    Prompt | Entry
+    :----- | :-----
+    **Authentication Method** | Select **Use only Azure Active Directory (Azure AD) authentication**<br><br>_Note: I do not recommend using SQL authentication, though it may be appropriate for some environments and use cases_
+    **Set Azure AD Admin** | Click the **Set admin** link and on the resulting pop-out, search for and select the appropriate user
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
@@ -26,8 +31,7 @@ _(aka “Azure SQL”, “Azure SQL Database”, “Azure SQL Database Server”
 
 #### Database
 
-* Navigate to your new SQL Server
-* Click **+ Create database**
+* On the **Overview** page of the new Azure SQL Database Server, click **+ Create database**
 
   <img src="https://user-images.githubusercontent.com/44923999/180611032-07d6c068-5a13-462b-a88a-7e3b3c465e83.png" width="600" title="Snipped: July 23, 2022" />
 
