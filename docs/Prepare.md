@@ -1,4 +1,4 @@
-## Prepare Resources
+## Prepare
 
 ### Resource Instantiation
 
