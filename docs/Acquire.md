@@ -1,4 +1,4 @@
-## Acquire Data
+## Acquire
 
 Data acquisition is complex, if for no other reason than the fact that there are so many combinations of source, target, and method.
 Only a few use cases are included below:
