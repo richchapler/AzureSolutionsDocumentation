@@ -12,12 +12,16 @@ Requirement statements might include:
 This solution requires the following resources:
 
 * [Purview](PrepareResources_Purview.md)
-* [SQL](PrepareResources_SQL.md)
+* [SQL](PrepareResources_SQL.md) (with sample data)
 
-Register Source
-Navigate to Purview in the Azure portal.
-Click the “Open Purview Studio” button.
-Click the Data Map icon on the navigation pane.
-Click the Register button on the resulting page.
-Click the Azure tab on the “Register sources” pop-out.
-Click to check the “Azure SQL Database” option and then click the Continue button.
+#### Register Source
+
+* Open the **Purview Governance Portal**
+* Click the **Data Map** icon on the navigation pane
+* Click **Register** on the resulting page
+
+![image](https://user-images.githubusercontent.com/44923999/180648889-285b11ec-4bec-427b-afb4-931a1e0afe45.png)
+
+
+* Click the Azure tab on the “Register sources” pop-out.
+* Click to check the “Azure SQL Database” option and then click the Continue button.
