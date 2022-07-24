@@ -19,11 +19,11 @@ This solution requires the following resources:
 *	Open **Synapse Studio** and click the **Manage** navigation icon
 *	Click **Linked services** from the **External connections** grouping in the resulting navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/180606347-670321a8-896f-41fe-afe6-0dfdb7d87d61.png" width="800" title="Snipped: July 23, 2022" />
+    <img src="https://user-images.githubusercontent.com/44923999/180606347-670321a8-896f-41fe-afe6-0dfdb7d87d61.png" width="800" title="Snipped: July 23, 2022" />
 
 *	Click **+ New**
 
-  <img src="https://user-images.githubusercontent.com/44923999/180606430-36d57546-9a80-463a-9977-0d6875fa4d3a.png" width="800" title="Snipped: July 23, 2022" />
+    <img src="https://user-images.githubusercontent.com/44923999/180606430-36d57546-9a80-463a-9977-0d6875fa4d3a.png" width="800" title="Snipped: July 23, 2022" />
 
 * Search for and select "REST" in the first page of the **New linked service** pop-out and then click **Continue**
 * Complete the resulting **New linked service…**” pop-out, including:
