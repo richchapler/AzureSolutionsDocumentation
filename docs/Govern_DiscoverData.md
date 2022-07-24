@@ -20,8 +20,10 @@ This solution requires the following resources:
 * Click the **Data Map** icon on the navigation pane
 * Click **Register** on the resulting page
 
-![image](https://user-images.githubusercontent.com/44923999/180648889-285b11ec-4bec-427b-afb4-931a1e0afe45.png)
+  <img src="https://user-images.githubusercontent.com/44923999/180648889-285b11ec-4bec-427b-afb4-931a1e0afe45.png" width="800" title="Snipped: July 24, 2022" />
 
+* On the resulting pop-out, search for and select **Azure SQL Database** and then click **Continue**
 
-* Click the Azure tab on the “Register sources” pop-out.
-* Click to check the “Azure SQL Database” option and then click the Continue button.
+  <img src="https://user-images.githubusercontent.com/44923999/180649034-fc466af5-9c13-4a47-b919-e4a2827b31fb.png" width="800" title="Snipped: July 24, 2022" />
+
+* Complete the **Register sources (Azure SQL Database)** form and then click **Register**
