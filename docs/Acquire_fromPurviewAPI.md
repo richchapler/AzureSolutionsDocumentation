@@ -30,10 +30,18 @@ This solution requires the following resources:
     <img src="https://user-images.githubusercontent.com/44923999/180684981-cf9c8ca9-5ec4-4554-aba3-7aaa9b908fde.png" width="800" title="Snipped: July 23, 2022" />
 
 * Complete the resulting **New linked service…**” pop-out, including:
+  Prompt | Entry
+  ------ | ------
+  **Base URL** | Modify and enter:`https://{Purview Instance Name}.purview.azure.com/scan/datasources/{Purview Data Source Name}?api-version=2022-02-01-preview`  
+  **Authentication Type** | Select **Anonymous**  
+
+* Click **Test connection** to confirm successful connection and then click **Create**
+
+### Step 3: Create Dataset
 
 # RESUME HERE!
 
-### Step 3: Create Pipeline
+### Step 4: Create Pipeline
 
 Complete the following steps:
 * Navigate to **Synapse Studio**
