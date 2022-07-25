@@ -104,4 +104,4 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/180799810-ad8a1fcb-f95f-4944-9855-9f01a0fcc60e.png" width="800" title="Snipped: July 25, 2022" />
 
-_Note: for this exercise, I am using the default connection to Data Lake (and expect that you will choose the Sink connection that is meaningful to you)_
+  _Note: for this exercise, I am using the default connection to Data Lake (and expect that you will choose the Sink connection that is meaningful to you)_
