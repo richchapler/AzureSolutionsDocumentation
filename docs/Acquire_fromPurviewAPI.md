@@ -90,12 +90,12 @@ Complete the following steps:
 * Expand **Move & Transform** in the **Activities** bar
 * Drag-and-drop a **Copy data** component into the activity window
 * Create a dependency from the **Get Token** component to the **Get Data** component
-* Complete the form on the **Source** tab
+* Enter values on the **Source** tab 
 
-    <img src="https://user-images.githubusercontent.com/44923999/179236666-66456de7-73f3-4867-967e-c04289bff466.png" width="800" title="Snipped: July 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180798145-88850e06-01f8-4d4f-9b4e-a271faaed71c.png" width="800" title="Snipped: July 15, 2022" />
 
-    Prompt | Entry
-    ------ | ------
-    **Source Dataset** | Select your REST dataset
-    **Request Method** | Select **POST**
-    **Request Body** | 
+  Prompt | Entry
+  ------ | ------
+  **Source dataset** | Select your REST dataset
+  **Request method** | Select **POST**
+  **Request body** | Modify and enter:<br>`{ "limit": 10 }`
