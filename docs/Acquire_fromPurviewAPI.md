@@ -71,7 +71,7 @@ Complete the following steps:
 * Drag-and-drop a **Web** component into the main window
 * Complete the form on the **Settings** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/180794832-65566cbd-6357-45f2-97f9-d00b997c8584.png" width="800" title="Snipped: July 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180794832-65566cbd-6357-45f2-97f9-d00b997c8584.png" width="800" title="Snipped: July 25, 2022" />
 
   Prompt | Entry
   ------ | ------
@@ -92,7 +92,17 @@ Complete the following steps:
 * Create a dependency from the **Get Token** component to the **Get Data** component
 * Enter values on the **Source** tab 
 
-  <img src="https://user-images.githubusercontent.com/44923999/180798145-88850e06-01f8-4d4f-9b4e-a271faaed71c.png" width="800" title="Snipped: July 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180798145-88850e06-01f8-4d4f-9b4e-a271faaed71c.png" width="800" title="Snipped: July 25, 2022" />
+
+  Prompt | Entry
+  ------ | ------
+  **Source dataset** | Select your REST dataset
+  **Request method** | Select **POST**
+  **Request body** | Enter: `{ "limit": 10 }`
+
+* Enter values on the **Sink** tab 
+
+  <img src="https://user-images.githubusercontent.com/44923999/180799810-ad8a1fcb-f95f-4944-9855-9f01a0fcc60e.png" width="800" title="Snipped: July 25, 2022" />
 
   Prompt | Entry
   ------ | ------
