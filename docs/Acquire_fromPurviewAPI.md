@@ -71,7 +71,7 @@ Complete the following steps:
 * Drag-and-drop a **Web** component into the main window
 * Complete the form on the **Settings** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/180794832-65566cbd-6357-45f2-97f9-d00b997c8584.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180803926-1a18dab9-22d1-41c9-8896-13e3436d7772.png" width="800" title="Snipped: July 25, 2022" />
 
   Prompt | Entry
   ------ | ------
