@@ -56,9 +56,7 @@ Complete the following steps:
 
 You should see the data from the One-Time Ingestion.
 
-You have completed the One-Time Ingestion.
-
-**BUT WAIT, you are not yet configured for continuous ingestion... do not click Close yet!**
+You have completed the One-Time Ingestion... but, **WAIT, you are not yet configured for continuous ingestion... do not click Close yet!**
 
 ### Step 3: Continuous Ingestion
 
@@ -67,7 +65,9 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/178315981-baca4ff4-65cb-46c1-8a7f-29ba9a7bad6e.png" width="400" title="Snipped: July 11, 2022" />
 
-* Complete the **Data connection** pop-out form
+* Complete the **Data connection** pop-out form<br>
+  _Note: Continuous Ingestion **only** supports the use of system and user-assigned managed identity... Service Principal and SAS Token are not available options_
+  
 * Click **Next: Ingest properties >** and then review default values on the **Ingest properties** tab
 * Click **Next: Review + create >**, confirm configuration and then click **Create**
 
