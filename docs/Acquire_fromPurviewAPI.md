@@ -99,7 +99,7 @@ Complete the following steps:
   **Source dataset** | Select your REST dataset
   **Request method** | Select **POST**
   **Request body** | Enter: `{ "limit": 10 }`
-  **Additional headers** | Click **+ Add** and enter key-value pair:<br>`content-type` :: `application/json;charset=utf-8`<br><br>Click **+ Add** and enter key-value pair:<br>`Authorization` :: `@concat('Bearer ',activity('Get Token').output.access_token)`
+  **Additional headers** | Click **+ Add** and enter key-value pair:<br>content-type: `application/json;charset=utf-8`<br>Authorization: `@concat('Bearer ',activity('Get Token').output.access_token)`
 
 * Enter values on the **Sink** tab 
 
