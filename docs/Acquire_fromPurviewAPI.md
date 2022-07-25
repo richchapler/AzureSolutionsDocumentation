@@ -51,7 +51,7 @@ Complete the following steps:
 
 * Search for and select **REST** on the **New linked service** pop-out and then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/180790388-7805aad1-bddc-4b3c-bd85-5631eac9e89e.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180805719-c13e9621-bdb3-4e46-88f5-c337c860a382.png" width="800" title="Snipped: July 25, 2022" />
 
 * Complete the **Set properties** pop-out form and then click **OK**
 * Click **Test connection** to confirm successful connection
