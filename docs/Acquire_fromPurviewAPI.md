@@ -27,7 +27,7 @@ This solution requires the following resources:
 
 * Search for and select "REST" in the first page of the **New linked service** pop-out and then click **Continue**
 
-    <img src="https://user-images.githubusercontent.com/44923999/180672477-d7d16dea-9a5a-4d6d-8099-4bacda77d3e3.png" width="800" title="Snipped: July 23, 2022" />
+    <img src="https://user-images.githubusercontent.com/44923999/180684981-cf9c8ca9-5ec4-4554-aba3-7aaa9b908fde.png" width="800" title="Snipped: July 23, 2022" />
 
 * Complete the resulting **New linked service…**” pop-out, including:
 
