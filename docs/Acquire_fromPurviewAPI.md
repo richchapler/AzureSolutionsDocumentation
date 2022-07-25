@@ -98,4 +98,4 @@ Complete the following steps:
   ------ | ------
   **Source dataset** | Select your REST dataset
   **Request method** | Select **POST**
-  **Request body** | Modify and enter:<br>`{ "limit": 10 }`
+  **Request body** | Enter: `{ "limit": 10 }`
