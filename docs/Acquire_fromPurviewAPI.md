@@ -101,8 +101,8 @@ Complete the following steps:
   **Request body** | Enter: `{ "limit": 10 }`
   **Additional headers** | Click **+ Add** and enter key-value pairs:<br>content-type: `application/json;charset=utf-8`<br>Authorization: `@concat('Bearer ',activity('Get Token').output.access_token)`
 
-* Enter values on the **Sink** tab 
+* Select the appropriate dataset (and configuration) on the **Sink** tab 
 
   <img src="https://user-images.githubusercontent.com/44923999/180799810-ad8a1fcb-f95f-4944-9855-9f01a0fcc60e.png" width="800" title="Snipped: July 25, 2022" />
 
-  _Note: for this exercise, I am using the default connection to Data Lake (and expect that you will choose the Sink connection that is meaningful to you)_
+  _Note: for this exercise, I am using the default connection to Data Lake_
