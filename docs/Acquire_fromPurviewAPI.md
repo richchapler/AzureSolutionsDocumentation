@@ -106,3 +106,8 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/180802206-ac29e3f2-b0bd-4892-8c30-d78361e60cb9.png" width="800" title="Snipped: July 25, 2022" />
 
   _Note: for this exercise, I am using the default connection to Data Lake_
+
+#### Confirm Success
+
+Click **Debug** and monitor result to confirm successful progress.
+Browse to your Data Lake and download the resulting file.
