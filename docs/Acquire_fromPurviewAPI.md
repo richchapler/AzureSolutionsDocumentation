@@ -103,6 +103,6 @@ Complete the following steps:
 
 * Select the appropriate dataset (and configuration) on the **Sink** tab 
 
-  <img src="https://user-images.githubusercontent.com/44923999/180799810-ad8a1fcb-f95f-4944-9855-9f01a0fcc60e.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180802206-ac29e3f2-b0bd-4892-8c30-d78361e60cb9.png" width="800" title="Snipped: July 25, 2022" />
 
   _Note: for this exercise, I am using the default connection to Data Lake_
