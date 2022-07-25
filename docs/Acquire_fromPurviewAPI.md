@@ -25,11 +25,11 @@ Complete the following steps:
 
 * Click **+ New**
 
-  <img src="https://user-images.githubusercontent.com/44923999/180606430-36d57546-9a80-463a-9977-0d6875fa4d3a.png" width="800" title="Snipped: July 23, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180805015-db42aa59-bbef-4fa3-8651-7b55f2b4ea32.png" width="800" title="Snipped: July 25, 2022" />
 
 * Search for and select "REST" on the **New linked service** pop-out and then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/180684981-cf9c8ca9-5ec4-4554-aba3-7aaa9b908fde.png" width="800" title="Snipped: July 23, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180804710-17c92274-44a9-4322-b2c3-bf03c5db0e26.png" width="800" title="Snipped: July 25, 2022" />
 
 * Complete the resulting **New linked service** pop-out, including:
 
@@ -47,7 +47,7 @@ Complete the following steps:
 * Open **Synapse Studio** and click the **Data** navigation icon
 * Click **+** and then select **Integration dataset** from the **Linked** grouping in the resulting navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/180790115-f8ca88f2-a02a-42c2-a8c6-ef582c60512d.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180805485-9187f29f-0232-42ad-af43-c6fbc4ae8510.png" width="800" title="Snipped: July 25, 2022" />
 
 * Search for and select **REST** on the **New linked service** pop-out and then click **Continue**
 
