@@ -16,37 +16,50 @@ This solution requires the following resources:
 
 ### Step 2: Create Linked Service
 
-*	Open **Synapse Studio** and click the **Manage** navigation icon
-*	Click **Linked services** from the **External connections** grouping in the resulting navigation
+Complete the following steps:
 
-    <img src="https://user-images.githubusercontent.com/44923999/180606347-670321a8-896f-41fe-afe6-0dfdb7d87d61.png" width="800" title="Snipped: July 23, 2022" />
+* Open **Synapse Studio** and click the **Manage** navigation icon
+* Click **Linked services** from the **External connections** grouping in the resulting navigation
 
-*	Click **+ New**
+  <img src="https://user-images.githubusercontent.com/44923999/180606347-670321a8-896f-41fe-afe6-0dfdb7d87d61.png" width="800" title="Snipped: July 23, 2022" />
 
-    <img src="https://user-images.githubusercontent.com/44923999/180606430-36d57546-9a80-463a-9977-0d6875fa4d3a.png" width="800" title="Snipped: July 23, 2022" />
+* Click **+ New**
 
-* Search for and select "REST" in the first page of the **New linked service** pop-out and then click **Continue**
+  <img src="https://user-images.githubusercontent.com/44923999/180606430-36d57546-9a80-463a-9977-0d6875fa4d3a.png" width="800" title="Snipped: July 23, 2022" />
 
-    <img src="https://user-images.githubusercontent.com/44923999/180684981-cf9c8ca9-5ec4-4554-aba3-7aaa9b908fde.png" width="800" title="Snipped: July 23, 2022" />
+* Search for and select "REST" on the **New linked service** pop-out and then click **Continue**
+
+  <img src="https://user-images.githubusercontent.com/44923999/180684981-cf9c8ca9-5ec4-4554-aba3-7aaa9b908fde.png" width="800" title="Snipped: July 23, 2022" />
 
 * Complete the resulting **New linked service** pop-out, including:
 
   Prompt | Entry
   ------ | ------
-  **Base URL** | Modify and enter:<br>`https://{Purview Instance Name}.purview.azure.com/scan/datasources/{Purview Data Source Name}?api-version=2022-02-01-preview`  
+  **Base URL** | Modify and enter:<br>`https://{Purview Account Name}.purview.azure.com/catalog/api/search/query?api-version=2022-03-01-preview`  
   **Authentication Type** | Select **Anonymous**  
 
 * Click **Test connection** to confirm successful connection and then click **Create**
 
 ### Step 3: Create Dataset
 
-# RESUME HERE!
+Complete the following steps:
+
+* Open **Synapse Studio** and click the **Data** navigation icon
+* Click **+** and then select **Integration dataset** from the **Linked** grouping in the resulting navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/180790115-f8ca88f2-a02a-42c2-a8c6-ef582c60512d.png" width="800" title="Snipped: July 25, 2022" />
+
+* Search for and select **REST** on the **New linked service** pop-out and then click **Continue**
+
+  <img src="https://user-images.githubusercontent.com/44923999/180790388-7805aad1-bddc-4b3c-bd85-5631eac9e89e.png" width="800" title="Snipped: July 25, 2022" />
+
+* Complete the **Set properties** pop-out form and then click **OK**
+* Click **Test connection** to confirm successful connection
 
 ### Step 4: Create Pipeline
 
 Complete the following steps:
-* Navigate to **Synapse Studio**
-* Click the **Integrate** navigation icon
+* Open **Synapse Studio** and click the **Integrate** navigation icon
 * Click **+** and select **Pipeline** from the resulting dropdown menu
 
 #### Activity 1: Get Token
@@ -58,14 +71,14 @@ Complete the following steps:
 * Drag-and-drop a **Web** component into the main window
 * Complete the form on the **Settings** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/179229885-810ac78b-b59c-4ce6-a2c5-6e12047011b7.png" width="800" title="Snipped: July 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180794832-65566cbd-6357-45f2-97f9-d00b997c8584.png" width="800" title="Snipped: July 15, 2022" />
 
   Prompt | Entry
   ------ | ------
   **URL** | Modify and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
   **Method** | Select **POST**  
   **Headers** | Click **+ Add** and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
-  **Body** | ...for Cost Management, modify and enter:<br>`grant_type=client_credentials&client_id={ClientId}&client_secret={ClientSecret}&resource=https://management.azure.com/`<br><br>...for Log Analytics, modify and enter:<br>`grant_type=client_credentials&client_id={ClientId}&client_secret={ClientSecret}&resource=https://api.loganalytics.io/`<br><br>...for Purview, modify and enter:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://purview.azure.net`
+  **Body** | Modify and enter:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://purview.azure.net`
 
 * Click **Debug** and monitor to confirm success
 
@@ -75,37 +88,14 @@ This activity will make a REST API call and capture the response as a delimited 
 
 Complete the following steps:
 * Expand **Move & Transform** in the **Activities** bar
-*	Drag-and-drop a **Copy data** component into the activity window
-*	Create a dependency from the **Get Token** component to the **Copy data** component
-*	Complete the form on the **Source** tab
+* Drag-and-drop a **Copy data** component into the activity window
+* Create a dependency from the **Get Token** component to the **Get Data** component
+* Complete the form on the **Source** tab
 
     <img src="https://user-images.githubusercontent.com/44923999/179236666-66456de7-73f3-4867-967e-c04289bff466.png" width="800" title="Snipped: July 15, 2022" />
 
     Prompt | Entry
     ------ | ------
     **Source Dataset** | Select your REST dataset
-    **Request Method** | ...for Cost Management, select **POST**<br>...for Log Analytics,  select **POST**<br>...for Purview, select **GET**
-    **Request Body** | ...for Cost Management, enter:<br>
-`{
-  "type": "Usage",
-  "timeframe": "TheLastMonth",
-  "dataset": {
-    "granularity": "None",
-    "aggregation": {
-      "totalCost": {
-        "name": "PreTaxCost",
-        "function": "Sum"
-      }
-    },
-    "grouping": [
-      {
-        "type": "Dimension",
-        "name": "ResourceGroup"
-      }
-    ]
-  }
-}`
-<br><br>...for Log Analytics, enter:<br>`{ "query": "Sample_CL | take 10" }`
-  
-  
-  and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
+    **Request Method** | Select **POST**
+    **Request Body** | 
