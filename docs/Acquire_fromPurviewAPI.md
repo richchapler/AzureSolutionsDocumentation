@@ -92,7 +92,7 @@ Complete the following steps:
 * Create a dependency from the **Get Token** component to the **Get Data** component
 * Enter values on the **Source** tab 
 
-  <img src="https://user-images.githubusercontent.com/44923999/180798145-88850e06-01f8-4d4f-9b4e-a271faaed71c.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180803310-4399a334-7b54-4720-9766-4701bde373ba.png" width="800" title="Snipped: July 25, 2022" />
 
   Prompt | Entry
   ------ | ------
