@@ -12,7 +12,7 @@ I have tried to keep these instructions free of the obvious:
 
 ### Contents
 
-> [**Application Registration**](PrepareResources_ApplicationRegistration.md)
+> [**Application Registration**](Prepare_ApplicationRegistration.md)
 
 > **Data Explorer** >> [Cluster](PrepareResources_DataExplorer_Cluster.md) :: [Database](PrepareResources_DataExplorer_Database.md)
 
