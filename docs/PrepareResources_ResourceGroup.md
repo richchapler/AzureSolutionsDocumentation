@@ -16,19 +16,18 @@
 
 ### Create with ARM Template
 
-Resource Groups must be deployed at the subscription-level {i.e., scope = "subscription"}.
+_Note: Resource Groups must be deployed at the subscription-level {i.e., scope = "subscription"}_
 
-```
-{
-    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": { "ResourceGroupName": { "type": "string" } },
-    "resources": [
-        {
-            "type": "Microsoft.Resources/resourceGroups",
-            "apiVersion": "[providers('Microsoft.Resources','resourceGroups').apiVersions[0]]",
-            "name": "[parameters('ResourceGroupName')]",
-            "location": "westus3"
-        }
-    ]
-}
+    {
+        "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": { "ResourceGroupName": { "type": "string" } },
+        "resources": [
+            {
+                "type": "Microsoft.Resources/resourceGroups",
+                "apiVersion": "[providers('Microsoft.Resources','resourceGroups').apiVersions[0]]",
+                "name": "[parameters('ResourceGroupName')]",
+                "location": "westus3"
+            }
+        ]
+    }
