@@ -1,6 +1,6 @@
 ## Acquire Data
 
-Data acquisition is complex, if for no other reason than the fact that there are so many combinations of source, target, and method.
+Data acquisition is complex because there are so many combinations of source, target, and method.
 Only a few use cases are included below:
 
 ### No Code
