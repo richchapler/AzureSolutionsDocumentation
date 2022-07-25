@@ -7,7 +7,7 @@ Only a few use cases are included below:
 
   Use Case | Source | Target | Method
   :----- | :----- | :----- | :-----
-  ["One-Click" Ingestion](AcquireData_NoCode_OneClickIngestion.md) | Data Lake | Data Explorer | "One-Click Ingestion Wizard"<br>
+  ["One-Click" Ingestion](Acquire_OneClickIngestion.md) | Data Lake | Data Explorer | "One-Click Ingestion Wizard"<br>
 
 ### Low Code
 
