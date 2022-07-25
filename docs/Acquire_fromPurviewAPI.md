@@ -2,7 +2,7 @@
 
 Requirement statements might include:
 
-* "We have a corporate-approved governance solution, but it doesn't have connectors for Azure resources"
+* "Our approved Data Governance solution (not Purview) lacks Azure connectors"
 * "We want to use Purview to collect the best possible source metadata from Azure resources"
 
 ### Step 1: Prepare Resources
