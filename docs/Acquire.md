@@ -8,7 +8,6 @@ Only a few use cases are included below:
   Use Case | Source | Target | Method
   :----- | :----- | :----- | :-----
   ["One-Click" Ingestion](AcquireData_NoCode_OneClickIngestion.md) | Data Lake | Data Explorer | "One-Click Ingestion Wizard"<br>
-  "Copy Data Tool" (coming soon...) | Data Lake | Synapse, Dedicated SQL Pool | "Built-in copy task"
 
 ### Low Code
 
