@@ -9,7 +9,7 @@ Requirement statements might include:
 
 This solution requires the following resources:
 
-* [Data Explorer Cluster](Prepare_DataExplorer_Cluster.md) (with [database](PrepareResources_DataExplorer_Database.md))
+* [Data Explorer Cluster](Prepare_DataExplorer_Cluster.md) (with [database](Prepare_DataExplorer_Database.md))
 * [Data Lake](PrepareResources_DataLake.md) (with [container](PrepareResources_DataLake_Container.md) and downloaded [sample data](https://github.com/richchapler/AzureDataSolutions/wiki/Sample-Data))
 
 ### Step 2: One-Time Ingestion
