@@ -16,7 +16,7 @@ I have tried to keep these instructions free of the obvious:
 
 > **Data Explorer** >> [Cluster](Prepare_DataExplorer_Cluster.md) :: [Database](Prepare_DataExplorer_Database.md)
 
-> [**Data Lake**](PrepareResources_DataLake.md) >> [Container](PrepareResources_DataLake_Container.md) :: [Sample Data](PrepareResources_DataLake_SampleData.md)
+> [**Data Lake**](Prepare_DataLake.md) >> [Container](PrepareResources_DataLake_Container.md) :: [Sample Data](PrepareResources_DataLake_SampleData.md)
 
 > [**Data Migration Assistant**](https://www.microsoft.com/en-us/download/details.aspx?id=53595)
 
