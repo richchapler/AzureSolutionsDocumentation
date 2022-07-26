@@ -1,5 +1,6 @@
 ## Application Registration
-_(aka "Application", "Client", "Service Principal")_
+_(aka "Application", "Client", "Service Principal")_<br><br>
+_Note: Minimize operational burden {e.g., maintenance of Client Secrets, system downtime, etc.} by using a User-Assigned **Managed Identity** instead of an Application Registration_
 
 ### Create with Azure Portal
 
