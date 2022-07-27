@@ -30,4 +30,4 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Storage Account**](Prepare_StorageAccount.md)
 
-> [**Synapse**](Prepare_Synapse.md) >> [Linked Service](PrepareResources_Synapse_LinkedService.md)
+> [**Synapse**](Prepare_Synapse.md) >> [Dataset](Prepare_Synapse_Dataset.md) :: [Linked Service](PrepareResources_Synapse_LinkedService.md)
