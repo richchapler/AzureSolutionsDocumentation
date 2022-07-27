@@ -1,8 +1,8 @@
 ## Application Registration
 _(aka "Application", "Client", "Service Principal")_<br><br>
 _Notes_<br>
-_* Minimize operational burden {e.g., maintenance of Client Secrets, system downtime, etc.} by using a User-Assigned **Managed Identity** instead of an Application Registration_
-_* Consider using a multi-tenant Service Principal to support integration with third-party applications_
+_* Use a **Managed Identity** rather than an Application Registration to minimize operational burden {e.g., maintenance of secrets, system downtime, etc.}_<br>
+_* You might use a multi-tenant Service Principal to support integration with third-party applications that prompt only for Client Id and Client Secret_
 
 ### Create with Azure Portal
 
