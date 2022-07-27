@@ -26,7 +26,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Resource Group**](Prepare_ResourceGroup.md)
 
-> [**SQL**](PrepareResources_SQL.md) >> Server :: Database :: Sample Data
+> [**SQL**](Prepare_SQL.md) >> Server :: Database :: Sample Data
 
 > [**Storage Account**](PrepareResources_StorageAccount.md)
 
