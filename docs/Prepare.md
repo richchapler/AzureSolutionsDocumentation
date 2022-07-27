@@ -24,7 +24,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Purview**](Prepare_Purview.md) >> [Collection Role Assignment](PrepareResources_Purview_CollectionRoleAssignment.md)
 
-> [**Resource Group**](PrepareResources_ResourceGroup.md)
+> [**Resource Group**](Prepare_ResourceGroup.md)
 
 > [**SQL**](PrepareResources_SQL.md) >> Server :: Database :: Sample Data
 
