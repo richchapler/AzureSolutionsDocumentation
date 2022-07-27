@@ -1,8 +1,9 @@
-[Prepare Resources](PrepareResources.md) > **Event Hub**
+## Event Hub
+_(aka "Event Hub Namespace")_
 
-## Create with Azure Portal
+### Create with Azure Portal
 
-### Create Namespace
+#### Create Namespace
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
@@ -16,7 +17,7 @@
 
 * Click **Review + create**, review configuration, and then click **Create**
 
-### Create Event Hub
+#### Create Event Hub
 
 * On the **Overview** page of the newly created Event Hub Namespace, click **+ Event Hub**
 * Complete the resulting **Create Event Hub** form, **Basics** tab
