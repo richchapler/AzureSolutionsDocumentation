@@ -22,7 +22,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Event Hub**](Prepare_EventHub.md)
 
-> [**Purview**](Prepare_Purview.md) >> [Collection Role Assignment](PrepareResources_Purview_CollectionRoleAssignment.md)
+> [**Purview**](Prepare_Purview.md) >> [Collection Role Assignment](Prepare_Purview_CollectionRoleAssignment.md)
 
 > [**Resource Group**](Prepare_ResourceGroup.md)
 
