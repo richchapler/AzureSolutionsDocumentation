@@ -28,6 +28,6 @@ I have tried to keep these instructions free of the obvious:
 
 > [**SQL**](Prepare_SQL.md) >> Server :: Database :: Sample Data
 
-> [**Storage Account**](PrepareResources_StorageAccount.md)
+> [**Storage Account**](Prepare_StorageAccount.md)
 
 > [**Synapse**](PrepareResources_Synapse.md) >> [Linked Service](PrepareResources_Synapse_LinkedService.md)
