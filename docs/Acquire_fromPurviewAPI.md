@@ -11,7 +11,7 @@ This solution requires the following resources:
 
 * [Application Registration](Prepare_ApplicationRegistration.md) with Purview [collection role assignments](PrepareResources_Purview_CollectionRoleAssignment.md) for **Collection admins**, **Data source admins**, and **Data curators**
 * [Data Lake](Prepare_DataLake.md) (with [container](Prepare_DataLake_Container.md))
-* [Purview](PrepareResources_Purview.md) with an already-scanned data source (example: https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-sql-database?tabs=managed-identity)
+* [Purview](Prepare_Purview.md) with an already-scanned data source (example: https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-sql-database?tabs=managed-identity)
 * [Synapse](PrepareResources_Synapse.md)
 
 ### Step 2: Create Linked Service
