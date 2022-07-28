@@ -1,18 +1,18 @@
-## Acquire Data from Purview via REST API
+## Data Acquisition from Purview via REST API
 
 Requirement statements might include:
 
 * "Our approved Data Governance solution (not Purview) lacks Azure connectors"
 * "We want to use Purview to collect the best possible source metadata from Azure resources"
 
-### Step 1: Prepare Resources
+### Step 1: Infrastructure Resources
 
 This solution requires the following resources:
 
-* [Application Registration](Prepare_ApplicationRegistration.md) with Purview [collection role assignments](Prepare_Purview_CollectionRoleAssignment.md) for **Collection admins**, **Data source admins**, and **Data curators**
-* [Data Lake](Prepare_DataLake.md) (with [container](Prepare_DataLake_Container.md))
-* [Purview](Prepare_Purview.md) with an [already-scanned data source](https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-sql-database?tabs=managed-identity)
-* [Synapse](Prepare_Synapse.md)
+* [Application Registration](Infrastructure_ApplicationRegistration.md) with Purview [collection role assignments](Infrastructure_Purview_CollectionRoleAssignment.md) for **Collection admins**, **Data source admins**, and **Data curators**
+* [Data Lake](Infrastructure_DataLake.md) (with [container](Infrastructure_DataLake_Container.md))
+* [Purview](Infrastructure_Purview.md) with an [already-scanned data source](https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-sql-database?tabs=managed-identity)
+* [Synapse](Infrastructure_Synapse.md)
 
 ### Step 2: Create Linked Service
 
