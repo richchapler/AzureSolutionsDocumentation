@@ -1,4 +1,4 @@
-## Data Acquisition from Purview via REST API
+## Data Acquisition... from Purview, via REST API
 
 Requirement statements might include:
 
