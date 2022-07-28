@@ -5,12 +5,12 @@ Requirement statements might include:
 * "Devices running Application X, running around the world, continuously drop files into the Data Lake"
 * “We want to automatically ingest data files as they appear”
 
-### Step 1: Prepare Resources
+### Step 1: Infrastructure Resources
 
 This solution requires the following resources:
 
-* [Data Explorer Cluster](Prepare_DataExplorer_Cluster.md) (with [database](Prepare_DataExplorer_Database.md))
-* [Data Lake](Prepare_DataLake.md) (with [container](Prepare_DataLake_Container.md) and downloaded [sample data](https://filesamples.com/formats/csv))
+* [Data Explorer Cluster](Infrastructure_DataExplorer_Cluster.md) (with [database](Infrastructure_DataExplorer_Database.md))
+* [Data Lake](Infrastructure_DataLake.md) (with [container](Infrastructure_DataLake_Container.md) and downloaded [sample data](https://filesamples.com/formats/csv))
 
 ### Step 2: One-Time Ingestion
 
