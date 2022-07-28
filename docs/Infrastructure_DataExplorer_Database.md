@@ -1,8 +1,8 @@
-[Prepare Resources](PrepareResources.md) > Data Explorer > **Database**
+## Database
 
 _Note: These instructions can apply to either [Clusters](PrepareResources_DataExplorer_Cluster.md) or Pools_
 
-## Create
+### Create
 
 * Navigate to your instance of Data Explorer and click **+ Add database** on the main page
 * Complete the resulting **Azure Data Explorer Database** pop-out form and then click **Create**
