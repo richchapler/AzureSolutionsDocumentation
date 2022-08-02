@@ -24,15 +24,17 @@ Complete the following steps:
 
 * **Run** the following KQL:
 
-    RawSensorsData
-    | mvexpand sensors = rawdata['data'] to typeof(string)
-    | extend jsondata = parse_json(sensors)
-    | extend name = tostring(jsondata.name)
-    | extend timestamp = jsondata.timestamp
-    | mv-expand value = jsondata.values to typeof(double)
-        , t1 = jsondata["timeDelta"] to typeof(long)
-    | project Sensor = name
-        , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
-        , Value = value
-        , State = iff(value >= 0.1, "Active", "Dormant")
-    | take 10
+```
+RawSensorsData
+| mvexpand sensors = rawdata['data'] to typeof(string)
+| extend jsondata = parse_json(sensors)
+| extend name = tostring(jsondata.name)
+| extend timestamp = jsondata.timestamp
+| mv-expand value = jsondata.values to typeof(double)
+    , t1 = jsondata["timeDelta"] to typeof(long)
+| project Sensor = name
+    , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
+    , Value = value
+    , State = iff(value >= 0.1, "Active", "Dormant")
+| take 10
+```
