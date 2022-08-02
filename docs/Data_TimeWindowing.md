@@ -20,7 +20,7 @@ Complete the following steps:
 
 * On the **Explore data samples** pop-up, click to select **IoT data** and then click **Explore**
 
-  <img src="https://user-images.githubusercontent.com/44923999/182453777-e1010579-29eb-4d54-9d4f-aff9d4d33b9c.png" width="800" title="Snipped: August 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/182495753-2caf6e57-109f-43f9-b825-ed77438cd22f.png" width="800" title="Snipped: August 2, 2022" />
 
 * To preview our transformation of the sample dataset, **Run** the following KQL:
 
@@ -35,7 +35,7 @@ Complete the following steps:
   | project Sensor = name
       , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
       , Value = value
-      , State = iff(value >= 0.1, "Active", "Dormant")
+      , State = iff(value >= 0.1, "Active", "Inactive")
   | take 10
   ```
 
