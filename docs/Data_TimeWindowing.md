@@ -11,7 +11,7 @@ This solution requires the following resources:
 
 * Data Explorer [Cluster](Infrastructure_DataExplorer_Cluster.md)
 
-### Step 2: Sample Data
+### Step 2: Prepare Sample Data
 
 Complete the following steps:
 
