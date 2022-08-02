@@ -3,7 +3,7 @@
 Requirement statements might include:
 
 * "We want to use our time-series data to characterize Device 'Runs' {i.e., the period between State A and State B}"
-* "We need to know key metrics {e.g., temperature} at the start of a run and at the end of a run"
+* "We need to know key metrics {e.g., temperature} at the start and end of a run"
 
 ### Step 1: Infrastructure Resources
 
