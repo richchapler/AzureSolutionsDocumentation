@@ -22,7 +22,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/182453777-e1010579-29eb-4d54-9d4f-aff9d4d33b9c.png" width="800" title="Snipped: August 2, 2022" />
 
-* **Run** the following KQL:
+* To preview our transformation of the sample dataset, **Run** the following KQL:
 
   ```
   RawSensorsData
@@ -38,3 +38,5 @@ Complete the following steps:
       , State = iff(value >= 0.1, "Active", "Dormant")
   | take 10
   ```
+
+lorem
