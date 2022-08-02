@@ -9,11 +9,11 @@ Requirement statements might include:
 
 This solution requires the following resources:
 
-* Data Explorer [Cluster](Infrastructure_DataExplorer_Cluster.md) and [Database](Infrastructure_DataExplorer_Database.md)
+* Data Explorer [Cluster](Infrastructure_DataExplorer_Cluster.md)
 
-### Step 2: Lorem Ipsum
+### Step 2: Sample Data
 
-Lorem Ipsum
+Complete the following steps:
 
 * Open **Synapse Studio** and click the **Manage** navigation icon
 * Click **Linked services** from the **External connections** grouping in the resulting navigation
