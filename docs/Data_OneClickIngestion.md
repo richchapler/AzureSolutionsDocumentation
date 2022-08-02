@@ -90,8 +90,8 @@ You should see the old data plus new data from the copy of the sample1.csv file.
 
 #### Pro Tips
 
-* Ingestion can be delayed by system processing... be patient (but not too patient!)
-* Consider increasing the speed of ingestion (for testing) by executing the following KQL:<br />
+* Consider using MULTILINE JSON rather than JSON
+* Consider increasing the speed of ingestion from the default of every five minutes by executing the following KQL:<br />
 `.alter database rchaplerded policy ingestionbatching @'{"maximumBatchingTimeSpan":"00:00:30"}'`
 * You might also detect ingestion failures by executing the following KQL:<br />
 `.show ingestion failures | take 10`
