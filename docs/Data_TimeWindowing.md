@@ -9,7 +9,7 @@ Requirement statements might include:
 
 This solution requires the following resources:
 
-* [Data Explorer](Infrastructure_DataExplorer.md)
+* Data Explorer [Cluster](Infrastructure_DataExplorer_Cluster.md) and [Database](Infrastructure_DataExplorer_Database.md)
 
 ### Step 2: Lorem Ipsum
 
