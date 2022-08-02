@@ -39,4 +39,6 @@ Complete the following steps:
   | take 10
   ```
 
-lorem
+_Notes:
+* The sample data lacks a column that we can use to characterize "State A" and "State B", so we create one with this logic
+* We cannot create a function to encapsulate this result since we lack necessary permissions for the SampleIoTData database_
