@@ -15,14 +15,24 @@ This solution requires the following resources:
 
 Complete the following steps:
 
-* Navigate to https://dataexplorer.azure.com/, default landing page **Home**
-* Click **Explore sample data with KQL**
+* Navigate to https://dataexplorer.azure.com/ and then on the **Home** page, click **Explore sample data with KQL**
 
-  <img src="https://user-images.githubusercontent.com/44923999/182449010-e0a5130d-6186-4988-a4e0-5682912484b0.png" width="800" title="Snipped: August 2, 2022" />
 
 * On the **Explore data samples** pop-up, click to select **IoT data** and then click **Explore**
 
-Click Ingest Data on the resulting Data Management page
-* Open **Synapse Studio** and click the **Manage** navigation icon
-* Click **Linked services** from the **External connections** grouping in the resulting navigation
+  <img src="https://user-images.githubusercontent.com/44923999/182453777-e1010579-29eb-4d54-9d4f-aff9d4d33b9c.png" width="800" title="Snipped: August 2, 2022" />
 
+* **Run** the following KQL:
+
+    RawSensorsData
+    | mvexpand sensors = rawdata['data'] to typeof(string)
+    | extend jsondata = parse_json(sensors)
+    | extend name = tostring(jsondata.name)
+    | extend timestamp = jsondata.timestamp
+    | mv-expand value = jsondata.values to typeof(double)
+        , t1 = jsondata["timeDelta"] to typeof(long)
+    | project Sensor = name
+        , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
+        , Value = value
+        , State = iff(value >= 0.1, "Active", "Dormant")
+    | take 10
