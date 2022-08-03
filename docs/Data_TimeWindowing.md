@@ -22,7 +22,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/182495753-2caf6e57-109f-43f9-b825-ed77438cd22f.png" width="800" title="Snipped: August 2, 2022" />
 
-* To preview our transformation of the sample dataset, **Run** the following KQL:
+* First, we will transform the **RawSensorsData** sample dataset; paste the following KQL and then click **Run**
 
   ```
   RawSensorsData
