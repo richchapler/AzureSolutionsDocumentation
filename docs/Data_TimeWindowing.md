@@ -72,8 +72,6 @@ Complete the following steps:
   | serialize 
   | extend nextStart = next(Start, 1)
   ```
-  
-  * Confirm resultset
 
   _Notes:_<br>
   _* The logic from the prior section is included with a `let` statement_<br>
