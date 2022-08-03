@@ -15,7 +15,7 @@ This solution requires the following resources:
 
 First, we will transform the **RawSensorsData** sample dataset.
 
-  <img src="https://user-images.githubusercontent.com/44923999/182495753-2caf6e57-109f-43f9-b825-ed77438cd22f.png" width="800" title="Snipped: August 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/182633451-497c8e51-6be1-416c-a431-6c52f2b14b0b.png" width="800" title="Snipped: August 2, 2022" />
 
 Complete the following steps:
 
@@ -37,18 +37,18 @@ Complete the following steps:
       , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
       , Value = value
       , State = iff(value >= 0.1, "Active", "Inactive")
-  | take 10
+  | where Sensor == "sensor-99"
   ```
 
   _Notes:_<br>
   _* `project .. State` is used to characterize rows as Active or Inactive... the `iff( value > 0.1..` conditional is arbitrary_<br>
-  _* `take 10` is used to limit the displayed data but won't be used in future steps_
+  _* `where .. sensor == "sensor-99"` is used to limit the displayed data but won't be used in future steps_
 
 ### Step 3: Serialize Transformed Data
 
 Next, we will serialize "start of run" from the previously transformed data.
 
-  <img src="https://user-images.githubusercontent.com/44923999/182631559-5bf4271b-0f1a-4ac5-9815-4215ebdb6a61.png" width="800" title="Snipped: August 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/182633642-fb10c967-e219-4224-bb08-1e25fc266583.png" width="800" title="Snipped: August 2, 2022" />
 
 Complete the following steps:
 
@@ -66,9 +66,10 @@ Complete the following steps:
       | project Sensor = name
           , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
           , Value = value
-          , State = iff(value >= 0.1, "Active", "Inactive");
+          , State = iff(value >= 0.1, "Active", "Inactive")
+      | where Sensor == "sensor-99";
   t
-  | where State == "Active" and Sensor == "sensor-99"
+  | where State == "Active"
   | project Sensor, Start = Timestamp
   | sort by Sensor, Start asc 
   | serialize 
@@ -77,4 +78,3 @@ Complete the following steps:
 
   _Notes:_<br>
   _* The logic from the prior section is included with a `let` statement_<br>
-  _* `where .. sensor == "sensor-99"` is used to limit the displayed data but won't be used in future steps_
