@@ -39,4 +39,4 @@ Complete the following steps:
   | take 10
   ```
 
-_Note: We must add a column to characterize State values Active and Inactive... the conditional used is completely arbitrary_
+  _Note: We must add a column to characterize State values Active and Inactive... the conditional used is completely arbitrary_
