@@ -1,4 +1,4 @@
-## Data Analysis... Time Windowing
+## Data Analysis: Time Windowing
 
 Requirement statements might include:
 
