@@ -43,5 +43,5 @@ _Note: When a Storage Account is configured for Data Lake Storage, you will see 
 ```
 
 _Notes:_<br>
-* Create a data lake using the Storage Account template plus the isHnsEnabled property<br>
-* Suffix "dl" does not consider Gen1 vs Gen2_
+* _There is only one difference between the ARM templates for Data Lakes and Storage Accounts: the **isHnsEnabled** property_<br>
+* _Suffix "dl" does not consider Gen1 vs Gen2_
