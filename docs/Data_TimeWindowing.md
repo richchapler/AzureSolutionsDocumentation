@@ -39,7 +39,7 @@ Complete the following steps:
   ```
 
   _Notes:_<br>
-  _* The State column is added to characterize values Active and Inactive... the `iff( value > 0.1..` conditional is arbitrary_<br>
+  _* `project .. State` is used to characterize rows as Active or Inactive... the `iff( value > 0.1..` conditional is arbitrary_<br>
   _* `take 10` is used to limit the displayed data but won't be used in future steps_
 
 ### Step 3: Analyze Data
@@ -57,16 +57,16 @@ Next, we will serialize "start of run" from the previously transformed data.
       | extend timestamp = jsondata.timestamp
       | mv-expand value = jsondata.values to typeof(double)
           , t1 = jsondata["timeDelta"] to typeof(long)
-      | project sensor = name
-          , timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
-          , value
-          , state = iff(value >= 0.1, "Active", "Inactive");
+      | project Sensor = name
+          , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
+          , Value = value
+          , State = iff(value >= 0.1, "Active", "Inactive");
   TxSensorData
-  | where state == "Active" and sensor == "sensor-99"
-  | project sensor, start = timestamp
-  | sort by sensor, start asc 
+  | where State == "Active" and Sensor == "sensor-99"
+  | project Sensor, Start = Timestamp
+  | sort by Sensor, Start asc 
   | serialize 
-  | extend next_start = next(start, 1)
+  | extend nextStart = next(Start, 1)
   ```
   
   _Notes:_<br>
