@@ -62,6 +62,7 @@ You have completed the One-Time Ingestion... but, **WAIT, you are not yet config
 
 Complete the following steps:
 * Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header
+  _Note: you can also navigate to your Data Explorer Database, Data Connections and then click **+ Add data connection**
 
   <img src="https://user-images.githubusercontent.com/44923999/178315981-baca4ff4-65cb-46c1-8a7f-29ba9a7bad6e.png" width="400" title="Snipped: July 11, 2022" />
 
