@@ -2,7 +2,7 @@
 
 Requirement statements might include:
 
-* "Devices running Application X, running around the world, continuously drop files into the Data Lake"
+* "We have devices running an app 24x7, around the world, continuously drop files into the Data Lake"
 * “We want to automatically ingest data files as they appear”
 
 ### Step 1: Infrastructure Resources
