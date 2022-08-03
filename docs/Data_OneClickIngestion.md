@@ -61,15 +61,20 @@ You have completed the One-Time Ingestion... but, **WAIT, you are not yet config
 ### Step 3: Continuous Ingestion
 
 Complete the following steps:
-* Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header
-  _Note: you can also navigate to your Data Explorer Database, Data Connections and then click **+ Add data connection**
+* Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header<br>
+  _Note: you can also navigate to your Data Explorer Database, Data Connections and then click **+ Add data connection**_
 
-  <img src="https://user-images.githubusercontent.com/44923999/178315981-baca4ff4-65cb-46c1-8a7f-29ba9a7bad6e.png" width="400" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/182691946-c369f08b-4e6f-46be-863d-7118b99d6492.png" width="800" title="Snipped: August 3, 2022" />
 
-* Complete the **Data connection** pop-out form<br>
-  _Note: Continuous Ingestion **only** supports the use of system and user-assigned managed identity... Service Principal and SAS Token are not available options_
+* Complete the form on the **Create data connection** pop-out, **Basics** tab<br>
+  _Note: Continuous Ingestion **only** supports the use of System and User-Assigned Managed Identity... Service Principal and SAS Token are not available options_
+* Click **Next: Ingest properties >**
   
-* Click **Next: Ingest properties >** and then review default values on the **Ingest properties** tab
+  <img src="https://user-images.githubusercontent.com/44923999/182691406-1995fd5d-0a15-411a-bea2-9e893193a5fd.png" width="800" title="Snipped: August 3, 2022" />
+
+* Complete the form on the **Create data connection** pop-out, **Ingest properties** tab<br>
+  _Note: If the Data Format of your source is JSON, consider using MULTILINE JSON instead (to pre-emptively avoid data quality-related ingestion issues)_
+  
 * Click **Next: Review + create >**, confirm configuration and then click **Create**
 
 #### Confirm Success
@@ -91,7 +96,6 @@ You should see the old data plus new data from the copy of the sample1.csv file.
 
 #### Pro Tips
 
-* Consider using MULTILINE JSON rather than JSON
 * Consider increasing the speed of ingestion from the default of every five minutes by executing the following KQL:<br />
 `.alter database rchaplerded policy ingestionbatching @'{"maximumBatchingTimeSpan":"00:00:30"}'`
 * You might also detect ingestion failures by executing the following KQL:<br />
