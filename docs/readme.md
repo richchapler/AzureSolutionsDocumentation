@@ -3,4 +3,4 @@ In this documentation, you will find step-by-step instructions for solutions to 
 ## Contents
 > [Infrastructure](Infrastructure.md) >> Resource Instantiation
 
-> [Data](Data.md) >> Acquisition
+> [Data](Data.md) >> Acquisition :: Analysis
