@@ -39,4 +39,4 @@ Complete the following steps:
   | take 10
   ```
 
-  _Note: The State column is added to characterize values Active and Inactive... the "> 0.1" conditional is completely arbitrary_
+  _Note: The State column is added to characterize values Active and Inactive... the "iff( value > 0.1.." conditional is arbitrary_
