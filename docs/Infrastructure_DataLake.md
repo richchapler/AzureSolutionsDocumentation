@@ -43,5 +43,5 @@ _Note: When a Storage Account is configured for Data Lake Storage, you will see 
 ```
 
 _Notes:_<br>
-_* Create a data lake using the Storage Account template plus the isHnsEnabled property_<br>
-_* Suffix "dl" does not consider Gen1 vs Gen2_<br>
+* Create a data lake using the Storage Account template plus the isHnsEnabled property<br>
+* Suffix "dl" does not consider Gen1 vs Gen2_
