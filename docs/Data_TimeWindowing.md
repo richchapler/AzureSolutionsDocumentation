@@ -2,8 +2,7 @@
 
 Requirement statements might include:
 
-* "We want to use our time-series data to characterize Device 'Runs' {i.e., the period between Active and Inactive}"
-* "We need to know key metrics {e.g., temperature} at the start and end of a run"
+* "We want to use our time-series data to characterize Sensor 'Activity Runs' {what we call the period between Active and Inactive}"
 
 ### Step 1: Infrastructure Resources
 
@@ -78,3 +77,9 @@ Complete the following steps:
 
   _Notes:_<br>
   _* The logic from the prior section is included with a `let` statement_<br>
+
+### Step 4: Finalize Analysis
+
+Finally, we will join "end of run", include an Activity Run Identifier and calculate Delta.
+
+  <img src="https://user-images.githubusercontent.com/44923999/182653189-c5519d5f-c695-4617-b713-f780897b7f6f.png" width="800" title="Snipped: August 2, 2022" />
