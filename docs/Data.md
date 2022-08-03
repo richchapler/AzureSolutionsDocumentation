@@ -2,10 +2,10 @@
 
 ### Acquisition
 
-  Use Case | Source | Target | Method | Type
+  Use Case | Method | Source | Target | Type
   :----- | :----- | :----- | :----- | :-----
-  [...using "One-Click" Ingestion](Data_OneClickIngestion.md) | Data Lake | Data Explorer | "One-Click Ingestion Wizard" | No Code<br>
-  [...from Purview via REST API](Data_fromPurviewAPI.md) | Azure API | Data Lake | Synapse Pipeline | Low Code
+  [...using "One-Click" Ingestion](Data_OneClickIngestion.md) | Data Explorer Wizard | Data Lake | Data Explorer | No Code<br>
+  [...from Purview via REST API](Data_fromPurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
 
 ### Analysis
 
