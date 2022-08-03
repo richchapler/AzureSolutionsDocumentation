@@ -38,8 +38,8 @@ Complete the following steps:
   | take 10
   ```
 
-  _Notes:_
-  _* The State column is added to characterize values Active and Inactive... the `iff( value > 0.1..` conditional is arbitrary_
+  _Notes:_<br>
+  _* The State column is added to characterize values Active and Inactive... the `iff( value > 0.1..` conditional is arbitrary_<br>
   _* `take 10` is used to limit the displayed data but won't be used in future steps_
 
 ### Step 3: Analyze Data
@@ -69,6 +69,6 @@ Next, we will serialize "start of run" from the previously transformed data.
   | extend next_start = next(start, 1)
   ```
   
-  _Notes:_
-  _* The logic from the prior section is included with a `let` statement_
+  _Notes:_<br>
+  _* The logic from the prior section is included with a `let` statement_<br>
   _* `where .. sensor == "sensor-99"` is used to limit the displayed data but won't be used in future steps_
