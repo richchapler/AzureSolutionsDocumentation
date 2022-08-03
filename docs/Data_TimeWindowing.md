@@ -13,15 +13,17 @@ This solution requires the following resources:
 
 ### Step 2: Prepare Sample Data
 
+First, we will transform the **RawSensorsData** sample dataset.
+
+  <img src="https://user-images.githubusercontent.com/44923999/182495753-2caf6e57-109f-43f9-b825-ed77438cd22f.png" width="800" title="Snipped: August 2, 2022" />
+
 Complete the following steps:
 
 * Navigate to https://dataexplorer.azure.com/ and then on the **Home** page, click **Explore sample data with KQL**
 
 * On the **Explore data samples** pop-up, click to select **IoT data** and then click **Explore**
 
-  <img src="https://user-images.githubusercontent.com/44923999/182495753-2caf6e57-109f-43f9-b825-ed77438cd22f.png" width="800" title="Snipped: August 2, 2022" />
-
-* First, we will transform the **RawSensorsData** sample dataset; paste the following KQL and then click **Run**
+* Paste the following KQL and then click **Run**
 
   ```
   RawSensorsData
