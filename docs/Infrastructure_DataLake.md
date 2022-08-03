@@ -32,11 +32,11 @@ _Note: When a Storage Account is configured for Data Lake Storage, you will see 
     {
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "[providers('Microsoft.Storage','storageAccounts').apiVersions[0]]",
-      "name": "[concat(resourceGroup().name,'**dl**')]",
+      "name": "[concat(resourceGroup().name,'dl')]",
       "location": "[resourceGroup().location]",
       "sku": { "name": "Standard_LRS" },
       "kind": "StorageV2",
-      **"properties": { "isHnsEnabled": true }**
+      "properties": { "isHnsEnabled": true }
     }
   ]
 }
