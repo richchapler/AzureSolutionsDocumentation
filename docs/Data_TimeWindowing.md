@@ -42,14 +42,18 @@ Complete the following steps:
   _* `project .. State` is used to characterize rows as Active or Inactive... the `iff( value > 0.1..` conditional is arbitrary_<br>
   _* `take 10` is used to limit the displayed data but won't be used in future steps_
 
-### Step 3: Analyze Data
+### Step 3: Serialize Transformed Data
 
 Next, we will serialize "start of run" from the previously transformed data.
+
+  <img src="https://user-images.githubusercontent.com/44923999/182631559-5bf4271b-0f1a-4ac5-9815-4215ebdb6a61.png" width="800" title="Snipped: August 2, 2022" />
+
+Complete the following steps:
 
 * Paste the following KQL and then click **Run**
 
   ```
-  let TxSensorData = 
+  let t = 
       RawSensorsData
       | mvexpand sensors = rawdata['data'] to typeof(string)
       | extend jsondata = parse_json(sensors)
@@ -61,7 +65,7 @@ Next, we will serialize "start of run" from the previously transformed data.
           , Timestamp = unixtime_microseconds_todatetime(t1 + timestamp)
           , Value = value
           , State = iff(value >= 0.1, "Active", "Inactive");
-  TxSensorData
+  t
   | where State == "Active" and Sensor == "sensor-99"
   | project Sensor, Start = Timestamp
   | sort by Sensor, Start asc 
@@ -69,6 +73,8 @@ Next, we will serialize "start of run" from the previously transformed data.
   | extend nextStart = next(Start, 1)
   ```
   
+  * Confirm resultset
+
   _Notes:_<br>
   _* The logic from the prior section is included with a `let` statement_<br>
   _* `where .. sensor == "sensor-99"` is used to limit the displayed data but won't be used in future steps_
