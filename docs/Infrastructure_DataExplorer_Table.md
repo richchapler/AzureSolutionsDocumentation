@@ -1,4 +1,4 @@
-## Data Explorer Table
+## Data Explorer >> Table
 
 ### Create with Azure Portal
 
