@@ -21,7 +21,7 @@ I have tried to keep these instructions free of the obvious:
 > [**Data Migration Assistant**](https://www.microsoft.com/en-us/download/details.aspx?id=53595)
 
 > [**Event Hub**](Infrastructure_EventHub.md)
-> 
+
 > [**Log Analytics**](Infrastructure_LogAnalytics.md)
 
 > [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md)
