@@ -5,7 +5,7 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused w
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for "Azure Data Explorer" and select the appropriate dropdown value
+* Use the **Search services and marketplace** textbox to search for and select "Azure Data Explorer"
 * Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
 * Complete the **Create an Azure Data Explorer Cluster** form
 
