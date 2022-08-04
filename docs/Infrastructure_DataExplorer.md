@@ -18,7 +18,6 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused w
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
 #### Database
-
 _Note: These instructions can apply to either Data Explorer Clusters or Synapse Data Explorer Pools_
 
 * Navigate to your instance of Data Explorer and click **+ Add database** on the main page
