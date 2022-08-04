@@ -1,7 +1,7 @@
 ## Synapse
 _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 
-## Create with Azure Portal
+### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
