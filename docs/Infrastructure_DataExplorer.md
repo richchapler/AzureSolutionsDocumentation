@@ -1,9 +1,9 @@
 ## Data Explorer
 
-### Create with Azure Portal
-
-#### Cluster
+### Cluster
 _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused with Data Explorer Pool functionality in Synapse)_
+
+#### Create with Azure Portal
 
 Complete the following steps:
 
@@ -19,8 +19,10 @@ Complete the following steps:
 
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
-#### Database
+### Database
 _Note: These instructions can apply to either Data Explorer Clusters or Synapse Data Explorer Pools_
+
+#### Create with Azure Portal
 
 Complete the following steps:
 
@@ -29,7 +31,9 @@ Complete the following steps:
   
   <img src="https://user-images.githubusercontent.com/44923999/178294501-96d06134-e93c-4bd6-ba67-414c6be5841c.png" width="800" title="Snipped: July 8, 2022" />
 
-#### Table
+### Table
+
+#### Create with Azure Portal
 
 Complete the following steps:
 
@@ -43,7 +47,9 @@ Complete the following steps:
   .create table t ( d:dynamic )
   ```
 
-#### Ingestion Mapping
+### Ingestion Mapping
+
+#### Create with Azure Portal
 
 Complete the following steps:
 
@@ -56,3 +62,10 @@ Complete the following steps:
   ```
   .create table t ingestion json mapping 't_mapping' '[{"column":"d","path":"$","datatype":"dynamic"}]'
   ```
+
+
+### Data Connection
+_Note: These instructions rely on many dependencies:_
+* _Data Explorer_
+
+#### Create with ARM Template
