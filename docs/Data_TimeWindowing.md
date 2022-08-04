@@ -6,9 +6,9 @@ Requirement statements might include:
 
 ### Step 1: Infrastructure Resources
 
-This solution requires the following resources:
+This solution requires the following resource:
 
-* Data Explorer [Cluster](Infrastructure_DataExplorer_Cluster.md)
+* [Data Explorer](Infrastructure_DataExplorer.md) >> Cluster
 
 ### Step 2: Prepare Sample Data
 
