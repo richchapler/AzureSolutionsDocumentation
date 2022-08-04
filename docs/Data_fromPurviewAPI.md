@@ -5,8 +5,7 @@ Requirement statements might include:
 * "Our approved Data Governance solution (not Purview) lacks Azure connectors"
 * "We want to use Purview to collect the best possible source metadata from Azure resources"
 
-### Step 1: Infrastructure Resources
-
+### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
 * [Application Registration](Infrastructure_ApplicationRegistration.md) with Purview [collection role assignments](Infrastructure_Purview_CollectionRoleAssignment.md) for **Collection admins**, **Data source admins**, and **Data curators**
