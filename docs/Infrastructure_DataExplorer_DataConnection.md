@@ -2,8 +2,6 @@
 
 ### Create with ARM Template
 
-_Note: Successful deployment of this ARM template depends on many resources:_
-
 #### Step 1: Prepare Infrastructure
 
 This solution requires the following resource:
