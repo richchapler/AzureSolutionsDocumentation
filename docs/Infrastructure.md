@@ -14,7 +14,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
-> **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md)
+> [**Data Explorer**](Infrastructure_DataExplorer.md) >> Cluster :: Database
 
 > [**Data Lake**](Infrastructure_DataLake.md) >> [Container](Infrastructure_DataLake_Container.md)
 
