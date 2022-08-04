@@ -62,10 +62,10 @@ Complete the following steps:
   ```
   .create table t ingestion json mapping 't_mapping' '[{"column":"d","path":"$","datatype":"dynamic"}]'
   ```
-
-
+  
 ### Data Connection
-_Note: These instructions rely on many dependencies:_
-* _Data Explorer_
 
 #### Create with ARM Template
+
+_Note: Successful deployment of this ARM template depends on many resources:_
+* _[Data Explorer](Infrastructure_DataExplorer.md) >> Cluster :: Database :: Table :: Ingestion Mapping_
