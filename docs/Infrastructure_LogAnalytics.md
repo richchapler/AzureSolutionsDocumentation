@@ -12,4 +12,4 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/182906014-ff2d5139-560f-4c38-99ac-46e2931bae6b.png" width="800" title="Snipped: August 4, 2022" />
 
 * Complete the **Create Log Analytics workspace** form, **Basics** tab
-* Click the **Review + Create** button, review configuration, and then click the **Create** button
+* Click **Review + Create**, confirm configuration settings on the resulting page, and then click **Create**
