@@ -7,6 +7,9 @@ _Note: Successful deployment of this ARM template depends on many resources:_
 * _[Event Hub](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group_
 * _[Storage Account](Infrastructure_StorageAccount.md)_
 
+![image](https://user-images.githubusercontent.com/44923999/182941824-1675b487-e60c-44ba-8a94-0eeaa8ee12af.png)
+
+
   ```
   {
       "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
