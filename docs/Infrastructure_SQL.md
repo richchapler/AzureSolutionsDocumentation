@@ -10,11 +10,11 @@ _(aka “Azure SQL”, “Azure SQL Database”, “Azure SQL Database Server”
 * Use the **Search services and marketplace** textbox to search for "azure sql" and select the appropriate dropdown value
 * Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
 
-  <img src="https://user-images.githubusercontent.com/44923999/180610756-3263f92c-a42d-4d2e-b841-2a5d32432237.png" width="600" title="Snipped: July 23, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180610756-3263f92c-a42d-4d2e-b841-2a5d32432237.png" width="800" title="Snipped: July 23, 2022" />
 
 * On the **Select SQL deployment option** > **How do you plan to use the service?** page, select **Database server** from the **Resource type** dropdown and then click **Create**<br>
  
-  <img src="https://user-images.githubusercontent.com/44923999/180610666-c30e773c-7184-40c6-8669-84deea5252ed.png" width="600" title="Snipped: July 23, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180610666-c30e773c-7184-40c6-8669-84deea5252ed.png" width="800" title="Snipped: July 23, 2022" />
 
 * Complete the form on the **Create SQL Database Server** page, **Basics** tab, including:
 
@@ -33,7 +33,7 @@ _(aka “Azure SQL”, “Azure SQL Database”, “Azure SQL Database Server”
 
 * On the **Overview** page of the new Azure SQL Database Server, click **+ Create database**
 
-  <img src="https://user-images.githubusercontent.com/44923999/180611032-07d6c068-5a13-462b-a88a-7e3b3c465e83.png" width="600" title="Snipped: July 23, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/180611032-07d6c068-5a13-462b-a88a-7e3b3c465e83.png" width="800" title="Snipped: July 23, 2022" />
 
 * Complete the form on the **Create SQL Database** page, **Basics** tab
 
