@@ -14,10 +14,17 @@ This solution requires the following resource:
 
 #### Step 2: Prepare Sample Data
 
-First, we will transform the **RawSensorsData** sample dataset.
+Complete the following steps:
+
+* Click the menu button in the upper-left corner of the Azure Portal and select **Deploy a custom template** from the resulting dropdown
 
   <img src="https://user-images.githubusercontent.com/44923999/182941824-1675b487-e60c-44ba-8a94-0eeaa8ee12af.png" width="800" title="Snipped: August 4, 2022" />
 
+* Click **Build your own template in the editor**
+
+  <img src="https://user-images.githubusercontent.com/44923999/182942508-5b378150-abc2-47de-924d-4a4720326fba.png" width="800" title="Snipped: August 4, 2022" />
+
+* Paste and modify the following JSON:
 
   ```
   {
@@ -43,3 +50,7 @@ First, we will transform the **RawSensorsData** sample dataset.
       ]
   }
   ```
+
+* Click **Save**
+* Confirm values on the resulting **Custom deployment** >> **Deploy from a custom template** page, **Basics** tab
+* Click **Review + create**
