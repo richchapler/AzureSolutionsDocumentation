@@ -1,8 +1,8 @@
-## Data Explorer
+# Data Explorer
 
-### Create with Azure Portal
+## Create with Azure Portal
 
-#### Cluster
+### Cluster
 _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused with Data Explorer Pool functionality in Synapse)_
 
 Complete the following steps:
@@ -19,7 +19,7 @@ Complete the following steps:
 
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
-#### Database
+### Database
 _Note: These instructions can apply to either Data Explorer Clusters or Synapse Data Explorer Pools_
 
 Complete the following steps:
@@ -29,7 +29,7 @@ Complete the following steps:
   
   <img src="https://user-images.githubusercontent.com/44923999/178294501-96d06134-e93c-4bd6-ba67-414c6be5841c.png" width="800" title="Snipped: July 8, 2022" />
 
-#### Table
+### Table
 _Note: There are many ways to execute KQL {e.g., Kusto Explorer App, Azure Portal "Query", etc... choose your favorite_
 
 Complete the following steps:
