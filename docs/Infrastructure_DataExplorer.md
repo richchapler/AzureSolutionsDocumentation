@@ -36,4 +36,6 @@ Complete the following steps:
 
 * Modify and execute the following KQL:
 
+  ```
   .create table t ( d:dynamic )
+  ```
