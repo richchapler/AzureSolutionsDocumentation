@@ -4,7 +4,7 @@
 
 #### Step 1: Prepare Infrastructure
 
-This solution requires the following resource:
+This solution requires the following resources:
 
 * **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md)
 * [Event Hub](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
