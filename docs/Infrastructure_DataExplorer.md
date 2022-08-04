@@ -30,11 +30,14 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/178294501-96d06134-e93c-4bd6-ba67-414c6be5841c.png" width="800" title="Snipped: July 8, 2022" />
 
 #### Table
-_Note: There are many ways to execute KQL {e.g., Kusto Explorer App, Azure Portal "Query", etc... choose your favorite_
 
 Complete the following steps:
 
-* Modify and execute the following KQL:
+* Navigate to your Data Explorer Database, and then select Query from the navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/182936394-a49e10dc-9a28-4e4e-834a-ff432e28cd3e.png" width="800" title="Snipped: August 4, 2022" />
+
+* Modify and **Run** the following KQL:
 
   ```
   .create table t ( d:dynamic )
