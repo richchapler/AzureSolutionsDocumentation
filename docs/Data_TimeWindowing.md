@@ -19,9 +19,7 @@ First, we will transform the **RawSensorsData** sample dataset.
 Complete the following steps:
 
 * Navigate to https://dataexplorer.azure.com/ and then on the **Home** page, click **Explore sample data with KQL**
-
 * On the **Explore data samples** pop-up, click to select **IoT data** and then click **Explore**
-
 * Paste the following KQL and then click **Run**
 
   ```
