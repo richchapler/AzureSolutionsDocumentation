@@ -10,7 +10,7 @@ This solution requires the following resources:
 * [Event Hub](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
 * [Storage Account](Infrastructure_StorageAccount.md)
 
-#### Step 2: Prepare Sample Data
+#### Step 2: Deploy Custom Template
 
 Complete the following steps:
 
