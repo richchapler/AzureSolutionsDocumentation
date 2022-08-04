@@ -1,9 +1,9 @@
 ## Data Explorer
 
-### Cluster
-_(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused with Data Explorer Pool functionality in Synapse)_
+### Create with Azure Portal
 
-#### Create with Azure Portal
+#### Cluster
+_(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused with Data Explorer Pool functionality in Synapse)_
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
@@ -17,11 +17,9 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused w
 
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
-## Database
+#### Database
 
-_Note: These instructions can apply to either [Clusters](PrepareResources_DataExplorer_Cluster.md) or Pools_
-
-#### Create with Azure Portal
+_Note: These instructions can apply to either Data Explorer Clusters or Synapse Data Explorer Pools_
 
 * Navigate to your instance of Data Explorer and click **+ Add database** on the main page
 * Complete the resulting **Azure Data Explorer Database** pop-out form and then click **Create**
