@@ -9,7 +9,7 @@ Requirement statements might include:
 
 This solution requires the following resources:
 
-* [Data Explorer](Infrastructure_DataExplorer.md) >> Cluster :: Database
+* [Data Explorer] >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md)
 * [Data Lake](Infrastructure_DataLake.md) (with [container](Infrastructure_DataLake_Container.md) and downloaded [sample data](https://filesamples.com/formats/csv))
 
 ### Step 2: One-Time Ingestion
