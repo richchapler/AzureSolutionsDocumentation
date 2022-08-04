@@ -4,11 +4,11 @@ Requirement statements might include:
 
 * "We want to use our time-series data to characterize Sensor 'Activity Runs' {what we call the period between Active and Inactive}"
 
-### Step 1: Infrastructure Resources
+### Step 1: Prepare Infrastructure
 
 This solution requires the following resource:
 
-* [Data Explorer](Infrastructure_DataExplorer.md) >> Cluster
+* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md)
 
 ### Step 2: Prepare Sample Data
 
