@@ -1,4 +1,5 @@
 ## Log Analytics
+_(aka “Log Analytics Workspace”)_
 
 ### Create with Azure Portal
 
