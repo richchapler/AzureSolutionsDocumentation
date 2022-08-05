@@ -22,6 +22,8 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
 
+> [**Grafana**](Infrastructure_Grafana.md)
+
 > [**Log Analytics**](Infrastructure_LogAnalytics.md)
 
 > [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md)
