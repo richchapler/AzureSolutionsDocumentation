@@ -60,5 +60,18 @@ Complete the following steps:
 
 * Confirm values on the resulting **Review your scan** pop-out form, and then click **Save and run**
 
+### Step 4: Confirm Success
+
+Complete the following steps:
+
+* Navigate to **Data map** > **Monitoring** in the **Microsoft Purview Governance Portal**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184021732-42a98402-f764-468c-a450-98571d5a876c.png" width="800" title="Snipped: August 10, 2022" />
+
+* Confirm successful scan
+* Navigate to **Data catalog** > **Browse** in the **Microsoft Purview Governance Portal**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184021555-2cbda974-1708-41c9-8299-68aa6d1f7e84.png" width="800" title="Snipped: August 10, 2022" />
+
 ### Reference
 https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-data-explorer
