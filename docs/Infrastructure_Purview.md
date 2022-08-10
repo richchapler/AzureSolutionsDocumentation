@@ -3,6 +3,8 @@ _(aka "Microsoft Purview" ... "Azure Purview" is specific to Azure Sentinel)_
 
 ### Create with Azure Portal
 
+Complete the following steps:
+
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
 * Use the **Search services and marketplace** textbox to search for and select "Microsoft Purview"
