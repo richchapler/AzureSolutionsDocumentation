@@ -52,5 +52,13 @@ Complete the following steps:
 
 * Select **AzureDataExplorer** on the resulting **Select a scan rule set** pop-out form, and then click **Continue**
 
+  <img src="https://user-images.githubusercontent.com/44923999/184019391-81329502-7ed4-4e17-9a24-a8aaaaaa2feb.png" width="800" title="Snipped: August 10, 2022" />
+
+* Complete the resulting **Set a scan trigger** pop-out form, and then click **Continue**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184019677-3642f802-5774-48e1-abf0-5e0c6f942797.png" width="800" title="Snipped: August 10, 2022" />
+
+* Confirm values on the resulting **Review your scan** pop-out form, and then click **Save and run**
+
 ### Reference
 https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-data-explorer
