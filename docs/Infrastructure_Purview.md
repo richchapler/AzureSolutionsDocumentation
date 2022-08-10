@@ -5,8 +5,8 @@ _(aka "Microsoft Purview" ... "Azure Purview" is specific to Azure Sentinel)_
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for "Microsoft Purview" and select the appropriate dropdown value
-* Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
+* Use the **Search services and marketplace** textbox to search for and select "Microsoft Purview"
+* Find the correct result, click the **Create** dropdown, and select "Microsoft Purview"
 * Complete the **Create Microsoft Purview account** form
 
   <img src="https://user-images.githubusercontent.com/44923999/180605435-cbce8c37-faf8-4310-a478-7f1bb4e4d940.png" width="800" title="Snipped: July 23, 2022" />
