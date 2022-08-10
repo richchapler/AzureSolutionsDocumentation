@@ -73,5 +73,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/184021555-2cbda974-1708-41c9-8299-68aa6d1f7e84.png" width="800" title="Snipped: August 10, 2022" />
 
+* Browse and confirm the scanned source
+
 ### Reference
 https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-data-explorer
