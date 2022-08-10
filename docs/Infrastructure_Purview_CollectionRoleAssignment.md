@@ -1,6 +1,6 @@
 ## Purview >> Collection Role Assignment
 
-### Create with Azure Portal
+### Create with Microsoft Purview Governance Portal
 
 * Navigate to **Data map** > **Collections** in the **Purview Governance Portal**
 *	Select your  collection, and then the **Role assignments** tab
