@@ -1,4 +1,4 @@
-## Collection Role Assignment
+## Purview >> Collection Role Assignment
 
 ### Create with Azure Portal
 
