@@ -1,4 +1,4 @@
-## Linked Service
+## Synapse >> Linked Service
 
 ### Create with Azure Portal
 
