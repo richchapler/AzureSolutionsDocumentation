@@ -26,7 +26,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Log Analytics**](Infrastructure_LogAnalytics.md)
 
-> [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md)
+> [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md) :: [Sources](Infrastructure_Purview_Sources.md)
 
 > [**Resource Group**](Infrastructure_ResourceGroup.md)
 
