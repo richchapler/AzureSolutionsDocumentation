@@ -30,3 +30,6 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/184015637-6bc28ff2-3e23-4f90-a1f9-7b2a8fc28610.png" width="800" title="Snipped: August 10, 2022" />
 
 * Complete the resulting pop-out form, click **Test Connection** to confirm success, and then click **Continue**
+
+### Reference
+https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-data-explorer
