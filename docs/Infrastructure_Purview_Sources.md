@@ -1,6 +1,6 @@
 ## Purview >> Sources
 
-### Step 1: Permissions
+### Step 1: Source Permissions
 
 #### Azure Data Explorer
 
@@ -13,7 +13,7 @@ Complete the following steps:
 * On the resulting screen, click **+ Add** and select **AllDatabasesViewer** from the resulting dropdown menu
 * On the resulting pop-out, search for and select the managed identity of your Purview instance, then click **Select**
 
-### Step 1: Register Source
+### Step 2: Register Source
 
 #### Azure Data Explorer
 
@@ -30,7 +30,7 @@ Complete the following steps:
 
 * Complete the resulting pop-out form and then click **Register**
 
-### Step 2: Scan
+### Step 3: Scan Source
 
 Complete the following steps:
 
@@ -47,6 +47,10 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/184018634-6b7b579f-c05c-4c37-88ea-5ea9473a197c.png" width="800" title="Snipped: August 10, 2022" />
 
 * Confirm selections on the resulting **Scope your scan** pop-out form, and then click **Continue**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184018996-cca7f92c-6475-4daf-abaa-f6929eb3e72b.png" width="800" title="Snipped: August 10, 2022" />
+
+* Select **AzureDataExplorer** on the resulting **Select a scan rule set** pop-out form, and then click **Continue**
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/purview/register-scan-azure-data-explorer
