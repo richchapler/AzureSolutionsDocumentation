@@ -1,4 +1,4 @@
-## Synapse, Dataset
+## Synapse >> Dataset
 _(aka "Integration Dataset")_
 
 ### Create with Azure Portal
