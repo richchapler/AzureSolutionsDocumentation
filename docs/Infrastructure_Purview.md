@@ -1,11 +1,11 @@
 ## Purview
-_(aka "Azure Purview", "Microsoft Purview")_
+_(aka "Microsoft Purview" ... "Azure Purview" is specific to Azure Sentinel)_
 
 ### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for "purview" and select the appropriate dropdown value
+* Use the **Search services and marketplace** textbox to search for "Microsoft Purview" and select the appropriate dropdown value
 * Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
 * Complete the **Create Microsoft Purview account** form
 
