@@ -14,7 +14,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
-> **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md)
+> **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md)
 
 > [**Data Lake**](Infrastructure_DataLake.md) >> [Container](Infrastructure_DataLake_Container.md)
 
