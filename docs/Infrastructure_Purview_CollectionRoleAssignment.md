@@ -2,6 +2,8 @@
 
 ### Create with Microsoft Purview Governance Portal
 
+Complete the following steps:
+
 * Navigate to **Data map** > **Collections** in the **Purview Governance Portal**
 *	Select your  collection, and then the **Role assignments** tab
 *	On the resulting page, click the **Edit role assignments** dropdown
