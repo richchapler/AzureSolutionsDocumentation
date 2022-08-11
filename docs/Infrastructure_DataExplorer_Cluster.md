@@ -1,4 +1,4 @@
-## Data Explorer >> Cluster
+## [Data Explorer](Infrastructure_DataExplorer.md) >> **Cluster**
 _Note: Stand-alone clusters are similar to, but not the same as, Synapse Data Explorer Pool functionality_
 
 ### Create with Azure Portal
