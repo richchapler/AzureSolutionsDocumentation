@@ -33,6 +33,10 @@ Complete the following steps:
 * On the resulting pop-out, search for and select the managed identity of your Purview instance, then click **Select**
 * Back on the **Add role assignment** screen, click **Review + assign**
 
+  <img src="https://user-images.githubusercontent.com/44923999/184260718-84a5cb5c-d9b5-45c5-ae40-7e1e1f453fd6.png" width="800" title="Snipped: August 11, 2022" />
+
+* On the resulting **Add role assignment** screen, confirm configuration and then click **Review + assign**
+
 ### Step 2: Register Source
 
 #### Azure Data Explorer
