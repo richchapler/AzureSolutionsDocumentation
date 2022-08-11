@@ -1,4 +1,5 @@
 ## Data Explorer >> Cluster
+_(similar to, but not the same as Synapse Data Explorer Pool functionality)_
 
 ### Create with Azure Portal
 
