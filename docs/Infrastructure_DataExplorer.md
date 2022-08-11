@@ -5,7 +5,7 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”)_
 
 #### Data Share
 Cross-region cluster-follower … when will it be possible to follow shared ADX A in region A from ADX B in region B?
-* August 11, 2022... "no plans to implement this product feature... was previously implemented and created unexpected costs for customers"
+* August 11, 2022... "no plans to re-implement this product feature... was previously implemented and then deprecated because it created unpredictable cost for customers"
 
 When will ADX Data Share support Customer Managed Keys?
 * August 11, 2022... "planned, but no ETA"
