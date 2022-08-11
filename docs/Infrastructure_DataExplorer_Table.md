@@ -1,4 +1,4 @@
-## Data Explorer >> Table
+## [Data Explorer](Infrastructure_DataExplorer.md) >> **Table**
 
 ### Create with Azure Portal
 
