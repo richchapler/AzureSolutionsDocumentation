@@ -1,4 +1,4 @@
-## Data Explorer >> Database
+## [Data Explorer](Infrastructure_DataExplorer.md) >> **Database**
 _Note: These instructions can apply to either Data Explorer Clusters or Synapse Data Explorer Pools_
 
 ### Create with Azure Portal
