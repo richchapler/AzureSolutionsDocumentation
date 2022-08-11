@@ -5,11 +5,11 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”)_
 The answers provided below represent best-known information on a given topic as of a given date.
 
 #### Data Share
-Cross-region cluster-follower … when will it be possible to follow shared ADX A in region A from ADX B in region B?
+Cross-Region Cluster-Follower … when will it be possible to follow shared ADX A in region A from ADX B in region B?
 * August 11, 2022... "no plans to re-implement this product feature... was previously implemented and then deprecated because it created unpredictable cost for customers"
 
-When will ADX Data Share support Customer Managed Keys?
-* August 11, 2022... "planned, but no ETA"
+Customer Managed Keys ... when will ADX Data Share support Customer Managed Keys?
+* August 11, 2022... "product feature is planned, but no articulated ETA"
 
 #### DevOps / GitHub
 Is there any way to connect ADX directly to DevOps / GitHub (like Synapse **Set up code repository**)?
