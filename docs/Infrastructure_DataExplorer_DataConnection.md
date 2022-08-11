@@ -1,4 +1,4 @@
-## Data Explorer >> Data Connection
+## [Data Explorer](Infrastructure_DataExplorer.md) >> **Data Connection**
 
 ### Create with ARM Template
 
