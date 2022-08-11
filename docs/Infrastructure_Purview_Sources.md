@@ -13,6 +13,26 @@ Complete the following steps:
 * On the resulting screen, click **+ Add** and select **AllDatabasesViewer** from the resulting dropdown menu
 * On the resulting pop-out, search for and select the managed identity of your Purview instance, then click **Select**
 
+#### Azure Data Lake, Gen 2
+
+Complete the following steps:
+
+* Navigate to your Data Lake, then **Access Control (IAM)** in the navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/184259786-22c36812-ae2a-410d-8c62-cf3e48022e5e.png" width="800" title="Snipped: August 11, 2022" />
+
+* On the resulting screen, click **+ Add** and select **Add role assignment** from the resulting dropdown menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/184259881-65add184-5505-4beb-b072-e340bcb6bfaa.png" width="800" title="Snipped: August 11, 2022" />
+
+* On the resulting **Add role assignment** screen, search for and select **Storage Blob Data Reader**, then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184260378-4e203be5-1956-4ffa-964f-e32de9c3f76d.png" width="800" title="Snipped: August 11, 2022" />
+
+* On the resulting **Add role assignment** screen, select the **Managed identity** radio button, and then click **+ Select members**
+* On the resulting pop-out, search for and select the managed identity of your Purview instance, then click **Select**
+* Back on the **Add role assignment** screen, click **Review + assign**
+
 ### Step 2: Register Source
 
 #### Azure Data Explorer
