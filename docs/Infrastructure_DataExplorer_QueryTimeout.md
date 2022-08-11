@@ -1,4 +1,4 @@
-## Data Explorer >> Query Timeout
+## [Data Explorer](Infrastructure_DataExplorer.md) >> **Query Timeout**
 
 Complete the following steps:
 
