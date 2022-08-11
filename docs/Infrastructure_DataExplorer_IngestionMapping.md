@@ -1,4 +1,4 @@
-## Data Explorer >> Ingestion Mapping
+## [Data Explorer](Infrastructure_DataExplorer.md) >> **Ingestion Mapping**
 
 ### Create with Azure Portal
 
