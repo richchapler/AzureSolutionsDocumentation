@@ -2,6 +2,7 @@
 _(aka “ADX,” “Azure Data Explorer,” “Kusto”)_
 
 ### Frequently Asked Questions (FAQ)
+The answers provided below represent best-known information on a given topic as of a given date.
 
 #### Data Share
 Cross-region cluster-follower … when will it be possible to follow shared ADX A in region A from ADX B in region B?
