@@ -1,5 +1,5 @@
 ## Data Explorer
-_(aka “ADX,” “Azure Data Explorer,” “Kusto”... also, easy confused with Data Explorer Pool functionality in Synapse)_
+_(aka “ADX,” “Azure Data Explorer,” “Kusto”)_
 
 ### Frequently Asked Questions (FAQ)
 
