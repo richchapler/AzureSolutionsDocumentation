@@ -1,5 +1,5 @@
 ## Data Explorer >> Cluster
-_(similar to, but not the same as Synapse Data Explorer Pool functionality)_
+_Note: Stand-alone clusters are similar to, but not the same as, Synapse Data Explorer Pool functionality_
 
 ### Create with Azure Portal
 
