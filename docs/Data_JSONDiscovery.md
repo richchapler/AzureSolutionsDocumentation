@@ -3,7 +3,7 @@
 Requirement statements might include:
 
 * "Our data includes a dynamic column filled with JSON subject to frequent schema changes"
-* "We want a way to discover all of the column headers that might be derived from the JSON over many rows"
+* "We want a way to discover all of the column headers that might be derived from the JSON over billions of rows"
 
 ### Step 1: Stage Sample Data
 
