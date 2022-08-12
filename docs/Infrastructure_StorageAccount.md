@@ -18,3 +18,4 @@
   ]
 }
 ```
+_Note: ARM Template deployment is incremental by default {i.e., an existing resource will not be destroyed and re-created}_
