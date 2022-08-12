@@ -16,28 +16,40 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/184379741-939e57b0-7ffd-4c32-9f31-833fe06661f3.png" width="800" title="Snipped: August 12, 2022" />
 
 * Paste the following KQL and then click Run
+* 
   ```
   let dt = datatable(c:string)
   ['{"c1":"lorem","c2":"ipsum"}','{"c2":"dolor","c4":"sit"}','{"c3":"amet"}'];
   dt
   ```
 
-* Confirm that you see the expected values in the `datatable` {i.e., JSON-formatted columhns with different names and data}
+* Confirm expected resultset {i.e., JSON-formatted columns with different names and data}
 
 ### Step 2: Enumerate Root Keys
 
-* Paste the following KQL and then click Run
+Complete the following steps:
 
+* Append the following KQL and then click Run
 
   ```
-  let dt = datatable(c:string)
-  ['{"c1":"lorem","c2":"ipsum"}','{"c2":"dolor","c4":"sit"}','{"c3":"amet"}'];
-  dt
   | project headers = bag_keys(todynamic(c))
+  ```
+
+* Confirm expected resultset {i.e., JSON-formatted, column headers only}
+
+### Step 3: Finalize Result
+
+Complete the following steps:
+
+* Append the following KQL and then click Run
+
+  ```
   | mv-expand headers
   | distinct tostring(headers)
   | sort by headers asc
   ```
+
+* Confirm expected resultset {i.e., alphabetized list of column headers}
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/bagkeysfunction
