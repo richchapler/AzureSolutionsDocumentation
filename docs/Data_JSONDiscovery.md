@@ -7,7 +7,14 @@ Requirement statements might include:
 
 ### Step 1: Stage Sample Data
 
-Lorem Ipsum
+First, we will stage a `datatable` with some simple data.
+
+Complete the following steps:
+
+* Navigate to **Query** on https://dataexplorer.azure.com/
+
+  <img src="https://user-images.githubusercontent.com/44923999/184379741-939e57b0-7ffd-4c32-9f31-833fe06661f3.png" width="800" title="Snipped: August 12, 2022" />
+
 
 ### Step 2: Enumerate Root Keys
 
@@ -20,17 +27,14 @@ Complete the following steps:
 * Navigate to https://dataexplorer.azure.com/ and then on the **Home** page, click **Explore sample data with KQL**
 
   ```
-  let dt = datatable(c:string)
-  [
-  '{"c1":"lorem","c2":"ipsum"}'
-  ,'{"c2":"dolor","c4":"sit"}'
-  ,'{"c3":"amet"}'
-  ];
-  dt
-  | project headers = bag_keys(todynamic(c))
-  | mv-expand headers
-  | distinct tostring(headers)
-  | sort by headers asc
+let dt = datatable(c:string)
+['{"c1":"lorem","c2":"ipsum"}','{"c2":"dolor","c4":"sit"}','{"c3":"amet"}'];
+dt
+| project headers = bag_keys(todynamic(c))
+| mv-expand headers
+| distinct tostring(headers)
+| sort by headers asc
+
   ```
 
 ### Reference
