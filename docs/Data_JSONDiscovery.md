@@ -30,14 +30,13 @@ Complete the following steps:
 
 
   ```
-let dt = datatable(c:string)
-['{"c1":"lorem","c2":"ipsum"}','{"c2":"dolor","c4":"sit"}','{"c3":"amet"}'];
-dt
-| project headers = bag_keys(todynamic(c))
-| mv-expand headers
-| distinct tostring(headers)
-| sort by headers asc
-
+  let dt = datatable(c:string)
+  ['{"c1":"lorem","c2":"ipsum"}','{"c2":"dolor","c4":"sit"}','{"c3":"amet"}'];
+  dt
+  | project headers = bag_keys(todynamic(c))
+  | mv-expand headers
+  | distinct tostring(headers)
+  | sort by headers asc
   ```
 
 ### Reference
