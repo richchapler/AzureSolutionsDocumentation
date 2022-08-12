@@ -42,7 +42,7 @@ Complete the following steps:
 
 ### Step 3: Finalize Result
 
-Finally, we will prepare the deliverable result.
+Finally, we will prepare a deliverable result.
 
   <img src="https://user-images.githubusercontent.com/44923999/184383036-6b0d6307-0634-40b3-a8f3-182aee304902.png" width="800" title="Snipped: August 12, 2022" />
 
