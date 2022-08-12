@@ -19,19 +19,19 @@ Complete the following steps:
 
 * Navigate to https://dataexplorer.azure.com/ and then on the **Home** page, click **Explore sample data with KQL**
 
-let dt = datatable(c:string)
-[
-'{"c1":"lorem","c2":"ipsum"}'
-,'{"c2":"dolor","c4":"sit"}'
-,'{"c3":"amet"}'
-];
-dt
-| project headers = bag_keys(todynamic(c))
-| mv-expand headers
-| distinct tostring(headers)
-| sort by headers asc
-
-| distinct ColumnHeaders
+  ```
+  let dt = datatable(c:string)
+  [
+  '{"c1":"lorem","c2":"ipsum"}'
+  ,'{"c2":"dolor","c4":"sit"}'
+  ,'{"c3":"amet"}'
+  ];
+  dt
+  | project headers = bag_keys(todynamic(c))
+  | mv-expand headers
+  | distinct tostring(headers)
+  | sort by headers asc
+  ```
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/bagkeysfunction
