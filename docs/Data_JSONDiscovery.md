@@ -15,16 +15,19 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/184379741-939e57b0-7ffd-4c32-9f31-833fe06661f3.png" width="800" title="Snipped: August 12, 2022" />
 
+* Paste the following KQL and then click Run
+  ```
+  let dt = datatable(c:string)
+  ['{"c1":"lorem","c2":"ipsum"}','{"c2":"dolor","c4":"sit"}','{"c3":"amet"}'];
+  dt
+  ```
+
+* Confirm that you see the expected values in the `datatable` {i.e., JSON-formatted columhns with different names and data}
 
 ### Step 2: Enumerate Root Keys
 
-First, we will transform the **RawSensorsData** sample dataset.
+* Paste the following KQL and then click Run
 
-  <img src="https://user-images.githubusercontent.com/44923999/182669711-cfb91e83-c71f-490d-887c-d5b54156a212.png" width="800" title="Snipped: August 2, 2022" />
-
-Complete the following steps:
-
-* Navigate to https://dataexplorer.azure.com/ and then on the **Home** page, click **Explore sample data with KQL**
 
   ```
 let dt = datatable(c:string)
