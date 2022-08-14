@@ -1,5 +1,5 @@
 ## Cognitive Search
-_(aka "Azure Cognitive Search")_
+_(aka "Azure Cognitive Search", "Search Service")_
 
 ### Create with Azure Portal
 
