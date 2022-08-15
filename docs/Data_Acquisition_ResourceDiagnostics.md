@@ -69,6 +69,25 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/184691673-dfbf8d4c-fc62-4202-a5cb-805df64002e8.png" width="800" title="Snipped: August 15, 2022" />
 
-  _I recommend the latter..._
+* Whichever method you employ, you should end the exercise with a table and ingestion mapping
 
   <img src="https://user-images.githubusercontent.com/44923999/184692023-143b8339-7192-486b-84a9-78692706af02.png" width="800" title="Snipped: August 15, 2022" />
+
+### Step 3: Archive to Storage Account
+
+Next, we will configure Data Explorer to stream Command logs to an Event Hub.
+
+<br>Complete the following steps:
+
+* Use the Azure Portal to navigate to your Data Explorer Cluster
+* Select **Diagnostic Settings** in the **Monitoring** group of the left-hand navigation
+* Click **+ Add diagnostic setting**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184693081-586578cc-b5be-4906-9df8-f7ca6abd97cd.png" width="800" title="Snipped: August 15, 2022" />
+
+* On the resulting **Diagnostic setting** page, complete the form, including:
+
+  Prompt| Entry
+  ------ | ------
+  **Logs** >> **Categories** | Check **Command**
+  **Destination Details** | Check **Stream to an event hub** and then populate **Subscription**, **Event hub namespace**, and **Event hub**
