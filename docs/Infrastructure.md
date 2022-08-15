@@ -28,6 +28,8 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Log Analytics**](Infrastructure_LogAnalytics.md)
 
+> [**Logic App**](Infrastructure_LogicApp.md)
+
 > [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md) :: [Sources](Infrastructure_Purview_Sources.md)
 
 > [**Resource Group**](Infrastructure_ResourceGroup.md)
