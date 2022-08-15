@@ -7,11 +7,11 @@ _(aka "Event Hub Namespace")_
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for "event hub" and select the appropriate dropdown value
-* Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
+* Use the Search services and marketplace textbox to search for and select "Event Hubs"
+* Find the correct result, click the Create dropdown, and select "Event Hubs"
 * Complete the resulting **Create Namespace** form, **Basics** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/178357378-015685ab-28cc-47db-930e-c9979c602780.png" width="800" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/184648981-8fbfda57-69b8-4f3c-9c48-b757a336ecc3.png" width="800" title="Snipped: August 15, 2022" />
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
