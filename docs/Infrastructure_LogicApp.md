@@ -4,12 +4,20 @@
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for "Azure Cognitive Search" and select the appropriate dropdown value
-* Find the correct result, click the **Create** dropdown, and select "Azure Cognitive Search"
-* Complete the **Create a search service** form, **Basics** tab
+* Use the **Search services and marketplace** textbox to search for "Logic App" and select the appropriate dropdown value
+* Find the correct result, click the **Create** dropdown, and select "Logic App"
+* Complete the **Create Logic App** form, **Basics** tab
  
-  <img src="https://user-images.githubusercontent.com/44923999/184549904-966b479e-27b3-4da3-925a-729b4abfb72b.png" width="800" title="Snipped: August 14, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/184642718-210c7341-40e7-4534-a80e-678466e4f26a.png" width="800" title="Snipped: August 15, 2022" />
 
-  _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
+* Complete the **Create Logic App** form, **Hosting** tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/184643004-fd890fa8-d4d5-4096-946f-7f1ad9a4a79d.png" width="800" title="Snipped: August 15, 2022" />
+
+* Complete the **Create Logic App** form, **Monitoring** tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/184643119-1abc8e7e-0c85-4465-9add-76decd662b8a.png" width="800" title="Snipped: August 15, 2022" />
+
+_Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
