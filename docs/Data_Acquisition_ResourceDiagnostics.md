@@ -6,17 +6,42 @@ Requirement statements might include:
 * "Log Analytics doesn't retain log data for as long as we need (30d default > 730d max does not match compliance requirements)"
 * "Is there a way to pull the log data that we care about into Data Explorer?"
 
-### Step 1: Prepare Infrastructure
+### Prepare Infrastructure
 This solution requires the following resources:
 
 * **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md)
 * [**Event Hub**](Infrastructure_EventHub.md)
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
-### Step 2: Archive to Storage Account
+#### Grant Access (Data Explorer > Event Hub)
+Data Explorer requires special permissions to interact with Event Hub.
+
+Complete the following steps:
+
+* Navigate to your Event Hub Namespace, then "**Access Control (IAM)**" in the navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/184709205-5f6e8ad5-92fe-4577-b759-8e3b2b14dca4.png" width="800" title="Snipped: August 15, 2022" />
+
+* On the resulting screen, click **+ Add** and select "**Add role assignment**" from the resulting dropdown menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/184709389-f74fc089-9169-495b-b03c-94a78eaa34b6.png" width="800" title="Snipped: August 15, 2022" />
+
+* On the resulting "**Add role assignment**" screen, search for and select "**Azure Event Hub Data Receiver**", then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184709516-1e43e812-97d9-41ed-b1e9-657e19f974c6.png" width="800" title="Snipped: August 15, 2022" />
+
+* On the resulting "**Add role assignment**" screen, select the "**Managed identity**" radio button, and then click "**+ Select members**"
+* On the resulting pop-out, search for and select the managed identity of your Data Explorer Cluster, then click **Select**
+* Back on the "**Add role assignment**" screen, click "**Review + assign**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/184709935-d728f0d2-606e-4c2e-aa45-c73b8cf5d6fe.png" width="800" title="Snipped: August 15, 2022" />
+
+* On the resulting "**Add role assignment**" screen, confirm configuration, and then click "**Review + assign**"
+
+### Step 1: Archive to Storage Account
 First, we will configure Data Explorer to archive Command logs to a Storage Account (both as demonstration and to support easy ADX ingestion).
 
-_Note: These instructions can apply to any Azure resource type (via **Monitoring** >> **Diagnostic Settings**)_
+_Note: These instructions can apply to any Azure resource type (via **Monitoring** >> "**Diagnostic Settings**")_
 
 <br>Complete the following steps:
 
