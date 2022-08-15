@@ -8,7 +8,8 @@ Requirement statements might include:
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* [Data Explorer](Infrastructure_Data Explorer.md)
+* [**Data Explorer**](Infrastructure_DataExplorer.md) >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md)
+* [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub
 
 ### Step 2: Lorem
 
