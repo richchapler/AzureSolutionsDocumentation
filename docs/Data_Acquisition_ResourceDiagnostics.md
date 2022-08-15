@@ -72,7 +72,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/184689010-d9ce3dcd-eeaf-440f-84cb-daac77dcb28b.png" width="800" title="Snipped: August 15, 2022" />
 
-* Paste the following KQL and then click Run
+* Run the following KQL
 
   ```
   .show tables
@@ -148,7 +148,7 @@ Complete the following steps:
 
 * Use the Azure Portal to navigate to your Data Explorer Database
 * Select "**Query**" in the **Overview** group of the left-hand navigation
-* Paste the following KQL and then click Run to remove any previous records in table **t**
+* Run the following KQL to remove any previous records in table **t**
 
   ```
   ..clear table t data
