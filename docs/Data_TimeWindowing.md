@@ -4,13 +4,7 @@ Requirement statements might include:
 
 * "We want to use our time-series data to characterize Sensor 'Activity Runs' {what we call the period between Active and Inactive}"
 
-### Step 1: Prepare Infrastructure
-
-This solution requires the following resource:
-
-* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md)
-
-### Step 2: Prepare Sample Data
+### Step 1: Prepare Sample Data
 
 First, we will transform the **RawSensorsData** sample dataset.
 
@@ -44,7 +38,7 @@ Complete the following steps:
   _* `project ... State` is used to characterize rows as Active or Inactive... the `iff( value > 0.1..` conditional is arbitrary_<br>
   _* `where ... sensor == "sensor-99"` is used to limit the displayed data but won't be used in future steps_
 
-### Step 3: Serialize Transformed Data
+### Step 2: Serialize Transformed Data
 
 Next, we will serialize "start of run" from the previously transformed data.
 
@@ -62,7 +56,7 @@ Complete the following steps:
   | extend nextStart = next(Start, 1)
   ```
 
-### Step 4: Finalize Analysis
+### Step 3: Finalize Analysis
 
 Finally, we will join "end of run", include an Activity Run Identifier and calculate Delta.
 
