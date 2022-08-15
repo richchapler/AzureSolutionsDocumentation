@@ -149,7 +149,12 @@ Complete the following steps:
 * Use the Azure Portal to navigate to your Data Explorer Database
 * Select "**Query**" in the **Overview** group of the left-hand navigation
 * Run the following KQL to remove any previous records in table **t**
+  ```
+  .clear table t data
+  ```
+  
+* Run the following KQL to confirm that are zero records in table **t**
 
   ```
-  ..clear table t data
+  t | count
   ```
