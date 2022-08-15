@@ -59,8 +59,10 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/184689998-5b0d8303-b6d3-4800-9785-2af23c645d93.png" width="800" title="Snipped: August 15, 2022" />
 
-* Confirm creation / population of container "**insights-log-command**"
+* Confirm creation / population of container "**insights-log-command**" and sub-folders
 
   <img src="https://user-images.githubusercontent.com/44923999/184690314-08d54000-38eb-48a4-b952-78d909bce6c3.png" width="800" title="Snipped: August 15, 2022" />
 
-* Drill into this container and sub-folders
+* When you get to the bottom of the folder hierarchy, **Download** the ".json" file
+
+_Note: You could use this JSON file to divine the schema information necessary to create the Data Explorer [Table](Infrastructure_DataExplorer_Table.md] and [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) or you can use the [One-Click Ingestion](Data_OneClickIngestion.md) wizard_
