@@ -58,3 +58,9 @@ Complete the following steps:
 * Select **Containers** in the **Data storage** group of the left-hand navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/184689998-5b0d8303-b6d3-4800-9785-2af23c645d93.png" width="800" title="Snipped: August 15, 2022" />
+
+* Confirm creation / population of container "**insights-log-command**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/184690314-08d54000-38eb-48a4-b952-78d909bce6c3.png" width="800" title="Snipped: August 15, 2022" />
+
+* Drill into this container and sub-folders
