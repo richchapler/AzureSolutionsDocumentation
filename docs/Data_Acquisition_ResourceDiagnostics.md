@@ -4,6 +4,7 @@ Requirement statements might include:
 
 * "Log Analytics costs more than we want to spend"
 * "Log Analytics doesn't retain log data for as long as we need (30d default > 730d max does not match compliance requirements)"
+* "Is there a way to pull the log data that we care about into Data Explorer?"
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
@@ -20,20 +21,20 @@ _Note: These instructions can apply to any Azure resource type (via **Monitoring
 <br>Complete the following steps:
 
 * Use the Azure Portal to navigate to your Data Explorer Cluster
-* Select **Diagnostic Settings** in the **Monitoring** group of the left-hand navigation
+* Select "**Diagnostic Settings**" in the **Monitoring** group of the left-hand navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/184675094-161c4fad-a134-4960-bbff-ee9600f443ae.png" width="800" title="Snipped: August 15, 2022" />
 
-* Click **+ Add diagnostic setting**
+* Click "**+ Add diagnostic setting**"
 
   <img src="https://user-images.githubusercontent.com/44923999/184688702-e5098cbb-c14a-4124-9437-60a585243403.png" width="800" title="Snipped: August 15, 2022" />
 
-* On the resulting **Diagnostic setting** page, complete the form, including:
+* On the resulting "**Diagnostic setting**" page, complete the form, including:
 
   Prompt| Entry
   ------ | ------
   **Logs** >> **Categories** | Check **Command** and then confirm the **Retention (days)** default of 0 {i.e., retain archived data forever}
-  **Destination Details** | Check **Archive to a storage account** and then populate **Subscription** and **Storage account**
+  "**Destination Details**" | Check "**Archive to a storage account**" and then populate **Subscription** and "**Storage account**"
 
 * Click **Save**
 
@@ -54,7 +55,7 @@ Complete the following steps:
 
 * Confirm expected resultset (in my environment, there were "No Rows to Show" because no tables have been created yet)
 * Use the Azure Portal to navigate to your Storage Account
-* Select **Containers** in the **Data storage** group of the left-hand navigation
+* Select **Containers** in the "**Data storage**" group of the left-hand navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/184689998-5b0d8303-b6d3-4800-9785-2af23c645d93.png" width="800" title="Snipped: August 15, 2022" />
 
@@ -78,17 +79,17 @@ Next, we will configure Data Explorer to stream Command logs to an Event Hub.
 <br>Complete the following steps:
 
 * Use the Azure Portal to navigate to your Data Explorer Cluster
-* Select **Diagnostic Settings** in the **Monitoring** group of the left-hand navigation
-* Click **+ Add diagnostic setting**
+* Select "**Diagnostic Settings**" in the **Monitoring** group of the left-hand navigation
+* Click "**+ Add diagnostic setting**"
 
   <img src="https://user-images.githubusercontent.com/44923999/184693081-586578cc-b5be-4906-9df8-f7ca6abd97cd.png" width="800" title="Snipped: August 15, 2022" />
 
-* On the resulting **Diagnostic setting** page, complete the form, including:
+* On the resulting "**Diagnostic setting**" page, complete the form, including:
 
   Prompt| Entry
   ------ | ------
   **Logs** >> **Categories** | Check **Command**
-  **Destination Details** | Check **Stream to an event hub** and then populate **Subscription**, **Event hub namespace**, and **Event hub**
+  "**Destination Details**" | Check "**Stream to an event hub**" and then populate **Subscription**, "**Event hub namespace**", and "**Event hub**"
 
 * Click **Save**
 
