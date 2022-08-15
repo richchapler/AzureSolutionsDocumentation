@@ -105,11 +105,13 @@ Finally, we will configure Data Explorer to continuously ingest data from the Ev
 * Use the Azure Portal to navigate to your Data Explorer Database
 * Select "**Data connections**" in the **Settings** group of the left-hand navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/184698679-74317477-d883-420b-85f8-a8857dacdeb2.png" width="800" title="Snipped: August 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/184698831-37274a27-f72e-4aba-a044-08033f5ddf87.png" width="800" title="Snipped: August 15, 2022" />
 
 * Click "**+ Add data connection**" and select "**Event Hub**" from the resulting dropdown menu
 
-  <img src="https://user-images.githubusercontent.com/44923999/182691946-c369f08b-4e6f-46be-863d-7118b99d6492.png" width="800" title="Snipped: August 3, 2022" />
+<br><br><br><br><br><br><br><br><br>
+
+<img src="https://user-images.githubusercontent.com/44923999/182691946-c369f08b-4e6f-46be-863d-7118b99d6492.png" width="800" title="Snipped: August 3, 2022" />
 
 * Complete the form on the **Create data connection** pop-out, **Basics** tab<br>
   _Note: Continuous Ingestion **only** supports the use of System and User-Assigned Managed Identity... Service Principal and SAS Token are not available options_
