@@ -1,4 +1,4 @@
-## Data Acquisition... Resource Diagnostics
+## Data Acquisition... from Resource Diagnostics
 
 Requirement statements might include:
 
@@ -170,3 +170,5 @@ Complete the following steps:
   ```
   t | count
   ```
+
+  <img src="https://user-images.githubusercontent.com/44923999/184713480-e97749b0-a26e-4c16-b4ff-508e9b3a1cd5.png" width="800" title="Snipped: August 15, 2022" />
