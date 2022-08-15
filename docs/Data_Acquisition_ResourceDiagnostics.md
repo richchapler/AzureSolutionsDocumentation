@@ -134,17 +134,9 @@ Finally, we will configure Data Explorer to continuously ingest data from the Ev
 
 * Click "**+ Add data connection**" and select "**Event Hub**" from the resulting dropdown menu
 
-<br><br><br><br><br><br><br><br><br>
+<img src="https://user-images.githubusercontent.com/44923999/184710490-76c51882-8613-460d-a3b3-ffb0b5808f8b.png" width="800" title="Snipped: August 15, 2022" />
 
-<img src="https://user-images.githubusercontent.com/44923999/182691946-c369f08b-4e6f-46be-863d-7118b99d6492.png" width="800" title="Snipped: August 3, 2022" />
-
-* Complete the form on the **Create data connection** pop-out, **Basics** tab<br>
-  _Note: Continuous Ingestion **only** supports the use of System and User-Assigned Managed Identity... Service Principal and SAS Token are not available options_
-* Click **Next: Ingest properties >**
-  
-  <img src="https://user-images.githubusercontent.com/44923999/182691406-1995fd5d-0a15-411a-bea2-9e893193a5fd.png" width="800" title="Snipped: August 3, 2022" />
-
-* Complete the form on the **Create data connection** pop-out, **Ingest properties** tab<br>
-  _Note: If the Data Format of your source is JSON, consider using MULTILINE JSON instead (to pre-emptively avoid data quality-related ingestion issues)_
-  
-* Click **Next: Review + create >**, confirm configuration and then click **Create**
+* Complete the form on the **Create data connection** pop-out and then click **Create**<br>
+  _Notes:_
+  * _Continuous Ingestion **only** supports the use of System and User-Assigned Managed Identity... Service Principal and SAS Token are not available options_
+  * _If the Data Format of your source is JSON, consider using MULTILINE JSON instead (to pre-emptively avoid data quality-related ingestion issues)_
