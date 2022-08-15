@@ -1,4 +1,4 @@
-## Data Acquisition... Resource Logs
+## Data Acquisition... Resource Diagnostics
 
 Requirement statements might include:
 
@@ -24,6 +24,12 @@ Complete the following steps:
 
 * Click **+ Add diagnostic setting**
 
-  <img src="https://user-images.githubusercontent.com/44923999/184676139-3abbbecd-1f54-454c-bdd0-fe1f354483bf.png" width="800" title="Snipped: August 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/184676669-a78ff2ba-18d1-4512-adee-9f9461104f21.png" width="800" title="Snipped: August 15, 2022" />
 
-* Click **+ Add diagnostic setting**
+* On the resulting **Diagnostic setting** page, complete the form, including:
+
+  Prompt| Entry
+  ------ | ------
+  **Logs** >> **Categories** | Check **Query**
+  **Logs** >> **Categories** | Confirm **Retention (days)** default of 0 (which means that archived data will be retained forever)
+  **Destination Details** | Check **Archive to a storage account** and then populate **Subscription** and **Storage account**
