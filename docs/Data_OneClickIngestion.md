@@ -60,8 +60,8 @@ You have completed the One-Time Ingestion... but, **WAIT, you are not yet config
 ### Step 3: Continuous Ingestion
 
 Complete the following steps:
-* Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header<br>
-  _Note: you can also navigate to your Data Explorer Database, Data Connections and then click **+ Add data connection**_
+* Scroll down on the **Data ingestion completed** page, and click on the **Event grid** link under the **Continuous ingestion** header
+<br>  _Note: you can also navigate to your Data Explorer Database, Data Connections and then click **+ Add data connection**_
 
   <img src="https://user-images.githubusercontent.com/44923999/182691946-c369f08b-4e6f-46be-863d-7118b99d6492.png" width="800" title="Snipped: August 3, 2022" />
 
