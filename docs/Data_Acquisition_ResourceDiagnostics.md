@@ -18,7 +18,7 @@ First, we will configure Data Explorer to archive Query-related logs to a Storag
 
 _Note: These instructions can apply to any Azure resource type (via **Monitoring** >> **Diagnostic Settings**); for this exercise, however, we will capture logs from Data Explorer_
 
-Complete the following steps:
+<br>Complete the following steps:
 
 * Use the Azure Portal to navigate to your Data Explorer Cluster
 * Select **Diagnostic Settings** in the **Monitoring** group of the left-hand navigation
