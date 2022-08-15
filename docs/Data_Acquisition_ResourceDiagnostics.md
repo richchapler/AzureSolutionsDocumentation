@@ -71,3 +71,4 @@ Complete the following steps:
 
   _I recommend the latter..._
 
+  <img src="https://user-images.githubusercontent.com/44923999/184692023-143b8339-7192-486b-84a9-78692706af02.png" width="800" title="Snipped: August 15, 2022" />
