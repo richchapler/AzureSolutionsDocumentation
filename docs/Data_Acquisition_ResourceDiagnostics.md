@@ -30,6 +30,5 @@ Complete the following steps:
 
   Prompt| Entry
   ------ | ------
-  **Logs** >> **Categories** | Check **Query**
-  **Logs** >> **Categories** | Confirm **Retention (days)** default of 0 (which means that archived data will be retained forever)
+  **Logs** >> **Categories** | Check **Query**<br>Confirm **Retention (days)** default of 0 (which means that archived data will be retained forever)
   **Destination Details** | Check **Archive to a storage account** and then populate **Subscription** and **Storage account**
