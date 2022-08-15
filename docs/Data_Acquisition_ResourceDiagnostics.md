@@ -54,3 +54,7 @@ Complete the following steps:
   ```
 
 * Confirm expected resultset (in my environment, there were "No Rows to Show" because no tables have been created yet)
+* Use the Azure Portal to navigate to your Storage Account
+* Select **Containers** in the **Data storage** group of the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/184689998-5b0d8303-b6d3-4800-9785-2af23c645d93.png" width="800" title="Snipped: August 15, 2022" />
