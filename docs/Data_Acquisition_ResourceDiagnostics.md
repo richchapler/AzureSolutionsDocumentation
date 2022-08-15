@@ -141,3 +141,15 @@ Finally, we will configure Data Explorer to continuously ingest data from the Ev
   _Notes:_
   * _Continuous Ingestion **only** supports the use of System and User-Assigned Managed Identity... Service Principal and SAS Token are not available options_
   * _If the Data Format of your source is JSON, consider using MULTILINE JSON instead (to pre-emptively avoid data quality-related ingestion issues)_
+
+#### Confirm Success
+
+Complete the following steps:
+
+* Use the Azure Portal to navigate to your Data Explorer Database
+* Select "**Query**" in the **Overview** group of the left-hand navigation
+* Paste the following KQL and then click Run to remove any previous records in table **t**
+
+  ```
+  ..clear table t data
+  ```
