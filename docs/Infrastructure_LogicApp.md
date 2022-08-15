@@ -21,3 +21,6 @@
 _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
+
+### Reference
+https://docs.microsoft.com/en-us/azure/logic-apps/
