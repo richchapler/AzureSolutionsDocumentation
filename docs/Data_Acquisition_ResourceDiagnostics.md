@@ -13,7 +13,6 @@ This solution requires the following resources:
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
 ### Step 2: Archive to Storage Account
-
 First, we will configure Data Explorer to archive Command logs to a Storage Account (both as demonstration and to support easy ADX ingestion).
 
 _Note: These instructions can apply to any Azure resource type (via **Monitoring** >> **Diagnostic Settings**)_
@@ -73,8 +72,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/184692023-143b8339-7192-486b-84a9-78692706af02.png" width="800" title="Snipped: August 15, 2022" />
 
-### Step 3: Archive to Storage Account
-
+### Step 3: Stream to an Event Hub
 Next, we will configure Data Explorer to stream Command logs to an Event Hub.
 
 <br>Complete the following steps:
@@ -91,3 +89,14 @@ Next, we will configure Data Explorer to stream Command logs to an Event Hub.
   ------ | ------
   **Logs** >> **Categories** | Check **Command**
   **Destination Details** | Check **Stream to an event hub** and then populate **Subscription**, **Event hub namespace**, and **Event hub**
+
+* Click **Save**
+
+  <img src="https://user-images.githubusercontent.com/44923999/184694922-64da9047-918f-4518-9cb5-7a18f2883674.png" width="800" title="Snipped: August 15, 2022" />
+
+<br>_Note: The Storage Account Diagnostic Settings were useful for demonstration and helped with initial Data Explorer data ingestion, but consider deleting it if you do not need it_
+
+### Step 4: Configure Continuous Ingestion
+Finally, we will configure Data Explorer to continuously ingest data from the Event Hub.
+
+<br>Complete the following steps:
