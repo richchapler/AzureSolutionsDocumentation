@@ -35,3 +35,5 @@ _Note: These instructions can apply to any Azure resource type (via **Monitoring
   ------ | ------
   **Logs** >> **Categories** | Check **Query** and then confirm the **Retention (days)** default of 0 {i.e., retain archived data forever}
   **Destination Details** | Check **Archive to a storage account** and then populate **Subscription** and **Storage account**
+
+* Click **Save**
