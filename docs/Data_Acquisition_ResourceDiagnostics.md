@@ -102,7 +102,7 @@ Finally, we will configure Data Explorer to continuously ingest data from the Ev
 <br>Complete the following steps:
 
 * Use the Azure Portal to navigate to your Data Explorer Database
-
-  <img src="https://user-images.githubusercontent.com/44923999/184695742-6dbad09c-db14-4995-bd57-54652709904e.png" width="800" title="Snipped: August 15, 2022" />
-
 * Select "**Data connections**" in the **Settings** group of the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/184696032-79676ab4-3fb9-4b98-ba8a-95842f8eed9d.png" width="800" title="Snipped: August 15, 2022" />
+
