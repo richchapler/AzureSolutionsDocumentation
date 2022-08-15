@@ -158,3 +158,15 @@ Complete the following steps:
   ```
   t | count
   ```
+
+* Run the following KQL to create new log data for ingestion
+
+  ```
+  .show tables
+  ```
+
+* Run the following KQL to confirm that new log entries have been created, were routed through Event Hub, and ingested into Data Explorer
+
+  ```
+  t | count
+  ```
