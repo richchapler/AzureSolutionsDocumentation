@@ -40,4 +40,9 @@ _Note: These instructions can apply to any Azure resource type (via **Monitoring
 
 #### Confirm Success
 
+Complete the following steps:
 
+* Use the Azure Portal to navigate to your Data Explorer Cluster
+* Select **Query** in the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/184689010-d9ce3dcd-eeaf-440f-84cb-daac77dcb28b.png" width="800" title="Snipped: August 15, 2022" />
