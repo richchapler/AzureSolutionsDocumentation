@@ -10,8 +10,9 @@ This solution requires the following resources:
 
 * **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md)
 * [**Event Hub**](Infrastructure_EventHub.md)
+* [**Storage Account**](Infrastructure_StorageAccount.md)
 
-### Step 2: Lorem
+### Step 2: Diagnostic Settings
 
 Complete the following steps:
 
