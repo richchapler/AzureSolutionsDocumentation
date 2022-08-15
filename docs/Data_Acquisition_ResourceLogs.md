@@ -14,6 +14,8 @@ This solution requires the following resources:
 
 ### Step 2: Diagnostic Settings
 
+<br>  _Note: These instructions can apply to any Azure resource type (via **Monitoring** >> **Diagnostic Settings**); for this exercise, however, we will capture logs from Data Explorer_
+
 Complete the following steps:
 
 * Ipsum
