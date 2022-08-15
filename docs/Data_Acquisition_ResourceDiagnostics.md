@@ -94,7 +94,7 @@ Next, we will configure Data Explorer to stream Command logs to an Event Hub.
 
   <img src="https://user-images.githubusercontent.com/44923999/184694922-64da9047-918f-4518-9cb5-7a18f2883674.png" width="800" title="Snipped: August 15, 2022" />
 
-<br>  _Note: The Storage Account Diagnostic Settings were useful for demonstration and helped with initial Data Explorer data ingestion, but consider deleting it if you do not need it_
+  <br>_Note: The Storage Account Diagnostic Settings were useful for demonstration and helped with initial Data Explorer data ingestion, but consider deleting it if you do not need it_
 
 ### Step 4: Configure Continuous Ingestion
 Finally, we will configure Data Explorer to continuously ingest data from the Event Hub.
