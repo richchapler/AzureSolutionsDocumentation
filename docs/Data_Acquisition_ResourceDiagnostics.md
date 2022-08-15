@@ -65,4 +65,9 @@ Complete the following steps:
 
 * When you get to the bottom of the folder hierarchy, **Download** the ".json" file
 
-_Note: You could use this JSON file to divine the schema information necessary to create the Data Explorer [Table](Infrastructure_DataExplorer_Table.md) and [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) or you can use the [One-Click Ingestion](Data_OneClickIngestion.md) wizard... I recommend the latter_
+  _Note: You could use this JSON file to divine the schema information necessary to create the Data Explorer [Table](Infrastructure_DataExplorer_Table.md) and [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) or you can use the [One-Click Ingestion](Data_OneClickIngestion.md) wizard... I recommend the latter_
+
+  <img src="https://user-images.githubusercontent.com/44923999/184691673-dfbf8d4c-fc62-4202-a5cb-805df64002e8.png" width="800" title="Snipped: August 15, 2022" />
+
+  _I recommend the latter..._
+
