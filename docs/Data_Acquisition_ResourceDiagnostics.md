@@ -14,7 +14,7 @@ This solution requires the following resources:
 
 ### Step 2: Archive to Storage Account
 
-First, we will configure Data Explorer to archive Query-related logs to a Storage Account.
+First, we will configure Data Explorer to archive Command logs to a Storage Account (both as demonstration and to support easy ADX ingestion).
 
 _Note: These instructions can apply to any Azure resource type (via **Monitoring** >> **Diagnostic Settings**)_
 
@@ -27,13 +27,17 @@ _Note: These instructions can apply to any Azure resource type (via **Monitoring
 
 * Click **+ Add diagnostic setting**
 
-  <img src="https://user-images.githubusercontent.com/44923999/184676669-a78ff2ba-18d1-4512-adee-9f9461104f21.png" width="800" title="Snipped: August 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/184688702-e5098cbb-c14a-4124-9437-60a585243403.png" width="800" title="Snipped: August 15, 2022" />
 
 * On the resulting **Diagnostic setting** page, complete the form, including:
 
   Prompt| Entry
   ------ | ------
-  **Logs** >> **Categories** | Check **Query** and then confirm the **Retention (days)** default of 0 {i.e., retain archived data forever}
+  **Logs** >> **Categories** | Check **Command** and then confirm the **Retention (days)** default of 0 {i.e., retain archived data forever}
   **Destination Details** | Check **Archive to a storage account** and then populate **Subscription** and **Storage account**
 
 * Click **Save**
+
+#### Confirm Success
+
+
