@@ -54,7 +54,7 @@ Complete the following steps:
   **Cluster** | Select your development instance of "**Data Explorer**"
   **Database** | Select the database in your development instance of "**Data Explorer**"
 
-* Click **Test connection** and confirm successful connection
+* Click "**Test connection**" and confirm successful connection
 * Click **Create**
 
 ### Reference
