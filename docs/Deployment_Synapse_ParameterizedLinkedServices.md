@@ -27,6 +27,7 @@ This solution requires:
 
 ### Step 1: Create a Static Linked Service
 First, we will create a static linked service to help us understand that use case and challenges.
+<br>_Note: If you interested in simply solving the challenge, feel free to skip ahead to Step 4_
 
 Complete the following steps:
 
@@ -79,17 +80,30 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/185496188-3cd53754-cbcf-420b-ab06-1cfa6c10cc59.png" width="800" title="Snipped: August 18, 2022" />
 
-* Review settings on the resulting screen and then click "**Merge pull request**"
+* Review settings on the resulting screen and then click "**Merge pull request**" and on the resulting screen, click "**Confirm merge**"
 
   _Note: This exercise errs on the side of brevity, we are clearly not giving standard deployment process or pull requests their full due_
 
+Successful merge of the pull request means that the "production" branch is ready to review on the production instance of Synapse. 
+
+### Step 3: Review Result
+
+* Navigate to **Synapse Studio** in your production instance of Synapse
+* Confirm that you are working in the "**production**" branch
+* Click the **Manage** navigation icon
+* Select "**Linked services**" from the "**External connections**" grouping in the resulting navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/185497675-a0c5783e-7c3c-49bd-9f55-49dc09ff53f9.png" width="800" title="Snipped: August 18, 2022" />
+
+You will see that the "static" Linked Service has been deployed to the production branch and could be published. There are several problems, however:
+
+* blah
+
+### Step 4: Create a Dynamic Linked Service
+
 **Lorem Ipsum...**
 
-### Step 3: Create a Dynamic Linked Service
-
-**Lorem Ipsum...**
-
-### Step 4: Deploy the Dynamic Linked Service
+### Step 5: Deploy the Dynamic Linked Service
 
 **Lorem Ipsum...**
 
