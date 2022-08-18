@@ -59,8 +59,13 @@ Complete the following steps:
 * Click **Commit**
 
 ### Step 2: Deploy the Static Linked Service
+Next, we will create pull request to move changes into the "production" branch.
 
-Lorem Ipsum... need to create a pull request
+Complete the following steps:
+
+* Continue in the development instance of Synapse and the "**development**" branch
+
+Lorem Ipsum...
 
 ### Step 3: Create a Dynamic Linked Service
 
