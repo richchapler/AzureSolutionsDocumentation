@@ -117,9 +117,26 @@ Complete the following steps:
 * Click "**+ New**"
 * On the resulting "**New linked service**" pop-out, search for and select "**Azure Data Explorer (Kusto)**", then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/185499388-e2c9ed21-a90e-4f89-a541-1b5e7864b596.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185502998-9a7f6bd2-dd25-417d-928f-47c4cbbd4a41.png" width="800" title="Snipped: August 18, 2022" />
 
-* This time through we will complete the resulting "**New linked service**" >> "**Azure Data Explorer (Kusto)**" pop-out form differently, starting with clicking the "**Enter manually**" radio button under "**Account selection method**"
+* Not surprisingly, we will complete the resulting "**New linked service**" >> "**Azure Data Explorer (Kusto)**" pop-out form differently than we did for "static"
+  * First, click "**+ New**" under Parameters with the following values:
+    Name | Type | Default value
+    ------ | ------ | ------
+    WorkspaceName | String | devsaw
+    
+    _Note: We are providing a "**Default value**" only temporarily... the value for the parameter should be passed in from the Datasets that use it_
+
+  * Second, select the "**Enter manually**" radio button under "**Account selection method**"
+  * Third, Click on the **Endpoint** text box and then click the "**Add dynamic content...**" link that appears below the text box
+
+    <img src="https://user-images.githubusercontent.com/44923999/185500863-0d0aa02d-6117-4dc3-8a78-887880f09355.png" width="800" title="Snipped: August 18, 2022" />
+
+
+@if(equals(pipeline().DataFactory,'devsaw')
+ ,'https://devdec.westus3.kusto.windows.net'
+ ,'https://proddec.westus3.kusto.windows.net'
+)
 
 
 * Click "**Test connection**" and confirm successful connection
