@@ -105,8 +105,25 @@ The point of Steps 1 through 3 was to demonstrate that a static Linked Service i
 
 ### Step 4: Create a Dynamic Linked Service
 
-**Lorem Ipsum...**
+First, we will create a static linked service to help us understand that use case and challenges.
+<br>_Note: If you interested in simply solving the challenge, feel free to skip ahead to Step 4_
 
+Complete the following steps:
+
+* Navigate to **Synapse Studio** in your development instance of Synapse
+* Confirm that you are working in the "**development**" branch
+* Click the **Manage** navigation icon
+* Select "**Linked services**" from the "**External connections**" grouping in the resulting navigation
+* Click "**+ New**"
+* On the resulting "**New linked service**" pop-out, search for and select "**Azure Data Explorer (Kusto)**", then click **Continue**
+
+  <img src="https://user-images.githubusercontent.com/44923999/185499388-e2c9ed21-a90e-4f89-a541-1b5e7864b596.png" width="800" title="Snipped: August 18, 2022" />
+
+* This time through we will complete the resulting "**New linked service**" >> "**Azure Data Explorer (Kusto)**" pop-out form differently, starting with clicking the "**Enter manually**" radio button under "**Account selection method**"
+
+
+* Click "**Test connection**" and confirm successful connection
+* Click **Commit**
 ### Step 5: Deploy the Dynamic Linked Service
 
 **Lorem Ipsum...**
