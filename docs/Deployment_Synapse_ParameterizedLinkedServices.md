@@ -69,7 +69,7 @@ Complete the following steps:
 
 * Click the "**development branch**" dropdown menu and select "**Create pull request**..."
 
-  <img src="https://user-images.githubusercontent.com/44923999/185471684-e794fa42-4292-4bf7-9584-46e16f43cccb.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185478139-3c9eaa43-60ab-4436-8213-36f36aef58ec.png" width="800" title="Snipped: August 18, 2022" />
 
 **Lorem Ipsum...**
 
