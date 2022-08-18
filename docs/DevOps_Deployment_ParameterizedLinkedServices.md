@@ -9,7 +9,7 @@ Requirement statements might include:
 ### Prepare Infrastructure
 This solution requires the following resources:
 
-* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md)
+* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: Sample Data
 * GitHub
 * [**Synapse**](Infrastructure_Synapse.md)
 * User-Assigned Managed Identity
