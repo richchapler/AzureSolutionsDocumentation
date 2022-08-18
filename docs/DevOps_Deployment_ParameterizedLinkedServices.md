@@ -1,4 +1,4 @@
-## DevOps >> Parameterized Linked Services
+## Deployment >> Parameterized Linked Services
 
 Requirement statements might include:
 
