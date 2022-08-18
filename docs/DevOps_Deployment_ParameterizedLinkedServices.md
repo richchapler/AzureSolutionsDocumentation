@@ -3,7 +3,7 @@
 Requirement statements might include:
 
 * "We regularly deploy changes from our development environment (dev) to our production environment (prod)"
-* "Our current Linked Service definitions are fixed on a specific environment... when changes are deployed, manual re-configuration is required"
+* "Our current Linked Service definitions are fixed on a specific environment... when changes are deployed, re-configuration is required"
 * "We want to make our Linked Services dynamic {i.e., when in environment X, use configuration settings appropriate to X}"
 
 ### Preface
