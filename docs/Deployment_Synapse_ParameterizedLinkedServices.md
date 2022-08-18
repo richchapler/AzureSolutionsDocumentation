@@ -10,7 +10,7 @@ This use case included requirement statements like:
 
 ### Preface
 
-Different organizations provide for deployment with various architectural configurations: 1) separate subscriptions, 2) separate resource groups, and 3) separate resources.<br><br>This documentation will employ separate resource groups.
+Different organizations provide for deployment with various architectural configurations: 1) separate subscriptions, 2) separate resource groups, and 3) separate resources.<br><br>This documentation employs separate resource groups.
 
 ### Prepare Infrastructure
 
