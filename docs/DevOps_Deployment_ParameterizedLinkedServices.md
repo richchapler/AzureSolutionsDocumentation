@@ -8,7 +8,7 @@ Requirement statements might include:
 
 ### Preface
 
-Organizations provide for deployments with various architectural configurations: 1) separate subscriptions, 2) separate resource groups, 3) separate resources, etc. Parameterization will work for any of these configurations. This documentation will employ separate resource groups.
+Different organizations provide for deployment with various architectural configurations: 1) separate subscriptions, 2) separate resource groups, 3) separate resources, etc. Parameterization will work for any of these configurations. This documentation will employ separate resource groups.
 
 ### Prepare Infrastructure
 This solution requires two resource groups {i.e., dev and prod} with each of the following resources:
