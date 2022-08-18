@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/44923999/185416361-d8b12426-677b-48ec-9e46-d316cb7902d7.png)
 
-This use case included requirement statements like:
+This use case considers requirement statements like:
 
 * "We regularly deploy changes from our development environment (dev) to our production environment (prod)"
 * "Our current Linked Service definitions are static... when changes are deployed, re-configuration is required"
