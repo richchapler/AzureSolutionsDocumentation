@@ -5,4 +5,4 @@ In this documentation, you will find step-by-step instructions for solutions to 
 
 > [Data](Data.md) >> Acquisition :: Analysis
 
-> Deployment
+> [Deployment](Deployment.md) >> Synapse
