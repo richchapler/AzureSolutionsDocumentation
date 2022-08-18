@@ -5,7 +5,7 @@
 This use case included requirement statements like:
 
 * "We regularly deploy changes from our development environment (dev) to our production environment (prod)"
-* "Our current Linked Service definitions are fixed on a specific environment... when changes are deployed, re-configuration is required"
+* "Our current Linked Service definitions are static... when changes are deployed, re-configuration is required"
 * "We want to make our Linked Services dynamic {i.e., when in environment X, use configuration settings appropriate to X}"
 
 ### Preface
@@ -25,8 +25,8 @@ You will also require:
 
 * **GitHub** >> [Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)
 
-### Step 1: Fixed Linked Service
-First, we will create a fixed linked service.
+### Step 1: Static Linked Service
+First, we will create a static linked service.
 
 Complete the following steps:
 
