@@ -26,7 +26,7 @@ This solution requires:
   <img src="https://user-images.githubusercontent.com/44923999/185439267-ac9df2cc-8257-4ebf-8d6f-f0378ade3598.png" width="800" title="Snipped: August 18, 2022" />
 
 ### Step 1: Create a Static Linked Service
-First, we will create a static linked service (as point-of-reference).
+First, we will create a static linked service to help us understand that use case and challenges.
 
 Complete the following steps:
 
