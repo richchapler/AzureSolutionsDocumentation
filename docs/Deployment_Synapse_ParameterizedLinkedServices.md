@@ -65,7 +65,7 @@ Complete the following steps:
 
 * Continue in the development instance of Synapse and the "**development**" branch
 
-  <img src="https://user-images.githubusercontent.com/44923999/185471252-af5baa75-8834-4dcd-929b-59ed910e892d.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185477727-848084df-6bd7-485f-b841-9817fca1e7af.png" width="800" title="Snipped: August 18, 2022" />
 
 * Click the "**development branch**" dropdown menu and select "**Create pull request**..."
 
