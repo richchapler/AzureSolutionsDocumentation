@@ -25,7 +25,7 @@ This solution requires:
 
   <img src="https://user-images.githubusercontent.com/44923999/185439267-ac9df2cc-8257-4ebf-8d6f-f0378ade3598.png" width="800" title="Snipped: August 18, 2022" />
 
-### Step 1: Static Linked Service
+### Step 1: Create a Static Linked Service
 First, we will create a static linked service (as point-of-reference).
 
 Complete the following steps:
@@ -57,6 +57,18 @@ Complete the following steps:
 
 * Click "**Test connection**" and confirm successful connection
 * Click **Commit**
+
+### Step 2: Deploy the Static Linked Service
+
+Lorem Ipsum... need to create a pull request
+
+### Step 3: Create a Dynamic Linked Service
+
+Lorem Ipsum...
+
+### Step 4: Deploy the Dynamic Linked Service
+
+Lorem Ipsum...
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
