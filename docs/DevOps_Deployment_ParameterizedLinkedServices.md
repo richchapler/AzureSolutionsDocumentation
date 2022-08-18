@@ -42,8 +42,8 @@ Complete the following steps:
 
 * On the resulting "**New linked service**" pop-out, search for and select "**Azure Data Explorer (Kusto)**", then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/185446566-a82ddece-d612-42cb-a7b2-c883de5399c2.png" width="800" title="Snipped: August 18, 2022" />
-  
+  <img src="https://user-images.githubusercontent.com/44923999/185447987-5ec78990-bb60-478e-ae3b-fef9621de16c.png" width="800" title="Snipped: August 18, 2022" />
+
 * Complete the resulting "**New linked service**" >> "**Azure Data Explorer (Kusto)**" pop-out form, including:
 
   Prompt | Entry
