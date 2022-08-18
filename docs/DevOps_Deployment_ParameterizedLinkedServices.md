@@ -6,13 +6,18 @@ Requirement statements might include:
 * "Linked Service definitions typically point at a specific environment... and that means, when changes are deployed, manual re-configuration is required"
 * "We want to make our Linked Services dynamic {i.e., when in environment X, use configuration settings appropriate to X}"
 
+### Preface
+
+Organizations provide for deployments with various architectural configurations: 1) separate subscriptions, 2) separate resource groups, 3) separate resources, etc. Parameterization will work for any of these configurations. This documentation will employ separate resource groups.
+
 ### Prepare Infrastructure
-This solution requires the following resources:
+This solution requires two resource groups {i.e., dev and prod} with each of the following resources:
 
 * **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: Sample Data
-* GitHub
 * [**Synapse**](Infrastructure_Synapse.md)
 * User-Assigned Managed Identity
+
+* GitHub
 
 #### Grant Access (Data Explorer > Event Hub)
 Data Explorer requires special permissions to interact with Event Hub.
