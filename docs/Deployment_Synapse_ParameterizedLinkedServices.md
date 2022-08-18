@@ -52,8 +52,8 @@ Complete the following steps:
   **Connect via…** | Confirm default selection, **AutoResolveIntegrationRuntime**
   **Authentication method** | Select "**System Assigned Managed Identity**"
   **Account selection method** | Select "**From Azure subscription**"
-  **Cluster** | Select your development instance of "**Data Explorer**"
-  **Database** | Select the database in your development instance of "**Data Explorer**"
+  **Cluster** | Select your **development** instance of "**Data Explorer**"
+  **Database** | Select the database in your **development** instance of "**Data Explorer**"
 
 * Click "**Test connection**" and confirm successful connection
 * Click **Commit**
@@ -69,7 +69,9 @@ Complete the following steps:
 
 * Click the "**development branch**" dropdown menu and select "**Create pull request**..."
 
-  <img src="https://user-images.githubusercontent.com/44923999/185478139-3c9eaa43-60ab-4436-8213-36f36aef58ec.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185481805-6c171547-0592-47c8-b1ba-2bb5e76ae5c0.png" width="800" title="Snipped: August 18, 2022" />
+
+* Click "**Create pull request**"
 
 **Lorem Ipsum...**
 
