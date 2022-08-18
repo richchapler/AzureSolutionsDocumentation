@@ -73,6 +73,16 @@ Complete the following steps:
 
 * Click "**Create pull request**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/185495949-297dc374-970c-4456-aa80-f66e12e40ede.png" width="800" title="Snipped: August 18, 2022" />
+
+* Review settings on the resulting screen and then click "**Create pull request**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/185496188-3cd53754-cbcf-420b-ab06-1cfa6c10cc59.png" width="800" title="Snipped: August 18, 2022" />
+
+* Review settings on the resulting screen and then click "**Merge pull request**"
+
+  _Note: This exercise errs on the side of brevity, we are clearly not giving standard deployment process or pull requests their full due_
+
 **Lorem Ipsum...**
 
 ### Step 3: Create a Dynamic Linked Service
