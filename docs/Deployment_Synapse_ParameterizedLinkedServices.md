@@ -65,15 +65,21 @@ Complete the following steps:
 
 * Continue in the development instance of Synapse and the "**development**" branch
 
-Lorem Ipsum...
+  <img src="https://user-images.githubusercontent.com/44923999/185471252-af5baa75-8834-4dcd-929b-59ed910e892d.png" width="800" title="Snipped: August 18, 2022" />
+
+* Click the "**development branch**" dropdown menu and select "**Create pull request**..."
+
+  <img src="https://user-images.githubusercontent.com/44923999/185471684-e794fa42-4292-4bf7-9584-46e16f43cccb.png" width="800" title="Snipped: August 18, 2022" />
+
+**Lorem Ipsum...**
 
 ### Step 3: Create a Dynamic Linked Service
 
-Lorem Ipsum...
+**Lorem Ipsum...**
 
 ### Step 4: Deploy the Dynamic Linked Service
 
-Lorem Ipsum...
+**Lorem Ipsum...**
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
