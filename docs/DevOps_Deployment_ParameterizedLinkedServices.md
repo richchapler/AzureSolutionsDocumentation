@@ -8,12 +8,12 @@ Requirement statements might include:
 
 ### Preface
 
-Different organizations provide for deployment with various architectural configurations; some examples: 1) separate subscriptions, 2) separate resource groups, and 3) separate resources. Parameterization will work for any of these configurations. This documentation will employ separate resource groups.
+Different organizations provide for deployment with various architectural configurations: 1) separate subscriptions, 2) separate resource groups, and 3) separate resources. Parameterization will work for any of these configurations. This documentation will employ separate resource groups.
 
 ### Prepare Infrastructure
 This solution requires two resource groups {i.e., dev and prod} with each of the following resources:
 
-* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: Sample Data
+* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Sample Data](https://docs.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=one-click-ingest)
 * [**Synapse**](Infrastructure_Synapse.md)
 * User-Assigned Managed Identity
 
