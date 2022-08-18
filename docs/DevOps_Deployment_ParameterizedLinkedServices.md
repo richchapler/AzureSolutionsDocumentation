@@ -16,7 +16,7 @@ Different organizations provide for deployment with various architectural config
 
 This solution requires:
 
-* **GitHub** with a [repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository), a "**development**" [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository), and a "**production**" [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
+* **GitHub Enterprise** with a [repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository), a "**development**" [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository), and a "**production**" [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
 
 <br>...as well as two resource groups {i.e., dev and prod} with each of the following resources:
 
@@ -31,18 +31,19 @@ First, we will create a static linked service (as point-of-reference).
 Complete the following steps:
 
 * Navigate to **Synapse Studio** in your development instance of Synapse
+* Confirm that you are working in the "**development**" branch
 * Click the **Manage** navigation icon
 * Select "**Linked services**" from the "**External connections**" grouping in the resulting navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/185442780-b9b8ae0b-e89e-4488-867a-2f2a2bcc43b9.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185463845-8d7c3c6f-4d7d-4cee-a616-c9bab4637547.png" width="800" title="Snipped: August 18, 2022" />
 
 * Click "**+ New**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/185445645-9603df82-7016-4781-8c6b-6155ea0fc858.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185464087-cfcac130-63be-4182-b197-a7f3a90ba28e.png" width="800" title="Snipped: August 18, 2022" />
 
 * On the resulting "**New linked service**" pop-out, search for and select "**Azure Data Explorer (Kusto)**", then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/185447987-5ec78990-bb60-478e-ae3b-fef9621de16c.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185464259-94e986a1-3db6-425d-8b8c-ac9ac5298481.png" width="800" title="Snipped: August 18, 2022" />
 
 * Complete the resulting "**New linked service**" >> "**Azure Data Explorer (Kusto)**" pop-out form, including:
 
@@ -55,7 +56,7 @@ Complete the following steps:
   **Database** | Select the database in your development instance of "**Data Explorer**"
 
 * Click "**Test connection**" and confirm successful connection
-* Click **Create**
+* Click **Commit**
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
