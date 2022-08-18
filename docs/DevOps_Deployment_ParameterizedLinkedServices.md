@@ -25,12 +25,14 @@ You will also require:
 
 * **GitHub** >> [Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)
 
-### Step 1: Blah
-First, we will blah.
+### Step 1: Fixed Linked Service
+First, we will create a fixed linked service.
 
 Complete the following steps:
 
-* Navigate to your Event Hub Namespace, then "**Access Control (IAM)**" in the navigation
+* Navigate to **Manage** >> "**Linked services**" in your Synapse Studio
+
+  <img src="https://user-images.githubusercontent.com/44923999/185442780-b9b8ae0b-e89e-4488-867a-2f2a2bcc43b9.png" width="800" title="Snipped: August 18, 2022" />
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
