@@ -2,6 +2,6 @@
 
 ### Synapse
 
-  Use Case | Method | Source | Target | Type
-  :----- | :----- | :----- | :----- | :-----
-  ["One-Click" Ingestion](Data_OneClickIngestion.md) | Data Explorer Wizard | Data Lake | Data Explorer | No Code<br>
+  Use Case | Type
+  :----- | :-----
+  [Parameterized Linked Services](Deployment_Synapse_ParameterizedLinkedServices.md) | No Code<br>
