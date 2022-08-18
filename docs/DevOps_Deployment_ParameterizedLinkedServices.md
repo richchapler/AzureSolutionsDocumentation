@@ -14,16 +14,16 @@ Different organizations provide for deployment with various architectural config
 
 ### Prepare Infrastructure
 
+This solution requires:
+
+* **GitHub** with a [repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository), a "**development**" [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository), and a "**production**" [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-and-deleting-branches-within-your-repository)
+
+<br>...as well as two resource groups {i.e., dev and prod} with each of the following resources:
+
+* **Data Explorer** [cluster](Infrastructure_DataExplorer_Cluster.md) and [database](Infrastructure_DataExplorer_Database.md) with [sample data](https://docs.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=one-click-ingest)
+* [**Synapse**](Infrastructure_Synapse.md), configured to use [GitHub Enterprise](Infrastructure_Synapse_GitConfiguration.md)
+
   <img src="https://user-images.githubusercontent.com/44923999/185439267-ac9df2cc-8257-4ebf-8d6f-f0378ade3598.png" width="800" title="Snipped: August 18, 2022" />
-
-This solution requires two resource groups {i.e., dev and prod} with each of the following resources:
-
-* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Sample Data](https://docs.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=one-click-ingest)
-* [**Synapse**](Infrastructure_Synapse.md)
-
-You will also require:
-
-* **GitHub** >> [Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)
 
 ### Step 1: Static Linked Service
 First, we will create a static linked service (as point-of-reference).
