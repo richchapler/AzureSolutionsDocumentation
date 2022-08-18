@@ -95,9 +95,13 @@ Successful merge of the pull request means that the "production" branch is ready
 
   <img src="https://user-images.githubusercontent.com/44923999/185497675-a0c5783e-7c3c-49bd-9f55-49dc09ff53f9.png" width="800" title="Snipped: August 18, 2022" />
 
-You will see that the "static" Linked Service has been deployed to the production branch and could be published. There are several problems, however:
+You will see that the "static" Linked Service has been deployed to the production branch and could be published.<br>There are several problems, however:
 
-* blah
+* "**Connection failed**" - The system-assigned permissions that allow the development instance of Synapse and Data Explorer to interact do not work for the production instance of Synapse and the development instance of Data Explorer (and rightly so)
+* **Wrong Data Explorer** - Even if there were not a permissions issue, we do not want to access data from the development environment
+* **Dependent Datasets** - If we had dependent datasets, each of those would need to be updated to switch between Linked Services and making that change negatively impacts other settings {e.g., credentials}
+
+The point of Steps 1 through 3 was to demonstrate that a static Linked Service is not a great choice for regular deployment of changes from a development instance of Synapse to a production instance of Synapse. We will stop here and flip to a more reasonable solution.
 
 ### Step 4: Create a Dynamic Linked Service
 
