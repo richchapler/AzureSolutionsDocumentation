@@ -25,6 +25,24 @@ This solution requires:
 
   <img src="https://user-images.githubusercontent.com/44923999/185621162-ea01a934-f17f-4dce-b2bd-6caaea601932.png" width="800" title="Snipped: August 18, 2022" />
 
+#### Grant Access (Synapse > Data Explorer)
+Permissions must be added to Data Explorer in both environments {i.e., dev and prod}.
+
+Complete the following steps:
+
+* Navigate to your development instance of Data Explorer, then "**Permissions**" in the navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/185622002-bb053429-f0ab-4453-b41c-ff7bf1e97ac5.png" width="800" title="Snipped: August 15, 2022" />
+
+* Click "**+ Add**" and then select **AllDatabasesAdmin** from the resulting dropdown menu
+* On the resulting screen, click **+ Add** and select "**Add role assignment**" from the resulting dropdown menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/185622271-6d43b98f-6df4-420d-a14b-87cef140e396.png" width="800" title="Snipped: August 15, 2022" />
+
+* On the resulting pop-out, search for and then **Select** your development instance of Synapse
+
+Repeat this process for your production instance of Data Explorer
+
 ### Step 1: Create a Static Linked Service
 First, we will create a static linked service to help us understand that use case and challenges.
 <br>_Note: If you interested in simply solving the challenge, feel free to skip ahead to Step 4_
