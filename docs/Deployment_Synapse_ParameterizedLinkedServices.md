@@ -192,15 +192,12 @@ Complete the following steps:
 * Click the **Manage** navigation icon
 * Select "**Linked services**" from the "**External connections**" grouping in the resulting navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/185497675-a0c5783e-7c3c-49bd-9f55-49dc09ff53f9.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185674922-3155b60c-2a62-4a3c-ac3f-0264646b14c7.png" width="800" title="Snipped: August 19, 2022" />
 
-You will see that the "static" Linked Service has been deployed to the production branch and arguably, could be published.<br>There are several problems, however:
+* Open the "**dynamic**" Linked Service and update the "**WorkspaceName**" to value "**prodsaw**"
+<br>_Note: This parameter should be updated from the Dataset, rather than manually_
 
-* "**Connection failed**" - The system-assigned permissions that allow the development instance of Synapse and Data Explorer to interact do not work for the production instance of Synapse and the development instance of Data Explorer (and rightly so)
-* **Wrong Data Explorer** - Even if there were not a permissions issue, we do not want to access data from the development environment
-* **Dependent Datasets** - If we had dependent datasets, each of those would need to be updated to switch between Linked Services and making that change negatively impacts other settings {e.g., credentials}
-
-The point of Steps 1 through 3 was to demonstrate that a static Linked Service is not a great choice for regular deployment of changes from a development instance of Synapse to a production instance of Synapse. We will stop here and flip to a more reasonable solution.
+* Click "**Test connection**", confirm successful connection
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
