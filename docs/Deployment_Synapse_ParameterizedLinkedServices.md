@@ -23,7 +23,7 @@ This solution requires:
 * **Data Explorer** [cluster](Infrastructure_DataExplorer_Cluster.md) and [database](Infrastructure_DataExplorer_Database.md)
 * [**Synapse**](Infrastructure_Synapse.md), configured to use [GitHub Enterprise](Infrastructure_Synapse_GitConfiguration.md)
 
-  <img src="https://user-images.githubusercontent.com/44923999/185439267-ac9df2cc-8257-4ebf-8d6f-f0378ade3598.png" width="800" title="Snipped: August 18, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185621162-ea01a934-f17f-4dce-b2bd-6caaea601932.png" width="800" title="Snipped: August 18, 2022" />
 
 ### Step 1: Create a Static Linked Service
 First, we will create a static linked service to help us understand that use case and challenges.
