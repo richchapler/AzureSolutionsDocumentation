@@ -29,8 +29,7 @@ Complete the following steps:
 
 * Select your data connection type, copy-paste into the "**Edit template**" window, and then modify the selected JSON:
 
-#### Event Hub
-
+#### Event Grid (Blob Storage)
 
   ```
   {
