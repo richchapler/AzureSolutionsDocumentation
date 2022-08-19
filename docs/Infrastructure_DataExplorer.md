@@ -15,6 +15,9 @@ Customer Managed Keys ... when will ADX Data Share support Customer Managed Keys
 Is there any way to connect ADX directly to DevOps / GitHub (like Synapse **Set up code repository**)?
 * August 11, 2022... "we do not have anything like that today outside Synapse"
 
+#### Execute Multiple Commands
+.execute database script <|
+
 #### Geo-Replication
 Does ADX support geo-replication?
 * August 11, 2022... "geo-replication is not an existing or planned product feature"
