@@ -1,5 +1,7 @@
 ## [Data Explorer](Infrastructure_DataExplorer.md) >> **Data Connection**
 
+![image](https://user-images.githubusercontent.com/44923999/185688537-f5257f22-eb25-405f-be9b-1cd45c6574f4.png)
+
 ### Create with ARM Template
 
 #### Step 1: Prepare Infrastructure
