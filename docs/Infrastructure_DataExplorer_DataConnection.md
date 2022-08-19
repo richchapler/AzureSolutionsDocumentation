@@ -4,15 +4,18 @@
 
 ### Create with ARM Template
 
-#### Step 1: Prepare Infrastructure
+### Prepare Infrastructure
 
-This solution requires the following resources:
+This solution requires:
 
-* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md)
-* [Event Hub](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
-* [Storage Account](Infrastructure_StorageAccount.md)
+* **Data Explorer** [cluster](Infrastructure_DataExplorer_Cluster.md) and [database](Infrastructure_DataExplorer_Database.md), with a [table](Infrastructure_DataExplorer_Table.md) and [ingestion mapping](Infrastructure_DataExplorer_IngestionMapping.md)
+* [**Storage Account**](Infrastructure_StorageAccount.md)
 
-#### Step 2: Deploy Custom Template
+<br>...and, depending on your source, will also require one of the following:
+
+* [**Event Hub**](Infrastructure_EventHub.md)
+
+### Step 1: Deploy Custom Template
 
 Complete the following steps:
 
@@ -24,7 +27,10 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/182942508-5b378150-abc2-47de-924d-4a4720326fba.png" width="800" title="Snipped: August 4, 2022" />
 
-* Paste and modify the following JSON:
+* Select your data connection type, copy-paste into the Deploy window, and then modify the following JSON:
+
+#### Event Hub
+
 
   ```
   {
