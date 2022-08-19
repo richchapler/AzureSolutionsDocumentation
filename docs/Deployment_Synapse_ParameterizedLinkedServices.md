@@ -197,7 +197,7 @@ Complete the following steps:
 * Open the "**dynamic**" Linked Service and update the "**WorkspaceName**" to value "**prodsaw**"
 <br>_Note: This parameter should be updated from the Dataset, rather than manually_
 
-* Click "**Test connection**", confirm successful connection
+* Click "**Test connection**" and confirm successful connection
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
