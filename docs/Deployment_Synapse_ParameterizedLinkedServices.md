@@ -94,7 +94,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/185495949-297dc374-970c-4456-aa80-f66e12e40ede.png" width="800" title="Snipped: August 18, 2022" />
 
-* Review settings on the resulting screen and then click "**Create pull request**"
+* Review settings on the resulting "**Open a pull request**" screen {e.g., from "development" to "production"} and then click "**Create pull request**"
 
   <img src="https://user-images.githubusercontent.com/44923999/185496188-3cd53754-cbcf-420b-ab06-1cfa6c10cc59.png" width="800" title="Snipped: August 18, 2022" />
 
