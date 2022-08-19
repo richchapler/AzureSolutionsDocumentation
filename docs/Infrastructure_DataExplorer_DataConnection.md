@@ -23,7 +23,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/182941824-1675b487-e60c-44ba-8a94-0eeaa8ee12af.png" width="800" title="Snipped: August 4, 2022" />
 
-* Click **Build your own template in the editor**
+* Click "**Build your own template in the editor**"
 
   <img src="https://user-images.githubusercontent.com/44923999/182942508-5b378150-abc2-47de-924d-4a4720326fba.png" width="800" title="Snipped: August 4, 2022" />
 
