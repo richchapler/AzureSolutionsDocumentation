@@ -1,6 +1,6 @@
 ## Data Acquisition... from Resource Diagnostics
 
-Requirement statements might include:
+This use case considers requirement statements like:
 
 * "Log Analytics costs more than we want to spend"
 * "Log Analytics doesn't retain log data for as long as we need (30d default > 730d max does not match compliance requirements)"
