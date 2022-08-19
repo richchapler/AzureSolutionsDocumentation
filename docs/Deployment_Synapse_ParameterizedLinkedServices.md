@@ -138,7 +138,7 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/185502998-9a7f6bd2-dd25-417d-928f-47c4cbbd4a41.png" width="800" title="Snipped: August 18, 2022" />
 
 * Not surprisingly, we will complete the resulting "**New linked service**" >> "**Azure Data Explorer (Kusto)**" pop-out form differently than we did for "static"
-  * First, click "**+ New**" under Parameters with the following values:
+  * First, click "**+ New**" under Parameters and enter the following values:
     Name | Type | Default value
     ------ | ------ | ------
     WorkspaceName | String | devsaw
