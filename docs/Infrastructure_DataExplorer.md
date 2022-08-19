@@ -22,7 +22,7 @@ Is there any way to connect ADX directly to DevOps / GitHub (like Synapse **Set 
    {command1};
    {command2};
   ```
-   
+
 #### Geo-Replication
 Does ADX support geo-replication?
 * August 11, 2022... "geo-replication is not an existing or planned product feature"
