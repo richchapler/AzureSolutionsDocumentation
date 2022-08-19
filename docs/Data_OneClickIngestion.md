@@ -1,6 +1,6 @@
 ## "One-Click" Ingestion
 
-Requirement statements might include:
+This use case considers requirement statements like:
 
 * "We have devices running an app 24x7, around the world, continuously dropping files into the Data Lake"
 * “We want to automatically ingest data files as they appear”
