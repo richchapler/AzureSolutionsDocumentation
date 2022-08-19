@@ -1,4 +1,4 @@
-## Data Analysis: Time Windowing
+## Data Analysis... Time Windowing
 
 This use case considers requirement statements like:
 
