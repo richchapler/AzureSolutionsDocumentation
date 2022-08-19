@@ -1,6 +1,6 @@
 ## Data Analysis: Time Windowing
 
-Requirement statements might include:
+This use case considers requirement statements like:
 
 * "We want to use our time-series data to characterize Sensor 'Activity Runs' {what we call the period between Active and Inactive}"
 
