@@ -44,7 +44,7 @@ Complete the following steps:
 Repeat this process for your production instance of Data Explorer
 
 ### Step 1: Create a Static Linked Service
-First, we will create a static linked service to help us understand that use case and challenges.
+In this step, we will create a static linked service to help us understand that use case and challenges.
 <br>_Note: If you interested in simply solving the challenge, feel free to skip ahead to Step 4_
 
 Complete the following steps:
@@ -78,7 +78,7 @@ Complete the following steps:
 * Click **Commit**
 
 ### Step 2: Deploy the Static Linked Service
-Next, we will create pull request to move changes into the "production" branch.
+In this step, we will create pull request to move changes into the "production" branch.
 
 Complete the following steps:
 
@@ -105,6 +105,9 @@ Complete the following steps:
 Successful merge of the pull request means that the "production" branch is ready to review on the production instance of Synapse. 
 
 ### Step 3: Review Result
+In this step, we will review the result.
+
+Complete the following steps:
 
 * Navigate to **Synapse Studio** in your production instance of Synapse
 * Confirm that you are working in the "**production**" branch
@@ -122,9 +125,7 @@ You will see that the "static" Linked Service has been deployed to the productio
 The point of Steps 1 through 3 was to demonstrate that a static Linked Service is not a great choice for regular deployment of changes from a development instance of Synapse to a production instance of Synapse. We will stop here and flip to a more reasonable solution.
 
 ### Step 4: Create a Dynamic Linked Service
-
-First, we will create a static linked service to help us understand that use case and challenges.
-<br>_Note: If you interested in simply solving the challenge, feel free to skip ahead to Step 4_
+In this step, we will create a dynamic linked service to demonstrate a solution to the issues observed in the previous step.
 
 Complete the following steps:
 
@@ -146,22 +147,60 @@ Complete the following steps:
     _Note: We are providing a "**Default value**" only temporarily... the value for the parameter should be passed in from the Datasets that use it_
 
   * Second, select the "**Enter manually**" radio button under "**Account selection method**"
-  * Third, Click on the **Endpoint** text box and then click the "**Add dynamic content...**" link that appears below the text box
+  * Third, click on the **Endpoint** text box and then click the "**Add dynamic content...**" link that appears below the text box
 
     <img src="https://user-images.githubusercontent.com/44923999/185500863-0d0aa02d-6117-4dc3-8a78-887880f09355.png" width="800" title="Snipped: August 18, 2022" />
 
+    * Modify the following expression and paste into the resulting "**Add dynamic content**" pop-out:
+      ```
+      @if(equals(linkedService().WorkspaceName,'devsaw')
+       ,'https://devdec.westus3.kusto.windows.net'
+       ,'https://proddec.westus3.kusto.windows.net'
+      )
+      ```
+  
+    * Click **OK**
 
-@if(equals(pipeline().DataFactory,'devsaw')
- ,'https://devdec.westus3.kusto.windows.net'
- ,'https://proddec.westus3.kusto.windows.net'
-)
+  * Next, click on the **Database** text box and then click the "**Add dynamic content...**" link that appears below the text box
 
+    <img src="https://user-images.githubusercontent.com/44923999/185500863-0d0aa02d-6117-4dc3-8a78-887880f09355.png" width="800" title="Snipped: August 18, 2022" />
 
-* Click "**Test connection**" and confirm successful connection
-* Click **Commit**
+    * Modify the following expression and paste into the resulting "**Add dynamic content**" pop-out:
+      ```
+      @if(equals(linkedService().WorkspaceName,'devsaw')
+       ,'devded'
+       ,'prodded'
+      )
+      ```
+  
+    * Click **OK**
+
+  * Finally, click "**Test connection**", confirm successful connection, and then click **Save**
+
 ### Step 5: Deploy the Dynamic Linked Service
+In this step, we will create another pull request to move new changes into the "production" branch.
 
-**Lorem Ipsum...**
+Repeat the process described in "**Step 2: Deploy the Static Linked Service**"
+
+### Step 6: Confirm Success
+In this step, we will confirm success.
+
+Complete the following steps:
+
+* Navigate to **Synapse Studio** in your production instance of Synapse
+* Confirm that you are working in the "**production**" branch
+* Click the **Manage** navigation icon
+* Select "**Linked services**" from the "**External connections**" grouping in the resulting navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/185497675-a0c5783e-7c3c-49bd-9f55-49dc09ff53f9.png" width="800" title="Snipped: August 18, 2022" />
+
+You will see that the "static" Linked Service has been deployed to the production branch and arguably, could be published.<br>There are several problems, however:
+
+* "**Connection failed**" - The system-assigned permissions that allow the development instance of Synapse and Data Explorer to interact do not work for the production instance of Synapse and the development instance of Data Explorer (and rightly so)
+* **Wrong Data Explorer** - Even if there were not a permissions issue, we do not want to access data from the development environment
+* **Dependent Datasets** - If we had dependent datasets, each of those would need to be updated to switch between Linked Services and making that change negatively impacts other settings {e.g., credentials}
+
+The point of Steps 1 through 3 was to demonstrate that a static Linked Service is not a great choice for regular deployment of changes from a development instance of Synapse to a production instance of Synapse. We will stop here and flip to a more reasonable solution.
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
