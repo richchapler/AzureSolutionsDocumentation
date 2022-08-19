@@ -16,7 +16,6 @@ Is there any way to connect ADX directly to DevOps / GitHub (like Synapse **Set 
 * August 11, 2022... "we do not have anything like that today outside Synapse"
 
 #### Execute Multiple Commands at once
-* August 19, 2022... Modify and **Run** the following KQL:
   ```
   .execute database script <|
    {command1};
