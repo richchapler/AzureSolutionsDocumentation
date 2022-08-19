@@ -1,4 +1,4 @@
-## Data Analysis: JSON Discovery
+## Data Analysis... JSON Discovery
 
 This use case considers requirement statements like:
 
