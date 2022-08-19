@@ -1,6 +1,6 @@
 ## Data Acquisition... from Purview, via REST API
 
-Requirement statements might include:
+This use case considers requirement statements like:
 
 * "Our approved Data Governance solution (not Purview) lacks Azure connectors"
 * "We want to use Purview to collect the best possible source metadata from Azure resources"
