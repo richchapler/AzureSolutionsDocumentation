@@ -1,18 +1,20 @@
 ## [Data Explorer](Infrastructure_DataExplorer.md) >> **Cluster**
-_Note: Stand-alone clusters are similar to, but not the same as, Synapse Data Explorer Pool functionality_
+_Note: Stand-alone clusters are similar to Synapse Data Explorer Pools, but have a more complete functionality set_
+
+![image](https://user-images.githubusercontent.com/44923999/185751732-2b38331d-66ba-4b48-b7ee-9309b5beb3d6.png)
 
 ### Create with Azure Portal
 
 Complete the following steps:
 
 * Click the menu button in the upper-left corner of the Azure Portal
-* Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for and select "Azure Data Explorer"
-* Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
-* Complete the **Create an Azure Data Explorer Cluster** form
+* Click "**+ Create a resource**" in the resulting dropdown
+* Use the "**Search services and marketplace**" textbox to search for and select "Azure Data Explorer"
+* Find the correct result, click the Create dropdown, and select "Microsoft Purview"
+* Complete the "**Create an Azure Data Explorer Cluster**" form
 
-  <img src="https://user-images.githubusercontent.com/44923999/178290844-95e498e4-f8a4-4b89-8fcf-eb9f035c312c.png" width="800" title="Snipped: July 11, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185752048-55364502-054f-4a6d-921c-cb13f8a24283.png" width="800" title="Snipped: August 20, 2022" />
 
   _Note: No additional configuration is required but consider review of the default values on the remaining tabs._
 
-* Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
+* Click "**Review + create**", confirm configuration settings on the resulting page, and then click **Create**
