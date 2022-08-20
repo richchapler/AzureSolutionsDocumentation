@@ -1,5 +1,7 @@
 ## [Data Explorer](Infrastructure_DataExplorer.md) >> **Table**
 
+![image](https://user-images.githubusercontent.com/44923999/185751628-db6489fe-5e2f-418d-a3df-1a1b19d51479.png)
+
 ### Create with Azure Portal
 
 Complete the following steps:
