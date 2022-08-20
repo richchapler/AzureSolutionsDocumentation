@@ -1,6 +1,8 @@
 ## Cognitive Search
 _(aka "Azure Cognitive Search", "Search Service")_
 
+![image](https://user-images.githubusercontent.com/44923999/185751411-651a1049-dc05-4249-b05d-f50d3437f685.png)
+
 ### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
