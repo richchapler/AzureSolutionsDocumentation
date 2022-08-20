@@ -10,7 +10,7 @@ Complete the following steps:
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click "**+ Create a resource**" in the resulting dropdown
 * Use the "**Search services and marketplace**" textbox to search for and select "Azure Data Explorer"
-* Find the correct result, click the Create dropdown, and select "Microsoft Purview"
+* Find the correct result, click the Create dropdown, and select "Azure Data Explorer"
 * Complete the "**Create an Azure Data Explorer Cluster**" form
 
   <img src="https://user-images.githubusercontent.com/44923999/185752048-55364502-054f-4a6d-921c-cb13f8a24283.png" width="800" title="Snipped: August 20, 2022" />
