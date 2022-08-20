@@ -1,6 +1,8 @@
 ## Data Lake
 _(aka "ADLS", "Azure Data Lake Storage", "Storage Account")_
 
+![image](https://user-images.githubusercontent.com/44923999/185765176-d55122dd-48bb-4816-97dc-afa3839ae4f0.png)
+
 ### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
