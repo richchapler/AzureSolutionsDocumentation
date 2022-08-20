@@ -1,6 +1,8 @@
 ## Log Analytics
 _(aka “Log Analytics Workspace”)_
 
+![image](https://user-images.githubusercontent.com/44923999/185765431-22cc2fa0-105e-4ee8-b26a-a4c0f7c48de1.png)
+
 ### Create with Azure Portal
 
 Complete the following steps:
