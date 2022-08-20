@@ -1,6 +1,8 @@
 ## Data Explorer
 _(aka “ADX,” “Azure Data Explorer,” “Kusto”)_
 
+![image](https://user-images.githubusercontent.com/44923999/185751628-db6489fe-5e2f-418d-a3df-1a1b19d51479.png)
+
 ### Frequently Asked Questions (FAQ)
 The answers provided below represent best-known information on a given topic as of a given date.
 
