@@ -13,6 +13,7 @@ This solution requires:
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
 ### Step 1: Deploy Custom Template
+In this step, we will deploy a Data Connection on the Data Explorer Database using an ARM Template
 
 Complete the following steps:
 
@@ -32,16 +33,24 @@ Complete the following steps:
   {
       "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
       "contentVersion": "1.0.0.0",
-        "resources": [{
+      "parameters": {
+          "DataExplorer_Cluster_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dec')]" },
+          "DataExplorer_Database_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'ded')]" },
+          "DataExplorer_DataConnection_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dedc')]" },
+          "DataLake_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dls')]" },
+          "EventHubNamespace_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'ehn')]" },
+          "EventHub_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eh')]" }
+      },
+      "resources": [{
               "type": "Microsoft.Kusto/Clusters/Databases/DataConnections",
               "apiVersion": "2019-09-07",
-              "name": "rchaplerdec/rchaplerded/rchaplerdedc",
+              "name": "[concat(parameters('DataExplorer_Cluster_Name'),'/', parameters('DataExplorer_Database_Name'), '/', parameters('DataExplorer_DataConnection_Name'))]",
               "location": "[resourceGroup().location]",
               "tags": { "Environment": "PROD", "CostCenter":"123456" },
               "kind": "EventGrid",
               "properties": {
-                  "storageAccountResourceId": "[resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Storage/storageAccounts', 'rchaplersa')]",
-                  "eventHubResourceId": "[resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.EventHub/namespaces/eventhubs', 'rchaplerehn', 'rchaplereh')]",
+                  "storageAccountResourceId": "[resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('DataLake_Name'))]",
+                  "eventHubResourceId": "[resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.EventHub/namespaces/eventhubs', parameters('EventHubNamespace_Name'), parameters('EventHub_Name'))]",
                   "consumerGroup": "$Default",
                   "tableName": "['t']",
                   "mappingRuleName": "['t_mapping']",
@@ -56,3 +65,16 @@ Complete the following steps:
 * Click **Save**
 * Confirm values on the resulting "**Custom deployment**" >> "**Deploy from a custom template**" page, **Basics** tab
 * Click "**Review + create**", confirm configuration settings on the resulting page, and then click **Create**
+
+### Step 2: Specify Container
+In this step, we will update the deployed Data Connection to specify a container
+
+Complete the following steps:
+
+* Navigate to your Data Explorer Database and then click "**Data Connections**" in the **Settings** area of the left-hand navigation
+* On the resulting page, click on the newly deployed Data Connection
+
+  <img src="https://user-images.githubusercontent.com/44923999/185758134-4158179d-5126-45d1-8d4d-9ad521f0b9a8.png" width="800" title="Snipped: August 20, 2022" />
+
+* Expand "**Filter settings**" on the resulting pop-out form and update values for **Prefix**, **Suffix**, and "**Case Sensitive**" as appropriate
+* Click **Update**
