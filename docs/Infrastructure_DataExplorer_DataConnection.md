@@ -10,7 +10,7 @@ This solution requires:
 
 * **Data Explorer** [cluster](Infrastructure_DataExplorer_Cluster.md) and [database](Infrastructure_DataExplorer_Database.md), with a [table](Infrastructure_DataExplorer_Table.md) and [ingestion mapping](Infrastructure_DataExplorer_IngestionMapping.md)
 * [**Event Hub**](Infrastructure_EventHub.md)
-* [**Storage Account**](Infrastructure_StorageAccount.md)
+* [**Storage Account**](Infrastructure_StorageAccount.md) with a container
 
 ### Step 1: Deploy Custom Template
 In this step, we will deploy a Data Connection on the Data Explorer Database using an ARM Template
@@ -74,7 +74,8 @@ Complete the following steps:
 * Navigate to your Data Explorer Database and then click "**Data Connections**" in the **Settings** area of the left-hand navigation
 * On the resulting page, click on the newly deployed Data Connection
 
-  <img src="https://user-images.githubusercontent.com/44923999/185758134-4158179d-5126-45d1-8d4d-9ad521f0b9a8.png" width="800" title="Snipped: August 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/185758730-15af9b22-3920-4622-bc15-a74e8413ce3f.png" width="800" title="Snipped: August 20, 2022" />
 
+* Select "**System-Assigned**" from the "**Assign managed identity**" drop-down
 * Expand "**Filter settings**" on the resulting pop-out form and update values for **Prefix**, **Suffix**, and "**Case Sensitive**" as appropriate
 * Click **Update**
