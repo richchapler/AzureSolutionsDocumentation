@@ -1,5 +1,7 @@
 ## Data Acquisition... from Resource Diagnostics
 
+![image](https://user-images.githubusercontent.com/44923999/185979002-2b54427a-dadf-4076-a682-7c3cac86e2ab.png)
+
 This use case considers requirement statements like:
 
 * "Log Analytics costs more than we want to spend"
