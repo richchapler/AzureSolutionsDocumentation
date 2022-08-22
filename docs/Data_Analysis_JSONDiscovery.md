@@ -1,5 +1,7 @@
 ## Data Analysis... JSON Discovery
 
+![image](https://user-images.githubusercontent.com/44923999/185979491-0904a503-b871-46a4-99f8-0148bc4df55b.png)
+
 This use case considers requirement statements like:
 
 * "Our data includes a dynamic column filled with JSON subject to frequent schema changes"
