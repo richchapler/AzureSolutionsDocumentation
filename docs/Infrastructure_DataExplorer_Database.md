@@ -1,7 +1,7 @@
 ## [Data Explorer](Infrastructure_DataExplorer.md) >> **Database**
 _Note: These instructions can apply to either Data Explorer Clusters or Synapse Data Explorer Pools_
 
-![image](https://user-images.githubusercontent.com/44923999/185751628-db6489fe-5e2f-418d-a3df-1a1b19d51479.png)
+![image](https://user-images.githubusercontent.com/44923999/185980410-353cda9e-d0a8-405c-ab1c-409df61e46c4.png)
 
 ### Create with Azure Portal
 
