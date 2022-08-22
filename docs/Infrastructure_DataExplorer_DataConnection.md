@@ -4,7 +4,7 @@
 
 ### Create with ARM Template
 
-### Step #1: Prepare Infrastructure
+### Step 1: Prepare Infrastructure
 In this step, we will prepare the Azure resources necessary to complete the exercise.
 
 This solution requires:
