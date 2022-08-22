@@ -1,6 +1,8 @@
 ## Synapse
 _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 
+![image](https://user-images.githubusercontent.com/44923999/185975852-f21da095-6d6d-4259-86d8-6b199c9e3295.png)
+
 ### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
