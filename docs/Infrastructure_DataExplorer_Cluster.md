@@ -1,7 +1,7 @@
 ## [Data Explorer](Infrastructure_DataExplorer.md) >> **Cluster**
 _Note: Stand-alone clusters are similar to Synapse Data Explorer Pools, but have a more complete functionality set_
 
-![image](https://user-images.githubusercontent.com/44923999/185751732-2b38331d-66ba-4b48-b7ee-9309b5beb3d6.png)
+![image](https://user-images.githubusercontent.com/44923999/185980410-353cda9e-d0a8-405c-ab1c-409df61e46c4.png)
 
 ### Create with Azure Portal
 
