@@ -1,5 +1,7 @@
 ## Synapse >> Git Configuration
 
+![image](https://user-images.githubusercontent.com/44923999/185975977-59f39ef4-ef55-4f8b-9720-233807cf747d.png)
+
 ### Create with Synapse Studio
 
 * Navigate to **Synapse Studio** and then click the **Manage** navigation icon
