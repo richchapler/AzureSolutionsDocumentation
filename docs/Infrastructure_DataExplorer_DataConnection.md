@@ -70,16 +70,15 @@ Complete the following steps:
 * Confirm values on the resulting "**Custom deployment**" >> "**Deploy from a custom template**" page, **Basics** tab
 * Click "**Review + create**", confirm configuration settings on the resulting page, and then click **Create**
 
-### Step 3: Specify Container
-In this step, we will update the deployed Data Connection to specify a container.
+### Step 3: Assign Managed Identity
+In this step, we will assign a Managed Instance to the deployed Data Connection.
 
 Complete the following steps:
 
-* Navigate to your Data Explorer Database and then click "**Data Connections**" in the **Settings** area of the left-hand navigation
+* Navigate to your Data Explorer Database and then click "**Data Connections**" in the **Settings** grouping of the left-hand navigation
 * On the resulting page, click on the newly deployed Data Connection
 
-  <img src="https://user-images.githubusercontent.com/44923999/185758730-15af9b22-3920-4622-bc15-a74e8413ce3f.png" width="800" title="Snipped: August 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186000371-07f1c31e-483c-4976-a9ac-e3124745aee7.png" width="800" title="Snipped: August 22, 2022" />
 
 * Select "**System-Assigned**" from the "**Assign managed identity**" drop-down
-* Expand "**Filter settings**" on the resulting pop-out form and update values for **Prefix**, **Suffix**, and "**Case Sensitive**" as appropriate
 * Click **Update**
