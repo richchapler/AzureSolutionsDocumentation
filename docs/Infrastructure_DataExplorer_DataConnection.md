@@ -65,7 +65,7 @@ Complete the following steps:
   }
   ```
 
-* Click **Save**
+* Click **Save** 
 * Confirm values on the resulting "**Custom deployment**" >> "**Deploy from a custom template**" page, **Basics** tab
 * Click "**Review + create**", confirm configuration settings on the resulting page, and then click **Create**
 
