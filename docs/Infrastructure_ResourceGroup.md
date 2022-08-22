@@ -1,5 +1,7 @@
 ## Resource Group
 
+![image](https://user-images.githubusercontent.com/44923999/185973749-291ea716-009b-497a-badf-08fcd876596e.png)
+
 ### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
