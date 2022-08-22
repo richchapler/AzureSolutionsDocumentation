@@ -1,5 +1,7 @@
 ## Data Analysis... Time Windowing
 
+![image](https://user-images.githubusercontent.com/44923999/185979568-394236c2-1265-468b-b137-f1c0a31a569e.png)
+
 This use case considers requirement statements like:
 
 * "We want to use our time-series data to characterize Sensor 'Activity Runs' {what we call the period between Active and Inactive}"
