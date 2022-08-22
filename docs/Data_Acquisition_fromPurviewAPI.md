@@ -1,5 +1,7 @@
 ## Data Acquisition... from Purview, via REST API
 
+![image](https://user-images.githubusercontent.com/44923999/185978130-452af816-19c6-40e2-94a8-bad516fcd178.png)
+
 This use case considers requirement statements like:
 
 * "Our approved Data Governance solution (not Purview) lacks Azure connectors"
