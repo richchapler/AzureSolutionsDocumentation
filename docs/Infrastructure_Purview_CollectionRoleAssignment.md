@@ -1,5 +1,7 @@
 ## Purview >> Collection Role Assignment
 
+![image](https://user-images.githubusercontent.com/44923999/185973161-3cfb0848-9745-41f6-b4f5-e0e5eab830d9.png)
+
 ### Create with Microsoft Purview Governance Portal
 
 Complete the following steps:
