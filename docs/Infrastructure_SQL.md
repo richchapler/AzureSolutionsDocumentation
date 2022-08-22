@@ -1,6 +1,8 @@
 ## SQL
 _(aka “Azure SQL”, “Azure SQL Database”, “Azure SQL Database Server”, “Azure SQL Server”)_
 
+![image](https://user-images.githubusercontent.com/44923999/185975092-fff1a9cc-3e78-4796-8206-8fa601e569a8.png)
+
 ### Create with Azure Portal
 
 #### Server
