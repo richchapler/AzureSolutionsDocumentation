@@ -1,5 +1,7 @@
 ## Purview >> Sources
 
+![image](https://user-images.githubusercontent.com/44923999/185973242-b30abab5-6b25-4d03-a403-58c5c42f172c.png)
+
 ### Step 1: Source Permissions
 
 #### Azure Data Explorer
