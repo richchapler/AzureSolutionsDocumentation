@@ -1,6 +1,6 @@
 ## Data Analysis... JSON Discovery
 
-![image](https://user-images.githubusercontent.com/44923999/185979491-0904a503-b871-46a4-99f8-0148bc4df55b.png)
+![image](https://user-images.githubusercontent.com/44923999/185980410-353cda9e-d0a8-405c-ab1c-409df61e46c4.png)
 
 This use case considers requirement statements like:
 
