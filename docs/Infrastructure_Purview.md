@@ -1,6 +1,8 @@
 ## Purview
 _(aka "Microsoft Purview" ... "Azure Purview" is specific to Azure Sentinel)_
 
+![image](https://user-images.githubusercontent.com/44923999/185973102-3d6105d6-6657-4de9-8ba7-3736f21d55d3.png)
+
 ### Create with Azure Portal
 
 Complete the following steps:
