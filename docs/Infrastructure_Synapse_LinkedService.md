@@ -1,5 +1,7 @@
 ## Synapse >> Linked Service
 
+![image](https://user-images.githubusercontent.com/44923999/185976022-5c3b8fcb-cf1a-4978-8916-54a8573c3d5a.png)
+
 ### Create with Azure Portal
 
 * Navigate to **Synapse Studio**
