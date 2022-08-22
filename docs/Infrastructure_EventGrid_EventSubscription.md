@@ -9,15 +9,15 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "DataLake_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dl')]" },
-        "DataLakeContainer_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dlc')]" },
-        "EventGrid_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eg')]" },
+        "DataLake_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dls')]" },
+        "DataLakeContainer_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dlsc')]" },
         "EventHubNamespace_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'ehn')]" },
-        "EventHub_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eh')]" }
+        "EventHub_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eh')]" },
+        "EventSubscription_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eges')]" }
     },
     "resources": [
         {
-            "name": "[concat(parameters('DataLake_Name'),'/Microsoft.EventGrid/',parameters('EventGrid_Name'))]",
+            "name": "[concat(parameters('DataLake_Name'),'/Microsoft.EventGrid/',parameters('EventSubscription_Name'))]",
             "type": "Microsoft.Storage/storageAccounts/providers/eventSubscriptions",
             "apiVersion": "[providers('Microsoft.EventGrid','eventSubscriptions').apiVersions[0]]",
             "properties": {
@@ -28,7 +28,7 @@
                     }
                 },
                 "filter": {
-                    "subjectBeginsWith": "/blobServices/default/containers/parameters('DataLakeContainer_Name')",
+                    "subjectBeginsWith": "[concat('/blobServices/default/containers/',parameters('DataLakeContainer_Name'))]",
                     "subjectEndsWith": "json",
                     "includedEventTypes": ["Microsoft.Storage.BlobCreated"]
                 }
