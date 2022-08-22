@@ -4,16 +4,18 @@
 
 ### Create with ARM Template
 
-### Prepare Infrastructure
+### Step #1: Prepare Infrastructure
+In this step, we will prepare the Azure resources necessary to complete the exercise.
 
 This solution requires:
 
 * **Data Explorer** [cluster](Infrastructure_DataExplorer_Cluster.md) and [database](Infrastructure_DataExplorer_Database.md), with a [table](Infrastructure_DataExplorer_Table.md) and [ingestion mapping](Infrastructure_DataExplorer_IngestionMapping.md)
+* [**Event Grid**, **Event Subscription**](Infrastructure_EventGrid_EventSubscription.md)
 * [**Event Hub**](Infrastructure_EventHub.md)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container
 
-### Step 1: Deploy Custom Template
-In this step, we will deploy a Data Connection on the Data Explorer Database using an ARM Template
+### Step 2: Deploy Custom Template
+In this step, we will deploy a Data Connection on the Data Explorer Database using an ARM Template.
 
 Complete the following steps:
 
@@ -66,8 +68,8 @@ Complete the following steps:
 * Confirm values on the resulting "**Custom deployment**" >> "**Deploy from a custom template**" page, **Basics** tab
 * Click "**Review + create**", confirm configuration settings on the resulting page, and then click **Create**
 
-### Step 2: Specify Container
-In this step, we will update the deployed Data Connection to specify a container
+### Step 3: Specify Container
+In this step, we will update the deployed Data Connection to specify a container.
 
 Complete the following steps:
 
