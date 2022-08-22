@@ -36,28 +36,29 @@ Complete the following steps:
       "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
       "contentVersion": "1.0.0.0",
       "parameters": {
-          "DataExplorer_Cluster_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dec')]" },
-          "DataExplorer_Database_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'ded')]" },
-          "DataExplorer_DataConnection_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dedc')]" },
           "DataLake_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dls')]" },
+          "DataLakeContainer_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'dlsc')]" },
           "EventHubNamespace_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'ehn')]" },
-          "EventHub_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eh')]" }
+          "EventHub_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eh')]" },
+          "EventSubscription_Name": { "type": "string", "defaultValue": "[concat(resourceGroup().name,'eges')]" }
       },
-      "resources": [{
-              "type": "Microsoft.Kusto/Clusters/Databases/DataConnections",
-              "apiVersion": "2019-09-07",
-              "name": "[concat(parameters('DataExplorer_Cluster_Name'),'/', parameters('DataExplorer_Database_Name'), '/', parameters('DataExplorer_DataConnection_Name'))]",
-              "location": "[resourceGroup().location]",
-              "tags": { "Environment": "PROD", "CostCenter":"123456" },
-              "kind": "EventGrid",
+      "resources": [
+          {
+              "name": "[concat(parameters('DataLake_Name'),'/Microsoft.EventGrid/',parameters('EventSubscription_Name'))]",
+              "type": "Microsoft.Storage/storageAccounts/providers/eventSubscriptions",
+              "apiVersion": "[providers('Microsoft.EventGrid','eventSubscriptions').apiVersions[0]]",
               "properties": {
-                  "storageAccountResourceId": "[resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Storage/storageAccounts', parameters('DataLake_Name'))]",
-                  "eventHubResourceId": "[resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.EventHub/namespaces/eventhubs', parameters('EventHubNamespace_Name'), parameters('EventHub_Name'))]",
-                  "consumerGroup": "$Default",
-                  "tableName": "['t']",
-                  "mappingRuleName": "['t_mapping']",
-                  "dataFormat": "['json']",
-                  "databaseRouting": "Single"
+                  "destination": {
+                      "endpointType": "EventHub",
+                      "properties": {
+                          "resourceId": "[resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.EventHub/namespaces/eventhubs', parameters('EventHubNamespace_Name'), parameters('EventHub_Name'))]"
+                      }
+                  },
+                  "filter": {
+                      "subjectBeginsWith": "[concat('/blobServices/default/containers/',parameters('DataLakeContainer_Name'))]",
+                      "subjectEndsWith": "json",
+                      "includedEventTypes": ["Microsoft.Storage.BlobCreated"]
+                  }
               }
           }
       ]
