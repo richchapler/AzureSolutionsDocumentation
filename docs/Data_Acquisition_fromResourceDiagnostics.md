@@ -1,6 +1,6 @@
 ## Data Acquisition... from Resource Diagnostics
 
-![image](https://user-images.githubusercontent.com/44923999/185979002-2b54427a-dadf-4076-a682-7c3cac86e2ab.png)
+![image](https://user-images.githubusercontent.com/44923999/185979268-83aad799-8e0a-4e82-9f82-f81616cf8cff.png)
 
 This use case considers requirement statements like:
 
