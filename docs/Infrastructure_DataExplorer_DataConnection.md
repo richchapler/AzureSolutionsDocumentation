@@ -9,8 +9,8 @@ In this step, we will prepare the Azure resources necessary to complete the exer
 
 This solution requires:
 
-* **Data Explorer** [cluster](Infrastructure_DataExplorer_Cluster.md) and [database](Infrastructure_DataExplorer_Database.md), with a [table](Infrastructure_DataExplorer_Table.md) and [ingestion mapping](Infrastructure_DataExplorer_IngestionMapping.md)
-* [**Event Grid**, **Event Subscription**](Infrastructure_EventGrid_EventSubscription.md)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md), with a [**Table**](Infrastructure_DataExplorer_Table.md) and [**Ingestion Mapping**](Infrastructure_DataExplorer_IngestionMapping.md)
+* Event Grid, [**Event Subscription**](Infrastructure_EventGrid_EventSubscription.md)
 * [**Event Hub**](Infrastructure_EventHub.md)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container
 
