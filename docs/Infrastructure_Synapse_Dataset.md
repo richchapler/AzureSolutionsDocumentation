@@ -1,6 +1,8 @@
 ## Synapse >> Dataset
 _(aka "Integration Dataset")_
 
+![image](https://user-images.githubusercontent.com/44923999/185975941-4bb68fad-4d72-48bc-9f19-ce37e0aba3da.png)
+
 ### Create with Azure Portal
 
 * Navigate to **Synapse Studio**
