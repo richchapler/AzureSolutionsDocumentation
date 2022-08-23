@@ -11,9 +11,9 @@ This use case considers requirement statements like:
 This solution requires the following resources:
 
 * [Application Registration](Infrastructure_ApplicationRegistration.md)
-* [Data Lake](Infrastructure_DataLake.md) with a [container](Infrastructure_DataLake_Container.md)
+* [Data Lake](Infrastructure_DataLake.md) with a [Container](Infrastructure_DataLake_Container.md)
 * [Log Analytics](Infrastructure_LogAnalytics.md)
-* [Synapse](Infrastructure_Synapse.md)
+* [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) pointed at the default Data Lake
 
 ### Step 2: Create Linked Service
 In this step, we will create the Linked Service we will use to get our Bearer Token.
@@ -102,9 +102,7 @@ Complete the following steps:
 
 * Select the appropriate dataset (and configuration) on the **Sink** tab 
 
-  <img src="https://user-images.githubusercontent.com/44923999/180802206-ac29e3f2-b0bd-4892-8c30-d78361e60cb9.png" width="800" title="Snipped: July 25, 2022" />
-
-  _Note: for this exercise, I am using the default connection to Data Lake_
+  <img src="https://user-images.githubusercontent.com/44923999/186217944-78b9131f-846b-4ba7-9d21-10e18dde9fa7.png" width="800" title="Snipped: August 23, 2022" />
 
 #### Confirm Success
 
