@@ -97,7 +97,7 @@ Complete the following steps:
   ------ | ------
   **Source dataset** | Select your REST dataset
   **Request method** | Select **POST**
-  **Request body** | Modify and enter:<br> `{ "query": "Sample_CL | take 10" }`
+  **Request body** | Modify and enter: { "query": "Sample_CL | take 10" }
   **Additional headers** | Click **+ Add** and enter key-value pairs:<br>`content-type` :: `application/json;charset=utf-8`<br>`Authorization` :: `@concat('Bearer ',activity('Get Token').output.access_token)`
 
 * Select the appropriate dataset (and configuration) on the **Sink** tab 
