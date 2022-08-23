@@ -91,13 +91,13 @@ Complete the following steps:
 * Create a dependency from the "**Get Token**" component to the "**Get Data**" component
 * Enter values on the **Source** tab 
 
-  <img src="https://user-images.githubusercontent.com/44923999/180803310-4399a334-7b54-4720-9766-4701bde373ba.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186216401-ec555ffc-190b-4ea2-9be8-d59b0b30e1f0.png" width="800" title="Snipped: August 23, 2022" />
 
   Prompt | Entry
   ------ | ------
   **Source dataset** | Select your REST dataset
   **Request method** | Select **POST**
-  **Request body** | Enter: `{ "limit": 10 }`
+  **Request body** | Enter: `{ "query": "Sample_CL | take 10" }`
   **Additional headers** | Click **+ Add** and enter key-value pairs:<br>content-type: `application/json;charset=utf-8`<br>Authorization: `@concat('Bearer ',activity('Get Token').output.access_token)`
 
 * Select the appropriate dataset (and configuration) on the **Sink** tab 
