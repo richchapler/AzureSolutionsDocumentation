@@ -4,7 +4,7 @@
 
 This use case considers requirement statements like:
 * "We capture custom logs from various device and apps to Log Analytics"
-* "We want to capture Log Analytics data and maintain an extended history (past the maximum retention period)"
+* "We want to capture and maintain an extended history of Log Analytics data (past the maximum retention period)"
 * "We feel that Log Analytics has more functionality than we need and costs too much"
 
 ### Step 1: Prepare Infrastructure
