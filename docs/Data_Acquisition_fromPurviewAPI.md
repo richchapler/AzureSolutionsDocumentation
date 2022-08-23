@@ -3,7 +3,6 @@
 ![image](https://user-images.githubusercontent.com/44923999/185978130-452af816-19c6-40e2-94a8-bad516fcd178.png)
 
 This use case considers requirement statements like:
-
 * "Our approved Data Governance solution (not Purview) lacks Azure connectors"
 * "We want to use Purview to collect the best possible source metadata from Azure resources"
 
@@ -16,6 +15,7 @@ This solution requires the following resources:
 * [Synapse](Infrastructure_Synapse.md)
 
 ### Step 2: Create Linked Service
+In this step, we will create the Linked Service we will use to get our Bearer Token.
 
 Complete the following steps:
 
@@ -42,6 +42,7 @@ Complete the following steps:
 * Click "**Test connection**" to confirm successful connection and then click **Create**
 
 ### Step 3: Create Dataset
+In this step, we will create the Dataset we will use to get our Bearer Token.
 
 Complete the following steps:
 
@@ -58,6 +59,7 @@ Complete the following steps:
 * Click "**Test connection**" to confirm successful connection
 
 ### Step 4: Create Pipeline
+In this step, we will create a Pipeline and add Activities.
 
 Complete the following steps:
 * Open "**Synapse Studio**" and click the **Integrate** navigation icon
@@ -83,7 +85,6 @@ Complete the following steps:
 * Click **Debug** and monitor to confirm success
 
 #### Activity 2: Get Data
-
 This activity will make a REST API call and capture the response as a delimited file in the Data Lake.
 
 Complete the following steps:
