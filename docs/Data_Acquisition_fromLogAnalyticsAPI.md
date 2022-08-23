@@ -78,7 +78,7 @@ Complete the following steps:
   **URL** | Modify and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
   **Method** | Select **POST**  
   **Headers** | Click "**+ Add**" and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
-  **Body** | Modify and enter:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://api.loganalytics.io/`
+  **Body** | Modify and enter:<br> `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://api.loganalytics.io/`
 
 * Click **Debug** and monitor to confirm success
 
@@ -97,7 +97,7 @@ Complete the following steps:
   ------ | ------
   **Source dataset** | Select your REST dataset
   **Request method** | Select **POST**
-  **Request body** | Enter: `{ "query": "Sample_CL | take 10" }`
+  **Request body** | Modify and enter:<br> `{ "query": "Sample_CL | take 10" }`
   **Additional headers** | Click **+ Add** and enter key-value pairs:<br>`content-type` :: `application/json;charset=utf-8`<br>`Authorization` :: `@concat('Bearer ',activity('Get Token').output.access_token)`
 
 * Select the appropriate dataset (and configuration) on the **Sink** tab 
