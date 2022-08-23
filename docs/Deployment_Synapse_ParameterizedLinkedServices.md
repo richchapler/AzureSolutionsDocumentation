@@ -140,6 +140,7 @@ Complete the following steps:
 
 * Not surprisingly, we will complete the resulting "**New linked service**" >> "**Azure Data Explorer (Kusto)**" pop-out form differently than we did for "static"
   * First, click "**+ New**" under Parameters and enter the following values:
+  
     Name | Type | Default value
     ------ | ------ | ------
     WorkspaceName | String | devsaw
