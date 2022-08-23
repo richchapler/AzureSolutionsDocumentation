@@ -71,14 +71,14 @@ Complete the following steps:
 * Drag-and-drop a **Web** component into the main window
 * Complete the form on the **Settings** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/186214217-ac24aa86-ce1c-4479-a8ea-900be4044629.png" width="800" title="Snipped: August 23, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186214719-30d3b72a-65dd-41e5-8128-472d593b0a52.png" width="800" title="Snipped: August 23, 2022" />
 
   Prompt | Entry
   ------ | ------
   **URL** | Modify and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
   **Method** | Select **POST**  
   **Headers** | Click "**+ Add**" and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
-  **Body** | Modify and enter:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://purview.azure.net`
+  **Body** | Modify and enter:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://api.loganalytics.io/`
 
 * Click **Debug** and monitor to confirm success
 
