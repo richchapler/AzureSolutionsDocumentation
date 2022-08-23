@@ -19,52 +19,51 @@ This solution requires the following resources:
 
 Complete the following steps:
 
-* Open **Synapse Studio** and click the **Manage** navigation icon
-* Click **Linked services** from the **External connections** grouping in the resulting navigation
+* Open "**Synapse Studio**" and click the **Manage** navigation icon
+* Click "**Linked services**" from the "**External connections**" grouping in the resulting navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/180606347-670321a8-896f-41fe-afe6-0dfdb7d87d61.png" width="800" title="Snipped: July 23, 2022" />
 
-* Click **+ New**
+* Click "**+ New**"
 
   <img src="https://user-images.githubusercontent.com/44923999/180805015-db42aa59-bbef-4fa3-8651-7b55f2b4ea32.png" width="800" title="Snipped: July 25, 2022" />
 
-* Search for and select "REST" on the **New linked service** pop-out and then click **Continue**
+* Search for and select "REST" on the "**New linked service**" pop-out and then click **Continue**
 
   <img src="https://user-images.githubusercontent.com/44923999/180804710-17c92274-44a9-4322-b2c3-bf03c5db0e26.png" width="800" title="Snipped: July 25, 2022" />
 
-* Complete the resulting **New linked service** pop-out, including:
+* Complete the resulting "**New linked service**" pop-out, including:
 
   Prompt | Entry
   ------ | ------
-  **Base URL** | Modify and enter:<br>`https://{Purview Account Name}.purview.azure.com/catalog/api/search/query?api-version=2022-03-01-preview`  
-  **Authentication Type** | Select **Anonymous**  
+  "**Base URL**" | Modify and enter:<br>`https://{Purview Account Name}.purview.azure.com/catalog/api/search/query?api-version=2022-03-01-preview`  
+  "**Authentication Type**" | Select **Anonymous**  
 
-* Click **Test connection** to confirm successful connection and then click **Create**
+* Click "**Test connection**" to confirm successful connection and then click **Create**
 
 ### Step 3: Create Dataset
 
 Complete the following steps:
 
-* Open **Synapse Studio** and click the **Data** navigation icon
-* Click **+** and then select **Integration dataset** from the **Linked** grouping in the resulting navigation
+* Open "**Synapse Studio**" and click the **Data** navigation icon
+* Click **+** and then select "**Integration dataset**" from the **Linked** grouping in the resulting navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/180805485-9187f29f-0232-42ad-af43-c6fbc4ae8510.png" width="800" title="Snipped: July 25, 2022" />
 
-* Search for and select **REST** on the **New linked service** pop-out and then click **Continue**
+* Search for and select **REST** on the "**New linked service**" pop-out and then click **Continue**
 
   <img src="https://user-images.githubusercontent.com/44923999/180805719-c13e9621-bdb3-4e46-88f5-c337c860a382.png" width="800" title="Snipped: July 25, 2022" />
 
-* Complete the **Set properties** pop-out form and then click **OK**
-* Click **Test connection** to confirm successful connection
+* Complete the "**Set properties**" pop-out form and then click **OK**
+* Click "**Test connection**" to confirm successful connection
 
 ### Step 4: Create Pipeline
 
 Complete the following steps:
-* Open **Synapse Studio** and click the **Integrate** navigation icon
+* Open "**Synapse Studio**" and click the **Integrate** navigation icon
 * Click **+** and select **Pipeline** from the resulting dropdown menu
 
 #### Activity 1: Get Token
-
 This activity will make a REST API call to http://login.microsoftonline.com and get a bearer token.
 
 Complete the following steps:
@@ -78,7 +77,7 @@ Complete the following steps:
   ------ | ------
   **URL** | Modify and enter:`https://login.microsoftonline.com/{TenantId}/oauth2/token`  
   **Method** | Select **POST**  
-  **Headers** | Click **+ Add** and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
+  **Headers** | Click "**+ Add**" and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
   **Body** | Modify and enter:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://purview.azure.net`
 
 * Click **Debug** and monitor to confirm success
@@ -88,9 +87,9 @@ Complete the following steps:
 This activity will make a REST API call and capture the response as a delimited file in the Data Lake.
 
 Complete the following steps:
-* Expand **Move & Transform** in the **Activities** bar
-* Drag-and-drop a **Copy data** component into the activity window
-* Create a dependency from the **Get Token** component to the **Get Data** component
+* Expand "**Move & Transform**" in the **Activities** bar
+* Drag-and-drop a "**Copy data**" component into the activity window
+* Create a dependency from the "**Get Token**" component to the "**Get Data**" component
 * Enter values on the **Source** tab 
 
   <img src="https://user-images.githubusercontent.com/44923999/180803310-4399a334-7b54-4720-9766-4701bde373ba.png" width="800" title="Snipped: July 25, 2022" />
