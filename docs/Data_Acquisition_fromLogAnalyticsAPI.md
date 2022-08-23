@@ -20,24 +20,21 @@ In this step, we will create the Linked Service we will use to get our Bearer To
 
 Complete the following steps:
 
-* Open "**Synapse Studio**" and click the **Manage** navigation icon
+* Open **Synapse Studio** and click the **Manage** navigation icon
 * Click "**Linked services**" from the "**External connections**" grouping in the resulting navigation
-
-  <img src="https://user-images.githubusercontent.com/44923999/180606347-670321a8-896f-41fe-afe6-0dfdb7d87d61.png" width="800" title="Snipped: July 23, 2022" />
-
 * Click "**+ New**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/180805015-db42aa59-bbef-4fa3-8651-7b55f2b4ea32.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186210475-7a993950-f5ba-4775-bb55-0dcb165a57a2.png" width="800" title="Snipped: August 23, 2022" />
 
 * Search for and select "REST" on the "**New linked service**" pop-out and then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/180804710-17c92274-44a9-4322-b2c3-bf03c5db0e26.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186212084-c41badaf-a6c3-4602-8dd2-937cbbe3e44e.png" width="800" title="Snipped: August 23, 2022" />
 
 * Complete the resulting "**New linked service**" pop-out, including:
 
   Prompt | Entry
   ------ | ------
-  "**Base URL**" | Modify and enter:<br>`https://{Purview Account Name}.purview.azure.com/catalog/api/search/query?api-version=2022-03-01-preview`  
+  "**Base URL**" | Modify and enter:<br>`https://api.loganalytics.io/v1/workspaces/{LogAnalyticsWorkspaceId}/query`  
   "**Authentication Type**" | Select **Anonymous**  
 
 * Click "**Test connection**" to confirm successful connection and then click **Create**
@@ -47,14 +44,14 @@ In this step, we will create the Dataset we will use to get our Bearer Token.
 
 Complete the following steps:
 
-* Open "**Synapse Studio**" and click the **Data** navigation icon
+* Open **Synapse Studio** and click the **Data** navigation icon
 * Click **+** and then select "**Integration dataset**" from the **Linked** grouping in the resulting navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/180805485-9187f29f-0232-42ad-af43-c6fbc4ae8510.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186212524-f226d182-cc9e-4964-bbdc-c7ee68f0f467.png" width="800" title="Snipped: August 23, 2022" />
 
 * Search for and select **REST** on the "**New linked service**" pop-out and then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/180805719-c13e9621-bdb3-4e46-88f5-c337c860a382.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186212779-0ec84877-1ca9-482f-aa22-c38f24993174.png" width="800" title="Snipped: August 23, 2022" />
 
 * Complete the "**Set properties**" pop-out form and then click **OK**
 * Click "**Test connection**" to confirm successful connection
@@ -67,7 +64,7 @@ Complete the following steps:
 * Click **+** and select **Pipeline** from the resulting dropdown menu
 
 #### Activity 1: Get Token
-This activity will make a REST API call to http://login.microsoftonline.com and get a bearer token.
+This activity will make a REST API call to get a bearer token.
 
 Complete the following steps:
 * Expand **General** in the **Activities** bar
