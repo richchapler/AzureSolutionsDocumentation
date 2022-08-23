@@ -64,14 +64,14 @@ Complete the following steps:
 * Click **+** and select **Pipeline** from the resulting dropdown menu
 
 #### Activity 1: Get Token
-This activity will make a REST API call to get a bearer token.
+This activity will make a REST API call and get a bearer token.
 
 Complete the following steps:
 * Expand **General** in the **Activities** bar
 * Drag-and-drop a **Web** component into the main window
 * Complete the form on the **Settings** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/180803926-1a18dab9-22d1-41c9-8896-13e3436d7772.png" width="800" title="Snipped: July 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/186214217-ac24aa86-ce1c-4479-a8ea-900be4044629.png" width="800" title="Snipped: August 23, 2022" />
 
   Prompt | Entry
   ------ | ------
