@@ -178,6 +178,12 @@ Complete the following steps:
 
   * Finally, click "**Test connection**", confirm successful connection, and then click **Save**
 
+You might also use something like:
+
+```
+@concat('https://', linkedService().Environment, 'rchaplerdec.westus3.kusto.windows.net')
+```
+
 ### Step 5: Deploy the Dynamic Linked Service
 In this step, we will create another pull request to move new changes into the "production" branch.
 
@@ -199,6 +205,12 @@ Complete the following steps:
 <br>_Note: This parameter should be updated from the Dataset, rather than manually_
 
 * Click "**Test connection**" and confirm successful connection
+
+### What's Next?
+
+You will reference your dynamic Linked Service from a Dataset with a parameter {e.g., "Environment"} and you will populate the "**Linked Service Properties**", parameter value with expression: `@dataset().Environment`
+
+You will reference this Dataset with a parameter {e.g., "Environment"} and you will populate the "**Linked Service Properties**", parameter value with an expression like: `@substring(pipeline().DataFactory,1,1)`
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-factory/parameterize-linked-services?tabs=data-factory
