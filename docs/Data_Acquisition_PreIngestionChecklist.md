@@ -110,6 +110,15 @@ In this step, we will apply partitioning designed to improve query performance f
 }
 ```
 
+### Step N: "I missed something!"
+Invariably, something vital will be missed... or a change in the schema will be required... or, something...
+
+Though there is no backfill functionality for Update Policy, you can use the following KQL to parse in data from the modified logic:
+
+```
+.set-or-append async T <| UpdatePolicy()
+```
+
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/partitioningpolicy
