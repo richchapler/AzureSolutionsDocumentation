@@ -39,9 +39,9 @@ In the following example, we limit the original set of columns with `project` an
 #### Timestamp
 Data Explorer is a **time-series** database, so having at least one meaningful timestamp column is expected. Besides its obvious value, this column will be very useful for partitioning.
 
-The StormEvents data has two columns, `StartTime` and `EndTime` and both are type `datetime`. This is sufficient for our needs.
+The StormEvents data has two columns, `StartTime` and `EndTime` and both are type `datetime`. Either is sufficient for our needs; the choice of one, the other, or both should be based on solution context.
 
-If, however, they were of time `long` as in the case of a Unix timestamp, it would be advantageous to extend a new `UnixTime_long` column with one of various KQL functions like: [unixtime_milliseconds_todatetime()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/unixtime-milliseconds-todatetimefunction)
+If your Timestamp column is of data type `long` (as in the case of a Unix timestamp), it would be advantageous to extend a new `UnixTime_datetime` column with one of various KQL functions like: [unixtime_milliseconds_todatetime()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/unixtime-milliseconds-todatetimefunction)
 
 #### Geospatial
 Data Explorer handling of [geospatial](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geospatial-grid-systems) data is simply awesome.
