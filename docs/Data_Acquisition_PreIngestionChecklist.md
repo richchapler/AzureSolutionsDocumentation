@@ -6,12 +6,7 @@ This use case considers requirement statements like:
 * "We are planning to kick-off ingestion (both continuous and historical)... is there anything we should consider before we begin?"
 * "We plan to use [H3: Uber's Hexagonal Hierarchical Spatial Index](https://www.uber.com/blog/h3/) for advanced analysis"
 
-### Step 1: Prepare Infrastructure
-This solution requires the following resources:
-
-* **Data Explorer** [Cluster](Infrastructure_DataExplorer_Cluster.md) and [Database](Infrastructure_DataExplorer_Database.md)
-
-### Step 2: Core Transformations via **Update Policy**
+### Core Transformations via **Update Policy**
 In this step, we will consider transformations to raw data that are permanent and necessary. We will capture those transformation in a function and surface the resulting data to a target table.
 
 Navigate to https://dataexplorer.azure.com/clusters/help/databases/Samples to run KQL queries against the sample **StormEvents** data.
