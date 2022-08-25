@@ -67,20 +67,32 @@ The StormEvents data has one dynamic column, `StormSummary` which contains JSON 
 
 #### Final Solution
 
-Pulling together everything discussed, we arrive at two KQL statements:
+Run the following KQL to: 1) create a target table for transformed data, 2) create a function for transformation logic, and 3) add an update policy
 
-.create function with (folder = 'bronze')
-     ExtractMyLogs()  
-    {
-    MySourceTable
-    | parse OriginalRecord with "[" Timestamp:datetime "] [ThreadId:" ThreadId:int "] [ProcessId:" ProcessId:int "] TimeSinceStartup: " TimeSinceStartup:timespan " Message: " Message:string
-    | project-away OriginalRecord
+```
+.create table MyTargetTable (EventId:int, EventType:string, StartTime:datetime, H3_Resolution6:string, TotalDamages:int)
+```
+
+```
+.create function with (folder = 'bronze') MyTransformationLogic() {
+  StormEvents
+  | where not(isempty(BeginLon))
+  | project EventId
+      , EventType
+      , StartTime
+      , H3_Resolution6 = geo_point_to_h3cell(BeginLon, BeginLat, 6)
+      , TotalDamages = StormSummary.TotalDamages
 }
+```
 
+```
+.alter table MyTargetTable policy update 
+@'[{ "IsEnabled": true, "Source": "StormEvents", "Query": "MyTransformationLogic()", "IsTransactional": false, "PropagateIngestionProperties": false}]'
+```
 
+### Step 2: Partitioning Policy
 
-
-
+Lorem Ipsum
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
