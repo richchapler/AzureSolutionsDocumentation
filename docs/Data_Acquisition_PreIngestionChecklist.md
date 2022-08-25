@@ -26,7 +26,13 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/186710088-4b80f89b-36da-437e-8686-48581d5ff07e.png" width="800" title="Snipped: August 25, 2022" />
 
 #### Minimum Viable Product
-Consider beginning every KQL exercise with thinning {i.e., "what columns and rows can I drop from downstream processing?"}
+Consider beginning every KQL exercise with thinning {i.e., "what columns and rows can I drop from downstream processing?"}. Because we'll be materializing our result using an **update policy**, be sure to consider every possible downstream need. If there is a chance you might need column X, better to materialize it in the more-efficient, resulting table than not.
+
+  ```  
+  StormEvents
+  | where not(isempty(BeginLon))
+  | project EventId, EventType, StartTime, BeginLon, BeginLat
+  ```  
 
 #### Timestamp
 Data Explorer is a **time-series** database, so having at least one meaningful timestamp column is expected. Besides its obvious value, this column will be very useful for partitioning.
@@ -38,7 +44,8 @@ If, however, they were of time `long` as in the case of a Unix timestamp, it wou
 #### Geospatial
 Data Explorer handling of [geospatial](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geospatial-grid-systems) data is simply awesome.
 
-The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `EndLon` :: `EndLat`. It would be advantageous to extend new columns using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) to address our use case requirements.
+The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `EndLon` :: `EndLat`.
+Using these, we can extend new columns using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **to address our use case requirements**.
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
