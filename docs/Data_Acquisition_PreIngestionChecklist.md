@@ -7,7 +7,7 @@ This use case considers requirement statements like:
 * "We plan to use [H3: Uber's Hexagonal Hierarchical Spatial Index](https://www.uber.com/blog/h3/) for advanced analysis"
 * "We need to extract X from dynamic column Y"
 
-### Core Transformations via **Update Policy**
+### Step 1: Core Transformations via **Update Policy**
 In this step, we will consider transformations to raw data that are permanent and necessary. We will capture those transformation in a function and surface the resulting data to a target table.
 
 Navigate to https://dataexplorer.azure.com/clusters/help/databases/Samples to run KQL queries against the sample **StormEvents** data.
@@ -64,6 +64,23 @@ The StormEvents data has one dynamic column, `StormSummary` which contains JSON 
 <br>We can parse desired values from this dynamic column with KQL like:
 
 ```| extend TotalDamages = StormSummary.TotalDamages```
+
+#### Final Solution
+
+Pulling together everything discussed, we arrive at two KQL statements:
+
+.create function with (folder = 'bronze')
+     ExtractMyLogs()  
+    {
+    MySourceTable
+    | parse OriginalRecord with "[" Timestamp:datetime "] [ThreadId:" ThreadId:int "] [ProcessId:" ProcessId:int "] TimeSinceStartup: " TimeSinceStartup:timespan " Message: " Message:string
+    | project-away OriginalRecord
+}
+
+
+
+
+
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
