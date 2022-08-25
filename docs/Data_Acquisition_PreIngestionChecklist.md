@@ -40,7 +40,9 @@ If your Timestamp column is of data type `long` (as in the case of a Unix timest
 Most customers care about geospatial data because of the depth that it adds to analytics.
 
 The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `EndLon` :: `EndLat`.
-Using these, we can extend new columns using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **to address our use case requirements**.
+Using these, we can extend new column(s) using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **to address our use case requirements**.
+
+  <img src="https://user-images.githubusercontent.com/44923999/186732552-646affc0-5ebc-43cc-89ca-83af6f32ef97.png" width="800" title="Snipped: August 25, 2022" />
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
