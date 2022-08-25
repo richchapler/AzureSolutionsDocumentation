@@ -91,8 +91,25 @@ Run the following KQL to: 1) create a target table for transformed data, 2) crea
 ```
 
 ### Step 2: Partitioning Policy
+In this step, we will apply partitioning designed to improve query performance for the majority of queries.
 
-Lorem Ipsum
+```
+.alter table StormEvents_transformed policy partitioning
+{
+  "PartitionKeys": [
+    {
+      "ColumnName": "unix_time_datetime",
+      "Kind": "UniformRange",
+      "Properties": {
+        "Reference": "2021-01-01T00:00:00",
+        "RangeSize": "7.00:00:00",
+        "OverrideCreationTime": false
+      }
+    }
+  ]
+}
+```
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
+https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/partitioningpolicy
