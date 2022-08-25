@@ -7,7 +7,7 @@ This use case considers requirement statements like:
 * "We plan to use [H3: Uber's Hexagonal Hierarchical Spatial Index](https://www.uber.com/blog/h3/) for advanced analysis"
 * "We need to extract X from dynamic column Y"
 
-### Step 1: Core Transformations via **Update Policy**
+### Step 1: Update Policy (for core transformations)
 In this step, we will consider transformations to raw data that are permanent and necessary. We will capture those transformation in a function and surface the resulting data to a target table.
 
 Navigate to https://dataexplorer.azure.com/clusters/help/databases/Samples to run KQL queries against the sample **StormEvents** data.
@@ -65,7 +65,7 @@ The StormEvents data has one dynamic column, `StormSummary` which contains JSON 
 
 ```| extend TotalDamages = StormSummary.TotalDamages```
 
-#### Final Solution
+#### Final Logic
 
 Run the following KQL to: 1) create a target table for transformed data, 2) create a function for transformation logic, and 3) add an update policy
 
@@ -90,7 +90,7 @@ Run the following KQL to: 1) create a target table for transformed data, 2) crea
 @'[{ "IsEnabled": true, "Source": "StormEvents", "Query": "MyTransformationLogic()", "IsTransactional": false, "PropagateIngestionProperties": false}]'
 ```
 
-### Step 2: Partitioning Policy
+### Step 2: Partitioning Policy (for query performance)
 In this step, we will apply partitioning designed to improve query performance for the majority of queries.
 
 ```
@@ -98,7 +98,7 @@ In this step, we will apply partitioning designed to improve query performance f
 {
   "PartitionKeys": [
     {
-      "ColumnName": "unix_time_datetime",
+      "ColumnName": "StartTime",
       "Kind": "UniformRange",
       "Properties": {
         "Reference": "2021-01-01T00:00:00",
