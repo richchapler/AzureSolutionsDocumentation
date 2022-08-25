@@ -38,8 +38,8 @@ The StormEvents data has two columns, `StartTime` and `EndTime` and both are typ
 
 If your Timestamp column is of data type `long` (as in the case of a Unix timestamp), you should extend a new `UnixTime_datetime` column with one of various KQL functions like: [unixtime_milliseconds_todatetime()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/unixtime-milliseconds-todatetimefunction)
 
-#### [Geospatial](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geospatial-grid-systems)
-Most customers care about geospatial data because of the depth that it adds to analytics.
+#### Geospatial
+Most customers care about [geospatial](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geospatial-grid-systems) data because of the depth that it adds to analytics.
 
 The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `EndLon` :: `EndLat`.
 Using these, we can extend new column(s) using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **to address our use case requirements**.
