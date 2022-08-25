@@ -29,7 +29,7 @@ Data Explorer is a **time-series** database, so having at least one meaningful t
 
 The StormEvents data has two columns, `StartTime` and `EndTime` and both are type `datetime`. This is sufficient for our needs.
 
-If, however, they were of time `long` as in the case of a Unix timestamp, it would advanageous to extend a new `UnixTime_long` column
+If, however, they were of time `long` as in the case of a Unix timestamp, it would advanageous to extend a new `UnixTime_long` column with one of various KQL functions like: [unixtime_milliseconds_todatetime()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/unixtime-milliseconds-todatetimefunction)
   
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
