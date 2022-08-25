@@ -29,7 +29,7 @@
                 },
                 "filter": {
                     "subjectBeginsWith": "[concat('/blobServices/default/containers/',parameters('DataLakeContainer_Name'))]",
-                    "subjectEndsWith": "json",
+                    "subjectEndsWith": ".csv",
                     "includedEventTypes": ["Microsoft.Storage.BlobCreated"]
                 }
             }
