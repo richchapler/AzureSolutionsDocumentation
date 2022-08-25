@@ -1,6 +1,6 @@
 ## Data Acquisition... Pre-Ingestion Checklist
 
-![image](https://user-images.githubusercontent.com/44923999/186208783-6c8db61d-01ea-4d5a-9a39-ac02458ec463.png)
+![image](https://user-images.githubusercontent.com/44923999/185980410-353cda9e-d0a8-405c-ab1c-409df61e46c4.png)
 
 This use case considers requirement statements like:
 * "We are planning to kick-off ingestion (both continuous and historical)... is there anything we should consider before we begin?"
