@@ -38,7 +38,7 @@ If, however, they were of time `long` as in the case of a Unix timestamp, it wou
 #### Geospatial
 Data Explorer handling of [geospatial](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geospatial-grid-systems) data is simply awesome.
 
-The StormEvents data has `Longitude` and `Latitude`, and it would be advantageous to extend new columns using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) to address our use case requirements.
+The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `EndLon` :: `EndLat`. It would be advantageous to extend new columns using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) to address our use case requirements.
 
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
