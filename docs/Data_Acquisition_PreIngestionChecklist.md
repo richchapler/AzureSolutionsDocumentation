@@ -14,10 +14,8 @@ This solution requires the following resources:
 ### Step 2: Core Transformations via **Update Policy**
 In this step, we will consider transformations to raw data that are permanent and necessary. We will capture those transformation in a function and surface the resulting data to a target table.
 
-Complete the following steps:
+Navigate to https://dataexplorer.azure.com/clusters/help/databases/Samples to run KQL queries against the sample **StormEvents** data.
 
-* Navigate to https://dataexplorer.azure.com/clusters/help/databases/Samples
-* Replace the default KQL with:
   ```  
   StormEvents
   | take 25
@@ -37,14 +35,14 @@ In the following example, we limit the original set of columns with `project` an
   ```  
 
 #### Timestamp
-Data Explorer is a **time-series** database, so having at least one meaningful timestamp column is expected. Besides its obvious value, this column will be very useful for partitioning.
+Most customers care about timestamp data because of its value in partitioning.
 
 The StormEvents data has two columns, `StartTime` and `EndTime` and both are type `datetime`. Either is sufficient for our needs; the choice of one, the other, or both should be based on solution context.
 
 If your Timestamp column is of data type `long` (as in the case of a Unix timestamp), you should extend a new `UnixTime_datetime` column with one of various KQL functions like: [unixtime_milliseconds_todatetime()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/unixtime-milliseconds-todatetimefunction)
 
-#### Geospatial
-Data Explorer handling of [geospatial](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geospatial-grid-systems) data is simply awesome.
+#### [Geospatial](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geospatial-grid-systems)
+Most customers care about geospatial data because of the depth that it adds to analytics.
 
 The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `EndLon` :: `EndLat`.
 Using these, we can extend new columns using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **to address our use case requirements**.
