@@ -48,7 +48,7 @@ The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `End
 
   <img src="https://user-images.githubusercontent.com/44923999/186732552-646affc0-5ebc-43cc-89ca-83af6f32ef97.png" width="800" title="Snipped: August 25, 2022" />
 
-Using these columns and [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **we can address our use case requirements** with the following KQL:
+Using these columns and [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **we can address our use case requirements** with KQL like:
 
 ```| extend H3_Resolution6 = geo_point_to_h3cell(BeginLon, BeginLat, 6)```
 
@@ -61,7 +61,7 @@ The StormEvents data has one dynamic column, `StormSummary` which contains JSON 
 {"TotalDamages":0,"StartTime":"2007-01-01T00:00:00.0000000Z","EndTime":"2007-01-27T14:00:00.0000000Z","Details":{"Description":"At the Petersburg river gage, the White River crested at 25.09 feet on the 21st. This is almost ten feet above the flood stage of 16 feet. Although the flooding was moderately severe, this crest was over two and a half feet lower than the major flood in January, 2005. Extensive bottomland flooding affected agricultural and rural residential areas. Several rural county roads flooded. A few residents moved out of an area locally known as Dodge City. Several small oil fields were inaccessible. Since this occurred outside of agricultural season, little or no crop damage occurred. High water isolated some river cabin residents. State Road 257 was completely flooded.","Location":"INDIANA"}}
 ```
 
-Using this, we can parse out desired values with the following KQL:
+<br>We can parse desired values from this dynamic column with KQL like:
 
 ```| extend TotalDamages = StormSummary.TotalDamages```
 
