@@ -26,7 +26,9 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/186710088-4b80f89b-36da-437e-8686-48581d5ff07e.png" width="800" title="Snipped: August 25, 2022" />
 
 #### Minimum Viable Product
-Consider beginning every KQL exercise with thinning {i.e., "what columns and rows can I drop from downstream processing?"}. Because we'll be materializing our result using an **update policy**, be sure to consider every possible downstream need. If there is a chance you might need column X, better to materialize it in the more-efficient, resulting table than not.
+Consider beginning every KQL exercise with thinning {i.e., "what columns and rows can I drop from downstream processing?"}. Because update policies process data only during ingestion {i.e., no updates after initial processing}, we want to be sure to consider every possible downstream need. If there is a chance you might need column X, better to materialize it in the more-efficient, resulting table than not.
+
+In the following example, we limit the original set of columns with `project` and rows with `where`.
 
   ```  
   StormEvents
