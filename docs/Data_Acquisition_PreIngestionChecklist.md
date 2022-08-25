@@ -29,6 +29,8 @@ In the following example, we limit the original set of columns with `project` an
   | project EventId, EventType, StartTime, BeginLon, BeginLat
   ```  
 
+This is also a reasonable time (though not the only time) to incorporate data quality considerations {i.e., "drop any rows where the value of Column X is abnormal"}
+
 #### Timestamp
 Most customers care about timestamp data because of its value in partitioning.
 
