@@ -48,7 +48,7 @@ The StormEvents data has two pairs of columns, `BeginLon` :: `BeginLat` and `End
 
   <img src="https://user-images.githubusercontent.com/44923999/186732552-646affc0-5ebc-43cc-89ca-83af6f32ef97.png" width="800" title="Snipped: August 25, 2022" />
 
-Using these, we can extend new column(s) using [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **to address our use case requirements** with the following KQL:
+Using these columns and [geo_point_to_h3cell()](https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function) **we can address our use case requirements** with the following KQL:
 
 ```| extend H3_Resolution6 = geo_point_to_h3cell(BeginLon, BeginLat, 6)```
 
