@@ -141,6 +141,13 @@ Complete the following steps:
 
 Complete the following steps:
 
+* Return to the "**Data export**" page and you should see your new export either **Starting** or **Healthy** (depending on how much time has passed since **Save**)
+
   <img src="https://user-images.githubusercontent.com/44923999/187303416-dd5b1629-8e25-4055-a995-559c0ca007e9.png" width="800" title="Snipped: August 29, 2022" />
 
-* Return to the "**Data export**" page and you should see your new export either **Starting** or **Healthy** (depending on how much time has passed since **Save**)
+* Navigate to your Event Hubs Namespace, and scroll to the charts at the bottom of the **Overview** page to confirm data flow
+
+  <img src="https://user-images.githubusercontent.com/44923999/187303874-3e7a5947-d199-4245-9109-7c07fcd7e085.png" width="800" title="Snipped: August 29, 2022" />
+
+### Step 6: Ingest Data
+In this step, we will Lorem Ipsum.
