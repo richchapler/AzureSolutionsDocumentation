@@ -99,4 +99,4 @@ Complete the following steps:
   **Simulate this device?** | Select **Yes**
   
 * Click **Create**
-* Repeat to add additional devices {e.g., Pump002, Pump003 .. PumpNNN}
+* Repeat if you wish to add additional devices {e.g., Pump002, Pump003 .. PumpNNN}
