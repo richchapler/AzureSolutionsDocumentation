@@ -8,7 +8,7 @@ This use case considers requirement statements like:
 * "Log Analytics doesn't retain log data for as long as we need (30d default > 730d max does not match compliance requirements)"
 * "Is there a way to pull the log data that we care about into Data Explorer?"
 
-### Prepare Infrastructure
+### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
 * **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md)
@@ -40,7 +40,7 @@ Complete the following steps:
 
 * On the resulting "**Add role assignment**" screen, confirm configuration, and then click "**Review + assign**"
 
-### Step 1: Archive to Storage Account
+### Step 2: Archive to Storage Account
 First, we will configure Data Explorer to archive Command logs to a Storage Account (both as demonstration and to support easy ADX ingestion).
 
 _Note: These instructions can apply to any Azure resource type (via **Monitoring** >> "**Diagnostic Settings**")_
