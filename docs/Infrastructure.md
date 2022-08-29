@@ -32,6 +32,8 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Grafana**](https://docs.microsoft.com/en-us/azure/managed-grafana/quickstart-managed-grafana-portal)
 
+> [**IoT Central**](Infrastructure_IoTCentral.md)
+
 > [**Log Analytics**](Infrastructure_LogAnalytics.md)
 
 > [**Logic App**](Infrastructure_LogicApp.md)
