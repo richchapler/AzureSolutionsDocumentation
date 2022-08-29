@@ -49,6 +49,6 @@ Complete the following steps:
 * Navigate to your **IoT Central Application**, and then "**Device Templates**" in the left-hand navigation
 * Select your Device Template and on the resulting page, click "**+ Add capability**"
 
-![image](https://user-images.githubusercontent.com/44923999/187241429-a599ab44-8f2a-4d22-8191-8d0df0bc5d9a.png)
+  <img src="https://user-images.githubusercontent.com/44923999/187242299-7f1edd77-704b-456c-bd39-3933342a8ebc.png" width="800" title="Snipped: August 29, 2022" />
 
-_Note: Threshhold values {e.g., Pressure, Max} are derived from what I found from an internet search re: "industrial pump"}
+_Note: Threshhold values {e.g., Pressure, Max} are derived from what I found from an internet search re: "industrial pump"}_
