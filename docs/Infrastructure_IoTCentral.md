@@ -12,9 +12,5 @@ _(aka "IoT Central Application")_
 
   <img src="https://user-images.githubusercontent.com/44923999/187224111-ddc9a186-c572-4444-90c1-7b8cf03c7ee7.png" width="800" title="Snipped: August 29, 2022" />
 
-* Complete the **IoT Central Application** form, including:<br>
-  Prompt | Entry
-  ------ | ------
-  **Template** | Choose the template appropriate to your use case 
-
+* Complete the **IoT Central Application** form
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
