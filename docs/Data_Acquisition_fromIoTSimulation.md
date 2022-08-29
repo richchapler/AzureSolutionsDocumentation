@@ -16,18 +16,11 @@ In this step, we will create a Device Template.
 
 Complete the following steps:
 
-  <img src="https://user-images.githubusercontent.com/44923999/187228017-7d569c6d-475b-4aad-af30-92b933e48c94.png" width="800" title="Snipped: August 29, 2022" />
-
-* From the Azure Portal, **IoT Central Application**, **Overview** page, click on the "**IoT Central Application URL**"
-* Select "**Diagnostic Settings**" in the **Monitoring** group of the left-hand navigation
+* From the Azure Portal, **IoT Central Application**, **Overview** page, click on the "**IoT Central Application URL**" link
 
   <img src="https://user-images.githubusercontent.com/44923999/187228762-41bcae98-f945-49a5-afc2-c1affa8d783e.png" width="800" title="Snipped: August 29, 2022" />
 
-* Select "**Device templates**" in the **Connect** group of the left-hand navigation
-
-  <img src="https://user-images.githubusercontent.com/44923999/187229096-7faf99db-baae-4fd2-bf2e-72e84f34623e.png" width="800" title="Snipped: August 29, 2022" />
-
-* On the resulting "**Device templates**" page, click "**Create a device template**"
+* Select "**Device templates**" in the **Connect** group of the left-hand navigation and on the resulting "**Device templates**" page, click "**Create a device template**"
 
   <img src="https://user-images.githubusercontent.com/44923999/187230571-3bda18b2-2035-41c3-9e90-c183eaf586b6.png" width="800" title="Snipped: August 29, 2022" />
 
@@ -35,7 +28,7 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/187232369-19cdb883-35d6-4f92-b75d-8a0664de5994.png" width="800" title="Snipped: August 29, 2022" />
 
-* On the resulting "**Device templates**" > "**Create a device template**" > "**Customize**" page, enter "Pump" and then click "**Next: Review**"
+* On the resulting "**Device templates**" > "**Create a device template**" > "**Customize**" page, enter the name for your device and then click "**Next: Review**"
 
   <img src="https://user-images.githubusercontent.com/44923999/187232630-af106d45-1614-4a1e-91be-9cc1a2797f6b.png" width="800" title="Snipped: August 29, 2022" />
 
@@ -51,12 +44,11 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/187242299-7f1edd77-704b-456c-bd39-3933342a8ebc.png" width="800" title="Snipped: August 29, 2022" />
   
-* Complete the resulting form, including:
+* Complete the resulting form with values that match your device; for example:
 
   Prompt | Entry
   ------ | ------
   **Display name** and **Name** | Enter "Pressure"
-  **Capability type** | Select "Telemetry"
   **Capability type** | Select "Telemetry"
   **Semantic type** | Select "Pressure"
   **Schema** | Select "Double"
@@ -124,3 +116,9 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/187250824-11a1cefe-f729-4730-8d49-0aeb376fe467.png" width="800" title="Snipped: August 29, 2022" />
   
 * Click "**Add an export**"
+
+* On the resulting **Exports** page, in the **Destinations** grouping, click "**create a new one**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187299177-36656f20-f091-465a-acf3-5245599028f2.png" width="800" title="Snipped: August 29, 2022" />
+
+  <img src="https://user-images.githubusercontent.com/44923999/187232369-19cdb883-35d6-4f92-b75d-8a0664de5994.png" width="800" title="Snipped: August 29, 2022" />
