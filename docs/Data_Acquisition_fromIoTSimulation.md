@@ -27,4 +27,8 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/187229096-7faf99db-baae-4fd2-bf2e-72e84f34623e.png" width="800" title="Snipped: August 15, 2022" />
 
-* On the "**Device templates**" page, click "**Create a device template**"
+* On the resulting "**Device templates**" page, click "**Create a device template**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187230571-3bda18b2-2035-41c3-9e90-c183eaf586b6.png" width="800" title="Snipped: August 15, 2022" />
+
+* On the resulting "**Device templates**" > "**Create a device template**" page, select "**IoT device**" and then click "**Next: Customize**"
