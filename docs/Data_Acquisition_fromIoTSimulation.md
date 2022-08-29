@@ -50,5 +50,26 @@ Complete the following steps:
 * Select your Device Template and on the resulting page, click "**+ Add capability**"
 
   <img src="https://user-images.githubusercontent.com/44923999/187242299-7f1edd77-704b-456c-bd39-3933342a8ebc.png" width="800" title="Snipped: August 29, 2022" />
+  
+* Complete the resulting form, including:
 
-_Note: Threshhold values {e.g., Pressure, Max} are derived from what I found from an internet search re: "industrial pump"}_
+  Prompt | Entry
+  ------ | ------
+  **Display name** and **Name** | Enter "Pressure"
+  **Capability type** | Select "Telemetry"
+  **Capability type** | Select "Telemetry"
+  **Semantic type** | Select "Pressure"
+  **Schema** | Select "Double"
+  **Min value** | Enter 0
+  **Max value** | Enter 30
+  **Decimal places** | Enter 1
+  **Unit** | Select "Pound per square inch"
+  **Display unit** | Enter "PSI"
+
+_Note: These values are derived from what I found from an internet search re: "industrial pump"... you are likely to have more meaningful values {i.e., values applicable to your use case and device}_
+
+* Click **Save**
+
+  <img src="https://user-images.githubusercontent.com/44923999/187244100-4a7673b7-2458-4aa3-891d-8870b6efe71a.png" width="800" title="Snipped: August 29, 2022" />
+
+* Repeat for additional capabilities {e.g., Temperature and Flow, as depicted above}
