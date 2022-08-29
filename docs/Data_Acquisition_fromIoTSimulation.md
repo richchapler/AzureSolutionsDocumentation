@@ -104,9 +104,23 @@ Complete the following steps:
 ### Step 5: Export Data
 In this step, we will set up continuous export of data to Azure Data Explorer.
 
+##### Event Hub, Connection String
+
 Complete the following steps:
 
-* Navigate to your **IoT Central Application**, and then **Devices** in the left-hand navigation
+* Navigate to your Event Hub Namespace, and then "**Shared Access Policies**" in the **Settings** grouping of the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/187298261-44addf59-1879-4a7f-b45d-a3e3e43b0378.png" width="800" title="Snipped: August 29, 2022" />
+
+* Click to select **RootManageSharedAccessKey**
+* On the resulting "**SAS Policy: RootManageSharedAccessKey**" pop-out menu, copy the "**Connection string-primary key**" value for later use
+
+##### IoT Central, Data Export
+
+Complete the following steps:
+
+* Navigate to your **IoT Central Application**, and then "**Data export**" in the left-hand navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/187250824-11a1cefe-f729-4730-8d49-0aeb376fe467.png" width="800" title="Snipped: August 29, 2022" />
   
+* Click "**Add an export**"
