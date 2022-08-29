@@ -73,3 +73,15 @@ _Note: These values are derived from what I found from an internet search re: "i
   <img src="https://user-images.githubusercontent.com/44923999/187244100-4a7673b7-2458-4aa3-891d-8870b6efe71a.png" width="800" title="Snipped: August 29, 2022" />
 
 * Repeat for additional capabilities {e.g., Temperature and Flow, as depicted above}
+
+  <img src="https://user-images.githubusercontent.com/44923999/187244354-46f573e1-cbb2-4c58-926c-2e2ab22ca633.png" width="800" title="Snipped: August 29, 2022" />
+
+* When you are finished adding capabilities, click **Publish**, review configuration and then click **Publish** (again)
+
+### Step 2: Add Device
+In this step, we will instantiate device simulations using our Device Template.
+
+Complete the following steps:
+
+* Navigate to your **IoT Central Application**, and then "**Devices**" in the left-hand navigation
+  <img src="https://user-images.githubusercontent.com/44923999/187244787-3626aa10-926d-45ef-b221-523138a9327e.png" width="800" title="Snipped: August 29, 2022" />
