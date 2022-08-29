@@ -1,6 +1,6 @@
 ## Data Acquisition... from IoT Simulation
 
-![image](https://user-images.githubusercontent.com/44923999/187239488-fdf4637d-c1a9-484f-8274-293ca8c673d6.png)
+![image](https://user-images.githubusercontent.com/44923999/187276879-6d8fffff-fb47-405a-ad53-bbc0dee92665.png)
 
 This use case considers requirement statements like:
 
@@ -78,7 +78,7 @@ _Note: These values are derived from what I found from an internet search re: "i
 
 * When you are finished adding capabilities, click **Publish**, review configuration and then click **Publish** (again)
 
-### Step 2: Add Device
+### Step 4: Add Device
 In this step, we will instantiate device simulations using our Device Template.
 
 Complete the following steps:
@@ -100,3 +100,13 @@ Complete the following steps:
   
 * Click **Create**
 * Repeat if you wish to add additional devices {e.g., Pump002, Pump003 .. PumpNNN}
+
+### Step 5: Export Data
+In this step, we will set up continuous export of data to Azure Data Explorer.
+
+Complete the following steps:
+
+* Navigate to your **IoT Central Application**, and then **Devices** in the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/187250824-11a1cefe-f729-4730-8d49-0aeb376fe467.png" width="800" title="Snipped: August 29, 2022" />
+  
