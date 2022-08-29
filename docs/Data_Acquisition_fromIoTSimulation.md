@@ -36,3 +36,7 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/187232369-19cdb883-35d6-4f92-b75d-8a0664de5994.png" width="800" title="Snipped: August 29, 2022" />
 
 * On the resulting "**Device templates**" > "**Create a device template**" > "**Customize**" page, enter "Pump" and then click "**Next: Review**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187232630-af106d45-1614-4a1e-91be-9cc1a2797f6b.png" width="800" title="Snipped: August 29, 2022" />
+
+* On the resulting "**Device templates**" > "**Create a device template**" > "**Review**" page, review configuration and then click **Create**
