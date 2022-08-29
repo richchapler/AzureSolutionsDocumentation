@@ -1,6 +1,6 @@
 ## Data Acquisition... from IoT Simulation
 
-![image](https://user-images.githubusercontent.com/44923999/187233827-3f17ec32-c0df-46a7-9424-8fe249576a1d.png)
+![image](https://user-images.githubusercontent.com/44923999/187239488-fdf4637d-c1a9-484f-8274-293ca8c673d6.png)
 
 This use case considers requirement statements like:
 
@@ -12,7 +12,7 @@ This solution requires the following resources:
 * [**IoT Central**](Infrastructure_IoTCentral.md)
 
 ### Step 2: Create Device Template
-First, we will create a Device Template.
+In this step, we will create a Device Template.
 
 Complete the following steps:
 
@@ -40,3 +40,8 @@ Complete the following steps:
   <img src="https://user-images.githubusercontent.com/44923999/187232630-af106d45-1614-4a1e-91be-9cc1a2797f6b.png" width="800" title="Snipped: August 29, 2022" />
 
 * On the resulting "**Device templates**" > "**Create a device template**" > "**Review**" page, review configuration and then click **Create**
+
+### Step 3: Create Device Template
+In this step, we will model our device by adding capabilities.
+
+Complete the following steps:
