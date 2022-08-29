@@ -11,7 +11,7 @@ This use case considers requirement statements like:
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* **Data Explorer** >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [**Event Hub**](Infrastructure_EventHub.md)
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
