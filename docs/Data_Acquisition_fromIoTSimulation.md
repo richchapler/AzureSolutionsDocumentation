@@ -4,7 +4,7 @@
 
 This use case considers requirement statements like:
 
-* "We are working hard to bring IoT online, but it is going to take time... we want to begin working on analytics before we have real data"
+* "We are working hard to bring IoT online, but it is going to take time... we want to begin working on analytics before the 'real' data starts flowing"
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
@@ -119,4 +119,16 @@ Complete the following steps:
 
 * On the resulting **Exports** page, in the **Destinations** grouping, click "**create a new one**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/187299177-36656f20-f091-465a-acf3-5245599028f2.png" width="800" title="Snipped: August 29, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/187301992-16544919-8a6f-4e74-b86d-fb60dd8c5ad1.png" width="800" title="Snipped: August 29, 2022" />
+
+* Complete the resulting "**New destination**" form, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Destination type** | Select "**Azure Event Hubs**"
+  **Authorization** | Select "**Connection string**"
+  **Connection string** | Paste the value copied in the previous section
+  
+  * Click **Create**
+
+  <img src="https://user-images.githubusercontent.com/44923999/187302143-15a7b3d5-a2aa-414e-9f00-ff049d43b145.png" width="800" title="Snipped: August 29, 2022" />
