@@ -58,7 +58,7 @@ Complete the following steps:
   **Unit** | Select "Pound per square inch"
   **Display unit** | Enter "PSI"
 
-_Note: These values are derived from what I found from an internet search re: "industrial pump"... you are likely to have more meaningful values {i.e., values applicable to your use case and device}_
+_Note: These values are derived from internet search results re: "industrial pump"... your values will, of course, match your device and use case_
 
 * Click **Save**
 
@@ -120,5 +120,3 @@ Complete the following steps:
 * On the resulting **Exports** page, in the **Destinations** grouping, click "**create a new one**"
 
   <img src="https://user-images.githubusercontent.com/44923999/187299177-36656f20-f091-465a-acf3-5245599028f2.png" width="800" title="Snipped: August 29, 2022" />
-
-  <img src="https://user-images.githubusercontent.com/44923999/187232369-19cdb883-35d6-4f92-b75d-8a0664de5994.png" width="800" title="Snipped: August 29, 2022" />
