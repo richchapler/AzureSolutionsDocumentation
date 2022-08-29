@@ -1,5 +1,5 @@
 ## IoT Central
-_(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
+_(aka "IoT Central Application")_
 
 ![image](https://user-images.githubusercontent.com/44923999/185975852-f21da095-6d6d-4259-86d8-6b199c9e3295.png)
 
