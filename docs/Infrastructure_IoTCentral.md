@@ -1,7 +1,7 @@
 ## IoT Central
 _(aka "IoT Central Application")_
 
-![image](https://user-images.githubusercontent.com/44923999/187239702-561b311d-16de-4d87-a978-881fd50f5631.png)
+![image](https://user-images.githubusercontent.com/44923999/187276998-e079ae9b-f990-4903-8cca-8ae4d36136be.png)
 
 ### Create with Azure Portal
 
