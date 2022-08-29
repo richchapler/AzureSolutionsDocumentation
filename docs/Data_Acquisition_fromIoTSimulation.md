@@ -147,7 +147,7 @@ Complete the following steps:
 
 * Navigate to your Event Hubs Namespace, and scroll to the charts at the bottom of the **Overview** page to confirm data flow
 
-  <img src="https://user-images.githubusercontent.com/44923999/187303874-3e7a5947-d199-4245-9109-7c07fcd7e085.png" width="800" title="Snipped: August 29, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/187314249-875d21f2-23f8-462d-80f6-796cf33d4433.png" width="800" title="Snipped: August 29, 2022" />
 
 ### Step 6: Ingest Data
 In this step, we will Lorem Ipsum.
