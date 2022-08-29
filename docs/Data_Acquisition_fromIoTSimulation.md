@@ -91,3 +91,12 @@ Complete the following steps:
 
   <img src="https://user-images.githubusercontent.com/44923999/187249302-9d0d29ac-4f93-4937-9c2a-3d1aa95d97ce.png" width="800" title="Snipped: August 29, 2022" />
 
+* Complete the resulting "**Create a new device**" form, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Device template** | Select the previously-created device template
+  **Simulate this device?** | Select **Yes**
+  
+* Click **Create**
+* Repeat to add additional devices {e.g., Pump002, Pump003 .. PumpNNN}
