@@ -131,6 +131,16 @@ Complete the following steps:
   **Authorization** | Select "**Connection string**"
   **Connection string** | Paste the value copied in the previous section
   
-  * Click **Create**
+* Click **Create**
 
   <img src="https://user-images.githubusercontent.com/44923999/187302143-15a7b3d5-a2aa-414e-9f00-ff049d43b145.png" width="800" title="Snipped: August 29, 2022" />
+
+* Click **Save**
+
+##### Confirm Success
+
+Complete the following steps:
+
+  <img src="https://user-images.githubusercontent.com/44923999/187303416-dd5b1629-8e25-4055-a995-559c0ca007e9.png" width="800" title="Snipped: August 29, 2022" />
+
+* Return to the "**Data export**" page and you should see your new export either **Starting** or **Healthy** (depending on how much time has passed since **Save**)
