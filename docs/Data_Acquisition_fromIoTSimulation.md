@@ -83,5 +83,11 @@ In this step, we will instantiate device simulations using our Device Template.
 
 Complete the following steps:
 
-* Navigate to your **IoT Central Application**, and then "**Devices**" in the left-hand navigation
+* Navigate to your **IoT Central Application**, and then **Devices** in the left-hand navigation
+
   <img src="https://user-images.githubusercontent.com/44923999/187244787-3626aa10-926d-45ef-b221-523138a9327e.png" width="800" title="Snipped: August 29, 2022" />
+
+* Click "**Add a device**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187249302-9d0d29ac-4f93-4937-9c2a-3d1aa95d97ce.png" width="800" title="Snipped: August 29, 2022" />
+
