@@ -1,6 +1,6 @@
 ## Data Acquisition... from IoT Simulation
 
-![image](https://user-images.githubusercontent.com/44923999/187276879-6d8fffff-fb47-405a-ad53-bbc0dee92665.png)
+![image](https://user-images.githubusercontent.com/44923999/187302525-e127f4d3-6a61-443d-adb2-5c92b49817fe.png)
 
 This use case considers requirement statements like:
 
