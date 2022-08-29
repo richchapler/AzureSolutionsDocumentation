@@ -21,14 +21,18 @@ Complete the following steps:
 * From the Azure Portal, **IoT Central Application**, **Overview** page, click on the "**IoT Central Application URL**"
 * Select "**Diagnostic Settings**" in the **Monitoring** group of the left-hand navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/187228762-41bcae98-f945-49a5-afc2-c1affa8d783e.png" width="800" title="Snipped: August 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/187228762-41bcae98-f945-49a5-afc2-c1affa8d783e.png" width="800" title="Snipped: August 29, 2022" />
 
 * Select "**Device templates**" in the **Connect** group of the left-hand navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/187229096-7faf99db-baae-4fd2-bf2e-72e84f34623e.png" width="800" title="Snipped: August 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/187229096-7faf99db-baae-4fd2-bf2e-72e84f34623e.png" width="800" title="Snipped: August 29, 2022" />
 
 * On the resulting "**Device templates**" page, click "**Create a device template**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/187230571-3bda18b2-2035-41c3-9e90-c183eaf586b6.png" width="800" title="Snipped: August 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/187230571-3bda18b2-2035-41c3-9e90-c183eaf586b6.png" width="800" title="Snipped: August 29, 2022" />
 
-* On the resulting "**Device templates**" > "**Create a device template**" page, select "**IoT device**" and then click "**Next: Customize**"
+* On the resulting "**Device templates**" > "**Create a device template**" > "**Select type**" page, select "**IoT device**" and then click "**Next: Customize**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187232369-19cdb883-35d6-4f92-b75d-8a0664de5994.png" width="800" title="Snipped: August 29, 2022" />
+
+* On the resulting "**Device templates**" > "**Create a device template**" > "**Customize**" page, enter "Pump" and then click "**Next: Review**"
