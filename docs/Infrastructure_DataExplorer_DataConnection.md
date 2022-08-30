@@ -17,8 +17,6 @@ This solution requires:
 ### Step 2: Deploy Custom Template
 In this step, we will deploy a Data Connection on the Data Explorer Database using an ARM Template.
 
-Complete the following steps:
-
 * Click the menu button in the upper-left corner of the Azure Portal and select "**Deploy a custom template**" from the resulting dropdown
 
   <img src="https://user-images.githubusercontent.com/44923999/182941824-1675b487-e60c-44ba-8a94-0eeaa8ee12af.png" width="800" title="Snipped: August 4, 2022" />
@@ -72,8 +70,6 @@ Complete the following steps:
 
 ### Step 3: Assign Managed Identity
 In this step, we will assign a Managed Instance to the deployed Data Connection.
-
-Complete the following steps:
 
 * Navigate to your Data Explorer Database and then click "**Data Connections**" in the **Settings** grouping of the left-hand navigation
 * On the resulting page, click on the newly deployed Data Connection
