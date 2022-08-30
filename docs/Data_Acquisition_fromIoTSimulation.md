@@ -4,7 +4,8 @@
 
 This use case considers requirement statements like:
 
-* "We are working hard to bring IoT online, but it is going to take time... we want to begin working on analytics before the 'real' data starts flowing"
+* "We are working hard to bring IoT online, but it is going to take time"
+* "We want to begin working on analytics before the *real* data starts flowing"
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
