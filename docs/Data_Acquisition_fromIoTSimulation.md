@@ -139,4 +139,7 @@ In this step, we will set up continuous export of data to an event hub.
   <img src="https://user-images.githubusercontent.com/44923999/187314249-875d21f2-23f8-462d-80f6-796cf33d4433.png" width="800" title="Snipped: August 29, 2022" />
 
 ### Step 6: Ingest Data
-In this step, we will Lorem Ipsum.
+In this step, we will establish continuous ingestion of the simulated IoT data.
+
+Follow the instructions for creating a Data Explorer, [Data Connection](Infrastructure_DataExplorer_DataConnection.md).
+
