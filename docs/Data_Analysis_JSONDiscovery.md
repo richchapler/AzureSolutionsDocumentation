@@ -61,5 +61,7 @@ Complete the following steps:
 
 * Confirm expected resultset {i.e., alphabetized list of column headers}
 
+<img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
+
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/query/bagkeysfunction
