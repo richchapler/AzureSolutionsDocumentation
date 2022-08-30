@@ -17,8 +17,6 @@ This solution requires the following resources:
 ### Step 2: Create Device Template
 In this step, we will create a Device Template.
 
-Complete the following steps:
-
 * From the Azure Portal, **IoT Central Application**, **Overview** page, click on the "**IoT Central Application URL**" link
 
   <img src="https://user-images.githubusercontent.com/44923999/187228762-41bcae98-f945-49a5-afc2-c1affa8d783e.png" width="800" title="Snipped: August 29, 2022" />
@@ -39,8 +37,6 @@ Complete the following steps:
 
 ### Step 3: Create Device Template
 In this step, we will model our device by adding capabilities.
-
-Complete the following steps:
 
 * Navigate to your **IoT Central Application**, and then "**Device Templates**" in the left-hand navigation
 * Select your Device Template and on the resulting page, click "**+ Add capability**"
@@ -76,8 +72,6 @@ _Note: These values are derived from internet search results re: "industrial pum
 ### Step 4: Add Device
 In this step, we will instantiate device simulations using our Device Template.
 
-Complete the following steps:
-
 * Navigate to your **IoT Central Application**, and then **Devices** in the left-hand navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/187244787-3626aa10-926d-45ef-b221-523138a9327e.png" width="800" title="Snipped: August 29, 2022" />
@@ -97,11 +91,9 @@ Complete the following steps:
 * Repeat if you wish to add additional devices {e.g., Pump002, Pump003 .. PumpNNN}
 
 ### Step 5: Export Data
-In this step, we will set up continuous export of data to Azure Data Explorer.
+In this step, we will set up continuous export of data to an event hub.
 
 ##### Event Hub, Connection String
-
-Complete the following steps:
 
 * Navigate to your Event Hub Namespace, and then "**Shared Access Policies**" in the **Settings** grouping of the left-hand navigation
 
@@ -111,8 +103,6 @@ Complete the following steps:
 * On the resulting "**SAS Policy: RootManageSharedAccessKey**" pop-out menu, copy the "**Connection string-primary key**" value for later use
 
 ##### IoT Central, Data Export
-
-Complete the following steps:
 
 * Navigate to your **IoT Central Application**, and then "**Data export**" in the left-hand navigation
 
@@ -139,8 +129,6 @@ Complete the following steps:
 * Click **Save**
 
 ##### Confirm Success
-
-Complete the following steps:
 
 * Return to the "**Data export**" page and you should see your new export either **Starting** or **Healthy** (depending on how much time has passed since **Save**)
 
