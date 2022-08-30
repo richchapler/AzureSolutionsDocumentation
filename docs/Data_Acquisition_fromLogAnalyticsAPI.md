@@ -108,3 +108,5 @@ Complete the following steps:
 
 Click **Debug** and monitor result to confirm successful progress.
 Browse to your Data Lake and download the resulting file.
+
+<img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
