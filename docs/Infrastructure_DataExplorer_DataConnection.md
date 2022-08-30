@@ -19,6 +19,20 @@ In this step, we will use the "**Ingest Data**" wizard to create a Data Connecti
 * Click on "**Ingest Data**"
 
   <img src="https://user-images.githubusercontent.com/44923999/187457253-05dc0963-82b0-451a-9c02-e3b6aba5b998.png" width="800" title="Snipped: August 30, 2022" />
+  
+* Complete the "**Ingest data**" > **Destination** form and then click "**Next: Source**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187460352-89f9a327-f32a-4f4d-bdc8-9883edfb7c3e.png" width="800" title="Snipped: August 30, 2022" />
+
+* Complete the "**Ingest data**" > **Source** form and then click "**Next: Schema**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187460699-e6bfa46e-6dba-4a2e-b6e3-528685ec1c93.png" width="800" title="Snipped: August 30, 2022" />
+
+* Complete the "**Ingest data**" > **Schema** form and then click "**Start Ingestion**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187460984-fbbcc9ef-7479-4eb1-a824-c8646a2f9f1e.png" width="800" title="Snipped: August 30, 2022" />
+
+* Confirm success on the "**Continuous ingestion ... established**" page
 
 ### Create with ARM Template
 
