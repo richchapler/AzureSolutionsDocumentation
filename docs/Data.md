@@ -6,7 +6,7 @@
 
   Use Case | Method | Source | Target | Type
   :----- | :----- | :----- | :----- | :-----
-  [Pre-Ingestion Checklist (Data Explorer)](Data_Acquisition_PreIngestionChecklist.md) | | Sample Data | | KQL
+  [Pre-Ingestion Checklist](Data_Acquisition_PreIngestionChecklist.md) | Data Explorer | Sample Data | | KQL
   [...via One-Click Ingestion](Data_Acquisition_OneClickIngestion.md) | Data Explorer Wizard | Data Lake | Data Explorer | No Code
   [...from Log Analytics via REST API](Data_Acquisition_fromLogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
   [...from IoT Simulation](Data_Acquisition_fromIoTSimulation.md) | Continuous Ingestion (Event Hub) | IoT Central | Data Explorer | No Code
