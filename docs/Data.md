@@ -7,10 +7,11 @@
   Use Case | Method | Source | Target | Type
   :----- | :----- | :----- | :----- | :-----
   [Pre-Ingestion Checklist](Data_Acquisition_PreIngestionChecklist.md) | Data Explorer | Sample Data | | KQL
-  [One-Click Ingestion](Data_Acquisition_OneClickIngestion.md) | Data Explorer Wizard | Data Lake | Data Explorer | No Code
-  [Log Analytics via REST API](Data_Acquisition_fromLogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
-  [Purview via REST API](Data_Acquisition_fromPurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
-  [Resource Diagnostics](Data_Acquisition_fromResourceDiagnostics.md) | Continuous Ingestion | Resource Diagnostics | Data Explorer | No Code
+  [...via One-Click Ingestion](Data_Acquisition_OneClickIngestion.md) | Data Explorer Wizard | Data Lake | Data Explorer | No Code
+  [...from Log Analytics via REST API](Data_Acquisition_fromLogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
+  [...from IoT Simulation](Data_Acquisition_fromIoTSimulation.md) | Event Hub | IoT Central | Data Explorer | No Code
+  [...from Purview via REST API](Data_Acquisition_fromPurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
+  [...from Resource Diagnostics](Data_Acquisition_fromResourceDiagnostics.md) | Continuous Ingestion | Resource Diagnostics | Data Explorer | No Code
 
 ### Analysis
 
