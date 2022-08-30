@@ -7,7 +7,7 @@
 #### Step 1: Prepare Infrastructure
 In this step, we will prepare the Azure resources necessary to complete the exercise. This solution requires:
 
-* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md), with a [**Table**](Infrastructure_DataExplorer_Table.md) and [**Ingestion Mapping**](Infrastructure_DataExplorer_IngestionMapping.md)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 
 ### Step 2: Ingest Data
 In this step, we will use the "**Ingest Data**" wizard to create a Data Connection.
