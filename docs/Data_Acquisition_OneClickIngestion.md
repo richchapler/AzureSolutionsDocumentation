@@ -93,6 +93,8 @@ Complete the following steps:
 
 You should see the old data plus new data from the copy of the sample1.csv file.
 
+<img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
+
 ### Bonus Content
 
 #### Pro Tips
