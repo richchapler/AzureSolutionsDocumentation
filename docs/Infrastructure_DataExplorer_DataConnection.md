@@ -2,19 +2,35 @@
 
 ![image](https://user-images.githubusercontent.com/44923999/185980410-353cda9e-d0a8-405c-ab1c-409df61e46c4.png)
 
+### Create with Azure Data Explorer Web UI
+
+#### Step 1: Prepare Infrastructure
+In this step, we will prepare the Azure resources necessary to complete the exercise. This solution requires:
+
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md), with a [**Table**](Infrastructure_DataExplorer_Table.md) and [**Ingestion Mapping**](Infrastructure_DataExplorer_IngestionMapping.md)
+
+### Step 2: Ingest Data
+In this step, we will use the "**Ingest Data**" wizard to create a Data Connection.
+
+* Browse to https://dataexplorer.azure.com/oneclick
+
+  <img src="https://user-images.githubusercontent.com/44923999/187456543-fe895720-7296-446c-9237-a691c2aeef91.png" width="800" title="Snipped: August 30, 2022" />
+
+* Click on "**Ingest Data**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/187457253-05dc0963-82b0-451a-9c02-e3b6aba5b998.png" width="800" title="Snipped: August 30, 2022" />
+
 ### Create with ARM Template
 
-### Step 1: Prepare Infrastructure
-In this step, we will prepare the Azure resources necessary to complete the exercise.
-
-This solution requires:
+#### Step 1: Prepare Infrastructure
+In this step, we will prepare the Azure resources necessary to complete the exercise. This solution requires:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md), with a [**Table**](Infrastructure_DataExplorer_Table.md) and [**Ingestion Mapping**](Infrastructure_DataExplorer_IngestionMapping.md)
 * Event Grid, [**Event Subscription**](Infrastructure_EventGrid_EventSubscription.md)... dependent on Event Hub and Storage Account
 * [**Event Hub**](Infrastructure_EventHub.md)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container
 
-### Step 2: Deploy Custom Template
+#### Step 2: Deploy Custom Template
 In this step, we will deploy a Data Connection on the Data Explorer Database using an ARM Template.
 
 * Click the menu button in the upper-left corner of the Azure Portal and select "**Deploy a custom template**" from the resulting dropdown
@@ -27,7 +43,7 @@ In this step, we will deploy a Data Connection on the Data Explorer Database usi
 
 * Select your data connection type, copy-paste into the "**Edit template**" window, and then modify the selected JSON:
 
-#### Event Grid (Blob Storage)
+##### Event Grid (Blob Storage)
 
   ```
   {
@@ -68,7 +84,7 @@ In this step, we will deploy a Data Connection on the Data Explorer Database usi
 * Confirm values on the resulting "**Custom deployment**" >> "**Deploy from a custom template**" page, **Basics** tab
 * Click "**Review + create**", confirm configuration settings on the resulting page, and then click **Create**
 
-### Step 3: Assign Managed Identity
+#### Step 3: Assign Managed Identity
 In this step, we will assign a Managed Instance to the deployed Data Connection.
 
 * Navigate to your Data Explorer Database and then click "**Data Connections**" in the **Settings** grouping of the left-hand navigation
