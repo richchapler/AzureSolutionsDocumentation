@@ -119,6 +119,8 @@ Though there is no backfill functionality for Update Policy, you can use the fol
 .set-or-append async T <| UpdatePolicy()
 ```
 
+<img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
+
 ### Reference
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/updatepolicy
 https://docs.microsoft.com/en-us/azure/data-explorer/kusto/management/partitioningpolicy
