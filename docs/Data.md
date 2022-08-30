@@ -11,7 +11,7 @@
   [...from Log Analytics via REST API](Data_Acquisition_fromLogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
   [...from IoT Simulation](Data_Acquisition_fromIoTSimulation.md) | Continuous Ingestion (Event Hub) | IoT Central | Data Explorer | No Code
   [...from Purview via REST API](Data_Acquisition_fromPurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
-  [...from Resource Diagnostics](Data_Acquisition_fromResourceDiagnostics.md) | Continuous Ingestion | Resource Diagnostics | Data Explorer | No Code
+  [...from Resource Diagnostics](Data_Acquisition_fromResourceDiagnostics.md) | Continuous Ingestion (Event Hub) | Resource Diagnostics | Data Explorer | No Code
 
 ### Analysis
 
