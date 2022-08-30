@@ -150,4 +150,4 @@ In this step, we will establish continuous ingestion of the simulated IoT data.
   | take 5
   ```
   
-<img src="[https://user-images.githubusercontent.com/44923999/187314249-875d21f2-23f8-462d-80f6-796cf33d4433.png](https://st4.depositphotos.com/16203680/20413/v/450/depositphotos_204137822-stock-illustration-business-illustration-concept-cartoon-stickman.jpg)" title="Congratulations... you have successfuly completed this exercise!" />
+<img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
