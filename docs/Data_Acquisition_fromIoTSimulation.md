@@ -143,3 +143,11 @@ In this step, we will establish continuous ingestion of the simulated IoT data.
 
 * Follow the instructions for creating a Data Explorer, [Data Connection](Infrastructure_DataExplorer_DataConnection.md).
 * Navigate to the Azure Data Explorer Web UI, and then **Query** in the left-hand navigation 
+* Paste the following KQL and then click **Run**
+
+  ```
+  pumps
+  | take 5
+  ```
+  
+<img src="[https://user-images.githubusercontent.com/44923999/187314249-875d21f2-23f8-462d-80f6-796cf33d4433.png](https://st4.depositphotos.com/16203680/20413/v/450/depositphotos_204137822-stock-illustration-business-illustration-concept-cartoon-stickman.jpg)" title="Congratulations... you have successfuly completed this exercise!" />
