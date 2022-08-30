@@ -74,3 +74,5 @@ Complete the following steps:
   | sort by Start asc
   | project Sensor, RunId = tostring(row_number()), Start, nextStart, End, Delta = datetime_diff('millisecond', End, Start)
 ```
+
+<img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
