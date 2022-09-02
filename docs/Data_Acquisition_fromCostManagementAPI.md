@@ -14,7 +14,16 @@ This solution requires the following resources:
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) for Data Explorer
 
-### Step 2: Create Linked Service
+### Step 2: Create Destination Table
+In this step, we will create the Data Explorer table which will serve as destination for our Synapse Pipeline
+
+```
+.create table t3 (PreTaxCost: real, UsageDate: string, ResourceType: string, Currency: string) 
+```
+
+_Note: This initial version of the table includes only a few of the columns that might be included as you evolve your query logic_
+
+### Step 3: Create Linked Service
 In this step, we will create the Linked Service we will use to get our Bearer Token.
 
 * Open **Synapse Studio** and click the **Manage** navigation icon
@@ -36,7 +45,7 @@ In this step, we will create the Linked Service we will use to get our Bearer To
 
 * Click "**Test connection**" to confirm successful connection and then click **Create**
 
-### Step 3: Create Dataset
+### Step 4: Create Dataset
 In this step, we will create the Dataset we will use to get our Bearer Token.
 
 * Open **Synapse Studio** and click the **Data** navigation icon
@@ -52,7 +61,7 @@ In this step, we will create the Dataset we will use to get our Bearer Token.
 * Click "**Test connection**" to confirm successful connection
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
-### Step 4: Get Bearer Token
+### Step 5: Create Pipeline
 In this step, we will create a Pipeline and add an Activity.
 
 * Open "**Synapse Studio**" and click the **Integrate** navigation icon
@@ -73,8 +82,7 @@ In this step, we will create a Pipeline and add an Activity.
 * Click **Debug** and confirm success
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
-### Step 5: Prepare Data Explorer
-In this step, we will create a Pipeline and add an Activity.
+
 
 
 
