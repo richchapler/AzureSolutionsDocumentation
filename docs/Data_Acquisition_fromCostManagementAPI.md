@@ -73,10 +73,14 @@ In this step, we will create the Dataset we will use to get our Bearer Token.
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
 ### Step 5: Create Pipeline
-In this step, we will create a Pipeline and add an Activity.
+In this step, we will create a Pipeline and add Activities.
 
 * Open "**Synapse Studio**" and click the **Integrate** navigation icon
 * Click **+** and select **Pipeline** from the resulting dropdown menu
+
+#### Activity 1: Get Token
+This activity will make a REST API call and get a bearer token.
+
 * Expand **General** in the **Activities** bar
 * Drag-and-drop a **Web** component into the main window
 * Complete the form on the **Settings** tab
