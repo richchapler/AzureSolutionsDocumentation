@@ -12,7 +12,7 @@ This solution requires the following resources:
 
 * [Application Registration](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at subscription)
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) for Data Explorer
+* [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
 ### Step 2: Create Destination Table
 In this step, we will create the Data Explorer table which will serve as destination for our Synapse Pipeline
