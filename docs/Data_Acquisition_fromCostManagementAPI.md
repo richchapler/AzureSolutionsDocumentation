@@ -11,7 +11,7 @@ This use case considers requirement statements like:
 This solution requires the following resources:
 
 * [Application Registration](Infrastructure_ApplicationRegistration.md)
-* [Data Explorer](Infrastructure_ApplicationRegistration.md)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) for Data Explorer
 
 ### Step 2: Create Linked Service
