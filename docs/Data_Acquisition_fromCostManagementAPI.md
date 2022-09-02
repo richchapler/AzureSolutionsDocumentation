@@ -1,6 +1,6 @@
 ## Data Acquisition... from Cost Management, via REST API
 
-![image](https://user-images.githubusercontent.com/44923999/186208783-6c8db61d-01ea-4d5a-9a39-ac02458ec463.png)
+![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
 This use case considers requirement statements like:
 * "Power BI, Cost Management connector requires billing account permissions we cannot get"
