@@ -169,9 +169,9 @@ This activity will make a REST API call, parse the response and write the data t
 
 * Review the response and then close the "**Preview data**" window 
 
-  <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
-
 #### "Sink" tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
 
 * Click on the  **Sink** tab, and then select your Data Explorer dataset
 
