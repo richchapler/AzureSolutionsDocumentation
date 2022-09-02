@@ -127,7 +127,7 @@ This activity will make a REST API call, parse the response and write the data t
   **Request method** | Select **POST**
   **Additional headers** | Click **+ Add** and enter key-value pairs:<br>`content-type` :: `application/json;charset=utf-8`<br>`authorization` :: `@concat('Bearer ',activity('Get Token').output.access_token)`
 
-  Finally, enter '**Request body**' value:
+  Finally, paste the following JSON into '**Request body**':
 
   ```
   {
@@ -155,16 +155,20 @@ This activity will make a REST API call, parse the response and write the data t
   }
   ```
   
-  * Click "Preview data"  
+  _Note: See links in Reference (below) for additional help with preparation of Request Body JSON {i.e., the query}_
+  
+* Click "Preview data"  
 
   <img src="https://user-images.githubusercontent.com/44923999/188211809-54c79983-ef20-47ef-b754-4909164d1cf5.png" width="800" title="Snipped: September 2, 2022" />
 
-  * On the resulting "**Please provide actual value of the parameters to preview data**" pop-out, paste the previously-copied Bearer Token value into the **Value** textbox and then click **OK** 
+* On the resulting "**Please provide actual value of the parameters to preview data**" pop-out, paste the previously-copied Bearer Token value into the **Value** textbox and then click **OK** 
 
-  ##### Reference
-  Information found at the following links can be used to refine the query:<br>
-  [Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
-  [Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
+  <img src="https://user-images.githubusercontent.com/44923999/188220207-9c8c7891-868a-4d99-883d-bada3de2996c.png" width="800" title="Snipped: September 2, 2022" />
+
+* Review the response and then close the "**Preview data**" window 
+
+
+
 
 
   <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
@@ -182,3 +186,7 @@ This activity will make a REST API call, parse the response and write the data t
 * Browse to your Data Lake and download the resulting file.
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
+
+### Reference
+[Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
+[Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
