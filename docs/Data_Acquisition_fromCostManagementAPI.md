@@ -19,13 +19,18 @@ In this step, we will create the Data Explorer table which will serve as destina
 
 * Navigate to Data Explorer and then select Query from the navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/182936394-a49e10dc-9a28-4e4e-834a-ff432e28cd3e.png" width="800" title="Snipped: August 4, 2022" />
-  
-* Modify and **Run** the following KQL:
+  <img src="https://user-images.githubusercontent.com/44923999/188202710-018bd814-90f5-4283-a70c-29904f47512e.png" width="800" title="Snipped: September 2, 2022" />
 
-```
-.create table t3 (PreTaxCost: real, UsageDate: string, ResourceType: string, Currency: string) 
-```
+* **Run** the following KQL:
+
+  ```
+  .create table CostManagement (
+      Currency: string
+      , PreTaxCost: real
+      , ResourceType: string
+      , UsageDate: string
+      )
+  ```
  
 _Note: This initial version of the table includes only a few of the columns that might be included as you evolve your query logic_
 
