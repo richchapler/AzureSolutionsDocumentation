@@ -95,36 +95,64 @@ This activity will make a REST API call and get a bearer token.
   **Body** | Modify and enter:<br> `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://api.loganalytics.io/`
 
 * Click **Debug** and confirm success
-* Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
-
-
-
-
-
-
-
-
 
 #### Activity 2: Copy Data
-This activity will make a REST API call and capture the response as a delimited file in the Data Lake.
+This activity will make a REST API call and capture the response in Data Lake.
 
 * Expand "**Move & Transform**" in the **Activities** bar
 * Drag-and-drop a "**Copy data**" component into the activity window
 * Create a dependency from the "**Get Token**" component to the "**Get Data**" component
-* Enter values on the **Source** tab 
 
-  <img src="https://user-images.githubusercontent.com/44923999/186216401-ec555ffc-190b-4ea2-9be8-d59b0b30e1f0.png" width="800" title="Snipped: September 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/188206412-e90cef93-615e-403f-8e66-64d46fb9af86.png" width="800" title="Snipped: September 2, 2022" />
+
+* Enter values on the **Source** tab 
 
   Prompt | Entry
   ------ | ------
   **Source dataset** | Select your REST dataset
   **Request method** | Select **POST**
-  **Request body** | Modify and enter:<br>`{ "query": "Sample_CL" }`
-  **Additional headers** | Click **+ Add** and enter key-value pairs:<br>`content-type` :: `application/json;charset=utf-8`<br>`Authorization` :: `@concat('Bearer ',activity('Get Token').output.access_token)`
+  **Additional headers** | Click **+ Add** and enter key-value pairs:<br>`content-type` :: `application/json;charset=utf-8`<br>`authorization` :: `@concat('Bearer ',activity('Get Token').output.access_token)`
+
+  Finally, enter '**Request body**' value:
+
+  ```
+  {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+          "from": "2022-08-29T00:00:00Z",
+          "to": "2022-08-30T00:00:00Z"
+      },
+      "dataset": {
+          "granularity": "Daily",
+          "aggregation": {
+              "totalCost": {
+                  "name": "PreTaxCost",
+                  "function": "Sum"
+              }
+          },
+          "grouping": [
+              {
+                  "type": "Dimension",
+                  "name": "ResourceType"
+              }
+          ]
+      }
+  }
+  ```
+  
+##### Reference
+Information found at the following links can be used to refine the query
+
+[Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)
+[Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
+
 
 * Select the appropriate dataset (and configuration) on the **Sink** tab 
 
   <img src="https://user-images.githubusercontent.com/44923999/186217944-78b9131f-846b-4ba7-9d21-10e18dde9fa7.png" width="800" title="Snipped: September 2, 2022" />
+
+* Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
 #### Confirm Success
 
