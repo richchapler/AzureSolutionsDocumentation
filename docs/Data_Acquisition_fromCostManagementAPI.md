@@ -3,9 +3,9 @@
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
 This use case considers requirement statements like:
-* "Power BI, Cost Management connector requires billing account permissions we cannot get"
-* "We want to view costs across many subscriptions"
+* "We want to analyze Azure resource costs across many subscriptions"
 * "An understanding of resources and costs would really help us get a handle of inherited subscriptions"
+* "Power BI, Cost Management connector requires billing account permissions we cannot get"
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
