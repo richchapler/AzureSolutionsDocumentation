@@ -3,8 +3,7 @@
 ![image](https://user-images.githubusercontent.com/44923999/185980410-353cda9e-d0a8-405c-ab1c-409df61e46c4.png)
 
 ### Create with Azure Portal
-
-Complete the following steps:
+In this step, we will use the Azure Portal to create a table in our Data Explorer database.
 
 * Navigate to Data Explorer and then select Query from the navigation
 
