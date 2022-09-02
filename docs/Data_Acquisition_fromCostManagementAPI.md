@@ -186,10 +186,11 @@ _Note: If your "Preview Data" fails and you get an "The access token is invalid"
 
 * The resulting "**Please provide**..." pop-out should still have the Bearer Token value in the **Value** textbox from when we completed the "Preview Data" step... update as needed and then click **OK** 
 
-  <img src="https://user-images.githubusercontent.com/44923999/188222910-705e2546-b6c1-4b3b-8b09-70b074305948.png" width="800" title="Snipped: September 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/188227129-5962a206-fc75-46ae-8b38-80127b6075ca.png" width="800" title="Snipped: September 2, 2022" />
 
+* Turn on "**Advanced editor**" 
 * Select "**Collection reference**" dropdown value, "**$['properties']['rows']**" 
-* Click "+ New mapping" and enter values for each of the four columns:
+* Click "**+ New mapping**" and enter values for each of the four columns:
 
   Name | Column Name
   ------ | ------
