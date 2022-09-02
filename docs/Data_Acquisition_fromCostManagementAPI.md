@@ -78,7 +78,7 @@ In this step, we will create a Pipeline and add Activities.
 * Open "**Synapse Studio**" and click the **Integrate** navigation icon
 * Click **+** and select **Pipeline** from the resulting dropdown menu
 
-#### Activity 1: Get Token
+### Step 5a: Create Activity 1, Get Token
 This activity will make a REST API call and get a bearer token.
 
 * Expand **General** in the **Activities** bar
@@ -110,7 +110,7 @@ This activity will make a REST API call and get a bearer token.
 
 _Note: If your "Preview Data" fails and you get an "The access token is invalid" error, it is likely that the token expired... simply Debug to get a new token_
 
-#### Activity 2: Copy Data
+### Step 5a: Create Activity 2, Copy Data
 This activity will make a REST API call, parse the response and write the data to Data Explorer.
 
 * Expand "**Move & Transform**" in the **Activities** bar
@@ -118,6 +118,8 @@ This activity will make a REST API call, parse the response and write the data t
 * Create a dependency from the "**Get Token**" component to the "**Copy Data**" component
 
   <img src="https://user-images.githubusercontent.com/44923999/188206412-e90cef93-615e-403f-8e66-64d46fb9af86.png" width="800" title="Snipped: September 2, 2022" />
+
+#### Source
 
 * Enter values on the **Source** tab 
 
@@ -167,11 +169,9 @@ This activity will make a REST API call, parse the response and write the data t
 
 * Review the response and then close the "**Preview data**" window 
 
-
-
-
-
   <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
+
+#### Sink
 
 * Click on the  **Sink** tab, and then select your Data Explorer dataset
 
