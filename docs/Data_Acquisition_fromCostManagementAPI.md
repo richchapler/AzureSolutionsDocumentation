@@ -96,12 +96,25 @@ This activity will make a REST API call and get a bearer token.
 
 * Click **Debug** and confirm success
 
+  <img src="https://user-images.githubusercontent.com/44923999/188210464-6d5a3462-9777-4523-a29c-9b239592ad60.png" width="800" title="Snipped: September 2, 2022" />
+
+* On the resulting **Output**, mouse over the "**Get Token**" row and click on the **Output** icon
+
+  <img src="https://user-images.githubusercontent.com/44923999/188210549-725e73ff-5c3b-4890-90ec-6cbf87b7e25d.png" width="800" title="Snipped: September 2, 2022" />
+
+* Copy the "access token" value for later use... in the example below, everything from `eyJ0...` to `...1mqg`
+
+  ```
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzE2YjNjMDEzLWQzMDAtNDY4ZC1hYzY0LTdlZGEwODIwYjZkMy8iLCJpYXQiOjE2NjIxMzU3MzgsIm5iZiI6MTY2MjEzNTczOCwiZXhwIjoxNjYyMTM5NjM4LCJhaW8iOiJFMlpnWURnZXE4L2x6ZGlTWmFNdmNQTDVtUXZyQUE9PSIsImFwcGlkIjoiNzVhZmM4ZTktZjI5Ny00YmE0LThiNWItNWNlMzQ5NTI1OGExIiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMTZiM2MwMTMtZDMwMC00NjhkLWFjNjQtN2VkYTA4MjBiNmQzLyIsImlkdHlwIjoiYXBwIiwib2lkIjoiZmY1Njc1NzQtMzY2Ny00ZDJiLWIxNmUtMmMyOTJjOTZkYzBkIiwicmgiOiIwLkFVWUFFOEN6RmdEVGpVYXNaSDdhQ0NDMjAwWklmM2tBdXRkUHVrUGF3ZmoyTUJPQUFBQS4iLCJzdWIiOiJmZjU2NzU3NC0zNjY3LTRkMmItYjE2ZS0yYzI5MmM5NmRjMGQiLCJ0aWQiOiIxNmIzYzAxMy1kMzAwLTQ2OGQtYWM2NC03ZWRhMDgyMGI2ZDMiLCJ1dGkiOiJ3QklycG9nYzIwZThxdXZ0NjhLT0FBIiwidmVyIjoiMS4wIiwieG1zX3RjZHQiOjE2NDUxMzcyMjh9.JSSyRQzqkcDatL9d8Vlbd8pr6_FXPmYJdf5fiZI1zWbQalH48pIVF57l4ZiWEwQLGdzsfZEwZQN9-ujSUWPSXGIUw3iTGqtAl8sI48G4hD8rPB9YwCt8sSKWVd1vx30_f7Cm4CyDiY7qNqkOfNdADzfpBj-CwB2U4zhmrVzbFk57qIpAuXUDDlAVen6JKXokC931mmUpZ_fYDBHiE14tXgPalPklP2bxaJKTlahObvfuLworr-A70zJi2Pdp5ckmMR3GqySM34Hz9uMbKtnEs8fJNJRYaeVGSHIjbY0Zp0wXgwmcaK31TXsNOl1_HXoMwvwLPicqR1y28Mq0ef1mqg"
+  ```
+
+
 #### Activity 2: Copy Data
-This activity will make a REST API call and capture the response in Data Lake.
+This activity will make a REST API call, parse the response and write the data to Data Explorer.
 
 * Expand "**Move & Transform**" in the **Activities** bar
-* Drag-and-drop a "**Copy data**" component into the activity window
-* Create a dependency from the "**Get Token**" component to the "**Get Data**" component
+* Drag-and-drop a "**Copy Data**" component into the activity window
+* Create a dependency from the "**Get Token**" component to the "**Copy Data**" component
 
   <img src="https://user-images.githubusercontent.com/44923999/188206412-e90cef93-615e-403f-8e66-64d46fb9af86.png" width="800" title="Snipped: September 2, 2022" />
 
@@ -141,16 +154,17 @@ This activity will make a REST API call and capture the response in Data Lake.
   }
   ```
   
-##### Reference
-Information found at the following links can be used to refine the query
+  ##### Reference
+  Information found at the following links can be used to refine the query:<br>
+  [Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
+  [Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
 
-[Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)
-[Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
+  <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
 
+* Click on the  **Sink** tab, and then select your Data Explorer dataset
 
-* Select the appropriate dataset (and configuration) on the **Sink** tab 
+* Click on the  **Mapping** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/186217944-78b9131f-846b-4ba7-9d21-10e18dde9fa7.png" width="800" title="Snipped: September 2, 2022" />
 
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
