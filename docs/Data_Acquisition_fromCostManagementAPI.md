@@ -201,12 +201,19 @@ _Note: If your "Preview Data" fails and you get an "The access token is invalid"
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
 ### Step 6: Confirm Success
+In this step, we will process the pipeline and review the resulting data.
 
 * Click **Debug** and confirm success
 * Browse to your Data Lake and download the resulting file.
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
 
-### Reference
-[Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
-[Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
+### Future Topics
+There are many more things that could be done to ready this solution for production:
+
+* Query enhancement
+  [Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
+  [Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
+
+* Parameterization
+* Scheduled capture and related "how frequently is new data available" analysis
