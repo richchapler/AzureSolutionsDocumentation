@@ -119,7 +119,7 @@ This activity will make a REST API call, parse the response and write the data t
 
   <img src="https://user-images.githubusercontent.com/44923999/188206412-e90cef93-615e-403f-8e66-64d46fb9af86.png" width="800" title="Snipped: September 2, 2022" />
 
-#### Source
+#### "Source" tab
 
 * Enter values on the **Source** tab 
 
@@ -171,9 +171,11 @@ This activity will make a REST API call, parse the response and write the data t
 
   <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
 
-#### Sink
+#### "Sink" tab
 
 * Click on the  **Sink** tab, and then select your Data Explorer dataset
+
+#### "Mapping" tab
 
 * Click on the  **Mapping** tab
 
