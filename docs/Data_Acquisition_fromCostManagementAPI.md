@@ -17,10 +17,16 @@ This solution requires the following resources:
 ### Step 2: Create Destination Table
 In this step, we will create the Data Explorer table which will serve as destination for our Synapse Pipeline
 
+* Navigate to Data Explorer and then select Query from the navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/182936394-a49e10dc-9a28-4e4e-834a-ff432e28cd3e.png" width="800" title="Snipped: August 4, 2022" />
+  
+* Modify and **Run** the following KQL:
+
 ```
 .create table t3 (PreTaxCost: real, UsageDate: string, ResourceType: string, Currency: string) 
 ```
-
+ 
 _Note: This initial version of the table includes only a few of the columns that might be included as you evolve your query logic_
 
 ### Step 3: Create Linked Service
