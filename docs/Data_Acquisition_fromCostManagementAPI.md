@@ -188,10 +188,15 @@ _Note: If your "Preview Data" fails and you get an "The access token is invalid"
 
   <img src="https://user-images.githubusercontent.com/44923999/188222910-705e2546-b6c1-4b3b-8b09-70b074305948.png" width="800" title="Snipped: September 2, 2022" />
 
+* Select "**Collection reference**" dropdown value, "**$['properties']['rows']**" 
+* Click "+ New mapping" and enter values for each of the four columns:
 
-
-
-
+  Name | Column Name
+  ------ | ------
+  [0] | PreTaxCost
+  [1] | UsageDate
+  [2] | ResourceType
+  [3] | Currency
 
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
