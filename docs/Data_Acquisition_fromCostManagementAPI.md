@@ -154,10 +154,17 @@ This activity will make a REST API call, parse the response and write the data t
   }
   ```
   
+  * Click "Preview data"  
+
+  <img src="https://user-images.githubusercontent.com/44923999/188211809-54c79983-ef20-47ef-b754-4909164d1cf5.png" width="800" title="Snipped: September 2, 2022" />
+
+  * On the resulting "**Please provide actual value of the parameters to preview data**" pop-out, paste the previously-copied Bearer Token value into the **Value** textbox and then click **OK** 
+
   ##### Reference
   Information found at the following links can be used to refine the query:<br>
   [Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
   [Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
+
 
   <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
 
