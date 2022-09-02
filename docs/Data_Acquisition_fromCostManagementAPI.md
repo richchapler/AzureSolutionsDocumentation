@@ -3,17 +3,16 @@
 ![image](https://user-images.githubusercontent.com/44923999/186208783-6c8db61d-01ea-4d5a-9a39-ac02458ec463.png)
 
 This use case considers requirement statements like:
-* "We capture custom logs from various device and apps to Log Analytics"
-* "We want to capture and maintain an extended history of Log Analytics data (past the maximum retention period)"
-* "We feel that Log Analytics has more functionality than we need and costs too much"
+* "Power BI, Cost Management connector requires billing account permissions we cannot get"
+* "We want to view costs across many subscriptions"
+* "An understanding of resources and costs would really help us get a handle of inherited subscriptions"
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
 * [Application Registration](Infrastructure_ApplicationRegistration.md)
-* [Data Lake](Infrastructure_DataLake.md) with a [Container](Infrastructure_DataLake_Container.md)
-* [Log Analytics](Infrastructure_LogAnalytics.md)
-* [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) pointed at the default Data Lake
+* [Data Explorer](Infrastructure_ApplicationRegistration.md)
+* [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) for Data Explorer
 
 ### Step 2: Create Linked Service
 In this step, we will create the Linked Service we will use to get our Bearer Token.
