@@ -204,8 +204,16 @@ _Note: If your "Preview Data" fails and you get an "The access token is invalid"
 ### Step 6: Confirm Success
 In this step, we will process the pipeline and review the resulting data.
 
-* Click **Debug** and confirm success
-* Browse to your Data Lake and download the resulting file.
+* Click **Debug** and confirm successful pipeline processing
+* Navigate to your Data Explorer Database, and then **Query** in left-hand navigation
+* **Run** the following KQL:
+  ```
+  CostManagement
+  ```
+  
+  <img src="https://user-images.githubusercontent.com/44923999/188231061-2ebff00d-704d-4f60-aa3c-e40b7daf1002.png" width="800" title="Snipped: September 2, 2022" />
+
+* Confirm results
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
 
