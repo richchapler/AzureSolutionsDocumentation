@@ -108,8 +108,6 @@ This activity will make a REST API call and get a bearer token.
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzE2YjNjMDEzLWQzMDAtNDY4ZC1hYzY0LTdlZGEwODIwYjZkMy8iLCJpYXQiOjE2NjIxMzU3MzgsIm5iZiI6MTY2MjEzNTczOCwiZXhwIjoxNjYyMTM5NjM4LCJhaW8iOiJFMlpnWURnZXE4L2x6ZGlTWmFNdmNQTDVtUXZyQUE9PSIsImFwcGlkIjoiNzVhZmM4ZTktZjI5Ny00YmE0LThiNWItNWNlMzQ5NTI1OGExIiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMTZiM2MwMTMtZDMwMC00NjhkLWFjNjQtN2VkYTA4MjBiNmQzLyIsImlkdHlwIjoiYXBwIiwib2lkIjoiZmY1Njc1NzQtMzY2Ny00ZDJiLWIxNmUtMmMyOTJjOTZkYzBkIiwicmgiOiIwLkFVWUFFOEN6RmdEVGpVYXNaSDdhQ0NDMjAwWklmM2tBdXRkUHVrUGF3ZmoyTUJPQUFBQS4iLCJzdWIiOiJmZjU2NzU3NC0zNjY3LTRkMmItYjE2ZS0yYzI5MmM5NmRjMGQiLCJ0aWQiOiIxNmIzYzAxMy1kMzAwLTQ2OGQtYWM2NC03ZWRhMDgyMGI2ZDMiLCJ1dGkiOiJ3QklycG9nYzIwZThxdXZ0NjhLT0FBIiwidmVyIjoiMS4wIiwieG1zX3RjZHQiOjE2NDUxMzcyMjh9.JSSyRQzqkcDatL9d8Vlbd8pr6_FXPmYJdf5fiZI1zWbQalH48pIVF57l4ZiWEwQLGdzsfZEwZQN9-ujSUWPSXGIUw3iTGqtAl8sI48G4hD8rPB9YwCt8sSKWVd1vx30_f7Cm4CyDiY7qNqkOfNdADzfpBj-CwB2U4zhmrVzbFk57qIpAuXUDDlAVen6JKXokC931mmUpZ_fYDBHiE14tXgPalPklP2bxaJKTlahObvfuLworr-A70zJi2Pdp5ckmMR3GqySM34Hz9uMbKtnEs8fJNJRYaeVGSHIjbY0Zp0wXgwmcaK31TXsNOl1_HXoMwvwLPicqR1y28Mq0ef1mqg"
   ```
 
-_Note: If your "Preview Data" fails and you get an "The access token is invalid" error, it is likely that the token expired... simply Debug to get a new token_
-
 ### Step 5b: Create Activity 2, Copy Data
 This activity will make a REST API call, parse the response and write the data to Data Explorer.
 
@@ -167,22 +165,37 @@ This activity will make a REST API call, parse the response and write the data t
 
   <img src="https://user-images.githubusercontent.com/44923999/188220207-9c8c7891-868a-4d99-883d-bada3de2996c.png" width="800" title="Snipped: September 2, 2022" />
 
+_Note: If your "Preview Data" fails and you get an "The access token is invalid" error, it is likely that the token expired... simply Debug to get a new token_
+
 * Review the response and then close the "**Preview data**" window 
 
 #### "Sink" tab
 
+* Click on the **Sink** tab
+
   <img src="https://user-images.githubusercontent.com/44923999/188209702-056fff32-982b-4f9f-8d71-d0f5928db823.png" width="800" title="Snipped: September 2, 2022" />
 
-* Click on the  **Sink** tab, and then select your Data Explorer dataset
+* Complete the form by selecting your Data Explorer dataset
 
 #### "Mapping" tab
 
-* Click on the  **Mapping** tab
+* Click on the **Mapping** tab
+* Click on "**Import schemas**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/188222315-0982b771-9a0f-4198-94c1-8e1610672d05.png" width="800" title="Snipped: September 2, 2022" />
+
+* The resulting "**Please provide**..." pop-out should still have the Bearer Token value in the **Value** textbox from when we completed the "Preview Data" step... update as needed and then click **OK** 
+
+  <img src="https://user-images.githubusercontent.com/44923999/188222910-705e2546-b6c1-4b3b-8b09-70b074305948.png" width="800" title="Snipped: September 2, 2022" />
+
+
+
+
 
 
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
-#### Confirm Success
+### Step 6: Confirm Success
 
 * Click **Debug** and confirm success
 * Browse to your Data Lake and download the resulting file.
