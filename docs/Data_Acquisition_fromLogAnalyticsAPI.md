@@ -13,7 +13,7 @@ This solution requires the following resources:
 * [Application Registration](Infrastructure_ApplicationRegistration.md)
 * [Data Lake](Infrastructure_DataLake.md) with a [Container](Infrastructure_DataLake_Container.md)
 * [Log Analytics](Infrastructure_LogAnalytics.md)
-* [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) pointed at the default Data Lake
+* [Synapse](Infrastructure_Synapse.md) with an [Integration Dataset](Infrastructure_Synapse_Dataset.md) for the default Data Lake
 
 ### Step 2: Create Linked Service
 In this step, we will create the Linked Service we will use to get our Bearer Token.
