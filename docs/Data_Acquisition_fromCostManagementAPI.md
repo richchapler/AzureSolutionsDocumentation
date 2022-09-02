@@ -42,29 +42,26 @@ In this step, we will create the Dataset we will use to get our Bearer Token.
 * Open **Synapse Studio** and click the **Data** navigation icon
 * Click **+** and then select "**Integration dataset**" from the **Linked** grouping in the resulting navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/186212524-f226d182-cc9e-4964-bbdc-c7ee68f0f467.png" width="800" title="Snipped: September 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/188195944-563f1dae-23eb-487d-b2d0-1747a6058ee1.png" width="800" title="Snipped: September 2, 2022" />
 
 * Search for and select **REST** on the "**New linked service**" pop-out and then click **Continue**
 
-  <img src="https://user-images.githubusercontent.com/44923999/186212779-0ec84877-1ca9-482f-aa22-c38f24993174.png" width="800" title="Snipped: September 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/188196140-3ac10408-7991-4702-8d64-568f74b281c5.png" width="800" title="Snipped: September 2, 2022" />
 
 * Complete the "**Set properties**" pop-out form and then click **OK**
 * Click "**Test connection**" to confirm successful connection
+* Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
-### Step 4: Create Pipeline
-In this step, we will create a Pipeline and add Activities.
+### Step 4: Get Bearer Token
+In this step, we will create a Pipeline and add an Activity.
 
 * Open "**Synapse Studio**" and click the **Integrate** navigation icon
 * Click **+** and select **Pipeline** from the resulting dropdown menu
-
-#### Activity 1: Get Token
-This activity will make a REST API call and get a bearer token.
-
 * Expand **General** in the **Activities** bar
 * Drag-and-drop a **Web** component into the main window
 * Complete the form on the **Settings** tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/186214719-30d3b72a-65dd-41e5-8128-472d593b0a52.png" width="800" title="Snipped: September 2, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/188197200-3f5083fd-fcc3-4a92-bbfa-bde3e01e77dc.png" width="800" title="Snipped: September 2, 2022" />
 
   Prompt | Entry
   ------ | ------
@@ -73,9 +70,19 @@ This activity will make a REST API call and get a bearer token.
   **Headers** | Click "**+ Add**" and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
   **Body** | Modify and enter:<br> `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://api.loganalytics.io/`
 
-* Click **Debug** and monitor to confirm success
+* Click **Debug** and confirm success
+* Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
-#### Activity 2: Get Data
+### Step 5: Prepare Data Explorer
+In this step, we will create a Pipeline and add an Activity.
+
+
+
+
+
+
+
+#### Activity 2: Copy Data
 This activity will make a REST API call and capture the response as a delimited file in the Data Lake.
 
 * Expand "**Move & Transform**" in the **Activities** bar
@@ -98,7 +105,7 @@ This activity will make a REST API call and capture the response as a delimited 
 
 #### Confirm Success
 
-Click **Debug** and monitor result to confirm successful progress.
-Browse to your Data Lake and download the resulting file.
+* Click **Debug** and confirm success
+* Browse to your Data Lake and download the resulting file.
 
-<img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
+  <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
