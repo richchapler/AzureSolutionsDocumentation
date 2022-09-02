@@ -34,8 +34,8 @@ Complete the following steps:
 
   Prompt | Entry
   ------ | ------
-  "**Base URL**" | Modify and enter:<br>`https://api.loganalytics.io/v1/workspaces/{LogAnalyticsWorkspaceId}/query`  
-  "**Authentication Type**" | Select **Anonymous**  
+  **Base URL** | Modify and enter:<br>`https://api.loganalytics.io/v1/workspaces/{LogAnalyticsWorkspaceId}/query`  
+  **Authentication Type** | Select **Anonymous**  
 
 * Click "**Test connection**" to confirm successful connection and then click **Create**
 
