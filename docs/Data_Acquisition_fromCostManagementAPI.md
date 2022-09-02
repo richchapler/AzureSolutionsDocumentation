@@ -110,7 +110,7 @@ This activity will make a REST API call and get a bearer token.
 
 _Note: If your "Preview Data" fails and you get an "The access token is invalid" error, it is likely that the token expired... simply Debug to get a new token_
 
-### Step 5a: Create Activity 2, Copy Data
+### Step 5b: Create Activity 2, Copy Data
 This activity will make a REST API call, parse the response and write the data to Data Explorer.
 
 * Expand "**Move & Transform**" in the **Activities** bar
