@@ -221,7 +221,7 @@ In this step, we will process the pipeline and review the resulting data.
 ### Future Topics
 There are many more things that could be done to ready this solution for production:
 
-* Query enhancement
+* Query enhancement<br>
   [Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
   [Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
 
