@@ -209,6 +209,7 @@ In this step, we will process the pipeline and review the resulting data.
 * **Run** the following KQL:
   ```
   CostManagement
+  | take 10
   ```
   
   <img src="https://user-images.githubusercontent.com/44923999/188231421-c41a80d9-db55-426f-8eb3-1974a049e03e.png" width="800" title="Snipped: September 2, 2022" />
