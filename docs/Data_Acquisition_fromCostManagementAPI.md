@@ -4,7 +4,7 @@
 
 This use case considers requirement statements like:
 * "We want to analyze Azure resource costs across many subscriptions"
-* "An understanding of resources and costs would really help us get a handle of inherited subscriptions"
+* "An understanding of resources and costs would really help us get a handle on inherited subscriptions"
 * "Power BI, Cost Management connector requires billing account permissions we cannot get"
 
 ### Step 1: Prepare Infrastructure
