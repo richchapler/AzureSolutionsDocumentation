@@ -158,7 +158,7 @@ This activity will make a REST API call, parse the response and write the data t
     ```
   
   _Notes:_
-  * _Time period values {e.g., 2022-01-01T00:00:00} are parameterized for use in the Synapse Pipeline, dynamic expression in the example above_
+  * _Time period values {e.g., 2022-01-01T00:00:00} are parameterized for use in a dynamic expression in the example above_
   * _The API limits how many dimensions can be included to 15_
   * _See links in Reference (below) for additional help with preparation of Request Body JSON {i.e., the query}_
   
