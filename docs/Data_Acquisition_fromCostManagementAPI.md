@@ -56,6 +56,8 @@ In this step, we will create the Linked Service we will use to get our Bearer To
 
 * Click "**Test connection**" to confirm successful connection and then click **Create**
 
+_Note: Consider including the Subscription Name in your Linked Service and Dataset names_
+
 ### Step 4: Create Dataset
 In this step, we will create the Dataset we will use to get our Bearer Token.
 
