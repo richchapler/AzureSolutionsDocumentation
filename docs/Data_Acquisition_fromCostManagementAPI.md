@@ -133,31 +133,34 @@ This activity will make a REST API call, parse the response and write the data t
 
   ```
   {
-      "type": "Usage",
-      "timeframe": "Custom",
-      "timePeriod": {
-          "from": "2022-08-29T00:00:00Z",
-          "to": "2022-08-30T00:00:00Z"
-      },
-      "dataset": {
-          "granularity": "Daily",
-          "aggregation": {
-              "totalCost": {
-                  "name": "PreTaxCost",
-                  "function": "Sum"
-              }
-          },
-          "grouping": [
-              {
-                  "type": "Dimension",
-                  "name": "ResourceType"
-              }
-          ]
-      }
-  }
-  ```
+        "type": "Usage",
+        "timeframe": "Custom",
+        "timePeriod": {
+            "from": "@{formatDateTime(adddays(utcnow(),-2),'yyyy-MM-ddT00:00:00')}",
+            "to": "@{formatDateTime(utcnow(),'yyyy-MM-ddTHH:mm:ss')}"
+        },
+        "dataset": {
+            "granularity": "Daily",
+            "aggregation": {
+                "totalCost": {
+                    "name": "PreTaxCost",
+                    "function": "Sum"
+                }
+            },
+            "grouping": [
+                {
+                    "type": "Dimension",
+                    "name": "ResourceType"
+                }
+            ]
+        }
+    }
+    ```
   
-  _Note: See links in Reference (below) for additional help with preparation of Request Body JSON {i.e., the query}_
+  _Notes:_
+  * _Time period values {e.g., 2022-01-01T00:00:00} are parameterized for use in the Synapse Pipeline, dynamic expression in the example above_
+  * _The API limits how many dimensions can be included to 15_
+  * _See links in Reference (below) for additional help with preparation of Request Body JSON {i.e., the query}_
   
 * Click "Preview data"  
 
@@ -227,5 +230,4 @@ There are many more things that could be done to ready this solution for product
   [Query - Usage - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/query/usage)<br>
   [Dimensions - List - REST API (Azure Cost Management)](https://docs.microsoft.com/en-us/rest/api/cost-management/dimensions/list)
 
-* Parameterization
-* Scheduled capture and related "how frequently is new data available" analysis
+* Parameterization and iteration for pull of historical data
