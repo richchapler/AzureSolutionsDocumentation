@@ -4,10 +4,11 @@
 
 _Note: These instructions build on the following documentation:_
 * _[Data Acquisition... from Cost Management, via REST API](Data_Acquisition_fromCostManagementAPI.md)_
-* _[Deployment](Deployment_Synapse_ParameterizedLinkedServices.md)_
+* _[Deployment of Synapse using Parameterized Linked Services](Deployment_Synapse_ParameterizedLinkedServices.md)_
 
 This use case considers requirement statements like:
-* "We ran through the instructions "
+* "Our subscription has more than 1,000 resources... so, when we try to use the documented solution for pulling data from the Cost Management API, we hit the limitation"
+* "We want to pull historical data... at least 730 days {i.e., 2 years}"
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
