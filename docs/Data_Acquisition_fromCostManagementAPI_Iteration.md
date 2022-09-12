@@ -1,4 +1,4 @@
-## Data Acquisition... from Cost Management, via REST API and using Iteration
+## Data Acquisition... from Cost Management API, using Iteration
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
