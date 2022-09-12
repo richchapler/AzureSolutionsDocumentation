@@ -4,7 +4,7 @@
 
 _Note: These instructions build on the following documentation:_
 * _[Data Acquisition... from Cost Management, via REST API](Data_Acquisition_fromCostManagementAPI.md)_
-* _[Data_Acquisition_fromCostManagementAPI.md]_
+* _[Deployment](Deployment_Synapse_ParameterizedLinkedServices.md)_
 
 This use case considers requirement statements like:
 * "We ran through the instructions "
