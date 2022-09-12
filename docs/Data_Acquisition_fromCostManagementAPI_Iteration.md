@@ -1,0 +1,17 @@
+## Data Acquisition... from Cost Management, via REST API and using Iteration
+
+![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
+
+_Note: These instructions build on the following documentation:_
+* _[Data_Acquisition_fromCostManagementAPI.md]_
+* _[Data_Acquisition_fromCostManagementAPI.md]_
+
+This use case considers requirement statements like:
+* "We ran through the instructions "
+
+### Step 1: Prepare Infrastructure
+This solution requires the following resources:
+
+* [Application Registration](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at subscription)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
+* [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
