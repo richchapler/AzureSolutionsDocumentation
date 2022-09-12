@@ -6,8 +6,10 @@ _Note: These instructions build on the following documentation:_
 * _[Data Acquisition... from Cost Management, via REST API](Data_Acquisition_fromCostManagementAPI.md)_
 * _[Deployment of Synapse using Parameterized Linked Services](Deployment_Synapse_ParameterizedLinkedServices.md)_
 
+_The instructions below will only briefly cover any repetitive topics._
+
 This use case considers requirement statements like:
-* "We have discovered a Cost Management API limitation (1,000 resources per request)
+* "We discovered a Cost Management API limitation (1,000 resources per request)"
 * "We need to change scope from '/subscriptions/{subscriptionId}/' to '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'"
 * "We want to pull historical data... 730 days {i.e., 2 years}"
 
@@ -18,4 +20,5 @@ This solution requires the following resources:
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
+### Step 1: Lorem Ipsum
 
