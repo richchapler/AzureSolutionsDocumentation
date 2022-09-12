@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
 _Note: These instructions build on the following documentation:_
-* _[Data_Acquisition_fromCostManagementAPI.md]_
+* _[Data Acquisition... from Cost Management, via REST API](Data_Acquisition_fromCostManagementAPI.md)_
 * _[Data_Acquisition_fromCostManagementAPI.md]_
 
 This use case considers requirement statements like:
