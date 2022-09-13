@@ -1,4 +1,4 @@
-## Data Acquisition... from Cost Management API, using Iteration
+## Data Acquisition... from Cost Management API, using Logic Apps
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
@@ -9,7 +9,8 @@ _Note: These instructions build on the following documentation:_
 _The instructions below will only briefly cover any repetitive topics._
 
 This use case considers requirement statements like:
-* "We discovered a Cost Management API limitation (1,000 resources per request)"
+* "Our subscriptions have more than 1,000 resources... so, they are hitting the Cost Management API's per-request limitation"
+* "We want to pull the maximum number of columns (15) from the Cost Management API"
 * "We need to change scope from '/subscriptions/{subscriptionId}/' to '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'"
 * "We want to pull historical data... 730 days {i.e., 2 years}"
 
