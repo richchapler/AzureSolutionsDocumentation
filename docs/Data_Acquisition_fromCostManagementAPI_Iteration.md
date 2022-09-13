@@ -10,7 +10,7 @@ _The instructions below will only briefly cover any repetitive topics._
 
 This use case considers requirement statements like:
 * "Our subscriptions have more than 1,000 resources... so, they are hitting the Cost Management API's per-request limitation"
-* "We want to pull the maximum number of columns (15) from the Cost Management API"
+* "We want to pull more Cost Management API columns than before, but we haven't settled on a final set {i.e., capture should be dynamic}"
 * "We need to change scope from '/subscriptions/{subscriptionId}/' to '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'"
 * "We want to pull historical data... 730 days {i.e., 2 years}"
 
