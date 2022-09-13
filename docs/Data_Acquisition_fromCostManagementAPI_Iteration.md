@@ -21,5 +21,6 @@ This solution requires the following resources:
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
-### Step 1: Lorem Ipsum
+### Step 2: Lorem Ipsum
 
+_Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
