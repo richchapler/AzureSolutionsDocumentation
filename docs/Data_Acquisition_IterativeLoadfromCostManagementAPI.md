@@ -9,9 +9,9 @@ This use case considers requirement statements like:
 * "We want to pull historical data... 730 days {i.e., 2 years}"
 
 The proposed solution described in this documentation will:
-* ...leverage Logic Apps' nested iteration capability
-* ...capture user input with parameters: a Subscription array, StartDate and EndDate (ISO-8601 formatted strings per Logic App requirements)
-* ...request data from the Cost Management API using scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'}, rather than scope Subscription {i.e., '/subscriptions/{subscriptionId}/'}
+...leverage Logic Apps' nested iteration capability
+...capture user input with parameters: a Subscription array, StartDate and EndDate (ISO-8601 formatted strings per Logic App requirements)
+...request data from the Cost Management API using scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'}, rather than scope Subscription {i.e., '/subscriptions/{subscriptionId}/'}
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
