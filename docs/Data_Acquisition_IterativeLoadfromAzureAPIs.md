@@ -23,6 +23,11 @@ This solution requires the following resources:
 
 ### Step 2: Lorem Ipsum
 
+![image](https://user-images.githubusercontent.com/44923999/190196827-51bef9f0-22dd-44c9-90d1-15ca74d4c139.png)
+
+* Navigate to your Logic App
+
+
 _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
 
 scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'}, rather than scope Subscription {i.e., '/subscriptions/{subscriptionId}/'}
