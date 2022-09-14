@@ -6,7 +6,7 @@ This use case considers requirement statements like:
 * "We need to capture and analyze cost data from many subscriptions"
 * "Our subscriptions have more than 1,000 resources and are hitting the Cost Management API's per-request limitation"
 * "We want to pull historical data... 730 days {i.e., 2 years}"
-* "We want to pull more Cost Management API columns than before, but we haven't settled on a final set {i.e., capture should be dynamic}"
+* "We want to pull more Cost Management API columns than before, but we haven't settled on a final set {i.e., schema **will** drift}"
 
 <br>The solution described in this documentation will:
 * Leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
@@ -21,7 +21,7 @@ This solution requires the following resources:
 * [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
 * [**Logic App**](Infrastructure_LogicApp.md)
 
-### Step 2: Lorem Ipsum
+### Step 2: Create Workflow
 In this step, we will create a workflow and initialize variables
 
 * Navigate to your Logic App
