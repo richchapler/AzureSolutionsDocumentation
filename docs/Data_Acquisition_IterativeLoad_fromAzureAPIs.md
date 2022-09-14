@@ -22,12 +22,18 @@ This solution requires the following resources:
 * [**Logic App**](Infrastructure_LogicApp.md)
 
 ### Step 2: Create Workflow
-In this step, we will create a workflow and initialize variables
+In this step, we will create a workflow, add parameters, and initialize variables
 
 * Navigate to your Logic App
 
   <img src="https://user-images.githubusercontent.com/44923999/190197666-84f0e96f-72c3-4ab7-b527-890eeebc0c23.png" width="800" title="Snipped: August 25, 2022" />
 
+* Click on "**Create workflow >**" in the "**Create a workflow in Designer**" rectangle
+* On the resulting page click "**+ Add**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190224201-41c58642-dbb5-4636-8da4-d151b82bf838.png" width="800" title="Snipped: August 25, 2022" />
+
+* Complete the resulting "**New workflow**" pop-out form and then click **Create**
 
 
 _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
