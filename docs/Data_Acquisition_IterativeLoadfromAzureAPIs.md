@@ -16,10 +16,10 @@ The proposed solution described in this documentation will:
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* [Application Registration](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at subscription)
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at subscription)
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * Event Hub
-* Logic App
+* [**Logic App**](Infrastructure_LogicApp.md)
 
 ### Step 2: Lorem Ipsum
 
