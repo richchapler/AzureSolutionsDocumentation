@@ -38,6 +38,15 @@ In this step, we will create a workflow, add parameters, and initialize variable
 
   <img src="https://user-images.githubusercontent.com/44923999/190224716-25683448-8416-46ed-92ee-e284d7a326bf.png" width="800" title="Snipped: August 25, 2022" />
 
+* Click on **Designer** in the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/190227857-c98b728a-99ff-4e75-8aec-348ce9e9fb1d.png" width="800" title="Snipped: August 25, 2022" />
+
+
+
+
+
+
 
 ### Miscellaneous Notes (incorporate or delete before publishing)
 
