@@ -40,13 +40,13 @@ In this step, we will create a workflow, add parameters, and initialize variable
 
 * Click on **Designer** in the left-hand navigation
 
-#### Add a Trigger
-
   <img src="https://user-images.githubusercontent.com/44923999/190228291-84e1f972-8d70-446d-8413-409c12ed2bc5.png" width="800" title="Snipped: August 25, 2022" />
 
 * On the resulting screen and "**Add a trigger**" pop-out, search for and then select "**Schedule**" (aka "Recurrence")
 
+  <img src="https://user-images.githubusercontent.com/44923999/190257035-35c15279-4117-4e5b-8b7f-c4cfff15a386.png" width="800" title="Snipped: August 25, 2022" />
 
+* Complete the resulting pop-out form and then click **Save**
 
 
 
