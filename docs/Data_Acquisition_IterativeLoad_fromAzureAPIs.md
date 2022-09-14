@@ -34,7 +34,12 @@ In this step, we will create a workflow, add parameters, and initialize variable
   <img src="https://user-images.githubusercontent.com/44923999/190224201-41c58642-dbb5-4636-8da4-d151b82bf838.png" width="800" title="Snipped: August 25, 2022" />
 
 * Complete the resulting "**New workflow**" pop-out form and then click **Create**
+* Click on the link for your new workflow
 
+  <img src="https://user-images.githubusercontent.com/44923999/190224716-25683448-8416-46ed-92ee-e284d7a326bf.png" width="800" title="Snipped: August 25, 2022" />
+
+
+### Miscellaneous Notes (incorporate or delete before publishing)
 
 _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
 
