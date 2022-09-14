@@ -40,8 +40,9 @@ In this step, we will create a workflow, add parameters, and initialize variable
 
 * Click on **Designer** in the left-hand navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/190227857-c98b728a-99ff-4e75-8aec-348ce9e9fb1d.png" width="800" title="Snipped: August 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190228291-84e1f972-8d70-446d-8413-409c12ed2bc5.png" width="800" title="Snipped: August 25, 2022" />
 
+* On the resulting screen and "**Add a trigger**" pop-out, search for and then select "**Schedule**" (aka "Recurrence")
 
 
 
@@ -372,3 +373,22 @@ scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{res
     "kind": "Stateful"
 }
 ```
+
+@range(0,div(div(div(div(div(div(sub(ticks(pipeline().parameters.EndDate),ticks(pipeline().parameters.StartDate)),10),1000),1000),60),60),24))
+
+ADF equivalent of DATEDIFF
+
+@addDays(pipeline().parameters.StartDate, item())
+
+@concat('https://management.azure.com/subscriptions/'
+    ,item()
+    ,'/resourcegroups?api-version=2021-04-01'
+    )
+
+
+dateDifference(addToTime('1970-01-01', parameters('StartDate'),'second'),addToTime('1970-01-01', parameters('EndDate'),'second'))
+
+addDays(parameters('StartDate'),Counter,'yyyy-MM-ddTHH:mm:ssZ')
+
+formatDateTime(parameters('StartDate'),'yyyy-MM-ddTHH:mm:ssZ')
+
