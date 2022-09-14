@@ -26,7 +26,7 @@ In this step, we will create a workflow and initialize variables
 
 * Navigate to your Logic App
 
-![image](https://user-images.githubusercontent.com/44923999/190196827-51bef9f0-22dd-44c9-90d1-15ca74d4c139.png)
+![image](https://user-images.githubusercontent.com/44923999/190197666-84f0e96f-72c3-4ab7-b527-890eeebc0c23.png)
 
 
 
