@@ -36,6 +36,7 @@ scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{res
 
 (ISO-8601 formatted strings per Logic App requirements)
 
+```
 {
     "definition": {
         "$schema": https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#,
@@ -350,4 +351,4 @@ scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{res
     },
     "kind": "Stateful"
 }
-
+```
