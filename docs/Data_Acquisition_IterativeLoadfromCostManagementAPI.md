@@ -1,6 +1,6 @@
-## Data Acquisition... Historical Load from Cost Management API
+## Data Acquisition... Iterative Load from Cost Management API
 
-![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
+![image](https://user-images.githubusercontent.com/44923999/190155800-820282af-0eb6-47ff-b392-ed1abf9783f9.png)
 
 _Note: These instructions build on the following documentation:_
 * _[Data Acquisition... from Cost Management, via REST API](Data_Acquisition_fromCostManagementAPI.md)_
