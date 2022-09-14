@@ -26,7 +26,7 @@ In this step, we will create a workflow and initialize variables
 
 * Navigate to your Logic App
 
-![image](https://user-images.githubusercontent.com/44923999/190197666-84f0e96f-72c3-4ab7-b527-890eeebc0c23.png)
+  <img src="https://user-images.githubusercontent.com/44923999/190197666-84f0e96f-72c3-4ab7-b527-890eeebc0c23.png" width="800" title="Snipped: August 25, 2022" />
 
 
 
