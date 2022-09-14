@@ -35,3 +35,319 @@ _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **Service
 scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'}, rather than scope Subscription {i.e., '/subscriptions/{subscriptionId}/'}
 
 (ISO-8601 formatted strings per Logic App requirements)
+
+{
+    "definition": {
+        "$schema": https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#,
+        "actions": {
+            "For_Each_Subscription": {
+                "actions": {
+                    "For_Each_Resource_Group": {
+                        "actions": {
+                            "For_Each_Date": {
+                                "actions": {
+                                    "Get_Cost_Management_Data": {
+                                        "inputs": {
+                                            "body": {
+                                                "dataset": {
+                                                    "aggregation": {
+                                                        "totalCost": {
+                                                            "function": "Sum",
+                                                            "name": "PreTaxCost"
+                                                        }
+                                                    },
+                                                    "granularity": "Daily",
+                                                    "grouping": [
+                                                        {
+                                                            "name": "ResourceGroupName",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "ResourceType",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "ResourceId",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "ResourceLocation",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "MeterCategory",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "MeterSubCategory",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "Meter",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "ServiceName",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "PartNumber",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "PricingModel",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "ChargeType",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "ReservationName",
+                                                            "type": "Dimension"
+                                                        },
+                                                        {
+                                                            "name": "Frequency",
+                                                            "type": "Dimension"
+                                                        }
+                                                    ]
+                                                },
+                                                "timePeriod": {
+                                                    "from": "@{variables('Date')}",
+                                                    "to": "@{variables('Date')}"
+                                                },
+                                                "timeframe": "Custom",
+                                                "type": "Usage"
+                                            },
+                                            "headers": {
+                                                "authorization": "@variables('Token')",
+                                                "content-type": "application/json;charset=utf-8"
+                                            },
+                                            "method": "POST",
+                                            "uri": https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01
+                                        },
+                                        "runAfter": {
+                                            "Set_Date": [
+                                                "Succeeded"
+                                            ]
+                                        },
+                                        "type": "Http"
+                                    },
+                                    "Send_Event": {
+                                        "inputs": {
+                                            "body": {
+                                                "ContentData": "@{base64(body('Get_Cost_Management_Data'))}"
+                                            },
+                                            "host": {
+                                                "connection": {
+                                                    "referenceName": "eventhubs"
+                                                }
+                                            },
+                                            "method": "post",
+                                            "path": "/@{encodeURIComponent('rchaplereh')}/events"
+                                        },
+                                        "runAfter": {
+                                            "Get_Cost_Management_Data": [
+                                                "Succeeded"
+                                            ]
+                                        },
+                                        "type": "ApiConnection"
+                                    },
+                                    "Set_Date": {
+                                        "inputs": {
+                                            "name": "Date",
+                                            "value": "@{item()}"
+                                        },
+                                        "runAfter": {},
+                                        "type": "SetVariable"
+                                    }
+                                },
+                                "foreach": "@variables('Dates')",
+                                "runAfter": {
+                                    "Set_Scope": [
+                                        "Succeeded"
+                                    ]
+                                },
+                                "type": "Foreach"
+                            },
+                            "Set_Scope": {
+                                "inputs": {
+                                    "name": "Scope",
+                                    "value": "@{item().id}"
+                                },
+                                "runAfter": {},
+                                "type": "SetVariable"
+                            }
+                        },
+                        "foreach": "@body('Get_Resource_Groups').value",
+                        "runAfter": {
+                            "Get_Resource_Groups": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "Foreach"
+                    },
+                    "Get_Resource_Groups": {
+                        "inputs": {
+                            "headers": {
+                                "authorization": "@variables('Token')",
+                                "content-type": "application/json;charset=utf-8"
+                            },
+                            "method": "GET",
+                            "uri": "@{concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')}"
+                        },
+                        "runAfter": {},
+                        "type": "Http"
+                    }
+                },
+                "foreach": "@parameters('Subscriptions')",
+                "runAfter": {
+                    "Initialize_Date": [
+                        "Succeeded"
+                    ],
+                    "Set_Token": [
+                        "Succeeded"
+                    ],
+                    "Until": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Foreach"
+            },
+            "Get_Token": {
+                "inputs": {
+                    "body": "grant_type=client_credentials&client_id=75afc8e9-f297-4ba4-8b5b-5ce3495258a1&client_secret=BUo8Q~DLdAEJTlhn5sfPPUXwg_WAtH7hyXKfscX9&resource=https://management.azure.com/",
+                    "headers": {
+                        "content-type": "application/x-www-form-urlencoded"
+                    },
+                    "method": "POST",
+                    "uri": https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token
+                },
+                "runAfter": {},
+                "type": "Http"
+            },
+            "Initialize_Counter": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Counter",
+                            "type": "integer",
+                            "value": 0
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "Initialize_Date": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Date",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_Scope": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Initialize_Dates_Array": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Dates",
+                            "type": "array"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_Counter": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Initialize_Scope": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Scope",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            },
+            "Set_Token": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Token",
+                            "type": "string",
+                            "value": "@{concat('Bearer ',body('Get_Token').access_token)}"
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Get_Token": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "InitializeVariable"
+            },
+            "Until": {
+                "actions": {
+                    "Append_Date": {
+                        "inputs": {
+                            "name": "Dates",
+                            "value": "@addDays(parameters('StartDate'),variables('Counter'))"
+                        },
+                        "runAfter": {},
+                        "type": "AppendToArrayVariable"
+                    },
+                    "Increment_variable": {
+                        "inputs": {
+                            "name": "Counter",
+                            "value": 1
+                        },
+                        "runAfter": {
+                            "Append_Date": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "IncrementVariable"
+                    }
+                },
+                "expression": "@greater(addDays(parameters('StartDate'), variables('Counter')), addDays(parameters('EndDate'), 0))",
+                "limit": {
+                    "count": 60,
+                    "timeout": "PT1H"
+                },
+                "runAfter": {
+                    "Initialize_Dates_Array": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Until"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "Trigger_Daily": {
+                "recurrence": {
+                    "frequency": "Day",
+                    "interval": 1
+                },
+                "type": "Recurrence"
+            }
+        }
+    },
+    "kind": "Stateful"
+}
+
