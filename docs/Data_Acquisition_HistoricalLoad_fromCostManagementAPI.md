@@ -1,4 +1,4 @@
-## Data Acquisition... from Cost Management API, using Logic Apps
+## Data Acquisition... Historical Load from Cost Management API
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
@@ -19,7 +19,8 @@ This solution requires the following resources:
 
 * [Application Registration](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at subscription)
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
+* Event Hub
+* Logic App
 
 ### Step 2: Lorem Ipsum
 
