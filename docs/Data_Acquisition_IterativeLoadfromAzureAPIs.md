@@ -9,9 +9,9 @@ This use case considers requirement statements like:
 * "We want to pull more Cost Management API columns than before, but we haven't settled on a final set {i.e., capture should be dynamic}"
 
 The proposed solution described in this documentation will:
-<br>...leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
-<br>...request data from the Cost Management API Resource Group rather than Subscription level
-<br>...leverage Data Explorer's dynamic data type to provide for schema drift
+* Leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
+* Leverage Data Explorer's dynamic data type to provide for potential schema drift
+* Request data from the Cost Management API at the Resource Group rather than Subscription level
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
