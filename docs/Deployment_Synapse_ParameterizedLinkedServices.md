@@ -210,7 +210,7 @@ Complete the following steps:
 
 You will reference your dynamic Linked Service from a Dataset with a parameter {e.g., "Environment"} and you will populate the "**Linked Service Properties**", parameter value with expression: `@dataset().Environment`
 
-You will reference this Dataset with a parameter {e.g., "Environment"} and you will populate the "**Linked Service Properties**", parameter value with an expression like: `@substring(pipeline().DataFactory,1,1)`
+You will reference this Dataset with a parameter {e.g., "Environment"} and you will populate the "**Linked Service Properties**", parameter value with an expression like: `@substring(pipeline().DataFactory,0,1)`
 
 <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
 
