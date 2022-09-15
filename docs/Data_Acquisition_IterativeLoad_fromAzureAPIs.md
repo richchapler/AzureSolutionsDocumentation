@@ -11,12 +11,14 @@ This use case considers requirement statements like:
 <br>The solution described in this documentation will:
 * Leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
 * Leverage Data Explorer's dynamic data type to provide for potential schema drift
-* Request data from the Cost Management API at the Resource Group rather than Subscription level
+* Request data from the Cost Management API at the Resource Group level rather than Subscription level
+
+_Note: If you have Resource Groups with more than 1,000 resources, you might have to choose a more granular scope or other strategy_
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at subscription)
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at Subscription or Resource Group)
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
 * [**Logic App**](Infrastructure_LogicApp.md)
@@ -36,11 +38,14 @@ In this step, we will create a workflow, initialize variables, and add parameter
   <img src="https://user-images.githubusercontent.com/44923999/190224201-41c58642-dbb5-4636-8da4-d151b82bf838.png" width="800" title="Snipped: September 15, 2022" />
 
 * Complete the resulting "**New workflow**" pop-out form and then click **Create**
+
+_Note: Choice of stateful or stateless will depend on your use case and environment... reference: https://docs.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare#stateful-stateless_
+
 * Click on the link for your new workflow
 
   <img src="https://user-images.githubusercontent.com/44923999/190224716-25683448-8416-46ed-92ee-e284d7a326bf.png" width="800" title="Snipped: September 15, 2022" />
 
-* Click on **Designer** in the left-hand navigation
+* Navigate to **Designer**
 
   <img src="https://user-images.githubusercontent.com/44923999/190228291-84e1f972-8d70-446d-8413-409c12ed2bc5.png" width="800" title="Snipped: September 15, 2022" />
 
