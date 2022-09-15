@@ -255,12 +255,29 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
   Prompt | Entry
   ------ | ------
-  **Name** | Enter "Dates" 
+  **Name** | Select "Dates" 
   **Value** | Add dynamic content: `addDays(parameters('StartDate'),variables('Counter'))`
   
 * Click **Save**
 
+#### Until Loop, Increment Counter
 
+* Click the **+** inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/190453240-f8abf10c-cc9d-48f2-8b06-c69525b87ccb.png" width="800" title="Snipped: September 15, 2022" />
+
+* On the resulting "**Add an action**" pop-out, search for and then select "**Increment variable**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190453412-c626ce60-6f2b-4577-8fa5-47063807ee3a.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**Append to array variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Select "Counter" 
+  **Value** | Enter "1"
+  
+* Click **Save**
 
 
 
