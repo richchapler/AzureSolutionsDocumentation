@@ -283,13 +283,12 @@ Before we move on to the next step, let's confirm that what we have created (so 
 ### Step 5: Iterate through Subscriptions
 In this step, we will nest "For Each" actions for Subscriptions.
 
+* Navigate to **Designer**
 * Click the **+** icon at the bottom of the page and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190455774-3fc7ce49-37d8-40c0-bb4d-b0ba410fe0e9.png" width="800" title="Snipped: September 15, 2022" />
 
   _Note: Dependencies from all parallel branches will be added to the new action_
-
-#### For Each Subscription
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
@@ -301,7 +300,7 @@ In this step, we will nest "For Each" actions for Subscriptions.
   ------ | ------
   **Select an output from previous steps** | Select "Subscriptions" 
   
-* Click the **+** icon inside the "For each" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "For Each, Subscription" action and then "**Add an action**" on the resulting pop-up menu
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
@@ -328,8 +327,57 @@ Before we move on to the next step, let's confirm that what we have created (so 
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
-### Step 6: Iterate through Subscriptions
+### Step 6: Iterate through Resource Groups
 In this step, we will nest "For Each" actions for Resource Groups {aka Scopes}.
+
+* Navigate to **Designer**
+* Click the **+** icon inside the "For Each, Subscription" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190468526-30da4a77-adbc-494d-bad5-80616fd45dae.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**For each**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Select an output from previous steps** | Enter dynamic content: `body('Get_Resource_Groups').value`
+
+* Click the **+** icon inside the "For Each, Subscription" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190469079-06379573-b7e9-46db-bb0a-49c3e05c8f35.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**Set variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Select "Scope" 
+  **Value** | Add dynamic content: `item().id`
+
+* Click **Save**
+
+#### Confirm Success
+Before we move on to the next step, let's confirm that what we have created (so far) is functional.
+
+* Navigate to **Overview**
+* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Click on the new "**Running**" item in the "**Run History**" list
+
+  <img src="https://user-images.githubusercontent.com/44923999/190466998-7779d281-3390-481c-b520-d7e995b30249.png" width="800" title="Snipped: September 15, 2022" />
+
+* Confirm that all actions succeed and click on those you would like to understand better
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
