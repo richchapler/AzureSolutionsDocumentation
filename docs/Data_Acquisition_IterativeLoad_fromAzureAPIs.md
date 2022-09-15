@@ -21,12 +21,14 @@ This solution requires the following resources:
 * [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
 * [**Logic App**](Infrastructure_LogicApp.md)
 
-### Step 2: Create Workflow
-In this step, we will create a workflow, add parameters, and initialize variables
+### Step 2: Prepare Workflow
+In this step, we will create a workflow, initialize variables, and add parameters
 
 * Navigate to your Logic App
 
   <img src="https://user-images.githubusercontent.com/44923999/190197666-84f0e96f-72c3-4ab7-b527-890eeebc0c23.png" width="800" title="Snipped: September 15, 2022" />
+
+#### Workflow
 
 * Click on "**Create workflow >**" in the "**Create a workflow in Designer**" rectangle
 * On the resulting page click "**+ Add**"
@@ -47,6 +49,8 @@ In this step, we will create a workflow, add parameters, and initialize variable
   <img src="https://user-images.githubusercontent.com/44923999/190257035-35c15279-4117-4e5b-8b7f-c4cfff15a386.png" width="800" title="Snipped: September 15, 2022" />
 
 * Complete the resulting pop-out form and then click **Save**
+
+#### Variables
 
 * Click the **+** to insert a new step and then "Add an action" on the resulting pop-up menu
 
@@ -80,7 +84,22 @@ In this step, we will create a workflow, add parameters, and initialize variable
   **Type** | String 
   **Value** | {null}
 
+* Click **Save**
 
+#### Parameters
+
+* Click **Parameters** in the menu bar
+* On the resulting **Parameters** pop-out form, click "**+ Create parameter**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190414578-e50034b4-3dcc-4459-bdd1-b2aeed81251a.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the pop-out form, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Subscriptions 
+  **Type** | Array 
+  **Value** | `[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
 
 
