@@ -52,7 +52,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 #### Variables
 
-* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190261952-61599cfe-a8f5-4bff-9f32-c6f75ec0535f.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -72,7 +72,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   <img src="https://user-images.githubusercontent.com/44923999/190411759-3537a9d9-7b14-4775-a269-4488e71982e2.png" width="800" title="Snipped: September 15, 2022" />
 
-* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
@@ -148,6 +148,8 @@ In this step, we will request an access token from the Client Credentials Token 
   **Headers** | Add dynamic content: `content-type` :: `application/x-www-form-urlencoded`
   **Body** | Add dynamic content:  `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
 
+  _Note: If you expect processing to take longer than an hour {i.e., the lifespan of a token}, you might consider moving token logic to the nested iteration_
+
 #### Initialize Token Variable
 
 * Click the **+** icon under **HTTP** and then "**Add an action**" on the resulting pop-up menu
@@ -200,7 +202,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### "Dates" Variable
 
-* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190446998-f40ffa00-2dae-43a9-8445-0ffd7db5d057.png" width="800" title="Snipped: September 15, 2022" />
@@ -215,7 +217,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### Until Loop
 
-* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190447971-9107b07e-78a0-43b7-a9d7-134ec445a786.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -233,7 +235,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### Until Loop, Append Date
 
-* Click the **+** icon inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "Do..Until" action and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190450048-918ca5c1-a382-44f2-8e20-6cc3053562b1.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -250,7 +252,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   
 #### Until Loop, Increment Counter
 
-* Click the **+** icon inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "Do..Until" action and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190453240-f8abf10c-cc9d-48f2-8b06-c69525b87ccb.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -278,12 +280,14 @@ Before we move on to the next step, let's confirm that what we have created (so 
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
-### Step 5: Create Nested Iteration
-In this step, we will nest "For Each" actions for Subscriptions, Resource Groups, and Dates.
+### Step 5: Iterate through Subscriptions
+In this step, we will nest "For Each" actions for Subscriptions.
 
 * Click the **+** icon at the bottom of the page and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190455774-3fc7ce49-37d8-40c0-bb4d-b0ba410fe0e9.png" width="800" title="Snipped: September 15, 2022" />
+
+  _Note: Dependencies from all parallel branches will be added to the new action_
 
 #### For Each Subscription
 
@@ -297,11 +301,35 @@ In this step, we will nest "For Each" actions for Subscriptions, Resource Groups
   ------ | ------
   **Select an output from previous steps** | Select "Subscriptions" 
   
-* Click the **+** icon inside the "For each" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "For each" action and then "**Add an action**" on the resulting pop-up menu
 
+* On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/190461148-1eec1ca0-36bd-4e9e-aec6-952cd170c064.png" width="800" title="Snipped: September 15, 2022" />
 
+* Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
+  Prompt | Entry
+  ------ | ------
+  **Method** | Select "GET" 
+  **URI** | Add dynamic content: `concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')`
+  **Headers** | Add:<br>`authorization` :: dynamic content `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
+
+* Click **Save**
+
+#### Confirm Success
+Before we move on to the next step, let's confirm that what we have created (so far) is functional.
+
+* Navigate to **Overview**
+* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Click on the new "**Running**" item in the "**Run History**" list
+
+  <img src="https://user-images.githubusercontent.com/44923999/190454850-6fbf4344-6e90-4249-aaa8-cd4b39ed212d.png" width="800" title="Snipped: September 15, 2022" />
+
+* Confirm that all actions succeed and click on those you would like to understand better
+
+### Step 6: Iterate through Subscriptions
+In this step, we will nest "For Each" actions for Resource Groups {aka Scopes}.
 
 
 
