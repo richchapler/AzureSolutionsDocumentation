@@ -39,7 +39,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 * Complete the resulting "**New workflow**" pop-out form and then click **Create**
 
-_Note: Choice of stateful or stateless will depend on your use case and environment... reference: https://docs.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare#stateful-stateless_
+  _Note: Choice of stateful or stateless will depend on your use case and environment... reference: https://docs.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare#stateful-stateless_
 
 * Click on the link for your new workflow
 
