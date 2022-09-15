@@ -105,7 +105,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   <img src="https://user-images.githubusercontent.com/44923999/190417711-b98ea504-7f0d-4ab3-a4e3-79e03c47c724.png" width="800" title="Snipped: September 15, 2022" />
 
-* Repeat for the Start Date parameter
+* Repeat for the **StartDate** parameter
 
   Prompt | Entry
   ------ | ------
@@ -115,7 +115,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   _Note: Date values will be required in ISO-8601 formatted strings {e.g., 2022-09-01T00:00:00.0000000}; abbreviated versions work fine_
 
-* Repeat for the End Date parameter
+* Repeat for the **EndDate** parameter
 
   Prompt | Entry
   ------ | ------
@@ -187,9 +187,8 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will iterate through dates between StartDate and EndDate and append to the Dates array.
 
 * Click the **+** underneath "**Recurrence, Daily**" and then "**Add a parallel branch**" on the resulting pop-up menu
-* On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190444707-9b5f3484-fd83-47db-a724-3d8921ed9eca.png" width="800" title="Snipped: September 15, 2022" />
+#### "Counter" Variable
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
@@ -202,6 +201,23 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Name** | Enter "Counter" 
   **Type** | Select "String" 
   **Value** | Enter "0"
+
+* Click **Save**
+
+#### "Dates" Variable
+
+* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190446998-f40ffa00-2dae-43a9-8445-0ffd7db5d057.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Enter "Dates" 
+  **Type** | Select "Array" 
+  **Value** | {null}
 
 * Click **Save**
 
