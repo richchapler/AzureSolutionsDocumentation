@@ -407,12 +407,118 @@ Before we move on to the next step, let's confirm that what we have created (so 
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
+### Step 8: Get Costs
+In this step, we will send a request to the Cost Management API using iterative variables.
 
+* Navigate to **Designer**
+* Click the **+** icon inside the "For Each, Dates" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/190474598-47ff99ed-7339-43af-8d5d-d52bec1b25ff.png" width="800" title="Snipped: September 15, 2022" />
 
+* Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
+  Prompt | Entry
+  ------ | ------
+  **Method** | Select "POST" 
+  **URI** | Add dynamic content:<br>`[concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')](https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01)`
+  **Headers** | Add:<br>`authorization` :: dynamic content `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
+*  Finally, paste the following in **Body**:
+  ```
+  {
+    "dataset": {
+      "aggregation": {
+        "totalCost": {
+          "function": "Sum",
+          "name": "PreTaxCost"
+        }
+      },
+      "granularity": "Daily",
+      "grouping": [
+        {
+          "name": "ResourceGroupName",
+          "type": "Dimension"
+        },
+        {
+          "name": "ResourceType",
+          "type": "Dimension"
+        },
+        {
+          "name": "ResourceId",
+          "type": "Dimension"
+        },
+        {
+          "name": "ResourceLocation",
+          "type": "Dimension"
+        },
+        {
+          "name": "MeterCategory",
+          "type": "Dimension"
+        },
+        {
+          "name": "MeterSubCategory",
+          "type": "Dimension"
+        },
+        {
+          "name": "Meter",
+          "type": "Dimension"
+        },
+        {
+          "name": "ServiceName",
+          "type": "Dimension"
+        },
+        {
+          "name": "PartNumber",
+          "type": "Dimension"
+        },
+        {
+          "name": "PricingModel",
+          "type": "Dimension"
+        },
+        {
+          "name": "ChargeType",
+          "type": "Dimension"
+        },
+        {
+          "name": "ReservationName",
+          "type": "Dimension"
+        },
+        {
+          "name": "Frequency",
+          "type": "Dimension"
+        }
+      ]
+    },
+    "timePeriod": {
+      "from": "@{variables('Date')}",
+      "to": "@{variables('Date')}"
+    },
+    "timeframe": "Custom",
+    "type": "Usage"
+  }
+  ```
 
+  _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
+
+* Click **Save**
+
+#### Confirm Success
+Before we move on to the next step, let's confirm that what we have created (so far) is functional.
+
+* Navigate to **Overview**
+* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Click on the new "**Running**" item in the "**Run History**" list
+
+  <img src="https://user-images.githubusercontent.com/44923999/190473630-b2905f7a-1af8-4d00-a0b4-dd24ce08699b.png" width="800" title="Snipped: September 15, 2022" />
+
+* Confirm that all actions succeed and click on those you would like to understand better
+
+### Step 9: Send to Event Hub
+In this step, we will send the Cost Management API response to the Event Hub (for downstream ingestion in Data Explorer).
+
+* Navigate to **Designer**
+* Click the **+** icon inside the "For Each, Dates" action and then "**Add an action**" on the resulting pop-up menu
 
 
 
@@ -422,7 +528,6 @@ Before we move on to the next step, let's confirm that what we have created (so 
 
 ### Miscellaneous Notes (incorporate or delete before publishing)
 
-_Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
 
 scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'}, rather than scope Subscription {i.e., '/subscriptions/{subscriptionId}/'}
 
