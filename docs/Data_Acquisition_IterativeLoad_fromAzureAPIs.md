@@ -99,7 +99,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   ------ | ------
   **Name** | Subscriptions 
   **Type** | Array 
-  **Value** | `[ "{Subscription1_Id}","{Subscription2_Id}" ]`
+  **Value** | Your SubscriptionId values in form:<br>`[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
 * Click **X** to close the pop-out form and then click **Save**
 
