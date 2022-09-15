@@ -167,6 +167,19 @@ In this step, we will request an access token from the Client Credentials Token 
   **Type** | Select "String"
   **Value** | Add dynamic content `concat('Bearer ',body('HTTP,_Get_Token').access_token)`
 
+* Click **Save**
+
+#### Confirm Success
+Before we move on to the next step, let's confirm that what we have created (so far) is functional.
+
+* Navigate to **Overview**
+
+  <img src="https://user-images.githubusercontent.com/44923999/190438832-fa58b059-953a-4597-bc20-c1c8c2e472d7.png" width="800" title="Snipped: September 15, 2022" />
+
+* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+
+
+
 
 
 
