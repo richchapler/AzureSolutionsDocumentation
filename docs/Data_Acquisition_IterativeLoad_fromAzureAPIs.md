@@ -26,33 +26,45 @@ In this step, we will create a workflow, add parameters, and initialize variable
 
 * Navigate to your Logic App
 
-  <img src="https://user-images.githubusercontent.com/44923999/190197666-84f0e96f-72c3-4ab7-b527-890eeebc0c23.png" width="800" title="Snipped: August 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190197666-84f0e96f-72c3-4ab7-b527-890eeebc0c23.png" width="800" title="Snipped: September 15, 2022" />
 
 * Click on "**Create workflow >**" in the "**Create a workflow in Designer**" rectangle
 * On the resulting page click "**+ Add**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190224201-41c58642-dbb5-4636-8da4-d151b82bf838.png" width="800" title="Snipped: August 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190224201-41c58642-dbb5-4636-8da4-d151b82bf838.png" width="800" title="Snipped: September 15, 2022" />
 
 * Complete the resulting "**New workflow**" pop-out form and then click **Create**
 * Click on the link for your new workflow
 
-  <img src="https://user-images.githubusercontent.com/44923999/190224716-25683448-8416-46ed-92ee-e284d7a326bf.png" width="800" title="Snipped: August 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190224716-25683448-8416-46ed-92ee-e284d7a326bf.png" width="800" title="Snipped: September 15, 2022" />
 
 * Click on **Designer** in the left-hand navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/190228291-84e1f972-8d70-446d-8413-409c12ed2bc5.png" width="800" title="Snipped: August 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190228291-84e1f972-8d70-446d-8413-409c12ed2bc5.png" width="800" title="Snipped: September 15, 2022" />
 
 * On the resulting screen and "**Add a trigger**" pop-out, search for and then select "**Schedule**" (aka "Recurrence")
 
-  <img src="https://user-images.githubusercontent.com/44923999/190257035-35c15279-4117-4e5b-8b7f-c4cfff15a386.png" width="800" title="Snipped: August 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190257035-35c15279-4117-4e5b-8b7f-c4cfff15a386.png" width="800" title="Snipped: September 15, 2022" />
 
 * Complete the resulting pop-out form and then click **Save**
 
 * Click the **+** to insert a new step and then "Add an action" on the resulting pop-up menu
 
-  <img src="https://user-images.githubusercontent.com/44923999/190261952-61599cfe-a8f5-4bff-9f32-c6f75ec0535f.png" width="800" title="Snipped: August 25, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190261952-61599cfe-a8f5-4bff-9f32-c6f75ec0535f.png" width="800" title="Snipped: September 15, 2022" />
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190410009-bed8f453-2963-4912-8f34-c9fdf5df1df5.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**Initialize variable**" pop-out form, including:
+
+
+* Click **Save**
+
+
+
+
+
 
 
 ### Miscellaneous Notes (incorporate or delete before publishing)
