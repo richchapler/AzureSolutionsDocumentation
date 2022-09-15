@@ -58,6 +58,13 @@ In this step, we will create a workflow, add parameters, and initialize variable
 
 * Complete the resulting "**Initialize variable**" pop-out form, including:
 
+  Prompt | Entry
+  ------ | ------
+  **Name** | Date 
+  **Type** | String 
+  **Value** | {null}
+  
+  _Note: Logic Apps does not have a data type for DateTime, so we are using string and will handle usage in expressions_
 
 * Click **Save**
 
