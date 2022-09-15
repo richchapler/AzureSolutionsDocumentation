@@ -101,6 +101,19 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Array 
   **Value** | `[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
+* Click **X** to close the pop-out form and then click **Save**
+
+  <img src="https://user-images.githubusercontent.com/44923999/190416194-227501d8-fede-41a4-a6a5-df4452b382cc.png" width="800" title="Snipped: September 15, 2022" />
+
+* Repeat for the Start Date parameter
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Start Date 
+  **Type** | String
+  **Value** | `2022-01-01` (or a date value that is meaningful for you)
+
+  _Note: Date values will be required in ISO-8601 formatted strings {e.g., 2022-09-01T00:00:00.0000000}; abbreviated versions work fine_
 
 
 
