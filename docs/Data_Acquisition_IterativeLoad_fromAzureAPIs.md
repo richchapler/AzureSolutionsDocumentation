@@ -167,7 +167,7 @@ In this step, we will request an access token from the Client Credentials Token 
   ------ | ------
   **Name** | Enter "Token" 
   **Type** | Select "String"
-  **Value** | Add dynamic content<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`
+  **Value** | Add expression:<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`
 
 * Click **Save**
 
@@ -234,13 +234,13 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
   Prompt | Entry
   ------ | ------
-  **Choose a value** | Add dynamic content: `addDays(parameters('StartDate'), variables('Counter'))`
-  **Type** | Select "is greather than" 
-  **Choose a value** | Add dynamic content: `addDays(parameters('EndDate'), 0)`
+  **Choose a value** | Add expression:<br>`addDays(parameters('StartDate'), variables('Counter'))`
+  **Type** | Select "is greater than" 
+  **Choose a value** | Add expression:<br>`addDays(parameters('EndDate'), 0)`
 
 #### Until Loop, Append Date
 
-* Click the **+** icon inside the "Do..Until" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**Do..Until**" action and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190450048-918ca5c1-a382-44f2-8e20-6cc3053562b1.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -253,11 +253,11 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   Prompt | Entry
   ------ | ------
   **Name** | Select "Dates" 
-  **Value** | Add dynamic content: `addDays(parameters('StartDate'),variables('Counter'))`
+  **Value** | Add expression:<br>`addDays(parameters('StartDate'),variables('Counter'))`
   
 #### Until Loop, Increment Counter
 
-* Click the **+** icon inside the "Do..Until" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**Do..Until**" action and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190453240-f8abf10c-cc9d-48f2-8b06-c69525b87ccb.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -305,7 +305,7 @@ In this step, we will nest "For Each" actions for Subscriptions.
   ------ | ------
   **Select an output from previous steps** | Select "Subscriptions" 
   
-* Click the **+** icon inside the "For Each, Subscriptions" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
@@ -316,8 +316,8 @@ In this step, we will nest "For Each" actions for Subscriptions.
   Prompt | Entry
   ------ | ------
   **Method** | Select "GET" 
-  **URI** | Add dynamic content: `concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')`
-  **Headers** | Add:<br>`authorization` :: dynamic content `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
+  **URI** | Add expression:<br>`concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')`
+  **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
 * Click **Save**
 
@@ -336,7 +336,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will nest "For Each" actions for Resource Groups {aka Scopes}.
 
 * Navigate to **Designer**
-* Click the **+** icon inside the "For Each, Subscriptions" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190470775-60ff85a3-4247-4a4f-a523-e4dff1fad22b.png" width="800" title="Snipped: September 15, 2022" />
@@ -345,9 +345,9 @@ In this step, we will nest "For Each" actions for Resource Groups {aka Scopes}.
 
   Prompt | Entry
   ------ | ------
-  **Select an output from previous steps** | Enter dynamic content: `body('HTTP,_Get_Resource_Groups').value`
+  **Select an output from previous steps** | Enter expression: `body('HTTP,_Get_Resource_Groups').value`
 
-* Click the **+** icon inside the "For Each, Resource Groups" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Resource Groups**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190469079-06379573-b7e9-46db-bb0a-49c3e05c8f35.png" width="800" title="Snipped: September 15, 2022" />
@@ -356,8 +356,8 @@ In this step, we will nest "For Each" actions for Resource Groups {aka Scopes}.
 
   Prompt | Entry
   ------ | ------
-  **Name** | Select "Scope" 
-  **Value** | Add dynamic content: `item().id`
+  **Name** | Select "**Scope**" 
+  **Value** | Add expression: `item().id`
 
 * Click **Save**
 
@@ -376,7 +376,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will nest "For Each" actions for Dates.
 
 * Navigate to **Designer**
-* Click the **+** icon inside the "For Each, Resource Groups" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Resource Groups**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190472425-05d5589f-29bb-49d4-9f56-836a3a2fae6d.png" width="800" title="Snipped: September 15, 2022" />
@@ -385,9 +385,9 @@ In this step, we will nest "For Each" actions for Dates.
 
   Prompt | Entry
   ------ | ------
-  **Select an output from previous steps** | Enter dynamic content: `variables('Dates')`
+  **Select an output from previous steps** | Enter expression: `variables('Dates')`
 
-* Click the **+** icon inside the "For Each, Dates" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Dates**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190473339-570664df-77a3-4af7-a0f1-3febdc8cd08d.png" width="800" title="Snipped: September 15, 2022" />
@@ -397,7 +397,7 @@ In this step, we will nest "For Each" actions for Dates.
   Prompt | Entry
   ------ | ------
   **Name** | Select "Date" 
-  **Value** | Add dynamic content: `item()`
+  **Value** | Add expression: `item()`
 
 * Click **Save**
 
@@ -416,7 +416,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will send a request to the Cost Management API using iterative variables.
 
 * Navigate to **Designer**
-* Click the **+** icon inside the "For Each, Dates" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Dates**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190474598-47ff99ed-7339-43af-8d5d-d52bec1b25ff.png" width="800" title="Snipped: September 15, 2022" />
@@ -426,8 +426,8 @@ In this step, we will send a request to the Cost Management API using iterative 
   Prompt | Entry
   ------ | ------
   **Method** | Select "POST" 
-  **URI** | Add dynamic content:<br>`[concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')](https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01)`
-  **Headers** | Add:<br>`authorization` :: dynamic content `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
+  **URI** | Add expression:<br>`[concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')](https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01)`
+  **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
 *  Finally, paste the following in **Body**:
   ```
@@ -523,7 +523,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will send the Cost Management API response to the Event Hub (for downstream ingestion in Data Explorer).
 
 * Navigate to **Designer**
-* Click the **+** icon inside the "For Each, Dates" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Dates**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Send Event**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190478428-ca6f598d-cf32-44dd-a440-a9a791d7a2e8.png" width="800" title="Snipped: September 15, 2022" />
@@ -533,7 +533,7 @@ In this step, we will send the Cost Management API response to the Event Hub (fo
   Prompt | Entry
   ------ | ------
   **Authentication Type** | Select "**Connection String**" 
-  **Connection String** | Paste the "**Connection string-primary ke**y" value copied from your Event Hub Namespace >> **Shared access policies**
+  **Connection String** | Paste the "**Connection string-primary key**" value copied from your Event Hub Namespace >> **Shared access policies**
 
 * Click **Create**
 
@@ -543,7 +543,7 @@ In this step, we will send the Cost Management API response to the Event Hub (fo
 
   Prompt | Entry
   ------ | ------
-  **Add new parameter** | Check "Content" 
+  **Add new parameter** | Check "**Content**" 
 
   <img src="https://user-images.githubusercontent.com/44923999/190479224-43f1e5bf-a4b4-45d7-9f3b-c09358a40325.png" width="800" title="Snipped: September 15, 2022" />
 
