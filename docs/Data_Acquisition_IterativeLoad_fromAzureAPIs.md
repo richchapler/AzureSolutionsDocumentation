@@ -64,8 +64,8 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   Prompt | Entry
   ------ | ------
-  **Name** | Date 
-  **Type** | String 
+  **Name** | Enter "Date" 
+  **Type** | Select "String" 
   **Value** | {null}
   
   _Note: Logic Apps does not have a data type for DateTime, so we are using string and will handle usage in expressions_
@@ -80,8 +80,8 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   Prompt | Entry
   ------ | ------
-  **Name** | Date 
-  **Type** | String 
+  **Name** | Enter "Scope" 
+  **Type** | Select "String" 
   **Value** | {null}
 
 * Click **Save**
@@ -97,8 +97,8 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   Prompt | Entry
   ------ | ------
-  **Name** | Subscriptions 
-  **Type** | Array 
+  **Name** | Enter "Subscriptions" 
+  **Type** | Select "Array"
   **Value** | Your SubscriptionId values in form:<br>`[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
 * Click **X** to close the pop-out form and then click **Save**
@@ -109,8 +109,8 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   Prompt | Entry
   ------ | ------
-  **Name** | StartDate 
-  **Type** | String
+  **Name** | Enter "StartDate" 
+  **Type** | Select "String"
   **Value** | `2022-01-01` (or a date value that is meaningful for you)
 
   _Note: Date values will be required in ISO-8601 formatted strings {e.g., 2022-09-01T00:00:00.0000000}; abbreviated versions work fine_
@@ -119,8 +119,8 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   Prompt | Entry
   ------ | ------
-  **Name** | EndDate 
-  **Type** | String
+  **Name** | Enter "EndDate" 
+  **Type** | Select "String"
   **Value** | `2022-08-31` (or a date value that is meaningful for you)
   
   _Note: Parameters will be alphabetized regardless of the order in which you create them_
@@ -146,16 +146,26 @@ In this step, we will request an access token from the Client Credentials Token 
 
   Prompt | Entry
   ------ | ------
-  **Method** | Select **POST** 
+  **Method** | Select "POST" 
   **URI** | `https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token`
   **Headers** | `content-type` :: `application/x-www-form-urlencoded`
   **Body** | `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
 
 * Click **Save**
 
+#### Initialize Token Variable
 
+* Click the **+** under **HTTP** and then "**Add an action**" on the resulting pop-up menu
 
+  <img src="https://user-images.githubusercontent.com/44923999/190437313-7be79dc5-9120-44e8-a69a-bef6fd290aeb.png" width="800" title="Snipped: September 15, 2022" />
 
+* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Enter "Token" 
+  **Type** | Select "String"
+  **Value** | Add dynamic content `concat('Bearer ',body('HTTP,_Get_Token').access_token)`
 
 
 
