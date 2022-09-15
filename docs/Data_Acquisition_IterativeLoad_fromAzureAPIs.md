@@ -52,7 +52,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 #### Variables
 
-* Click the **+** to insert a new step and then "Add an action" on the resulting pop-up menu
+* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190261952-61599cfe-a8f5-4bff-9f32-c6f75ec0535f.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -74,7 +74,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   <img src="https://user-images.githubusercontent.com/44923999/190411759-3537a9d9-7b14-4775-a269-4488e71982e2.png" width="800" title="Snipped: September 15, 2022" />
 
-* Click the **+** to insert a new step and then "Add an action" on the resulting pop-up menu
+* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 * Complete the resulting "**Initialize variable**" pop-out form, including:
 
@@ -126,6 +126,19 @@ In this step, we will create a workflow, initialize variables, and add parameter
   _Note: Parameters will be alphabetized regardless of the order in which you create them_
 
 * Click **X** to close the pop-out form and then click **Save**
+
+### Step 3: Get Bearer Token
+In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable
+
+* Click the **+** underneath "**Recurrence, Daily**" and then "Add an action" on the resulting pop-up menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/190418481-06a71761-cec0-4f6b-b06f-20e7230c58d9.png" width="800" title="Snipped: September 15, 2022" />
+
+* Click the **+** to insert a new step and then "**Add a parallel branch**" on the resulting pop-up menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/190419847-2bd758fe-fa7f-441e-a4fc-e8210ee9197e.png" width="800" title="Snipped: September 15, 2022" />
+
+* On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
 
 
