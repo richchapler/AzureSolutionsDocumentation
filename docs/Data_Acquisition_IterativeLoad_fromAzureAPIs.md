@@ -68,6 +68,18 @@ In this step, we will create a workflow, add parameters, and initialize variable
 
 * Click **Save**
 
+  <img src="https://user-images.githubusercontent.com/44923999/190411759-3537a9d9-7b14-4775-a269-4488e71982e2.png" width="800" title="Snipped: September 15, 2022" />
+
+* Click the **+** to insert a new step and then "Add an action" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
+* Complete the resulting "**Initialize variable**" pop-out form, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Date 
+  **Type** | String 
+  **Value** | {null}
+
 
 
 
