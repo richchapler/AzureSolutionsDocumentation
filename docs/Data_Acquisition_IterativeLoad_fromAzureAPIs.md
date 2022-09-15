@@ -530,33 +530,23 @@ In this step, we will send the Cost Management API response to the Event Hub (fo
   **Authentication Type** | Select "**Connection String**" 
   **Connection String** | Paste the "**Connection string-primary ke**y" value copied from your Event Hub Namespace >> **Shared access policies**
 
+* Click **Create**
 
+  <img src="https://user-images.githubusercontent.com/44923999/190478665-5e5dd77c-c211-4a31-8f14-284297005854.png" width="800" title="Snipped: September 15, 2022" />
 
+* Complete the resulting "**Send Event**" pop-out form, **Parameters** tab, including:
 
+  Prompt | Entry
+  ------ | ------
+  **Add new parameter** | Check "Content" 
 
+  <img src="https://user-images.githubusercontent.com/44923999/190479224-43f1e5bf-a4b4-45d7-9f3b-c09358a40325.png" width="800" title="Snipped: September 15, 2022" />
 
+* Click into the resulting "**Content of the event**" textbox, and in the resulting pop-up, select **Body** from "**HTTP, Get Costs**"
 
-### Miscellaneous Notes (incorporate or delete before publishing)
+* Click **Save**
 
+### Step 10: Ingest Data
+Follow the instructions at [One-Click Ingestion](Data_Acquisition_OneClickIngestion.md) to setup the ingestion from Event Hub to Data Explorer.
 
-scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'}, rather than scope Subscription {i.e., '/subscriptions/{subscriptionId}/'}
-
-
-@range(0,div(div(div(div(div(div(sub(ticks(pipeline().parameters.EndDate),ticks(pipeline().parameters.StartDate)),10),1000),1000),60),60),24))
-
-ADF equivalent of DATEDIFF
-
-@addDays(pipeline().parameters.StartDate, item())
-
-@concat('https://management.azure.com/subscriptions/'
-    ,item()
-    ,'/resourcegroups?api-version=2021-04-01'
-    )
-
-
-dateDifference(addToTime('1970-01-01', parameters('StartDate'),'second'),addToTime('1970-01-01', parameters('EndDate'),'second'))
-
-addDays(parameters('StartDate'),Counter,'yyyy-MM-ddTHH:mm:ssZ')
-
-formatDateTime(parameters('StartDate'),'yyyy-MM-ddTHH:mm:ssZ')
-
+  <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
