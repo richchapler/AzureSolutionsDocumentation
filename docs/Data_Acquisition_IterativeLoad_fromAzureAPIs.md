@@ -519,6 +519,16 @@ In this step, we will send the Cost Management API response to the Event Hub (fo
 
 * Navigate to **Designer**
 * Click the **+** icon inside the "For Each, Dates" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Send Event**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190478428-ca6f598d-cf32-44dd-a440-a9a791d7a2e8.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**Send Event**" pop-out form, **Create Connection** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Authentication Type** | Select "**Connection String**" 
+  **Connection String** | Paste the "**Connection string-primary ke**y" value copied from your Event Hub Namespace >> **Shared access policies**
 
 
 
