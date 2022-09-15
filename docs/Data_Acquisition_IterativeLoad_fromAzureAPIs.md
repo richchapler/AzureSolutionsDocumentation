@@ -52,7 +52,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 #### Variables
 
-* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190261952-61599cfe-a8f5-4bff-9f32-c6f75ec0535f.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -74,7 +74,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   <img src="https://user-images.githubusercontent.com/44923999/190411759-3537a9d9-7b14-4775-a269-4488e71982e2.png" width="800" title="Snipped: September 15, 2022" />
 
-* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
@@ -130,7 +130,8 @@ In this step, we will create a workflow, initialize variables, and add parameter
 ### Step 3: Get Bearer Token
 In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable.
 
-* Click the **+** underneath "**Recurrence, Daily**"
+* Navigate to **Designer**
+* Click the **+** icon underneath "**Recurrence, Daily**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190418481-06a71761-cec0-4f6b-b06f-20e7230c58d9.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -155,7 +156,7 @@ In this step, we will request an access token from the Client Credentials Token 
 
 #### Initialize Token Variable
 
-* Click the **+** under **HTTP** and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon under **HTTP** and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190437313-7be79dc5-9120-44e8-a69a-bef6fd290aeb.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -186,7 +187,8 @@ Before we move on to the next step, let's confirm that what we have created (so 
 ### Step 4: Prepare Dates Array
 In this step, we will iterate through dates between StartDate and EndDate and append to the Dates array.
 
-* Click the **+** underneath "**Recurrence, Daily**" and then "**Add a parallel branch**" on the resulting pop-up menu
+* Navigate to **Designer**
+* Click the **+** icon underneath "**Recurrence, Daily**" and then "**Add a parallel branch**" on the resulting pop-up menu
 
 #### "Counter" Variable
 
@@ -206,7 +208,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### "Dates" Variable
 
-* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190446998-f40ffa00-2dae-43a9-8445-0ffd7db5d057.png" width="800" title="Snipped: September 15, 2022" />
@@ -223,7 +225,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### Until Loop
 
-* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190447971-9107b07e-78a0-43b7-a9d7-134ec445a786.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -243,7 +245,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### Until Loop, Append Date
 
-* Click the **+** inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190450048-918ca5c1-a382-44f2-8e20-6cc3053562b1.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -262,7 +264,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### Until Loop, Increment Counter
 
-* Click the **+** inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190453240-f8abf10c-cc9d-48f2-8b06-c69525b87ccb.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -279,6 +281,26 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   
 * Click **Save**
 
+#### Confirm Success
+Before we move on to the next step, let's confirm that what we have created (so far) is functional.
+
+* Navigate to **Overview**
+* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Click on the new "**Running**" item in the "**Run History**" list
+
+  <img src="https://user-images.githubusercontent.com/44923999/190454850-6fbf4344-6e90-4249-aaa8-cd4b39ed212d.png" width="800" title="Snipped: September 15, 2022" />
+
+* Confirm that all actions succeed and click on those you would like to understand better
+
+### Step 5: Create Nested Iteration
+In this step, we will nest "For Each" actions for Subscriptions, Resource Groups, and Dates.
+
+* Click the **+** icon at the bottom of the page and then "**Add an action**" on the resulting pop-up menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/190455774-3fc7ce49-37d8-40c0-bb4d-b0ba410fe0e9.png" width="800" title="Snipped: September 15, 2022" />
+
+
+
 
 
 
@@ -292,7 +314,6 @@ _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **Service
 
 scope Resource Group {i.e., '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'}, rather than scope Subscription {i.e., '/subscriptions/{subscriptionId}/'}
 
-(ISO-8601 formatted strings per Logic App requirements)
 
 ```
 {
