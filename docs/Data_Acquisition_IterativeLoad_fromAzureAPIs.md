@@ -105,6 +105,14 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 
 
+
+
+
+
+
+
+
+
 ### Miscellaneous Notes (incorporate or delete before publishing)
 
 _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
