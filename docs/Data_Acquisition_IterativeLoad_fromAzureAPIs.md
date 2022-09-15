@@ -70,8 +70,6 @@ In this step, we will create a workflow, initialize variables, and add parameter
   
   _Note: Logic Apps does not have a data type for DateTime, so we are using string and will handle usage in expressions_
 
-* Click **Save**
-
   <img src="https://user-images.githubusercontent.com/44923999/190411759-3537a9d9-7b14-4775-a269-4488e71982e2.png" width="800" title="Snipped: September 15, 2022" />
 
 * Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
@@ -83,8 +81,6 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Name** | Enter "Scope" 
   **Type** | Select "String" 
   **Value** | {null}
-
-* Click **Save**
 
 #### Parameters
 
@@ -101,7 +97,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Select "Array"
   **Value** | Your SubscriptionId values in form: `[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
-* Click **X** to close the pop-out form and then click **Save**
+* Click **X** to close the pop-out form
 
   <img src="https://user-images.githubusercontent.com/44923999/190417711-b98ea504-7f0d-4ab3-a4e3-79e03c47c724.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -125,7 +121,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   
   _Note: Parameters will be alphabetized regardless of the order in which you create them_
 
-* Click **X** to close the pop-out form and then click **Save**
+* Click **X** to close the pop-out form
 
 ### Step 3: Get Bearer Token
 In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable.
@@ -151,8 +147,6 @@ In this step, we will request an access token from the Client Credentials Token 
   **URI** | Add dynamic content: `https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token`
   **Headers** | Add dynamic content: `content-type` :: `application/x-www-form-urlencoded`
   **Body** | Add dynamic content:  `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
-
-* Click **Save**
 
 #### Initialize Token Variable
 
@@ -204,8 +198,6 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Type** | Select "String" 
   **Value** | Enter "0"
 
-* Click **Save**
-
 #### "Dates" Variable
 
 * Click the **+** icon to insert a new step and then "**Add an action**" on the resulting pop-up menu
@@ -220,8 +212,6 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Name** | Enter "Dates" 
   **Type** | Select "Array" 
   **Value** | {null}
-
-* Click **Save**
 
 #### Until Loop
 
@@ -241,8 +231,6 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Type** | Select "is greather than" 
   **Choose a value** | Add dynamic content: `addDays(parameters('EndDate'), 0)`
 
-* Click **Save**
-
 #### Until Loop, Append Date
 
 * Click the **+** icon inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
@@ -260,8 +248,6 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Name** | Select "Dates" 
   **Value** | Add dynamic content: `addDays(parameters('StartDate'),variables('Counter'))`
   
-* Click **Save**
-
 #### Until Loop, Increment Counter
 
 * Click the **+** icon inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
@@ -299,8 +285,19 @@ In this step, we will nest "For Each" actions for Subscriptions, Resource Groups
 
   <img src="https://user-images.githubusercontent.com/44923999/190455774-3fc7ce49-37d8-40c0-bb4d-b0ba410fe0e9.png" width="800" title="Snipped: September 15, 2022" />
 
+#### For Each Subscription
 
+* On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/190459574-150f4e41-8427-49de-b134-33bde1a9679b.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**For each**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Select an output from previous steps** | Select "Subscriptions" 
+  
+* Click the **+** icon inside the "For each" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
 
 
 
