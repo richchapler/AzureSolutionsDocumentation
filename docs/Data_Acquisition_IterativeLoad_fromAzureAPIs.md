@@ -193,7 +193,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190445093-9afe8806-8102-4824-9d33-7c0481adf007.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190445905-5a3247ab-c764-4330-985f-dff913fa3348.png" width="800" title="Snipped: September 15, 2022" />
 
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
