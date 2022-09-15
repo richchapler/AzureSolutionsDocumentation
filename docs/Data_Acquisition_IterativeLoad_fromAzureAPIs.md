@@ -99,7 +99,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   ------ | ------
   **Name** | Enter "Subscriptions" 
   **Type** | Select "Array"
-  **Value** | Your SubscriptionId values in form:<br>`[ "{Subscription1_Id}","{Subscription2_Id}" ]`
+  **Value** | Your SubscriptionId values in form: `[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
 * Click **X** to close the pop-out form and then click **Save**
 
@@ -111,7 +111,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   ------ | ------
   **Name** | Enter "StartDate" 
   **Type** | Select "String"
-  **Value** | `2022-01-01` (or a date value that is meaningful for you)
+  **Value** | Enter `2022-01-01` (or a date value that is meaningful for you)
 
   _Note: Date values will be required in ISO-8601 formatted strings {e.g., 2022-09-01T00:00:00.0000000}; abbreviated versions work fine_
 
@@ -121,7 +121,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   ------ | ------
   **Name** | Enter "EndDate" 
   **Type** | Select "String"
-  **Value** | `2022-08-31` (or a date value that is meaningful for you)
+  **Value** | Enter `2022-08-31` (or a date value that is meaningful for you)
   
   _Note: Parameters will be alphabetized regardless of the order in which you create them_
 
@@ -147,9 +147,9 @@ In this step, we will request an access token from the Client Credentials Token 
   Prompt | Entry
   ------ | ------
   **Method** | Select "POST" 
-  **URI** | `https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token`
-  **Headers** | `content-type` :: `application/x-www-form-urlencoded`
-  **Body** | `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
+  **URI** | Add dynamic content: `https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token`
+  **Headers** | Add dynamic content: `content-type` :: `application/x-www-form-urlencoded`
+  **Body** | Add dynamic content:  `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
 
 * Click **Save**
 
@@ -220,6 +220,31 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Value** | {null}
 
 * Click **Save**
+
+#### Until Loop
+
+* Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/190447971-9107b07e-78a0-43b7-a9d7-134ec445a786.png" width="800" title="Snipped: September 15, 2022" />
+
+* On the resulting "**Add an action**" pop-out, search for and then select "**Until**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190448952-3407b518-4eaa-4ef3-b095-12d4a82efe6a.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting **Until** pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Choose a value** | Add dynamic content: `addDays(parameters('StartDate'), variables('Counter'))`
+  **Type** | Select "is greather than" 
+  **Choose a value** | Add dynamic content: `addDays(parameters('EndDate'), 0)`
+
+* Click **Save**
+
+
+
+
+
 
 
 
