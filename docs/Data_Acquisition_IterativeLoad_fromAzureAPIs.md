@@ -55,6 +55,8 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 * Complete the resulting pop-out form and then click **Save**
 
+  _Note: I chose daily because I believe that that is how often Cost Management data updates_
+
 #### Variables
 
 * Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
@@ -102,8 +104,6 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Select "Array"
   **Value** | Your SubscriptionId values in form: `[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
-* Click **X** to close the pop-out form
-
   <img src="https://user-images.githubusercontent.com/44923999/190417711-b98ea504-7f0d-4ab3-a4e3-79e03c47c724.png" width="800" title="Snipped: September 15, 2022" />
 
 * Repeat for the **StartDate** parameter
@@ -149,11 +149,11 @@ In this step, we will request an access token from the Client Credentials Token 
   Prompt | Entry
   ------ | ------
   **Method** | Select "POST" 
-  **URI** | Add dynamic content: `https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token`
-  **Headers** | Add dynamic content: `content-type` :: `application/x-www-form-urlencoded`
-  **Body** | Add dynamic content:  `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
+  **URI** | Enter `https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token`
+  **Headers** | Add `content-type` :: `application/x-www-form-urlencoded`
+  **Body** | Enter  `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
 
-  _Note: If you expect processing to take longer than an hour {i.e., the lifespan of a token}, you might consider moving token logic to the nested iteration_
+  _Note: If you expect processing to take longer than an hour {i.e., the lifespan of a token}, you might consider moving token handling to the nested iteration_
 
 #### Initialize Token Variable
 
@@ -167,7 +167,7 @@ In this step, we will request an access token from the Client Credentials Token 
   ------ | ------
   **Name** | Enter "Token" 
   **Type** | Select "String"
-  **Value** | Add dynamic content `concat('Bearer ',body('HTTP,_Get_Token').access_token)`
+  **Value** | Add dynamic content<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`
 
 * Click **Save**
 
@@ -226,7 +226,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
   <img src="https://user-images.githubusercontent.com/44923999/190447971-9107b07e-78a0-43b7-a9d7-134ec445a786.png" width="800" title="Snipped: September 15, 2022" />
 
-* On the resulting "**Add an action**" pop-out, search for and then select **Until**
+* On the resulting "**Add an action**" pop-out, search for and then select "**Until**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190448952-3407b518-4eaa-4ef3-b095-12d4a82efe6a.png" width="800" title="Snipped: September 15, 2022" />
 
