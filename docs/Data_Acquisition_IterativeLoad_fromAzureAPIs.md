@@ -227,7 +227,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
   <img src="https://user-images.githubusercontent.com/44923999/190447971-9107b07e-78a0-43b7-a9d7-134ec445a786.png" width="800" title="Snipped: September 15, 2022" />
 
-* On the resulting "**Add an action**" pop-out, search for and then select "**Until**"
+* On the resulting "**Add an action**" pop-out, search for and then select **Until**
 
   <img src="https://user-images.githubusercontent.com/44923999/190448952-3407b518-4eaa-4ef3-b095-12d4a82efe6a.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -241,8 +241,24 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 * Click **Save**
 
+#### Until Loop, Append Date
 
+* Click the **+** inside the "Do..Until" action to insert a new step and then "**Add an action**" on the resulting pop-up menu
 
+  <img src="https://user-images.githubusercontent.com/44923999/190450048-918ca5c1-a382-44f2-8e20-6cc3053562b1.png" width="800" title="Snipped: September 15, 2022" />
+
+* On the resulting "**Add an action**" pop-out, search for and then select "**Append to array variable**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190450440-bee99bd8-3889-40a0-9772-d19445c2f806.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**Append to array variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Enter "Dates" 
+  **Value** | Add dynamic content: `addDays(parameters('StartDate'),variables('Counter'))`
+  
+* Click **Save**
 
 
 
