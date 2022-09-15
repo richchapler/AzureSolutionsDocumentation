@@ -403,7 +403,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190471493-79690223-8abd-46f0-b496-01d775c8e544.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190473630-b2905f7a-1af8-4d00-a0b4-dd24ce08699b.png" width="800" title="Snipped: September 15, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
