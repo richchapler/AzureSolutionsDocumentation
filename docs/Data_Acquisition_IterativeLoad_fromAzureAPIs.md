@@ -305,7 +305,7 @@ In this step, we will nest "For Each" actions for Subscriptions.
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190461148-1eec1ca0-36bd-4e9e-aec6-952cd170c064.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190466131-a89cc632-8a24-4806-9368-87e5e591922e.png" width="800" title="Snipped: September 15, 2022" />
 
 * Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
@@ -324,7 +324,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190454850-6fbf4344-6e90-4249-aaa8-cd4b39ed212d.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/190466998-7779d281-3390-481c-b520-d7e995b30249.png" width="800" title="Snipped: September 15, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
