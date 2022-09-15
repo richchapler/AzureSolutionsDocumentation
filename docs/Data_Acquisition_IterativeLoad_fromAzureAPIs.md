@@ -22,7 +22,7 @@ This solution requires the following resources:
 * [**Logic App**](Infrastructure_LogicApp.md)
 
 ### Step 2: Prepare Workflow
-In this step, we will create a workflow, initialize variables, and add parameters
+In this step, we will create a workflow, initialize variables, and add parameters.
 
 * Navigate to your Logic App
 
@@ -60,7 +60,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   <img src="https://user-images.githubusercontent.com/44923999/190410009-bed8f453-2963-4912-8f34-c9fdf5df1df5.png" width="800" title="Snipped: September 15, 2022" />
 
-* Complete the resulting "**Initialize variable**" pop-out form, including:
+* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
   Prompt | Entry
   ------ | ------
@@ -76,7 +76,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 * Click the **+** to insert a new step and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
-* Complete the resulting "**Initialize variable**" pop-out form, including:
+* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
   Prompt | Entry
   ------ | ------
@@ -128,13 +128,13 @@ In this step, we will create a workflow, initialize variables, and add parameter
 * Click **X** to close the pop-out form and then click **Save**
 
 ### Step 3: Get Bearer Token
-In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable
+In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable.
 
-* Click the **+** underneath "**Recurrence, Daily**" and then "Add an action" on the resulting pop-up menu
+* Click the **+** underneath "**Recurrence, Daily**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190418481-06a71761-cec0-4f6b-b06f-20e7230c58d9.png" width="800" title="Snipped: September 15, 2022" />
 
-* Click the **+** to insert a new step and then "**Add a parallel branch**" on the resulting pop-up menu
+* Click "**Add a parallel branch**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/190419847-2bd758fe-fa7f-441e-a4fc-e8210ee9197e.png" width="800" title="Snipped: September 15, 2022" />
 
@@ -184,7 +184,29 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 4: Prepare Dates Array
-In this step, lorem ipsum...
+In this step, we will iterate through dates between StartDate and EndDate and append to the Dates array.
+
+* Click the **+** underneath "**Recurrence, Daily**" and then "**Add a parallel branch**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190444707-9b5f3484-fd83-47db-a724-3d8921ed9eca.png" width="800" title="Snipped: September 15, 2022" />
+
+* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/190445093-9afe8806-8102-4824-9d33-7c0481adf007.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Enter "Counter" 
+  **Type** | Select "String" 
+  **Value** | Enter "0"
+
+* Click **Save**
+
+
+
 
 
 
