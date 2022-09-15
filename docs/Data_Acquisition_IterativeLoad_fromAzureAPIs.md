@@ -140,6 +140,22 @@ In this step, we will request an access token from the Client Credentials Token 
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/190432016-ee55661b-22c0-4f08-bbf9-2c9e860c5107.png" width="800" title="Snipped: September 15, 2022" />
+
+* Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Method** | Select **POST** 
+  **URI** | `https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token`
+  **Headers** | `content-type` :: `application/x-www-form-urlencoded`
+  **Body** | `grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}&resource=https://management.azure.com/`
+
+* Click **Save**
+
+
+
+
 
 
 
