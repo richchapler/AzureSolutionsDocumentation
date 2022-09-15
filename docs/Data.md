@@ -8,10 +8,11 @@
   :----- | :----- | :----- | :----- | :-----
   [Pre-Ingestion Checklist](Data_Acquisition_PreIngestionChecklist.md) | Data Explorer | Sample Data | | KQL
   [One-Click Ingestion](Data_Acquisition_OneClickIngestion.md) | Data Explorer Wizard | Data Lake | Data Explorer | No Code
-  [...from Cost Management via REST API](Data_Acquisition_fromCostManagementAPI.md) | Synapse Pipeline | Azure API | Data Explorer | Low Code
+  [...from Cost Management API](Data_Acquisition_fromCostManagementAPI.md) | Synapse Pipeline | Azure API | Data Explorer | Low Code
+  [...from Cost Management API, Iterative Load](Data_Acquisition_IterativeLoad_fromAzureAPIs.md) | Logic App | Azure API | Data Explorer | Low Code
   [...from IoT Simulation](Data_Acquisition_fromIoTSimulation.md) | Continuous Ingestion (Event Hub) | IoT Central | Data Explorer | No Code
-  [...from Log Analytics via REST API](Data_Acquisition_fromLogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
-  [...from Purview via REST API](Data_Acquisition_fromPurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
+  [...from Log Analytics API](Data_Acquisition_fromLogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
+  [...from Purview API](Data_Acquisition_fromPurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
   [...from Resource Diagnostics](Data_Acquisition_fromResourceDiagnostics.md) | Continuous Ingestion (Event Hub) | Resource Diagnostics | Data Explorer | No Code
 
 ### Analysis
