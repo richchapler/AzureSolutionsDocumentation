@@ -430,6 +430,7 @@ In this step, we will send a request to the Cost Management API using iterative 
   **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
 *  Finally, paste the following in **Body**:
+
   ```
   {
     "dataset": {
