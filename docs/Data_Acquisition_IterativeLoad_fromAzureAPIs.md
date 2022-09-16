@@ -114,7 +114,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Select "String"
   **Value** | Enter `2022-01-01` (or a date value that is meaningful for you)
 
-  _Note: Date values will be required in ISO-8601 formatted strings {e.g., 2022-09-01T00:00:00.0000000}; abbreviated versions work fine_
+  _Note: Date values will be required in ISO-8601 formatted strings {e.g., 2022-09-15T00:00:00.0000000}; abbreviated versions {e.g., 2022-09-15} work fine_
 
 * Repeat for the **EndDate** parameter
 
