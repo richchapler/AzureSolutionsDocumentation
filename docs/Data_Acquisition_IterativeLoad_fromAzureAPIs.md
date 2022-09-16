@@ -426,7 +426,7 @@ In this step, we will send a request to the Cost Management API using iterative 
   Prompt | Entry
   ------ | ------
   **Method** | Select "POST" 
-  **URI** | Add expression:<br>`[concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')](https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01)`
+  **URI** | Add expression:<br>`https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01`
   **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
 *  Finally, paste the following in **Body**:
