@@ -202,7 +202,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   Prompt | Entry
   ------ | ------
   **Name** | Enter "Counter" 
-  **Type** | Select "String" 
+  **Type** | Select "Int" 
   **Value** | Enter "0"
 
 #### "Dates" Variable
