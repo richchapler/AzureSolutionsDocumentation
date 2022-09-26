@@ -6,6 +6,12 @@ _(aka “ADX,” “Azure Data Explorer,” “Kusto”)_
 ### Frequently Asked Questions (FAQ)
 The answers provided below represent best-known information on a given topic as of a given date.
 
+#### Retention Policy
+Recoverability … what happens if important data is deleted as a result of retention policy settings?
+* September 26, 2022... Documentation explains that retention policy includes two properties:
+  * SoftDeletePeriod, the time span for which data is guaranteed to be available to query (default: 100 years)
+  * Recoverability, ensures that data will be recoverable for 14 days after soft delete (default: enabled)
+
 #### Data Share
 Cross-Region Cluster-Follower … when will it be possible to follow shared ADX A in region A from ADX B in region B?
 * August 11, 2022... "no plans to re-implement this product feature... was previously implemented and then deprecated because it created unpredictable cost for customers"
