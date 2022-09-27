@@ -134,7 +134,7 @@ In this step, we will request an access token from the Client Credentials Token 
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192594647-4ef16cb7-d235-4ec6-94f4-4962aa173c27.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192596099-785e7bc4-a984-481d-9aa3-f715afef92b3.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
@@ -150,8 +150,9 @@ In this step, we will request an access token from the Client Credentials Token 
 #### Initialize Token Variable
 
 * Click the **+** icon under **HTTP** and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190437313-7be79dc5-9120-44e8-a69a-bef6fd290aeb.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192595638-7986c38c-9142-4d44-bdd9-0068d020db05.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
@@ -159,7 +160,7 @@ In this step, we will request an access token from the Client Credentials Token 
   ------ | ------
   **Name** | Enter "Token" 
   **Type** | Select "String"
-  **Value** | Add expression:<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`
+  **Value** | Enter expression:<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`
 
 * Click **Save**
 
