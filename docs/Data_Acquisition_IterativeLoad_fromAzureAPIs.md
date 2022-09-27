@@ -594,13 +594,13 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 * Click the **+** icon inside the "**For Each, Response Row**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, click the **Azure** tab, search for and then select "**Run control command and render a chart**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192559350-4c4d3db1-ccf3-4309-bee5-9ea97c7daf3a.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192640678-a1a697d0-df48-4953-aa9f-62c2cecb83d8.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Run control command and render a chart**" pop-out form, **Parameters** tab, including:
 
   Prompt | Entry
   ------ | ------
-  **Control Command** | Enter `.ingest inline into table t <| @{body('HTTP,_Get_Costs')}`
+  **Control Command** | Select variable **KQL**
   **Chart Type** | Select "**Html Table**"
   
   _Note: the selected "**Chart Type**" value does not matter; it is required by the Operation, but the result will not be used_
@@ -609,19 +609,14 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
   <img src="https://user-images.githubusercontent.com/44923999/190478665-5e5dd77c-c211-4a31-8f14-284297005854.png" width="800" title="Snipped: September 15, 2022" />
 
-* Complete the resulting "**Send Event**" pop-out form, **Parameters** tab, including:
-
-  Prompt | Entry
-  ------ | ------
-  **Add new parameter** | Check "**Content**" 
-
-  <img src="https://user-images.githubusercontent.com/44923999/190479224-43f1e5bf-a4b4-45d7-9f3b-c09358a40325.png" width="800" title="Snipped: September 15, 2022" />
-
-* Click into the resulting "**Content of the event**" textbox, and in the resulting pop-up, select **Body** from "**HTTP, Get Costs**"
-
 * Click **Save**
 
-### Step 10: Ingest Data
-Follow the instructions at [One-Click Ingestion](Data_Acquisition_OneClickIngestion.md) to setup the ingestion from Event Hub to Data Explorer.
+
+
+
+
+
+
+
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
