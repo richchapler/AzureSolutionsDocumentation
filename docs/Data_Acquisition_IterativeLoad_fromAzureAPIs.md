@@ -298,7 +298,7 @@ In this step, we will create a "For Each" action for Subscriptions.
 * Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192626820-f7dace14-0a42-4fec-8b4d-e5529063fd2e.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192627282-3ac16593-cdfb-4319-b721-4434907849fa.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
@@ -308,7 +308,7 @@ In this step, we will create a "For Each" action for Subscriptions.
   **URI** | Enter expression:<br>`concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')`
   **Headers** | Add headers:<br>`Authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
-_Note: Capitalization of the header key "Authorization" appears to be important to this API_
+  _Note: Capitalization of the header key "Authorization" appears to be important to this API_
 
 * Click **Save**
 
