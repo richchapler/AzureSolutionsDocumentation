@@ -224,9 +224,9 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
   Prompt | Entry
   ------ | ------
-  **Choose a value** | Add expression:<br>`addDays(parameters('StartDate'), variables('Counter'))`
+  **Choose a value** | Enter expression:<br>`addDays(parameters('StartDate'), variables('Counter'))`
   **Type** | Select "is greater than" 
-  **Choose a value** | Add expression:<br>`addDays(parameters('EndDate'), 0)`
+  **Choose a value** | Enter expression:<br>`addDays(parameters('EndDate'), 0)`
 
 #### Until Loop, Append Date
 
@@ -243,7 +243,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   Prompt | Entry
   ------ | ------
   **Name** | Select "Dates" 
-  **Value** | Add expression:<br>`addDays(parameters('StartDate'),variables('Counter'))`
+  **Value** | Enter expression:<br>`addDays(parameters('StartDate'),variables('Counter'))`
   
 #### Until Loop, Increment Counter
 
@@ -348,7 +348,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
   Prompt | Entry
   ------ | ------
   **Name** | Select "**Scope**" 
-  **Value** | Add expression: `item().id`
+  **Value** | Enter expression: `item().id`
 
 * Click **Save**
 
@@ -388,7 +388,7 @@ In this step, we will nest "For Each" actions for Dates.
   Prompt | Entry
   ------ | ------
   **Name** | Select "Date" 
-  **Value** | Add expression: `item()`
+  **Value** | Enter expression: `item()`
 
 * Click **Save**
 
@@ -417,7 +417,7 @@ In this step, we will send a request to the Cost Management API using iterative 
   Prompt | Entry
   ------ | ------
   **Method** | Select "POST" 
-  **URI** | Add expression:<br>`https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01`
+  **URI** | Enter expression:<br>`https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01`
   **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
 *  Finally, paste the following in **Body**:
@@ -507,7 +507,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190477511-052af683-c8d6-4c79-be7e-62612c493e27.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192635839-a571b993-877f-445c-a095-c75e74c52e49.png" width="800" title="Snipped: September 27, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
