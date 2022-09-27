@@ -1,6 +1,6 @@
 ## Data Acquisition... Iterative Load from Azure APIs
 
-![image](https://user-images.githubusercontent.com/44923999/190155800-820282af-0eb6-47ff-b392-ed1abf9783f9.png)
+![image](https://user-images.githubusercontent.com/44923999/192547308-676da706-ba85-49cc-9c6e-d8bbe997fa62.png)
 
 This use case considers requirement statements like:
 * "We need to capture and analyze cost data from many subscriptions"
