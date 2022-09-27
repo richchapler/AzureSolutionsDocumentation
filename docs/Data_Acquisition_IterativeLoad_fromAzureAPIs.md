@@ -59,7 +59,6 @@ In this step, we will create a workflow, initialize variables, and add parameter
 * Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/192591045-fe09d81e-5ee8-41f9-b688-2d653dfd22fb.png" width="800" title="Snipped: September 27, 2022" />
-![image](https://user-images.githubusercontent.com/44923999/.png)
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
