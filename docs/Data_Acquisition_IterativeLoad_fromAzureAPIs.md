@@ -147,12 +147,12 @@ In this step, we will request an access token from the Client Credentials Token 
 
   _Note: If you expect processing to take longer than an hour {i.e., the lifespan of a token}, you might consider moving token handling to the nested iteration_
 
-#### Initialize Token Variable
+#### Initialize Variable, Token
 
 * Click the **+** icon under **HTTP** and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192597024-04f33f75-da3a-4533-b4fa-7ec057ad1433.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192597248-aae13dce-04a6-4498-831c-59050c9cd278.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
