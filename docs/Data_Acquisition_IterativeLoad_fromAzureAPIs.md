@@ -570,7 +570,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/192635839-a571b993-877f-445c-a095-c75e74c52e49.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192638440-104b408d-96d8-4271-b304-a94c4c5b777c.png" width="800" title="Snipped: September 27, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
@@ -578,6 +578,45 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will send the Cost Management API response to Data Explorer using an `.ingest inline` command.
 
 * Navigate to **Designer**
+
+#### Iterate through Response Rows
+In this step, we will nest "For Each" actions for Dates.
+
+* Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON, Response**" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/192639186-4656db9d-fcda-48f2-88ff-fde32a9a785c.png" width="800" title="Snipped: September 27, 2022" />
+
+* Complete the resulting "**For each**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Select an output from previous steps** | Enter expression: `variables('Dates')`
+
+* Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/192629234-e12c2485-e04c-4102-9dea-fdba5d50ae8c.png" width="800" title="Snipped: September 27, 2022" />
+
+* On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "rows" grom the "**Parse JSON**" grouping
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Write to ADX
+
 * Click the **+** icon inside the "**For Each, Dates**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, click the **Azure** tab, search for and then select "**Run control command and render a chart**"
 
