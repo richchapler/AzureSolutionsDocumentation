@@ -502,12 +502,12 @@ In this step, we will request and process data from the Cost Management API.
   _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
 
 
-#### Parse JSON, Response
+#### Parse JSON
 
 * Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Parse JSON**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192630740-f07210f9-c467-4779-bddd-62bb69af05fe.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192637507-42df62f5-22e8-4ae0-988d-2e7db949b631.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
