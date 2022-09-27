@@ -580,23 +580,11 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 * Navigate to **Designer**
 
 #### Iterate through Response Rows
-In this step, we will nest "For Each" actions for Dates.
 
 * Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON, Response**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192639186-4656db9d-fcda-48f2-88ff-fde32a9a785c.png" width="800" title="Snipped: September 27, 2022" />
-
-* Complete the resulting "**For each**" pop-out form, **Parameters** tab, including:
-
-  Prompt | Entry
-  ------ | ------
-  **Select an output from previous steps** | Enter expression: `variables('Dates')`
-
-* Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
-* On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
-
-  <img src="https://user-images.githubusercontent.com/44923999/192629234-e12c2485-e04c-4102-9dea-fdba5d50ae8c.png" width="800" title="Snipped: September 27, 2022" />
 
 * On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "rows" grom the "**Parse JSON**" grouping
 
