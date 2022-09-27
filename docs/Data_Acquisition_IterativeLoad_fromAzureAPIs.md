@@ -219,7 +219,6 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 * On the resulting "**Add an action**" pop-out, search for and then select "**Until**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192621503-61143154-dd17-43d2-aefe-62c0c18cc0d8.png" width="800" title="Snipped: September 27, 2022" />
-![image](https://user-images.githubusercontent.com/44923999/.png)
 
 * Complete the resulting **Until** pop-out form, **Parameters** tab, including:
 
@@ -233,11 +232,11 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 * Click the **+** icon inside the "**Do..Until**" action and then "**Add an action**" on the resulting pop-up menu
 
-  <img src="https://user-images.githubusercontent.com/44923999/190450048-918ca5c1-a382-44f2-8e20-6cc3053562b1.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192622104-b9b829e1-115a-465b-8188-5aa8eb7ce3ca.png" width="800" title="Snipped: September 27, 2022" />
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Append to array variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190450440-bee99bd8-3889-40a0-9772-d19445c2f806.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192622263-8aa69872-87c3-4aa5-8d05-3ece589db462.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Append to array variable**" pop-out form, **Parameters** tab, including:
 
