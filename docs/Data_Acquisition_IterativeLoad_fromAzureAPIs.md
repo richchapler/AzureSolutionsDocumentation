@@ -152,7 +152,7 @@ In this step, we will request an access token from the Client Credentials Token 
 * Click the **+** icon under **HTTP** and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192595638-7986c38c-9142-4d44-bdd9-0068d020db05.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192597024-04f33f75-da3a-4533-b4fa-7ec057ad1433.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
@@ -161,6 +161,8 @@ In this step, we will request an access token from the Client Credentials Token 
   **Name** | Enter "Token" 
   **Type** | Select "String"
   **Value** | Enter expression:<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`
+
+  _Note: The parenthetic "body" value {e.g., "body('HTTP,_Get_Token')} may need to change depending on what you named the component_ 
 
 * Click **Save**
 
