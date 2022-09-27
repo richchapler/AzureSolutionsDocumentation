@@ -128,6 +128,9 @@ In this step, we will create a workflow, initialize variables, and add parameter
 In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable.
 
 * Navigate to **Designer**
+
+#### HTTP, Get Token
+
 * Click the **+** icon underneath "**Recurrence**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192594246-6a59769f-cd1b-440c-95e0-d82620a5ec0e.png" width="800" title="Snipped: September 27, 2022" />
@@ -188,10 +191,10 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will iterate through dates between StartDate and EndDate and append to the Dates array.
 
 * Navigate to **Designer**
-* Click the **+** icon underneath "**Recurrence**" and then "**Add a parallel branch**" on the resulting pop-up menu
 
 #### Initialize Variable, Counter
 
+* Click the **+** icon underneath "**Recurrence**" and then "**Add a parallel branch**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192600226-de668e6a-fa41-44ea-85a3-032b67d9e88c.png" width="800" title="Snipped: September 27, 2022" />
@@ -210,7 +213,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 * Repeat for array variable **Dates** (with no initial value)
 
-#### Until Loop
+#### Do..Until
 
 * Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 
@@ -228,7 +231,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Type** | Select "is greater than" 
   **Choose a value** | Enter expression:<br>`addDays(parameters('EndDate'), 0)`
 
-#### Until Loop, Append Date
+#### Append to Array Variable, Date
 
 * Click the **+** icon inside the "**Do..Until**" action and then "**Add an action**" on the resulting pop-up menu
 
@@ -245,7 +248,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Name** | Select "Dates" 
   **Value** | Enter expression:<br>`addDays(parameters('StartDate'),variables('Counter'))`
   
-#### Until Loop, Increment Counter
+#### Increment Variable, Counter
 
 * Click the **+** icon inside the "**Do..Until**" action and then "**Add an action**" on the resulting pop-up menu
 
@@ -279,6 +282,9 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will create a "For Each" action for Subscriptions.
 
 * Navigate to **Designer**
+
+#### For Each, Subscription
+
 * Click the **+** icon at the bottom of the page and then "**Add an action**" on the resulting pop-up menu
 
   <img src="https://user-images.githubusercontent.com/44923999/192624266-b5b3a4d7-2d5a-4a7f-9064-70634dbf7290.png" width="800" title="Snipped: September 27, 2022" />
@@ -294,7 +300,9 @@ In this step, we will create a "For Each" action for Subscriptions.
   Prompt | Entry
   ------ | ------
   **Select an output from previous steps** | Select "Subscriptions" 
-  
+
+#### HTTP, Get Resource Groups
+
 * Click the **+** icon inside the "**For Each, Subscription**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
@@ -327,6 +335,9 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will create a "For Each" action for Resource Groups {aka Scopes}.
 
 * Navigate to **Designer**
+
+#### For Each, Resource Group
+
 * Click the **+** icon inside the "**For Each, Subscription**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
@@ -337,6 +348,8 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
   Prompt | Entry
   ------ | ------
   **Select an output from previous steps** | Enter expression: `body('HTTP,_Get_Resource_Groups').value`
+
+#### Set Variable, Scope
 
 * Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
@@ -367,6 +380,9 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will nest "For Each" actions for Dates.
 
 * Navigate to **Designer**
+
+#### For Each, Date
+
 * Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
@@ -377,6 +393,8 @@ In this step, we will nest "For Each" actions for Dates.
   Prompt | Entry
   ------ | ------
   **Select an output from previous steps** | Enter expression: `variables('Dates')`
+
+#### Set Variable, Date
 
 * Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
@@ -589,7 +607,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 * On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "**rows**" from the "**Parse JSON**" grouping
 
-#### Write to ADX
+#### ADX Command, Ingest
 
 * Click the **+** icon inside the "**For Each, Response Row**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, click the **Azure** tab, search for and then select "**Run control command and render a chart**"
@@ -611,7 +629,16 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 * Click **Save**
 
+#### Confirm Success
+Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
+* Navigate to **Overview**
+* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Click on the new "**Running**" item in the "**Run History**" list
+
+  <img src="https://user-images.githubusercontent.com/44923999/192638440-104b408d-96d8-4271-b304-a94c4c5b777c.png" width="800" title="Snipped: September 27, 2022" />
+
+* Confirm that all actions succeed and click on those you would like to understand better
 
 
 
