@@ -54,7 +54,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   _Note: I chose daily because I believe that that is how often Cost Management data updates_
 
-#### Variables
+#### Initialize Variable, Date
 
 * Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 
@@ -74,11 +74,15 @@ In this step, we will create a workflow, initialize variables, and add parameter
   
   _Note: Logic Apps does not have a data type for DateTime, so we use string and handle usage in expressions_
 
-  <img src="https://user-images.githubusercontent.com/44923999/192591752-1252451c-17e5-44e5-8e01-9163214d0672.png" width="800" title="Snipped: September 27, 2022" />
+#### Initialize Variable, Scope
+
+<img src="https://user-images.githubusercontent.com/44923999/192591752-1252451c-17e5-44e5-8e01-9163214d0672.png" width="800" title="Snipped: September 27, 2022" />
 
 * Repeat for string variable **Scope**
 
-  <img src="https://user-images.githubusercontent.com/44923999/192592437-11340df0-697a-4a13-9c6d-5948d07e30a9.png" width="800" title="Snipped: September 27, 2022" />
+#### Initialize Variable, KQL
+
+<img src="https://user-images.githubusercontent.com/44923999/192592437-11340df0-697a-4a13-9c6d-5948d07e30a9.png" width="800" title="Snipped: September 27, 2022" />
 
 * Repeat for string variable **KQL**
   
@@ -202,7 +206,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### Initialize Variable, Dates
 
-  <img src="https://user-images.githubusercontent.com/44923999/190446998-f40ffa00-2dae-43a9-8445-0ffd7db5d057.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192601399-1cf57b86-47cb-4678-a2d7-d8dcf36c7592.png" width="800" title="Snipped: September 15, 2022" />
 
 * Repeat for array variable **Dates**
 
