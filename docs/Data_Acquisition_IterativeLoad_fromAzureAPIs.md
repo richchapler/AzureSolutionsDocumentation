@@ -271,7 +271,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190454850-6fbf4344-6e90-4249-aaa8-cd4b39ed212d.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192623862-67e1bccb-a259-43f9-b97c-304dba148971.png" width="800" title="Snipped: September 27, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
