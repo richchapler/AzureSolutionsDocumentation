@@ -236,7 +236,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Append to array variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192622263-8aa69872-87c3-4aa5-8d05-3ece589db462.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192623210-b34b6282-152f-4df1-a5d6-4637a1e3ff2c.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Append to array variable**" pop-out form, **Parameters** tab, including:
 
