@@ -585,28 +585,13 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 * Then click "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192639186-4656db9d-fcda-48f2-88ff-fde32a9a785c.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192640257-3473416c-fbaa-4999-9396-4a400d1d28a1.png" width="800" title="Snipped: September 27, 2022" />
 
 * On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "**rows**" from the "**Parse JSON**" grouping
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### Write to ADX
 
-* Click the **+** icon inside the "**For Each, Dates**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Response Row**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, click the **Azure** tab, search for and then select "**Run control command and render a chart**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192559350-4c4d3db1-ccf3-4309-bee5-9ea97c7daf3a.png" width="800" title="Snipped: September 27, 2022" />
