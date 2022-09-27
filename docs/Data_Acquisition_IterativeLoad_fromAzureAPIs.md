@@ -597,7 +597,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 * Navigate to **Designer**
 
-#### Iterate through Response Rows
+#### For Each, Response Row
 
 * Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON, Response**" action
 * Then click "**Add an action**" on the resulting pop-up menu
@@ -606,6 +606,22 @@ In this step, we will send the Cost Management API response to Data Explorer usi
   <img src="https://user-images.githubusercontent.com/44923999/192640350-baaa1637-a1c9-43c8-9ae3-89cd66917b53.png" width="800" title="Snipped: September 27, 2022" />
 
 * On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "**rows**" from the "**Parse JSON**" grouping
+
+#### Set Variable, KQL
+
+* Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/192628042-c247947c-cd7c-45b1-ab6b-c52e4c2a22c1.png" width="800" title="Snipped: September 27, 2022" />
+
+* Complete the resulting "**Set variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Select "**KQL**" 
+  **Value** | Enter expression: `concat('.ingest inline into table CostManagement <| ', replace(replace(string(item()),'[',''),']',''))`
+
+* Click **Save**
 
 #### ADX Command, Ingest
 
