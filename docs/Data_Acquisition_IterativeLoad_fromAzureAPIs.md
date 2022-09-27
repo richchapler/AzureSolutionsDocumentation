@@ -200,20 +200,11 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   **Type** | Select "Integer" 
   **Value** | Enter 0
 
-#### "Dates" Variable
-
-* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
-* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
+#### Initialize Variable, Dates
 
   <img src="https://user-images.githubusercontent.com/44923999/190446998-f40ffa00-2dae-43a9-8445-0ffd7db5d057.png" width="800" title="Snipped: September 15, 2022" />
 
-* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
-
-  Prompt | Entry
-  ------ | ------
-  **Name** | Enter "Dates" 
-  **Type** | Select "Array" 
-  **Value** | {null}
+* Repeat for array variable **Dates**
 
 #### Until Loop
 
