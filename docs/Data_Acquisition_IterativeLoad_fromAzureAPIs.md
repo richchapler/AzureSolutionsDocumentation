@@ -6,11 +6,9 @@ This use case considers requirement statements like:
 * "We need to capture and analyze cost data from many subscriptions"
 * "Our subscriptions have more than 1,000 resources and are hitting the Cost Management API's per-request limitation"
 * "We want to pull historical data... 730 days {i.e., 2 years}"
-* "We want to pull more Cost Management API columns than before, but we haven't settled on a final set {i.e., schema **will** drift}"
 
 <br>The solution described in this documentation will:
 * Leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
-* Leverage Data Explorer's dynamic data type to provide for potential schema drift
 * Request data from the Cost Management API at the Resource Group level rather than Subscription level
 
 _Note: If you have Resource Groups with more than 1,000 resources, you might have to choose a more granular scope or other strategy_
@@ -34,7 +32,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 * Click on "**Create workflow >**" in the "**Create a workflow in Designer**" rectangle
 * On the resulting page click "**+ Add**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190224201-41c58642-dbb5-4636-8da4-d151b82bf838.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192587724-6af8e35b-406a-4b4c-bd78-0e38c7cab16e.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**New workflow**" pop-out form and then click **Create**
 
@@ -42,15 +40,15 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 * Click on the link for your new workflow
 
-  <img src="https://user-images.githubusercontent.com/44923999/190224716-25683448-8416-46ed-92ee-e284d7a326bf.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192587935-a0ccf68a-4cc7-420f-ac7f-4e021ea91315.png" width="800" title="Snipped: September 27, 2022" />
 
 * Navigate to **Designer**
 
-  <img src="https://user-images.githubusercontent.com/44923999/190228291-84e1f972-8d70-446d-8413-409c12ed2bc5.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192588119-475c52a0-49ce-4e8c-99c1-a098868a84df.png" width="800" title="Snipped: September 27, 2022" />
 
 * On the resulting screen and "**Add a trigger**" pop-out, search for and then select "**Schedule**" (aka "Recurrence")
 
-  <img src="https://user-images.githubusercontent.com/44923999/190257035-35c15279-4117-4e5b-8b7f-c4cfff15a386.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192588288-fbf2a72a-04d7-4344-acf0-9588155ba347.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting pop-out form and then click **Save**
 
