@@ -20,7 +20,6 @@ This solution requires the following resources:
 
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at Subscription or Resource Group)
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
 * [**Logic App**](Infrastructure_LogicApp.md)
 
 ### Step 2: Prepare Workflow
