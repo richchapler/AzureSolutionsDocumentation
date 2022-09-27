@@ -585,7 +585,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 * Then click "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192640257-3473416c-fbaa-4999-9396-4a400d1d28a1.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192640350-baaa1637-a1c9-43c8-9ae3-89cd66917b53.png" width="800" title="Snipped: September 27, 2022" />
 
 * On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "**rows**" from the "**Parse JSON**" grouping
 
