@@ -72,38 +72,22 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Select "String" 
   **Value** | {null}
   
-  _Note: Logic Apps does not have a data type for DateTime, so we are using string and will handle usage in expressions_
+  _Note: Logic Apps does not have a data type for DateTime, so we use string and handle usage in expressions_
 
   <img src="https://user-images.githubusercontent.com/44923999/192591752-1252451c-17e5-44e5-8e01-9163214d0672.png" width="800" title="Snipped: September 27, 2022" />
 
-* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
-* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
-* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
-
-  Prompt | Entry
-  ------ | ------
-  **Name** | Enter "Scope" 
-  **Type** | Select "String" 
-  **Value** | {null}
+* Repeat for string variable **Scope**
 
   <img src="https://user-images.githubusercontent.com/44923999/192592437-11340df0-697a-4a13-9c6d-5948d07e30a9.png" width="800" title="Snipped: September 27, 2022" />
 
-* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
-* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
-* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
-
-  Prompt | Entry
-  ------ | ------
-  **Name** | Enter "KQL" 
-  **Type** | Select "String" 
-  **Value** | {null}
+* Repeat for string variable **KQL**
   
 #### Parameters
 
 * Click **Parameters** in the menu bar
 * On the resulting **Parameters** pop-out form, click "**+ Create parameter**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190414578-e50034b4-3dcc-4459-bdd1-b2aeed81251a.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192592869-da6ac1f7-19fe-4cf7-901c-6c43e35fa7ed.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the pop-out form, including:
 
@@ -113,10 +97,9 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Select "Array"
   **Value** | Your SubscriptionId values in form: `[ "{Subscription1_Id}","{Subscription2_Id}" ]`
 
-  <img src="https://user-images.githubusercontent.com/44923999/190417711-b98ea504-7f0d-4ab3-a4e3-79e03c47c724.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192593500-0d272e61-1125-428b-a67a-801c0d34debd.png" width="800" title="Snipped: September 27, 2022" />
 
-* Repeat for the **StartDate** parameter
-
+* Repeat for parameter **StartDate** 
   Prompt | Entry
   ------ | ------
   **Name** | Enter "StartDate" 
@@ -125,7 +108,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
   _Note: Date values will be required in ISO-8601 formatted strings {e.g., 2022-09-15T00:00:00.0000000}; abbreviated versions {e.g., 2022-09-15} work fine_
 
-* Repeat for the **EndDate** parameter
+* Repeat for parameter **EndDate**
 
   Prompt | Entry
   ------ | ------
@@ -135,7 +118,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   
   _Note: Parameters will be alphabetized regardless of the order in which you create them_
 
-* Click **X** to close the pop-out form
+* Click **X** to close the pop-out form and then click **Save**
 
 ### Step 3: Get Bearer Token
 In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable.
