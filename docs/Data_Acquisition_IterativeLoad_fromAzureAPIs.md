@@ -208,7 +208,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
   <img src="https://user-images.githubusercontent.com/44923999/192601399-1cf57b86-47cb-4678-a2d7-d8dcf36c7592.png" width="800" title="Snipped: September 15, 2022" />
 
-* Repeat for array variable **Dates**
+* Repeat for array variable **Dates** (with no initial value)
 
 #### Until Loop
 
