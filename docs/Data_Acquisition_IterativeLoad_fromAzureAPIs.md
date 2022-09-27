@@ -581,12 +581,13 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 #### Iterate through Response Rows
 
-* Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON, Response**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON, Response**" action
+* Then click "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192639186-4656db9d-fcda-48f2-88ff-fde32a9a785c.png" width="800" title="Snipped: September 27, 2022" />
 
-* On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "rows" grom the "**Parse JSON**" grouping
+* On the resulting "**For each**" pop-out form, **Parameters** tab, "**Select an output from previous steps**" textbox, select dynamic content "**rows**" from the "**Parse JSON**" grouping
 
 
 
