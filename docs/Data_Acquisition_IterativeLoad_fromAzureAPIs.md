@@ -58,11 +58,12 @@ In this step, we will create a workflow, initialize variables, and add parameter
 
 * Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 
-  <img src="https://user-images.githubusercontent.com/44923999/190261952-61599cfe-a8f5-4bff-9f32-c6f75ec0535f.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192591045-fe09d81e-5ee8-41f9-b688-2d653dfd22fb.png" width="800" title="Snipped: September 27, 2022" />
+![image](https://user-images.githubusercontent.com/44923999/.png)
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190410009-bed8f453-2963-4912-8f34-c9fdf5df1df5.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192591237-71d8d320-7131-4e15-b535-fff6d43c763d.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
@@ -74,7 +75,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   
   _Note: Logic Apps does not have a data type for DateTime, so we are using string and will handle usage in expressions_
 
-  <img src="https://user-images.githubusercontent.com/44923999/190411759-3537a9d9-7b14-4775-a269-4488e71982e2.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192591752-1252451c-17e5-44e5-8e01-9163214d0672.png" width="800" title="Snipped: September 27, 2022" />
 
 * Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
@@ -86,6 +87,18 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Select "String" 
   **Value** | {null}
 
+  <img src="https://user-images.githubusercontent.com/44923999/192591971-bfda735b-a193-4cce-8a2f-91dba4a30de3.png" width="800" title="Snipped: September 27, 2022" />
+
+* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
+* Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Name** | Enter "KQL" 
+  **Type** | Select "String" 
+  **Value** | {null}
+  
 #### Parameters
 
 * Click **Parameters** in the menu bar
