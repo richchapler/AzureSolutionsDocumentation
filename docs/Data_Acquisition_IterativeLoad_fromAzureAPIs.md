@@ -276,18 +276,18 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 5: Iterate through Subscriptions
-In this step, we will nest "For Each" actions for Subscriptions.
+In this step, we will create a "For Each" action for Subscriptions.
 
 * Navigate to **Designer**
 * Click the **+** icon at the bottom of the page and then "**Add an action**" on the resulting pop-up menu
 
-  <img src="https://user-images.githubusercontent.com/44923999/190455774-3fc7ce49-37d8-40c0-bb4d-b0ba410fe0e9.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192624266-b5b3a4d7-2d5a-4a7f-9064-70634dbf7290.png" width="800" title="Snipped: September 27, 2022" />
 
   _Note: Dependencies from all parallel branches will be added to the new action_
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190459574-150f4e41-8427-49de-b134-33bde1a9679b.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192624716-e3e20dc5-ec5a-4614-a160-f3e6c310018c.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**For each**" pop-out form, **Parameters** tab, including:
 
@@ -296,17 +296,16 @@ In this step, we will nest "For Each" actions for Subscriptions.
   **Select an output from previous steps** | Select "Subscriptions" 
   
 * Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
-
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190466131-a89cc632-8a24-4806-9368-87e5e591922e.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192625088-8588d639-d90e-4669-8b5f-383bb1259699.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
   Prompt | Entry
   ------ | ------
   **Method** | Select "GET" 
-  **URI** | Add expression:<br>`concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')`
+  **URI** | Enter expression:<br>`concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')`
   **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
 * Click **Save**
@@ -323,7 +322,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 6: Iterate through Resource Groups
-In this step, we will nest "For Each" actions for Resource Groups {aka Scopes}.
+In this step, we will create a "For Each" action for Resource Groups {aka Scopes}.
 
 * Navigate to **Designer**
 * Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
