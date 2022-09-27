@@ -330,7 +330,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 * Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190470775-60ff85a3-4247-4a4f-a523-e4dff1fad22b.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192627843-ff8a80b0-0422-4ff1-8017-a3925cfb0608.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**For each**" pop-out form, **Parameters** tab, including:
 
@@ -341,7 +341,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 * Click the **+** icon inside the "**For Each, Resource Groups**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190469079-06379573-b7e9-46db-bb0a-49c3e05c8f35.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192628042-c247947c-cd7c-45b1-ab6b-c52e4c2a22c1.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Set variable**" pop-out form, **Parameters** tab, including:
 
