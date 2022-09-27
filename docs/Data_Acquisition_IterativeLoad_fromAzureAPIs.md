@@ -124,7 +124,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable.
 
 * Navigate to **Designer**
-* Click the **+** icon underneath "**Recurrence, Daily**"
+* Click the **+** icon underneath "**Recurrence**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192594246-6a59769f-cd1b-440c-95e0-d82620a5ec0e.png" width="800" title="Snipped: September 27, 2022" />
 
@@ -184,21 +184,21 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will iterate through dates between StartDate and EndDate and append to the Dates array.
 
 * Navigate to **Designer**
-* Click the **+** icon underneath "**Recurrence, Daily**" and then "**Add a parallel branch**" on the resulting pop-up menu
+* Click the **+** icon underneath "**Recurrence**" and then "**Add a parallel branch**" on the resulting pop-up menu
 
-#### "Counter" Variable
+#### Initialize Variable, Counter
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190445905-5a3247ab-c764-4330-985f-dff913fa3348.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192600226-de668e6a-fa41-44ea-85a3-032b67d9e88c.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Initialize variable**" pop-out form, **Parameters** tab, including:
 
   Prompt | Entry
   ------ | ------
   **Name** | Enter "Counter" 
-  **Type** | Select "Int" 
-  **Value** | Enter "0"
+  **Type** | Select "Integer" 
+  **Value** | Enter 0
 
 #### "Dates" Variable
 
