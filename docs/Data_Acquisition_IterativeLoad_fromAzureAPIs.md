@@ -160,9 +160,9 @@ In this step, we will request an access token from the Client Credentials Token 
   ------ | ------
   **Name** | Enter "Token" 
   **Type** | Select "String"
-  **Value** | Enter expression:<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`<br>...and then click **OK**
+  **Value** | Enter expression:<br>`concat('Bearer ',body('HTTP,_Get_Token').access_token)`<br><br>...and then click **OK**
 
-  _Note: The parenthetic "body" value {e.g., "body('HTTP,_Get_Token')} may need to change depending on what you named the component_ 
+  _Note: The parenthetic "body" value {i.e., `body('HTTP,_Get_Token')`} may need to change depending on what you named the component_ 
 
 * Click **Save**
 
