@@ -86,7 +86,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   **Type** | Select "String" 
   **Value** | {null}
 
-  <img src="https://user-images.githubusercontent.com/44923999/192591971-bfda735b-a193-4cce-8a2f-91dba4a30de3.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192592437-11340df0-697a-4a13-9c6d-5948d07e30a9.png" width="800" title="Snipped: September 27, 2022" />
 
 * Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
