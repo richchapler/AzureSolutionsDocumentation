@@ -532,8 +532,6 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
   Prompt | Entry
   ------ | ------
-  **Cluster URL** | Enter "https://rchaplerdec.westus3.kusto.windows.net" 
-  **Database Name** | Enter "rchaplerded"
   **Control Command** | Enter ".ingest inline into table t <| @{body('HTTP,_Get_Costs')}"
   **Chart Type** | Select "Html Table"
   _Note: the selected "**Chart Type**" value does not matter; it is required by the Operation, but the result will not be used_
