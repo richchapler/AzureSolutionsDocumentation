@@ -298,7 +298,7 @@ In this step, we will create a "For Each" action for Subscriptions.
 * Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192625088-8588d639-d90e-4669-8b5f-383bb1259699.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192626820-f7dace14-0a42-4fec-8b4d-e5529063fd2e.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
@@ -306,7 +306,9 @@ In this step, we will create a "For Each" action for Subscriptions.
   ------ | ------
   **Method** | Select "GET" 
   **URI** | Enter expression:<br>`concat('https://management.azure.com/subscriptions/',item(),'/resourcegroups?api-version=2021-04-01')`
-  **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
+  **Headers** | Add headers:<br>`Authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
+
+_Note: Capitalization of the header key "Authorization" appears to be important to this API_
 
 * Click **Save**
 
@@ -317,7 +319,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190466998-7779d281-3390-481c-b520-d7e995b30249.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192626982-a02a11f7-9ffb-4d82-af51-24b502cbb331.png" width="800" title="Snipped: September 27, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
