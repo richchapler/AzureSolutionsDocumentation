@@ -403,10 +403,13 @@ Before we move on to the next step, let's confirm that what we have created (so 
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
-### Step 8: Get Costs
-In this step, we will send a request to the Cost Management API using iterative variables.
+### Step 8: Get Cost Data
+In this step, we will request and process data from the Cost Management API.
 
 * Navigate to **Designer**
+
+#### HTTP, Get Costs
+
 * Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
@@ -420,7 +423,7 @@ In this step, we will send a request to the Cost Management API using iterative 
   **URI** | Enter expression:<br>`https://management.azure.com/@{variables('Scope')}/providers/Microsoft.CostManagement/query?api-version=2021-10-01`
   **Headers** | Add headers:<br>`authorization` :: `variables('Token')`<br>`content-type` :: `application/json;charset=utf-8`
 
-*  Finally, paste the following in **Body**:
+* Finally, paste the following in **Body**:
 
   ```
   {
@@ -497,6 +500,72 @@ In this step, we will send a request to the Cost Management API using iterative 
   ```
 
   _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
+
+
+#### Parse JSON, Response
+
+* Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
+* On the resulting "**Add an action**" pop-out, search for and then select "**Parse JSON**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/192630740-f07210f9-c467-4779-bddd-62bb69af05fe.png" width="800" title="Snipped: September 27, 2022" />
+
+* Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Content** | Select dynamic content "Body" grom the "**HTTP, Get Costs**" grouping
+
+* Then, paste the following in **Schema**:
+
+  ```
+  {
+      "properties": {
+          "eTag": {},
+          "id": {
+              "type": "string"
+          },
+          "location": {},
+          "name": {
+              "type": "string"
+          },
+          "properties": {
+              "properties": {
+                  "columns": {
+                      "items": {
+                          "properties": {
+                              "name": {
+                                  "type": "string"
+                              },
+                              "type": {
+                                  "type": "string"
+                              }
+                          },
+                          "required": [
+                              "name",
+                              "type"
+                          ],
+                          "type": "object"
+                      },
+                      "type": "array"
+                  },
+                  "nextLink": {},
+                  "rows": {
+                      "items": {
+                          "type": "array"
+                      },
+                      "type": "array"
+                  }
+              },
+              "type": "object"
+          },
+          "sku": {},
+          "type": {
+              "type": "string"
+          }
+      },
+      "type": "object"
+  }
+  ```
 
 * Click **Save**
 
