@@ -126,15 +126,15 @@ In this step, we will request an access token from the Client Credentials Token 
 * Navigate to **Designer**
 * Click the **+** icon underneath "**Recurrence, Daily**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190418481-06a71761-cec0-4f6b-b06f-20e7230c58d9.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192594246-6a59769f-cd1b-440c-95e0-d82620a5ec0e.png" width="800" title="Snipped: September 27, 2022" />
 
 * Click "**Add a parallel branch**" on the resulting pop-up menu
 
-  <img src="https://user-images.githubusercontent.com/44923999/190419847-2bd758fe-fa7f-441e-a4fc-e8210ee9197e.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192594362-2a0deb2e-0f92-47dd-a178-cf3edbf3b839.png" width="800" title="Snipped: September 27, 2022" />
 
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190432016-ee55661b-22c0-4f08-bbf9-2c9e860c5107.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192594647-4ef16cb7-d235-4ec6-94f4-4962aa173c27.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**HTTP**" pop-out form, **Parameters** tab, including:
 
