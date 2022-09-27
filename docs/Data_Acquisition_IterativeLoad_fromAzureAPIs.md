@@ -295,7 +295,7 @@ In this step, we will create a "For Each" action for Subscriptions.
   ------ | ------
   **Select an output from previous steps** | Select "Subscriptions" 
   
-* Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Subscription**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192627282-3ac16593-cdfb-4319-b721-4434907849fa.png" width="800" title="Snipped: September 27, 2022" />
@@ -327,7 +327,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will create a "For Each" action for Resource Groups {aka Scopes}.
 
 * Navigate to **Designer**
-* Click the **+** icon inside the "**For Each, Subscriptions**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Subscription**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192627843-ff8a80b0-0422-4ff1-8017-a3925cfb0608.png" width="800" title="Snipped: September 27, 2022" />
@@ -338,7 +338,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
   ------ | ------
   **Select an output from previous steps** | Enter expression: `body('HTTP,_Get_Resource_Groups').value`
 
-* Click the **+** icon inside the "**For Each, Resource Groups**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192628042-c247947c-cd7c-45b1-ab6b-c52e4c2a22c1.png" width="800" title="Snipped: September 27, 2022" />
@@ -359,7 +359,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190471493-79690223-8abd-46f0-b496-01d775c8e544.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192628455-6d963fd8-3e08-42a1-b925-b739fbdbd4f7.png" width="800" title="Snipped: September 27, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
@@ -367,10 +367,10 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will nest "For Each" actions for Dates.
 
 * Navigate to **Designer**
-* Click the **+** icon inside the "**For Each, Resource Groups**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190472425-05d5589f-29bb-49d4-9f56-836a3a2fae6d.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192628876-d9b264c4-d347-496b-ac71-2b2f9c8f1798.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**For each**" pop-out form, **Parameters** tab, including:
 
@@ -378,10 +378,10 @@ In this step, we will nest "For Each" actions for Dates.
   ------ | ------
   **Select an output from previous steps** | Enter expression: `variables('Dates')`
 
-* Click the **+** icon inside the "**For Each, Dates**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/190473339-570664df-77a3-4af7-a0f1-3febdc8cd08d.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192629234-e12c2485-e04c-4102-9dea-fdba5d50ae8c.png" width="800" title="Snipped: September 27, 2022" />
 
 * Complete the resulting "**Set variable**" pop-out form, **Parameters** tab, including:
 
@@ -399,7 +399,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190473630-b2905f7a-1af8-4d00-a0b4-dd24ce08699b.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192630220-9f3fbbd4-b60a-4871-923d-e05cbb8f42de.png" width="800" title="Snipped: September 27, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
@@ -407,7 +407,7 @@ Before we move on to the next step, let's confirm that what we have created (so 
 In this step, we will send a request to the Cost Management API using iterative variables.
 
 * Navigate to **Designer**
-* Click the **+** icon inside the "**For Each, Dates**" action and then "**Add an action**" on the resulting pop-up menu
+* Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
   <img src="https://user-images.githubusercontent.com/44923999/190474598-47ff99ed-7339-43af-8d5d-d52bec1b25ff.png" width="800" title="Snipped: September 15, 2022" />
