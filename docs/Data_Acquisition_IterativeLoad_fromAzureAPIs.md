@@ -171,12 +171,12 @@ Before we move on to the next step, let's confirm that what we have created (so 
 
 * Navigate to **Overview**
 
-  <img src="https://user-images.githubusercontent.com/44923999/190438832-fa58b059-953a-4597-bc20-c1c8c2e472d7.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192598406-911f7a8e-7f59-4965-af34-e3a8b07689c1.png" width="800" title="Snipped: September 27, 2022" />
 
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/190440627-6944ea79-cbdc-4479-8358-4af0df74e53c.png" width="800" title="Snipped: September 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192598688-069b7473-6a9c-4b5e-bc37-c77f3814dc4f.png" width="800" title="Snipped: September 27, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
