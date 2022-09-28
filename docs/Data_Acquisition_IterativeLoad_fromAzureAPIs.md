@@ -514,7 +514,6 @@ In this step, we will request and process data from the Cost Management API.
 
   _Note: Scope ResourceGroup does not allow use of **BillingPeriod** and **ServiceTier** columns_
 
-
 #### Parse JSON
 
 * Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
@@ -593,7 +592,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 #### For Each, Response Row
 
-* Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON, Response**" action
+* Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON**" action
 * Then click "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
@@ -606,7 +605,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 * Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192628042-c247947c-cd7c-45b1-ab6b-c52e4c2a22c1.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192789432-8591ac03-e7b3-496d-a7cd-588cb5ad3be2.png" width="800" title="Snipped: September 28, 2022" />
 
 * Complete the resulting "**Set variable**" pop-out form, **Parameters** tab, including:
 
