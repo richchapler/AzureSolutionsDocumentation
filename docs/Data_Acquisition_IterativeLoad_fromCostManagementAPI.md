@@ -1,4 +1,4 @@
-## Data Acquisition... Iterative Load from Azure APIs
+## Data Acquisition... Iterative Load from Cost Management API
 
 ![image](https://user-images.githubusercontent.com/44923999/192547308-676da706-ba85-49cc-9c6e-d8bbe997fa62.png)
 
