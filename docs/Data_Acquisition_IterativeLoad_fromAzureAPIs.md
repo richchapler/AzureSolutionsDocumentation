@@ -20,6 +20,32 @@ This solution requires the following resources:
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [**Logic App**](Infrastructure_LogicApp.md)
 
+#### Prepare Data Explorer
+
+* Navigate to Data Explorer Database, then Query in the Data grouping of the left-hand navigation
+* Run the following KQL:
+
+  ```
+  .create table CostManagement (
+      PreTaxCost: decimal
+      , UsageDate: int
+      , ResourceGroupName: string
+      , ResourceType: string
+      , ResourceId: string
+      , ResourceLocation: string
+      , MeterCategory: string
+      , MeterSubCategory: string
+      , Meter: string
+      , ServiceName: string
+      , PartNumber: string
+      , PricingModel: string
+      , ChargeType: string
+      , ReservationName: string
+      , Frequency: string
+      , Currency: string
+      )
+  ```
+
 ### Step 2: Prepare Workflow
 In this step, we will create a workflow, initialize variables, and add parameters.
 
@@ -175,12 +201,7 @@ In this step, we will request an access token from the Client Credentials Token 
 
 #### Confirm Success
 
-* Navigate to **Overview**
-
-  <img src="https://user-images.githubusercontent.com/44923999/192598406-911f7a8e-7f59-4965-af34-e3a8b07689c1.png" width="800" title="Snipped: September 27, 2022" />
-
-* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
-* Click on the new "**Running**" item in the "**Run History**" list
+* Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
 
   <img src="https://user-images.githubusercontent.com/44923999/192598688-069b7473-6a9c-4b5e-bc37-c77f3814dc4f.png" width="800" title="Snipped: September 27, 2022" />
 
@@ -268,8 +289,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 
 #### Confirm Success
 
-* Navigate to **Overview**
-* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192623862-67e1bccb-a259-43f9-b97c-304dba148971.png" width="800" title="Snipped: September 27, 2022" />
@@ -320,8 +340,7 @@ In this step, we will create a "For Each" action for Subscriptions.
 
 #### Confirm Success
 
-* Navigate to **Overview**
-* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192626982-a02a11f7-9ffb-4d82-af51-24b502cbb331.png" width="800" title="Snipped: September 27, 2022" />
@@ -364,8 +383,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 
 #### Confirm Success
 
-* Navigate to **Overview**
-* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192628455-6d963fd8-3e08-42a1-b925-b739fbdbd4f7.png" width="800" title="Snipped: September 27, 2022" />
@@ -408,8 +426,7 @@ In this step, we will nest "For Each" actions for Dates.
 
 #### Confirm Success
 
-* Navigate to **Overview**
-* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192630220-9f3fbbd4-b60a-4871-923d-e05cbb8f42de.png" width="800" title="Snipped: September 27, 2022" />
@@ -577,8 +594,7 @@ In this step, we will request and process data from the Cost Management API.
 
 #### Confirm Success
 
-* Navigate to **Overview**
-* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192638440-104b408d-96d8-4271-b304-a94c4c5b777c.png" width="800" title="Snipped: September 27, 2022" />
@@ -621,7 +637,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 * Click the **+** icon inside the "**For Each, Response Row**" action and then "**Add an action**" on the resulting pop-up menu
 * On the resulting "**Add an action**" pop-out, click the **Azure** tab, search for and then select "**Run control command and render a chart**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/192640678-a1a697d0-df48-4953-aa9f-62c2cecb83d8.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192791316-11fd9dec-a0bb-467d-8c08-4acd340e4ca8.png" width="800" title="Snipped: September 28, 2022" />
 
 * Complete the resulting "**Run control command and render a chart**" pop-out form, **Parameters** tab, including:
 
@@ -636,18 +652,25 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 #### Confirm Success
 
-* Navigate to **Overview**
-* Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
+* Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
 * Click on the new "**Running**" item in the "**Run History**" list
 
-  <img src="https://user-images.githubusercontent.com/44923999/192638440-104b408d-96d8-4271-b304-a94c4c5b777c.png" width="800" title="Snipped: September 27, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/192792427-f3052503-5ea6-4924-9d79-aa62bd827847.png" width="800" title="Snipped: September 28, 2022" />
 
 * Confirm that all actions succeed and click on those you would like to understand better
 
+### Step 10: Query Data
 
+* Navigate to Data Explorer Database, then Query in the Data grouping of the left-hand navigation
 
+  <img src="https://user-images.githubusercontent.com/44923999/192793220-ea2cc1b9-d35a-4255-b591-a2c2892d55ae.png" width="800" title="Snipped: September 28, 2022" />
 
+* Run the following KQL:
 
-
+  ```
+  CostManagement
+  | extend IngestionTime = ingestion_time()
+  | sort by IngestionTime desc
+  ```
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
