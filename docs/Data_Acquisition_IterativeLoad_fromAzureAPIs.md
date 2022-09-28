@@ -527,7 +527,7 @@ In this step, we will request and process data from the Cost Management API.
 
   <img src="https://user-images.githubusercontent.com/44923999/192637507-42df62f5-22e8-4ae0-988d-2e7db949b631.png" width="800" title="Snipped: September 27, 2022" />
 
-* On the resulting "**Parse JSON**" pop-out form, **Parameters** tab, **Content** textbox, select dynamic content "Body" grom the "**HTTP, Get Costs**" grouping and then, paste the following in **Schema**:
+* On the resulting "**Parse JSON**" pop-out form, **Parameters** tab, **Content** textbox, select dynamic content "Body" from the "**HTTP, Get Costs**" grouping and then, paste the following in **Schema**:
 
   ```
   {
