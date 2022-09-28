@@ -174,7 +174,6 @@ In this step, we will request an access token from the Client Credentials Token 
 * Click **Save**
 
 #### Confirm Success
-Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
 * Navigate to **Overview**
 
@@ -268,7 +267,6 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 * Click **Save**
 
 #### Confirm Success
-Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
 * Navigate to **Overview**
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
@@ -321,7 +319,6 @@ In this step, we will create a "For Each" action for Subscriptions.
 * Click **Save**
 
 #### Confirm Success
-Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
 * Navigate to **Overview**
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
@@ -366,7 +363,6 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 * Click **Save**
 
 #### Confirm Success
-Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
 * Navigate to **Overview**
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
@@ -411,7 +407,6 @@ In this step, we will nest "For Each" actions for Dates.
 * Click **Save**
 
 #### Confirm Success
-Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
 * Navigate to **Overview**
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
@@ -582,7 +577,6 @@ In this step, we will request and process data from the Cost Management API.
 * Click **Save**
 
 #### Confirm Success
-Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
 * Navigate to **Overview**
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
@@ -639,14 +633,9 @@ In this step, we will send the Cost Management API response to Data Explorer usi
   
   _Note: the selected "**Chart Type**" value does not matter; it is required by the Operation, but the result will not be used_
 
-* Click **Create**
-
-  <img src="https://user-images.githubusercontent.com/44923999/190478665-5e5dd77c-c211-4a31-8f14-284297005854.png" width="800" title="Snipped: September 15, 2022" />
-
 * Click **Save**
 
 #### Confirm Success
-Before we move on to the next step, let's confirm that what we have created (so far) is functional.
 
 * Navigate to **Overview**
 * Click "**Run Trigger**" and then **Run** in the resulting dropdown menu
