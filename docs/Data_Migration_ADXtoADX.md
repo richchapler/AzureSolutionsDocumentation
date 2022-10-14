@@ -15,7 +15,7 @@ This solution requires the following resources:
 
 _Note: The use case requirements reference a new and an old instance of Data Explorer; for the sake of simplicy, we will use the same instance, but two separate tables_
 
-### Step 2: Ingest Sample Data
+### Step 2: Prepare Source
 In this step, we will ingest sample data into our Data Explorer instance.
 
 * Navigate to https://dataexplorer.azure.com/oneclick
@@ -53,6 +53,12 @@ In this step, we will ingest sample data into our Data Explorer instance.
   <img src="https://user-images.githubusercontent.com/44923999/195893525-cbb9a491-74f6-4620-8c3c-112e0272617c.png" width="800" title="Snipped: October 14, 2022" />
 
 * Confirm success and then click **Close**
+
+### Step 3: Prepare Sink
+
+  <img src="https://user-images.githubusercontent.com/44923999/195893987-c0299dfb-dd0e-460a-8ec3-073e46b1ad16.png" width="800" title="Snipped: October 14, 2022" />
+
+### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
 
