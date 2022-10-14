@@ -69,6 +69,13 @@ In this step, we will prepare the destination table to which data will be migrat
 .create table StormEvents_new (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string) 
 ```
 
+  <img src="https://user-images.githubusercontent.com/44923999/195895398-619f76c8-b14d-44fe-b1f2-eeab065698a8.png" width="800" title="Snipped: October 14, 2022" />
+
+### Step 4: Create Pipeline
+In this step, we will create a Synapse Pipeline that will iterate through and copy date-based chunks of source data to the sink table.
+
+  <img src="https://user-images.githubusercontent.com/44923999/195896462-3ad96cf5-97ee-413c-aeee-ea0c5674f3a1.png" width="800" title="Snipped: October 14, 2022" />
+
 ### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
