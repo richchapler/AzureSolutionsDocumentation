@@ -23,13 +23,14 @@ _Note: The use case requirements reference a new and an old instance of Data Exp
 
 * Click "**Ingest data**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/195889671-1d1975bb-cc82-487f-9440-ba526b7f02ed.png" width="800" title="Snipped: October 14, 2022" />
 
 * On the resulting "**Ingest data**" page, "**1. Destination**" tab, select your Data Explorer Cluster and Database
 * Select the "**New table**" radio button, enter the name "**StormEvents_old**" 
 * Click "**Next: Source**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/195890762-c14cd303-ed9b-49f9-bc8f-019983922afd.png" width="800" title="Snipped: October 14, 2022" />
 
+* On the resulting "**Ingest data**" page, "**2. Source**" tab, select your Data Explorer Cluster and Database
 
 https://kustosamples.blob.core.windows.net/samplefiles/StormEvents.csv
 
