@@ -26,7 +26,7 @@ In this step, we will ingest sample data into our Data Explorer instance.
 
   <img src="https://user-images.githubusercontent.com/44923999/195891239-91587c4f-5d19-49a8-b2d7-6e47b8b172b5.png" width="800" title="Snipped: October 14, 2022" />
 
-* Complete the resulting "**Ingest data**" > "**1. Destination**" form, including:
+* Complete the resulting "**Ingest data**" > "**1. Destination**" form:
 
   Prompt | Entry
   ------ | ------
@@ -37,7 +37,7 @@ In this step, we will ingest sample data into our Data Explorer instance.
 
   <img src="https://user-images.githubusercontent.com/44923999/195893255-ffe3d239-73cf-435e-aca0-997ba0f2779f.png" width="800" title="Snipped: October 14, 2022" />
 
-* Complete the resulting "**Ingest data**" > "**2. Source**" form, including:
+* Complete the resulting "**Ingest data**" > "**2. Source**" form:
 
   Prompt | Entry
   ------ | ------
