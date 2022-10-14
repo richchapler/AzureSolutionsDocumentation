@@ -61,6 +61,14 @@ In this step, we will prepare the destination table to which data will be migrat
 
   <img src="https://user-images.githubusercontent.com/44923999/195893987-c0299dfb-dd0e-460a-8ec3-073e46b1ad16.png" width="800" title="Snipped: October 14, 2022" />
 
+* Expand to and then right-click the new "**StormEvents_old**" table
+* Select "**Create table script**" in the resulting pop-up menu
+* Modify and run the following KQL:
+
+```
+.create table StormEvents_new (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string) 
+```
+
 ### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
