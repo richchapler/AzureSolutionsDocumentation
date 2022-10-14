@@ -95,7 +95,7 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
 
   ```
   StormEvents_old
-  | extend _dt = format_datetime(StartTime, 'yyyy-MM-dd')
+  | project _dt = format_datetime(StartTime, 'yyyy-MM-dd')
   | distinct _dt
   | sort by _dt asc
   ```
