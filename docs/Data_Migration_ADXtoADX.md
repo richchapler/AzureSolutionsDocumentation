@@ -15,7 +15,8 @@ This solution requires the following resources:
 
 _Note: The use case requirements reference a new and an old instance of Data Explorer; for the sake of simplicy, we will use the same instance, but two separate tables_
 
-#### Sample Data
+### Step 2: Ingest Sample Data
+In this step, we will ingest sample data into our Data Explorer instance.
 
 * Navigate to https://dataexplorer.azure.com/oneclick
 
@@ -34,11 +35,20 @@ _Note: The use case requirements reference a new and an old instance of Data Exp
 
 * Click "**Next: Source**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/195890762-c14cd303-ed9b-49f9-bc8f-019983922afd.png" width="800" title="Snipped: October 14, 2022" />
 
-* On the resulting "**Ingest data**" page, "**2. Source**" tab, select your Data Explorer Cluster and Database
+* Complete the resulting "**Ingest data**" > "**2. Source**" form, including:
 
-https://kustosamples.blob.core.windows.net/samplefiles/StormEvents.csv
+  Prompt | Entry
+  ------ | ------
+  **Source type** | Select **Blob**
+  **Link to source** | Enter https://kustosamples.blob.core.windows.net/samplefiles/StormEvents.csv
+
+* Click "**Next: Schema**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/195892772-d0759270-a6ac-4520-a053-604eb7505286.png" width="800" title="Snipped: October 14, 2022" />
+
+* Review automatically-generated values and then click "**Next: Start ingestion**"
+
 
 ### Step 2: Prepare Workflow
 In this step, we will create a workflow, initialize variables, and add parameters.
