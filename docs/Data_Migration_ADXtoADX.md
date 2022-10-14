@@ -17,31 +17,9 @@ This solution requires the following resources:
 
 * Navigate to https://dataexplorer.azure.com/oneclick
 
-![image](https://user-images.githubusercontent.com/44923999/195886569-1c6a3b3b-1e13-4bba-89b8-0f97fb445b52.png)
+  <img src="https://user-images.githubusercontent.com/44923999/195886569-1c6a3b3b-1e13-4bba-89b8-0f97fb445b52.png" width="800" title="Snipped: October 14, 2022" />
 
-
-* Run the following KQL:
-
-  ```
-  .create table CostManagement (
-      PreTaxCost: decimal
-      , UsageDate: int
-      , ResourceGroupName: string
-      , ResourceType: string
-      , ResourceId: string
-      , ResourceLocation: string
-      , MeterCategory: string
-      , MeterSubCategory: string
-      , Meter: string
-      , ServiceName: string
-      , PartNumber: string
-      , PricingModel: string
-      , ChargeType: string
-      , ReservationName: string
-      , Frequency: string
-      , Currency: string
-      )
-  ```
+* Click "**Ingest data**"
 
 ### Step 2: Prepare Workflow
 In this step, we will create a workflow, initialize variables, and add parameters.
