@@ -50,9 +50,9 @@ In this step, we will ingest sample data into our Data Explorer instance.
 
 * Review automatically-generated values and then click "**Next: Start ingestion**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/195893525-cbb9a491-74f6-4620-8c3c-112e0272617c.png" width="800" title="Snipped: October 14, 2022" />
 
-### Step 2: Prepare Workflow
-In this step, we will create a workflow, initialize variables, and add parameters.
+* Confirm success and then click **Close**
 
 ### Reference
 > https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard
