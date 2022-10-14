@@ -23,9 +23,15 @@ _Note: The use case requirements reference a new and an old instance of Data Exp
 
 * Click "**Ingest data**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/195891239-91587c4f-5d19-49a8-b2d7-6e47b8b172b5.png" width="800" title="Snipped: October 14, 2022" />
 
-* On the resulting "**Ingest data**" page, "**1. Destination**" tab, select your Data Explorer Cluster and Database
-* Select the "**New table**" radio button, enter the name "**StormEvents_old**" 
+* Complete the resulting "**Ingest data**" > "**1. Destination**" form, including:
+
+  Prompt | Entry
+  ------ | ------
+  **Cluster** and **Database** | Select your instance
+  **Table** | Select the "**New table**" radio button, and then enter the name "**StormEvents_old**" 
+
 * Click "**Next: Source**"
 
   <img src="https://user-images.githubusercontent.com/44923999/195890762-c14cd303-ed9b-49f9-bc8f-019983922afd.png" width="800" title="Snipped: October 14, 2022" />
