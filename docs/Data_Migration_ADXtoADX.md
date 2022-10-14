@@ -1,6 +1,6 @@
 ## Data Migration... Data Explorer 1 to Data Explorer 2
 
-![image](https://user-images.githubusercontent.com/44923999/192547308-676da706-ba85-49cc-9c6e-d8bbe997fa62.png)
+![image](https://user-images.githubusercontent.com/44923999/195881302-076c87c3-3bd0-4495-ac0a-f111730bf670.png)
 
 This use case considers requirement statements like:
 * "We need to capture and analyze cost data from many subscriptions"
