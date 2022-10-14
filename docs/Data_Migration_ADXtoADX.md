@@ -3,22 +3,15 @@
 ![image](https://user-images.githubusercontent.com/44923999/195881302-076c87c3-3bd0-4495-ac0a-f111730bf670.png)
 
 This use case considers requirement statements like:
-* "We need to capture and analyze cost data from many subscriptions"
-* "Our subscriptions have more than 1,000 resources and are hitting the Cost Management API's per-request limitation"
-* "We want to pull historical data... 730 days {i.e., 2 years}"
-
-<br>The solution described in this documentation will:
-* Leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
-* Request data from the Cost Management API at the Resource Group level rather than Subscription level
-
-_Note: If you have Resource Groups with more than 1,000 resources, you might have to choose a more granular scope or other strategy_
+* "We have instantiated a new instance of Data Explorer and need to migrate ~1.5 billion records from the old instance"
+* "We have tried `set-or-append`, but we are hitting Data Explorer's one-hour timeout maximum"
+* "To overcome the timeout, we want to chunk and iteratively copy our data by date"
 
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at Subscription or Resource Group)
-* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Logic App**](Infrastructure_LogicApp.md)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) ... 2 instances
+* [**Synapse**](Infrastructure_Synapse.md)
 
 #### Prepare Data Explorer
 
