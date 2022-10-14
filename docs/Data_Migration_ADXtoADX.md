@@ -23,6 +23,16 @@ _Note: The use case requirements reference a new and an old instance of Data Exp
 
 * Click "**Ingest data**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/195889671-1d1975bb-cc82-487f-9440-ba526b7f02ed.png" width="800" title="Snipped: October 14, 2022" />
+
+* On the resulting "**Ingest data**" page, 1. **Destination** tab, select your Data Explorer Cluster and Database
+* Select the "**New table**" radio button, enter the name "**StormEvents_old**" 
+* Click "**Next: Source**"
+
+
+
+https://kustosamples.blob.core.windows.net/samplefiles/StormEvents.csv
+
 ### Step 2: Prepare Workflow
 In this step, we will create a workflow, initialize variables, and add parameters.
 
