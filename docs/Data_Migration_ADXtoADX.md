@@ -10,7 +10,7 @@ This use case considers requirement statements like:
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* Data Explorer, [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) ... 2 instances
+* Data Explorer, [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [**Synapse**](Infrastructure_Synapse.md)
 
 #### Sample Data
