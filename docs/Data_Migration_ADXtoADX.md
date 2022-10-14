@@ -35,6 +35,7 @@ In this step, we will ingest sample data into our Data Explorer instance.
 
 * Click "**Next: Source**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/195893107-5e1e8566-8338-4461-96ba-3cb1e8002907.png" width="800" title="Snipped: October 14, 2022" />
 
 * Complete the resulting "**Ingest data**" > "**2. Source**" form, including:
 
