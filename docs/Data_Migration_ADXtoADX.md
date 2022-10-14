@@ -63,7 +63,7 @@ In this step, we will prepare the destination table to which data will be migrat
 
 * Expand to and then right-click the new "**StormEvents_old**" table
 * Select "**Create table script**" in the resulting pop-up menu
-* Modify and run the following KQL:
+* Run the following, modified KQL:
 
 ```
 .create table StormEvents_new (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string) 
