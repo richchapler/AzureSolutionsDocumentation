@@ -13,9 +13,13 @@ This solution requires the following resources:
 * Data Explorer, [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) ... 2 instances
 * [**Synapse**](Infrastructure_Synapse.md)
 
-#### Prepare Data Explorer
+#### Sample Data
 
-* Navigate to Data Explorer Database, then Query in the Data grouping of the left-hand navigation
+* Navigate to https://dataexplorer.azure.com/oneclick
+
+![image](https://user-images.githubusercontent.com/44923999/195886569-1c6a3b3b-1e13-4bba-89b8-0f97fb445b52.png)
+
+
 * Run the following KQL:
 
   ```
