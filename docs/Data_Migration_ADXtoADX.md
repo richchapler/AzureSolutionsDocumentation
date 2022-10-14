@@ -55,6 +55,9 @@ In this step, we will ingest sample data into our Data Explorer instance.
 * Confirm success and then click **Close**
 
 ### Step 3: Prepare Sink
+In this step, we will prepare the destination table to which data will be migrated.
+
+* Navigate to **Query**
 
   <img src="https://user-images.githubusercontent.com/44923999/195893987-c0299dfb-dd0e-460a-8ec3-073e46b1ad16.png" width="800" title="Snipped: October 14, 2022" />
 
