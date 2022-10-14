@@ -13,6 +13,8 @@ This solution requires the following resources:
 * Data Explorer, [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [**Synapse**](Infrastructure_Synapse.md)
 
+_Note: The use case requirements reference a new and an old instance of Data Explorer; for the sake of simplicy, we will use the same instance, but two separate tables_
+
 #### Sample Data
 
 * Navigate to https://dataexplorer.azure.com/oneclick
