@@ -74,7 +74,22 @@ In this step, we will prepare the destination table to which data will be migrat
 ### Step 4: Create Pipeline
 In this step, we will create a Synapse Pipeline that will iterate through and copy date-based chunks of source data to the sink table.
 
-  <img src="https://user-images.githubusercontent.com/44923999/195896462-3ad96cf5-97ee-413c-aeee-ea0c5674f3a1.png" width="800" title="Snipped: October 14, 2022" />
+_Note: These instructions will not detail how to establish Synapse >> Data Explorer permissions, how to create a linked service, or dataset_
+
+* Navigate to Synapse Studio, Integrate
+* Click the **+** icon and then **Pipeline** in the resulting dropdown menu
+
+#### Add Activity: Lookup Dates
+
+<img src="https://user-images.githubusercontent.com/44923999/195896462-3ad96cf5-97ee-413c-aeee-ea0c5674f3a1.png" width="800" title="Snipped: October 14, 2022" />
+
+* Drag-and-drop a **Lookup** component from the **Activities** tree, **General** grouping
+* Complete the form on the **Settings** tab
+
+  Prompt | Entry
+  ------ | ------
+  **Source dataset** | Select the **StormEvents_old** dataset
+  **First row only** | Confirm **unchecked**
 
 ### Congratulations!
 
