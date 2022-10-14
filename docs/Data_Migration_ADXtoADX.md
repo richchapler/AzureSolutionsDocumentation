@@ -91,6 +91,15 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
   **Source dataset** | Select the **StormEvents_old** dataset
   **First row only** | Confirm **unchecked**
 
+* Finally, paste the following **Query**:
+
+  ```
+  StormEvents_old
+  | extend _dt = format_datetime(StartTime, 'yyyy-MM-dd')
+  | distinct _dt
+  | sort by _dt asc
+  ```
+
 ### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
