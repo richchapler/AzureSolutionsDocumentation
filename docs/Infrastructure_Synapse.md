@@ -24,7 +24,7 @@ _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
-  ### Create with ARM Template
+### Create with ARM Template
   
   ```
   {
