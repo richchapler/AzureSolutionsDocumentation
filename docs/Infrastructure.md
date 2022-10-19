@@ -46,4 +46,4 @@ I have tried to keep these instructions free of the obvious:
 
 > [**Storage Account**](Infrastructure_StorageAccount.md)
 
-> [**Synapse**](Infrastructure_Synapse.md) >> [Git Configuration](Infrastructure_Synapse_GitConfiguration.md) :: [Dataset](Infrastructure_Synapse_Dataset.md) :: [Linked Service](Infrastructure_Synapse_LinkedService.md)
+> [**Synapse**](Infrastructure_Synapse.md) >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git Configuration](Infrastructure_Synapse_GitConfiguration.md) :: [Dataset](Infrastructure_Synapse_Dataset.md) :: [Linked Service](Infrastructure_Synapse_LinkedService.md)
