@@ -1,4 +1,4 @@
-## Synapse >> Firewall rules
+## Synapse >> Firewall Rules
 
 ### Create with ARM Template
 Use this template to add Firewall Rules to Synapse.
