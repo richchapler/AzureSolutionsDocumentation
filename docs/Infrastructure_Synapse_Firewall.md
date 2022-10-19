@@ -1,13 +1,9 @@
-## Synapse, Firewall
+## Synapse >> Firewall
 
 ### Create with ARM Template
 Use this template to instantiate Synapse.
   
-_Notes:_<br>
-*	_This section depends on pre-instantiation of a Data Lake and a code repository (DevOps or GitHub)_
-*	_To instantiate Synapse on a new subscription, we must ensure that Subscription > Resource Provider > Microsoft.SQL has been registered_
-*	_Repository configuration {i.e., "workspaceRepositoryConfiguration"} is not included in the JSON because it is not possible to programmatically set the related permissions {e.g., GitHub Personal Access Token}; this key must be addressed manually_
-*	_If you disable "publicNetworkAccess", you must also provide VNET configuration_
+_Note: Rules should align with your security policies and network configuration._
 
   ```
   {
