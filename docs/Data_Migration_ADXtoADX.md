@@ -102,7 +102,7 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
 
 #### Add Activity: ForEach Date
 
-<img src="https://user-images.githubusercontent.com/44923999/197608214-9e927a8c-6a46-4886-a0ea-62d01a3cae3b.png" width="800" title="Snipped: October 24, 2022" />
+<img src="https://user-images.githubusercontent.com/44923999/197608605-a0634d52-ecd8-4aee-a07a-6505e3c82636.png" width="800" title="Snipped: October 24, 2022" />
 
 * Drag-and-drop a **ForEach** component from the **Activities** tree, "**Iteration & conditionals**" grouping
 * Complete the form on the **Settings** tab
@@ -111,7 +111,9 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
   ------ | ------
   **Sequential** | Checked
   **Items** | Paste expression `@activity('Lookup Dates').output.value`
-  
+
+* Click the **+** button in the **Activities** area of the "**ForEach Date**" component, and select "Copy data" from the "Move & transform" grouping of the resulting dropdown
+
 ### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
