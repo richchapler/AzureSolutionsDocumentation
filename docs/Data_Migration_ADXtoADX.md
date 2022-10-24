@@ -100,6 +100,18 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
   | sort by _dt asc
   ```
 
+#### Add Activity: ForEach Date
+
+<img src="https://user-images.githubusercontent.com/44923999/197608214-9e927a8c-6a46-4886-a0ea-62d01a3cae3b.png" width="800" title="Snipped: October 24, 2022" />
+
+* Drag-and-drop a **ForEach** component from the **Activities** tree, "**Iteration & conditionals**" grouping
+* Complete the form on the **Settings** tab
+
+  Prompt | Entry
+  ------ | ------
+  **Sequential** | Checked
+  **Items** | Paste expression `@activity('Lookup Dates').output.value`
+  
 ### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
