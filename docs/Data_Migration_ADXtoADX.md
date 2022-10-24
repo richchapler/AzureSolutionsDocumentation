@@ -129,12 +129,9 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
     
   <br><img src="https://user-images.githubusercontent.com/44923999/197610401-d0b6fe26-2f08-4135-ac84-dbfb247219ad.png" width="800" title="Snipped: October 24, 2022" />
 
- * Complete the form on the **Sink** tab
+* On the **Sink** tab form, select "**Sink dataset**" value "**StormEvents_new**"
 
-  Prompt | Entry
-  ------ | ------
-  **Sink dataset** | Select "**StormEvents_new**"
-  
+
   
   
   
