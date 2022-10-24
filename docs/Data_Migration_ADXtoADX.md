@@ -117,7 +117,7 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
 * Click the **+** button in the **Activities** area of the "**ForEach Date**" component
 * Select "Copy data" from the "Move & transform" grouping of the resulting dropdown
 
-  <img src="https://user-images.githubusercontent.com/44923999/197609315-018d9c17-ff77-4f89-904d-da5ec327ece6.png" width="800" title="Snipped: October 24, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/197610680-bebd344b-72c2-4915-8910-27bbc196de36.png" width="800" title="Snipped: October 24, 2022" />
 
 * Click the new "**Copy Data**" sub-component
 * Complete the form on the **Source** tab
@@ -125,13 +125,15 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
   Prompt | Entry
   ------ | ------
   **Source dataset** | Select "**StormEvents_old**"
-  **Query** | Paste KQL: StormEvents_old | take 10
-  
-  _Note: Only the first ten records are pulled for the purpose of demonstration; modify as appropriate_
-  
-    <img src="https://user-images.githubusercontent.com/44923999/197610401-d0b6fe26-2f08-4135-ac84-dbfb247219ad.png" width="800" title="Snipped: October 24, 2022" />
+  **Query** | Paste KQL: `StormEvents_old`
+    
+  <br><img src="https://user-images.githubusercontent.com/44923999/197610401-d0b6fe26-2f08-4135-ac84-dbfb247219ad.png" width="800" title="Snipped: October 24, 2022" />
 
-  
+ * Complete the form on the **Sink** tab
+
+  Prompt | Entry
+  ------ | ------
+  **Sink dataset** | Select "**StormEvents_new**"
   
   
   
