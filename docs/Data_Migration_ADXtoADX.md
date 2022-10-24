@@ -63,11 +63,11 @@ In this step, we will prepare the destination table to which data will be migrat
 
 * Expand to and then right-click the new "**StormEvents_old**" table
 * Select "**Create table script**" in the resulting pop-up menu
-* Run the following, modified KQL:
+* Run the following KQL:
 
-```
-.create table StormEvents_new (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string) 
-```
+  ```
+  .create table StormEvents_new (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string) 
+  ```
 
   <img src="https://user-images.githubusercontent.com/44923999/195895398-619f76c8-b14d-44fe-b1f2-eeab065698a8.png" width="800" title="Snipped: October 14, 2022" />
 
@@ -117,7 +117,7 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
 * Click the **+** button in the **Activities** area of the "**ForEach Date**" component
 * Select "Copy data" from the "Move & transform" grouping of the resulting dropdown
 
-<img src="https://user-images.githubusercontent.com/44923999/197609315-018d9c17-ff77-4f89-904d-da5ec327ece6.png" width="800" title="Snipped: October 24, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/197609315-018d9c17-ff77-4f89-904d-da5ec327ece6.png" width="800" title="Snipped: October 24, 2022" />
 
 ### Congratulations!
 
