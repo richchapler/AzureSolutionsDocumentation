@@ -131,10 +131,19 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
 
 * On the **Sink** tab form, select "**Sink dataset**" value "**StormEvents_new**"
 
+### Step 5: Confirm Success
+In this step, we will process the pipeline and review the resulting data.
 
+* Click **Debug** and confirm successful pipeline processing
+* Navigate to your Data Explorer Database, and then **Query** in left-hand navigation
+* **Run** the following KQL:
+  ```
+  CostManagement
+  | take 10
+  ```
   
-  
-  
+  <br><img src="https://user-images.githubusercontent.com/44923999/197610401-d0b6fe26-2f08-4135-ac84-dbfb247219ad.png" width="800" title="Snipped: October 24, 2022" />
+ 
 ### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
