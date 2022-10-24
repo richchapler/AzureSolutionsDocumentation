@@ -119,6 +119,22 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
 
   <img src="https://user-images.githubusercontent.com/44923999/197609315-018d9c17-ff77-4f89-904d-da5ec327ece6.png" width="800" title="Snipped: October 24, 2022" />
 
+* Click the new "**Copy Data**" sub-component
+* Complete the form on the **Source** tab
+
+  Prompt | Entry
+  ------ | ------
+  **Source dataset** | Select "**StormEvents_old**"
+  **Query** | Paste KQL `StormEvents_old | take 10`
+  
+  _Note: Only the first ten records are pulled for the purpose of demonstration; modify as appropriate_
+  
+  
+  
+  
+  
+  
+  
 ### Congratulations!
 
   <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
