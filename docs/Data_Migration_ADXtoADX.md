@@ -125,11 +125,12 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
   Prompt | Entry
   ------ | ------
   **Source dataset** | Select "**StormEvents_old**"
-  **Query** | Paste KQL `StormEvents_old | take 10`
+  **Query** | Paste KQL: StormEvents_old | take 10
   
   _Note: Only the first ten records are pulled for the purpose of demonstration; modify as appropriate_
   
-  
+    <img src="https://user-images.githubusercontent.com/44923999/197610401-d0b6fe26-2f08-4135-ac84-dbfb247219ad.png" width="800" title="Snipped: October 24, 2022" />
+
   
   
   
