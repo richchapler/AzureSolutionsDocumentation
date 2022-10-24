@@ -112,7 +112,12 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
   **Sequential** | Checked
   **Items** | Paste expression `@activity('Lookup Dates').output.value`
 
-* Click the **+** button in the **Activities** area of the "**ForEach Date**" component, and select "Copy data" from the "Move & transform" grouping of the resulting dropdown
+##### Add Sub-Activity: Copy Data
+
+* Click the **+** button in the **Activities** area of the "**ForEach Date**" component
+* Select "Copy data" from the "Move & transform" grouping of the resulting dropdown
+
+<img src="https://user-images.githubusercontent.com/44923999/197609315-018d9c17-ff77-4f89-904d-da5ec327ece6.png" width="800" title="Snipped: October 24, 2022" />
 
 ### Congratulations!
 
