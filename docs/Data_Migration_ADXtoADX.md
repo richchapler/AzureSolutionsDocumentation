@@ -66,10 +66,31 @@ In this step, we will prepare the destination table to which data will be migrat
 * Run the following KQL:
 
   ```
-  .create table StormEvents_new (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string) 
+  .create table StormEvents_new (
+    StartTime: datetime
+    , EndTime: datetime
+    , EpisodeId: long
+    , EventId: long
+    , State: string
+    , EventType: string
+    , InjuriesDirect: long
+    , InjuriesIndirect: long
+    , DeathsDirect: long
+    , DeathsIndirect: long
+    , DamageProperty: long
+    , DamageCrops: long
+    , Source: string
+    , BeginLocation: string
+    , EndLocation: string
+    , BeginLat: real
+    , BeginLon: real
+    , EndLat: real
+    , EndLon: real
+    , EpisodeNarrative: string
+    , EventNarrative: string
+    , StormSummary: string
+    ) 
   ```
-
-  <img src="https://user-images.githubusercontent.com/44923999/195895398-619f76c8-b14d-44fe-b1f2-eeab065698a8.png" width="800" title="Snipped: October 14, 2022" />
 
 ### Step 4: Create Pipeline
 In this step, we will create a Synapse Pipeline that will iterate through and copy date-based chunks of source data to the sink table.
