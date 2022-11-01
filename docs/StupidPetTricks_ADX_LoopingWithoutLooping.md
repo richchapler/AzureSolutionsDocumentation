@@ -1,6 +1,6 @@
 KQL logic
 
-datatable(s:string)
+```datatable(s:string)
     [
     "ABCDEFGHIJKLMNOP1,2022-01-02T03:04:05.1234567Z"
     "ABCDEFGHIJKLMNOP1,2022-01-02T03:04:05.1234567ZABCDEFGHIJKLMNOP1,2022-01-02T03:04:05.1234567Z"
@@ -8,6 +8,7 @@ datatable(s:string)
     ]
 | project columns = extract_all(@'(.{17,}?202\d-.{22}Z)', s)
 | mv-expand columns to typeof(string)
+```
 
 Regex explained:
 .{17,}?202\d.-{22}Z
