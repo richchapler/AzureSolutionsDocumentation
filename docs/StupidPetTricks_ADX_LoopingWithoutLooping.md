@@ -1,4 +1,6 @@
-# KQL logic
+## KQL, Loop (without looping) through poorly-formed data
+
+The data staged in the `datatable` below should have a newline after the timestamp, but the source data is incorrectly prepared
 
 ```
 datatable(s:string)
