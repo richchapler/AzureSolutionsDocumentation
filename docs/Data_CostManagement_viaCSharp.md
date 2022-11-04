@@ -1,11 +1,10 @@
 ```
 using System.Net.Http.Headers;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 public class Program
 {
-    public class Token
+    public class OAuth2
     {
         public string? access_token { get; set; }
     }
@@ -27,13 +26,11 @@ public class Program
 
             HttpResponseMessage response = await client.PostAsync(requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"), content: content);
 
-            string result = response.Content.ReadAsStringAsync().Result;
+            OAuth2? oauth2 = JsonSerializer.Deserialize<OAuth2>(response.Content.ReadAsStringAsync().Result);
 
-            System.Console.WriteLine(result);
+            string token = oauth2.access_token;
 
-            Token? token = JsonSerializer.Deserialize<Token>(result);
-
-            System.Console.WriteLine(token?.access_token);
+            System.Console.WriteLine(" Token: " + token);
 
             for (var d = DateTime.Parse("11/1/2022"); d <= DateTime.Parse("11/3/2022"); d = d.AddDays(1))
             {
