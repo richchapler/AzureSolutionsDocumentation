@@ -16,23 +16,33 @@ public class Program
     {
         Console.WriteLine("Start: " + DateTime.Now);
 
+        string clientid = "{YOUR CLIENT ID}",
+            clientsecret = "{YOUR CLIENT SECRET}",
+            tenantid = "{YOUR TENANT ID}",
+            startDate = "11/4/2022",
+            endDate = "11/5/2022";
+
+        string[] subscriptions = new string[] { "ed7eaf77-d411-484b-92e6-5cba0b6d8098" };
+
         var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-            clientId: "75afc8e9-f297-4ba4-8b5b-5ce3495258a1",
-            clientSecret: "YXe8Q~SKQ6_zM1FvDDXbhx7zxWoKlvrMDIz1Pb6G",
-            tenantId: "16b3c013-d300-468d-ac64-7eda0820b6d3",
+            clientId: clientid,
+            clientSecret: clientsecret,
+            tenantId: tenantid,
             environment: AzureEnvironment.AzureGlobalCloud
         );
 
-        /* ************************* Iterate: Subscription >> Resource Group >> Date */
+        /* ************************* Iterate Subscriptions */
 
-        foreach (string subscription in new string[] { "ed7eaf77-d411-484b-92e6-5cba0b6d8098" }) /* Iterate: Subscription */
+        foreach (string subscription in new string[] { "ed7eaf77-d411-484b-92e6-5cba0b6d8098" })
         {
             var azure = Azure
                 .Authenticate(credentials)
                 .WithSubscription(subscriptionId: subscription)
                 ;
 
-            foreach (var resourceGroup in azure.ResourceGroups.List()) /* Iterate: Resource Group */
+            /* ************************* Iterate Resource Groups */
+
+            foreach (var resourceGroup in azure.ResourceGroups.List())
             {
                 /* ************************* Get Token */
 
@@ -42,8 +52,8 @@ public class Program
                 {
                     FormUrlEncodedContent content = new FormUrlEncodedContent(new[]{
                         new KeyValuePair<string, string>("grant_type", "client_credentials"),
-                        new KeyValuePair<string, string>("client_id", "75afc8e9-f297-4ba4-8b5b-5ce3495258a1"),
-                        new KeyValuePair<string, string>("client_secret", "YXe8Q~SKQ6_zM1FvDDXbhx7zxWoKlvrMDIz1Pb6G"),
+                        new KeyValuePair<string, string>("client_id", clientid),
+                        new KeyValuePair<string, string>("client_secret", clientsecret),
                         new KeyValuePair<string, string>("resource", "https://management.azure.com/")
                     });
 
@@ -58,12 +68,12 @@ public class Program
 
                 /* ************************* Iterate Dates */
 
-                for (var date = DateTime.Parse("11/1/2022"); date <= DateTime.Parse("11/3/2022"); date = date.AddDays(1))
+                for (var date = DateTime.Parse(startDate); date <= DateTime.Parse(endDate); date = date.AddDays(1))
                 {
-                    Console.WriteLine(" Processing: " + resourceGroup.Id + " >> " + date.ToString("MMMM dd yyyy"));
+                    Console.WriteLine(Environment.NewLine + resourceGroup.Id + " >> " + date.ToString("MMMM dd yyyy"));
 
                     /* ************************* Request Cost Management Data */
-                    
+
                     using (HttpClient client = new HttpClient())
                     {
                         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
