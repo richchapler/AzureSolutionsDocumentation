@@ -34,8 +34,6 @@ public class Program
 
             foreach (var resourceGroup in azure.ResourceGroups.List()) /* Iterate: Resource Group */
             {
-                Console.WriteLine(" Processing: " + resourceGroup.Id + " >> Getting Token");
-
                 /* ************************* Get Token */
 
                 string token;
@@ -58,10 +56,14 @@ public class Program
                     token = oauth2.access_token;
                 }
 
-                for (var date = DateTime.Parse("11/1/2022"); date <= DateTime.Parse("11/3/2022"); date = date.AddDays(1)) /* Iterate: Date */
+                /* ************************* Iterate Dates */
+
+                for (var date = DateTime.Parse("11/1/2022"); date <= DateTime.Parse("11/3/2022"); date = date.AddDays(1))
                 {
                     Console.WriteLine(" Processing: " + resourceGroup.Id + " >> " + date.ToString("MMMM dd yyyy"));
 
+                    /* ************************* Request Cost Management Data */
+                    
                     using (HttpClient client = new HttpClient())
                     {
                         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
@@ -70,15 +72,14 @@ public class Program
                             method: new HttpMethod("POST"),
                             requestUri: "https://management.azure.com/" + resourceGroup.Id + "/providers/Microsoft.CostManagement/query?api-version=2021-10-01");
 
-                        //request.Headers.TryAddWithoutValidation("Authorization", "Bearer " + token);
                         request.Content = new StringContent(
                             content: "{'dataset':{'aggregation':{'totalCost':{'function':'Sum','name':'PreTaxCost'}},'granularity':'Daily','grouping':[{'name':'ResourceGroupName','type':'Dimension'},{'name':'ResourceType','type':'Dimension'},{'name':'ResourceId','type':'Dimension'},{'name':'ResourceLocation','type':'Dimension'},{'name':'MeterCategory','type':'Dimension'},{'name':'MeterSubCategory','type':'Dimension'},{'name':'Meter','type':'Dimension'},{'name':'ServiceName','type':'Dimension'},{'name':'PartNumber','type':'Dimension'},{'name':'PricingModel','type':'Dimension'},{'name':'ChargeType','type':'Dimension'},{'name':'ReservationName','type':'Dimension'},{'name':'Frequency','type':'Dimension'}]},'timePeriod':{'from':'" + date + "','to':'" + date + "'},'timeframe':'Custom','type':'Usage'}",
                             encoding: Encoding.UTF8,
                             mediaType: "application/json");
 
-                        HttpResponseMessage response = client.SendAsync(request).Result;
+                        HttpResponseMessage response = client.Send(request);
 
-                        Console.WriteLine(response);
+                        Console.WriteLine(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
                     }
                 }
             }
