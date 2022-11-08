@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
-This documentation consolidates previous posts on this topics covering the acquisition of data using the Azure Cost Management API via: 1) Data Factory, 2) Logic App, and 3) Function App (**CREATE LINKS FOR EACH OF THESE SECTIONS**)
+This documentation consolidates previous posts regarding acquisition of data using the Azure Cost Management API via: 1) Data Factory, 2) Logic App, and 3) Function App (**CREATE LINKS FOR EACH OF THESE SECTIONS**)
 
 For any of these resource types, your answer to "why use X?" may be as simple as the fact that you favor that solution type
 
