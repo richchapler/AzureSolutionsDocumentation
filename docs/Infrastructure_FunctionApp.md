@@ -6,11 +6,11 @@
 
 * Click the menu button in the upper-left corner of the Azure Portal
 * Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for "Logic App" and select the appropriate dropdown value
-* Find the correct result, click the **Create** dropdown, and select "Logic App"
-* Complete the **Create Logic App** form, **Basics** tab
+* Use the **Search services and marketplace** textbox to search for "Function App" and select the appropriate dropdown value
+* On the "Function App" page, click **Create**
+* Complete the **Create Function App** form, **Basics** tab
  
-  <img src="https://user-images.githubusercontent.com/44923999/184642718-210c7341-40e7-4534-a80e-678466e4f26a.png" width="800" title="Snipped: August 15, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/201128646-95bfc1dd-8315-4194-b22a-62d9ae877bee.png" width="800" title="Snipped: November 10, 2022" />
 
 * Complete the **Create Logic App** form, **Hosting** tab
 
