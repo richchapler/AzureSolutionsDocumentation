@@ -15,7 +15,8 @@
 
   Prompt| Entry
   ------ | ------
-  **Publish** | Select **Code**
+  **Publish** | Select **Code** (or value appropriate to your use case)
+  **Runtime stack** | Select **.NET** (or value appropriate to your use case)
  
 * Complete the **Create Logic App** form, **Hosting** tab
 
