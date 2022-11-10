@@ -1,22 +1,22 @@
 # Data Acquisition: Azure Cost Management API
 
-![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
+This documentation consolidates previously-released documentation regarding acquisition of data using the Azure Cost Management API via Data Factory and Logic App.
 
-This documentation consolidates previous posts regarding acquisition of data using the Azure Cost Management API via: 1) Data Factory, 2) Logic App, and 3) Function App (**CREATE LINKS FOR EACH OF THESE SECTIONS**)
+For any of these resource types, your answer to "why use X?" may be as simple as the fact that you favor that solution type.
 
-For any of these resource types, your answer to "why use X?" may be as simple as the fact that you favor that solution type
+You might also consider the following Pros and Cons.
 
-| Resource Type | Pros                                                         | Cons                                                         |
-| ------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Data Factory  |                                                              | - Nested iteration {i.e., `foreach` inside of a `foreach`} is not possible |
-| Logic App     | - No-Code interface might be more accessible for some developers | - Interface is challenging<br />- Processing is slow (and it is not possible to see what is happening until all iteration is complete) |
-| Function      | - Ability to leverage C# is accessible to more advanced developers |                                                              |
+| Resource Type | Pros                                     | Cons                                                         |
+| ------------- | ---------------------------------------- | ------------------------------------------------------------ |
+| Data Factory  | - Familiar orchestration engine          | - Nested iteration not possible                              |
+| Logic App     | - More accessible to low-code developers | - Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
+| Function      | - More accessible to C# developers       |                                                              |
 
 ### Step 1a: Prepare Infrastructure
 
 All solutions require the following resources:
 
-* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "Cost Management Reader" role assignment (granted at Subscription or Resource Group)
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "**Cost Management Reader**" role assignment (granted at Subscription or Resource Group)
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 
 Solution-specific requirements will be included in each "...via" section
@@ -48,9 +48,9 @@ Solution-specific requirements will be included in each "...via" section
       )
   ```
 
-
-
 ## ...via Data Factory
+
+![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
 This use case considers requirement statements like:
 
@@ -65,6 +65,7 @@ This solution requires the following resources:
 * [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
 ### Step 2: Create Destination Table
+
 In this step, we will create the Data Explorer table which will serve as destination for our Synapse Pipeline
 
 * Navigate to Data Explorer and then select Query from the navigation
@@ -85,10 +86,13 @@ In this step, we will create the Data Explorer table which will serve as destina
 _Note: This initial version of the table includes only a few of the columns that might be included as you evolve your query logic_
 
 ### Step 3: Create Linked Service
+
 In this step, we will create the Linked Service we will use to get our Bearer Token.
 
 * Open **Synapse Studio** and click the **Manage** navigation icon
+
 * Click "**Linked services**" from the "**External connections**" grouping in the resulting navigation
+
 * Click "**+ New**"
 
   <img src="https://user-images.githubusercontent.com/44923999/188169292-9886c049-e9cb-4d11-b6d9-a7ffe7e285d9.png" width="800" title="Snipped: September 2, 2022" />
@@ -109,9 +113,11 @@ In this step, we will create the Linked Service we will use to get our Bearer To
 _Note: Consider including the Subscription Name in your Linked Service and Dataset names_
 
 ### Step 4: Create Dataset
+
 In this step, we will create the Dataset we will use to get our Bearer Token.
 
 * Open **Synapse Studio** and click the **Data** navigation icon
+
 * Click **+** and then select "**Integration dataset**" from the **Linked** grouping in the resulting navigation
 
   <img src="https://user-images.githubusercontent.com/44923999/188195944-563f1dae-23eb-487d-b2d0-1747a6058ee1.png" width="800" title="Snipped: September 2, 2022" />
@@ -121,20 +127,26 @@ In this step, we will create the Dataset we will use to get our Bearer Token.
   <img src="https://user-images.githubusercontent.com/44923999/188196140-3ac10408-7991-4702-8d64-568f74b281c5.png" width="800" title="Snipped: September 2, 2022" />
 
 * Complete the "**Set properties**" pop-out form and then click **OK**
+
 * Click "**Test connection**" to confirm successful connection
+
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
 ### Step 5: Create Pipeline
+
 In this step, we will create a Pipeline and add Activities.
 
 * Open "**Synapse Studio**" and click the **Integrate** navigation icon
 * Click **+** and select **Pipeline** from the resulting dropdown menu
 
 ### Step 5a: Create Activity 1, Get Token
+
 This activity will make a REST API call and get a bearer token.
 
 * Expand **General** in the **Activities** bar
+
 * Drag-and-drop a **Web** component into the main window
+
 * Complete the form on the **Settings** tab
 
   <img src="https://user-images.githubusercontent.com/44923999/188197200-3f5083fd-fcc3-4a92-bbfa-bde3e01e77dc.png" width="800" title="Snipped: September 2, 2022" />
@@ -161,10 +173,13 @@ This activity will make a REST API call and get a bearer token.
   ```
 
 ### Step 5b: Create Activity 2, Copy Data
+
 This activity will make a REST API call, parse the response and write the data to Data Explorer.
 
 * Expand "**Move & Transform**" in the **Activities** bar
+
 * Drag-and-drop a "**Copy Data**" component into the activity window
+
 * Create a dependency from the "**Get Token**" component to the "**Copy Data**" component
 
   <img src="https://user-images.githubusercontent.com/44923999/188206412-e90cef93-615e-403f-8e66-64d46fb9af86.png" width="800" title="Snipped: September 2, 2022" />
@@ -206,12 +221,13 @@ This activity will make a REST API call, parse the response and write the data t
         }
     }
   ```
-  
+
   _Notes:_
+
   * _Time period values {e.g., 2022-01-01T00:00:00} are parameterized for use in a dynamic expression in the example above_
   * _The API limits how many dimensions can be included to 15_
   * _See links in Reference (below) for additional help with preparation of Request Body JSON {i.e., the query}_
-  
+
 * Click "Preview data"  
 
   <img src="https://user-images.githubusercontent.com/44923999/188211809-54c79983-ef20-47ef-b754-4909164d1cf5.png" width="800" title="Snipped: September 2, 2022" />
@@ -235,6 +251,7 @@ _Note: If your "Preview Data" fails and you get an "The access token is invalid"
 #### "Mapping" tab
 
 * Click on the **Mapping** tab
+
 * Click on "**Import schemas**"
 
   <img src="https://user-images.githubusercontent.com/44923999/188222315-0982b771-9a0f-4198-94c1-8e1610672d05.png" width="800" title="Snipped: September 2, 2022" />
@@ -244,7 +261,9 @@ _Note: If your "Preview Data" fails and you get an "The access token is invalid"
   <img src="https://user-images.githubusercontent.com/44923999/188227129-5962a206-fc75-46ae-8b38-80127b6075ca.png" width="800" title="Snipped: September 2, 2022" />
 
 * Turn on "**Advanced editor**" 
+
 * Select "**Collection reference**" dropdown value, "**$['properties']['rows']**" 
+
 * Click "**+ New mapping**" and enter values for each of the four columns:
 
   | Name | Column Name  |
@@ -257,16 +276,20 @@ _Note: If your "Preview Data" fails and you get an "The access token is invalid"
 * Click "**Publish all**", review changes on the resulting "**Publish all**" pop-out and then click **Publish**
 
 ### Step 6: Confirm Success
+
 In this step, we will process the pipeline and review the resulting data.
 
 * Click **Debug** and confirm successful pipeline processing
+
 * Navigate to your Data Explorer Database, and then **Query** in left-hand navigation
+
 * **Run** the following KQL:
+
   ```
   CostManagement
   | take 10
   ```
-  
+
   <img src="https://user-images.githubusercontent.com/44923999/188231421-c41a80d9-db55-426f-8eb3-1974a049e03e.png" width="800" title="Snipped: September 2, 2022" />
 
 * Confirm results
@@ -278,22 +301,26 @@ In this step, we will process the pipeline and review the resulting data.
 ![image](https://user-images.githubusercontent.com/44923999/192547308-676da706-ba85-49cc-9c6e-d8bbe997fa62.png)
 
 This use case considers requirement statements like:
+
 * "We need to capture and analyze cost data from many subscriptions"
 * "Our subscriptions have more than 1,000 resources and are hitting the Cost Management API's per-request limitation"
 * "We want to pull historical data... 730 days {i.e., 2 years}"
 
 <br>The solution described in this documentation will:
+
 * Leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
 * Request data from the Cost Management API at the Resource Group level rather than Subscription level
 
 _Note: If you have Resource Groups with more than 1,000 resources, you might have to choose a more granular scope or other strategy_
 
 ### Step 1b: Prepare Infrastructure
+
 This solution requires the following resources:
 
 * [**Logic App**](Infrastructure_LogicApp.md)
 
 ### Step 2: Prepare Workflow
+
 In this step, we will create a workflow, initialize variables, and add parameters.
 
 * Navigate to your Logic App
@@ -303,6 +330,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
 #### Workflow
 
 * Click on "**Create workflow >**" in the "**Create a workflow in Designer**" rectangle
+
 * On the resulting page click "**+ Add**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192587724-6af8e35b-406a-4b4c-bd78-0e38c7cab16e.png" width="800" title="Snipped: September 27, 2022" />
@@ -344,7 +372,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   | **Name**  | Enter "Date"    |
   | **Type**  | Select "String" |
   | **Value** | {null}          |
-  
+
   _Note: Logic Apps does not have a data type for DateTime, so we use string and handle usage in expressions_
 
 #### Initialize Variable, Scope
@@ -358,10 +386,11 @@ In this step, we will create a workflow, initialize variables, and add parameter
 <img src="https://user-images.githubusercontent.com/44923999/192592437-11340df0-697a-4a13-9c6d-5948d07e30a9.png" width="800" title="Snipped: September 27, 2022" />
 
 * Repeat for string variable **KQL**
-  
+
 #### Parameters
 
 * Click **Parameters** in the menu bar
+
 * On the resulting **Parameters** pop-out form, click "**+ Create parameter**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192592869-da6ac1f7-19fe-4cf7-901c-6c43e35fa7ed.png" width="800" title="Snipped: September 27, 2022" />
@@ -377,6 +406,7 @@ In this step, we will create a workflow, initialize variables, and add parameter
   <img src="https://user-images.githubusercontent.com/44923999/192593500-0d272e61-1125-428b-a67a-801c0d34debd.png" width="800" title="Snipped: September 27, 2022" />
 
 * Repeat for parameter **StartDate** 
+
   | Prompt    | Entry                                                        |
   | --------- | ------------------------------------------------------------ |
   | **Name**  | Enter "StartDate"                                            |
@@ -392,12 +422,13 @@ In this step, we will create a workflow, initialize variables, and add parameter
   | **Name**  | Enter "EndDate"                                              |
   | **Type**  | Select "String"                                              |
   | **Value** | Enter `2022-08-31` (or a date value that is meaningful for you) |
-  
+
   _Note: Parameters will be alphabetized regardless of the order in which you create them_
 
 * Click **X** to close the pop-out form and then click **Save**
 
 ### Step 3: Get Bearer Token
+
 In this step, we will request an access token from the Client Credentials Token URL and initialize a Token variable.
 
 * Navigate to **Designer**
@@ -430,6 +461,7 @@ In this step, we will request an access token from the Client Credentials Token 
 #### Initialize Variable, Token
 
 * Click the **+** icon under **HTTP** and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192597248-aae13dce-04a6-4498-831c-59050c9cd278.png" width="800" title="Snipped: September 27, 2022" />
@@ -455,6 +487,7 @@ In this step, we will request an access token from the Client Credentials Token 
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 4: Prepare Dates Array
+
 In this step, we will iterate through dates between StartDate and EndDate and append to the Dates array.
 
 * Navigate to **Designer**
@@ -462,6 +495,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 #### Initialize Variable, Counter
 
 * Click the **+** icon underneath "**Recurrence**" and then "**Add a parallel branch**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192600226-de668e6a-fa41-44ea-85a3-032b67d9e88c.png" width="800" title="Snipped: September 27, 2022" />
@@ -514,7 +548,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   | --------- | ------------------------------------------------------------ |
   | **Name**  | Select "Dates"                                               |
   | **Value** | Enter expression:<br>`addDays(parameters('StartDate'),variables('Counter'))` |
-  
+
 #### Increment Variable, Counter
 
 * Click the **+** icon inside the "**Do..Until**" action and then "**Add an action**" on the resulting pop-up menu
@@ -531,12 +565,13 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
   | --------- | ---------------- |
   | **Name**  | Select "Counter" |
   | **Value** | Enter "1"        |
-  
+
 * Click **Save**
 
 #### Confirm Success
 
 * Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
+
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192623862-67e1bccb-a259-43f9-b97c-304dba148971.png" width="800" title="Snipped: September 27, 2022" />
@@ -544,6 +579,7 @@ In this step, we will iterate through dates between StartDate and EndDate and ap
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 5: Iterate through Subscriptions
+
 In this step, we will create a "For Each" action for Subscriptions.
 
 * Navigate to **Designer**
@@ -569,6 +605,7 @@ In this step, we will create a "For Each" action for Subscriptions.
 #### HTTP, Get Resource Groups
 
 * Click the **+** icon inside the "**For Each, Subscription**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192627282-3ac16593-cdfb-4319-b721-4434907849fa.png" width="800" title="Snipped: September 27, 2022" />
@@ -588,6 +625,7 @@ In this step, we will create a "For Each" action for Subscriptions.
 #### Confirm Success
 
 * Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
+
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192626982-a02a11f7-9ffb-4d82-af51-24b502cbb331.png" width="800" title="Snipped: September 27, 2022" />
@@ -595,6 +633,7 @@ In this step, we will create a "For Each" action for Subscriptions.
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 6: Iterate through Resource Groups
+
 In this step, we will create a "For Each" action for Resource Groups {aka Scopes}.
 
 * Navigate to **Designer**
@@ -602,6 +641,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 #### For Each, Resource Group
 
 * Click the **+** icon inside the "**For Each, Subscription**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192627843-ff8a80b0-0422-4ff1-8017-a3925cfb0608.png" width="800" title="Snipped: September 27, 2022" />
@@ -615,6 +655,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 #### Set Variable, Scope
 
 * Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192628042-c247947c-cd7c-45b1-ab6b-c52e4c2a22c1.png" width="800" title="Snipped: September 27, 2022" />
@@ -631,6 +672,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 #### Confirm Success
 
 * Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
+
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192628455-6d963fd8-3e08-42a1-b925-b739fbdbd4f7.png" width="800" title="Snipped: September 27, 2022" />
@@ -638,6 +680,7 @@ In this step, we will create a "For Each" action for Resource Groups {aka Scopes
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 7: Iterate through Dates
+
 In this step, we will nest "For Each" actions for Dates.
 
 * Navigate to **Designer**
@@ -645,6 +688,7 @@ In this step, we will nest "For Each" actions for Dates.
 #### For Each, Date
 
 * Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192628876-d9b264c4-d347-496b-ac71-2b2f9c8f1798.png" width="800" title="Snipped: September 27, 2022" />
@@ -658,6 +702,7 @@ In this step, we will nest "For Each" actions for Dates.
 #### Set Variable, Date
 
 * Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192629234-e12c2485-e04c-4102-9dea-fdba5d50ae8c.png" width="800" title="Snipped: September 27, 2022" />
@@ -674,6 +719,7 @@ In this step, we will nest "For Each" actions for Dates.
 #### Confirm Success
 
 * Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
+
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192630220-9f3fbbd4-b60a-4871-923d-e05cbb8f42de.png" width="800" title="Snipped: September 27, 2022" />
@@ -681,6 +727,7 @@ In this step, we will nest "For Each" actions for Dates.
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 8: Get Cost Data
+
 In this step, we will request and process data from the Cost Management API.
 
 * Navigate to **Designer**
@@ -688,6 +735,7 @@ In this step, we will request and process data from the Cost Management API.
 #### HTTP, Get Costs
 
 * Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192630740-f07210f9-c467-4779-bddd-62bb69af05fe.png" width="800" title="Snipped: September 27, 2022" />
@@ -781,6 +829,7 @@ In this step, we will request and process data from the Cost Management API.
 #### Parse JSON
 
 * Click the **+** icon inside the "**For Each, Date**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**Parse JSON**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192637507-42df62f5-22e8-4ae0-988d-2e7db949b631.png" width="800" title="Snipped: September 27, 2022" />
@@ -842,6 +891,7 @@ In this step, we will request and process data from the Cost Management API.
 #### Confirm Success
 
 * Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
+
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192638440-104b408d-96d8-4271-b304-a94c4c5b777c.png" width="800" title="Snipped: September 27, 2022" />
@@ -849,6 +899,7 @@ In this step, we will request and process data from the Cost Management API.
 * Confirm that all actions succeed and click on those you would like to understand better
 
 ### Step 9: Ingest to Data Explorer
+
 In this step, we will send the Cost Management API response to Data Explorer using an `.ingest inline` command.
 
 * Navigate to **Designer**
@@ -856,7 +907,9 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 #### For Each, Response Row
 
 * Click the **+** icon inside the "**For Each, Date**" action and below the "**Parse JSON**" action
+
 * Then click "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**For each**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192640350-baaa1637-a1c9-43c8-9ae3-89cd66917b53.png" width="800" title="Snipped: September 27, 2022" />
@@ -866,6 +919,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 #### Set Variable, KQL
 
 * Click the **+** icon inside the "**For Each, Resource Group**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192789432-8591ac03-e7b3-496d-a7cd-588cb5ad3be2.png" width="800" title="Snipped: September 28, 2022" />
@@ -882,6 +936,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 #### ADX Command, Ingest
 
 * Click the **+** icon inside the "**For Each, Response Row**" action and then "**Add an action**" on the resulting pop-up menu
+
 * On the resulting "**Add an action**" pop-out, click the **Azure** tab, search for and then select "**Run control command and render a chart**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192791316-11fd9dec-a0bb-467d-8c08-4acd340e4ca8.png" width="800" title="Snipped: September 28, 2022" />
@@ -892,7 +947,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
   | ------------------- | ----------------------- |
   | **Control Command** | Select variable **KQL** |
   | **Chart Type**      | Select "**Html Table**" |
-  
+
   _Note: the selected "**Chart Type**" value does not matter; it is required by the Operation, but the result will not be used_
 
 * Click **Save**
@@ -900,6 +955,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 #### Confirm Success
 
 * Navigate to **Overview**, click "**Run Trigger**", and then click **Run** in the resulting dropdown menu
+
 * Click on the new "**Running**" item in the "**Run History**" list
 
   <img src="https://user-images.githubusercontent.com/44923999/192792427-f3052503-5ea6-4924-9d79-aa62bd827847.png" width="800" title="Snipped: September 28, 2022" />
@@ -924,103 +980,136 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 ## ...via Function App
 
-```
-using Microsoft.Azure.Management.Fluent;
+
+
+### Function2.cs
+
+```c#
 using Microsoft.Azure.Management.ResourceManager.Fluent;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 
-public class Program
+namespace FunctionApp2
 {
-    public class OAuth2
+    public class Function2
     {
-        public string? access_token { get; set; }
-    }
-
-    public static async Task Main(string[] args)
-    {
-        Console.WriteLine("Start: " + DateTime.Now);
-
-        string clientid = "{YOUR CLIENT ID}",
-            clientsecret = "{YOUR CLIENT SECRET}",
-            tenantid = "{YOUR TENANT ID}",
-            startDate = "11/4/2022",
-            endDate = "11/5/2022";
-
-        string[] subscriptions = new string[] { "{YOUR SUBSCRIPTION ID}", "{YOUR SUBSCRIPTION ID}" };
-
-        var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-            clientId: clientid,
-            clientSecret: clientsecret,
-            tenantId: tenantid,
-            environment: AzureEnvironment.AzureGlobalCloud
-        );
-
-        /* ************************* Iterate Subscriptions */
-
-        foreach (string subscription in new string[] { "ed7eaf77-d411-484b-92e6-5cba0b6d8098" })
+        [FunctionName("Function2")]
+        public async Task Run(
+            [TimerTrigger("*/1 * * * *")] TimerInfo myTimer,
+            [Blob("outputdemo/{sys.utcnow}.txt", FileAccess.Write, Connection = "AzureWebJobsStorage")] Stream outputFile,
+            ILogger log)
         {
-            var azure = Azure
-                .Authenticate(credentials)
-                .WithSubscription(subscriptionId: subscription)
-                ;
+            log.LogInformation($"Start: {DateTime.Now}");
 
-            /* ************************* Iterate Resource Groups */
+            string clientid = "75afc8e9-f297-4ba4-8b5b-5ce3495258a1",
+                clientsecret = "YXe8Q~SKQ6_zM1FvDDXbhx7zxWoKlvrMDIz1Pb6G",
+                tenantid = "16b3c013-d300-468d-ac64-7eda0820b6d3",
+                startDate = "11/4/2022",
+                endDate = "11/5/2022"; /* Need Key Vault */
 
-            foreach (var resourceGroup in azure.ResourceGroups.List())
+            string[] subscriptions = new string[] { "ed7eaf77-d411-484b-92e6-5cba0b6d8098" };
+
+            var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
+                clientId: clientid,
+                clientSecret: clientsecret,
+                tenantId: tenantid,
+                environment: AzureEnvironment.AzureGlobalCloud
+            );
+
+            /* ************************* Iterate Subscriptions */
+
+            foreach (string subscription in subscriptions)
             {
-                /* ************************* Get Token */
+                var azure = Microsoft.Azure.Management.Fluent.Azure
+                    .Authenticate(credentials)
+                    .WithSubscription(subscriptionId: subscription)
+                    ;
 
-                string token;
+                /* ************************* Iterate Resource Groups */
 
-                using (HttpClient client = new HttpClient())
+                foreach (var resourceGroup in azure.ResourceGroups.List())
                 {
-                    FormUrlEncodedContent content = new FormUrlEncodedContent(new[]{
+                    /* ************************* Get Token */
+
+                    string token;
+
+                    using (HttpClient client = new HttpClient())
+                    {
+                        FormUrlEncodedContent content = new FormUrlEncodedContent(new[]{
                         new KeyValuePair<string, string>("grant_type", "client_credentials"),
                         new KeyValuePair<string, string>("client_id", clientid),
                         new KeyValuePair<string, string>("client_secret", clientsecret),
                         new KeyValuePair<string, string>("resource", "https://management.azure.com/")
                     });
 
-                    content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+                        content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
-                    HttpResponseMessage response = await client.PostAsync(requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"), content: content);
+                        HttpResponseMessage response = await client.PostAsync(requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"), content: content);
 
-                    OAuth2? oauth2 = JsonSerializer.Deserialize<OAuth2>(response.Content.ReadAsStringAsync().Result);
+                        OAuth2? oauth2 = JsonSerializer.Deserialize<OAuth2>(response.Content.ReadAsStringAsync().Result);
 
-                    token = oauth2.access_token;
-                }
+                        token = oauth2.access_token;
+                    }
 
-                /* ************************* Iterate Dates */
+                    /* ************************* Iterate Dates */
 
-                for (var date = DateTime.Parse(startDate); date <= DateTime.Parse(endDate); date = date.AddDays(1))
-                {
-                    Console.WriteLine(Environment.NewLine + resourceGroup.Id + " >> " + date.ToString("MMMM dd yyyy"));
-
-                    /* ************************* Request Cost Management Data */
-
-                    using (HttpClient client = new HttpClient())
+                    for (var date = DateTime.Parse(startDate); date <= DateTime.Parse(endDate); date = date.AddDays(1))
                     {
-                        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                        Console.WriteLine(Environment.NewLine + resourceGroup.Id + " >> " + date.ToString("MMMM dd yyyy"));
 
-                        HttpRequestMessage request = new HttpRequestMessage(
-                            method: new HttpMethod("POST"),
-                            requestUri: "https://management.azure.com/" + resourceGroup.Id + "/providers/Microsoft.CostManagement/query?api-version=2021-10-01");
+                        /* ************************* Request Cost Management Data */
 
-                        request.Content = new StringContent(
-                            content: "{'dataset':{'aggregation':{'totalCost':{'function':'Sum','name':'PreTaxCost'}},'granularity':'Daily','grouping':[{'name':'ResourceGroupName','type':'Dimension'},{'name':'ResourceType','type':'Dimension'},{'name':'ResourceId','type':'Dimension'},{'name':'ResourceLocation','type':'Dimension'},{'name':'MeterCategory','type':'Dimension'},{'name':'MeterSubCategory','type':'Dimension'},{'name':'Meter','type':'Dimension'},{'name':'ServiceName','type':'Dimension'},{'name':'PartNumber','type':'Dimension'},{'name':'PricingModel','type':'Dimension'},{'name':'ChargeType','type':'Dimension'},{'name':'ReservationName','type':'Dimension'},{'name':'Frequency','type':'Dimension'}]},'timePeriod':{'from':'" + date + "','to':'" + date + "'},'timeframe':'Custom','type':'Usage'}",
-                            encoding: Encoding.UTF8,
-                            mediaType: "application/json");
+                        using (HttpClient client = new HttpClient())
+                        {
+                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-                        HttpResponseMessage response = client.Send(request);
+                            HttpRequestMessage request = new HttpRequestMessage(
+                                method: new HttpMethod("POST"),
+                                requestUri: "https://management.azure.com/" + resourceGroup.Id + "/providers/Microsoft.CostManagement/query?api-version=2021-10-01");
 
-                        Console.WriteLine(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                            request.Content = new StringContent(
+                                content: "{'dataset':{'aggregation':{'totalCost':{'function':'Sum','name':'PreTaxCost'}},'granularity':'Daily','grouping':[{'name':'ResourceGroupName','type':'Dimension'},{'name':'ResourceType','type':'Dimension'},{'name':'ResourceId','type':'Dimension'},{'name':'ResourceLocation','type':'Dimension'},{'name':'MeterCategory','type':'Dimension'},{'name':'MeterSubCategory','type':'Dimension'},{'name':'Meter','type':'Dimension'},{'name':'ServiceName','type':'Dimension'},{'name':'PartNumber','type':'Dimension'},{'name':'PricingModel','type':'Dimension'},{'name':'ChargeType','type':'Dimension'},{'name':'ReservationName','type':'Dimension'},{'name':'Frequency','type':'Dimension'}]},'timePeriod':{'from':'" + date + "','to':'" + date + "'},'timeframe':'Custom','type':'Usage'}",
+                                encoding: Encoding.UTF8,
+                                mediaType: "application/json");
+
+                            HttpResponseMessage response = client.Send(request);
+
+                            Console.WriteLine(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+
+                            byte[] output = new UnicodeEncoding().GetBytes(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                            await outputFile.WriteAsync(output, 0, output.Length);
+
+                        }
+
+                        log.LogInformation($"End: {DateTime.Now}");
                     }
                 }
             }
         }
-        Console.WriteLine("End: " + DateTime.Now);
+        public class OAuth2
+        {
+            public string? access_token { get; set; }
+        }
     }
+}
+```
+
+### local.settings.json
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=rchaplerdlsg2;AccountKey=NwHoIWgMez00TOMPliXT7dYAqJC8EPUHDY59nLqQj2a2F3zrqYrqBOuAoxHywdZfqn69cANt7nU0+ASt9MBJdg==;EndpointSuffix=core.windows.net",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  }
 }
 ```
