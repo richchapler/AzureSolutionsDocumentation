@@ -8,10 +8,15 @@
 * Click **+ Create a resource** in the resulting dropdown
 * Use the **Search services and marketplace** textbox to search for "Function App" and select the appropriate dropdown value
 * On the "Function App" page, click **Create**
-* Complete the **Create Function App** form, **Basics** tab
- 
+
   <img src="https://user-images.githubusercontent.com/44923999/201128646-95bfc1dd-8315-4194-b22a-62d9ae877bee.png" width="800" title="Snipped: November 10, 2022" />
 
+* Complete the **Create Function App** form, **Basics** tab, including:
+
+  Prompt| Entry
+  ------ | ------
+  **Publish** | Select **Code**
+ 
 * Complete the **Create Logic App** form, **Hosting** tab
 
   <img src="https://user-images.githubusercontent.com/44923999/184643004-fd890fa8-d4d5-4096-946f-7f1ad9a4a79d.png" width="800" title="Snipped: August 15, 2022" />
