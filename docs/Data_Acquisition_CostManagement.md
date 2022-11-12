@@ -1014,7 +1014,7 @@ namespace FunctionApp2
                 startDate = "11/4/2022",
                 endDate = "11/5/2022"; /* Need Key Vault */
 
-            string[] subscriptions = new string[] { "ed7eaf77-d411-484b-92e6-5cba0b6d8098" };
+            string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}" };
 
             var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
                 clientId: clientid,
