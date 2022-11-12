@@ -980,17 +980,18 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 ## ...via Function App
 
+### Nuget
 
+![image](https://user-images.githubusercontent.com/44923999/201480066-6676c0cd-5f9a-423b-a0d5-5d7ec638df3f.png)
 
 ### Function2.cs
 
-```c#
+```
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -1003,12 +1004,10 @@ namespace FunctionApp2
     {
         [FunctionName("Function2")]
         public async Task Run(
-            [TimerTrigger("*/1 * * * *")] TimerInfo myTimer,
-            [Blob("outputdemo/{sys.utcnow}.txt", FileAccess.Write, Connection = "AzureWebJobsStorage")] Stream outputFile,
-            ILogger log)
+            [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
+            [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
+            ILogger theLogger)
         {
-            log.LogInformation($"Start: {DateTime.Now}");
-
             string clientid = "75afc8e9-f297-4ba4-8b5b-5ce3495258a1",
                 clientsecret = "YXe8Q~SKQ6_zM1FvDDXbhx7zxWoKlvrMDIz1Pb6G",
                 tenantid = "16b3c013-d300-468d-ac64-7eda0820b6d3",
@@ -1082,14 +1081,12 @@ namespace FunctionApp2
 
                             HttpResponseMessage response = client.Send(request);
 
-                            Console.WriteLine(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                            string output = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-                            byte[] output = new UnicodeEncoding().GetBytes(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-                            await outputFile.WriteAsync(output, 0, output.Length);
+                            theLogger.LogInformation(output);
 
+                            await theEventHub.AddAsync(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
                         }
-
-                        log.LogInformation($"End: {DateTime.Now}");
                     }
                 }
             }
@@ -1104,11 +1101,12 @@ namespace FunctionApp2
 
 ### local.settings.json
 
-```json
+```
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=rchaplerdlsg2;AccountKey=NwHoIWgMez00TOMPliXT7dYAqJC8EPUHDY59nLqQj2a2F3zrqYrqBOuAoxHywdZfqn69cANt7nU0+ASt9MBJdg==;EndpointSuffix=core.windows.net",
+    "AzureWebJobsStorage": "{STORAGE ACCOUNT CONNECTION STRING}",
+    "EventHubConnectionAppSetting": "{EVENT HUB CONNECTION STRING}",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet"
   }
 }
