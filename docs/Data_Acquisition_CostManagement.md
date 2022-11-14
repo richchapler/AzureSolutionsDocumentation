@@ -1001,6 +1001,11 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * Click "**Create a new project**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/201696928-02adc19a-6cfe-45b9-8271-eb71da588f0d.png" width="800" title="Snipped: November 14, 2022" />
+
+* Search for and select "Azure Functions" on the "**Create a new project**" page and then click **Next**
+
+
 ### Nuget
 
 ![image](https://user-images.githubusercontent.com/44923999/201480066-6676c0cd-5f9a-423b-a0d5-5d7ec638df3f.png)
