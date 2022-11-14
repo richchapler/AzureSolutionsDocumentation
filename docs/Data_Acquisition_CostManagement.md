@@ -1022,6 +1022,32 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * Click **Create**
 
+### Step 2: "Function1.cs" Logic, Update Method
+
+  <img src="https://user-images.githubusercontent.com/44923999/201704764-9bac8923-2aa6-4967-8590-efd1b45f447d.png" width="800" title="Snipped: November 14, 2022" />
+
+Replace the default code `public static void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
+
+```
+public async Task Run(
+            [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
+            [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
+            ILogger theLogger)
+        {
+```
+
+Logic Explained:
+
+* `async Task` ... provides for use of asynchronous calls
+* `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
+
+Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
+
+
+
+![image](https://user-images.githubusercontent.com/44923999/201702008-1004ad40-2472-4c56-b738-124d4df4b64d.png)
+
+
 ### Nuget
 
 ![image](https://user-images.githubusercontent.com/44923999/201480066-6676c0cd-5f9a-423b-a0d5-5d7ec638df3f.png)
