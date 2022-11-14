@@ -1005,6 +1005,22 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * Search for and select "Azure Functions" on the "**Create a new project**" page and then click **Next**
 
+  <img src="https://user-images.githubusercontent.com/44923999/201698215-cb356c83-c8f6-4c53-b824-ecacb592abb7.png" width="800" title="Snipped: November 14, 2022" />
+
+* Complete the "**Configure your new project**" form and then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/201699397-aa6ec8bf-406f-4365-9d1c-2fd2a8b8cefe.png" width="800" title="Snipped: November 14, 2022" />
+
+* Complete the "**Additional information**" form, including:
+
+  | Prompt | Entry |
+  | ------ | ----- |
+  | **Functions worker** | Select "**.NET Framework v1**" |
+  | **Function** | Select "**Timer trigger**" |
+  | **Use Azurite...** | Checked |
+  | **Schedule** | Enter "*/1 * * * *" (the CRON expression for every one minute) |
+
+* Click **Create**
 
 ### Nuget
 
