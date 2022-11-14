@@ -6,7 +6,7 @@ Three Resource Type-based methods are included in corresponding sections below.
 
 | Resource Type | Pros | Cons |
 | ----- | ----- | ----- |
-| Data Factory | - Familiar orchestration engine | - Nested iteration not possible |
+| Data Factory | - Familiar orchestration engine<br>- More accessible to "low-code" developers | - Nested iteration not possible |
 | Logic App | - More accessible to "low-code" developers | - Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
 | Function | - More accessible to "high-code" developers<br>- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | |
 
