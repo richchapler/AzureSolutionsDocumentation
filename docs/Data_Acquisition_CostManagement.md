@@ -4,7 +4,7 @@ This documentation consolidates newly-crafted and previously-released Azure Cost
 
 Three Resource Type-based methods are included in corresponding sections below.
 
-| Resource Type | Pros                                     | Cons                                                         |
+| Resource Type | Pros | Cons |
 | ------------- | ---------------------------------------- | ------------------------------------------------------------ |
 | Data Factory  | - Familiar orchestration engine          | - Nested iteration not possible                              |
 | Logic App     | - More accessible to low-code developers | - Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
@@ -48,7 +48,7 @@ Solution-specific requirements will be included in each "...via" section
       )
   ```
 
-## ...via Data Factory
+## ...via Synapse (or Data Factory) Pipeline
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
