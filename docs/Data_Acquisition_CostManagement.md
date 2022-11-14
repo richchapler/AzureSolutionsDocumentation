@@ -1081,12 +1081,11 @@ In addition to the items listed at the beginning of this documentation, this sol
 
   _Note: I am not investing the time for this demonstration, but Key Vault should be used for, at least {CLIENT SECRET}_
 
-### Step 6: "Function1.cs" Logic, Iterate Subscriptions and Resource Groups
+### Step 6: "Function1.cs" Logic, Iterate Subscriptions
 
 * Continue on the "Function1.cs" tab
 
   <img src="https://user-images.githubusercontent.com/44923999/201754332-89dde712-8696-4a4e-8552-775f7a0a3255.png" width="800" title="Snipped: November 14, 2022" />
-
 
 * Add the following code at the top:
 
@@ -1130,6 +1129,63 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * Repeat for "**Microsoft.Azure.Management.Fluent**"
 
+### Step 8: "Function1.cs" Logic, Iterate Resource Groups
+
+Continue on the "Function1.cs" tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/201758552-97856d5a-1209-4d37-8ed9-756c9e12ebd2.png" width="800" title="Snipped: November 14, 2022" />
+
+* Add the following code at the top:
+
+  ```
+  using System.Net.Http.Headers;
+  using System.Text.Json;
+  ```
+  
+* Add the following code to the method:
+
+  ```
+  foreach (var resourceGroup in azure.ResourceGroups.List())
+  {
+      /* ************************* Get Token */
+
+      string token;
+
+      using (HttpClient client = new HttpClient())
+      {
+          FormUrlEncodedContent content = new FormUrlEncodedContent(new[]{
+          new KeyValuePair<string, string>("grant_type", "client_credentials"),
+          new KeyValuePair<string, string>("client_id", clientid),
+          new KeyValuePair<string, string>("client_secret", clientsecret),
+          new KeyValuePair<string, string>("resource", "https://management.azure.com/")
+      });
+
+          content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+
+          HttpResponseMessage response = await client.PostAsync(
+              requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"),
+              content: content);
+
+          OAuth2? oauth2 = JsonSerializer.Deserialize<OAuth2>(response.Content.ReadAsStringAsync().Result);
+
+          token = oauth2.access_token;
+      }
+  ```
+
+* Add the following code at the bottom:
+
+  ```
+  public class OAuth2
+  {
+      public string? access_token { get; set; }
+  }
+  ```
+
+  Logic Explained:
+
+  * `foreach (...` ... will iterate through the previously-created string array of Subscription Id values
+  * `var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal` ... generates credentials for use with Azure SDK
+  * `var azure = Microsoft.Azure.Management.Fluent.Azure` ... connects to the current subscription using generated credentials
 --------------------------------------------------
 
 ### Nuget
