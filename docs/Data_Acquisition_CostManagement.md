@@ -1052,8 +1052,7 @@ In addition to the items listed at the beginning of this documentation, this sol
 
   <img src="https://user-images.githubusercontent.com/44923999/201706712-73b391a0-e282-439c-a13f-36553b218ab5.png" width="800" title="Snipped: November 14, 2022" />
 
-* Search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**" on the **Browse** tab of the "**NuGet - Solution**" page
-* Click **Next**
+* Search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**" on the **Browse** tab of the "**NuGet - Solution**" page, then click **Next**
 * On the resulting popout, check project CostManagement and then click **Install**
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
@@ -1122,10 +1121,8 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 ### Step 7: Install NuGet, Microsoft.Azure.Management...
 
-* Notice error "The type or namespace 'Management' does not exist in the namespace..."; this must be resolved by adding a NuGet Package
 * Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
-* Search for and select "**Microsoft.Azure.Management.ResourceManager.Fluent**" on the **Browse** tab of the "**NuGet - Solution**" page
-* Click **Next**
+* Search for and select "**Microsoft.Azure.Management.ResourceManager.Fluent**" on the **Browse** tab of the "**NuGet - Solution**" page, then click **Next**
 * On the resulting popout, check project CostManagement and then click **Install**
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
