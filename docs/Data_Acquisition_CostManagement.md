@@ -1151,7 +1151,7 @@ Continue on the "Function1.cs" tab
   }
   ```
   
-* Add the following code to the method:
+* Add the following code to end of the method:
 
   ```
   foreach (var resourceGroup in azure.ResourceGroups.List())
@@ -1182,15 +1182,66 @@ Continue on the "Function1.cs" tab
   ```
 
   Logic Explained:
-
   * `foreach (...` ... will iterate through Azure Fluent-derived list of Resource Groups
-  * The remainder, from `using (HttpClient...` to `token = oauth2.access_token;` makes an API call to get an access token for the Cost Management call
+  * The remainder, from `using (HttpClient...` to `token = oauth2.access_token;`, makes an API call to get an access token for the Cost Management call
 
   _Note: Tokens expire after an hour; placement of the API call at this level should provide for reasonably frequent token refresh_
 
---------------------------------------------------
+### Step 9: "Function1.cs" Logic, Iterate Dates and Request Cost Management Data
 
-### Function2.cs
+* Continue on the "Function1.cs" tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/201762581-ea42fa72-67be-452b-8c0b-954ae0981060.png" width="800" title="Snipped: November 14, 2022" />
+
+* Add the following code to the method:
+
+  ```
+  for (var date = DateTime.Parse(startDate); date <= DateTime.Parse(endDate); date = date.AddDays(1))
+  {
+      Console.WriteLine(Environment.NewLine + resourceGroup.Id + " >> " + date.ToString("MMMM dd yyyy"));
+
+      /* ************************* Request Cost Management Data */
+
+      using (HttpClient client = new HttpClient())
+      {
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+          HttpRequestMessage request = new HttpRequestMessage(
+              method: new HttpMethod("POST"),
+              requestUri: "https://management.azure.com/" + resourceGroup.Id + "/providers/Microsoft.CostManagement/query?api-version=2021-10-01");
+
+          request.Content = new StringContent(
+              content: "{'dataset':{'aggregation':{'totalCost':{'function':'Sum','name':'PreTaxCost'}},'granularity':'Daily','grouping':[{'name':'ResourceGroupName','type':'Dimension'},{'name':'ResourceType','type':'Dimension'},{'name':'ResourceId','type':'Dimension'},{'name':'ResourceLocation','type':'Dimension'},{'name':'MeterCategory','type':'Dimension'},{'name':'MeterSubCategory','type':'Dimension'},{'name':'Meter','type':'Dimension'},{'name':'ServiceName','type':'Dimension'},{'name':'PartNumber','type':'Dimension'},{'name':'PricingModel','type':'Dimension'},{'name':'ChargeType','type':'Dimension'},{'name':'ReservationName','type':'Dimension'},{'name':'Frequency','type':'Dimension'}]},'timePeriod':{'from':'" + date + "','to':'" + date + "'},'timeframe':'Custom','type':'Usage'}",
+              encoding: Encoding.UTF8,
+              mediaType: "application/json");
+
+          HttpResponseMessage response = client.Send(request);
+      }
+  }
+  ```
+
+  Logic Explained:
+  * `foreach (...` ... will iterate through dates based on `startDate` and `endDate` variables
+  * The remainder, from `using (HttpClient...` to `HttpResponseMessage response = client.Send(request);`, makes an API call to get Cost Management data
+
+### Step 10: "Function1.cs" Logic, Send to Event Hub
+
+* Continue on the "Function1.cs" tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/201763518-de067b3b-cda2-4b35-97b9-b2c3bbf0e2e0.png" width="800" title="Snipped: November 14, 2022" />
+
+* Add the following code to the method:
+
+  ```
+  string output = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+  theLogger.LogInformation(output);
+
+  await theEventHub.AddAsync(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+  ```         
+  
+### Function1.cs
+The final end-to-end code in Function1.cs:
 
 ```c#
 using Microsoft.Azure.Management.ResourceManager.Fluent;
@@ -1204,35 +1255,36 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FunctionApp2
+
+namespace CostManagement
 {
-    public class Function2
+    public class Function1
     {
-        [FunctionName("Function2")]
+        [FunctionName("Function1")]
         public async Task Run(
             [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
             [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
             ILogger theLogger)
         {
-            string clientid = "75afc8e9-f297-4ba4-8b5b-5ce3495258a1",
-                clientsecret = "YXe8Q~SKQ6_zM1FvDDXbhx7zxWoKlvrMDIz1Pb6G",
-                tenantid = "16b3c013-d300-468d-ac64-7eda0820b6d3",
+            string clientid = "{CLIENT ID}",
+                clientsecret = "{CLIENT SECRET}",
+                tenantid = "{TENANT ID}",
                 startDate = "11/4/2022",
-                endDate = "11/5/2022"; /* Need Key Vault */
+                endDate = "11/5/2022";
 
-            string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}" };
-
-            var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-                clientId: clientid,
-                clientSecret: clientsecret,
-                tenantId: tenantid,
-                environment: AzureEnvironment.AzureGlobalCloud
-            );
+            string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}", "{SUBSCRIPTION ID N}" };
 
             /* ************************* Iterate Subscriptions */
 
             foreach (string subscription in subscriptions)
             {
+                var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
+                    clientId: clientid,
+                    clientSecret: clientsecret,
+                    tenantId: tenantid,
+                    environment: AzureEnvironment.AzureGlobalCloud
+                );
+
                 var azure = Microsoft.Azure.Management.Fluent.Azure
                     .Authenticate(credentials)
                     .WithSubscription(subscriptionId: subscription)
@@ -1257,7 +1309,9 @@ namespace FunctionApp2
 
                         content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
-                        HttpResponseMessage response = await client.PostAsync(requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"), content: content);
+                        HttpResponseMessage response = await client.PostAsync(
+                            requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"),
+                            content: content);
 
                         OAuth2? oauth2 = JsonSerializer.Deserialize<OAuth2>(response.Content.ReadAsStringAsync().Result);
 
@@ -1303,6 +1357,7 @@ namespace FunctionApp2
         }
     }
 }
+
 ```
 
 ### local.settings.json
