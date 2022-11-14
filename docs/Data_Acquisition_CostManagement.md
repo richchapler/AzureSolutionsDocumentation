@@ -52,7 +52,7 @@ Solution-specific requirements will be included in each "...via" section
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
-This use case considers requirement statements like:
+This use case considers the following requirement statements:
 
 * "We want to analyze Azure resource costs across many subscriptions"
 * "An understanding of resources and costs would really help us get a handle on inherited subscriptions"
@@ -299,7 +299,7 @@ In this step, we will process the pipeline and review the resulting data.
 
 ![image](https://user-images.githubusercontent.com/44923999/192547308-676da706-ba85-49cc-9c6e-d8bbe997fa62.png)
 
-This use case considers requirement statements like:
+This use case considers the following requirement statements:
 
 * "We need to capture and analyze cost data from many subscriptions"
 * "Our subscriptions have more than 1,000 resources and are hitting the Cost Management API's per-request limitation"
@@ -979,7 +979,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 ![image](https://user-images.githubusercontent.com/44923999/201684228-f77a5552-3f9e-49fb-b857-46bf1991d4a3.png)
 
-This use case considers requirement statements like:
+This use case considers the following requirement statements:
 
 * "We want to pull data from many subscriptions with many resource groups each"
 * "We want to pull historical data and ingest daily"
@@ -993,7 +993,7 @@ In addition to the items listed at the beginning of this documentation, this sol
 * **Function App** ... this, however, will be created during publish, so no need to create in advance
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
-### Step 2: Visual Studio
+### Step 2: Create Visual Studio Project
 
 * Open Visual Studio
 
