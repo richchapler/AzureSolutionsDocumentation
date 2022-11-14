@@ -1079,6 +1079,14 @@ In addition to the items listed at the beginning of this documentation, this sol
   * `{CLIENT ID}` and `{CLIENT SECRET}` ... re: your Application Registration (with "**Cost Management Reader**" role assignment)
   * `startDate`, `endDate`. and `subscriptions` ... parameterized values necessary for iteration
 
+  _Note: I am not investing the time for this demonstration, but Key Vault should be used for, at least {CLIENT SECRET}_
+
+### Step 5: "Function1.cs" Logic, Iterate Subscriptions and Resource Groups
+
+* Continue on the "Function1.cs" tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/201753838-df088641-529b-493a-b624-55e26baa71e7.png" width="800" title="Snipped: November 14, 2022" />
+
 --------------------------------------------------
 
 ### Nuget
