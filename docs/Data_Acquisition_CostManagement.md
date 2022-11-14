@@ -1009,13 +1009,13 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * Complete the "**Configure your new project**" form and then click **Next**
 
-  <img src="https://user-images.githubusercontent.com/44923999/201699397-aa6ec8bf-406f-4365-9d1c-2fd2a8b8cefe.png" width="800" title="Snipped: November 14, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/201709567-ea5c59be-014e-4f38-9781-582afd44edea.png" width="800" title="Snipped: November 14, 2022" />
 
 * Complete the "**Additional information**" form, including:
 
   | Prompt | Entry |
   | ------ | ----- |
-  | **Functions worker** | Select "**.NET Framework v1**" |
+  | **Functions worker** | Select "**.NET 6.0 (Long Term Support)**" |
   | **Function** | Select "**Timer trigger**" |
   | **Use Azurite...** | Checked |
   | **Schedule** | Enter "*/1 * * * *" (the CRON expression for every one minute) |
@@ -1033,7 +1033,6 @@ public async Task Run(
             [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
             [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
             ILogger theLogger)
-        {
 ```
 
 Logic Explained:
@@ -1041,7 +1040,7 @@ Logic Explained:
 * `async Task` ... provides for use of asynchronous calls
 * `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
 
-### Step 3: Add NuGet
+### Step 3: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
 
 Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
 
@@ -1052,7 +1051,8 @@ Error "The type or namespace 'EventHub' could not be found..." must be resolved 
   <img src="https://user-images.githubusercontent.com/44923999/201706712-73b391a0-e282-439c-a13f-36553b218ab5.png" width="800" title="Snipped: November 14, 2022" />
 
 * Search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**" on the "**Create a new project**" page and then click **Next**
-* On the resulting "Microsoft Azure.WebJobs.Extensions.EventHubs" popout, check project CostManagement and then click **Install**
+* On the resulting popout, check project CostManagement and then click **Install**
+* When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
 
 ### Nuget
