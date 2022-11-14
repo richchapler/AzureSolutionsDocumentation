@@ -1141,6 +1141,15 @@ Continue on the "Function1.cs" tab
   using System.Net.Http.Headers;
   using System.Text.Json;
   ```
+
+* Add the following code at the bottom:
+
+  ```
+  public class OAuth2
+  {
+      public string? access_token { get; set; }
+  }
+  ```
   
 * Add the following code to the method:
 
@@ -1172,25 +1181,14 @@ Continue on the "Function1.cs" tab
       }
   ```
 
-* Add the following code at the bottom:
-
-  ```
-  public class OAuth2
-  {
-      public string? access_token { get; set; }
-  }
-  ```
-
   Logic Explained:
 
-  * `foreach (...` ... will iterate through the previously-created string array of Subscription Id values
-  * `var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal` ... generates credentials for use with Azure SDK
-  * `var azure = Microsoft.Azure.Management.Fluent.Azure` ... connects to the current subscription using generated credentials
+  * `foreach (...` ... will iterate through Azure Fluent-derived list of Resource Groups
+  * The remainder, from `using (HttpClient...` to `token = oauth2.access_token;` makes an API call to get an access token for the Cost Management call
+
+  _Note: Tokens expire after an hour; placement of the API call at this level should provide for reasonably frequent token refresh_
+
 --------------------------------------------------
-
-### Nuget
-
-![image](https://user-images.githubusercontent.com/44923999/201480066-6676c0cd-5f9a-423b-a0d5-5d7ec638df3f.png)
 
 ### Function2.cs
 
