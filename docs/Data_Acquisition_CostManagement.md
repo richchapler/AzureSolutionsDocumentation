@@ -5,10 +5,10 @@ This documentation consolidates newly-crafted and previously-released Azure Cost
 Three Resource Type-based methods are included in corresponding sections below.
 
 | Resource Type | Pros | Cons |
-| ------------- | ---------------------------------------- | ------------------------------------------------------------ |
-| Data Factory  | - Familiar orchestration engine          | - Nested iteration not possible                              |
-| Logic App     | - More accessible to low-code developers | - Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
-| Function      | - More accessible to C# developers       |                                                              |
+| ----- | ----- | ----- |
+| Data Factory | - Familiar orchestration engine | - Nested iteration not possible |
+| Logic App | - More accessible to low-code developers | - Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
+| Function | - More accessible to C# developers<br>- Can use Visual Studio {i.e., easy NuGet handling and GitHub integration} | |
 
 Beyond the listed Pros and Cons, your answer to "why use X?" may be as simple as the fact that you favor that solution type.
 
