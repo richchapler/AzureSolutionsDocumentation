@@ -990,7 +990,9 @@ This use case considers the following requirement statements:
 
 In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
+* **Event Hub**
 * **Function App** ... this, however, will be created during publish, so no need to create in advance
+* **Storage Account**
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
 ### Step 2: Create Visual Studio Project
@@ -1240,7 +1242,7 @@ Continue on the "Function1.cs" tab
   await theEventHub.AddAsync(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
   ```         
   
-### Function1.cs
+#### Function1.cs
 The final end-to-end code in Function1.cs:
 
 ```c#
@@ -1360,15 +1362,21 @@ namespace CostManagement
 
 ```
 
-### local.settings.json
+### Step 11: Update "local.settings.json"
 
-```json
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "{STORAGE ACCOUNT CONNECTION STRING}",
-    "EventHubConnectionAppSetting": "{EVENT HUB CONNECTION STRING}",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+* Open "local.settings.json"
+
+  <img src="https://user-images.githubusercontent.com/44923999/201764322-4756a0d8-0da1-4de7-affa-b4bef22ec67f.png" width="800" title="Snipped: November 14, 2022" />
+
+* Replace default JSON with the following JSON:
+
+  ```
+  {
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=rchaplerdlsg2;AccountKey={ACCOUNT KEY};EndpointSuffix=core.windows.net",
+      "EventHubConnectionAppSetting": "Endpoint=sb://rchaplerehn.servicebus.windows.net/;SharedAccessKeyName=rchaplerehsap;SharedAccessKey={SHARED ACCESS KEY};EntityPath=rchaplereh",
+      "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+    }
   }
-}
-```
+  ```
