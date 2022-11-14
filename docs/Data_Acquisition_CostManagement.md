@@ -1044,10 +1044,6 @@ Logic Explained:
 Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
 
 
-
-![image](https://user-images.githubusercontent.com/44923999/201702008-1004ad40-2472-4c56-b738-124d4df4b64d.png)
-
-
 ### Nuget
 
 ![image](https://user-images.githubusercontent.com/44923999/201480066-6676c0cd-5f9a-423b-a0d5-5d7ec638df3f.png)
