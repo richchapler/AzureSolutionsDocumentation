@@ -12,7 +12,7 @@ Three Resource Type-based methods are included in corresponding sections below.
 
 Beyond the listed Pros and Cons, your answer to "why use X?" may be as simple as the fact that you favor that solution type.
 
-### Step 1a: Prepare Infrastructure
+### Prepare Resources
 
 All solutions require the following resources:
 
@@ -58,9 +58,9 @@ This use case considers requirement statements like:
 * "An understanding of resources and costs would really help us get a handle on inherited subscriptions"
 * "Power BI, Cost Management connector requires billing account permissions we cannot get"
 
-### Step 1b: Prepare Infrastructure
+### Step 1: Prepare Infrastructure
 
-This solution requires the following resources:
+In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
 * [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
@@ -312,9 +312,9 @@ This use case considers requirement statements like:
 
 _Note: If you have Resource Groups with more than 1,000 resources, you might have to choose a more granular scope or other strategy_
 
-### Step 1b: Prepare Infrastructure
+### Step 1: Prepare Resources
 
-This solution requires the following resources:
+In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
 * [**Logic App**](Infrastructure_LogicApp.md)
 
@@ -978,6 +978,28 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 ## ...via Function App
 
 ![image](https://user-images.githubusercontent.com/44923999/201684228-f77a5552-3f9e-49fb-b857-46bf1991d4a3.png)
+
+This use case considers requirement statements like:
+
+* "We want to pull data from many subscriptions with many resource groups each"
+* "We want to pull historical data and ingest daily"
+* "Synapse Pipelines couldn't iterate as needed"
+* "Logic Apps didn't give us the desired visibility at run-time"
+
+### Step 1: Prepare Resources
+
+In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
+
+* **Function App** ... this, however, will be created during publish, so no need to create in advance
+* [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
+
+### Step 2: Visual Studio
+
+* Open Visual Studio
+
+  <img src="https://user-images.githubusercontent.com/44923999/201695714-2c2be122-0b23-42ef-8a47-f71a4bc3ac76.png" width="800" title="Snipped: November 14, 2022" />
+
+* Click "**Create a new project**"
 
 ### Nuget
 
