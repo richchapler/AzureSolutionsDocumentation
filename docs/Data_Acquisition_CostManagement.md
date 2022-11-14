@@ -1042,7 +1042,7 @@ Logic Explained:
 
 ### Step 3: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
 
-Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
+* Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
 
   <img src="https://user-images.githubusercontent.com/44923999/201705526-949273b7-44aa-4eba-b9de-1bb3dfd0ac0b.png" width="800" title="Snipped: November 14, 2022" />
 
