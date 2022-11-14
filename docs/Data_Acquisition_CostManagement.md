@@ -1022,28 +1022,29 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * Click **Create**
 
-### Step 2: "Function1.cs" Logic, Update Method
+### Step 3: "Function1.cs" Logic, Update Method
+
+* Visual Studio will open a "Function1.cs" tab
 
   <img src="https://user-images.githubusercontent.com/44923999/201704764-9bac8923-2aa6-4967-8590-efd1b45f447d.png" width="800" title="Snipped: November 14, 2022" />
 
-Replace the default code `public static void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
+* Replace the default code `public static void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
 
-```
-public async Task Run(
-  [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
-  [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
-  ILogger theLogger)
-```
+  ```
+  public async Task Run(
+    [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
+    [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
+    ILogger theLogger)
+  ```
 
-Logic Explained:
+  Logic Explained:
 
-* `async Task` ... provides for use of asynchronous calls
-* `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
+  * `async Task` ... provides for use of asynchronous calls
+  * `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
 
-### Step 3: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
+### Step 4: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
 
 * Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
-
   <img src="https://user-images.githubusercontent.com/44923999/201705526-949273b7-44aa-4eba-b9de-1bb3dfd0ac0b.png" width="800" title="Snipped: November 14, 2022" />
 
 * Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
