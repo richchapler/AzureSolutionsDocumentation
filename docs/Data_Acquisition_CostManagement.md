@@ -1056,7 +1056,7 @@ In addition to the items listed at the beginning of this documentation, this sol
 * On the resulting popout, check project CostManagement and then click **Install**
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
-### Step 4: "Function1.cs" Logic, Add Variables and Parameters
+### Step 5: "Function1.cs" Logic, Add Variables and Parameters
 
 * Return to the "Function1.cs" tab
 
@@ -1081,11 +1081,51 @@ In addition to the items listed at the beginning of this documentation, this sol
 
   _Note: I am not investing the time for this demonstration, but Key Vault should be used for, at least {CLIENT SECRET}_
 
-### Step 5: "Function1.cs" Logic, Iterate Subscriptions and Resource Groups
+### Step 6: "Function1.cs" Logic, Iterate Subscriptions and Resource Groups
 
 * Continue on the "Function1.cs" tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/201753838-df088641-529b-493a-b624-55e26baa71e7.png" width="800" title="Snipped: November 14, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/201754332-89dde712-8696-4a4e-8552-775f7a0a3255.png" width="800" title="Snipped: November 14, 2022" />
+
+* Add the following code:
+
+  ```
+  foreach (string subscription in subscriptions)
+  {
+      var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
+          clientId: clientid,
+          clientSecret: clientsecret,
+          tenantId: tenantid,
+          environment: AzureEnvironment.AzureGlobalCloud
+      );
+
+      var azure = Microsoft.Azure.Management.Fluent.Azure
+          .Authenticate(credentials)
+          .WithSubscription(subscriptionId: subscription)
+          ;
+  }
+  ```
+
+  Logic Explained:
+
+  * `foreach (...` ... will iterate through the previously-created string array of Subscription Id values
+  * `var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal` ... generates credentials for use with Azure SDK
+  * `var azure = Microsoft.Azure.Management.Fluent.Azure` ... connects to the current subscription using generated credentials
+
+### Step 7: Install NuGet, Lorem Ipsum
+
+* Notice error "The type or namespace 'Management' does not exist in the namespace..."; this must be resolved by adding a NuGet Package
+
+  <img src="https://user-images.githubusercontent.com/44923999/201705526-949273b7-44aa-4eba-b9de-1bb3dfd0ac0b.png" width="800" title="Snipped: November 14, 2022" />
+
+* Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/201706712-73b391a0-e282-439c-a13f-36553b218ab5.png" width="800" title="Snipped: November 14, 2022" />
+
+* Search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**" on the "**Create a new project**" page and then click **Next**
+* On the resulting popout, check project CostManagement and then click **Install**
+* When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
+![image](https://user-images.githubusercontent.com/44923999/201754952-aede78ee-c69c-4092-8394-4deb1c6db12f.png)
 
 --------------------------------------------------
 
