@@ -1,16 +1,16 @@
 # Data Acquisition: Azure Cost Management API
 
-This documentation consolidates previously-released documentation regarding acquisition of data using the Azure Cost Management API via Data Factory and Logic App.
+This documentation consolidates newly-crafted and previously-released Azure Cost Management API data acquisition documentation.
 
-For any of these resource types, your answer to "why use X?" may be as simple as the fact that you favor that solution type.
-
-You might also consider the following Pros and Cons.
+Three Resource Type-based methods are included in corresponding sections below.
 
 | Resource Type | Pros                                     | Cons                                                         |
 | ------------- | ---------------------------------------- | ------------------------------------------------------------ |
 | Data Factory  | - Familiar orchestration engine          | - Nested iteration not possible                              |
 | Logic App     | - More accessible to low-code developers | - Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
 | Function      | - More accessible to C# developers       |                                                              |
+
+Beyond the listed Pros and Cons, your answer to "why use X?" may be as simple as the fact that you favor that solution type.
 
 ### Step 1a: Prepare Infrastructure
 
@@ -294,7 +294,6 @@ In this step, we will process the pipeline and review the resulting data.
 
 * Confirm results
 
-  <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
 
 ## ...via Logic App
 
@@ -976,9 +975,9 @@ In this step, we will send the Cost Management API response to Data Explorer usi
   | sort by IngestionTime desc
   ```
 
-  <img src="https://user-images.githubusercontent.com/44923999/187472753-de7b0a75-cea5-4ae0-af73-4117b65fa92d.png" width="200" title="Congratulations... you have successfuly completed this exercise!" />
-
 ## ...via Function App
+
+![image](https://user-images.githubusercontent.com/44923999/201684228-f77a5552-3f9e-49fb-b857-46bf1991d4a3.png)
 
 ### Nuget
 
@@ -986,7 +985,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
 
 ### Function2.cs
 
-```
+```c#
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
@@ -1101,7 +1100,7 @@ namespace FunctionApp2
 
 ### local.settings.json
 
-```
+```json
 {
   "IsEncrypted": false,
   "Values": {
