@@ -1041,7 +1041,18 @@ Logic Explained:
 * `async Task` ... provides for use of asynchronous calls
 * `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
 
+### Step 3: Add NuGet
+
 Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
+
+  <img src="https://user-images.githubusercontent.com/44923999/201705526-949273b7-44aa-4eba-b9de-1bb3dfd0ac0b.png" width="800" title="Snipped: November 14, 2022" />
+
+* Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/201706712-73b391a0-e282-439c-a13f-36553b218ab5.png" width="800" title="Snipped: November 14, 2022" />
+
+* Search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**" on the "**Create a new project**" page and then click **Next**
+* On the resulting "Microsoft Azure.WebJobs.Extensions.EventHubs" popout, check project CostManagement and then click **Install**
 
 
 ### Nuget
