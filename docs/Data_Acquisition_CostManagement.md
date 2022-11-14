@@ -1044,7 +1044,8 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 ### Step 4: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
 
-* Error "The type or namespace 'EventHub' could not be found..." must be resolved by adding Nuget.
+* Notice error "The type or namespace 'EventHub' could not be found..."; this must be resolved by adding a NuGet Package
+
   <img src="https://user-images.githubusercontent.com/44923999/201705526-949273b7-44aa-4eba-b9de-1bb3dfd0ac0b.png" width="800" title="Snipped: November 14, 2022" />
 
 * Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
@@ -1057,24 +1058,28 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 ### Step 4: "Function1.cs" Logic, Add Variables and Parameters
 
+* Return to the "Function1.cs" tab
+
   <img src="https://user-images.githubusercontent.com/44923999/201716478-a9784f70-2238-4404-9cbe-582dd158c147.png" width="800" title="Snipped: November 14, 2022" />
 
-Replace the default code `log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");` with:
+* Replace the default code `log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");` with:
 
-```
-string clientid = "{CLIENT ID}",
-  clientsecret = "{CLIENT SECRET}",
-  tenantid = "{TENANT ID}",
-  startDate = "11/4/2022",
-  endDate = "11/5/2022";
+  ```
+  string clientid = "{CLIENT ID}",
+    clientsecret = "{CLIENT SECRET}",
+    tenantid = "{TENANT ID}",
+    startDate = "11/4/2022",
+    endDate = "11/5/2022";
 
-string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}", "{SUBSCRIPTION ID N}" };
-```
+  string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}", "{SUBSCRIPTION ID N}" };
+  ```
 
-Logic Explained:
+  Logic Explained:
 
-* `{CLIENT ID}` and `{CLIENT SECRET}` ... re: your Application Registration (with "**Cost Management Reader**" role assignment)
-* `startDate`, `endDate`. and `subscriptions` ... parameterized values necessary for iteration
+  * `{CLIENT ID}` and `{CLIENT SECRET}` ... re: your Application Registration (with "**Cost Management Reader**" role assignment)
+  * `startDate`, `endDate`. and `subscriptions` ... parameterized values necessary for iteration
+
+--------------------------------------------------
 
 ### Nuget
 
