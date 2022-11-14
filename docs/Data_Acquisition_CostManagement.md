@@ -1030,9 +1030,9 @@ Replace the default code `public static void Run([TimerTrigger("*/1 * * * *")]Ti
 
 ```
 public async Task Run(
-            [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
-            [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
-            ILogger theLogger)
+  [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
+  [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
+  ILogger theLogger)
 ```
 
 Logic Explained:
@@ -1054,6 +1054,26 @@ Error "The type or namespace 'EventHub' could not be found..." must be resolved 
 * On the resulting popout, check project CostManagement and then click **Install**
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
+### Step 4: "Function1.cs" Logic, Add Variables and Parameters
+
+  <img src="https://user-images.githubusercontent.com/44923999/201716478-a9784f70-2238-4404-9cbe-582dd158c147.png" width="800" title="Snipped: November 14, 2022" />
+
+Replace the default code `log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");` with:
+
+```
+string clientid = "{CLIENT ID}",
+  clientsecret = "{CLIENT SECRET}",
+  tenantid = "{TENANT ID}",
+  startDate = "11/4/2022",
+  endDate = "11/5/2022";
+
+string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}", "{SUBSCRIPTION ID N}" };
+```
+
+Logic Explained:
+
+* `{CLIENT ID}` and `{CLIENT SECRET}` ... re: your Application Registration (with "**Cost Management Reader**" role assignment)
+* `startDate`, `endDate`. and `subscriptions` ... parameterized values necessary for iteration
 
 ### Nuget
 
