@@ -1268,13 +1268,13 @@ namespace CostManagement
             [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
             ILogger theLogger)
         {
-            string clientid = "{CLIENT ID}",
-                clientsecret = "{CLIENT SECRET}",
-                tenantid = "{TENANT ID}",
-                startDate = "11/4/2022",
+            string clientid = "CLIENT_ID",
+                clientsecret = "CLIENT_SECRET",
+                tenantid = "TENANT_ID",
+                startDate = "11/1/2022",
                 endDate = "11/5/2022";
 
-            string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}", "{SUBSCRIPTION ID N}" };
+            string[] subscriptions = new string[] { "SUBSCRIPTION_ID1", "SUBSCRIPTION_ID2", "SUBSCRIPTION_ID3" };
 
             /* ************************* Iterate Subscriptions */
 
