@@ -2,7 +2,9 @@
 
 It is not possible to simply query the Azure cost details dataset with your favorite data tools. It is possible, however, to get the data.
 
-Microsoft [Cost Management + Billing](https://learn.microsoft.com/en-us/azure/cost-management-billing/automate/usage-details-best-practices) documentation abstracts multiple options: 1) Azure Portal, 2) Power BI, 3) API, and 4) Exports. This documentation details step-by-step instructions for some of these options.
+Microsoft [Cost Management + Billing](https://learn.microsoft.com/en-us/azure/cost-management-billing/automate/usage-details-best-practices) documentation abstracts multiple options: 1) Azure Portal, 2) Power BI, 3) API, and 4) Exports.
+
+This documentation details step-by-step instructions for some of these options.
 
 | Option | Pros | Cons |
 | ----- | ----- | ----- |
