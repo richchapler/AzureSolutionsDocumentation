@@ -1374,8 +1374,8 @@ namespace CostManagement
   {
     "IsEncrypted": false,
     "Values": {
-      "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=rchaplerdlsg2;AccountKey={ACCOUNT KEY};EndpointSuffix=core.windows.net",
-      "EventHubConnectionAppSetting": "Endpoint=sb://rchaplerehn.servicebus.windows.net/;SharedAccessKeyName=rchaplerehsap;SharedAccessKey={SHARED ACCESS KEY};EntityPath=rchaplereh",
+      "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=STORAGE_ACCOUNT_NAME;AccountKey=STORAGE_ACCOUNT_KEY;EndpointSuffix=core.windows.net",
+      "EventHubConnectionAppSetting": "Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME",
       "FUNCTIONS_WORKER_RUNTIME": "dotnet"
     }
   }
