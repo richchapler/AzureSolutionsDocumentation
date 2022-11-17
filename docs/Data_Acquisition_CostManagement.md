@@ -1,54 +1,23 @@
 # Data Acquisition: Azure Cost Management API
 
-This documentation consolidates newly-crafted and previously-released Azure Cost Management API data acquisition documentation.
+It is not possible to simply query the Azure cost details dataset with your favorite data tools.
 
-Three Resource Type-based methods are included in corresponding sections below.
+However, Microsoft [Cost Management + Billing](https://learn.microsoft.com/en-us/azure/cost-management-billing/automate/usage-details-best-practices) documentation abstracts multiple options: 1) Azure Portal, 2) Power BI, 3) API, and 4) Exports. This documentation details step-by-step instructions for some of these options.
 
-| Resource Type | Pros | Cons |
+| Option | Pros | Cons |
 | ----- | ----- | ----- |
-| Data Factory | - Familiar orchestration engine<br>- More accessible to "low-code" developers | - Nested iteration not possible |
-| Logic App | - More accessible to "low-code" developers<br>- Nested iteration possible | - Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
-| Function | - More accessible to "high-code" developers<br>- Visual Studio {i.e., IntelliSense, NuGet, and GitHub}<br>- Nested iteration possible | |
+| Azure Portal | - Easy-to-Use<br>- No additional tools or coding required | - Targets "small cost detail" datasets (<2GB) |
+| Power BI | ??? | - Requires permissions most people lack |
+| API,<br>Data Factory | - Familiar orchestration engine<br>- More accessible to "low-code" developers | - API targets "small cost datasets"<br>- Nested iteration not possible |
+| API,<br/>Logic App | - More accessible to "low-code" developers<br>- Nested iteration possible | - API targets "small cost datasets"<br/>- Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
+| API,<br/>Function App | - More accessible to "high-code" developers<br>- Visual Studio {i.e., IntelliSense, NuGet, and GitHub}<br>- Nested iteration possible | - API targets "small cost datasets" |
+| Exports | - Most scalable solution | ----- |
 
-Beyond the listed Pros and Cons, your answer to "why use X?" may be as simple as the fact that you favor that solution type.
+**This list of Pros and Cons is based on my experience and perception ONLY.**
 
-### Prepare Resources
+Your answer to "why use Option X?" may be as simple as the fact that you favor that option.
 
-All solutions require the following resources:
-
-* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "**Cost Management Reader**" role assignment (granted at Subscription or Resource Group)
-* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-
-Solution-specific requirements will be included in each "...via" section
-
-#### Prepare Data Explorer
-
-* Navigate to Data Explorer Database, then Query in the Data grouping of the left-hand navigation
-
-* Run the following KQL:
-
-  ```KQL
-  .create table CostManagement (
-      PreTaxCost: decimal
-      , UsageDate: int
-      , ResourceGroupName: string
-      , ResourceType: string
-      , ResourceId: string
-      , ResourceLocation: string
-      , MeterCategory: string
-      , MeterSubCategory: string
-      , Meter: string
-      , ServiceName: string
-      , PartNumber: string
-      , PricingModel: string
-      , ChargeType: string
-      , ReservationName: string
-      , Frequency: string
-      , Currency: string
-      )
-  ```
-
-## ...via Synapse (or Data Factory) Pipeline
+## API, via Synapse Pipeline
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
@@ -62,6 +31,8 @@ This use case considers the following requirement statements:
 
 In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "**Cost Management Reader**" role assignment (granted at Subscription or Resource Group)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
 ### Step 2: Create Destination Table
@@ -295,7 +266,7 @@ In this step, we will process the pipeline and review the resulting data.
 * Confirm results
 
 
-## ...via Logic App
+## API, via Logic App
 
 ![image](https://user-images.githubusercontent.com/44923999/192547308-676da706-ba85-49cc-9c6e-d8bbe997fa62.png)
 
@@ -316,6 +287,8 @@ _Note: If you have Resource Groups with more than 1,000 resources, you might hav
 
 In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "**Cost Management Reader**" role assignment (granted at Subscription or Resource Group)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [**Logic App**](Infrastructure_LogicApp.md)
 
 ### Step 2: Prepare Workflow
@@ -975,7 +948,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
   | sort by IngestionTime desc
   ```
 
-## ...via Function App
+## API, via Function App
 
 ![image](https://user-images.githubusercontent.com/44923999/201684228-f77a5552-3f9e-49fb-b857-46bf1991d4a3.png)
 
@@ -990,6 +963,8 @@ This use case considers the following requirement statements:
 
 In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "**Cost Management Reader**" role assignment (granted at Subscription or Resource Group)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * **Event Hub**
 * **Function App** ... this, however, will be created during publish, so no need to create in advance
 * **Storage Account**
@@ -1072,7 +1047,7 @@ In addition to the items listed at the beginning of this documentation, this sol
     tenantid = "{TENANT ID}",
     startDate = "11/4/2022",
     endDate = "11/5/2022";
-
+  
   string[] subscriptions = new string[] { "{SUBSCRIPTION ID 1}", "{SUBSCRIPTION ID 2}", "{SUBSCRIPTION ID N}" };
   ```
 
@@ -1106,7 +1081,7 @@ In addition to the items listed at the beginning of this documentation, this sol
           tenantId: tenantid,
           environment: AzureEnvironment.AzureGlobalCloud
       );
-
+  
       var azure = Microsoft.Azure.Management.Fluent.Azure
           .Authenticate(credentials)
           .WithSubscription(subscriptionId: subscription)
@@ -1159,9 +1134,9 @@ Continue on the "Function1.cs" tab
   foreach (var resourceGroup in azure.ResourceGroups.List())
   {
       /* ************************* Get Token */
-
+  
       string token;
-
+  
       using (HttpClient client = new HttpClient())
       {
           FormUrlEncodedContent content = new FormUrlEncodedContent(new[]{
@@ -1170,15 +1145,15 @@ Continue on the "Function1.cs" tab
           new KeyValuePair<string, string>("client_secret", clientsecret),
           new KeyValuePair<string, string>("resource", "https://management.azure.com/")
       });
-
+  
           content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-
+  
           HttpResponseMessage response = await client.PostAsync(
               requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"),
               content: content);
-
+  
           OAuth2? oauth2 = JsonSerializer.Deserialize<OAuth2>(response.Content.ReadAsStringAsync().Result);
-
+  
           token = oauth2.access_token;
       }
   ```
@@ -1201,22 +1176,22 @@ Continue on the "Function1.cs" tab
   for (var date = DateTime.Parse(startDate); date <= DateTime.Parse(endDate); date = date.AddDays(1))
   {
       Console.WriteLine(Environment.NewLine + resourceGroup.Id + " >> " + date.ToString("MMMM dd yyyy"));
-
+  
       /* ************************* Request Cost Management Data */
-
+  
       using (HttpClient client = new HttpClient())
       {
           client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-
+  
           HttpRequestMessage request = new HttpRequestMessage(
               method: new HttpMethod("POST"),
               requestUri: "https://management.azure.com/" + resourceGroup.Id + "/providers/Microsoft.CostManagement/query?api-version=2021-10-01");
-
+  
           request.Content = new StringContent(
               content: "{'dataset':{'aggregation':{'totalCost':{'function':'Sum','name':'PreTaxCost'}},'granularity':'Daily','grouping':[{'name':'ResourceGroupName','type':'Dimension'},{'name':'ResourceType','type':'Dimension'},{'name':'ResourceId','type':'Dimension'},{'name':'ResourceLocation','type':'Dimension'},{'name':'MeterCategory','type':'Dimension'},{'name':'MeterSubCategory','type':'Dimension'},{'name':'Meter','type':'Dimension'},{'name':'ServiceName','type':'Dimension'},{'name':'PartNumber','type':'Dimension'},{'name':'PricingModel','type':'Dimension'},{'name':'ChargeType','type':'Dimension'},{'name':'ReservationName','type':'Dimension'},{'name':'Frequency','type':'Dimension'}]},'timePeriod':{'from':'" + date + "','to':'" + date + "'},'timeframe':'Custom','type':'Usage'}",
               encoding: Encoding.UTF8,
               mediaType: "application/json");
-
+  
           HttpResponseMessage response = client.Send(request);
       }
   }
@@ -1236,11 +1211,11 @@ Continue on the "Function1.cs" tab
 
   ```
   string output = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-
+  
   theLogger.LogInformation(output);
-
+  
   await theEventHub.AddAsync(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-  ```         
+  ```
   
 #### Function1.cs
 The final end-to-end code in Function1.cs:
@@ -1379,4 +1354,31 @@ namespace CostManagement
       "FUNCTIONS_WORKER_RUNTIME": "dotnet"
     }
   }
+  ```
+  
+  #### Prepare Data Explorer
+
+* Navigate to Data Explorer Database, then Query in the Data grouping of the left-hand navigation
+
+* Run the following KQL:
+
+  ```KQL
+  .create table CostManagement (
+      PreTaxCost: decimal
+      , UsageDate: int
+      , ResourceGroupName: string
+      , ResourceType: string
+      , ResourceId: string
+      , ResourceLocation: string
+      , MeterCategory: string
+      , MeterSubCategory: string
+      , Meter: string
+      , ServiceName: string
+      , PartNumber: string
+      , PricingModel: string
+      , ChargeType: string
+      , ReservationName: string
+      , Frequency: string
+      , Currency: string
+      )
   ```
