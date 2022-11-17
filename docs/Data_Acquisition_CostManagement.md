@@ -1101,7 +1101,7 @@ In addition to the items listed at the beginning of this documentation, this sol
   foreach (string subscription in subscriptions)
   {
       var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-          clientId: clientid,
+          clientId: clientId,
           clientSecret: clientsecret,
           tenantId: tenantid,
           environment: AzureEnvironment.AzureGlobalCloud
@@ -1166,7 +1166,7 @@ Continue on the "Function1.cs" tab
       {
           FormUrlEncodedContent content = new FormUrlEncodedContent(new[]{
           new KeyValuePair<string, string>("grant_type", "client_credentials"),
-          new KeyValuePair<string, string>("client_id", clientid),
+          new KeyValuePair<string, string>("client_id", clientId),
           new KeyValuePair<string, string>("client_secret", clientsecret),
           new KeyValuePair<string, string>("resource", "https://management.azure.com/")
       });
@@ -1268,7 +1268,7 @@ namespace CostManagement
             [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
             ILogger theLogger)
         {
-            string clientid = "CLIENT_ID",
+            string clientId = "CLIENT_ID",
                 clientsecret = "CLIENT_SECRET",
                 tenantid = "TENANT_ID",
                 startDate = "11/1/2022",
@@ -1281,7 +1281,7 @@ namespace CostManagement
             foreach (string subscription in subscriptions)
             {
                 var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-                    clientId: clientid,
+                    clientId: clientId,
                     clientSecret: clientsecret,
                     tenantId: tenantid,
                     environment: AzureEnvironment.AzureGlobalCloud
@@ -1304,7 +1304,7 @@ namespace CostManagement
                     {
                         FormUrlEncodedContent content = new FormUrlEncodedContent(new[]{
                         new KeyValuePair<string, string>("grant_type", "client_credentials"),
-                        new KeyValuePair<string, string>("client_id", clientid),
+                        new KeyValuePair<string, string>("client_id", clientId),
                         new KeyValuePair<string, string>("client_secret", clientsecret),
                         new KeyValuePair<string, string>("resource", "https://management.azure.com/")
                     });
