@@ -1312,7 +1312,7 @@ namespace CostManagement
                         content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
                         HttpResponseMessage response = await client.PostAsync(
-                            requestUri: new Uri("https://login.microsoftonline.com/16b3c013-d300-468d-ac64-7eda0820b6d3/oauth2/token"),
+                            requestUri: new Uri("https://login.microsoftonline.com/" + tenantid + "/oauth2/token"),
                             content: content);
 
                         OAuth2? oauth2 = JsonSerializer.Deserialize<OAuth2>(response.Content.ReadAsStringAsync().Result);
