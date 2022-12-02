@@ -8,14 +8,15 @@ Microsoft [Cost Management + Billing](https://learn.microsoft.com/en-us/azure/co
 
 This documentation details step-by-step instructions for some of these options.
 
-| Option | Pros | Cons |
-| ----- | ----- | ----- |
-| Azure Portal | - Easy-to-Use<br>- No additional tools or coding required | - Targets "small cost detail" datasets (<2GB) |
-| Power BI | ??? | - Requires permissions most people lack |
-| API,<br>Data Factory | - Familiar orchestration engine<br>- More accessible to "low-code" developers | - API targets "small cost datasets"<br>- Nested iteration not possible |
-| API,<br/>Logic App | - More accessible to "low-code" developers<br>- Nested iteration possible | - API targets "small cost datasets"<br/>- Interface can be challenging<br />- Processing is slow<br />- Not possible to gauge progress while iterating |
-| API,<br/>Function App | - More accessible to "high-code" developers<br>- Visual Studio {i.e., IntelliSense, NuGet, and GitHub}<br>- Nested iteration possible | - API targets "small cost datasets" |
-| Exports | - Most scalable solution | ----- |
+| Option | Pros | Cons | Interface |
+| ----- | ----- | ----- | ----- |
+| **Azure Portal** | - Easy-to-Use<br>- No additional tools or coding required | - Targets "small cost detail" datasets (<2GB) | - |
+| **Power BI** | ??? | - Requires permissions most people lack | Application |
+| **API** | - Can pull > 1y historical data | - No bulk query | |
+| ...via Data Factory | - Familiar orchestration engine | - Nested iteration impossible | Designer |
+| ...via Logic App | - Nested iteration possible | - Challenging Interface<br />- Slow Processing<br />- Not possible to gauge progress while iterating | Designer |
+| ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - | C#, etc. |
+| **Exports** | - Most scalable solution | ----- |
 
 **This list of Pros and Cons is based on my experience and perception ONLY.**
 
