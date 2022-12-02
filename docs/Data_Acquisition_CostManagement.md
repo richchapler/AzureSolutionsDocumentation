@@ -14,7 +14,7 @@ This documentation details step-by-step instructions for some of these options.
 | **Power BI** | ??? | - Requires permissions most people lack | Application |
 | **API** | - Can pull > 1y historical data | - No bulk query | |
 | ...via Data Factory | - Familiar orchestration engine | - Nested iteration impossible | Designer |
-| ...via Logic App | - Nested iteration possible | - Challenging Interface<br />- Slow Processing<br />- Not possible to gauge progress while iterating | Designer |
+| ...via Logic App | - Nested iteration possible | - Challenging interface<br />- Slow processing<br />- Difficult to monitor progress | Designer |
 | ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - | C#, etc. |
 | **Exports** | - Most scalable solution | ----- |
 
