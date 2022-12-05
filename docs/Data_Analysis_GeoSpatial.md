@@ -1,6 +1,6 @@
 # Data Analysis: Geo-Spatial Visualization
 
-![image](https://user-images.githubusercontent.com/44923999/202575655-a598bf45-b6fd-4d34-ba0b-9e43c91bb2bb.png)
+![image](https://user-images.githubusercontent.com/44923999/205741474-6f1e333d-bc35-48b0-831d-4a8e38e31af9.png)
 
 This documentation details step-by-step instructions for some of these options.
 
