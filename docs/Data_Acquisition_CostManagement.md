@@ -1360,7 +1360,8 @@ namespace CostManagement
     }
   }
   ```
-  
+  _Note: When you publish to an Azure Function App, remember that "local.settings.json" will not be published directly... you will need to update the function app with environment settings directly._
+    
   #### Prepare Data Explorer
 
 * Navigate to Data Explorer Database, then Query in the Data grouping of the left-hand navigation
