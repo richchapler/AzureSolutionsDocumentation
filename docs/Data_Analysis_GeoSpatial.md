@@ -1,4 +1,4 @@
-# Data Acquisition: Azure Cost Management
+# Data Analysis: Geo-Spatial Visualization
 
 ![image](https://user-images.githubusercontent.com/44923999/202575655-a598bf45-b6fd-4d34-ba0b-9e43c91bb2bb.png)
 
