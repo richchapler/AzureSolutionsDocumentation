@@ -18,11 +18,11 @@ This documentation details step-by-step instructions for some of these options.
 | ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - | C#, etc. |
 | **Exports** | - Most scalable solution | ----- |
 
-**This list of Pros and Cons is based on my experience and perception ONLY.**
+**This list of Pros and Cons is based on my research, experience and perception ONLY.**
 
 Your answer to "why use Option X?" may be as simple as the fact that you favor that option.
 
-## API, via Synapse Pipeline
+## API, via Data Factory (or Synapse Pipeline)
 
 ![image](https://user-images.githubusercontent.com/44923999/188199195-34c228d5-37e8-4c06-8d7d-88b0e8d2a3ec.png)
 
