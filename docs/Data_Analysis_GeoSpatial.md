@@ -1,6 +1,22 @@
+# Data Acquisition: Azure Cost Management
+
+![image](https://user-images.githubusercontent.com/44923999/202575655-a598bf45-b6fd-4d34-ba0b-9e43c91bb2bb.png)
+
+This documentation details step-by-step instructions for some of these options.
+
+| Option | Pros | Cons |
+| ----- | ----- | ----- |
+| **Power BI, Shape Map** | - | - |
+
+**This list of Pros and Cons is based on my research, experience and perception ONLY.**
+
+Your answer to "why use Option X?" may be as simple as the fact that you favor that option.
+
+## Power BI, Shape Map
+
 Power BI, Maps
-Shape Maps - https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
-Filled Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths?tabs=powerbi-desktop
+* Shape Maps - https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
+* Filled Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths?tabs=powerbi-desktop
 ArcGIS Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualizations-arcgis
 
 Power BI, Azure Maps
