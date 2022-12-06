@@ -46,7 +46,7 @@ In this step, we will get sample data that will be used for all visualization ex
 
 * Click the **Data** icon in the left-hand navigation to review imported **StormEvents** data and confirm success
 
-## Step 2: Shape Maps
+## Step 3: Evaluate Shape Maps
 Reference: https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
 
 In this step, we will get setup and evaluate Shape Maps.
