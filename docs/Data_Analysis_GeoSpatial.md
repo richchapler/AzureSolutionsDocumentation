@@ -62,9 +62,9 @@ In this step, we will get setup and evaluate Shape Maps.
 
 * Open your saved file and then click the **Report** icon in the left-hand navigation
 
-  <img src="https://user-images.githubusercontent.com/44923999/205978444-2c07c216-75a7-4ce6-8c9f-eab6572e06af.png" width="800" title="Snipped: December 6, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/205978728-4bdd4805-e990-4784-975f-db73d72035eb.png" width="800" title="Snipped: December 6, 2022" />
 
-* Click the new "Shape map" icon in the **Visualizations** gallery and resize the resulting visual in the main body (at will)
+* Click the new "Shape map" icon in the **Visualizations** gallery and resize the resulting visual in the main body (as desired)
 
 
 
