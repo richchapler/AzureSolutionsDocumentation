@@ -8,6 +8,8 @@ This documentation details step-by-step instructions for **some** of the Power B
 | Option | Description | Pros | Cons |
 | ----- | ----- | ----- | ----- |
 | **Shape Maps** | Compare regions using color | - Simple, Quick, Flexible | - Only Power BI Desktop<br>- Low Precision |
+| **Filled Maps** | - | - | - |
+| **ArcGIS Maps** | - | - | - |
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY._
 
