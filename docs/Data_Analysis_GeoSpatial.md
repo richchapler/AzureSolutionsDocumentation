@@ -32,7 +32,7 @@ In this step, we will create the Data Explorer table which will serve as destina
 
 * Click "**Get Data from another source**"
 
-![image](https://user-images.githubusercontent.com/44923999/205939562-cabcc0c7-cdf5-42ee-86d4-7c3ce5ac09b0.png)
+  <img src="https://user-images.githubusercontent.com/44923999/205939562-cabcc0c7-cdf5-42ee-86d4-7c3ce5ac09b0.png" width="800" title="Snipped: December 6, 2022" />
 
 
 ## Power BI, Shape Map
