@@ -22,9 +22,9 @@ This solution requires the following resources:
 * Data Explorer Samples (no need to instantiate anything new)
 * [Power BI](https://powerbi.microsoft.com/en-us/desktop/)
 
-### Step 2: Connect to Data
+### Step 2: Get Data
 
-In this step, we will create the Data Explorer table which will serve as destination for our Synapse Pipeline
+In this step, we will get sample data that will be used for all visualization exercises.
 
 * Open Power BI Desktop
 
@@ -32,7 +32,17 @@ In this step, we will create the Data Explorer table which will serve as destina
 
 * Click "**Get Data from another source**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/205939562-cabcc0c7-cdf5-42ee-86d4-7c3ce5ac09b0.png" width="800" title="Snipped: December 6, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/205939562-cabcc0c7-cdf5-42ee-86d4-7c3ce5ac09b0.png" width="600" title="Snipped: December 6, 2022" />
+
+* On the "**Get Data**" pop-up, search for and select "**Azure Data Explorer (Kusto)**" and then click **Connect**
+
+  <img src="https://user-images.githubusercontent.com/44923999/205969459-4dda392e-9994-4ec2-8c6b-fdcd9db907ee.png" width="600" title="Snipped: December 6, 2022" />
+
+* On the "**Azure Data Explorer (Kusto)**" pop-up, enter Cluster value "**https://help.kusto.windows.net/**" and then click **OK**
+
+  <img src="https://user-images.githubusercontent.com/44923999/205970278-d46aa816-40ed-446f-9d4f-492b77b9a5fc.png" width="600" title="Snipped: December 6, 2022" />
+
+* On the **Navigator** pop-up, search for and select "**StormEvents**" and then click **Load**
 
 
 ## Power BI, Shape Map
