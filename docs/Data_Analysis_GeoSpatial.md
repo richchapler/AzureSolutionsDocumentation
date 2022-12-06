@@ -83,7 +83,7 @@ In this step, we will get setup and evaluate Shape Maps.
 
 * Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., "**Zoom on selection**"}
 
-## Step 3: Evaluate Shape Maps
+## Step 4: Evaluate Filled Maps
 Reference: https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths
 
 In this step, we will get setup and evaluate Filled Maps.
