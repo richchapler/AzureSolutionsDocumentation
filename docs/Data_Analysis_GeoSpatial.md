@@ -66,7 +66,9 @@ In this step, we will get setup and evaluate Shape Maps.
 
 * Click the new "Shape map" icon in the **Visualizations** gallery and resize the resulting visual in the main body (as desired)
 
+  <img src="https://user-images.githubusercontent.com/44923999/205986949-1ca6170a-f034-4121-8e0d-4645e0d0bdb7.png" width="800" title="Snipped: December 6, 2022" />
 
+* Lorem Ipsum
 
 
 
