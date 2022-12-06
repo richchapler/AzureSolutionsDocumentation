@@ -2,7 +2,8 @@
 
 ![image](https://user-images.githubusercontent.com/44923999/205741474-6f1e333d-bc35-48b0-831d-4a8e38e31af9.png)
 
-There are many, many options for visualizing and analyzing geo-spatial data. This documentation details step-by-step instructions for some of these options.
+There are many, many options for visualizing and analyzing geo-spatial data.
+This documentation details step-by-step instructions for **some** of these options.
 
 | Option | Pros | Cons |
 | ----- | ----- | ----- |
