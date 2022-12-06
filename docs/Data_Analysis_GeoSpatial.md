@@ -83,6 +83,8 @@ In this step, we will get setup and evaluate Shape Maps.
 
 * Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., "**Zoom on selection**"}
 
+* Rename the "**Page 1**" tab to "**Shape Map**" and save changes
+
 ## Step 4: Evaluate Filled Maps
 Reference: https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths
 
@@ -92,6 +94,12 @@ In this step, we will get setup and evaluate Filled Maps.
 
   <img src="https://user-images.githubusercontent.com/44923999/205995080-5ddff466-8874-4e65-8384-7be893654a47.png" width="600" title="Snipped: December 6, 2022" />
 
+* Check the "**Use Map and Filled Map Visuals**" checkbox, click **OK** and then restart **Power BI Desktop**
+
+* Open your saved file, and then click the **Report** icon in the left-hand navigation
+* Right-click on the "**Shape Map**" tab, select "**Duplicate Page**" in the resulting drop-down, and then rename the new tab to "**Filled Map**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/205997037-ac643a58-2a84-426a-bb36-8685db99aa90.png" width="800" title="Snipped: December 6, 2022" />
 
 
 ------------------------------------------------------------------------
