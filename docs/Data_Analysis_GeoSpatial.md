@@ -7,7 +7,7 @@ This documentation details step-by-step instructions for **some** of the Power B
 
 | Option | Description | Pros | Cons |
 | ----- | ----- | ----- | ----- |
-| **Shape Maps** | Compare regions using color | - Simple, Quick, Flexible | - Only Power BI Desktop<br>- Low Precision |
+| **Shape Maps** | Compare regions using color | - Simple, Quick, Flexible | - Only Power BI Desktop<br>- No GPS coordinate support |
 | **Filled Maps** | Compare regions using shading, tinting, or patterns | - Simple, Quick, Flexible<br>- Can publish to Power BI Service<br>- Supports GPS coordinates | - |
 | **ArcGIS Maps** | - | - | - |
 
