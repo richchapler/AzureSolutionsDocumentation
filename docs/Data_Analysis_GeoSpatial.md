@@ -3,11 +3,11 @@
 ![image](https://user-images.githubusercontent.com/44923999/205741474-6f1e333d-bc35-48b0-831d-4a8e38e31af9.png)
 
 There are many, many options for visualizing and analyzing geo-spatial data.
-This documentation details step-by-step instructions for **some** of these options.
+This documentation details step-by-step instructions for **some** of the Power BI-based options.
 
-| Option | Pros | Cons |
-| ----- | ----- | ----- |
-| **Power BI, Shape Map** | - | - |
+| Option | Description | Pros | Cons |
+| ----- | ----- | ----- | ----- |
+| **Shape Map** | - Compare regions using color | - | - Only Power BI Desktop<br>- Does not show precise locations |
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY. Your answer to "why use Option X?" may be as simple as the fact that you favor that option._
 
