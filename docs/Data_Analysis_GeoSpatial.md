@@ -131,7 +131,18 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ge
 
 In this step, we will get setup and evaluate Azure Maps.
 
-**Lorem Ipsum**
+* Click **File** >> "**Options and Settings**" >> **Options** >> "**Preview Features**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/206030992-eab86670-7849-4937-8537-a7fa3f1e0903.png" width="600" title="Snipped: December 6, 2022" />
+
+* Check the "**Azure map visual**" checkbox, click **OK** and then restart **Power BI Desktop**
+
+* Open your saved file, and then click the **Report** icon in the left-hand navigation
+* Right-click on the "**Filled Map**" tab, select "**Duplicate Page**" in the resulting drop-down, and then rename the new tab to "**Azure Map**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/206032795-5d521eae-5ef9-4b4a-b10f-c4465b908926.png" width="800" title="Snipped: December 6, 2022" />
+
+* Select the map visual and then click the "**Azure Map**" icon in the **Visualizations** pane
 
 ------------------------------------------------------------------------
 
