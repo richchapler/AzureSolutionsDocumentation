@@ -128,7 +128,7 @@ In this step, we will get setup and evaluate Filled Maps.
 
 ------------------------------------------------------------------------
 
-# Notes
+# Coming Soon...
 
 * Azure Maps - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
   * Add a bar chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
