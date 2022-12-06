@@ -144,16 +144,26 @@ In this step, we will get setup and evaluate Azure Maps.
 
 * Select the map visual and then click the "**Azure Map**" icon in the **Visualizations** pane
 
-### Step 5a: Add Bar Chart Layer
+### Bar Chart Layer
+Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer
 
-_Lorem Ipsum_
+  <img src="https://user-images.githubusercontent.com/44923999/206034982-ced01298-e96b-46f3-8080-6897609c5ec2.png" width="800" title="Snipped: December 6, 2022" />
+
+* Click the "Format your visual" tab on the **Visualizations** pane
+* Modify settings, including:
+
+  | Prompt | Entry |
+  | ----- | ----- |
+  | **Bubble layer** | Set to **Off** |
+  | **Bar chart layer** | Set to **On** |
+
+* Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
 ------------------------------------------------------------------------
 
 # Coming Soon...
 
 * Azure Maps
-  * Add a bar chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
   * Add a pie chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
   * Add a heat map - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-heat-map-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
 * GeoJSON - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
