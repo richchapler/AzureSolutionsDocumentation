@@ -140,7 +140,7 @@ In this step, we will get setup and evaluate Azure Maps.
 * Open your saved file, and then click the **Report** icon in the left-hand navigation
 * Right-click on the "**Filled Map**" tab, select "**Duplicate Page**" in the resulting drop-down, and then rename the new tab to "**Azure Map**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/206032795-5d521eae-5ef9-4b4a-b10f-c4465b908926.png" width="800" title="Snipped: December 6, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/206033779-ccc3b3d1-a13f-4613-b943-9b0b849f4afc.png" width="800" title="Snipped: December 6, 2022" />
 
 * Select the map visual and then click the "**Azure Map**" icon in the **Visualizations** pane
 
