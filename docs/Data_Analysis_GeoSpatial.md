@@ -10,6 +10,28 @@ There are many, many options for visualizing and analyzing geo-spatial data. Thi
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY. Your answer to "why use Option X?" may be as simple as the fact that you favor that option._
 
+This use case considers the following requirement statements:
+
+* "We want to use geo-spatial visualization to help us better understand our data, but we do not know where to start"
+
+### Step 1: Prepare Infrastructure
+
+This solution requires the following resources:
+
+* Data Explorer Samples (no need to instantiate anything new)
+* [Power BI](https://powerbi.microsoft.com/en-us/desktop/)
+
+### Step 2: Connect to Data
+
+In this step, we will create the Data Explorer table which will serve as destination for our Synapse Pipeline
+
+* Open Power BI Desktop
+
+![image](https://user-images.githubusercontent.com/44923999/205939249-dbdd2005-e07c-4ba8-9480-9d2243a9a038.png)
+
+
+* Navigate to Data Explorer and then select Query from the navigation
+
 ## Power BI, Shape Map
 
 Power BI, Maps
