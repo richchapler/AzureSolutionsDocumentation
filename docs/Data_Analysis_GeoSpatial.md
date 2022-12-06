@@ -8,7 +8,7 @@ This documentation details step-by-step instructions for **some** of the Power B
 | Option | Description | Pros | Cons |
 | ----- | ----- | ----- | ----- |
 | **Shape Maps** | Compare regions using color | - Simple, Quick, Flexible | - Only Power BI Desktop<br>- Low Precision |
-| **Filled Maps** | Compare regions using shading, tinting, or patterns | - | - |
+| **Filled Maps** | Compare regions using shading, tinting, or patterns | - Simple, Quick, Flexible<br>- Can publish to Power BI Service | - |
 | **ArcGIS Maps** | - | - | - |
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY._
@@ -120,6 +120,11 @@ In this step, we will get setup and evaluate Filled Maps.
 * Click **OK**
 
   <img src="https://user-images.githubusercontent.com/44923999/206022900-6c96ff06-33f6-4272-8d15-4470ada209f5.png" width="800" title="Snipped: December 6, 2022" />
+
+* Click **File** >> **Publish** >> "**Publish to Power BI**"
+* On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (save when prompted)
+
+  <img src="https://user-images.githubusercontent.com/44923999/206024469-e19221fc-b8f4-4096-acd9-2a16ed2675ea.png" width="800" title="Snipped: December 6, 2022" />
 
 ------------------------------------------------------------------------
 
