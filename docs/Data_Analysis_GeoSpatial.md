@@ -150,12 +150,7 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
   <img src="https://user-images.githubusercontent.com/44923999/206034982-ced01298-e96b-46f3-8080-6897609c5ec2.png" width="800" title="Snipped: December 6, 2022" />
 
 * Click the "Format your visual" tab on the **Visualizations** pane
-* Modify settings, including:
-
-  | Prompt | Entry |
-  | ----- | ----- |
-  | **Bubble layer** | Set to **Off** |
-  | **Bar chart layer** | Set to **On** |
+* Set "**Bubble layer**" to **Off** and "**Bar chart layer**" to **On**
 
 * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
