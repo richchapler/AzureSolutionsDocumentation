@@ -144,6 +144,10 @@ In this step, we will get setup and evaluate Azure Maps.
 
 * Select the map visual and then click the "**Azure Map**" icon in the **Visualizations** pane
 
+### Step 5a: Add Bar Chart Layer
+
+_Lorem Ipsum_
+
 ------------------------------------------------------------------------
 
 # Coming Soon...
