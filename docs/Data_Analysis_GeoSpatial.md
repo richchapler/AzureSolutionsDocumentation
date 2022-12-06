@@ -119,6 +119,8 @@ In this step, we will get setup and evaluate Filled Maps.
 
 * Click **OK**
 
+  <img src="https://user-images.githubusercontent.com/44923999/206022900-6c96ff06-33f6-4272-8d15-4470ada209f5.png" width="800" title="Snipped: December 6, 2022" />
+
 ------------------------------------------------------------------------
 
 # Notes
