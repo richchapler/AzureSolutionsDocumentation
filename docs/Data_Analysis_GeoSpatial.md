@@ -44,6 +44,9 @@ In this step, we will get sample data that will be used for all visualization ex
 
 * On the **Navigator** pop-up, search for and select "**StormEvents**" and then click **Load**
 
+  <img src="https://user-images.githubusercontent.com/44923999/205970985-7eb253d5-828f-4642-aa52-371be952cb7a.png" width="800" title="Snipped: December 6, 2022" />
+
+* Click the **Data** icon in the left-hand navigation to review imported **StormEvents** data and confirm success
 
 ## Power BI, Shape Map
 
