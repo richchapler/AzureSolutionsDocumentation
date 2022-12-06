@@ -9,8 +9,9 @@ This documentation details step-by-step instructions for **some** of the Power B
 | ----- | ----- | ----- | ----- |
 | **Shape Map** | Compare regions using color | - | - Only Power BI Desktop<br>- Does not show precise locations |
 
-_Note: This list of Pros and Cons is based on my research, experience and perception ONLY. Your answer to "why use Option X?" may be as simple as the fact that you favor that option._
+_Note: This list of Pros and Cons is based on my research, experience and perception ONLY._
 
+## Step 0: Understand Use Case
 This use case considers the following requirement statements:
 
 * "We want to use geo-spatial visualization to help us better understand our data, but we do not know where to start"
