@@ -9,7 +9,7 @@ This documentation details step-by-step instructions for **some** of the Power B
 | ----- | ----- | ----- | ----- |
 | **Shape Maps** | Compare locations {e.g., state} using color | - Simple, Quick, Flexible | - Only Power BI Desktop<br>- No GPS coordinate support |
 | **Filled Maps** | Precise spatial comparison with gradient , etc. | - Can publish to Power BI Service<br>- Supports GPS coordinates | |
-| **Azure Maps** | Layer charts, heatmaps, etc. on top of map | - Rich Visualization | |
+| **Azure Maps** | Layer charts, heatmaps, etc. on top of map | - Many Visualization Options | |
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY._
 
