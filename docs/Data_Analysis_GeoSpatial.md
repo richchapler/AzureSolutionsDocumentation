@@ -110,6 +110,14 @@ In this step, we will get setup and evaluate Filled Maps.
 
   <img src="https://user-images.githubusercontent.com/44923999/206022199-86c21fec-9989-4050-96fb-6072a158727f.png" width="600" title="Snipped: December 6, 2022" />
 
+* Complete the resulting "**Default color - Fill colors**" pop-up, including:
+
+  | Prompt | Entry |
+  | ----- | ----- |
+  | **What field should we base this on?** | Select "**DeathsDirect**" |
+  | **Summarization** | Select "**Sum**" |
+
+* Click **OK**
 
 ------------------------------------------------------------------------
 
