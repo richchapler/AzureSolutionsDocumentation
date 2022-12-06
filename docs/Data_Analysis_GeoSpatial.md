@@ -73,21 +73,22 @@ In this step, we will get setup and evaluate Shape Maps.
   | Bucket | Field |
   | ----- | ----- |
   | **Location** | **State** |
+  | **Color saturation** | **Deaths Direct** |
+  
+  _Note from documentation: "The Location field in the Azure Maps Power BI Visual can accept multiple values, such as country, region, state, city, street address and zip code. By providing multiple sources of location information in the Location field, you help to guarantee more accurate results and eliminate ambiguity that would prevent a specific location to be determined. For example, there are over 20 different cities in the United States named Franklin."_
+  
+  <img src="https://user-images.githubusercontent.com/44923999/205988885-b90e04ca-fdcc-4c56-8dbe-6902f5d75620.png" width="800" title="Snipped: December 6, 2022" />
 
+* Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., "**Zoom on selection**"}
 
 ------------------------------------------------------------------------
 
-
+# Notes
 
 * Filled Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths?tabs=powerbi-desktop
-ArcGIS Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualizations-arcgis
-
-Power BI, Azure Maps
-https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
-Add a bar chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
-Add a pie chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
-Add a heat map - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-heat-map-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
-GeoJSON - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
-
-The location field
-The Location field in the Azure Maps Power BI Visual can accept multiple values, such as country, region, state, city, street address and zip code. By providing multiple sources of location information in the Location field, you help to guarantee more accurate results and eliminate ambiguity that would prevent a specific location to be determined. For example, there are over 20 different cities in the United States named Franklin.
+* ArcGIS Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualizations-arcgis
+* Power BI, Azure Maps - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
+* Add a bar chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
+* Add a pie chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
+* Add a heat map - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-heat-map-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
+* GeoJSON - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
