@@ -15,15 +15,13 @@ This use case considers the following requirement statements:
 
 * "We want to use geo-spatial visualization to help us better understand our data, but we do not know where to start"
 
-### Step 1: Prepare Infrastructure
-
+## Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
 * Data Explorer Samples (no need to instantiate anything new)
 * [Power BI](https://powerbi.microsoft.com/en-us/desktop/)
 
-### Step 2: Get Data
-
+## Step 2: Get Data
 In this step, we will get sample data that will be used for all visualization exercises.
 
 * Open Power BI Desktop
@@ -48,10 +46,14 @@ In this step, we will get sample data that will be used for all visualization ex
 
 * Click the **Data** icon in the left-hand navigation to review imported **StormEvents** data and confirm success
 
-## Power BI, Shape Map
+## Step 2: Shape Maps
+Reference: https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
 
-Power BI, Maps
-* Shape Maps - https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
+In this step, we will get setup and evaluate Shape Maps.
+
+
+
+
 * Filled Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths?tabs=powerbi-desktop
 ArcGIS Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualizations-arcgis
 
