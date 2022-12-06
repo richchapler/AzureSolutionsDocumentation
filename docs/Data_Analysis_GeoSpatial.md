@@ -64,15 +64,15 @@ In this step, we will get setup and evaluate Shape Maps.
 
   <img src="https://user-images.githubusercontent.com/44923999/205978728-4bdd4805-e990-4784-975f-db73d72035eb.png" width="800" title="Snipped: December 6, 2022" />
 
-* Click the new "Shape map" icon in the **Visualizations** gallery and resize the resulting visual in the main body (as desired)
+* Click the new "Shape map" icon in the **Visualizations** pane and resize the resulting visual in the main body (as desired)
 
   <img src="https://user-images.githubusercontent.com/44923999/205986949-1ca6170a-f034-4121-8e0d-4645e0d0bdb7.png" width="800" title="Snipped: December 6, 2022" />
 
-* Drag-and-drop from **Fields** to **Visualizations**, including:
+* Drag-and-drop from the **Fields** pane to the **Visualizations** pane, including:
 
-  | Prompt | Entry |
+  | Bucket | Field |
   | ----- | ----- |
-  | **Location** | State |
+  | **Location** | **State** |
 
 
 ------------------------------------------------------------------------
