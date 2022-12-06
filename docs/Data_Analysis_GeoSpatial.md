@@ -99,8 +99,9 @@ In this step, we will get setup and evaluate Filled Maps.
 * Open your saved file, and then click the **Report** icon in the left-hand navigation
 * Right-click on the "**Shape Map**" tab, select "**Duplicate Page**" in the resulting drop-down, and then rename the new tab to "**Filled Map**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/205997037-ac643a58-2a84-426a-bb36-8685db99aa90.png" width="800" title="Snipped: December 6, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/205997326-9dc4b563-7c33-4070-93f2-e831656f66a0.png" width="800" title="Snipped: December 6, 2022" />
 
+* Select the map visual and then click the "**Filled Map**" icon in the **Visualizations** pane
 
 ------------------------------------------------------------------------
 
