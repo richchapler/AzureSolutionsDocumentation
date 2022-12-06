@@ -47,10 +47,29 @@ In this step, we will get sample data that will be used for all visualization ex
 
 * Click the **Data** icon in the left-hand navigation to review imported **StormEvents** data and confirm success
 
+* To save changes, click **File** >> "**Save as**" and then complete the pop-up
+
 ## Step 3: Evaluate Shape Maps
 Reference: https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
 
 In this step, we will get setup and evaluate Shape Maps.
+
+* Click **File** > "**Options and Settings**" > **Options** > "**Preview Features**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/205976019-55ac56fc-b74a-4a3f-9fb3-6e2384d9afab.png" width="600" title="Snipped: December 6, 2022" />
+
+* Check the "**Shape map visual**" checkbox, click **OK** and then restart **Power BI Desktop**
+
+* Open your saved file and then click the **Report** icon in the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/205978444-2c07c216-75a7-4ce6-8c9f-eab6572e06af.png" width="800" title="Snipped: December 6, 2022" />
+
+* Click the new "Shape map" icon in the **Visualizations** gallery and resize the resulting visual in the main body (at will)
+
+
+
+
+
 
 
 
