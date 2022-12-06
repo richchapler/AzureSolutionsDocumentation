@@ -103,9 +103,13 @@ In this step, we will get setup and evaluate Filled Maps.
 
 * Select the map visual and then click the "**Filled Map**" icon in the **Visualizations** pane
 
-  <img src="https://user-images.githubusercontent.com/44923999/206021596-83e26f28-f820-4d22-afc3-72dfdeb038c7.png" width="800" title="Snipped: December 6, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/206021877-cb9770c9-8a17-4d1a-9126-1dcad95df428.png" width="800" title="Snipped: December 6, 2022" />
 
 * Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., **Style**, "**Zoom buttons**", etc.}
+* Expand "**Fill colors**" >> **Colors** and then click the "**fx**" button
+
+  <img src="https://user-images.githubusercontent.com/44923999/206022199-86c21fec-9989-4050-96fb-6072a158727f.png" width="600" title="Snipped: December 6, 2022" />
+
 
 ------------------------------------------------------------------------
 
