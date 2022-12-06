@@ -9,7 +9,7 @@ This documentation details step-by-step instructions for **some** of the Power B
 | ----- | ----- | ----- | ----- |
 | **Shape Maps** | Compare regions using color | - Simple, Quick, Flexible | - Only Power BI Desktop<br>- No GPS coordinate support |
 | **Filled Maps** | Compare regions using shading, tinting, or patterns | - Simple, Quick, Flexible<br>- Can publish to Power BI Service<br>- Supports GPS coordinates | - |
-| **ArcGIS Maps** | - | - | - |
+| **Azure Maps** | - | - | - |
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY._
 
@@ -126,11 +126,18 @@ In this step, we will get setup and evaluate Filled Maps.
 
   <img src="https://user-images.githubusercontent.com/44923999/206024469-e19221fc-b8f4-4096-acd9-2a16ed2675ea.png" width="800" title="Snipped: December 6, 2022" />
 
+## Step 5: Evaluate Azure Maps
+Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started
+
+In this step, we will get setup and evaluate Azure Maps.
+
+**Lorem Ipsum**
+
 ------------------------------------------------------------------------
 
 # Coming Soon...
 
-* Azure Maps - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
+* Azure Maps
   * Add a bar chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
   * Add a pie chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
   * Add a heat map - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-heat-map-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
