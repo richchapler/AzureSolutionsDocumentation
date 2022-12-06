@@ -56,7 +56,7 @@ Reference: https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
 
 In this step, we will get setup and evaluate Shape Maps.
 
-* Click **File** > "**Options and Settings**" > **Options** > "**Preview Features**"
+* Click **File** >> "**Options and Settings**" >> **Options** >> "**Preview Features**"
 
   <img src="https://user-images.githubusercontent.com/44923999/205976019-55ac56fc-b74a-4a3f-9fb3-6e2384d9afab.png" width="600" title="Snipped: December 6, 2022" />
 
@@ -82,6 +82,17 @@ In this step, we will get setup and evaluate Shape Maps.
   <img src="https://user-images.githubusercontent.com/44923999/205988885-b90e04ca-fdcc-4c56-8dbe-6902f5d75620.png" width="800" title="Snipped: December 6, 2022" />
 
 * Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., "**Zoom on selection**"}
+
+## Step 3: Evaluate Shape Maps
+Reference: https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths
+
+In this step, we will get setup and evaluate Filled Maps.
+
+* Click **File** >> "**Options and Settings**" >> **Options** >> **Security**
+
+  <img src="https://user-images.githubusercontent.com/44923999/205995080-5ddff466-8874-4e65-8384-7be893654a47.png" width="600" title="Snipped: December 6, 2022" />
+
+
 
 ------------------------------------------------------------------------
 
