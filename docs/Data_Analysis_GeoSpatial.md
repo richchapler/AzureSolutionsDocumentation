@@ -103,11 +103,14 @@ In this step, we will get setup and evaluate Filled Maps.
 
 * Select the map visual and then click the "**Filled Map**" icon in the **Visualizations** pane
 
+  <img src="https://user-images.githubusercontent.com/44923999/206021596-83e26f28-f820-4d22-afc3-72dfdeb038c7.png" width="800" title="Snipped: December 6, 2022" />
+
+* Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., **Style**, "**Zoom buttons**", etc.}
+
 ------------------------------------------------------------------------
 
 # Notes
 
-* Filled Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths?tabs=powerbi-desktop
 * ArcGIS Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualizations-arcgis
 * Power BI, Azure Maps - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
 * Add a bar chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
