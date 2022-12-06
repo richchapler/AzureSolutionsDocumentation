@@ -7,7 +7,7 @@ This documentation details step-by-step instructions for **some** of the Power B
 
 | Option | Description | Pros | Cons |
 | ----- | ----- | ----- | ----- |
-| **Shape Map** | - Compare regions using color | - | - Only Power BI Desktop<br>- Does not show precise locations |
+| **Shape Map** | Compare regions using color | - | - Only Power BI Desktop<br>- Does not show precise locations |
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY. Your answer to "why use Option X?" may be as simple as the fact that you favor that option._
 
