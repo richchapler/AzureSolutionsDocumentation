@@ -27,10 +27,12 @@ In this step, we will create the Data Explorer table which will serve as destina
 
 * Open Power BI Desktop
 
-![image](https://user-images.githubusercontent.com/44923999/205939249-dbdd2005-e07c-4ba8-9480-9d2243a9a038.png)
+  <img src="https://user-images.githubusercontent.com/44923999/205939249-dbdd2005-e07c-4ba8-9480-9d2243a9a038.png" width="800" title="Snipped: December 6, 2022" />
 
+* Click "**Get Data from another source**"
 
-* Navigate to Data Explorer and then select Query from the navigation
+![image](https://user-images.githubusercontent.com/44923999/205939562-cabcc0c7-cdf5-42ee-86d4-7c3ce5ac09b0.png)
+
 
 ## Power BI, Shape Map
 
