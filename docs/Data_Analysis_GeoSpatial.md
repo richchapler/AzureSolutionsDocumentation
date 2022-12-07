@@ -21,7 +21,7 @@ This use case considers the following requirement statements:
 ## Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* Data Explorer Samples (no need to instantiate anything new)
+* Data Explorer sample data (new instantiation unnecessary)
 * [Power BI](https://powerbi.microsoft.com/en-us/desktop/)
 
 ## Step 2: Get Data
