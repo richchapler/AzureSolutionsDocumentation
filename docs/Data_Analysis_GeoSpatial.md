@@ -121,8 +121,10 @@ In this step, we will get setup and evaluate Filled Maps.
 
   <img src="https://user-images.githubusercontent.com/44923999/206022900-6c96ff06-33f6-4272-8d15-4470ada209f5.png" width="800" title="Snipped: December 6, 2022" />
 
+#### Save and Publish
+
 * Click **File** >> **Publish** >> "**Publish to Power BI**"
-* On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (save when prompted)
+* On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (Save / Replace when prompted)
 
   <img src="https://user-images.githubusercontent.com/44923999/206024469-e19221fc-b8f4-4096-acd9-2a16ed2675ea.png" width="800" title="Snipped: December 6, 2022" />
 
@@ -153,6 +155,13 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 * Set "**Bubble layer**" to **Off** and "**Bar chart layer**" to **On**
 * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
+#### Save and Publish
+
+* Click **File** >> **Publish** >> "**Publish to Power BI**"
+* On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (Save / Replace when prompted)
+
+  <img src="https://user-images.githubusercontent.com/44923999/206225403-4d470706-0692-419a-820f-30b1b5333fa0.png" width="800" title="Snipped: December 7, 2022" />
+
 ### Pie Chart Layer
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer
 
@@ -163,6 +172,13 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 * Click the "**Format your visual**" tab on the **Visualizations** pane
   * Set "**Bubble layer**" to **On** and "**Bar chart layer**" to **Off**
   * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
+
+#### Save and Publish
+
+* Click **File** >> **Publish** >> "**Publish to Power BI**"
+* On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (Save / Replace when prompted)
+
+  <img src="https://user-images.githubusercontent.com/44923999/206226233-4970d95e-090b-4979-a3ff-27a26fe64e38.png" width="800" title="Snipped: December 7, 2022" />
 
 ------------------------------------------------------------------------
 
