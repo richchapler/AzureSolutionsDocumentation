@@ -154,12 +154,16 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
 * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
+### Pie Chart Layer
+Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer
+
+Lorem Ipsum
+
 ------------------------------------------------------------------------
 
 # Coming Soon...
 
 * Azure Maps
-  * Add a pie chart - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
   * Add a heat map - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-heat-map-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
 * GeoJSON - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
 * ArcGIS Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualizations-arcgis
