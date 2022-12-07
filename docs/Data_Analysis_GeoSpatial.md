@@ -9,7 +9,7 @@ This documentation details step-by-step instructions for **some** of the Power B
 | ----- | ----- | ----- | ----- |
 | **Shape Maps** | Compare locations {e.g., state} using color | - Simple, Quick, Flexible | - No GPS coordinate support |
 | **Filled Maps** | Precise spatial comparison with gradient , etc. | - Supports GPS coordinates | |
-| **Azure Maps** | Layer charts, heatmaps, etc. on top of map | - Many Visualization Options | |
+| **Azure Maps** | Layer charts, etc. on top of map | - Many Visualization Options | |
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY._
 
@@ -185,6 +185,4 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 # Coming Soon...
 
 * Azure Maps
-  * Heatmap - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-heat-map-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
   * GeoJSON - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer?context=%2Fpower-bi%2Fcreate-reports%2Fcontext%2Fcontext
-* ArcGIS Maps - https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualizations-arcgis
