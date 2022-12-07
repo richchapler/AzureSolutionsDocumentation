@@ -81,7 +81,7 @@ In this step, we will get setup and evaluate Shape Maps.
   
   <img src="https://user-images.githubusercontent.com/44923999/205988885-b90e04ca-fdcc-4c56-8dbe-6902f5d75620.png" width="800" title="Snipped: December 6, 2022" />
 
-* Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., "**Zoom on selection**"}
+* Click the "**Format your visual**" tab on the **Visualizations** pane and explore settings {e.g., "**Zoom on selection**"}
 
 * Rename the "**Page 1**" tab to "**Shape Map**" and save changes
 
@@ -105,7 +105,7 @@ In this step, we will get setup and evaluate Filled Maps.
 
   <img src="https://user-images.githubusercontent.com/44923999/206021877-cb9770c9-8a17-4d1a-9126-1dcad95df428.png" width="800" title="Snipped: December 6, 2022" />
 
-* Click the "Format your visual" tab on the **Visualizations** pane and explore settings {e.g., **Style**, "**Zoom buttons**", etc.}
+* Click the "**Format your visual**" tab on the **Visualizations** pane and explore settings {e.g., **Style**, "**Zoom buttons**", etc.}
 * Expand "**Fill colors**" >> **Colors** and then click the "**fx**" button
 
   <img src="https://user-images.githubusercontent.com/44923999/206022199-86c21fec-9989-4050-96fb-6072a158727f.png" width="600" title="Snipped: December 6, 2022" />
@@ -149,15 +149,20 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
   <img src="https://user-images.githubusercontent.com/44923999/206034982-ced01298-e96b-46f3-8080-6897609c5ec2.png" width="800" title="Snipped: December 6, 2022" />
 
-* Click the "Format your visual" tab on the **Visualizations** pane
+* Click the "**Format your visual**" tab on the **Visualizations** pane
 * Set "**Bubble layer**" to **Off** and "**Bar chart layer**" to **On**
-
 * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
 ### Pie Chart Layer
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer
 
-Lorem Ipsum
+  <img src="https://user-images.githubusercontent.com/44923999/206219840-a9fc5f6b-de5d-4a3b-ae48-b506c9aa12d7.png" width="800" title="Snipped: December 7, 2022" />
+
+* Click the "**Add data to your visual**" tab on the **Visualizations** pane
+  * Drag the **EventType** field to the **Legend** bucket
+* Click the "**Format your visual**" tab on the **Visualizations** pane
+  * Set "**Bubble layer**" to **On** and "**Bar chart layer**" to **Off**
+  * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
 ------------------------------------------------------------------------
 
