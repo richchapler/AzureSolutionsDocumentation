@@ -195,20 +195,12 @@ _Note: S2 (http://s2geometry.io/) is another grouping method that might be consi
 
 Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function
 
-
 StormEvents
-| extend h3 = geo_point_to_h3cell(EndLon,EndLat,2)
-| where not(isempty(h3))
-| summarize eventCount = count() by h3
-| project feature = bag_pack(
-        "type", "Feature"
-        , "geometry", geo_h3cell_to_polygon(h3)
-        , "properties", pack_all()
-        )
+| summarize DeathsDirect = sum(DeathsDirect) by h3 = geo_point_to_h3cell(EndLon,EndLat,2)
+| extend properties = bag_pack("color", iif(DeathsDirect > 5, "red", "green"))
+| project feature = bag_pack("type", "Feature", "geometry",geo_h3cell_to_polygon(h3), "properties", properties)
 | summarize features = make_list(feature)
-| project bag_pack(
-        "type", "FeatureCollection",
-        "features", features)
+| project bag_pack("type", "FeatureCollection", "features", features)
 
 ------------------------------------------------------------------------
 
