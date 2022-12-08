@@ -146,7 +146,7 @@ In this step, we will get setup and evaluate Azure Maps.
 
 * Select the map visual and then click the "**Azure Map**" icon in the **Visualizations** pane
 
-### Bar Chart Layer
+### Step 5a: Bar Chart Layer
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer
 
   <img src="https://user-images.githubusercontent.com/44923999/206034982-ced01298-e96b-46f3-8080-6897609c5ec2.png" width="800" title="Snipped: December 6, 2022" />
@@ -162,7 +162,7 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
   <img src="https://user-images.githubusercontent.com/44923999/206225403-4d470706-0692-419a-820f-30b1b5333fa0.png" width="800" title="Snipped: December 7, 2022" />
 
-### Pie Chart Layer
+### Step 5b: Pie Chart Layer
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer
 
   <img src="https://user-images.githubusercontent.com/44923999/206219840-a9fc5f6b-de5d-4a3b-ae48-b506c9aa12d7.png" width="800" title="Snipped: December 7, 2022" />
@@ -180,7 +180,7 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
   <img src="https://user-images.githubusercontent.com/44923999/206226233-4970d95e-090b-4979-a3ff-27a26fe64e38.png" width="800" title="Snipped: December 7, 2022" />
 
-### Reference Layer
+### Step 5c: Reference Layer
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer
 
 In this step, we will create the GeoJSON file we will need to evaluate Reference Layer functionality in Power BI >> Azure Maps.
