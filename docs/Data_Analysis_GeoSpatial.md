@@ -180,20 +180,18 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
   <img src="https://user-images.githubusercontent.com/44923999/206226233-4970d95e-090b-4979-a3ff-27a26fe64e38.png" width="800" title="Snipped: December 7, 2022" />
 
-## Step 6: Prepare GeoJSON
+### Reference Layer
+Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer
 
 In this step, we will create the GeoJSON file we will need to evaluate Reference Layer functionality in Power BI >> Azure Maps.
 
-### Step 6a: Summarize Data
+#### Prepare GeoJSON File
 
 Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function
 
 We will use H3 (https://www.uber.com/blog/h3/) to group multiple GPS coordinates into resolution-6 (3 km) hexagons.
 
 _Note: S2 (http://s2geometry.io/) is another grouping method that might be considered_
-
-
-Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function
 
 ```
 StormEvents
@@ -204,8 +202,10 @@ StormEvents
 | project bag_pack("type", "FeatureCollection", "features", features)
 ```
 
+Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function
+
 ------------------------------------------------------------------------
 
 # Coming Soon...
 
-* Azure Maps, GeoJSON - https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer
+* Azure Maps, GeoJSON - 
