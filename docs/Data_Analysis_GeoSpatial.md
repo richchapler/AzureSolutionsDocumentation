@@ -193,7 +193,7 @@ We will use H3 (https://www.uber.com/blog/h3/) to group multiple GPS coordinates
 _Note: S2 (http://s2geometry.io/) is another grouping method that might be considered_
 
 
-
+Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function
 
 
 
