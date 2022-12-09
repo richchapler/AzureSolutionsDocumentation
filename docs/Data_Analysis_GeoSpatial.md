@@ -193,7 +193,7 @@ Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo
   <img src="https://user-images.githubusercontent.com/44923999/206757950-bef53759-1990-4aa2-b112-c05f22b68efc.png" width="800" title="Snipped: December 9, 2022" />
 
 * Navigate to [Azure Data Explorer, Samples Database](https://dataexplorer.azure.com/clusters/help/databases/Samples)
-* Execute the following KQL:
+* **Run** the following KQL:
 
   ```
   StormEvents
