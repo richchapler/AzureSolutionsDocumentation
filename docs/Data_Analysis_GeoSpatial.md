@@ -209,10 +209,10 @@ _https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-
  Logic Explained:
 
   * `summarize` and `where` ... providing for filtration of groupings with zero-valued measures
-  * `geo_point_to_h3cell` ... calculates the [H3](https://www.uber.com/blog/h3/) value for a given longitude, latitude, and resolution<br><br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function_
-  * `pack_all()` ... creates a dynamic object with related data from all columns<br><br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/packallfunction_
-  * `bag_pack()` ... creates a dynamic object from a list of keys and values<br><br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/packfunction_
-  * `geo_h3cell_to_polygon()` ... calculates the polygon from a given H3 value<br><br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function_
+  * `geo_point_to_h3cell` ... calculates the [H3](https://www.uber.com/blog/h3/) value for a given longitude, latitude, and resolution<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function_
+  * `pack_all` ... creates a dynamic object with related data from all columns<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/packallfunction_
+  * `bag_pack` ... creates a dynamic object from a list of keys and values<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/packfunction_
+  * `geo_h3cell_to_polygon` ... calculates the polygon from a given H3 value<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function_
 
 _Note: S2 (http://s2geometry.io/) is another grouping method that might be considered_
 
