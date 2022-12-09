@@ -190,19 +190,26 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
 Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function
 
+  <img src="https://user-images.githubusercontent.com/44923999/206757950-bef53759-1990-4aa2-b112-c05f22b68efc.png" width="800" title="Snipped: December 9, 2022" />
+
+* Navigate to [Azure Data Explorer, Samples Database](https://dataexplorer.azure.com/clusters/help/databases/Samples)
+* Execute the following KQL:
+
+  ```
+  StormEvents
+  | summarize DeathsDirect = sum(DeathsDirect) by h3 = geo_point_to_h3cell(EndLon,EndLat,2)
+  | where DeathsDirect > 0
+  | extend properties = pack_all()
+  | project feature = bag_pack("type", "Feature", "geometry",geo_h3cell_to_polygon(h3), "properties", properties)
+  | summarize features = make_list(feature)
+  | project bag_pack("type", "FeatureCollection", "features", features)
+  ```
+
 We will use H3 (https://www.uber.com/blog/h3/) to group multiple GPS coordinates into resolution-6 (3 km) hexagons.
 
 _Note: S2 (http://s2geometry.io/) is another grouping method that might be considered_
 
-```
-StormEvents
-| summarize DeathsDirect = sum(DeathsDirect) by h3 = geo_point_to_h3cell(EndLon,EndLat,2)
-| where DeathsDirect > 0
-| extend properties = pack_all()
-| project feature = bag_pack("type", "Feature", "geometry",geo_h3cell_to_polygon(h3), "properties", properties)
-| summarize features = make_list(feature)
-| project bag_pack("type", "FeatureCollection", "features", features)
-```
+
 
 Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function
 
