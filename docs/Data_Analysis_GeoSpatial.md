@@ -55,7 +55,7 @@ In this exercise, we will get sample data that will be used for all visualizatio
 * To save changes, click **File** >> "**Save as**" and then complete the pop-up
 
 ## Exercise 2: Evaluate Shape Maps
-Reference: https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
+_To Learn More... https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map_
 
 In this exercise, we will get setup and evaluate Power BI, Shape Maps.
 
@@ -89,7 +89,7 @@ In this exercise, we will get setup and evaluate Power BI, Shape Maps.
 * Rename the "**Page 1**" tab to "**Shape Map**" and save changes
 
 ## Exercise 3: Evaluate Filled Maps
-Reference: https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths
+_To Learn More... https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths_
 
 In this exercise, we will get setup and evaluate Power BI, Filled Maps.
 
@@ -132,7 +132,7 @@ In this exercise, we will get setup and evaluate Power BI, Filled Maps.
   <img src="https://user-images.githubusercontent.com/44923999/206024469-e19221fc-b8f4-4096-acd9-2a16ed2675ea.png" width="800" title="Snipped: December 6, 2022" />
 
 ## Exercise 4: Evaluate Azure Maps
-Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started
+_To Learn More... https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started_
 
 In this exercise, we will get setup and evaluate Power BI, Azure Maps.
 
@@ -150,7 +150,7 @@ In this exercise, we will get setup and evaluate Power BI, Azure Maps.
 * Select the map visual and then click the "**Azure Map**" icon in the **Visualizations** pane
 
 ### Exercise 4a: Bar Chart Layer
-Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer
+_To Learn More... https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer_
 
   <img src="https://user-images.githubusercontent.com/44923999/206034982-ced01298-e96b-46f3-8080-6897609c5ec2.png" width="800" title="Snipped: December 6, 2022" />
 
@@ -166,7 +166,7 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
   <img src="https://user-images.githubusercontent.com/44923999/206225403-4d470706-0692-419a-820f-30b1b5333fa0.png" width="800" title="Snipped: December 7, 2022" />
 
 ### Exercise 4b: Pie Chart Layer
-Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer
+_To Learn More... https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer_
 
   <img src="https://user-images.githubusercontent.com/44923999/206219840-a9fc5f6b-de5d-4a3b-ae48-b506c9aa12d7.png" width="800" title="Snipped: December 7, 2022" />
 
@@ -184,11 +184,11 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
   <img src="https://user-images.githubusercontent.com/44923999/206226233-4970d95e-090b-4979-a3ff-27a26fe64e38.png" width="800" title="Snipped: December 7, 2022" />
 
 ### Exercise 4c: Reference Layer (GeoJSON)
-Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer
+_To Learn More... https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer_
 
 #### Prepare GeoJSON File
 
-Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function
+_To Learn More... https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function_
 
 * Navigate to [Azure Data Explorer, Samples Database](https://dataexplorer.azure.com/clusters/help/databases/Samples)
 * **Run** the following KQL:
@@ -206,7 +206,7 @@ Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo
  Logic Explained:
 
   * `summarize` ... providing for filtration of groupings with zero-valued measures
-  * `[geo_point_to_h3cell](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function)` ... calculates the [H3](https://www.uber.com/blog/h3/) value for a geographic location {i.e., GPS coordinates} 
+  * `geo_point_to_h3cell` ... calculates the [H3](https://www.uber.com/blog/h3/) value for a given longitude, latitude, and resolution<br>_To Learn More... https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function_
 
   <img src="https://user-images.githubusercontent.com/44923999/206757950-bef53759-1990-4aa2-b112-c05f22b68efc.png" width="800" title="Snipped: December 9, 2022" />
 
@@ -216,6 +216,6 @@ _Note: S2 (http://s2geometry.io/) is another grouping method that might be consi
 
 
 
-Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function
+_To Learn More... https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function_
 
 Save file and test by dragging and dropping on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map
