@@ -190,8 +190,6 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
 Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function
 
-  <img src="https://user-images.githubusercontent.com/44923999/206757950-bef53759-1990-4aa2-b112-c05f22b68efc.png" width="800" title="Snipped: December 9, 2022" />
-
 * Navigate to [Azure Data Explorer, Samples Database](https://dataexplorer.azure.com/clusters/help/databases/Samples)
 * **Run** the following KQL:
 
@@ -204,6 +202,13 @@ Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo
   | summarize features = make_list(feature)
   | project bag_pack("type", "FeatureCollection", "features", features)
   ```
+
+ Logic Explained:
+
+  * `summarize` ... providing for filtration of groupings with zero-valued measures
+  * `[geo_point_to_h3cell](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function)` ... calculates the [H3](https://www.uber.com/blog/h3/) value for a geographic location {i.e., GPS coordinates} 
+
+  <img src="https://user-images.githubusercontent.com/44923999/206757950-bef53759-1990-4aa2-b112-c05f22b68efc.png" width="800" title="Snipped: December 9, 2022" />
 
 We will use H3 (https://www.uber.com/blog/h3/) to group multiple GPS coordinates into resolution-6 (3 km) hexagons.
 
