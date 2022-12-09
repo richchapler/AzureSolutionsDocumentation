@@ -206,14 +206,66 @@ _https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-
   | project bag_pack("type", "FeatureCollection", "features", features)
   ```
 
- Logic Explained:
+Logic Explained:
 
   * `summarize` and `where` ... providing for filtration of groupings with zero-valued measures
-  * `geo_point_to_h3cell` ... calculates the [H3](https://www.uber.com/blog/h3/) value for a given longitude, latitude, and resolution<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function_
+  * `geo_point_to_h3cell` ... calculates the [H3](https://www.uber.com/blog/h3/) value for a given longitude, latitude, and resolution<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function_<br>_Note: S2 (http://s2geometry.io/) is another grouping method that might be considered_
+
   * `pack_all` ... creates a dynamic object with related data from all columns<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/packallfunction_
   * `bag_pack` ... creates a dynamic object from a list of keys and values<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/packfunction_
   * `geo_h3cell_to_polygon` ... calculates the polygon from a given H3 value<br>_https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function_
 
-_Note: S2 (http://s2geometry.io/) is another grouping method that might be considered_
+
+Sample Result (abridged):
+
+  ```
+  {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                "-80.698564844719911",
+                "26.062694311272747"
+              ],
+              [
+                "-79.211732382045582",
+                "26.761491776435669"
+              ],
+              [
+                "-79.057435773237245",
+                "28.3728922138514"
+              ],
+              [
+                "-80.425374695204042",
+                "29.321821309161468"
+              ],
+              [
+                "-81.9664941624314",
+                "28.63180650194559"
+              ],
+              [
+                "-82.08430112269555",
+                "26.984013476507922"
+              ],
+              [
+                "-80.698564844719911",
+                "26.062694311272747"
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "h3": "8244affffffffff",
+          "DeathsDirect": 2
+        }
+      }
+    ]
+  }
+  ```
 
 Save file and test by dragging and dropping on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map
