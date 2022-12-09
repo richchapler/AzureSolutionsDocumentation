@@ -28,7 +28,7 @@ This solution requires the following resources:
 * [Power BI](https://powerbi.microsoft.com/en-us/desktop/)
 
 ## Exercise 1: Get Data
-In this step, we will get sample data that will be used for all visualization exercises.
+In this exercise, we will get sample data that will be used for all visualization exercises.
 
 * Open Power BI Desktop
 
@@ -57,7 +57,7 @@ In this step, we will get sample data that will be used for all visualization ex
 ## Exercise 2: Evaluate Shape Maps
 Reference: https://learn.microsoft.com/en-us/power-bi/visuals/desktop-shape-map
 
-In this step, we will get setup and evaluate Shape Maps.
+In this exercise, we will get setup and evaluate Power BI, Shape Maps.
 
 * Click **File** >> "**Options and Settings**" >> **Options** >> "**Preview Features**"
 
@@ -91,7 +91,7 @@ In this step, we will get setup and evaluate Shape Maps.
 ## Exercise 3: Evaluate Filled Maps
 Reference: https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-filled-maps-choropleths
 
-In this step, we will get setup and evaluate Filled Maps.
+In this exercise, we will get setup and evaluate Power BI, Filled Maps.
 
 * Click **File** >> "**Options and Settings**" >> **Options** >> **Security**
 
@@ -134,7 +134,7 @@ In this step, we will get setup and evaluate Filled Maps.
 ## Exercise 4: Evaluate Azure Maps
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-get-started
 
-In this step, we will get setup and evaluate Azure Maps.
+In this exercise, we will get setup and evaluate Power BI, Azure Maps.
 
 * Click **File** >> "**Options and Settings**" >> **Options** >> "**Preview Features**"
 
@@ -149,7 +149,7 @@ In this step, we will get setup and evaluate Azure Maps.
 
 * Select the map visual and then click the "**Azure Map**" icon in the **Visualizations** pane
 
-### Exercise 5: Bar Chart Layer
+### Exercise 4a: Bar Chart Layer
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-chart-layer
 
   <img src="https://user-images.githubusercontent.com/44923999/206034982-ced01298-e96b-46f3-8080-6897609c5ec2.png" width="800" title="Snipped: December 6, 2022" />
@@ -165,7 +165,7 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
   <img src="https://user-images.githubusercontent.com/44923999/206225403-4d470706-0692-419a-820f-30b1b5333fa0.png" width="800" title="Snipped: December 7, 2022" />
 
-### Exercise 6: Pie Chart Layer
+### Exercise 4b: Pie Chart Layer
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer
 
   <img src="https://user-images.githubusercontent.com/44923999/206219840-a9fc5f6b-de5d-4a3b-ae48-b506c9aa12d7.png" width="800" title="Snipped: December 7, 2022" />
@@ -183,10 +183,8 @@ Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-ad
 
   <img src="https://user-images.githubusercontent.com/44923999/206226233-4970d95e-090b-4979-a3ff-27a26fe64e38.png" width="800" title="Snipped: December 7, 2022" />
 
-### Exercise 7: Reference Layer (GeoJSON)
+### Exercise 4c: Reference Layer (GeoJSON)
 Reference: https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer
-
-In this step, we will create the GeoJSON file we will need to evaluate Reference Layer functionality in Power BI >> Azure Maps.
 
 #### Prepare GeoJSON File
 
