@@ -196,13 +196,16 @@ _Note: S2 (http://s2geometry.io/) is another grouping method that might be consi
 ```
 StormEvents
 | summarize DeathsDirect = sum(DeathsDirect) by h3 = geo_point_to_h3cell(EndLon,EndLat,2)
-| extend properties = bag_pack("color", iif(DeathsDirect > 5, "red", "green"))
+| where DeathsDirect > 0
+| extend properties = pack_all()
 | project feature = bag_pack("type", "Feature", "geometry",geo_h3cell_to_polygon(h3), "properties", properties)
 | summarize features = make_list(feature)
 | project bag_pack("type", "FeatureCollection", "features", features)
 ```
 
 Reference: https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-h3cell-to-polygon-function
+
+Save file and test by dragging and dropping on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map
 
 ------------------------------------------------------------------------
 
