@@ -8,14 +8,14 @@ Microsoft [Cost Management + Billing](https://learn.microsoft.com/en-us/azure/co
 
 This documentation details step-by-step instructions for some of these options.
 
-| Option | Pros | Cons | Interface |
-| ----- | ----- | ----- | ----- |
-| **Azure Portal** | - Easy-to-Use<br>- No additional tools or coding required | - Targets "small cost detail" datasets (<2GB) | - |
-| **Power BI** | ??? | - Requires permissions most people lack | Application |
-| **API** | - Can pull > 1y historical data | - No bulk query<br>- Resource Manager limits read requests to 15,000 per hour and write requests to 1,200 per hour| |
-| ...via Data Factory | - Familiar orchestration engine | - Nested iteration impossible | Designer |
-| ...via Logic App | - Nested iteration possible | - Challenging interface<br />- Slow processing<br />- Difficult to monitor progress | Designer |
-| ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - | C#, etc. |
+| Option | Pros | Cons |
+| ----- | ----- | ----- |
+| **Azure Portal** | - Easy-to-Use<br>- No additional tools or coding required | - Targets "small cost detail" datasets (<2GB) |
+| **Power BI** | ??? | - Requires permissions most people lack |
+| **API** | - Can pull historical data greater than 1 year  | - No bulk query<br>- Limited to 15k read requests per hour ([more](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling)) |
+| ...via Data Factory | - Familiar orchestration engine | - Nested iteration impossible |
+| ...via Logic App | - Nested iteration possible | - Challenging interface<br />- Slow processing<br />- Difficult to monitor progress |
+| ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - |
 | **Exports** | - Most scalable solution | ----- |
 
 **This list of Pros and Cons is based on my research, experience and perception ONLY.**
