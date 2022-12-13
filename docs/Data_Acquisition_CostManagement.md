@@ -15,7 +15,7 @@ This documentation details step-by-step instructions for some of these options.
 | **API** | - Can pull historical data greater than 1 year  | - No bulk query<br>- Limited to 15k read requests per hour ([more](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling)) |
 | ...via Data Factory | - Familiar orchestration engine | - Nested iteration impossible |
 | ...via Logic App | - Nested iteration possible | - Challenging interface<br />- Slow processing<br />- Difficult to monitor progress |
-| ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - |
+| ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - Requires coding expertise |
 | **Exports** | - Most scalable solution | ----- |
 
 **This list of Pros and Cons is based on my research, experience and perception ONLY.**
