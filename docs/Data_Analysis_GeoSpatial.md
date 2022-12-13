@@ -218,58 +218,58 @@ Logic Explained:
 
 Sample Result (abridged):
 
-  ```
-  {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
+    ```
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
               [
-                "-80.698564844719911",
-                "26.062694311272747"
-              ],
-              [
-                "-79.211732382045582",
-                "26.761491776435669"
-              ],
-              [
-                "-79.057435773237245",
-                "28.3728922138514"
-              ],
-              [
-                "-80.425374695204042",
-                "29.321821309161468"
-              ],
-              [
-                "-81.9664941624314",
-                "28.63180650194559"
-              ],
-              [
-                "-82.08430112269555",
-                "26.984013476507922"
-              ],
-              [
-                "-80.698564844719911",
-                "26.062694311272747"
+                [
+                  "-80.698564844719911",
+                  "26.062694311272747"
+                ],
+                [
+                  "-79.211732382045582",
+                  "26.761491776435669"
+                ],
+                [
+                  "-79.057435773237245",
+                  "28.3728922138514"
+                ],
+                [
+                  "-80.425374695204042",
+                  "29.321821309161468"
+                ],
+                [
+                  "-81.9664941624314",
+                  "28.63180650194559"
+                ],
+                [
+                  "-82.08430112269555",
+                  "26.984013476507922"
+                ],
+                [
+                  "-80.698564844719911",
+                  "26.062694311272747"
+                ]
               ]
             ]
-          ]
-        },
-        "properties": {
-          "h3": "8244affffffffff",
-          "DeathsDirect": 2
+          },
+          "properties": {
+            "h3": "8244affffffffff",
+            "DeathsDirect": 2
+          }
         }
-      }
-    ]
-  }
-  ```
+      ]
+    }
+    ```
 
   * Copy the result, paste into a text editor {e.g., Notepad, Visual Studio Code, etc.}, and save the file to your Desktop as "sample.json"
 
-  <img src="https://user-images.githubusercontent.com/44923999/207388243-d3be3bc6-3beb-43d2-b294-f7d5a174b6ce.png" width="800" title="Snipped: December 13, 2022" />
+    <img src="https://user-images.githubusercontent.com/44923999/207388243-d3be3bc6-3beb-43d2-b294-f7d5a174b6ce.png" width="800" title="Snipped: December 13, 2022" />
 
   * Test by dragging and dropping on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map
