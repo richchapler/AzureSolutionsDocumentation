@@ -155,7 +155,7 @@ _https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-char
   <img src="https://user-images.githubusercontent.com/44923999/206034982-ced01298-e96b-46f3-8080-6897609c5ec2.png" width="800" title="Snipped: December 6, 2022" />
 
 * Click the "**Format your visual**" tab on the **Visualizations** pane
-* Set "**Bubble layer**" to **Off** and "**Bar chart layer**" to **On**
+* Set "**Bar chart layer**" to **On** and all other visualizations to **Off**
 * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
 #### Save and Publish
@@ -172,8 +172,9 @@ _https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-char
 
 * Click the "**Add data to your visual**" tab on the **Visualizations** pane
   * Drag the **EventType** field to the **Legend** bucket
+
 * Click the "**Format your visual**" tab on the **Visualizations** pane
-  * Set "**Bubble layer**" to **On** and "**Bar chart layer**" to **Off**
+  * Set "**Bubble layer**" to **On** and all other visualizations to **Off**
   * Explore additional visualization settings {e.g., Size, Shape, Colors, etc.}
 
 #### Save and Publish
@@ -280,3 +281,8 @@ Sample Result (abridged):
   
   <img src="https://user-images.githubusercontent.com/44923999/207396533-383e494f-438b-4fb6-9b98-33195bace961.png" width="800" title="Snipped: December 13, 2022" />
 
+* Click the "**Format your visual**" tab on the **Visualizations** pane
+* Set all visualizations to **Off** and expand "Reference Layer"
+* Click **Upload**, browse to, and select the "sample.json" file
+
+  <img src="https://user-images.githubusercontent.com/44923999/207403135-19b6a4d3-1cd2-4b33-9ba9-37040f9a5048.png" width="800" title="Snipped: December 13, 2022" />
