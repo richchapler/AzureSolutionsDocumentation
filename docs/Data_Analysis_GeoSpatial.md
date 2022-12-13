@@ -268,7 +268,8 @@ Sample Result (abridged):
   }
   ```
 
+  * Copy the result, paste into a text editor {e.g., Notepad, Visual Studio Code, etc.}, and save the file to your Desktop as "sample.json"
+
   <img src="https://user-images.githubusercontent.com/44923999/207388243-d3be3bc6-3beb-43d2-b294-f7d5a174b6ce.png" width="800" title="Snipped: December 13, 2022" />
 
-  * Copy the result, paste into a text editor {e.g., Notepad, Visual Studio Code, etc.}, and save the file to your Desktop as "sample.json"
   * Test by dragging and dropping on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map
