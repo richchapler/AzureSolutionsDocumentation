@@ -286,7 +286,9 @@ This use case considers the following requirement statements:
 * Leverage Logic Apps' nested iteration capability with input parameters for Subscriptions and Start / End Dates 
 * Request data from the Cost Management API at the Resource Group level rather than Subscription level
 
-_Note: If you have Resource Groups with more than 1,000 resources, you might have to choose a more granular scope or other strategy_
+_Notes:_
+* _Historical Resource Groups {i.e., have been deleted or renamed} will not surface via Fluent, and will surface as empty strings in the Cost Management API (if queried at the subscription level)_
+* _If you have Resource Groups with more than 1,000 resources, you might have to choose a more granular scope or other strategy_
 
 ### Step 1: Prepare Resources
 
