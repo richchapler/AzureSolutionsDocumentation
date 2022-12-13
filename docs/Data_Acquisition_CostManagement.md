@@ -1390,3 +1390,6 @@ namespace CostManagement
       , Currency: string
       )
   ```
+
+## Reference
+* https://learn.microsoft.com/en-us/azure/cost-management-billing/automate/usage-details-best-practices
