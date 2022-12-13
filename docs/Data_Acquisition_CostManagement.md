@@ -16,7 +16,7 @@ This documentation details step-by-step instructions for some of these options.
 | ...via Data Factory | - Familiar orchestration engine | - Nested iteration impossible |
 | ...via Logic App | - Nested iteration possible | - Challenging interface<br />- Slow processing<br />- Difficult to monitor progress |
 | ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - Requires coding expertise |
-| **Exports** | - Most scalable solution | ----- |
+| **Exports** | - "Most scalable solution" | - No historical data (pull begins day you instantiate) |
 
 **This list of Pros and Cons is based on my research, experience and perception ONLY.**
 
