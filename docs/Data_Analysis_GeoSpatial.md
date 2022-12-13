@@ -282,7 +282,7 @@ Sample Result (abridged):
   <img src="https://user-images.githubusercontent.com/44923999/207396533-383e494f-438b-4fb6-9b98-33195bace961.png" width="800" title="Snipped: December 13, 2022" />
 
 * Click the "**Format your visual**" tab on the **Visualizations** pane
-* Set all visualizations to **Off** and expand "Reference Layer"
-* Click **Upload**, browse to, and select the "sample.json" file
+* Set all visualizations to **Off** and expand "**Reference Layer**"
+* Click **Upload**, then browse to and **Open** the "sample.json" file
 
   <img src="https://user-images.githubusercontent.com/44923999/207403135-19b6a4d3-1cd2-4b33-9ba9-37040f9a5048.png" width="800" title="Snipped: December 13, 2022" />
