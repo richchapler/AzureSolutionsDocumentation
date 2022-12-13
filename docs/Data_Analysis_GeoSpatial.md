@@ -274,5 +274,4 @@ Sample Result (abridged):
 
   _Note: To confirm success, drag-and-drop the new GeoJSON file on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map_
   
-  ![image](https://user-images.githubusercontent.com/44923999/207389620-6d869f4e-5bea-4547-98ad-20c42762c437.png)
-
+    <img src="https://user-images.githubusercontent.com/44923999/207389620-6d869f4e-5bea-4547-98ad-20c42762c437.png" width="800" title="Snipped: December 13, 2022" />
