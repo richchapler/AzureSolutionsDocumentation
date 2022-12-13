@@ -12,7 +12,7 @@ This documentation details step-by-step instructions for some of these options.
 | ----- | ----- | ----- | ----- |
 | **Azure Portal** | - Easy-to-Use<br>- No additional tools or coding required | - Targets "small cost detail" datasets (<2GB) | - |
 | **Power BI** | ??? | - Requires permissions most people lack | Application |
-| **API** | - Can pull > 1y historical data | - No bulk query | |
+| **API** | - Can pull > 1y historical data | - No bulk query<br>- Resource Manager limits read requests to 15,000 per hour and write requests to 1,200 per hour| |
 | ...via Data Factory | - Familiar orchestration engine | - Nested iteration impossible | Designer |
 | ...via Logic App | - Nested iteration possible | - Challenging interface<br />- Slow processing<br />- Difficult to monitor progress | Designer |
 | ...via Function App | - Nested iteration possible<br />- Visual Studio {i.e., IntelliSense, NuGet, and GitHub} | - | C#, etc. |
