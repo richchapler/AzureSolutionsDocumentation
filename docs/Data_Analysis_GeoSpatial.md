@@ -163,8 +163,6 @@ _https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-bar-char
 * Click **File** >> **Publish** >> "**Publish to Power BI**"
 * On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (Save / Replace when prompted)
 
-  <img src="https://user-images.githubusercontent.com/44923999/206225403-4d470706-0692-419a-820f-30b1b5333fa0.png" width="800" title="Snipped: December 7, 2022" />
-
 ### Exercise 4b: Pie Chart Layer
 _https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-chart-layer_
 
@@ -181,8 +179,6 @@ _https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-pie-char
 
 * Click **File** >> **Publish** >> "**Publish to Power BI**"
 * On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (Save / Replace when prompted)
-
-  <img src="https://user-images.githubusercontent.com/44923999/206226233-4970d95e-090b-4979-a3ff-27a26fe64e38.png" width="800" title="Snipped: December 7, 2022" />
 
 ### Exercise 4c: Reference Layer (GeoJSON)
 _https://learn.microsoft.com/en-us/azure/azure-maps/power-bi-visual-add-reference-layer_
@@ -286,3 +282,8 @@ Sample Result (abridged):
 * Click **Upload**, then browse to and **Open** the "sample.json" file
 
   <img src="https://user-images.githubusercontent.com/44923999/207403135-19b6a4d3-1cd2-4b33-9ba9-37040f9a5048.png" width="800" title="Snipped: December 13, 2022" />
+
+#### Save and Publish
+
+* Click **File** >> **Publish** >> "**Publish to Power BI**"
+* On the resulting "**Publish to Power BI**" pop-up, select "**My workspace**" and then click **Select** (Save / Replace when prompted)
