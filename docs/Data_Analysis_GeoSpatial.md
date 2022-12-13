@@ -273,7 +273,7 @@ Sample Result (abridged):
 
   <img src="https://user-images.githubusercontent.com/44923999/207389620-6d869f4e-5bea-4547-98ad-20c42762c437.png" width="800" title="Snipped: December 13, 2022" />
 
-* Return to Power BI and clear previous settings on the Azure Maps component
+* Return to Power BI and clear previous configuration
   
   <img src="https://user-images.githubusercontent.com/44923999/207396533-383e494f-438b-4fb6-9b98-33195bace961.png" width="800" title="Snipped: December 13, 2022" />
 
@@ -281,7 +281,7 @@ Sample Result (abridged):
 * Set all visualizations to **Off** and expand "**Reference Layer**"
 * Click **Upload**, then browse to and **Open** the "sample.json" file
 
-  <img src="https://user-images.githubusercontent.com/44923999/207403135-19b6a4d3-1cd2-4b33-9ba9-37040f9a5048.png" width="800" title="Snipped: December 13, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/207404986-e557465f-e1b2-48e0-8a36-2a0889e27417.png" width="800" title="Snipped: December 13, 2022" />
 
 #### Save and Publish
 
