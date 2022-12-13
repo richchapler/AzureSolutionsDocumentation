@@ -218,61 +218,66 @@ Logic Explained:
 
 Sample Result (abridged):
 
-    ```
-    {
-      "type": "FeatureCollection",
-      "features": [
-        {
-          "type": "Feature",
-          "geometry": {
-            "type": "Polygon",
-            "coordinates": [
+  ```
+  {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
               [
-                [
-                  "-80.698564844719911",
-                  "26.062694311272747"
-                ],
-                [
-                  "-79.211732382045582",
-                  "26.761491776435669"
-                ],
-                [
-                  "-79.057435773237245",
-                  "28.3728922138514"
-                ],
-                [
-                  "-80.425374695204042",
-                  "29.321821309161468"
-                ],
-                [
-                  "-81.9664941624314",
-                  "28.63180650194559"
-                ],
-                [
-                  "-82.08430112269555",
-                  "26.984013476507922"
-                ],
-                [
-                  "-80.698564844719911",
-                  "26.062694311272747"
-                ]
+                "-80.698564844719911",
+                "26.062694311272747"
+              ],
+              [
+                "-79.211732382045582",
+                "26.761491776435669"
+              ],
+              [
+                "-79.057435773237245",
+                "28.3728922138514"
+              ],
+              [
+                "-80.425374695204042",
+                "29.321821309161468"
+              ],
+              [
+                "-81.9664941624314",
+                "28.63180650194559"
+              ],
+              [
+                "-82.08430112269555",
+                "26.984013476507922"
+              ],
+              [
+                "-80.698564844719911",
+                "26.062694311272747"
               ]
             ]
-          },
-          "properties": {
-            "h3": "8244affffffffff",
-            "DeathsDirect": 2
-          }
+          ]
+        },
+        "properties": {
+          "h3": "8244affffffffff",
+          "DeathsDirect": 2
         }
-      ]
-    }
-    ```
+      }
+    ]
+  }
+  ```
 
-  * Copy the result, paste into a text editor {e.g., Notepad, Visual Studio Code, etc.}, and save the file to your Desktop as "sample.json"
+* Copy the result, paste into a text editor {e.g., Notepad, Visual Studio Code, etc.}, and save the file to your Desktop as "sample.json"
 
-    <img src="https://user-images.githubusercontent.com/44923999/207388243-d3be3bc6-3beb-43d2-b294-f7d5a174b6ce.png" width="800" title="Snipped: December 13, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/207388243-d3be3bc6-3beb-43d2-b294-f7d5a174b6ce.png" width="800" title="Snipped: December 13, 2022" />
 
-  * To confirm success, drag-and-drop the new GeoJSON file on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map
+* To confirm success, drag-and-drop the new GeoJSON file on the map at: https://samples.azuremaps.com/geospatial-files/drag-and-drop-geojson-file-onto-map
+
+  <img src="https://user-images.githubusercontent.com/44923999/207389620-6d869f4e-5bea-4547-98ad-20c42762c437.png" width="800" title="Snipped: December 13, 2022" />
+
+* Return to Power BI and clear previous settings on the Azure Maps component
+* Set "**Bubble layer**" to **Off** and "**Bar chart layer**" to **On**
   
-    <img src="https://user-images.githubusercontent.com/44923999/207389620-6d869f4e-5bea-4547-98ad-20c42762c437.png" width="800" title="Snipped: December 13, 2022" />
-    
+  <img src="https://user-images.githubusercontent.com/44923999/207396533-383e494f-438b-4fb6-9b98-33195bace961.png" width="800" title="Snipped: December 13, 2022" />
+
