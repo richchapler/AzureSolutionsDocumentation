@@ -136,13 +136,28 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 7: Publish
 
+* Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
+
   <img src="https://user-images.githubusercontent.com/44923999/208507075-b1675f1b-0645-4460-94bb-2a8f2c14dec9.png" width="800" title="Snipped: December 19, 2022" />
 
-* Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
+* On the **Publish** pop-up, **Target** tab, select "**Azure**" and then click **Next**
 
   <img src="https://user-images.githubusercontent.com/44923999/208524701-66855dbf-aa15-4166-823b-9a3ab7335312.png" width="600" title="Snipped: December 19, 2022" />
 
-* On the resulting **Publish** pop-up, select target "**Azure**" and then click **Next**
+* On the **Publish** pop-up, "**Specific target**" tab, select "**Azure Function App (Windows)**" and then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/208525720-9123df26-a749-469e-89bc-47a22ad8e997.png" width="600" title="Snipped: December 19, 2022" />
+
+* On the **Publish** pop-up, "**Functions instance**" tab, select your subscription, expand to and select your Function App, then click **Finish**
+
+  <img src="https://user-images.githubusercontent.com/44923999/208526223-fab7fdcc-64a6-4e23-80d1-c3c20ae5c846.png" width="600" title="Snipped: December 19, 2022" />
+
+* On the **Publish** pop-up, "**Finish**" tab, monitor publish profile creation progress
+
+  <img src="https://user-images.githubusercontent.com/44923999/208526895-da1b4106-0231-4c2b-8147-4cbc2468a64f.png" width="600" title="Snipped: December 19, 2022" />
+
+* Click **Close**
+
 
 
 
