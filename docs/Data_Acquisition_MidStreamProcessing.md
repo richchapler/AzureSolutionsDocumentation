@@ -10,7 +10,7 @@
 ## Prepare Infrastructure
 This solution requires the following resources:
 
-* Event Hubs ... one to mimic an untouchable source and a second to mimic post-processing
+* [**Event Hubs**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group ... one to mimic the untouchable source and a second to mimic post-processing
 * Function Apps ... one to mock data flowing through the untouchable source and a second to hand mid-stream processing
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 
