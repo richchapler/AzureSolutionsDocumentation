@@ -296,7 +296,7 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "**Cost Management Reader**" role assignment (granted at Subscription or Resource Group)
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Logic App**](Infrastructure_LogicApp.md)
+* [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 
 ### Step 2: Prepare Workflow
 
