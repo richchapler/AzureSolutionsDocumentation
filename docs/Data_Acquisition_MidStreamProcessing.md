@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/44923999/208464152-33914e21-5ae5-49fc-8a9a-dc7dddcf0339.png)
 
-## Understand Use Case
+## Use Case
 
 * "We stream millions of messages per hour through a source owned and controlled by another team"
 * "Each message requires special handling, mid-stream {e.g., 1) translation of a proprietary format, 2) decompression, 3) unpacking / re-packing of JSON, etc.}"
