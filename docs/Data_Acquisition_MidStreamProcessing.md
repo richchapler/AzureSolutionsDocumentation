@@ -50,7 +50,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 2: "Function1.cs" Logic, Update Method
 
-* Visual Studio will open a "Function1.cs" tab
+* Open "Function1.cs"
 
   <img src="https://user-images.githubusercontent.com/44923999/208492132-99ce75ef-18f5-416a-8852-c34d37d35a09.png" width="800" title="Snipped: December 19, 2022" />
 
@@ -68,7 +68,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   * `async Task` ... provides for use of asynchronous calls
   * `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
 
-### Step 3: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
+### Step 3: Install NuGet
 
 * In the "**Error List**", you will notice errors like "The type or namespace 'EventHub' could not be found..."; these must be resolved by adding a NuGet Package
 
@@ -82,11 +82,11 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 * On the resulting pop-out, check project **MidStreamProcessing** and then click **Install**
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
-### Step 4: "Function1.cs" Logic, Add Variables and Parameters
+### Step 4: Update "Function1.cs"
 
-* Return to the "Function1.cs" tab
+* Return to "Function1.cs"
 
-  <img src="https://user-images.githubusercontent.com/44923999/201716478-a9784f70-2238-4404-9cbe-582dd158c147.png" width="800" title="Snipped: November 14, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208499718-fb7658ab-5dff-4d8d-9384-752f62a120f7.png" width="800" title="Snipped: December 19, 2022" />
 
 * Replace the default code `log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");` with:
 
@@ -103,13 +103,35 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   * `string output = ...` generates a nested JSON string like `{"rows":[{"id":5740c202-3ee8-43c0-8561-01a33506cb6f},{"id":78ec5ee8-95f1-4189-85db-d14a53916566},{"id":8fc61f2f-db87-4424-8860-d553983f908f}]}`
   * `await theEventHub.AddAsync(output);` sends the JSON string to the Event Hub
 
+### Step 5: Update "local.settings.json"
 
+* Open "local.settings.json"
 
+  <img src="https://user-images.githubusercontent.com/44923999/208500134-9dcf4c03-4226-4ccb-b5af-32af5588b886.png" width="800" title="Snipped: December 19, 2022" />
+
+* Modify the following JSON {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values} and then replace default "local.settings.json" content
+
+  ```
+  {
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=STORAGE_ACCOUNT_NAME;AccountKey=STORAGE_ACCOUNT_KEY;EndpointSuffix=core.windows.net",
+      "EventHubConnectionAppSetting": "Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME",
+      "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+    }
+  }
+  ```
+
+### Step 6: Update "local.settings.json"
 
 
 
 
 # Delete Me
+
+  _Note: When you publish to an Azure Function App, remember that "local.settings.json" will not be published directly... you will need to update the function app with environment settings directly._
+
+
 ```
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
