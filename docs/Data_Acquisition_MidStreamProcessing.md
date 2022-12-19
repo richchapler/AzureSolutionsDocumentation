@@ -122,7 +122,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   }
   ```
 
-### Step 6: Confirm Success
+### Step 6: Confirm Success (local)
 
 * In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**"
 
@@ -158,9 +158,10 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **Close**
 
+### Step 8: Confirm Success (published to Azure)
 
-
-
+_Lorem Ipsum
+_
 
 # Delete Me
 
