@@ -70,7 +70,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 3: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
 
-* In the "**Error List**", you might notice errors like "The type or namespace 'EventHub' could not be found..."; these must be resolved by adding a NuGet Package
+* In the "**Error List**", you will notice errors like "The type or namespace 'EventHub' could not be found..."; these must be resolved by adding a NuGet Package
 
   <img src="https://user-images.githubusercontent.com/44923999/208492582-5cc800c9-12f4-4ec6-9c6b-0431d56cfb4e.png" width="800" title="Snipped: December 19, 2022" />
 
@@ -82,7 +82,26 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 * On the resulting pop-out, check project **MidStreamProcessing** and then click **Install**
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
+### Step 4: "Function1.cs" Logic, Add Variables and Parameters
 
+* Return to the "Function1.cs" tab
+
+  <img src="https://user-images.githubusercontent.com/44923999/201716478-a9784f70-2238-4404-9cbe-582dd158c147.png" width="800" title="Snipped: November 14, 2022" />
+
+* Replace the default code `log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");` with:
+
+  ```
+  string output = "{\"rows\":[{\"id\":"+Guid.NewGuid()+ "},{\"id\":"+Guid.NewGuid()+"},{\"id\":"+Guid.NewGuid()+"}]}";
+
+  theLogger.LogInformation(output);
+
+  await theEventHub.AddAsync(output);
+  ```
+
+  Logic Explained:
+
+  * `string output = ...` generates a nested JSON string like `{"rows":[{"id":5740c202-3ee8-43c0-8561-01a33506cb6f},{"id":78ec5ee8-95f1-4189-85db-d14a53916566},{"id":8fc61f2f-db87-4424-8860-d553983f908f}]}`
+  * `await theEventHub.AddAsync(output);` sends the JSON string to the Event Hub
 
 
 
