@@ -3,6 +3,7 @@
 ![image](https://user-images.githubusercontent.com/44923999/208464152-33914e21-5ae5-49fc-8a9a-dc7dddcf0339.png)
 
 ## Use Case
+This solution considers the following requirements:
 
 * "We stream millions of messages per hour from an Event Hub owned and controlled by another organization"
 * "Each message requires special, mid-stream handling {e.g., format translation, decompression, re-packing of JSON, etc.}"
