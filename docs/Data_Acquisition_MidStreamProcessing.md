@@ -136,8 +136,9 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 7: Publish
 
-Lorem Ipsum
+  <img src="https://user-images.githubusercontent.com/44923999/208507075-b1675f1b-0645-4460-94bb-2a8f2c14dec9.png" width="800" title="Snipped: December 19, 2022" />
 
+* Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
 
 
 
