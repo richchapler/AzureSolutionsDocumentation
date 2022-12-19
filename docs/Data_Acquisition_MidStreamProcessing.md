@@ -4,7 +4,7 @@
 
 ## Use Case
 
-* "We stream millions of messages per hour through a source owned and controlled by another team"
+* "We stream millions of messages per hour from an Event Hub owned and controlled by another organization"
 * "Each message requires special handling, mid-stream {e.g., 1) translation of a proprietary format, 2) decompression, 3) unpacking / re-packing of JSON, etc.}"
 
 ## Prepare Infrastructure
