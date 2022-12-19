@@ -16,7 +16,7 @@ This documentation details step-by-step instructions for **some** of the Power B
 
 _Note: This list of Pros and Cons is based on my research, experience and perception ONLY._
 
-## Understand Use Case
+## Use Case
 This use case considers the following requirement statements:
 
 * "We want to use geo-spatial visualization to help us better understand our data, but we do not know where to start"
