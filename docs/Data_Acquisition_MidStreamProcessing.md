@@ -126,11 +126,19 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/208502174-2084dcfc-d5d2-48b6-88f2-cabf2c3a39f0.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208506217-b908f61d-d67d-4e54-8c94-14de07bf6685.png" width="800" title="Snipped: December 19, 2022" />
 
 * In the resulting Command window, monitor processing and confirm success
 
-* Navigate to the Event Hub
+  <img src="https://user-images.githubusercontent.com/44923999/208505976-69e389b4-2850-44b5-8e17-8728d4bfc6dd.png" width="800" title="Snipped: December 19, 2022" />
+
+* Navigate to the Event Hub and confirm Incoming Messages
+
+### Step 7: Publish
+
+Lorem Ipsum
+
+
 
 
 
