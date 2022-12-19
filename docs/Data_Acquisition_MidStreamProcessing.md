@@ -12,7 +12,7 @@ This solution requires the following resources:
 
 * Event Hubs ... one to mimic an untouchable source and a second to mimic post-processing
 * Function Apps ... one to mock data flowing through the untouchable source and a second to hand mid-stream processing
-* Data Explorer
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 
 ## Exercise 1: Mock Untouchable Source
 
