@@ -14,6 +14,8 @@ I have tried to keep these instructions free of the obvious:
 
 ### Contents
 
+> [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
+> 
 > [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
 > [**Cognitive Search**](Infrastructure_CognitiveSearch.md)
