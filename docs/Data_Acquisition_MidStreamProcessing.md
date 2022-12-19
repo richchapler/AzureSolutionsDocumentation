@@ -19,7 +19,7 @@ This solution requires the following resources:
 ## Exercise 1: Mock Untouchable Source
 In this exercise, we will use a Function App to mock the flow of messages coming from the source Event Hub.
 
-### Create Visual Studio Project
+### Step 1: Create Visual Studio Project
 
 * Open Visual Studio
 
@@ -48,11 +48,11 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **Create**
 
-### "Function1.cs" Logic, Update Method
+### Step 2: "Function1.cs" Logic, Update Method
 
 * Visual Studio will open a "Function1.cs" tab
 
-  <img src="https://user-images.githubusercontent.com/44923999/208475058-2f42f4c6-4783-4bdd-b838-c2cbcb4ca755.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208492132-99ce75ef-18f5-416a-8852-c34d37d35a09.png" width="800" title="Snipped: December 19, 2022" />
 
 * Replace the default code `public void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
 
@@ -67,6 +67,20 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   * `async Task` ... provides for use of asynchronous calls
   * `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
+
+### Step 3: Install NuGet, Microsoft.Azure.WebJobs.Extensions.EventHubs
+
+* In the "**Error List**", you might notice errors like "The type or namespace 'EventHub' could not be found..."; these must be resolved by adding a NuGet Package
+
+  <img src="https://user-images.githubusercontent.com/44923999/208492582-5cc800c9-12f4-4ec6-9c6b-0431d56cfb4e.png" width="800" title="Snipped: December 19, 2022" />
+
+* Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/201706712-73b391a0-e282-439c-a13f-36553b218ab5.png" width="800" title="Snipped: November 14, 2022" />
+
+* Search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**" on the **Browse** tab of the "**NuGet - Solution**" page, then click **Next**
+* On the resulting popout, check project CostManagement and then click **Install**
+* When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
 # Delete Me
 ```
