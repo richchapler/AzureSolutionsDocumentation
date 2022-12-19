@@ -53,7 +53,6 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 * Visual Studio will open a "Function1.cs" tab
 
   <img src="https://user-images.githubusercontent.com/44923999/208475058-2f42f4c6-4783-4bdd-b838-c2cbcb4ca755.png" width="800" title="Snipped: December 19, 2022" />
-![image](https://user-images.githubusercontent.com/44923999/.png)
 
 * Replace the default code `public void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
 
