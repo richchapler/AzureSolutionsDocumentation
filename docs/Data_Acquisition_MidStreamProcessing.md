@@ -124,6 +124,9 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 6: Update "local.settings.json"
 
+In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**"
+
+![image](https://user-images.githubusercontent.com/44923999/208501863-68603b80-97da-4b88-b04f-43098d195a11.png)
 
 
 
