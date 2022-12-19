@@ -158,10 +158,21 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **Close**
 
-### Step 8: Confirm Success (published to Azure)
+### Step 8: Configure Application Settings in Function App
 
-_Lorem Ipsum
-_
+![image](https://user-images.githubusercontent.com/44923999/208539853-fd408f56-6d71-45ff-833f-f1656d0f9824.png)
+
+
+### Step 9: Confirm Success (published to Azure)
+
+* Navigate to the Function App and confirm Function Executions
+
+  <img src="https://user-images.githubusercontent.com/44923999/208537745-6e110e80-8910-436c-9a32-556a29a077d0.png" width="800" title="Snipped: December 19, 2022" />
+
+
+
+
+
 
 # Delete Me
 
