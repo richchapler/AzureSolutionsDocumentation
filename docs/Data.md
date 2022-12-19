@@ -19,6 +19,7 @@
   [...from Log Analytics API](Data_Acquisition_LogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
   [...from Purview API](Data_Acquisition_PurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
   [...from Resource Diagnostics](Data_Acquisition_ResourceDiagnostics.md) | Continuous Ingestion (Event Hub) | Resource Diagnostics | Data Explorer | No Code
+  [Mid-Stream Processing](Data_Acquisition_MidStreamProcessing.md) | Continuous Ingestion (Event Hub) | Event Hub | Data Explorer | C# (Function App)
 
 ### Analysis
 
