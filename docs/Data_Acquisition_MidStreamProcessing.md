@@ -12,8 +12,8 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Event Hub**](Infrastructure_EventHub.md)s >> Namespace :: Hub :: Consumer Group ... one to mimic the untouchable source and a second to mimic post-processing
-* [**Function App**](Infrastructure_FunctionApp.md)s ... one to mock data flowing through the untouchable source and a second to hand mid-stream processing
+* [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group ... one to mimic the untouchable source and a second to mimic post-processing
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
 ## Exercise 1: Mock Untouchable Source
