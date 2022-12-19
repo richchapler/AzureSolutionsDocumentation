@@ -5,7 +5,7 @@
 ## Use Case
 
 * "We stream millions of messages per hour from an Event Hub owned and controlled by another organization"
-* "Each message requires special, mid-stream handling {e.g., translation of a proprietary format, decompression, unpacking / re-packing of JSON, etc.}"
+* "Each message requires special, mid-stream handling {e.g., format translation, decompression, re-packing of JSON, etc.}"
 
 ## Prepare Infrastructure
 This solution requires the following resources:
