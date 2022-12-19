@@ -122,11 +122,17 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   }
   ```
 
-### Step 6: Update "local.settings.json"
+### Step 6: Confirm Success
 
-In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**"
+* In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**"
 
-![image](https://user-images.githubusercontent.com/44923999/208501863-68603b80-97da-4b88-b04f-43098d195a11.png)
+  <img src="https://user-images.githubusercontent.com/44923999/208502174-2084dcfc-d5d2-48b6-88f2-cabf2c3a39f0.png" width="800" title="Snipped: December 19, 2022" />
+
+* In the resulting Command window, monitor processing and confirm success
+
+* Navigate to the Event Hub
+
+
 
 
 
