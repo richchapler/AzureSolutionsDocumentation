@@ -140,7 +140,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
 
-  <img src="https://user-images.githubusercontent.com/44923999/208524701-66855dbf-aa15-4166-823b-9a3ab7335312.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208524701-66855dbf-aa15-4166-823b-9a3ab7335312.png" width="600" title="Snipped: December 19, 2022" />
 
 * On the resulting **Publish** pop-up, select target "**Azure**" and then click **Next**
 
