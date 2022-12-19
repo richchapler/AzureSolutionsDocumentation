@@ -17,6 +17,7 @@ This solution requires the following resources:
 
 ## Exercise 1: Mock Untouchable Source
 
+```
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System;
@@ -40,3 +41,4 @@ namespace Event_Hub_Message_Generator
         }
     }
 }
+```
