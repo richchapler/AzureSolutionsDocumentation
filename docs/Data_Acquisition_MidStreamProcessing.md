@@ -76,11 +76,19 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/201706712-73b391a0-e282-439c-a13f-36553b218ab5.png" width="800" title="Snipped: November 14, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208492799-a3c55385-e5f7-48be-843f-ee4a5efc65e9.png" width="800" title="Snipped: December 19, 2022" />
 
-* Search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**" on the **Browse** tab of the "**NuGet - Solution**" page, then click **Next**
-* On the resulting popout, check project CostManagement and then click **Install**
+* On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**"
+* On the resulting pop-out, check project **MidStreamProcessing** and then click **Install**
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
+
+
+
+
+
+
+
+
 
 # Delete Me
 ```
