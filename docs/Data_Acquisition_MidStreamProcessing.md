@@ -160,7 +160,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 8: Configure Application Settings
 
-* In the Azure Portal, navigate to the Function App, then Configuration in the Settings group of the left-hand navigation pane
+* In the Azure Portal, navigate to the Function App, then **Configuration** in the **Settings** group of the left-hand navigation pane
 
   <img src="https://user-images.githubusercontent.com/44923999/208687614-b4dbd19d-1691-4227-96b0-1f51de52d3d0.png" width="800" title="Snipped: December 20, 2022" />
 
@@ -179,7 +179,12 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 9: Confirm Success (published to Azure)
 
-* Navigate to the Function App and confirm Function Executions
+* Navigate to Function1, then **Monitor** in the **Developer** group of the left-hand navigation pane
 
-  <img src="https://user-images.githubusercontent.com/44923999/208537745-6e110e80-8910-436c-9a32-556a29a077d0.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208690334-19be532d-75d2-4d23-b98f-eaf144bbb56f.png" width="800" title="Snipped: December 20, 2022" />
 
+* Confirm **Success** messages
+
+  <img src="https://user-images.githubusercontent.com/44923999/208690545-52a314ef-6999-4fde-964c-eba38768d100.png" width="800" title="Snipped: December 20, 2022" />
+
+* Navigate to the Event Hub and confirm Incoming Messages
