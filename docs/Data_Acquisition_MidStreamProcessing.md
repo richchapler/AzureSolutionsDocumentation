@@ -22,7 +22,7 @@ This solution will address requirements in three steps:
 This solution requires the following resources:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Event Hub**](Infrastructure_EventHub.md)... one to mimic the untouchable source and a second to mimic post-processing
+* [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)... one namespace with two event hubs (incoming and outgoing)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
