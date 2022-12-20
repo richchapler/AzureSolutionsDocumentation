@@ -9,6 +9,14 @@ This solution considers the following requirements:
 * "We stream millions of messages per hour from an Event Hub owned and controlled by another organization"
 * "Each message requires special, mid-stream handling {e.g., format translation, decompression, re-packing of JSON, etc.}"
 
+## Proposed Solution
+
+This solution will address requirements in three steps:
+
+* Mimic Source - For this exercise, we must loosely mirror the source Event Hub... in the real-world, we would just connect to the real source
+* Process Mid-Stream - create a Function App with incoming Event Hub (source), processing logic {e.g. unpack JSON} and outgoing Event Hub (destination)
+* Ingest Data - ingest data into Data Explorer
+
 ## Prepare Infrastructure
 
 This solution requires the following resources:
@@ -18,7 +26,7 @@ This solution requires the following resources:
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
-## Exercise 1: Mock Untouchable Source
+## Exercise 1: Mimic Source
 
 In this exercise, we will use a Function App to mock the flow of messages coming from the source Event Hub.
 
