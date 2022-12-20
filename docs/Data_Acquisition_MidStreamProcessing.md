@@ -134,7 +134,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Navigate to the Event Hub and confirm Incoming Messages
 
-### Step 7: Publish
+### Step 7: Publish to Azure
 
 * Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
 
@@ -158,7 +158,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **Close**
 
-### Step 8: Configure Application Settings in Function App
+### Step 8: Configure Application Settings
 
 * In the Azure Portal, navigate to the Function App, then Configuration in the Settings group of the left-hand navigation pane
 
@@ -173,15 +173,9 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   | Prompt | Entry |
   | ----- | ----- |
   | **Name** | Enter "**EventHubConnectionAppSetting**" |
-  | **Value** | Modify {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values} and enter the following string: `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
+  | **Value** | Modify and enter the following string: `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
 
-
-
-
-
-![image](https://user-images.githubusercontent.com/44923999/208539853-fd408f56-6d71-45ff-833f-f1656d0f9824.png)
-
-
+* Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
 
 ### Step 9: Confirm Success (published to Azure)
 
