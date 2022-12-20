@@ -169,38 +169,3 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   <img src="https://user-images.githubusercontent.com/44923999/208537745-6e110e80-8910-436c-9a32-556a29a077d0.png" width="800" title="Snipped: December 19, 2022" />
 
-
-
-
-
-
-# Delete Me
-
-  _Note: When you publish to an Azure Function App, remember that "local.settings.json" will not be published directly... you will need to update the function app with environment settings directly._
-
-
-```
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
-
-namespace Event_Hub_Message_Generator
-{
-    public class Function1
-    {
-        [FunctionName("Function1")]
-        public async Task Run(
-            [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
-            [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
-            ILogger theLogger)
-        {
-            string output = "{\"rows\":[{\"id\":"+Guid.NewGuid()+ "},{\"id\":"+Guid.NewGuid()+"},{\"id\":"+Guid.NewGuid()+"}]}";
-
-            theLogger.LogInformation(output);
-
-            await theEventHub.AddAsync(output);
-        }
-    }
-}
-```
