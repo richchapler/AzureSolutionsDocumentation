@@ -22,7 +22,7 @@ This solution will address requirements in three steps:
 This solution requires the following resources:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group ... one to mimic the untouchable source and a second to mimic post-processing
+* [**Event Hub**](Infrastructure_EventHub.md)... one to mimic the untouchable source and a second to mimic post-processing
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
@@ -202,8 +202,14 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Navigate to the Event Hub and confirm Incoming Messages
 
-## Exercise 2: Mid-Stream Processing
+## Exercise 2: Process Mid-Stream
 
   <img src="https://user-images.githubusercontent.com/44923999/208710138-a6f25c3e-88a9-4195-aebf-54c8016d5b5c.png" width="800" title="Snipped: December 20, 2022" />
 
-Were we to ingest the source data directly {i.e., without mid-stream processing}, our best strategy would be to pull it in Data Format "TXT"
+Were we to ingest the source data directly {i.e., without mid-stream processing}, our best strategy would be to pull it in Data Format "TXT", and then convert to dynamic / parse with KQL in Data Explorer.
+
+In this exercise, we will create a Function App with incoming Event Hub (source), processing logic {e.g. unpack JSON} and outgoing Event Hub (destination)
+
+### Step 1: Lorem Ipsum
+
+* Open Visual Studio
