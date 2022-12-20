@@ -160,7 +160,23 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 8: Configure Application Settings in Function App
 
+* In the Azure Portal, navigate to the Function App, then Configuration in the Settings group of the left-hand navigation pane
+
+  <img src="https://user-images.githubusercontent.com/44923999/208687614-b4dbd19d-1691-4227-96b0-1f51de52d3d0.png" width="800" title="Snipped: December 20, 2022" />
+
+* Click "**+ New application setting**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/208687847-124e1f5b-6aee-4709-b135-d313731fda82.png" width="800" title="Snipped: December 20, 2022" />
+
+EventHubConnectionAppSetting
+* Modify the following JSON {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values} and then replace default "local.settings.json" content
+Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME
+
+
+
+
 ![image](https://user-images.githubusercontent.com/44923999/208539853-fd408f56-6d71-45ff-833f-f1656d0f9824.png)
+
 
 
 ### Step 9: Confirm Success (published to Azure)
