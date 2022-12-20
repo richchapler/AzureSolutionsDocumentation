@@ -201,3 +201,9 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   <img src="https://user-images.githubusercontent.com/44923999/208690545-52a314ef-6999-4fde-964c-eba38768d100.png" width="800" title="Snipped: December 20, 2022" />
 
 * Navigate to the Event Hub and confirm Incoming Messages
+
+## Exercise 2: Mid-Stream Processing
+
+  <img src="https://user-images.githubusercontent.com/44923999/208710138-a6f25c3e-88a9-4195-aebf-54c8016d5b5c.png" width="800" title="Snipped: December 20, 2022" />
+
+Were we to ingest the source data directly {i.e., without mid-stream processing}, our best strategy would be to pull it in Data Format "TXT"
