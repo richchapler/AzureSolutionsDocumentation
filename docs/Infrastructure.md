@@ -28,7 +28,7 @@ I have tried to keep these instructions free of the obvious:
 
 > **Event Grid** >> [Event Subscription](Infrastructure_EventGrid_EventSubscription.md)
 
-> [**Event Hub**](Infrastructure_EventHub.md) >> Namespace :: Hub :: Consumer Group
+> [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/) >> Namespace :: Hub :: Consumer Group
 
 > [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
 
