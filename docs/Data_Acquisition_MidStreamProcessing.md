@@ -213,3 +213,93 @@ In this exercise, we will create a Function App with incoming Event Hub (source)
 ### Step 1: Lorem Ipsum
 
 * Open Visual Studio
+
+## Reference
+
+### Exercise1.cs
+
+```
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
+
+namespace MidStreamProcessing
+{
+    public class Exercise1
+    {
+        [FunctionName("Exercise1")]
+        public async Task Run(
+            [TimerTrigger("*/1 * * * *")] TimerInfo timer
+            , [EventHub(eventHubName:"rchaplereh-incoming", Connection="incoming")] IAsyncCollector<string> incoming
+            , ILogger log)
+        {
+            string output = "{\"rows\":[{\"id\":\"" + Guid.NewGuid() + "\"},{\"id\":\"" + Guid.NewGuid() + "\"},{\"id\":\"" + Guid.NewGuid() + "\"}]}";
+
+            log.LogInformation(output);
+
+            await incoming.AddAsync(output);
+        }
+    }
+}
+```
+
+### Exercise2.cs
+
+```
+using Azure.Messaging.EventHubs;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Threading.Tasks;
+
+namespace MidStreamProcessing
+{
+    public static class Exercise2
+    {
+        [FunctionName("Exercise2")]
+        public static async Task Run(
+            [EventHubTrigger(eventHubName: "rchaplereh-incoming", Connection = "incoming")] EventData[] incoming,
+            [EventHub(eventHubName: "rchaplereh-outgoing", Connection = "outgoing")] IAsyncCollector<string> outgoing,
+            ILogger log
+            )
+        {
+            foreach (EventData ed in incoming)
+            {
+                data d = JsonSerializer.Deserialize<data>(ed.EventBody);
+
+                foreach (row r in d.rows)
+                {
+                    log.LogInformation(JsonSerializer.Serialize(r));
+
+                    await outgoing.AddAsync(JsonSerializer.Serialize(r));
+                }
+            }
+            //await Task.Yield();
+        }
+    }
+
+    public class data { public row[] rows { get; set; } }
+    public class row { public string id { get; set; } }
+}
+```
+
+### local.settings.json
+
+```
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=rchaplerdlsg2;AccountKey=NwHoIWgMez00TOMPliXT7dYAqJC8EPUHDY59nLqQj2a2F3zrqYrqBOuAoxHywdZfqn69cANt7nU0+ASt9MBJdg==;EndpointSuffix=core.windows.net",
+
+    "incoming": "Endpoint=sb://rchaplerehn.servicebus.windows.net/;SharedAccessKeyName=rchaplerehsap-incoming;SharedAccessKey=uPyPY5g5IZrTl0qGoniFh4JmsF0ZIKes80z/0og0sys=;EntityPath=rchaplereh-incoming",
+
+    "outgoing": "Endpoint=sb://rchaplerehn.servicebus.windows.net/;SharedAccessKeyName=rchaplerehsap-outgoing;SharedAccessKey=ZdWfdxuJogWm7h8N9FJ3nr3wRe6sjPgnRaZlNc9Sgmg=;EntityPath=rchaplereh-outgoing",
+
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  }
+}
+```
