@@ -3,12 +3,14 @@
 ![image](https://user-images.githubusercontent.com/44923999/208464152-33914e21-5ae5-49fc-8a9a-dc7dddcf0339.png)
 
 ## Use Case
+
 This solution considers the following requirements:
 
 * "We stream millions of messages per hour from an Event Hub owned and controlled by another organization"
 * "Each message requires special, mid-stream handling {e.g., format translation, decompression, re-packing of JSON, etc.}"
 
 ## Prepare Infrastructure
+
 This solution requires the following resources:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
@@ -17,6 +19,7 @@ This solution requires the following resources:
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
 ## Exercise 1: Mock Untouchable Source
+
 In this exercise, we will use a Function App to mock the flow of messages coming from the source Event Hub.
 
 ### Step 1: Create Visual Studio Project
@@ -29,7 +32,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   <img src="https://user-images.githubusercontent.com/44923999/201696928-02adc19a-6cfe-45b9-8271-eb71da588f0d.png" width="800" title="Snipped: November 14, 2022" />
 
-* On the "**Create a new project**" page, search for and select "Azure Functions", then click **Next**
+* On the "**Create a new project**" page, search for and select "**Azure Functions**", then click **Next**
 
   <img src="https://user-images.githubusercontent.com/44923999/208470843-1698307e-c955-4c60-9173-798460baa275.png" width="800" title="Snipped: December 19, 2022" />
 
@@ -39,12 +42,12 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Complete the "**Additional information**" form, including:
 
-  | Prompt | Entry |
-  | ------ | ----- |
-  | **Functions worker** | Select "**.NET 6.0 (Long Term Support)**" |
-  | **Function** | Select "**Timer trigger**" |
-  | **Use Azurite...** | Checked |
-  | **Schedule** | Enter "*/1 * * * *" (the CRON expression for every one minute) |
+  | Prompt               | Entry                                                        |
+  | -------------------- | ------------------------------------------------------------ |
+  | **Functions worker** | Select "**.NET 6.0 (Long Term Support)**"                    |
+  | **Function**         | Select "**Timer trigger**"                                   |
+  | **Use Azurite...**   | Checked                                                      |
+  | **Schedule**         | Enter "***/1 * * * ***" (the CRON expression for every one minute) |
 
 * Click **Create**
 
@@ -66,7 +69,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   Logic Explained:
 
   * `async Task` ... provides for use of asynchronous calls
-  * `[EventHub...` ... provides for output to Event Hub (for later Data Explorer ingestion)
+  * `[EventHub...` ... provides for **output** to Event Hub
 
 ### Step 3: Install NuGet
 
@@ -79,7 +82,9 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   <img src="https://user-images.githubusercontent.com/44923999/208492799-a3c55385-e5f7-48be-843f-ee4a5efc65e9.png" width="800" title="Snipped: December 19, 2022" />
 
 * On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**"
+
 * On the resulting pop-out, check project **MidStreamProcessing** and then click **Install**
+
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
 ### Step 4: Update "Function1.cs"
@@ -92,9 +97,9 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   ```
   string output = "{\"rows\":[{\"id\":"+Guid.NewGuid()+ "},{\"id\":"+Guid.NewGuid()+"},{\"id\":"+Guid.NewGuid()+"}]}";
-
+  
   theLogger.LogInformation(output);
-
+  
   await theEventHub.AddAsync(output);
   ```
 
@@ -132,35 +137,35 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   <img src="https://user-images.githubusercontent.com/44923999/208505976-69e389b4-2850-44b5-8e17-8728d4bfc6dd.png" width="800" title="Snipped: December 19, 2022" />
 
-* Navigate to the Event Hub and confirm Incoming Messages
+* Navigate to the Event Hub and confirm **Incoming Messages**
 
 ### Step 7: Publish to Azure
 
+* Return to Visual Studio
+
+<img src="https://user-images.githubusercontent.com/44923999/208507075-b1675f1b-0645-4460-94bb-2a8f2c14dec9.png" width="800" title="Snipped: December 19, 2022" />
+
 * Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
-
-  <img src="https://user-images.githubusercontent.com/44923999/208507075-b1675f1b-0645-4460-94bb-2a8f2c14dec9.png" width="800" title="Snipped: December 19, 2022" />
-
-* On the **Publish** pop-up, **Target** tab, select "**Azure**" and then click **Next**
 
   <img src="https://user-images.githubusercontent.com/44923999/208524701-66855dbf-aa15-4166-823b-9a3ab7335312.png" width="600" title="Snipped: December 19, 2022" />
 
-* On the **Publish** pop-up, "**Specific target**" tab, select "**Azure Function App (Windows)**" and then click **Next**
+* On the **Publish** pop-up, **Target** tab, select "**Azure**" and then click **Next**
 
   <img src="https://user-images.githubusercontent.com/44923999/208525720-9123df26-a749-469e-89bc-47a22ad8e997.png" width="600" title="Snipped: December 19, 2022" />
 
-* On the **Publish** pop-up, "**Functions instance**" tab, select your subscription, expand to and select your Function App, then click **Finish**
+* On the **Publish** pop-up, "**Specific target**" tab, select "**Azure Function App (Windows)**" and then click **Next**
 
   <img src="https://user-images.githubusercontent.com/44923999/208526223-fab7fdcc-64a6-4e23-80d1-c3c20ae5c846.png" width="600" title="Snipped: December 19, 2022" />
 
-* On the **Publish** pop-up, "**Finish**" tab, monitor publish profile creation progress
+* On the **Publish** pop-up, "**Functions instance**" tab, select your subscription, expand to and select your Function App, then click **Finish**
 
   <img src="https://user-images.githubusercontent.com/44923999/208526895-da1b4106-0231-4c2b-8147-4cbc2468a64f.png" width="600" title="Snipped: December 19, 2022" />
 
-* Click **Close**
+* On the **Publish** pop-up, "**Finish**" tab, monitor publish profile creation progress and then click **Close**
 
 ### Step 8: Configure Application Settings
 
-* In the Azure Portal, navigate to the Function App, then **Configuration** in the **Settings** group of the left-hand navigation pane
+* Navigate to the Function App, then **Configuration** in the **Settings** group of the left-hand navigation pane
 
   <img src="https://user-images.githubusercontent.com/44923999/208687614-b4dbd19d-1691-4227-96b0-1f51de52d3d0.png" width="800" title="Snipped: December 20, 2022" />
 
@@ -170,10 +175,10 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Complete the resulting "**Add/Edit application setting**" pop-out, including:
 
-  | Prompt | Entry |
-  | ----- | ----- |
-  | **Name** | Enter "**EventHubConnectionAppSetting**" |
-  | **Value** | Modify and enter the following string: `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
+  | Prompt    | Entry                                                        |
+  | --------- | ------------------------------------------------------------ |
+  | **Name**  | Enter "**EventHubConnectionAppSetting**"                     |
+  | **Value** | Modify and enter the following string:<br> `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
 
 * Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
 
