@@ -11,7 +11,7 @@ This use case considers requirement statements like:
 This solution requires the following resources:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Event Hub**](Infrastructure_EventHub.md)
+* [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)
 * [**IoT Central**](Infrastructure_IoTCentral.md)
 
 ### Step 2: Create Device Template
