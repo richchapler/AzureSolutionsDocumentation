@@ -22,7 +22,7 @@ This solution will address requirements in three steps:
 This solution requires the following resources:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)... one namespace with two event hubs (incoming and outgoing)
+* [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)... one namespace with two event hubs (incoming and outgoing, with corresponding Shared Acces Policies)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
