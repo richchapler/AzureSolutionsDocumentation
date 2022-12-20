@@ -168,9 +168,13 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   <img src="https://user-images.githubusercontent.com/44923999/208687847-124e1f5b-6aee-4709-b135-d313731fda82.png" width="800" title="Snipped: December 20, 2022" />
 
-EventHubConnectionAppSetting
-* Modify the following JSON {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values} and then replace default "local.settings.json" content
-Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME
+* Complete the resulting "**Add/Edit application setting**" pop-out, including:
+
+  | Prompt | Entry |
+  | ----- | ----- |
+  | **Name** | Enter "**EventHubConnectionAppSetting**" |
+  | **Value** | Modify {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values} and enter the following string: `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
+
 
 
 
