@@ -77,7 +77,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Rename "Function1.cs" to "Exercise1.cs" and open
 
-  <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: December 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: December 21, 2022" />
 
 * Replace the default code `[FunctionName("Function1")]` with `[FunctionName("Exercise1")]`
 * Replace the default code `public void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
@@ -111,32 +111,34 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Open "local.settings.json"
 
-  <img src="https://user-images.githubusercontent.com/44923999/208500134-9dcf4c03-4226-4ccb-b5af-32af5588b886.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208928679-39b0a6f2-cc7d-4a87-b9a0-edac092dfc79.png" width="800" title="Snipped: December 21, 2022" />
 
-* Modify the following JSON {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values} and then replace default "local.settings.json" content
+* Modify the following JSON {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values}
 
   ```
   {
     "IsEncrypted": false,
     "Values": {
       "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=STORAGE_ACCOUNT_NAME;AccountKey=STORAGE_ACCOUNT_KEY;EndpointSuffix=core.windows.net",
-      "EventHubConnectionAppSetting": "Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME",
+
+      "incoming": "Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME",
+
       "FUNCTIONS_WORKER_RUNTIME": "dotnet"
     }
   }
   ```
 
+* Use modified JSON to replace default "local.settings.json" content
+
 ### Step 6: Confirm Success (local)
 
-* In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**"
+* In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**" and in the resulting Command window, monitor processing and confirm success
 
-  <img src="https://user-images.githubusercontent.com/44923999/208506217-b908f61d-d67d-4e54-8c94-14de07bf6685.png" width="800" title="Snipped: December 19, 2022" />
-
-* In the resulting Command window, monitor processing and confirm success
-
-  <img src="https://user-images.githubusercontent.com/44923999/208505976-69e389b4-2850-44b5-8e17-8728d4bfc6dd.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208929770-4bac3ce0-56ad-4f5c-a30b-09a5506be055.png" width="800" title="Snipped: December 21, 2022" />
 
 * Navigate to the Event Hub and confirm **Incoming Messages**
+
+  <img src="https://user-images.githubusercontent.com/44923999/208930352-4c6764b9-9221-4a03-ba8b-2478abd658ad.png" width="800" title="Snipped: December 21, 2022" />
 
 ### Step 7: Publish to Azure
 
