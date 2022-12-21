@@ -22,7 +22,7 @@ This solution will address requirements in three steps:
 This solution requires the following resources:
 
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)... one namespace with two event hubs (incoming and outgoing, with corresponding Shared Acces Policies and Consumer Groups)
+* [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)... one namespace with two event hubs (...incoming and ...outgoing, with corresponding Shared Acces Policies and Consumer Groups)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
@@ -42,36 +42,37 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * On the "**Create a new project**" page, search for and select "**Azure Functions**", then click **Next**
 
-  <img src="https://user-images.githubusercontent.com/44923999/208470843-1698307e-c955-4c60-9173-798460baa275.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208800336-d2a27a2b-b910-43b1-ac8f-bee628e8c8d9.png" width="800" title="Snipped: December 20, 2022" />
 
 * Complete the "**Configure your new project**" form and then click **Next**
 
-  <img src="https://user-images.githubusercontent.com/44923999/201709567-ea5c59be-014e-4f38-9781-582afd44edea.png" width="800" title="Snipped: November 14, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208800514-a7a5a588-e44b-44a8-943d-846d6ac56f98.png" width="800" title="Snipped: December 20, 2022" />
 
-* Complete the "**Additional information**" form, including:
+* Complete the "**Additional information**" form:
 
-  | Prompt               | Entry                                                        |
-  | -------------------- | ------------------------------------------------------------ |
-  | **Functions worker** | Select "**.NET 6.0 (Long Term Support)**"                    |
-  | **Function**         | Select "**Timer trigger**"                                   |
-  | **Use Azurite...**   | Checked                                                      |
-  | **Schedule**         | Enter "***/1 * * * ***" (the CRON expression for every one minute) |
+  | Prompt | Entry |
+  | ----- | ----- |
+  | **Functions worker** | Select "**.NET 6.0 (Long Term Support)**" |
+  | **Function** | Select "**Timer trigger**" |
+  | **Use Azurite...** | Checked |
+  | **Schedule** | Enter "0 */1 * * * *" (the CRON expression for every one minute) |
 
 * Click **Create**
 
-### Step 2: "Function1.cs" Logic, Update Method
+### Step 2: Update "Function1.cs"
 
-* Open "Function1.cs"
+* Visual Studio will create and open "Function1.cs"
+* Rename to "Exercise1.cs" and replace the default code `[FunctionName("Function1")]` with `[FunctionName("Exercise1")]`
 
-  <img src="https://user-images.githubusercontent.com/44923999/208492132-99ce75ef-18f5-416a-8852-c34d37d35a09.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208800908-f08210e5-05b5-434a-a13e-266673ce8fc9.png" width="800" title="Snipped: December 20, 2022" />
 
 * Replace the default code `public void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
 
   ```
   public async Task Run(
-    [TimerTrigger("*/1 * * * *")] TimerInfo theTimer,
-    [EventHub("dest", Connection = "EventHubConnectionAppSetting")] IAsyncCollector<string> theEventHub,
-    ILogger theLogger)
+    [TimerTrigger("*/1 * * * *")] TimerInfo timer
+    , [EventHub(eventHubName:"rchaplereh-incoming", Connection="incoming")] IAsyncCollector<string> incoming
+    , ILogger log)
   ```
 
   Logic Explained:
@@ -95,7 +96,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
-### Step 4: Update "Function1.cs"
+### Step 4: Update "Exercise1.cs"
 
 * Return to "Function1.cs"
 
