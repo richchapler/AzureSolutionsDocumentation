@@ -59,12 +59,26 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **Create**
 
-### Step 2: Update "Function1.cs"
+### Step 2: Install NuGet
+
+* In this step, we will install Nuget to pre-empt errors when we update the logic
+
+  <img src="https://user-images.githubusercontent.com/44923999/208803586-942b5d0f-b09d-4df3-a094-878f17ed8015.png" width="800" title="Snipped: December 20, 2022" />
+
+* Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/208803810-34581b76-62b6-4d28-b5cf-5fcde3e45516.png" width="800" title="Snipped: December 20, 2022" />
+
+* On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**"
+* On the resulting pop-out, check project **DataAcquisition_MidStreamProcessing** and then click "**Install**"
+* When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
+
+### Step 3: Update Logic
 
 * Visual Studio will create and open "Function1.cs"
 * Rename to "Exercise1.cs" and replace the default code `[FunctionName("Function1")]` with `[FunctionName("Exercise1")]`
 
-  <img src="https://user-images.githubusercontent.com/44923999/208800908-f08210e5-05b5-434a-a13e-266673ce8fc9.png" width="800" title="Snipped: December 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208802207-f0c85bc0-d700-4347-9c5b-a932b92202a3.png" width="800" title="Snipped: December 20, 2022" />
 
 * Replace the default code `public void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
 
@@ -80,21 +94,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   * `async Task` ... provides for use of asynchronous calls
   * `[EventHub...` ... provides for **output** to Event Hub
 
-### Step 3: Install NuGet
 
-* In the "**Error List**", you will notice errors like "The type or namespace 'EventHub' could not be found..."; these must be resolved by adding a NuGet Package
-
-  <img src="https://user-images.githubusercontent.com/44923999/208492582-5cc800c9-12f4-4ec6-9c6b-0431d56cfb4e.png" width="800" title="Snipped: December 19, 2022" />
-
-* Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
-
-  <img src="https://user-images.githubusercontent.com/44923999/208492799-a3c55385-e5f7-48be-843f-ee4a5efc65e9.png" width="800" title="Snipped: December 19, 2022" />
-
-* On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Azure.WebJobs.Extensions.EventHubs**"
-
-* On the resulting pop-out, check project **MidStreamProcessing** and then click **Install**
-
-* When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
 ### Step 4: Update "Exercise1.cs"
 
