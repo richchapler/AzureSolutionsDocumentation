@@ -144,7 +144,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Return to Visual Studio
 
-<img src="https://user-images.githubusercontent.com/44923999/208507075-b1675f1b-0645-4460-94bb-2a8f2c14dec9.png" width="800" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208931362-0c5fa72f-2451-4ad0-ac9d-6762d0f818b8.png" width="800" title="Snipped: December 19, 2022" />
 
 * Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
 
@@ -160,39 +160,40 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * On the **Publish** pop-up, "**Functions instance**" tab, select your subscription, expand to and select your Function App, then click **Finish**
 
-  <img src="https://user-images.githubusercontent.com/44923999/208526895-da1b4106-0231-4c2b-8147-4cbc2468a64f.png" width="600" title="Snipped: December 19, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208931759-d1d257bc-e16e-4d00-a3d9-b8daee52d2fd.png" width="600" title="Snipped: December 21, 2022" />
 
 * On the **Publish** pop-up, "**Finish**" tab, monitor publish profile creation progress and then click **Close**
+
+  <img src="https://user-images.githubusercontent.com/44923999/208932581-fb373a70-0dcb-4da0-a8af-d9942ac010c1.png" width="800" title="Snipped: December 21, 2022" />
+
+* On the "...DataAcquisition_MidStreamProcessing.csproj: Publish" page, click **Publish**
 
 ### Step 8: Configure Application Settings
 
 * Navigate to the Function App, then **Configuration** in the **Settings** group of the left-hand navigation pane
 
-  <img src="https://user-images.githubusercontent.com/44923999/208687614-b4dbd19d-1691-4227-96b0-1f51de52d3d0.png" width="800" title="Snipped: December 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208932948-df391957-b2b9-4865-8b07-9a5b6a7d47d1.png" width="800" title="Snipped: December 21, 2022" />
 
 * Click "**+ New application setting**"
 
-  <img src="https://user-images.githubusercontent.com/44923999/208687847-124e1f5b-6aee-4709-b135-d313731fda82.png" width="800" title="Snipped: December 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208933467-f54ae533-de52-403d-a897-858669261cb9.png" width="800" title="Snipped: December 21, 2022" />
 
 * Complete the resulting "**Add/Edit application setting**" pop-out, including:
 
   | Prompt    | Entry                                                        |
   | --------- | ------------------------------------------------------------ |
-  | **Name**  | Enter "**EventHubConnectionAppSetting**"                     |
+  | **Name**  | Enter "**incoming**"                     |
   | **Value** | Modify and enter the following string:<br> `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
 
 * Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
 
 ### Step 9: Confirm Success (published to Azure)
 
-* Navigate to Function1, then **Monitor** in the **Developer** group of the left-hand navigation pane
+* Navigate to function Exercise1, then **Monitor** in the **Developer** group of the left-hand navigation pane
 
-  <img src="https://user-images.githubusercontent.com/44923999/208690334-19be532d-75d2-4d23-b98f-eaf144bbb56f.png" width="800" title="Snipped: December 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208934008-f664ffb1-e21e-4620-a695-978f452cb061.png" width="800" title="Snipped: December 21, 2022" />
 
 * Confirm **Success** messages
-
-  <img src="https://user-images.githubusercontent.com/44923999/208690545-52a314ef-6999-4fde-964c-eba38768d100.png" width="800" title="Snipped: December 20, 2022" />
-
 * Navigate to the Event Hub and confirm Incoming Messages
 
 ## Exercise 2: Process Mid-Stream
