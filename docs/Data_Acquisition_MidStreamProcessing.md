@@ -75,11 +75,11 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ### Step 3: Update Logic
 
-* Visual Studio will create and open "Function1.cs"
-* Rename to "Exercise1.cs" and replace the default code `[FunctionName("Function1")]` with `[FunctionName("Exercise1")]`
+* Rename "Function1.cs" to "Exercise1.cs" and open
 
-  <img src="https://user-images.githubusercontent.com/44923999/208802207-f0c85bc0-d700-4347-9c5b-a932b92202a3.png" width="800" title="Snipped: December 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: December 20, 2022" />
 
+* Replace the default code `[FunctionName("Function1")]` with `[FunctionName("Exercise1")]`
 * Replace the default code `public void Run([TimerTrigger("*/1 * * * *")]TimerInfo myTimer, TraceWriter log)` with:
 
   ```
@@ -94,27 +94,17 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   * `async Task` ... provides for use of asynchronous calls
   * `[EventHub...` ... provides for **output** to Event Hub
 
-
-
-### Step 4: Update "Exercise1.cs"
-
-* Return to "Function1.cs"
-
-  <img src="https://user-images.githubusercontent.com/44923999/208499718-fb7658ab-5dff-4d8d-9384-752f62a120f7.png" width="800" title="Snipped: December 19, 2022" />
-
 * Replace the default code `log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");` with:
 
   ```
-  string output = "{\"rows\":[{\"id\":"+Guid.NewGuid()+ "},{\"id\":"+Guid.NewGuid()+"},{\"id\":"+Guid.NewGuid()+"}]}";
-  
-  theLogger.LogInformation(output);
-  
-  await theEventHub.AddAsync(output);
+  string json = "{\"rows\":[{\"id\":\"" + Guid.NewGuid() + "\"},{\"id\":\"" + Guid.NewGuid() + "\"},{\"id\":\"" + Guid.NewGuid() + "\"}]}";
+  log.LogInformation(json);
+  await incoming.AddAsync(json);
   ```
 
   Logic Explained:
 
-  * `string output = ...` generates a nested JSON string like `{"rows":[{"id":5740c202-3ee8-43c0-8561-01a33506cb6f},{"id":78ec5ee8-95f1-4189-85db-d14a53916566},{"id":8fc61f2f-db87-4424-8860-d553983f908f}]}`
+  * `string output = ...` generates a nested JSON string like `{"rows":[{"id":"5740c202-3ee8-43c0-8561-01a33506cb6f"},...]}`
   * `await theEventHub.AddAsync(output);` sends the JSON string to the Event Hub
 
 ### Step 5: Update "local.settings.json"
