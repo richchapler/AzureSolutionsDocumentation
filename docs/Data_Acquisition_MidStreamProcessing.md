@@ -231,15 +231,15 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
 * Replace the default `using` code block with:
 
-```
-using Azure.Messaging.EventHubs;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using System.Text.Json;
-using System.Threading.Tasks;
-```
+  ```
+  using Azure.Messaging.EventHubs;
+  using Microsoft.Azure.WebJobs;
+  using Microsoft.Extensions.Logging;
+  using System.Text.Json;
+  using System.Threading.Tasks;
+  ```
 
-* Replace the default code `public static async Task Run([EventHubTrigger("rchaplereh-incoming", Connection = "incoming")] EventData[] events, ILogger log)` with:
+* Replace the default code `public static async Task Run(...` with:
 
   ```
   public static async Task Run(
