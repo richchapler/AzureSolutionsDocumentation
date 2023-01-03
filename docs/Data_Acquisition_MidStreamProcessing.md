@@ -305,6 +305,6 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
   _Notice that both Exercise1 and Exercise are running_
 
-* Navigate to the Event Hub and confirm **Incoming Messages**
+* Navigate to the Event Hub and confirm both incoming and outgoing messages
 
-  <img src="https://user-images.githubusercontent.com/44923999/208930352-4c6764b9-9221-4a03-ba8b-2478abd658ad.png" width="800" title="Snipped: December 21, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/210447013-9338a4b7-d04f-4241-b386-828db0f3a38a.png" width="800" title="Snipped: January 3, 2023" />
