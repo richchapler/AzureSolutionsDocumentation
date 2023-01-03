@@ -301,7 +301,7 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
 * In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**" and in the resulting Command window, monitor processing and confirm success
 
-  <img src="https://user-images.githubusercontent.com/44923999/208929770-4bac3ce0-56ad-4f5c-a30b-09a5506be055.png" width="800" title="Snipped: December 21, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/210446414-773ec9a3-f9f0-416f-8f51-6ff0a785ae83.png" width="800" title="Snipped: January 3, 2023" />
 
 * Navigate to the Event Hub and confirm **Incoming Messages**
 
