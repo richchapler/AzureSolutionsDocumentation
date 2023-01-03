@@ -229,7 +229,11 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
 ### Step 2: Update Logic
 
-* Replace the default `using` code block with:
+* Open "Exercise.cs"
+  
+  <img src="https://user-images.githubusercontent.com/44923999/210444860-9b64264d-ceee-4231-979d-5180c5d2a4f2.png" width="800" title="Snipped: January 3, 2023" />
+
+* Replace default code with:
 
   ```
   using Azure.Messaging.EventHubs;
@@ -237,26 +241,37 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
   using Microsoft.Extensions.Logging;
   using System.Text.Json;
   using System.Threading.Tasks;
+
+  namespace DataAcquisition_MidStreamProcessing
+  {
+    public static class Exercise2
+    {
+      [FunctionName("Exercise2")]
+      public static async Task Run(
+        [EventHubTrigger(eventHubName: "rchaplereh-incoming", Connection = "incoming")] EventData[] incoming,
+        [EventHub(eventHubName: "rchaplereh-outgoing", Connection = "outgoing")] IAsyncCollector<string> outgoing,
+        ILogger log
+        )
+      {
+        foreach (EventData ed in incoming)
+        {
+          data d = JsonSerializer.Deserialize<data>(ed.EventBody);
+
+          foreach (row r in d.rows)
+          {
+            log.LogInformation(JsonSerializer.Serialize(r));
+
+            await outgoing.AddAsync(JsonSerializer.Serialize(r));
+          }
+        }
+      }
+    }
+
+    public class data { public row[] rows { get; set; } }
+    public class row { public string id { get; set; } }
+  }
   ```
-
-* Replace the default code `public static async Task Run(...` with:
-
-  ```
-  public static async Task Run(
-    [EventHubTrigger(eventHubName: "rchaplereh-incoming", Connection = "incoming")] EventData[] incoming,
-    [EventHub(eventHubName: "rchaplereh-outgoing", Connection = "outgoing")] IAsyncCollector<string> outgoing,
-    ILogger log
-    )
-  ```
-
-  Logic Explained:
-
-  * `[EventHubTrigger(...` ... provides for **input** from Event Hub
-  * `[EventHub(...` ... provides for **output** to Event Hub
-
-
-
-
+  
 ## Reference
 
 ### Exercise1.cs
@@ -284,49 +299,6 @@ namespace MidStreamProcessing
             await incoming.AddAsync(output);
         }
     }
-}
-```
-
-### Exercise2.cs
-
-```
-using Azure.Messaging.EventHubs;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-
-namespace MidStreamProcessing
-{
-    public static class Exercise2
-    {
-        [FunctionName("Exercise2")]
-        public static async Task Run(
-            [EventHubTrigger(eventHubName: "rchaplereh-incoming", Connection = "incoming")] EventData[] incoming,
-            [EventHub(eventHubName: "rchaplereh-outgoing", Connection = "outgoing")] IAsyncCollector<string> outgoing,
-            ILogger log
-            )
-        {
-            foreach (EventData ed in incoming)
-            {
-                data d = JsonSerializer.Deserialize<data>(ed.EventBody);
-
-                foreach (row r in d.rows)
-                {
-                    log.LogInformation(JsonSerializer.Serialize(r));
-
-                    await outgoing.AddAsync(JsonSerializer.Serialize(r));
-                }
-            }
-            //await Task.Yield();
-        }
-    }
-
-    public class data { public row[] rows { get; set; } }
-    public class row { public string id { get; set; } }
 }
 ```
 
