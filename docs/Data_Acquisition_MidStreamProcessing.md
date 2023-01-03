@@ -308,3 +308,8 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 * Navigate to the Event Hub and confirm both incoming and outgoing messages
 
   <img src="https://user-images.githubusercontent.com/44923999/210447013-9338a4b7-d04f-4241-b386-828db0f3a38a.png" width="800" title="Snipped: January 3, 2023" />
+
+### Step 5: Publish to Azure
+### Step 6: Configure Application Settings
+### Step 7: Confirm Success (published to Azure)
+### Step 8: Ingest Data
