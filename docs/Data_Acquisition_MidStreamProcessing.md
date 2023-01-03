@@ -303,6 +303,8 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
   <img src="https://user-images.githubusercontent.com/44923999/210446414-773ec9a3-f9f0-416f-8f51-6ff0a785ae83.png" width="800" title="Snipped: January 3, 2023" />
 
+  _Notice that both Exercise1 and Exercise are running_
+
 * Navigate to the Event Hub and confirm **Incoming Messages**
 
   <img src="https://user-images.githubusercontent.com/44923999/208930352-4c6764b9-9221-4a03-ba8b-2478abd658ad.png" width="800" title="Snipped: December 21, 2022" />
