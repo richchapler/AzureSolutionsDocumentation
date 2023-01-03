@@ -218,12 +218,14 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
   <img src="https://user-images.githubusercontent.com/44923999/210417898-465add07-8fe2-4760-b504-03caf5a061ff.png" width="600" title="Snipped: January 3, 2023" />
 
-* Complete the resulting "**New Azure Function - Exercise2**" pop-up form, select "Event Hub trigger" and complete enter the following values:
+* Complete the resulting "**New Azure Function...**" pop-up form, select "Event Hub trigger" and complete enter the following values:
 
   | Prompt | Entry |
   | ----- | ----- |
   | **Connection string setting name** | Enter "**incoming**" |
   | **Event Hub name** | Modify and enter "**EVENTHUB_NAME**" |
+
+* Click **Add**
 
 ## Reference
 
