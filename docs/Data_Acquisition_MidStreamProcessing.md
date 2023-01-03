@@ -198,11 +198,11 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 ## Exercise 2: Process Mid-Stream
 
-  <img src="https://user-images.githubusercontent.com/44923999/208710138-a6f25c3e-88a9-4195-aebf-54c8016d5b5c.png" width="800" title="Snipped: December 20, 2022" />
+<img src="https://user-images.githubusercontent.com/44923999/208710138-a6f25c3e-88a9-4195-aebf-54c8016d5b5c.png" width="800" title="Snipped: December 20, 2022" />
 
-Were we to ingest the source data directly {i.e., without mid-stream processing}, our best strategy would be to pull it in Data Format "TXT", and then convert to dynamic / parse with KQL in Data Explorer.
+Were we to ingest the source data directly {i.e., without mid-stream processing}, our best strategy would be to pull it in Data Format "TXT", and then convert to dynamic / parse with KQL in Data Explorer. This, of course, implies that data is accessible at the level described in our simple first exercise. Mid-stream processing addresses far more than JSON parsing; for example: encoding, compression, custom formats, etc.
 
-In this exercise, we will create a Function App with incoming Event Hub (source), processing logic {e.g. unpack JSON} and outgoing Event Hub (destination)
+In Exercise 2, we will create a Function App with incoming Event Hub (source), processing logic {e.g. unpack JSON} and outgoing Event Hub (destination).
 
 ### Step 1: Lorem Ipsum
 
