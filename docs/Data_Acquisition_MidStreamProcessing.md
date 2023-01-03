@@ -251,7 +251,8 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
   Logic Explained:
 
-  * `[EventHub...` ... provides for **output** to Event Hub
+  * `[EventHubTrigger(...` ... provides for **input** from Event Hub
+  * `[EventHub(...` ... provides for **output** to Event Hub
 
 
 
