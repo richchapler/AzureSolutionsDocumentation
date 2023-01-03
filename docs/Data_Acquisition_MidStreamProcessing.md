@@ -180,9 +180,9 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Complete the resulting "**Add/Edit application setting**" pop-out, including:
 
-  | Prompt    | Entry                                                        |
+  | Prompt | Entry |
   | --------- | ------------------------------------------------------------ |
-  | **Name**  | Enter "**incoming**"                     |
+  | **Name** | Enter "**incoming**" |
   | **Value** | Modify and enter the following string:<br> `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
 
 * Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
@@ -204,9 +204,26 @@ Were we to ingest the source data directly {i.e., without mid-stream processing}
 
 In Exercise 2, we will create a Function App with incoming Event Hub (source), processing logic {e.g. unpack JSON} and outgoing Event Hub (destination).
 
-### Step 1: Lorem Ipsum
+### Step 1: Add New Azure Function
 
 * Open Visual Studio
+
+  <img src="https://user-images.githubusercontent.com/44923999/210417129-33cdc7bf-7d56-4ab3-b261-bd959bdae5da.png" width="800" title="Snipped: January 3, 2023" />
+
+* In Solution Explorer, right-click on the project, then **Add** >> "**New Azure Function**" on the resulting drop-down menus
+
+  <img src="https://user-images.githubusercontent.com/44923999/210417520-b45a481a-fdaf-4fb5-bdb1-c1ba31763288.png" width="600" title="Snipped: January 3, 2023" />
+
+* Complete the "**Add New Item...**" pop-up form, and then click **Add**
+
+  <img src="https://user-images.githubusercontent.com/44923999/210417898-465add07-8fe2-4760-b504-03caf5a061ff.png" width="600" title="Snipped: January 3, 2023" />
+
+* Complete the resulting "**New Azure Function - Exercise2**" pop-up form, select "Event Hub trigger" and complete enter the following values:
+
+  | Prompt | Entry |
+  | ----- | ----- |
+  | **Connection string setting name** | Enter "**incoming**" |
+  | **Event Hub name** | Modify and enter "**EVENTHUB_NAME**" |
 
 ## Reference
 
