@@ -107,7 +107,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
   * `string output = ...` generates a nested JSON string like `{"rows":[{"id":"5740c202-3ee8-43c0-8561-01a33506cb6f"},...]}`
   * `await theEventHub.AddAsync(output);` sends the JSON string to the Event Hub
 
-### Step 5: Update "local.settings.json"
+### Step 4: Update "local.settings.json"
 
 * Open "local.settings.json"
 
@@ -130,7 +130,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Use modified JSON to replace default "local.settings.json" content
 
-### Step 6: Confirm Success (local)
+### Step 5: Confirm Success (local)
 
 * In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**" and in the resulting Command window, monitor processing and confirm success
 
@@ -140,7 +140,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   <img src="https://user-images.githubusercontent.com/44923999/208930352-4c6764b9-9221-4a03-ba8b-2478abd658ad.png" width="800" title="Snipped: December 21, 2022" />
 
-### Step 7: Publish to Azure
+### Step 6: Publish to Azure
 
 * Return to Visual Studio
 
@@ -168,7 +168,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * On the "...DataAcquisition_MidStreamProcessing.csproj: Publish" page, click **Publish**
 
-### Step 8: Configure Application Settings
+### Step 7: Configure Application Settings
 
 * Navigate to the Function App, then **Configuration** in the **Settings** group of the left-hand navigation pane
 
@@ -187,7 +187,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
 
-### Step 9: Confirm Success (published to Azure)
+### Step 8: Confirm Success (published to Azure)
 
 * Navigate to function Exercise1, then **Monitor** in the **Developer** group of the left-hand navigation pane
 
@@ -271,50 +271,38 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
     public class row { public string id { get; set; } }
   }
   ```
-  
-## Reference
 
-### Exercise1.cs
+### Step 3: Update "local.settings.json"
 
-```
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+* Open "local.settings.json"
 
-namespace MidStreamProcessing
-{
-    public class Exercise1
-    {
-        [FunctionName("Exercise1")]
-        public async Task Run(
-            [TimerTrigger("*/1 * * * *")] TimerInfo timer
-            , [EventHub(eventHubName:"rchaplereh-incoming", Connection="incoming")] IAsyncCollector<string> incoming
-            , ILogger log)
-        {
-            string output = "{\"rows\":[{\"id\":\"" + Guid.NewGuid() + "\"},{\"id\":\"" + Guid.NewGuid() + "\"},{\"id\":\"" + Guid.NewGuid() + "\"}]}";
+  <img src="https://user-images.githubusercontent.com/44923999/210446109-49a0c8ba-a07f-4f36-aaec-a9cd92d58cc5.png" width="800" title="Snipped: January 3, 2023" />
 
-            log.LogInformation(output);
+* Modify the following JSON {e.g., replace placeholders like STORAGE_ACCOUNT_NAME with real values}
 
-            await incoming.AddAsync(output);
-        }
+  ```
+  {
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=STORAGE_ACCOUNT_NAME;AccountKey=STORAGE_ACCOUNT_KEY;EndpointSuffix=core.windows.net",
+
+      "incoming": "Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME",
+
+      "outgoing": "Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME",
+
+      "FUNCTIONS_WORKER_RUNTIME": "dotnet"
     }
-}
-```
-
-### local.settings.json
-
-```
-{
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=rchaplerdlsg2;AccountKey=NwHoIWgMez00TOMPliXT7dYAqJC8EPUHDY59nLqQj2a2F3zrqYrqBOuAoxHywdZfqn69cANt7nU0+ASt9MBJdg==;EndpointSuffix=core.windows.net",
-
-    "incoming": "Endpoint=sb://rchaplerehn.servicebus.windows.net/;SharedAccessKeyName=rchaplerehsap-incoming;SharedAccessKey=uPyPY5g5IZrTl0qGoniFh4JmsF0ZIKes80z/0og0sys=;EntityPath=rchaplereh-incoming",
-
-    "outgoing": "Endpoint=sb://rchaplerehn.servicebus.windows.net/;SharedAccessKeyName=rchaplerehsap-outgoing;SharedAccessKey=ZdWfdxuJogWm7h8N9FJ3nr3wRe6sjPgnRaZlNc9Sgmg=;EntityPath=rchaplereh-outgoing",
-
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
   }
-}
-```
+  ```
+
+* Use modified JSON to replace default "local.settings.json" content
+
+### Step 4: Confirm Success (local)
+
+* In the Visual Studio menu-bar, click **Debug** >> "**Start Debugging**" and in the resulting Command window, monitor processing and confirm success
+
+  <img src="https://user-images.githubusercontent.com/44923999/208929770-4bac3ce0-56ad-4f5c-a30b-09a5506be055.png" width="800" title="Snipped: December 21, 2022" />
+
+* Navigate to the Event Hub and confirm **Incoming Messages**
+
+  <img src="https://user-images.githubusercontent.com/44923999/208930352-4c6764b9-9221-4a03-ba8b-2478abd658ad.png" width="800" title="Snipped: December 21, 2022" />
