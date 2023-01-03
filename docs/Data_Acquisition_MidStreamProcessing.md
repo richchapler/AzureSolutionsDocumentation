@@ -214,11 +214,11 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
   <img src="https://user-images.githubusercontent.com/44923999/210417520-b45a481a-fdaf-4fb5-bdb1-c1ba31763288.png" width="600" title="Snipped: January 3, 2023" />
 
-* Complete the "**Add New Item...**" pop-up form, and then click **Add**
+* On the "**Add New Item...**" pop-up form, enter a **Name** and then click **Add**
 
   <img src="https://user-images.githubusercontent.com/44923999/210417898-465add07-8fe2-4760-b504-03caf5a061ff.png" width="600" title="Snipped: January 3, 2023" />
 
-* Complete the resulting "**New Azure Function...**" pop-up form, select "Event Hub trigger" and complete enter the following values:
+* Complete the resulting "**New Azure Function...**" pop-up form, select "Event Hub trigger" and enter the following values:
 
   | Prompt | Entry |
   | ----- | ----- |
@@ -226,6 +226,35 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
   | **Event Hub name** | Modify and enter "**EVENTHUB_NAME**" |
 
 * Click **Add**
+
+### Step 2: Update Logic
+
+* Replace the default `using` code block with:
+
+```
+using Azure.Messaging.EventHubs;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using System.Threading.Tasks;
+```
+
+* Replace the default code `public static async Task Run([EventHubTrigger("rchaplereh-incoming", Connection = "incoming")] EventData[] events, ILogger log)` with:
+
+  ```
+  public static async Task Run(
+    [EventHubTrigger(eventHubName: "rchaplereh-incoming", Connection = "incoming")] EventData[] incoming,
+    [EventHub(eventHubName: "rchaplereh-outgoing", Connection = "outgoing")] IAsyncCollector<string> outgoing,
+    ILogger log
+    )
+  ```
+
+  Logic Explained:
+
+  * `[EventHub...` ... provides for **output** to Event Hub
+
+
+
 
 ## Reference
 
