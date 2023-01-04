@@ -166,7 +166,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   <img src="https://user-images.githubusercontent.com/44923999/208932581-fb373a70-0dcb-4da0-a8af-d9942ac010c1.png" width="800" title="Snipped: December 21, 2022" />
 
-* On the "...DataAcquisition_MidStreamProcessing.csproj: Publish" page, click **Publish**
+* On the "...Publish" page, click **Publish**
 
 ### Step 7: Configure Application Settings
 
@@ -319,7 +319,7 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
   <img src="https://user-images.githubusercontent.com/44923999/210577539-91370965-6fd3-44b4-812b-2bcba51bb6ef.png" width="800" title="Snipped: January 4, 2023" />
 
-* On the "...DataAcquisition_MidStreamProcessing.csproj: Publish" page, click **Publish**
+* On the "...Publish" page, click **Publish**
 
 ### Step 6: Configure Application Settings
 ### Step 7: Confirm Success (published to Azure)
