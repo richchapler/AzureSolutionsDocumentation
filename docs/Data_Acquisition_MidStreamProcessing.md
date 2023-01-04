@@ -371,3 +371,4 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
   <img src="https://user-images.githubusercontent.com/44923999/210593527-d6471456-e4e9-4bcb-8033-e2283e3f13a8.png" width="800" title="Snipped: January 4, 2023" />
 
+* Confirm success and then click **Close**
