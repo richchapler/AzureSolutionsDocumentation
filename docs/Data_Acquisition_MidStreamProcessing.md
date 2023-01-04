@@ -334,7 +334,7 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 * Complete the resulting "**Add/Edit application setting**" pop-out, including:
 
   | Prompt | Entry |
-  | --------- | ------------------------------------------------------------ |
+  | ----- | ----- |
   | **Name** | Enter "**outgoing**" |
   | **Value** | Modify and enter the following string:<br> `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
 
@@ -353,3 +353,21 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
   <img src="https://user-images.githubusercontent.com/44923999/210590504-6bef6af9-cfc8-4c09-b0a8-21eaf3d11133.png" width="800" title="Snipped: January 4, 2023" />
 
 * Click **Ingest**
+
+  <img src="https://user-images.githubusercontent.com/44923999/210591461-d9128620-8715-4c7c-bad6-276321cf5593.png" width="800" title="Snipped: January 4, 2023" />
+
+* Complete the resulting "**Ingest data**" >> "**Destination**" form, including an appropriate name for the destination table
+* Click "**Next: Source**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/210592005-3623ffb8-78b0-4242-ac91-945ebf2035a6.png" width="800" title="Snipped: January 4, 2023" />
+
+* Complete the resulting "**Ingest data**" >> "**Source**" form, including those values appropriate to the outgoing Event Hub
+* Click "**Next: Schema**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/210593077-99e8633d-3fdf-4521-bfc0-2eb01d4a85e1.png" width="800" title="Snipped: January 4, 2023" />
+
+* Complete the resulting "**Ingest data**" >> "**Schema**" form, including selection of data format **JSON**
+* Click "**Next: Start ingestion**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/210593527-d6471456-e4e9-4bcb-8033-e2283e3f13a8.png" width="800" title="Snipped: January 4, 2023" />
+
