@@ -146,7 +146,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
   <img src="https://user-images.githubusercontent.com/44923999/208931362-0c5fa72f-2451-4ad0-ac9d-6762d0f818b8.png" width="800" title="Snipped: December 19, 2022" />
 
-* Right-click on the MidStreamProcessing project and select Publish from the resulting drop-down menu
+* Right-click on the project and select Publish from the resulting drop-down menu
 
   <img src="https://user-images.githubusercontent.com/44923999/208524701-66855dbf-aa15-4166-823b-9a3ab7335312.png" width="600" title="Snipped: December 19, 2022" />
 
@@ -310,6 +310,17 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
   <img src="https://user-images.githubusercontent.com/44923999/210447013-9338a4b7-d04f-4241-b386-828db0f3a38a.png" width="800" title="Snipped: January 3, 2023" />
 
 ### Step 5: Publish to Azure
+
+* Return to Visual Studio
+
+  <img src="https://user-images.githubusercontent.com/44923999/208931362-0c5fa72f-2451-4ad0-ac9d-6762d0f818b8.png" width="800" title="Snipped: December 19, 2022" />
+
+* Right-click on the project and select Publish from the resulting drop-down menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/210577539-91370965-6fd3-44b4-812b-2bcba51bb6ef.png" width="800" title="Snipped: January 4, 2023" />
+
+* On the "...DataAcquisition_MidStreamProcessing.csproj: Publish" page, click **Publish**
+
 ### Step 6: Configure Application Settings
 ### Step 7: Confirm Success (published to Azure)
 ### Step 8: Ingest Data
