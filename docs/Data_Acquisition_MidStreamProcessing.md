@@ -347,3 +347,9 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 * Navigate to the Event Hub and confirm Incoming Messages
 
 ### Step 8: Ingest Data
+
+* Navigate to https://dataexplorer.azure.com/home, then click **Data** in the left-hand navigation pane
+
+  <img src="https://user-images.githubusercontent.com/44923999/210590504-6bef6af9-cfc8-4c09-b0a8-21eaf3d11133.png" width="800" title="Snipped: January 4, 2023" />
+
+* Click **Ingest**
