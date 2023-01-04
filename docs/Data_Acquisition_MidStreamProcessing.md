@@ -341,4 +341,12 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 * Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
 
 ### Step 7: Confirm Success (Azure)
+
+* Navigate to function Exercise1, then **Monitor** in the **Developer** group of the left-hand navigation pane
+
+  <img src="https://user-images.githubusercontent.com/44923999/208934008-f664ffb1-e21e-4620-a695-978f452cb061.png" width="800" title="Snipped: December 21, 2022" />
+
+* Confirm **Success** messages
+* Navigate to the Event Hub and confirm Incoming Messages
+
 ### Step 8: Ingest Data
