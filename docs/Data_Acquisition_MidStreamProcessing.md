@@ -187,7 +187,7 @@ In this exercise, we will use a Function App to mock the flow of messages coming
 
 * Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
 
-### Step 8: Confirm Success (published to Azure)
+### Step 8: Confirm Success (Azure)
 
 * Navigate to function Exercise1, then **Monitor** in the **Developer** group of the left-hand navigation pane
 
@@ -340,5 +340,5 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 
 * Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
 
-### Step 7: Confirm Success (published to Azure)
+### Step 7: Confirm Success (Azure)
 ### Step 8: Ingest Data
