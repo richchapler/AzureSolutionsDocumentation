@@ -322,5 +322,23 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 * On the "...Publish" page, click **Publish**
 
 ### Step 6: Configure Application Settings
+
+* Navigate to the Function App, then **Configuration** in the **Settings** group of the left-hand navigation pane
+
+  <img src="https://user-images.githubusercontent.com/44923999/208932948-df391957-b2b9-4865-8b07-9a5b6a7d47d1.png" width="800" title="Snipped: December 21, 2022" />
+
+* Click "**+ New application setting**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/210579151-63d36d51-1a8d-41d7-824a-a321e9eeb387.png" width="800" title="Snipped: January 4, 2023" />
+
+* Complete the resulting "**Add/Edit application setting**" pop-out, including:
+
+  | Prompt | Entry |
+  | --------- | ------------------------------------------------------------ |
+  | **Name** | Enter "**outgoing**" |
+  | **Value** | Modify and enter the following string:<br> `Endpoint=sb://EVENTHUB_NAMESPACE_NAME.servicebus.windows.net/;SharedAccessKeyName=EVENTHUB_SHAREDACCESSPOLICY_NAME;SharedAccessKey=EVENTHUB_SHAREDACCESSPOLICY_KEY;EntityPath=EVENTHUB_NAME` |
+
+* Click **OK** to close the pop-out and then **Save** on the **Configuration** page, "**Application setting**" tab
+
 ### Step 7: Confirm Success (published to Azure)
 ### Step 8: Ingest Data
