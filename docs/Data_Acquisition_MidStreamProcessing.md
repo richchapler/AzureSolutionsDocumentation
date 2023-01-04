@@ -346,7 +346,9 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
 * Confirm **Success** messages
 * Navigate to the Event Hub and confirm Incoming Messages
 
-### Step 8: Ingest Data
+## Ingest Data
+
+In this quick exercise, we will ingest data from the outgoing Event Hub into Data Explorer.
 
 * Navigate to https://dataexplorer.azure.com/home, then click **Data** in the left-hand navigation pane
 
@@ -372,3 +374,7 @@ In Exercise 2, we will create a Function App with incoming Event Hub (source), p
   <img src="https://user-images.githubusercontent.com/44923999/210593527-d6471456-e4e9-4bcb-8033-e2283e3f13a8.png" width="800" title="Snipped: January 4, 2023" />
 
 * Confirm success and then click **Close**
+
+  <img src="https://user-images.githubusercontent.com/44923999/210594399-6c3ab17b-003d-4eaa-8272-0a916b8a5519.png" width="800" title="Snipped: January 4, 2023" />
+
+* Navigate to Query and run KQL {e.g., `t | take 5`} to confirm successful ingestion of data
