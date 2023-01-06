@@ -6,8 +6,8 @@ Key Vault migration is not a simple topic, nor is there a point-and-click, "Expl
 
 This documentation details step-by-step instructions for some of the options.
 
-| Option | Pros | Cons |
-| ----- | ----- | ----- |
+| Option           | Pros       | Cons     |
+| ---------------- | ---------- | -------- |
 | **Azure Portal** | - Familiar | - Manual |
 
 **This list of Pros and Cons is based on my research, experience and perception ONLY.**
@@ -24,15 +24,19 @@ In addition to the items listed at the beginning of this documentation, this sol
 ## Exercise 1: Copy Secret using Azure Portal
 
 ### Use Case
+
 * Our **Main** "key ring" (Subscription 1, Key Vault 1) includes all secrets for our group
 * We want to copy Secret X from the **Main** "key ring" to a **Branch** "key ring" (Subscription 2, Key Vault 2)
 
-Questions:
-1) Why not just give the new user / group access to the secret in the **Main** key ring?
-2) Why do we want duplicate copies of a given secret? 
+*Questions for Nathan:*
+
+1) *Why not just give the new user / group access to the secret in the **Main** key ring?*
+2) *Why do we want duplicate copies of a given secret?* 
 
 ### Proposed Solution
+
 In this exercise, we will "copy" a secret from our source Key Vault to our destination Key Vault in three steps:
+
 * Step 1
 * Step 2
 * Step 3
