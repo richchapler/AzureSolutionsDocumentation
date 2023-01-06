@@ -38,7 +38,7 @@ I have tried to keep these instructions free of the obvious:
 
 > [**IoT Central**](Infrastructure_IoTCentral.md)
 
-> [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault/)
+> [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) >> [Secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
 
 > [**Log Analytics**](Infrastructure_LogAnalytics.md)
 
