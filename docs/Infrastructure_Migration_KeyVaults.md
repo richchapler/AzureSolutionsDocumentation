@@ -26,7 +26,7 @@ In addition to the items listed at the beginning of this documentation, this sol
 ### Use Case
 
 * Our **Main** "key ring" (Subscription 1, Key Vault 1) includes all secrets for our group
-* We want to copy Secret X from the **Main** "key ring" to a **Branch** "key ring" (Subscription 2, Key Vault 2)
+* We want to "copy" Secret X from the **Main** "key ring" to a **Branch** "key ring" (Subscription 2, Key Vault 3)
 
 *Questions for Nathan:*
 
@@ -37,9 +37,8 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 In this exercise, we will "copy" a secret from our source Key Vault to our destination Key Vault in three steps:
 
-* Step 1
-* Step 2
-* Step 3
+* Step 1: Download Secret X from **Main** (Subscription 1, Key Vault 1) and Import to **Branch** (Subscription 1, Key Vault 2)
+* Step 2: Move Secret X from **Branch** (Subscription 1, Key Vault 2) to **Copy** (Subscription 2, Key Vault 2)
 
 ### Step 1: LOREM IPSUM
 
