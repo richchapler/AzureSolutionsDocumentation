@@ -38,6 +38,8 @@ I have tried to keep these instructions free of the obvious:
 
 > [**IoT Central**](Infrastructure_IoTCentral.md)
 
+> [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault/)
+
 > [**Log Analytics**](Infrastructure_LogAnalytics.md)
 
 > [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
