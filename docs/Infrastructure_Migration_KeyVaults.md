@@ -30,7 +30,7 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 * Our "**Main**" Key Vault (on Subscription 1) includes all secrets for our group
 * We want to "copy" a Secret from the "**Main**" Key Vault to a "**Branch**" Key Vault (on Subscription 1)
-* We also want to "copy" the Secret a "**Copy**" Key Vault (on Subscription 2)
+* We also want to "copy" the Secret to the "**Copy**" Key Vault (on Subscription 2)
 
 *Questions for Nathan:*
 
