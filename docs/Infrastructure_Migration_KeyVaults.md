@@ -57,9 +57,6 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
   <img src="https://user-images.githubusercontent.com/44923999/211365372-54e7ce60-7142-4272-b0d4-071fb4259cfe.png" width="800" title="Snipped: January 9, 2023" />
 
 * Click "**Download Backup**" and then **Download** on the "**Creating a backup**" pop-up
-
-  <img src="https://user-images.githubusercontent.com/44923999/211365878-9bdc3a74-0d1b-47bd-9c51-084cbb379a9e.png" width="600" title="Snipped: January 9, 2023" />
-
 * Confirm download of the file to the **Downloads** folder on your local device
 
 ### Step 2: Download Backup
@@ -69,7 +66,4 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
   <img src="https://user-images.githubusercontent.com/44923999/211366627-1e5dab97-575a-420b-b459-d6576703e9d6.png" width="800" title="Snipped: January 9, 2023" />
 
 * Click "**Restore Backup**"
-
-  <img src="https://user-images.githubusercontent.com/44923999/211368061-4be2082c-8e9b-41e4-9dc1-e0967b06e825.png" width="600" title="Snipped: January 9, 2023" />
-
 * Select the previously downloaded file on the resulting pop-up **Open** dialog box and then click **Open**
