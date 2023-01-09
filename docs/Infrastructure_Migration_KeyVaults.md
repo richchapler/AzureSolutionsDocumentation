@@ -18,8 +18,11 @@ Your answer to "why use Option X?" may be as simple as the fact that you favor t
 
 In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
-* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault/) (a source and a target instance in the same Subscription)
-* [**Secret**](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault/)
+  * Instance #1 - Main (Subscription 1)
+  * Instance #2 - Branch (Subscription 1)
+  * Instance #3 - Copy (Subscription 2)
+* [**Secret**](https://learn.microsoft.com/en-us/azure/key-vault/secrets) in "Main" Key Vault
 
 ## Exercise 1: Copy Secret using Azure Portal
 
@@ -40,6 +43,6 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Step 1: Download Secret X from **Main** (Subscription 1, Key Vault 1) and Import to **Branch** (Subscription 1, Key Vault 2)
 * Step 2: Move Secret X from **Branch** (Subscription 1, Key Vault 2) to **Copy** (Subscription 2, Key Vault 2)
 
-### Step 1: LOREM IPSUM
+### Step 1: Export Secret
 
 * Open Azure Portal
