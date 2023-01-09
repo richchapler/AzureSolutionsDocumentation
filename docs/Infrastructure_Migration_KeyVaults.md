@@ -71,5 +71,4 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 
 * Navigate to the "**...branch**" Key Vault
 
-  <img src="https://user-images.githubusercontent.com/44923999/211375101-a3e8bf10-a595-4f17-909b-2ead8018859b.png" width="800" title="Snipped: January 9, 2023" />
-
+  <img src="https://user-images.githubusercontent.com/44923999/211375255-64611bc4-2d8b-434a-a78d-036895573341.png" width="800" title="Snipped: January 9, 2023" />
