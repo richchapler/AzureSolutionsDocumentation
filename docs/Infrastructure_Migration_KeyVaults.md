@@ -46,5 +46,17 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 ### Step 1: Export Secret
 
 * Open Azure Portal and navigate to the "**Main**" Key Vault
+* Navigate to **Secrets** in the **Objects** group of the left-hand navigation pane
 
+  <img src="https://user-images.githubusercontent.com/44923999/211365071-481196e9-a51c-476f-b724-1677098258a2.png" width="800" title="Snipped: January 9, 2023" />
+
+* Click to select your Secret
+
+  <img src="https://user-images.githubusercontent.com/44923999/211365372-54e7ce60-7142-4272-b0d4-071fb4259cfe.png" width="800" title="Snipped: January 9, 2023" />
+
+* Click "**Download Backup**" and then **Download** on the "**Creating a backup**" pop-up
+
+  <img src="https://user-images.githubusercontent.com/44923999/211365878-9bdc3a74-0d1b-47bd-9c51-084cbb379a9e.png" width="600" title="Snipped: January 9, 2023" />
+
+* Confirm download of the file to the **Downloads** folder on your local device
 
