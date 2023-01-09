@@ -68,4 +68,8 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Click "**Restore Backup**", select the previously downloaded file on the resulting pop-up **Open** dialog box and then click **Open**
 
 ### Step 3: Move Key Vault
-Lorem Ipsum
+
+* Navigate to the "**...branch**" Key Vault
+
+  <img src="https://user-images.githubusercontent.com/44923999/211375101-a3e8bf10-a595-4f17-909b-2ead8018859b.png" width="800" title="Snipped: January 9, 2023" />
+
