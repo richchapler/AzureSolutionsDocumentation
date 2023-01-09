@@ -65,5 +65,4 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 
   <img src="https://user-images.githubusercontent.com/44923999/211366627-1e5dab97-575a-420b-b459-d6576703e9d6.png" width="800" title="Snipped: January 9, 2023" />
 
-* Click "**Restore Backup**"
-* Select the previously downloaded file on the resulting pop-up **Open** dialog box and then click **Open**
+* Click "**Restore Backup**", select the previously downloaded file on the resulting pop-up **Open** dialog box and then click **Open**
