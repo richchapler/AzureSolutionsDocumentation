@@ -72,3 +72,7 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Navigate to the "**...branch**" Key Vault
 
   <img src="https://user-images.githubusercontent.com/44923999/211375255-64611bc4-2d8b-434a-a78d-036895573341.png" width="800" title="Snipped: January 9, 2023" />
+
+* Click **Move** and then "**Move to another subscription**" in the resulting drop-down menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/211375540-3b22e566-9817-4fdc-bcb4-8b0b726477c6.png" width="800" title="Snipped: January 9, 2023" />
