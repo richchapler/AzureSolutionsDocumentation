@@ -24,12 +24,13 @@ In addition to the items listed at the beginning of this documentation, this sol
   * Instance #3 - "...Copy" (on Subscription 2)
 * [**Secret**](https://learn.microsoft.com/en-us/azure/key-vault/secrets) in "Main" Key Vault
 
-## Exercise 1: Copy Secret using Azure Portal
+## Exercise 1: "Copy" Secret(s) using Azure Portal
 
 ### Use Case
 
 * Our "**Main**" Key Vault (on Subscription 1) includes all secrets for our group
 * We want to "copy" a Secret from the "**Main**" Key Vault to a "**Branch**" Key Vault (on Subscription 1)
+* We also want to "copy" the Secret a "**Copy**" Key Vault (on Subscription 2)
 
 *Questions for Nathan:*
 
@@ -40,9 +41,9 @@ In addition to the items listed at the beginning of this documentation, this sol
 
 In this exercise, we will "copy" a secret from our source Key Vault to our destination Key Vault in three steps:
 
-* Step 1: Download Backup of Secret123 from "**Main**" (Subscription 1, Key Vault 1)
-* Step 2: Import to "**Branch**" (Subscription 1, Key Vault 2)
-* Step 3: Move Secret X from **Branch** (Subscription 1, Key Vault 2) to **Copy** (Subscription 2, Key Vault 2)
+* Step 1: Download Backup of Secret123 from "**Main**" Key Vault (on Subscription 1)
+* Step 2: Restore Backup of Secret123 to "**Branch**" Key Vault (on Subscription 1)
+* Step 3: Move "**Branch**" Key Vault (on Subscription 1) to "**Copy**" Key Vault (on Subscription 2)
 
 ### Step 1: Download Backup
 
