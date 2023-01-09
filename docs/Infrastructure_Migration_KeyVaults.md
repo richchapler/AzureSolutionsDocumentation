@@ -8,7 +8,7 @@ This documentation details step-by-step instructions for some of the options.
 
 | Option           | Pros       | Cons     |
 | ---------------- | ---------- | -------- |
-| **Azure Portal** | - Familiar | - Manual |
+| **Azure Portal** | - Familiar<br>- Key not exposed | - Manual<br>- One at a Time |
 
 **This list of Pros and Cons is based on my research, experience and perception ONLY.**
 
@@ -70,6 +70,5 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Click "**Restore Backup**"
 
   <img src="https://user-images.githubusercontent.com/44923999/211368061-4be2082c-8e9b-41e4-9dc1-e0967b06e825.png" width="600" title="Snipped: January 9, 2023" />
-![image](https://user-images.githubusercontent.com/44923999/.png)
 
 * Select the previously downloaded file on the resulting pop-up **Open** dialog box and then click **Open**
