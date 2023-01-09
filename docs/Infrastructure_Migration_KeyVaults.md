@@ -66,3 +66,10 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Navigate to the "**...branch**" Key Vault, then **Secrets** in the **Objects** group of the left-hand navigation pane
 
   <img src="https://user-images.githubusercontent.com/44923999/211366627-1e5dab97-575a-420b-b459-d6576703e9d6.png" width="800" title="Snipped: January 9, 2023" />
+
+* Click "**Restore Backup**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/211368061-4be2082c-8e9b-41e4-9dc1-e0967b06e825.png" width="600" title="Snipped: January 9, 2023" />
+![image](https://user-images.githubusercontent.com/44923999/.png)
+
+* Select the previously downloaded file on the resulting pop-up **Open** dialog box and then click **Open**
