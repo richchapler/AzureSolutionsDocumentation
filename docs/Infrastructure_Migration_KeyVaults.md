@@ -19,9 +19,9 @@ Your answer to "why use Option X?" may be as simple as the fact that you favor t
 In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault/)
-  * Instance #1 - Main (Subscription 1)
-  * Instance #2 - Branch (Subscription 1)
-  * Instance #3 - Copy (Subscription 2)
+  * Instance #1 - "...Main" (on Subscription 1)
+  * Instance #2 - "...Branch" (on Subscription 1)
+  * Instance #3 - "...Copy" (on Subscription 2)
 * [**Secret**](https://learn.microsoft.com/en-us/azure/key-vault/secrets) in "Main" Key Vault
 
 ## Exercise 1: Copy Secret using Azure Portal
