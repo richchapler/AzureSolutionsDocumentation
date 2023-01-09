@@ -46,7 +46,7 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 
 ### Step 1: Download Backup
 
-* Open Azure Portal and navigate to the "**Main**" Key Vault
+* Open Azure Portal and navigate to the "**...main**" Key Vault
 * Navigate to **Secrets** in the **Objects** group of the left-hand navigation pane
 
   <img src="https://user-images.githubusercontent.com/44923999/211365071-481196e9-a51c-476f-b724-1677098258a2.png" width="800" title="Snipped: January 9, 2023" />
@@ -63,6 +63,6 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 
 ### Step 2: Download Backup
 
-* Navigate to the "**Main**" Key Vault, then **Secrets** in the **Objects** group of the left-hand navigation pane
+* Navigate to the "**...branch**" Key Vault, then **Secrets** in the **Objects** group of the left-hand navigation pane
 
   <img src="https://user-images.githubusercontent.com/44923999/211366627-1e5dab97-575a-420b-b459-d6576703e9d6.png" width="800" title="Snipped: January 9, 2023" />
