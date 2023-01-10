@@ -93,3 +93,7 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Monitor progress and confirm "Moving resources complete" success message in the **Notifications** pane
 
   <img src="https://user-images.githubusercontent.com/44923999/211564077-3972ad5e-665b-492b-a922-4d640cb9fc31.png" width="800" title="Snipped: January 10, 2023" />
+
+* Switch to the second subscription and navigate to the new Resource Group to confirm presence of the moved Key Vault
+
+  <img src="https://user-images.githubusercontent.com/44923999/211564463-a10d5afa-1464-4409-929b-e1f568f7a33c.png" width="800" title="Snipped: January 10, 2023" />
