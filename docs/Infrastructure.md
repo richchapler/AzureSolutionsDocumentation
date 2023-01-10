@@ -16,7 +16,7 @@ I have tried to keep these instructions free of the obvious:
 > 
 > [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
-> [**Cognitive Search**](Infrastructure_CognitiveSearch.md)
+> [**Cognitive Search**](https://learn.microsoft.com/en-us/azure/search/)
 
 > [**Data Explorer**](Infrastructure_DataExplorer.md) >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md)
 
