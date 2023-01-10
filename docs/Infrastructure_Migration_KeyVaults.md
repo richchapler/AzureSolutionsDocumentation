@@ -76,3 +76,5 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Click **Move** and then "**Move to another subscription**" in the resulting drop-down menu
 
   <img src="https://user-images.githubusercontent.com/44923999/211375540-3b22e566-9817-4fdc-bcb4-8b0b726477c6.png" width="800" title="Snipped: January 9, 2023" />
+
+* Complete the "**Move resources**" >> "**Source + target**" page, and then click **Next**
