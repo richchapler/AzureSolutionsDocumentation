@@ -86,3 +86,7 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
   <img src="https://user-images.githubusercontent.com/44923999/211562181-65da535f-2226-4777-b585-b8058d112fcc.png" width="800" title="Snipped: January 10, 2023" />
 
 * Review selections on the "**Move resources**" >> "**Review**" form, check the "I understand..." checkbox and then click **Move**
+
+### Step 4: Confirm Success
+
+Lorem Ipsum
