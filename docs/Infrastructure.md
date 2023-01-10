@@ -1,8 +1,8 @@
-## Infrastructure
+# Infrastructure
 
 ![image](https://user-images.githubusercontent.com/44923999/185972867-64465cc3-0769-4045-bc5d-672f573854c7.png)
 
-### Resource Instantiation
+## Resource Instantiation
 
 I have tried to keep these instructions free of the obvious:
 
@@ -11,8 +11,6 @@ I have tried to keep these instructions free of the obvious:
 * When the interface says **Region** (or something similar like **Location**), select the same region used by the resource group (or a different value, if appropriate)
 * When the interface asks for a **Name**, enter a meaningful name aligned with standards
 * When I mention that you need to use a resource {e.g., a Key Vault}, this should imply that you will need to have instantiated a Key Vault
-
-### Contents
 
 > [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
 > 
@@ -53,3 +51,7 @@ I have tried to keep these instructions free of the obvious:
 > [**Storage Account**](Infrastructure_StorageAccount.md)
 
 > [**Synapse**](Infrastructure_Synapse.md) >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git Configuration](Infrastructure_Synapse_GitConfiguration.md) :: [Dataset](Infrastructure_Synapse_Dataset.md) :: [Linked Service](Infrastructure_Synapse_LinkedService.md)
+
+## Migration
+
+> [**Key Vault**](Infrastructure_Migration_KeyVaults.md)
