@@ -4,7 +4,7 @@
 
 Key Vault migration is not a simple topic, nor is there a point-and-click, "Explorer" type tool.
 
-This documentation details step-by-step instructions for some of the options.
+This documentation will detail step-by-step instructions for one of the options.
 
 | Option           | Pros       | Cons     |
 | ---------------- | ---------- | -------- |
