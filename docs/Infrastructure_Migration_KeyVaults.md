@@ -21,21 +21,16 @@ In addition to the items listed at the beginning of this documentation, this sol
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault/)
   * Instance #1 - "...Main" (on Subscription 1)
   * Instance #2 - "...Branch" (on Subscription 1)
-  * Instance #3 - "...Copy" (on Subscription 2)
+  * Instance #3 - "...Branch" (on Subscription 2)
 * [**Secret**](https://learn.microsoft.com/en-us/azure/key-vault/secrets) in "Main" Key Vault
 
-## Exercise 1: "Copy" Secret(s) using Azure Portal
+## Exercise 1: Migrate Secret(s) using Azure Portal
 
 ### Use Case
 
 * Our "**Main**" Key Vault (on Subscription 1) includes all secrets for our group
 * We want to "copy" a Secret from the "**Main**" Key Vault to a "**Branch**" Key Vault (on Subscription 1)
-* We also want to "copy" the Secret to the "**Copy**" Key Vault (on Subscription 2)
-
-*Questions for Nathan:*
-
-1) *Why not just give the new user / group access to the secret in the **Main** key ring?*
-2) *Why do we want duplicate copies of a given secret?* 
+* We also want to "copy" the Secret to Subscription 2
 
 ### Proposed Solution
 
@@ -43,7 +38,7 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 
 * Step 1: Download Backup of Secret123 from "**Main**" Key Vault (on Subscription 1)
 * Step 2: Restore Backup of Secret123 to "**Branch**" Key Vault (on Subscription 1)
-* Step 3: Move "**Branch**" Key Vault (on Subscription 1) to "**Copy**" Key Vault (on Subscription 2)
+* Step 3: Move "**Branch**" Key Vault (on Subscription 1) to "**Branch**" Key Vault (on Subscription 2)
 * Step 4: Confirm Success
 
 ### Step 1: Download Backup
@@ -97,3 +92,9 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Switch to the second subscription and navigate to the new Resource Group to confirm presence of the moved Key Vault
 
   <img src="https://user-images.githubusercontent.com/44923999/211564463-a10d5afa-1464-4409-929b-e1f568f7a33c.png" width="800" title="Snipped: January 10, 2023" />
+
+* Navigate to **Secrets** in the **Objects** group in the left-hand navigation
+
+  <img src="https://user-images.githubusercontent.com/44923999/211565345-1fc462df-133d-4519-96af-ba4faa7af058.png" width="800" title="Snipped: January 10, 2023" />
+
+* Confirm inclusion of appropriate secrets
