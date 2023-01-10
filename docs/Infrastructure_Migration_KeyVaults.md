@@ -90,6 +90,6 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 
 ### Step 4: Confirm Success
 
-* Monitor progress and confirm "Moving resources complete" success message
+* Monitor progress and confirm "Moving resources complete" success message in the **Notifications** pane
 
   <img src="https://user-images.githubusercontent.com/44923999/211564077-3972ad5e-665b-492b-a922-4d640cb9fc31.png" width="800" title="Snipped: January 10, 2023" />
