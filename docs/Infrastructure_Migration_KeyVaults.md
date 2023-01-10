@@ -82,3 +82,7 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
   <img src="https://user-images.githubusercontent.com/44923999/211561970-b6f5e7a1-09c6-4b87-8eb3-15cc91fd3124.png" width="800" title="Snipped: January 10, 2023" />
 
 * On the "**Move resources**" >> "**Resources to move**" form, wait for "Checking whether these resources can be moved..." validation and then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/211562181-65da535f-2226-4777-b585-b8058d112fcc.png" width="800" title="Snipped: January 10, 2023" />
+
+* Review selections on the "**Move resources**" >> "**Review**" form, check the "I understand..." checkbox and then click **Move**
