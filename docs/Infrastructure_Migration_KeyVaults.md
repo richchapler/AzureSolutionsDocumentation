@@ -44,6 +44,7 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 * Step 1: Download Backup of Secret123 from "**Main**" Key Vault (on Subscription 1)
 * Step 2: Restore Backup of Secret123 to "**Branch**" Key Vault (on Subscription 1)
 * Step 3: Move "**Branch**" Key Vault (on Subscription 1) to "**Copy**" Key Vault (on Subscription 2)
+* Step 4: Confirm Success
 
 ### Step 1: Download Backup
 
@@ -89,4 +90,6 @@ In this exercise, we will "copy" a secret from our source Key Vault to our desti
 
 ### Step 4: Confirm Success
 
-Lorem Ipsum
+* Monitor progress and confirm "Moving resources complete" success message
+
+  <img src="https://user-images.githubusercontent.com/44923999/211564077-3972ad5e-665b-492b-a922-4d640cb9fc31.png" width="800" title="Snipped: January 10, 2023" />
