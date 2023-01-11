@@ -12,11 +12,11 @@ This solution considers the following requirements:
 ## Proposed Solution
 This solution will address requirements in three steps:
 
-o	Exercise 1: Surface data via API (Function App GET customers, products, etc.) 
-o	Exercise 2: Surface API via APIM (calls from customers will come through API for security, organization, throttling, “subscription model”, etc.) … http://api.blah.com/customer?id=7
-o	Exercise 3: APIM Monetization? … with Stripe?
-o	Exercise 4: Subscribe to API in APIM (persona: customer)
-o	Exercise 5: Power BI template that uses API
+*	Exercise 1: Surface data via API (Function App GET customers, products, etc.) 
+*	Exercise 2: Surface API via APIM (calls from customers will come through API for security, organization, throttling, “subscription model”, etc.) … http://api.blah.com/customer?id=7
+*	Exercise 3: APIM Monetization? … with Stripe?
+*	Exercise 4: Subscribe to API in APIM (persona: customer)
+*	Exercise 5: Power BI template that uses API
 
 ## Required Infrastructure
 This solution requires the following resources:
