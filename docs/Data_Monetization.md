@@ -6,3 +6,4 @@ _aka "Analytics as a Service", "AaaS"_
 ## Reference
 
 https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-the-sdk
+https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-kusto-data
