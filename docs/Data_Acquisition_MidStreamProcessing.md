@@ -17,7 +17,7 @@ This solution will address requirements in three steps:
 * Process Mid-Stream - create a Function App with incoming Event Hub (source), processing logic {e.g. unpack JSON} and outgoing Event Hub (destination)
 * Ingest Data - ingest data into Data Explorer
 
-## Prepare Infrastructure
+## Required Infrastructure
 
 This solution requires the following resources:
 
