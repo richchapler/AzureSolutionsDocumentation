@@ -41,12 +41,22 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
 * On the "**Create a new project**" page, search for and select "**Azure Functions**", then click **Next**
 
-  <img src="https://user-images.githubusercontent.com/44923999/208800336-d2a27a2b-b910-43b1-ac8f-bee628e8c8d9.png" width="800" title="Snipped: December 20, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/212138137-5eb64402-c7dd-4b35-8285-d0ffd527f2f9.png" width="600" title="Snipped: January 12, 2023" />
 
 * Complete the "**Configure your new project**" form and then click **Next**
 
+  <img src="https://user-images.githubusercontent.com/44923999/212139114-5874d64a-42dc-449f-8635-d90d2cd319c8.png" width="600" title="Snipped: January 12, 2023" />
 
-Create Function with "Http trigger with OpenAPI" to make an API
+* Complete the "**Additional information**" form:
+
+  | Prompt | Entry |
+  | ----- | ----- |
+  | **Functions worker** | Select "**.NET 6.0 (Long Term Support)**" |
+  | **Function** | Select "**Http trigger with OpenAPI**" |
+  | **Use Azurite...** | Checked |
+  | **Authorization level** | Confirm default "Function" |
+
+* Click **Create**
 
 ## Reference
 
