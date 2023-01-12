@@ -163,6 +163,21 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
   <img src="https://user-images.githubusercontent.com/44923999/212152235-d37d84e9-9889-48cb-8d02-6d1b040e34e8.png" width="600" title="Snipped: January 12, 2023" />
 
+* On the **Publish** >> "**Where are you publishing...**" page, select "**Azure**" and then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/212152644-c26e3467-4499-4ce4-946b-9b7ed376b3b3.png" width="600" title="Snipped: January 12, 2023" />
+
+* On the **Publish** >> "**Which Azure service...**" page, select "**Azure Function App (Windows)**" and then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/212153003-da72ba24-8d5b-4929-b187-913e0ba620cc.png" width="600" title="Snipped: January 12, 2023" />
+
+* On the **Publish** >> "**Select existing or...**" page, select your Function App and then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/212153305-667d4a62-ba8e-4ea4-a851-42a46f843f6d.png" width="600" title="Snipped: January 12, 2023" />
+
+* On the **Publish** >> "**Enable API consumption...**" page, click "**Create a new instance**"
+
+
 ## Reference
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-the-sdk
