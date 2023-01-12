@@ -22,7 +22,8 @@ This solution will address requirements in three steps:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [Application Registration](Infrastructure_ApplicationRegistration.md) ... two instances for "Customer1" and "Customer2"
+* [**API Management**](https://learn.microsoft.com/en-us/azure/api-management/)
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md) ... two instances for "Customer1" and "Customer2"
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and two [**databases**](Infrastructure_DataExplorer_Database.md) ("Customer1" and "Customer2", both with StormEvents sample data)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
