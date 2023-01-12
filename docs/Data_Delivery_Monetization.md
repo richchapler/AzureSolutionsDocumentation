@@ -182,7 +182,7 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
 * On the **Publish profile creation progress**" page, confirm success and then click **Close**
 
-  <img src="https://user-images.githubusercontent.com/44923999/212164342-4e969dfa-a6a6-437a-b679-73efcf487fdd.png" width="800" title="Snipped: January 12, 2023" />
+  <img src="https://user-images.githubusercontent.com/44923999/212164829-7fd5ee7a-2f7a-44d6-acef-cb3cd4568fda.png" width="800" title="Snipped: January 12, 2023" />
 
 * Back on the "...Publish" page, click **Publish** and confirm successful publication
 
