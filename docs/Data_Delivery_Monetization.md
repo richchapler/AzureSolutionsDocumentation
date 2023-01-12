@@ -13,7 +13,7 @@ This solution considers the following requirements:
 ## Proposed Solution
 This solution will address requirements in three steps:
 
-*	Exercise 1: Surface data via API (Function App GET customers, products, etc.) 
+*	Exercise 1: Use Function App to create a "get data" API (from the sample StormEvents data on a Data Explorer cluster / database)
 *	Exercise 2: Surface API via APIM (calls from customers will come through API for security, organization, throttling, “subscription model”, etc.) … http://api.blah.com/customer?id=7
 *	Exercise 3: APIM Monetization? … with Stripe?
 *	Exercise 4: Subscribe to API in APIM (persona: customer)
