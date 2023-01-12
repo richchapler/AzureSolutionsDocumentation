@@ -78,14 +78,90 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 * Navigate to the **Updates** tab, check "**Select all packages**" and then click **Update** (as applicable)
 * When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
 
+### Step 3: Update Logic
 
+* Rename "Function1.cs" to "StormEvents.cs" and open
+
+  <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: December 21, 2022" />
+
+* Replace the default code with:
+
+  ```
+  using Kusto.Cloud.Platform.Data;
+  using Kusto.Data.Common;
+  using Microsoft.AspNetCore.Http;
+  using Microsoft.AspNetCore.Mvc;
+  using Microsoft.Azure.WebJobs;
+  using Microsoft.Azure.WebJobs.Extensions.Http;
+  using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+  using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+  using Microsoft.Extensions.Logging;
+  using Microsoft.OpenApi.Models;
+  using System;
+  using System.Net;
+  using System.Threading.Tasks;
+
+  namespace StormEvents
+  {
+      public class StormEvents
+      {
+          private readonly ILogger<StormEvents> _logger;
+
+          public StormEvents(ILogger<StormEvents> log)
+          {
+              _logger = log;
+          }
+
+          [FunctionName("StormEvents")]
+          [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+          [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
+          //[OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
+          [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "This is the StormEvent data!")]
+
+          // "decorators" that tells people what the API does ... add description data here
+
+          public async Task<IActionResult> Run(
+              [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
+          {
+              _logger.LogInformation("C# HTTP trigger function processed a request.");
+
+              var kcsb = new Kusto.Data.KustoConnectionStringBuilder(
+                  connectionString: "ADX_CLUSTER_URI").WithAadApplicationKeyAuthentication(
+                      applicationClientId: "CLIENT_ID",
+                      applicationKey: "CLIENT_SECRET",
+                      authority: "TENANT_ID"
+                  );
+
+              try
+              {
+                  var cqp = Kusto.Data.Net.Client.KustoClientFactory.CreateCslQueryProvider(kcsb);
+
+                  var q = "StormEvents | limit 10 | project StartTime, EventType, State";
+                  var crp = new ClientRequestProperties() { ClientRequestId = Guid.NewGuid().ToString() };
+
+                  var result = cqp.ExecuteQuery(databaseName: "Customer1", query: q, properties: crp).ToJsonString();
+
+                  return new OkObjectResult(result);
+              }
+              catch (Exception e)
+              {
+                  return new OkObjectResult(e.ToString());
+              }
+          }
+      }
+  }
+  ```
+
+  Logic Explained:
+
+  * `using Kusto.Cloud.Platform.Data` and `using Kusto.Data.Common`... necessary to execute Data Explorer queries
+  * [KustoConnectionStringBuilder](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/kusto)
+  
 ## Reference
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-the-sdk
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-kusto-data
-
-> https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/kusto
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard
 
