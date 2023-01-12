@@ -82,7 +82,7 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
 * Rename "Function1.cs" to "StormEvents.cs" and open
 
-  <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: December 21, 2022" />
+  <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: January 12, 2023" />
 
 * Replace the default code with:
 
@@ -152,7 +152,17 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
   * `using Kusto.Cloud.Platform.Data` and `using Kusto.Data.Common`... necessary to execute Data Explorer queries
   * [KustoConnectionStringBuilder](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/kusto)
-  
+
+### Step 4: Publish to Azure
+
+* Continue in Visual Studio
+
+  <img src="https://user-images.githubusercontent.com/44923999/212151843-6221cfc1-86cf-429e-a2a1-dc835102e989.png" width="800" title="Snipped: January 12, 2023" />
+
+* Right-click on the project and select **Publish** from the resulting drop-down menu
+
+  <img src="https://user-images.githubusercontent.com/44923999/212152235-d37d84e9-9889-48cb-8d02-6d1b040e34e8.png" width="600" title="Snipped: January 12, 2023" />
+
 ## Reference
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-the-sdk
