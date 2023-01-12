@@ -28,3 +28,9 @@
   [Geo-Spatial Visualization](Data_Analysis_GeoSpatial.md) | Data Explorer >> Power BI | No Code
   [JSON Discovery](Data_Analysis_JSONDiscovery.md) | Data Explorer | KQL
   [Time Windowing](Data_Analysis_TimeWindowing.md) | Data Explorer | KQL
+
+### Delivery
+
+  Use Case | Method | Language
+  :----- | :----- | :-----
+  [Data Monetization](Data_Delivery_Monetization.md) | APIM | C#
