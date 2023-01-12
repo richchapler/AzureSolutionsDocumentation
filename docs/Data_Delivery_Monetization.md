@@ -174,10 +174,17 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
 * On the **Publish** >> "**Select existing or...**" page, select your Function App and then click **Next**
 
-  <img src="https://user-images.githubusercontent.com/44923999/212153305-667d4a62-ba8e-4ea4-a851-42a46f843f6d.png" width="600" title="Snipped: January 12, 2023" />
+  <img src="https://user-images.githubusercontent.com/44923999/212163888-82580072-ae94-4825-95f4-43f18fcc34c7.png" width="600" title="Snipped: January 12, 2023" />
 
-* On the **Publish** >> "**Enable API consumption...**" page, select your instance of **API Management** and then ...
+* On the **Publish** >> "**Enable API consumption...**" page, expand your instance of **API Management**, select "**echo-api**" and then click **Finish**
 
+  <img src="https://user-images.githubusercontent.com/44923999/212164072-b11eafdb-f4b5-4ac3-8f5c-bab9f33340ae.png" width="600" title="Snipped: January 12, 2023" />
+
+* On the **Publish profile creation progress**" page, confirm success and then click **Close**
+
+  <img src="https://user-images.githubusercontent.com/44923999/212164342-4e969dfa-a6a6-437a-b679-73efcf487fdd.png" width="800" title="Snipped: January 12, 2023" />
+
+* Back on the "...Publish" page, click **Publish** and confirm successful publication
 
 ## Reference
 
