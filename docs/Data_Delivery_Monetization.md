@@ -176,7 +176,7 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
   <img src="https://user-images.githubusercontent.com/44923999/212153305-667d4a62-ba8e-4ea4-a851-42a46f843f6d.png" width="600" title="Snipped: January 12, 2023" />
 
-* On the **Publish** >> "**Enable API consumption...**" page, click "**Create a new instance**"
+* On the **Publish** >> "**Enable API consumption...**" page, select your instance of **API Management** and then ...
 
 
 ## Reference
