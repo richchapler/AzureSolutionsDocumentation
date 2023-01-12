@@ -106,11 +106,7 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
       public class StormEvents
       {
           private readonly ILogger<StormEvents> _logger;
-
-          public StormEvents(ILogger<StormEvents> log)
-          {
-              _logger = log;
-          }
+          public StormEvents(ILogger<StormEvents> log) { _logger = log; }
 
           [FunctionName("StormEvents")]
           [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
