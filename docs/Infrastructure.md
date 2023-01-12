@@ -12,8 +12,10 @@ I have tried to keep these instructions free of the obvious:
 * When the interface asks for a **Name**, enter a meaningful name aligned with standards
 * When I mention that you need to use a resource {e.g., a Key Vault}, this should imply that you will need to have instantiated a Key Vault
 
+> [**API Management**](https://learn.microsoft.com/en-us/azure/api-management/)
+
 > [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
-> 
+
 > [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
 > [**Cognitive Search**](https://learn.microsoft.com/en-us/azure/search/)
