@@ -38,6 +38,7 @@ This solution requires the following resources:
 
 ## Code
 
+```
 using Kusto.Cloud.Platform.Data;
 using Kusto.Data.Common;
 using Microsoft.AspNetCore.Http;
@@ -102,4 +103,4 @@ namespace DataMonetization
         }
     }
 }
-  
+```
