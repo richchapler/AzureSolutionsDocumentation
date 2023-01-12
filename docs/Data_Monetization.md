@@ -26,6 +26,9 @@ This solution requires the following resources:
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
+
+Create Function with "Http trigger with OpenAPI" to make an API
+
 ## Reference
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-the-sdk
