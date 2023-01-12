@@ -36,6 +36,8 @@ This solution requires the following resources:
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard
 
+> https://stackoverflow.com/questions/53397728/kusto-query-from-c-sharp
+
 ## Code
 
 ```
