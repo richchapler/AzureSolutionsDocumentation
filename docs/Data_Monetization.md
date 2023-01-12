@@ -26,6 +26,25 @@ This solution requires the following resources:
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
+## Exercise 1: Create API
+In this exercise, we will create a "get data" API using Function App, Data Explorer and StormEvents sample data.
+
+### Step 1: Create Visual Studio Project
+
+* Open Visual Studio
+
+  <img src="https://user-images.githubusercontent.com/44923999/212137484-599c9cd8-5e0e-46b1-818d-a3a008fecd5b.png" width="600" title="Snipped: January 12, 2023" />
+
+* Click "**Create a new project**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/212137783-9ee34157-17fc-4364-a2d1-d572afbb4d8b.png" width="600" title="Snipped: January 12, 2023" />
+
+* On the "**Create a new project**" page, search for and select "**Azure Functions**", then click **Next**
+
+  <img src="https://user-images.githubusercontent.com/44923999/208800336-d2a27a2b-b910-43b1-ac8f-bee628e8c8d9.png" width="800" title="Snipped: December 20, 2022" />
+
+* Complete the "**Configure your new project**" form and then click **Next**
+
 
 Create Function with "Http trigger with OpenAPI" to make an API
 
