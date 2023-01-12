@@ -186,6 +186,12 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
 * Back on the "...Publish" page, click **Publish** and confirm successful publication
 
+### Step 5: Confirm Success
+
+Lorem Ipsum
+
+--------------------------
+
 ## Reference
 
 > https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/netfx/about-the-sdk
