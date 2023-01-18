@@ -2,15 +2,8 @@
 
 ![image](https://user-images.githubusercontent.com/44923999/185972867-64465cc3-0769-4045-bc5d-672f573854c7.png)
 
-## Resource Instantiation
-
-I have tried to keep these instructions free of the obvious:
-
-* When the interface says **Subscription**, use the dropdown to select the appropriate subscription
-* When the interface says **Resource Group**, select the appropriate resource group
-* When the interface says **Region** (or something similar like **Location**), select the same region used by the resource group (or a different value, if appropriate)
-* When the interface asks for a **Name**, enter a meaningful name aligned with standards
-* When I mention that you need to use a resource {e.g., a Key Vault}, this should imply that you will need to have instantiated a Key Vault
+## Instantiation
+_Note: in many cases, the links below point to Microsoft documentation... wherever necessary, I have added additional documentation to fill gaps_
 
 > [**API Management**](https://learn.microsoft.com/en-us/azure/api-management/)
 
