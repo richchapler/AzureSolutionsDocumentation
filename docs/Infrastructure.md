@@ -15,6 +15,8 @@ _Note: in many cases, the links below point to Microsoft documentation... wherev
 
 > [**Data Explorer**](Infrastructure_DataExplorer.md) >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md)
 
+> Data Factory >> [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
+
 > [**Data Lake**](Infrastructure_DataLake.md) >> [Container](Infrastructure_DataLake_Container.md)
 
 > [**Data Migration Assistant**](https://www.microsoft.com/en-us/download/details.aspx?id=53595)
@@ -45,7 +47,7 @@ _Note: in many cases, the links below point to Microsoft documentation... wherev
 
 > [**Storage Account**](Infrastructure_StorageAccount.md)
 
-> [**Synapse**](Infrastructure_Synapse.md) >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git Configuration](Infrastructure_Synapse_GitConfiguration.md) :: [Dataset](Infrastructure_Synapse_Dataset.md) :: [Linked Service](Infrastructure_Synapse_LinkedService.md)
+> [**Synapse**](Infrastructure_Synapse.md) >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git Configuration](Infrastructure_Synapse_GitConfiguration.md) :: [Dataset](Infrastructure_Synapse_Dataset.md) :: [Linked Service](Infrastructure_Synapse_LinkedService.md) :: [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 
 ## Migration
 
