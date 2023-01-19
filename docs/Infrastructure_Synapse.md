@@ -22,6 +22,9 @@ _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 * Click the **Next: Security >** button and then select the **Use only Azure Active Directory (Azure AD) authentication** radio button
   _Note: Though local authentication may be appropriate to some use cases, I do not typically recommend it_
 
+* Click the **Next: Networking >** button and then uncheck the "**Allow connections from all IP addresses**" checkbox
+  _Note: Unchecking the box prevents creation of a firewall rule that opens 0.0.0.0 to 255.255.255.255; set individual firewall rules instead_
+
 * Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
 
 ### Create with ARM Template
