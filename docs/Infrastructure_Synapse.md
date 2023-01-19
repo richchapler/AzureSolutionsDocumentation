@@ -3,6 +3,8 @@ _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 
 ![image](https://user-images.githubusercontent.com/44923999/185975852-f21da095-6d6d-4259-86d8-6b199c9e3295.png)
 
+_Note: Use [Microsoft Learn: Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/) documentation for most questions. The documentation below covers additional, specific guidance around topics like use of Azure Active Directory, firewall, etc._
+
 ### Create with Azure Portal
 
 * Click the menu button in the upper-left corner of the Azure Portal
