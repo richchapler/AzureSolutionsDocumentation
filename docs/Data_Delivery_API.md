@@ -7,7 +7,7 @@ This solution considers the following requirements:
 
 * "We have customer-specific data that we want to share with customers securely"
 * "Customer data must be 'air-gapped' {i.e., zero chance of Customer 1 seeing Customer 2 data, and vice versa}"
-* "In the future, we will want to share and monetize our analysis and data offerings with customers"
+* "In the future, we will want to monetize our analysis and data offerings with customers"
 
 ## Proposed Solution
 This solution will address requirements in two exercises:
