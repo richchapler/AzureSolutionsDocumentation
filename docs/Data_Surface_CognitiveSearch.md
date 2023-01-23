@@ -23,11 +23,11 @@ This solution will address requirements in three exercises:
 ## Exercise 1: Import Data
 In this exercise, we will import built-in sample data.
 
-* Open the Azure Portal and navigate to your Search Service instance
+<img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
 
-  <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
+Navigate to your Search Service instance and then click "**Import Data**"
 
-* Click "**Import Data**"
+### Step 1: Connect to your data
 
   <img src="https://user-images.githubusercontent.com/44923999/214140498-3b1a486c-57bd-407a-b249-60a93e54602e.png" width="800" title="Snipped: January 23, 2023" />
 
