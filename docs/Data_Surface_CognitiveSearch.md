@@ -1,4 +1,5 @@
 # Surface Data with Cognitive Search
+_Note: Cognitive Search is also known as Search Services_
 
 ![image](https://user-images.githubusercontent.com/44923999/214127109-5208bf6e-f1d3-40b0-bcbc-a302b5834ab8.png)
 
