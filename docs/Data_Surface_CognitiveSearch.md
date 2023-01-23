@@ -13,6 +13,20 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 
+## Proposed Solution
+This solution will address requirements in three exercises:
+
+*	Exercise 1: Import Data
+*	Exercise 2: Create Search Index
+*	Exercise 3: Prepare Interface
+
+## Exercise 1: Import Data
+In this exercise, we will import built-in sample data.
+
+### Step 1: Lorem Ipsum
+
+Lorem Ipsum
+
 ## Reference
 
 * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
