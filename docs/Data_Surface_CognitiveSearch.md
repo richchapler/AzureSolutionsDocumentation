@@ -27,9 +27,13 @@ In this exercise, we will import built-in sample data.
 
 * Open the Azure Portal and navigate to your Search Service instance
 
-  <img src="https://user-images.githubusercontent.com/44923999/214131662-5146b2f6-89bd-4dd8-97c8-adc9432f04d7.png" width="800" title="Snipped: January 23, 2023" />
+  <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
 
 * Click "**Import Data**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/214139885-de0b6b0e-ce0a-4cb8-8e1c-9f9b9d10dad9.png" width="800" title="Snipped: January 23, 2023" />
+
+* On the resulting "**Import Data**" page, "**Connect to your data**" tab, select Samples from the "**Existing data source**" drop-down menu
 
 ## Reference
 
