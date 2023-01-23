@@ -1,5 +1,4 @@
-# Data Monetization
-_aka "Analytics as a Service", "AaaS"_
+# "GETdata" API Creation
 
 ![image](https://user-images.githubusercontent.com/44923999/211827398-33d50c55-7fad-42df-999a-78a7a6b18026.png)
 
