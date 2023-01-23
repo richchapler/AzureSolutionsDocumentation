@@ -33,7 +33,7 @@ In this exercise, we will import built-in sample data.
 
 * On the resulting "**Import Data**" page, "**Connect to your data**" tab, select **Samples** from the "**Existing data source**" drop-down menu
 * Select the "**realestate-us-sample**" row
-* Click "**Next: Add cognitive skills (Optional)**" tab
+* Click "**Next: Add cognitive skills (Optional)**"
 
 ## Reference
 
