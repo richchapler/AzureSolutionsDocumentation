@@ -5,6 +5,6 @@ In this documentation, you will find step-by-step instructions for solutions to 
 ## Contents
 > [Infrastructure](Infrastructure.md) >> Instantiation :: Migration
 
-> [Data](Data.md) >> Migration :: Acquisition :: Analysis :: Delivery
+> [Data](Data.md) >> Migration :: Acquisition :: Analysis :: Surface
 
 > [Deployment](Deployment.md) >> Synapse
