@@ -58,6 +58,12 @@ Navigate to your instance and then click "**Import Data**"
 * On the resulting "**Import Data**" page, "**Customize target index**" tab, configure index options
   _Note: Once again, experimentation and rework is the path I take when reviewing the many options._
 
+* Click "**Next: Create an indexer**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/214154948-102c8185-cbdc-44f9-b21f-12bb9a22a43b.png" width="800" title="Snipped: January 23, 2023" />
+
+* On the resulting "**Import Data**" page, "**Create an indexer**" tab, configure and then click **Submit**
+
 ## Reference
 
 * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
