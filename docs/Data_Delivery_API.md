@@ -144,7 +144,7 @@ In this exercise, we will create an API using Function App, Data Explorer and St
 
   * `using Kusto.Cloud.Platform.Data` and `using Kusto.Data.Common`... necessary to execute Data Explorer queries
   * [KustoConnectionStringBuilder](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/kusto)
-  * `var q = "StormEvents | limit 3...` limits the result to just three rows
+  * `var q = "StormEvents | limit 3...` limits the result to just three rows to keep the exercise simple 
 
 ### Step 4: Publish to Azure
 
