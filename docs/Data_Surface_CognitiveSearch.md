@@ -40,6 +40,11 @@ Navigate to your instance and then click "**Import Data**"
 
 * On the resulting "**Import Data**" page, "**Add cognitive skills (Optional)**" tab, expand "**Attach Cognitive Services**"
 * Select your instance of Cognitive Services
+* Collapse "**Attach Cognitive Services**" and then expand "**Add enrichments**"
+
+  <img src="https://user-images.githubusercontent.com/44923999/214149017-338ba6c7-3281-40ee-92ca-e8b099b5430f.png" width="800" title="Snipped: January 23, 2023" />
+
+  _Note: Even familiar data sources can be hard to configure the first time through {e.g., "will the Description field have "people names"?}. I lean towards experimentation in this situation... we can always re-configure once the initial Import Data exercise is complete._
 
 ## Reference
 
