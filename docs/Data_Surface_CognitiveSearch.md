@@ -49,6 +49,9 @@ Navigate to your instance and then click "**Import Data**"
   _Note: Even familiar data sources can be hard to configure the first time through {e.g., "will the Description field have "people names"?}. I lean towards experimentation in this situation... we can always re-configure once the initial Import Data exercise is complete._
 * Collapse "**Add enrichments**" and then expand "**Save enrichments to a knowledge store**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/214153287-beed5d62-200a-48ec-b852-578f38621af6.png" width="800" title="Snipped: January 23, 2023" />
+
+* Configure knowledge store options and then click "**Next: Customize target index**"
 
 ## Reference
 
