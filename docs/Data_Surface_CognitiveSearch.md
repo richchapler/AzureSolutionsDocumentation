@@ -12,3 +12,7 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+
+## Reference
+
+* [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
