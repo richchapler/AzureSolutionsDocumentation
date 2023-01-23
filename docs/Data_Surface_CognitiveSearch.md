@@ -53,6 +53,11 @@ Navigate to your instance and then click "**Import Data**"
 
 * Configure knowledge store options and then click "**Next: Customize target index**"
 
+  <img src="https://user-images.githubusercontent.com/44923999/214154309-fea824d2-d3bf-435b-bf85-500dd28be462.png" width="800" title="Snipped: January 23, 2023" />
+
+* On the resulting "**Import Data**" page, "**Customize target index**" tab, configure index options
+  _Note: Once again, experimentation and rework is the path I take when reviewing the many options._
+
 ## Reference
 
 * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
