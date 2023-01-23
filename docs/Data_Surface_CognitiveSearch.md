@@ -12,6 +12,7 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+* Cognitive Services
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
@@ -25,7 +26,7 @@ In this exercise, we will import built-in sample data.
 
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
 
-Navigate to your Search Service instance and then click "**Import Data**"
+Navigate to your instance and then click "**Import Data**"
 
 ### Step 1: Connect to your data
 
