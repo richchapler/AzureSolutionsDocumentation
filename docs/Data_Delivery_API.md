@@ -186,7 +186,7 @@ In this exercise, we will create an API using Function App, Data Explorer and St
 
 * Click "**Get Function URL**" and copy the value from the resulting pop-up
 
-  <img src="https://user-images.githubusercontent.com/44923999/212186966-066fc12e-40df-4eab-89a2-bae2981ce508.png" width="800" title="Snipped: January 12, 2023" />
+  <img src="https://user-images.githubusercontent.com/44923999/214117591-4d1bbf24-bcf0-48cf-a809-237779d209ea.png" width="800" title="Snipped: January 23, 2023" />
 
 * Open a new tab on your browser and paste the copied URL... you can expect to see a JSON response with StormEvents data {abbreviated and prettified below}:
 
@@ -227,41 +227,6 @@ In this exercise, we will create an API using Function App, Data Explorer and St
             "2007-01-01T00:00:00Z",
             "Winter Storm",
             "WISCONSIN"
-          ],
-          [
-            "2007-01-01T00:00:00Z",
-            "Winter Weather",
-            "NEW YORK"
-          ],
-          [
-            "2007-01-01T00:00:00Z",
-            "Winter Weather",
-            "NEW YORK"
-          ],
-          [
-            "2007-01-01T00:00:00Z",
-            "Winter Weather",
-            "NEW YORK"
-          ],
-          [
-            "2007-01-01T00:00:00Z",
-            "Winter Weather",
-            "NEW YORK"
-          ],
-          [
-            "2007-01-01T00:00:00Z",
-            "Winter Weather",
-            "NEW YORK"
-          ],
-          [
-            "2007-01-01T00:00:00Z",
-            "Winter Weather",
-            "NEW YORK"
-          ],
-          [
-            "2007-01-01T00:00:00Z",
-            "Winter Weather",
-            "NEW YORK"
           ]
         ]
       },
@@ -336,28 +301,28 @@ In this exercise, we will create an API using Function App, Data Explorer and St
         ],
         "Rows": [
           [
-            "2023-01-23T16:45:36.1388689Z",
+            "2023-01-23T18:13:12.421014Z",
             4,
             "Info",
             0,
             "Query completed successfully",
             2,
-            "9c7d9904-cf06-4330-902f-dca76f0c4997",
-            "9c7d9904-cf06-4330-902f-dca76f0c4997",
-            "a4985c95-0111-45c2-925a-183bf98dffb7",
-            "98f9a05d-8123-4489-8863-b8ba0f401746"
+            "be124417-f656-4ba2-a708-6092de5841f8",
+            "be124417-f656-4ba2-a708-6092de5841f8",
+            "38de4bc5-73f9-4448-8ec7-b028aa0968ac",
+            "768f1424-d75f-448e-a78d-4788bbfd4dac"
           ],
           [
-            "2023-01-23T16:45:36.1388689Z",
+            "2023-01-23T18:13:12.421014Z",
             6,
             "Stats",
             0,
-            "{\"ExecutionTime\":0.0,\"resource_usage\":{\"cache\":{\"memory\":{\"hits\":0,\"misses\":0,\"total\":0},\"disk\":{\"hits\":0,\"misses\":0,\"total\":0},\"shards\":{\"hot\":{\"hitbytes\":0,\"missbytes\":0,\"retrievebytes\":0},\"cold\":{\"hitbytes\":0,\"missbytes\":0,\"retrievebytes\":0},\"bypassbytes\":0}},\"cpu\":{\"user\":\"00:00:00\",\"kernel\":\"00:00:00\",\"total cpu\":\"00:00:00\"},\"memory\":{\"peak_per_node\":1573200},\"network\":{\"inter_cluster_total_bytes\":2810,\"cross_cluster_total_bytes\":0}},\"input_dataset_statistics\":{\"extents\":{\"total\":1,\"scanned\":1,\"scanned_min_datetime\":\"2023-01-12T13:43:43.0092037Z\",\"scanned_max_datetime\":\"2023-01-12T13:43:43.0092037Z\"},\"rows\":{\"total\":59066,\"scanned\":59066},\"rowstores\":{\"scanned_rows\":0,\"scanned_values_size\":0},\"shards\":{\"queries_generic\":1,\"queries_specialized\":0}},\"dataset_statistics\":[{\"table_row_count\":10,\"table_size\":317}],\"cross_cluster_resource_usage\":{}}",
+            "{\"ExecutionTime\":0.0,\"resource_usage\":{\"cache\":{\"memory\":{\"hits\":0,\"misses\":0,\"total\":0},\"disk\":{\"hits\":0,\"misses\":0,\"total\":0},\"shards\":{\"hot\":{\"hitbytes\":52739,\"missbytes\":0,\"retrievebytes\":0},\"cold\":{\"hitbytes\":0,\"missbytes\":0,\"retrievebytes\":0},\"bypassbytes\":0}},\"cpu\":{\"user\":\"00:00:00\",\"kernel\":\"00:00:00\",\"total cpu\":\"00:00:00\"},\"memory\":{\"peak_per_node\":1573200},\"network\":{\"inter_cluster_total_bytes\":2268,\"cross_cluster_total_bytes\":0}},\"input_dataset_statistics\":{\"extents\":{\"total\":1,\"scanned\":1,\"scanned_min_datetime\":\"2023-01-12T13:43:43.0092037Z\",\"scanned_max_datetime\":\"2023-01-12T13:43:43.0092037Z\"},\"rows\":{\"total\":59066,\"scanned\":59066},\"rowstores\":{\"scanned_rows\":0,\"scanned_values_size\":0},\"shards\":{\"queries_generic\":1,\"queries_specialized\":0}},\"dataset_statistics\":[{\"table_row_count\":3,\"table_size\":100}],\"cross_cluster_resource_usage\":{}}",
             1,
-            "9c7d9904-cf06-4330-902f-dca76f0c4997",
-            "9c7d9904-cf06-4330-902f-dca76f0c4997",
-            "a4985c95-0111-45c2-925a-183bf98dffb7",
-            "98f9a05d-8123-4489-8863-b8ba0f401746"
+            "be124417-f656-4ba2-a708-6092de5841f8",
+            "be124417-f656-4ba2-a708-6092de5841f8",
+            "38de4bc5-73f9-4448-8ec7-b028aa0968ac",
+            "768f1424-d75f-448e-a78d-4788bbfd4dac"
           ]
         ]
       },
@@ -395,14 +360,14 @@ In this exercise, we will create an API using Function App, Data Explorer and St
             0,
             "QueryResult",
             "PrimaryResult",
-            "a2f62615-d383-4650-ac40-304783fecb80",
+            "0e601b81-d776-473a-a8bf-20ad84770a8c",
             ""
           ],
           [
             1,
             "QueryProperties",
             "@ExtendedProperties",
-            "557d0504-68fa-4541-b1d1-1ba8150d120e",
+            "4f4d08e9-8887-4a79-80b2-dd47310ce96f",
             ""
           ],
           [
@@ -417,6 +382,8 @@ In this exercise, we will create an API using Function App, Data Explorer and St
     ]
   }
   ```
+
+_Note: This JSON is not likely your finally desired result; additional massaging will be required_
 
 --------------------------
 
