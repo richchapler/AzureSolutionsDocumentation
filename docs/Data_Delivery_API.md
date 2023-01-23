@@ -12,7 +12,7 @@ This solution considers the following requirements:
 ## Proposed Solution
 This solution will address requirements in two exercises:
 
-*	Exercise 1: Use Function App to create a "get data" API (from the sample StormEvents data on a Data Explorer cluster / database)
+*	Exercise 1: Create a "GETdata" API using Function App and the sample StormEvents data on your Data Explorer cluster / database
 *	Exercise 2: Power BI template that uses API
 
 ## Future Plans
