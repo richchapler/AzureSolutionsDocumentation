@@ -6,9 +6,7 @@ _Note: This documentation is a prelude to a larger, future conversation about Da
 ## Use Case
 This solution considers the following requirements:
 
-* "We have customer-specific data that we want to share with customers securely"
-* "Customer data must be 'air-gapped' {i.e., zero chance of Customer 1 seeing Customer 2 data, and vice versa}"
-* "In the future, we will want to monetize our analysis and data offerings with customers"
+* "We have customer-specific data that we want to share via API"
 
 ## Proposed Solution
 This solution will address requirements in one exercise:
@@ -19,8 +17,8 @@ This solution will address requirements in one exercise:
 This solution requires the following resources:
 
 * [**API Management**](https://learn.microsoft.com/en-us/azure/api-management/)
-* [**Application Registration**](Infrastructure_ApplicationRegistration.md) ... two instances for "Customer1" and "Customer2"
-* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and two [**databases**](Infrastructure_DataExplorer_Database.md) ("Customer1" and "Customer2", both with StormEvents sample data)
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) (with StormEvents sample data)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
 * [**Visual Studio**](https://visualstudio.microsoft.com/) with **Azure development** workload
 
