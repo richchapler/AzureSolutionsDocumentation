@@ -18,9 +18,9 @@ This solution will address requirements in two exercises:
 ## Future Plans
 In the future, I expect to expand this documentation to include:
 
-*	Exercise: Surface API via APIM (calls from customers will come through API for security, organization, throttling, “subscription model”, etc.) … http://api.blah.com/customer?id=7
-*	Exercise: APIM Monetization with Stripe
-*	Exercise: Subscribe to API in APIM (persona: customer)
+*	Surface API via APIM (calls from customers will come through API for security, organization, throttling, “subscription model”, etc.) … http://api.blah.com/customer?id=7
+*	APIM Monetization with Stripe
+*	Subscribe to API in APIM (persona: customer)
 
 ## Required Infrastructure
 This solution requires the following resources:
