@@ -31,7 +31,8 @@ In this exercise, we will import built-in sample data.
 
   <img src="https://user-images.githubusercontent.com/44923999/214140498-3b1a486c-57bd-407a-b249-60a93e54602e.png" width="800" title="Snipped: January 23, 2023" />
 
-* On the resulting "**Import Data**" page, "**Connect to your data**" tab, select Samples from the "**Existing data source**" drop-down menu
+* On the resulting "**Import Data**" page, "**Connect to your data**" tab, select **Samples** from the "**Existing data source**" drop-down menu
+* Select the "**realestate-us-sample**" row
 
 ## Reference
 
