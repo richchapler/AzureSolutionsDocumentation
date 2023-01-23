@@ -12,7 +12,7 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
-* Cognitive Services
+* [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
