@@ -116,16 +116,12 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
           [FunctionName("StormEvents")]
           [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
           [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-          //[OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
+          [OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
           [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "This is the StormEvent data!")]
-
-          // "decorators" that tells people what the API does ... add description data here
 
           public async Task<IActionResult> Run(
               [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
           {
-              _logger.LogInformation("C# HTTP trigger function processed a request.");
-
               var kcsb = new Kusto.Data.KustoConnectionStringBuilder(
                   connectionString: "ADX_CLUSTER_URI").WithAadApplicationKeyAuthentication(
                       applicationClientId: "CLIENT_ID",
@@ -137,7 +133,7 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
               {
                   var cqp = Kusto.Data.Net.Client.KustoClientFactory.CreateCslQueryProvider(kcsb);
 
-                  var q = "StormEvents | limit 10 | project StartTime, EventType, State";
+                  var q = "StormEvents | limit 3 | project StartTime, EventType, State";
                   var crp = new ClientRequestProperties() { ClientRequestId = Guid.NewGuid().ToString() };
 
                   var result = cqp.ExecuteQuery(databaseName: "Customer1", query: q, properties: crp).ToJsonString();
@@ -157,6 +153,7 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
   * `using Kusto.Cloud.Platform.Data` and `using Kusto.Data.Common`... necessary to execute Data Explorer queries
   * [KustoConnectionStringBuilder](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/kusto)
+  * `var q = "StormEvents | limit 3...` limits the result to just three rows
 
 ### Step 4: Publish to Azure
 
@@ -200,7 +197,235 @@ In this exercise, we will create a "get data" API using Function App, Data Explo
 
   <img src="https://user-images.githubusercontent.com/44923999/212186966-066fc12e-40df-4eab-89a2-bae2981ce508.png" width="800" title="Snipped: January 12, 2023" />
 
-* Open a new tab on your browser and paste the copied URL... you can expect to see a JSON response with StormEvents data
+* Open a new tab on your browser and paste the copied URL... you can expect to see a JSON response with StormEvents data {abbreviated and prettified below}:
+
+  ```
+  {
+    "Tables": [
+      {
+        "TableName": "Table_0",
+        "Columns": [
+          {
+            "ColumnName": "StartTime",
+            "DataType": "DateTime",
+            "ColumnType": "datetime"
+          },
+          {
+            "ColumnName": "EventType",
+            "DataType": "String",
+            "ColumnType": "string"
+          },
+          {
+            "ColumnName": "State",
+            "DataType": "String",
+            "ColumnType": "string"
+          }
+        ],
+        "Rows": [
+          [
+            "2007-01-01T00:00:00Z",
+            "Thunderstorm Wind",
+            "NORTH CAROLINA"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Storm",
+            "WISCONSIN"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Storm",
+            "WISCONSIN"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Weather",
+            "NEW YORK"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Weather",
+            "NEW YORK"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Weather",
+            "NEW YORK"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Weather",
+            "NEW YORK"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Weather",
+            "NEW YORK"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Weather",
+            "NEW YORK"
+          ],
+          [
+            "2007-01-01T00:00:00Z",
+            "Winter Weather",
+            "NEW YORK"
+          ]
+        ]
+      },
+      {
+        "TableName": "Table_1",
+        "Columns": [
+          {
+            "ColumnName": "Value",
+            "DataType": "String",
+            "ColumnType": "string"
+          }
+        ],
+        "Rows": [
+          [
+            "{\"Visualization\":null,\"Title\":null,\"XColumn\":null,\"Series\":null,\"YColumns\":null,\"AnomalyColumns\":null,\"XTitle\":null,\"YTitle\":null,\"XAxis\":null,\"YAxis\":null,\"Legend\":null,\"YSplit\":null,\"Accumulate\":false,\"IsQuerySorted\":false,\"Kind\":null,\"Ymin\":\"NaN\",\"Ymax\":\"NaN\",\"Xmin\":null,\"Xmax\":null}"
+          ]
+        ]
+      },
+      {
+        "TableName": "Table_2",
+        "Columns": [
+          {
+            "ColumnName": "Timestamp",
+            "DataType": "DateTime",
+            "ColumnType": "datetime"
+          },
+          {
+            "ColumnName": "Severity",
+            "DataType": "Int32",
+            "ColumnType": "int"
+          },
+          {
+            "ColumnName": "SeverityName",
+            "DataType": "String",
+            "ColumnType": "string"
+          },
+          {
+            "ColumnName": "StatusCode",
+            "DataType": "Int32",
+            "ColumnType": "int"
+          },
+          {
+            "ColumnName": "StatusDescription",
+            "DataType": "String",
+            "ColumnType": "string"
+          },
+          {
+            "ColumnName": "Count",
+            "DataType": "Int32",
+            "ColumnType": "int"
+          },
+          {
+            "ColumnName": "RequestId",
+            "DataType": "Guid",
+            "ColumnType": "guid"
+          },
+          {
+            "ColumnName": "ActivityId",
+            "DataType": "Guid",
+            "ColumnType": "guid"
+          },
+          {
+            "ColumnName": "SubActivityId",
+            "DataType": "Guid",
+            "ColumnType": "guid"
+          },
+          {
+            "ColumnName": "ClientActivityId",
+            "DataType": "String",
+            "ColumnType": "string"
+          }
+        ],
+        "Rows": [
+          [
+            "2023-01-23T16:45:36.1388689Z",
+            4,
+            "Info",
+            0,
+            "Query completed successfully",
+            2,
+            "9c7d9904-cf06-4330-902f-dca76f0c4997",
+            "9c7d9904-cf06-4330-902f-dca76f0c4997",
+            "a4985c95-0111-45c2-925a-183bf98dffb7",
+            "98f9a05d-8123-4489-8863-b8ba0f401746"
+          ],
+          [
+            "2023-01-23T16:45:36.1388689Z",
+            6,
+            "Stats",
+            0,
+            "{\"ExecutionTime\":0.0,\"resource_usage\":{\"cache\":{\"memory\":{\"hits\":0,\"misses\":0,\"total\":0},\"disk\":{\"hits\":0,\"misses\":0,\"total\":0},\"shards\":{\"hot\":{\"hitbytes\":0,\"missbytes\":0,\"retrievebytes\":0},\"cold\":{\"hitbytes\":0,\"missbytes\":0,\"retrievebytes\":0},\"bypassbytes\":0}},\"cpu\":{\"user\":\"00:00:00\",\"kernel\":\"00:00:00\",\"total cpu\":\"00:00:00\"},\"memory\":{\"peak_per_node\":1573200},\"network\":{\"inter_cluster_total_bytes\":2810,\"cross_cluster_total_bytes\":0}},\"input_dataset_statistics\":{\"extents\":{\"total\":1,\"scanned\":1,\"scanned_min_datetime\":\"2023-01-12T13:43:43.0092037Z\",\"scanned_max_datetime\":\"2023-01-12T13:43:43.0092037Z\"},\"rows\":{\"total\":59066,\"scanned\":59066},\"rowstores\":{\"scanned_rows\":0,\"scanned_values_size\":0},\"shards\":{\"queries_generic\":1,\"queries_specialized\":0}},\"dataset_statistics\":[{\"table_row_count\":10,\"table_size\":317}],\"cross_cluster_resource_usage\":{}}",
+            1,
+            "9c7d9904-cf06-4330-902f-dca76f0c4997",
+            "9c7d9904-cf06-4330-902f-dca76f0c4997",
+            "a4985c95-0111-45c2-925a-183bf98dffb7",
+            "98f9a05d-8123-4489-8863-b8ba0f401746"
+          ]
+        ]
+      },
+      {
+        "TableName": "Table_3",
+        "Columns": [
+          {
+            "ColumnName": "Ordinal",
+            "DataType": "Int64",
+            "ColumnType": "long"
+          },
+          {
+            "ColumnName": "Kind",
+            "DataType": "String",
+            "ColumnType": "string"
+          },
+          {
+            "ColumnName": "Name",
+            "DataType": "String",
+            "ColumnType": "string"
+          },
+          {
+            "ColumnName": "Id",
+            "DataType": "String",
+            "ColumnType": "string"
+          },
+          {
+            "ColumnName": "PrettyName",
+            "DataType": "String",
+            "ColumnType": "string"
+          }
+        ],
+        "Rows": [
+          [
+            0,
+            "QueryResult",
+            "PrimaryResult",
+            "a2f62615-d383-4650-ac40-304783fecb80",
+            ""
+          ],
+          [
+            1,
+            "QueryProperties",
+            "@ExtendedProperties",
+            "557d0504-68fa-4541-b1d1-1ba8150d120e",
+            ""
+          ],
+          [
+            2,
+            "QueryStatus",
+            "QueryStatus",
+            "00000000-0000-0000-0000-000000000000",
+            ""
+          ]
+        ]
+      }
+    ]
+  }
+  ```
 
 --------------------------
 
