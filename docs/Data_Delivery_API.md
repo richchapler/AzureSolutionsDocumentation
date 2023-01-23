@@ -1,4 +1,5 @@
 # Surface Data with an API
+_Note: This documentation is a prelude to a larger, future conversation about Data Monetization_
 
 ![image](https://user-images.githubusercontent.com/44923999/214113810-5d6ffd3c-0b84-4f3b-9ac9-266ef1fa3302.png)
 
@@ -12,7 +13,7 @@ This solution considers the following requirements:
 ## Proposed Solution
 This solution will address requirements in two exercises:
 
-*	Exercise 1: Create an API using Function App and the sample StormEvents data on your Data Explorer Cluster / Database
+*	Exercise 1: Create an API using Function App, Data Explorer and StormEvents sample data
 
 ## Required Infrastructure
 This solution requires the following resources:
@@ -21,11 +22,10 @@ This solution requires the following resources:
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md) ... two instances for "Customer1" and "Customer2"
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and two [**databases**](Infrastructure_DataExplorer_Database.md) ("Customer1" and "Customer2", both with StormEvents sample data)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
-* [**Power BI**](https://powerbi.microsoft.com/en-us/)
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
 ## Exercise 1: Create API
-In this exercise, we will create a "get data" API using Function App, Data Explorer and StormEvents sample data.
+In this exercise, we will create an API using Function App, Data Explorer and StormEvents sample data.
 
 ### Step 1: Create Visual Studio Project
 
