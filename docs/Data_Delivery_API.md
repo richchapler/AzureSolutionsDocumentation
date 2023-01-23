@@ -103,6 +103,7 @@ In this exercise, we will create an API using Function App, Data Explorer and St
       public class StormEvents
       {
           private readonly ILogger<StormEvents> _logger;
+
           public StormEvents(ILogger<StormEvents> log) { _logger = log; }
 
           [FunctionName("StormEvents")]
@@ -115,17 +116,17 @@ In this exercise, we will create an API using Function App, Data Explorer and St
               [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
           {
               var kcsb = new Kusto.Data.KustoConnectionStringBuilder(
-                  connectionString: "ADX_CLUSTER_URI").WithAadApplicationKeyAuthentication(
-                      applicationClientId: "CLIENT_ID",
-                      applicationKey: "CLIENT_SECRET",
-                      authority: "TENANT_ID"
+                  connectionString: "https://rchaplerdec.westus3.kusto.windows.net").WithAadApplicationKeyAuthentication(
+                      applicationClientId: "21e11b4a-d067-40e0-9ed2-47f4a60c0218", // rchaplerar-c1
+                      applicationKey: "pY88Q~JLYM_zxfgdec9NrbgsojBCUr7UXIn1ccba",
+                      authority: "16b3c013-d300-468d-ac64-7eda0820b6d3"
                   );
 
               try
               {
                   var cqp = Kusto.Data.Net.Client.KustoClientFactory.CreateCslQueryProvider(kcsb);
 
-                  var q = "StormEvents | limit 3 | project StartTime, EventType, State";
+                  var q = "StormEvents | limit 10 | project StartTime, EventType, State";
                   var crp = new ClientRequestProperties() { ClientRequestId = Guid.NewGuid().ToString() };
 
                   var result = cqp.ExecuteQuery(databaseName: "Customer1", query: q, properties: crp).ToJsonString();
