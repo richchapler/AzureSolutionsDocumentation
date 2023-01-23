@@ -11,7 +11,7 @@ This solution considers the following requirements:
 * "In the future, we will want to monetize our analysis and data offerings with customers"
 
 ## Proposed Solution
-This solution will address requirements in two exercises:
+This solution will address requirements in one exercise:
 
 *	Exercise 1: Create an API using Function App, Data Explorer and StormEvents sample data
 
