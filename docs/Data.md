@@ -33,4 +33,4 @@
 
   Use Case | Method | Language
   :----- | :----- | :-----
-  [Data Monetization](Data_Delivery_Monetization.md) | APIM | C#
+  [Surface Data with an API](Data_Delivery_API.md) | Function App | C#
