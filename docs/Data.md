@@ -29,8 +29,8 @@
   [JSON Discovery](Data_Analysis_JSONDiscovery.md) | Data Explorer | KQL
   [Time Windowing](Data_Analysis_TimeWindowing.md) | Data Explorer | KQL
 
-### Delivery
+### Surface
 
   Use Case | Method | Language
   :----- | :----- | :-----
-  [Surface Data with an API](Data_Delivery_API.md) | Function App | C#
+  [Surface Data with an API](Data_Surface_API.md) | Function App + APIM | C#
