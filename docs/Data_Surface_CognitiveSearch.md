@@ -38,7 +38,7 @@ Navigate to your instance and then click "**Import Data**"
 
   <img src="https://user-images.githubusercontent.com/44923999/214144851-f5be1f08-374d-4b8d-8fed-b56e6a7980a7.png" width="800" title="Snipped: January 23, 2023" />
 
-* On the resulting "**Import Data**" page, "**Add cognitive skills (Optional)**" tab, expand "**Attach Cognitives Services**"
+* On the resulting "**Import Data**" page, "**Add cognitive skills (Optional)**" tab, expand "**Attach Cognitive Services**"
 * Select your instance of Cognitive Services
 
 ## Reference
