@@ -10,13 +10,17 @@ This solution considers the following requirements:
 * "In the future, we will want to share and monetize our analysis and data offerings with customers"
 
 ## Proposed Solution
-This solution will address requirements in three steps:
+This solution will address requirements in two exercises:
 
 *	Exercise 1: Use Function App to create a "get data" API (from the sample StormEvents data on a Data Explorer cluster / database)
-*	Exercise 2: Surface API via APIM (calls from customers will come through API for security, organization, throttling, “subscription model”, etc.) … http://api.blah.com/customer?id=7
-*	Exercise 3: APIM Monetization? … with Stripe?
-*	Exercise 4: Subscribe to API in APIM (persona: customer)
-*	Exercise 5: Power BI template that uses API
+*	Exercise 2: Power BI template that uses API
+
+## Future Plans
+In the future, I expect to expand this documentation to include:
+
+*	Exercise: Surface API via APIM (calls from customers will come through API for security, organization, throttling, “subscription model”, etc.) … http://api.blah.com/customer?id=7
+*	Exercise: APIM Monetization with Stripe
+*	Exercise: Subscribe to API in APIM (persona: customer)
 
 ## Required Infrastructure
 This solution requires the following resources:
@@ -25,6 +29,7 @@ This solution requires the following resources:
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md) ... two instances for "Customer1" and "Customer2"
 * Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and two [**databases**](Infrastructure_DataExplorer_Database.md) ("Customer1" and "Customer2", both with StormEvents sample data)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured to use [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) for monitoring
+* Power BI
 * [Visual Studio](https://visualstudio.microsoft.com/) with **Azure development** workload
 
 ## Exercise 1: Create API
