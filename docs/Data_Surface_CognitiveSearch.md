@@ -13,6 +13,7 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* [**Storage Account**](Infrastructure_StorageAccount.md)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
