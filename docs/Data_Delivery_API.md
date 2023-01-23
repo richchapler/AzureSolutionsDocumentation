@@ -124,7 +124,7 @@ In this exercise, we will create an API using Function App, Data Explorer and St
               {
                   var cqp = Kusto.Data.Net.Client.KustoClientFactory.CreateCslQueryProvider(kcsb);
 
-                  var q = "StormEvents | limit 10 | project StartTime, EventType, State";
+                  var q = "StormEvents | limit 3 | project StartTime, EventType, State";
                   var crp = new ClientRequestProperties() { ClientRequestId = Guid.NewGuid().ToString() };
 
                   var result = cqp.ExecuteQuery(databaseName: "Customer1", query: q, properties: crp).ToJsonString();
