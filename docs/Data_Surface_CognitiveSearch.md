@@ -25,7 +25,11 @@ In this exercise, we will import built-in sample data.
 
 ### Step 1: Lorem Ipsum
 
-Lorem Ipsum
+* Open the Azure Portal and navigate to your Search Service instance
+
+  <img src="https://user-images.githubusercontent.com/44923999/214131662-5146b2f6-89bd-4dd8-97c8-adc9432f04d7.png" width="800" title="Snipped: January 23, 2023" />
+
+* Click "**Import Data**"
 
 ## Reference
 
