@@ -29,6 +29,10 @@ This solution will address requirements in three exercises:
 In this exercise, we will prepare sample data {i.e., Data Explorer "StormEvents" sample data, continuously export to Azure Blob Storage}.<br>
 _Note: This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
 
+### Step 1: Setup Continuous Export
+
+### Step 1: Import Sample Data
+
 ## Exercise 2: Import Data
 In this exercise, we will import built-in sample data.
 
@@ -165,6 +169,7 @@ Confirm successful data import.
 
 ## Reference
 
+* [Continuous data export overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export)
 * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
 * [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
 * [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
