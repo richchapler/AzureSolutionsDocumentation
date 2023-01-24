@@ -6,7 +6,8 @@ _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 ## Use Case
 This solution considers the following requirements:
 
-* "We have archived a significant amount of rich, historical data and want to help business users search this data asset"
+* "We have archived a significant amount of rich, historical data from a soon-to-be deprecated solution"
+* "We want to help business users search this data asset"
 
 ## Required Infrastructure
 This solution requires the following resources:
