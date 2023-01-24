@@ -29,9 +29,43 @@ This solution will address requirements in three exercises:
 In this exercise, we will prepare sample data {i.e., Data Explorer "StormEvents" sample data, continuously export to Azure Blob Storage}.<br>
 _Note: This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
 
-### Step 1: Setup Continuous Export
+### Step 1: Create External Table
+External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
 
-* Navigate to Data Explorer, Query
+In this step, we will run a KQL query to create an external table that we can use as a destination for data export.
+
+Navigate to Data Explorer, then Query in the Data grouping of the left-hand navigation pane and then **Run** the following KQL:
+
+```
+.create external table StormEvents (
+    StartTime: datetime,
+    EndTime: datetime,
+    EpisodeId: int,
+    EventId: int,
+    State: string,
+    EventType: string,
+    InjuriesDirect: int,
+    InjuriesIndirect: int,
+    DeathsDirect: int,
+    DeathsIndirect: int,
+    DamageProperty: int,
+    DamageCrops: int,
+    Source: string,
+    BeginLocation: string,
+    EndLocation: string,
+    BeginLat: real,
+    BeginLon: real,
+    EndLat: real,
+    EndLon: real,
+    EpisodeNarrative: string,
+    EventNarrative: string,
+    StormSummary: dynamic
+    )
+kind = storage
+dataformat = csv ( 'https://rchaplers.blob.core.windows.net/rchaplersac;STORAGEACCOUNT_ACCESSKEY' )
+```
+
+<img src="https://user-images.githubusercontent.com/44923999/214343030-f08d5a1e-d1ee-4cf6-a118-d777e266cf67.png" width="800" title="Snipped: January 24, 2023" />
 
 ### Step 2: Import Sample Data
 
