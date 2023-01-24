@@ -14,6 +14,7 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) (with StormEvents sample data)
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
 ## Proposed Solution
