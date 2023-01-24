@@ -26,8 +26,10 @@ This solution will address requirements in three exercises:
 *	Exercise 4: Prepare Interface
 
 ## Exercise 1: Prepare Data
-In this exercise, we will prepare sample data {i.e., Data Explorer "StormEvents" sample data, continuously export to Azure Blob Storage}.<br>
-_Note: This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
+In this exercise, we will prepare sample data {i.e., Data Explorer "StormEvents" sample data, continuously exported to Azure Blob Storage}.<br><br>
+_Notes:_
+* _This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
+* _.export might be used (instead of continuous export) if one-time load is all that is required_
 
 ### Step 1: Create External Table
 External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
