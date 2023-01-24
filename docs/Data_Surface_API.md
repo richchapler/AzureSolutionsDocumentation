@@ -115,9 +115,9 @@ In this exercise, we will create an API using Function App, Data Explorer and St
           {
               var kcsb = new Kusto.Data.KustoConnectionStringBuilder(
                   connectionString: "https://rchaplerdec.westus3.kusto.windows.net").WithAadApplicationKeyAuthentication(
-                      applicationClientId: "21e11b4a-d067-40e0-9ed2-47f4a60c0218", // rchaplerar-c1
-                      applicationKey: "pY88Q~JLYM_zxfgdec9NrbgsojBCUr7UXIn1ccba",
-                      authority: "16b3c013-d300-468d-ac64-7eda0820b6d3"
+                      applicationClientId: "CLIENT_ID",
+                      applicationKey: "CLIENT_SECRET",
+                      authority: "TENANT_ID"
                   );
 
               try
