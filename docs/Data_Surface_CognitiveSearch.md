@@ -18,11 +18,15 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-*	Exercise 1: Import Data
-*	Exercise 2: Create Search Index
-*	Exercise 3: Prepare Interface
+*	Exercise 1: Prepare Data
+*	Exercise 2: Import Data
+*	Exercise 3: Create Search Index
+*	Exercise 4: Prepare Interface
 
-## Exercise 1: Import Sample Data
+## Exercise 1: Prepare Data
+In this exercise, we will prepare sample data {i.e., the StormEvents sample data from Azure Data Explorer}.
+
+## Exercise 2: Import Data
 In this exercise, we will import built-in sample data.
 
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
