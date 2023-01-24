@@ -41,22 +41,20 @@ On the "**Connect to your data**" tab, select **Samples** from the "**Existing d
 On the "**Add cognitive skills (Optional)**" tab, expand "**Attach Cognitive Services**"
 
 #### Step 2a: Attach Cognitive Services
-
 <img src="https://user-images.githubusercontent.com/44923999/214144851-f5be1f08-374d-4b8d-8fed-b56e6a7980a7.png" width="800" title="Snipped: January 23, 2023" />
 
 * Select your instance of Cognitive Services
+* Collapse "**Attach Cognitive Services**" and then expand "**Add enrichments**"
 
 #### Step 2b: Add Enrichments
-Collapse "**Attach Cognitive Services**" and then expand "**Add enrichments**"
-
 <img src="https://user-images.githubusercontent.com/44923999/214149017-338ba6c7-3281-40ee-92ca-e8b099b5430f.png" width="800" title="Snipped: January 23, 2023" />
 
 * Add appropriate enrichments<br>
   _Note: Even familiar data sources can be hard to configure the first time through {e.g., "will the Description field have "people names"?}. I lean towards experimentation in this situation... we can always re-configure once the initial Import Data exercise is complete._
 
-#### Step 2c: Save Enrichments
-Collapse "**Add enrichments**" and then expand "**Save enrichments to a knowledge store**"
+* Collapse "**Add enrichments**" and then expand "**Save enrichments to a knowledge store**"
 
+#### Step 2c: Save Enrichments
 <img src="https://user-images.githubusercontent.com/44923999/214153287-beed5d62-200a-48ec-b852-578f38621af6.png" width="800" title="Snipped: January 23, 2023" />
 
 * Configure knowledge store options and then click "**Next: Customize target index**"
