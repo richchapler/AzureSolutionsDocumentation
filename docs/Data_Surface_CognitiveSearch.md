@@ -6,7 +6,7 @@ _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 ## Use Case
 This solution considers the following requirements:
 
-* "We have archived a significant amount of rich, historical data from a soon-to-be deprecated solution"
+* "We used Data Explorer to capture a significant amount of rich, historical data from a soon-to-be-deprecated, on-prem database"
 * "We want to help business users search this data asset"
 
 ## Required Infrastructure
@@ -26,7 +26,8 @@ This solution will address requirements in three exercises:
 *	Exercise 4: Prepare Interface
 
 ## Exercise 1: Prepare Data
-In this exercise, we will prepare sample data {i.e., the StormEvents sample data from Azure Data Explorer}.
+In this exercise, we will prepare sample data {i.e., Data Explorer "StormEvents" sample data, continuously export to Azure Blob Storage}.<br>
+_Note: This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
 
 ## Exercise 2: Import Data
 In this exercise, we will import built-in sample data.
