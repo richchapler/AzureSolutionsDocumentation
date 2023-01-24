@@ -61,8 +61,9 @@ Configure index options and then click "**Next: Create an indexer**"
 Configure and then click **Submit**
 
 ### Step 5: Confirm Success
+<img src="https://user-images.githubusercontent.com/44923999/214312163-6f2c0749-ac0b-4a61-9bcd-f2e5b25e50ea.png" width="800" title="Snipped: January 24, 2023" />
 
-Lorem Ipsum
+On the **Overview** page, click "**Search explorer**"
 
 -----------------------
 
