@@ -15,7 +15,7 @@ _Note: in many cases, the links below point to Microsoft documentation... wherev
 
 > [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
-> [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md) ... [FAQ](Infrastructure_DataExplorer.md)
+> [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md) >> also, [FAQ](Infrastructure_DataExplorer.md)
 
 > **Data Factory** >> [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 
