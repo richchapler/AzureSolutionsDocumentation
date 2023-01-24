@@ -66,12 +66,12 @@ Update and then **Run** the following KQL:
     StormSummary: dynamic
     )
 kind = storage
-dataformat = csv ( 'https://rchaplers.blob.core.windows.net/rchaplersac;STORAGEACCOUNT_ACCESSKEY' )
+dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY' )
 ```
 
 _Note: I prefixed the name of the external table with the letter "e" {i.e., "eStormEvents} because the sample data imported in the next step uses the table name "StormEvents"_
 
-<img src="https://user-images.githubusercontent.com/44923999/214356706-a97e6aeb-3461-4381-84d9-2176e7f5077b.png" width="800" title="Snipped: January 24, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214364390-47fe0af5-8eb3-4df1-989c-70416cc8b0a4.png" width="800" title="Snipped: January 24, 2023" />
 
 ### Step 2: Create Continuous Export
 Continuous Export enables Data Explorer to export the results of a query to an external data source for backup, archiving or downstream processing.
