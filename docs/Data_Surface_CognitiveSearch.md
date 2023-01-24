@@ -20,12 +20,12 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-*	Exercise 1: Prepare Data
-*	Exercise 2: Import Data
-*	Exercise 3: Create Search Index
-*	Exercise 4: Prepare Interface
+*	Exercise 1: Prepare Demonstration Data
+*	Exercise 2: Cognitive Search Import
+*	Exercise 3: Create Search Index (pending)
+*	Exercise 4: Prepare Interface (pending)
 
-## Exercise 1: Prepare Data
+## Exercise 1: Prepare Demonstration Data
 In this exercise, we will prepare sample data {i.e., Data Explorer "StormEvents" sample data, continuously exported to Azure Blob Storage}.<br><br>
 _Notes:_
 * _This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
@@ -93,7 +93,7 @@ Follow the guidance at the following link: [Quickstart: Ingest sample data into 
 
 -------------------
 
-## Exercise 2: Import Data
+## Exercise 2: Cognitive Search Import
 In this exercise, we will import built-in sample data.
 
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
