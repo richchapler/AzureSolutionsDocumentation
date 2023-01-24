@@ -65,9 +65,18 @@ Configure and then click **Submit**
 
 On the **Overview** page, click "**Search explorer**"
 
+<img src="https://user-images.githubusercontent.com/44923999/214313821-47edb62f-b48b-4a25-8893-7668224abb9b.png" width="800" title="Snipped: January 24, 2023" />
+
+"**Search Explorer**" supports your efforts to:
+* Interact with and test a search index
+* Test and debug search queries
+* Craft a Request URL (for API calls)
+
+Execute the following (very simple) query string: $top=1
 -----------------------
 
 ## Reference
 
 * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
 * [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
+* [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
