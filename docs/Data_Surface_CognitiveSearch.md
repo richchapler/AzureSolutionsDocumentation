@@ -34,7 +34,9 @@ External tables enable Data Explorer to interact with data stored in an external
 
 In this step, we will run a KQL query to create an external table that we can use as a destination for data export.
 
-Navigate to Data Explorer, then Query in the Data grouping of the left-hand navigation pane and then **Run** the following KQL:
+Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
+
+Update and then **Run** the following KQL:
 
 ```
 .create external table StormEvents (
