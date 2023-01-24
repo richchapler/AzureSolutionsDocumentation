@@ -71,7 +71,7 @@ dataformat = csv ( 'https://rchaplers.blob.core.windows.net/rchaplersac;STORAGEA
 
 _Note: I prefixed the name of the external table with the letter "e" {i.e., "eStormEvents} because the sample data imported in the next step uses the table name "StormEvents"_
 
-<img src="https://user-images.githubusercontent.com/44923999/214343030-f08d5a1e-d1ee-4cf6-a118-d777e266cf67.png" width="800" title="Snipped: January 24, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214356706-a97e6aeb-3461-4381-84d9-2176e7f5077b.png" width="800" title="Snipped: January 24, 2023" />
 
 ### Step 2: Import StormEvents Data
 
