@@ -31,7 +31,9 @@ _Note: This exercise is necessary because Data Explorer is not a Cognitive Searc
 
 ### Step 1: Setup Continuous Export
 
-### Step 1: Import Sample Data
+* Navigate to Data Explorer, Query
+
+### Step 2: Import Sample Data
 
 ## Exercise 2: Import Data
 In this exercise, we will import built-in sample data.
@@ -170,6 +172,7 @@ Confirm successful data import.
 ## Reference
 
 * [Continuous data export overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export)
+* [Create and alter Azure Storage external tables](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/external-tables-azurestorage-azuredatalake)
 * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
 * [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
 * [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
