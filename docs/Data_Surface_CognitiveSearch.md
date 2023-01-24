@@ -41,7 +41,7 @@ Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of th
 Update and then **Run** the following KQL:
 
 ```
-.create external table StormEvents (
+.create external table StormEvents-external (
     StartTime: datetime,
     EndTime: datetime,
     EpisodeId: int,
@@ -68,6 +68,8 @@ Update and then **Run** the following KQL:
 kind = storage
 dataformat = csv ( 'https://rchaplers.blob.core.windows.net/rchaplersac;STORAGEACCOUNT_ACCESSKEY' )
 ```
+
+_Note: I suffixed the external name {i.e., ...-external} because the sample data imported in the next step uses the table name "StormEvents"_
 
 <img src="https://user-images.githubusercontent.com/44923999/214343030-f08d5a1e-d1ee-4cf6-a118-d777e266cf67.png" width="800" title="Snipped: January 24, 2023" />
 
