@@ -33,4 +33,5 @@
 
   Use Case | Method | Language
   :----- | :----- | :-----
-  [Surface Data with an API](Data_Surface_API.md) | Function App + APIM | C#
+  [...with an API](Data_Surface_API.md) | Function App + APIM | C# (Function App)
+  [...with Cognitive Search](Data_Surface_CognitiveSearch.md) | Cognitive Search | Low Code
