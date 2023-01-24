@@ -72,7 +72,88 @@ On the **Overview** page, click "**Search explorer**"
 * Test and debug search queries
 * Craft a Request URL (for API calls)
 
-Execute the following (very simple) query string: $top=1
+Execute the following (very simple) query string: `$top=1`
+
+Results
+```
+{
+  "@odata.context": "https://rchaplercs.search.windows.net/indexes/realestate-us-sample-index/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 1,
+      "listingId": "OTM4MjI2NQ2",
+      "beds": 5,
+      "baths": 4,
+      "description": "This is a apartment residence and is perfect for entertaining.  This home provides lakefront property located close to parks and features a detached garage, beautiful bedroom floors and lots of storage.",
+      "description_de": "Dies ist eine Wohnanlage und ist perfekt für Unterhaltung.  Dieses Haus bietet Seeliegenschaft Parks in der Nähe und verfügt über eine freistehende Garage schöne Zimmer-Etagen and viel Stauraum.",
+      "description_fr": "Il s’agit d’un appartement de la résidence et est parfait pour se divertir.  Cette maison offre propriété au bord du lac Situé à proximité de Parcs et dispose d’un garage détaché, planchers de belle chambre and beaucoup de rangement.",
+      "description_it": "Si tratta di un appartamento residence ed è perfetto per intrattenere.  Questa casa fornisce proprietà lungolago Situato vicino ai parchi e dispone di un garage indipendente, piani di bella camera da letto and sacco di stoccaggio.",
+      "description_es": "Se trata de una residencia Apartamento y es perfecto para el entretenimiento.  Esta casa ofrece propiedad de lago situado cerca de parques y cuenta con un garaje independiente, pisos de dormitorio hermoso and montón de almacenamiento.",
+      "description_pl": "Jest to apartament residence i jest idealny do zabawy.  Ten dom zapewnia lakefront Wlasciwosc usytuowany w poblizu parków i oferuje garaz wolnostojacy, piekna sypialnia podlogi and mnóstwo miejsca do przechowywania.",
+      "description_nl": "Dit is een appartement Residentie en is perfect voor entertaining.  Dit huis biedt lakefront eigenschap vlakbij parken en beschikt over een vrijstaande garage, mooie slaapkamer vloeren and veel opslag.",
+      "sqft": 12960,
+      "daysOnMarket": 9,
+      "status": "sold",
+      "source": "Pérez Realty",
+      "number": "19339",
+      "street": "Linden Avenue North",
+      "unit": "658",
+      "type": "Apartment",
+      "city": "Shoreline",
+      "region": "wa",
+      "countryCode": "us",
+      "postCode": "98133",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          -122.35,
+          47.7699
+        ],
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "EPSG:4326"
+          }
+        }
+      },
+      "price": 3693600,
+      "thumbnail": "https://searchdatasets.blob.core.windows.net/images/bd5bt4apt.jpg",
+      "tags": [
+        "apartment residence",
+        "entertaining",
+        "lakefront property",
+        "parks",
+        "detached garage",
+        "beautiful bedroom floors",
+        "lots of storage"
+      ],
+      "organizations": [],
+      "locations": [
+        "apartment residence",
+        "home",
+        "parks",
+        "garage"
+      ],
+      "people": [],
+      "keyphrases": [
+        "beautiful bedroom floors",
+        "apartment residence",
+        "lakefront property",
+        "detached garage",
+        "home",
+        "parks",
+        "lots",
+        "storage"
+      ],
+      "masked_text": "This is a apartment residence and is perfect for entertaining.  This home provides lakefront property located close to parks and features a detached garage, beautiful bedroom floors and lots of storage.",
+      "pii_entities": []
+    }
+  ]
+}
+```
+
+Confirm successful data import.
+
 -----------------------
 
 ## Reference
