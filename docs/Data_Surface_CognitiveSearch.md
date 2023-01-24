@@ -14,8 +14,8 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Storage Account**](Infrastructure_StorageAccount.md)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) with StormEvents sample data
+* [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents"
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
@@ -73,7 +73,20 @@ _Note: I prefixed the name of the external table with the letter "e" {i.e., "eSt
 
 <img src="https://user-images.githubusercontent.com/44923999/214356706-a97e6aeb-3461-4381-84d9-2176e7f5077b.png" width="800" title="Snipped: January 24, 2023" />
 
-### Step 2: Import StormEvents Data
+### Step 2: Create Continuous Export
+Continuous Export enables Data Explorer to export the results of a query to an external data source for backup, archiving or downstream processing.
+
+In this step, we will run a KQL query to create a continuous export job.
+
+Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
+
+Update and then **Run** the following KQL:
+
+```
+.create continuous-export blah
+```
+
+### Step 3: Import StormEvents Data
 
 Follow the guidance at the following link: [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
 
