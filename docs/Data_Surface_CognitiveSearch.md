@@ -71,7 +71,11 @@ dataformat = csv ( 'https://rchaplers.blob.core.windows.net/rchaplersac;STORAGEA
 
 <img src="https://user-images.githubusercontent.com/44923999/214343030-f08d5a1e-d1ee-4cf6-a118-d777e266cf67.png" width="800" title="Snipped: January 24, 2023" />
 
-### Step 2: Import Sample Data
+### Step 2: Import StormEvents Data
+
+Follow the guidance at the following link: [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+
+-------------------
 
 ## Exercise 2: Import Data
 In this exercise, we will import built-in sample data.
