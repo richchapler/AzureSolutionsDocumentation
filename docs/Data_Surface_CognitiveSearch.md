@@ -83,7 +83,8 @@ Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of th
 Update and then **Run** the following KQL:
 
 ```
-.create continuous-export blah
+.create-or-alter continuous-export ceStormEvents to table eStormEvents with ( intervalBetweenRuns = 1h)
+<| StormEvents
 ```
 
 ### Step 3: Import StormEvents Data
