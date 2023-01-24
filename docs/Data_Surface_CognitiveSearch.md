@@ -1,5 +1,5 @@
 # Surface Data with Cognitive Search
-_Note: Cognitive Search is also known as Search Services and Azure Search_
+_Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 ![image](https://user-images.githubusercontent.com/44923999/214127109-5208bf6e-f1d3-40b0-bcbc-a302b5834ab8.png)
 
@@ -29,7 +29,7 @@ In this exercise, we will import built-in sample data.
 
 Navigate to your instance and then click "**Import Data**"
 
-### Step 1: Connect to your data
+### Step 1: Connect Data
 
   <img src="https://user-images.githubusercontent.com/44923999/214140498-3b1a486c-57bd-407a-b249-60a93e54602e.png" width="800" title="Snipped: January 23, 2023" />
 
@@ -43,15 +43,21 @@ Navigate to your instance and then click "**Import Data**"
 * Select your instance of Cognitive Services
 * Collapse "**Attach Cognitive Services**" and then expand "**Add enrichments**"
 
+### Step 2: Add Enrichments
+
   <img src="https://user-images.githubusercontent.com/44923999/214149017-338ba6c7-3281-40ee-92ca-e8b099b5430f.png" width="800" title="Snipped: January 23, 2023" />
 
 * Add appropriate enrichments
   _Note: Even familiar data sources can be hard to configure the first time through {e.g., "will the Description field have "people names"?}. I lean towards experimentation in this situation... we can always re-configure once the initial Import Data exercise is complete._
 * Collapse "**Add enrichments**" and then expand "**Save enrichments to a knowledge store**"
 
+### Step 3: Configure Storage
+
   <img src="https://user-images.githubusercontent.com/44923999/214153287-beed5d62-200a-48ec-b852-578f38621af6.png" width="800" title="Snipped: January 23, 2023" />
 
 * Configure knowledge store options and then click "**Next: Customize target index**"
+
+### Step 4: Customize Index
 
   <img src="https://user-images.githubusercontent.com/44923999/214154309-fea824d2-d3bf-435b-bf85-500dd28be462.png" width="800" title="Snipped: January 23, 2023" />
 
@@ -63,6 +69,12 @@ Navigate to your instance and then click "**Import Data**"
   <img src="https://user-images.githubusercontent.com/44923999/214154948-102c8185-cbdc-44f9-b21f-12bb9a22a43b.png" width="800" title="Snipped: January 23, 2023" />
 
 * On the resulting "**Import Data**" page, "**Create an indexer**" tab, configure and then click **Submit**
+
+### Step 5: Confirm Success
+
+Lorem Ipsum
+
+-----------------------
 
 ## Reference
 
