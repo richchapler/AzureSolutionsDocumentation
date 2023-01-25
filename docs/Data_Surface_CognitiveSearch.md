@@ -15,7 +15,7 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) with StormEvents sample data
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents"
 
 ## Proposed Solution
@@ -29,23 +29,17 @@ This solution will address requirements in three exercises:
 -----
 
 ## Exercise 1: Prepare Demonstration Data
-In this exercise, we will discuss two data preparation options:
+In this exercise, we will discuss two data ways of preparing Data Explorer-based data for use by Cognitive Search:
 
-* Option #1: One-Time Export... appropriate where data is static
-* Option #2: Continuous Export... appropriate where data changes over time
-
-We will use Data Explorer "StormEvents" sample data exported to Azure Blob Storage (as per use case / requirement).<br><br>
-_Note: In Exercise 2, we will see that Data Explorer is not a Cognitive Search, "Import Data" option, but Blob Storage is_
-
-### Option #1: One-Time Export
-* _.export might be used (instead of continuous export) if one-time load is all that is required_
-
-### Option #2: Continuous Export
+* Option #1: One-Time Export (to Blob Storage)... appropriate where data is static
+* Option #2: Continuous Export (to Blob Storage)... appropriate where data changes over time
 
 ### Step 1: Create External Table
 External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
 
-In this step, we will run a KQL query to create an external table that we can use as a destination for data export.
+In this step, we will run a KQL query to create an external table that we can use as an export destination.
+
+<img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
 
@@ -80,14 +74,31 @@ kind = storage
 dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY' )
 ```
 
-_Note: I prefixed the name of the external table with the letter "e" {i.e., "eStormEvents} because the sample data imported in the next step uses the table name "StormEvents"_
+_Note: I prefixed the external table name with the letter "e" {i.e., "eStormEvents"} because the imported sample data will use the table name "StormEvents"_
 
-<img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
+#### Step 2: Perform One-Time Export (Option #1)
+In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
 
-#### Step 2: Create Continuous Export
-"Continuous Export" describes the recurring export of query results to an external data source for backup, archiving or downstream processing.
+Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
 
-In this step, we will run a KQL query to create a Continuous Export job.
+<img src="https://user-images.githubusercontent.com/44923999/214618239-312d447b-230b-4ed2-acbb-2dbf2b520ce7.png" width="800" title="Snipped: January 25, 2023" />
+
+Confirm sample data ingestion and then **Run** the following KQL:
+
+```
+.export to table eStormEvents <| StormEvents
+```
+
+<img src="https://user-images.githubusercontent.com/44923999/214618664-ff0186ba-772b-4a52-abfb-f9d71d8ea7b0.png" width="800" title="Snipped: January 25, 2023" />
+
+Navigate to your Storage Account, then "**Storage browser**" in the left-hand navigation
+
+<img src="https://user-images.githubusercontent.com/44923999/214619240-351930f8-31e2-4433-8477-f366ec53519d.png" width="800" title="Snipped: January 25, 2023" />
+
+Navigate to the "stormevents" Container and confirm your export.
+
+#### Step 3: Create Continuous Export (Option #2)
+In this step, we will: 1) clear previously loaded sample data, 2) run a KQL query to create a Continuous Export job, and 3) re-import sample data (to trigger Continuous Export)
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
 
