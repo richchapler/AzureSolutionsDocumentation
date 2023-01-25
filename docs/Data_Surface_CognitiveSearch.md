@@ -248,7 +248,7 @@ Confirm successful data import.
 
 * Data Explorer
   * [Create and alter Azure Storage external tables](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/external-tables-azurestorage-azuredatalake)
-  * [Data export](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/)
+  * [Export data to an external table](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/export-data-to-an-external-table)
   * [Continuous data export overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export)
 * Cognitive Search
   * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
