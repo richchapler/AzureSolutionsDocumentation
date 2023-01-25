@@ -76,7 +76,7 @@ dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEA
 
 _Note: The external table name is prefixed with the letter "e" {i.e., "eStormEvents"} because the sample data uses table name "StormEvents"_
 
-#### Step 2: Perform One-Time Export (Option #1)
+### Step 2: Perform One-Time Export (Option #1)
 In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
 
 Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
