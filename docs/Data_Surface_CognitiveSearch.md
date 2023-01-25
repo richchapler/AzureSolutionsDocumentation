@@ -121,15 +121,13 @@ Create a Continuous Export by running the following KQL:
 
 _Note: Once you have activated Continuous Export, any newly imported data will be exported per schedule {e.g., every one minute for `intervalBetweenRuns = 1m`}_
 
-#### Step 3: Import StormEvents Data
+<img src="https://user-images.githubusercontent.com/44923999/214658454-38befdd7-ae1e-4702-b96a-29b1d598ac0e.png" width="800" title="Snipped: January 25, 2023" />
 
-Follow the guidance at the following link: [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+Re-load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
 
-#### Step 4: Confirm Success
+<img src="https://user-images.githubusercontent.com/44923999/214658739-5f91e5e3-7758-4664-89a5-6ca3e13f4a42.png" width="800" title="Snipped: January 25, 2023" />
 
-Navigate to the "stormevents" Container in your Storage Account and confirm your export.
-
-<img src="https://user-images.githubusercontent.com/44923999/214593881-7c9740ce-b166-4623-badc-56f6b95deff6.png" width="800" title="Snipped: January 25, 2023" />
+Navigate back to the "stormevents" Container and confirm the second export.
 
 -----
 
