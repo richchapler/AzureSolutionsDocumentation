@@ -34,15 +34,15 @@ In this exercise, we will discuss two data preparation options:
 * Option #1: One-Time Export... appropriate where data is static
 * Option #2: Continuous Export... appropriate where data changes over time
 
-We will use Data Explorer "StormEvents" sample data exported to Azure Blob Storage (as per requirement).<br><br>
-_Note: Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)_
+We will use Data Explorer "StormEvents" sample data exported to Azure Blob Storage (as per use case / requirement).<br><br>
+_Note: In Exercise 2, we will see that Data Explorer is not a Cognitive Search, "Import Data" option, but Blob Storage is_
 
 ### Option #1: One-Time Export
 * _.export might be used (instead of continuous export) if one-time load is all that is required_
 
 ### Option #2: Continuous Export
 
-#### Step 1: Create External Table
+### Step 1: Create External Table
 External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
 
 In this step, we will run a KQL query to create an external table that we can use as a destination for data export.
