@@ -43,7 +43,7 @@ In this step, we will run a KQL query to create an external table that we can us
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
 
-Update and then **Run** the following KQL:
+Update {i.e., replace STORAGEACCOUNT_ACCESSKEY with a real value} and then **Run** the following KQL:
 
 ```
 .create external table eStormEvents (
