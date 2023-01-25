@@ -7,6 +7,7 @@ _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 This solution considers the following requirements:
 
 * "We used Data Explorer to capture a significant amount of rich, historical data from a soon-to-be-deprecated, on-prem database"
+* "Most of the historical data is static, but a small percentage will change over time"
 * "We want to help business users search this data asset"
 
 ## Required Infrastructure
@@ -20,18 +21,24 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-*	Exercise 1: Prepare Demonstration Data
-*	Exercise 2: Cognitive Search Import
-*	Exercise 3: Create Search Index (pending)
-*	Exercise 4: Prepare Interface (pending)
+* Exercise 1: Prepare Demonstration Data
+* Exercise 2: Cognitive Search Import
+* Exercise 3: Create Search Index (pending)
+* Exercise 4: Prepare Interface (pending)
 
 ## Exercise 1: Prepare Demonstration Data
-In this exercise, we will prepare sample data {i.e., Data Explorer "StormEvents" sample data, continuously exported to Azure Blob Storage}.<br><br>
+In this exercise, we will discuss two methods for the preparation of sample data:
+
+* Option #1: Continuous ... appropriate where data changes over time
+* Option #2: One-Time ... appropriate where data is static
+
+Our Use Case / Requirement was sourced data from Data Explorer; we will use Data Explorer "StormEvents" sample data exported to Azure Blob Storage}.<br><br>
 _Notes:_
 * _This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
-* _.export might be used (instead of continuous export) if one-time load is all that is required_
 
-### Step 1: Create External Table
+### Option #1: Continuous Export
+
+#### Step 1: Create External Table
 External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
 
 In this step, we will run a KQL query to create an external table that we can use as a destination for data export.
@@ -73,7 +80,7 @@ _Note: I prefixed the name of the external table with the letter "e" {i.e., "eSt
 
 <img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
 
-### Step 2: Create Continuous Export
+#### Step 2: Create Continuous Export
 "Continuous Export" describes the recurring export of query results to an external data source for backup, archiving or downstream processing.
 
 In this step, we will run a KQL query to create a Continuous Export job.
@@ -87,9 +94,12 @@ Update and then **Run** the following KQL:
 <| StormEvents
 ```
 
-### Step 3: Import StormEvents Data
+#### Step 3: Import StormEvents Data
 
 Follow the guidance at the following link: [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+
+### Option #2: One-Time Export
+* _.export might be used (instead of continuous export) if one-time load is all that is required_
 
 -------------------
 
