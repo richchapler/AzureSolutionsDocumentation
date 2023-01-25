@@ -74,9 +74,9 @@ _Note: I prefixed the name of the external table with the letter "e" {i.e., "eSt
 <img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
 
 ### Step 2: Create Continuous Export
-Continuous Export enables Data Explorer to export the results of a query to an external data source for backup, archiving or downstream processing.
+"Continuous Export" describes the recurring export of query results to an external data source for backup, archiving or downstream processing.
 
-In this step, we will run a KQL query to create a continuous export job.
+In this step, we will run a KQL query to create a Continuous Export job.
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
 
