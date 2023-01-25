@@ -94,13 +94,19 @@ Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of th
 Update and then **Run** the following KQL:
 
 ```
-.create-or-alter continuous-export ceStormEvents to table eStormEvents with ( intervalBetweenRuns = 1h )
+.create-or-alter continuous-export ceStormEvents to table eStormEvents with ( intervalBetweenRuns = 1m )
 <| StormEvents
 ```
 
 #### Step 3: Import StormEvents Data
 
 Follow the guidance at the following link: [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+
+#### Step 4: Confirm Success
+
+Navigate to the "stormevents" Container in your Storage Account and confirm your export.
+
+<img src="https://user-images.githubusercontent.com/44923999/214593881-7c9740ce-b166-4623-badc-56f6b95deff6.png" width="800" title="Snipped: January 25, 2023" />
 
 -----
 
