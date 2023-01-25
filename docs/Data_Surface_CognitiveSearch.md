@@ -35,7 +35,7 @@ In this exercise, we will discuss two ways of preparing Data Explorer-based data
 * Option #2: Continuous Export (to Blob Storage)... for data that will change over time
 
 ### Step 1: Create External Table
-External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
+Both One-Time and Continuous Export use an External Table to interact with data stored in an external data source (such as Blob Storage).
 
 In this step, we will run a KQL query to create an external table that we can use as an export destination.
 
