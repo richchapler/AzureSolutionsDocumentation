@@ -246,8 +246,11 @@ Confirm successful data import.
 
 ## Reference
 
-* [Continuous data export overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export)
-* [Create and alter Azure Storage external tables](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/external-tables-azurestorage-azuredatalake)
-* [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
-* [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
-* [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
+* Data Explorer
+  * [Create and alter Azure Storage external tables](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/external-tables-azurestorage-azuredatalake)
+  * [Data export](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/)
+  * [Continuous data export overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export)
+* Cognitive Search
+  * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
+  * [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
+  * [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
