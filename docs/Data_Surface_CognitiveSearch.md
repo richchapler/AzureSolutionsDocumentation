@@ -44,16 +44,16 @@ Update and then **Run** the following KQL:
 .create external table eStormEvents (
     StartTime: datetime,
     EndTime: datetime,
-    EpisodeId: int,
-    EventId: int,
+    EpisodeId: long,
+    EventId: long,
     State: string,
     EventType: string,
-    InjuriesDirect: int,
-    InjuriesIndirect: int,
-    DeathsDirect: int,
-    DeathsIndirect: int,
-    DamageProperty: int,
-    DamageCrops: int,
+    InjuriesDirect: long,
+    InjuriesIndirect: long,
+    DeathsDirect: long,
+    DeathsIndirect: long,
+    DamageProperty: long,
+    DamageCrops: long,
     Source: string,
     BeginLocation: string,
     EndLocation: string,
@@ -63,7 +63,7 @@ Update and then **Run** the following KQL:
     EndLon: real,
     EpisodeNarrative: string,
     EventNarrative: string,
-    StormSummary: dynamic
+    StormSummary: string
     )
 kind = storage
 dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY' )
@@ -71,7 +71,7 @@ dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEA
 
 _Note: I prefixed the name of the external table with the letter "e" {i.e., "eStormEvents} because the sample data imported in the next step uses the table name "StormEvents"_
 
-<img src="https://user-images.githubusercontent.com/44923999/214364390-47fe0af5-8eb3-4df1-989c-70416cc8b0a4.png" width="800" title="Snipped: January 24, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
 
 ### Step 2: Create Continuous Export
 Continuous Export enables Data Explorer to export the results of a query to an external data source for backup, archiving or downstream processing.
