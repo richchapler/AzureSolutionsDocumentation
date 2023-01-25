@@ -26,17 +26,21 @@ This solution will address requirements in three exercises:
 * Exercise 3: Create Search Index (pending)
 * Exercise 4: Prepare Interface (pending)
 
+-----
+
 ## Exercise 1: Prepare Demonstration Data
 In this exercise, we will discuss two methods for the preparation of sample data:
 
-* Option #1: Continuous ... appropriate where data changes over time
-* Option #2: One-Time ... appropriate where data is static
+* Option #1: One-Time ... appropriate where data is static
+* Option #2: Continuous ... appropriate where data changes over time
 
-Our Use Case / Requirement was sourced data from Data Explorer; we will use Data Explorer "StormEvents" sample data exported to Azure Blob Storage}.<br><br>
-_Notes:_
-* _This exercise is necessary because Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)"_
+We will use Data Explorer "StormEvents" sample data exported to Azure Blob Storage (as per requirement).<br><br>
+_Note: Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)_
 
-### Option #1: Continuous Export
+### Option #1: One-Time Export
+* _.export might be used (instead of continuous export) if one-time load is all that is required_
+
+### Option #2: Continuous Export
 
 #### Step 1: Create External Table
 External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
@@ -98,10 +102,7 @@ Update and then **Run** the following KQL:
 
 Follow the guidance at the following link: [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
 
-### Option #2: One-Time Export
-* _.export might be used (instead of continuous export) if one-time load is all that is required_
-
--------------------
+-----
 
 ## Exercise 2: Cognitive Search Import
 In this exercise, we will import built-in sample data.
