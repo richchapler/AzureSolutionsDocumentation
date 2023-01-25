@@ -74,7 +74,7 @@ kind = storage
 dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY' )
 ```
 
-_Note: I prefixed the external table name with the letter "e" {i.e., "eStormEvents"} because the imported sample data will use the table name "StormEvents"_
+_Note: The external table name is prefixed with the letter "e" {i.e., "eStormEvents"} because the sample data uses table name "StormEvents"_
 
 #### Step 2: Perform One-Time Export (Option #1)
 In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
