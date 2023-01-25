@@ -29,10 +29,10 @@ This solution will address requirements in three exercises:
 -----
 
 ## Exercise 1: Prepare Demonstration Data
-In this exercise, we will discuss two methods for the preparation of sample data:
+In this exercise, we will discuss two data preparation options:
 
-* Option #1: One-Time ... appropriate where data is static
-* Option #2: Continuous ... appropriate where data changes over time
+* Option #1: One-Time Export... appropriate where data is static
+* Option #2: Continuous Export... appropriate where data changes over time
 
 We will use Data Explorer "StormEvents" sample data exported to Azure Blob Storage (as per requirement).<br><br>
 _Note: Data Explorer is not a Cognitive Search, "Import Data" option (as we will see in Exercise 2)_
