@@ -97,17 +97,29 @@ Navigate to your Storage Account, then "**Storage browser**" in the left-hand na
 
 Navigate to the "stormevents" Container and confirm your export.
 
-#### Step 3: Create Continuous Export (Option #2)
+### Step 3: Create Continuous Export (Option #2)
 In this step, we will: 1) clear previously loaded sample data, 2) run a KQL query to create a Continuous Export job, and 3) re-import sample data (to trigger Continuous Export)
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
 
-Update and then **Run** the following KQL:
+<img src="https://user-images.githubusercontent.com/44923999/214656930-8ae8c556-40f2-4764-a54d-e7af6382845a.png" width="800" title="Snipped: January 25, 2023" />
+
+Clear previously imported StormEvents data by running the following KQL:
+
+```
+.clear table StormEvents data
+```
+
+<img src="https://user-images.githubusercontent.com/44923999/214656813-f859e3a8-fb82-49f7-9a6b-376419f0eba9.png" width="800" title="Snipped: January 25, 2023" />
+
+Create a Continuous Export by running the following KQL:
 
 ```
 .create-or-alter continuous-export ceStormEvents to table eStormEvents with ( intervalBetweenRuns = 1m )
 <| StormEvents
 ```
+
+_Note: Once you have activated Continuous Export, any newly imported data will be exported per schedule {e.g., every one minute for `intervalBetweenRuns = 1m`}_
 
 #### Step 3: Import StormEvents Data
 
