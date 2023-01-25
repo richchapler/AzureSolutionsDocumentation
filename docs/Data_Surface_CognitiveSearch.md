@@ -31,8 +31,8 @@ This solution will address requirements in three exercises:
 ## Exercise 1: Prepare Demonstration Data
 In this exercise, we will discuss two ways of preparing Data Explorer-based data for use by Cognitive Search:
 
-* Option #1: One-Time Export (to Blob Storage)... appropriate where data is static
-* Option #2: Continuous Export (to Blob Storage)... appropriate where data changes over time
+* Option #1: One-Time Export (to Blob Storage)... for data that will not change
+* Option #2: Continuous Export (to Blob Storage)... for data that will change over time
 
 ### Step 1: Create External Table
 External tables enable Data Explorer to interact with data stored in an external data source (such as Data Lake or Blob Storage).
