@@ -306,6 +306,8 @@ In this exercise, we will prepare a search interface for end-users.
 
 _Warning from "Create a demo app..." documentation: "A demo app can help you visualize how an index will function in a client app, but it isn't intended for production scenarios. Production apps should include security, error handling, and hosting logic that the demo app doesn't provide."_
 
+### Step 1: Create Demo App
+
 <img src="https://user-images.githubusercontent.com/44923999/214943967-b1d57e7c-09c1-4194-9dfa-190aa653b79b.png" width="800" title="Snipped: January 26, 2023" />
 
 Open "stormevents-index" (**Cognitive Search** >> **Overview** >> **Indexes**).
@@ -313,6 +315,20 @@ Open "stormevents-index" (**Cognitive Search** >> **Overview** >> **Indexes**).
 <img src="https://user-images.githubusercontent.com/44923999/214945091-f169c0a9-6ddc-423e-ae4f-22afb870eb37.png" width="800" title="Snipped: January 26, 2023" />
 
 Click "**Create Demo App**" (and "**Enable CORS and continue**", if prompted).
+
+#### Individual Result
+
+<img src="https://user-images.githubusercontent.com/44923999/214946156-50a58f1d-c4be-4f07-9194-be30702a399c.png" width="800" title="Snipped: January 26, 2023" />
+
+Complete the form on the "Create Demo App" page, "Individual result" tab.
+
+| **Prompt** | **Entry** |
+| :----- | :----- |
+| **Thumbnail** | Select "EventId" |
+| **Title** | Select "EventType" |
+| **Description** | Select "EventNarrative" |
+
+Click **Next**.
 
 -----
 
