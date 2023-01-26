@@ -150,8 +150,16 @@ Navigate to your instance of Cognitive Search and then click "**Import Data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/214865867-e82b4a08-00ee-488d-8a89-dd87e7fb65a3.png" width="800" title="Snipped: January 26, 2023" />
 
-On the "**Connect to your data**" tab, select "**Azure Blob Storage**" from the "**Data Source**" drop-down menu
+Complete the resulting "**Connect to your data**" form, including:
 
+| Prompt | Entry |
+| ----- | ----- |
+| **Data Source** | Select "**Azure Blob Storage**" |
+| **Data Source Name** | Enter a meaningful name aligned with naming standards {e.g., STORAGEACCOUNTNAME_CONTAINERNAME} |
+| **Data to extract** | Select "**Content and metadata**" |
+
+# Lorem Ipsum
+  
 Click "**Next: Add cognitive skills (Optional)**"
 
 ### Step 3: Add Cognitive Skills
