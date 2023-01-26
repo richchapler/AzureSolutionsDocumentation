@@ -211,7 +211,7 @@ _Some thoughts..._
 * _In a first, experimental pass, I am opting for greedy {i.e., selecting all possible choices}_
 * _Once I see how those choices play out in the interface, I will come back and be more strategic_
 
-With these thoughts in mind, complete the "**Customize target index**" form, including:
+Complete the "**Customize target index**" form, including:
 
 | **Prompt** | **Entry** |
 | :----- | :----- |
