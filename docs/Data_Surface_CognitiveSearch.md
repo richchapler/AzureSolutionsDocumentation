@@ -203,7 +203,7 @@ Collapse "**Add enrichments**" and then expand "**Save enrichments to a knowledg
 Configure knowledge store options.
 Click "**Next: Customize target index**".
 
-### Step 4: Customize Target Index
+### Step 3: Customize Target Index
 <img src="https://user-images.githubusercontent.com/44923999/214931224-8b6fe474-0c02-4302-a174-3445881b6eb8.png" width="800" title="Snipped: January 26, 2023" />
 
 _Some thoughts..._
@@ -223,98 +223,76 @@ Complete the "**Customize target index**" form, including:
 
 Click "**Next: Create an indexer**".
 
-### Step 5: Create Indexer
-<img src="https://user-images.githubusercontent.com/44923999/214154948-102c8185-cbdc-44f9-b21f-12bb9a22a43b.png" width="800" title="Snipped: January 23, 2023" />
+### Step 4: Create Indexer
+<img src="https://user-images.githubusercontent.com/44923999/214932334-e23022d2-0c9c-4ae2-8f18-375120e5cfe1.png" width="800" title="Snipped: January 26, 2023" />
 
-Configure and then click **Submit**
+Configure and then click **Submit**.
 
-### Step 6: Confirm Success
-<img src="https://user-images.githubusercontent.com/44923999/214312163-6f2c0749-ac0b-4a61-9bcd-f2e5b25e50ea.png" width="800" title="Snipped: January 24, 2023" />
+### Step 5: Confirm Success
+<img src="https://user-images.githubusercontent.com/44923999/214312163-6f2c0749-ac0b-4a61-9bcd-f2e5b25e50ea.png" width="800" title="Snipped: January 26, 2023" />
 
 On the **Overview** page, click "**Search explorer**"
 
-<img src="https://user-images.githubusercontent.com/44923999/214313821-47edb62f-b48b-4a25-8893-7668224abb9b.png" width="800" title="Snipped: January 24, 2023" />
-
-"**Search Explorer**" supports your efforts to:
-* Interact with and test a search index
-* Test and debug search queries
-* Craft a Request URL (for API calls)
+<img src="https://user-images.githubusercontent.com/44923999/214932918-7896dc21-d2de-4b89-bc56-1c881d255b57.png" width="800" title="Snipped: January 26, 2023" />
 
 Execute the following (very simple) query string: `$top=1`
 
 Results
 ```
 {
-  "@odata.context": "https://rchaplercs.search.windows.net/indexes/realestate-us-sample-index/$metadata#docs(*)",
+  "@odata.context": "https://rchaplerss.search.windows.net/indexes/stormevents-index/$metadata#docs(*)",
   "value": [
     {
       "@search.score": 1,
-      "listingId": "OTM4MjI2NQ2",
-      "beds": 5,
-      "baths": 4,
-      "description": "This is a apartment residence and is perfect for entertaining.  This home provides lakefront property located close to parks and features a detached garage, beautiful bedroom floors and lots of storage.",
-      "description_de": "Dies ist eine Wohnanlage und ist perfekt für Unterhaltung.  Dieses Haus bietet Seeliegenschaft Parks in der Nähe und verfügt über eine freistehende Garage schöne Zimmer-Etagen and viel Stauraum.",
-      "description_fr": "Il s’agit d’un appartement de la résidence et est parfait pour se divertir.  Cette maison offre propriété au bord du lac Situé à proximité de Parcs et dispose d’un garage détaché, planchers de belle chambre and beaucoup de rangement.",
-      "description_it": "Si tratta di un appartamento residence ed è perfetto per intrattenere.  Questa casa fornisce proprietà lungolago Situato vicino ai parchi e dispone di un garage indipendente, piani di bella camera da letto and sacco di stoccaggio.",
-      "description_es": "Se trata de una residencia Apartamento y es perfecto para el entretenimiento.  Esta casa ofrece propiedad de lago situado cerca de parques y cuenta con un garaje independiente, pisos de dormitorio hermoso and montón de almacenamiento.",
-      "description_pl": "Jest to apartament residence i jest idealny do zabawy.  Ten dom zapewnia lakefront Wlasciwosc usytuowany w poblizu parków i oferuje garaz wolnostojacy, piekna sypialnia podlogi and mnóstwo miejsca do przechowywania.",
-      "description_nl": "Dit is een appartement Residentie en is perfect voor entertaining.  Dit huis biedt lakefront eigenschap vlakbij parken en beschikt over een vrijstaande garage, mooie slaapkamer vloeren and veel opslag.",
-      "sqft": 12960,
-      "daysOnMarket": 9,
-      "status": "sold",
-      "source": "Pérez Realty",
-      "number": "19339",
-      "street": "Linden Avenue North",
-      "unit": "658",
-      "type": "Apartment",
-      "city": "Shoreline",
-      "region": "wa",
-      "countryCode": "us",
-      "postCode": "98133",
-      "location": {
-        "type": "Point",
-        "coordinates": [
-          -122.35,
-          47.7699
-        ],
-        "crs": {
-          "type": "name",
-          "properties": {
-            "name": "EPSG:4326"
-          }
-        }
-      },
-      "price": 3693600,
-      "thumbnail": "https://searchdatasets.blob.core.windows.net/images/bd5bt4apt.jpg",
-      "tags": [
-        "apartment residence",
-        "entertaining",
-        "lakefront property",
-        "parks",
-        "detached garage",
-        "beautiful bedroom floors",
-        "lots of storage"
-      ],
-      "organizations": [],
+      "StartTime": "2007-01-03T04:30:00Z",
+      "EndTime": "2007-01-03T09:00:00Z",
+      "EpisodeId": "MTE3NQ2",
+      "EventId": "5041",
+      "State": "ALASKA",
+      "EventType": "Blizzard",
+      "InjuriesDirect": "0",
+      "InjuriesIndirect": "0",
+      "DeathsDirect": "0",
+      "DeathsIndirect": "0",
+      "DamageProperty": "0",
+      "DamageCrops": "0",
+      "Source": "Official NWS Observations",
+      "BeginLocation": null,
+      "EndLocation": null,
+      "BeginLat": null,
+      "BeginLon": null,
+      "EndLat": null,
+      "EndLon": null,
+      "EpisodeNarrative": "A storm moved toward Prince william Sound generating strong wind and snow in the western Sound.",
+      "EventNarrative": null,
+      "AzureSearch_DocumentKey": "https://rchaplers.blob.core.windows.net/stormevents/af63802d-469c-4f37-b33a-f2dd47af2e95_1_882c013a24fc436db61b657f7cbb6802.csv;272",
+      "metadata_storage_content_type": "application/octet-stream",
+      "metadata_storage_size": 66547959,
+      "metadata_storage_last_modified": "2023-01-26T14:24:51Z",
+      "metadata_storage_content_md5": "imGCB90ICIv9EaDdsy7X/g==",
+      "metadata_storage_name": "af63802d-469c-4f37-b33a-f2dd47af2e95_1_882c013a24fc436db61b657f7cbb6802.csv",
+      "metadata_storage_path": "https://rchaplers.blob.core.windows.net/stormevents/af63802d-469c-4f37-b33a-f2dd47af2e95_1_882c013a24fc436db61b657f7cbb6802.csv",
+      "metadata_storage_file_extension": ".csv",
       "locations": [
-        "apartment residence",
-        "home",
-        "parks",
-        "garage"
+        "Prince william Sound",
+        "Sound"
       ],
-      "people": [],
       "keyphrases": [
-        "beautiful bedroom floors",
-        "apartment residence",
-        "lakefront property",
-        "detached garage",
-        "home",
-        "parks",
-        "lots",
-        "storage"
+        "Prince william Sound",
+        "western Sound",
+        "strong wind",
+        "storm",
+        "snow"
       ],
-      "masked_text": "This is a apartment residence and is perfect for entertaining.  This home provides lakefront property located close to parks and features a detached garage, beautiful bedroom floors and lots of storage.",
-      "pii_entities": []
+      "StormSummary": {
+        "TotalDamages": 0,
+        "StartTime": "2007-01-03T04:30:00Z",
+        "EndTime": "2007-01-03T09:00:00Z",
+        "Details": {
+          "Description": "",
+          "Location": "ALASKA"
+        }
+      }
     }
   ]
 }
