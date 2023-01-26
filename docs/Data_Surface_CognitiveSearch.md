@@ -166,24 +166,35 @@ Complete the resulting "**Connect to your data**" form, including:
 Click "**Next: Add cognitive skills (Optional)**".
 
 ### Step 2: Add Cognitive Skills
+
+#### Attach Cognitive Services
+
 <img src="https://user-images.githubusercontent.com/44923999/214895862-67c4bc0d-831c-4255-a1ff-1dc8f17697e5.png" width="800" title="Snipped: January 26, 2023" />
 
-Expand "**Attach Cognitive Services**" and then select your instance of Cognitive Services
+Expand "**Attach Cognitive Services**" and then select your instance of Cognitive Services.
+
+#### Add Enrichments
 
 <img src="https://user-images.githubusercontent.com/44923999/214915613-19b182d9-a32d-4e4d-bde2-5b5161521ed1.png" width="800" title="Snipped: January 26, 2023" />
 
-Collapse "**Attach Cognitive Services**", expand "**Add enrichments**", and then add appropriate enrichments.
+Collapse "**Attach Cognitive Services**", expand "**Add enrichments**".
 
-Some thoughts:
-* Even familiar data sources can be hard to configure the first time through {e.g., "will Column X have "people names"?}
-* Looking at the StormEvents data, we see that the EpisodeNarrative column includes the most data, including references to location
-* We can use this observation as a starting point for completing the "Import Data" wizard, confirm our results and refine iteratively based on what we learn
+_Some thoughts..._
+* _Even familiar data sources can be hard to configure the first time through {e.g., "will Column X have "people names"?}_
+* _Looking at the StormEvents data, we see that the **EpisodeNarrative** column includes the most anecdotal data, including references to location_
+* _Based on this observation, we can assert that the **EpisodeNarrative** column is a reasonable starting point for completing the "Import Data" wizard, confirm our results and refine iteratively based on what we learn_
 
 Complete the "**Add cognitive skills**..." >> "**Add enrichments**" form, including:
 
 | **Prompt** | **Entry** |
 | :----- | :----- |
 | **Skillset name** | Enter "stormevents-episodenarrative" |
+| **Source data field** | Select **EpisodeNarrative** |
+| **Check items below...** | Select "**Extract location names**" and "**Extract key phrases**" |
+
+_Note: In the spirit of experimentation, we might include additional options like "**Extract people names**" or "**Extract organization names**", but given no evidence of that type of data in the **EpisodeNarrative** column, I am choosing to be more targeted_
+
+#### Add Enrichments
 
 <img src="https://user-images.githubusercontent.com/44923999/214914789-0d7450be-9af9-49a2-85b1-0c204dc3d07d.png" width="800" title="Snipped: January 26, 2023" />
 
