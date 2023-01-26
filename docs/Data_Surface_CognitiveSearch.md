@@ -301,8 +301,10 @@ Confirm successful data import.
 
 -----
 
-## Exercise 3: Cognitive Search, Prepare Interface
+## Exercise 3: Cognitive Search, Create App
 In this exercise, we will prepare a search interface for end-users.
+
+_Note: Documentation makes a specific point worth focus: "A demo app can help you visualize how an index will function in a client app, but it isn't intended for production scenarios. Production apps should include security, error handling, and hosting logic that the demo app doesn't provide." 
 
 **Lorem Ipsum**
 
@@ -319,3 +321,4 @@ In this exercise, we will prepare a search interface for end-users.
   * [Import data wizard in Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-import-data-portal)
   * [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
   * [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
+  * [Quickstart: Create a demo app in the portal...](https://learn.microsoft.com/en-us/azure/search/search-create-app-portal)
