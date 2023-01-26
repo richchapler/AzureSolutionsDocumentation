@@ -334,6 +334,18 @@ Click **Next**.
 
 <img src="https://user-images.githubusercontent.com/44923999/214947587-62a38935-b557-4dfb-9b3a-ceb458b541a0.png" width="800" title="Snipped: January 26, 2023" />
 
+Select all items that should be included in the sidebar and then click **Next**.
+
+#### Suggestions
+
+<img src="https://user-images.githubusercontent.com/44923999/214966079-3a6c80b8-a423-4a49-ad76-00cf37490d38.png" width="800" title="Snipped: January 26, 2023" />
+
+Select all items that should be displayed as suggestions in the search box dropdown and then click "**Create Demo App**".
+When prompted "Your demo app is ready", click **Download**.
+Navigate to the Downloads folder using Windows explorer and open **AzSearch.html**.
+
+<img src="https://user-images.githubusercontent.com/44923999/214966534-5e5d2436-116a-40bd-af7d-fff296b5f639.png" width="800" title="Snipped: January 26, 2023" />
+
 -----
 
 ## Reference
