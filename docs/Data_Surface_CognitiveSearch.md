@@ -16,7 +16,7 @@ This solution requires the following resources:
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
-* [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents"
+* [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents" (and related SAS token)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
@@ -37,23 +37,28 @@ In this exercise, we will discuss two ways of preparing Data Explorer-based data
 ### Step 1: Perform One-Time Export (Option #1)
 In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
 
-Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard).
 
 <img src="https://user-images.githubusercontent.com/44923999/214618239-312d447b-230b-4ed2-acbb-2dbf2b520ce7.png" width="800" title="Snipped: January 25, 2023" />
 
 Confirm sample data ingestion.
 
-<img src="https://user-images.githubusercontent.com/44923999/214855174-e311e3de-f115-4e03-8575-520cbe6453cb.png" width="800" title="Snipped: January 26, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214860857-bad99774-9e00-4875-80a9-8f87e35cc0f2.png" width="800" title="Snipped: January 26, 2023" />
 
-**Run** the following KQL:
+Update {i.e., replace STORAGEACCOUNT_ACCESSKEY with a real value} and then **Run** the following KQL:
 
 ```
-.export to table eStormEvents with ( includeHeaders = "all" ) <| StormEvents
+.export to csv ( "https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY" )
+with ( includeHeaders = "all" ) <| StormEvents
 ```
 
 <img src="https://user-images.githubusercontent.com/44923999/214619240-351930f8-31e2-4433-8477-f366ec53519d.png" width="800" title="Snipped: January 25, 2023" />
 
 Navigate to the "stormevents" Container and confirm your export.
+
+<img src="https://user-images.githubusercontent.com/44923999/214861628-06359051-426b-4061-80ff-58f2143798d0.png" width="800" title="Snipped: January 26, 2023" />
+
+Open the file with Excel to confirm data quality.
 
 ### Step 3: Create Continuous Export (Option #2)
 In this step, we will run a KQL query to create an external table that we can use as a Continuous Export destination.
