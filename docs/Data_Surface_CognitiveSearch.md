@@ -34,10 +34,29 @@ In this exercise, we will discuss two ways of preparing Data Explorer-based data
 * Option #1: One-Time Export (to Blob Storage)... for data that will not change
 * Option #2: Continuous Export (to Blob Storage)... for data that will change over time
 
-### Step 1: Create External Table
-Both One-Time and Continuous Export use an External Table to interact with data stored in an external data source (such as Blob Storage).
+### Step 1: Perform One-Time Export (Option #1)
+In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
 
-In this step, we will run a KQL query to create an external table that we can use as an export destination.
+Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+
+<img src="https://user-images.githubusercontent.com/44923999/214618239-312d447b-230b-4ed2-acbb-2dbf2b520ce7.png" width="800" title="Snipped: January 25, 2023" />
+
+Confirm sample data ingestion.
+
+<img src="https://user-images.githubusercontent.com/44923999/214855174-e311e3de-f115-4e03-8575-520cbe6453cb.png" width="800" title="Snipped: January 26, 2023" />
+
+**Run** the following KQL:
+
+```
+.export to table eStormEvents with ( includeHeaders = "all" ) <| StormEvents
+```
+
+<img src="https://user-images.githubusercontent.com/44923999/214619240-351930f8-31e2-4433-8477-f366ec53519d.png" width="800" title="Snipped: January 25, 2023" />
+
+Navigate to the "stormevents" Container and confirm your export.
+
+### Step 3: Create Continuous Export (Option #2)
+In this step, we will run a KQL query to create an external table that we can use as a Continuous Export destination.
 
 <img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
 
@@ -76,29 +95,7 @@ dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEA
 
 _Note: The external table name is prefixed with the letter "e" {i.e., "eStormEvents"} because the sample data uses table name "StormEvents"_
 
-### Step 2: Perform One-Time Export (Option #1)
-In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
-
-Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
-
-<img src="https://user-images.githubusercontent.com/44923999/214618239-312d447b-230b-4ed2-acbb-2dbf2b520ce7.png" width="800" title="Snipped: January 25, 2023" />
-
-Confirm sample data ingestion and then **Run** the following KQL:
-
-```
-.export to table eStormEvents <| StormEvents
-```
-
-<img src="https://user-images.githubusercontent.com/44923999/214618664-ff0186ba-772b-4a52-abfb-f9d71d8ea7b0.png" width="800" title="Snipped: January 25, 2023" />
-
-Navigate to your Storage Account, then "**Storage browser**" in the left-hand navigation
-
-<img src="https://user-images.githubusercontent.com/44923999/214619240-351930f8-31e2-4433-8477-f366ec53519d.png" width="800" title="Snipped: January 25, 2023" />
-
-Navigate to the "stormevents" Container and confirm your export.
-
-### Step 3: Create Continuous Export (Option #2)
-In this step, we will: 1) clear previously loaded sample data, 2) run a KQL query to create a Continuous Export job, and 3) re-import sample data (to trigger Continuous Export)
+In this step, we will: 1) clear sample data previously loaded to Data Explorer, 2) run a KQL query to create a Continuous Export job, and 3) re-import sample data (to trigger Continuous Export)
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
 
@@ -269,7 +266,7 @@ Confirm successful data import.
 
 * Data Explorer
   * [Create and alter Azure Storage external tables](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/external-tables-azurestorage-azuredatalake)
-  * [Export data to an external table](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/export-data-to-an-external-table)
+  * [Export data to storage](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/export-data-to-storage)
   * [Continuous data export overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export)
 * Cognitive Search
   * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
