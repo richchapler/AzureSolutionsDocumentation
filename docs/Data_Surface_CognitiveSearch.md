@@ -306,7 +306,11 @@ In this exercise, we will prepare a search interface for end-users.
 
 _Warning from "Create a demo app..." documentation: "A demo app can help you visualize how an index will function in a client app, but it isn't intended for production scenarios. Production apps should include security, error handling, and hosting logic that the demo app doesn't provide."_
 
-**Lorem Ipsum**
+<img src="https://user-images.githubusercontent.com/44923999/214943967-b1d57e7c-09c1-4194-9dfa-190aa653b79b.png" width="800" title="Snipped: January 26, 2023" />
+
+Open "stormevents-index" (**Cognitive Search** >> **Overview** >> **Indexes**).
+
+<img src="https://user-images.githubusercontent.com/44923999/214944518-ccdd8448-2f67-404a-8a09-2a7b994370e9.png" width="800" title="Snipped: January 26, 2023" />
 
 -----
 
