@@ -152,9 +152,7 @@ Navigate to your instance of Cognitive Search and then click "**Import Data**".
 
 On the "**Connect to your data**" tab, select "**Azure Blob Storage**" from the "**Data Source**" drop-down menu
 
-<img src="https://user-images.githubusercontent.com/44923999/214140498-3b1a486c-57bd-407a-b249-60a93e54602e.png" width="800" title="Snipped: January 23, 2023" />
-
-Select the "**realestate-us-sample**" row and then click "**Next: Add cognitive skills (Optional)**"
+Click "**Next: Add cognitive skills (Optional)**"
 
 ### Step 3: Add Cognitive Skills
 <img src="https://user-images.githubusercontent.com/44923999/214144851-f5be1f08-374d-4b8d-8fed-b56e6a7980a7.png" width="800" title="Snipped: January 23, 2023" />
