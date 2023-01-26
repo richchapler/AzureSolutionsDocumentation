@@ -209,7 +209,7 @@ Click "**Next: Customize target index**".
 _Some thoughts..._
 * _There are a LOT of options!_
 * _In a first, experimental pass, I am opting for greedy {i.e., selecting all possible choices}_
-* _Once I see how those choices play out in the interact (Exercise 3), I will come back and be more strategic_
+* _Once I see how those choices play out in the interface, I will come back and be more strategic_
 
 With these thoughts in mind, complete the "**Customize target index**" form, including:
 
