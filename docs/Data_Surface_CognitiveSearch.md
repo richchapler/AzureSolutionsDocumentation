@@ -155,7 +155,7 @@ Complete the resulting "**Connect to your data**" form, including:
 | **Prompt** | **Entry** |
 | :----- | :----- |
 | **Data Source** | Select "**Azure Blob Storage**" |
-| **Data Source Name** | Enter a meaningful name aligned with naming standards {e.g., STORAGEACCOUNTNAME_CONTAINERNAME} |
+| **Data Source Name** | Enter a meaningful name aligned with naming standards {e.g., STORAGEACCOUNTNAME-CONTAINERNAME} |
 | **Data to extract** | Select "**Content and metadata**" |
 | **Parsing mode** | Select "**Delimited text**" |
 | **First Line Contains Header** | Checked |
