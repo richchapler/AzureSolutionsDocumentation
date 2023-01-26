@@ -294,5 +294,6 @@ Confirm successful data import.
   * [Create or alter continuous export](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/create-alter-continuous)
 * Cognitive Search
   * [What's Azure Cognitive Search?](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search)
+  * [Import data wizard in Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-import-data-portal)
   * [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
   * [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
