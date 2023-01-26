@@ -63,6 +63,9 @@ Navigate to the "stormevents" Container and confirm your export.
 Open the file with Excel to confirm data quality.
 
 ### Step 3: Create Continuous Export (Option #2)
+In this step, we will: 1) create an External Table and 2) create a Continuous Export.
+
+#### Step 3a: Create External Table
 In this step, we will run a KQL query to create an external table that we can use as a Continuous Export destination.
 
 <img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
@@ -102,6 +105,7 @@ dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEA
 
 _Note: The external table name is prefixed with the letter "e" {i.e., "eStormEvents"} because the sample data uses table name "StormEvents"_
 
+#### Step 3b: Create Continuous Export
 In this step, we will: 1) clear sample data previously loaded to Data Explorer, 2) run a KQL query to create a Continuous Export job, and 3) re-import sample data (to trigger Continuous Export)
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
@@ -140,12 +144,7 @@ In this exercise, we will import prepared demonstration data.
 
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
 
-### Step 1: Evaluate Source Data
-Re-open your exported data in Excel so you can evaluate the values that you select in the "Import Data" process. Examples:
-
-* Description ... what field would be a good choice for this?
-
-### Step 2: Connect Data
+### Step 1: Connect Data
 Navigate to your instance of Cognitive Search and then click "**Import Data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/214865867-e82b4a08-00ee-488d-8a89-dd87e7fb65a3.png" width="800" title="Snipped: January 26, 2023" />
@@ -166,17 +165,27 @@ Complete the resulting "**Connect to your data**" form, including:
 
 Click "**Next: Add cognitive skills (Optional)**".
 
-### Step 3: Add Cognitive Skills
+### Step 2: Add Cognitive Skills
 <img src="https://user-images.githubusercontent.com/44923999/214895862-67c4bc0d-831c-4255-a1ff-1dc8f17697e5.png" width="800" title="Snipped: January 26, 2023" />
 
 Expand "**Attach Cognitive Services**" and then select your instance of Cognitive Services
 
-<img src="https://user-images.githubusercontent.com/44923999/214149017-338ba6c7-3281-40ee-92ca-e8b099b5430f.png" width="800" title="Snipped: January 23, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214915613-19b182d9-a32d-4e4d-bde2-5b5161521ed1.png" width="800" title="Snipped: January 26, 2023" />
 
-Collapse "**Attach Cognitive Services**", expand "**Add enrichments**", and then add appropriate enrichments.<br><br>
-_Note: Even familiar data sources can be hard to configure the first time through {e.g., "will the Description field have "people names"?}. I lean towards experimentation in this situation... we can always re-configure once the initial Import Data exercise is complete._
+Collapse "**Attach Cognitive Services**", expand "**Add enrichments**", and then add appropriate enrichments.
 
-<img src="https://user-images.githubusercontent.com/44923999/214153287-beed5d62-200a-48ec-b852-578f38621af6.png" width="800" title="Snipped: January 23, 2023" />
+Some thoughts:
+* Even familiar data sources can be hard to configure the first time through {e.g., "will Column X have "people names"?}
+* Looking at the StormEvents data, we see that the EpisodeNarrative column includes the most data, including references to location
+* We can use this observation as a starting point for completing the "Import Data" wizard, confirm our results and refine iteratively based on what we learn
+
+Complete the "**Add cognitive skills**..." >> "**Add enrichments**" form, including:
+
+| **Prompt** | **Entry** |
+| :----- | :----- |
+| **Skillset name** | Enter "stormevents-episodenarrative" |
+
+<img src="https://user-images.githubusercontent.com/44923999/214914789-0d7450be-9af9-49a2-85b1-0c204dc3d07d.png" width="800" title="Snipped: January 26, 2023" />
 
 Collapse "**Add enrichments**", expand "**Save enrichments to a knowledge store**", configure knowledge store options and then click "**Next: Customize target index**"
 
