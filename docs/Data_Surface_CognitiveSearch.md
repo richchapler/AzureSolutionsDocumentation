@@ -304,7 +304,7 @@ Confirm successful data import.
 ## Exercise 3: Cognitive Search, Create App
 In this exercise, we will prepare a search interface for end-users.
 
-_Note: Documentation makes a specific point worth focus: "A demo app can help you visualize how an index will function in a client app, but it isn't intended for production scenarios. Production apps should include security, error handling, and hosting logic that the demo app doesn't provide." 
+_Warning from "Create a demo app..." documentation: "A demo app can help you visualize how an index will function in a client app, but it isn't intended for production scenarios. Production apps should include security, error handling, and hosting logic that the demo app doesn't provide."_
 
 **Lorem Ipsum**
 
