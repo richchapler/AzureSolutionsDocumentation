@@ -142,9 +142,10 @@ Navigate back to the "stormevents" Container and confirm the second export.
 ## Exercise 2: Cognitive Search, Import Data
 In this exercise, we will import the exported StormEvents data into Cognitive Search.
 
+### Step 1: Connect Data
+
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
 
-### Step 1: Connect Data
 Navigate to your instance of Cognitive Search and then click "**Import Data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/214865867-e82b4a08-00ee-488d-8a89-dd87e7fb65a3.png" width="800" title="Snipped: January 26, 2023" />
