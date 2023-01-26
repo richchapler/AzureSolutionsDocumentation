@@ -330,6 +330,10 @@ Complete the form on the "Create Demo App" page, "Individual result" tab.
 
 Click **Next**.
 
+#### Sidebar
+
+<img src="https://user-images.githubusercontent.com/44923999/214947587-62a38935-b557-4dfb-9b3a-ceb458b541a0.png" width="800" title="Snipped: January 26, 2023" />
+
 -----
 
 ## Reference
