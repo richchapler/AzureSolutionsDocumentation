@@ -310,9 +310,9 @@ _Warning from "Create a demo app..." documentation: "A demo app can help you vis
 
 Open "stormevents-index" (**Cognitive Search** >> **Overview** >> **Indexes**).
 
-<img src="https://user-images.githubusercontent.com/44923999/214944518-ccdd8448-2f67-404a-8a09-2a7b994370e9.png" width="800" title="Snipped: January 26, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214945091-f169c0a9-6ddc-423e-ae4f-22afb870eb37.png" width="800" title="Snipped: January 26, 2023" />
 
-Click "**Create Demo App**".
+Click "**Create Demo App**" (and "**Enable CORS and continue**", if prompted).
 
 -----
 
