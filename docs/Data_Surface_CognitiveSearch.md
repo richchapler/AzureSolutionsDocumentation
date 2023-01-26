@@ -157,19 +157,23 @@ Complete the resulting "**Connect to your data**" form, including:
 | **Data Source** | Select "**Azure Blob Storage**" |
 | **Data Source Name** | Enter a meaningful name aligned with naming standards {e.g., STORAGEACCOUNTNAME_CONTAINERNAME} |
 | **Data to extract** | Select "**Content and metadata**" |
+| **Parsing mode** | Select "**Delimited text**" |
+| **First Line Contains Header** | Checked |
+| **Delimiter Character** | Select "**,**" |
+| **Connection string** | Use the "**Choose an existing connection**" link |
+| **Managed identity authentication** | Select "**None**" |
+| **Container name** | Select "**stormevents**" |
 
-# Lorem Ipsum
-  
-Click "**Next: Add cognitive skills (Optional)**"
+Click "**Next: Add cognitive skills (Optional)**".
 
 ### Step 3: Add Cognitive Skills
-<img src="https://user-images.githubusercontent.com/44923999/214144851-f5be1f08-374d-4b8d-8fed-b56e6a7980a7.png" width="800" title="Snipped: January 23, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214895862-67c4bc0d-831c-4255-a1ff-1dc8f17697e5.png" width="800" title="Snipped: January 26, 2023" />
 
 Expand "**Attach Cognitive Services**" and then select your instance of Cognitive Services
 
 <img src="https://user-images.githubusercontent.com/44923999/214149017-338ba6c7-3281-40ee-92ca-e8b099b5430f.png" width="800" title="Snipped: January 23, 2023" />
 
-Collapse "**Attach Cognitive Services**", expand "**Add enrichments**", and then add appropriate enrichments<br>
+Collapse "**Attach Cognitive Services**", expand "**Add enrichments**", and then add appropriate enrichments.<br><br>
 _Note: Even familiar data sources can be hard to configure the first time through {e.g., "will the Description field have "people names"?}. I lean towards experimentation in this situation... we can always re-configure once the initial Import Data exercise is complete._
 
 <img src="https://user-images.githubusercontent.com/44923999/214153287-beed5d62-200a-48ec-b852-578f38621af6.png" width="800" title="Snipped: January 23, 2023" />
