@@ -28,7 +28,7 @@ This solution will address requirements in three exercises:
 
 -----
 
-## Exercise 1: Prepare Demonstration Data
+## Exercise 1: Data Exploer, Export Data
 In this exercise, we will discuss two ways of preparing Data Explorer-based data for use by Cognitive Search:
 
 * Option #1: One-Time Export (to Blob Storage)... for data that will not change
