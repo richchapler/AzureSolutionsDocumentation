@@ -178,7 +178,7 @@ Expand "**Attach Cognitive Services**" and then select your instance of Cognitiv
 
 <img src="https://user-images.githubusercontent.com/44923999/214915613-19b182d9-a32d-4e4d-bde2-5b5161521ed1.png" width="800" title="Snipped: January 26, 2023" />
 
-Collapse "**Attach Cognitive Services**", expand "**Add enrichments**".
+Collapse "**Attach Cognitive Services**" and then expand "**Add enrichments**".
 
 _Some thoughts..._
 * _Even familiar data sources can be hard to configure the first time through {e.g., "will Column X have "people names"?}_
@@ -195,16 +195,33 @@ Complete the "**Add cognitive skills**..." >> "**Add enrichments**" form, includ
 
 _Note: In the spirit of experimentation, we might include additional options like "**Extract people names**" or "**Extract organization names**", but given no evidence of that type of data in the **EpisodeNarrative** column, I am choosing to be more targeted_
 
-#### Add Enrichments
+#### Save enrichments to a knowledge store
 
-<img src="https://user-images.githubusercontent.com/44923999/214914789-0d7450be-9af9-49a2-85b1-0c204dc3d07d.png" width="800" title="Snipped: January 26, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/214929356-8c4ff44e-a21a-4b6f-a08f-f7d8c1e779a1.png" width="800" title="Snipped: January 26, 2023" />
 
-Collapse "**Add enrichments**", expand "**Save enrichments to a knowledge store**", configure knowledge store options and then click "**Next: Customize target index**"
+Collapse "**Add enrichments**" and then expand "**Save enrichments to a knowledge store**".
+Configure knowledge store options.
+Click "**Next: Customize target index**".
 
-### Step 4: Customize Index
-<img src="https://user-images.githubusercontent.com/44923999/214154309-fea824d2-d3bf-435b-bf85-500dd28be462.png" width="800" title="Snipped: January 23, 2023" />
+### Step 4: Customize Target Index
+<img src="https://user-images.githubusercontent.com/44923999/214931224-8b6fe474-0c02-4302-a174-3445881b6eb8.png" width="800" title="Snipped: January 26, 2023" />
 
-Configure index options and then click "**Next: Create an indexer**"
+_Some thoughts..._
+* _There are a LOT of options!_
+* _In a first, experimental pass, I am opting for greedy {i.e., selecting all possible choices}_
+* _Once I see how those choices play out in the interact (Exercise 3), I will come back and be more strategic_
+
+With these thoughts in mind, complete the "**Customize target index**" form, including:
+
+| **Prompt** | **Entry** |
+| :----- | :----- |
+| **Index name** | Enter "stormevents-index" |
+| **Key** | Select "EpisodeId" |
+| **Suggester name** | Select "stormevents-suggester" |
+
+...and, of course, select all available options.
+
+Click "**Next: Create an indexer**".
 
 ### Step 5: Create Indexer
 <img src="https://user-images.githubusercontent.com/44923999/214154948-102c8185-cbdc-44f9-b21f-12bb9a22a43b.png" width="800" title="Snipped: January 23, 2023" />
