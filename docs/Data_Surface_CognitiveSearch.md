@@ -23,8 +23,7 @@ This solution will address requirements in three exercises:
 
 * Exercise 1: Prepare Demonstration Data
 * Exercise 2: Cognitive Search Import
-* Exercise 3: Create Search Index (pending)
-* Exercise 4: Prepare Interface (pending)
+* Exercise 3: Prepare Interface
 
 -----
 
@@ -300,7 +299,14 @@ Results
 
 Confirm successful data import.
 
------------------------
+-----
+
+## Exercise 3: Cognitive Search, Prepare Interface
+In this exercise, we will prepare a search interface for end-users.
+
+**Lorem Ipsum**
+
+-----
 
 ## Reference
 
