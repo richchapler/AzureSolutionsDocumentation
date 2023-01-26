@@ -135,21 +135,28 @@ Navigate back to the "stormevents" Container and confirm the second export.
 
 -----
 
-## Exercise 2: Cognitive Search Import
+## Exercise 2: Cognitive Search, Import Data
 In this exercise, we will import prepared demonstration data.
 
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
 
-Navigate to your instance and then click "**Import Data**"
+### Step 1: Evaluate Source Data
+Re-open your exported data in Excel so you can evaluate the values that you select in the "Import Data" process. Examples:
 
-### Step 1: Connect Data
-On the "**Connect to your data**" tab, select **Samples** from the "**Existing data source**" drop-down menu
+* Description ... what field would be a good choice for this?
 
-  <img src="https://user-images.githubusercontent.com/44923999/214140498-3b1a486c-57bd-407a-b249-60a93e54602e.png" width="800" title="Snipped: January 23, 2023" />
+### Step 2: Connect Data
+Navigate to your instance of Cognitive Search and then click "**Import Data**".
+
+<img src="https://user-images.githubusercontent.com/44923999/214865867-e82b4a08-00ee-488d-8a89-dd87e7fb65a3.png" width="800" title="Snipped: January 26, 2023" />
+
+On the "**Connect to your data**" tab, select "**Azure Blob Storage**" from the "**Data Source**" drop-down menu
+
+<img src="https://user-images.githubusercontent.com/44923999/214140498-3b1a486c-57bd-407a-b249-60a93e54602e.png" width="800" title="Snipped: January 23, 2023" />
 
 Select the "**realestate-us-sample**" row and then click "**Next: Add cognitive skills (Optional)**"
 
-### Step 2: Add Cognitive Skills
+### Step 3: Add Cognitive Skills
 <img src="https://user-images.githubusercontent.com/44923999/214144851-f5be1f08-374d-4b8d-8fed-b56e6a7980a7.png" width="800" title="Snipped: January 23, 2023" />
 
 Expand "**Attach Cognitive Services**" and then select your instance of Cognitive Services
@@ -163,17 +170,17 @@ _Note: Even familiar data sources can be hard to configure the first time throug
 
 Collapse "**Add enrichments**", expand "**Save enrichments to a knowledge store**", configure knowledge store options and then click "**Next: Customize target index**"
 
-### Step 3: Customize Index
+### Step 4: Customize Index
 <img src="https://user-images.githubusercontent.com/44923999/214154309-fea824d2-d3bf-435b-bf85-500dd28be462.png" width="800" title="Snipped: January 23, 2023" />
 
 Configure index options and then click "**Next: Create an indexer**"
 
-### Step 4: Create Indexer
+### Step 5: Create Indexer
 <img src="https://user-images.githubusercontent.com/44923999/214154948-102c8185-cbdc-44f9-b21f-12bb9a22a43b.png" width="800" title="Snipped: January 23, 2023" />
 
 Configure and then click **Submit**
 
-### Step 5: Confirm Success
+### Step 6: Confirm Success
 <img src="https://user-images.githubusercontent.com/44923999/214312163-6f2c0749-ac0b-4a61-9bcd-f2e5b25e50ea.png" width="800" title="Snipped: January 24, 2023" />
 
 On the **Overview** page, click "**Search explorer**"
