@@ -174,8 +174,7 @@ Click "**Next: Add cognitive skills (Optional)**".
 Expand "**Attach Cognitive Services**" and then select your instance of Cognitive Services.
 
 #### Add Enrichments
-
-<img src="https://user-images.githubusercontent.com/44923999/214915613-19b182d9-a32d-4e4d-bde2-5b5161521ed1.png" width="800" title="Snipped: January 26, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/215102269-e3dae590-f0d5-4036-a495-8d57c8b0d7ca.png" width="800" title="Snipped: January 26, 2023" />
 
 Collapse "**Attach Cognitive Services**" and then expand "**Add enrichments**".
 
@@ -190,7 +189,7 @@ Complete the "**Add cognitive skills**..." >> "**Add enrichments**" form, includ
 | :----- | :----- |
 | **Skillset name** | Enter "stormevents-episodenarrative" |
 | **Source data field** | Select **EpisodeNarrative** |
-| **Check items below...** | Select "**Extract location names**" and "**Extract key phrases**" |
+| **Check items below...** | Select "**Extract location names**" and "**Extract key phrases**" (and enter friendly Field Names) |
 
 _Note: In the spirit of experimentation, we might include additional options like "**Extract people names**" or "**Extract organization names**", but given no evidence of that type of data in the **EpisodeNarrative** column, I am choosing to be more targeted_
 
