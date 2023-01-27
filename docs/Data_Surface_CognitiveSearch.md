@@ -202,12 +202,12 @@ Configure knowledge store options.
 Click "**Next: Customize target index**".
 
 ### Step 3: Customize Target Index
-<img src="https://user-images.githubusercontent.com/44923999/214931224-8b6fe474-0c02-4302-a174-3445881b6eb8.png" width="800" title="Snipped: January 26, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/215103824-4625faee-8961-4b90-a8d3-19a7090c0dd9.png" width="800" title="Snipped: January 26, 2023" />
 
 _Some thoughts..._
 * _There are a LOT of options!_
-* _In a first, experimental pass, I am opting for greedy {i.e., selecting all possible choices}_
-* _Once I see how those choices play out in the interface, I will come back and be more strategic_
+* _When you simply don't know what to choose, opt for greedy {i.e., selecting all possible choices}_
+* _Once you see how those choices play out in the interface, come back through and be more strategic_
 
 Complete the "**Customize target index**" form, including:
 
@@ -217,7 +217,7 @@ Complete the "**Customize target index**" form, including:
 | **Key** | Select "EpisodeId" |
 | **Suggester name** | Select "stormevents-suggester" |
 
-...and, of course, select all available options.
+_Note: You will see that in some cases {e.g., "Retrievable"}. In other cases {e.g., "Filterable"}, after early experimentation, I realized that this would end up surfacing in the interface sidebar and many of the options were unnecessary._
 
 Click "**Next: Create an indexer**".
 
