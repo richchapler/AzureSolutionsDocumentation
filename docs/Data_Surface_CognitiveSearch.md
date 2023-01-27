@@ -343,6 +343,13 @@ Select all items that should be displayed as suggestions in the search box dropd
 
 Navigate to the Downloads folder using Windows explorer and open **AzSearch.html**.
 
+### Step 2..n: Iterate
+
+Your first, second, third... versions are not going to be exactly what you want, but keep at it.<br><br>
+
+_A thought..._
+* _Consider going back to you original source of data and creating new columns {e.g., an EventId-Type column that concatenates information that would be more useful in search result presentation}_
+
 -----
 
 ## Reference
