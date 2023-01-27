@@ -318,13 +318,13 @@ Click "**Create Demo App**" (and "**Enable CORS and continue**", if prompted).
 
 #### Individual Result
 
-<img src="https://user-images.githubusercontent.com/44923999/214946156-50a58f1d-c4be-4f07-9194-be30702a399c.png" width="800" title="Snipped: January 26, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/215100381-31996b16-12a2-4702-916e-4f226fd1ea6c.png" width="800" title="Snipped: January 26, 2023" />
 
 Complete the form on the "Create Demo App" page, "Individual result" tab.
 
 | **Prompt** | **Entry** |
 | :----- | :----- |
-| **Thumbnail** | Select "EventId" |
+| **Thumbnail** | Since we lack an image column, leave unselected |
 | **Title** | Select "EventType" |
 | **Description** | Select "EventNarrative" |
 
