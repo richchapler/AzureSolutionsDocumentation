@@ -316,16 +316,15 @@ Open "stormevents-index" (**Cognitive Search** >> **Overview** >> **Indexes**).
 Click "**Create Demo App**" (and "**Enable CORS and continue**", if prompted).
 
 #### Individual Result
-
-<img src="https://user-images.githubusercontent.com/44923999/215100381-31996b16-12a2-4702-916e-4f226fd1ea6c.png" width="800" title="Snipped: January 26, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/215104652-a63703d5-a98d-40c7-8acc-3bc972d58a61.png" width="800" title="Snipped: January 26, 2023" />
 
 Complete the form on the "Create Demo App" page, "Individual result" tab.
 
 | **Prompt** | **Entry** |
 | :----- | :----- |
 | **Thumbnail** | Since we lack an image column, leave unselected |
-| **Title** | Select "EventType" |
-| **Description** | Select "EventNarrative" |
+| **Title** | Select "EventId" |
+| **Description** | Select "EventType" |
 
 Click **Next**.
 
