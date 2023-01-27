@@ -335,10 +335,9 @@ Click **Next**.
 Select all items that should be included in the sidebar and then click **Next**.
 
 #### Suggestions
+<img src="https://user-images.githubusercontent.com/44923999/215105054-0c3d29b5-ecc6-4ad0-88df-d842d7473922.png" width="800" title="Snipped: January 26, 2023" />
 
-<img src="https://user-images.githubusercontent.com/44923999/214966079-3a6c80b8-a423-4a49-ad76-00cf37490d38.png" width="800" title="Snipped: January 26, 2023" />
-
-Select all items that should be displayed as suggestions in the search box dropdown and then click "**Create Demo App**"; when prompted "Your demo app is ready", click **Download**.
+Select all items that should be displayed as suggestions in the search box dropdown {e.g., "Event Narrative} and then click "**Create Demo App**"; when prompted "Your demo app is ready", click **Download**.
 
 <img src="https://user-images.githubusercontent.com/44923999/214966534-5e5d2436-116a-40bd-af7d-fff296b5f639.png" width="800" title="Snipped: January 26, 2023" />
 
