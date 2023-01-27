@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/44923999/185972867-64465cc3-0769-4045-bc5d-672f573854c7.png)
 
 ## Instantiation
-_Note: in many cases, the links below point to Microsoft documentation... wherever necessary, I have added additional documentation to fill gaps_
+_Note: in many cases, the links below point to Microsoft documentation... I add additional documentation only to fill gaps_
 
 > [**API Management**](https://learn.microsoft.com/en-us/azure/api-management/)
 
