@@ -22,7 +22,14 @@ This solution will address requirements in N exercises:
 
 -----
 
-## Exercise 1
-![Uploading image.png…]()
+## Exercise 1: Data Exploer, Export Data
+In this exercise, we will discuss two ways of preparing Data Explorer-based data for use by Cognitive Search:
 
+* Option #1: One-Time Export (to Blob Storage)... for data that will not change
+* Option #2: Continuous Export (to Blob Storage)... for data that will change over time
+
+_Note: Continuous Export does not provide for data headers and that complicates the import of data into Cognitive Search_
+
+### Step 1: Perform One-Time Export (Option #1)
+In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
 ![image](https://user-images.githubusercontent.com/44923999/215788562-676e145f-5baf-4843-a74f-7256b341f53e.png)
