@@ -1,21 +1,19 @@
-## Synapse
+# Synapse
 _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 
 ![image](https://user-images.githubusercontent.com/44923999/185975852-f21da095-6d6d-4259-86d8-6b199c9e3295.png)
 
 _Note: Use [Microsoft Learn: Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/) documentation for most questions. The documentation below covers additional, specific guidance around topics like use of Azure Active Directory, firewall, etc._
 
-### Specific Guidance
-Consider the following items when creating a Synapse instance (with the Azure Portal or otherwise)
-
-#### Managed Resource Group
-Recommendation: Provide a name aligned with your naming standard
+## Specific Guidance
+### Managed Resource Group
+**Recommendation**: Provide a name aligned with your naming standard
 
 * If you do not specify a name for the Managed Resource Group, Synapse will automatically generate a name on your behalf (and odds are good that it will not align with your naming standards)
 * Because you are likely to have more than one managed Resource Group, consider using a consistent naming pattern {e.g., **<UseCase>mrgs** for Synapse and **<UseCase>mrgx** for Resource Type X
 
-#### Security, Authentication
-Recommendation: Use only Azure Active Directory
+### Security >> Authentication
+**Recommendation**: Use only Azure Active Directory
  
 * Advantages of using only Azure Active Directory...
   * **Centralized user management**: Azure AD allows for centralized user management, making it easier to manage user accounts and permissions across different systems and applications
@@ -30,8 +28,8 @@ Recommendation: Use only Azure Active Directory
   * **Integration challenges**: integrating Azure AD with your existing systems and applications may require additional time and effort, particularly if you need to integrate with systems that use different authentication methods
   * **Complexity**: using Azure AD for authentication can increase the complexity of managing user accounts and permissions, especially in large organizations with many users
 
-#### Networking, "**Allow connections from all IP addresses**"
-Recommendation: Prevent the creation of a firewall rule that opens 0.0.0.0 to 255.255.255.255; set individual firewall rules instead
+### Networking >> "**Allow connections from all IP addresses**"
+**Recommendation**: Prevent the creation of a firewall rule that opens 0.0.0.0 to 255.255.255.255; set individual firewall rules instead
   
 * Advantages of allowing connections from all IP addresses
   * **Accessibility**: This option allows anyone with the proper credentials to access the Synapse instance from anywhere, as long as they have an internet connection
@@ -42,7 +40,7 @@ Recommendation: Prevent the creation of a firewall rule that opens 0.0.0.0 to 25
   * **Performance**: Allowing connections from all IP addresses can have a negative impact on performance, as it can result in a large number of incoming connections that need to be processed
   * **Cost**: Allowing connections from all IP addresses may result in increased costs, as it may require additional resources to process the incoming connections
 
-### Create with ARM Template
+## Create with ARM Template
 Use this template to instantiate Synapse.
   
 _Notes:_<br>
