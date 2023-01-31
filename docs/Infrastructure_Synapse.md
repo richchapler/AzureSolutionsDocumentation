@@ -5,29 +5,42 @@ _(aka "Azure Synapse Analytics", "Synapse Analytics Workspace")_
 
 _Note: Use [Microsoft Learn: Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/) documentation for most questions. The documentation below covers additional, specific guidance around topics like use of Azure Active Directory, firewall, etc._
 
-### Create with Azure Portal
+### Specific Guidance
+Consider the following items when creating a Synapse instance (with the Azure Portal or otherwise)
 
-* Click the menu button in the upper-left corner of the Azure Portal
-* Click **+ Create a resource** in the resulting dropdown
-* Use the **Search services and marketplace** textbox to search for "synapse" and select the appropriate dropdown value
-* Find the correct result, select the **Create** dropdown, and then click the appropriate dropdown value
-* Complete the **Create Synapse workspace** form
+#### Managed Resource Group
+Recommendation: Provide a name aligned with your naming standard
 
-  <img src="https://user-images.githubusercontent.com/44923999/179077930-cd2745c0-3d14-4db8-b8ae-a37cb18295a1.png" width="800" title="Snipped: July 14, 2022" />
+* If you do not specify a name for the Managed Resource Group, Synapse will automatically generate a name on your behalf (and odds are good that it will not align with your naming standards)
+* Because you are likely to have more than one managed Resource Group, consider using a consistent naming pattern {e.g., **<UseCase>mrgs** for Synapse and **<UseCase>mrgx** for Resource Type X
 
-  Prompt | Entry
-  ------ | ------
-  **Managed Resource Group** | This resource group will hold ancillary resources created specifically for Synapse<br><br>_Note: Because you are likely to have more than one managed Resource Group, consider using a consistent naming pattern {e.g., **<UseCase>mrg-s** for Synapse and **<UseCase>mrg-x** for Resource Type X}_
-  **Account Name** | Select an existing data lake or click the **Create new** link to create a new data lake
-  **File System Name** | Select an existing data lake file system or click the **Create new** link to create a new data lake file system
+#### Security, Authentication
+Recommendation: Use only Azure Active Directory
+ 
+* Advantages of using only Azure Active Directory...
+  * **Centralized user management**: Azure AD allows for centralized user management, making it easier to manage user accounts and permissions across different systems and applications
+  * **Improved security**: using Azure AD for authentication enhances security by providing additional layers of authentication and authorization, and by reducing the risk of password-related security incidents
+  * **Single sign-on (SSO)**: Azure AD enables single sign-on (SSO) across different systems and applications, making it easier for users to access the resources they need without having to remember multiple usernames and passwords
+  * **Scalability**: Azure AD is a scalable solution that can handle a large number of user accounts and authentication requests, making it suitable for use in large organizations
+  * **Integration with other Azure services**: Azure AD can be integrated with other Azure services, such as Azure Functions, Power Apps, and Microsoft 365, allowing for a more seamless user experience
 
-* Click the **Next: Security >** button and then select the **Use only Azure Active Directory (Azure AD) authentication** radio button
-  _Note: Though local authentication may be appropriate to some use cases, I do not typically recommend it_
+* Disadvantages of using only Azure Active Directory...
+  * **Dependency on Azure AD**: using only Azure AD authentication creates a dependency on the availability and performance of Azure AD, which can impact the availability and performance of your Azure Synapse instance
+  * **Cost**: using Azure AD for authentication may incur additional costs, depending on the specific Azure AD plan you are using
+  * **Integration challenges**: integrating Azure AD with your existing systems and applications may require additional time and effort, particularly if you need to integrate with systems that use different authentication methods
+  * **Complexity**: using Azure AD for authentication can increase the complexity of managing user accounts and permissions, especially in large organizations with many users
 
-* Click the **Next: Networking >** button and then uncheck the "**Allow connections from all IP addresses**" checkbox
-  _Note: Unchecking the box prevents creation of a firewall rule that opens 0.0.0.0 to 255.255.255.255; set individual firewall rules instead_
+#### Networking, "**Allow connections from all IP addresses**"
+Recommendation: Prevent the creation of a firewall rule that opens 0.0.0.0 to 255.255.255.255; set individual firewall rules instead
+  
+* Advantages of allowing connections from all IP addresses
+  * **Accessibility**: This option allows anyone with the proper credentials to access the Synapse instance from anywhere, as long as they have an internet connection
+  * **Convenience**: This option can be convenient for users who need to access the Synapse instance from different locations, as they will not have to worry about the IP address of their device changing
 
-* Click **Review + create**, confirm configuration settings on the resulting page, and then click **Create**
+* Disadvantages of allowing connections from all IP addresses
+  * **Security**: Allowing connections from all IP addresses can increase the security risks, as it leaves the Synapse instance more vulnerable to unauthorized access
+  * **Performance**: Allowing connections from all IP addresses can have a negative impact on performance, as it can result in a large number of incoming connections that need to be processed
+  * **Cost**: Allowing connections from all IP addresses may result in increased costs, as it may require additional resources to process the incoming connections
 
 ### Create with ARM Template
 Use this template to instantiate Synapse.
