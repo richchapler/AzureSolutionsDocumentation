@@ -13,6 +13,7 @@ This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) with three copies of [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard) {i.e. StormEvents1, StormEvents2, and StormEvents3}
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "exports" (and related SAS token)
+* [**Synapse**](Infrastructure_Synapse.md)
 
 ## Proposed Solution
 This solution will address requirements in N exercises:
