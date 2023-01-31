@@ -1,5 +1,7 @@
 ## Synapse >> Firewall Rules
 
+https://learn.microsoft.com/en-us/azure/synapse-analytics/security/synapse-workspace-ip-firewall
+
 ### Create with ARM Template
 Use this template to add Firewall Rules to Synapse.
 
