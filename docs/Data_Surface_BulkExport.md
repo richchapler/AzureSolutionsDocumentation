@@ -6,7 +6,7 @@
 This solution considers the following requirements:
 
 * "We have hundreds of Data Explorer tables that we want to ready for use with Cognitive Search"
-* "Individual export will take much more human effort than we want to invest"
+* "Individual data export will take much more human effort than we want to invest"
 
 ## Required Infrastructure
 This solution requires the following resources:
@@ -17,8 +17,7 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in N exercises:
 
-* Exercise 1: Figure out what tables are in Data Explorer
-* Exercise 2: Iterate through list of tables and export to Storage Account
+* Exercise 1: Synapse Pipeline, Create Export Iterator
 
 -----
 
