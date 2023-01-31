@@ -23,5 +23,6 @@ This solution will address requirements in N exercises:
 -----
 
 ## Exercise 1
+![Uploading image.png…]()
 
 ![image](https://user-images.githubusercontent.com/44923999/215788562-676e145f-5baf-4843-a74f-7256b341f53e.png)
