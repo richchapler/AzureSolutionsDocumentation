@@ -1,6 +1,6 @@
 # Surface Data with Bulk Export
 
-![image](https://user-images.githubusercontent.com/44923999/215786929-46b22f51-5b64-459a-8af5-493d09000f80.png)
+![image](https://user-images.githubusercontent.com/44923999/215880260-d581ec97-3b29-4490-94ae-0f473fcc3612.png)
 
 ## Use Case
 This solution considers the following requirements:
