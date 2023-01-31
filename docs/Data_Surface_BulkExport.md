@@ -28,7 +28,7 @@ This solution will address requirements in N exercises:
 
 -----
 
-## Exercise 1: Data Exploer, Export Data
+## Exercise 1: Data Explorer, Export Data
 In this exercise, we will explore the identification of export targets and how to automate export.
 
 ![image](https://user-images.githubusercontent.com/44923999/215788562-676e145f-5baf-4843-a74f-7256b341f53e.png)
