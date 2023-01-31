@@ -11,13 +11,17 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md) ... MAY JUST USE DATA EXPLORER HELP DATABASE
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "exports" (and related SAS token)
 
 ## Proposed Solution
 This solution will address requirements in N exercises:
 
 * Exercise 1: Figure out what tables are in Data Explorer
-* Exercise 1: Iterate through list of tables and export to Storage Account
+* Exercise 2: Iterate through list of tables and export to Storage Account
 
 -----
+
+## Exercise 1
+
+![image](https://user-images.githubusercontent.com/44923999/215788562-676e145f-5baf-4843-a74f-7256b341f53e.png)
