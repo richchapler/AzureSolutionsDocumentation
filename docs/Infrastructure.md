@@ -51,7 +51,7 @@ _Note: in many cases, the links below point to Microsoft documentation... I add 
 
 > [**Storage Account**](Infrastructure_StorageAccount.md)
 
-> [**Synapse**](Infrastructure_Synapse.md) >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git Configuration](Infrastructure_Synapse_GitConfiguration.md) :: [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) :: [Linked Service](Infrastructure_Synapse_LinkedService.md) :: [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
+> [**Synapse**](Infrastructure_Synapse.md) >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git Configuration](Infrastructure_Synapse_GitConfiguration.md) :: [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) :: [Linked Service](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory) :: [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
 
 ## Migration
 
