@@ -17,7 +17,7 @@ This solution requires the following resources:
   * Three copies of [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard) {i.e., tables StormEvents1, StormEvents2, and StormEvents3}
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "exports" (and related SAS token)
 * [**Synapse**](Infrastructure_Synapse.md)
-  * [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) for IP address of development device
+  * [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) allowing your Client IP
   * [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) for Data Explorer
   * [Linked Service](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory) for Data Explorer
 
