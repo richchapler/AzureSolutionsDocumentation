@@ -18,8 +18,8 @@ This solution requires the following resources:
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "exports" (and related SAS token)
 * [**Synapse**](Infrastructure_Synapse.md)
   * [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) allowing your Client IP
-  * [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) for Data Explorer
-  * [Linked Service](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory) for Data Explorer
+  * [Linked Service](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory) for your Data Explorer instance
+  * [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) for your Data Explorer instance
 
 ## Proposed Solution
 This solution will address requirements in N exercises:
