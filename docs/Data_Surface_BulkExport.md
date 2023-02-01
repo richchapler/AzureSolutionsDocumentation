@@ -71,3 +71,10 @@ Navigate to Synapse Studio, Integrate and then click the **+** icon and then **P
 <img src="https://user-images.githubusercontent.com/44923999/216067715-573fef58-9b80-43bb-a301-fe710d0719cc.png" width="800" title="Snipped: February 1, 2023" />
 
 * Click **Debug** and confirm successful pipeline processing
+
+<img src="https://user-images.githubusercontent.com/44923999/216069273-a28c64dd-cd9c-42dc-820e-8a21428e84fa.png" width="800" title="Snipped: February 1, 2023" />
+
+* Navigate to the **exports** container in your Storage Account instance and confirm proper export
+
+## Congratulations
+You have successfully completed this exercise.
