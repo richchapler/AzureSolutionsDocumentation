@@ -13,7 +13,7 @@ This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
   * [**Cluster**](Infrastructure_DataExplorer_Cluster.md)
-  * [**Database**](Infrastructure_DataExplorer_Database.md) with **Viewer** permissions for Synapse managed identity
+  * [**Database**](Infrastructure_DataExplorer_Database.md) with **Viewer** permissions granted to Synapse managed identity
   * Three copies of [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard) {i.e., tables StormEvents1, StormEvents2, and StormEvents3}
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "exports" (and related SAS token)
 * [**Synapse**](Infrastructure_Synapse.md)
