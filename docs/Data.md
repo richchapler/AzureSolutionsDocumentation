@@ -34,4 +34,5 @@
   Use Case | Method | Language
   :----- | :----- | :-----
   [...with an API](Data_Surface_API.md) | Function App + APIM | C# (Function App)
+  [...with Bulk Export](Data_Surface_BulkExport.md) | Synapse Pipeline | Low Code
   [...with Cognitive Search](Data_Surface_CognitiveSearch.md) | Cognitive Search | Low Code
