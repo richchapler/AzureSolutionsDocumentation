@@ -34,33 +34,33 @@ Navigate to Synapse Studio, Integrate and then click the **+** icon and then **P
 
 <img src="https://user-images.githubusercontent.com/44923999/216063424-12f1909e-26de-4572-8812-e85609a4cf16.png" width="800" title="Snipped: February 1, 2023" />
 
-* Drag-and-drop a **Lookup** component from the **Activities** tree, **General** grouping
-* On the **Settings** tab, select your Data Explorer dataset, uncheck "**First row only**" and then paste the following **Query**:
+Drag-and-drop a **Lookup** component from the **Activities** tree, **General** grouping.<br>
+On the **Settings** tab, select your Data Explorer dataset, uncheck "**First row only**" and then paste the following **Query**:
 
-  `.show tables | project TableName`
+`.show tables | project TableName`
   
-  _Note: Data Explorer datasets must specifically reference a table, but we do not actually use the referenced table with our ".show tables..." query_
+_Note: Data Explorer datasets must specifically reference a table, but we do not actually use the referenced table with our ".show tables..." query_
 
 ### Step 2: Add Activity: ForEach
 
 <img src="https://user-images.githubusercontent.com/44923999/216064663-066d56f8-e775-43e4-933c-ab4a9b78905c.png" width="800" title="Snipped: February 1, 2023" />
 
-* Drag-and-drop a **ForEach** component from the **Activities** tree, "**Iteration & conditionals**" grouping
-* Complete the form on the **Settings** tab
+Drag-and-drop a **ForEach** component from the **Activities** tree, "**Iteration & conditionals**" grouping.<br>
+Complete the form on the **Settings** tab.<br>
 
-  Prompt | Entry
-  ------ | ------
-  **Sequential** | Checked
-  **Items** | Paste expression `@activity('Lookup').output.value`
+Prompt | Entry
+------ | ------
+**Sequential** | Checked
+**Items** | Paste expression `@activity('Lookup').output.value`
 
 ### Step 3: Add Sub-Activity: Copy Data
 
 <img src="https://user-images.githubusercontent.com/44923999/216067419-dc310846-709a-45b8-baee-c3a0e4a87ab9.png" width="800" title="Snipped: February 1, 2023" />
 
-* Click the **+** button in the **Activities** area of the **ForEach** component
-* Select "Azure Data Explorer Command" from the "Azure Data Explorer" grouping of the resulting drop-down menu
-* Select your Data Explorer dataset on the **Connection** tab
-* On the Command tab, update and then paste the following logic into the Command textbox:
+Click the **+** button in the **Activities** area of the **ForEach** component.<br>
+Select "Azure Data Explorer Command" from the "Azure Data Explorer" grouping of the resulting drop-down menu.<br>
+Select your Data Explorer dataset on the **Connection** tab.<br>
+On the Command tab, update and then paste the following logic into the Command textbox:
 
   ```
   @concat('.export to csv ( "https://rchaplers.blob.core.windows.net/exports;STORAGEACCOUNT_ACCESSKEY" ) with ( includeHeaders = "all", namePrefix ="',item().TableName,'") <| ',item().TableName )
@@ -70,11 +70,11 @@ Navigate to Synapse Studio, Integrate and then click the **+** icon and then **P
 
 <img src="https://user-images.githubusercontent.com/44923999/216067715-573fef58-9b80-43bb-a301-fe710d0719cc.png" width="800" title="Snipped: February 1, 2023" />
 
-* Click **Debug** and confirm successful pipeline processing
+Click **Debug** and confirm successful pipeline processing.
 
-<img src="https://user-images.githubusercontent.com/44923999/216069273-a28c64dd-cd9c-42dc-820e-8a21428e84fa.png" width="800" title="Snipped: February 1, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/216070375-b4e2df69-50b9-42db-b4c4-312eb7a72e6d.png" width="800" title="Snipped: February 1, 2023" />
 
-* Navigate to the **exports** container in your Storage Account instance and confirm proper export
+Navigate to the **exports** container in your Storage Account instance and confirm proper export.
 
 ## Congratulations
 You have successfully completed this exercise.
