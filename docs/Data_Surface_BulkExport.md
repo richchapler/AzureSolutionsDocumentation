@@ -6,7 +6,7 @@
 This solution considers the following requirements:
 
 * "We have hundreds of Data Explorer tables that we want to prepare for use with Cognitive Search"
-* "Individual data export will take much more human effort than we want to invest"
+* "Manual {i.e., one-by-one} data export will take an unreasonable amount of human effort"
 
 ## Required Infrastructure
 This solution requires the following resources:
