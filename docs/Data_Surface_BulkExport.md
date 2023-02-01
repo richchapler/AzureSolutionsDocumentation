@@ -21,17 +21,9 @@ This solution requires the following resources:
   * [Linked Service](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory) for your Data Explorer instance
   * [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) for your Data Explorer instance
 
-## Proposed Solution
-This solution will address requirements in N exercises:
-
-* Exercise 1: Synapse Pipeline, Create Export Iterator
-
 -----
 
 ## Exercise 1: Data Explorer, Export Data
-In this exercise, we will explore the identification of export targets and how to automate export.
+In this exercise, we will create a Synapse pipeline that identifies and then iterates through a list of tables for export.
 
-![image](https://user-images.githubusercontent.com/44923999/215788562-676e145f-5baf-4843-a74f-7256b341f53e.png)
-
-### Step 1: Perform One-Time Export (Option #1)
-In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
+Navigate to Synapse.
