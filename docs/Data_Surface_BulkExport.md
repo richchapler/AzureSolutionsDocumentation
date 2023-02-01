@@ -26,4 +26,24 @@ This solution requires the following resources:
 ## Exercise 1: Data Explorer, Export Data
 In this exercise, we will create a Synapse pipeline that identifies and then iterates through a list of tables for export.
 
-Navigate to Synapse.
+_Note: These instructions will not detail how to establish Synapse >> Data Explorer permissions, how to create a linked service, or dataset_
+
+Navigate to Synapse Studio, Integrate and then click the **+** icon and then **Pipeline** in the resulting dropdown menu.
+
+### Add Activity: Lookup
+
+<img src="https://user-images.githubusercontent.com/44923999/216063424-12f1909e-26de-4572-8812-e85609a4cf16.png" width="800" title="Snipped: February 1, 2023" />
+
+* Drag-and-drop a **Lookup** component from the **Activities** tree, **General** grouping
+* On the **Settings** tab, select your Data Explorer dataset, uncheck "**First row only**" and then paste the following **Query**:
+
+  `.show tables | project TableName`
+  
+_Note: Data Explorer datasets must specifically reference a table, but we do not actually use the referenced table with our ".show tables..." query_
+
+
+
+
+
+
+
