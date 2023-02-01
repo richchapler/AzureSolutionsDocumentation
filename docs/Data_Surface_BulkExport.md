@@ -5,7 +5,7 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "We have hundreds of Data Explorer tables that we want to ready for use with Cognitive Search"
+* "We have hundreds of Data Explorer tables that we want to prepare for use with Cognitive Search"
 * "Individual data export will take much more human effort than we want to invest"
 
 ## Required Infrastructure
