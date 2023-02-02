@@ -11,7 +11,7 @@ This use case considers requirement statements like:
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
