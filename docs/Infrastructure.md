@@ -44,7 +44,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 
-* [**Machine Learning**](https://learn.microsoft.com/en-us/azure/machine-learning/)
+* [**Machine Learning**](https://learn.microsoft.com/en-us/azure/machine-learning/) >> [Compute Instance](https://learn.microsoft.com/en-us/azure/machine-learning/concept-compute-instance)
 
 * [**Power BI**](https://powerbi.microsoft.com/en-us/)
 
