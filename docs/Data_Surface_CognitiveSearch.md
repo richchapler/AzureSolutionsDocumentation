@@ -15,7 +15,7 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents" (and related SAS token)
 
 ## Proposed Solution
