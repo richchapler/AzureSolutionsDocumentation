@@ -44,6 +44,8 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 
+* [**Machine Learning**](https://learn.microsoft.com/en-us/azure/machine-learning/)
+
 * [**Power BI**](https://powerbi.microsoft.com/en-us/)
 
 * [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md) :: [Sources](Infrastructure_Purview_Sources.md)
