@@ -7,7 +7,7 @@
 #### Step 1: Prepare Infrastructure
 In this step, we will prepare the Azure resources necessary to complete the exercise. This solution requires:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) and [Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 
 ### Step 2: Ingest Data
 In this step, we will use the "**Ingest Data**" wizard to create a Data Connection.
