@@ -20,7 +20,7 @@ This solution requires:
 
 <br>...as well as two resource groups {i.e., dev and prod} with each of the following resources:
 
-* **Data Explorer** [cluster](Infrastructure_DataExplorer_Cluster.md) and [database](Infrastructure_DataExplorer_Database.md)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**Synapse**](Infrastructure_Synapse.md), configured to use [GitHub Enterprise](Infrastructure_Synapse_GitConfiguration.md)
 
   <img src="https://user-images.githubusercontent.com/44923999/185621162-ea01a934-f17f-4dce-b2bd-6caaea601932.png" width="800" title="Snipped: August 18, 2022" />
