@@ -12,7 +12,7 @@ The documentation below covers additional, specific guidance around topics like 
 **Recommendation**: Provide a name aligned with your naming standard
 
 * If you do not specify a name for the Managed Resource Group, Synapse will automatically generate a name on your behalf (and odds are good that it will not align with your naming standards)
-* Because you are likely to have more than one managed Resource Group, consider using a consistent naming pattern {e.g., **<UseCase>mrgs** for Synapse and **<UseCase>mrgx** for Resource Type X
+* Because you are likely to have more than one managed Resource Group, consider using a consistent naming pattern {e.g., prefix **<UseCase>mrgs** for Synapse and prefix **<UseCase>mrgx** for Resource Type X}
 
 ### Security >> Authentication
 **Recommendation**: Use only Azure Active Directory
