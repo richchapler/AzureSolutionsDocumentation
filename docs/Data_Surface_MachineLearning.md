@@ -21,6 +21,7 @@ Steps
 * Create Compute (should this be in Infrastructure?)
 * Connect ADX
 
+```
 # Step 1: Install the package
 !pip install azure-kusto-data
  
@@ -39,6 +40,7 @@ results = client.execute("rchaplerded", query)
  
 # Step 6: Print the results
 print(results.primary_results[0])
+```
 
 ## Exercise 1: Data Explorer, Export Data
 In this exercise, we will create a Synapse pipeline that identifies and then iterates through a list of tables for export.
