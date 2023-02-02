@@ -19,6 +19,22 @@ Steps
 * Create Compute (should this be in Infrastructure?)
 * Connect ADX
 
+
+To connect to an Azure Data Explorer (Kusto) cluster from an Azure ML Notebook, you will need to perform the following steps:
+1.	Install the azure-kusto-data package in the Azure ML Notebook environment using the command !pip install azure-kusto-data.
+2.	Import the necessary modules using the command from azure.kusto.data import KustoClient, KustoConnectionStringBuilder.
+3.	Build the connection string using the KustoConnectionStringBuilder class. You will need the following information to build the connection string:
+•       The cluster name
+•       The database name
+•       The client ID and client secret or a managed identity for the Azure ML Notebook.
+4.	Create a Kusto client instance using the KustoClient class and the connection string.
+5.	Use the Kusto client instance to query the database by calling the execute method.
+ 
+For the permissions, you will need the Data Reader role at the database level, or the Data Contributor role if you want to write data as well. You can assign these roles using the Azure portal, the Azure CLI, or Azure Resource Manager templates.
+ 
+
+
+
 ![image](https://user-images.githubusercontent.com/44923999/216399872-eb7c206d-c656-491d-a9d6-1f7a6ba3d70b.png)
 
 ```
@@ -42,15 +58,9 @@ results = client.execute("rchaplerded", query)
 print(results.primary_results[0])
 ```
 
-## Exercise 1: Data Explorer, Export Data
-In this exercise, we will create a Synapse pipeline that identifies and then iterates through a list of tables for export.
+## Exercise 1: Lorem Ipsum
+In this exercise, we will lorem ipsum
 
-_Note: These instructions will not detail how to establish Synapse >> Data Explorer permissions, how to create a linked service, or dataset_
+### Step 1: Lorem Ipsum
 
-Navigate to Synapse Studio, Integrate and then click the **+** icon and then **Pipeline** in the resulting dropdown menu.
-
-### Step 1: Add Activity: Lookup
-
-<img src="https://user-images.githubusercontent.com/44923999/216063424-12f1909e-26de-4572-8812-e85609a4cf16.png" width="800" title="Snipped: February 1, 2023" />
-
-Drag-and-drop a **Lookup** component from the **Activities** tree, **General** grouping.<br>
+<img src="https://user-images.githubusercontent.com/44923999/blah.png" width="800" title="Snipped: February 1, 2023" />
