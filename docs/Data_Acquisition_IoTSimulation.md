@@ -10,7 +10,7 @@ This use case considers requirement statements like:
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) and [Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/)
 * [**IoT Central**](Infrastructure_IoTCentral.md)
 
