@@ -16,7 +16,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
-  * Configuration >> [Cluster](Infrastructure_DataExplorer_Cluster.md) :: [Database](Infrastructure_DataExplorer_Database.md) :: [Table](Infrastructure_DataExplorer_Table.md)
+  * Configuration >> [Cluster](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) :: [Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) :: [Table](Infrastructure_DataExplorer_Table.md)
   * Data >> [Continuous Export](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md)
   * [FAQ](Infrastructure_DataExplorer.md)
 
