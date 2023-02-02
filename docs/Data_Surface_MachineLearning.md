@@ -16,16 +16,88 @@ This solution requires the following resources:
 -----
 
 Steps
-* Use Azure ML Command Line to install PIP
+* Use Azure ML Command Line to install "azure-kusto-data"
 
 ![image](https://user-images.githubusercontent.com/44923999/216428803-786b082a-43a6-4fdc-b423-d3f7ae3fc835.png)
 
+### Command Line
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 ```
 
-* Create Compute (should this be in Infrastructure?)
+```
+sudo apt  install pypy  # version 7.3.1+dfsg-2
+```
+
+```
+pypy -m pip install azure-kusto-data azure-kusto-ingest
+```
+NOT CLEAR IF THE ONES ABOVE IS NECESSARY!!
+
+### Command #1
+```
+pip install azure-kusto-data
+```
+
+### Command #2
+```
+pip install azure-kusto-ingest
+```
+
+### Command #3
+```
+from azure.kusto.data import KustoClient, KustoConnectionStringBuilder, ClientRequestProperties
+from azure.kusto.data.exceptions import KustoServiceError
+from azure.kusto.data.helpers import dataframe_from_result_table
+```
+
+### Command #4
+```
+kcsb = KustoConnectionStringBuilder.with_aad_application_key_authentication("https://rchaplerdec.westus3.kusto.windows.net","75afc8e9-f297-4ba4-8b5b-5ce3495258a1",".8q8Q~5MYV2sBVLwhaBAOWBJranmpErUJ9gHYaDP","16b3c013-d300-468d-ac64-7eda0820b6d3")
+kcsb.authority_id = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+```
+
+### Command #4
+```
+client = KustoClient(kcsb)
+response = client.execute("rchaplerded", "StormEvents1 | count")
+df = dataframe_from_result_table(response.primary_results[0])
+df.head(3)
+```
+
+
+
+https://github.com/Azure/azure-kusto-python/blob/master/azure-kusto-data/tests/sample.py
+
+
+Here's a code snippet in Python that demonstrates how to connect to Kusto using the kqlmagic library in a Jupyter Notebook:
+
+python
+Copy code
+!pip install kqlmagic
+
+%load_ext Kqlmagic
+
+# Connect to Kusto cluster and database
+%kql kusto://code.kusto.windows.net/MyDatabase
+
+# Run a KQL query
+%kql query_string = "StormEvents | count"
+In the above code:
+
+The pip install kqlmagic command installs the kqlmagic library.
+The %load_ext Kqlmagic command loads the kqlmagic extension into the Jupyter Notebook.
+The %kql kusto://code.kusto.windows.net/MyDatabase command connects to the specified Kusto cluster and database.
+The %kql query_string = "StormEvents | count" command runs a sample KQL query to count the number of rows in the StormEvents table.
+
+
+
+Regenerate response
+
+
+
+
 * Connect ADX
 
 
