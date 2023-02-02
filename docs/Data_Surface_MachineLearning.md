@@ -19,6 +19,8 @@ Steps
 * Create Compute (should this be in Infrastructure?)
 * Connect ADX
 
+![image](https://user-images.githubusercontent.com/44923999/216399872-eb7c206d-c656-491d-a9d6-1f7a6ba3d70b.png)
+
 ```
 # Step 1: Install the package
 !pip install azure-kusto-data
