@@ -37,7 +37,7 @@ This use case considers the following requirement statements:
 In addition to the items listed at the beginning of this documentation, this solution requires the following resources:
 
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md) with "**Cost Management Reader**" role assignment (granted at Subscription or Resource Group)
-* Data Explorer [**Cluster**](Infrastructure_DataExplorer_Cluster.md) and [**Database**](Infrastructure_DataExplorer_Database.md)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
 ### Step 2: Create Destination Table
