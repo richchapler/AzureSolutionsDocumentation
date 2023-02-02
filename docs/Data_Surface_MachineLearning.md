@@ -16,6 +16,15 @@ This solution requires the following resources:
 -----
 
 Steps
+* Use Azure ML Command Line to install PIP
+
+![image](https://user-images.githubusercontent.com/44923999/216428803-786b082a-43a6-4fdc-b423-d3f7ae3fc835.png)
+
+```
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+```
+
 * Create Compute (should this be in Infrastructure?)
 * Connect ADX
 
