@@ -10,7 +10,7 @@ This use case considers requirement statements like:
 ### Step 1: Prepare Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) and [Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**Data Lake**](Infrastructure_DataLake.md) (with [container](Infrastructure_DataLake_Container.md) and downloaded [sample data](https://filesamples.com/formats/csv))
 
 ### Step 2: One-Time Ingestion
