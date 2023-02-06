@@ -79,4 +79,6 @@ In this exercise, we will lorem ipsum
 
 ### Step 1: Lorem Ipsum
 
+## Reference
+* https://learn.microsoft.com/en-us/azure/data-explorer/machine-learning-clustering
 <img src="https://user-images.githubusercontent.com/44923999/blah.png" width="800" title="Snipped: February 1, 2023" />
