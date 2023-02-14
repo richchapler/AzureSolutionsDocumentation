@@ -25,6 +25,8 @@ This solution will address requirements in three exercises:
 * Exercise 2: Cognitive Search, Import Data
 * Exercise 3: Cognitive Search, Create App
 
+-----
+
 ### Exercise 1: Data Explorer, Export Data
 In this exercise, we will discuss two ways of preparing Data Explorer-based data for use by Cognitive Search:
 
