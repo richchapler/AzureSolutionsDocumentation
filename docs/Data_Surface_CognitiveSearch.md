@@ -3,14 +3,14 @@ _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 ![image](https://user-images.githubusercontent.com/44923999/214475405-ae4cd7af-d318-49e7-854d-3060609c2124.png)
 
-## Use Case #1: Structured Data
+## Use Case
 This solution considers the following requirements:
 
 * "We used Data Explorer to capture a significant amount of rich, historical data from a soon-to-be-deprecated, on-prem database"
 * "Most of the historical data is static, but a small percentage will change over time"
 * "We want to help business users search this data asset"
 
-### Required Infrastructure
+## Required Infrastructure
 This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
@@ -18,16 +18,16 @@ This solution requires the following resources:
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents" (and related SAS token)
 
-### Proposed Solution
+## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Data Exploer, Export Data
+* Exercise 1: Data Explorer, Export Data
 * Exercise 2: Cognitive Search, Import Data
 * Exercise 3: Cognitive Search, Create App
 
 -----
 
-### Exercise 1: Data Explorer, Export Data
+## Exercise 1: Data Explorer, Export Data
 In this exercise, we will discuss two ways of preparing Data Explorer-based data for use by Cognitive Search:
 
 * Option #1: One-Time Export (to Blob Storage)... for data that will not change
@@ -35,7 +35,7 @@ In this exercise, we will discuss two ways of preparing Data Explorer-based data
 
 _Note: Continuous Export does not provide for data headers and that complicates the import of data into Cognitive Search_
 
-#### Step 1: Perform One-Time Export (Option #1)
+### Step 1: Perform One-Time Export (Option #1)
 In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
 
 Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard).
@@ -61,10 +61,10 @@ Navigate to the "stormevents" Container and confirm your export.
 
 Open the file with Excel to confirm data quality.
 
-#### Step 2: Create Continuous Export (Option #2)
+### Step 2: Create Continuous Export (Option #2)
 In this step, we will: 1) create an External Table and 2) create a Continuous Export.
 
-##### Step 2a: Create External Table
+#### Step 2a: Create External Table
 In this step, we will run a KQL query to create an external table that we can use as a Continuous Export destination.
 
 <img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
@@ -104,7 +104,7 @@ dataformat = csv ( 'https://rchaplers.blob.core.windows.net/stormevents;STORAGEA
 
 _Note: The external table name is prefixed with the letter "e" {i.e., "eStormEvents"} because the sample data uses table name "StormEvents"_
 
-##### Step 2b: Create Continuous Export
+#### Step 2b: Create Continuous Export
 In this step, we will: 1) clear sample data previously loaded to Data Explorer, 2) run a KQL query to create a Continuous Export job, and 3) re-import sample data (to trigger Continuous Export)
 
 Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
@@ -138,14 +138,14 @@ Navigate back to the "stormevents" Container and confirm the second export.
 
 -----
 
-### Exercise 2: Cognitive Search, Import Data
+## Exercise 2: Cognitive Search, Import Data
 In this exercise, we will import the exported StormEvents data into Cognitive Search.
 
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
 
 Navigate to your instance of Cognitive Search and then click "**Import Data**".
 
-#### Step 1: Connect Data
+### Step 1: Connect Data
 
 <img src="https://user-images.githubusercontent.com/44923999/214865867-e82b4a08-00ee-488d-8a89-dd87e7fb65a3.png" width="800" title="Snipped: January 26, 2023" />
 
@@ -165,15 +165,15 @@ Complete the resulting "**Connect to your data**" form, including:
 
 Click "**Next: Add cognitive skills (Optional)**".
 
-#### Step 2: Add Cognitive Skills
+### Step 2: Add Cognitive Skills
 
-##### Attach Cognitive Services
+#### Attach Cognitive Services
 
 <img src="https://user-images.githubusercontent.com/44923999/214895862-67c4bc0d-831c-4255-a1ff-1dc8f17697e5.png" width="800" title="Snipped: January 26, 2023" />
 
 Expand "**Attach Cognitive Services**" and then select your instance of Cognitive Services.
 
-##### Add Enrichments
+#### Add Enrichments
 <img src="https://user-images.githubusercontent.com/44923999/215102269-e3dae590-f0d5-4036-a495-8d57c8b0d7ca.png" width="800" title="Snipped: January 26, 2023" />
 
 Collapse "**Attach Cognitive Services**" and then expand "**Add enrichments**".
@@ -193,7 +193,7 @@ Complete the "**Add cognitive skills**..." >> "**Add enrichments**" form, includ
 
 _Note: In the spirit of experimentation, we might include additional options like "**Extract people names**" or "**Extract organization names**", but given no evidence of that type of data in the **EpisodeNarrative** column, I am choosing to be more targeted_
 
-##### Save enrichments to a knowledge store
+#### Save enrichments to a knowledge store
 
 <img src="https://user-images.githubusercontent.com/44923999/214929356-8c4ff44e-a21a-4b6f-a08f-f7d8c1e779a1.png" width="800" title="Snipped: January 26, 2023" />
 
@@ -201,7 +201,7 @@ Collapse "**Add enrichments**" and then expand "**Save enrichments to a knowledg
 Configure knowledge store options.
 Click "**Next: Customize target index**".
 
-#### Step 3: Customize Target Index
+### Step 3: Customize Target Index
 <img src="https://user-images.githubusercontent.com/44923999/215104254-b2a636fd-3af9-4a1e-90dd-141f66a5f401.png" width="800" title="Snipped: January 26, 2023" />
 
 _Some thoughts..._
@@ -221,12 +221,12 @@ _Note: You will see that in some cases {e.g., "Retrievable"}. In other cases {e.
 
 Click "**Next: Create an indexer**".
 
-#### Step 4: Create Indexer
+### Step 4: Create Indexer
 <img src="https://user-images.githubusercontent.com/44923999/214932334-e23022d2-0c9c-4ae2-8f18-375120e5cfe1.png" width="800" title="Snipped: January 26, 2023" />
 
 Configure and then click **Submit**.
 
-#### Step 5: Confirm Success
+### Step 5: Confirm Success
 <img src="https://user-images.githubusercontent.com/44923999/214312163-6f2c0749-ac0b-4a61-9bcd-f2e5b25e50ea.png" width="800" title="Snipped: January 26, 2023" />
 
 On the **Overview** page, click "**Search explorer**"
@@ -300,12 +300,12 @@ Confirm successful data import.
 
 -----
 
-### Exercise 3: Cognitive Search, Create App
+## Exercise 3: Cognitive Search, Create App
 In this exercise, we will prepare a search interface for end-users.
 
 _Warning from "Create a demo app..." documentation: "A demo app can help you visualize how an index will function in a client app, but it isn't intended for production scenarios. Production apps should include security, error handling, and hosting logic that the demo app doesn't provide."_
 
-#### Step 1: Create Demo App
+### Step 1: Create Demo App
 
 <img src="https://user-images.githubusercontent.com/44923999/214943967-b1d57e7c-09c1-4194-9dfa-190aa653b79b.png" width="800" title="Snipped: January 26, 2023" />
 
@@ -315,7 +315,7 @@ Open "stormevents-index" (**Cognitive Search** >> **Overview** >> **Indexes**).
 
 Click "**Create Demo App**" (and "**Enable CORS and continue**", if prompted).
 
-##### Individual Result
+#### Individual Result
 <img src="https://user-images.githubusercontent.com/44923999/215104652-a63703d5-a98d-40c7-8acc-3bc972d58a61.png" width="800" title="Snipped: January 26, 2023" />
 
 Complete the form on the "Create Demo App" page, "Individual result" tab.
@@ -328,13 +328,13 @@ Complete the form on the "Create Demo App" page, "Individual result" tab.
 
 Click **Next**.
 
-##### Sidebar
+#### Sidebar
 
 <img src="https://user-images.githubusercontent.com/44923999/214947587-62a38935-b557-4dfb-9b3a-ceb458b541a0.png" width="800" title="Snipped: January 26, 2023" />
 
 Select all items that should be included in the sidebar and then click **Next**.
 
-##### Suggestions
+#### Suggestions
 <img src="https://user-images.githubusercontent.com/44923999/215105054-0c3d29b5-ecc6-4ad0-88df-d842d7473922.png" width="800" title="Snipped: January 26, 2023" />
 
 Select all items that should be displayed as suggestions in the search box dropdown {e.g., "Event Narrative} and then click "**Create Demo App**"; when prompted "Your demo app is ready", click **Download**.
@@ -343,7 +343,7 @@ Select all items that should be displayed as suggestions in the search box dropd
 
 Navigate to the Downloads folder using Windows explorer and open **AzSearch.html**.
 
-#### Step 2..n: Iterate
+### Step 2..n: Iterate
 
 Your first, second, third... versions are not going to be exactly what you want, but keep at it.<br><br>
 
