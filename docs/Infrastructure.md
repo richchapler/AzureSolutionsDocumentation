@@ -11,7 +11,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) >> [FAQ](https://learn.microsoft.com/en-us/azure/search/search-faq-frequently-asked-questions)
 
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
