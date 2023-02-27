@@ -56,6 +56,8 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
+* [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
+
 * [**Synapse**](Infrastructure_Synapse.md)
   * Configuration >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git (Repository)](Infrastructure_Synapse_GitConfiguration.md)
   * Pools >> [Dedicated SQL Pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-sql-pool-studio) :: [Serverless SQL Pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/quickstart-serverless-sql-pool)
