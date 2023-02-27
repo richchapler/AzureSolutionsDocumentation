@@ -146,7 +146,10 @@ _Note: These instructions will not detail how to establish Synapse >> Data Explo
   Prompt | Entry
   ------ | ------
   **Source dataset** | Select "**StormEvents_old**"
-  **Query** | Paste KQL: `@concat('StormEvents_old | where = format_datetime(StartTime, ''yyyy-MM-dd'') == ',item())`
+  **Query** | Paste KQL:
+  ```
+  @concat('StormEvents_old | where = format_datetime(StartTime, ''yyyy-MM-dd'') == ',item())
+  ```
     
   <br><img src="https://user-images.githubusercontent.com/44923999/197610401-d0b6fe26-2f08-4135-ac84-dbfb247219ad.png" width="800" title="Snipped: October 24, 2022" />
 
