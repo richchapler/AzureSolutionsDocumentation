@@ -38,6 +38,8 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**IoT Central**](Infrastructure_IoTCentral.md)
 
+* [**IoT Hub**](https://learn.microsoft.com/en-us/azure/iot-hub/) >> [Raspberry Pi Simulator](https://azure-samples.github.io/raspberry-pi-web-simulator/)
+
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) >> [Secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
 
 * [**Log Analytics**](Infrastructure_LogAnalytics.md)
