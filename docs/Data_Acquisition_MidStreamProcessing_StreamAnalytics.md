@@ -1,6 +1,6 @@
 # Data Acquisition: Mid-Stream Processing via Stream Analytics
 
-![image](https://user-images.githubusercontent.com/44923999/214475405-ae4cd7af-d318-49e7-854d-3060609c2124.png)
+![image](https://user-images.githubusercontent.com/44923999/221875850-3e7ad7e9-4416-4dde-9c76-ea822f750db0.png)
 
 ## Use Case
 This solution considers the following requirements:
