@@ -132,9 +132,9 @@ Select metrics "**Input Events**" and "**Output Events**", click **Apply**, then
 
 Navigate to "**Query**" in the "**Data**" grouping of the Data Explorer navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/221995725-86a22602-f501-4581-8415-2093ef71a581.png" width="800" title="Snipped: February 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/221996613-aa02268b-7b20-4da3-817f-8250728fe5f5.png" width="800" title="Snipped: February 28, 2023" />
 
-Confirm the data in the output by executing the following KQL: `t`
+Confirm output data by executing the following KQL: `t`
 
 #### Troubleshooting
 
