@@ -83,6 +83,8 @@ FROM rchaplerih
 WHERE Temperature <= 27 -- route #2
 ```
 
+![image](https://user-images.githubusercontent.com/44923999/221941546-8255ac64-422d-436d-a006-4839a0f36b6e.png)
+
 -----
 
 ## Reference
