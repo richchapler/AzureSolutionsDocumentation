@@ -50,6 +50,9 @@ Click on the new Device link.
 <img src="https://user-images.githubusercontent.com/44923999/221905410-1bbfc497-446c-4ffb-ab72-c22497927012.png" width="800" title="Snipped: February 28, 2023" />
 
 Copy the "**Primary connection string**" value; example: `HostName=rchaplerih.azure-devices.net;DeviceId=Device001;SharedAccessKey=...`
+
+### Step 2: Activate Simulator
+
 Navigate to the Raspberry Pi Azure IoT Online Simulator (https://azure-samples.github.io/raspberry-pi-web-simulator/).
 
 <img src="https://user-images.githubusercontent.com/44923999/221912699-cd996cda-a4f5-42ba-91ac-4f1cad2c3f58.png" width="800" title="Snipped: February 28, 2023" />
@@ -57,14 +60,17 @@ Navigate to the Raspberry Pi Azure IoT Online Simulator (https://azure-samples.g
 Update Line 15, `const connectionString = ...` with the copied "**Primary connection string**" value and then click **Run**.
 
 ## Exercise 2: Configure Job
-### Stream Analytics Job, Add Input
+
+### Step 1: Add Job Input
+
 Navigate to theStream Analytics Job and then "**Inputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221920094-c96b4c8a-f5ca-4af3-88a1-bb2ba9b850a7.png" width="800" title="Snipped: February 28, 2023" />
 
 Click "**+ Add stream input**", select "**IoT Hub**" from the resulting dropdown menu, complete the resulting "**IoT Hub**" pop-out, and then click **Save**.
 
-### Data Explorer, Create Destination Table
+### Step 2: Create Destination Table
+
 Navigate to Data Explorer and then **Query** in the **Data** grouping of the left-hand navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221956094-af2d8851-25d6-4926-a42a-300b1403120d.png" width="800" title="Snipped: February 28, 2023" />
@@ -81,7 +87,7 @@ Execute the following KQL:
     )
 ```
 
-### Stream Analytics Job, Add Output
+### Step 3: Add Job Output
 Navigate to "**Outputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221955364-58c61210-4ac2-45b8-8598-1829f5fb9194.png" width="800" title="Snipped: February 28, 2023" />
