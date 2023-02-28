@@ -116,9 +116,17 @@ INTO [rchaplerdec-rchaplerded]
 FROM rchaplerih
 ```
 
-Click "**Test query**".
+Click "**Test query**" and confirm result.
 
-### Step 5: Confirm Success
+### Step 6: Confirm Success
+
+#### Job Diagram
+
+Navigate to "**Job diagram...**" in the "**Developer tools**" grouping of the left-hand navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/221995347-df89e605-b331-42de-b6cf-395513efe4a1.png" width="800" title="Snipped: February 28, 2023" />
+
+Select metrics "**Input Events**" and "**Output Events**", click **Apply**, then confirm the flow of events.
 
 #### Troubleshooting
 
