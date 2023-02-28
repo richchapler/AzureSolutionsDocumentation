@@ -64,9 +64,9 @@ Navigate to the Stream Analytics Job and then "**Inputs**" in the "**Job topolog
 Click "**+ Add stream input**" and select "**IoT Hub**" from the resulting dropdown menu.<br>
 Complete the resulting "**IoT Hub**" pop-out, including:
 
-  | Prompt | Entry |
-  | ----- | ----- |
-  | **Input alias** | Enter a meaningful name aligned with standards |
+| Prompt | Entry |
+| :----- | :----- |
+| **Input alias** | Enter a meaningful name aligned with standards |
 
 -----
 
