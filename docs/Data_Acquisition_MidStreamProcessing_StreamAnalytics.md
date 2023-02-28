@@ -16,7 +16,7 @@ This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**IoT Hub**](https://learn.microsoft.com/en-us/azure/iot-hub/)
-* [Raspberry Pi Simulator](https://azure-samples.github.io/raspberry-pi-web-simulator/)
+* [**Raspberry Pi Simulator**](https://azure-samples.github.io/raspberry-pi-web-simulator/)
 * [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
 
 ## Proposed Solution
@@ -90,7 +90,7 @@ Execute the following KQL:
 ### Step 3: Add Job Output
 Navigate to "**Outputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/221955364-58c61210-4ac2-45b8-8598-1829f5fb9194.png" width="800" title="Snipped: February 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/221990599-36b1bbb3-1c80-4529-b6d9-c52b4760ae38.png" width="800" title="Snipped: February 28, 2023" />
 
 Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown menu, complete the resulting "**Azure Data Explorer**" pop-out, and then click **Save**.
 
