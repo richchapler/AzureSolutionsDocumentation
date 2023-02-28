@@ -88,11 +88,16 @@ Execute the following KQL:
 ```
 
 ### Step 3: Add Job Output
+
 Navigate to "**Outputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221990599-36b1bbb3-1c80-4529-b6d9-c52b4760ae38.png" width="800" title="Snipped: February 28, 2023" />
 
 Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown menu, complete the resulting "**Azure Data Explorer**" pop-out, and then click **Save**.
+
+### Step 4: Test Query
+
+Navigate to "**Query**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
 ```
 SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, temperature, humidity
