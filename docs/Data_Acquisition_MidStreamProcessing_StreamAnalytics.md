@@ -33,7 +33,7 @@ In this exercise, we will create a stream of sample data and surface it to IoT H
 We will follow the instructions at https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal<br>(loosely summarized below)
 
 ### Step 1: Create Device
-Navigate to the IoT Hub and then "**Devices**" in the "**Device management**" grouping of the left-hand navigation pane.
+Navigate to "**Devices**" in the "**Device management**" grouping of the IoT Hub navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221903858-42e8284b-3178-4f1f-a7c7-49f07e12568d.png" width="800" title="Snipped: February 28, 2023" />
 
@@ -63,7 +63,7 @@ Update Line 15, `const connectionString = ...` with the copied "**Primary connec
 
 ### Step 1: Add Job Input
 
-Navigate to theStream Analytics Job and then "**Inputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
+Navigate to "**Inputs**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221920094-c96b4c8a-f5ca-4af3-88a1-bb2ba9b850a7.png" width="800" title="Snipped: February 28, 2023" />
 
@@ -71,7 +71,7 @@ Click "**+ Add stream input**", select "**IoT Hub**" from the resulting dropdown
 
 ### Step 2: Create Destination Table
 
-Navigate to Data Explorer and then **Query** in the **Data** grouping of the left-hand navigation pane.
+Navigate to **Query** in the **Data** grouping of the Data Explorer navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221956094-af2d8851-25d6-4926-a42a-300b1403120d.png" width="800" title="Snipped: February 28, 2023" />
 
@@ -89,7 +89,7 @@ Execute the following KQL:
 
 ### Step 3: Add Job Output
 
-Navigate to "**Outputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
+Navigate to "**Outputs**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221990599-36b1bbb3-1c80-4529-b6d9-c52b4760ae38.png" width="800" title="Snipped: February 28, 2023" />
 
@@ -97,7 +97,7 @@ Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown 
 
 ### Step 4: Start Job
 
-Navigate to "**Overview**" on the left-hand navigation pane.
+Navigate to "**Overview**" on the Stream Analytics Job navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221994420-6a2b2577-bf84-487b-853c-70ff99ccef1d.png" width="800" title="Snipped: February 28, 2023" />
 
@@ -105,7 +105,7 @@ Click **Start**.
 
 ### Step 5: Test Query
 
-Navigate to "**Query**" in the "**Job topology**" grouping of the left-hand navigation pane.
+Navigate to "**Query**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221994564-0b354243-e02d-4bdc-887c-53a3dac42179.png" width="800" title="Snipped: February 28, 2023" />
 
@@ -122,11 +122,19 @@ Click "**Test query**" and confirm result.
 
 #### Job Diagram
 
-Navigate to "**Job diagram...**" in the "**Developer tools**" grouping of the left-hand navigation pane.
+Navigate to "**Job diagram...**" in the "**Developer tools**" grouping of the Stream Analytics Job navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221995347-df89e605-b331-42de-b6cf-395513efe4a1.png" width="800" title="Snipped: February 28, 2023" />
 
 Select metrics "**Input Events**" and "**Output Events**", click **Apply**, then confirm the flow of events.
+
+#### Data Explorer
+
+Navigate to "**Query**" in the "**Data**" grouping of the Data Explorer navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/221995725-86a22602-f501-4581-8415-2093ef71a581.png" width="800" title="Snipped: February 28, 2023" />
+
+Execute the following KQL: `t`
 
 #### Troubleshooting
 
