@@ -57,8 +57,11 @@ Navigate to the Raspberry Pi Azure IoT Online Simulator (https://azure-samples.g
 Update Line 15, `const connectionString = ...` with the copied "**Primary connection string**" value and then click **Run**.
 
 ## Exercise 2: Create Stream Analytics Job
+Navigate to the Stream Analytics Job and then "**Inputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
-Lorem Ipsum
+<img src="https://user-images.githubusercontent.com/44923999/221920094-c96b4c8a-f5ca-4af3-88a1-bb2ba9b850a7.png" width="800" title="Snipped: February 28, 2023" />
+
+Click "**+ Add stream input**" and select "**IoT Hub**" from the resulting dropdown menu.
 
 -----
 
