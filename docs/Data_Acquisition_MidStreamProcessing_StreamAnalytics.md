@@ -54,7 +54,7 @@ Navigate to the Raspberry Pi Azure IoT Online Simulator (https://azure-samples.g
 
 <img src="https://user-images.githubusercontent.com/44923999/221912699-cd996cda-a4f5-42ba-91ac-4f1cad2c3f58.png" width="800" title="Snipped: February 28, 2023" />
 
-Update Line 15, `connectionString = ...` with the copied "**Primary connection string**" value and then click **Run**.
+Update Line 15, `const connectionString = ...` with the copied "**Primary connection string**" value and then click **Run**.
 
 -----
 
