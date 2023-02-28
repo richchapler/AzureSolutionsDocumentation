@@ -24,6 +24,7 @@ This solution will address requirements in two exercises:
 
 * Exercise 1: Create Stream
 * Exercise 2: Create Job
+* Exercise 3: Route Data
 
 -----
 
@@ -138,10 +139,12 @@ Confirm output data by executing the following KQL: `t`
 
 #### Troubleshooting
 
-If you don't see data flowing through to Azure Data Explorer then LOREM IPSUM
+Consider the following tips:
+* Lorem Ipsum
 
+## Exercise 3: Route Data
 
-![image](https://user-images.githubusercontent.com/44923999/221941546-8255ac64-422d-436d-a006-4839a0f36b6e.png)
+<img src="https://user-images.githubusercontent.com/44923999/221941546-8255ac64-422d-436d-a006-4839a0f36b6e.png" width="800" title="Snipped: February 28, 2023" />
 
 -----
 
