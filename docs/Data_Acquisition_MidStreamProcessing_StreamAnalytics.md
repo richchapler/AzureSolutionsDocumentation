@@ -134,7 +134,7 @@ Navigate to "**Query**" in the "**Data**" grouping of the Data Explorer navigati
 
 <img src="https://user-images.githubusercontent.com/44923999/221995725-86a22602-f501-4581-8415-2093ef71a581.png" width="800" title="Snipped: February 28, 2023" />
 
-Execute the following KQL: `t`
+Confirm the data in the output by executing the following KQL: `t`
 
 #### Troubleshooting
 
