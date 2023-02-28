@@ -5,15 +5,11 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "We used Data Explorer to capture a significant amount of rich, historical data from a soon-to-be-deprecated, on-prem database"
-* "Most of the historical data is static, but a small percentage will change over time"
-* "We want to help business users search this data asset"
+* "We stream millions of messages per hour from an Event Hub owned and controlled by another organization"
 
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
-* [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents" (and related SAS token)
 
