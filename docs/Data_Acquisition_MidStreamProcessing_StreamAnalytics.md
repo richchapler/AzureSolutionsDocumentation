@@ -99,17 +99,21 @@ Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown 
 
 Navigate to "**Query**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
-```
-SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, temperature, humidity
-INTO [rchaplerdec-rchaplerded-temp-gt27]
-FROM rchaplerih
-WHERE Temperature > 27; -- route #1
+<img src="https://user-images.githubusercontent.com/44923999/221992333-9b3f45ff-00d6-4a76-910e-7394f539f408.png" width="800" title="Snipped: February 28, 2023" />
 
-SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, temperature, humidity
-INTO [rchaplerdec-rchaplerded-temp-ltoet27]
-FROM rchaplerih
-WHERE Temperature <= 27 -- route #2
+Paste the following query logic:
 ```
+SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, temperature, humidity
+INTO [rchaplerdec-rchaplerded]
+FROM rchaplerih
+```
+
+### Step 5: Confirm Success
+
+#### Troubleshooting
+
+If you don't see data flowing through to Azure Data Explorer then LOREM IPSUM
+
 
 ![image](https://user-images.githubusercontent.com/44923999/221941546-8255ac64-422d-436d-a006-4839a0f36b6e.png)
 
