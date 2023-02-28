@@ -22,12 +22,12 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in two exercises:
 
-* Exercise 1: Create Sample Stream
-* Exercise 2: Create Stream Analytics Job
+* Exercise 1: Create Stream
+* Exercise 2: Create Job
 
 -----
 
-## Exercise 1: Create Sample Stream
+## Exercise 1: Create Stream
 In this exercise, we will create a stream of sample data and surface it to IoT Hub.
 
 We will follow the instructions at https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal<br>(loosely summarized below)
@@ -56,20 +56,37 @@ Navigate to the Raspberry Pi Azure IoT Online Simulator (https://azure-samples.g
 
 Update Line 15, `const connectionString = ...` with the copied "**Primary connection string**" value and then click **Run**.
 
-## Exercise 2: Create Stream Analytics Job
-Navigate to the Stream Analytics Job and then "**Inputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
+## Exercise 2: Configure Job
+### Stream Analytics Job, Add Input
+Navigate to theStream Analytics Job and then "**Inputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
 <img src="https://user-images.githubusercontent.com/44923999/221920094-c96b4c8a-f5ca-4af3-88a1-bb2ba9b850a7.png" width="800" title="Snipped: February 28, 2023" />
 
-Click "**+ Add stream input**" and select "**IoT Hub**" from the resulting dropdown menu.<br>
-Complete the resulting "**IoT Hub**" pop-out, including:
+Click "**+ Add stream input**", select "**IoT Hub**" from the resulting dropdown menu, complete the resulting "**IoT Hub**" pop-out, and then click **Save**.
 
-| Prompt | Entry |
-| :----- | :----- |
-| **Input alias** | Enter a meaningful name aligned with standards |
-| **IoT Hub** | Select your IoT Hub |
+### Data Explorer, Create Destination Table
+Navigate to Data Explorer and then **Query** in the **Data** grouping of the left-hand navigation pane.
 
-Click **Save**.
+<img src="https://user-images.githubusercontent.com/44923999/221956094-af2d8851-25d6-4926-a42a-300b1403120d.png" width="800" title="Snipped: February 28, 2023" />
+
+Execute the following KQL:
+
+```
+.create table t (
+    messageId:int,
+    deviceId:string,
+    generationId:string,
+    temperature:double,
+    humidity:double
+    )
+```
+
+### Stream Analytics Job, Add Output
+Navigate to "**Outputs**" in the "**Job topology**" grouping of the left-hand navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/221955364-58c61210-4ac2-45b8-8598-1829f5fb9194.png" width="800" title="Snipped: February 28, 2023" />
+
+Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown menu, complete the resulting "**Azure Data Explorer**" pop-out, and then click **Save**.
 
 ```
 SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, temperature, humidity
