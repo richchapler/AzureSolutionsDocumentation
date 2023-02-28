@@ -95,11 +95,19 @@ Navigate to "**Outputs**" in the "**Job topology**" grouping of the left-hand na
 
 Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown menu, complete the resulting "**Azure Data Explorer**" pop-out, and then click **Save**.
 
-### Step 4: Test Query
+### Step 4: Start Job
+
+Navigate to "**Overview**" on the left-hand navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/221994420-6a2b2577-bf84-487b-853c-70ff99ccef1d.png" width="800" title="Snipped: February 28, 2023" />
+
+Click **Start**.
+
+### Step 5: Test Query
 
 Navigate to "**Query**" in the "**Job topology**" grouping of the left-hand navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/221992333-9b3f45ff-00d6-4a76-910e-7394f539f408.png" width="800" title="Snipped: February 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/221994564-0b354243-e02d-4bdc-887c-53a3dac42179.png" width="800" title="Snipped: February 28, 2023" />
 
 Paste the following query logic:
 ```
@@ -107,6 +115,8 @@ SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, te
 INTO [rchaplerdec-rchaplerded]
 FROM rchaplerih
 ```
+
+Click "**Test query**".
 
 ### Step 5: Confirm Success
 
