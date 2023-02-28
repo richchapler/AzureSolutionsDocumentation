@@ -41,7 +41,7 @@ Click "**+ Add Device**".
 
 <img src="https://user-images.githubusercontent.com/44923999/221904124-ae190bef-f18b-432e-b8a0-81f73a80fbe8.png" width="800" title="Snipped: February 28, 2023" />
 
-On the "**Create a device**" page, enter a "Device ID" value and then click "**Save**".
+On the "**Create a device**" page, enter a "Device ID" value and then click **Save**.
 
 <img src="https://user-images.githubusercontent.com/44923999/221904412-6676e526-9dad-4fbb-bb18-82f94211de66.png" width="800" title="Snipped: February 28, 2023" />
 
@@ -54,7 +54,7 @@ Navigate to the Raspberry Pi Azure IoT Online Simulator (https://azure-samples.g
 
 <img src="https://user-images.githubusercontent.com/44923999/221912699-cd996cda-a4f5-42ba-91ac-4f1cad2c3f58.png" width="800" title="Snipped: February 28, 2023" />
 
-Update Line 15, `connectionString = ...` with the copied "**Primary connection string**" value.
+Update Line 15, `connectionString = ...` with the copied "**Primary connection string**" value and then click **Run**.
 
 -----
 
