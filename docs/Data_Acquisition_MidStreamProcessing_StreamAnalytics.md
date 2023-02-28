@@ -7,7 +7,7 @@ This solution considers the following requirements:
 
 * "We stream millions of messages per hour from an IoT Hub owned and controlled by another organization"
 * "We want visibility into the live stream and the ability to troubleshoot in near real-time"
-* "We want to route messages, mid-stream, to the appropriate destination table in Azure Data Explorer without using a second layer of Event Hubs"
+* "We want to route messages, mid-stream, to the appropriate table in Data Explorer without using a second layer of Event Hubs"
 * "We want to bake in minor transformations {e.g., JSON parsing, rounding, etc.}"
 * "We want to make sure that the solution will "pick up where it left off" if there is a problem with the connection to Event Hub"
 
