@@ -5,13 +5,16 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "We stream millions of messages per hour from an Event Hub owned and controlled by another organization"
+* "We stream millions of messages per hour from an IoT Hub owned and controlled by another organization"
+* "We want visibility into the live stream and the ability to troubleshoot in near real-time"
+* "We want to route messages, mid-stream, to the appropriate destination table in Azure Data Explorer"
 
 ## Required Infrastructure
 This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
-* [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents" (and related SAS token)
+* [**IoT Hub**](https://learn.microsoft.com/en-us/azure/iot-hub/) >> [Raspberry Pi Simulator](https://azure-samples.github.io/raspberry-pi-web-simulator/)
+* [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
