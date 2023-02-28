@@ -1,5 +1,4 @@
-# Surface Data to Azure Cognitive Search
-_Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
+# Data Acquisition: Mid-Stream Processing via Stream Analytics
 
 ![image](https://user-images.githubusercontent.com/44923999/214475405-ae4cd7af-d318-49e7-854d-3060609c2124.png)
 
