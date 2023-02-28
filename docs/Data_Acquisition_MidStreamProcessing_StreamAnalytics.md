@@ -30,19 +30,26 @@ This solution will address requirements in two exercises:
 ## Exercise 1: Create Sample Stream
 In this exercise, we will create a stream of sample data and surface it to IoT Hub.
 
-We will follow the instructions at https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal (loosely summarized below).
+We will follow the instructions at https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal<br>(loosely summarized below)
 
-### Step 1: Lorem Ipsum
-In this step, we will: 1) load sample data and 2) run a KQL query to perform an export to Blob Storage.
+### Step 1: Create Device
+Navigate to the IoT Hub and then "**Devices**" in the "**Device management**" grouping of the left-hand navigation pane.
 
-Load sample data as specified in [Quickstart: Ingest sample data into Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard).
+<img src="https://user-images.githubusercontent.com/44923999/221903858-42e8284b-3178-4f1f-a7c7-49f07e12568d.png" width="800" title="Snipped: February 28, 2023" />
 
-<img src="https://user-images.githubusercontent.com/44923999/214618239-312d447b-230b-4ed2-acbb-2dbf2b520ce7.png" width="800" title="Snipped: January 25, 2023" />
+Click "**+ Add Device**".
 
-```
-.export to csv ( "https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY" )
-with ( includeHeaders = "all" ) <| StormEvents
-```
+<img src="https://user-images.githubusercontent.com/44923999/221904124-ae190bef-f18b-432e-b8a0-81f73a80fbe8.png" width="800" title="Snipped: February 28, 2023" />
+
+On the "**Create a device**" page, enter a "Device ID" value and then click "**Save**".
+
+<img src="https://user-images.githubusercontent.com/44923999/221904412-6676e526-9dad-4fbb-bb18-82f94211de66.png" width="800" title="Snipped: February 28, 2023" />
+
+Click on the new Device link.
+
+<img src="https://user-images.githubusercontent.com/44923999/221905410-1bbfc497-446c-4ffb-ab72-c22497927012.png" width="800" title="Snipped: February 28, 2023" />
+
+Copy the "Primary connection string" value; example: `HostName=rchaplerih.azure-devices.net;DeviceId=Device001;SharedAccessKey=...`
 
 -----
 
