@@ -71,6 +71,18 @@ Complete the resulting "**IoT Hub**" pop-out, including:
 
 Click **Save**.
 
+```
+SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, temperature, humidity
+INTO [rchaplerdec-rchaplerded-temp-gt27]
+FROM rchaplerih
+WHERE Temperature > 27; -- route #1
+
+SELECT messageId, deviceId, IoTHub.ConnectionDeviceGenerationId generationId, temperature, humidity
+INTO [rchaplerdec-rchaplerded-temp-ltoet27]
+FROM rchaplerih
+WHERE Temperature <= 27 -- route #2
+```
+
 -----
 
 ## Reference
