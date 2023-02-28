@@ -67,6 +67,9 @@ Complete the resulting "**IoT Hub**" pop-out, including:
 | Prompt | Entry |
 | :----- | :----- |
 | **Input alias** | Enter a meaningful name aligned with standards |
+| **IoT Hub** | Select your IoT Hub |
+
+Click **Save**.
 
 -----
 
