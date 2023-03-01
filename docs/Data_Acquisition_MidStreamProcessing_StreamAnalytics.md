@@ -212,6 +212,10 @@ Click "**Save query**".
 
 Navigate to "**Overview**" on the Stream Analytics Job navigation pane and click **Start**.
 
+### Step 5: Confirm Success
+
+LOREM IPSUM!!!
+
 -----
 
 ## Reference
