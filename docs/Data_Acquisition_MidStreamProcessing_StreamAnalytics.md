@@ -1,4 +1,4 @@
-# Data Acquisition: Mid-Stream Processing via Stream Analytics (WiP)
+# Data Acquisition: Mid-Stream Processing via Stream Analytics
 
 ![image](https://user-images.githubusercontent.com/44923999/221875850-3e7ad7e9-4416-4dde-9c76-ea822f750db0.png)
 
