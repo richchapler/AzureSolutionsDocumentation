@@ -42,7 +42,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) >> [Secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
 
-* [**Log Analytics**](Infrastructure_LogAnalytics.md)
+* [**Log Analytics**](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
 
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 
