@@ -218,9 +218,10 @@ Navigate to "**Overview**" on the Stream Analytics Job navigation pane and click
 
 Navigate to "**Query**" in the "**Data**" grouping of the Data Explorer navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/222235785-6bfba01f-d31f-4757-84ff-151212daea10.png" width="800" title="Snipped: February 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/222238151-92156921-fa16-4323-a9ac-c868a64945d8.png" width="800" title="Snipped: February 28, 2023" />
+![image](https://user-images.githubusercontent.com/44923999/.png)
 
-Confirm output data by executing the following KQL commands: `temperature_gt27` and `temperature_ltoet27`
+Confirm proper routing by executing the following KQL commands: `temperature_gt27` and `temperature_ltoet27`
 
 -----
 
