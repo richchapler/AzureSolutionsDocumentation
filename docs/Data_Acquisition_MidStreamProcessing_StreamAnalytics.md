@@ -161,17 +161,19 @@ To demonstrate routing and data transformation, we'll automate data movement bas
 
 Navigate to **Query** in the **Data** grouping of the Data Explorer navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/222198121-70ef4d8a-db34-415b-bac5-c4c472b53a36.png" width="800" title="Snipped: March 1, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/222236726-a8d9bb84-b5e6-4a8e-87fd-45d5840f1488.png" width="800" title="Snipped: March 1, 2023" />
 
 Execute the following KQL:
 
 ```
 .create table temperature_gt27 (
+    messageId:int,
     deviceId:string,
     temperature:double
     );
     
 .create table temperature_ltoet27 (
+    messageId:int,
     deviceId:string,
     temperature:double
     );
