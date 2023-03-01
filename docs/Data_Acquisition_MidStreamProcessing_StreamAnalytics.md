@@ -6,10 +6,10 @@
 This solution considers the following requirements:
 
 * "We stream millions of messages per hour from an IoT Hub owned and controlled by another organization"
-* "We want visibility into the live stream and the ability to troubleshoot in near real-time"
-* "We want to route messages, mid-stream, to the appropriate table in Data Explorer without using a second layer of Event Hubs"
-* "We want to bake in minor transformations {e.g., JSON parsing, rounding, etc.}"
 * "We want to make sure that the solution will "pick up where it left off" if there is a problem with the connection to Event Hub"
+* "We want visibility into the live stream and the ability to troubleshoot in near real-time"
+* "We want to bake in minor transformations {e.g., JSON parsing, rounding, etc.}"
+* "We want to route messages, mid-stream, to the appropriate table in Data Explorer without using a second layer of Event Hubs"
 
 ## Required Infrastructure
 This solution requires the following resources:
@@ -20,7 +20,7 @@ This solution requires the following resources:
 * [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
 
 ## Proposed Solution
-This solution will address requirements in two exercises:
+This solution will address requirements in three exercises:
 
 * Exercise 1: Create Stream
 * Exercise 2: Create Job
@@ -143,8 +143,29 @@ Consider the following tips:
 * Lorem Ipsum
 
 ## Exercise 3: Route Data
+To demonstrate routing, we'll automate data movement based on the value of the Temperature field.
 
-<img src="https://user-images.githubusercontent.com/44923999/221941546-8255ac64-422d-436d-a006-4839a0f36b6e.png" width="800" title="Snipped: February 28, 2023" />
+### Step 1: Create Tables and Job
+
+Navigate to **Query** in the **Data** grouping of the Data Explorer navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/222175317-be7329f8-3c3b-43a8-84a8-d8872af2606e.png" width="800" title="Snipped: March 1, 2023" />
+
+Execute the following KQL:
+
+```
+.create table temperature_gt27 (
+    deviceId:string,
+    temperature:double
+    );
+    
+.create table temperature_ltoet27 (
+    deviceId:string,
+    temperature:double
+    );
+```
+
+Lorem Ipsum
 
 -----
 
