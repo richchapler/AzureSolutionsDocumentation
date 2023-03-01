@@ -149,7 +149,7 @@ To demonstrate routing, we'll automate data movement based on the value of the T
 
 Navigate to **Query** in the **Data** grouping of the Data Explorer navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/222175317-be7329f8-3c3b-43a8-84a8-d8872af2606e.png" width="800" title="Snipped: March 1, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/222198121-70ef4d8a-db34-415b-bac5-c4c472b53a36.png" width="800" title="Snipped: March 1, 2023" />
 
 Execute the following KQL:
 
