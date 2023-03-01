@@ -191,7 +191,7 @@ _Note: You may need to stop the previously created job in order to add a new out
 
 Navigate to "**Query**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/221994564-0b354243-e02d-4bdc-887c-53a3dac42179.png" width="800" title="Snipped: February 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/222208254-0d383ea1-6c92-4956-ae12-bbe65fa295a6.png" width="800" title="Snipped: February 28, 2023" />
 
 Paste the following query logic:
 ```
