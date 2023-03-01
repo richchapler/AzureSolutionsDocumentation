@@ -105,7 +105,7 @@ Navigate to "**Overview**" on the Stream Analytics Job navigation pane.
 
 Click **Start**.
 
-### Step 5: Test Query
+### Step 5: Edit Query
 
 Navigate to "**Query**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
 
@@ -181,11 +181,32 @@ Execute the following KQL:
 
 Navigate to "**Outputs**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/222202552-44bb469d-ef5f-4bd0-9c76-ce44c04eba59.png" width="800" title="Snipped: March 1, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/222205384-423525ca-da91-4921-a751-512c56fced03.png" width="800" title="Snipped: March 1, 2023" />
 
 Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown menu, complete the resulting "**Azure Data Explorer**" pop-out for the "temperature_gt27" table, and then click **Save**. Repeat for the "temperature_ltoet27" output (table).
 
 _Note: You may need to stop the previously created job in order to add a new output_
+
+### Step 3: Edit Query
+
+Navigate to "**Query**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/221994564-0b354243-e02d-4bdc-887c-53a3dac42179.png" width="800" title="Snipped: February 28, 2023" />
+
+Paste the following query logic:
+```
+SELECT messageId, deviceId, round(temperature,2) as temperature
+INTO [rchaplerdec-rchaplerded-gt27]
+FROM rchaplerih
+WHERE Temperature > 27;
+
+SELECT messageId, deviceId, round(temperature,2) as temperature
+INTO [rchaplerdec-rchaplerded-ltoet27]
+FROM rchaplerih
+WHERE Temperature <= 27;
+```
+
+Click "**Test query**" and confirm result.
 
 -----
 
