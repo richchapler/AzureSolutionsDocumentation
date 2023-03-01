@@ -214,7 +214,11 @@ Navigate to "**Overview**" on the Stream Analytics Job navigation pane and click
 
 ### Step 5: Confirm Success
 
-LOREM IPSUM!!!
+Navigate to "**Query**" in the "**Data**" grouping of the Data Explorer navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/222235785-6bfba01f-d31f-4757-84ff-151212daea10.png" width="800" title="Snipped: February 28, 2023" />
+
+Confirm output data by executing the following KQL commands: `temperature_gt27` and `temperature_ltoet27`
 
 -----
 
