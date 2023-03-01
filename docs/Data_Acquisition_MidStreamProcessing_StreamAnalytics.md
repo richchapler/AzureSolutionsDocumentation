@@ -118,7 +118,7 @@ INTO [rchaplerdec-rchaplerded]
 FROM rchaplerih
 ```
 
-Click "**Test query**" and confirm result.
+Click "**Save query**".
 
 ### Step 6: Confirm Success
 
@@ -206,7 +206,11 @@ FROM rchaplerih
 WHERE Temperature <= 27;
 ```
 
-Click "**Test query**" and confirm result.
+Click "**Save query**".
+
+### Step 4: Start Job
+
+Navigate to "**Overview**" on the Stream Analytics Job navigation pane and click **Start**.
 
 -----
 
