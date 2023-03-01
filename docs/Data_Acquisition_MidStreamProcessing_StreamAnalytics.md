@@ -148,7 +148,11 @@ Click "**+ Add diagnostic setting**"
 
 <img src="https://user-images.githubusercontent.com/44923999/222199954-fe81df4d-5357-4317-84b0-cd43e2437e03.png" width="800" title="Snipped: March 1, 2023" />
 
-Complete the form and click **Save**.
+Complete the form and click **Save**.<br>
+
+<img src="https://user-images.githubusercontent.com/44923999/222200799-6915e965-4a26-42a8-9fba-d1b2ffcd39d4.png" width="800" title="Snipped: March 1, 2023" />
+
+Navigate to "**Logs**" in the "**Monitoring**" grouping of the Stream Analytics Job navigation pane and browse canned queries.
 
 ## Exercise 3: Route Data
 To demonstrate routing, we'll automate data movement based on the value of the Temperature field.
