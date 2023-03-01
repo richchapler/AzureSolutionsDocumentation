@@ -16,6 +16,7 @@ This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
 * [**IoT Hub**](https://learn.microsoft.com/en-us/azure/iot-hub/)
+* [**Log Analytics**](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
 * [**Raspberry Pi Simulator**](https://azure-samples.github.io/raspberry-pi-web-simulator/)
 * [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
 
@@ -139,8 +140,15 @@ Confirm output data by executing the following KQL: `t`
 
 #### Troubleshooting
 
-Consider the following tips:
-* Lorem Ipsum
+Navigate to "**Diagnostic settings**" in the "**Monitoring**" grouping of the Stream Analytics Job navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/222199724-dc5060c0-00fc-43d7-9d8f-feae09bb78a2.png" width="800" title="Snipped: March 1, 2023" />
+
+Click "**+ Add diagnostic setting**"
+
+<img src="https://user-images.githubusercontent.com/44923999/222199954-fe81df4d-5357-4317-84b0-cd43e2437e03.png" width="800" title="Snipped: March 1, 2023" />
+
+Complete the form and click **Save**.
 
 ## Exercise 3: Route Data
 To demonstrate routing, we'll automate data movement based on the value of the Temperature field.
