@@ -155,9 +155,9 @@ Complete the form and click **Save**.<br>
 Navigate to "**Logs**" in the "**Monitoring**" grouping of the Stream Analytics Job navigation pane and browse canned queries.
 
 ## Exercise 3: Route Data
-To demonstrate routing, we'll automate data movement based on the value of the Temperature field.
+To demonstrate routing and data transformation, we'll automate data movement based on the rounded value of the Temperature field {i.e., greater than X goes to one table and less than or equal to X goes to a second table}.
 
-### Step 1: Create Tables and Job
+### Step 1: Create Tables
 
 Navigate to **Query** in the **Data** grouping of the Data Explorer navigation pane.
 
@@ -177,7 +177,15 @@ Execute the following KQL:
     );
 ```
 
-Lorem Ipsum
+### Step 2: Add Job Output
+
+Navigate to "**Outputs**" in the "**Job topology**" grouping of the Stream Analytics Job navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/222202552-44bb469d-ef5f-4bd0-9c76-ce44c04eba59.png" width="800" title="Snipped: March 1, 2023" />
+
+Click "**+ Add**", select "**Azure Data Explorer**" from the resulting dropdown menu, complete the resulting "**Azure Data Explorer**" pop-out for the "temperature_gt27" table, and then click **Save**. Repeat for the "temperature_ltoet27" output (table).
+
+_Note: You may need to stop the previously created job in order to add a new output_
 
 -----
 
