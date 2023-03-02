@@ -1,4 +1,4 @@
-# Data Acquisition: Mid-Stream Processing via Function App
+# Data Enrichment: Mid-Stream Processing via Function App
 
 ![image](https://user-images.githubusercontent.com/44923999/208464152-33914e21-5ae5-49fc-8a9a-dc7dddcf0339.png)
 
