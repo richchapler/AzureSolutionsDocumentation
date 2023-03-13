@@ -10,8 +10,8 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
-* 
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) with Managed Identity
+ 
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
