@@ -10,7 +10,7 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search), configured with System-Assigned Managed Identity
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search), with System-Assigned Managed Identity enabled
  
 ## Proposed Solution
 This solution will address requirements in three exercises:
