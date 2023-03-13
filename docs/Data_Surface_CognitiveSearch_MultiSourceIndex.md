@@ -11,6 +11,14 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search), with System-Assigned Managed Identity enabled
+* SQL Server and Database
+
+Grant access to Cognitive Search:
+
+```
+CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
+EXEC sp_addrolemember 'db_datareader', [rchaplerss];
+```
  
 ## Proposed Solution
 This solution will address requirements in three exercises:
