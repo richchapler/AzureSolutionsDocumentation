@@ -12,13 +12,13 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search), with System-Assigned Managed Identity enabled
 * SQL Server and Database
+  * Grant IAC "Reader" role in place for Cognitive Search, SAMI
+  * Grant access to Cognitive Search:
 
-Grant access to Cognitive Search:
-
-```
-CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
-EXEC sp_addrolemember 'db_datareader', [rchaplerss];
-```
+    ```
+    CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
+    EXEC sp_addrolemember 'db_datareader', [rchaplerss];
+    ```
  
 ## Proposed Solution
 This solution will address requirements in three exercises:
