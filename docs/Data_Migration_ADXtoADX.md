@@ -4,7 +4,8 @@
 
 This use case considers requirement statements like:
 * "We have instantiated a new instance of Data Explorer and need to migrate ~1.5 billion records from the old instance"
-* "We have tried `set-or-append async`, but we are hitting Data Explorer's one-hour timeout maximum" (see Reference, "Query Limits" link for more information)
+* "We have tried `set-or-append async`, but we are hitting the Data Explorer cap"<br>
+  _see Reference, "Query Limits" link, "Limit execution timeout" section for more information about the one-hour timeout maximum_
 * "To overcome the timeout, we want to chunk and iteratively copy our data by date"
 
 ### Step 1: Prepare Infrastructure
