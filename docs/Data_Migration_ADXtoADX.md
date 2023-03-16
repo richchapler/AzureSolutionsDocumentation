@@ -4,7 +4,7 @@
 
 This use case considers requirement statements like:
 * "We have instantiated a new instance of Data Explorer and need to migrate ~1.5 billion records from the old instance"
-* "We have tried `set-or-append async`, but we are hitting Data Explorer's one-hour timeout maximum"
+* "We have tried `set-or-append async`, but we are hitting Data Explorer's one-hour timeout maximum" (see Reference, "Query Limits" link for more information)
 * "To overcome the timeout, we want to chunk and iteratively copy our data by date"
 
 ### Step 1: Prepare Infrastructure
@@ -174,3 +174,4 @@ In this step, we will process the pipeline and review the resulting data.
 
 ### Reference
 > https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard
+> https://learn.microsoft.com/en-us/azure/data-explorer/kusto/concepts/querylimits
