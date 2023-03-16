@@ -13,10 +13,10 @@ This solution requires the following resources:
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
   * Enable **System-Assigned Managed Identity**
   * Use a Region that supports Cognitive Services {e.g., West}
-* SQL Server and Database
+* [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
   * Enable "**Allow Azure services and resources to access this server**"
   * Grant IAC "Reader" role in place for Cognitive Search, System-Assigned Managed Identity
-  * Grant access to Cognitive Search:
+  * Grant access to Cognitive Search using the following T-SQL:
 
     ```
     CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
