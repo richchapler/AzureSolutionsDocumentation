@@ -54,7 +54,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Resource Group**](Infrastructure_ResourceGroup.md)
 
-* [**SQL**](Infrastructure_SQL.md) >> Server :: Database :: Sample Data
+* [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql)
 
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
