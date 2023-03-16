@@ -10,11 +10,12 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search), with System-Assigned Managed Identity enabled
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+  * Enable **System-Assigned Managed Identity**
   * Use a Region that supports Cognitive Services {e.g., West}
 * SQL Server and Database
-  * "Alow Azure services and resources to access this server"
-  * Grant IAC "Reader" role in place for Cognitive Search, SAMI
+  * Enable "**Allow Azure services and resources to access this server**"
+  * Grant IAC "Reader" role in place for Cognitive Search, System-Assigned Managed Identity
   * Grant access to Cognitive Search:
 
     ```
