@@ -1,4 +1,4 @@
-# Storage Account
+# Infrastructure: Storage Account
 
 _(aka "Blob Storage")_<br>
 
