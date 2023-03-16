@@ -1,4 +1,4 @@
-## Application Registration
+# Infrastructure: Application Registration
 _(aka "Application", "Client", "Service Principal")_<br>
 
 ![image](https://user-images.githubusercontent.com/44923999/185750680-8bb8b009-3820-47de-8957-a206628516d7.png)
