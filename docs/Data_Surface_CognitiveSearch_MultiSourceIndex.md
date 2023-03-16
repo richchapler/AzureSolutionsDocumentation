@@ -17,12 +17,12 @@ This solution requires the following resources:
   * Enable "**Allow Azure services and resources to access this server**"
   * Grant IAC "Reader" role in place for Cognitive Search, System-Assigned Managed Identity
   * Grant access to Cognitive Search using the following T-SQL:
-
     ```
     CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
     EXEC sp_addrolemember 'db_datareader', [rchaplerss];
     ```
- 
+* [**Storage Account**](Infrastructure_StorageAccount.md)
+
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
