@@ -26,11 +26,13 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Lorem Ipsum
+* Exercise 1: Source #1
+* Exercise 2: Source #2
+* Exercise 3: Manually Create Index, Indexer, etc.
 
 -----
 
-## Exercise 1: Create Indexer
+## Exercise 1: Source #1
 In this exercise, we will Lorem Ipsum.
 
 ### Step 1: Lorem Ipsum
