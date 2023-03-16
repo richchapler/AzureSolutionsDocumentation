@@ -5,7 +5,7 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "Lorem Ipsum"
+* "We want to have a single search experience, not one for each source"
 
 ## Required Infrastructure
 This solution requires the following resources:
