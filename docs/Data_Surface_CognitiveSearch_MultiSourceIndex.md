@@ -386,18 +386,13 @@ In this exercise, we will manually create an index and a multi-source indexer.
 ### Step 1: Create Index
 Navigate to Cognitive Search, "**Overview**" and then click "**+ Add index**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226456128-902fc1e5-86cb-47e3-9a13-4b30c4203e35.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226464184-15effd4e-5df3-4f50-b7ca-360957356078.png" width="800" title="Snipped: March 20, 2023" />
 
-Enter an "**Index name**" value {e.g., "multisource-index"} on the "**Create index**" page.<br>
-Click "**+ Add field**".
-
-<img src="https://user-images.githubusercontent.com/44923999/226456215-8083c9a1-04b1-4244-871b-39dd6ba4de79.png" width="800" title="Snipped: March 20, 2023" />
-
-Click "**Save**".
-
-<img src="https://user-images.githubusercontent.com/44923999/226456282-4598c146-aa5c-48ac-8ad1-383c93834edd.png" width="800" title="Snipped: March 20, 2023" />
+Enter an "**Index name**" value {e.g., "**multisource-index**"} on the "**Create index**" page.<br>
 
 Click "**Create**".
+
+_Note: We will add fields (besides the default "id") later in this exercise._
 
 ### Step 2: Add Indexers
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
