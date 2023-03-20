@@ -45,7 +45,7 @@ This solution will address requirements in three exercises:
 In this exercise, we will create and learn about Cognitive Search index functionality for SQL Server.
 
 ### Step 1: Import Data
-Navigate to Cognitive Search and click "**Import data**".
+Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226375829-57106809-9582-46b5-ba64-638d3348e36b.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -87,7 +87,7 @@ Click "**Next: Create an indexer**".
 On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
 ### Step 2: Confirm Success
-Navigate to "**Overview**" in the navigation pane, then click on the "Indexers" tab.
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
 
 <img src="https://user-images.githubusercontent.com/44923999/226418120-1ab6b78c-8b5d-4abf-a75f-e50a19ab6061.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -144,7 +144,7 @@ Review the produced JSON content... we will use the example below in Exercise Th
 }
 ```
 
-Navigate to "**Overview**" in the navigation pane, then click on the "Indexes" tab.<br>
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexes**" tab.<br>
 Click on the newly-created index.
 
 <img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
@@ -191,7 +191,7 @@ Review "**Results**" content; example below:
 In this exercise, we will create and learn about Cognitive Search index functionality for Blob Storage.
 
 ### Step 1: Import Data
-Navigate to Cognitive Search and click "**Import data**".
+Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226424973-8d3802c5-6459-47be-9651-ed78ac6c6378.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -238,7 +238,7 @@ Click "**Next: Create an indexer**".
 On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
 ### Step 2: Confirm Success
-Navigate to "**Overview**" in the navigation pane, then click on the "Indexers" tab.
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
 
 <img src="https://user-images.githubusercontent.com/44923999/226442015-6dd2e1db-37d8-4a62-9f69-1d27349eaa1a.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -328,7 +328,7 @@ Review the produced JSON content... we will use the example below in Exercise Th
 }
 ```
 
-Navigate to "**Overview**" in the navigation pane, then click on the "Indexes" tab.<br>
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexes**" tab.<br>
 Click on the newly-created index.
 
 <img src="https://user-images.githubusercontent.com/44923999/226443772-0ca61cb5-3848-4201-8a29-8cf0004c4535.png" width="800" title="Snipped: March 20, 2023" />
@@ -381,10 +381,10 @@ Review "**Results**" content; example below:
 -----
 
 ## Exercise 3: Manually Create Multi-Source Index, Indexer, etc.e
-In this exercise, we will manually create a composite index.
+In this exercise, we will manually create an index and a multi-source indexer.
 
 ### Step 1: Create Index
-Navigate to Cognitive Search and click "**+ Add index**".
+Navigate to Cognitive Search, "**Overview**" and then click "**+ Add index**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226445615-8a1f757f-4c7a-49b4-ae55-1b6e06d4cded.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -400,7 +400,8 @@ Click "**Save**".
 Click "**Create**".
 
 ### Step 2: Add Indexer
-Lorem Ipsum
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
+Click "**+ Add indexer**".
 
 -----
 
