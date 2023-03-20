@@ -15,18 +15,22 @@ This solution requires the following resources:
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) (aka "Search Service")
   * Enable **System-Assigned Managed Identity**
   * Use a Region that supports Cognitive Search {e.g., West}
+
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
   * Include sample data
   * Enable "**Allow Azure services and resources to access this server**"
-  * Grant IAC "Reader" role in place for Cognitive Search, System-Assigned Managed Identity
+  * Grant Role Assignment "Reader" role for Search Service, System-Assigned Managed Identity
   * Grant access to Cognitive Search using the following T-SQL:
     ```
     CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
     EXEC sp_addrolemember 'db_datareader', [rchaplerss];
     ```
+    
 * [**Storage Account**](Infrastructure_StorageAccount.md)
   * Create container named "drawings" (with sample files)
+  * Grant Role Assignment "Storage Blob Data Reader" role for Search Service, System-Assigned Managed Identity
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
@@ -55,11 +59,13 @@ Prompt | Entry
 **Managed identity authentication** | Select "**System-assigned**"
 **Table/View** | Enter "**SalesLT.Product**"
 
-Click "**Next: Add cognitive skills**..." and on the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
+Click "**Next: Add cognitive skills**...".<br>
+On the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226380779-1feebb45-d656-4288-ae6b-f6e67c48a5e8.png" width="800" title="Snipped: March 20, 2023" />
 
-Select your instance of Cognitive Services, collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
+Select your instance of Cognitive Services.<br>
+Collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226403680-d650824d-0b63-4334-b3a9-1179890dfc44.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -73,7 +79,8 @@ Click "**Next: Customize target index**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226404041-aa514da5-1a5c-4edd-90c9-a034488f15be.png" width="800" title="Snipped: March 20, 2023" />
 
-On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**", select all available options, and then click "**Next: Create an indexer**".
+On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**" and select all available options.<br>
+Click "**Next: Create an indexer**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226385246-bf6f57bf-c315-4513-9920-fd4254f7c4ec.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -175,9 +182,11 @@ Review "**Results**" content; example below:
 }
 ```
 
-### Congratulations... you have successfully completed this exercise
+**Congratulations... you have successfully completed this exercise**
 
-## Exercise 2:Cognitive Search + Blob Storage
+-----
+
+## Exercise 2: Cognitive Search + Blob Storage
 In this exercise, we will create and learn about Cognitive Search index functionality for Blob Storage.
 
 ### Step 1: Import Data
@@ -197,32 +206,38 @@ Prompt | Entry
 **Managed identity authentication** | Select "**System-assigned**"
 **Container name** | Enter "**drawings**"
 
-Click "**Next: Add cognitive skills**..." and on the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
+Click "**Next: Add cognitive skills**...".<br>
+On the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226380779-1feebb45-d656-4288-ae6b-f6e67c48a5e8.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226438820-bf994ed7-09b1-4fc7-8aab-387b279bfa31.png" width="800" title="Snipped: March 20, 2023" />
 
-Select your instance of Cognitive Services, collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
+Select your instance of Cognitive Services.<br>
+Collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226403680-d650824d-0b63-4334-b3a9-1179890dfc44.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226439985-d3345185-8c71-49ab-bf2d-6b0bb81fb8d9.png" width="800" title="Snipped: March 20, 2023" />
 
 On the "**Add cognitive skills**..." tab,  select:
+* "Enable OCR and merge all text into merged_content field"
 * "Extract people names"
 * "Extract organization names"
 * "Extract location names"
 * "Extract key phrases"
+* "Generate tags from images"
+* "Generate captions from images"
 
 Click "**Next: Customize target index**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226404041-aa514da5-1a5c-4edd-90c9-a034488f15be.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226440751-f1218c0f-3f86-489b-8ff5-a2b3ef898978.png" width="800" title="Snipped: March 20, 2023" />
 
-On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**", select all available options, and then click "**Next: Create an indexer**".
+On the "**Customize target index**" tab, enter **Suggester** name "**azureblob-suggester**" and select all available options.<br>
+Click "**Next: Create an indexer**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226385246-bf6f57bf-c315-4513-9920-fd4254f7c4ec.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226441062-5c3304bb-05a0-401d-8ff4-be1ec077a028.png" width="800" title="Snipped: March 20, 2023" />
 
 On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
 
-
+Lorem Ipsum
 
 
 -----
