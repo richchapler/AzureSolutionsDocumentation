@@ -397,7 +397,7 @@ _Note: We will add fields (besides the default "id") later in this exercise._
 ### Step 2: Add Indexers
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
 
-#### Structured Data
+#### SQL Database
 Click "**+ Add indexer**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226461680-5e63e584-3d8b-4219-9721-f95c394ce737.png" width="800" title="Snipped: March 20, 2023" />
@@ -415,7 +415,7 @@ _Note: You have likely noticed that we are reusing previously created items like
 
 Click "**Save**".
 
-#### Unstructured Data
+#### Blob Storage
 Click "**+ Add indexer**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226460780-f0a494d8-5144-4944-8cc6-8fbe34be2cd6.png" width="800" title="Snipped: March 20, 2023" />
@@ -429,7 +429,25 @@ Prompt | Entry
 **Datasource** | Select "**rchaplers-drawings**"
 **Skillset** | Select "**None**"
 
+Navigate to the "**Indexer Definition (JSON)**" tab.
+
+<img src="https://user-images.githubusercontent.com/44923999/226468270-a1517e14-93ae-46aa-bd15-acb5b515345b.png" width="800" title="Snipped: March 20, 2023" />
+
+Append the following JSON to the end of the default JSON content:
+```
+,
+  "fieldMappings": [
+    {
+      "sourceFieldName": "ProductID",
+      "targetFieldName": "id",
+      "mappingFunction": null
+    }
+  ],
+```
+
 Click "**Save**".
+
+_Note: You will see that additional JSON is added on save."
 
 -----
 
