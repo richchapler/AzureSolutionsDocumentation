@@ -37,7 +37,7 @@ This solution will address requirements in three exercises:
 
 * Exercise 1: Cognitive Search + SQL Database
 * Exercise 2: Cognitive Search + Blob Storage
-* Exercise 3: Manually Create Composite Index, Indexer, etc.
+* Exercise 3: Manually Create Multi-Source Index, Indexer, etc.
 
 -----
 
@@ -380,22 +380,22 @@ Review "**Results**" content; example below:
 
 -----
 
-## Exercise 3: Manually Create Composite Index, Indexer, etc.e
+## Exercise 3: Manually Create Multi-Source Index, Indexer, etc.e
 In this exercise, we will manually create a composite index.
 
 ### Step 1: Create Index
 Navigate to Cognitive Search and click "**+ Add index**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226444856-fbdb0146-7639-4997-889c-cec380af40de.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226445615-8a1f757f-4c7a-49b4-ae55-1b6e06d4cded.png" width="800" title="Snipped: March 20, 2023" />
 
-Enter an "**Index name**" value {e.g., "composite} on the "**Create index**" page.<br>
+Enter an "**Index name**" value {e.g., "multisource"} on the "**Create index**" page.<br>
 Click "**+ Add field**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226444947-417e20eb-f205-48e1-8d95-e4294acc6c22.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226445674-72ce36ca-f950-4b1f-abac-a75cde6235b1.png" width="800" title="Snipped: March 20, 2023" />
 
 Click "**Save**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226445284-a73fa31e-c108-40b8-9945-3b36d28d017c.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226445732-a145c572-b8d6-40c2-a33e-0187622286db.png" width="800" title="Snipped: March 20, 2023" />
 
 Click "**Create**".
 
