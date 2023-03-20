@@ -381,7 +381,7 @@ Review "**Results**" content; example below:
 -----
 
 ## Exercise 3: Manually Create Multi-Source Index, Indexer, etc.e
-In this exercise, we will manually create an index and a multi-source indexer.
+In this exercise, we will manually create a multi-source index populated by two indexers.
 
 ### Step 1: Create Index
 Navigate to Cognitive Search, "**Overview**" and then click "**+ Add index**".
