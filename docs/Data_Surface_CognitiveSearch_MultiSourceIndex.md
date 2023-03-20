@@ -58,7 +58,7 @@ Click "**Next: Add cognitive skills**..." and on the resulting "**Add cognitive 
 
 Select your instance of Cognitive Services, collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226381683-263cf8ea-8974-4181-b5c0-4ff8f3163183.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226403680-d650824d-0b63-4334-b3a9-1179890dfc44.png" width="800" title="Snipped: March 20, 2023" />
 
 On the "**Add cognitive skills**..." tab,  select:
 * "Extract people names"
@@ -66,24 +66,34 @@ On the "**Add cognitive skills**..." tab,  select:
 * "Extract location names"
 * "Extract key phrases"
 
-_Note: We are choosing all possible options to support our learning goals {e.g., understand Cognitive Search index functionality for SQL Server and create useful reference JSON}_
-
 Click "**Next: Customize target index**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226395418-2d3a9fd1-9f9d-4522-b0f7-ea9e4c8b6597.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226404041-aa514da5-1a5c-4edd-90c9-a034488f15be.png" width="800" title="Snipped: March 20, 2023" />
 
-On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**" and then select all available options.
-
-Click "**Next: Create an indexer**".
+On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**", select all available options, and then click "**Next: Create an indexer**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226385246-bf6f57bf-c315-4513-9920-fd4254f7c4ec.png" width="800" title="Snipped: March 20, 2023" />
 
 On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
-### Step 2: Lorem Ipsum
-Navigate to "**Overview**" in the navigation pane and then click into the newly-created index.
+### Step 2: Confirm Success
+Navigate to "**Overview**" in the navigation pane, then click on the "Indexers" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/221903858-42e8284b-3178-4f1f-a7c7-49f07e12568d.png" width="800" title="Snipped: February 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226404747-96283712-3660-47a6-a8bb-ad2bfeae4ee1.png" width="800" title="Snipped: March 20, 2023" />
+
+Click on the newly-created Indexer.
+
+<img src="https://user-images.githubusercontent.com/44923999/226404925-b1cf0637-b9db-4093-b5e7-62bdaa7d2140.png" width="800" title="Snipped: March 20, 2023" />
+
+On the "**Execution history**" tab, confirm **Success**.
+
+<img src="https://user-images.githubusercontent.com/44923999/226405366-d5a3beaf-4c32-40ad-bd8c-43e3c1059a84.png" width="800" title="Snipped: March 20, 2023" />
+
+Navigate to the "**Indexer Definition (JSON)**" tab and review the produced JSON content.
+
+<img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
+
+Navigate to "**Overview**" in the navigation pane, then click on the "Index" tab.
 
 ```
 {
