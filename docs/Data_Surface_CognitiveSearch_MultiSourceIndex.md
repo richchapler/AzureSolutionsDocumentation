@@ -42,18 +42,24 @@ Navigate to Cognitive Search and click "**Import data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226375829-57106809-9582-46b5-ba64-638d3348e36b.png" width="800" title="Snipped: March 20, 2023" />
 
-Complete the "**Import Data**" >> "**Connect to your data**" formm including
+#### Connect Data
+
+Complete the "**Import Data**" >> "**Connect to your data**" form including
 
 Prompt | Entry
------- | ------
+:----- | :-----
 **Data Source** | Select "**Azure SQL Database**"
 **Data source name** | Enter a meaningful name aligned with your standard {e.g., SERVER-DATABASE}
-**Connection string** | Click "**Choose an existing connection**" and then select your SQL Database from the resulting pop-out menu
+**Connection string** | Click "**Choose an existing connection**", then select your SQL Database from the resulting pop-out menu
 **Managed identity authentication** | Select "**System-assigned**"
 **Table/View** | Enter "**SalesLT.Product**"
 
+#### Cognitive Skills
 
-  
+Click "**Next: Add cognitive skills (Optional)**"
+
+_Note: Our goal is to learn about Cognitive Search index functionality for SQL Server {i.e., create useful reference JSON}, so we will select more options in this exercise than we will ultimately use for the composite index_
+
 ```
 {
   "@odata.context": "https://rchaplerss.search.windows.net/$metadata#indexers/$entity",
