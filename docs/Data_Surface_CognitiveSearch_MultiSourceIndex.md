@@ -64,7 +64,10 @@ On the "**Add cognitive skills**..." tab, select all available options (supporti
 
 <img src="https://user-images.githubusercontent.com/44923999/226383404-e66cc03d-b82f-4d41-83f3-12dc48415af2.png" width="800" title="Snipped: March 20, 2023" />
 
-On the "**Customize target index**" tab, Select all available options and then click "**Next: Create an indexer**".
+On the "**Customize target index**" tab, select **almost** all available options except:
+* "Sortable" should remain unchecked for "pii_entities" items "text", "type", "subtype", "offset", "length", and "score"
+
+Click "**Next: Create an indexer**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226385246-bf6f57bf-c315-4513-9920-fd4254f7c4ec.png" width="800" title="Snipped: March 20, 2023" />
 
