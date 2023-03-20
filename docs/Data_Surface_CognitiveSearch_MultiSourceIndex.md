@@ -384,7 +384,14 @@ Review "**Results**" content; example below:
 In this exercise, we will manually create a composite index.
 
 ### Step 1: Lorem Ipsum
-Navigate to Cognitive Search and click "**Import data**".
+Navigate to Cognitive Search and click "**+ Add index**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226444856-fbdb0146-7639-4997-889c-cec380af40de.png" width="800" title="Snipped: March 20, 2023" />
+
+Enter an "**Index name**" value {e.g., "composite} on the "**Create index**" page.<br>
+Click "**+ Add field**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226444947-417e20eb-f205-48e1-8d95-e4294acc6c22.png" width="800" title="Snipped: March 20, 2023" />
 
 -----
 
