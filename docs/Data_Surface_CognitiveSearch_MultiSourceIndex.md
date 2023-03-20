@@ -12,7 +12,8 @@ This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
   * Enable **System-Assigned Managed Identity**
-  * Use a Region that supports Cognitive Services {e.g., West}
+  * Use a Region that supports Cognitive Search {e.g., West}
+* [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
   * Include sample data
   * Enable "**Allow Azure services and resources to access this server**"
@@ -29,7 +30,7 @@ This solution will address requirements in three exercises:
 
 * Exercise 1: Source #1, SQL Database
 * Exercise 2: Source #2, Blob Storage
-* Exercise 3: Manually Create Index, Indexer, etc.
+* Exercise 3: Manually Create Composite Index, Indexer, etc.
 
 -----
 
