@@ -91,7 +91,7 @@ Navigate to the "**Indexer Definition (JSON)**" tab.
 
 <img src="https://user-images.githubusercontent.com/44923999/226405366-d5a3beaf-4c32-40ad-bd8c-43e3c1059a84.png" width="800" title="Snipped: March 20, 2023" />
 
-Review the produced JSON content:
+Review the produced JSON content... we will use the example below in Exercise Three.
 
 ```
 {
@@ -135,9 +135,9 @@ Review the produced JSON content:
 }
 ```
 
-<img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
-
 Navigate to "**Overview**" in the navigation pane, then click on the "Index" tab.
+
+<img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
 
 Lorem Ipsum
 
