@@ -90,49 +90,55 @@ On the "**Execution history**" tab, confirm **Success**.
 
 <img src="https://user-images.githubusercontent.com/44923999/226405366-d5a3beaf-4c32-40ad-bd8c-43e3c1059a84.png" width="800" title="Snipped: March 20, 2023" />
 
-Navigate to the "**Indexer Definition (JSON)**" tab and review the produced JSON content.
-
-<img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
-
-Navigate to "**Overview**" in the navigation pane, then click on the "Index" tab.
+Navigate to the "**Indexer Definition (JSON)**" tab and review the produced JSON content. Example:
 
 ```
 {
   "@odata.context": "https://rchaplerss.search.windows.net/$metadata#indexers/$entity",
-  "@odata.etag": "\"0x8DB2403A0F5F720\"",
-  "name": "azureblob-indexer",
+  "@odata.etag": "\"0x8DB295E944A0232\"",
+  "name": "azuresql-indexer",
   "description": "",
-  "dataSourceName": "rchaplers",
-  "skillsetName": null,
-  "targetIndexName": "multisource",
+  "dataSourceName": "rchaplersds-rchaplersd",
+  "skillsetName": "azuresql-skillset",
+  "targetIndexName": "azuresql-index",
   "disabled": null,
   "schedule": null,
   "parameters": {
     "batchSize": null,
     "maxFailedItems": 0,
     "maxFailedItemsPerBatch": 0,
-    "base64EncodeKeys": null,
-    "configuration": {
-      "dataToExtract": "contentAndMetadata",
-      "parsingMode": "default"
-    }
+    "base64EncodeKeys": false,
+    "configuration": {}
   },
-  "fieldMappings": [
+  "fieldMappings": [],
+  "outputFieldMappings": [
     {
-      "sourceFieldName": "metadata_storage_path",
-      "targetFieldName": "id",
-      "mappingFunction": {
-        "name": "base64Encode",
-        "parameters": null
-      }
+      "sourceFieldName": "/document/ProductID/people",
+      "targetFieldName": "people"
+    },
+    {
+      "sourceFieldName": "/document/ProductID/organizations",
+      "targetFieldName": "organizations"
+    },
+    {
+      "sourceFieldName": "/document/ProductID/locations",
+      "targetFieldName": "locations"
+    },
+    {
+      "sourceFieldName": "/document/ProductID/keyphrases",
+      "targetFieldName": "keyphrases"
     }
   ],
-  "outputFieldMappings": [],
   "cache": null,
   "encryptionKey": null
 }
 ```
 
+<img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
+
+Navigate to "**Overview**" in the navigation pane, then click on the "Index" tab.
+
+Lorem Ipsum
 
 -----
 
