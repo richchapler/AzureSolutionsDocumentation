@@ -440,7 +440,7 @@ Navigate to the "**Indexer Definition (JSON)**" tab.
 
 <img src="https://user-images.githubusercontent.com/44923999/226469403-8a5549ca-a569-4c9a-9f38-8dc74c6e54ac.png" width="800" title="Snipped: March 20, 2023" />
 
-Append the following JSON to the end of the default JSON content:
+Append the following JSON to the end of the default JSON content (included in the image above):
 ```
 ,
   "fieldMappings": [
@@ -453,6 +453,8 @@ Append the following JSON to the end of the default JSON content:
 ```
 
 Click "**Save**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226469577-d1cb84cc-720c-41e9-a0b0-148be7c49e44.png" width="800" title="Snipped: March 20, 2023" />
 
 _Note: You will see that additional JSON is added on save._
 
