@@ -399,6 +399,8 @@ Click "**Save**".
 
 Click "**Create**".
 
+### Step 2: Add Indexer
+Lorem Ipsum
 
 -----
 
