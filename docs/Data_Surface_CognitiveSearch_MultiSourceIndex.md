@@ -6,6 +6,7 @@
 This solution considers the following requirements:
 
 * "We want to have a single search experience, not one for each source"
+* "We are eager to embrace Azure OpenAI when it becomes available"
 
 ## Required Infrastructure
 This solution requires the following resources:
