@@ -415,6 +415,13 @@ _Note: You have likely noticed that we are reusing previously created items like
 
 Click "**Save**".
 
+##### Confirm Success
+Navigate to the newly created Indexer and confirm successful execution.
+
+
+
+Lorem Ipsum
+
 #### Blob Storage
 Click "**+ Add indexer**".
 
@@ -431,7 +438,7 @@ Prompt | Entry
 
 Navigate to the "**Indexer Definition (JSON)**" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/226468270-a1517e14-93ae-46aa-bd15-acb5b515345b.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226469403-8a5549ca-a569-4c9a-9f38-8dc74c6e54ac.png" width="800" title="Snipped: March 20, 2023" />
 
 Append the following JSON to the end of the default JSON content:
 ```
@@ -442,7 +449,7 @@ Append the following JSON to the end of the default JSON content:
       "targetFieldName": "id",
       "mappingFunction": null
     }
-  ],
+  ]
 ```
 
 Click "**Save**".
