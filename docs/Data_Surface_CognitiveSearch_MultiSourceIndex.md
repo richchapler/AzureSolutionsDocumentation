@@ -1,6 +1,6 @@
 # Data Surface: Cognitive Search, Multi-Source Index (WiP)
 
-<img src="https://user-images.githubusercontent.com/44923999/225638762-782f272b-be53-4fd0-a798-96dd8fa801aa.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/226446292-5131f0ab-9d2c-45aa-80f2-20ddd0224458.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
