@@ -5,6 +5,7 @@
 ## Use Case
 This solution considers the following requirements:
 
+* "We have structured data {e.g., SQL Database} and unstructured data {e.g., CAD drawings} that want to search"
 * "We want to have a single search experience, not one for each source"
 * "We are eager to embrace Azure OpenAI when it becomes available"
 
@@ -25,6 +26,7 @@ This solution requires the following resources:
     EXEC sp_addrolemember 'db_datareader', [rchaplerss];
     ```
 * [**Storage Account**](Infrastructure_StorageAccount.md)
+  * Create container named "drawings" (with sample files)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
@@ -35,7 +37,7 @@ This solution will address requirements in three exercises:
 
 -----
 
-## Exercise 1: SQL Database
+## Exercise 1: Cognitive Search + SQL Database
 In this exercise, we will create and learn about Cognitive Search index functionality for SQL Server.
 
 ### Step 1: Import Data
@@ -43,7 +45,7 @@ Navigate to Cognitive Search and click "**Import data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226375829-57106809-9582-46b5-ba64-638d3348e36b.png" width="800" title="Snipped: March 20, 2023" />
 
-Complete the "**Import Data**" >> "**Connect to your data**" form including:
+Complete the "**Import Data**" >> "**Connect to your data**" form, including:
 
 Prompt | Entry
 :----- | :-----
@@ -172,6 +174,56 @@ Review "**Results**" content; example below:
   ]
 }
 ```
+
+### Congratulations... you have successfully completed this exercise
+
+## Exercise 2:Cognitive Search + Blob Storage
+In this exercise, we will create and learn about Cognitive Search index functionality for Blob Storage.
+
+### Step 1: Import Data
+Navigate to Cognitive Search and click "**Import data**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226424973-8d3802c5-6459-47be-9651-ed78ac6c6378.png" width="800" title="Snipped: March 20, 2023" />
+
+Complete the "**Import Data**" >> "**Connect to your data**" form, including:
+
+Prompt | Entry
+:----- | :-----
+**Data Source** | Select "**Azure Blob Storage**"
+**Data source name** | Enter a meaningful name aligned with your standard {e.g., ACCOUNT-CONTAINER}
+**Data to extract** | Select "**Content and metadata**"
+**Parsing mode** | Select "**Default**"
+**Connection string** | Click "**Choose an existing connection**", then select your Storage Account and Container from the resulting menus
+**Managed identity authentication** | Select "**System-assigned**"
+**Container name** | Enter "**drawings**"
+
+Click "**Next: Add cognitive skills**..." and on the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226380779-1feebb45-d656-4288-ae6b-f6e67c48a5e8.png" width="800" title="Snipped: March 20, 2023" />
+
+Select your instance of Cognitive Services, collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226403680-d650824d-0b63-4334-b3a9-1179890dfc44.png" width="800" title="Snipped: March 20, 2023" />
+
+On the "**Add cognitive skills**..." tab,  select:
+* "Extract people names"
+* "Extract organization names"
+* "Extract location names"
+* "Extract key phrases"
+
+Click "**Next: Customize target index**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226404041-aa514da5-1a5c-4edd-90c9-a034488f15be.png" width="800" title="Snipped: March 20, 2023" />
+
+On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**", select all available options, and then click "**Next: Create an indexer**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226385246-bf6f57bf-c315-4513-9920-fd4254f7c4ec.png" width="800" title="Snipped: March 20, 2023" />
+
+On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
+
+
+
+
 
 -----
 
