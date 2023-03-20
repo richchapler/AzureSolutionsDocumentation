@@ -394,10 +394,8 @@ Click "**Create**".
 
 _Note: We will add fields (besides the default "id") later in this exercise._
 
-### Step 2: Add Indexers
+### Step 2: Add Indexer for SQL Database
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
-
-#### SQL Database
 Click "**+ Add indexer**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226461680-5e63e584-3d8b-4219-9721-f95c394ce737.png" width="800" title="Snipped: March 20, 2023" />
@@ -412,29 +410,6 @@ Prompt | Entry
 **Skillset** | Select "**None**"
 
 _Note: You have likely noticed that we are reusing previously created items like data source "rchaplersds-rchaplersd"... new or modified items can be used, of course, if different configuration is required._
-
-Click "**Save**".
-
-##### Confirm Success
-Navigate to the newly created Indexer and confirm successful execution.
-
-
-
-Lorem Ipsum
-
-#### Blob Storage
-Click "**+ Add indexer**".
-
-<img src="https://user-images.githubusercontent.com/44923999/226460780-f0a494d8-5144-4944-8cc6-8fbe34be2cd6.png" width="800" title="Snipped: March 20, 2023" />
-
-Complete the "**Add indexer**" >> "**Settings**" form, including:
-
-Prompt | Entry
-:----- | :-----
-**Name** | Enter a meaningful name aligned with your standard {e.g., ACCOUNT-CONTAINER-indexer}
-**Index** | Select "**multisource-index**"
-**Datasource** | Select "**rchaplers-drawings**"
-**Skillset** | Select "**None**"
 
 Navigate to the "**Indexer Definition (JSON)**" tab.
 
@@ -452,11 +427,45 @@ Append the following JSON to the end of the default JSON content (included in th
   ]
 ```
 
+_Note: I determined the correct field in the SQL Database by looking for the key column in the SalesLT.Product table._
+
 Click "**Save**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226469577-d1cb84cc-720c-41e9-a0b0-148be7c49e44.png" width="800" title="Snipped: March 20, 2023" />
 
 _Note: You will see that additional JSON is added on save._
+
+##### Confirm Success
+
+Navigate to the newly created Indexer.
+<img src="https://user-images.githubusercontent.com/44923999/226470050-40b41f4a-ed34-470a-801e-88962cb4f6de.png" width="800" title="Snipped: March 20, 2023" />
+
+Confirm successful execution.
+
+Navigate to the `multisource-index` Index.
+
+<img src="https://user-images.githubusercontent.com/44923999/226470609-bfed84db-b4b3-4d44-9a8b-3499018bb99c.png" width="800" title="Snipped: March 20, 2023" />
+
+Paste the following "**Query string**" value: `$top=1` and then click **Search**.<br>
+Review "**Results**" content; example below:
+
+```
+{
+  "@odata.context": "https://rchaplerss.search.windows.net/indexes('multisource-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 1,
+      "id": "710"
+    }
+  ]
+}
+```
+
+_Note: You will see that the results are not that interesting (yet!)._
+
+### Step 3: Add Indexer for Blob Storage
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
+Click "**+ Add indexer**".
 
 -----
 
