@@ -393,6 +393,13 @@ Click "**+ Add field**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226444947-417e20eb-f205-48e1-8d95-e4294acc6c22.png" width="800" title="Snipped: March 20, 2023" />
 
+Click "**Save**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226445284-a73fa31e-c108-40b8-9945-3b36d28d017c.png" width="800" title="Snipped: March 20, 2023" />
+
+Click "**Create**".
+
+
 -----
 
 ## Reference
