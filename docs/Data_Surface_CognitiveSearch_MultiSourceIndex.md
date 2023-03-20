@@ -447,7 +447,7 @@ Append the following JSON to the end of the default JSON content:
 
 Click "**Save**".
 
-_Note: You will see that additional JSON is added on save."
+_Note: You will see that additional JSON is added on save._
 
 -----
 
