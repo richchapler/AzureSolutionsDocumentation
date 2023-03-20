@@ -399,26 +399,42 @@ Click "**Save**".
 
 Click "**Create**".
 
-### Step 2: Add Indexer
+### Step 2: Add Indexers
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
-Click "**+ Add indexer**" and on the resulting page, select the "**Indexer Definition (JSON)**" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/226456574-db677d3d-b3c9-4308-8d9e-2fcfda24a712.png" width="800" title="Snipped: March 20, 2023" />
+#### Structured Data
+Click "**+ Add indexer**".
 
-Replace the default content with the following JSON:
+<img src="https://user-images.githubusercontent.com/44923999/226461680-5e63e584-3d8b-4219-9721-f95c394ce737.png" width="800" title="Snipped: March 20, 2023" />
 
-```
-{
-  "name": "indexer1679343631056",
-  "dataSourceName": "",
-  "targetIndexName": "",
-  "parameters": {
-    "batchSize": null,
-    "maxFailedItems": null,
-    "maxFailedItemsPerBatch": null
-  }
-}
-```
+Complete the "**Add indexer**" >> "**Settings**" form, including:
+
+Prompt | Entry
+:----- | :-----
+**Name** | Enter a meaningful name aligned with your standard {e.g., SERVER-DATABASE-indexer}
+**Index** | Select "**multisource-index**"
+**Datasource** | Select "**rchaplersds-rchaplersd**"
+**Skillset** | Select "**None**"
+
+_Note: You have likely noticed that we are reusing previously created items like data source "rchaplersds-rchaplersd"... new or modified items can be used, of course, if different configuration is required._
+
+Click "**Save**".
+
+#### Unstructured Data
+Click "**+ Add indexer**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226460780-f0a494d8-5144-4944-8cc6-8fbe34be2cd6.png" width="800" title="Snipped: March 20, 2023" />
+
+Complete the "**Add indexer**" >> "**Settings**" form, including:
+
+Prompt | Entry
+:----- | :-----
+**Name** | Enter a meaningful name aligned with your standard {e.g., ACCOUNT-CONTAINER-indexer}
+**Index** | Select "**multisource-index**"
+**Datasource** | Select "**rchaplers-drawings**"
+**Skillset** | Select "**None**"
+
+Click "**Save**".
 
 -----
 
