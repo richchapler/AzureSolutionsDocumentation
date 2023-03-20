@@ -236,9 +236,96 @@ Click "**Next: Create an indexer**".
 
 On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
+### Step 2: Confirm Success
+Navigate to "**Overview**" in the navigation pane, then click on the "Indexers" tab.
 
-Lorem Ipsum
+<img src="https://user-images.githubusercontent.com/44923999/226442015-6dd2e1db-37d8-4a62-9f69-1d27349eaa1a.png" width="800" title="Snipped: March 20, 2023" />
 
+Click on the newly-created Indexer.
+
+<img src="https://user-images.githubusercontent.com/44923999/226442058-459b4099-b530-43b7-8d4c-773d9a3ef8c1.png" width="800" title="Snipped: March 20, 2023" />
+
+Confirm successful execution.<br>
+Navigate to the "**Indexer Definition (JSON)**" tab.
+
+<img src="https://user-images.githubusercontent.com/44923999/226442137-0061ef1e-8815-47a2-a495-81676d112bfb.png" width="800" title="Snipped: March 20, 2023" />
+
+Review the produced JSON content... we will use the example below in Exercise Three.
+
+```
+{
+  "@odata.context": "https://rchaplerss.search.windows.net/$metadata#indexers/$entity",
+  "@odata.etag": "\"0x8DB297649341A54\"",
+  "name": "azureblob-indexer",
+  "description": "",
+  "dataSourceName": "rchaplers-drawings",
+  "skillsetName": "azureblob-skillset",
+  "targetIndexName": "azureblob-index",
+  "disabled": null,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": 0,
+    "maxFailedItemsPerBatch": 0,
+    "base64EncodeKeys": null,
+    "configuration": {
+      "dataToExtract": "contentAndMetadata",
+      "parsingMode": "default",
+      "imageAction": "generateNormalizedImages"
+    }
+  },
+  "fieldMappings": [
+    {
+      "sourceFieldName": "metadata_storage_path",
+      "targetFieldName": "metadata_storage_path",
+      "mappingFunction": {
+        "name": "base64Encode",
+        "parameters": null
+      }
+    }
+  ],
+  "outputFieldMappings": [
+    {
+      "sourceFieldName": "/document/merged_content/people",
+      "targetFieldName": "people"
+    },
+    {
+      "sourceFieldName": "/document/merged_content/organizations",
+      "targetFieldName": "organizations"
+    },
+    {
+      "sourceFieldName": "/document/merged_content/locations",
+      "targetFieldName": "locations"
+    },
+    {
+      "sourceFieldName": "/document/merged_content/keyphrases",
+      "targetFieldName": "keyphrases"
+    },
+    {
+      "sourceFieldName": "/document/merged_content",
+      "targetFieldName": "merged_content"
+    },
+    {
+      "sourceFieldName": "/document/normalized_images/*/text",
+      "targetFieldName": "text"
+    },
+    {
+      "sourceFieldName": "/document/normalized_images/*/layoutText",
+      "targetFieldName": "layoutText"
+    },
+    {
+      "sourceFieldName": "/document/normalized_images/*/imageTags/*/name",
+      "targetFieldName": "imageTags"
+    },
+    {
+      "sourceFieldName": "/document/normalized_images/*/imageCaption",
+      "targetFieldName": "imageCaption"
+    }
+  ],
+  "cache": null,
+  "encryptionKey": null
+}
+```
 
 -----
 
