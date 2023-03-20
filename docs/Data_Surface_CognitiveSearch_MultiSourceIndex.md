@@ -37,7 +37,7 @@ This solution will address requirements in three exercises:
 
 * Exercise 1: Cognitive Search + SQL Database
 * Exercise 2: Cognitive Search + Blob Storage
-* Exercise 3: Manually Create Multi-Source Index, Indexer, etc.
+* Exercise 3: Manually Create Multi-Source Index
 
 -----
 
@@ -380,7 +380,7 @@ Review "**Results**" content; example below:
 
 -----
 
-## Exercise 3: Manually Create Multi-Source Index, Indexer, etc.e
+## Exercise 3: Manually Create Multi-Source Index
 In this exercise, we will manually create a multi-source index populated by two indexers.
 
 ### Step 1: Create Index
