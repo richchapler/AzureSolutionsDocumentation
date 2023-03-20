@@ -28,13 +28,13 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Source #1, SQL Database
-* Exercise 2: Source #2, Blob Storage
+* Exercise 1: SQL Database
+* Exercise 2: Blob Storage
 * Exercise 3: Manually Create Composite Index, Indexer, etc.
 
 -----
 
-## Exercise 1: Source #1, SQL Database
+## Exercise 1: SQL Database
 In this exercise, we will create and learn about Cognitive Search index functionality for SQL Server.
 
 ### Step 1: Import Data
