@@ -80,13 +80,13 @@ On the "**Create an indexer**" tab, confirm default values and then click "**Sub
 ### Step 2: Confirm Success
 Navigate to "**Overview**" in the navigation pane, then click on the "Indexers" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/226404747-96283712-3660-47a6-a8bb-ad2bfeae4ee1.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226418120-1ab6b78c-8b5d-4abf-a75f-e50a19ab6061.png" width="800" title="Snipped: March 20, 2023" />
 
 Click on the newly-created Indexer.
 
 <img src="https://user-images.githubusercontent.com/44923999/226404925-b1cf0637-b9db-4093-b5e7-62bdaa7d2140.png" width="800" title="Snipped: March 20, 2023" />
 
-On the "**Execution history**" tab, confirm **Success**.
+Confirm successful execution.
 
 <img src="https://user-images.githubusercontent.com/44923999/226405366-d5a3beaf-4c32-40ad-bd8c-43e3c1059a84.png" width="800" title="Snipped: March 20, 2023" />
 
