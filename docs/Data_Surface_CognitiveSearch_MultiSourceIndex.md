@@ -52,7 +52,7 @@ Prompt | Entry
 **Managed identity authentication** | Select "**System-assigned**"
 **Table/View** | Enter "**SalesLT.Product**"
 
-Click "**Next: Add cognitive skills (Optional)**" and on the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
+Click "**Next: Add cognitive skills**..." and on the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226380779-1feebb45-d656-4288-ae6b-f6e67c48a5e8.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -60,7 +60,11 @@ Select your instance of Cognitive Services, collapse "**Attach Cognitive Service
 
 <img src="https://user-images.githubusercontent.com/44923999/226381683-263cf8ea-8974-4181-b5c0-4ff8f3163183.png" width="800" title="Snipped: March 20, 2023" />
 
-Select all available options (support our goal to learn about Cognitive Search index functionality for SQL Server {i.e., create useful reference JSON}).
+Select all available options (supporting our goal to learn about Cognitive Search index functionality for SQL Server {i.e., create useful reference JSON}) and then click "**Next: Customize target index**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226383404-e66cc03d-b82f-4d41-83f3-12dc48415af2.png" width="800" title="Snipped: March 20, 2023" />
+
+Select all available options and then click "**Next: Create an indexer**".
 
 ```
 {
