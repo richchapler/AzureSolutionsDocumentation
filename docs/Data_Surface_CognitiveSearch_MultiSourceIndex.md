@@ -386,22 +386,39 @@ In this exercise, we will manually create an index and a multi-source indexer.
 ### Step 1: Create Index
 Navigate to Cognitive Search, "**Overview**" and then click "**+ Add index**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226445615-8a1f757f-4c7a-49b4-ae55-1b6e06d4cded.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226456128-902fc1e5-86cb-47e3-9a13-4b30c4203e35.png" width="800" title="Snipped: March 20, 2023" />
 
-Enter an "**Index name**" value {e.g., "multisource"} on the "**Create index**" page.<br>
+Enter an "**Index name**" value {e.g., "multisource-index"} on the "**Create index**" page.<br>
 Click "**+ Add field**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226445674-72ce36ca-f950-4b1f-abac-a75cde6235b1.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226456215-8083c9a1-04b1-4244-871b-39dd6ba4de79.png" width="800" title="Snipped: March 20, 2023" />
 
 Click "**Save**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226445732-a145c572-b8d6-40c2-a33e-0187622286db.png" width="800" title="Snipped: March 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226456282-4598c146-aa5c-48ac-8ad1-383c93834edd.png" width="800" title="Snipped: March 20, 2023" />
 
 Click "**Create**".
 
 ### Step 2: Add Indexer
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
-Click "**+ Add indexer**".
+Click "**+ Add indexer**" and on the resulting page, select the "**Indexer Definition (JSON)**" tab.
+
+<img src="https://user-images.githubusercontent.com/44923999/226456574-db677d3d-b3c9-4308-8d9e-2fcfda24a712.png" width="800" title="Snipped: March 20, 2023" />
+
+Replace the default content with the following JSON:
+
+```
+{
+  "name": "indexer1679343631056",
+  "dataSourceName": "",
+  "targetIndexName": "",
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": null,
+    "maxFailedItemsPerBatch": null
+  }
+}
+```
 
 -----
 
