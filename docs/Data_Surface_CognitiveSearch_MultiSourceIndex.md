@@ -60,8 +60,11 @@ Select your instance of Cognitive Services, collapse "**Attach Cognitive Service
 
 <img src="https://user-images.githubusercontent.com/44923999/226381683-263cf8ea-8974-4181-b5c0-4ff8f3163183.png" width="800" title="Snipped: March 20, 2023" />
 
-On the "**Add cognitive skills**..." tab,  select all available options except:
-* "Translate text" should remain unchecked
+On the "**Add cognitive skills**..." tab,  select:
+* "Extract people names"
+* "Extract organization names"
+* "Extract location names"
+* "Extract key phrases"
 
 _Note: We are choosing all possible options to support our learning goals {e.g., understand Cognitive Search index functionality for SQL Server and create useful reference JSON}_
 
@@ -69,8 +72,7 @@ Click "**Next: Customize target index**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226395418-2d3a9fd1-9f9d-4522-b0f7-ea9e4c8b6597.png" width="800" title="Snipped: March 20, 2023" />
 
-On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**" and then select all available options except:
-* "Sortable" should remain unchecked for "pii_entities" items "text", "type", "subtype", "offset", "length", and "score"
+On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**" and then select all available options.
 
 Click "**Next: Create an indexer**".
 
