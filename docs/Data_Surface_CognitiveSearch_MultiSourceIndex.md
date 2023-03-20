@@ -383,7 +383,7 @@ Review "**Results**" content; example below:
 ## Exercise 3: Manually Create Composite Index, Indexer, etc.e
 In this exercise, we will manually create a composite index.
 
-### Step 1: Lorem Ipsum
+### Step 1: Create Index
 Navigate to Cognitive Search and click "**+ Add index**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226444856-fbdb0146-7639-4997-889c-cec380af40de.png" width="800" title="Snipped: March 20, 2023" />
