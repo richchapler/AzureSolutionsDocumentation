@@ -144,7 +144,8 @@ Review the produced JSON content... we will use the example below in Exercise Th
 }
 ```
 
-Navigate to "**Overview**" in the navigation pane, then click on the "Index" tab.
+Navigate to "**Overview**" in the navigation pane, then click on the "Indexes" tab.<br>
+Click on the newly-created index.
 
 <img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
 
@@ -326,6 +327,64 @@ Review the produced JSON content... we will use the example below in Exercise Th
   "encryptionKey": null
 }
 ```
+
+Navigate to "**Overview**" in the navigation pane, then click on the "Indexes" tab.<br>
+Click on the newly-created index.
+
+<img src="https://user-images.githubusercontent.com/44923999/226443772-0ca61cb5-3848-4201-8a29-8cf0004c4535.png" width="800" title="Snipped: March 20, 2023" />
+
+Paste the following "**Query string**" value: `$top=1` and then click **Search**.<br>
+Review "**Results**" content; example below:
+
+```
+{
+  "@odata.context": "https://rchaplerss.search.windows.net/indexes('azureblob-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 1,
+      "content": "\n6'\n\n4'\n\n1' 2' 1'\n\n2'\n-6\n\n\"\n2'\n\n-6\n\"\n\n1'\n\n4'\n\n12\n\n12\n\n5'\n\n1' 2' 1'\n\n2'\n\n4'\n\n3'\n6\"6\"\n\n5'\n\n6'\n\nFLOOR PLAN FRONT ELEVATION SIDE ELEVATION\n\nDOG HOUSE PLANS\n\n6\"6\"\n\n\n\tSheets and Views\n\tModel\n\n\n",
+      "metadata_storage_content_type": "application/pdf",
+      "metadata_storage_size": 89182,
+      "metadata_storage_last_modified": "2023-02-14T14:03:20Z",
+      "metadata_storage_content_md5": "FzOLnd9v1JDJwH9AQwFCmA==",
+      "metadata_storage_name": "Dog House Plan Sample - Model.pdf",
+      "metadata_storage_path": "aHR0cHM6Ly9yY2hhcGxlcnMuYmxvYi5jb3JlLndpbmRvd3MubmV0L2RyYXdpbmdzL0RvZyUyMEhvdXNlJTIwUGxhbiUyMFNhbXBsZSUyMC0lMjBNb2RlbC5wZGY1",
+      "metadata_storage_file_extension": ".pdf",
+      "metadata_content_type": "application/pdf",
+      "metadata_language": "de",
+      "metadata_title": "Model",
+      "metadata_creation_date": "2023-02-14T14:02:17Z",
+      "people": [],
+      "organizations": [],
+      "locations": [
+        "FLOOR"
+      ],
+      "keyphrases": [
+        "FLOOR PLAN FRONT ELEVATION SIDE ELEVATION",
+        "DOG HOUSE PLANS",
+        "Views Model",
+        "Sheets",
+        "6"
+      ],
+      "merged_content": "\n6'\n\n4'\n\n1' 2' 1'\n\n2'\n-6\n\n\"\n2'\n\n-6\n\"\n\n1'\n\n4'\n\n12\n\n12\n\n5'\n\n1' 2' 1'\n\n2'\n\n4'\n\n3'\n6\"6\"\n\n5'\n\n6'\n\nFLOOR PLAN FRONT ELEVATION SIDE ELEVATION\n\nDOG HOUSE PLANS\n\n6\"6\"\n\n\n\tSheets and Views\n\tModel\n\n\n",
+      "text": [],
+      "layoutText": [],
+      "imageTags": [],
+      "imageCaption": []
+    }
+  ]
+}
+```
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 3: Manually Create Composite Index, Indexer, etc.e
+In this exercise, we will manually create a composite index.
+
+### Step 1: Lorem Ipsum
+Navigate to Cognitive Search and click "**Import data**".
 
 -----
 
