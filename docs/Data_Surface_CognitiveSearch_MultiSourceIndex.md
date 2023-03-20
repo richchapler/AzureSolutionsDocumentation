@@ -60,11 +60,15 @@ Select your instance of Cognitive Services, collapse "**Attach Cognitive Service
 
 <img src="https://user-images.githubusercontent.com/44923999/226381683-263cf8ea-8974-4181-b5c0-4ff8f3163183.png" width="800" title="Snipped: March 20, 2023" />
 
-Select all available options (supporting our goal to learn about Cognitive Search index functionality for SQL Server {i.e., create useful reference JSON}) and then click "**Next: Customize target index**".
+On the "**Add cognitive skills**..." tab, select all available options (supporting our goal to learn about Cognitive Search index functionality for SQL Server {i.e., create useful reference JSON}) and then click "**Next: Customize target index**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226383404-e66cc03d-b82f-4d41-83f3-12dc48415af2.png" width="800" title="Snipped: March 20, 2023" />
 
-Select all available options and then click "**Next: Create an indexer**".
+On the "**Customize target index**" tab, Select all available options and then click "**Next: Create an indexer**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226385246-bf6f57bf-c315-4513-9920-fd4254f7c4ec.png" width="800" title="Snipped: March 20, 2023" />
+
+On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
 ```
 {
