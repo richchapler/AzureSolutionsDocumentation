@@ -86,11 +86,12 @@ Click on the newly-created Indexer.
 
 <img src="https://user-images.githubusercontent.com/44923999/226404925-b1cf0637-b9db-4093-b5e7-62bdaa7d2140.png" width="800" title="Snipped: March 20, 2023" />
 
-Confirm successful execution.
+Confirm successful execution.<br>
+Navigate to the "**Indexer Definition (JSON)**" tab.
 
 <img src="https://user-images.githubusercontent.com/44923999/226405366-d5a3beaf-4c32-40ad-bd8c-43e3c1059a84.png" width="800" title="Snipped: March 20, 2023" />
 
-Navigate to the "**Indexer Definition (JSON)**" tab and review the produced JSON content. Example:
+Review the produced JSON content:
 
 ```
 {
