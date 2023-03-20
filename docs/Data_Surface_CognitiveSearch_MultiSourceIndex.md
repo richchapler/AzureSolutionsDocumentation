@@ -139,7 +139,39 @@ Navigate to "**Overview**" in the navigation pane, then click on the "Index" tab
 
 <img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
 
-Lorem Ipsum
+Paste the following "**Query string**" value: `$top=1` and then click **Search**.<br>
+Review "**Results**" content; example below:
+
+```
+{
+  "@odata.context": "https://rchaplerss.search.windows.net/indexes('azuresql-index')/$metadata#docs(*)",
+  "value": [
+    {
+      "@search.score": 1,
+      "ProductID": "710",
+      "Name": "Mountain Bike Socks, L",
+      "ProductNumber": "SO-B909-L",
+      "Color": "White",
+      "StandardCost": "3.3963",
+      "ListPrice": "9.5000",
+      "Size": "L",
+      "Weight": null,
+      "ProductCategoryID": 27,
+      "ProductModelID": 18,
+      "SellStartDate": "2005-07-01T00:00:00Z",
+      "SellEndDate": "2006-06-30T00:00:00Z",
+      "DiscontinuedDate": null,
+      "ThumbnailPhotoFileName": "no_image_available_small.gif",
+      "rowguid": "161c035e-21b3-4e14-8e44-af508f35d80a",
+      "ModifiedDate": "2008-03-11T10:01:36.827Z",
+      "people": [],
+      "organizations": [],
+      "locations": [],
+      "keyphrases": []
+    }
+  ]
+}
+```
 
 -----
 
