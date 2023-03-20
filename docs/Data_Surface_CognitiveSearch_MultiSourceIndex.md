@@ -14,6 +14,7 @@ This solution requires the following resources:
   * Enable **System-Assigned Managed Identity**
   * Use a Region that supports Cognitive Services {e.g., West}
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
+  * Include sample data
   * Enable "**Allow Azure services and resources to access this server**"
   * Grant IAC "Reader" role in place for Cognitive Search, System-Assigned Managed Identity
   * Grant access to Cognitive Search using the following T-SQL:
@@ -26,14 +27,14 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Source #1
-* Exercise 2: Source #2
+* Exercise 1: Source #1, SQL Database
+* Exercise 2: Source #2, Blob Storage
 * Exercise 3: Manually Create Index, Indexer, etc.
 
 -----
 
-## Exercise 1: Source #1
-In this exercise, we will Lorem Ipsum.
+## Exercise 1: Source #1, SQL Database
+In this exercise, we will create and learn about Cognitive Search index functionality for SQL Server.
 
 ### Step 1: Lorem Ipsum
 Navigate to "**blah**" in the "**blah**" grouping of the Blah navigation pane.
