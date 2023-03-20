@@ -438,6 +438,7 @@ _Note: You will see that additional JSON is added on save._
 ##### Confirm Success
 
 Navigate to the newly created Indexer.
+
 <img src="https://user-images.githubusercontent.com/44923999/226470050-40b41f4a-ed34-470a-801e-88962cb4f6de.png" width="800" title="Snipped: March 20, 2023" />
 
 Confirm successful execution.
