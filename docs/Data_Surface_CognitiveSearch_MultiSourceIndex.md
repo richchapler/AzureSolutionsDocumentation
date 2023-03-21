@@ -569,21 +569,21 @@ Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br
 Click to open the newly-created "**ACCOUNT-CONTAINER-indexer**".
 Navigate to the "Indexer Definition (JSON)" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/226619183-5b179ea7-f9be-4d9f-88e8-8ff6b5dc0bf0.png" width="800" title="Snipped: March 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226620790-adb13501-3c91-42cd-bfbc-6dca79b11b72.png" width="800" title="Snipped: March 21, 2023" />
 
 Paste the following JSON into the "fieldMappings" definition:
 
 ```
   {
-    "sourceFieldName": "metadata_storage_path",
+    "sourceFieldName": "metadata_storage_name",
     "targetFieldName": "name",
     "mappingFunction": null
   }
 ```
 
-_Note: I determined the correct field in the SQL Database by looking for the SalesLT.Product column that best matched the newly-added "name" field in the index._
+_Note: I determined the correct field by looking at the previously created "azureblob-indexer" (from Exercise 2)._
 
-Click "**Save**" and then click "**Run**" to update the index.
+Click "**Save**", "**Reset**", and then click "**Run**" to update the index.
 
 <img src="https://user-images.githubusercontent.com/44923999/226617073-407e57c7-c63e-42e3-8b90-89af27853317.png" width="800" title="Snipped: March 21, 2023" />
 
