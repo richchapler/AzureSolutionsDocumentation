@@ -536,7 +536,7 @@ Click "**Save**".
 
 Navigate to the "**Fields**" tab on the "**multisource-index**" page to confirm addition of the new field.
 
-#### Modify SQL Indexer
+#### Modify SQL Database Indexer
 
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
 Click to open the newly-created "**SERVER-DATABASE-indexer**".
@@ -563,8 +563,46 @@ Click "**Save**" and then click "**Run**" to update the index.
 
 Navigate to the "**Search explorer**" tab on the "**multisource-index**" page and confirm addition of the new field with a simple Search.
 
+#### Modify Blob Storage Indexer
+
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
+Click to open the newly-created "**ACCOUNT-CONTAINER-indexer**".
+Navigate to the "Indexer Definition (JSON)" tab.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<img src="https://user-images.githubusercontent.com/44923999/226615980-49de37bd-3394-4165-af16-38db025cdd9b.png" width="800" title="Snipped: March 21, 2023" />
+
+Paste the following JSON into the "fieldMappings" definition:
+
+```
+,
+  {
+    "sourceFieldName": "Name",
+    "targetFieldName": "name",
+    "mappingFunction": null
+  }
+```
+
+_Note: I determined the correct field in the SQL Database by looking for the SalesLT.Product column that best matched the newly-added "name" field in the index._
+
+Click "**Save**" and then click "**Run**" to update the index.
+
+<img src="https://user-images.githubusercontent.com/44923999/226617073-407e57c7-c63e-42e3-8b90-89af27853317.png" width="800" title="Snipped: March 21, 2023" />
+
+Navigate to the "**Search explorer**" tab on the "**multisource-index**" page and confirm addition of the new field with a simple Search.
+
 -----
 
-## Reference
-
-* [Set up an indexer connection to Azure SQL using a managed identity](https://learn.microsoft.com/en-us/azure/search/search-howto-managed-identities-sql)
+**Congratulations... you have successfully completed this exercise**
