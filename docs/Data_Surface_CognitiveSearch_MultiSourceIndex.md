@@ -465,8 +465,86 @@ Review "**Results**" content; example below:
 _Note: You will see that the results are not that interesting (yet!)._
 
 ### Step 3: Add Indexer for Blob Storage
+
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
 Click "**+ Add indexer**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226608271-bac1d556-dc99-49d7-ba7d-0f0ddcf4e2fe.png" width="800" title="Snipped: March 21, 2023" />
+
+Complete the "**Add indexer**" >> "**Settings**" form, including:
+
+Prompt | Entry
+:----- | :-----
+**Name** | Enter a meaningful name aligned with your standard {e.g., ACCOUNT-CONTAINER-indexer}
+**Index** | Select "**multisource-index**"
+**Datasource** | Select "**rchaplers-drawings**"
+**Skillset** | Select "**None**"
+
+_Note: We do not have to map a field to id because this is handled automatically._
+
+Click "**Save**".
+
+##### Confirm Success
+
+Navigate to the newly created Indexer.
+
+<img src="https://user-images.githubusercontent.com/44923999/226609003-c4f9957a-fa24-416f-80a6-4d91b269b301.png" width="800" title="Snipped: March 21, 2023" />
+
+Confirm successful execution.
+
+Navigate to the `multisource-index` Index.
+
+<img src="https://user-images.githubusercontent.com/44923999/226609444-47e6488d-62da-4adb-ada2-f841a795f048.png" width="800" title="Snipped: March 21, 2023" />
+
+You will notice that the "**Documents**" count has increased by the number of documents included in your "**drawings**" container.
+
+### Step 4: Add "name" Field
+
+#### Modify Multi-Source Index
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexes**" tab.<br>
+Click to open "**multisource-index**".
+On the resulting page, click "**Edit JSON**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226611500-d1c0ead6-9b0c-4b2a-9d45-57bf4b3df7d9.png" width="800" title="Snipped: March 21, 2023" />
+
+Paste the following JSON into the "fields" definition:
+
+```
+,
+    {
+      "name": "name",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false,
+      "indexAnalyzer": null,
+      "searchAnalyzer": null,
+      "analyzer": null,
+      "normalizer": null,
+      "synonymMaps": []
+    }
+```
+
+_Note: This addition will add a new non-key "name" field to "multisource-index" that can be searched, filtered, sorted, etc._
+
+Click "**Save**".
+
+<img src="https://user-images.githubusercontent.com/44923999/226612904-255222ba-61a6-41b8-81bf-2dac62eafb01.png" width="800" title="Snipped: March 21, 2023" />
+
+Navigate to the "**fields**" tab on the "**multisource-index**" page to confirm addition of the new field.
+
+#### Modify SQL Indexer
+
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
+Click to open the newly-created "**SERVER-DATABASE-indexer**".
+Navigate to the "Indexer Definition (JSON)" tab.
+
+<img src="https://user-images.githubusercontent.com/44923999/226610625-25f593ec-6246-4166-ad24-d35272836e06.png" width="800" title="Snipped: March 21, 2023" />
+
+Review the Indexer Definition JSON from Exercise 1
 
 -----
 
