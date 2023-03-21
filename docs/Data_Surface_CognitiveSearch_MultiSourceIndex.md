@@ -542,7 +542,7 @@ Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br
 Click to open the newly-created "**SERVER-DATABASE-indexer**".
 Navigate to the "Indexer Definition (JSON)" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/226613650-6cd3725b-2df1-4899-a84c-d38f344289a1.png" width="800" title="Snipped: March 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226614585-acf083a1-7b60-4d5d-8371-0c90f099e332.png" width="800" title="Snipped: March 21, 2023" />
 
 Paste the following JSON into the "fieldMappings" definition:
 
