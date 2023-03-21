@@ -534,7 +534,7 @@ Click "**Save**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226612904-255222ba-61a6-41b8-81bf-2dac62eafb01.png" width="800" title="Snipped: March 21, 2023" />
 
-Navigate to the "**fields**" tab on the "**multisource-index**" page to confirm addition of the new field.
+Navigate to the "**Fields**" tab on the "**multisource-index**" page to confirm addition of the new field.
 
 #### Modify SQL Indexer
 
@@ -542,20 +542,26 @@ Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br
 Click to open the newly-created "**SERVER-DATABASE-indexer**".
 Navigate to the "Indexer Definition (JSON)" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/226614585-acf083a1-7b60-4d5d-8371-0c90f099e332.png" width="800" title="Snipped: March 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226615980-49de37bd-3394-4165-af16-38db025cdd9b.png" width="800" title="Snipped: March 21, 2023" />
 
 Paste the following JSON into the "fieldMappings" definition:
 
 ```
 ,
   {
-    "sourceFieldName": "ProductName",
+    "sourceFieldName": "Name",
     "targetFieldName": "name",
     "mappingFunction": null
   }
 ```
 
 _Note: I determined the correct field in the SQL Database by looking for the SalesLT.Product column that best matched the newly-added "name" field in the index._
+
+Click "**Save**" and then click "**Run**" to update the index.
+
+<img src="https://user-images.githubusercontent.com/44923999/226616523-6e9be08f-14d7-4cce-bb65-9a886eca17a6.png" width="800" title="Snipped: March 21, 2023" />
+
+Navigate to the "**Search explorer**" tab on the "**multisource-index**" page and confirm addition of the new field with a simple Search.
 
 -----
 
