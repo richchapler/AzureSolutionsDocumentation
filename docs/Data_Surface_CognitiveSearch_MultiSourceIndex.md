@@ -559,7 +559,7 @@ _Note: I determined the correct field in the SQL Database by looking for the Sal
 
 Click "**Save**" and then click "**Run**" to update the index.
 
-<img src="https://user-images.githubusercontent.com/44923999/226616523-6e9be08f-14d7-4cce-bb65-9a886eca17a6.png" width="800" title="Snipped: March 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226617073-407e57c7-c63e-42e3-8b90-89af27853317.png" width="800" title="Snipped: March 21, 2023" />
 
 Navigate to the "**Search explorer**" tab on the "**multisource-index**" page and confirm addition of the new field with a simple Search.
 
