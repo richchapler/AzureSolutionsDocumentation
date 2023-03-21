@@ -569,27 +569,13 @@ Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br
 Click to open the newly-created "**ACCOUNT-CONTAINER-indexer**".
 Navigate to the "Indexer Definition (JSON)" tab.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<img src="https://user-images.githubusercontent.com/44923999/226615980-49de37bd-3394-4165-af16-38db025cdd9b.png" width="800" title="Snipped: March 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226619183-5b179ea7-f9be-4d9f-88e8-8ff6b5dc0bf0.png" width="800" title="Snipped: March 21, 2023" />
 
 Paste the following JSON into the "fieldMappings" definition:
 
 ```
-,
   {
-    "sourceFieldName": "Name",
+    "sourceFieldName": "metadata_storage_path",
     "targetFieldName": "name",
     "mappingFunction": null
   }
