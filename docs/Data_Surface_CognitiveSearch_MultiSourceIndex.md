@@ -511,21 +511,21 @@ Paste the following JSON into the "fields" definition:
 
 ```
 ,
-    {
-      "name": "name",
-      "type": "Edm.String",
-      "searchable": true,
-      "filterable": true,
-      "retrievable": true,
-      "sortable": true,
-      "facetable": true,
-      "key": false,
-      "indexAnalyzer": null,
-      "searchAnalyzer": null,
-      "analyzer": null,
-      "normalizer": null,
-      "synonymMaps": []
-    }
+  {
+    "name": "name",
+    "type": "Edm.String",
+    "searchable": true,
+    "filterable": true,
+    "retrievable": true,
+    "sortable": true,
+    "facetable": true,
+    "key": false,
+    "indexAnalyzer": null,
+    "searchAnalyzer": null,
+    "analyzer": null,
+    "normalizer": null,
+    "synonymMaps": []
+  }
 ```
 
 _Note: This addition will add a new non-key "name" field to "multisource-index" that can be searched, filtered, sorted, etc._
@@ -548,11 +548,11 @@ Paste the following JSON into the "fieldMappings" definition:
 
 ```
 ,
-		{
-      "sourceFieldName": "ProductName",
-      "targetFieldName": "name",
-      "mappingFunction": null
-    }
+  {
+    "sourceFieldName": "ProductName",
+    "targetFieldName": "name",
+    "mappingFunction": null
+  }
 ```
 
 _Note: I determined the correct field in the SQL Database by looking for the SalesLT.Product column that best matched the newly-added "name" field in the index._
