@@ -1,4 +1,4 @@
-# Data Surface: Cognitive Search, Multi-Source Index (WiP)
+# Data Surface: Cognitive Search, Multi-Source Index
 
 <img src="https://user-images.githubusercontent.com/44923999/226446292-5131f0ab-9d2c-45aa-80f2-20ddd0224458.png" width="1000" />
 
