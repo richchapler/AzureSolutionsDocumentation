@@ -542,9 +542,20 @@ Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br
 Click to open the newly-created "**SERVER-DATABASE-indexer**".
 Navigate to the "Indexer Definition (JSON)" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/226610625-25f593ec-6246-4166-ad24-d35272836e06.png" width="800" title="Snipped: March 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226613650-6cd3725b-2df1-4899-a84c-d38f344289a1.png" width="800" title="Snipped: March 21, 2023" />
 
-Review the Indexer Definition JSON from Exercise 1
+Paste the following JSON into the "fieldMappings" definition:
+
+```
+,
+		{
+      "sourceFieldName": "ProductName",
+      "targetFieldName": "name",
+      "mappingFunction": null
+    }
+```
+
+_Note: I determined the correct field in the SQL Database by looking for the SalesLT.Product column that best matched the newly-added "name" field in the index._
 
 -----
 
