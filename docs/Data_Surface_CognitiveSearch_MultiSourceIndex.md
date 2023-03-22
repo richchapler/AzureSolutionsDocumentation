@@ -585,9 +585,10 @@ _Note: I determined the correct field by looking at the previously created "azur
 
 Click "**Save**", "**Reset**", and then click "**Run**" to update the index.
 
-<img src="https://user-images.githubusercontent.com/44923999/226617073-407e57c7-c63e-42e3-8b90-89af27853317.png" width="800" title="Snipped: March 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/226981709-c53887f0-2af3-444c-bb8a-d61dc1dd9f1b.png" width="800" title="Snipped: March 22, 2023" />
 
-Navigate to the "**Search explorer**" tab on the "**multisource-index**" page and confirm addition of the new field with a simple Search.
+Navigate to the "**Search explorer**" tab on the "**multisource-index**" page.<br>
+Confirm addition of the new field with a simple Search {e.g., `helmet*`}.
 
 -----
 
