@@ -1,11 +1,12 @@
 # Data Enrichment: Open AI (WiP)
 
-<img src="https://user-images.githubusercontent.com/44923999/222469226-d62e01ff-9c11-4a4f-89bf-f77fad0012d2.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/227210296-1540091a-e156-41d9-9cfd-278246c311f1.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
 
-* "Lorem Ipsum"
+* "I want to learn about ChatGPT (OpenAI) with a simple use case"
+* "I want to enrich data with compelling content ready for consumption by end-users"
 
 ## Required Infrastructure
 This solution requires the following resources:
