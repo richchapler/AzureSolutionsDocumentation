@@ -5,23 +5,25 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "I want to learn about ChatGPT (OpenAI) with a simple use case"
+* "I want to learn about Azure OpenAI with a simple use case"
 * "I want to enrich data with compelling content ready for consumption by end-users"
 
 ## Required Infrastructure
 This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 * [**Postman**](https://www.postman.com/product/workspaces/)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Lorem Ipsum
+* Exercise 1: Test API
+* Exercise 2: Data Flow
 
 -----
 
-## Exercise 1: Lorem Ipsum
+## Exercise 1: Test API
 In this exercise, we will ...
 
 Lorem Ispum
