@@ -12,6 +12,7 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [**Postman**](https://www.postman.com/product/workspaces/)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
