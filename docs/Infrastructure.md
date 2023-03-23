@@ -48,6 +48,8 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Machine Learning**](https://learn.microsoft.com/en-us/azure/machine-learning/) >> [Compute Instance](https://learn.microsoft.com/en-us/azure/machine-learning/concept-compute-instance)
 
+* [**Postman**](https://www.postman.com/product/workspaces/)
+
 * [**Power BI**](https://powerbi.microsoft.com/en-us/)
 
 * [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md) :: [Sources](Infrastructure_Purview_Sources.md)
