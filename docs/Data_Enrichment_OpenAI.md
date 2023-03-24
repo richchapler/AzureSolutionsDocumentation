@@ -11,7 +11,7 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with StormEvents sample data
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster](Infrastructure_DataExplorer_Cluster.md), [Database](Infrastructure_DataExplorer_Database.md), and [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 * [**Postman**](https://www.postman.com/product/workspaces/) with a workspace and collection
 
