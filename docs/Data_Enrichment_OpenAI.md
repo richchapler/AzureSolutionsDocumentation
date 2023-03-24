@@ -37,7 +37,7 @@ Enter the following values:
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | Select "**POST**"
-**Enter URL or paste text** | Modify and paste: `https://rchaplerai.openai.azure.com/openai/deployments/rchapleraimd/completions?api-version=2022-12-01`
+**Enter URL or paste text** | Modify and paste:<br>`https://rchaplerai.openai.azure.com/openai/deployments/rchapleraimd/completions?api-version=2022-12-01`
 
 Navigate to the "Headers" tab.
 
@@ -48,7 +48,7 @@ Enter the following values:
 Key | Value
 :----- | :-----
 **api-key** | your OpenAI Key
-**Content-Type** | application/json`
+**Content-Type** | application/json
 
 <img src="https://user-images.githubusercontent.com/44923999/227530522-a2adbc66-42f6-4102-ad21-acb8d5fb39fb.png" width="800" title="Snipped: March 24, 2023" />
 
@@ -67,6 +67,41 @@ Logic Explained:
 * `prompt`... the query for which to generate a completion; our strategy will be to start with something very simple and hone in later steps
 * `max_tokens`... establishes context length
 * `temperature`... closer to 0 for greater accuracy and closer to 1 for more creativity
+
+Click "**Send**".
+
+<img src="https://user-images.githubusercontent.com/44923999/227566583-85bceb5f-83ea-4ad8-a7d2-9df6b3056a50.png" width="800" title="Snipped: March 24, 2023" />
+
+We can expect a response like this:
+
+```
+{
+    "id": "cmpl-6xdR7jo4K0ZT9bRKmzV72YmTSPN6X",
+    "object": "text_completion",
+    "created": 1679670965,
+    "model": "text-davinci-003",
+    "choices": [
+        {
+            "text": ", and the effects of climate change on stormwater management.\n\nThe course will also cover the design of stormwater management systems, including green infrastructure, and the use of computer models to simulate stormwater runoff. Students will learn how to design and implement stormwater management systems that are cost-effective, efficient, and environmentally friendly. In addition, students will gain an understanding of the regulatory requirements for stormwater management and the importance of public engagement in the process.",
+            "index": 0,
+            "finish_reason": "stop",
+            "logprobs": null
+        }
+    ],
+    "usage": {
+        "completion_tokens": 93,
+        "prompt_tokens": 2,
+        "total_tokens": 95
+    }
+}
+```
+
+This is a reasonable start, but not very specific.<br>
+We need to develop our understanding of source data that we might use to enhance our prompt.<br>
+Navigate to your Data Explorer database, then Query in the navigation pane.
+Enter `StormEvents | take 1` and then click "**Run**".<br>
+
+<img src="https://user-images.githubusercontent.com/44923999/227569221-98668b58-0089-4884-bfec-ff762b17b52c.png" width="800" title="Snipped: March 24, 2023" />
 
 
 -----
