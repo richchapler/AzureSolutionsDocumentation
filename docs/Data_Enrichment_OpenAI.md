@@ -11,22 +11,22 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster](Infrastructure_DataExplorer_Cluster.md), [Database](Infrastructure_DataExplorer_Database.md), and [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [cluster](Infrastructure_DataExplorer_Cluster.md), [database](Infrastructure_DataExplorer_Database.md), and [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 * [**Postman**](https://www.postman.com/product/workspaces/) with a workspace and collection
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Test API
+* Exercise 1: Prepare Prompt
 * Exercise 2: Data Flow
 
 -----
 
-## Exercise 1: Test API
-In this exercise, we will use Postman to test the OpenAI API request and generate a prompt that can be used in relation to the Data Explorer, StormEvents data.
+## Exercise 1: Prepare Prompt
+In this exercise, we will use Postman to test the OpenAI API and generate a prompt that can be used in relation to the Data Explorer, StormEvents data.
 
-Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}
+Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}.
 
 <img src="https://user-images.githubusercontent.com/44923999/227523628-acba95f1-1cf4-416f-a7ba-f2787a3301d6.png" width="800" title="Snipped: March 23, 2023" />
 
@@ -34,7 +34,7 @@ Click "+" to open a new tab and paste the following JSON:
 
 ```
 {
-    "prompt":"Redmond weather",
+    "prompt":"storm events",
     "max_tokens":1000,
     "temperature":0.90
 }
