@@ -28,7 +28,7 @@ In this exercise, we will use Postman to test the OpenAI API request.
 
 Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}
 
-![image](https://user-images.githubusercontent.com/44923999/227393577-218bce99-8c82-453f-aa15-5876351cd79b.png)
+<img src="https://user-images.githubusercontent.com/44923999/227393577-218bce99-8c82-453f-aa15-5876351cd79b.png" width="800" title="Snipped: March 23, 2023" />
 
 
 
