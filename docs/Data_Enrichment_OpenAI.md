@@ -101,7 +101,7 @@ We can expect a response like this:
 }
 ```
 
-This is a reasonable start, but not very specific.<br>
+This start is a good test of the API, but not very specific to the concept.<br>
 We need to develop our understanding of source data that we might use to enhance our prompt.
 
 ### Attempt #2, Parameter Preparation
@@ -155,9 +155,80 @@ The response lacks cost data (which we need for the original concept), so let's 
 
 ### Attempt #3, Concept Alignment
 
+Expand the prompt to include cost and contributors:
+
 `List three recent examples of NORTH CAROLINA storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z.
 **Include the cost of each example along with cost contributors.**`
 
+Return to Postman, navigate to the "**Body**" tab, update the "**prompt**" value in the JSON and click "**Send**".
+
+<img src="https://user-images.githubusercontent.com/44923999/227618447-d6051167-bd9b-483d-bf98-741aa164fb5c.png" width="800" title="Snipped: March 24, 2023" />
+
+Now the response includes cost information.
+
+```
+{
+    "id": "cmpl-6xdpkH53KdkQBf126qdVqkPrY8ViP",
+    "object": "text_completion",
+    "created": 1679672492,
+    "model": "text-davinci-003",
+    "choices": [
+        {
+            "text": "\n\n1. Tropical Storm Michael (2018): Cost: $1.5 billion; Contributors: Flooding, wind damage, and power outages.\n\n2. Hurricane Florence (2018): Cost: $17 billion; Contributors: Flooding, wind damage, and power outages.\n\n3. Hurricane Dorian (2019): Cost: $3.5 billion; Contributors: Flooding, wind damage, and power outages.",
+            "index": 0,
+            "finish_reason": "stop",
+            "logprobs": null
+        }
+    ],
+    "usage": {
+        "completion_tokens": 93,
+        "prompt_tokens": 46,
+        "total_tokens": 139
+    }
+}
+```
+
+Some challenges, though:
+* The results include different events than Attempt #2
+* Results seem more extreme {e.g., Tropical Storm costing $1.5b vs. "Thunderstorm Wind"}
+* Factors seem very generic
+
+### Attempt #4, Response Normalization
+
+Going back to the available Data Explorer data, we find column "EpisodeNarrative" which provides additional detail for comparison, and can be used in place of some of the more granular columns.
+
+`List the top three storm events similar in scope to 'A small cluster of thunderstorms moved rapidly across the foothills and piedmont of western North Carolina, producing scattered wind damage.', sorted descending by cost and including a description of cost components.`
+
+What's changed...
+* `top three... sorted descending by cost`... I gave specific instruction regarding what examples matter
+* `similar in scope to`... I provided a qualifier and switched from granular columns to a single descriptive column "EpisodeNarrative"
+* `a description of cost components`... I was more clear how to present contributors to cost
+
+And, a better result:
+
+```
+{
+    "id": "cmpl-6xhJaHRiBqV0hjLFr42bLLrWYPUHE",
+    "object": "text_completion",
+    "created": 1679685874,
+    "model": "text-davinci-003",
+    "choices": [
+        {
+            "text": "\n\n1. The 2018 Western North Carolina Windstorm: This storm caused widespread wind damage across the foothills and piedmont of western North Carolina, resulting in an estimated $50 million in damages. The storm caused downed trees, power outages, and structural damage to homes and businesses.\n\n2. The 2016 Western North Carolina Windstorm: This storm caused widespread wind damage across the foothills and piedmont of western North Carolina, resulting in an estimated $30 million in damages. The storm caused downed trees, power outages, and structural damage to homes and businesses.\n\n3. The 2014 Western North Carolina Windstorm: This storm caused widespread wind damage across the foothills and piedmont of western North Carolina, resulting in an estimated $20 million in damages. The storm caused downed trees, power outages, and structural damage to homes and businesses.",
+            "index": 0,
+            "finish_reason": "stop",
+            "logprobs": null
+        }
+    ],
+    "usage": {
+        "completion_tokens": 177,
+        "prompt_tokens": 50,
+        "total_tokens": 227
+    }
+}
+```
+
+Prompt iteration does not end here, but we have done enough for this exercise.
 
 -----
 
