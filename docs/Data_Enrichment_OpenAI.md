@@ -11,7 +11,7 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with StormEvents sample data
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 * [**Postman**](https://www.postman.com/product/workspaces/) with a workspace and collection
 
@@ -24,7 +24,7 @@ This solution will address requirements in three exercises:
 -----
 
 ## Exercise 1: Test API
-In this exercise, we will use Postman to test the OpenAI API request.
+In this exercise, we will use Postman to test the OpenAI API request and generate a prompt that can be used in relation to the Data Explorer, StormEvents data.
 
 Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}
 
@@ -32,12 +32,13 @@ Navigate to your Postman workspace and collection {e.g., https://web.postman.co/
 
 Click "+" to open a new tab and paste the following JSON:
 
+```
 {
     "prompt":"Redmond weather",
     "max_tokens":1000,
     "temperature":0.90
 }
-
+```
 
 Lorem Ispum
 
