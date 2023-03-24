@@ -17,9 +17,10 @@ This solution requires the following resources:
 
 ## Proposed Solution
 
-The Concept... enrich Data Explorer's sample dataset, "StormEvents" with cost data for similar, recent events {i.e., a similar storm event had damages that cost $X to repair}.
+Concept: Enrich Data Explorer's sample dataset, "StormEvents" with cost data for similar, recent events.<br>
+_{i.e., "these three similar storm events had X damages that cost $Y to repair"}_
 
-This solution will address requirements in three exercises:
+This documentation will address solution requirements in two exercises:
 
 * Exercise 1: Prepare Prompt
 * Exercise 2: Create Data Flow
@@ -27,9 +28,10 @@ This solution will address requirements in three exercises:
 -----
 
 ## Exercise 1: Prepare Prompt
-In this exercise, we will use Postman to test the OpenAI API and generate a prompt that can be used in relation to the Data Explorer, StormEvents data.
+In this exercise, we will iteratively generate a prompt that can be used with an OpenAI DaVinci model.
 
-Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}.
+Navigate to your Postman workspace and collection,<br>
+_{e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}_
 
 Click "+" to open a new tab and rename to "OpenAI_DaVinci".
 Enter the following values:
