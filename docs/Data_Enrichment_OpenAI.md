@@ -16,10 +16,13 @@ This solution requires the following resources:
 * [**Postman**](https://www.postman.com/product/workspaces/) with a workspace and collection
 
 ## Proposed Solution
+
+The Concept... enrich Data Explorer's sample dataset, "StormEvents" with cost data for similar, recent events {i.e., a similar storm event had damages that cost $X to repair}.
+
 This solution will address requirements in three exercises:
 
 * Exercise 1: Prepare Prompt
-* Exercise 2: Data Flow
+* Exercise 2: Create Data Flow
 
 -----
 
