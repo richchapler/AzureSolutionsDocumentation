@@ -52,6 +52,10 @@ Key | Value
 
 <img src="https://user-images.githubusercontent.com/44923999/227530522-a2adbc66-42f6-4102-ad21-acb8d5fb39fb.png" width="800" title="Snipped: March 24, 2023" />
 
+Now we begin crafting our request...
+
+### Attempt #1
+
 Navigate to the "**Body**" tab and paste the following JSON:
 
 ```
@@ -96,7 +100,10 @@ We can expect a response like this:
 ```
 
 This is a reasonable start, but not very specific.<br>
-We need to develop our understanding of source data that we might use to enhance our prompt.<br>
+We need to develop our understanding of source data that we might use to enhance our prompt.
+
+### Attempt #2
+
 Navigate to your Data Explorer database, then Query in the navigation pane.
 Enter `StormEvents | take 1` and then click "**Run**".<br>
 
@@ -112,7 +119,7 @@ Column | Data
 
 With this sort of data we might develop a prompt like:
 
-`List three recent examples of NORTH CAROLINA storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z`
+`List three recent examples of **NORTH CAROLINA** storm events similar to the **Thunderstorm Wind** storm event that began **2007-01-01T00:00:00Z**`
 
 Return to Postman, navigate to the "**Body**" tab, update the "**prompt**" value in the JSON and click "**Send**".
 
@@ -141,6 +148,14 @@ This time, the response is more specific and informative.
     }
 }
 ```
+
+The response lacks cost data (which we need for the original concept), so let's try again...
+
+### Attempt #3
+
+`List three recent examples of NORTH CAROLINA storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z.
+**Include the cost of each example along with cost contributors.**`
+
 
 -----
 
