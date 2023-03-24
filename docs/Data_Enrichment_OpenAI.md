@@ -12,7 +12,7 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [cluster](Infrastructure_DataExplorer_Cluster.md), [database](Infrastructure_DataExplorer_Database.md), and [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
-* [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
+* [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with [deployment model](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal)
 * [**Postman**](https://www.postman.com/product/workspaces/) with a workspace and collection
 
 ## Proposed Solution
@@ -28,11 +28,14 @@ In this exercise, we will use Postman to test the OpenAI API and generate a prom
 
 Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}.
 
-<img src="https://user-images.githubusercontent.com/44923999/227523628-acba95f1-1cf4-416f-a7ba-f2787a3301d6.png" width="800" title="Snipped: March 23, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/227530522-a2adbc66-42f6-4102-ad21-acb8d5fb39fb.png" width="800" title="Snipped: March 24, 2023" />
 
 Click "+" to open a new tab and enter the following values:
 
-
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | Select "**POST**"
+**Enter URL or paste text** | Modify and paste: `https://rchaplerai.openai.azure.com/openai/deployments/rchapleraimd/completions?api-version=2022-12-01`
 
 paste the following JSON:
 
