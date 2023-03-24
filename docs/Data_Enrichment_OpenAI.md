@@ -56,7 +56,7 @@ Key | Value
 
 Now we begin crafting our request...
 
-### Attempt #1
+### Attempt #1, Basic Request
 
 Navigate to the "**Body**" tab and paste the following JSON:
 
@@ -104,7 +104,7 @@ We can expect a response like this:
 This is a reasonable start, but not very specific.<br>
 We need to develop our understanding of source data that we might use to enhance our prompt.
 
-### Attempt #2
+### Attempt #2, Parameter Preparation
 
 Navigate to your Data Explorer database, then Query in the navigation pane.
 Enter `StormEvents | take 1` and then click "**Run**".<br>
@@ -153,7 +153,7 @@ This time, the response is more specific and informative.
 
 The response lacks cost data (which we need for the original concept), so let's try again...
 
-### Attempt #3
+### Attempt #3, Concept Alignment
 
 `List three recent examples of NORTH CAROLINA storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z.
 **Include the cost of each example along with cost contributors.**`
