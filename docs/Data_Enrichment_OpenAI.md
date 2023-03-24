@@ -197,7 +197,7 @@ Some challenges, though:
 
 Going back to the available Data Explorer data, we find column "EpisodeNarrative" which provides additional detail for comparison, and can be used in place of some of the more granular columns.
 
-`List the top three storm events similar in scope to 'A small cluster of thunderstorms moved rapidly across the foothills and piedmont of western North Carolina, producing scattered wind damage.', sorted descending by cost and including a description of cost components.`
+`List the top three storm events similar in scope to 'A small cluster of thunderstorms moved rapidly across the foothills and piedmont of western North Carolina, producing scattered wind damage.', sorted descending by cost, and including a description of cost components.`
 
 What's changed...
 * `top three... sorted descending by cost`... I gave specific instruction regarding what examples matter
@@ -229,6 +229,17 @@ And, a better result:
 ```
 
 Prompt iteration does not end here, but we have done enough for this exercise.
+
+-----
+
+## Exercise 2: Create Data Flow
+In this exercise, we will bake our prompt into a Data Flow, parameterize from Data Explorer, StormEvents sample data and insert the result into a sink dataset.
+
+Our prompt, parameterized:
+
+```List the top three storm events similar in scope to '{EpisodeNarrative}', sorted descending by cost, and including a description of cost components.```
+
+Lorem Ipsum
 
 -----
 
