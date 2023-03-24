@@ -30,20 +30,28 @@ Navigate to your Postman workspace and collection {e.g., https://web.postman.co/
 
 <img src="https://user-images.githubusercontent.com/44923999/227523628-acba95f1-1cf4-416f-a7ba-f2787a3301d6.png" width="800" title="Snipped: March 23, 2023" />
 
-Click "+" to open a new tab and paste the following JSON:
+Click "+" to open a new tab and enter the following values:
+
+
+
+paste the following JSON:
 
 ```
 {
     "prompt":"storm events",
     "max_tokens":1000,
-    "temperature":0.90
+    "temperature":0.10
 }
 ```
 
-Lorem Ispum
+Logic Explained:
+* `prompt`... the query for which to generate a completion; our strategy will be to start with something very simple and hone in later steps
+* `max_tokens`... establishes context length
+* `temperature`... closer to 0 for greater accuracy and closer to 1 for more creativity
+
 
 -----
 
 ## Reference
 
-* [Azure Data Explorer output from Azure Stream Analytics](https://learn.microsoft.com/en-us/azure/stream-analytics/azure-database-explorer-output)
+* [OpenAI Service REST API Reference](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
