@@ -28,8 +28,15 @@ In this exercise, we will use Postman to test the OpenAI API request.
 
 Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}
 
-<img src="https://user-images.githubusercontent.com/44923999/227393577-218bce99-8c82-453f-aa15-5876351cd79b.png" width="800" title="Snipped: March 23, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/227523628-acba95f1-1cf4-416f-a7ba-f2787a3301d6.png" width="800" title="Snipped: March 23, 2023" />
 
+Click "+" to open a new tab and paste the following JSON:
+
+{
+    "prompt":"Redmond weather",
+    "max_tokens":1000,
+    "temperature":0.90
+}
 
 
 Lorem Ispum
