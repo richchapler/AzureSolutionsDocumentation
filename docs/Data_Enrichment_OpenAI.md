@@ -103,6 +103,17 @@ Enter `StormEvents | take 1` and then click "**Run**".<br>
 
 <img src="https://user-images.githubusercontent.com/44923999/227569221-98668b58-0089-4884-bfec-ff762b17b52c.png" width="800" title="Snipped: March 24, 2023" />
 
+A quick review of the data provides some interesting options:
+
+Column | Data
+:----- | :-----
+**Start Time** | 2007-01-01T00:00:00Z
+**State** | NORTH CAROLINA
+**Event Type** | Thunderstorm Wind
+
+With this sort of data we might develop a prompt like:
+
+`List three recent examples of storm events similar to the NORTH CAROLINA Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z`
 
 -----
 
