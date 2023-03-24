@@ -28,15 +28,28 @@ In this exercise, we will use Postman to test the OpenAI API and generate a prom
 
 Navigate to your Postman workspace and collection {e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}.
 
-<img src="https://user-images.githubusercontent.com/44923999/227530522-a2adbc66-42f6-4102-ad21-acb8d5fb39fb.png" width="800" title="Snipped: March 24, 2023" />
-
-Click "+" to open a new tab and enter the following values:
+Click "+" to open a new tab and rename to "OpenAI_DaVinci".
+Enter the following values:
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | Select "**POST**"
 **Enter URL or paste text** | Modify and paste: `https://rchaplerai.openai.azure.com/openai/deployments/rchapleraimd/completions?api-version=2022-12-01`
 
+Navigate to the "Headers" tab.
+
+<img src="https://user-images.githubusercontent.com/44923999/227531164-07b77089-5142-4db1-8d3e-05a5b2a79381.png" width="800" title="Snipped: March 24, 2023" />
+
+Enter the following values:
+
+Key | Value
+:----- | :-----
+**api-key** | your OpenAI Key
+**Content-Type** | application/json`
+
+<img src="https://user-images.githubusercontent.com/44923999/227530522-a2adbc66-42f6-4102-ad21-acb8d5fb39fb.png" width="800" title="Snipped: March 24, 2023" />
+
+Click "+" to open a new tab 
 paste the following JSON:
 
 ```
