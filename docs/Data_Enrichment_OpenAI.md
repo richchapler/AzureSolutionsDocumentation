@@ -39,7 +39,7 @@ Prompt | Entry
 **HTTP Method** | Select "**POST**"
 **Enter URL or paste text** | Modify and paste:<br>`https://rchaplerai.openai.azure.com/openai/deployments/rchapleraimd/completions?api-version=2022-12-01`
 
-Navigate to the "Headers" tab.
+Navigate to the "**Headers**" tab.
 
 <img src="https://user-images.githubusercontent.com/44923999/227531164-07b77089-5142-4db1-8d3e-05a5b2a79381.png" width="800" title="Snipped: March 24, 2023" />
 
@@ -52,8 +52,7 @@ Key | Value
 
 <img src="https://user-images.githubusercontent.com/44923999/227530522-a2adbc66-42f6-4102-ad21-acb8d5fb39fb.png" width="800" title="Snipped: March 24, 2023" />
 
-Click "+" to open a new tab 
-paste the following JSON:
+Navigate to the "**Body**" tab and paste the following JSON:
 
 ```
 {
@@ -113,7 +112,35 @@ Column | Data
 
 With this sort of data we might develop a prompt like:
 
-`List three recent examples of storm events similar to the NORTH CAROLINA Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z`
+`List three recent examples of NORTH CAROLINA storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z`
+
+Return to Postman, navigate to the "**Body**" tab, update the "**prompt**" value in the JSON and click "**Send**".
+
+<img src="https://user-images.githubusercontent.com/44923999/227571968-4c3c096b-5e11-4c33-8ede-51c411da8e6a.png" width="800" title="Snipped: March 24, 2023" />
+
+This time, the response is more specific and informative.
+
+```
+{
+    "id": "cmpl-6xdiHSdO5nXSHhbULeET3szA9C9tx",
+    "object": "text_completion",
+    "created": 1679672029,
+    "model": "text-davinci-003",
+    "choices": [
+        {
+            "text": "\n\n1. Tropical Storm Isaias (2020): This storm caused widespread wind damage and power outages across North Carolina in August 2020.\n\n2. Winter Storm Diego (2018): This storm brought heavy snow and ice to North Carolina in December 2018, causing numerous power outages and hazardous travel conditions.\n\n3. Hurricane Florence (2018): This storm caused extensive flooding and wind damage across the state in September 2018, resulting in numerous fatalities and billions of dollars in damage.",
+            "index": 0,
+            "finish_reason": "stop",
+            "logprobs": null
+        }
+    ],
+    "usage": {
+        "completion_tokens": 98,
+        "prompt_tokens": 34,
+        "total_tokens": 132
+    }
+}
+```
 
 -----
 
