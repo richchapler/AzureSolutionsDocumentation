@@ -242,6 +242,31 @@ Our prompt, parameterized:
 
 Lorem Ipsum
 
+```
+{
+    "prompt": "List the top three examples of storm events in CASAR, NORTH CAROLINA similar in scope to 'Thunderstorm Wind', sorted descending by cost",
+    "max_tokens": 1000,
+    "temperature": 1
+}
+```
+
+Lookup1
+```
+StormEvents | project EventId, State, EventType | take 3
+```
+
+Web1
+```
+{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":1}
+```
+
+Command
+```
+.ingest inline into table StormEvents_New with (format="psv") <| @{item().EventId}|"@{item().State}"|"@{item().EventType}"|"@{activity('Web1').output.choices[0].text}"
+```
+
+
+
 -----
 
 ## Reference
