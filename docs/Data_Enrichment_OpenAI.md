@@ -247,3 +247,4 @@ Lorem Ipsum
 ## Reference
 
 * [OpenAI Service REST API Reference](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference)
+* [.ingest inline command (push)](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-ingestion/ingest-inline)
