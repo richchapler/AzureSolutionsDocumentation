@@ -50,7 +50,7 @@ Update {i.e., replace STORAGEACCOUNT_ACCESSKEY with a real value} and then **Run
 
 ```
 .export to csv ( "https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY" )
-with ( includeHeaders = "all" ) <| StormEvents
+with ( includeHeaders = "all", fileExtension = "csv" ) <| StormEvents
 ```
 
 <img src="https://user-images.githubusercontent.com/44923999/214619240-351930f8-31e2-4433-8477-f366ec53519d.png" width="800" title="Snipped: January 25, 2023" />
