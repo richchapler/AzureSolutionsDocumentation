@@ -37,3 +37,11 @@ Does ADX support geo-replication?
 #### Kepler
 Are there plans to bake **Kepler** into Azure Data Explorer?
 * August 11, 2022... "no plans at the moment"
+
+#### How do I figure out what table Column X is in?
+
+```
+.show database informix schema
+| where ColumnName contains '{column_name}'
+| project TableName,ColumnName
+```
