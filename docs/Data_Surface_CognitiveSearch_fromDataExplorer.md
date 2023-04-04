@@ -379,16 +379,22 @@ var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "
 
 This means that any user with this HTML will be able to access search results from the associated index.
 
+**EVEN WITHOUT QUERYKEY, THE DEMO APP RETURNS RESULTS... OPEN CASE WITH AZURE SUPPORT TO FIGURE OUT HOW TO BLOCK THIS HOLE**
+
 ### Step 2: Programmatically set index permissions (lorem ipsum)
 
-Lorem Ipsum
+Azure PowerShell
+
+```
+New-AzRoleAssignment -ObjectId 9ce9ba09-5eb1-4c58-b53e-126ef78f1a46
+  -RoleDefinitionName "Search Index Data Reader"
+  -Scope "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index"
+```
+
 
 "In Azure Cognitive Search, an individual index is generally not a securable object"
 "However, if you're using Azure roles, you can set permissions on individual indexes as long as it's done programmatically."
 
-### Step 2: Automagic
-
-Lorem Ipsum
 
 -----
 
@@ -406,3 +412,4 @@ Lorem Ipsum
   * [Quickstart: Create a demo app in the portal...](https://learn.microsoft.com/en-us/azure/search/search-create-app-portal)
 * Security
   * [Security overview for Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-security-overview)
+  * [Connect to Azure Cognitive Search using Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/azure/search/search-security-rbac)
