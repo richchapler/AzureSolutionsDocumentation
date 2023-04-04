@@ -381,7 +381,7 @@ This means that any user with this HTML will be able to access search results fr
 
 **EVEN WITHOUT QUERYKEY, THE DEMO APP RETURNS RESULTS... OPEN CASE WITH AZURE SUPPORT TO FIGURE OUT HOW TO BLOCK THIS HOLE**
 
-### Step 2: Programmatically set index permissions (lorem ipsum)
+### Step 2: Programmatically set index permissions
 
 "In Azure Cognitive Search, an individual index is generally not a securable object"<br>
 "However, if you're using Azure roles, you can set permissions on individual indexes as long as it's done programmatically."
