@@ -395,6 +395,24 @@ New-AzRoleAssignment -ObjectId 9ce9ba09-5eb1-4c58-b53e-126ef78f1a46
   -Scope "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index"
 ```
 
+Result:
+```
+RoleAssignmentName : 89f76855-6dbc-470b-aae2-177e7a203c27
+RoleAssignmentId   : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index/provid
+                     ers/Microsoft.Authorization/roleAssignments/89f76855-6dbc-470b-aae2-177e7a203c27
+Scope              : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index
+DisplayName        : Rich Chapler
+SignInName         : Richard.Chapler_microsoft.com#EXT#@fdpo.onmicrosoft.com
+RoleDefinitionName : Search Index Data Reader
+RoleDefinitionId   : 1407120a-92aa-4202-b7e9-c0e197c71c8f
+ObjectId           : 9ce9ba09-5eb1-4c58-b53e-126ef78f1a46
+ObjectType         : User
+CanDelegate        : False
+Description        : 
+ConditionVersion   : 
+Condition          : 
+```
+
 -----
 
 ## Reference
