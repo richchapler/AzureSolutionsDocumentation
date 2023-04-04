@@ -355,9 +355,31 @@ _A thought..._
 ## Exercise 4: Cognitive Search, Secure App
 In this exercise, we will secure the demo app created in Exercise 3.
 
-### Step 1: CORS
+### Step 1: Review Default App Security
 
-Lorem Ipsum
+The default Demo App {i.e., **AzSearch.html**} includes the index "queryKey" directly in the auto-generated HTML; example:
+
+```
+<!-- Dependencies -->
+<script src="https://cdn.jsdelivr.net/react/15.5.0/react.min.js"></script>
+<script src="https://cdn.jsdelivr.net/react/15.5.0/react-dom.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/redux/3.6.0/redux.min.js"></script>
+<!-- Main -->
+<script src="https://cdn.jsdelivr.net/npm/@microsoft/azsearch.js@0.0.21/dist/AzSearch.bundle.js"></script>
+<script>
+// WARNING
+// For demonstration purposes only, do not use in a production environment. For simplicity, this is a single HTML page that has the query key to the search service.
+// CORS (*) must be enabled in the index before using the demo app.
+
+// Initialize and connect to your search service
+var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "ZfD85LXNigdHaQdPMnYmrcBid7VAHDvlH3AWGjKkrsAzSeC8Wed2", service: "rchaplerss", dnsSuffix:"search.windows.net" });
+
+```
+
+This means that any user with this HTML will be able to access search results from the associated index.<br>
+
+"In Azure Cognitive Search, an individual index is generally not a securable object"
+"However, if you're using Azure roles, you can set permissions on individual indexes as long as it's done programmatically."
 
 ### Step 2: Automagic
 
@@ -377,3 +399,5 @@ Lorem Ipsum
   * [Quickstart: Create an Azure Cognitive Search index in the Azure portal](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal)
   * [Quickstart: Use Search explorer to run queries in the portal](https://learn.microsoft.com/en-us/azure/search/search-explorer)
   * [Quickstart: Create a demo app in the portal...](https://learn.microsoft.com/en-us/azure/search/search-create-app-portal)
+* Security
+  * [Security overview for Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-security-overview)
