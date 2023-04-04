@@ -22,8 +22,9 @@ This solution requires the following resources:
 This solution will address requirements in three exercises:
 
 * Exercise 1: Data Explorer, Export Data
-* Exercise 2: Cognitive Search, Import Data
+* Exercise 2: Cognitive Search, Create Index
 * Exercise 3: Cognitive Search, Create App
+* Exercise 4: Cognitive Search, Secure App
 
 -----
 
@@ -138,7 +139,7 @@ Navigate back to the "stormevents" Container and confirm the second export.
 
 -----
 
-## Exercise 2: Cognitive Search, Import Data
+## Exercise 2: Cognitive Search, Create Index
 In this exercise, we will import the exported StormEvents data into Cognitive Search.
 
 <img src="https://user-images.githubusercontent.com/44923999/214132098-21179866-e85c-43f8-8737-7bf5efd0ebef.png" width="800" title="Snipped: January 23, 2023" />
