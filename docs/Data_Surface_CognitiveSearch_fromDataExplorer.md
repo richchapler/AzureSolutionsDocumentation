@@ -383,18 +383,16 @@ This means that any user with this HTML will be able to access search results fr
 
 ### Step 2: Programmatically set index permissions (lorem ipsum)
 
-Azure PowerShell
+"In Azure Cognitive Search, an individual index is generally not a securable object"<br>
+"However, if you're using Azure roles, you can set permissions on individual indexes as long as it's done programmatically."
+
+#### Azure PowerShell
 
 ```
 New-AzRoleAssignment -ObjectId 9ce9ba09-5eb1-4c58-b53e-126ef78f1a46
   -RoleDefinitionName "Search Index Data Reader"
   -Scope "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index"
 ```
-
-
-"In Azure Cognitive Search, an individual index is generally not a securable object"
-"However, if you're using Azure roles, you can set permissions on individual indexes as long as it's done programmatically."
-
 
 -----
 
