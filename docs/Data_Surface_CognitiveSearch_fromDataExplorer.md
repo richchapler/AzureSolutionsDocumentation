@@ -8,7 +8,7 @@ This solution considers the following requirements:
 
 * "We used Data Explorer to capture a significant amount of rich, historical data from a soon-to-be-deprecated, on-prem database"
 * "Most of the historical data is static, but a small percentage will change over time"
-* "We want to help business users search this data asset"
+* "We want to help business users search this data asset using a shareable and secure app"
 
 ## Required Infrastructure
 This solution requires the following resources:
@@ -354,11 +354,11 @@ _A thought..._
 -----
 
 ## Exercise 4: Cognitive Search, Secure App
-In this exercise, we will secure the demo app created in Exercise 3.
+In this exercise, we will secure the Demo App created in Exercise 3.
 
 ### Step 1: Review Default App Security
 
-The default Demo App {i.e., **AzSearch.html**} includes the index "queryKey" directly in the auto-generated HTML; example:
+The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**" directly in the auto-generated HTML; snip below:
 
 ```
 <!-- Dependencies -->
@@ -377,7 +377,11 @@ var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "
 
 ```
 
-This means that any user with this HTML will be able to access search results from the associated index.<br>
+This means that any user with this HTML will be able to access search results from the associated index.
+
+### Step 2: Programmatically set index permissions (lorem ipsum)
+
+Lorem Ipsum
 
 "In Azure Cognitive Search, an individual index is generally not a securable object"
 "However, if you're using Azure roles, you can set permissions on individual indexes as long as it's done programmatically."
