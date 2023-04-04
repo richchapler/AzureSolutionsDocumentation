@@ -373,7 +373,7 @@ The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**"
 // CORS (*) must be enabled in the index before using the demo app.
 
 // Initialize and connect to your search service
-var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "ZfD85LXNigdHaQdPMnYmrcBid7VAHDvlH3AWGjKkrsAzSeC8Wed2", service: "rchaplerss", dnsSuffix:"search.windows.net" });
+var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "{QUERY_KEY}", service: "rchaplerss", dnsSuffix:"search.windows.net" });
 
 ```
 
