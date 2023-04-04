@@ -379,9 +379,6 @@ var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "
 
 This means that any user with this HTML will be able to access search results from the associated index.
 
-**EVEN WITHOUT QUERYKEY, THE DEMO APP RETURNS RESULTS...<br>
-OPEN CASE WITH AZURE SUPPORT TO FIGURE OUT HOW TO BLOCK THIS HOLE**
-
 ### Step 2: Programmatically set index permissions
 
 "In Azure Cognitive Search, an individual index is generally not a securable object"<br>
@@ -412,6 +409,8 @@ Description        :
 ConditionVersion   : 
 Condition          : 
 ```
+
+![image](https://user-images.githubusercontent.com/44923999/229923217-9df89499-1634-4ef7-98de-c592d2b14816.png)
 
 -----
 
