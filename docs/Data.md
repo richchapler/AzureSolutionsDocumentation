@@ -40,7 +40,7 @@
 
   Use Case | Source | Surface | Language(s)
   :----- | :----- | :----- | :-----
-  [...with an API](Data_Surface_API.md) | | Function App + APIM | C# (Function App)
-  [...with Bulk Export](Data_Surface_BulkExport.md) | | Synapse Pipeline | Low Code
-  [...with Cognitive Search (multi-source index)](Data_Surface_CognitiveSearch_MultiSourceIndex.md) | SQL and Blob Storage | Cognitive Search | JSON
-  [Data Explorer >> Cognitive Search](Data_Surface_fromDataExplorer_toCognitiveSearch.md) | Data Explorer (via export) | Cognitive Search | JSON and HTML
+  [Application Programming Interface (API)](Data_Surface_API.md) | | Function App + APIM | C# (Function App)
+  [Bulk Export](Data_Surface_BulkExport.md) | | Synapse Pipeline | Low Code
+  [Cognitive Search (multi-source index)](Data_Surface_CognitiveSearch_MultiSourceIndex.md) | SQL and Blob Storage | Cognitive Search | JSON
+  [Cognitive Search (from Data Explorer)](Data_Surface_CognitiveSearch_fromDataExplorer.md) | Data Explorer (via export) | Cognitive Search | JSON and HTML
