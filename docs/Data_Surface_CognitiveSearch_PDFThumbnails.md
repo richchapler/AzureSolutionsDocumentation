@@ -17,7 +17,7 @@ This solution requires the following resources:
 
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
-* [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
+* [**Logic Apps**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 
 * [**Storage Account**](Infrastructure_StorageAccount.md)
   * Create container named "drawings" (with sample files)
