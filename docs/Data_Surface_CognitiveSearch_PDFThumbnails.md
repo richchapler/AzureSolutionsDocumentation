@@ -52,3 +52,9 @@ Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 -----
 
 **Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Reference
+
+* [Export data to storage](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/export-data-to-storage)
