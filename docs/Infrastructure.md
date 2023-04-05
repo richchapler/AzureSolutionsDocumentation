@@ -14,6 +14,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) >> [FAQ](https://learn.microsoft.com/en-us/azure/search/search-faq-frequently-asked-questions)
 
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+  * [**Computer Vision**](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview)
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
   * Configuration >> [Cluster](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) :: [Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) :: [Table](Infrastructure_DataExplorer_Table.md)
