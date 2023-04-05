@@ -74,7 +74,7 @@ Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of th
 
 Update {i.e., replace STORAGEACCOUNT_ACCESSKEY with a real value} and then **Run** the following KQL:
 
-```
+```KQL
 .create external table eStormEvents (
     StartTime: datetime,
     EndTime: datetime,
