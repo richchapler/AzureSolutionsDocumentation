@@ -24,7 +24,7 @@ This solution will address requirements in three exercises:
 * Exercise 1: Data Explorer, Export Data
 * Exercise 2: Cognitive Search, Create Index
 * Exercise 3: Cognitive Search, Create App
-* Exercise 4: Cognitive Search, Secure App
+* Exercise 4: Cognitive Search, Secure Index
 
 -----
 
@@ -353,8 +353,8 @@ _A thought..._
 
 -----
 
-## Exercise 4: Cognitive Search, Secure App
-In this exercise, we will secure the Demo App created in Exercise 3.
+## Exercise 4: Cognitive Search, Secure Index
+In this exercise, we will secure the index (and consequently, the Demo App created in Exercise 3).
 
 ### Step 1: Review Default App Security
 
