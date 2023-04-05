@@ -1,6 +1,6 @@
 # Data Surface: Cognitive Search, PDF-based Thumbnails
 
-<img src="https://user-images.githubusercontent.com/44923999/230160251-0512dbaf-df45-47e0-b002-1bf8fa93aebf.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/230174162-ec4fa1da-788e-40bc-a9b1-f4d1bed6e49c.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
