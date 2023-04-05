@@ -16,7 +16,7 @@ This solution requires the following resources:
   * Use a Region that supports Cognitive Search {e.g., West}
 
 * Cognitive Services
-  * [**Computer Vision**](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview)
+  * [**Computer Vision**](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview) with System-Assigned Managed Identity
 
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 
