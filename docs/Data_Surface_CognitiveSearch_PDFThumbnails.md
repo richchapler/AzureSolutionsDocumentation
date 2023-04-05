@@ -1,4 +1,4 @@
-# Data Surface: Cognitive Search, Thumbnail Generation
+# Data Surface: Cognitive Search, PDF-based Thumbnails
 
 <img src="https://user-images.githubusercontent.com/44923999/226446292-5131f0ab-9d2c-45aa-80f2-20ddd0224458.png" width="1000" />
 
