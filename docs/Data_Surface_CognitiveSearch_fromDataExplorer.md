@@ -70,7 +70,7 @@ In this step, we will run a KQL query to create an external table that we can us
 
 <img src="https://user-images.githubusercontent.com/44923999/214453289-002dc1bf-24aa-4883-af20-34e3fb300f62.png" width="800" title="Snipped: January 24, 2023" />
 
-Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
+Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation.
 
 Update {i.e., replace STORAGEACCOUNT_ACCESSKEY with a real value} and then **Run** the following KQL:
 
@@ -108,13 +108,13 @@ _Note: The external table name is prefixed with the letter "e" {i.e., "eStormEve
 #### Step 2b: Create Continuous Export
 In this step, we will: 1) clear sample data previously loaded to Data Explorer, 2) run a KQL query to create a Continuous Export job, and 3) re-import sample data (to trigger Continuous Export)
 
-Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation pane.
+Navigate to Data Explorer, and then "**Query**" in the "**Data**" grouping of the left-hand navigation.
 
 <img src="https://user-images.githubusercontent.com/44923999/214656930-8ae8c556-40f2-4764-a54d-e7af6382845a.png" width="800" title="Snipped: January 25, 2023" />
 
 Clear previously imported StormEvents data by running the following KQL:
 
-```
+```KQL
 .clear table StormEvents data
 ```
 
@@ -122,7 +122,7 @@ Clear previously imported StormEvents data by running the following KQL:
 
 Create a Continuous Export by running the following KQL:
 
-```
+```KQL
 .create-or-alter continuous-export ceStormEvents to table eStormEvents with ( intervalBetweenRuns = 1m )
 <| StormEvents
 ```
@@ -237,7 +237,7 @@ On the **Overview** page, click "**Search explorer**"
 Execute the following (very simple) query string: `$top=1`
 
 Results
-```
+```JSON
 {
   "@odata.context": "https://rchaplerss.search.windows.net/indexes/stormevents-index/$metadata#docs(*)",
   "value": [
@@ -360,49 +360,46 @@ In this exercise, we will secure the index (and consequently, the Demo App creat
 
 The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**" directly in the auto-generated HTML; snip below:
 
-```HTML
-<!-- Dependencies -->
-<script src="https://cdn.jsdelivr.net/react/15.5.0/react.min.js"></script>
-<script src="https://cdn.jsdelivr.net/react/15.5.0/react-dom.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/redux/3.6.0/redux.min.js"></script>
-<!-- Main -->
-<script src="https://cdn.jsdelivr.net/npm/@microsoft/azsearch.js@0.0.21/dist/AzSearch.bundle.js"></script>
-<script>
-// WARNING
-// For demonstration purposes only, do not use in a production environment. For simplicity, this is a single HTML page that has the query key to the search service.
-// CORS (*) must be enabled in the index before using the demo app.
-
-// Initialize and connect to your search service
+```
 var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "{QUERY_KEY}", service: "rchaplerss", dnsSuffix:"search.windows.net" });
-
 ```
 
-This means that any user with this HTML will be able to access search results from the associated index.
+This means that any user with this HTML will be able to access search results from the associated index.<br>
+Simply removing the "queryKey" from the HTML will prevent hey-based access to data via the Demo App HTML.
 
-### Step 2: Programmatically set index permissions
+### Step 2: Modify API Access Control
 
-"In Azure Cognitive Search, an individual index is generally not a securable object"<br>
-"However, if you're using Azure roles, you can set permissions on individual indexes as long as it's done programmatically."
+Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping of the left-hand navigation.
 
-#### Azure PowerShell
+<img src="https://user-images.githubusercontent.com/44923999/230093301-10547954-9e6d-4743-9a9a-e4c16ec536d5.png" width="800" title="Snipped: April 5, 2023" />
+
+Click to select the "Role-based access control" radio button.
+
+### Step 3: Programmatically set index permissions
+
+Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
+
+<img src="https://user-images.githubusercontent.com/44923999/230094993-e818f45d-85b3-4e6b-ab6e-c106aeb9de25.png" width="800" title="Snipped: April 5, 2023" />
+
+Modify, copy / paste, and then run the following command:
 
 ```PowerShell
-New-AzRoleAssignment -ObjectId 9ce9ba09-5eb1-4c58-b53e-126ef78f1a46
+New-AzRoleAssignment -ObjectId {OBJECT_ID}
   -RoleDefinitionName "Search Index Data Reader"
-  -Scope "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index"
+  -Scope "/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/stormevents-index"
 ```
 
-Result:
+You can expect a result like:
+
 ```
 RoleAssignmentName : 89f76855-6dbc-470b-aae2-177e7a203c27
-RoleAssignmentId   : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index/provid
-                     ers/Microsoft.Authorization/roleAssignments/89f76855-6dbc-470b-aae2-177e7a203c27
-Scope              : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index
-DisplayName        : Rich Chapler
-SignInName         : Richard.Chapler_microsoft.com#EXT#@fdpo.onmicrosoft.com
+RoleAssignmentId   : /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/stormevents-index/providers/Microsoft.Authorization/roleAssignments/89f76855-6dbc-470b-aae2-177e7a203c27
+Scope              : /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/stormevents-index
+DisplayName        : {USER_NAME}
+SignInName         : {USER_SIGNIN}
 RoleDefinitionName : Search Index Data Reader
 RoleDefinitionId   : 1407120a-92aa-4202-b7e9-c0e197c71c8f
-ObjectId           : 9ce9ba09-5eb1-4c58-b53e-126ef78f1a46
+ObjectId           : {OBJECT_ID}
 ObjectType         : User
 CanDelegate        : False
 Description        : 
@@ -410,7 +407,15 @@ ConditionVersion   :
 Condition          : 
 ```
 
-![image](https://user-images.githubusercontent.com/44923999/229923217-9df89499-1634-4ef7-98de-c592d2b14816.png)
+#### Confirm Success
+
+Navigate to the User in Azure Active Directory.
+
+<img src="https://user-images.githubusercontent.com/44923999/230096444-63f2c93d-5b7e-4c8a-8aa6-32141c1be662.png" width="800" title="Snipped: April 5, 2023" />
+
+Click "**Azure role assignments**" in the left-hand navigation.
+
+<img src="https://user-images.githubusercontent.com/44923999/230096988-81b6e89a-8715-4719-be15-5e0c4e31461b.png" width="800" title="Snipped: April 5, 2023" />
 
 -----
 
