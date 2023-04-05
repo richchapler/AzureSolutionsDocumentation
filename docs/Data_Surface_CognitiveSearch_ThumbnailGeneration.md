@@ -1,13 +1,12 @@
-# Data Surface: Cognitive Search, Multi-Source Index
+# Data Surface: Cognitive Search, Thumbnail Generation
 
 <img src="https://user-images.githubusercontent.com/44923999/226446292-5131f0ab-9d2c-45aa-80f2-20ddd0224458.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
 
-* "We have structured data {e.g., SQL Database} and unstructured data {e.g., CAD drawings} that want to search"
-* "We want to have a single search experience, not one for each source"
-* "We are eager to embrace Azure OpenAI when it becomes available"
+* "We have PDF files in Azure Storage that we want to surface with Cognitive Search"
+* "We want our demonstration app to include thumbnails for the images"
 
 ## Required Infrastructure
 This solution requires the following resources:
@@ -18,16 +17,8 @@ This solution requires the following resources:
 
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
-* [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
-  * Include sample data
-  * Enable "**Allow Azure services and resources to access this server**"
-  * Grant Role Assignment "Reader" role for Search Service, System-Assigned Managed Identity
-  * Grant access to Cognitive Search using the following T-SQL:
-    ```
-    CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
-    EXEC sp_addrolemember 'db_datareader', [rchaplerss];
-    ```
-    
+* Logic Apps
+
 * [**Storage Account**](Infrastructure_StorageAccount.md)
   * Create container named "drawings" (with sample files)
   * Grant Role Assignment "Storage Blob Data Reader" role for Search Service, System-Assigned Managed Identity
@@ -35,16 +26,15 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Cognitive Search + SQL Database
-* Exercise 2: Cognitive Search + Blob Storage
-* Exercise 3: Manually Create Multi-Source Index
+* Exercise 1: Generate Thumbnail Images
+* Exercise 2: Bake Thumbnails into Cognitive Search Index and Demonstration App
 
 -----
 
-## Exercise 1: Cognitive Search + SQL Database
-In this exercise, we will create and learn about Cognitive Search index functionality for SQL Server.
+## Exercise 1: Generate Thumbnail Images
+In this exercise, we will generate thumbnail images with Logic Apps and Cognitive Services.
 
-### Step 1: Import Data
+### Step 1: Lorem Ipsum
 Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226375829-57106809-9582-46b5-ba64-638d3348e36b.png" width="800" title="Snipped: March 20, 2023" />
