@@ -420,6 +420,10 @@ Click "**Azure role assignments**" in the left-hand navigation.
 
 -----
 
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
 ## Reference
 
 * Data Explorer
