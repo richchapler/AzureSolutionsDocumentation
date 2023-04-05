@@ -365,7 +365,8 @@ var automagic = new AzSearch.Automagic({ index: "stormevents-index", queryKey: "
 ```
 
 This means that any user with this HTML will be able to access search results from the associated index.<br>
-Simply removing the "queryKey" from the HTML will prevent hey-based access to data via the Demo App HTML.
+Simply removing the "queryKey" from the HTML will prevent key-based access to data via the Demo App HTML.<br>
+In fact, it will remove all access, so we need to modify index access to use Azure Active Directory.
 
 ### Step 2: Modify API Access Control
 
