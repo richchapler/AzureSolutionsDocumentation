@@ -1,12 +1,12 @@
 # Data Surface: Cognitive Search, PDF-based Thumbnails
 
-<img src="https://user-images.githubusercontent.com/44923999/226446292-5131f0ab-9d2c-45aa-80f2-20ddd0224458.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/230160251-0512dbaf-df45-47e0-b002-1bf8fa93aebf.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
 
 * "We have PDF files in Azure Storage that we want to surface with Cognitive Search"
-* "We want our demonstration app to include thumbnails for the images"
+* "We want our demonstration app to include thumbnails for the PDFs"
 
 ## Required Infrastructure
 This solution requires the following resources:
