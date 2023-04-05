@@ -47,4 +47,4 @@ Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
 ## Reference
 
-* [Export data to storage](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/export-data-to-storage)
+* [Generate Image Thumbnail using Azure Computer Vision and Logic Apps](https://www.youtube.com/watch?v=ubavaB2zYBg)
