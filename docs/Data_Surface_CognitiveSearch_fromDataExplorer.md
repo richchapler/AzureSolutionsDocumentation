@@ -49,7 +49,7 @@ Confirm sample data ingestion.
 
 Update {i.e., replace STORAGEACCOUNT_ACCESSKEY with a real value} and then **Run** the following KQL:
 
-```
+```KQL
 .export to csv ( "https://rchaplers.blob.core.windows.net/stormevents;STORAGEACCOUNT_ACCESSKEY" )
 with ( includeHeaders = "all", namePrefix = "stormevents", fileExtension = "csv" ) <| StormEvents
 ```
@@ -360,7 +360,7 @@ In this exercise, we will secure the Demo App created in Exercise 3.
 
 The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**" directly in the auto-generated HTML; snip below:
 
-```
+```HTML
 <!-- Dependencies -->
 <script src="https://cdn.jsdelivr.net/react/15.5.0/react.min.js"></script>
 <script src="https://cdn.jsdelivr.net/react/15.5.0/react-dom.min.js"></script>
@@ -386,7 +386,7 @@ This means that any user with this HTML will be able to access search results fr
 
 #### Azure PowerShell
 
-```
+```PowerShell
 New-AzRoleAssignment -ObjectId 9ce9ba09-5eb1-4c58-b53e-126ef78f1a46
   -RoleDefinitionName "Search Index Data Reader"
   -Scope "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/rchapler/providers/Microsoft.Search/searchServices/rchaplerss/indexes/stormevents-index"
