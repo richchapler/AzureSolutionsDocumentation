@@ -183,6 +183,8 @@ Review "**Results**" content; example below:
 }
 ```
 
+-----
+
 **Congratulations... you have successfully completed this exercise**
 
 -----
@@ -387,6 +389,8 @@ Review "**Results**" content; example below:
   ]
 }
 ```
+
+-----
 
 **Congratulations... you have successfully completed this exercise**
 
