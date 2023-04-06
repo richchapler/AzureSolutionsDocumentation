@@ -237,7 +237,19 @@ Click "**Next: Create an indexer**".
 
 On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
-### Step 2: Confirm Success
+### Step 2: Modify Image Action
+
+Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
+Open "**azureblob-indexer**" and then the "**Settings**" tab.
+
+<img src="https://user-images.githubusercontent.com/44923999/230490478-69ca2ddd-1d10-496c-b1a7-841b38902f76.png" width="800" title="Snipped: April 6, 2023" />
+
+Click on the "**Image action**" drop-down menu and select "**Generate Normalized Image Per Page**".
+
+This change will ensure that OCR functions correctly on PDF files.
+
+### Step 3: Confirm Success
+
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
 
 <img src="https://user-images.githubusercontent.com/44923999/226442015-6dd2e1db-37d8-4a62-9f69-1d27349eaa1a.png" width="800" title="Snipped: March 20, 2023" />
