@@ -418,6 +418,12 @@ Click "**Azure role assignments**" in the left-hand navigation.
 
 <img src="https://user-images.githubusercontent.com/44923999/230096988-81b6e89a-8715-4719-be15-5e0c4e31461b.png" width="800" title="Snipped: April 5, 2023" />
 
+Confirm success using Search Explorer.
+
+<img src="https://user-images.githubusercontent.com/44923999/230675015-6164dc3d-1f25-49b8-9433-8eceaa89f54c.png" width="800" title="Snipped: April 7, 2023" />
+
+_Note: You will not be able to confirm index security settings using the Demo App (which uses only queryKey)_ 
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
