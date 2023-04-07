@@ -422,7 +422,7 @@ Confirm success using Search Explorer.
 
 <img src="https://user-images.githubusercontent.com/44923999/230675015-6164dc3d-1f25-49b8-9433-8eceaa89f54c.png" width="800" title="Snipped: April 7, 2023" />
 
-_Note: You will not be able to confirm index security settings using the Demo App (which uses only queryKey)_ 
+_Note: You will not be able to confirm index security settings using the Demo App (which uses only queryKey). You will have to create an app that can leverage the Cognitive Search API in order to use RBAC._ 
 
 -----
 
