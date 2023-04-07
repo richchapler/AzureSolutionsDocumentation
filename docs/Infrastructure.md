@@ -66,7 +66,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 * [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
 
 * [**Synapse**](Infrastructure_Synapse.md)
-  * Configuration >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Git (Repository)](https://learn.microsoft.com/en-us/azure/synapse-analytics/cicd/source-control)
+  * Configuration >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Source Control](https://learn.microsoft.com/en-us/azure/synapse-analytics/cicd/source-control)
   * Pools >> [Dedicated SQL Pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-sql-pool-studio) :: [Serverless SQL Pool](https://learn.microsoft.com/en-us/azure/synapse-analytics/quickstart-serverless-sql-pool)
   * Development >> [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory) :: [Linked Service](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory) :: [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) 
 
