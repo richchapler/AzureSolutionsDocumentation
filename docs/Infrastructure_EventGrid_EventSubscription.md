@@ -28,7 +28,7 @@
                     }
                 },
                 "filter": {
-                    "subjectBeginsWith": "[concat('/blobServices/default/containers/',parameters('DataLakeContainer_Name'))]",
+                    "subjectBeginsWith": "[concat('/blobServices/default/containers/',parameters('DataLakeContainer_Name'),'/blobs/{FOLDER_NAME}')]",
                     "subjectEndsWith": ".csv",
                     "includedEventTypes": ["Microsoft.Storage.BlobCreated"]
                 }
