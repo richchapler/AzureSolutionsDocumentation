@@ -77,6 +77,10 @@ Use Windows Explorer to open your "**Downloads**" folder and then the new "**AzS
 
 <img src="https://user-images.githubusercontent.com/44923999/230919150-61603545-44b7-41c9-8066-a1150bc9f455.png" width="800" title="Snipped: April 10, 2023" />
 
+### Step 3: Secure Index
+
+Lorem Ipsum
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
