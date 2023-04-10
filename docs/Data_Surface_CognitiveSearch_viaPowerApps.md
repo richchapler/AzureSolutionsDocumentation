@@ -134,11 +134,7 @@ Condition          :
 
 #### Step 3c: Confirm Success
 
-Navigate to the User in Azure Active Directory.
-
-<img src="https://user-images.githubusercontent.com/44923999/230936377-4d09b0eb-e3d6-497b-8300-fe84ee688c83.png" width="800" title="Snipped: April 10, 2023" />
-
-Click "**Azure role assignments**" in the left-hand navigation.
+Navigate to the User in Azure Active Directory, and then click "**Azure role assignments**" in the left-hand navigation.
 
 <img src="https://user-images.githubusercontent.com/44923999/230096988-81b6e89a-8715-4719-be15-5e0c4e31461b.png" width="800" title="Snipped: April 5, 2023" />
 
