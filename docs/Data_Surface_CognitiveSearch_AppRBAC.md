@@ -7,6 +7,7 @@ _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 This solution considers the following requirements:
 
 * "We want to share our secured Cognitive Search index with our community of business users"
+* "We want to use Role-Based Access Control {i.e., Azure Active Directory} for all security"
 * "Since the Demo App only supports QueryKey-based security, we need an alternate solution"
 
 ## Prerequisites
