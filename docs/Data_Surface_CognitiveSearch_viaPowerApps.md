@@ -21,16 +21,40 @@ This solution will address requirements in three exercises:
 * Exercise 1: Prepare Index
 * Exercise 2: Lorem
 
+_Note: Because I have covered creation and securing of an index in other documentation, you can expect the brief version in the first two exercises._
+
 -----
 
 ## Exercise 1: Prepare Indexa
-In this exercise, we will: 1) create an index using sample data, and 2) configure index security
+In this exercise, we will create an index using sample data and then configure index security.
 
 ### Step 1: Create Index
 
-Navigate to Cognitive Search
+Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
-<img src="https://user-images.githubusercontent.com/44923999/214618239-312d447b-230b-4ed2-acbb-2dbf2b520ce7.png" width="800" title="Snipped: January 25, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/230911383-a7135ef7-65e2-45e7-bb4f-38f5addaa8e9.png" width="800" title="Snipped: April 10, 2023" />
+
+On the "**Connect your data**" tab, select "**Samples**" using the "**Data Source**" drop-down menu.<br>
+Then, select "**realestate-us-sample**" from the resulting data source list and click "**Next: Add cognitive skills (Optional)**".
+
+<img src="https://user-images.githubusercontent.com/44923999/230911764-3ed44b43-4673-416b-9882-87b809e957cd.png" width="800" title="Snipped: April 10, 2023" />
+
+On the "**Add cognitive skills (Optional)**" tab, simply click "**Skip to: Customize target index**".
+
+<img src="https://user-images.githubusercontent.com/44923999/230911991-df3cabf9-8f28-48f1-95b7-41cb9c1458d5.png" width="800" title="Snipped: April 10, 2023" />
+
+On the "**Customize target index**" tab, review default configuration, modify if desired, and then click "**Next: Create an indexer**".
+
+<img src="https://user-images.githubusercontent.com/44923999/230913029-a23d514c-5fb8-40e3-937c-7d1757b031a0.png" width="800" title="Snipped: April 10, 2023" />
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 2: Lorem
+In this exercise, we will lorem.
 
 -----
 
