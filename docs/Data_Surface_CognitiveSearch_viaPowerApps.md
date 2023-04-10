@@ -85,17 +85,26 @@ The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**"
 var automagic = new AzSearch.Automagic({ index: "{INDEX_NAME}", queryKey: "{QUERY_KEY}", service: "{SEARCH_SERVICE_NAME}", dnsSuffix:"search.windows.net" });
 ```
 
-This means that any user with this HTML will be able to access search results from the associated index.
+We cannot use the Demo App to surface Cognitive Search index and data because:
+* Any user with AzSearch.html (unmodified) will be able to access search results
+* The Demo App only works with queryKey (not RBAC)
 
-LOREM IPSUM
+We must do two things to switch to use of Role-Based Access Control {i.e., Azure Active Directory} for index security:
+1. Modify API Access Control
+2. Programmatically set index permissions
 
-### Step 2: Modify API Access Control
+#### Step 3a: Modify API Access Control
 
 Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping of the left-hand navigation.
 
-<img src="https://user-images.githubusercontent.com/44923999/230093301-10547954-9e6d-4743-9a9a-e4c16ec536d5.png" width="800" title="Snipped: April 5, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/230929406-ae8bc92b-109b-48ff-9932-40202c027840.png" width="800" title="Snipped: April 10, 2023" />
 
-Click to select the "Role-based access control" radio button.
+Under the "**API access control**" header, click to select the "**Role-based access control**" radio button.
+
+
+-----
+-----
+
 
 ### Step 3: Programmatically set index permissions
 
@@ -105,7 +114,8 @@ Navigate to the **Cloud Shell**, configure as required, and select **Powershell*
 
 Modify, copy / paste, and then run the following command:
 
-```PowerShell
+```
+PowerShell
 New-AzRoleAssignment -ObjectId {OBJECT_ID}
   -RoleDefinitionName "Search Index Data Reader"
   -Scope "/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/stormevents-index"
