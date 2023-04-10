@@ -163,7 +163,10 @@ Enter "**realestate-us-sample-index**" in the "**Connector name**" textbox on th
 
 <img src="https://user-images.githubusercontent.com/44923999/230941655-96442a4f-e999-444c-a763-e1ac6ae77bcd.png" width="800" title="Snipped: April 10, 2023" />
 
-Modify and then enter "**Host**" value: `{SERVICE_NAME}.search.windows.net`
+Modify and then enter "**Host**" value: `{SERVICE_NAME}.search.windows.net`<br>
+Click "**Security**".
+
+LOREM IPSUM
 
 -----
 
