@@ -9,7 +9,7 @@ This solution considers the following requirements:
 * "We want to share our secured Cognitive Search index with our community of business users"
 * "Since the Demo App only supports QueryKey-based security, we need an alternate solution"
 
-## Required Infrastructure
+## Prerequisites
 This solution requires the following resources:
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
@@ -136,7 +136,7 @@ Condition          :
 
 Navigate to the User in Azure Active Directory, and then click "**Azure role assignments**" in the left-hand navigation.
 
-<img src="https://user-images.githubusercontent.com/44923999/230096988-81b6e89a-8715-4719-be15-5e0c4e31461b.png" width="800" title="Snipped: April 5, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/230096988-81b6e89a-8715-4719-be15-5e0c4e31461b.png" width="800" title="Snipped: April 10, 2023" />
 
 -----
 
@@ -144,8 +144,12 @@ Navigate to the User in Azure Active Directory, and then click "**Azure role ass
 
 -----
 
-## Exercise 2: Lorem
-In this exercise, we will lorem.
+## Exercise 2: Create App
+In this exercise, we will create an app that securely queries "**realestate-us-sample-index**".
+
+<img src="https://user-images.githubusercontent.com/44923999/230939245-845ae93d-4617-479d-a9ed-fe7c558fc2bf.png" width="800" title="Snipped: April 10, 2023" />
+
+Navigate to PowerApps, click "**More**" in the left-hand navigation.
 
 -----
 
