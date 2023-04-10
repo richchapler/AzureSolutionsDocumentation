@@ -115,6 +115,9 @@ New-AzRoleAssignment -ObjectId {OBJECT_ID}
   -RoleDefinitionName "Search Index Data Reader"
   -Scope "/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/{INDEX_NAME}"
 ```
+Logic Explained:
+
+* `{OBJECT_ID}` ... refers to the Object ID for the Application Registration
 
 You can expect a result like:
 
