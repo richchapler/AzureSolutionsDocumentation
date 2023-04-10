@@ -21,12 +21,12 @@ This solution will address requirements in three exercises:
 * Exercise 1: Prepare Index
 * Exercise 2: Lorem
 
-_Note: Because I have covered creation and securing of an index in other documentation, you can expect the brief version in the first two exercises._
+_Note: Because I have covered creation and securing of an index in other documentation, you can expect a brief version in the first two exercises._
 
 -----
 
 ## Exercise 1: Prepare Indexa
-In this exercise, we will create an index using sample data and then configure index security.
+In this exercise, we will create an index using sample data, create a Demo App, and then configure index security.
 
 ### Step 1: Create Index
 
@@ -56,12 +56,19 @@ Allow time for processing and then click into the new "**realestate-us-sample-in
 
 <img src="https://user-images.githubusercontent.com/44923999/230914830-9de5c8fe-8475-44d1-9b05-47ad258e6325.png" width="800" title="Snipped: April 10, 2023" />
 
-On the "**Search explorer**" tab, click "**Search**" and review results.<br>
+On the "**Search explorer**" tab, click "**Search**" and review results.
+
+### Step 2: Create Demo App
+
 Click "**Create Demo App**".
 
 <img src="https://user-images.githubusercontent.com/44923999/230915524-487c5670-165b-4487-89e5-0040c41210cf.png" width="800" title="Snipped: April 10, 2023" />
 
 On the resulting "**Create Demo App**" pop-up, click "**Enable CORS and continue**".
+
+<img src="https://user-images.githubusercontent.com/44923999/230916396-cdbc6bbf-5cd2-4a90-84ff-e6f1e307d704.png" width="800" title="Snipped: April 10, 2023" />
+
+On the "**Create an indexer**" tab, review default configuration, modify if desired, and then click "**Submit**".
 
 -----
 
