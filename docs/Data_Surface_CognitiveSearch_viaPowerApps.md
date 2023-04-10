@@ -155,7 +155,7 @@ Navigate to PowerApps, click "**More**" in the left-hand navigation, and then cl
 
 Scroll to the bottom of the "**Discover all you can do**..." page.
 
-<img src="https://user-images.githubusercontent.com/44923999/230940350-ec6d91c0-7553-4056-ad11-d05a73957c00.png" width="800" title="Snipped: April 10, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/230941313-5254f3e5-9b06-4bef-96e3-6584c2a9b83d.png" width="800" title="Snipped: April 10, 2023" />
 
 Click "**Custom connectors**" in the "**Data**" box.<br>
 Click "**+ New custom connector**" in the upper-right of the resulting page, and then click "**Create from blank**" in the resulting menu.<br>
