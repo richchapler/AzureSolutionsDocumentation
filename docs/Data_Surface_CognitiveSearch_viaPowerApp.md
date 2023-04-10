@@ -1,4 +1,4 @@
-# Surface Data: Cognitive Search (via Power Apps)
+# Surface Data: Cognitive Search (via Power App and OAUTH)
 _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 <img src="https://user-images.githubusercontent.com/44923999/230908250-3724404b-8aff-4ce5-9e2d-315db10c27eb.png" width="1000" />
@@ -177,3 +177,4 @@ LOREM IPSUM
 ## Reference
 
 * [Tutorial: Query a Cognitive Search index from Power Apps](https://learn.microsoft.com/en-us/azure/search/search-howto-powerapps)
+* [OAuth Grant Types](https://oauth.net/2/grant-types/)
