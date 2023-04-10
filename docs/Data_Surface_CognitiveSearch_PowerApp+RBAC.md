@@ -1,4 +1,4 @@
-# Surface Data: Cognitive Search App (using AAD and RBAC)
+# Surface Data: Cognitive Search, Power App with Role-Based Access Control
 _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 <img src="https://user-images.githubusercontent.com/44923999/230908250-3724404b-8aff-4ce5-9e2d-315db10c27eb.png" width="1000" />
@@ -13,7 +13,7 @@ This solution considers the following requirements:
 ## Prerequisites
 This solution requires the following resources:
 
-* [Application Registration]
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Power Apps**](https://powerapps.microsoft.com/en-us/)
 
