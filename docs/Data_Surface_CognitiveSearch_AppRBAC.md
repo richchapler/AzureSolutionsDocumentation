@@ -13,6 +13,7 @@ This solution considers the following requirements:
 ## Prerequisites
 This solution requires the following resources:
 
+* [Application Registration]
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Power Apps**](https://powerapps.microsoft.com/en-us/)
 
