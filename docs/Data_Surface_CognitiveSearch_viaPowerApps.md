@@ -85,15 +85,14 @@ The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**"
 var automagic = new AzSearch.Automagic({ index: "{INDEX_NAME}", queryKey: "{QUERY_KEY}", service: "{SEARCH_SERVICE_NAME}", dnsSuffix:"search.windows.net" });
 ```
 
-We cannot use the Demo App to surface Cognitive Search index and data because:
-* Any user with AzSearch.html (unmodified) will be able to access search results
-* The Demo App only works with queryKey (not RBAC)
+If we remove the queryKey, the Demo App will not work... and, `AzSearch.Automagic(...` only works with queryKey.<br>
 
-We must do two things to switch to use of Role-Based Access Control {i.e., Azure Active Directory} for index security:
-1. Modify API Access Control
-2. Programmatically set index permissions
+To secure the index using Role-Based Access Control (RBAC), we must:
 
-#### Step 3a: Modify API Access Control
+* Modify the "**API Access Control**" setting
+* Programmatically set index permissions for an Azure Active Directory user or group
+
+#### Step 3a: Modify "**API Access Control**"
 
 Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping of the left-hand navigation.
 
