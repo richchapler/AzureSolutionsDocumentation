@@ -149,7 +149,17 @@ In this exercise, we will create an app that securely queries "**realestate-us-s
 
 <img src="https://user-images.githubusercontent.com/44923999/230939245-845ae93d-4617-479d-a9ed-fe7c558fc2bf.png" width="800" title="Snipped: April 10, 2023" />
 
-Navigate to PowerApps, click "**More**" in the left-hand navigation.
+Navigate to PowerApps, click "**More**" in the left-hand navigation, and then click "**Discover**" in the resulting menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/230940199-73e4f818-a9f7-4353-9990-c2c58a4b3d07.png" width="800" title="Snipped: April 10, 2023" />
+
+Scroll to the bottom of the "**Discover all you can do**..." page.
+
+<img src="https://user-images.githubusercontent.com/44923999/230940350-ec6d91c0-7553-4056-ad11-d05a73957c00.png" width="800" title="Snipped: April 10, 2023" />
+
+Click "**Custom connectors**" in the "**Data**" box.<br>
+Click "**+ New custom connector**" in the upper-right of the resulting page, and then click "**Create from blank**" in the resulting menu.<br>
+Enter "**realestate-us-sample-index**" in the "**Connector name**" textbox on the "**Create from blank**" pop-up, and then click "**Continue**".
 
 -----
 
