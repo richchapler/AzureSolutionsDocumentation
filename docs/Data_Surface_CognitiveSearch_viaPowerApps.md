@@ -6,8 +6,8 @@ _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 ## Use Case
 This solution considers the following requirements:
 
-* "We want to share our secured Cognitive Search index with our communit of business users"
-* "The Demo App only supports QueryKey-based security"
+* "We want to share our secured Cognitive Search index with our community of business users"
+* "Since the Demo App only supports QueryKey-based security, we need an alternate solution"
 
 ## Required Infrastructure
 This solution requires the following resources:
@@ -79,8 +79,71 @@ Use Windows Explorer to open your "**Downloads**" folder and then the new "**AzS
 
 ### Step 3: Secure Index
 
-Lorem Ipsum
+The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**" directly in the auto-generated HTML:
 
+```
+var automagic = new AzSearch.Automagic({ index: "{INDEX_NAME}", queryKey: "{QUERY_KEY}", service: "{SEARCH_SERVICE_NAME}", dnsSuffix:"search.windows.net" });
+```
+
+This means that any user with this HTML will be able to access search results from the associated index.
+
+LOREM IPSUM
+
+### Step 2: Modify API Access Control
+
+Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping of the left-hand navigation.
+
+<img src="https://user-images.githubusercontent.com/44923999/230093301-10547954-9e6d-4743-9a9a-e4c16ec536d5.png" width="800" title="Snipped: April 5, 2023" />
+
+Click to select the "Role-based access control" radio button.
+
+### Step 3: Programmatically set index permissions
+
+Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
+
+<img src="https://user-images.githubusercontent.com/44923999/230094993-e818f45d-85b3-4e6b-ab6e-c106aeb9de25.png" width="800" title="Snipped: April 5, 2023" />
+
+Modify, copy / paste, and then run the following command:
+
+```PowerShell
+New-AzRoleAssignment -ObjectId {OBJECT_ID}
+  -RoleDefinitionName "Search Index Data Reader"
+  -Scope "/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/stormevents-index"
+```
+
+You can expect a result like:
+
+```
+RoleAssignmentName : 89f76855-6dbc-470b-aae2-177e7a203c27
+RoleAssignmentId   : /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/stormevents-index/providers/Microsoft.Authorization/roleAssignments/89f76855-6dbc-470b-aae2-177e7a203c27
+Scope              : /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Search/searchServices/{SERVICE_NAME}/indexes/stormevents-index
+DisplayName        : {USER_NAME}
+SignInName         : {USER_SIGNIN}
+RoleDefinitionName : Search Index Data Reader
+RoleDefinitionId   : 1407120a-92aa-4202-b7e9-c0e197c71c8f
+ObjectId           : {OBJECT_ID}
+ObjectType         : User
+CanDelegate        : False
+Description        : 
+ConditionVersion   : 
+Condition          : 
+```
+
+#### Confirm Success
+
+Navigate to the User in Azure Active Directory.
+
+<img src="https://user-images.githubusercontent.com/44923999/230096444-63f2c93d-5b7e-4c8a-8aa6-32141c1be662.png" width="800" title="Snipped: April 5, 2023" />
+
+Click "**Azure role assignments**" in the left-hand navigation.
+
+<img src="https://user-images.githubusercontent.com/44923999/230096988-81b6e89a-8715-4719-be15-5e0c4e31461b.png" width="800" title="Snipped: April 5, 2023" />
+
+Confirm success using Search Explorer.
+
+<img src="https://user-images.githubusercontent.com/44923999/230675015-6164dc3d-1f25-49b8-9433-8eceaa89f54c.png" width="800" title="Snipped: April 7, 2023" />
+
+_Note: You will not be able to confirm index security settings using the Demo App (which uses only queryKey). You will have to create an app that can leverage the Cognitive Search API in order to use RBAC._ 
 -----
 
 **Congratulations... you have successfully completed this exercise**
