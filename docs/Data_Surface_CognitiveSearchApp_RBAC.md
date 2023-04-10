@@ -1,4 +1,4 @@
-# Surface Data: Cognitive Search (via Power App and OAUTH)
+# Surface Data: Cognitive Search App (using AAD and RBAC)
 _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 <img src="https://user-images.githubusercontent.com/44923999/230908250-3724404b-8aff-4ce5-9e2d-315db10c27eb.png" width="1000" />
