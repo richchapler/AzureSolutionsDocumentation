@@ -19,7 +19,7 @@ This solution requires the following resources:
 This solution will address requirements in three exercises:
 
 * Exercise 1: Prepare Index
-* Exercise 2: Lorem
+* Exercise 2: Create App
 
 _Note: Because I have covered creation and securing of an index in other documentation, you can expect a brief version in the first two exercises._
 
@@ -160,6 +160,10 @@ Scroll to the bottom of the "**Discover all you can do**..." page.
 Click "**Custom connectors**" in the "**Data**" box.<br>
 Click "**+ New custom connector**" in the upper-right of the resulting page, and then click "**Create from blank**" in the resulting menu.<br>
 Enter "**realestate-us-sample-index**" in the "**Connector name**" textbox on the "**Create from blank**" pop-up, and then click "**Continue**".
+
+<img src="https://user-images.githubusercontent.com/44923999/230941655-96442a4f-e999-444c-a763-e1ac6ae77bcd.png" width="800" title="Snipped: April 10, 2023" />
+
+Modify and then enter "**Host**" value: `{SERVICE_NAME}.search.windows.net`
 
 -----
 
