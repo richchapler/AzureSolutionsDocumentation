@@ -25,7 +25,7 @@ _Note: Because I have covered creation and securing of an index in other documen
 
 -----
 
-## Exercise 1: Prepare Indexa
+## Exercise 1: Prepare Index
 In this exercise, we will create an index using sample data, create a Demo App, and then configure index security.
 
 ### Step 1: Create Index
@@ -35,8 +35,7 @@ Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 <img src="https://user-images.githubusercontent.com/44923999/230911383-a7135ef7-65e2-45e7-bb4f-38f5addaa8e9.png" width="800" title="Snipped: April 10, 2023" />
 
 On the "**Connect your data**" tab, select "**Samples**" using the "**Data Source**" drop-down menu.<br>
-Then, select "**realestate-us-sample**" from the resulting data source list.<br>
-Finally, click "**Next: Add cognitive skills (Optional)**".
+Select "**realestate-us-sample**" from the resulting data source list and then, click "**Next: Add cognitive skills (Optional)**".
 
 <img src="https://user-images.githubusercontent.com/44923999/230911764-3ed44b43-4673-416b-9882-87b809e957cd.png" width="800" title="Snipped: April 10, 2023" />
 
@@ -68,7 +67,15 @@ On the resulting "**Create Demo App**" pop-up, click "**Enable CORS and continue
 
 <img src="https://user-images.githubusercontent.com/44923999/230916396-cdbc6bbf-5cd2-4a90-84ff-e6f1e307d704.png" width="800" title="Snipped: April 10, 2023" />
 
-On the "**Create an indexer**" tab, review default configuration, modify if desired, and then click "**Submit**".
+On the "**Individual result**" tab, review default configuration, modify if desired, and then click "**Create Demo App**".
+_Note: Review "Sidebar" and "Suggestions" tab, as desired._
+
+<img src="https://user-images.githubusercontent.com/44923999/230918267-a9df50e2-21f9-40ae-8d82-22293a2db82c.png" width="800" title="Snipped: April 10, 2023" />
+
+On the resulting "**Your demo app is ready**" pop-up, click "**Download**".<br>
+Use Windows Explorer to open your "**Downloads**" folder and then the new "**AzSearch.html**" file.
+
+<img src="https://user-images.githubusercontent.com/44923999/230919150-61603545-44b7-41c9-8066-a1150bc9f455.png" width="800" title="Snipped: April 10, 2023" />
 
 -----
 
