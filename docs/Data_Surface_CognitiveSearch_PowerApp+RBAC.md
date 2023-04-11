@@ -1,4 +1,4 @@
-# Surface Data: Cognitive Search, Power App with Role-Based Access Control
+# Surface Data: Cognitive Search, Power App with Role-Based Access Control (WiP)
 _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 <img src="https://user-images.githubusercontent.com/44923999/230908250-3724404b-8aff-4ce5-9e2d-315db10c27eb.png" width="1000" />
@@ -185,3 +185,4 @@ _The Audience is the API which your custom authentication App has permissions on
 
 * [Tutorial: Query a Cognitive Search index from Power Apps](https://learn.microsoft.com/en-us/azure/search/search-howto-powerapps)
 * [OAuth Grant Types](https://oauth.net/2/grant-types/)
+* [Security filters for trimming Azure Cognitive Search results using Active Directory identities](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad)
