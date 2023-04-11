@@ -119,6 +119,8 @@ Logic Explained:
 
 * `{OBJECT_ID}` ... refers to the Object ID for the Application Registration
 
+_Note: It is not possible to create a "Search Index Data Reader" role assignment for a Service Principal._
+
 You can expect a result like:
 
 ```
