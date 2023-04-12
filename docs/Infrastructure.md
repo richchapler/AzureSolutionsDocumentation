@@ -55,6 +55,8 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 
 * [**Power Apps**](https://powerapps.microsoft.com/en-us/)
 
+* [**Power Automate**](https://powerautomate.microsoft.com/en-us/)
+
 * [**Power BI**](https://powerbi.microsoft.com/en-us/)
 
 * [**Purview**](Infrastructure_Purview.md) >> [Collection Role Assignment](Infrastructure_Purview_CollectionRoleAssignment.md) :: [Sources](Infrastructure_Purview_Sources.md)
