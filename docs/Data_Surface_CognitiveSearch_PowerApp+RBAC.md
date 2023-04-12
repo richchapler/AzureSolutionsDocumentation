@@ -167,6 +167,10 @@ Click "**Create**".
 
 On the new flow designer page, click to expand the "**PowerApps (V2)**" trigger, and then click "**+ Add an input**".
 
+<img src="https://user-images.githubusercontent.com/44923999/231563868-e1934336-6fe9-4152-9d8f-07fbef593e94.png" width="800" title="Snipped: April 12, 2023" />
+
+Select "**Text**" from the resulting "**Choose the type of user input**" list.
+
 -----
 
 ## Exercise 3: Create App
