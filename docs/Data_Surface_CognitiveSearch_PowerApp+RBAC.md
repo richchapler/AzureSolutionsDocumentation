@@ -16,14 +16,14 @@ This solution requires the following resources:
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Power Apps**](https://powerapps.microsoft.com/en-us/)
+* [**Power Automate**](https://powerapps.microsoft.com/en-us/)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
 * Exercise 1: Prepare Index
-* Exercise 2: Create App
-
-_Note: Because I have covered creation and securing of an index in other documentation, you can expect a brief version in the first two exercises._
+* Exercise 2: Create Flow
+* Exercise 3: Create App
 
 -----
 
@@ -151,7 +151,12 @@ Navigate to the User in Azure Active Directory, and then click "**Azure role ass
 
 -----
 
-## Exercise 2: Create App
+## Exercise 2: Create Flow
+In this exercise, we will create a Power Automate Flow that calls the Cognitive Search API.
+
+-----
+
+## Exercise 3: Create App
 In this exercise, we will create an app that securely queries "**realestate-us-sample-index**".
 
 <img src="https://user-images.githubusercontent.com/44923999/230939245-845ae93d-4617-479d-a9ed-fe7c558fc2bf.png" width="800" title="Snipped: April 10, 2023" />
