@@ -154,6 +154,14 @@ Navigate to the User in Azure Active Directory, and then click "**Azure role ass
 ## Exercise 2: Create Flow
 In this exercise, we will create a Power Automate Flow that calls the Cognitive Search API.
 
+<img src="https://user-images.githubusercontent.com/44923999/231559914-ca3c7db4-68d8-4464-8be0-8bede8546dfc.png" width="800" title="Snipped: April 12, 2023" />
+
+Navigate to Power Automate, sign in if required, click "**+ Create**", and then click "**Instant cloud flow**" on the resulting page.
+
+<img src="https://user-images.githubusercontent.com/44923999/231560263-aac01112-fd97-4c43-9bc7-e54b67d830ce.png" width="800" title="Snipped: April 12, 2023" />
+
+On the resulting "**Build**..." pop-up, enter a meaningful "**Flow name**" and select "**PowerApps (V2)**" from the "**Choose how to trigger**..." list.
+
 -----
 
 ## Exercise 3: Create App
