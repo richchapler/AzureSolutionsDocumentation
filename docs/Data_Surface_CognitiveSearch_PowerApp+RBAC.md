@@ -1,7 +1,7 @@
-# Surface Data: Cognitive Search, Power App with Role-Based Access Control (WiP)
+# Surface Data: Cognitive Search, RBAC-secured PowerApp (WiP)
 _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
-<img src="https://user-images.githubusercontent.com/44923999/230908250-3724404b-8aff-4ce5-9e2d-315db10c27eb.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/231556765-3276ee63-1883-4176-af10-36a1ea3a9e12.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
