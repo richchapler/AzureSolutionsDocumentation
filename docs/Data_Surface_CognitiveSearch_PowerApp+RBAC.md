@@ -158,9 +158,14 @@ In this exercise, we will create a Power Automate Flow that calls the Cognitive 
 
 Navigate to Power Automate, sign in if required, click "**+ Create**", and then click "**Instant cloud flow**" on the resulting page.
 
-<img src="https://user-images.githubusercontent.com/44923999/231560263-aac01112-fd97-4c43-9bc7-e54b67d830ce.png" width="800" title="Snipped: April 12, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/231560981-e54f2e71-ea32-454c-b314-d637a2aa03d3.png" width="800" title="Snipped: April 12, 2023" />
 
-On the resulting "**Build**..." pop-up, enter a meaningful "**Flow name**" and select "**PowerApps (V2)**" from the "**Choose how to trigger**..." list.
+On the resulting "**Build**..." pop-up, enter a meaningful "**Flow name**" and select "**PowerApps (V2)**" from the "**Choose how to trigger**..." list.<br>
+Click "**Create**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231560981-e54f2e71-ea32-454c-b314-d637a2aa03d3.png" width="800" title="Snipped: April 12, 2023" />
+
+On the new flow designer page, click to expand the "**PowerApps (V2)**" trigger, and then click "**+ Add an input**".
 
 -----
 
