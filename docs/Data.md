@@ -42,5 +42,6 @@
   :----- | :----- | :----- | :-----
   [Application Programming Interface (API)](Data_Surface_API.md) | | Function App + APIM | C# (Function App)
   [Bulk Export](Data_Surface_BulkExport.md) | | Synapse Pipeline | Low Code
-  [Cognitive Search (multi-source index)](Data_Surface_CognitiveSearch_MultiSourceIndex.md) | SQL and Blob Storage | Cognitive Search | JSON
-  [Cognitive Search (from Data Explorer)](Data_Surface_CognitiveSearch_fromDataExplorer.md) | Data Explorer (via export) | Cognitive Search | JSON and HTML
+  [Cognitive Search, from Data Explorer](Data_Surface_CognitiveSearch_fromDataExplorer.md) | Data Explorer (via export) | Cognitive Search | JSON and HTML
+  [Cognitive Search, Multi-Source Index](Data_Surface_CognitiveSearch_MultiSourceIndex.md) | SQL and Blob Storage | Cognitive Search | JSON
+  [Cognitive Search, RBAC-secured PowerApp](Data_Surface_CognitiveSearch_PowerApp+RBAC.md) | Sample Data | Power Apps | JSON
