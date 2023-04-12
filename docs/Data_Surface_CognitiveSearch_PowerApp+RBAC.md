@@ -16,7 +16,7 @@ This solution requires the following resources:
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Power Apps**](https://powerapps.microsoft.com/en-us/)
-* [**Power Automate**](https://powerapps.microsoft.com/en-us/)
+* [**Power Automate**](https://powerautomate.microsoft.com/en-us/)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
