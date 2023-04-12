@@ -160,36 +160,17 @@ Navigate to Power Automate, sign in if required, click "**+ Create**", and then 
 
 <img src="https://user-images.githubusercontent.com/44923999/231560981-e54f2e71-ea32-454c-b314-d637a2aa03d3.png" width="800" title="Snipped: April 12, 2023" />
 
-On the resulting "**Build**..." pop-up, enter a meaningful "**Flow name**" and select "**PowerApps (V2)**" from the "**Choose how to trigger**..." list.<br>
+On the resulting "**Build**..." pop-up, enter a meaningful "**Flow name**" and select "**PowerApps (V2)**" from the "**Choose**..." list.<br>
 Click "**Create**".
 
-<img src="https://user-images.githubusercontent.com/44923999/231560981-e54f2e71-ea32-454c-b314-d637a2aa03d3.png" width="800" title="Snipped: April 12, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/231562018-02edea1a-3fa3-4a7b-86de-eb685d170b44.png" width="800" title="Snipped: April 12, 2023" />
 
 On the new flow designer page, click to expand the "**PowerApps (V2)**" trigger, and then click "**+ Add an input**".
 
 -----
 
 ## Exercise 3: Create App
-In this exercise, we will create an app that securely queries "**realestate-us-sample-index**".
-
-<img src="https://user-images.githubusercontent.com/44923999/230939245-845ae93d-4617-479d-a9ed-fe7c558fc2bf.png" width="800" title="Snipped: April 10, 2023" />
-
-Navigate to PowerApps, click "**More**" in the left-hand navigation, and then click "**Discover**" in the resulting menu.
-
-<img src="https://user-images.githubusercontent.com/44923999/230940199-73e4f818-a9f7-4353-9990-c2c58a4b3d07.png" width="800" title="Snipped: April 10, 2023" />
-
-Scroll to the bottom of the "**Discover all you can do**..." page.
-
-<img src="https://user-images.githubusercontent.com/44923999/230941313-5254f3e5-9b06-4bef-96e3-6584c2a9b83d.png" width="800" title="Snipped: April 10, 2023" />
-
-Click "**Custom connectors**" in the "**Data**" box.<br>
-Click "**+ New custom connector**" in the upper-right of the resulting page, and then click "**Create from blank**" in the resulting menu.<br>
-Enter "**realestate-us-sample-index**" in the "**Connector name**" textbox on the "**Create from blank**" pop-up, and then click "**Continue**".
-
-<img src="https://user-images.githubusercontent.com/44923999/230941655-96442a4f-e999-444c-a763-e1ac6ae77bcd.png" width="800" title="Snipped: April 10, 2023" />
-
-Modify and then enter "**Host**" value: `{SERVICE_NAME}.search.windows.net`<br>
-Click "**Security**".
+In this exercise, we will create an app that securely queries "**realestate-us-sample-index**" using the Power Automate Flow created in Exercise 2.
 
 LOREM IPSUM
 
