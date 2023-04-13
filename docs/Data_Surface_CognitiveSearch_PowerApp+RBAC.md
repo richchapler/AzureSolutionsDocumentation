@@ -250,9 +250,18 @@ _NOTE: OPEN AZURE SUPPORT CASE SUPPORTING USE OF RBAC FOR API CALL INSTEAD OF QU
 ## Exercise 4: Create App
 In this exercise, we will create an app that queries "**realestate-us-sample-index**".
 
-<img src="https://user-images.githubusercontent.com/44923999/231806537-5c85eada-9cc7-4a10-a0de-c42284c978cb.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/231806782-153f19b6-f8a7-4ed8-95fd-9fc00b2c32e3.png" width="800" title="Snipped: April 13, 2023" />
 
 Navigate to Power Apps, sign in if required, click "**+ Create**", and then click "**Blank app**" on the resulting page.
+
+<img src="https://user-images.githubusercontent.com/44923999/231807007-db6ddbfd-7c80-46e3-9976-5919695d9458.png" width="800" title="Snipped: April 13, 2023" />
+
+On the resulting pop-up, click "**Create**" in the "**Blank canvas app**" rectangle.
+
+<img src="https://user-images.githubusercontent.com/44923999/231807447-0a4b5d10-998c-41ce-9b9f-5bdfdb8497cc.png" width="800" title="Snipped: April 13, 2023" />
+
+On the resulting "Canvas app from blank" pop-up, enter a meaningful "**App name**" name and select format "**Tablet**".<br>
+Click "**Create**".
 
 LOREM IPSUM
 
