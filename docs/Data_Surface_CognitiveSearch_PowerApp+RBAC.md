@@ -180,6 +180,20 @@ Prompt | Entry
 
 _Note: These entries match the Search Explorer._
 
+Click "**Save**" and then "**+ New Step**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231763351-47f03570-3b94-4206-9d34-b45bdf9ea76d.png" width="800" title="Snipped: April 13, 2023" />
+
+On the new "**Choose an operation**" step, search for and select "**HTTP**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231764254-fcc8ebdd-06d4-4ca0-ad2e-b3212e54d9f5.png" width="800" title="Snipped: April 13, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Method** | Select "**GET**"
+**URI** | Modify and enter:<br>`https://{SERVICE_NAME}.search.windows.net/indexes/{INDEX_NAME}/docs?api-version=2021-04-30-Preview&search=`<br>Click "**Add dynamic content**" and then select "**Query string**" to complete the entry
+**Method** | Select "**GET**"
+
 -----
 
 ## Exercise 3: Create App
