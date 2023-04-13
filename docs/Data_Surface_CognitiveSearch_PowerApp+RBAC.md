@@ -21,14 +21,14 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Prepare Index
+* Exercise 1: Create Index
 * Exercise 2: Secure Index
 * Exercise 3: Create Flow
 * Exercise 4: Create App
 
 -----
 
-## Exercise 1: Prepare Index
+## Exercise 1: Create Index
 In this exercise, we will create an index using sample data.
 
 ### Step 1: Create Index
