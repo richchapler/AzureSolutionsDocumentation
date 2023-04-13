@@ -265,8 +265,12 @@ Click "**Create**".
 
 LOREM IPSUM
 
-_The Audience is the API which your custom authentication App has permissions on. To get this URL, navigate to Azure AD --> App Registration, then select your custom authentication App, and click on API Permissions. Hereafter, select API / Permissions name which should pop up the permission details along with the used API. For example, https://service.flow.microsoft.com/Approvals.Manage.All . In this case, the Audience is https://service.flow.microsoft.com/  _
-
 -----
 
 **Congratulations... you have successfully completed this exercise**
+
+-----
+
+# Notes
+_The Audience is the API which your custom authentication App has permissions on. To get this URL, navigate to Azure AD --> App Registration, then select your custom authentication App, and click on API Permissions. Hereafter, select API / Permissions name which should pop up the permission details along with the used API. For example, https://service.flow.microsoft.com/Approvals.Manage.All . In this case, the Audience is https://service.flow.microsoft.com/  _
+
