@@ -310,6 +310,30 @@ Click on the button control and then the "**Advanced**" tab in the resulting pop
 
 Populate the "OnSelect" textbox with: `Set(searchAPI,rchaplericf.Run(TextInput1.Text));`
 
+Logic Explained:
+
+* `Set(searchAPI...` ... will take the value returned by Power Automate and assign it to variable `searchAPI`
+* `rchaplericf.Run(TextInput1.Text)` ... will call the Power Automate, Instant Cloud Flow (which I named `rchaplericf`) and run it with the query string entered in the Text Input control
+
+### Surface Results
+
+Click on the text label control and then the "**Advanced**" tab in the resulting pop-out menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/231866008-ac2fca29-1deb-4b62-aff2-8ed4a601b93c.png" width="800" title="Snipped: April 13, 2023" />
+
+Populate the "Text" textbox with: `searchAPI.results`<br>
+Click "**Save**".
+
+### Confirm Success
+
+
+
+Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
+
+<img src="https://user-images.githubusercontent.com/44923999/231865423-6fe6029f-2064-4bf9-a6cc-c269e1d87d8b.png" width="800" title="Snipped: April 13, 2023" />
+![image](https://user-images.githubusercontent.com/44923999/.png)
+
+
 LOREM IPSUM
 
 -----
