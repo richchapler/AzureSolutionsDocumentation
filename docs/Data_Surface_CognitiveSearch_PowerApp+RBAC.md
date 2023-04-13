@@ -235,7 +235,7 @@ Click "Done".
 
 <img src="https://user-images.githubusercontent.com/44923999/231770153-27803ff6-1441-4d09-861b-e4091704c311.png" width="800" title="Snipped: April 13, 2023" />
 
-You can expect a "Your flow ran successfully" message, along with visualization of the results.
+You can expect a "**Your flow ran successfully**" message, along with a clickable visualization of the results.
 
 _NOTE: OPEN AZURE SUPPORT CASE SUPPORTING USE OF RBAC FOR API CALL INSTEAD OF QUERY KEY_
 
