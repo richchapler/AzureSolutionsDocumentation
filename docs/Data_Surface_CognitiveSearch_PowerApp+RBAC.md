@@ -270,9 +270,9 @@ Click "**Add an item from the Insert pane**".
 <img src="https://user-images.githubusercontent.com/44923999/231812785-0b6bd99f-d782-48b5-8e6e-e773efe2d9f0.png" width="800" title="Snipped: April 13, 2023" />
 
 Insert the following controls:
-•	**Text Input** … for search query input
-•	**Button** … for search query submit
-•	**Text Label** … for search result surfacing
+*	**Text Input** … for search query input
+*	**Button** … for search query submit
+*	**Text Label** … for search result surfacing
 
 Employ formatting {e.g., control width, border size, color, etc.} to enhance usability.
 
