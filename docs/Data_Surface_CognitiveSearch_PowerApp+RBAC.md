@@ -248,7 +248,7 @@ _NOTE: OPEN AZURE SUPPORT CASE SUPPORTING USE OF RBAC FOR API CALL INSTEAD OF QU
 -----
 
 ## Exercise 4: Create App
-In this exercise, we will create an app that queries "**realestate-us-sample-index**".
+In this exercise, we will create a Power App that queries "**realestate-us-sample-index**" (via Power Automate >> API request).
 
 <img src="https://user-images.githubusercontent.com/44923999/231806782-153f19b6-f8a7-4ed8-95fd-9fc00b2c32e3.png" width="800" title="Snipped: April 13, 2023" />
 
