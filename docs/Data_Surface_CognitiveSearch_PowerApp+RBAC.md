@@ -289,7 +289,26 @@ Click the cog icon in the upper right of the screen to open the Settings pop-up 
 <img src="https://user-images.githubusercontent.com/44923999/231860561-393dc7f0-6eda-4d07-b651-3318bed1ba72.png" width="800" title="Snipped: April 13, 2023" />
 
 Navigate to "**Upcoming Features**", and then the "**Retired**" tab.<br>
-Scroll to the bottom of the options and switch "**Enable classic Power Automate pane**" to "**On**".
+Scroll to the bottom of the options and switch "**Enable classic Power Automate pane**" to "**On**".<br>
+Close the pop-up menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/231861437-d112438f-3c84-48c6-863e-8fd318a8376b.png" width="800" title="Snipped: April 13, 2023" />
+
+Click the ellipses on the right end of the menu bar and then select "Power Automate" from the resulting drop-down menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/231862323-15b068e2-7ffb-4fa2-85a7-b585a4ede895.png" width="800" title="Snipped: April 13, 2023" />
+
+Select the previously-created Power Automate Flow and then close the pop-up menu.<br>
+Click on the red circle-X icon and then select "**Edit in the formula bar**" from the drop-down menu.<br>
+Delete the contents of the formula bar.
+
+### Change Button OnSelect
+
+Click on the button control and then the "**Advanced**" tab in the resulting pop-out menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/231863997-8bc340ce-3031-4035-a83d-d4577d6048c9.png" width="800" title="Snipped: April 13, 2023" />
+
+Populate the "OnSelect" textbox with: `Set(searchAPI,rchaplericf.Run(TextInput1.Text));`
 
 LOREM IPSUM
 
