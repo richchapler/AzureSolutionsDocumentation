@@ -217,6 +217,12 @@ Prompt | Entry
 
 Click "**Save**".
 
+_NOTE: OPEN AZURE SUPPORT CASE SUPPORTING USE OF RBAC FOR API CALL INSTEAD OF QUERY KEY_
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
 -----
 
 ## Exercise 3: Create App
