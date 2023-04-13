@@ -274,7 +274,13 @@ Insert the following controls:
 *	**Button** … for search query submit
 *	**Text Label** … for search result display
 
-Employ formatting {e.g., control width, border size, color, etc.} to enhance usability.
+<img src="https://user-images.githubusercontent.com/44923999/231859529-27ce90f8-704a-4c77-92a9-d4ad59750b8e.png" width="800" title="Snipped: April 13, 2023" />
+
+Consider personalizing look-and-feel {e.g., control width, border size, color, etc.} to enhance usability; examples:
+*	**Text Input** … 1) delete "Default" to "No value", and 2) change "Hint Text" to "Examples: *, $top=10, $top=10&search=*"
+*	**Button** … 1) change "Text" property to value "Search"
+*	**Text Label** … 1) change "Border thickness" to "1" and 2) change "Vertical align" to "Top"
+
 
 LOREM IPSUM
 
