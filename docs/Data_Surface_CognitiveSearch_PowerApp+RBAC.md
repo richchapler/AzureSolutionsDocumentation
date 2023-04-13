@@ -173,7 +173,12 @@ Select "**Text**" from the resulting "**Choose the type of user input**" list.
 
 <img src="https://user-images.githubusercontent.com/44923999/231762469-b2dfca21-6c56-47a6-b4a7-01fbdb6a6298.png" width="800" title="Snipped: April 13, 2023" />
 
+Prompt | Entry
+:----- | :-----
+**Input** | Enter "**Query string**"
+**Description** | Enter "**Examples: *, $top=10, $top=10&search=***"
 
+_Note: These entries match the Search Explorer._
 
 -----
 
