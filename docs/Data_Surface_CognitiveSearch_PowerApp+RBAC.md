@@ -196,8 +196,26 @@ Prompt | Entry
 
 Click "**Save**" and then "**+ New Step**".
 
-<img src="https://user-images.githubusercontent.com/44923999/231766339-1b3339c3-c5c1-4e7d-bd71-5ff3a11c69ef.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/231766720-007b56fc-36ac-4fc0-90e8-c4c2df744f0b.png" width="800" title="Snipped: April 13, 2023" />
 
+On the new "**Choose an operation**" step, search for and select "**Respond to a PowerApp or flow**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231766835-1264402d-3de0-4a72-9897-5aa3e0be58f0.png" width="800" title="Snipped: April 13, 2023" />
+
+On the new "**Respond to a PowerApp or flow**" step,  click "**+ Add an output**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231767272-3f08c7ec-1463-462c-b50f-4cab3e4c040d.png" width="800" title="Snipped: April 13, 2023" />
+
+Select "**Text**" from the resulting "**Choose the type of output**" list.
+
+<img src="https://user-images.githubusercontent.com/44923999/231767570-8d7de38e-9a88-422e-a500-680c5c98cfd3.png" width="800" title="Snipped: April 13, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Enter title** | Enter "**Query string**"
+**Enter a value to respond** | Click "**Add dynamic content**" and then select "**Body**" from the "**HTTP**" grouping
+
+Click "**Save**".
 
 -----
 
