@@ -186,13 +186,13 @@ Click "**Save**" and then "**+ New Step**".
 
 On the new "**Choose an operation**" step, search for and select "**HTTP**".
 
-<img src="https://user-images.githubusercontent.com/44923999/231764254-fcc8ebdd-06d4-4ca0-ad2e-b3212e54d9f5.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/231765436-6163a17f-8687-4c9e-8e07-a45b2be52cdb.png" width="800" title="Snipped: April 13, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **Method** | Select "**GET**"
 **URI** | Modify and enter:<br>`https://{SERVICE_NAME}.search.windows.net/indexes/{INDEX_NAME}/docs?api-version=2021-04-30-Preview&search=`<br>Click "**Add dynamic content**" and then select "**Query string**" to complete the entry
-**Method** | Select "**GET**"
+**Headers** |Modify and enter key-value pair: `api-key` :: `{QUERY_KEY}`
 
 -----
 
@@ -206,11 +206,3 @@ _The Audience is the API which your custom authentication App has permissions on
 -----
 
 **Congratulations... you have successfully completed this exercise**
-
------
-
-## Reference
-
-* [Tutorial: Query a Cognitive Search index from Power Apps](https://learn.microsoft.com/en-us/azure/search/search-howto-powerapps)
-* [OAuth Grant Types](https://oauth.net/2/grant-types/)
-* [Security filters for trimming Azure Cognitive Search results using Active Directory identities](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search-with-aad)
