@@ -194,6 +194,11 @@ Prompt | Entry
 **URI** | Modify and enter:<br>`https://{SERVICE_NAME}.search.windows.net/indexes/{INDEX_NAME}/docs?api-version=2021-04-30-Preview&search=`<br>Click "**Add dynamic content**" and then select "**Query string**" to complete the entry
 **Headers** |Modify and enter key-value pair: `api-key` :: `{QUERY_KEY}`
 
+Click "**Save**" and then "**+ New Step**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231766339-1b3339c3-c5c1-4e7d-bd71-5ff3a11c69ef.png" width="800" title="Snipped: April 13, 2023" />
+
+
 -----
 
 ## Exercise 3: Create App
