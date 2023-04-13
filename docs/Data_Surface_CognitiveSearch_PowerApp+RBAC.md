@@ -265,6 +265,7 @@ Click "**Create**".
 
 <img src="https://user-images.githubusercontent.com/44923999/231812219-9bd174c6-ddf6-4ec3-9d4a-a3aece0b9c2c.png" width="800" title="Snipped: April 13, 2023" />
 
+### Insert Controls
 Click "**Add an item from the Insert pane**".
 
 <img src="https://user-images.githubusercontent.com/44923999/231812785-0b6bd99f-d782-48b5-8e6e-e773efe2d9f0.png" width="800" title="Snipped: April 13, 2023" />
@@ -281,6 +282,14 @@ Consider personalizing look-and-feel {e.g., control width, border size, color, e
 *	**Button** … 1) change "Text" property to value "Search"
 *	**Text Label** … 1) change "Border thickness" to "1" and 2) change "Vertical align" to "Top"
 
+### Enable Power Automate
+
+Click the cog icon in the upper right of the screen to open the Settings pop-up menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/231860561-393dc7f0-6eda-4d07-b651-3318bed1ba72.png" width="800" title="Snipped: April 13, 2023" />
+
+Navigate to "**Upcoming Features**", and then the "**Retired**" tab.<br>
+Scroll to the bottom of the options and switch "**Enable classic Power Automate pane**" to "**On**".
 
 LOREM IPSUM
 
