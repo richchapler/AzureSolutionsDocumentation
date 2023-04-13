@@ -22,13 +22,14 @@ This solution requires the following resources:
 This solution will address requirements in three exercises:
 
 * Exercise 1: Prepare Index
-* Exercise 2: Create Flow
-* Exercise 3: Create App
+* Exercise 2: Secure Index
+* Exercise 3: Create Flow
+* Exercise 4: Create App
 
 -----
 
 ## Exercise 1: Prepare Index
-In this exercise, we will create an index using sample data, create a Demo App, and then configure index security.
+In this exercise, we will create an index using sample data.
 
 ### Step 1: Create Index
 
@@ -79,7 +80,8 @@ Use Windows Explorer to open your "**Downloads**" folder and then the new "**AzS
 
 <img src="https://user-images.githubusercontent.com/44923999/230919150-61603545-44b7-41c9-8066-a1150bc9f455.png" width="800" title="Snipped: April 10, 2023" />
 
-### Step 3: Secure Index
+## Exercise 1: Secure Index
+In this exercise, we will configure index security.
 
 The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**" directly in the auto-generated HTML:
 
@@ -94,7 +96,7 @@ To secure the index using Role-Based Access Control (RBAC), we must:
 * Modify the "**API Access Control**" setting
 * Programmatically set index permissions for an Azure Active Directory user or group
 
-#### Step 3a: Modify "**API Access Control**"
+### Step 1: Modify "**API Access Control**"
 
 Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping of the left-hand navigation.
 
@@ -102,7 +104,7 @@ Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping
 
 Under the "**API access control**" header, click to select the "**Role-based access control**" radio button.
 
-#### Step 3b: Programmatically set index permissions
+### Step 2: Programmatically set index permissions
 
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
@@ -151,7 +153,7 @@ Navigate to the User in Azure Active Directory, and then click "**Azure role ass
 
 -----
 
-## Exercise 2: Create Flow
+## Exercise 3: Create Flow
 In this exercise, we will create a Power Automate Flow that calls the Cognitive Search API.
 
 <img src="https://user-images.githubusercontent.com/44923999/231559914-ca3c7db4-68d8-4464-8be0-8bede8546dfc.png" width="800" title="Snipped: April 12, 2023" />
@@ -245,8 +247,12 @@ _NOTE: OPEN AZURE SUPPORT CASE SUPPORTING USE OF RBAC FOR API CALL INSTEAD OF QU
 
 -----
 
-## Exercise 3: Create App
-In this exercise, we will create an app that securely queries "**realestate-us-sample-index**" using the Power Automate Flow created in Exercise 2.
+## Exercise 4: Create App
+In this exercise, we will create an app that queries "**realestate-us-sample-index**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231806537-5c85eada-9cc7-4a10-a0de-c42284c978cb.png" width="800" title="Snipped: April 13, 2023" />
+
+Navigate to Power Apps, sign in if required, click "**+ Create**", and then click "**Blank app**" on the resulting page.
 
 LOREM IPSUM
 
