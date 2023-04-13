@@ -330,11 +330,11 @@ Click "**Save**".
 
 Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
 
-<img src="https://user-images.githubusercontent.com/44923999/231865423-6fe6029f-2064-4bf9-a6cc-c269e1d87d8b.png" width="800" title="Snipped: April 13, 2023" />
-![image](https://user-images.githubusercontent.com/44923999/.png)
+<img src="https://user-images.githubusercontent.com/44923999/231867004-323f9426-1495-46a2-903d-725c150ba8a6.png" width="800" title="Snipped: April 13, 2023" />
 
+Enter a query string and then click "**Search**".
 
-LOREM IPSUM
+TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 -----
 
