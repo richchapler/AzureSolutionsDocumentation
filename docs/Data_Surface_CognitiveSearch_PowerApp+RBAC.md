@@ -272,7 +272,7 @@ Click "**Add an item from the Insert pane**".
 Insert the following controls:
 *	**Text Input** … for search query input
 *	**Button** … for search query submit
-*	**Text Label** … for search result surfacing
+*	**Text Label** … for search result display
 
 Employ formatting {e.g., control width, border size, color, etc.} to enhance usability.
 
