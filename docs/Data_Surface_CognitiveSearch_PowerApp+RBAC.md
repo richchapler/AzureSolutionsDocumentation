@@ -347,6 +347,8 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 * Application Registrations can be assigned a role for a Search Service, but not a Search Index 
 * Application Registration credentials {i.e., Client ID and Client Secret} must be used to generate a Bearer Token
 * Search API Authorization is possible only for API Keys or Bearer Tokens
+* Even if we were able to authentication via some sort of delegated {i.e., use user permissions}, the authorized user would still have access to everything in the Search Service
+* NEED TO EXPLORE WHETHER THE SDK USES INDEX-LEVEL PERMISSIONS 
 
 -----
 
