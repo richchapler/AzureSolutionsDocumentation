@@ -344,4 +344,5 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 ## Reference
 
-* [https://learn.microsoft.com/en-us/azure/search/search-howto-aad?tabs=config-svc-portal%2Caad-rest](https://learn.microsoft.com/en-us/azure/search/search-howto-aad?tabs=config-svc-portal%2Caad-rest)
+* [Connect to Azure Cognitive Search using Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/azure/search/search-security-rbac?tabs=config-svc-rest%2Croles-portal%2Ctest-portal%2Ccustom-role-portal%2Cdisable-keys-portal)
+* [Authorize access to a search app using Azure Active Directory](https://learn.microsoft.com/en-us/azure/search/search-howto-aad?tabs=config-svc-portal%2Caad-rest)
