@@ -342,12 +342,12 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 -----
 
-## Challenges
+## Why I didn't use API
 
+* Search API Authorization is possible only for API Keys (not allowed by use case) or Bearer Tokens (OAuth)
+* OAuth uses Application Registration credentials {i.e., Client ID and Client Secret} to generate a Bearer Token
 * Application Registrations can be assigned a role for a Search Service, but not a Search Index 
-* Application Registration credentials {i.e., Client ID and Client Secret} must be used to generate a Bearer Token
-* Search API Authorization is possible only for API Keys or Bearer Tokens
-* Even if we were able to authentication via some sort of delegated {i.e., use user permissions}, the authorized user would still have access to everything in the Search Service
+* Even if we were able to authenticate via delegation {i.e., use user permissions}, the authorized user would still have access to everything in the Search Service because the authorization would be based on the Application Registration
 
 ### Ideas
   * EXPLORE WHETHER THE SDK USES INDEX-LEVEL PERMISSIONS (IF SO, BUILD A WEB APP)
