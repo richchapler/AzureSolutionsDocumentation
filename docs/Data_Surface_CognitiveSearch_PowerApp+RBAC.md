@@ -362,3 +362,4 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 * [Azure Cognitive Search Service REST](https://learn.microsoft.com/en-us/rest/api/searchservice/)
 * [Connect to Azure Cognitive Search using Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/azure/search/search-security-rbac?tabs=config-svc-rest%2Croles-portal%2Ctest-portal%2Ccustom-role-portal%2Cdisable-keys-portal)
 * [Authorize access to a search app using Azure Active Directory](https://learn.microsoft.com/en-us/azure/search/search-howto-aad?tabs=config-svc-portal%2Caad-rest)
+* [OAuth 2.0 authentication with Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/auth-oauth2)
