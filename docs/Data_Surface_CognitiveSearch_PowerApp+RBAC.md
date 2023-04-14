@@ -342,6 +342,14 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 -----
 
+## Notes
+
+* It isn't possible to use an Application Registration to secure a Search Index
+* Application Registration (Client) credentials must be used to generate a token
+* A token (or Query Key) is required to use the Search API
+
+-----
+
 ## Reference
 
 * [Azure Cognitive Search Service REST](https://learn.microsoft.com/en-us/rest/api/searchservice/)
