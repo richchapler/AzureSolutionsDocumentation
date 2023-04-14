@@ -346,6 +346,7 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 * Search API Authorization is possible only for API Keys (not allowed by use case) or Bearer Tokens (OAuth)
 * OAuth uses Application Registration credentials {i.e., Client ID and Client Secret} to generate a Bearer Token
+  _You cannot request a bearer token from Azure Active Directory (AAD) OAuth without a Client_ID. The OAuth 2.0 client credentials grant flow permits a web service (confidential client) to use its own credentials, instead of impersonating a user, to authenticate when calling another web service_
 * Application Registrations can be assigned a role for a Search Service, but not a Search Index 
 * Even if we were able to authenticate via delegation {i.e., use user permissions}, the authorized user would still have access to everything in the Search Service because the authorization would be based on the Application Registration
 
