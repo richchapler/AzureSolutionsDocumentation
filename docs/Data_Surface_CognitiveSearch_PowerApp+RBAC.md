@@ -344,9 +344,9 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 ## Notes
 
-* It isn't possible to use an Application Registration to secure a Search Index
-* Application Registration (Client) credentials must be used to generate a token
-* A token (or Query Key) is required to use the Search API
+* Application Registrations can be assigned a role for a Search Service, but not a Search Index 
+* Application Registration credentials {i.e., Client ID and Client Secret} must be used to generate a Bearer Token
+* Search API Authorization is possible only for API Keys or Bearer Tokens
 
 -----
 
