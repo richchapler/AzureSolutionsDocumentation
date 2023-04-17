@@ -301,6 +301,10 @@ Prompt | Entry
 **Body** | Modify and enter: `grant_type=client_credentials&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&scope=https://search.azure.com/.default`
 
 Click "**Save**" and then "**+ New Step**".<br>
+On the new "**Choose an operation**" step, search for and select "**HTTP**".<br>
+Rename the operation to "**Get Results**".
+
+<img src="https://user-images.githubusercontent.com/44923999/232534667-5912f141-a694-4fc4-ae37-8cb7dd27130d.png" width="800" title="Snipped: April 17, 2023" />
 
 
 
@@ -309,12 +313,8 @@ Click "**Save**" and then "**+ New Step**".<br>
 
 
 
+concat('Bearer ', body('Get_Token'))
 
-
-
-
-
-Click "**Save**" and then "**+ New Step**".
 
 <img src="https://user-images.githubusercontent.com/44923999/231766720-007b56fc-36ac-4fc0-90e8-c4c2df744f0b.png" width="800" title="Snipped: April 13, 2023" />
 
