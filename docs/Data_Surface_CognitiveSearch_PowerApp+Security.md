@@ -1,4 +1,4 @@
-# Surface Data: Cognitive Search, RBAC-secured PowerApp (WiP)
+# Surface Data: Cognitive Search, Secured PowerApp (WiP)
 _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 <img src="https://user-images.githubusercontent.com/44923999/231556765-3276ee63-1883-4176-af10-36a1ea3a9e12.png" width="1000" />
@@ -7,8 +7,8 @@ _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 This solution considers the following requirements:
 
 * "We want to share our secured Cognitive Search index with our community of business users"
-* "We want to use Role-Based Access Control {i.e., Azure Active Directory} for all security"
-* "Since the Demo App only supports QueryKey-based security, we need an alternate solution"
+* "We want to use Role-Based Access Control {i.e., Azure Active Directory} to secure wherever possible"
+* "The Demo App is great, but we need to produce an app that we can easily enhance (with as little code as possible)"
 
 ## Prerequisites
 This solution requires the following resources:
@@ -25,6 +25,7 @@ This solution will address requirements in three exercises:
 * Exercise 2: Secure Index
 * Exercise 3: Create Flow
 * Exercise 4: Create App
+* Exercise 5: Secure App
 
 -----
 
@@ -339,6 +340,13 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 -----
 
 **Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 5: Secure Index
+In this exercise, we will secure and publish the Power App.
+
+LOREM IPSUM
 
 -----
 
