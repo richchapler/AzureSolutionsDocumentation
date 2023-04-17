@@ -314,7 +314,7 @@ Prompt | Entry
 :----- | :-----
 **Method** | Select "**GET**"
 **URI** | Modify and enter:<br> expression `https://{SERVICE_NAME}.search.windows.net/indexes/{INDEX_NAME}/docs?api-version=2020-06-30&search=@{triggerBody()['text']}`
-**Headers** | Modify and enter key-value pairs:<br>`Authorization` :: expression `concat('Bearer ', body('Get_Token'))`<br>`content-type` :: `application/json`
+**Headers** | Modify and enter key-value pairs:<br>`Authorization` :: expression `concat('Bearer ', body('Get_Token').access_token)`<br>`content-type` :: `application/json`
 **Body** | Modify and enter: `grant_type=client_credentials&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&scope=https://search.azure.com/.default`
 
 Click "**Save**".
