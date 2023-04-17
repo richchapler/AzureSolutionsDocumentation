@@ -276,6 +276,8 @@ Navigate to Power Automate, sign in if required, click "**+ Create**", and then 
 On the resulting "**Build**..." pop-up, enter a meaningful "**Flow name**" and select "**PowerApps (V2)**" from the "**Choose**..." list.<br>
 Click "**Create**".
 
+#### PowerApps Trigger
+
 <img src="https://user-images.githubusercontent.com/44923999/232530903-7edbf654-8bbd-47ee-b916-908c37fa8a16.png" width="800" title="Snipped: April 17, 2023" />
 
 On the new flow designer page, click to expand the "**PowerApps (V2)**" trigger, and then click "**+ Add an input**".<br>
@@ -288,8 +290,9 @@ Prompt | Entry
 **Description** | Enter "**Examples: *, $top=10, $top=10&search=***"
 
 Click "**+ New Step**".<br>
+
+#### Get Token
 On the new "**Choose an operation**" step, search for and select "**HTTP**".<br>
-Rename the operation to "**Get Token**".
 
 <img src="https://user-images.githubusercontent.com/44923999/232532691-05e6cedf-b011-4599-9d62-30ab73b42e66.png" width="800" title="Snipped: April 17, 2023" />
 
@@ -300,20 +303,27 @@ Prompt | Entry
 **Headers** | Modify and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
 **Body** | Modify and enter: `grant_type=client_credentials&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&scope=https://search.azure.com/.default`
 
-Click "**Save**" and then "**+ New Step**".<br>
+Click "**Save**" and then "**+ New Step**".
+
+#### Get Results
 On the new "**Choose an operation**" step, search for and select "**HTTP**".<br>
-Rename the operation to "**Get Results**".
 
 <img src="https://user-images.githubusercontent.com/44923999/232534667-5912f141-a694-4fc4-ae37-8cb7dd27130d.png" width="800" title="Snipped: April 17, 2023" />
 
+Prompt | Entry
+:----- | :-----
+**Method** | Select "**GET**"
+**URI** | Modify and enter:<br> expression `https://{SERVICE_NAME}.search.windows.net/indexes/{INDEX_NAME}/docs?api-version=2020-06-30&search=@{triggerBody()['text']}`
+**Headers** | Modify and enter key-value pairs:<br>`Authorization` :: expression `concat('Bearer ', body('Get_Token'))`<br>`content-type` :: `application/json`
+**Body** | Modify and enter: `grant_type=client_credentials&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&scope=https://search.azure.com/.default`
+
+Click "**Save**".
 
 
 
 
 
 
-
-concat('Bearer ', body('Get_Token'))
 
 
 <img src="https://user-images.githubusercontent.com/44923999/231766720-007b56fc-36ac-4fc0-90e8-c4c2df744f0b.png" width="800" title="Snipped: April 13, 2023" />
