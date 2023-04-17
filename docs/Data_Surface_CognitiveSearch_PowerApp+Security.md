@@ -92,20 +92,45 @@ var automagic = new AzSearch.Automagic({ index: "{INDEX_NAME}", queryKey: "{QUER
 
 If we remove the queryKey, the Demo App will not work... and, `AzSearch.Automagic(...` only works with queryKey.<br>
 
-To secure the index using Role-Based Access Control (RBAC), we must:
+To use Role-Based Access Control (RBAC), we will:
 
 * Modify the "**API Access Control**" setting
+* Assign Azure roles using the Azure portal
 * Programmatically set index permissions for an Azure Active Directory user or group
 
 ### Step 1: Modify "**API Access Control**"
-
 Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping of the left-hand navigation.
 
 <img src="https://user-images.githubusercontent.com/44923999/230929406-ae8bc92b-109b-48ff-9932-40202c027840.png" width="800" title="Snipped: April 10, 2023" />
 
 Under the "**API access control**" header, click to select the "**Role-based access control**" radio button.
 
-### Step 2: Programmatically set index permissions
+### Step 2: Assign Azure roles using the Azure portal
+In this step, we will secure the Search Service with role-based access control.
+
+Navigate to **Access control (IAM)**.
+
+<img src="https://user-images.githubusercontent.com/44923999/232515340-45b0a61a-31e0-46e3-9368-00a303ca291e.png" width="800" title="Snipped: April 17, 2023" />
+
+Click "**Add**" and then "**Add role assignment**" on the resulting drop-down menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/232515664-f79f3dad-5062-4cd5-afaf-5edd9d3d649f.png" width="800" title="Snipped: April 17, 2023" />
+
+On the "**Add role assignment**" page, "**Role**" tab, search for and then select "**Search Index Data Reader**".<br>
+Click "**Next**".
+
+<img src="https://user-images.githubusercontent.com/44923999/232516374-d03533bb-f77d-457b-b465-521bd416ad84.png" width="800" title="Snipped: April 17, 2023" />
+
+On the "**Add role assignment**" page, "**Members**" tab, click "**+ Select members**".<br>
+Search for and then select your Application Registration. Click "**Select**".<br>
+Click "**Next**".
+
+<img src="https://user-images.githubusercontent.com/44923999/232516943-3c7067a3-3806-4291-b035-22dac3cb9542.png" width="800" title="Snipped: April 17, 2023" />
+
+On the "**Add role assignment**" page, "**Review + assign**" tab, review settings and then click "**Review + Assign**".
+
+### Step 3: Programmatically set index permissions
+In this step, we will secure the Search Index with role-based access control.
 
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
