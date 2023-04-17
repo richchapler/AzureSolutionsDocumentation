@@ -81,7 +81,7 @@ Use Windows Explorer to open your "**Downloads**" folder and then the new "**AzS
 
 <img src="https://user-images.githubusercontent.com/44923999/230919150-61603545-44b7-41c9-8066-a1150bc9f455.png" width="800" title="Snipped: April 10, 2023" />
 
-## Exercise 1: Secure Index
+## Exercise 2: Secure Index
 In this exercise, we will configure index security.
 
 The default Demo App {i.e., **AzSearch.html**} includes the index "**queryKey**" directly in the auto-generated HTML:
