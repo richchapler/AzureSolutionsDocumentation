@@ -308,62 +308,43 @@ Click "**Save**" and then "**+ New Step**".
 #### Get Results
 On the new "**Choose an operation**" step, search for and select "**HTTP**".<br>
 
-<img src="https://user-images.githubusercontent.com/44923999/232534667-5912f141-a694-4fc4-ae37-8cb7dd27130d.png" width="800" title="Snipped: April 17, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/232538835-f365181b-e4c0-4578-ac71-7b95cb4fc3b8.png" width="800" title="Snipped: April 17, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **Method** | Select "**GET**"
-**URI** | Modify and enter:<br> expression `https://{SERVICE_NAME}.search.windows.net/indexes/{INDEX_NAME}/docs?api-version=2020-06-30&search=@{triggerBody()['text']}`
+**URI** | Modify and enter:<br> expression `https://{SERVICE_NAME}.search.windows.net/indexes/{INDEX_NAME}/docs?api-version=2020-06-30&@{triggerBody()['text']}`
 **Headers** | Modify and enter key-value pairs:<br>`Authorization` :: expression `concat('Bearer ', body('Get_Token').access_token)`<br>`content-type` :: `application/json`
-**Body** | Modify and enter: `grant_type=client_credentials&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&scope=https://search.azure.com/.default`
 
-Click "**Save**".
+Click "**Save**" and then "**+ New Step**".
 
-
-
-
-
-
-
-
-<img src="https://user-images.githubusercontent.com/44923999/231766720-007b56fc-36ac-4fc0-90e8-c4c2df744f0b.png" width="800" title="Snipped: April 13, 2023" />
-
+#### Respond to a PowerApp
 On the new "**Choose an operation**" step, search for and select "**Respond to a PowerApp or flow**".
 
-<img src="https://user-images.githubusercontent.com/44923999/231766835-1264402d-3de0-4a72-9897-5aa3e0be58f0.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/232539647-f3d204a2-5a43-427a-bdf1-0b73121aa4f7.png" width="800" title="Snipped: April 17, 2023" />
 
-On the new "**Respond to a PowerApp or flow**" step,  click "**+ Add an output**".
-
-<img src="https://user-images.githubusercontent.com/44923999/231767272-3f08c7ec-1463-462c-b50f-4cab3e4c040d.png" width="800" title="Snipped: April 13, 2023" />
-
-Select "**Text**" from the resulting "**Choose the type of output**" list.
-
-<img src="https://user-images.githubusercontent.com/44923999/231767570-8d7de38e-9a88-422e-a500-680c5c98cfd3.png" width="800" title="Snipped: April 13, 2023" />
+On the new "**Respond to a PowerApp or flow**" step,  click "**+ Add an output**".<br>
+Select "**Text**" from the resulting "**Choose the type of output**" list.<br>
+Complete the resulting form:
 
 Prompt | Entry
 :----- | :-----
 **Enter title** | Enter "**Query string**"
-**Enter a value to respond** | Click "**Add dynamic content**" and then select "**Body**" from the "**HTTP**" grouping
+**Enter a value to respond** | Click "**Add dynamic content**" and then select "**Body**" from the "**Get Results**" grouping
 
 Click "**Save**".
 
 ### Confirm Success
 
-Click "Test".
+Click "Test".<br>
 
-<img src="https://user-images.githubusercontent.com/44923999/231768843-7cea7b3b-44dc-465b-a2cb-a2388270489c.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/232540388-ceace2e9-51e4-4c98-802c-886fbe03341d.png" width="800" title="Snipped: April 17, 2023" />
 
-In the "**Test Flow**" pop-out, click the radio button for "**Manually**" and then click "**Test**".
-
-<img src="https://user-images.githubusercontent.com/44923999/231769672-d4851498-c2c5-4ed0-be04-39d642001f14.png" width="800" title="Snipped: April 13, 2023" />
-
-In the "**Run Flow**" pop-out, enter a "**Query string**" {e.g., `$top=1`} and then click "**Run flow**".
-
-<img src="https://user-images.githubusercontent.com/44923999/231769944-55ee3df6-8d8e-48ea-881e-2bdbecb6aca8.png" width="800" title="Snipped: April 13, 2023" />
-
+In the "**Test Flow**" pop-out, click the radio button for "**Manually**" and then click "**Test**".<br>
+In the "**Run Flow**" pop-out, enter a "**Query string**" {e.g., `$top=1`} and then click "**Run flow**".<br>
 Click "Done".
 
-<img src="https://user-images.githubusercontent.com/44923999/231770153-27803ff6-1441-4d09-861b-e4091704c311.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/232540871-149510bd-b975-4e72-ad65-0a0223d59265.png" width="800" title="Snipped: April 17, 2023" />
 
 You can expect a "**Your flow ran successfully**" message, along with a clickable visualization of the results.
 
