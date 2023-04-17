@@ -456,21 +456,6 @@ LOREM IPSUM
 
 -----
 
-## Why I didn't use API
-
-* Search API Authorization is possible only for API Keys (not allowed by use case) or Bearer Tokens (OAuth)
-* OAuth uses Application Registration credentials {i.e., Client ID and Client Secret} to generate a Bearer Token
-  _You cannot request a bearer token from Azure Active Directory (AAD) OAuth without a Client_ID. The OAuth 2.0 client credentials grant flow permits a web service (confidential client) to use its own credentials, instead of impersonating a user, to authenticate when calling another web service_
-* Application Registrations can be assigned a role for a Search Service, but not a Search Index 
-* Even if we were able to authenticate via delegation {i.e., use user permissions}, the authorized user would still have access to everything in the Search Service because the authorization would be based on the Application Registration
-* SDK sits on top of the API so has the same limitations
-
-### Ideas
-* EXPLORE WHETHER POWER AUTOMATE HAS A KEY VAULT CONNECTOR THAT WOULD USE CURRENT USER CREDENTIALS TO SEE IF THEY HAVE ACCESS TO THE QUERY KEY
-* LOCK DOWN POWER APP TO ONLY USERS THAT SHOULD HAVE ACCESS AND HAVE ONLY A SINGLE INDEX IN THE SEARCH SERVICE
-
------
-
 ## Reference
 
 * [Azure Cognitive Search Service REST](https://learn.microsoft.com/en-us/rest/api/searchservice/)
