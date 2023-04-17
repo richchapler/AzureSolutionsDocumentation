@@ -180,7 +180,10 @@ Navigate to the User in Azure Active Directory, and then click "**Azure role ass
 -----
 
 ## Exercise 3: Create Flow
-In this exercise, we will create a Power Automate Flow that calls the Cognitive Search API.
+In this exercise, we will create a Power Automate Flow that calls the Cognitive Search API.<br>
+Requests to the Cognitive Search API are secured with either a Query Key or Service Principal; both options are detailed below.
+
+### Option 1: Query Key
 
 <img src="https://user-images.githubusercontent.com/44923999/231559914-ca3c7db4-68d8-4464-8be0-8bede8546dfc.png" width="800" title="Snipped: April 12, 2023" />
 
@@ -265,7 +268,94 @@ Click "Done".
 
 You can expect a "**Your flow ran successfully**" message, along with a clickable visualization of the results.
 
-_NOTE: OPEN AZURE SUPPORT CASE SUPPORTING USE OF RBAC FOR API CALL INSTEAD OF QUERY KEY_
+### Option 2: Service Principal
+Navigate to Power Automate, sign in if required, click "**+ Create**", and then click "**Instant cloud flow**" on the resulting page.
+
+<img src="https://user-images.githubusercontent.com/44923999/232530345-a78ed782-2d4d-47fb-9101-8257c2189207.png" width="800" title="Snipped: April 17, 2023" />
+
+On the resulting "**Build**..." pop-up, enter a meaningful "**Flow name**" and select "**PowerApps (V2)**" from the "**Choose**..." list.<br>
+Click "**Create**".
+
+<img src="https://user-images.githubusercontent.com/44923999/232530903-7edbf654-8bbd-47ee-b916-908c37fa8a16.png" width="800" title="Snipped: April 17, 2023" />
+
+On the new flow designer page, click to expand the "**PowerApps (V2)**" trigger, and then click "**+ Add an input**".<br>
+Select "**Text**" from the resulting "**Choose the type of user input**" list.<br>
+Complete the resulting form:
+
+Prompt | Entry
+:----- | :-----
+**Input** | Enter "**Query string**"
+**Description** | Enter "**Examples: *, $top=10, $top=10&search=***"
+
+Click "**+ New Step**".<br>
+On the new "**Choose an operation**" step, search for and select "**HTTP**".<br>
+Rename the operation to "**Get Token**".
+
+<img src="https://user-images.githubusercontent.com/44923999/232532691-05e6cedf-b011-4599-9d62-30ab73b42e66.png" width="800" title="Snipped: April 17, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Method** | Select "**POST**"
+**URI** | Modify and enter:<br>`https://login.microsoftonline.com/{TENANT_ID}/oauth2/token`
+**Headers** | Modify and enter key-value pair: `content-type` :: `application/x-www-form-urlencoded`
+**Body** | Modify and enter: `grant_type=client_credentials&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&scope=https://search.azure.com/.default`
+
+Click "**Save**" and then "**+ New Step**".<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+Click "**Save**" and then "**+ New Step**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231766720-007b56fc-36ac-4fc0-90e8-c4c2df744f0b.png" width="800" title="Snipped: April 13, 2023" />
+
+On the new "**Choose an operation**" step, search for and select "**Respond to a PowerApp or flow**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231766835-1264402d-3de0-4a72-9897-5aa3e0be58f0.png" width="800" title="Snipped: April 13, 2023" />
+
+On the new "**Respond to a PowerApp or flow**" step,  click "**+ Add an output**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231767272-3f08c7ec-1463-462c-b50f-4cab3e4c040d.png" width="800" title="Snipped: April 13, 2023" />
+
+Select "**Text**" from the resulting "**Choose the type of output**" list.
+
+<img src="https://user-images.githubusercontent.com/44923999/231767570-8d7de38e-9a88-422e-a500-680c5c98cfd3.png" width="800" title="Snipped: April 13, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Enter title** | Enter "**Query string**"
+**Enter a value to respond** | Click "**Add dynamic content**" and then select "**Body**" from the "**HTTP**" grouping
+
+Click "**Save**".
+
+### Confirm Success
+
+Click "Test".
+
+<img src="https://user-images.githubusercontent.com/44923999/231768843-7cea7b3b-44dc-465b-a2cb-a2388270489c.png" width="800" title="Snipped: April 13, 2023" />
+
+In the "**Test Flow**" pop-out, click the radio button for "**Manually**" and then click "**Test**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231769672-d4851498-c2c5-4ed0-be04-39d642001f14.png" width="800" title="Snipped: April 13, 2023" />
+
+In the "**Run Flow**" pop-out, enter a "**Query string**" {e.g., `$top=1`} and then click "**Run flow**".
+
+<img src="https://user-images.githubusercontent.com/44923999/231769944-55ee3df6-8d8e-48ea-881e-2bdbecb6aca8.png" width="800" title="Snipped: April 13, 2023" />
+
+Click "Done".
+
+<img src="https://user-images.githubusercontent.com/44923999/231770153-27803ff6-1441-4d09-861b-e4091704c311.png" width="800" title="Snipped: April 13, 2023" />
+
+You can expect a "**Your flow ran successfully**" message, along with a clickable visualization of the results.
 
 -----
 
