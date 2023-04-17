@@ -463,3 +463,5 @@ LOREM IPSUM
 * [Authorize access to a search app using Azure Active Directory](https://learn.microsoft.com/en-us/azure/search/search-howto-aad?tabs=config-svc-portal%2Caad-rest)
 * [OAuth 2.0 authentication with Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/auth-oauth2)
 * [Microsoft identity platform and the OAuth 2.0 client credentials flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow)
+* PowerApps
+  * [Securing the app and data](https://learn.microsoft.com/en-us/power-apps/guidance/planning/security)
