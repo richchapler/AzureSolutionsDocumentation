@@ -433,15 +433,11 @@ Click "**Save**".
 
 ### Confirm Success
 
-
-
 Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
 
 <img src="https://user-images.githubusercontent.com/44923999/231867004-323f9426-1495-46a2-903d-725c150ba8a6.png" width="800" title="Snipped: April 13, 2023" />
 
 Enter a query string and then click "**Search**".
-
-TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 -----
 
@@ -450,9 +446,16 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 -----
 
 ## Exercise 5: Secure App
-In this exercise, we will secure the Power App.
+In this exercise, we will share and secure the Power App.
 
-LOREM IPSUM
+<img src="https://user-images.githubusercontent.com/44923999/232559336-7d027daa-22ab-4dd9-978f-86bdef34e28d.png" width="800" title="Snipped: April 17, 2023" />
+
+Click the share icon in the upper-right of the Power App screen.
+
+<img src="https://user-images.githubusercontent.com/44923999/232559494-bd29f796-8973-4a8b-bf8a-48c77b5b5015.png" width="800" title="Snipped: April 17, 2023" />
+
+On the resulting pop-out, input a value in "**Enter a name, email address, or Everyone**".<br>
+Confirm settings and then click "Share".
 
 -----
 
