@@ -449,8 +449,8 @@ TO-DO: JSON PARSING AND GALLERY PRESENTATION
 
 -----
 
-## Exercise 5: Secure Index
-In this exercise, we will secure and publish the Power App.
+## Exercise 5: Secure App
+In this exercise, we will secure the Power App.
 
 LOREM IPSUM
 
@@ -458,10 +458,12 @@ LOREM IPSUM
 
 ## Reference
 
-* [Azure Cognitive Search Service REST](https://learn.microsoft.com/en-us/rest/api/searchservice/)
-* [Connect to Azure Cognitive Search using Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/azure/search/search-security-rbac?tabs=config-svc-rest%2Croles-portal%2Ctest-portal%2Ccustom-role-portal%2Cdisable-keys-portal)
-* [Authorize access to a search app using Azure Active Directory](https://learn.microsoft.com/en-us/azure/search/search-howto-aad?tabs=config-svc-portal%2Caad-rest)
-* [OAuth 2.0 authentication with Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/auth-oauth2)
-* [Microsoft identity platform and the OAuth 2.0 client credentials flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow)
+* Cognitive Search
+  * [Azure Cognitive Search Service REST](https://learn.microsoft.com/en-us/rest/api/searchservice/)
+  * [Connect to Azure Cognitive Search using Azure role-based access control (Azure RBAC)](https://learn.microsoft.com/en-us/azure/search/search-security-rbac?tabs=config-svc-rest%2Croles-portal%2Ctest-portal%2Ccustom-role-portal%2Cdisable-keys-portal)
+  * [Authorize access to a search app using Azure Active Directory](https://learn.microsoft.com/en-us/azure/search/search-howto-aad?tabs=config-svc-portal%2Caad-rest)
+* Power Automate
+  * [OAuth 2.0 authentication with Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/auth-oauth2)
+  * [Microsoft identity platform and the OAuth 2.0 client credentials flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow)
 * PowerApps
   * [Securing the app and data](https://learn.microsoft.com/en-us/power-apps/guidance/planning/security)
