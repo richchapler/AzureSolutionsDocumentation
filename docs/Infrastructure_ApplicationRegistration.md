@@ -28,5 +28,3 @@ DisplayName Id                                   AppId
 ----------- --                                   -----
 rchaplersp  64429f26-f1cf-4bd2-8d55-fea37532e180 8c57558e-0a36-41c4-bd98-6b7efeb23fab
 ```
-
-_Note: Consider generating a Key Vault Secret for any Client Identifier and Client Secret values_
