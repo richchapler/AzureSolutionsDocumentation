@@ -25,7 +25,8 @@ This solution will address requirements in three exercises:
 * Exercise 2: Secure Index
 * Exercise 3: Create Flow
 * Exercise 4: Create App
-* Exercise 5: Secure App
+* Exercise 5: Enhance App
+* Exercise 6: Secure App
 
 -----
 
