@@ -455,9 +455,11 @@ There are many enhancements that will improve usability; we will focus on:
 * Filter
 * Thumbnails
 
-### Enable ParseJSON
+### Enhancement 1: Vertical Gallery
 
-Click the ellipses icon and then select "**Settings**" from the resulting drop-down menu.
+#### Enable ParseJSON Feature
+
+Navigate to Power Apps, click the ellipses icon, and then select "**Settings**" from the resulting drop-down menu.
 
 <img src="https://user-images.githubusercontent.com/44923999/231860561-393dc7f0-6eda-4d07-b651-3318bed1ba72.png" width="800" title="Snipped: April 13, 2023" />
 
@@ -465,7 +467,7 @@ Navigate to "**Upcoming Features**", and then the "**Experimental**" tab.<br>
 Search for and turn on "**ParseJSON function and untyped objects**".<br>
 Close the pop-up menu.
 
-### Vertical Gallery
+#### Insert Vertical Gallery
 Navigate to Power Apps.
 
 <img src="https://user-images.githubusercontent.com/44923999/232920640-bb254f93-e583-48ff-93ae-e6e74d6bd9d7.png" width="800" title="Snipped: April 18, 2023" />
