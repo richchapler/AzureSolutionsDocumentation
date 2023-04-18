@@ -1,22 +1,32 @@
-# Infrastructure: Application Registration
-_(aka "Application", "Client", "Service Principal")_<br>
+# Application Registration
+_(aka "Application", "Client", "Security Principal", "Service Principal")_
 
-![image](https://user-images.githubusercontent.com/44923999/185750680-8bb8b009-3820-47de-8957-a206628516d7.png)
+<img src="https://user-images.githubusercontent.com/44923999/185750680-8bb8b009-3820-47de-8957-a206628516d7.png" width="1000" />
+
+[Quickstart: Register an application with the Microsoft identity platform](https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) and related documentation should serve as your primary source of information.
 
 _Notes_<br>
 _* Consider using a **System-Assigned Managed Identity** a **User-Assigned Managed Identity** rather than an Application Registration to minimize operational burden {e.g., maintenance of secrets, system downtime, etc.}_<br>
 _* You might use a multi-tenant Service Principal to support integration with third-party applications that prompt only for Client Id and Client Secret_
 
-### Create with Azure Portal
+## Create with PowerShell
 
-Complete the following steps:
+Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
-* Navigate to "**Azure Active Directory**" and click on "**App Registrations**" in the Manage group of the navigation pane
-* Click "**+ New Registration**"
-* Complete the "**Register an application**" form
+<img src="https://user-images.githubusercontent.com/44923999/232788882-f8bc59c9-2886-4601-9432-c5188c1df872.png" width="800" title="Snipped: April 18, 2023" />
 
-  <img src="https://user-images.githubusercontent.com/44923999/178037482-52960bbb-3b19-4950-9e44-646d98e9d3a4.png" width="600" title="Snipped: July 8, 2022" />
-  
-* Click **Register**
+Modify, copy / paste, and then run the following command:
+
+``` PowerShell
+New-AzADServicePrincipal -DisplayName {SERVICE_PRINCIPAL_NAME}
+```
+
+You can expect a result like:
+
+```
+DisplayName Id                                   AppId
+----------- --                                   -----
+rchaplersp  64429f26-f1cf-4bd2-8d55-fea37532e180 8c57558e-0a36-41c4-bd98-6b7efeb23fab
+```
 
 _Note: Consider generating a Key Vault Secret for any Client Identifier and Client Secret values_
