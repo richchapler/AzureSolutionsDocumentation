@@ -449,6 +449,40 @@ Enter a query string and then click "**Search**".
 ## Exercise 5: Enhance App
 In this exercise, we will enhance usability of the Power App.
 
+There are many enhancements that will improve usability; we will focus on:
+
+* Use of a Vertical Gallery (and related parsing of JSON)
+* Filter
+* Thumbnails
+
+### Vertical Gallery
+Navigate to Power Apps.
+
+<img src="https://user-images.githubusercontent.com/44923999/232918010-97608089-d4c6-4ccd-b97d-e396f1a048ec.png" width="800" title="Snipped: April 18, 2023" />
+
+Delete the Text Label control previously used to present results (as text).<br>
+Click "**+ Insert**" and then select "**Vertical gallery**" from the resulting drop-down menu.<br>
+Modify control layout to optimize presentation.
+
+<img src="https://user-images.githubusercontent.com/44923999/232918514-2a4cf006-5e9d-4616-b89b-d4393cb989d5.png" width="800" title="Snipped: April 18, 2023" />
+
+On the "**Gallery**" pop-out menu, "**Advanced**" tab", populate the following expression in the "**Items**" textbox:
+
+```
+ForAll(ParseJSON(searchAPI.results).value,{listingId:Text(ThisRecord.listingId), description:Text(ThisRecord.description)})
+```
+
+<img src="https://user-images.githubusercontent.com/44923999/232918900-d60833f6-1eae-45d3-be9f-6a4d200edd2b.png" width="800" title="Snipped: April 18, 2023" />
+
+On the "**Gallery**" pop-out menu, "**Properties**" tab", click the "**Edit**" link in the "**Fields**" row.<br>
+Complete the resulting "Data" pop-out form:
+
+Prompt | Entry
+:----- | :-----
+**Image1** | Leave "**SampleImage**"
+**Subtitle1** | Select "**description**"
+**Title1** | Select "**listingId**"
+
 LOREM IPSUM
 
 -----
