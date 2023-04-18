@@ -392,7 +392,7 @@ Consider personalizing look-and-feel {e.g., control width, border size, color, e
 
 ### Enable Power Automate
 
-Click the cog icon in the upper right of the screen to open the Settings pop-up menu.
+Click the ellipses icon and then select "Settings" from the resulting drop-down menu.
 
 <img src="https://user-images.githubusercontent.com/44923999/231860561-393dc7f0-6eda-4d07-b651-3318bed1ba72.png" width="800" title="Snipped: April 13, 2023" />
 
@@ -455,10 +455,20 @@ There are many enhancements that will improve usability; we will focus on:
 * Filter
 * Thumbnails
 
+### Enable ParseJSON
+
+Click the ellipses icon and then select "**Settings**" from the resulting drop-down menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/231860561-393dc7f0-6eda-4d07-b651-3318bed1ba72.png" width="800" title="Snipped: April 13, 2023" />
+
+Navigate to "**Upcoming Features**", and then the "**Experimental**" tab.<br>
+Search for and turn on "**ParseJSON function and untyped objects**".<br>
+Close the pop-up menu.
+
 ### Vertical Gallery
 Navigate to Power Apps.
 
-<img src="https://user-images.githubusercontent.com/44923999/232918010-97608089-d4c6-4ccd-b97d-e396f1a048ec.png" width="800" title="Snipped: April 18, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/232920640-bb254f93-e583-48ff-93ae-e6e74d6bd9d7.png" width="800" title="Snipped: April 18, 2023" />
 
 Delete the Text Label control previously used to present results (as text).<br>
 Click "**+ Insert**" and then select "**Vertical gallery**" from the resulting drop-down menu.<br>
