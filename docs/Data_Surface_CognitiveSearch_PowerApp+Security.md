@@ -446,7 +446,18 @@ Enter a query string and then click "**Search**".
 
 -----
 
-## Exercise 5: Secure App
+## Exercise 5: Enhance App
+In this exercise, we will enhance usability of the Power App.
+
+LOREM IPSUM
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 6: Secure App
 In this exercise, we will share and secure the Power App.
 
 <img src="https://user-images.githubusercontent.com/44923999/232559336-7d027daa-22ab-4dd9-978f-86bdef34e28d.png" width="800" title="Snipped: April 17, 2023" />
