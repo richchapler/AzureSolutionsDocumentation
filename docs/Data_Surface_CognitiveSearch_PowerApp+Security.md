@@ -96,8 +96,8 @@ If we remove the queryKey, the Demo App will not work... and, `AzSearch.Automagi
 To use Role-Based Access Control (RBAC), we will:
 
 * Modify the "**API Access Control**" setting
-* Assign Azure roles using the Azure portal
-* Programmatically set index permissions for an Azure Active Directory user or group
+* Assign Azure roles using the Azure portal (for RBAC- / AAD-based security at the Search **Service** level)
+* Programmatically set index permissions (for RBAC- / AAD-based security at the Search **Index** level)
 
 ### Step 1: Modify "**API Access Control**"
 Navigate to Cognitive Search, and then "**Keys**" in the "**Settings**" grouping of the left-hand navigation.
