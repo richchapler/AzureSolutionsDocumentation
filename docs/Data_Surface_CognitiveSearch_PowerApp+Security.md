@@ -461,10 +461,10 @@ There are many enhancements that will improve usability; we will focus on:
 
 Navigate to Power Apps, click the ellipses icon, and then select "**Settings**" from the resulting drop-down menu.
 
-<img src="https://user-images.githubusercontent.com/44923999/231860561-393dc7f0-6eda-4d07-b651-3318bed1ba72.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233089749-45663792-2b88-4f6e-8865-e65dc8f0ad7c.png" width="800" title="Snipped: April 13, 2023" />
 
 Navigate to "**Upcoming Features**", and then the "**Experimental**" tab.<br>
-Search for and turn on "**ParseJSON function and untyped objects**".<br>
+Search for and then turn on "**ParseJSON function and untyped objects**".<br>
 Close the pop-up menu.
 
 #### Insert Vertical Gallery
