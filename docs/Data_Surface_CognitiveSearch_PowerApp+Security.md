@@ -461,7 +461,7 @@ There are many enhancements that will improve usability; we will focus on:
 
 Navigate to Power Apps, click the ellipses icon, and then select "**Settings**" from the resulting drop-down menu.
 
-<img src="https://user-images.githubusercontent.com/44923999/233089749-45663792-2b88-4f6e-8865-e65dc8f0ad7c.png" width="800" title="Snipped: April 13, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233089749-45663792-2b88-4f6e-8865-e65dc8f0ad7c.png" width="800" title="Snipped: April 19, 2023" />
 
 Navigate to "**Upcoming Features**", and then the "**Experimental**" tab.<br>
 Search for and then turn on "**ParseJSON function and untyped objects**".<br>
@@ -470,7 +470,7 @@ Close the pop-up menu.
 #### Insert Vertical Gallery
 Navigate to Power Apps.
 
-<img src="https://user-images.githubusercontent.com/44923999/232920640-bb254f93-e583-48ff-93ae-e6e74d6bd9d7.png" width="800" title="Snipped: April 18, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233090917-4961e23a-4c6c-408a-9c7c-4134f4ff39c9.png" width="800" title="Snipped: April 19, 2023" />
 
 Delete the Text Label control previously used to present results (as text).<br>
 Click "**+ Insert**" and then select "**Vertical gallery**" from the resulting drop-down menu.<br>
