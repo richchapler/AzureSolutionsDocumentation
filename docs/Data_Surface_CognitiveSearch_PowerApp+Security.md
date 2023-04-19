@@ -466,8 +466,6 @@ Search for and then turn on "**ParseJSON function and untyped objects**".<br>
 Close the pop-up menu.
 
 #### Insert Vertical Gallery
-Navigate to Power Apps.
-
 <img src="https://user-images.githubusercontent.com/44923999/233090917-4961e23a-4c6c-408a-9c7c-4134f4ff39c9.png" width="800" title="Snipped: April 19, 2023" />
 
 Delete the Text Label control previously used to present results (as text).<br>
@@ -501,6 +499,14 @@ Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the men
 Enter a query string and then click "**Search**".
 
 ### Enhancement 2: Thumbnails
+#### Prepare "Thumbnails"
+For this documentation, I created a selection of icons using [Microsoft Bing, Image Create (powered by DALL-E)](https://www.bing.com/images/create)
+
+<img src="https://user-images.githubusercontent.com/44923999/233184788-e37a1bd2-663b-4518-9d28-4a30e75d6aa5.png" width="800" title="Snipped: April 19, 2023" />
+
+We will need various images: apartment, bungalow, condominium, duplex, flatlet, house
+
+Once you have created your images, upload them to Azure Storage.
 
 LOREM IPSUM
 
