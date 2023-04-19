@@ -501,7 +501,7 @@ Enter a query string and then click "**Search**".
 
 ### Enhancement 2: Images {aka "Thumbnails"}
 #### Prepare "Thumbnails"
-For this documentation, I created a selection of icons using [Microsoft Bing, Image Create (powered by DALL-E)](https://www.bing.com/images/create)
+For this documentation, I created a selection of icons using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create)
 
 <img src="https://user-images.githubusercontent.com/44923999/233184788-e37a1bd2-663b-4518-9d28-4a30e75d6aa5.png" width="800" title="Snipped: April 19, 2023" />
 
