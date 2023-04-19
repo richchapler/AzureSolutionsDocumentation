@@ -17,6 +17,7 @@ This solution requires the following resources:
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Power Apps**](https://powerapps.microsoft.com/en-us/)
 * [**Power Automate**](https://powerautomate.microsoft.com/en-us/)
+* [**Storage Account**](Infrastructure_StorageAccount.md) with "images" container
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
@@ -449,11 +450,11 @@ Enter a query string and then click "**Search**".
 ## Exercise 5: Enhance App
 In this exercise, we will enhance usability of the Power App.
 
-There are many enhancements that will improve usability; we will focus on:
+There are many enhancements that will improve usability; we will add and configure:
 
-* Use of a Vertical Gallery (and related parsing of JSON)
-* Filter
-* Thumbnails
+* Vertical Gallery (using JSON)
+* Images {aka "Thumbnails"}
+* Filters
 
 ### Enhancement 1: Vertical Gallery
 #### Enable ParseJSON Feature
@@ -498,7 +499,7 @@ Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the men
 
 Enter a query string and then click "**Search**".
 
-### Enhancement 2: Thumbnails
+### Enhancement 2: Images {aka "Thumbnails"}
 #### Prepare "Thumbnails"
 For this documentation, I created a selection of icons using [Microsoft Bing, Image Create (powered by DALL-E)](https://www.bing.com/images/create)
 
@@ -506,7 +507,9 @@ For this documentation, I created a selection of icons using [Microsoft Bing, Im
 
 We will need various images: apartment, bungalow, condominium, duplex, flatlet, house
 
-Once you have created your images, upload them to Azure Storage.
+<img src="https://user-images.githubusercontent.com/44923999/233185670-7a6b2c5e-33e2-4747-805a-3c5187140ed2.png" width="800" title="Snipped: April 19, 2023" />
+
+Once you have created your images, upload them to your "images" container on Azure Storage.
 
 LOREM IPSUM
 
