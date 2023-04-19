@@ -536,3 +536,4 @@ Confirm settings and then click "Share".
   * [ParseJSON function in Power Apps (experimental)](https://learn.microsoft.com/en-us/power-platform/power-fx/reference/function-parsejson)
   * [Securing the app and data](https://learn.microsoft.com/en-us/power-apps/guidance/planning/security)
   * [Set permission and share apps with colleagues](https://learn.microsoft.com/en-us/power-apps/teams/set-perms-and-share)
+  * [Power Fx formula reference for Power Apps](https://learn.microsoft.com/en-us/power-platform/power-fx/formula-reference)
