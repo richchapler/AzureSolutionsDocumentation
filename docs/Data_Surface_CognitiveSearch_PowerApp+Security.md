@@ -533,5 +533,6 @@ Confirm settings and then click "Share".
   * [OAuth 2.0 authentication with Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/auth-oauth2)
   * [Microsoft identity platform and the OAuth 2.0 client credentials flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow)
 * PowerApps
+  * [ParseJSON function in Power Apps (experimental)](https://learn.microsoft.com/en-us/power-platform/power-fx/reference/function-parsejson)
   * [Securing the app and data](https://learn.microsoft.com/en-us/power-apps/guidance/planning/security)
   * [Set permission and share apps with colleagues](https://learn.microsoft.com/en-us/power-apps/teams/set-perms-and-share)
