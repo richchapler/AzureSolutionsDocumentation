@@ -512,7 +512,7 @@ Enter a query string and then click "**Search**".
 ## Exercise 6: Secure App
 In this exercise, we will share and secure the Power App.
 
-<img src="https://user-images.githubusercontent.com/44923999/232559336-7d027daa-22ab-4dd9-978f-86bdef34e28d.png" width="800" title="Snipped: April 17, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233093399-cabe7e33-7165-43eb-aa78-dd3da2d1db67.png" width="800" title="Snipped: April 19, 2023" />
 
 Click the share icon in the upper-right of the Power App screen.
 
