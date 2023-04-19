@@ -456,9 +456,7 @@ There are many enhancements that will improve usability; we will focus on:
 * Thumbnails
 
 ### Enhancement 1: Vertical Gallery
-
 #### Enable ParseJSON Feature
-
 Navigate to Power Apps, click the ellipses icon, and then select "**Settings**" from the resulting drop-down menu.
 
 <img src="https://user-images.githubusercontent.com/44923999/233089749-45663792-2b88-4f6e-8865-e65dc8f0ad7c.png" width="800" title="Snipped: April 19, 2023" />
@@ -495,13 +493,16 @@ Prompt | Entry
 **Subtitle1** | Select "**description**"
 **Title1** | Select "**listingId**"
 
-##### Confirm Success
-
+#### Confirm Success
 Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
 
 <img src="https://user-images.githubusercontent.com/44923999/233091999-fa74c90c-3e7a-4ced-ac88-17ff17b3b816.png" width="800" title="Snipped: April 19, 2023" />
 
 Enter a query string and then click "**Search**".
+
+### Enhancement 2: Thumbnails
+
+LOREM IPSUM
 
 -----
 
