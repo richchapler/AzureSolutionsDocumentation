@@ -487,7 +487,7 @@ ForAll(ParseJSON(searchAPI.results).value,{listingId:Text(ThisRecord.listingId),
 <img src="https://user-images.githubusercontent.com/44923999/232918900-d60833f6-1eae-45d3-be9f-6a4d200edd2b.png" width="800" title="Snipped: April 18, 2023" />
 
 On the "**Gallery**" pop-out menu, "**Properties**" tab", click the "**Edit**" link in the "**Fields**" row.<br>
-Complete the resulting "Data" pop-out form:
+Complete the resulting "**Data**" pop-out form:
 
 Prompt | Entry
 :----- | :-----
@@ -495,7 +495,13 @@ Prompt | Entry
 **Subtitle1** | Select "**description**"
 **Title1** | Select "**listingId**"
 
-LOREM IPSUM
+##### Confirm Success
+
+Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
+
+<img src="https://user-images.githubusercontent.com/44923999/233091999-fa74c90c-3e7a-4ced-ac88-17ff17b3b816.png" width="800" title="Snipped: April 19, 2023" />
+
+Enter a query string and then click "**Search**".
 
 -----
 
