@@ -504,6 +504,28 @@ Enter a query string and then click "**Search**".
 
 LOREM IPSUM
 
+```
+If("apartment" in ThisItem.description
+    , "{BLOB_SAS_URL}"
+    , If("bungalow" in ThisItem.description
+        ,"{BLOB_SAS_URL}"
+        , If("condominium" in ThisItem.description
+            ,"{BLOB_SAS_URL}"
+            , If("duplex" in ThisItem.description
+                ,"{BLOB_SAS_URL}"
+                , If("flatlet" in ThisItem.description
+                    ,"{BLOB_SAS_URL}"
+                    , If("house" in ThisItem.description
+                        ,"{BLOB_SAS_URL}"
+                        ,""
+                        )
+                    )
+                )
+            )
+        )
+    )
+```
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
