@@ -548,6 +548,15 @@ _Note: Consider modifying "Image1" Size settings... for example, Width 80 and He
 
 Navigate to PowerApps, and add / modify the following controls:
 
+* "**SearchFor**" input... previously "TextInput1", will be used to capture the a value for Cognitive Search Index, Query String, `search=`
+* "**DesiredResultCount**" dropdown... new control, will be used to capture a value for Cognitive Search Index, Query String, `$top=`
+  * "Items" property set to `["1","5","10"]`
+  * "Default" property set to `"1"`
+* "**QueryString**" label... new control, will be used to concatenate the Query String value that will be included in the API request to Cognitive Search
+  * "Text" property set to `Concatenate("$top=",DesiredResultCount.Selected.Value,"&search=",SearchFor.Text)`
+
+_Note: In the snip above, you will see that I have also added label controls describing the various inputs_
+
 LOREM IPSUM
 
 -----
