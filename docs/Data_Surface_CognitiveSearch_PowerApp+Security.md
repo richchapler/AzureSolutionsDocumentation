@@ -509,6 +509,7 @@ Once you have created your images, upload them to your "images" container on Azu
 
 <img src="https://user-images.githubusercontent.com/44923999/233185670-7a6b2c5e-33e2-4747-805a-3c5187140ed2.png" width="800" title="Snipped: April 19, 2023" />
 
+#### Modify Image Control
 Navigate to PowerApps, and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
 
 <img src="https://user-images.githubusercontent.com/44923999/233417449-4a28503b-7fe1-4304-b911-7207b7c27d22.png" width="800" title="Snipped: April 20, 2023" />
@@ -533,9 +534,21 @@ Concatenate("https://{STORAGE_ACCOUNT_NAME}.blob.core.windows.net/images/"
 ,".jpg?{CONTAINER_BLOB_SAS_TOKEN}")
 ```
 
+#### Confirm Success
+Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
+
 <img src="https://user-images.githubusercontent.com/44923999/233418941-16386dd8-3644-415f-a758-92b5433e21fd.png" width="800" title="Snipped: April 20, 2023" />
 
 _Note: Consider modifying "Image1" Size settings... for example, Width 80 and Height 80_
+
+### Enhancement 3: Filters
+#### Modify Interface
+
+<img src="https://user-images.githubusercontent.com/44923999/233454582-ca918a1c-d708-420b-b08f-36fb30e65bff.png" width="800" title="Snipped: April 20, 2023" />
+
+Navigate to PowerApps, and add / modify the following controls:
+
+LOREM IPSUM
 
 -----
 
