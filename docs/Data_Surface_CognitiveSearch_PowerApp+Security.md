@@ -547,9 +547,9 @@ _Note: Consider modifying "Image1" Size settings... for example, Width 80 and He
 ## Exercise 6: Secure App
 In this exercise, we will share and secure the Power App.
 
-<img src="https://user-images.githubusercontent.com/44923999/233093399-cabe7e33-7165-43eb-aa78-dd3da2d1db67.png" width="800" title="Snipped: April 19, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233419284-0676178b-ed8f-404e-8cd2-41b3d67b3503.png" width="800" title="Snipped: April 20, 2023" />
 
-Click the share icon in the upper-right of the Power App screen.
+Click the "**Share**" icon in the upper-right of the Power App screen.
 
 <img src="https://user-images.githubusercontent.com/44923999/232559494-bd29f796-8973-4a8b-bf8a-48c77b5b5015.png" width="800" title="Snipped: April 17, 2023" />
 
