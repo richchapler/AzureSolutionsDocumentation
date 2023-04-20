@@ -501,39 +501,40 @@ Enter a query string and then click "**Search**".
 
 ### Enhancement 2: Images {aka "Thumbnails"}
 #### Prepare "Thumbnails"
-For this documentation, I created a selection of icons using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create)
+For this documentation, I created a selection of icons using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).
+You will need to prepare various images: apartment, bungalow, condominium, duplex, flatlet, house
 
 <img src="https://user-images.githubusercontent.com/44923999/233184788-e37a1bd2-663b-4518-9d28-4a30e75d6aa5.png" width="800" title="Snipped: April 19, 2023" />
 
-We will need various images: apartment, bungalow, condominium, duplex, flatlet, house
+Once you have created your images, upload them to your "images" container on Azure Storage.
 
 <img src="https://user-images.githubusercontent.com/44923999/233185670-7a6b2c5e-33e2-4747-805a-3c5187140ed2.png" width="800" title="Snipped: April 19, 2023" />
 
-Once you have created your images, upload them to your "images" container on Azure Storage.
+Navigate to PowerApps, and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
 
-LOREM IPSUM
+<img src="https://user-images.githubusercontent.com/44923999/233417449-4a28503b-7fe1-4304-b911-7207b7c27d22.png" width="800" title="Snipped: April 20, 2023" />
+
+On the "Advanced" tab in the "Image1" pop-out, modify and enter the following "Data" >> "Image" value:
 
 ```
-If("apartment" in ThisItem.description
-    , "{BLOB_SAS_URL}"
-    , If("bungalow" in ThisItem.description
-        ,"{BLOB_SAS_URL}"
-        , If("condominium" in ThisItem.description
-            ,"{BLOB_SAS_URL}"
-            , If("duplex" in ThisItem.description
-                ,"{BLOB_SAS_URL}"
-                , If("flatlet" in ThisItem.description
-                    ,"{BLOB_SAS_URL}"
-                    , If("house" in ThisItem.description
-                        ,"{BLOB_SAS_URL}"
-                        ,""
-                        )
+Concatenate("https://{STORAGE_ACCOUNT_NAME}.blob.core.windows.net/images/"
+, If("apartment" in ThisItem.description, "apartment"
+    , If("bungalow" in ThisItem.description, "bungalow"
+        , If("condominium" in ThisItem.description, "condominium"
+            , If("duplex" in ThisItem.description, "duplex"
+                , If("flatlet" in ThisItem.description, "flatlet"
+                    , If("house" in ThisItem.description, "house"
+                        , ""
                     )
                 )
             )
         )
     )
+)
+,".jpg?{CONTAINER_BLOB_SAS_TOKEN}")
 ```
+
+_Note: Consider modifying "Image1" Size settings... for example, Width 80 and Height 80_
 
 -----
 
