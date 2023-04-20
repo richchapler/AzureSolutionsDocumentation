@@ -557,7 +557,10 @@ Navigate to PowerApps, and add / modify the following controls:
 
 _Note: In the snip above, you will see that I have also added label controls describing the various inputs_
 
-LOREM IPSUM
+#### Confirm Success
+Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
+
+<img src="https://user-images.githubusercontent.com/44923999/233461771-e05eca79-40a6-446c-8122-5932699a81c7.png" width="800" title="Snipped: April 20, 2023" />
 
 -----
 
