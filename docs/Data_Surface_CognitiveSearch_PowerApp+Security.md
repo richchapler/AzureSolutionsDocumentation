@@ -534,6 +534,8 @@ Concatenate("https://{STORAGE_ACCOUNT_NAME}.blob.core.windows.net/images/"
 ,".jpg?{CONTAINER_BLOB_SAS_TOKEN}")
 ```
 
+<img src="https://user-images.githubusercontent.com/44923999/233418941-16386dd8-3644-415f-a758-92b5433e21fd.png" width="800" title="Snipped: April 20, 2023" />
+
 _Note: Consider modifying "Image1" Size settings... for example, Width 80 and Height 80_
 
 -----
