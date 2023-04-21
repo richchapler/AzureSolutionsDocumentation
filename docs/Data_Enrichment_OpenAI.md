@@ -254,7 +254,7 @@ Search for and then select "**Web**" from the resulting drop-down menu.
 
 <img src="https://user-images.githubusercontent.com/44923999/233690489-8d756a48-7993-4d61-8630-59bb47aac2ca.png" width="800" title="Snipped: April 21, 2023" />
 
-Click on the new Web activity and complete the form on the "**Settings**" tab:
+Click on the new "**Web**" activity and complete the form on the "**Settings**" tab:
 
 Prompt | Entry
 :----- | :-----
@@ -270,36 +270,15 @@ Click the "**+**" button in the "**Activities**" area of the "**ForEach**" compo
 
 Search for and then select "**Azure Data Explorer Command**" from the resulting drop-down menu.
 
+<img src="https://user-images.githubusercontent.com/44923999/233692806-57f16059-d739-4b0d-8d15-b4f2469271ee.png" width="800" title="Snipped: April 21, 2023" />
 
+Click on the new "**Azure Data Explorer Command**" activity, click the "**Connection**" tab, and then select your Data Explorer Linked Service.
 
+<img src="https://user-images.githubusercontent.com/44923999/233693255-6e4a4335-f296-44a8-bb4c-eac6cfb4fddc.png" width="800" title="Snipped: April 21, 2023" />
 
-LOREM IPSUM
-
------
-
-Our prompt, parameterized:
-
-```List the top three storm events similar in scope to '{EpisodeNarrative}', sorted descending by cost, and including a description of cost components.```
-
-Lorem Ipsum
-
+Click on the "**Command**" tab, and then populate the "**Command**" input with:
 ```
-{
-    "prompt": "List the top three examples of storm events in CASAR, NORTH CAROLINA similar in scope to 'Thunderstorm Wind', sorted descending by cost",
-    "max_tokens": 1000,
-    "temperature": 1
-}
-```
-
-
-Web1
-```
-{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":1}
-```
-
-Command
-```
-.ingest inline into table StormEvents_New with (format="psv") <| @{item().EventId}|"@{item().State}"|"@{item().EventType}"|"@{activity('Web1').output.choices[0].text}"
+.ingest inline into table StormEvents_Enriched with (format="psv") <| @{item().EventId}|"@{item().State}"|"@{item().EventType}"|"@{activity('Web').output.choices[0].text}"
 ```
 
 
