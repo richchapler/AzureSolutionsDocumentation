@@ -245,7 +245,7 @@ Prompt | Entry
 **Sequential** | Checked
 **Items** | Paste expression `@activity('Lookup').output.value`
 
-#### Sub-Activity: Copy Data
+#### Sub-Activity: Web
 Click the "**+**" button in the "**Activities**" area of the "**ForEach**" component.
 
 <img src="https://user-images.githubusercontent.com/44923999/233687764-ad003571-4727-4d4d-8d57-79ad8597bb93.png" width="800" title="Snipped: April 21, 2023" />
@@ -262,6 +262,16 @@ Prompt | Entry
 **Method** | Select "**POST**"
 **Body** | Paste:<br>`{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
 **Headers** | Modify and enter key-value pairs: `api-key` :: `{QUERY_KEY}` and `Content_Type` :: `application/json`
+
+#### Sub-Activity: Azure Data Explorer Command
+Click the "**+**" button in the "**Activities**" area of the "**ForEach**" component.
+
+<img src="https://user-images.githubusercontent.com/44923999/233692294-3242b90f-917c-4158-afb4-536d750589dd.png" width="800" title="Snipped: April 21, 2023" />
+
+Search for and then select "**Azure Data Explorer Command**" from the resulting drop-down menu.
+
+
+
 
 LOREM IPSUM
 
