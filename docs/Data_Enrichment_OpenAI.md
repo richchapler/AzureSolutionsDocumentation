@@ -296,6 +296,8 @@ Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview
 StormEvents_Enriched
 ```
 
+You should see three rows, with "**Comparables**" column populated from Azure Open AI.
+
 -----
 
 ## Reference
