@@ -1,4 +1,4 @@
-# Data Enrichment: Open AI
+# Data Enrichment: Azure OpenAI
 
 <img src="https://user-images.githubusercontent.com/44923999/227210296-1540091a-e156-41d9-9cfd-278246c311f1.png" width="1000" />
 
@@ -300,7 +300,7 @@ Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview
 StormEvents_Enriched
 ```
 
-You should see three rows, with "**Comparables**" column populated from Azure Open AI.
+You should see three rows, with "**Comparables**" column populated from Azure OpenAI.
 
 -----
 
