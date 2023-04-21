@@ -200,7 +200,7 @@ Prompt iteration can go on and on, but we have done enough for this exercise.
 ## Exercise 2: Create Pipeline
 In this exercise, we will bake our prompt into a Synapse Pipeline, parameterize from Data Explorer, StormEvents sample data and insert the result into a sink dataset.
 
-### Step 1: Prepare Destination {aka "Sink"}
+### Step 1: Prepare Destination
 
 Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview**" grouping of the left-hand navigation pane.
 
@@ -212,8 +212,15 @@ Right-click on the **StormEvents** table and then select "**Generate create scri
 
 Modify the generated script {i.e., change `.create table StormEvents` to `.create table StormEvents_Enriched` and click "**Run**".
 
+### Step 2: Create Pipeline
+
+Open Synapse Studio, and then the "**Integrate**" icon in the left-hand navigation bar.
+
+<img src="https://user-images.githubusercontent.com/44923999/233680690-cd720438-092a-4a8e-938a-e9a4b09df3f7.png" width="800" title="Snipped: April 21, 2023" />
 
 
+
+-----
 
 Our prompt, parameterized:
 
