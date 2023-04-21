@@ -234,17 +234,34 @@ Prompt | Entry
 Finally, paste the following **Query**: `StormEvents | project EventId, State, EventType | take 3`
 
 #### ForEach Activity
-Drag-and-drop a "**ForEach**" component from the "**Activities**" tree, "**Iteration & conditionals**" grouping.<br>
+Drag-and-drop a "**ForEach**" component from the "**Activities**" tree, "**Iteration & conditionals**" grouping.
 
 <img src="https://user-images.githubusercontent.com/44923999/233684613-5abef802-5f9f-404a-a36f-cfe1781440c5.png" width="800" title="Snipped: April 21, 2023" />
 
-Complete the form on the **Settings** tab:
+Complete the form on the "**Settings**" tab:
 
 Prompt | Entry
 :----- | :-----
 **Sequential** | Checked
 **Items** | Paste expression `@activity('Lookup').output.value`
-  
+
+#### Sub-Activity: Copy Data
+Click the "**+**" button in the "**Activities**" area of the "**ForEach**" component.
+
+<img src="https://user-images.githubusercontent.com/44923999/233687764-ad003571-4727-4d4d-8d57-79ad8597bb93.png" width="800" title="Snipped: April 21, 2023" />
+
+Search for and then select "**Web**" from the resulting drop-down menu.
+
+<img src="https://user-images.githubusercontent.com/44923999/233688186-e0575658-1c7a-4241-bca6-8b72dcf18600.png" width="800" title="Snipped: April 21, 2023" />
+
+Click on the new Web activity and complete the form on the "**Settings**" tab:
+
+Prompt | Entry
+:----- | :-----
+**URL** | Modify and then enter `https://{SERVICE_NAME}.openai.azure.com/openai/deployments/{MODEL_NAME}/completions?api-version=2022-12-01`
+**Method** | Select "**POST**"
+LOREM IPSUM
+
 -----
 
 Our prompt, parameterized:
