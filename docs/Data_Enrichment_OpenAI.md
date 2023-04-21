@@ -30,7 +30,7 @@ This documentation will address solution requirements in two exercises:
 -----
 
 ## Exercise 1: Prepare Prompt
-In this exercise, we will iteratively generate a prompt that can be used with an OpenAI DaVinci model.
+In this exercise, we will iteratively generate a prompt that can be used with an OpenAI ChatGPT model.
 
 Navigate to your Postman workspace and collection,<br>
 _{e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}_
