@@ -204,7 +204,7 @@ In this exercise, we will bake our prompt into a Synapse Pipeline, parameterize 
 
 Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview**" grouping of the left-hand navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/233679822-a6872d5e-d70c-42c6-ac15-e4350a49b46f.png" width="800" title="Snipped: April 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233680115-a71ddfba-1474-478a-b6e6-9f8e58228e10.png" width="800" title="Snipped: April 21, 2023" />
 
 Right-click on the **StormEvents** table and then select "**Generate create script**" in the resulting drop-down menu.
 
