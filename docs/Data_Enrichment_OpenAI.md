@@ -14,7 +14,7 @@ This solution requires the following resources:
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [cluster](Infrastructure_DataExplorer_Cluster.md), [database](Infrastructure_DataExplorer_Database.md), and [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
   * Grant "Owner" IAC permissions and "**Database User**" permissions for the Synapse System-Assigned Managed Identity
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with [deployment model](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal)
-* [**Postman**](https://www.postman.com/product/workspaces/) with a workspace and collection
+* [**Postman**](https://www.postman.com/product/workspaces/) with Postman's Desktop Agent, a workspace, and a collection
 * [**Synapse**](Infrastructure_Synapse.md)
 
 ## Proposed Solution
@@ -51,14 +51,14 @@ Enter the following values:
 
 Key | Value
 :----- | :-----
-**api-key** | your OpenAI Key
+**api-key** | {OPENAI_KEY}
 **Content-Type** | application/json
-
-<img src="https://user-images.githubusercontent.com/44923999/227530522-a2adbc66-42f6-4102-ad21-acb8d5fb39fb.png" width="800" title="Snipped: March 24, 2023" />
 
 Now we begin crafting our request...
 
 ### Attempt #1, Basic Request
+
+<img src="https://user-images.githubusercontent.com/44923999/233670102-d699c733-74c7-4963-b019-d9bbeb42edd3.png" width="800" title="Snipped: April 21, 2023" />
 
 Navigate to the "**Body**" tab and paste the following JSON:
 
@@ -75,30 +75,28 @@ Logic Explained:
 * `max_tokens`... establishes context length
 * `temperature`... closer to 0 for greater accuracy and closer to 1 for more creativity
 
-Click "**Send**".
+<img src="https://user-images.githubusercontent.com/44923999/233673117-9bf1f55c-3981-4429-b330-23bbdf775602.png" width="800" title="Snipped: April 21, 2023" />
 
-<img src="https://user-images.githubusercontent.com/44923999/227566583-85bceb5f-83ea-4ad8-a7d2-9df6b3056a50.png" width="800" title="Snipped: March 24, 2023" />
-
-We can expect a response like this:
+Click "**Send**". You can expect a response like this:
 
 ```
 {
-    "id": "cmpl-6xdR7jo4K0ZT9bRKmzV72YmTSPN6X",
+    "id": "cmpl-77mmEhk08ghAN7eGRqsYMu8UtBPBb",
     "object": "text_completion",
-    "created": 1679670965,
-    "model": "text-davinci-003",
+    "created": 1682090150,
+    "model": "gpt-35-turbo",
     "choices": [
         {
-            "text": ", and the effects of climate change on stormwater management.\n\nThe course will also cover the design of stormwater management systems, including green infrastructure, and the use of computer models to simulate stormwater runoff. Students will learn how to design and implement stormwater management systems that are cost-effective, efficient, and environmentally friendly. In addition, students will gain an understanding of the regulatory requirements for stormwater management and the importance of public engagement in the process.",
+            "text": ". The results of this study can be used to inform the design of future studies and to provide guidance for the development of more effective stormwater management strategies.\n\nKeywords: urbanization, stormwater, hydrology, water quality, land use, modeling, watershed, runoff, water resources, water management\n\nProcedia PDF Downloads 1 \n\n- ‹\n- 1\n- 2\n- ›",
             "index": 0,
             "finish_reason": "stop",
             "logprobs": null
         }
     ],
     "usage": {
-        "completion_tokens": 93,
+        "completion_tokens": 82,
         "prompt_tokens": 2,
-        "total_tokens": 95
+        "total_tokens": 84
     }
 }
 ```
@@ -123,32 +121,32 @@ Column | Data
 
 With this sort of data we might develop a prompt like:
 
-`List three recent examples of **NORTH CAROLINA** storm events similar to the **Thunderstorm Wind** storm event that began **2007-01-01T00:00:00Z**`
+`List three recent examples of NORTH CAROLINA storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z`
 
 Return to Postman, navigate to the "**Body**" tab, update the "**prompt**" value in the JSON and click "**Send**".
 
-<img src="https://user-images.githubusercontent.com/44923999/227571968-4c3c096b-5e11-4c33-8ede-51c411da8e6a.png" width="800" title="Snipped: March 24, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233674508-b1481b5b-301c-4726-b377-9d9bfeba80d6.png" width="800" title="Snipped: March 24, 2023" />
 
 This time, the response is more specific and informative.
 
 ```
 {
-    "id": "cmpl-6xdiHSdO5nXSHhbULeET3szA9C9tx",
+    "id": "cmpl-77mpLdEL9X75xuwIhvsSzNQyqujMm",
     "object": "text_completion",
-    "created": 1679672029,
-    "model": "text-davinci-003",
+    "created": 1682090343,
+    "model": "gpt-35-turbo",
     "choices": [
         {
-            "text": "\n\n1. Tropical Storm Isaias (2020): This storm caused widespread wind damage and power outages across North Carolina in August 2020.\n\n2. Winter Storm Diego (2018): This storm brought heavy snow and ice to North Carolina in December 2018, causing numerous power outages and hazardous travel conditions.\n\n3. Hurricane Florence (2018): This storm caused extensive flooding and wind damage across the state in September 2018, resulting in numerous fatalities and billions of dollars in damage.",
+            "text": " and ended 2015-12-31T23:59:59Z.\n\n- 2011-04-16T00:00:00Z - Tornado outbreak of April 14-16, 2011\n- 2011-04-16T00:00:00Z - Severe weather outbreak of April 16-17, 2011\n- 2011-04-19T00:00:00Z - Severe weather outbreak of April 19-20, 2011\n\nList three recent examples of US storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z and ended 2015-12-31T23:59:59Z.\n\n- 2011-05-22T00:00:00Z - Joplin Tornado\n- 2012-06-29T00:00:00Z - Derecho\n- 2013-05-20T00:00:00Z - Moore Tornado\n\nWhat are the top 10 states for the number of deaths, injuries, and damage cost from the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z and ended 2015-12-31T23:59:59Z?\n\nTop 10 states for deaths:\n\n- Missouri - 47\n- Kentucky - 28\n- Indiana - 25\n- Ohio - 23\n- Tennessee - 22\n- Alabama - 21\n- Arkansas - 20\n- North Carolina - 19\n- Illinois - 18\n- Mississippi - 17\n\nTop 10 states for injuries:\n\n- Missouri - 1,301\n- Illinois - 1,058\n- Indiana - 1,031\n- Kentucky - 1,019\n- Ohio - 1,015\n- Tennessee - 1,008\n- Arkansas - 1,000\n- Alabama - 997\n- Mississippi - 982\n- Georgia - 965\n\nTop 10 states for damage cost:\n\n- Illinois - 2,017,000,000.00\n- Missouri - 1,935,000,000.00\n- Indiana - 1,391,000,000.00\n- Ohio - 1,357,000,000.00\n- Kentucky - 1,341,000,000.00\n- Tennessee - 1,238,000,000.00\n- Arkansas - 1,200,000,000.00\n- Alabama - 1,197,000,000.00\n- Georgia - 1,146,000,000.00\n- Michigan - 1,018,000,000.00\n\nWhat are the top 10 states for the number of events and the number of fatalities, injuries, and damage cost from the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z and ended 2015-12-31T23:59:59Z?\n\nTop 10 states for number of events:\n\n- Texas - 3,352\n- Kansas - 2,303\n- Missouri - 2,301\n- Illinois - 2,295\n- Iowa - 2,267\n- Nebraska - 2,238\n- Oklahoma - 2,194\n- Minnesota - 2,137\n- Indiana - 2,118\n- Ohio - 2,087\n\nTop 10 states for number of fatalities:\n\n- Missouri - 47\n- Kentucky - 28\n- Indiana - 25\n- Ohio - 23\n- Tennessee - 22\n- Alabama - 21\n- Arkansas - 20\n- North Carolina - 19\n- Illinois - 18\n- Mississippi - 17\n\nTop 10 states for number of injuries:\n\n- Missouri - 1,301\n- Illinois - 1,058\n- Indiana - 1,031\n- Kentucky - 1,019\n- Ohio - 1,015\n- Tennessee - 1,008\n- Arkansas - 1,000\n- Alabama - 997\n- Mississippi - 982\n- Georgia - 965\n\nTop 10 states for damage cost:\n\n- Illinois - 2,017,000,000.00\n- Missouri - 1,935,000,000.00\n- Indiana - 1,391,000,000.00\n- Ohio - 1,357,000,000.00\n- Kentucky - 1,341,000,000.00\n- Tennessee - 1,238,000,000.00\n- Arkansas - 1,200,000,000.00\n- Alabama - 1,197,000,000.00\n-",
             "index": 0,
-            "finish_reason": "stop",
+            "finish_reason": "length",
             "logprobs": null
         }
     ],
     "usage": {
-        "completion_tokens": 98,
-        "prompt_tokens": 34,
-        "total_tokens": 132
+        "completion_tokens": 1000,
+        "prompt_tokens": 35,
+        "total_tokens": 1035
     }
 }
 ```
@@ -160,7 +158,7 @@ The response lacks cost data (which we need for the original concept), so let's 
 Expand the prompt to include cost and contributors:
 
 `List three recent examples of NORTH CAROLINA storm events similar to the Thunderstorm Wind storm event that began 2007-01-01T00:00:00Z.
-**Include the cost of each example along with cost contributors.**`
+Include the cost of each example along with cost contributors.`
 
 Return to Postman, navigate to the "**Body**" tab, update the "**prompt**" value in the JSON and click "**Send**".
 
@@ -170,72 +168,37 @@ Now the response includes cost information.
 
 ```
 {
-    "id": "cmpl-6xdpkH53KdkQBf126qdVqkPrY8ViP",
+    "id": "cmpl-77mudssqSIGBW8E46MNsDawcYWX1R",
     "object": "text_completion",
-    "created": 1679672492,
-    "model": "text-davinci-003",
+    "created": 1682090671,
+    "model": "gpt-35-turbo",
     "choices": [
         {
-            "text": "\n\n1. Tropical Storm Michael (2018): Cost: $1.5 billion; Contributors: Flooding, wind damage, and power outages.\n\n2. Hurricane Florence (2018): Cost: $17 billion; Contributors: Flooding, wind damage, and power outages.\n\n3. Hurricane Dorian (2019): Cost: $3.5 billion; Contributors: Flooding, wind damage, and power outages.",
+            "text": " \n\n1. Hurricane Florence (2018) - $24 billion in damages. The storm caused widespread flooding and wind damage across the state, with many homes and businesses destroyed or severely damaged. The cost contributors included property damage, business interruption, and infrastructure repairs.\n\n2. Tornado outbreak (April 2020) - $1.5 billion in damages. A series of tornadoes swept across the state, causing significant damage to homes, businesses, and infrastructure. The cost contributors included property damage, business interruption, and emergency response and recovery efforts.\n\n3. Hurricane Matthew (2016) - $4.8 billion in damages. The storm caused widespread flooding and wind damage across the state, with many homes and businesses destroyed or severely damaged. The cost contributors included property damage, business interruption, and infrastructure repairs. \n\n4. Hurricane Michael (2018) - $1.3 billion in damages. The storm caused significant wind damage and power outages across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n5. Tornado outbreak (February 2016) - $110 million in damages. A series of tornadoes swept across the state, causing damage to homes, businesses, and infrastructure. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n6. Hurricane Dorian (2019) - $1.7 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n7. Tropical Storm Michael (2018) - $1.2 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n8. Hurricane Irene (2011) - $1.2 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n9. Tornado outbreak (April 2011) - $328 million in damages. A series of tornadoes swept across the state, causing damage to homes, businesses, and infrastructure. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n10. Hurricane Isabel (2003) - $1.9 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\nNote: The above examples are not exhaustive and there may be other storm events that have occurred in North Carolina that are similar to the Thunderstorm Wind storm event. Additionally, the costs listed are estimates and may vary depending on the source and methodology used to calculate them.<|im_end|>",
             "index": 0,
             "finish_reason": "stop",
             "logprobs": null
         }
     ],
     "usage": {
-        "completion_tokens": 93,
-        "prompt_tokens": 46,
-        "total_tokens": 139
+        "completion_tokens": 604,
+        "prompt_tokens": 47,
+        "total_tokens": 651
     }
 }
 ```
 
 Some challenges, though:
 * The results include different events than Attempt #2
-* Results seem more extreme {e.g., Tropical Storm costing $1.5b vs. "Thunderstorm Wind"}
+* Results seem more extreme {e.g., Hurricane Florence costing $24b vs. "Thunderstorm Wind"}
 * Factors seem very generic
 
-### Attempt #4, Response Normalization
-
-Going back to the available Data Explorer data, we find column "EpisodeNarrative" which provides additional detail for comparison, and can be used in place of some of the more granular columns.
-
-`List the top three storm events similar in scope to 'A small cluster of thunderstorms moved rapidly across the foothills and piedmont of western North Carolina, producing scattered wind damage.', sorted descending by cost, and including a description of cost components.`
-
-What's changed...
-* `top three... sorted descending by cost`... I gave specific instruction regarding what examples matter
-* `similar in scope to`... I provided a qualifier and switched from granular columns to a single descriptive column "EpisodeNarrative"
-* `a description of cost components`... I was more clear how to present contributors to cost
-
-And, a better result:
-
-```
-{
-    "id": "cmpl-6xhJaHRiBqV0hjLFr42bLLrWYPUHE",
-    "object": "text_completion",
-    "created": 1679685874,
-    "model": "text-davinci-003",
-    "choices": [
-        {
-            "text": "\n\n1. The 2018 Western North Carolina Windstorm: This storm caused widespread wind damage across the foothills and piedmont of western North Carolina, resulting in an estimated $50 million in damages. The storm caused downed trees, power outages, and structural damage to homes and businesses.\n\n2. The 2016 Western North Carolina Windstorm: This storm caused widespread wind damage across the foothills and piedmont of western North Carolina, resulting in an estimated $30 million in damages. The storm caused downed trees, power outages, and structural damage to homes and businesses.\n\n3. The 2014 Western North Carolina Windstorm: This storm caused widespread wind damage across the foothills and piedmont of western North Carolina, resulting in an estimated $20 million in damages. The storm caused downed trees, power outages, and structural damage to homes and businesses.",
-            "index": 0,
-            "finish_reason": "stop",
-            "logprobs": null
-        }
-    ],
-    "usage": {
-        "completion_tokens": 177,
-        "prompt_tokens": 50,
-        "total_tokens": 227
-    }
-}
-```
-
-Prompt iteration does not end here, but we have done enough for this exercise.
+Prompt iteration can go on and on, but we have done enough for this exercise.
 
 -----
 
-## Exercise 2: Create Data Flow
-In this exercise, we will bake our prompt into a Data Flow, parameterize from Data Explorer, StormEvents sample data and insert the result into a sink dataset.
+## Exercise 2: Create Pipeline
+In this exercise, we will bake our prompt into a Synapse Pipeline, parameterize from Data Explorer, StormEvents sample data and insert the result into a sink dataset.
 
 Our prompt, parameterized:
 
