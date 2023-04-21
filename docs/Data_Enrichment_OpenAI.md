@@ -220,10 +220,10 @@ Open Synapse Studio, and then the "**Integrate**" icon in the left-hand navigati
 Click the "**+**" icon and then "**Pipeline**" in the resulting dropdown menu.
 
 #### Lookup Activity
+Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.
 
 <img src="https://user-images.githubusercontent.com/44923999/233682917-f4540c8f-ba39-49b6-bda6-03c24b337fd7.png" width="800" title="Snipped: April 21, 2023" />
 
-Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.<br>
 Complete the form on the "**Settings**" tab:
 
 Prompt | Entry
@@ -234,10 +234,10 @@ Prompt | Entry
 Finally, paste the following **Query**: `StormEvents | project EventId, State, EventType | take 3`
 
 #### ForEach Activity
+Drag-and-drop a "**ForEach**" component from the "**Activities**" tree, "**Iteration & conditionals**" grouping.<br>
 
 <img src="https://user-images.githubusercontent.com/44923999/233684613-5abef802-5f9f-404a-a36f-cfe1781440c5.png" width="800" title="Snipped: April 21, 2023" />
 
-Drag-and-drop a "**ForEach**" component from the "**Activities**" tree, "**Iteration & conditionals**" grouping.<br>
 Complete the form on the **Settings** tab:
 
 Prompt | Entry
