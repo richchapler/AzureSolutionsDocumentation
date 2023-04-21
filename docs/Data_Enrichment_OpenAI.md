@@ -206,11 +206,9 @@ Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview
 
 <img src="https://user-images.githubusercontent.com/44923999/233680115-a71ddfba-1474-478a-b6e6-9f8e58228e10.png" width="800" title="Snipped: April 21, 2023" />
 
-Right-click on the **StormEvents** table and then select "**Generate create script**" in the resulting drop-down menu.
+**Run** the following script.
+`.create table StormEvents_Enriched (EventId: long, State: string, EventType: string, Comparable: string)`
 
-`.create table StormEvents_Enriched (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string)`
-
-Modify the generated script {i.e., change `.create table StormEvents` to `.create table StormEvents_Enriched` and click "**Run**".
 
 ### Step 2: Create Pipeline
 Open Synapse Studio, and then the "**Integrate**" icon in the left-hand navigation bar.
@@ -260,7 +258,7 @@ Prompt | Entry
 :----- | :-----
 **URL** | Modify and then enter `https://{SERVICE_NAME}.openai.azure.com/openai/deployments/{MODEL_NAME}/completions?api-version=2022-12-01`
 **Method** | Select "**POST**"
-**Body** | Paste:<br>`{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
+**Body** | Paste:<br>`{"prompt":"Briefly describe the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
 **Headers** | Modify and enter key-value pairs: `api-key` :: `{QUERY_KEY}` and `Content_Type` :: `application/json`
 
 #### Sub-Activity: Azure Data Explorer Command
@@ -281,6 +279,13 @@ Click on the "**Command**" tab, and then populate the "**Command**" input with:
 .ingest inline into table StormEvents_Enriched with (format="psv") <| @{item().EventId}|"@{item().State}"|"@{item().EventType}"|"@{activity('Web').output.choices[0].text}"
 ```
 
+### Step 3: Confirm Sucess
+
+In Synapse Studio, click "**Debug**" and monitor to confirm success.
+
+<img src="https://user-images.githubusercontent.com/44923999/233694290-9549d97a-6ad0-4ac8-b84b-d3bd84fda1d6.png" width="800" title="Snipped: April 21, 2023" />
+
+Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview**" grouping of the left-hand navigation pane.
 
 
 -----
