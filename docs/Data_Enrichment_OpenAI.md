@@ -252,7 +252,7 @@ Click the "**+**" button in the "**Activities**" area of the "**ForEach**" compo
 
 Search for and then select "**Web**" from the resulting drop-down menu.
 
-<img src="https://user-images.githubusercontent.com/44923999/233688186-e0575658-1c7a-4241-bca6-8b72dcf18600.png" width="800" title="Snipped: April 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233690489-8d756a48-7993-4d61-8630-59bb47aac2ca.png" width="800" title="Snipped: April 21, 2023" />
 
 Click on the new Web activity and complete the form on the "**Settings**" tab:
 
@@ -262,8 +262,6 @@ Prompt | Entry
 **Method** | Select "**POST**"
 **Body** | Paste:<br>`{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
 **Headers** | Modify and enter key-value pairs: `api-key` :: `{QUERY_KEY}` and `Content_Type` :: `application/json`
-
-<img src="https://user-images.githubusercontent.com/44923999/233690489-8d756a48-7993-4d61-8630-59bb47aac2ca.png" width="800" title="Snipped: April 21, 2023" />
 
 LOREM IPSUM
 
