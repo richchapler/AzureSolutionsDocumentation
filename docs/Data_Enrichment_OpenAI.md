@@ -260,6 +260,7 @@ Prompt | Entry
 :----- | :-----
 **URL** | Modify and then enter `https://{SERVICE_NAME}.openai.azure.com/openai/deployments/{MODEL_NAME}/completions?api-version=2022-12-01`
 **Method** | Select "**POST**"
+
 LOREM IPSUM
 
 -----
