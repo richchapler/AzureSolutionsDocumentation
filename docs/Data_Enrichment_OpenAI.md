@@ -1,4 +1,4 @@
-# Data Enrichment: Open AI (WiP)
+# Data Enrichment: Open AI
 
 <img src="https://user-images.githubusercontent.com/44923999/227210296-1540091a-e156-41d9-9cfd-278246c311f1.png" width="1000" />
 
@@ -204,11 +204,12 @@ In this exercise, we will bake our prompt into a Synapse Pipeline, parameterize 
 
 Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview**" grouping of the left-hand navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/233680115-a71ddfba-1474-478a-b6e6-9f8e58228e10.png" width="800" title="Snipped: April 21, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233708563-cf1fab61-8008-4cbd-bda3-8dc5038c4fad.png" width="800" title="Snipped: April 21, 2023" />
 
 **Run** the following script.
-`.create table StormEvents_Enriched (EventId: long, State: string, EventType: string, Comparable: string)`
-
+```
+.create table StormEvents_Enriched (EventId: long, State: string, EventType: string, Comparable: string)
+```
 
 ### Step 2: Create Pipeline
 Open Synapse Studio, and then the "**Integrate**" icon in the left-hand navigation bar.
@@ -258,7 +259,7 @@ Prompt | Entry
 :----- | :-----
 **URL** | Modify and then enter `https://{SERVICE_NAME}.openai.azure.com/openai/deployments/{MODEL_NAME}/completions?api-version=2022-12-01`
 **Method** | Select "**POST**"
-**Body** | Paste:<br>`{"prompt":"Briefly describe the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
+**Body** | Paste:<br>`{"prompt":"In one sentence, describe the most significant example of a '@{item().EventType}' event in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
 **Headers** | Modify and enter key-value pairs: `api-key` :: `{QUERY_KEY}` and `Content_Type` :: `application/json`
 
 #### Sub-Activity: Azure Data Explorer Command
@@ -287,6 +288,13 @@ In Synapse Studio, click "**Debug**" and monitor to confirm success.
 
 Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview**" grouping of the left-hand navigation pane.
 
+<img src="https://user-images.githubusercontent.com/44923999/233709024-74ca59c5-196e-4977-af0a-d721acde5e9d.png" width="800" title="Snipped: April 21, 2023" />
+
+**Run** the following script.
+
+```
+StormEvents_Enriched
+```
 
 -----
 
