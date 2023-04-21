@@ -197,6 +197,10 @@ Prompt iteration can go on and on, but we have done enough for this exercise.
 
 -----
 
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
 ## Exercise 2: Create Pipeline
 In this exercise, we will bake our prompt into a Synapse Pipeline, parameterize from Data Explorer, StormEvents sample data and insert the result into a sink dataset.
 
@@ -297,6 +301,10 @@ StormEvents_Enriched
 ```
 
 You should see three rows, with "**Comparables**" column populated from Azure Open AI.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
 
 -----
 
