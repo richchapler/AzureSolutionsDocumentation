@@ -582,6 +582,10 @@ Confirm settings and then click "Share".
 
 -----
 
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
 ## Reference
 
 * Cognitive Search
