@@ -213,12 +213,13 @@ Right-click on the **StormEvents** table and then select "**Generate create scri
 Modify the generated script {i.e., change `.create table StormEvents` to `.create table StormEvents_Enriched` and click "**Run**".
 
 ### Step 2: Create Pipeline
-
 Open Synapse Studio, and then the "**Integrate**" icon in the left-hand navigation bar.
 
 <img src="https://user-images.githubusercontent.com/44923999/233680690-cd720438-092a-4a8e-938a-e9a4b09df3f7.png" width="800" title="Snipped: April 21, 2023" />
 
 Click the "**+**" icon and then "**Pipeline**" in the resulting dropdown menu.
+
+#### Lookup Activity
 
 <img src="https://user-images.githubusercontent.com/44923999/233682917-f4540c8f-ba39-49b6-bda6-03c24b337fd7.png" width="800" title="Snipped: April 21, 2023" />
 
@@ -232,6 +233,18 @@ Prompt | Entry
 
 Finally, paste the following **Query**: `StormEvents | project EventId, State, EventType | take 3`
 
+#### ForEach Activity
+
+<img src="https://user-images.githubusercontent.com/44923999/233684613-5abef802-5f9f-404a-a36f-cfe1781440c5.png" width="800" title="Snipped: April 21, 2023" />
+
+Drag-and-drop a "**ForEach**" component from the "**Activities**" tree, "**Iteration & conditionals**" grouping.<br>
+Complete the form on the **Settings** tab:
+
+Prompt | Entry
+:----- | :-----
+**Sequential** | Checked
+**Items** | Paste expression `@activity('Lookup').output.value`
+  
 -----
 
 Our prompt, parameterized:
@@ -248,10 +261,6 @@ Lorem Ipsum
 }
 ```
 
-Lookup1
-```
-StormEvents | project EventId, State, EventType | take 3
-```
 
 Web1
 ```
