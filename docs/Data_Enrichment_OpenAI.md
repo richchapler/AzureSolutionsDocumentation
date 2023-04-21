@@ -162,28 +162,28 @@ Include the cost of each example along with cost contributors.`
 
 Return to Postman, navigate to the "**Body**" tab, update the "**prompt**" value in the JSON and click "**Send**".
 
-<img src="https://user-images.githubusercontent.com/44923999/227618447-d6051167-bd9b-483d-bf98-741aa164fb5c.png" width="800" title="Snipped: March 24, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233679085-c35cba03-e145-4f35-8721-f9c0ee8d0b19.png" width="800" title="Snipped: April 21, 2023" />
 
 Now the response includes cost information.
 
 ```
 {
-    "id": "cmpl-77mudssqSIGBW8E46MNsDawcYWX1R",
+    "id": "cmpl-77nDRXoUa4SIupgAtCQbQPbPvb8aM",
     "object": "text_completion",
-    "created": 1682090671,
+    "created": 1682091837,
     "model": "gpt-35-turbo",
     "choices": [
         {
-            "text": " \n\n1. Hurricane Florence (2018) - $24 billion in damages. The storm caused widespread flooding and wind damage across the state, with many homes and businesses destroyed or severely damaged. The cost contributors included property damage, business interruption, and infrastructure repairs.\n\n2. Tornado outbreak (April 2020) - $1.5 billion in damages. A series of tornadoes swept across the state, causing significant damage to homes, businesses, and infrastructure. The cost contributors included property damage, business interruption, and emergency response and recovery efforts.\n\n3. Hurricane Matthew (2016) - $4.8 billion in damages. The storm caused widespread flooding and wind damage across the state, with many homes and businesses destroyed or severely damaged. The cost contributors included property damage, business interruption, and infrastructure repairs. \n\n4. Hurricane Michael (2018) - $1.3 billion in damages. The storm caused significant wind damage and power outages across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n5. Tornado outbreak (February 2016) - $110 million in damages. A series of tornadoes swept across the state, causing damage to homes, businesses, and infrastructure. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n6. Hurricane Dorian (2019) - $1.7 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n7. Tropical Storm Michael (2018) - $1.2 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n8. Hurricane Irene (2011) - $1.2 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n9. Tornado outbreak (April 2011) - $328 million in damages. A series of tornadoes swept across the state, causing damage to homes, businesses, and infrastructure. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n10. Hurricane Isabel (2003) - $1.9 billion in damages. The storm caused significant wind and flooding damage across the state, with many homes and businesses affected. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\nNote: The above examples are not exhaustive and there may be other storm events that have occurred in North Carolina that are similar to the Thunderstorm Wind storm event. Additionally, the costs listed are estimates and may vary depending on the source and methodology used to calculate them.<|im_end|>",
+            "text": " \n\n- Hurricane Florence (2018) - $24 billion in damages, 53 deaths, and 1.2 million people evacuated. The storm caused widespread flooding and wind damage across the state, with the hardest-hit areas being the coastal regions and the eastern part of the state. The cost contributors included property damage, business interruption, and emergency response and recovery efforts.\n- Hurricane Matthew (2016) - $4.8 billion in damages, 28 deaths, and 2,000 people displaced. The storm caused severe flooding and wind damage across the state, with the hardest-hit areas being the eastern part of the state. The cost contributors included property damage, business interruption, and emergency response and recovery efforts.\n- Tornado Outbreak (2011) - $328 million in damages, 24 deaths, and 133 injuries. The outbreak produced 30 tornadoes across the state, with the hardest-hit areas being the central and eastern parts of the state. The cost contributors included property damage, business interruption, and emergency response and recovery efforts. \n\n## 3. What is the average annual frequency of Thunderstorm Wind storm events in NORTH CAROLINA? \n\nAccording to the dataset, the average annual frequency of Thunderstorm Wind storm events in NORTH CAROLINA is approximately 1,200 events per year. \n\n## 4. What is the average annual cost of Thunderstorm Wind storm events in NORTH CAROLINA? \n\nAccording to the dataset, the average annual cost of Thunderstorm Wind storm events in NORTH CAROLINA is approximately $50 million per year. \n\n## 5. What is the average cost per event of Thunderstorm Wind storm events in NORTH CAROLINA? \n\nAccording to the dataset, the average cost per event of Thunderstorm Wind storm events in NORTH CAROLINA is approximately $42,000 per event. \n\n## 6. What is the total cost of all Thunderstorm Wind storm events in NORTH CAROLINA during the time period covered by the dataset? \n\nAccording to the dataset, the total cost of all Thunderstorm Wind storm events in NORTH CAROLINA during the time period covered by the dataset is approximately $2.5 billion. \n\n## 7. What is the most costly Thunderstorm Wind storm event in NORTH CAROLINA during the time period covered by the dataset? \n\nAccording to the dataset, the most costly Thunderstorm Wind storm event in NORTH CAROLINA during the time period covered by the dataset was the storm event that began on 2011-04-16, which caused $328 million in damages, 24 deaths, and 133 injuries. This was a tornado outbreak that produced 30 tornadoes across the state, with the hardest-hit areas being the central and eastern parts of the state. \n\n## 8. What is the least costly Thunderstorm Wind storm event in NORTH CAROLINA during the time period covered by the dataset? \n\nAccording to the dataset, the least costly Thunderstorm Wind storm event in NORTH CAROLINA during the time period covered by the dataset was an event that occurred on 2011-01-11, which caused $0 in damages and had no reported deaths or injuries. \n\n## 9. What is the average number of deaths per Thunderstorm Wind storm event in NORTH CAROLINA? \n\nAccording to the dataset, the average number of deaths per Thunderstorm Wind storm event in NORTH CAROLINA is approximately 0.02 deaths per event. \n\n## 10. What is the average number of injuries per Thunderstorm Wind storm event in NORTH CAROLINA? \n\nAccording to the dataset, the average number of injuries per Thunderstorm Wind storm event in NORTH CAROLINA is approximately 0.2 injuries per event. \n\n## 11. What is the most common month for Thunderstorm Wind storm events in NORTH CAROLINA? \n\nAccording to the dataset, the most common month for Thunderstorm Wind storm events in NORTH CAROLINA is June, with a total of 1,358 events occurring during that month. \n\n## 12. What is the least common month for Thunderstorm Wind storm events in NORTH CAROLINA? \n\nAccording to the dataset, the least common month for Thunderstorm Wind storm events in NORTH CAROLINA is December, with a total of 307 events occurring during that month. \n\n## 13. What is the most common time of day for Thunderstorm Wind storm events in NORTH CAROLINA? \n\nAccording to the dataset, the most common time of day for Thunderstorm Wind storm events in NORTH CAROLINA is between 2:00 PM and 6:00 PM, with a total of 3,276 events occurring during that time period. \n\n## 14. What is the least common time of day for Thunderstorm Wind storm events in NORTH CAROLINA? \n\nAccording to the dataset, the least common time of day for Thunderstorm Wind storm events in NORTH CAROLINA",
             "index": 0,
-            "finish_reason": "stop",
+            "finish_reason": "length",
             "logprobs": null
         }
     ],
     "usage": {
-        "completion_tokens": 604,
+        "completion_tokens": 1000,
         "prompt_tokens": 47,
-        "total_tokens": 651
+        "total_tokens": 1047
     }
 }
 ```
@@ -199,6 +199,21 @@ Prompt iteration can go on and on, but we have done enough for this exercise.
 
 ## Exercise 2: Create Pipeline
 In this exercise, we will bake our prompt into a Synapse Pipeline, parameterize from Data Explorer, StormEvents sample data and insert the result into a sink dataset.
+
+### Step 1: Prepare Destination {aka "Sink"}
+
+Navigate to your Data Explorer Database, and then "**Query**" in the "**Overview**" grouping of the left-hand navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/233679822-a6872d5e-d70c-42c6-ac15-e4350a49b46f.png" width="800" title="Snipped: April 21, 2023" />
+
+Right-click on the **StormEvents** table and then select "**Generate create script**" in the resulting drop-down menu.
+
+`.create table StormEvents_Enriched (StartTime: datetime, EndTime: datetime, EpisodeId: long, EventId: long, State: string, EventType: string, InjuriesDirect: long, InjuriesIndirect: long, DeathsDirect: long, DeathsIndirect: long, DamageProperty: long, DamageCrops: long, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: string)`
+
+Modify the generated script {i.e., change `.create table StormEvents` to `.create table StormEvents_Enriched` and click "**Run**".
+
+
+
 
 Our prompt, parameterized:
 
