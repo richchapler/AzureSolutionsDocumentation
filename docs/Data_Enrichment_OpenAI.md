@@ -11,7 +11,8 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [cluster](Infrastructure_DataExplorer_Cluster.md), [database](Infrastructure_DataExplorer_Database.md), and [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard) with "Owner" IAC permissions and "**Database User**" permissions granted to the Synapse System-Assigned Managed Identity
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [cluster](Infrastructure_DataExplorer_Cluster.md), [database](Infrastructure_DataExplorer_Database.md), and [sample data](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data?tabs=ingestion-wizard)
+  * Grant "Owner" IAC permissions and "**Database User**" permissions for the Synapse System-Assigned Managed Identity
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with [deployment model](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/create-resource?pivots=web-portal)
 * [**Postman**](https://www.postman.com/product/workspaces/) with a workspace and collection
 * [**Synapse**](Infrastructure_Synapse.md)
@@ -34,17 +35,17 @@ In this exercise, we will iteratively generate a prompt that can be used with an
 Navigate to your Postman workspace and collection,<br>
 _{e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}_
 
-Click "+" to open a new tab and rename to "OpenAI_DaVinci".
+Click "+" to open a new tab and rename to "OpenAI_ChatGPT".
 Enter the following values:
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | Select "**POST**"
-**Enter URL or paste text** | Modify and paste:<br>`https://rchaplerai.openai.azure.com/openai/deployments/rchapleraimd/completions?api-version=2022-12-01`
+**Enter URL or paste text** | Modify and paste:<br>`https://{SERVICE_NAME}.openai.azure.com/openai/deployments/{MODEL_NAME}/completions?api-version=2022-12-01`
 
 Navigate to the "**Headers**" tab.
 
-<img src="https://user-images.githubusercontent.com/44923999/227531164-07b77089-5142-4db1-8d3e-05a5b2a79381.png" width="800" title="Snipped: March 24, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/233663772-477594b2-9292-44a8-b30d-1b2c368f5660.png" width="800" title="Snipped: April 21, 2023" />
 
 Enter the following values:
 
