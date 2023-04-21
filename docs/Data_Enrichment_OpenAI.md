@@ -260,9 +260,10 @@ Prompt | Entry
 :----- | :-----
 **URL** | Modify and then enter `https://{SERVICE_NAME}.openai.azure.com/openai/deployments/{MODEL_NAME}/completions?api-version=2022-12-01`
 **Method** | Select "**POST**"
-**Body** | Paste `{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
-**Headers** | Modify and enter key-value pair: `api-key` :: `{QUERY_KEY}`<br>Modify and enter key-value pair: `Content_Type` :: `application/json`
+**Body** | Paste:<br>`{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
+**Headers** | Modify and enter key-value pairs: `api-key` :: `{QUERY_KEY}` and `Content_Type` :: `application/json`
 
+<img src="https://user-images.githubusercontent.com/44923999/233690489-8d756a48-7993-4d61-8630-59bb47aac2ca.png" width="800" title="Snipped: April 21, 2023" />
 
 LOREM IPSUM
 
