@@ -218,7 +218,19 @@ Open Synapse Studio, and then the "**Integrate**" icon in the left-hand navigati
 
 <img src="https://user-images.githubusercontent.com/44923999/233680690-cd720438-092a-4a8e-938a-e9a4b09df3f7.png" width="800" title="Snipped: April 21, 2023" />
 
+Click the "**+**" icon and then "**Pipeline**" in the resulting dropdown menu.
 
+<img src="https://user-images.githubusercontent.com/44923999/233682917-f4540c8f-ba39-49b6-bda6-03c24b337fd7.png" width="800" title="Snipped: April 21, 2023" />
+
+Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.<br>
+Complete the form on the "**Settings**" tab:
+
+Prompt | Entry
+:----- | :-----
+**Source dataset** | Select your "**StormEvents**" dataset (create if it does not already exist)
+**First row only** | Confirm **unchecked**
+
+Finally, paste the following **Query**: `StormEvents | project EventId, State, EventType | take 3`
 
 -----
 
