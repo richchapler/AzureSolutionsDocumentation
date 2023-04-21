@@ -260,6 +260,9 @@ Prompt | Entry
 :----- | :-----
 **URL** | Modify and then enter `https://{SERVICE_NAME}.openai.azure.com/openai/deployments/{MODEL_NAME}/completions?api-version=2022-12-01`
 **Method** | Select "**POST**"
+**Body** | Paste `{"prompt":"List the top three examples of '@{item().EventType}' events in @{item().State}, sorted descending by cost","max_tokens":1000,"temperature":0.1}`
+**Headers** | Modify and enter key-value pair: `api-key` :: `{QUERY_KEY}`<br>Modify and enter key-value pair: `Content_Type` :: `application/json`
+
 
 LOREM IPSUM
 
