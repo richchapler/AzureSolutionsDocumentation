@@ -1,6 +1,6 @@
 # Virtual Machine
 
-<img src="https://user-images.githubusercontent.com/44923999/234039617-e98acc9d-1846-4c0a-a1b3-f353d7e92def.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/234043896-bdf9af61-4fa4-4c12-abfb-afa3ca9224dd.png" width="1000" />
 
 [Microsoft Learn: Virtual Machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/overview) and related documentation should serve as your primary source of information.
 
