@@ -5,5 +5,5 @@
 
 [Microsoft Learn: Virtual Machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/overview) and related documentation should serve as your primary source of information.
 
-## Portal
+## Create with Azure Portal
 Lorem Ipsum
