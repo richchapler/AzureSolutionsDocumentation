@@ -34,7 +34,7 @@ Connect to the new virtual machine (using "**Download RDP file**") to complete i
 #### SQL Server Browser
 In this step, we will enable SQL Server Browser to allow connection to the SQL Server.
 
-<img src="https://user-images.githubusercontent.com/44923999/234053657-f93c5b70-b909-4344-b083-92daac5f32e1.png" width="800" title="Snipped: April 24, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/234053657-f93c5b70-b909-4344-b083-92daac5f32e1.png" width="300" title="Snipped: April 24, 2023" />
 
 Open the Windows **Services** applet.<br>
 Search for and double-click to open "**SQL Server Browser**".<br>
