@@ -5,7 +5,7 @@
 [Microsoft Learn: Virtual Machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/overview) and related documentation should serve as your primary source of information.
 
 ## Create with Azure Portal (SQL Server 2012 image)
-
+### Basics
 <img src="https://user-images.githubusercontent.com/44923999/234047278-739c4423-d5cf-4460-9ac7-d1714661c15c.png" width="800" title="Snipped: April 24, 2023" />
 
 Complete the "**Create a virtual machine**" form, "**Basics**" tab, including:
@@ -15,22 +15,33 @@ Prompt | Entry
 **Availability options** | Select "**No infrastructure redundancy required**"
 ...**inbound ports** | Select "**Allow Selected Ports**" and "**RDP (3389)**"
 
-Complete the “Create virtual machine” form, “SQL Server settings” tab, including:
-SQL Connectivity	Select “Public (Internet)”
-Port	Confirm default, 1433
-SQL Authentication
-Login Name
-Password	Click to Enable and then confirm default (which will match your previously entered Administrator values)
+### SQL Server settings
+Complete the "**Create a virtual machine**" form, "**SQL Server settings**" tab, including:
 
-Click the “Review + create” button, validate settings, and then click the Create button.
-Configure SQL Server
-Connect to the new virtual machine (using RDP) to complete image-specific configuration.
-SQL Server Browser
-Enable SQL Server Browser to allow connection to the SQL Server:
-•	Open Services, search for and double-click to open “SQL Server Browser”
-•	On the General tab, change “Startup Type” to Automatic, and then click the Apply button
-•	Click the Start button
-Configure IE ESC
+Prompt | Entry
+:----- | :-----
+**SQL connectivity** | Select "**Public (Internet)**"
+**Port** | Confirm default "**1433**"
+**SQL Authentication** | **Enable** and enter meaningful "**Login name**" and "**Password**" values (likely matching previously-entered Administrator credentials)
+
+Click "**Review + create**", validate settings, and then click "**Create**".
+
+### Configure SQL Server
+Connect to the new virtual machine (using "**Download RDP file**") to complete image-specific configuration.
+
+<img src="https://user-images.githubusercontent.com/44923999/234051398-464ce44e-0dbb-4942-8ef0-f54145692a2a.png" width="800" title="Snipped: April 24, 2023" />
+
+#### SQL Server Browser
+In this step, we will enable SQL Server Browser to allow connection to the SQL Server.
+
+<img src="https://user-images.githubusercontent.com/44923999/234053657-f93c5b70-b909-4344-b083-92daac5f32e1.png" width="800" title="Snipped: April 24, 2023" />
+
+Open the Windows **Services** applet.<br>
+Search for and double-click to open "**SQL Server Browser**".<br>
+On the "**General**" tab, change "**Startup type**" to "**Automatic**", and then click "**Apply**".<br>
+Click "**Start**".
+
+#### Configure IE ESC
 Disable Internet Explorer Enhanced Security Configuration to allow downloading to the demonstration VM:
 •	Open Server Manager and click the “Configure IE ESC” link in the “Server Summary” > “Security Information” interface grouping
 •	Alternatively, navigate to “Local Server” and you will find “IE Enhanced Security Configuration” in the Properties grouping
@@ -46,32 +57,3 @@ Browse to https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-co
 •	Back on the “Restore Database” pop-up, check the box next to added item in “Select the backup sets to restore” and then click the OK button
 
 When you have successfully completed these steps, you will see a pop-up that says “The restore of database ‘AdventureWorks” completed successfully.
- 
-## Create with Cloud Shell (Bash)
-Navigate to Cloud Shell and select Bash from the “Select Environment” drop-down menu.
-
- 
-
-Update and execute the following command to set variable rg {i.e., the name of your Resource Group}:
-rg="<UseCase>rg"
-
-Update and execute the following command to set variable vm {i.e., the desired name for the new virtual machine}:
-vm="<UseCase>vm"
-
-Execute the following command to create your virtual machine:
-az vm create --resource-group $rg --name $vm --image UbuntuLTS --assign-identity --admin-username rchapler --generate-ssh-keys
-
-Successful execution will create the following resources:
-•	Virtual Machine
-•	Disk
-•	Network Security Group
-•	Public IP Address
-•	Network Interface
-•	Virtual Network
-
-Update and execute the following command to connect to the server using SSH:
-ssh -i ~/.ssh/id_rsa rchapler@{public ip address}
-
- 
-
-You will know you are successful if your prompt has changed to your equivalent of rchapler@<UseCase>vm.
