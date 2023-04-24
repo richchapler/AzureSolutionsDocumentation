@@ -5,7 +5,7 @@
 [Microsoft Learn: Virtual Machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/overview) and related documentation should serve as your primary source of information.
 
 ## Create with Azure Portal (SQL Server 2012 image)
-### Basics
+
 <img src="https://user-images.githubusercontent.com/44923999/234047278-739c4423-d5cf-4460-9ac7-d1714661c15c.png" width="800" title="Snipped: April 24, 2023" />
 
 Complete the "**Create a virtual machine**" form, "**Basics**" tab, including:
@@ -15,7 +15,6 @@ Prompt | Entry
 **Availability options** | Select "**No infrastructure redundancy required**"
 ...**inbound ports** | Select "**Allow Selected Ports**" and "**RDP (3389)**"
 
-### SQL Server settings
 Complete the "**Create a virtual machine**" form, "**SQL Server settings**" tab, including:
 
 Prompt | Entry
