@@ -30,24 +30,14 @@ Connect to the new virtual machine (using "**Download RDP file**") to complete i
 
 <img src="https://user-images.githubusercontent.com/44923999/234051398-464ce44e-0dbb-4942-8ef0-f54145692a2a.png" width="800" title="Snipped: April 24, 2023" />
 
-#### SQL Server Browser
-In this step, we will enable SQL Server Browser to allow connection to the SQL Server.
+#### Download Sample Database
 
-<img src="https://user-images.githubusercontent.com/44923999/234053657-f93c5b70-b909-4344-b083-92daac5f32e1.png" width="300" title="Snipped: April 24, 2023" />
+On your local machine, search for and then download the AdventureWorks sample database (on your local machine).<br>
+Copy the file to your Virtual Machine.<br>
 
-Open the Windows **Services** applet.<br>
-Search for and double-click to open "**SQL Server Browser**".<br>
-On the "**General**" tab, change "**Startup type**" to "**Automatic**", and then click "**Apply**".<br>
-Click "**Start**".
 
-#### Configure IE ESC
-Disable Internet Explorer Enhanced Security Configuration to allow downloading to the demonstration VM:
-•	Open Server Manager and click the “Configure IE ESC” link in the “Server Summary” > “Security Information” interface grouping
-•	Alternatively, navigate to “Local Server” and you will find “IE Enhanced Security Configuration” in the Properties grouping
-•	Complete the “Internet Explorer Enhanced Security Configuration” pop-up, click Off under Administrators and Users, and then click the OK button
-Sample Database
-Browse to https://docs.microsoft.com/en-us/sql/samples/adventureworks-install-configure and complete the following steps:
-•	Download the appropriate version of the AdventureWorks sample database {e.g., “AdventureWorks2008R2-oltp.bak”}
+
+
 •	Open SQL Server Management Studio, right-click on Databases, and click “Restore Database” in the resulting drop-down menu
 •	On the “Restore Database” pop-up, enter AdventureWorks in the “To database” text box, “Destination for restore” interface grouping
 •	On the “Restore Database” pop-up, click the “From device” radio button in the “Source for restore” interface grouping
