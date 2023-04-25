@@ -64,6 +64,7 @@ _Note: in many cases, the Instantiation links point to Microsoft documentation..
 * [**Resource Group**](Infrastructure_ResourceGroup.md)
 
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql)
+  * [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
