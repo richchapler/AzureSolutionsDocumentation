@@ -20,27 +20,26 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Migrate Database to SQL Server 2022
+* Exercise 1: Migrate Database
 * Exercise 2: Activate Azure Hybrid
 * Exercise 3: Activate Arc + SQL Server
 * Exercise 4: Activate Purview
 
 -----
 
-## Exercise 1: Migrate Database to SQL Server 2022
-In this exercise, we will explore options for migrating a database from an earlier version of SQL Server.
+## Exercise 1: Migrate Database
+In this exercise, we will migrate a database from SQL Server 2019 to SQL Server 2022.
 
-There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022; this documentation details step-by-step instructions for **some** of the options.
+There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022:
+* Backup-Restore
+* Copy Database Wizard
+* Generate Scripts Wizard
+* Transactional Replication
+* Export/Import (aka BACPAC)
 
-Option | Pros | Cons | Documented Below?
-:----- | :----- | :----- | :-----
-**Restore a database backup** | - Lorem | - Ipsum | No
-**Copy Database Wizard** | - Lorem | - Ipsum | No
-**Use the Generate Scripts Wizard to publish databases** | - Lorem | - Ipsum | No
-**Transactional Replication** | - Lorem | - Ipsum | No
-**Export/Import (also known as BACPAC)** | - Lorem | - Ipsum | No
+This documentation covers only the first option.
 
-### Option 1: Backup-Restore
+### Step 1: Backup Database
 Open **SQL Server Management Studio** and connect to both SQL Server 2019 and 2022 instances.
 
 <img src="https://user-images.githubusercontent.com/44923999/234963219-df0478e4-3402-46fb-b477-c97eb92179f7.png" width="800" title="Snipped: April 27, 2023" />
@@ -58,6 +57,8 @@ Prompt | Entry
 **Back up to** | Confirm selection "**Disk**", then click "Add", browse to "**C:\Temp**" and enter file name "**AdventureWorks2019.bak**"
 
 Click "**OK**", allow time for processing and confirm success with the resulting "The backup of database 'AdventureWorks2019' completed successfully".
+
+### Step 1: Restore Database
 
 <img src="https://user-images.githubusercontent.com/44923999/234965525-4bc8a8e2-7c3b-44e2-a2bb-c778be964487.png" width="800" title="Snipped: April 27, 2023" />
 
@@ -85,6 +86,10 @@ Click "**OK**", allow time for processing and confirm success.
 
 -----
 
+## Exercise 2: Activate SQL Server 2022 Hybrid
+In this exercise, we LOREM IPSUM.
+
+-----
+
 ## Reference
 * [Copy Databases with Backup and Restore](https://learn.microsoft.com/en-us/sql/relational-databases/databases/copy-databases-with-backup-and-restore)
-* [Use the Copy Database Wizard](https://learn.microsoft.com/en-us/sql/relational-databases/databases/use-the-copy-database-wizard)
