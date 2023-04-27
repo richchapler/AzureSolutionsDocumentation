@@ -1,4 +1,4 @@
-# Migrate Data: SQL Server Hybridization
+# Migrate Data: SQL Server Hybridization (WiP)
 
 <img src="https://user-images.githubusercontent.com/44923999/234937691-8ce2332f-d836-4a7e-a306-6c5d14ef19f7.png" width="1000" />
 
@@ -30,12 +30,15 @@ This solution will address requirements in three exercises:
 ## Exercise 1: Migrate Database to SQL Server 2022
 In this exercise, we will explore options for migrating a database from an earlier version of SQL Server.
 
-There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022:
-* Copy Database Wizard
-* Restore a database backup
-* Use the Generate Scripts Wizard to publish databases
-* Transactional Replication2
-* Export/Import (also known as BACPAC)
+There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022; this documentation details step-by-step instructions for **some** of the options.
+
+| Option | Pros | Cons |
+| ----- | ----- | ----- |
+| **Copy Database Wizard** | - Lorem | - Ipsum |
+| **Restore a database backup** | - Lorem | - Ipsum |
+| **Use the Generate Scripts Wizard to publish databases** | - Lorem | - Ipsum |
+| **Transactional Replication** | - Lorem | - Ipsum |
+| **Export/Import (also known as BACPAC)** | - Lorem | - Ipsum |
 
 ### Option 1: Copy Database Wizard
 Open **SQL Server Management Studio** and connect to both SQL Server 2019 and 2022 instances.
