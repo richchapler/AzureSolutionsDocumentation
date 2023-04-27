@@ -32,18 +32,32 @@ In this exercise, we will explore options for migrating a database from an earli
 
 There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022; this documentation details step-by-step instructions for **some** of the options.
 
-| Option | Pros | Cons | Documented Below? |
-| :----- | :----- | :----- | :----- |
-| **Restore a database backup** | - Lorem | - Ipsum | No |
-| **Copy Database Wizard** | - Lorem | - Ipsum | No |
-| **Use the Generate Scripts Wizard to publish databases** | - Lorem | - Ipsum | No |
-| **Transactional Replication** | - Lorem | - Ipsum | No |
-| **Export/Import (also known as BACPAC)** | - Lorem | - Ipsum | No |
+Option | Pros | Cons | Documented Below?
+:----- | :----- | :----- | :-----
+**Restore a database backup** | - Lorem | - Ipsum | No
+**Copy Database Wizard** | - Lorem | - Ipsum | No
+**Use the Generate Scripts Wizard to publish databases** | - Lorem | - Ipsum | No
+**Transactional Replication** | - Lorem | - Ipsum | No
+**Export/Import (also known as BACPAC)** | - Lorem | - Ipsum | No
 
-### Option 1: Copy Database Wizard
+### Option 1: Backup-Restore
 Open **SQL Server Management Studio** and connect to both SQL Server 2019 and 2022 instances.
 
-<img src="https://user-images.githubusercontent.com/44923999/234953201-01818d70-78c0-41e4-9a2b-b3eb4df83c76.png" width="800" title="Snipped: April 27, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/234963219-df0478e4-3402-46fb-b477-c97eb92179f7.png" width="800" title="Snipped: April 27, 2023" />
+
+Right-click on the **AdventureWorks2019** database in the SQL Server 2019 connection.
+
+<img src="https://user-images.githubusercontent.com/44923999/234963644-c7aa4aac-50cf-4325-beab-5ae089405261.png" width="600" title="Snipped: April 27, 2023" />
+
+Complete the resulting "Back Up Database - AdventureWorks2019" pop-up form:
+
+Prompt | Entry
+:----- | :-----
+**Database** | Confirm selection "**AdventureWorks2019**"
+**Backup type** | Confirm selection "**Full**"
+**Back up to** | Confirm selection "**Disk**"<br>Click "Add", browse to "C:\Temp" and enter "File name" value "AdventureWorks2019.bak"
+
+Click "**Ok**".
 
 LOREM IPSUM
 
@@ -54,4 +68,5 @@ LOREM IPSUM
 -----
 
 ## Reference
+* [Copy Databases with Backup and Restore](https://learn.microsoft.com/en-us/sql/relational-databases/databases/copy-databases-with-backup-and-restore)
 * [Use the Copy Database Wizard](https://learn.microsoft.com/en-us/sql/relational-databases/databases/use-the-copy-database-wizard)
