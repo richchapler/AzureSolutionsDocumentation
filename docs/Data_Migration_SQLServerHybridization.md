@@ -59,7 +59,7 @@ Prompt | Entry
 
 Click "**OK**", allow time for processing and confirm success with the resulting "The backup of database 'AdventureWorks2019' completed successfully".
 
-<img src="https://user-images.githubusercontent.com/44923999/234965525-4bc8a8e2-7c3b-44e2-a2bb-c778be964487.png" width="600" title="Snipped: April 27, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/234965525-4bc8a8e2-7c3b-44e2-a2bb-c778be964487.png" width="800" title="Snipped: April 27, 2023" />
 
 Right-click on **Databases** in the SQL Server 2022 connection and then click "**Restore Database**" in the resulting menu.
 
@@ -73,7 +73,11 @@ Prompt | Entry
 **Destination** | Confirm value "**AdventureWorks2019**"
 **Restore to** | Confirm selection "**The last backup taken**..."
 
+Click on the "**Files**" tab and check "**Relocate all files to folder**".
+
 Click "**OK**", allow time for processing and confirm success.
+
+<img src="https://user-images.githubusercontent.com/44923999/234976336-d91154e3-72b7-4ce2-89a3-dcfbf07f5e10.png" width="800" title="Snipped: April 27, 2023" />
 
 -----
 
