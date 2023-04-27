@@ -1,4 +1,4 @@
-# Migrate Data: SQL Server 2022, Azure Hybrid, Arc and Purview
+# Migrate Data: SQL Server Hybridization
 
 <img src="https://user-images.githubusercontent.com/44923999/234937691-8ce2332f-d836-4a7e-a306-6c5d14ef19f7.png" width="1000" />
 
