@@ -32,13 +32,13 @@ In this exercise, we will explore options for migrating a database from an earli
 
 There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022; this documentation details step-by-step instructions for **some** of the options.
 
-| Option | Pros | Cons |
-| :----- | :----- | :----- |
-| **Copy Database Wizard** | - Lorem | - Ipsum |
-| **Restore a database backup** | - Lorem | - Ipsum |
-| **Use the Generate Scripts Wizard to publish databases** | - Lorem | - Ipsum |
-| **Transactional Replication** | - Lorem | - Ipsum |
-| **Export/Import (also known as BACPAC)** | - Lorem | - Ipsum |
+| Option | Pros | Cons | Documented Below? |
+| :----- | :----- | :----- | :----- |
+| **Restore a database backup** | - Lorem | - Ipsum | No |
+| **Copy Database Wizard** | - Lorem | - Ipsum | No |
+| **Use the Generate Scripts Wizard to publish databases** | - Lorem | - Ipsum | No |
+| **Transactional Replication** | - Lorem | - Ipsum | No |
+| **Export/Import (also known as BACPAC)** | - Lorem | - Ipsum | No |
 
 ### Option 1: Copy Database Wizard
 Open **SQL Server Management Studio** and connect to both SQL Server 2019 and 2022 instances.
