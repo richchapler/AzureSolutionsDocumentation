@@ -55,7 +55,7 @@ Prompt | Entry
 :----- | :-----
 **Database** | Confirm selection "**AdventureWorks2019**"
 **Backup type** | Confirm selection "**Full**"
-**Back up to** | Confirm selection "**Disk**"<br>Click "Add", browse to "C:\Temp" and enter "File name" value "AdventureWorks2019.bak"
+**Back up to** | Confirm selection "**Disk**"<br>Click "Add", browse to "C:\Temp" and enter file name "AdventureWorks2019.bak"
 
 Click "**Ok**".
 
