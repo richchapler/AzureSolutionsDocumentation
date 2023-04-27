@@ -33,7 +33,7 @@ In this exercise, we will explore options for migrating a database from an earli
 There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022; this documentation details step-by-step instructions for **some** of the options.
 
 | Option | Pros | Cons |
-| ----- | ----- | ----- |
+| :----- | :----- | :----- |
 | **Copy Database Wizard** | - Lorem | - Ipsum |
 | **Restore a database backup** | - Lorem | - Ipsum |
 | **Use the Generate Scripts Wizard to publish databases** | - Lorem | - Ipsum |
