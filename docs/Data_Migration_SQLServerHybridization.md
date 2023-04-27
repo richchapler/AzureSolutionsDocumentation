@@ -28,7 +28,14 @@ This solution will address requirements in three exercises:
 -----
 
 ## Exercise 1: Migrate Database to SQL Server 2022
+In this exercise, we will migrate a database from an earlier version of SQL Server.
+
+### Step 1: Lorem Ipsum
+Open SQL Server Management Studio and connect to both SQL Server 2019 and 2022 instances.
+
+<img src="https://user-images.githubusercontent.com/44923999/234953201-01818d70-78c0-41e4-9a2b-b3eb4df83c76.png" width="800" title="Snipped: April 27, 2023" />
+
+LOREM IPSUM
 
 There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022. Some of the options include using the Copy Database Wizard, restoring a database backup, or using the Generate Scripts Wizard to publish databases1. Another option is to use Transactional Replication2. You can also use Export/Import (also known as BACPAC) or Backup-restore to SQL Server 20222.
 
-<img src="https://user-images.githubusercontent.com/44923999/234934326-6712a8cf-370f-4faa-9c79-0c8dc3f7fe08.png" width="800" title="Snipped: April 27, 2023" />
