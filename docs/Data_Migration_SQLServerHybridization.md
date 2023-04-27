@@ -55,18 +55,25 @@ Prompt | Entry
 :----- | :-----
 **Database** | Confirm selection "**AdventureWorks2019**"
 **Backup type** | Confirm selection "**Full**"
-**Back up to** | Confirm selection "**Disk**"<br>Click "Add", browse to "C:\Temp" and enter file name "AdventureWorks2019.bak"
+**Back up to** | Confirm selection "**Disk**", then click "Add", browse to "**C:\Temp**" and enter file name "**AdventureWorks2019.bak**"
 
-Click "**Ok**", allow time for processing and confirm success with the resulting "The backup of database 'AdventureWorks2019' completed successfully".
+Click "**OK**", allow time for processing and confirm success with the resulting "The backup of database 'AdventureWorks2019' completed successfully".
 
 <img src="https://user-images.githubusercontent.com/44923999/234965525-4bc8a8e2-7c3b-44e2-a2bb-c778be964487.png" width="600" title="Snipped: April 27, 2023" />
 
 Right-click on **Databases** in the SQL Server 2022 connection and then click "**Restore Database**" in the resulting menu.
 
+<img src="https://user-images.githubusercontent.com/44923999/234973981-5e240eeb-f32a-419b-a94d-bc4529829556.png" width="600" title="Snipped: April 27, 2023" />
 
+Complete the resulting "Restore Database - AdventureWorks2019" pop-up form:
 
+Prompt | Entry
+:----- | :-----
+**Device** | Select "**Device**" and then click "..."<br>Click "**Add**", then browse to and select "C:\Temp\" and "AdventureWorks2019.bak"
+**Destination** | Confirm value "**AdventureWorks2019**"
+**Restore to** | Confirm selection "**The last backup taken**..."
 
-LOREM IPSUM
+Click "**OK**", allow time for processing and confirm success.
 
 -----
 
