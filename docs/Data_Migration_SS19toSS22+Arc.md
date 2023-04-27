@@ -7,7 +7,7 @@ This solution considers the following requirements:
 
 * "We have thousands of on-prem SQL Servers and we are not ready to migrate them to Azure"
 * "...that said, we want to take advantage of [Azure Hybrid Benefit](https://learn.microsoft.com/en-us/azure/azure-sql/azure-hybrid-benefit) for the discounts
-* "...and of course all of the other benefits of hybridization: security, scaling, management, data governance, etc."
+* "...and of course all of the other benefits of hybridization: scalability, business continuity, security, "single pane of glass" management, governance, etc."
 
 ## Prerequisites
 This solution requires the following resources:
