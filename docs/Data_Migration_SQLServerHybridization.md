@@ -45,7 +45,7 @@ Open **SQL Server Management Studio** and connect to both SQL Server 2019 and 20
 
 <img src="https://user-images.githubusercontent.com/44923999/234963219-df0478e4-3402-46fb-b477-c97eb92179f7.png" width="800" title="Snipped: April 27, 2023" />
 
-Right-click on the **AdventureWorks2019** database in the SQL Server 2019 connection.
+Right-click on the **AdventureWorks2019** database in the SQL Server 2019 connection, then roll-over "**Tasks**" and click "**Back Up**..." in the resulting menus.
 
 <img src="https://user-images.githubusercontent.com/44923999/234963644-c7aa4aac-50cf-4325-beab-5ae089405261.png" width="600" title="Snipped: April 27, 2023" />
 
@@ -57,7 +57,14 @@ Prompt | Entry
 **Backup type** | Confirm selection "**Full**"
 **Back up to** | Confirm selection "**Disk**"<br>Click "Add", browse to "C:\Temp" and enter file name "AdventureWorks2019.bak"
 
-Click "**Ok**".
+Click "**Ok**", allow time for processing and confirm success with the resulting "The backup of database 'AdventureWorks2019' completed successfully".
+
+<img src="https://user-images.githubusercontent.com/44923999/234965525-4bc8a8e2-7c3b-44e2-a2bb-c778be964487.png" width="600" title="Snipped: April 27, 2023" />
+
+Right-click on **Databases** in the SQL Server 2022 connection and then click "**Restore Database**" in the resulting menu.
+
+
+
 
 LOREM IPSUM
 
