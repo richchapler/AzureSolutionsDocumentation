@@ -13,8 +13,8 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * On-prem development server with:
-  * [SQL Server 2019](https://info.microsoft.com/ww-landing-sql-server-2019.html) (default instance "**MSSQLSERVER**") with [AdventureWorks](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure) sample database
-  * [SQL Server 2022](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (instance named "**SS22**", Standard edition)
+  * [SQL Server 2019](https://info.microsoft.com/ww-landing-sql-server-2019.html) default instance "**MSSQLSERVER**" with [AdventureWorks](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure) sample database
+  * SQL Server 2022 instance named "**SS22**", Standard edition (which cannot be downloaded directly from the Internet)
   * [SQL Server Management Studio](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 
 ## Proposed Solution
