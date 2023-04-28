@@ -95,7 +95,7 @@ There are two ways to establish hybrid connectivity:
 
 This documentation covers only the first option.
 
-### Step 1: Backup Database
+### Step 1: Create Managed Instance Link
 
 Open **SQL Server Management Studio** and connect to the SQL Server 2022 instance.
 
@@ -106,6 +106,25 @@ Right-click on the **AdventureWorks2019** database, then roll-over "**Azure SQL 
 <img src="https://user-images.githubusercontent.com/44923999/235180719-a2bec7b0-d52c-4a63-a950-2de4f746748a.png" width="600" title="Snipped: April 28, 2023" />
 
 Review "**Introduction**" page, then click "**Next >**".
+
+<img src="https://user-images.githubusercontent.com/44923999/235191812-6f255a6f-14f6-42fc-bd12-cb51cb563d40.png" width="600" title="Snipped: April 28, 2023" />
+
+Review and address unmet requirements on the "**Requirements**" page; examples:
+* AlwaysOn not enabled
+* Recommended trace flag 1800 not enabled
+* Recommended trace flag 9567 not enabled
+
+#### AlwaysOn not enabled
+Click the link to get a detailed error message:
+
+<img src="https://user-images.githubusercontent.com/44923999/235192508-3bef70c5-e926-4756-a23a-c3cc0c671f69.png" width="400" title="Snipped: April 28, 2023" />
+
+In this example, the message includes guidance for how to address the issue.<br>
+Open **SQL Server Configuration Manager**, and click "**SQL Server Services**" in the navigation pane.
+
+<img src="https://user-images.githubusercontent.com/44923999/235193492-8e4c71ea-7e81-45c1-984e-55b4ddff92df.png" width="800" title="Snipped: April 28, 2023" />
+
+Right-click on "**SQL Server (SS22)**" {i.e., the SQL Server 2022 instance} and select "**Properties**" from the resulting menu.
 
 -----
 
