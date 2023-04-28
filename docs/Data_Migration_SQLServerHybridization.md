@@ -20,14 +20,14 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Migrate Database
-* Exercise 2: Activate Azure Hybrid
+* Exercise 1: Database Migration
+* Exercise 2: Hybrid Connectivity
 * Exercise 3: Activate Arc + SQL Server
 * Exercise 4: Activate Purview
 
 -----
 
-## Exercise 1: Migrate Database
+## Exercise 1: Database Migration
 In this exercise, we will migrate a database from SQL Server 2019 to SQL Server 2022.
 
 There are several ways to migrate a database from SQL Server 2019 to SQL Server 2022:
@@ -86,8 +86,26 @@ Click "**OK**", allow time for processing and confirm success.
 
 -----
 
-## Exercise 2: Activate SQL Server 2022 Hybrid
-In this exercise, we LOREM IPSUM.
+## Exercise 2: Hybrid Connectivity
+In this exercise, we will establish hybrid connectivity between on-prem SQL Server 2022 and an Azure SQL Managed Instance.
+
+There are two ways to establish hybrid connectivity:
+* Replicate Database ... the on-prem SQL Server is read/write and the replicated Azure SQL Managed Instance is read-only; changes are transferred near real-time
+* Failover Database ... in the event of a disaster, manually failover to Azure SQL Managed Instance; after disaster mitigation, "fail back" to SQL Server 2022
+
+This documentation covers only the first option.
+
+### Step 1: Backup Database
+
+Open **SQL Server Management Studio** and connect to the SQL Server 2022 instance.
+
+<img src="https://user-images.githubusercontent.com/44923999/235180158-f4678ee2-d0f2-4c0a-90db-9c8b537e7a70.png" width="800" title="Snipped: April 28, 2023" />
+
+Right-click on the **AdventureWorks2019** database, then roll-over "**Azure SQL Managed Instance link**" and click "**Replicate database**" in the resulting menus.
+
+<img src="https://user-images.githubusercontent.com/44923999/235180719-a2bec7b0-d52c-4a63-a950-2de4f746748a.png" width="600" title="Snipped: April 28, 2023" />
+
+Review "**Introduction**" page, then click "**Next**".
 
 -----
 
