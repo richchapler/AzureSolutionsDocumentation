@@ -1,6 +1,6 @@
 # Migrate Data: SQL Server Hybridization (WiP)
 
-<img src="https://user-images.githubusercontent.com/44923999/234937691-8ce2332f-d836-4a7e-a306-6c5d14ef19f7.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/235181250-128cb7c3-8ec2-4d1b-8653-39a9d9eb5c27.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
@@ -105,7 +105,7 @@ Right-click on the **AdventureWorks2019** database, then roll-over "**Azure SQL 
 
 <img src="https://user-images.githubusercontent.com/44923999/235180719-a2bec7b0-d52c-4a63-a950-2de4f746748a.png" width="600" title="Snipped: April 28, 2023" />
 
-Review "**Introduction**" page, then click "**Next**".
+Review "**Introduction**" page, then click "**Next >**".
 
 -----
 
