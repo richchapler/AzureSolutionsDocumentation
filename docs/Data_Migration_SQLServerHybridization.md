@@ -14,7 +14,7 @@ This solution requires the following resources:
 
 * On-prem development server with:
   * [**SQL Server 2019**](https://info.microsoft.com/ww-landing-sql-server-2019.html) default instance "**MSSQLSERVER**" with [AdventureWorks](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure) sample database
-  * [**SQL Server 2022**](https://info.microsoft.com/ww-landing-sql-server-2022.html) instance named "**SS22**", **Standard edition** (configured with Azure "Pay-as-you-Go" billing)
+  * [**SQL Server 2022**](https://info.microsoft.com/ww-landing-sql-server-2022.html) instance named "**SS22**", **Enterprise** edition (configured with Azure "Pay-as-you-Go" billing)
   * [**SQL Server Management Studio**](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 
 ## Proposed Solution
@@ -130,3 +130,4 @@ Right-click on "**SQL Server (SS22)**" {i.e., the SQL Server 2022 instance} and 
 
 ## Reference
 * [Copy Databases with Backup and Restore](https://learn.microsoft.com/en-us/sql/relational-databases/databases/copy-databases-with-backup-and-restore)
+* [Editions and supported features of SQL Server 2022](https://learn.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-2022)
