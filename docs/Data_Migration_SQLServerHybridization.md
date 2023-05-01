@@ -16,6 +16,8 @@ This solution requires the following resources:
   * [**SQL Server 2019**](https://info.microsoft.com/ww-landing-sql-server-2019.html) default instance "**MSSQLSERVER**" with [AdventureWorks](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure) sample database
   * [**SQL Server 2022**](https://info.microsoft.com/ww-landing-sql-server-2022.html) instance named "**SS22**", **Enterprise** edition (configured with Azure "Pay-as-you-Go" billing)
   * [**SQL Server Management Studio**](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
+* Azure
+  * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) >> [Managed Instance](https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/instance-create-quickstart)
 
 ## Proposed Solution
 This solution will address requirements in three exercises:
