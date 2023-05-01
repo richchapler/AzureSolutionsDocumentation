@@ -63,7 +63,7 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 
 * [**Resource Group**](Infrastructure_ResourceGroup.md)
 
-* [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql)
+* [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) >> [Managed Instance](https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/instance-create-quickstart)
   * [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 
 * [**Storage Account**](Infrastructure_StorageAccount.md)
