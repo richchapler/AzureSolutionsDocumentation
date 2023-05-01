@@ -93,38 +93,27 @@ There are two ways to establish hybrid connectivity:
 * Replicate Database ... the on-prem SQL Server is read/write and the replicated Azure SQL Managed Instance is read-only; changes are transferred near real-time
 * Failover Database ... in the event of a disaster, manually failover to Azure SQL Managed Instance; after disaster mitigation, "fail back" to SQL Server 2022
 
-This documentation covers only the first option.
+This documentation covers only "**Failover Database**" because "Replicate Database" requires a Windows Server (and I only have my laptop for demonstration).
 
 ### Step 1: Create Managed Instance Link
 
 Open **SQL Server Management Studio** and connect to the SQL Server 2022 instance.
 
-<img src="https://user-images.githubusercontent.com/44923999/235180158-f4678ee2-d0f2-4c0a-90db-9c8b537e7a70.png" width="800" title="Snipped: April 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/235476271-8eff885b-bf07-483b-ae82-ddfbecdd9cbe.png" width="800" title="Snipped: May 1, 2023" />
 
-Right-click on the **AdventureWorks2019** database, then roll-over "**Azure SQL Managed Instance link**" and click "**Replicate database**" in the resulting menus.
+Right-click on the **AdventureWorks2019** database, then roll-over "**Azure SQL Managed Instance link**" and click "**Failover database**" in the resulting menus.
 
-<img src="https://user-images.githubusercontent.com/44923999/235180719-a2bec7b0-d52c-4a63-a950-2de4f746748a.png" width="600" title="Snipped: April 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/235476369-24c61dbb-0444-44e8-a030-94bf6299e329.png" width="600" title="Snipped: May 1, 2023" />
 
 Review "**Introduction**" page, then click "**Next >**".
 
-<img src="https://user-images.githubusercontent.com/44923999/235191812-6f255a6f-14f6-42fc-bd12-cb51cb563d40.png" width="600" title="Snipped: April 28, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/.png" width="600" title="Snipped: April 28, 2023" />
 
-Review and address unmet requirements on the "**Requirements**" page; examples:
-* AlwaysOn not enabled
-* Recommended trace flag 1800 not enabled
-* Recommended trace flag 9567 not enabled
 
-#### AlwaysOn not enabled
-Click the link to get a detailed error message:
 
-<img src="https://user-images.githubusercontent.com/44923999/235192508-3bef70c5-e926-4756-a23a-c3cc0c671f69.png" width="400" title="Snipped: April 28, 2023" />
 
-In this example, the message includes guidance for how to address the issue.<br>
-Open **SQL Server Configuration Manager**, and click "**SQL Server Services**" in the navigation pane.
 
-<img src="https://user-images.githubusercontent.com/44923999/235193492-8e4c71ea-7e81-45c1-984e-55b4ddff92df.png" width="800" title="Snipped: April 28, 2023" />
 
-Right-click on "**SQL Server (SS22)**" {i.e., the SQL Server 2022 instance} and select "**Properties**" from the resulting menu.
 
 -----
 
