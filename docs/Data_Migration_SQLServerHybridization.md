@@ -120,3 +120,4 @@ Review "**Introduction**" page, then click "**Next >**".
 ## Reference
 * [Copy Databases with Backup and Restore](https://learn.microsoft.com/en-us/sql/relational-databases/databases/copy-databases-with-backup-and-restore)
 * [Editions and supported features of SQL Server 2022](https://learn.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-2022)
+* [Tutorial: Add SQL Managed Instance to a failover group](https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/failover-group-add-instance-tutorial)
