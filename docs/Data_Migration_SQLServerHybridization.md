@@ -126,4 +126,5 @@ Review "**Introduction**" page, then click "**Next >**".
 ## Reference
 * [Copy Databases with Backup and Restore](https://learn.microsoft.com/en-us/sql/relational-databases/databases/copy-databases-with-backup-and-restore)
 * [Editions and supported features of SQL Server 2022](https://learn.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-2022)
-* [Tutorial: Add SQL Managed Instance to a failover group](https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/failover-group-add-instance-tutorial)
+* [Prepare your environment for a link - Azure SQL Managed Instance](https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/managed-instance-link-preparation?view=azuresql)
+* [Fail over a database by using the link in SSMS - Azure SQL Managed Instance](https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/managed-instance-link-use-ssms-to-failover-database?view=azuresql)
