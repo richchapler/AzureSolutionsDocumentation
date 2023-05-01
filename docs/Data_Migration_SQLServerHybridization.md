@@ -97,7 +97,11 @@ There are two ways to establish hybrid connectivity:
 
 This documentation covers only "**Failover Database**" because "Replicate Database" requires a Windows Server (and I only have my laptop for demonstration).
 
-### Step 1: Create Managed Instance Link
+### Step 1: Configure Managed Instance
+
+LOREM IPSUM
+
+### Step 2: Create Managed Instance Link
 
 Open **SQL Server Management Studio** and connect to the SQL Server 2022 instance.
 
