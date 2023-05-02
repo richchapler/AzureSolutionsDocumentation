@@ -572,7 +572,7 @@ Navigate to "Resource sharing (CORS)" in the left-hand navigation of the Storage
 
 <img src="https://user-images.githubusercontent.com/44923999/235705857-9117178b-9388-4f37-a419-ecf164f4b255.png" width="800" title="Snipped: May 2, 2023" />
 
-On the "Blob service" tab, enter the following values in a new column:
+On the "**Blob service**" tab, enter the following values in a new column:
 
 Prompt | Entry
 :----- | :-----
