@@ -567,7 +567,7 @@ Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the men
 For this enhancement, I created a selection of "floor plan" PDFs using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).<br>
 You will need to prepare various images, convert from JPG to PDF, and upload to a "drawings" folder on Azure Storage.
 
-#### Resource Sharing (CORS)
+#### Storage Account, Resource Sharing (CORS)
 Navigate to "Resource sharing (CORS)" in the left-hand navigation of the Storage Account.
 
 <img src="https://user-images.githubusercontent.com/44923999/235705857-9117178b-9388-4f37-a419-ecf164f4b255.png" width="800" title="Snipped: May 2, 2023" />
@@ -581,7 +581,26 @@ Prompt | Entry
 
 Click "**Save**".
 
- to PowerApps, and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
+#### PowerApps, PDF Viewer
+Navigate to PowerApps, click "**Insert**", then search for and select "**PDF viewer**".
+
+<img src="https://user-images.githubusercontent.com/44923999/235708648-2e376005-3b8e-4f4f-b94b-7a1e599cea9b.png" width="800" title="Snipped: May 2, 2023" />
+
+Arrange layout to accomodate the new control.
+
+<img src="https://user-images.githubusercontent.com/44923999/235709399-ada8acb7-453c-47c6-affd-941900fe07f9.png" width="800" title="Snipped: May 2, 2023" />
+
+
+
+
+and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
+
+
+
+
+
+
+Navigate to PowerApps, and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
 
 LOREM IPSUM
 
