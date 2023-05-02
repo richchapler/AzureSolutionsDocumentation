@@ -564,11 +564,29 @@ Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the men
 
 ### Enhancement 4: PDF Preview
 #### Prepare PDFs
-For this enhancement, I created a selection of "floor plan" PDFs using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).
-You will need to prepare various images: apartment, bungalow, condominium, duplex, flatlet, house
+For this enhancement, I created a selection of "floor plan" PDFs using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).<br>
+You will need to prepare various images, convert from JPG to PDF, and upload to a "drawings" folder on Azure Storage.
+
+#### Resource Sharing (CORS)
+Navigate to "Resource sharing (CORS)" in the left-hand navigation of the Storage Account.
+
+<img src="https://user-images.githubusercontent.com/44923999/235705857-9117178b-9388-4f37-a419-ecf164f4b255.png" width="800" title="Snipped: May 2, 2023" />
+
+On the "Blob service" tab, enter the following values in a new column:
+
+Prompt | Entry
+:----- | :-----
+**Allowed origins** | Enter an asterisk *
+**Allowed methods** | Select "GET"
+
+Click "**Save**".
+
  to PowerApps, and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
 
 LOREM IPSUM
+
+<img src="https://user-images.githubusercontent.com/44923999/235707153-ff43b4ce-dfaf-4b72-b006-91197817b93a.png" width="800" title="Snipped: May 2, 2023" />
+
 
 -----
 
