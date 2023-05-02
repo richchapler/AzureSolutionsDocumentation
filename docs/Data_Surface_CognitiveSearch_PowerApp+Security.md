@@ -620,7 +620,7 @@ _Note: This addition should be parameterized and made particular to your use cas
 ## Exercise 6: Secure App
 In this exercise, we will share and secure the Power App.
 
-<img src="https://user-images.githubusercontent.com/44923999/233419284-0676178b-ed8f-404e-8cd2-41b3d67b3503.png" width="800" title="Snipped: April 20, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/235717730-afb24564-ecfe-4282-8557-1d75b0e7cc6e.png" width="800" title="Snipped: April 20, 2023" />
 
 Click the "**Share**" icon in the upper-right of the Power App screen.
 
