@@ -453,6 +453,7 @@ There are many enhancements that will improve usability; we will add and configu
 * Vertical Gallery (using JSON)
 * Images {aka "Thumbnails"}
 * Filters
+* PDF Preview
 
 ### Enhancement 1: Vertical Gallery
 #### Enable ParseJSON Feature
@@ -499,7 +500,7 @@ Enter a query string and then click "**Search**".
 
 ### Enhancement 2: Images {aka "Thumbnails"}
 #### Prepare "Thumbnails"
-For this documentation, I created a selection of icons using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).
+For this enhancement, I created a selection of icons using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).
 You will need to prepare various images: apartment, bungalow, condominium, duplex, flatlet, house
 
 <img src="https://user-images.githubusercontent.com/44923999/233184788-e37a1bd2-663b-4518-9d28-4a30e75d6aa5.png" width="800" title="Snipped: April 19, 2023" />
@@ -561,6 +562,14 @@ Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the men
 
 <img src="https://user-images.githubusercontent.com/44923999/233461771-e05eca79-40a6-446c-8122-5932699a81c7.png" width="800" title="Snipped: April 20, 2023" />
 
+### Enhancement 4: PDF Preview
+#### Prepare PDFs
+For this enhancement, I created a selection of "floor plan" PDFs using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).
+You will need to prepare various images: apartment, bungalow, condominium, duplex, flatlet, house
+ to PowerApps, and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
+
+LOREM IPSUM
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
@@ -599,3 +608,5 @@ Confirm settings and then click "Share".
   * [Securing the app and data](https://learn.microsoft.com/en-us/power-apps/guidance/planning/security)
   * [Set permission and share apps with colleagues](https://learn.microsoft.com/en-us/power-apps/teams/set-perms-and-share)
   * [Power Fx formula reference for Power Apps](https://learn.microsoft.com/en-us/power-platform/power-fx/formula-reference)
+* Storage Account
+  * [Cross-Origin Resource Sharing (CORS) support for Azure Storage](https://learn.microsoft.com/en-us/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services)
