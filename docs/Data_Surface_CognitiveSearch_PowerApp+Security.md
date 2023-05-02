@@ -565,7 +565,7 @@ Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the men
 ### Enhancement 4: PDF Preview
 #### Prepare PDFs
 For this enhancement, I created a selection of "floor plan" PDFs using [Microsoft Bing, Image Creator (powered by DALL-E)](https://www.bing.com/images/create).<br>
-You will need to prepare various images, convert from JPG to PDF, and upload to a "drawings" folder on Azure Storage.
+You will need to prepare various images, convert from JPG to PDF, and upload to a container on Azure Storage.
 
 #### Storage Account, Resource Sharing (CORS)
 Navigate to "Resource sharing (CORS)" in the left-hand navigation of the Storage Account.
