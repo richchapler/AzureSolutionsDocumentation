@@ -590,24 +590,26 @@ Arrange layout to accomodate the new control.
 
 <img src="https://user-images.githubusercontent.com/44923999/235711893-922fa74b-21e8-4a0d-9ffd-71eff736824d.png" width="800" title="Snipped: May 2, 2023" />
 
-Click on the new PDF Viewer control, click the "**Advanced**" tab on the pop-out, and clear the "**Document**" value {i.e., "SamplePdf"}.
+Select "**Screen1**" >> "**Results**" (gallery) >> "**Title1**" from the "**Tree view**".
 
+<img src="https://user-images.githubusercontent.com/44923999/235714878-7f192c9a-cb8f-4c99-8082-58b366d326eb.png" width="800" title="Snipped: May 2, 2023" />
 
+Click the "**Advanced**" tab on the pop-out, and replace the "OnSelect" value with:
 
+```
+Set(selectedPDF,"https://{STORAGE_ACCOUNT_NAME}.blob.core.windows.net/drawings/{FILE_NAME}.pdf?{SAS_TOKEN}")
+```
 
-and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
+Click on the new PDF Viewer control, click the "**Advanced**" tab on the pop-out, and replace the "**Document**" value with `selectedPDF`.
 
+#### Confirm Success
+Click the play icon {i.e., "Preview the app (F5)"} in the upper-right of the menu-bar.
 
+<img src="https://user-images.githubusercontent.com/44923999/235715942-154bd8f8-9cee-444b-86c3-297a18a4600f.png" width="800" title="Snipped: May 2, 2023" />
 
+Enter a query string and then click on the title of a search result.
 
-
-
-Navigate to PowerApps, and select "**Screen1**" >> "**Gallery1**" >> "**Image1**" from the "**Tree view**".
-
-LOREM IPSUM
-
-<img src="https://user-images.githubusercontent.com/44923999/235707153-ff43b4ce-dfaf-4b72-b006-91197817b93a.png" width="800" title="Snipped: May 2, 2023" />
-
+_Note: This addition should be parameterized and made particular to your use case {e.g., not just launching the same PDF anytime you click the item Title}_
 
 -----
 
