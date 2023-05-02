@@ -588,7 +588,9 @@ Navigate to PowerApps, click "**Insert**", then search for and select "**PDF vie
 
 Arrange layout to accomodate the new control.
 
-<img src="https://user-images.githubusercontent.com/44923999/235709399-ada8acb7-453c-47c6-affd-941900fe07f9.png" width="800" title="Snipped: May 2, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/235711893-922fa74b-21e8-4a0d-9ffd-71eff736824d.png" width="800" title="Snipped: May 2, 2023" />
+
+Click on the new PDF Viewer control, click the "**Advanced**" tab on the pop-out, and clear the "**Document**" value {i.e., "SamplePdf"}.
 
 
 
