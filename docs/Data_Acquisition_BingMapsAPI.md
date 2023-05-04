@@ -1,4 +1,4 @@
-# Data Acquisition: Elevation Data from Bing Maps
+# Data Acquisition: Elevation Data from Bing Maps (WiP)
 
 <img src="https://user-images.githubusercontent.com/44923999/236240083-61fb1241-39e5-4d4c-ad0e-3f83480c8edf.png" width="1000" />
 
@@ -58,6 +58,8 @@ Navigate to Data Explorer >> "**Query**" and then run the following KQL:
 ## Step 2: Create Pipeline
 
 LOREM IPSUM
+
+@concat("http://dev.virtualearth.net/REST/v1/Elevation/List?points=",item().BeginLat,",",item().BeginLon,"&key=AovJ4RaLmics_D-oHTKlr35bg5S_W4T5m6ualG7i8Lsb09-6K1YvW939JjbPkbto")
 
 -----
 
