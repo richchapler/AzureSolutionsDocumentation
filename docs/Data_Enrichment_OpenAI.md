@@ -7,6 +7,8 @@ This solution considers the following requirements:
 
 * "I want to learn about Azure OpenAI with a simple use case"
 * "I want to enrich data with compelling content ready for consumption by end-users"
+* "We don't want to iterate through trillions of records each time we update elevation data"
+* H3 Resolution 9 ... how many decimal places?
 
 ## Required Infrastructure
 This solution requires the following resources:
