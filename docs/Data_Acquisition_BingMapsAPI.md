@@ -37,5 +37,5 @@ Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
 ## Reference
 
-* Cognitive Search
-  * [Azure Cognitive Search Service REST](https://learn.microsoft.com/en-us/rest/api/searchservice/)
+* Bing Maps
+  * [Get Elevations](https://learn.microsoft.com/en-us/bingmaps/rest-services/elevations/get-elevations)
