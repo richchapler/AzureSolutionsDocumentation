@@ -1,4 +1,4 @@
-## Data Acquisition... from IoT Simulation
+# Data Acquisition: ...from IoT Simulation
 
 ![image](https://user-images.githubusercontent.com/44923999/187302525-e127f4d3-6a61-443d-adb2-5c92b49817fe.png)
 
