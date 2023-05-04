@@ -93,3 +93,6 @@ http://dev.virtualearth.net/REST/v1/Elevation/List?points=35.52,-81.63,38.8,-75.
 
 * Bing Maps
   * [Get Elevations](https://learn.microsoft.com/en-us/bingmaps/rest-services/elevations/get-elevations)
+* Data Explorer
+  * [make_list() (aggregation function)](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/makelist-aggfunction)
+
