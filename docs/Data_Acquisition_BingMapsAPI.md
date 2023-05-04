@@ -7,6 +7,9 @@ This solution considers the following requirements:
 
 * "Our IoT devices capture GPS coordinates, but not elevation data"
 * "We want to enrich our data to enhance our machine learning models"
+* "We don't want to iterate through trillions of records each time we update elevation data"
+* H3 Resolution 9 ... how many decimal places?
+* "We want a variable number of decimal places based on number of times the number appears" ... max: 5
 
 ## Prerequisites
 This solution requires the following resources:
