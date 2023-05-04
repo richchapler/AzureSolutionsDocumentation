@@ -18,7 +18,7 @@ This solution requires the following resources:
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [Synapse Workspace](Infrastructure_Synapse.md) with...
   * Data Explorer [Linked Service and Integration Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services)
-  * Data Explorer Database, "User" permissions for the Synapse Managed Identity
+  * Data Explorer Database, "User" and "Ingestor" permissions for the Synapse Managed Identity
 
 -----
 
