@@ -19,7 +19,7 @@ This solution requires the following resources:
 * [**Storage Account**](Infrastructure_StorageAccount.md) with "images" container
 
 ## Proposed Solution
-This solution will address requirements in three exercises:
+This solution will address requirements in six exercises:
 
 * Exercise 1: Create Index
 * Exercise 2: Secure Index
