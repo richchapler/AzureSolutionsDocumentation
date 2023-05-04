@@ -14,18 +14,20 @@ This solution requires the following resources:
 * [Bing Maps](https://learn.microsoft.com/en-us/bingmaps/) [**Key**](https://learn.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key)
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [Synapse Workspace](Infrastructure_Synapse.md) with...
-  * Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md)
-  * Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
-## Proposed Solution
-This solution will address requirements in three exercises:
+  * Data Explorer [Linked Service and Integration Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services)
+  * Data Explorer "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 
-* Exercise 1: Modify Schema
-* Exercise 2: Create Pipeline
+## Proposed Solution
+This solution will address requirements in a single exercise:
+
+* Exercise 1: Enrich Data using Bing Maps
 
 -----
 
 ## Exercise 1: Modify Schema
 In this exercise, we will add an "**Elevation**" column to the **StormEvents** table.
+
+## Step 1: Modify Schema
 
 <img src="https://user-images.githubusercontent.com/44923999/236253087-0bf8388c-618d-4046-9d6a-4d05198346af.png" width="800" title="Snipped: May 4, 2023" />
 
