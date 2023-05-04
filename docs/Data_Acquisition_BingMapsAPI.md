@@ -1,21 +1,23 @@
 # Data Acquisition: Elevation Data from Bing Maps
 
-<img src="https://user-images.githubusercontent.com/44923999/236239750-29de7656-4f66-4148-870f-5ca9a557de6f.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/236240083-61fb1241-39e5-4d4c-ad0e-3f83480c8edf.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
 
-* "We want to share our secured Cognitive Search index with our community of business users"
+* "Our IoT devices capture GPS coordinates, but not elevation data"
+* "We want to enrich our data to enhance our machine learning models"
 
 ## Prerequisites
 This solution requires the following resources:
 
-* [**Bing Maps**](LoremIpsum.md)
-
+* [Bing Maps](https://learn.microsoft.com/en-us/bingmaps/) [**Key**](https://learn.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [Synapse](Infrastructure_Synapse.md) with a Data Explorer [Integration Dataset](Infrastructure_Synapse_Dataset.md) and Data Explorer, "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Lorem Ipsump
+* Exercise 1: Lorem Ipsum
 
 -----
 
