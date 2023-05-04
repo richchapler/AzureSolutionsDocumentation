@@ -1,4 +1,4 @@
-## Data Acquisition... from Purview API
+# Data Acquisition: ...from Purview API
 
 ![image](https://user-images.githubusercontent.com/44923999/185978130-452af816-19c6-40e2-94a8-bad516fcd178.png)
 
