@@ -1,6 +1,6 @@
 # Data Acquisition: Elevation Data from Bing Maps
 
-<img src="https://user-images.githubusercontent.com/44923999/231556765-3276ee63-1883-4176-af10-36a1ea3a9e12.png" width="1000" />
+<img src="https://user-images.githubusercontent.com/44923999/236239750-29de7656-4f66-4148-870f-5ca9a557de6f.png" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
