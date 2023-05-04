@@ -92,6 +92,22 @@ StormEvents
 | summarize points = make_list(coordinates) by groupNumber
 | project points = replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")
 
+Elevations_fromAPI
+| project e1 = replace_string(replace_string(replace_string(replace_string(tostring(elevations),"[",""),"]",""),"\"","")," ","")
+| project e2 = split(e1, ",")
+| mv-expand
+    bagexpansion=array
+    with_itemindex=rowNumber
+    e3 = todynamic(e2) to typeof(string)
+
+Elevations_fromAPI
+| project points = split(replace_string(replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")," ",""), ",")
+| mv-expand
+    bagexpansion=array
+    with_itemindex=i
+    value = todynamic(points) to typeof(string)
+| project row=i/2, value, Latitude = iif(i/2.0==i/2,"Latitude","Longitude")
+
 
 -----
 
