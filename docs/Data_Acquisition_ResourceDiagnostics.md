@@ -1,4 +1,4 @@
-## Data Acquisition... from Resource Diagnostics
+# Data Acquisition: ...from Resource Diagnostics
 
 ![image](https://user-images.githubusercontent.com/44923999/185979268-83aad799-8e0a-4e82-9f82-f81616cf8cff.png)
 
