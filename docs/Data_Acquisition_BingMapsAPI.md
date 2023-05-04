@@ -5,11 +5,10 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "Our IoT devices capture GPS coordinates, but not elevation data"
-* "We want to enrich our data to enhance our machine learning models"
-* "We don't want to iterate through trillions of records each time we update elevation data"
-* H3 Resolution 9 ... how many decimal places?
-* "We want a variable number of decimal places based on number of times the number appears" ... max: 5
+* "Our vehicular IoT devices capture GPS coordinates, but not elevation data"
+* "We want to enrich data to enhance machine learning models"
+* "As new data streams in, we want to enrich the stream with elevation data (based on the most granular possible GPS coordinates)"
+* "We want to query Elevation GPS coordinates to five decimal places {i.e., round coordinates with more than five decimal places}"
 
 ## Prerequisites
 This solution requires the following resources:
