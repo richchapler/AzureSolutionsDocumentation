@@ -17,14 +17,15 @@ This solution requires the following resources:
 ## Proposed Solution
 This solution will address requirements in three exercises:
 
-* Exercise 1: Lorem Ipsum
+* Exercise 1: Modify Schema
+* Exercise 2: Create Pipeline
 
 -----
 
-## Exercise 1: Lorem Ipsum
+## Exercise 1: Modify Schema
 In this exercise, we will create an index using sample data.
 
-### Step 1: Create Index
+### Step 1: Lorem Ipsum
 Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/230911383-a7135ef7-65e2-45e7-bb4f-38f5addaa8e9.png" width="800" title="Snipped: April 10, 2023" />
