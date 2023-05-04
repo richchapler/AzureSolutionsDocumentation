@@ -1,4 +1,4 @@
-## Data Acquisition... from Log Analytics API
+# Data Acquisition: ...from Log Analytics API
 
 ![image](https://user-images.githubusercontent.com/44923999/186208783-6c8db61d-01ea-4d5a-9a39-ac02458ec463.png)
 
