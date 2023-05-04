@@ -25,12 +25,38 @@ This solution will address requirements in three exercises:
 -----
 
 ## Exercise 1: Modify Schema
-In this exercise, we will create an index using sample data.
+In this exercise, we will add an "**Elevation**" column to the **StormEvents** table.
 
-### Step 1: Lorem Ipsum
-Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
+<img src="https://user-images.githubusercontent.com/44923999/236253087-0bf8388c-618d-4046-9d6a-4d05198346af.png" width="800" title="Snipped: May 4, 2023" />
 
-<img src="https://user-images.githubusercontent.com/44923999/230911383-a7135ef7-65e2-45e7-bb4f-38f5addaa8e9.png" width="800" title="Snipped: April 10, 2023" />
+Navigate to Data Explorer >> "**Query**" and then run the following KQL:
+```
+.alter table StormEvents (
+    StartTime: datetime,
+    EndTime: datetime,
+    EpisodeId: long,
+    EventId: long,
+    State: string,
+    EventType: string,
+    InjuriesDirect: long,
+    InjuriesIndirect: long,
+    DeathsDirect: long,
+    DeathsIndirect: long,
+    DamageProperty: long,
+    DamageCrops: long,
+    Source: string,
+    BeginLocation: string,
+    EndLocation: string,
+    BeginLat: real,
+    BeginLon: real,
+    EndLat: real,
+    EndLon: real,
+    EpisodeNarrative:string,
+    EventNarrative: string,
+    StormSummary: string,
+    Elevation: int
+    ) 
+```
 
 -----
 
