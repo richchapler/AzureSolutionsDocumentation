@@ -83,6 +83,16 @@ StormEvents
 
 http://dev.virtualearth.net/REST/v1/Elevation/List?points=35.52,-81.63,38.8,-75.58&key=AovJ4RaLmics_D-oHTKlr35bg5S_W4T5m6ualG7i8Lsb09-6K1YvW939JjbPkbto
 
+let blah = StormEvents | summarize c=count() | project toint(c/128);
+let groupCount = materialize(blah);
+StormEvents
+| where not(isnull(BeginLat)) and not(isnull(BeginLon))
+| distinct coordinates = strcat(round(BeginLat,5),",",round(BeginLon,5))
+| extend groupNumber = hash_xxhash64(coordinates, groupCount)
+| summarize points = make_list(coordinates) by groupNumber
+| project points = replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")
+
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
