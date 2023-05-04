@@ -15,16 +15,10 @@ This solution requires the following resources:
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [Synapse Workspace](Infrastructure_Synapse.md) with...
   * Data Explorer [Linked Service and Integration Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services)
-  * Data Explorer "**AllDatabasesAdmin**" permissions for the Synapse, System-Assigned Managed Identity
-
-## Proposed Solution
-This solution will address requirements in a single exercise:
-
-* Exercise 1: Enrich Data using Bing Maps
 
 -----
 
-## Exercise 1: Modify Schema
+## Exercise 1: Enrich Data using Bing Maps
 In this exercise, we will add an "**Elevation**" column to the **StormEvents** table.
 
 ## Step 1: Modify Schema
@@ -59,6 +53,10 @@ Navigate to Data Explorer >> "**Query**" and then run the following KQL:
     Elevation: int
     ) 
 ```
+
+## Step 2: Create Pipeline
+
+LOREM IPSUM
 
 -----
 
