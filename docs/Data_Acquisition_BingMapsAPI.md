@@ -97,14 +97,7 @@ StormEvents
 
 .clear table Elevations_fromAPI data
 
-Elevations_fromAPI
-| project batch, elevations = split(replace_string(replace_string(replace_string(replace_string(tostring(elevations),"[",""),"]",""),"\"","")," ",""), ",")
-| mv-expand
-    bagexpansion=array
-    with_itemindex=row
-    elevation = todynamic(elevations) to typeof(string)
-| project batch, row, elevation
-| join kind=inner (
+let Latitudes = (
     Elevations_fromAPI
     | project batch, points = split(replace_string(replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")," ",""), ",")
     | mv-expand
@@ -113,8 +106,8 @@ Elevations_fromAPI
         latitude = todynamic(points) to typeof(string)
     | where i/2.0==i/2
     | project batch, row=1/2, latitude
-    ) on batch, row
-| join kind=inner (
+);
+let Longitudes = (
     Elevations_fromAPI
     | project batch, points = split(replace_string(replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")," ",""), ",")
     | mv-expand
@@ -123,8 +116,21 @@ Elevations_fromAPI
         longitude = todynamic(points) to typeof(string)
     | where i/2.0!=i/2
     | project batch, row=1/2, longitude
-    ) on batch, row
-| project batch, row, elevation, latitude, longitude
+    // | where batch == 440 and row == 0
+);
+let Elevations = (
+    Elevations_fromAPI
+    | project batch, elevations = split(replace_string(replace_string(replace_string(replace_string(tostring(elevations),"[",""),"]",""),"\"","")," ",""), ",")
+    | mv-expand
+        bagexpansion=array
+        with_itemindex=row
+        elevation = todynamic(elevations) to typeof(string)
+    | project batch, row, elevation
+);
+Latitudes
+| join kind = inner Longitudes on batch, row
+| join kind = inner Elevations on batch, row
+| project batch, row, latitude, longitude, elevation
 
 -----
 
