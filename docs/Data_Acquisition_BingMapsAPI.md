@@ -100,31 +100,21 @@ StormEvents
 let Latitudes = (
     Elevations_fromAPI
     | project batch, points = split(replace_string(replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")," ",""), ",")
-    | mv-expand
-        bagexpansion=array
-        with_itemindex=i
-        latitude = todynamic(points) to typeof(string)
+    | mv-expand with_itemindex=i latitude = todynamic(points) to typeof(string)
     | where i/2.0==i/2
-    | project batch, row=1/2, latitude
+    | project batch, row=i/2, latitude
 );
 let Longitudes = (
     Elevations_fromAPI
     | project batch, points = split(replace_string(replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")," ",""), ",")
-    | mv-expand
-        bagexpansion=array
-        with_itemindex=i
-        longitude = todynamic(points) to typeof(string)
+    | mv-expand with_itemindex=i longitude = todynamic(points) to typeof(string)
     | where i/2.0!=i/2
-    | project batch, row=1/2, longitude
-    // | where batch == 440 and row == 0
+    | project batch, row=i/2, longitude
 );
 let Elevations = (
     Elevations_fromAPI
     | project batch, elevations = split(replace_string(replace_string(replace_string(replace_string(tostring(elevations),"[",""),"]",""),"\"","")," ",""), ",")
-    | mv-expand
-        bagexpansion=array
-        with_itemindex=row
-        elevation = todynamic(elevations) to typeof(string)
+    | mv-expand with_itemindex=row elevation = todynamic(elevations) to typeof(string)
     | project batch, row, elevation
 );
 Latitudes
