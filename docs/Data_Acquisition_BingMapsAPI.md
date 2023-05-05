@@ -44,7 +44,7 @@ Schema explained:
 
 batch | points | elevations
 :----- | :----- | :-----
-`347` |  `22.2083,-159.4784,28.9,-97.2...` | `[6,50,183,360,621,228...]"`
+`347` |  `22.2083,-159.4784,28.9,-97.2,...` | `[6,50,183,360,...]"`
 
 ### `Elevations` Table
 This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
