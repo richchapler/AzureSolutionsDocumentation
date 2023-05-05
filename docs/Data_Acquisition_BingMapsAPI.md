@@ -23,9 +23,9 @@ This solution requires the following resources:
 ## Exercise 1: Prepare Database
 In this exercise, we will prepare the Data Explorer Database.
 
-<img src="https://user-images.githubusercontent.com/44923999/236517174-bc833763-8f55-48f2-82a3-30b69a70fd80.png" width="800" title="Snipped: May 5, 2023" />
-
 Navigate to Data Explorer >> "**Query**".
+
+<img src="https://user-images.githubusercontent.com/44923999/236517174-bc833763-8f55-48f2-82a3-30b69a70fd80.png" width="800" title="Snipped: May 5, 2023" />
 
 ### `Elevations_fromAPI` Table
 This table will receive data direct from the Bing Maps API (as shaped by the Synapse Pipeline).
