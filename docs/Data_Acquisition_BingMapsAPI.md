@@ -23,7 +23,7 @@ This solution requires the following resources:
 ## Exercise 1: Prepare Database
 In this exercise, we will prepare the Data Explorer Database.
 
-<img src="https://user-images.githubusercontent.com/44923999/236506885-3a206fa4-50f9-4b5f-8c58-2f5de48c2a5b.png" width="800" title="Snipped: May 5, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/236517174-bc833763-8f55-48f2-82a3-30b69a70fd80.png" width="800" title="Snipped: May 5, 2023" />
 
 Navigate to Data Explorer >> "**Query**".
 
