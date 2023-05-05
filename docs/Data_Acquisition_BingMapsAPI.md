@@ -46,6 +46,8 @@ batch | points | elevations
 :----- | :----- | :-----
 `347` |  `22.2083,-159.4784,28.9,-97.2,...` | `[6,50,183,360,...]"`
 
+_Note: Characters that seem out-of-place {e.g., the double-quote at the end of the sample elevations column data} are real and will be cleaned in downstream logic_
+
 ### `Elevations` Table
 This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
 
@@ -54,8 +56,14 @@ Run the following KQL:
 .create table Elevations (latitude: real, longitude: real, elevation: int) 
 ```
 
+#### Sample Data
+
+latitude | longitude | elevation
+:----- | :----- | :-----
+`41.83` |  `-94.12` | `287`
+
 ### `transformElevations` Function
-This function will LOREM IPSUM.
+This function logic transforms data from `Elevations_fromAPI` to `Elevations` and will be used by the Update Policy.
 
 Run the following KQL:
 ```
@@ -81,6 +89,10 @@ latitudes
 }
 ```
 
+Logic explained:
+* `batch`... grouping mechanism used to optimize our interaction with the API {i.e., sending multiple coordinate pairs per request}
+
+LOREM IPSUM
 
 
 
