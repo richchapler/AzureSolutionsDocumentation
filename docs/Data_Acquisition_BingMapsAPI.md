@@ -118,9 +118,9 @@ Navigate to Synapse Studio >> "**Integrate**".
 
 Click the "**+**" icon and then click "**Pipeline**" in the resulting drop-down menu.
 
-#### Add Activity: `RowCount` Lookup
+#### Add Activity: `Rows` Lookup
 
-<img src="https://user-images.githubusercontent.com/44923999/236559993-384f68b7-5a5a-4d9c-8b46-761d6e37a2c3.png" width="800" title="Snipped: May 5, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/236561868-f3a7f1b0-62ae-491f-9245-4c8287af1384.png" width="800" title="Snipped: May 5, 2023" />
 
 Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.<br>
 Complete the form on the "**Settings**" tab, including:
@@ -134,6 +134,8 @@ Finally, in the "**Query**" input, enter `StormEvents | summarize rowCount = cou
 
 Logic explained:
 * `rowCount` will be used to define batches for iterative processing
+
+#### Add Activity: `Points` Lookup
 
 LOREM IPSUM
 
