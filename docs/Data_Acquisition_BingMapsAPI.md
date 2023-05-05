@@ -46,7 +46,7 @@ batch | points | elevations
 :----- | :----- | :-----
 `347` |  `22.2083,-159.4784,28.9,-97.2,...` | `[6,50,183,360,...]"`
 
-_Note: Characters that seem out-of-place {e.g., the double-quote at the end of the sample elevations column data} are real and will be cleaned in downstream logic_
+_Note: Garbage characters {e.g., the double-quote at the end of the sample elevations column data} will be cleaned in downstream logic_
 
 ### `Elevations` Table
 This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
@@ -63,7 +63,7 @@ latitude | longitude | elevation
 `41.83` |  `-94.12` | `287`
 
 ### `transformElevations` Function
-This function logic transforms data from `Elevations_fromAPI` to `Elevations` and will be used by the Update Policy.
+This logic transforms data from `Elevations_fromAPI` to `Elevations` and will be used by the Update Policy.
 
 Run the following KQL:
 ```
@@ -90,9 +90,17 @@ latitudes
 ```
 
 Logic explained:
-* `batch`... grouping mechanism used to optimize our interaction with the API {i.e., sending multiple coordinate pairs per request}
+* `cleanDynamic` is a user-defined function for repetitive transformations {e.g., eliminate garbage characters, format array, change data type}
+* `commonBase` expands `points` array into multiple records, adds a `row` index, and surfaces columns
+* `let latitudes...` and `let longitudes...`... prepares two in-memory tables from `commonBase`
+* `let elevations...` expands `elevations` array into multiple records, adds a `row` index, and surfaces columns
+* Final query with `join` operators merges all in-memory tables into a final result
 
+### `Elevations` Update Policy
+This logic transforms data from `Elevations_fromAPI` to `Elevations` and will be used by the Update Policy.
 LOREM IPSUM
+
+.alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'
 
 
 
