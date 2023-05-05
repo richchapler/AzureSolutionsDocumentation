@@ -116,6 +116,28 @@ Navigate to Synapse Studio >> "**Integrate**".
 
 <img src="https://user-images.githubusercontent.com/44923999/236559050-f271eb9f-1858-4062-ba14-e4531bc97d1b.png" width="800" title="Snipped: May 5, 2023" />
 
+Click the "**+**" icon and then click "**Pipeline**" in the resulting drop-down menu.
+
+#### Add Activity: `RowCount` Lookup
+
+<img src="https://user-images.githubusercontent.com/44923999/236559993-384f68b7-5a5a-4d9c-8b46-761d6e37a2c3.png" width="800" title="Snipped: May 5, 2023" />
+
+Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.
+Complete the form on the "**Settings**" tab, including:
+
+Prompt | Entry
+:----- | :-----
+**Source dataset** | Select the integration dataset
+**First row only** | **checked**
+**Query** | Enter `StormEvents | summarize rowCount = count()`
+
+Logic explained:
+* `rowCount` will be used to define batches for iterative processing
+
+LOREM IPSUM
+
+-----
+
 ```
 StormEvents
 | where not(isnull(BeginLat)) and not(isnull(BeginLon))
@@ -154,23 +176,6 @@ StormEvents
 | summarize points = make_list(coordinates) by groupNumber
 | project points = replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")
 ```
-
-```
-.create table Elevations (latitude: decimal, longitude: decimal, elevation: int)
-```
-
-```
-.create table Elevations (latitude: decimal, longitude: decimal, elevation: int)
-```
-
-
-
-```
-.alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'
-```
-
------
-
 
 -----
 
