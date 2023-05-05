@@ -27,7 +27,7 @@ In this exercise, we will prepare the Data Explorer Database.
 
 Navigate to Data Explorer >> "**Query**".
 
-### Table, Elevations_fromAPI
+### `Elevations_fromAPI` Table
 This table will receive data direct from the Bing Maps API (as shaped by the Synapse Pipeline).
 
 Run the following KQL:
@@ -35,10 +35,12 @@ Run the following KQL:
 .create table Elevations_fromAPI (batch: int, points: string, elevations: string) 
 ```
 
-Logic Explained:
-* `batch` refers to the grouping mechanism that we will use to optimize our interaction with the API {i.e., sending multiple coordinate pairs per request}
+Schema explained:
+* `batch`... grouping mechanism used to optimize our interaction with the API {i.e., sending multiple coordinate pairs per request}
+* `points`... set of latitude and longitude values in form `points=lat1,long1,lat2,long2,latn,longn` (the value passed to the API)
+* `elevations`... array of values returned by API (ordinally aligned with `points`)
 
-### Table, Elevations
+### `Elevations` Table
 This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
 
 Run the following KQL:
@@ -48,6 +50,33 @@ Run the following KQL:
 
 ### Function, Lorem Ipsum
 This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
+
+Run the following KQL:
+```
+.create-or-alter function transformElevations()  
+{
+let cleanDynamic = (arg0:string) { todynamic(split(replace_string(replace_string(replace_string(replace_string(arg0,"[",""),"]",""),"\"","")," ",""), ",")) };
+let commonBase = (
+    Elevations_fromAPI
+    | project batch, points = cleanDynamic(points)
+    | mv-expand with_itemindex=i value = points to typeof(string)
+    | extend type = iif( i/2.0 == i/2, "latitude", "longitude" ), row = i/2 );
+let latitudes = ( commonBase | where type == "latitude" | project batch, row, latitude = todecimal(value) );
+let longitudes = ( commonBase | where type == "longitude" | project batch, row, longitude = todecimal(value) );
+let elevations = (
+    Elevations_fromAPI
+    | project batch, value = cleanDynamic(elevations)
+    | mv-expand with_itemindex=row elevation = value to typeof(string)
+    | project batch, row, toint(elevation) );
+latitudes
+| join kind = inner longitudes on batch, row
+| join kind = inner elevations on batch, row
+| project latitude, longitude, elevation
+}
+```
+
+
+
 
 ```
 StormEvents
@@ -96,28 +125,7 @@ StormEvents
 .create table Elevations (latitude: decimal, longitude: decimal, elevation: int)
 ```
 
-```
-.create-or-alter function transformElevations()  
-{
-let cleanDynamic = (arg0:string) { todynamic(split(replace_string(replace_string(replace_string(replace_string(arg0,"[",""),"]",""),"\"","")," ",""), ",")) };
-let commonBase = (
-    Elevations_fromAPI
-    | project batch, points = cleanDynamic(points)
-    | mv-expand with_itemindex=i value = points to typeof(string)
-    | extend type = iif( i/2.0 == i/2, "latitude", "longitude" ), row = i/2 );
-let latitudes = ( commonBase | where type == "latitude" | project batch, row, latitude = todecimal(value) );
-let longitudes = ( commonBase | where type == "longitude" | project batch, row, longitude = todecimal(value) );
-let elevations = (
-    Elevations_fromAPI
-    | project batch, value = cleanDynamic(elevations)
-    | mv-expand with_itemindex=row elevation = value to typeof(string)
-    | project batch, row, toint(elevation) );
-latitudes
-| join kind = inner longitudes on batch, row
-| join kind = inner elevations on batch, row
-| project latitude, longitude, elevation
-}
-```
+
 
 ```
 .alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'
@@ -150,6 +158,7 @@ In this exercise, we will capture and then transform the response
 ## Reference
 
 * Bing Maps
+  * [Bing Maps Elevations API](https://learn.microsoft.com/en-us/bingmaps/rest-services/elevations/)
   * [Get Elevations](https://learn.microsoft.com/en-us/bingmaps/rest-services/elevations/get-elevations)
 * Data Explorer
   * [make_list() (aggregation function)](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/makelist-aggfunction)
