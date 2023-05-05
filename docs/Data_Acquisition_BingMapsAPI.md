@@ -6,10 +6,8 @@
 This solution considers the following requirements:
 
 * "Our vehicular IoT devices capture GPS coordinates, but not elevation data"
-* "We want to enrich data to enhance machine learning models"
-* "As new data streams in, we want to enrich the stream with elevation data (based on the most granular possible GPS coordinates)"
-* "We want to query Elevation GPS coordinates to five decimal places {i.e., round coordinates with more than five decimal places}"
-* Bing Maps API documentation: "The maximum number of elevations returned in a request is 1024"
+* "As new data streams in, we want to capture elevation (above sea level) for future reference"
+* "We want to query Elevation GPS coordinates to nore more than five decimal places"
 
 ## Prerequisites
 This solution requires the following resources:
@@ -17,15 +15,19 @@ This solution requires the following resources:
 * [Bing Maps](https://learn.microsoft.com/en-us/bingmaps/) [**Key**](https://learn.microsoft.com/en-us/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key)
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [Synapse Workspace](Infrastructure_Synapse.md) with...
-  * Data Explorer [Linked Service and Integration Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services)
-  * Data Explorer Database, "User" and "Ingestor" permissions for the Synapse Managed Identity
+  * Data Explorer [**Linked Service** and **Integration Dataset**](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services)
+  * Data Explorer Database, "**User**" and "**Ingestor**" permissions for the Synapse Managed Identity
 
 -----
 
-## Exercise 1: Enrich Data using Bing Maps
-In this exercise, we will add an "**Elevation**" column to the **StormEvents** table.
+## Exercise 1: Acquire Relevant Elevation Data
+In this exercise, we will:
+1. Prepare the destination Data Explorer Database
+2. Package and orchestrate a Bing Maps API request with a Synapse Pipeline
+3. Capture and then transform the response
 
-## Step 1: Modify Schema
+## Step 1: Prepare Destination
+In this exercise, we will add an "**Elevation**" column to the **StormEvents** table.
 
 <img src="https://user-images.githubusercontent.com/44923999/236253087-0bf8388c-618d-4046-9d6a-4d05198346af.png" width="800" title="Snipped: May 4, 2023" />
 
