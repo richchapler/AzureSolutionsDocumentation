@@ -21,44 +21,27 @@ This solution requires the following resources:
 -----
 
 ## Exercise 1: Prepare Database
-In this exercise, we will prepare the destination Data Explorer Database
+In this exercise, we will prepare the Data Explorer Database.
 
-## Step 1: Create "Elevations_Raw" Table
+<img src="https://user-images.githubusercontent.com/44923999/blah.png" width="800" title="Snipped: May 5, 2023" />
 
-<img src="https://user-images.githubusercontent.com/44923999/236253087-0bf8388c-618d-4046-9d6a-4d05198346af.png" width="800" title="Snipped: May 4, 2023" />
+Navigate to Data Explorer >> "**Query**".
 
-Navigate to Data Explorer >> "**Query**" and then run the following KQL:
+### Table, Elevations_fromAPI
+This table will receive data direct from the Bing Maps API (as shaped by the Synapse Pipeline).
+
+Run the following KQL:
 ```
-.alter table StormEvents (
-    StartTime: datetime,
-    EndTime: datetime,
-    EpisodeId: long,
-    EventId: long,
-    State: string,
-    EventType: string,
-    InjuriesDirect: long,
-    InjuriesIndirect: long,
-    DeathsDirect: long,
-    DeathsIndirect: long,
-    DamageProperty: long,
-    DamageCrops: long,
-    Source: string,
-    BeginLocation: string,
-    EndLocation: string,
-    BeginLat: real,
-    BeginLon: real,
-    EndLat: real,
-    EndLon: real,
-    EpisodeNarrative:string,
-    EventNarrative: string,
-    StormSummary: string,
-    Elevation: int
-    ) 
+.create table Elevations_fromAPI (batch: int, points: string, elevations: string) 
 ```
 
-## Step 2: Create Pipeline
+### Table, Elevations
+This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
 
-LOREM IPSUM
+Run the following KQL:
+```
+.create table Elevations (latitude: real, longitude: real, elevation: int) 
+```
 
 ```
 StormEvents
