@@ -122,7 +122,7 @@ Click the "**+**" icon and then click "**Pipeline**" in the resulting drop-down 
 
 <img src="https://user-images.githubusercontent.com/44923999/236559993-384f68b7-5a5a-4d9c-8b46-761d6e37a2c3.png" width="800" title="Snipped: May 5, 2023" />
 
-Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.
+Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.<br>
 Complete the form on the "**Settings**" tab, including:
 
 Prompt | Entry
