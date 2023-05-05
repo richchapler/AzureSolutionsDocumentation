@@ -97,12 +97,24 @@ Logic explained:
 * Final query with `join` operators merges all in-memory tables into a final result
 
 ### `Elevations` Update Policy
-This logic transforms data from `Elevations_fromAPI` to `Elevations` and will be used by the Update Policy.
-LOREM IPSUM
+This logic will trigger when data is added to `Elevations_fromAPI` and write data to `Elevations` using the `transformElevations` function.
 
-.alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'
+`.alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'`
 
+_Note: Creation of the Update Policy is an important pre-emptive step to the data ingestion that will happen in the next Exercise_
 
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 2: Create Pipeline
+In this exercise, we will package and orchestrate a Bing Maps API request with a Synapse Pipeline
+
+Navigate to Synapse Studio >> "**Integrate**".
+
+<img src="https://user-images.githubusercontent.com/44923999/236559050-f271eb9f-1858-4062-ba14-e4531bc97d1b.png" width="800" title="Snipped: May 5, 2023" />
 
 ```
 StormEvents
@@ -159,12 +171,6 @@ StormEvents
 
 -----
 
-**Congratulations... you have successfully completed this exercise**
-
------
-
-## Exercise 2: Create Pipeline
-In this exercise, we will package and orchestrate a Bing Maps API request with a Synapse Pipeline
 
 -----
 
