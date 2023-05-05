@@ -129,7 +129,8 @@ Prompt | Entry
 :----- | :-----
 **Source dataset** | Select the integration dataset
 **First row only** | **checked**
-**Query** | Enter `StormEvents | summarize rowCount = count()`
+
+Finally, in the "**Query**" input, enter `StormEvents | summarize rowCount = count()`
 
 Logic explained:
 * `rowCount` will be used to define batches for iterative processing
