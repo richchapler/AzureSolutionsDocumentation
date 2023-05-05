@@ -62,17 +62,23 @@ Navigate to Data Explorer >> "**Query**" and then run the following KQL:
 
 LOREM IPSUM
 
+```
 StormEvents
 | where not(isnull(BeginLat)) and not(isnull(BeginLon))
 | distinct BeginLat = round(BeginLat,5), BeginLon = round(BeginLon,5)
 | take 128
 | summarize points = make_list(strcat(BeginLat,",",BeginLon))
 | project points = replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")
-
+```
+```
 @concat("http://dev.virtualearth.net/REST/v1/Elevation/List?points=",item().BeginLat,",",item().BeginLon,"&key=AovJ4RaLmics_D-oHTKlr35bg5S_W4T5m6ualG7i8Lsb09-6K1YvW939JjbPkbto")
+```
 
+```
 http://dev.virtualearth.net/REST/v1/Elevation/List?points=35.52,-81.63,38.8,-75.58&key=AovJ4RaLmics_D-oHTKlr35bg5S_W4T5m6ualG7i8Lsb09-6K1YvW939JjbPkbto
+```
 
+```
 let blah = StormEvents | summarize c=count() | project toint(c/128);
 let groupCount = materialize(blah);
 StormEvents
@@ -81,7 +87,9 @@ StormEvents
 | extend groupNumber = hash_xxhash64(coordinates, groupCount)
 | summarize points = make_list(coordinates) by groupNumber
 | project points = replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")
+```
 
+```
 let rowCount = 59066;
 let groupSize = 128;
 let groupCount = tolong( rowCount / groupSize );
@@ -91,10 +99,15 @@ StormEvents
 | extend groupNumber = hash_xxhash64(coordinates, groupCount)
 | summarize points = make_list(coordinates) by groupNumber
 | project points = replace_string(replace_string(replace_string(tostring(points),"[",""),"]",""),"\"","")
+```
 
+```
 .create table Elevations (latitude: decimal, longitude: decimal, elevation: int)
+```
 
+```
 .create table Elevations (latitude: decimal, longitude: decimal, elevation: int)
+```
 
 ```
 .create-or-alter function transformElevations()  
