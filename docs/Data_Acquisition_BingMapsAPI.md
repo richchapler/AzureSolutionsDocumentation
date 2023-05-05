@@ -54,8 +54,8 @@ Run the following KQL:
 .create table Elevations (latitude: real, longitude: real, elevation: int) 
 ```
 
-### Function, Lorem Ipsum
-This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
+### `transformElevations` Function
+This function will LOREM IPSUM.
 
 Run the following KQL:
 ```
