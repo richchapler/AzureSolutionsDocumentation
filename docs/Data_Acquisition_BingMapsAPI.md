@@ -6,8 +6,8 @@
 This solution considers the following requirements:
 
 * "Our vehicular IoT devices capture GPS coordinates, but not elevation data"
-* "As new data streams in, we want to capture elevation data we do not already have (from previous runs)"
-* "We want to query GPS coordinates to nore more than five decimal places"
+* "As new data streams in, we want to capture elevation data that we do not have from previous runs"
+* "We want to query GPS coordinates to no more than five decimal places"
 
 ## Prerequisites
 This solution requires the following resources:
