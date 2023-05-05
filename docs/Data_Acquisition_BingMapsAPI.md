@@ -35,6 +35,9 @@ Run the following KQL:
 .create table Elevations_fromAPI (batch: int, points: string, elevations: string) 
 ```
 
+Logic Explained:
+* `batch` refers to the grouping mechanism that we will use to optimize our interaction with the API {i.e., sending multiple coordinate pairs per request}
+
 ### Table, Elevations
 This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
 
@@ -42,6 +45,9 @@ Run the following KQL:
 ```
 .create table Elevations (latitude: real, longitude: real, elevation: int) 
 ```
+
+### Function, Lorem Ipsum
+This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
 
 ```
 StormEvents
