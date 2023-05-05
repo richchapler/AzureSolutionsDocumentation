@@ -6,8 +6,8 @@
 This solution considers the following requirements:
 
 * "Our vehicular IoT devices capture GPS coordinates, but not elevation data"
-* "As new data streams in, we want to capture elevation (above sea level) for future reference"
-* "We want to query Elevation GPS coordinates to nore more than five decimal places"
+* "As new data streams in, we want to capture elevation data we do not already have (from previous runs)"
+* "We want to query GPS coordinates to nore more than five decimal places"
 
 ## Prerequisites
 This solution requires the following resources:
@@ -20,14 +20,10 @@ This solution requires the following resources:
 
 -----
 
-## Exercise 1: Acquire Relevant Elevation Data
-In this exercise, we will:
-1. Prepare the destination Data Explorer Database
-2. Package and orchestrate a Bing Maps API request with a Synapse Pipeline
-3. Capture and then transform the response
+## Exercise 1: Prepare Database
+In this exercise, we will prepare the destination Data Explorer Database
 
-## Step 1: Prepare Destination
-In this exercise, we will add an "**Elevation**" column to the **StormEvents** table.
+## Step 1: Create "Elevations_Raw" Table
 
 <img src="https://user-images.githubusercontent.com/44923999/236253087-0bf8388c-618d-4046-9d6a-4d05198346af.png" width="800" title="Snipped: May 4, 2023" />
 
@@ -137,6 +133,24 @@ latitudes
 ```
 .alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'
 ```
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 2: Create Pipeline
+In this exercise, we will package and orchestrate a Bing Maps API request with a Synapse Pipeline
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 3: Capture Data
+In this exercise, we will capture and then transform the response
 
 -----
 
