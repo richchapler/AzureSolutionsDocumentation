@@ -40,6 +40,12 @@ Schema explained:
 * `points`... set of latitude and longitude values in form `points=lat1,long1,lat2,long2,latn,longn` (the value passed to the API)
 * `elevations`... array of values returned by API (ordinally aligned with `points`)
 
+#### Sample Data
+
+batch | points | elevations
+:----- | :----- | :-----
+`347` |  `22.2083,-159.4784,28.9,-97.2...` | `[6,50,183,360,621,228...]"`
+
 ### `Elevations` Table
 This table will receive data from an Update Policy (as new data streams to Elevations_fromAPI).
 
