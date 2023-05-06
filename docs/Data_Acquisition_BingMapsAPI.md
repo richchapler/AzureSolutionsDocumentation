@@ -137,7 +137,7 @@ Logic explained:
 
 #### Add Activity: `Points` Lookup
 
-<img src="https://user-images.githubusercontent.com/44923999/236566829-bf90b057-236e-4b94-a2e1-dfaf8f0752a8.png" width="800" title="Snipped: May 5, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/236647946-be506642-d25f-41bb-9ed6-ff7f82ffabb4.png" width="800" title="Snipped: May 5, 2023" />
 
 Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.<br>
 Complete the form on the "**Settings**" tab, including:
