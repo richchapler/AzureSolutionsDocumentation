@@ -151,21 +151,36 @@ Finally, in the "**Query**" input, enter:
 
 ```
 let rowCount = @{activity('Rows').output.firstRow.rowCount};
-let groupSize = 128;
-let groupCount = tolong( rowCount / groupSize );
+let batchSize = 128;
+let batchCount = tolong( rowCount / batchSize );
 let cleanDynamic = (arg0:string) { todynamic(split(replace_string(replace_string(replace_string(replace_string(arg0,"[",""),"]",""),"\"","")," ",""), ",")) };
 StormEvents
 | where not(isnull(BeginLat)) and not(isnull(BeginLon))
 | join kind = leftanti Elevations on $left.BeginLat == $right.latitude and $left.BeginLon == $right.longitude
-| distinct coordinates = strcat(round(BeginLat,5),",",round(BeginLon,5)) // count 27,321
-| extend groupNumber = hash_xxhash64(coordinates, groupCount)
-| summarize points = make_list(coordinates) by groupNumber
-| project groupNumber, points = cleanDynamic(points)
+| distinct coordinates = strcat(round(BeginLat,5),",",round(BeginLon,5))
+| extend batch = hash_xxhash64(coordinates, batchCount)
+| summarize points = make_list(coordinates) by batch
+| project batch, points = cleanDynamic(points)
 ```
 
 Logic explained:
 * `let rowCount...` adds the result of the `Rows` lookup as a variable
-* LOREM IPSUM
+* `let groupSize...` specifies how many items should be included in each array (documentation specifies "The maximum number of elevations returned in a request is 1024", but I use 128 because I found it was hitting errors when I used 1024)
+* `let groupCount...` divides the total number of records {i.e., `rowCount`} by `groupSize`
+* `let cleanDynamic...` is a user-defined function for repetitive transformations {e.g., eliminate garbage characters, format array, change data type}
+* `where not(isnull(...` culls records with incomplete coordinate data
+* `join kind = leftanti...` culls coordinates that already exist in `Elevations` 
+* `distinct...` culls duplicate coordinates 
+* `extend batch...` assigns a row number 
+* `summarize points = make_list(...` prepares array from coordinates with the same `batch` 
+
+#### Sample Data
+
+batch | points
+:----- | :-----
+`41.83` |  `-94.12`
+
+LOREM IPSUM
 
 -----
 
