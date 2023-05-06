@@ -56,7 +56,7 @@ Run the following KQL:
 .create table Elevations (latitude: real, longitude: real, elevation: int) 
 ```
 
-#### Sample Data
+#### Sample Result
 
 latitude | longitude | elevation
 :----- | :----- | :-----
@@ -174,7 +174,7 @@ Logic explained:
 * `extend batch...` assigns a row number 
 * `summarize points = make_list(...` prepares array from coordinates with the same `batch` 
 
-#### Sample Data
+#### Sample Result
 
 batch | points
 :----- | :-----
