@@ -194,6 +194,21 @@ Prompt | Entry
 **Sequential** | Checked
 **Items** | Paste expression `@activity('Points').output.value`
 
+#### Add Sub-Activity: `ForEach` >> `Web`
+
+<img src="https://user-images.githubusercontent.com/44923999/236688310-eb40913b-02da-4e52-9405-38e140a10b13.png" width="800" title="Snipped: May 7, 2023" />
+
+Click the "**+**" button in the "**Activities**" area of the `ForEach` component.<br>
+Select "**Web**" from the "**General**" grouping of the resulting menu.<br>
+Click the new "**Web**" sub-component and complete the form on the "**Settings**" tab.
+
+Prompt | Entry
+------ | ------
+**URL** | Modify and enter `@concat('http://dev.virtualearth.net/REST/v1/Elevation/List?points=',item().points,'&heights=sealevel&key={BING_MAPS_KEY}')`
+**Method** | Select "**GET**"
+  
+Click "**OK**".
+
 -----
 
 LOREM IPSUM
