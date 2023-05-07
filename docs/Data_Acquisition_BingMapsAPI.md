@@ -118,7 +118,7 @@ Navigate to Synapse Studio >> "**Integrate**".
 
 Click the "**+**" icon and then click "**Pipeline**" in the resulting drop-down menu.
 
-#### Add Activity: `Rows` Lookup
+### Add Activity: `Rows` Lookup
 
 <img src="https://user-images.githubusercontent.com/44923999/236561868-f3a7f1b0-62ae-491f-9245-4c8287af1384.png" width="800" title="Snipped: May 5, 2023" />
 
@@ -135,9 +135,9 @@ Finally, in the "**Query**" input, enter `StormEvents | summarize rowCount = cou
 Logic explained:
 * `rowCount` will be used to define batches for iterative processing
 
-#### Add Activity: `Points` Lookup
+### Add Activity: `Points` Lookup
 
-<img src="https://user-images.githubusercontent.com/44923999/236647946-be506642-d25f-41bb-9ed6-ff7f82ffabb4.png" width="800" title="Snipped: May 5, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/236684152-79871a72-b27c-435e-822c-b1f96617d000.png" width="800" title="Snipped: May 7, 2023" />
 
 Drag-and-drop a "**Lookup**" component from the "**Activities**" tree, "**General**" grouping.<br>
 Complete the form on the "**Settings**" tab, including:
@@ -153,32 +153,48 @@ Finally, in the "**Query**" input, enter:
 let rowCount = @{activity('Rows').output.firstRow.rowCount};
 let batchSize = 128;
 let batchCount = tolong( rowCount / batchSize );
-let cleanDynamic = (arg0:string) { todynamic(split(replace_string(replace_string(replace_string(replace_string(arg0,"[",""),"]",""),"\"","")," ",""), ",")) };
+let cleanString = (arg0:string) { replace_string(replace_string(replace_string(replace_string(arg0,"[",""),"]",""),"\"","")," ","") };
 StormEvents
 | where not(isnull(BeginLat)) and not(isnull(BeginLon))
 | join kind = leftanti Elevations on $left.BeginLat == $right.latitude and $left.BeginLon == $right.longitude
 | distinct coordinates = strcat(round(BeginLat,5),",",round(BeginLon,5))
 | extend batch = hash_xxhash64(coordinates, batchCount)
 | summarize points = make_list(coordinates) by batch
-| project batch, points = cleanDynamic(points)
+| project batch, points = cleanString(points)
 ```
 
 Logic explained:
 * `let rowCount...` adds the result of the `Rows` lookup as a variable
-* `let groupSize...` specifies how many items should be included in each array (documentation specifies "The maximum number of elevations returned in a request is 1024", but I use 128 because I found it was hitting errors when I used 1024)
-* `let groupCount...` divides the total number of records {i.e., `rowCount`} by `groupSize`
-* `let cleanDynamic...` is a user-defined function for repetitive transformations {e.g., eliminate garbage characters, format array, change data type}
+* `let batchSize...` specifies how many items should be included in each array (documentation specifies "The maximum number of elevations returned in a request is 1024", but I use 128 because I found it was hitting errors when I used 1024)
+* `let batchCount...` divides the total number of records {i.e., `rowCount`} by `batchSize`
+* `let cleanString...` is a user-defined function for elimination of garbage characters
 * `where not(isnull(...` culls records with incomplete coordinate data
 * `join kind = leftanti...` culls coordinates that already exist in `Elevations` 
 * `distinct...` culls duplicate coordinates 
 * `extend batch...` assigns a row number 
 * `summarize points = make_list(...` prepares array from coordinates with the same `batch` 
 
+Test by clicking "**Debug**".
+
 #### Sample Result
 
 batch | points
 :----- | :-----
 `113` |  `["38.9989","-85.9","44.02","-97.3893",...]`
+
+### Add Activity: `ForEach`
+
+<img src="https://user-images.githubusercontent.com/44923999/236684006-db9d279c-9281-4f81-9c49-ee6314f2a333.png" width="800" title="Snipped: May 7, 2023" />
+
+Drag-and-drop a "**ForEach**" component from the "**Activities**" tree, "**Iteration & conditionals**" grouping.<br>
+Complete the form on the "**Settings**" tab, including:
+
+Prompt | Entry
+------ | ------
+**Sequential** | Checked
+**Items** | Paste expression `@activity('Points').output.value`
+
+-----
 
 LOREM IPSUM
 
