@@ -196,7 +196,7 @@ Prompt | Entry
 
 #### Add Sub-Activity: `ForEach` >> `Web`
 
-<img src="https://user-images.githubusercontent.com/44923999/236688310-eb40913b-02da-4e52-9405-38e140a10b13.png" width="800" title="Snipped: May 7, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/236897153-960934c1-01f4-41d6-b5d9-afa8b81a956e.png" width="800" title="Snipped: May 7, 2023" />
 
 Click the "**+**" button in the "**Activities**" area of the `ForEach` component, then select "**Web**" from the "**General**" grouping of the resulting menu.<br>
 Click the new "**Web**" sub-component and complete the form on the "**Settings**" tab.
