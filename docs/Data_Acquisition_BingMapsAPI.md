@@ -1,4 +1,4 @@
-# Data Acquisition: Elevation Data from Bing Maps (WiP)
+# Data Acquisition: Elevation Data from Bing Maps
 
 <img src="https://user-images.githubusercontent.com/44923999/236240083-61fb1241-39e5-4d4c-ad0e-3f83480c8edf.png" width="1000" />
 
