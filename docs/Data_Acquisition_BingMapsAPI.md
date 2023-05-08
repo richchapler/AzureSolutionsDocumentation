@@ -241,12 +241,7 @@ _Note: Processing all ~50k records in the StormEvents sample can take a signific
 
 <img src="https://user-images.githubusercontent.com/44923999/236905863-6803884d-7eb5-475c-8385-7320b3d71840.png" width="800" title="Snipped: May 8, 2023" />
 
-Navigate to the Data Explorer Database >> "Query", and run the following KQL:
-
-```
-Elevations_fromAPI
-| take 10
-```
+Navigate to the Data Explorer Database >> "Query", and run the following KQL: `Elevations_fromAPI | take 10`
 
 #### Expected Result
 
