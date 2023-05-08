@@ -198,7 +198,7 @@ Prompt | Entry
 
 <img src="https://user-images.githubusercontent.com/44923999/236688310-eb40913b-02da-4e52-9405-38e140a10b13.png" width="800" title="Snipped: May 7, 2023" />
 
-Click the "**+**" button in the "**Activities**" area of the `ForEach` component and then select "**Web**" from the "**General**" grouping of the resulting menu.<br>
+Click the "**+**" button in the "**Activities**" area of the `ForEach` component, then select "**Web**" from the "**General**" grouping of the resulting menu.<br>
 Click the new "**Web**" sub-component and complete the form on the "**Settings**" tab.
 
 Prompt | Entry
