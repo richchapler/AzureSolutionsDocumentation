@@ -247,13 +247,17 @@ Navigate to the Data Explorer Database >> "Query", and run the following KQL: `E
 
 batch | points | elevations
 :----- | :----- | :-----
-`131` |  ` 42.3607,-83.9115,34.15,-99.28,...` | ` [270,371,...]"`
+`131` |  `42.3607,-83.9115,34.15,-99.28,...` | `[270,371,...]`
 
 ### Data Explorer, Update Policy
 
-Run the following KQL:
+Run the following KQL: `Elevations | take 10`
 
-LOREM IPSUM
+#### Expected Result
+
+latitude | longitude | elevation
+:----- | :----- | :-----
+`42.3607` |  `-83.9115` | `270`
 
 -----
 
@@ -268,4 +272,3 @@ LOREM IPSUM
   * [Get Elevations](https://learn.microsoft.com/en-us/bingmaps/rest-services/elevations/get-elevations)
 * Data Explorer
   * [make_list() (aggregation function)](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/makelist-aggfunction)
-
