@@ -196,9 +196,9 @@ Prompt | Entry
 
 #### Add Sub-Activity: `ForEach` >> `Web`
 
-<img src="https://user-images.githubusercontent.com/44923999/236897153-960934c1-01f4-41d6-b5d9-afa8b81a956e.png" width="800" title="Snipped: May 7, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/236897153-960934c1-01f4-41d6-b5d9-afa8b81a956e.png" width="800" title="Snipped: May 8, 2023" />
 
-Click the "**+**" button in the "**Activities**" area of the `ForEach` component, then select "**Web**" from the "**General**" grouping of the resulting menu.<br>
+Click the "**+**" button in the "**Activities**" area of the `ForEach` component, then search for and select "**Web**" from the "**General**" grouping of the resulting menu.<br>
 Click the new "**Web**" sub-component and complete the form on the "**Settings**" tab.
 
 Prompt | Entry
@@ -210,7 +210,15 @@ Click "**OK**".
 
 #### Add Sub-Activity: `ForEach` >> `Azure Data Explorer Command`
 
-LOREM IPSUM
+<img src="https://user-images.githubusercontent.com/44923999/236897534-7302397d-6589-4006-a5da-21ffb2a15073.png" width="800" title="Snipped: May 8, 2023" />
+
+Click the "**+**" button in the "**Activities**" area of the `ForEach` component, then search for and select "**Azure Data Explorer Command**" from the "**General**" grouping of the resulting menu.<br>
+On the "**Connection**" tab, select your Data Explorer Integration Dataset.<br>
+On the "**Command**" tab, paste the following "**Command**" expression:
+
+`.ingest inline into table Elevations_fromAPI with (format="psv") <| @{item().batch} | @{item().points} | @{activity('Web').output.resourceSets[0].resources[0].elevations}"`
+
+Click "**Publish All**".
 
 -----
 
@@ -218,8 +226,10 @@ LOREM IPSUM
 
 -----
 
-## Exercise 3: Capture Data
-In this exercise, we will capture and then transform the response
+## Exercise 3: Confirm Success
+In this exercise, we will test the Synapse Pipeline and Data Explorer Update Policy.
+
+LOREM IPSUM
 
 -----
 
