@@ -203,7 +203,7 @@ Click the new "**Web**" sub-component and complete the form on the "**Settings**
 
 Prompt | Entry
 :----- | :-----
-**URL** | Modify and enter:<br>`@concat('http://dev.virtualearth.net/REST/v1/Elevation/List?points=',item().points,'&heights=sealevel&key={BING_MAPS_KEY}')`
+**URL** | Modify and enter:<br>`@concat('http://dev.virtualearth.net/REST/v1/Elevation/List?points=',item().points,'&key={BING_MAPS_KEY}')`
 **Method** | Select "**GET**"
   
 Click "**OK**".
