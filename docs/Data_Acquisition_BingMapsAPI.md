@@ -192,7 +192,7 @@ Complete the form on the "**Settings**" tab, including:
 Prompt | Entry
 :----- | :-----
 **Sequential** | Checked
-**Items** | Paste expression `@activity('Points').output.value`
+**Items** | Paste expression:<br>`@activity('Points').output.value`
 
 #### Add Sub-Activity: `ForEach` >> `Web`
 
@@ -203,12 +203,12 @@ Click the new "**Web**" sub-component and complete the form on the "**Settings**
 
 Prompt | Entry
 :----- | :-----
-**URL** | Modify and enter `@concat('http://dev.virtualearth.net/REST/v1/Elevation/List?points=',item().points,'&heights=sealevel&key={BING_MAPS_KEY}')`
+**URL** | Modify and enter:<br>`@concat('http://dev.virtualearth.net/REST/v1/Elevation/List?points=',item().points,'&heights=sealevel&key={BING_MAPS_KEY}')`
 **Method** | Select "**GET**"
   
 Click "**OK**".
 
------
+#### Add Sub-Activity: `ForEach` >> `Azure Data Explorer Command`
 
 LOREM IPSUM
 
