@@ -190,7 +190,7 @@ Drag-and-drop a "**ForEach**" component from the "**Activities**" tree, "**Itera
 Complete the form on the "**Settings**" tab, including:
 
 Prompt | Entry
------- | ------
+:----- | :-----
 **Sequential** | Checked
 **Items** | Paste expression `@activity('Points').output.value`
 
@@ -202,7 +202,7 @@ Click the "**+**" button in the "**Activities**" area of the `ForEach` component
 Click the new "**Web**" sub-component and complete the form on the "**Settings**" tab.
 
 Prompt | Entry
------- | ------
+:----- | :-----
 **URL** | Modify and enter `@concat('http://dev.virtualearth.net/REST/v1/Elevation/List?points=',item().points,'&heights=sealevel&key={BING_MAPS_KEY}')`
 **Method** | Select "**GET**"
   
