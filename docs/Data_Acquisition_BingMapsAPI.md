@@ -229,6 +229,35 @@ Click "**Publish All**".
 ## Exercise 3: Confirm Success
 In this exercise, we will test the Synapse Pipeline and Data Explorer Update Policy.
 
+### Synapse Pipeline
+
+Navigate to Synapse Studio >> "**Integrate**", open the pipeline created in Exercise 2, and click "**Debug**".
+
+<img src="https://user-images.githubusercontent.com/44923999/236905096-717d214b-7ac1-448b-a187-6ba211981cc1.png" width="800" title="Snipped: May 8, 2023" />
+
+_Note: Processing all ~50k records in the StormEvents sample can take a significant amount of time; after processing an interesting result set, you might decide to cancel the full run._
+
+### Data Explorer, `...fromAPI`
+
+<img src="https://user-images.githubusercontent.com/44923999/236905863-6803884d-7eb5-475c-8385-7320b3d71840.png" width="800" title="Snipped: May 8, 2023" />
+
+Navigate to the Data Explorer Database >> "Query", and run the following KQL:
+
+```
+Elevations_fromAPI
+| take 10
+```
+
+#### Expected Result
+
+batch | points | elevations
+:----- | :----- | :-----
+`131` |  ` 42.3607,-83.9115,34.15,-99.28,...` | ` [270,371,...]"`
+
+### Data Explorer, Update Policy
+
+Run the following KQL:
+
 LOREM IPSUM
 
 -----
