@@ -1,4 +1,4 @@
-# Data Surface: GeoSpatial Visualization with Azure Maps + Web App
+# Data Surface: GeoSpatial Visualization with Azure Maps (WiP)
 
 <img src="https://user-images.githubusercontent.com/44923999/236240083-61fb1241-39e5-4d4c-ad0e-3f83480c8edf.png" width="1000" />
 
