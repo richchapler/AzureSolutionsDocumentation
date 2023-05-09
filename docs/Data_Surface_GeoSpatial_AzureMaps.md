@@ -13,6 +13,7 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
+* [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps/) with **CORS**, Allowed Origins "*"
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
 -----
