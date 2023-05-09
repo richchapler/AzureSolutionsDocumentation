@@ -100,7 +100,7 @@ Click "**Add permissions**".
 
 Click "**Add permissions**".
 
-#### Grant admin consent for Default Directory ... **is this necessary???**
+#### Grant admin consent for Default Directory ... **to do this, you require admin permissions on the subscription**
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d206fc4-646c-46f8-86e6-b0f4256e427e" width="800" title="Snipped: May 9, 2023" />
 
@@ -115,9 +115,9 @@ LOREM IPSUM
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/018cb2ee-98ff-4979-a0da-926a5477efb5" width="800" title="Snipped: May 9, 2023" />
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ec7ca3cc-41bc-4b00-8194-62a1032018f5" width="800" title="Snipped: May 9, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eeecfa42-5575-4be1-b9cb-a0b1a8c38340" width="800" title="Snipped: May 9, 2023" />
 
-`https://rchaplers.blob.core.windows.net/$web/index.html`
+`https://rchaplers.blob.core.windows.net/$web/index.html?sp=r&st=2023-05-09T17:34:13Z&se=2023-05-10T01:34:13Z&spr=https&sv=2022-11-02&sr=b&sig=znVLccBUmTo4bAg9CYAocnD15Mo%2BBskTour7r0YYIeQ%3D`
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/98b67862-e68f-49cb-a349-5f3bd8411955" width="800" title="Snipped: May 9, 2023" />
 
