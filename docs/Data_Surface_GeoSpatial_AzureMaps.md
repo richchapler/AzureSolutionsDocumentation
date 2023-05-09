@@ -14,7 +14,7 @@ This solution requires the following resources:
 
 -----
 
-## Exercise 1: LOREM IPSUM
+## Exercise 1: Prepare Environment
 In this exercise, we will LOREM IPSUM.
 
 ### Step X: Configure Storage Account >> Capabilities >> Static Website
@@ -81,6 +81,48 @@ COPY THESE TO THE `$web` folder?
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e69d9091-9ba7-4760-8334-eca6674725ce" width="800" title="Snipped: May 9, 2023" />
 
 `NOR8Q~T-wfnwTaR0nT9.g6B5hvAkEpaAIewhJdvR`
+
+### Step 4: App Registration >> API Permissions >> Add a Permission
+
+#### Add Permission, Azure Data Explorer
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3147ad1f-70e4-43e0-8fea-913fc47e69e3" width="800" title="Snipped: May 9, 2023" />
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/526a4bb9-f1e3-4899-9e2c-6a6e686e3b95" width="800" title="Snipped: May 9, 2023" />
+
+Click "**Add permissions**".
+
+#### Add Permission, Azure Maps
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2ffc0be2-300d-49a5-9726-66cf72a216f1" width="800" title="Snipped: May 9, 2023" />
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/30a114ee-c847-4f9a-8dc5-73b3c9f4cbcb" width="800" title="Snipped: May 9, 2023" />
+
+Click "**Add permissions**".
+
+#### Grant admin consent for Default Directory ... **is this necessary???**
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d206fc4-646c-46f8-86e6-b0f4256e427e" width="800" title="Snipped: May 9, 2023" />
+
+## Exercise 2: Modify `index.html`
+In this exercise, we will LOREM IPSUM.
+
+## Step 1: Modify `index.html`
+
+LOREM IPSUM
+
+## Step 2: Upload `index.html` (and other files)
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/018cb2ee-98ff-4979-a0da-926a5477efb5" width="800" title="Snipped: May 9, 2023" />
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ec7ca3cc-41bc-4b00-8194-62a1032018f5" width="800" title="Snipped: May 9, 2023" />
+
+`https://rchaplers.blob.core.windows.net/$web/index.html`
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/98b67862-e68f-49cb-a349-5f3bd8411955" width="800" title="Snipped: May 9, 2023" />
+
+LOREM IPSUM
+
 
 -----
 
