@@ -60,6 +60,8 @@ In this exercise, we will LOREM IPSUM.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2fba70c6-da41-4d69-b817-9e98383ca234" width="800" title="Snipped: May 9, 2023" />
 
+Use redirect `https://chaplers.blob.core.windows.net/$web/index.html` instead of `...localhost`
+
 #### `logout.html`
 
 ```
