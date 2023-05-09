@@ -33,7 +33,6 @@
 
   Use Case | Method | Language
   :----- | :----- | :-----
-  [Geo-Spatial Visualization](Data_Analysis_GeoSpatial.md) | Data Explorer >> Power BI | No Code
   [JSON Discovery](Data_Analysis_JSONDiscovery.md) | Data Explorer | KQL
   [Time Windowing](Data_Analysis_TimeWindowing.md) | Data Explorer | KQL
 
@@ -46,3 +45,4 @@
   [Cognitive Search, from Data Explorer](Data_Surface_CognitiveSearch_fromDataExplorer.md) | Data Explorer (via export) | Cognitive Search | JSON and HTML
   [Cognitive Search, Multi-Source Index](Data_Surface_CognitiveSearch_MultiSourceIndex.md) | SQL and Blob Storage | Cognitive Search | JSON
   [Cognitive Search, PowerApp + Security](Data_Surface_CognitiveSearch_PowerApp+Security.md) | Sample Data | Power Apps | JSON
+  [Geo-Spatial Visualization with Power BI](Data_Surface_GeoSpatial_PowerBI.md) | Data Explorer >> Power BI | No Code
