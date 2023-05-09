@@ -1,11 +1,11 @@
 # Data Surface: GeoSpatial Visualization with Azure Maps (WiP)
 
-<img src="https://user-images.githubusercontent.com/44923999/236240083-61fb1241-39e5-4d4c-ad0e-3f83480c8edf.png" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0596e57b-78be-413e-96c5-828db0288d6a" width="1000" />
 
 ## Use Case
 This solution considers the following requirements:
 
-* "LOREM IPSUM"
+* "We want to analyze real-time, streaming GPS coordinates"
 
 ## Prerequisites
 This solution requires the following resources:
