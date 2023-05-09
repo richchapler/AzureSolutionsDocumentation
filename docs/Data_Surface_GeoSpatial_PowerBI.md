@@ -1,4 +1,4 @@
-# Data Analysis: Geo-Spatial Visualization
+# Data Surface: Geo-Spatial Visualization with Power BI
 
 ![image](https://user-images.githubusercontent.com/44923999/205741474-6f1e333d-bc35-48b0-831d-4a8e38e31af9.png)
 
