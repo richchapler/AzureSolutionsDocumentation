@@ -46,13 +46,7 @@ In this exercise, we will LOREM IPSUM.
 </html>
 ```
 
-#### `index.html`
-
-LOREM IPSUM
-
-COPY THESE TO THE `$web` folder?
-
-`https://rchaplers.z1.web.core.windows.net/`
+`https://chaplers.z22.web.core.windows.net/`
 
 ### Step 1: Create App Registration
 
