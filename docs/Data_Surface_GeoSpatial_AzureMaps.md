@@ -6,6 +6,7 @@
 This solution considers the following requirements:
 
 * "We want to analyze real-time, streaming GPS coordinates"
+* "We want to take advantage of advanced mapping features"
 
 ## Prerequisites
 This solution requires the following resources:
