@@ -80,7 +80,7 @@ In this exercise, we will LOREM IPSUM.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e69d9091-9ba7-4760-8334-eca6674725ce" width="800" title="Snipped: May 9, 2023" />
 
-`NOR8Q~T-wfnwTaR0nT9.g6B5hvAkEpaAIewhJdvR`
+`1Ou8Q~8vxuT8mz401XCZE6V~F6yRxIXnGQB7ycRO`
 
 ### Step 4: App Registration >> API Permissions >> Add a Permission
 
