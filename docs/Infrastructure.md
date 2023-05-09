@@ -49,6 +49,8 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 
 * [**Machine Learning**](https://learn.microsoft.com/en-us/azure/machine-learning/) >> [Compute Instance](https://learn.microsoft.com/en-us/azure/machine-learning/concept-compute-instance)
 
+* [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps/)
+
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 
 * [**Postman**](https://www.postman.com/product/workspaces/)
