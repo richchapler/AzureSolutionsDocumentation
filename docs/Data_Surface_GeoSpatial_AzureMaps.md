@@ -111,7 +111,51 @@ In this exercise, we will LOREM IPSUM.
 
 ## Step 1: Modify `index.html`
 
-LOREM IPSUM
+```
+@page
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+    <style>
+        html, body {
+            margin: 0
+        }
+
+        #myMap {
+            position: relative;
+            top: 0px;
+            left: 300px;
+            width: calc(90vw - 300px);
+            height: 80vh;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        function InitMap() {
+            var map = new atlas.Map('myMap', {
+                authOptions: {
+                    authType: 'subscriptionKey',
+                    subscriptionKey: 'hX_ICym11lSzClUnZP2lS8MUq4EGdkIFhf_jR21-RDQ'
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="InitMap()">
+    <div id="myMap"></div>
+</body>
+</html>
+```
+
+THIS IS THE BARE MINIMUM TO CREATE A MAPS PAGE... MODIFY FROM HERE
 
 ## Step 2: Upload `index.html` (and other files)
 
