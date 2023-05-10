@@ -82,7 +82,6 @@ Replace the default `index.cshtml` code with:
         html, body {
             margin: 0
         }
-
         #myMap {
             position: relative;
             top: 0px;
@@ -90,7 +89,6 @@ Replace the default `index.cshtml` code with:
             width: calc(90vw - 300px);
             height: 80vh;
         }
-
     </style>
 
     <script type="text/javascript">
@@ -112,9 +110,18 @@ Replace the default `index.cshtml` code with:
 ```
 
 Logic explained:
-* `<link rel="stylesheet"...` establishes a link to stylesheet `https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css`
+* `<link rel="stylesheet"...` establishes a link to the Azure Maps Web SDK stylesheet
+* `<script src="https://atlas.microsoft.com...` establishes a link to the Azure Maps Web SDK
+* `<style> ... #myMap...` describes layout of the Map component using both percent of viewport and pixel count
+* `<script ... function InitMap()...` defines a function that creates a map authenticated using Azure Maps, Primary Key
+<br><br>  _Note: Replace `{AZUREMAPS_PRIMARYKEY}` with your Azure Maps, Primary Key (found in "Settings" >> "**Authentication**")_
 
-_Note: Replace `{AZUREMAPS_PRIMARYKEY}` with the Primary Key from your instance of Azure Maps (found in "Settings" >> "**Authentication**"}_
+
+
+
+
+
+
 
 
 
