@@ -65,7 +65,7 @@ Click "**Create**".
 
 Open "**Pages**" >> `index.cshtml`
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e0bb3cf2-cbe7-46a8-b175-b3c9f8a747f8" width="800" title="Snipped: May 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a54060a7-a6d8-476d-9227-a4770484cca0" width="800" title="Snipped: May 10, 2023" />
 
 Replace the default `index.cshtml` code with:
 ```
