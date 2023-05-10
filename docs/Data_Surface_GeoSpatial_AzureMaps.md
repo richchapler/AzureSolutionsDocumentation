@@ -25,7 +25,8 @@ Surface Azure Maps in a Web Application.
 This documentation will address solution requirements in ##### exercises:
 
 * Exercise 1: Create Basic Web Application
-* Exercise 2: LOREM IPSUM
+* Exercise 2: Prepare Sample Data Stream
+* Exercise 3: Connect and Visualize Data
 
 -----
 
