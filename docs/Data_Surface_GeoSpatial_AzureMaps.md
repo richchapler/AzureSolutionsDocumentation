@@ -112,8 +112,8 @@ Replace the default `index.cshtml` code with:
 Logic explained:
 * `<link rel="stylesheet"...` establishes a link to the Azure Maps Web SDK stylesheet
 * `<script src="https://atlas.microsoft.com...` establishes a link to the Azure Maps Web SDK
-* `<style> ... #myMap...` describes layout of the Map component using both percent of viewport and pixel count
-* `<script ... function InitMap()...` defines a function that creates a map authenticated using Azure Maps, Primary Key
+* `<style>... #myMap...` describes layout of the Map component using both percent of viewport and pixel count
+* `<script...> function InitMap()...` defines a function that creates a map authenticated using Azure Maps, Primary Key
 <br><br>  _Note: Replace `{AZUREMAPS_PRIMARYKEY}` with your Azure Maps, Primary Key (found in "Settings" >> "**Authentication**")_
 
 -----
