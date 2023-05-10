@@ -112,7 +112,7 @@ Replace the default `index.cshtml` code with:
 </html>
 ```
 
-_Note: You will, of course, replace `{AZUREMAPS_PRIMARYKEY}` with the Primary Key from your instance of Azure Maps (found in "Settings" >> "**Authentication**"}
+_Note: You will, of course, replace `{AZUREMAPS_PRIMARYKEY}` with the Primary Key from your instance of Azure Maps (found in "Settings" >> "**Authentication**"}_
 
 
 
