@@ -15,7 +15,7 @@ This solution requires the following resources:
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps)
   * **CORS** >> Allowed Origins: `*`
-  * System-Assigned Managed Identity: `On`
+  * System-Assigned **Managed Identity**: `On`
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 * [**Visual Studio**](https://visualstudio.microsoft.com)
 
