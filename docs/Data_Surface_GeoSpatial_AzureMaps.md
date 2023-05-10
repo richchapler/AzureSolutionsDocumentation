@@ -36,6 +36,31 @@ In this exercise, we will use Visual Studio to create a basic web application an
 
 Open Visual Studio.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c19a84db-d898-4ab2-9456-b168c1cd9220" width="600" title="Snipped: May 10, 2023" />
+
+Click "**Create a new project**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e67290b5-e6e6-40fa-931e-565225bc0c63" width="600" title="Snipped: May 10, 2023" />
+
+Click "**ASP.NET Core Web App**" and then "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/67d7bed8-c452-4cb1-a29d-84fa5c6c4f5c" width="600" title="Snipped: May 10, 2023" />
+
+Complete the "Configure your new project" >> "ASP.NET Core WebApp" form and then click "Next".
+
+
+
+
+
+
+
+
+
+Prompt | Entry
+:----- | :-----
+**Project Name** | `WebApplication_AzureMaps`
+
+
 -----
 
 ## Exercise X: Prepare Environment (MOVE THIS DOCUMENTATION TO ARCHIVE FOR FUTURE USE)
