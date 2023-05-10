@@ -46,11 +46,11 @@ On the "**Create a new project**" page, click "**ASP.NET Core Web App**" and the
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/67d7bed8-c452-4cb1-a29d-84fa5c6c4f5c" width="600" title="Snipped: May 10, 2023" />
 
-Complete the "**Configure your new project**" >> "**ASP.NET Core WebApp**" form and then click "**Next**".
+Complete the "**Configure your new project**" form and then click "**Next**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/22b966d0-4eae-4610-a8fc-a37490aec2a3" width="600" title="Snipped: May 10, 2023" />
 
-Complete the "**Configure your new project**" >> "**ASP.NET Core WebApp**" form and then click "**Next**".
+Complete the "**Aditional information**" form and then click "**Next**".
 
 Prompt | Entry
 :----- | :-----
@@ -60,7 +60,11 @@ Prompt | Entry
 
 Click "**Create**".
 
+### Step 2: Edit Homepage
 
+Open "**Pages**" >> `index.cshtml`
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2920e438-2ee7-4307-84f0-4c219776cfb8" width="800" title="Snipped: May 10, 2023" />
 
 
 
