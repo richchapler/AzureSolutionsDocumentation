@@ -123,6 +123,10 @@ Logic explained:
 
 Right-click on project `WebApplication_AzureMaps` and select "**Publish**" from the resulting menu.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb34770b-c57a-4d81-8f0d-e07069ed774f" width="600" title="Snipped: May 10, 2023" />
+
+On the "**Publish**" >> "**Target**" popup, select "**Azure**" and then click "**Next**".
+
 -----
 
 ## Reference
