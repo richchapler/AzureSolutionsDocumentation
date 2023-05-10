@@ -32,33 +32,40 @@ This documentation will address solution requirements in ##### exercises:
 ## Exercise 1: Create Basic Web Application
 In this exercise, we will use Visual Studio to create a basic web application and publish to Azure.
 
-### Step X: LOREM IPSUM
+### Step 1: Create Project
 
 Open Visual Studio.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c19a84db-d898-4ab2-9456-b168c1cd9220" width="600" title="Snipped: May 10, 2023" />
 
-Click "**Create a new project**".
+Under "**Get started**", click "**Create a new project**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e67290b5-e6e6-40fa-931e-565225bc0c63" width="600" title="Snipped: May 10, 2023" />
 
-Click "**ASP.NET Core Web App**" and then "**Next**".
+On the "**Create a new project**" page, click "**ASP.NET Core Web App**" and then "**Next**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/67d7bed8-c452-4cb1-a29d-84fa5c6c4f5c" width="600" title="Snipped: May 10, 2023" />
 
-Complete the "Configure your new project" >> "ASP.NET Core WebApp" form and then click "Next".
+Complete the "**Configure your new project**" >> "**ASP.NET Core WebApp**" form and then click "**Next**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/22b966d0-4eae-4610-a8fc-a37490aec2a3" width="600" title="Snipped: May 10, 2023" />
 
-
-
-
-
-
-
+Complete the "**Configure your new project**" >> "**ASP.NET Core WebApp**" form and then click "**Next**".
 
 Prompt | Entry
 :----- | :-----
-**Project Name** | `WebApplication_AzureMaps`
+**Framework** | `.NET 7.0 (Standard Term Support)`
+**Authentication type** | `None`
+**Configure for HTTPS** | checked
+
+Click "**Create**".
+
+
+
+
+
+
+
 
 
 -----
