@@ -182,6 +182,14 @@ To build a simple web app using Visual Studio with the intent of publishing it t
 * Choose the name for your web app.
 * Click on Create.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/635edea7-f509-4812-a824-72c8dedc04ac" width="600" title="Snipped: May 9, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c2857a01-93c7-4c2b-98e4-34535d4bae67" width="600" title="Snipped: May 9, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/251088bd-05b2-4a33-91f6-dfd0a506a97c" width="600" title="Snipped: May 9, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f58ce723-b11c-4f59-8767-33b80f48798e" width="600" title="Snipped: May 9, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5b08c89a-06a2-4f47-a4cc-896b030508f0" width="600" title="Snipped: May 9, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0ee73bc7-d3d9-44a9-bd76-35fda4ab00dd" width="800" title="Snipped: May 9, 2023" />
+
+
 -----
 
 ## Reference
