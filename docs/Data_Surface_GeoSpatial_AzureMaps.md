@@ -6,21 +6,39 @@
 This solution considers the following requirements:
 
 * "We want to analyze real-time, streaming GPS coordinates"
-* "We want to take advantage of advanced mapping features"
+* "We want to employ powerful geospatial capabilities and the freshest mapping data"
 * "We tried Power BI and it doesn't keep up with the size of our dataset"
 
 ## Prerequisites
 This solution requires the following resources:
 
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
-* [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps/)
+* [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps)
   * **CORS** >> Allowed Origins: `*`
   * System-Assigned Managed Identity: `On`
 * [**Storage Account**](Infrastructure_StorageAccount.md)
+* [**Visual Studio**](https://visualstudio.microsoft.com)
+
+## Proposed Solution
+Surface Azure Maps in a Web Application.
+
+This documentation will address solution requirements in ##### exercises:
+
+* Exercise 1: Create Basic Web Application
+* Exercise 2: LOREM IPSUM
 
 -----
 
-## Exercise 1: Prepare Environment
+## Exercise 1: Create Basic Web Application
+In this exercise, we will use Visual Studio to create a basic web application and publish to Azure.
+
+### Step X: LOREM IPSUM
+
+Open Visual Studio.
+
+-----
+
+## Exercise X: Prepare Environment (MOVE THIS DOCUMENTATION TO ARCHIVE FOR FUTURE USE)
 In this exercise, we will LOREM IPSUM.
 
 ### Step X: Configure Storage Account >> Capabilities >> Static Website
