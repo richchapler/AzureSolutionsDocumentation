@@ -64,10 +64,9 @@ Click "**Create**".
 
 Open "**Pages**" >> `index.cshtml`
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2920e438-2ee7-4307-84f0-4c219776cfb8" width="800" title="Snipped: May 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e0bb3cf2-cbe7-46a8-b175-b3c9f8a747f8" width="800" title="Snipped: May 10, 2023" />
 
 Replace the default `index.cshtml` code with:
-
 ```
 @page
 @{
@@ -111,6 +110,9 @@ Replace the default `index.cshtml` code with:
 </body>
 </html>
 ```
+
+Logic explained:
+* `<link rel="stylesheet"...` establishes a link to stylesheet `https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css`
 
 _Note: Replace `{AZUREMAPS_PRIMARYKEY}` with the Primary Key from your instance of Azure Maps (found in "Settings" >> "**Authentication**"}_
 
