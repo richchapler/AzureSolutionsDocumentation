@@ -117,6 +117,12 @@ Logic explained:
 * `<script...> function InitMap()...` defines a function that creates a map authenticated using Azure Maps, Primary Key
 <br><br>  _Note: Replace `{AZUREMAPS_PRIMARYKEY}` with your Azure Maps, Primary Key (found in "Settings" >> "**Authentication**")_
 
+### Step 3: Publish
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4625385c-2f9d-4c3b-969a-ba44c59a19da" width="800" title="Snipped: May 10, 2023" />
+
+Right-click on project `WebApplication_AzureMaps` and select "**Publish**" from the resulting menu.
+
 -----
 
 ## Reference
