@@ -182,37 +182,6 @@ To build a simple web app using Visual Studio with the intent of publishing it t
 * Choose the name for your web app.
 * Click on Create.
 
-<br>To add an Azure Maps control to your web app, you can follow these steps:
-
-Open Visual Studio and open your web app project.
-Right-click on your project and select Manage NuGet Packages.
-Search for “Microsoft.Azure.Maps.WebControl” and install it.
-Add the following code to your web page where you want to display the map:
-
-```
-<div id="myMap" style="position:relative;width:100%;height:500px;"></div>
-<script type='text/javascript'>
-    var map = new atlas.Map('myMap', {
-        center: [-122.33, 47.6],
-        zoom: 12,
-        view: 'Auto',
-        authOptions: {
-            authType: 'subscriptionKey',
-            subscriptionKey: '<Your Azure Maps Key>'
-        }
-    });
-</script>
-```
-
-You can replace <Your Azure Maps Key> with your own Azure Maps key.
-
-Here are some resources that might help you:
-
-Create And Publish Azure Web App Using Visual Studio
-Publish a web app to Azure with Visual Studio
-Create and publish a web application with Azure App Service and Visual Studio Code
-
-
 -----
 
 ## Reference
