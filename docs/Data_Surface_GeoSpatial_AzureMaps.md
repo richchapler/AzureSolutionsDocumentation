@@ -66,9 +66,53 @@ Open "**Pages**" >> `index.cshtml`
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2920e438-2ee7-4307-84f0-4c219776cfb8" width="800" title="Snipped: May 10, 2023" />
 
+Replace the default `index.cshtml` code with:
 
+```
+@page
+@{
+    ViewData["Title"] = "Home page";
+}
 
+<html>
+<head>
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
 
+    <style>
+        html, body {
+            margin: 0
+        }
+
+        #myMap {
+            position: relative;
+            top: 0px;
+            left: 300px;
+            width: calc(90vw - 300px);
+            height: 80vh;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        function InitMap() {
+            var map = new atlas.Map('myMap', {
+                authOptions: {
+                    authType: 'subscriptionKey',
+                    subscriptionKey: '{AZUREMAPS_PRIMARYKEY}'
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="InitMap()">
+    <div id="myMap"></div>
+</body>
+</html>
+```
+
+_Note: You will, of course, replace `{AZUREMAPS_PRIMARYKEY}` with the Primary Key from your instance of Azure Maps (found in "Settings" >> "**Authentication**"}
 
 
 
