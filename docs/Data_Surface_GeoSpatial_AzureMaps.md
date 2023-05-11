@@ -13,7 +13,10 @@ This solution considers the following requirements:
 This solution requires the following resources:
 
 * [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
+  * [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+  * [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
+  * Database permissions for IoT Central System-Assigned Managed Identity
 * [IoT Central](https://learn.microsoft.com/en-us/azure/iot-central/)
   * System-Assigned **Managed Identity**: `On` 
 * [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps)
