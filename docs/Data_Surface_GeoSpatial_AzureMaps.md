@@ -134,7 +134,7 @@ On the "**Publish**" >> "**Specific target**" popup, select "**Azure App Service
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5b195526-9410-4c0a-a672-d9fdba90142c" width="600" title="Snipped: May 11, 2023" />
 
-On the "**Publish**" >> "**App Service**" popup, (create and/or) select your Application Service, then click "**Finish**".
+On the "**Publish**" >> "**App Service**" popup, select your Application Service, then click "**Finish**".
 
 -----
 
