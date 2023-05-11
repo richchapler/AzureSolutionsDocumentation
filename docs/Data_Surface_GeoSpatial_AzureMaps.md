@@ -12,6 +12,7 @@ This solution considers the following requirements:
 ## Prerequisites
 This solution requires the following resources:
 
+* [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps)
   * **CORS** >> Allowed Origins: `*`
@@ -125,7 +126,15 @@ Right-click on project `WebApplication_AzureMaps` and select "**Publish**" from 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb34770b-c57a-4d81-8f0d-e07069ed774f" width="600" title="Snipped: May 10, 2023" />
 
-On the "**Publish**" >> "**Target**" popup, select "**Azure**" and then click "**Next**".
+On the "**Publish**" >> "**Target**" popup, select "**Azure**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2d0a43f-5ddf-4e4d-b486-9135ca778f6c" width="600" title="Snipped: May 11, 2023" />
+
+On the "**Publish**" >> "**Specific target**" popup, select "**Azure App Service (Windows)**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5b195526-9410-4c0a-a672-d9fdba90142c" width="600" title="Snipped: May 11, 2023" />
+
+On the "**Publish**" >> "**App Service**" popup, (create and/or) select your Application Service, then click "**Finish**".
 
 -----
 
