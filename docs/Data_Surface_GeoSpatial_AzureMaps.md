@@ -161,6 +161,9 @@ When complete, Visual Studio will open the new web application in a browser wind
 
 ## Reference
 
-* [Azure Maps Samples](https://samples.azuremaps.com/)
-* [Azure.ResourceManager.Maps Namespace](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.maps?view=azure-dotnet)
+* Azure Maps
+  * [Azure Maps Samples](https://samples.azuremaps.com/)
+  * [Azure.ResourceManager.Maps Namespace](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.maps?view=azure-dotnet)
 https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.maps?view=azure-dotnet
+* Azure IoT Central
+  * [Export IoT data to Azure Data Explorer](https://learn.microsoft.com/en-us/azure/iot-central/core/howto-export-to-azure-data-explorer)
