@@ -167,3 +167,4 @@ When complete, Visual Studio will open the new web application in a browser wind
 https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.maps?view=azure-dotnet
 * Azure IoT Central
   * [Export IoT data to Azure Data Explorer](https://learn.microsoft.com/en-us/azure/iot-central/core/howto-export-to-azure-data-explorer)
+  * [Transform data inside your IoT Central application for export](https://learn.microsoft.com/en-us/azure/iot-central/core/howto-transform-data-internally)
