@@ -11,6 +11,8 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
+* [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
+
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) >> [FAQ](https://learn.microsoft.com/en-us/azure/search/search-faq-frequently-asked-questions)
 
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
