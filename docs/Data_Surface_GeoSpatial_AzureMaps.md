@@ -142,7 +142,8 @@ Confirm success on the "**Publish**" popup, "**Finish**" tab, select your Applic
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/32b3204a-7c0d-4c32-84ca-371aab262075" width="800" title="Snipped: May 11, 2023" />
 
-Back on the `WebApplication_Azure Maps...: Publish` page, click "**Publish**".
+On the `WebApplication_Azure Maps...: Publish` page, click "**Publish**".
+
 -----
 
 ## Reference
