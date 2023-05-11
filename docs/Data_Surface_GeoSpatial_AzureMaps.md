@@ -126,16 +126,23 @@ Right-click on project `WebApplication_AzureMaps` and select "**Publish**" from 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb34770b-c57a-4d81-8f0d-e07069ed774f" width="600" title="Snipped: May 10, 2023" />
 
-On the "**Publish**" >> "**Target**" popup, select "**Azure**", then click "**Next**".
+On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**Next**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2d0a43f-5ddf-4e4d-b486-9135ca778f6c" width="600" title="Snipped: May 11, 2023" />
 
-On the "**Publish**" >> "**Specific target**" popup, select "**Azure App Service (Windows)**", then click "**Next**".
+On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Service (Windows)**", then click "**Next**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5b195526-9410-4c0a-a672-d9fdba90142c" width="600" title="Snipped: May 11, 2023" />
 
-On the "**Publish**" >> "**App Service**" popup, select your Application Service, then click "**Finish**".
+On the "**Publish**" popup, "**App Service**" tab, select your Application Service, then click "**Finish**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/47f7b5b3-4143-4ca4-9420-4cc19a2ed7ca" width="600" title="Snipped: May 11, 2023" />
+
+Confirm success on the "**Publish**" popup, "**Finish**" tab, select your Application Service, then click "**Close**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/32b3204a-7c0d-4c32-84ca-371aab262075" width="800" title="Snipped: May 11, 2023" />
+
+Back on the `WebApplication_Azure Maps...: Publish` page, click "**Publish**".
 -----
 
 ## Reference
