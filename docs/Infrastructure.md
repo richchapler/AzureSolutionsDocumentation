@@ -39,7 +39,7 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 
 * [**Grafana**](https://docs.microsoft.com/en-us/azure/managed-grafana/quickstart-managed-grafana-portal)
 
-* [**IoT Central**](Infrastructure_IoTCentral.md)
+* [**IoT Central**](https://learn.microsoft.com/en-us/azure/iot-central/)
 
 * [**IoT Hub**](https://learn.microsoft.com/en-us/azure/iot-hub/) >> [Raspberry Pi Simulator](https://azure-samples.github.io/raspberry-pi-web-simulator/)
 
