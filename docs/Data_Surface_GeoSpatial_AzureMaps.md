@@ -140,9 +140,17 @@ On the "**Publish**" popup, "**App Service**" tab, select your Application Servi
 
 Confirm success on the "**Publish**" popup, "**Finish**" tab, select your Application Service, then click "**Close**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a27b901e-0ece-4453-98ae-925e0691608b" width="800" title="Snipped: May 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2018501f-9d34-4a0a-b0be-ea2dc86319cf" width="800" title="Snipped: May 11, 2023" />
 
 On the `WebApplication_Azure Maps...: Publish` page, click "**Publish**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/99e9a946-7dd8-4f02-9aed-65a0442c23ac" width="800" title="Snipped: May 11, 2023" />
+
+When complete, Visual Studio will open the new web application in a browser window.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
 
 -----
 
