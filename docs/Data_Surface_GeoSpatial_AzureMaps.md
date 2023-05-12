@@ -164,9 +164,16 @@ WIP
 Telemetry
 | project latitude = toreal(telemetry.geolocation.lat), longitude = toreal(telemetry.geolocation.lon)
 | where not(isnull(latitude)) and not(isnull(longitude))
-| extend polygon = replace_string(replace_string(tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 2)).coordinates),'[[[','[['),']]]',']]')
-| summarize quantity = count() by latitude, longitude, polygon
+| summarize quantity = count() by latitude, longitude
 | order by quantity desc
+```
+
+```
+Telemetry
+| project longitude = toreal(telemetry.geolocation.lon), latitude = toreal(telemetry.geolocation.lat)
+| where not(isnull(latitude)) and not(isnull(longitude))
+| extend polygon = geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 10)).coordinates
+| summarize polygons = replace_string(tostring(make_list(polygon)),'"','')
 ```
 
 ```
