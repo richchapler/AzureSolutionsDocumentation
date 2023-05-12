@@ -169,6 +169,156 @@ Telemetry
 | order by quantity desc
 ```
 
+```
+using Kusto.Data;
+using Kusto.Data.Net.Client;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data;
+using System.Diagnostics;
+
+namespace WebApplication1.Pages
+{
+    public class IndexModel : PageModel
+    {
+        public DataTable? coordinates { get; set; }
+        public string? polygons { get; set; }
+
+        public void OnGet()
+        {
+            var kcsb = new KustoConnectionStringBuilder("https://rchaplerdec.westus3.kusto.windows.net", "rchaplerded")
+                .WithAadApplicationKeyAuthentication(
+                    applicationClientId: "731995c1-a129-4a24-ab99-064dc4cfe2ac",
+                    applicationKey: "klm8Q~_0Lu2WHYu2-~rCf03WQXKFd2uwYrlQ1bXr",
+                    authority: "16b3c013-d300-468d-ac64-7eda0820b6d3"
+                    );
+
+            /* ***** Coordinates ***** */
+            coordinates = new DataTable();
+            coordinates.Columns.Add("latitude", typeof(double));
+            coordinates.Columns.Add("longitude", typeof(double));
+            coordinates.Columns.Add("count", typeof(int));
+
+            using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
+            {
+                var q = "Telemetry\r\n| project latitude = toreal(telemetry.geolocation.lat), longitude = toreal(telemetry.geolocation.lon)\r\n| where not(isnull(latitude)) and not(isnull(longitude))\r\n| summarize quantity = count() by latitude, longitude\r\n| order by quantity desc";
+
+                var reader = kcf.ExecuteQuery(q);
+
+                while (reader.Read())
+                {
+                    coordinates.Rows.Add(reader.GetDouble(0), reader.GetDouble(1), reader.GetInt64(2));
+                }
+            }
+
+            /* ***** Polygons ***** */
+            using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
+            {
+                var q = "Telemetry\r\n| project longitude = toreal(telemetry.geolocation.lon), latitude = toreal(telemetry.geolocation.lat)\r\n| where not(isnull(latitude)) and not(isnull(longitude))\r\n| extend polygon = geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 10)).coordinates\r\n| summarize polygons = replace_string(tostring(make_list(polygon)),'\"','')";
+
+                var reader = kcf.ExecuteQuery(q);
+
+                while (reader.Read()) { polygons = reader.GetString(0); }
+            }
+        }
+    }
+}
+```
+
+```
+@page
+@model WebApplication1.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@using System.Data
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+    <style>
+        html, body {
+            margin: 0
+        }
+
+        .form {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 350px;
+            height: calc(100vh - 50px);
+        }
+
+        #map {
+            position: absolute;
+            top: 10px;
+            left: 410px;
+            width: calc(100vw - 420px);
+            height: calc(100vh - 30px);
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        function Initialize() {
+            var map = new atlas.Map(
+                'map', /* Identifier */
+                {
+                    authOptions: { authType: 'subscriptionKey', subscriptionKey: 'hX_ICym11lSzClUnZP2lS8MUq4EGdkIFhf_jR21-RDQ' },
+                    style: 'grayscale_dark',
+                    center: [-122.121, 47.673],
+                    zoom: 8
+                }
+            )
+
+            map.events.add('ready', function ()
+            {
+                map.controls.add([new atlas.control.StyleControl({ mapStyles: 'all' })], { position: 'top-right' });
+
+                dataSource = new atlas.source.DataSource();
+                map.sources.add(dataSource);
+
+                map.layers.add(new atlas.layer.PolygonLayer(dataSource, null, { fillColor: 'yellow' }), 'labels');
+
+                dataSource.add(new atlas.data.Feature(new atlas.data.Polygon(@Model.polygons)));
+
+                updateStatus();
+            });
+        }
+    </script>
+</head>
+
+<body onload="Initialize()">
+    <fieldset class="form">
+        @if (Model.coordinates != null)
+        {
+            <div style="height:50%;overflow-y:scroll">
+                <table>
+                    <tr>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Count</th>
+                    </tr>
+                    @foreach (DataRow row in Model.coordinates.Rows)
+                    {
+                        <tr>
+                            <td>@row["latitude"]</td>
+                            <td>@row["longitude"]</td>
+                            <td>@row["count"]</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+    </fieldset>
+    <div id="map"></div>
+
+</body>
+</html>
+
+```
+
 -----
 
 ## Reference
