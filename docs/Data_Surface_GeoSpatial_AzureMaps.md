@@ -161,6 +161,8 @@ When complete, Visual Studio will open the new web application in a browser wind
 
 ## Reference
 
+* Azure Data Explorer
+  * [geo_point_to_h3cell()](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function)
 * Azure Maps
   * [Azure Maps Samples](https://samples.azuremaps.com/)
   * [Azure.ResourceManager.Maps Namespace](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.maps?view=azure-dotnet)
