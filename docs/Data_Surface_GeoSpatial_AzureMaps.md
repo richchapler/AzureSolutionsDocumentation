@@ -1,4 +1,4 @@
-# Data Surface: GeoSpatial Visualization with Azure Maps (WiP)
+# Data Surface: Streaming GeoSpatial Visualization (WiP)
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0596e57b-78be-413e-96c5-828db0288d6a" width="1000" />
 
