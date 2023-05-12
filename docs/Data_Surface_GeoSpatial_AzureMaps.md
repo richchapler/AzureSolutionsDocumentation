@@ -158,6 +158,18 @@ When complete, Visual Studio will open the new web application in a browser wind
 **Congratulations... you have successfully completed this exercise**
 
 -----
+WIP
+
+```
+Telemetry
+| project latitude = toreal(telemetry.geolocation.lat), longitude = toreal(telemetry.geolocation.lon)
+| where not(isnull(latitude)) and not(isnull(longitude))
+| extend polygon = replace_string(replace_string(tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 2)).coordinates),'[[[','[['),']]]',']]')
+| summarize quantity = count() by latitude, longitude, polygon
+| order by quantity desc
+```
+
+-----
 
 ## Reference
 
