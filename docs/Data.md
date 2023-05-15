@@ -45,4 +45,5 @@
   [Cognitive Search, from Data Explorer](Data_Surface_CognitiveSearch_fromDataExplorer.md) | Data Explorer (via export) | Cognitive Search | JSON and HTML
   [Cognitive Search, Multi-Source Index](Data_Surface_CognitiveSearch_MultiSourceIndex.md) | SQL and Blob Storage | Cognitive Search | JSON
   [Cognitive Search, PowerApp + Security](Data_Surface_CognitiveSearch_PowerApp+Security.md) | Sample Data | Power Apps | JSON
-  [Geo-Spatial Visualization with Power BI](Data_Surface_GeoSpatial_PowerBI.md) | Data Explorer >> Power BI | No Code
+  [Geo-Spatial Visualization with Power BI](Data_Surface_GeoSpatial_PowerBI.md) | Data Explorer | Power BI | No Code
+  [Streaming Geo-Spatial Visualization](Data_Surface_GeoSpatial_AzureMaps.md) | Data Explorer | Web App + Azure Map | CSHTML + Javascript
