@@ -202,7 +202,7 @@ Click "**Save**".
 
 ### Step 4: Data Export
 
-Return to the IoT Central Application.
+Still in the Iot Central Application, navigate to "**Data Export**", then on the "**Exports**" tab, click "**+ New export**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/27039c35-b912-4c2d-be33-5f7a659d75b1" width="800" title="Snipped: May 15, 2023" />
 
