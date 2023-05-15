@@ -167,24 +167,10 @@ In this exercise, we will use IoT Central to enable capture of streaming device 
 Open IoT Central.
 
 -----
-WIP
+## WIP
 
-```
-Telemetry
-| project latitude = toreal(telemetry.geolocation.lat), longitude = toreal(telemetry.geolocation.lon)
-| where not(isnull(latitude)) and not(isnull(longitude))
-| summarize quantity = count() by latitude, longitude
-| order by quantity desc
-```
 
-```
-Telemetry
-| project longitude = toreal(telemetry.geolocation.lon), latitude = toreal(telemetry.geolocation.lat)
-| where not(isnull(latitude)) and not(isnull(longitude))
-| extend polygon = geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 10)).coordinates
-| summarize polygons = replace_string(tostring(make_list(polygon)),'"','')
-```
-
+### index.cshtml.cs
 ```
 using Kusto.Data;
 using Kusto.Data.Net.Client;
@@ -197,7 +183,7 @@ namespace WebApplication1.Pages
     public class IndexModel : PageModel
     {
         public DataTable? coordinates { get; set; }
-        public string? polygons { get; set; }
+        public string? datasourceAdd_Polygons { get; set; }
 
         public void OnGet()
         {
@@ -226,20 +212,24 @@ namespace WebApplication1.Pages
                 }
             }
 
-            /* ***** Polygons ***** */
+            /* ***** datasourceAdd_Polygons ***** */
             using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
             {
-                var q = "Telemetry\r\n| project longitude = toreal(telemetry.geolocation.lon), latitude = toreal(telemetry.geolocation.lat)\r\n| where not(isnull(latitude)) and not(isnull(longitude))\r\n| extend polygon = geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 10)).coordinates\r\n| summarize polygons = replace_string(tostring(make_list(polygon)),'\"','')";
+                var q = "Telemetry\r\n| where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))\r\n| summarize height = count() by\r\n    polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates)\r\n    , color = toint(totimespan(now()-enqueuedTime) / 1h)";
 
                 var reader = kcf.ExecuteQuery(q);
 
-                while (reader.Read()) { polygons = reader.GetString(0); }
+                while (reader.Read())
+                {
+                    datasourceAdd_Polygons = string.Concat(datasourceAdd_Polygons, "dataSource.add(new atlas.data.Feature(new atlas.data.Polygon(", reader.GetString(0), "),{heightValue:", reader.GetInt64(2), ",colorValue:'rgba(0, 0, 255, 255-", reader.GetInt32(1), ")'}));\r\n");
+                }
             }
         }
     }
 }
 ```
 
+### index.cshtml
 ```
 @page
 @model WebApplication1.Pages.IndexModel
@@ -284,20 +274,25 @@ namespace WebApplication1.Pages
                     authOptions: { authType: 'subscriptionKey', subscriptionKey: 'hX_ICym11lSzClUnZP2lS8MUq4EGdkIFhf_jR21-RDQ' },
                     style: 'grayscale_dark',
                     center: [-122.121, 47.673],
+                    pitch: 60,
                     zoom: 8
                 }
             )
 
-            map.events.add('ready', function ()
-            {
+            map.events.add('ready', function () {
                 map.controls.add([new atlas.control.StyleControl({ mapStyles: 'all' })], { position: 'top-right' });
 
                 dataSource = new atlas.source.DataSource();
+
                 map.sources.add(dataSource);
 
-                map.layers.add(new atlas.layer.PolygonLayer(dataSource, null, { fillColor: 'yellow' }), 'labels');
+                @Html.Raw(Model.datasourceAdd_Polygons);
 
-                dataSource.add(new atlas.data.Feature(new atlas.data.Polygon(@Model.polygons)));
+                map.layers.add(
+                    new atlas.layer.PolygonExtrusionLayer(dataSource, null, {
+                        height: ['get', 'heightValue'],
+                        fillColor: ['get', 'colorValue']
+                    }), 'labels');
 
                 updateStatus();
             });
@@ -332,7 +327,6 @@ namespace WebApplication1.Pages
 
 </body>
 </html>
-
 ```
 
 -----
