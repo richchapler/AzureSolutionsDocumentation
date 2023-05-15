@@ -229,7 +229,7 @@ Click "**+ Transformation**" and on the resulting pop-out, select "**IoT Plug an
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/750ceba2-53cc-442c-b155-40f0ed4ecdcc" width="800" title="Snipped: May 15, 2023" />
 
 On the "**Data export**" page, you will see the new item, along with a status {e.g., "**Starting**" or "**Healthy**"}.
-<br>Make sure that the "IoT PnP" app is running on your device and move aroudn to capture new data.
+<br>Make sure that the "IoT PnP" app is running on your device and try moving around to capture interesting data.
 
 _Note: The "IoT PnP" app only seems to log new "Geolocation" data when the app is opened (and closed / re-opened if already open)"_
 
