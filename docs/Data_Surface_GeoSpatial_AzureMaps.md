@@ -55,7 +55,7 @@ On the "**Create a new project**" page, click "**ASP.NET Core Web App**" and the
 
 Complete the "**Configure your new project**" form and then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/22b966d0-4eae-4610-a8fc-a37490aec2a3" width="600" title="Snipped: May 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/56dcd05f-9582-41ef-b16d-d9a933d3ba0c" width="600" title="Snipped: May 15, 2023" />
 
 Complete the "**Aditional information**" form and then click "**Next**".
 
@@ -63,7 +63,7 @@ Prompt | Entry
 :----- | :-----
 **Framework** | `.NET 7.0 (Standard Term Support)`
 **Authentication type** | `None`
-**Configure for HTTPS** | checked
+**Configure for HTTPS** | unchecked
 
 Click "**Create**".
 
