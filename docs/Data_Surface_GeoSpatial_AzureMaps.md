@@ -28,7 +28,7 @@ This solution requires the following resources:
 ## Proposed Solution
 Surface Azure Maps in a Web Application.
 
-This documentation will address solution requirements in ##### exercises:
+This documentation will address solution requirements in three exercises:
 
 * Exercise 1: Create Web Application
 * Exercise 2: Generate Sample Data
@@ -245,12 +245,16 @@ Open Data Explorer Database >> "Query" and run the following KQL: `Telemetry`
 -----
 
 ## Exercise 3: Visualize Geospatial Data
-In this exercise, we will use enhance the app that we created in Exercise 1, adding connection to the sampled data that we generated in Exercise 2.
+In this exercise, we will enhance the app from Exercise 1, and connect to the sample data from Exercise 2.
 
-LOREM IPSUM
+### Step 1: Add DataTable
+
+Open Visual Studio.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/lorem" width="800" title="Snipped: May 15, 2023" />
 
 
-
+LOREM ISPUM
 
 
 
