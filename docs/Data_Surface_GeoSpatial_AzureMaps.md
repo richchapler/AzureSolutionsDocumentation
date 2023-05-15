@@ -174,8 +174,55 @@ Click "**Use phone as a device**" on the "**Devices**" page.
 
 Follow directions on the resulting pop-up to setup your phone.
 
+### Step 2: Prepare Destination
+
+Open then Data Explorer Database, then "**Query**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/03821c39-1944-4922-b6d6-1a3908910c47" width="800" title="Snipped: May 15, 2023" />
+
+Run the following KQL:
+
+```
+.create table Telemetry (applicationId: guid, deviceId: string, enqueuedTime: datetime, telemetry: dynamic)
+```
+
+
+### Step 4: Data Export
+
+Return to the IoT Central Application.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/27039c35-b912-4c2d-be33-5f7a659d75b1" width="800" title="Snipped: May 15, 2023" />
+
+Click "**+ New export**" on the "**Extend**" >> "**Data export**" page.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9726555-b8a7-4763-a0ce-a3a081bbc3ed" width="800" title="Snipped: May 15, 2023" />
+
+"**Enter an export name**" {e.g., "Telemetry"} and then click "**+ Destination**"
+
 -----
 ## WIP
+
+Telemetry
+| project latitude = toreal(telemetry.geolocation.lat), longitude = toreal(telemetry.geolocation.lon)
+| where not(isnull(latitude)) and not(isnull(longitude))
+| summarize quantity = count() by latitude, longitude
+| order by quantity desc
+
+// Telemetry
+// | project longitude = toreal(telemetry.geolocation.lon)
+//     , latitude = toreal(telemetry.geolocation.lat)
+//     , color = totimespan(now()-enqueuedTime) / 1h
+// | where not(isnull(latitude)) and not(isnull(longitude))
+// | extend polygon = geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 10)).coordinates, color
+// | summarize height = count() by polygon = tostring(polygon), color
+
+
+Telemetry
+| where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))
+| summarize height = count() by
+    polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates)
+    , color = toint(totimespan(now()-enqueuedTime) / 1h)
+
 
 
 ### index.cshtml.cs
