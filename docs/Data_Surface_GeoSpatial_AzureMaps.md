@@ -71,7 +71,7 @@ Click "**Create**".
 
 Open "**Pages**" >> `index.cshtml`
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a54060a7-a6d8-476d-9227-a4770484cca0" width="800" title="Snipped: May 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8f2eec60-f614-408b-9f9e-aa1408b05473" width="800" title="Snipped: May 15, 2023" />
 
 Replace the default `index.cshtml` code with:
 ```
@@ -89,12 +89,13 @@ Replace the default `index.cshtml` code with:
         html, body {
             margin: 0
         }
+
         #myMap {
             position: relative;
             top: 0px;
-            left: 300px;
-            width: calc(90vw - 300px);
-            height: 80vh;
+            left: 0px;
+            width: 90vw;
+            height: 90vh;
         }
     </style>
 
@@ -125,7 +126,7 @@ Logic explained:
 
 ### Step 3: Publish
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4625385c-2f9d-4c3b-969a-ba44c59a19da" width="800" title="Snipped: May 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/88a06fa8-d9a5-40a9-badc-e55f09f945d1" width="800" title="Snipped: May 15, 2023" />
 
 Right-click on project `WebApplication_AzureMaps` and select "**Publish**" from the resulting menu.
 
