@@ -160,11 +160,19 @@ When complete, Visual Studio will open the new web application in a browser wind
 -----
 
 ## Exercise 2: Generate Sample Data
-In this exercise, we will use IoT Central to enable capture of streaming device data.
+In this exercise, we will use IoT Central to enable capture of streaming device data (using a mobile phone as source).
 
-### Step 1: Lorem Ipsum
+### Step 1: Configure Device
 
-Open IoT Central.
+Open the IoT Central Application.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b5204083-cb41-4883-9f81-e9dabe821c1f" width="800" title="Snipped: May 15, 2023" />
+
+Click "**Use phone as a device**" on the "**Devices**" page.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bce05e3d-bdd9-4140-ad87-d4af7b58acf6" width="800" title="Snipped: May 15, 2023" />
+
+Follow directions on the resulting pop-up to setup your phone.
 
 -----
 ## WIP
