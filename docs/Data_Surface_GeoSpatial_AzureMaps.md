@@ -95,7 +95,7 @@ Replace the default `index.cshtml` code with:
             top: 0px;
             left: 0px;
             width: 90vw;
-            height: 90vh;
+            height: 85vh;
         }
     </style>
 
