@@ -344,7 +344,7 @@ namespace WebApplication1.Pages
 * Azure Maps
   * [Azure Maps Samples](https://samples.azuremaps.com/)
   * [Azure.ResourceManager.Maps Namespace](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.maps?view=azure-dotnet)
-https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.maps?view=azure-dotnet
+  * [Add a polygon extrusion layer to the map](https://learn.microsoft.com/en-us/azure/azure-maps/map-extruded-polygon)
 * Azure IoT Central
   * [Export IoT data to Azure Data Explorer](https://learn.microsoft.com/en-us/azure/iot-central/core/howto-export-to-azure-data-explorer)
   * [Transform data inside your IoT Central application for export](https://learn.microsoft.com/en-us/azure/iot-central/core/howto-transform-data-internally)
