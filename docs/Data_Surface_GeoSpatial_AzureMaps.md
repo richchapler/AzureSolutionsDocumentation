@@ -146,7 +146,10 @@ Confirm success on the "**Publish**" popup, "**Finish**" tab, select your Applic
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2018501f-9d34-4a0a-b0be-ea2dc86319cf" width="800" title="Snipped: May 11, 2023" />
 
-On the `WebApplication_Azure Maps...: Publish` page, click "**Publish**".<br>
+On the `WebApplication_Azure Maps...: Publish` page, click "**Publish**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2757f785-c60c-4ffc-9a96-b3911d3db065" width="800" title="Snipped: May 15, 2023" />
+
 When complete, Visual Studio will open the new web application in a browser window.
 
 -----
