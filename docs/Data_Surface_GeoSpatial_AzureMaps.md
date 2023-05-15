@@ -16,7 +16,7 @@ This solution requires the following resources:
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
   * [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
   * [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
-  * Database permissions for IoT Central System-Assigned Managed Identity
+  * Database permissions for the IoT Central System-Assigned Managed Identity
 * [IoT Central](https://learn.microsoft.com/en-us/azure/iot-central/)
   * System-Assigned **Managed Identity**: `On` 
 * [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps)
@@ -186,6 +186,17 @@ Run the following KQL:
 .create table Telemetry (applicationId: guid, deviceId: string, enqueuedTime: datetime, telemetry: dynamic)
 ```
 
+### Step 3: Data Export
+
+Return to the IoT Central Application and then navigate to "**Data Export**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2a6d2729-9640-48b4-8e99-4ec6cc0a343e" width="800" title="Snipped: May 15, 2023" />
+
+On the "**Destinations**" tab, click "**+ New destination**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ef2604b2-355a-45d9-bd6a-199f4f70d3f1" width="800" title="Snipped: May 15, 2023" />
+
+Click "**Save**".
 
 ### Step 4: Data Export
 
