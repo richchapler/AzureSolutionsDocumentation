@@ -126,8 +126,6 @@ Logic explained:
 
 ### Step 3: Publish
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/88a06fa8-d9a5-40a9-badc-e55f09f945d1" width="800" title="Snipped: May 15, 2023" />
-
 Right-click on project `WebApplication_AzureMaps` and select "**Publish**" from the resulting menu.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb34770b-c57a-4d81-8f0d-e07069ed774f" width="600" title="Snipped: May 10, 2023" />
