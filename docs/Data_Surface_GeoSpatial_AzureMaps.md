@@ -30,9 +30,9 @@ Surface Azure Maps in a Web Application.
 
 This documentation will address solution requirements in ##### exercises:
 
-* Exercise 1: Create Basic Web Application
-* Exercise 2: Prepare Sample Data Stream
-* Exercise 3: Connect and Visualize Data
+* Exercise 1: Create Web Application
+* Exercise 2: Generate Sample Data
+* Exercise 3: Visualize Geospatial Data
 
 -----
 
@@ -232,6 +232,23 @@ On the "**Data export**" page, you will see the new item, along with a status {e
 <br>Make sure that the "IoT PnP" app is running on your device and move aroudn to capture new data.
 
 _Note: The "IoT PnP" app only seems to log new "Geolocation" data when the app is opened (and closed / re-opened if already open)"_
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9dd15a60-8ff7-4028-b693-fd4040ddb622" width="800" title="Snipped: May 15, 2023" />
+
+Open Data Explorer Database >> "Query" and run the following KQL: `Telemetry`
+<br>You can expect to see data flowing in (within a few minutes of initial configuration).
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 3: Visualize Geospatial Data
+In this exercise, we will use enhance the app that we created in Exercise 1, adding connection to the sampled data that we generated in Exercise 2.
+
+LOREM IPSUM
+
 
 
 
