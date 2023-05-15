@@ -6,7 +6,7 @@
 This solution considers the following requirements:
 
 * "We want to analyze real-time, streaming GPS coordinates from our vehicle fleet"
-* "We want to employ powerful geospatial capabilities and the freshest mapping data"
+* "We want to employ powerful geospatial capabilities (like in-map charting) and the freshest mapping data"
 * "We tried Power BI and it doesn't keep up with the size of our dataset"
 
 ## Prerequisites
