@@ -186,6 +186,8 @@ Run the following KQL:
 .create table Telemetry (applicationId: guid, deviceId: string, enqueuedTime: datetime, telemetry: dynamic)
 ```
 
+Confirm success.
+
 ### Step 3: Data Export
 
 Return to the IoT Central Application and then navigate to "**Data Export**".
