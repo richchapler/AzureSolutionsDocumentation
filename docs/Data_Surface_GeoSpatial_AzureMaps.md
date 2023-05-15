@@ -36,7 +36,7 @@ This documentation will address solution requirements in ##### exercises:
 
 -----
 
-## Exercise 1: Create Basic Web Application
+## Exercise 1: Create Web Application
 In this exercise, we will use Visual Studio to create a basic web application and publish to Azure.
 
 ### Step 1: Create Project
@@ -156,6 +156,15 @@ When complete, Visual Studio will open the new web application in a browser wind
 -----
 
 **Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 2: Generate Sample Data
+In this exercise, we will use IoT Central to enable capture of streaming device data.
+
+### Step 1: Lorem Ipsum
+
+Open IoT Central.
 
 -----
 WIP
