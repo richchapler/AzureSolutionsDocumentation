@@ -202,15 +202,22 @@ Click "**Save**".
 
 ### Step 4: Data Export
 
-Still in the Iot Central Application, navigate to "**Data Export**", then on the "**Exports**" tab, click "**+ New export**".
+Navigate to Iot Central Application >> "**Data Export**" page >> "**Exports**" tab.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/27039c35-b912-4c2d-be33-5f7a659d75b1" width="800" title="Snipped: May 15, 2023" />
 
-Click "**+ New export**" on the "**Extend**" >> "**Data export**" page.
+Click "**+ New export**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9726555-b8a7-4763-a0ce-a3a081bbc3ed" width="800" title="Snipped: May 15, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b5e612b-9c33-4147-8e8d-a792c6b87cb5" width="800" title="Snipped: May 15, 2023" />
 
-"**Enter an export name**" {e.g., "Telemetry"} and then click "**+ Destination**"
+Complete the "Exports" form:
+
+Prompt | Entry
+:----- | :-----
+**Enter an export name** | Self-explanatory
+**Type of data to export** | **Telemetry**
+
+Click "**+ Destination**" and select the destination created in Step 3.
 
 -----
 ## WIP
