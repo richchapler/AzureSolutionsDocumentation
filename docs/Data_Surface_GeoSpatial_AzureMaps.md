@@ -282,7 +282,7 @@ Logic explained:
 * `geo_h3cell_to_polygon(...` calculates the polygon that represents the H3 Cell rectangular area
 * `color = ...` generates a value to be used with C# `rgba` function to produce a gradient (lighter for newer data >> darker for older data)
 
-### Step 3: `index.cshtml.cs` >> `public void OnGet()`
+### Step 3: Update `index.cshtml.cs`
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b420ee62-1fde-42cd-b52a-90bb648f0232" width="800" title="Snipped: May 16, 2023" />
 
@@ -301,16 +301,16 @@ namespace WebApplication_AzureMaps.Pages
 
         public void OnGet()
         {
-            var kcsb = new KustoConnectionStringBuilder("https://rchaplerdec.westus3.kusto.windows.net", "rchaplerded")
+            var kcsb = new KustoConnectionStringBuilder("{DATAEXPLORER_URI}", "{DATAEXPLORER_DATABASE}")
                 .WithAadApplicationKeyAuthentication(
-                    applicationClientId: "731995c1-a129-4a24-ab99-064dc4cfe2ac",
-                    applicationKey: "klm8Q~_0Lu2WHYu2-~rCf03WQXKFd2uwYrlQ1bXr",
-                    authority: "16b3c013-d300-468d-ac64-7eda0820b6d3"
+                    applicationClientId: "{APPLICATIONREGISTRATION_CLIENTID}",
+                    applicationKey: "{APPLICATIONREGISTRATION_CLIENTSECRET}",
+                    authority: "{TENANTID}"
                 );
 
             using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
             {
-                var q = "Telemetry\r\n| where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))\r\n| summarize height = count() by\r\n    polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates)\r\n    , color = toint(totimespan(now()-enqueuedTime) / 1h)";
+                var q = "Telemetry | where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))\r\n| summarize height = count() by polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates), color = toint(totimespan(now()-enqueuedTime) / 1h)";
 
                 var reader = kcf.ExecuteQuery(q);
 
@@ -327,14 +327,19 @@ namespace WebApplication_AzureMaps.Pages
 Logic explained:
 * `var kcsb = new KustoConnectionStringBuilder...` creates a new instance of the class used to build connection strings for Data Explorer sources
 * `.WithAadApplicationKeyAuthentication...` specifies authencation using an App Registration
+* `using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))` creates an object for sending queries to the Data Explorer cluster
+* `var reader = kcf.ExecuteQuery(q)` executes the query and returns results in a reader object
+* `while (reader.Read())` iterates through query results
+* `datasourceAdd_Polygons = ...` generates HTML using parameters from query results
+
+### Step 4: Update `index.cshtmls`
 
 
 
 
 
 
-
-LOREM ISPUM
+LOREM IPSUM
 
 -----
 ## WIP
