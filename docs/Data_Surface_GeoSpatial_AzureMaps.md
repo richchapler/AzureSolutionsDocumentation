@@ -284,27 +284,42 @@ Logic explained:
 
 ### Step 3: `index.cshtml.cs` >> `public void OnGet()`
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0e27ef99-a324-485b-9300-5558ebeaaca8" width="800" title="Snipped: May 16, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b420ee62-1fde-42cd-b52a-90bb648f0232" width="800" title="Snipped: May 16, 2023" />
 
-Open `index.cshtml.com`, then modify / paste the following C# into the `OnGet` function:
+Open `index.cshtml.com`, then modify / paste the following C# replacing default code:
 
 ```
-var kcsb = new KustoConnectionStringBuilder("{DATAEXPLORER_URI}", "{DATAEXPLORER_DATABASENAME}")
-    .WithAadApplicationKeyAuthentication(
-        applicationClientId: "{APPLICATIONREGISTRATION_CLIENTID}",
-        applicationKey: "{APPLICATIONREGISTRATION_CLIENTSECRET}",
-        authority: "{TENANTID}"
-    );
+using Kusto.Data;
+using Kusto.Data.Net.Client;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
+namespace WebApplication_AzureMaps.Pages
 {
-    var q = "Telemetry | where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon)) | summarize height = count() by\r\n polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates), color = toint(totimespan(now()-enqueuedTime) / 1h)";
-
-    var reader = kcf.ExecuteQuery(q);
-
-    while (reader.Read())
+    public class IndexModel : PageModel
     {
-        datasourceAdd_Polygons = string.Concat(datasourceAdd_Polygons, "dataSource.add(new atlas.data.Feature(new atlas.data.Polygon(", reader.GetString(0), "),{heightValue:", reader.GetInt64(2), ",colorValue:'rgba(0, 0, 255, 255-", reader.GetInt32(1), ")'}));\r\n");
+        public string? datasourceAdd_Polygons { get; set; }
+
+        public void OnGet()
+        {
+            var kcsb = new KustoConnectionStringBuilder("https://rchaplerdec.westus3.kusto.windows.net", "rchaplerded")
+                .WithAadApplicationKeyAuthentication(
+                    applicationClientId: "731995c1-a129-4a24-ab99-064dc4cfe2ac",
+                    applicationKey: "klm8Q~_0Lu2WHYu2-~rCf03WQXKFd2uwYrlQ1bXr",
+                    authority: "16b3c013-d300-468d-ac64-7eda0820b6d3"
+                );
+
+            using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
+            {
+                var q = "Telemetry\r\n| where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))\r\n| summarize height = count() by\r\n    polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates)\r\n    , color = toint(totimespan(now()-enqueuedTime) / 1h)";
+
+                var reader = kcf.ExecuteQuery(q);
+
+                while (reader.Read())
+                {
+                    datasourceAdd_Polygons = string.Concat(datasourceAdd_Polygons, "dataSource.add(new atlas.data.Feature(new atlas.data.Polygon(", reader.GetString(0), "),{heightValue:", reader.GetInt64(2), ",colorValue:'rgba(0, 0, 255, 255-", reader.GetInt32(1), ")'}));\r\n");
+                }
+            }
+        }
     }
 }
 ```
@@ -323,68 +338,6 @@ LOREM ISPUM
 
 -----
 ## WIP
-
-
-
-### index.cshtml.cs
-```
-using Kusto.Data;
-using Kusto.Data.Net.Client;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data;
-using System.Diagnostics;
-
-namespace WebApplication1.Pages
-{
-    public class IndexModel : PageModel
-    {
-        public DataTable? coordinates { get; set; }
-        public string? datasourceAdd_Polygons { get; set; }
-
-        public void OnGet()
-        {
-            var kcsb = new KustoConnectionStringBuilder("https://rchaplerdec.westus3.kusto.windows.net", "rchaplerded")
-                .WithAadApplicationKeyAuthentication(
-                    applicationClientId: "731995c1-a129-4a24-ab99-064dc4cfe2ac",
-                    applicationKey: "klm8Q~_0Lu2WHYu2-~rCf03WQXKFd2uwYrlQ1bXr",
-                    authority: "16b3c013-d300-468d-ac64-7eda0820b6d3"
-                    );
-
-            /* ***** Coordinates ***** */
-            coordinates = new DataTable();
-            coordinates.Columns.Add("latitude", typeof(double));
-            coordinates.Columns.Add("longitude", typeof(double));
-            coordinates.Columns.Add("count", typeof(int));
-
-            using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
-            {
-                var q = "Telemetry\r\n| project latitude = toreal(telemetry.geolocation.lat), longitude = toreal(telemetry.geolocation.lon)\r\n| where not(isnull(latitude)) and not(isnull(longitude))\r\n| summarize quantity = count() by latitude, longitude\r\n| order by quantity desc";
-
-                var reader = kcf.ExecuteQuery(q);
-
-                while (reader.Read())
-                {
-                    coordinates.Rows.Add(reader.GetDouble(0), reader.GetDouble(1), reader.GetInt64(2));
-                }
-            }
-
-            /* ***** datasourceAdd_Polygons ***** */
-            using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
-            {
-                var q = "Telemetry\r\n| where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))\r\n| summarize height = count() by\r\n    polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates)\r\n    , color = toint(totimespan(now()-enqueuedTime) / 1h)";
-
-                var reader = kcf.ExecuteQuery(q);
-
-                while (reader.Read())
-                {
-                    datasourceAdd_Polygons = string.Concat(datasourceAdd_Polygons, "dataSource.add(new atlas.data.Feature(new atlas.data.Polygon(", reader.GetString(0), "),{heightValue:", reader.GetInt64(2), ",colorValue:'rgba(0, 0, 255, 255-", reader.GetInt32(1), ")'}));\r\n");
-                }
-            }
-        }
-    }
-}
-```
-
 ### index.cshtml
 ```
 @page
