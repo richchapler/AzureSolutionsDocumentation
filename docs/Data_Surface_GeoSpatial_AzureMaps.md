@@ -256,7 +256,30 @@ Right-click on project `WebApplication_AzureMaps` and select "**Manage NuGet Pac
 
 On the "**NuGet Package Manager**..." page, "**Browse**" tab, search for and select `Microsoft.Azure.Kusto.Data`, then click "**Install**" on the right-hand panel.
 
-### Step 2: `index.cshtml.cs` >> `KustoConnectionStringBuilder`
+### Step 2: Prepare KQL
+
+Open then Data Explorer Database, then "**Query**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/676d6066-26e9-414c-8345-34b0b8f01c69" width="800" title="Snipped: May 16, 2023" />
+
+Run the following KQL:
+
+```
+Telemetry
+| where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))
+| summarize height = count() by
+    polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates)
+    , color = toint(totimespan(now()-enqueuedTime) / 1h)
+``` 
+
+Logic explained:
+* `Telemetry` refers to the table created in Exercise 2 and should have some data from earlier testing
+* `| where not(isnull(telemetry.geolocation.lat)) and...` filters out non-geospatial telemetry {e.g., barometer}
+* `| summarize height = count()...` value will determine polygon extrusion height rendered on the map
+
+LOREM IPSUM
+
+### Step 3: `index.cshtml.cs` >> `KustoConnectionStringBuilder`
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0e27ef99-a324-485b-9300-5558ebeaaca8" width="800" title="Snipped: May 16, 2023" />
 
