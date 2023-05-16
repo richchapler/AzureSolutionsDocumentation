@@ -12,11 +12,12 @@ This solution considers the following requirements:
 ## Prerequisites
 This solution requires the following resources:
 
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 * [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
   * [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
-  * [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
-  * Database permissions for the IoT Central System-Assigned Managed Identity
+  * `Database User` permissions for the Application Registration
+  * `Database Admin` permissions for the IoT Central System-Assigned Managed Identity
 * [IoT Central](https://learn.microsoft.com/en-us/azure/iot-central/)
   * System-Assigned **Managed Identity**: `On` 
 * [**Maps**](https://learn.microsoft.com/en-us/azure/azure-maps)
@@ -246,16 +247,42 @@ Open Data Explorer Database >> "Query" and run the following KQL: `Telemetry`
 ## Exercise 3: Visualize Geospatial Data
 In this exercise, we will enhance the app from Exercise 1, and connect to the sample data from Exercise 2.
 
-### Step 1: Add DataTable
+### Step 1: Nuget >> `Microsoft.Azure.Kusto.Data`
 
-Open Visual Studio.
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94170541-f538-40a2-bab8-cc405dbf7d33" width="800" title="Snipped: May 16, 2023" />
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/lorem" width="800" title="Snipped: May 15, 2023" />
+Right-click on project `WebApplication_AzureMaps` and select "**Manage NuGet Packages...**" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0f743466-0fd7-4ecc-a758-4281dfde338c" width="800" title="Snipped: May 16, 2023" />
+
+On the "**NuGet Package Manager**..." page, "**Browse**" tab, search for and select `Microsoft.Azure.Kusto.Data`, then click "**Install**" on the right-hand panel.
+
+### Step 2: `index.cshtml.cs` >> `KustoConnectionStringBuilder`
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0e27ef99-a324-485b-9300-5558ebeaaca8" width="800" title="Snipped: May 16, 2023" />
+
+Open `index.cshtml.com`, then modify / paste the following C# into the `OnGet` function:
+
+```
+var kcsb = new KustoConnectionStringBuilder("{DATAEXPLORER_URI}", "{DATAEXPLORER_DATABASENAME}")
+    .WithAadApplicationKeyAuthentication(
+        applicationClientId: "{APPLICATIONREGISTRATION_CLIENTID}",
+        applicationKey: "{APPLICATIONREGISTRATION_CLIENTSECRET}",
+        authority: "{TENANTID}"
+    );
+```
+
+Logic explained:
+* `var kcsb = new KustoConnectionStringBuilder...` creates a new instance of the class used to build connection strings for Data Explorer sources
+* `.WithAadApplicationKeyAuthentication...` specifies authencation using an App Registration
+
+
+
+
+
 
 
 LOREM ISPUM
-
-
 
 -----
 ## WIP
