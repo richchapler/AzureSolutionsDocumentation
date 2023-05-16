@@ -339,7 +339,7 @@ Logic explained:
 
 Open `index.cshtml` and paste `@model WebApplication_AzureMaps.Pages.IndexModel` immediately under `@page` to establish a connection from `index.cshtml.cs`.
 
-Next, paste the following Javascript immediately after `var map = new atlas.Map(...)`:
+Next, paste the following logic immediately after `var map = new atlas.Map(...)`:
 
 ```
 map.events.add('ready', function () {
