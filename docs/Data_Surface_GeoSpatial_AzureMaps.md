@@ -257,7 +257,7 @@ Right-click on project `WebApplication_AzureMaps` and select "**Manage NuGet Pac
 On the "**NuGet Package Manager**..." page, "**Browse**" tab, search for and select `Microsoft.Azure.Kusto.Data`, then click "**Install**" on the right-hand panel.
 
 ### Step 2: Prepare KQL
-_Note: The goal of this step is to understand the KQL logic and the resulting data that will be used in the coming steps_
+_Note: The goal of this step is to understand the query logic and the required dataset for steps that follow_
 
 Open then Data Explorer Database, then "**Query**".
 
