@@ -286,7 +286,7 @@ Logic explained:
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b420ee62-1fde-42cd-b52a-90bb648f0232" width="800" title="Snipped: May 16, 2023" />
 
-Open `index.cshtml.com`, then modify / paste the following C# replacing default code:
+Open `index.cshtml.cs`, then modify / paste the following C# replacing default code:
 
 ```
 using Kusto.Data;
@@ -335,7 +335,39 @@ Logic explained:
 
 ### Step 4: Update `index.cshtml`
 
-LOREM IPSUM
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e92d54bf-3a7f-4f71-9f71-6d8d074d1d47" width="800" title="Snipped: May 16, 2023" />
+
+Open `index.cshtml` and paste `@model WebApplication_AzureMaps.Pages.IndexModel` immediately under `@page` to establish a connection from `index.cshtml.cs`.
+
+Next, paste the following immediately after `var map = new atlas.Map(...)`:
+
+```
+map.events.add('ready', function () {
+    dataSource = new atlas.source.DataSource();
+    map.sources.add(dataSource);
+
+    @Html.Raw(Model.datasourceAdd_Polygons);
+
+    map.layers.add(
+        new atlas.layer.PolygonExtrusionLayer(dataSource, null, {
+            height: ['get', 'heightValue'],
+            fillColor: ['get', 'colorValue']
+        }), 'labels');
+
+    updateStatus();
+});
+```
+
+Logic explained:
+* `map.events.add(...` adds an event listener that triggers `ready` when map resources are ready
+* `dataSource = ...` instantiates class used to manage shape data
+* `map.sources.add(dataSource);` adds the `dataSource` object to map object's sources
+* `@Html.Raw(Model.datasourceAdd_Polygons);` renders dynamic HTML from `index.cshtml.cs`
+* `map.layers.add(...` adds a layer to the map object
+* `PolygonExtrusionLayer` is used to render 3D extruded polygons on the map
+* `height` and `fillColor` sets polygon-specific values from data
+
+
 
 -----
 
