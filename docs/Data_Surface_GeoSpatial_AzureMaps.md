@@ -257,6 +257,7 @@ Right-click on project `WebApplication_AzureMaps` and select "**Manage NuGet Pac
 On the "**NuGet Package Manager**..." page, "**Browse**" tab, search for and select `Microsoft.Azure.Kusto.Data`, then click "**Install**" on the right-hand panel.
 
 ### Step 2: Prepare KQL
+_Note: The goal of this step is to understand the KQL logic and the resulting data that will be used in the coming steps_
 
 Open then Data Explorer Database, then "**Query**".
 
@@ -280,12 +281,6 @@ Logic explained:
 * `geo_point_to_h3cell(...` calculates the H3 Cell token string value of a geographic location
 * `geo_h3cell_to_polygon(...` calculates the polygon that represents the H3 Cell rectangular area
 * `color = ...` generates a value to be used with C# `rgba` function to produce a gradient (lighter for newer data >> darker for older data)
-
-
-
-
-
-LOREM IPSUM
 
 ### Step 3: `index.cshtml.cs` >> `KustoConnectionStringBuilder`
 
@@ -316,27 +311,6 @@ LOREM ISPUM
 
 -----
 ## WIP
-
-Telemetry
-| project latitude = toreal(telemetry.geolocation.lat), longitude = toreal(telemetry.geolocation.lon)
-| where not(isnull(latitude)) and not(isnull(longitude))
-| summarize quantity = count() by latitude, longitude
-| order by quantity desc
-
-// Telemetry
-// | project longitude = toreal(telemetry.geolocation.lon)
-//     , latitude = toreal(telemetry.geolocation.lat)
-//     , color = totimespan(now()-enqueuedTime) / 1h
-// | where not(isnull(latitude)) and not(isnull(longitude))
-// | extend polygon = geo_h3cell_to_polygon(geo_point_to_h3cell(longitude, latitude, 10)).coordinates, color
-// | summarize height = count() by polygon = tostring(polygon), color
-
-
-Telemetry
-| where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon))
-| summarize height = count() by
-    polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates)
-    , color = toint(totimespan(now()-enqueuedTime) / 1h)
 
 
 
