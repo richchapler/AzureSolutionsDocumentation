@@ -282,7 +282,7 @@ Logic explained:
 * `geo_h3cell_to_polygon(...` calculates the polygon that represents the H3 Cell rectangular area
 * `color = ...` generates a value to be used with C# `rgba` function to produce a gradient (lighter for newer data >> darker for older data)
 
-### Step 3: `index.cshtml.cs` >> `KustoConnectionStringBuilder`
+### Step 3: `index.cshtml.cs` >> `public void OnGet()`
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0e27ef99-a324-485b-9300-5558ebeaaca8" width="800" title="Snipped: May 16, 2023" />
 
@@ -295,6 +295,18 @@ var kcsb = new KustoConnectionStringBuilder("{DATAEXPLORER_URI}", "{DATAEXPLORER
         applicationKey: "{APPLICATIONREGISTRATION_CLIENTSECRET}",
         authority: "{TENANTID}"
     );
+
+using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))
+{
+    var q = "Telemetry | where not(isnull(telemetry.geolocation.lat)) and not(isnull(telemetry.geolocation.lon)) | summarize height = count() by\r\n polygon = tostring(geo_h3cell_to_polygon(geo_point_to_h3cell(toreal(telemetry.geolocation.lon), toreal(telemetry.geolocation.lat), 10)).coordinates), color = toint(totimespan(now()-enqueuedTime) / 1h)";
+
+    var reader = kcf.ExecuteQuery(q);
+
+    while (reader.Read())
+    {
+        datasourceAdd_Polygons = string.Concat(datasourceAdd_Polygons, "dataSource.add(new atlas.data.Feature(new atlas.data.Polygon(", reader.GetString(0), "),{heightValue:", reader.GetInt64(2), ",colorValue:'rgba(0, 0, 255, 255-", reader.GetInt32(1), ")'}));\r\n");
+    }
+}
 ```
 
 Logic explained:
