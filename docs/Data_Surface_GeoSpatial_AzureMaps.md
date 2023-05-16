@@ -14,8 +14,7 @@ This solution requires the following resources:
 
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 * [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
-  * [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
   * `Database User` permissions for the Application Registration
   * `Database Admin` permissions for the IoT Central System-Assigned Managed Identity
 * [IoT Central](https://learn.microsoft.com/en-us/azure/iot-central/)
