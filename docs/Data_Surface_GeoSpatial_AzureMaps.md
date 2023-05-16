@@ -276,6 +276,14 @@ Logic explained:
 * `Telemetry` is the table created and populated in Exercise 2
 * `| where not(isnull(telemetry.geolocation.lat)) and...` filters out non-geospatial telemetry {e.g., barometer}
 * `| summarize height = count()...` value will determine polygon extrusion height rendered on the map
+* `polygon = ...` complex array of GPS coordinates {e.g., `[[[-123.28034262380052,47.42758258345559],[-123.27962461597717,47.428051156925118],...]]
+* `geo_point_to_h3cell(...` calculates the H3 Cell token string value of a geographic location
+* `geo_h3cell_to_polygon(...` calculates the polygon that represents the H3 Cell rectangular area
+* `color = ...` generates a value to be used with C# `rgba` function to produce a gradient (lighter for newer data >> darker for older data)
+
+
+
+
 
 LOREM IPSUM
 
