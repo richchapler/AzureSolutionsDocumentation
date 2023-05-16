@@ -335,7 +335,7 @@ Logic explained:
 
 ### Step 4: Update `index.cshtml`
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e92d54bf-3a7f-4f71-9f71-6d8d074d1d47" width="800" title="Snipped: May 16, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0834d00b-f413-490c-9ae5-06af45df248b" width="800" title="Snipped: May 16, 2023" />
 
 Open `index.cshtml` and paste `@model WebApplication_AzureMaps.Pages.IndexModel` immediately under `@page` to establish a connection from `index.cshtml.cs`.
 
