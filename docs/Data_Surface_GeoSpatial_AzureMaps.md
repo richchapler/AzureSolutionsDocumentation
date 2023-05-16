@@ -325,6 +325,7 @@ namespace WebApplication_AzureMaps.Pages
 ```
 
 Logic explained:
+* `public string? datasourceAdd_Polygons { get; set; }` defines a public string that will contain polygon data for CSHTML surfacing
 * `var kcsb = new KustoConnectionStringBuilder...` creates a new instance of the class used to build connection strings for Data Explorer sources
 * `.WithAadApplicationKeyAuthentication...` specifies authencation using an App Registration
 * `using (var kcf = KustoClientFactory.CreateCslQueryProvider(kcsb))` creates an object for sending queries to the Data Explorer cluster
