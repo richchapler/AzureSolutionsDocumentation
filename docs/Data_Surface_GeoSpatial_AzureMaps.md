@@ -273,7 +273,7 @@ Telemetry
 ``` 
 
 Logic explained:
-* `Telemetry` refers to the table created in Exercise 2 and should have some data from earlier testing
+* `Telemetry` is the table created and populated in Exercise 2
 * `| where not(isnull(telemetry.geolocation.lat)) and...` filters out non-geospatial telemetry {e.g., barometer}
 * `| summarize height = count()...` value will determine polygon extrusion height rendered on the map
 
