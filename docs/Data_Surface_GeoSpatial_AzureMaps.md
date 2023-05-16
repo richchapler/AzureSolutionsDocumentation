@@ -1,4 +1,4 @@
-# Data Surface: Geo-Spatial Visualization with Azure Maps (WiP)
+# Data Surface: Geo-Spatial Visualization with Azure Maps
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0596e57b-78be-413e-96c5-828db0288d6a" width="1000" />
 
@@ -30,13 +30,13 @@ Surface Azure Maps in a Web Application.
 
 This documentation will address solution requirements in three exercises:
 
-* Exercise 1: Create Web Application
-* Exercise 2: Generate Sample Data
-* Exercise 3: Visualize Geospatial Data
+* Exercise 1: Create Application
+* Exercise 2: Generate Data
+* Exercise 3: Visualize Data
 
 -----
 
-## Exercise 1: Create Web Application
+## Exercise 1: Create Application
 In this exercise, we will use Visual Studio to create a basic web application and publish to Azure.
 
 ### Step 1: Create Project
@@ -158,7 +158,7 @@ When complete, Visual Studio will open the new web application in a browser wind
 
 -----
 
-## Exercise 2: Generate Sample Data
+## Exercise 2: Generate Data
 In this exercise, we will use IoT Central to enable capture of streaming device data (using a mobile phone as source).
 
 ### Step 1: Configure Device
@@ -243,7 +243,7 @@ Open Data Explorer Database >> "Query" and run the following KQL: `Telemetry`
 
 -----
 
-## Exercise 3: Visualize Geospatial Data
+## Exercise 3: Visualize Data
 In this exercise, we will enhance the app from Exercise 1, and connect to the sample data from Exercise 2.
 
 ### Step 1: Nuget >> `Microsoft.Azure.Kusto.Data`
@@ -367,7 +367,13 @@ Logic explained:
 * `PolygonExtrusionLayer` is used to render 3D extruded polygons on the map
 * `height` and `fillColor` sets polygon-specific values from data
 
+### Step 5: Confirm Success
 
+Publish your project and confirm that you see extruded polygons as expected.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
 
 -----
 
