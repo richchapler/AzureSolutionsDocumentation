@@ -103,5 +103,5 @@ Open Lorem Ipsum.
 
 ## Reference
 
-* Azure Data Explorer
-  * [geo_point_to_h3cell()](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/geo-point-to-h3cell-function)
+* Alation
+  * [Create new schemas under a particular data source](https://developer.alation.com/dev/reference/postschemas)
