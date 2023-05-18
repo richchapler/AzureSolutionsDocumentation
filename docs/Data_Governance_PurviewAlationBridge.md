@@ -89,11 +89,13 @@ Navigate to "**Data catalog**" >> "**Browse**" and confirm scan results on the "
 -----
 
 ## Exercise 2: Prepare Requests
-In this exercise, we will Lorem Ipsum.
+In this exercise, we will prepare API Requests manually approximating the flow of data from Purview to Alation.
 
 ### Step 1: Lorem Ipsum
 
-Open Lorem Ipsum.
+Navigate to your Postman workspace and collection,<br>
+_{e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}_
+
 
 -----
 
