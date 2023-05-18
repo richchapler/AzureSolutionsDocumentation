@@ -101,6 +101,8 @@ Navigate to Postman and click "+" to create a new request.<br>
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/15e5dd21-850c-42f5-8d93-c2fcfdacc7c3" width="800" title="Snipped: May 18, 2023" />
 
+Complete the form:
+
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | Select `POST`
