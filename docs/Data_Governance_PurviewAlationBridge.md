@@ -104,14 +104,30 @@ _{e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-00
 
 Click "+" to create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9670cca3-3b7b-4df0-948d-7b40509ff8a4" width="800" title="Snipped: May 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/15e5dd21-850c-42f5-8d93-c2fcfdacc7c3" width="800" title="Snipped: May 18, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | Select "**POST**"
 **Enter URL or paste text** | Modify and paste:<br>`https://login.microsoftonline.com/{TENANTID}/oauth2/token`
 **Authorization** >> Type | Select "**No Auth**"
-**Body**<br>_raw >> Text_ | Modify and paste:<br>`grant_type=client_credentials&client_id={APPLICATIONREGISTRATION_CLIENTID}&client_secret={APPLICATIONREGISTRATION_CLIENTSECRET}& resource=https://purview.azure.net`
+**Body**<br>_raw >> Text_ | Select `form-data` and the following key-value pairs:<br>`grant_type` :: `client_credentials`<br>`client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>`client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>`resource` :: `https://purview.azure.net`
+
+##### Sample Response
+Status: `200 OK`
+Body:
+```
+{
+    "token_type": "Bearer",
+    "expires_in": "3599",
+    "ext_expires_in": "3599",
+    "expires_on": "1684446114",
+    "not_before": "1684442214",
+    "resource": "https://purview.azure.net",
+    "access_token": "{TOKEN}"
+}
+```
+
 
 
 -----
