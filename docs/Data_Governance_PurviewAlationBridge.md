@@ -10,7 +10,7 @@ This documentation considers the following requirements and goals:
 
 ## Proposed Solution
 * Use Purview to gather metadata from Data Explorer
-* Use Postman to test API requests to Purview
+* Use Postman to prepare API requests for Purview and Alation
 * Use Logic App to bridge metadata into Alation
 
 ## Prerequisites
@@ -81,6 +81,19 @@ Monitor scan progress until "**Last run status**" equals "**Completed**".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ce6a4eee-ca73-4f95-86ca-e4415a455a8a" width="800" title="Snipped: May 18, 2023" />
 
 Navigate to "**Data catalog**" >> "**Browse**" and confirm scan results on the "**Browse assets**" page.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 2: Prepare Requests
+In this exercise, we will Lorem Ipsum.
+
+### Step 1: Lorem Ipsum
+
+Open Lorem Ipsum.
 
 -----
 
