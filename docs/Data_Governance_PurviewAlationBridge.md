@@ -47,6 +47,7 @@ Complete the "**Register data source (Azure Data Explorer (Kusto))**" form, then
 
 On the "**Data sources**" page, click the "**New scan**" icon on your registered data source.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f1142f3a-bc18-44a4-9392-870d64344fe1" width="800" title="Snipped: May 18, 2023" />
 
 
 
