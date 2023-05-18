@@ -16,7 +16,8 @@ This documentation considers the following requirements and goals:
 ## Prerequisites
 The proposed solution requires:
 * [**Alation**](https://www.alation.com/)
-* [**Application Registration**](Infrastructure_ApplicationRegistration.md) with Purview [collection role assignments](Infrastructure_Purview_CollectionRoleAssignment.md) for `Collection admins`, `Data source admins`, and `Data curators`
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md)
+  * ...with Purview [collection role assignments](Infrastructure_Purview_CollectionRoleAssignment.md) for `Collection admins`, `Data source admins`, and `Data curators`
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
   * ...with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
   * ...with `Database User` permissions for the Purview System-Assigned Managed Identity
@@ -103,14 +104,14 @@ _{e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-00
 
 Click "+" to create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/13c84344-2c86-454d-bb69-1fcda5075426" width="800" title="Snipped: May 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9670cca3-3b7b-4df0-948d-7b40509ff8a4" width="800" title="Snipped: May 18, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | Select "**POST**"
-**Enter URL or paste text** | Modify and paste:<br>`https://login.microsoftonline.com/{TenantId}/oauth2/token`
+**Enter URL or paste text** | Modify and paste:<br>`https://login.microsoftonline.com/{TENANTID}/oauth2/token`
 **Authorization** >> Type | Select "**No Auth**"
-**Body** >> raw >> Text | Modify and paste:<br>`grant_type=client_credentials&client_id={Client Identifier}&client_secret={Client Secret}& resource=https://purview.azure.net`
+**Body** >> raw >> Text | Modify and paste:<br>`grant_type=client_credentials&client_id={APPLICATIONREGISTRATION_CLIENTID}&client_secret={APPLICATIONREGISTRATION_CLIENTSECRET}& resource=https://purview.azure.net`
 
 
 -----
