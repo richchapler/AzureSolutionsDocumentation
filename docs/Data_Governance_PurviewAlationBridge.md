@@ -76,6 +76,10 @@ Navigate to the registered data source.
 
 Monitor scan progress until "**Last run status**" equals "**Completed**".
 
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/ce6a4eee-ca73-4f95-86ca-e4415a455a8a)
+
+Navigate to "**Data catalog**" >> "**Browse**" and confirm scan results on the "**Browse assets**" page.
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
