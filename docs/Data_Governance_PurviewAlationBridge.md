@@ -57,7 +57,7 @@ Confirm selections on the "**Scope your scan**" pop-out form, then click "**Cont
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8a6ea30-3ecc-4e0b-b955-f6ce6905ec38" width="800" title="Snipped: May 18, 2023" />
 
-Confirm selections on the "**Select a scan rule set**" pop-out form, then click "**Continue**".
+Confirm selection on the "**Select a scan rule set**" pop-out form, then click "**Continue**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5626d2a3-df02-48bf-b224-c27df9e35219" width="800" title="Snipped: May 18, 2023" />
 
