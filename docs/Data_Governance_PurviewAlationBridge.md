@@ -111,7 +111,7 @@ Prompt | Entry
 **HTTP Method** | Select `POST`
 **Enter URL or paste text** | Modify and paste: `https://login.microsoftonline.com/{TENANTID}/oauth2/token`
 **Authorization** >> Type | Select "**No Auth**"
-**Body** | Select `form-data` and the following key-value pairs:<br>`grant_type` :: `client_credentials`<br>`client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>`client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>`resource` :: `https://purview.azure.net`
+**Body** | Select `form-data` and add the following key-value pairs:<br>`grant_type` :: `client_credentials`<br>`client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>`client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>`resource` :: `https://purview.azure.net`
 
 ##### Sample Response
 Status: `200 OK`
