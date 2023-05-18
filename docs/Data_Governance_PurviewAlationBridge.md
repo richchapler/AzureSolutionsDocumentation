@@ -115,7 +115,6 @@ Prompt | Entry
 
 ##### Sample Response
 Status: `200 OK`<br>
-Body:
 ```
 {
     "token_type": "Bearer",
