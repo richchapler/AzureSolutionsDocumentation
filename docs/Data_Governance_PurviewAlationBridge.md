@@ -129,6 +129,10 @@ Status: `200 OK`<br>
 
 The `{TOKEN}` value will be used in all subsequent Purview API requests.
 
+#### Alation, 
+
+LOREM IPSUM
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
@@ -138,4 +142,5 @@ The `{TOKEN}` value will be used in all subsequent Purview API requests.
 ## Reference
 
 * Alation
+  * [Refresh & Access Token Overview](https://developer.alation.com/dev/reference/refresh-access-token-overview)
   * [Create new schemas under a particular data source](https://developer.alation.com/dev/reference/postschemas)
