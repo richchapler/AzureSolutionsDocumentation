@@ -16,6 +16,7 @@ This documentation considers the following requirements and goals:
 The proposed solution requires:
 * [**Alation**](https://www.alation.com/)
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) [Cluster and Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal)
+  * `Database User` permissions for the Purview System-Assigned Managed Identity
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 * [**Purview**](Infrastructure_Purview.md)
 
