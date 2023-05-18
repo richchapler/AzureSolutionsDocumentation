@@ -20,6 +20,7 @@ The proposed solution requires:
   * ...with [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
   * ...with `Database User` permissions for the Purview System-Assigned Managed Identity
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
+* [**Postman**](https://www.postman.com/product/workspaces/)
 * [**Purview**](Infrastructure_Purview.md)
 
 -----
