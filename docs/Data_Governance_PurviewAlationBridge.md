@@ -129,7 +129,7 @@ Status: `200 OK`<br>
 
 The `{TOKEN}` value will be used in all subsequent Purview API requests.
 
-#### Alation, 
+#### Alation, Refresh Token
 
 LOREM IPSUM
 
