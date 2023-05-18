@@ -49,7 +49,23 @@ On the "**Data sources**" page, click the "**New scan**" icon on your registered
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f1142f3a-bc18-44a4-9392-870d64344fe1" width="800" title="Snipped: May 18, 2023" />
 
+Complete the "**Scan**..." pop-out form, then click "**Continue**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f7542d38-a911-4804-a513-f3f78ebd97d5" width="800" title="Snipped: May 18, 2023" />
+
+Confirm selections on the "**Scope your scan**" pop-out form, then click "**Continue**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8a6ea30-3ecc-4e0b-b955-f6ce6905ec38" width="800" title="Snipped: May 18, 2023" />
+
+Confirm selections on the "**Select a scan rule set**" pop-out form, then click "**Continue**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5626d2a3-df02-48bf-b224-c27df9e35219" width="800" title="Snipped: May 18, 2023" />
+
+Complete the "**Set a scan trigger**" pop-out form, then click "**Continue**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/61d0a41a-ca51-4ea5-a6e0-4f1a6f2976d9" width="800" title="Snipped: May 18, 2023" />
+
+Review selections on the "**Review your scan**" pop-out form, then click "**Scan and run**".
 
 -----
 
