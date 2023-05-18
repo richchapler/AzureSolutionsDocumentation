@@ -23,7 +23,7 @@ The proposed solution requires:
 -----
 
 ## Exercise 1: Gather Metadata
-In this exercise, we will gather metadata from Data Explorer.
+In this exercise, we will register and scan Data Explorer.
 
 ### Step 1: Purview, Register Data Explorer
 
@@ -66,6 +66,14 @@ Complete the "**Set a scan trigger**" pop-out form, then click "**Continue**".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/61d0a41a-ca51-4ea5-a6e0-4f1a6f2976d9" width="800" title="Snipped: May 18, 2023" />
 
 Review selections on the "**Review your scan**" pop-out form, then click "**Scan and run**".
+
+### Step 3: Purview, Confirm Success
+
+Navigate to the registered data source.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/64c8f4c8-f51d-4335-8784-d09e3a50ae18" width="800" title="Snipped: May 18, 2023" />
+
+Monitor scan progress until "**Last run status**" equals "**Successful**".
 
 -----
 
