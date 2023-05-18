@@ -114,7 +114,7 @@ Prompt | Entry
 **Body** | Select `form-data` and add the following key-value pairs:<br>`grant_type` :: `client_credentials`<br>`client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>`client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>`resource` :: `https://purview.azure.net`
 
 ##### Sample Response
-Status: `200 OK`
+Status: `200 OK`<br>
 Body:
 ```
 {
