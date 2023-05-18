@@ -9,8 +9,8 @@ This documentation considers the following requirements and goals:
 * "We want to get Azure resource metadata into Alation without manual effort"
 
 ## Proposed Solution
-* Use Purview to gather metadata about our Azure Data Explorer
-* Use Logic App to bridge the data into Alation for a consolidated view of all data assets
+* Use Purview to gather metadata from Data Explorer
+* Use Logic App to bridge metadata into Alation
 
 ## Prerequisites
 The proposed solution requires:
@@ -19,15 +19,10 @@ The proposed solution requires:
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 * [**Purview**](Infrastructure_Purview.md)
 
-
-This documentation will address solution requirements in three exercises:
-
-* Exercise 1: Lorem Ipsum
-
 -----
 
-## Exercise 1: Lorem Ipsum
-In this exercise, we will Lorem Ipsum.
+## Exercise 1: Gather Metadata
+In this exercise, we will gather metadata from Data Explorer.
 
 ### Step 1: Lorem Ipsum
 
