@@ -74,7 +74,7 @@ Navigate to the registered data source.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/64c8f4c8-f51d-4335-8784-d09e3a50ae18" width="800" title="Snipped: May 18, 2023" />
 
-Monitor scan progress until "**Last run status**" equals "**Successful**".
+Monitor scan progress until "**Last run status**" equals "**Completed**".
 
 -----
 
