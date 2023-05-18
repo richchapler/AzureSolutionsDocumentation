@@ -111,7 +111,7 @@ Prompt | Entry
 **HTTP Method** | Select "**POST**"
 **Enter URL or paste text** | Modify and paste:<br>`https://login.microsoftonline.com/{TENANTID}/oauth2/token`
 **Authorization** >> Type | Select "**No Auth**"
-**Body** >> raw >> Text | Modify and paste:<br>`grant_type=client_credentials&client_id={APPLICATIONREGISTRATION_CLIENTID}&client_secret={APPLICATIONREGISTRATION_CLIENTSECRET}& resource=https://purview.azure.net`
+**Body**<br>_raw >> Text_ | Modify and paste:<br>`grant_type=client_credentials&client_id={APPLICATIONREGISTRATION_CLIENTID}&client_secret={APPLICATIONREGISTRATION_CLIENTSECRET}& resource=https://purview.azure.net`
 
 
 -----
