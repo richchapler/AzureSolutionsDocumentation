@@ -128,6 +128,8 @@ The resulting `{access_token}` value will be used in all subsequent Purview API 
 
 #### Alation, Refresh Token
 
+A Refresh Token is a "long living token the users can use to manage and create API Access Tokens, which can be used to interact with the other Alation APIs".
+
 LOREM IPSUM
 
 -----
