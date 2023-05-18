@@ -10,6 +10,7 @@ This documentation considers the following requirements and goals:
 
 ## Proposed Solution
 * Use Purview to gather metadata from Data Explorer
+* Use Postman to test API requests to Purview
 * Use Logic App to bridge metadata into Alation
 
 ## Prerequisites
