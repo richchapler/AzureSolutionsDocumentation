@@ -91,10 +91,18 @@ Navigate to "**Data catalog**" >> "**Browse**" and confirm scan results on the "
 ## Exercise 2: Prepare Requests
 In this exercise, we will prepare API Requests manually approximating the flow of data from Purview to Alation.
 
-### Step 1: Lorem Ipsum
+### Step 1: Authentication
 
-Navigate to your Postman workspace and collection,<br>
+#### Purview
+
+Navigate to your Postman Workspace and Collection.<br>
 _{e.g., https://web.postman.co/workspace/My-Workspace~00000000-0000-0000-0000-000000000000}_
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7fb36d57-ae03-404c-a89a-af5fa3ed8881" width="800" title="Snipped: May 18, 2023" />
+
+Click "+" to create a new request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/13c84344-2c86-454d-bb69-1fcda5075426" width="800" title="Snipped: May 18, 2023" />
 
 
 -----
