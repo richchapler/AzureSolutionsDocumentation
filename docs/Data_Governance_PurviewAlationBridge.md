@@ -120,11 +120,11 @@ Status: `200 OK`<br>
     "expires_on": "1684446114",
     "not_before": "1684442214",
     "resource": "https://purview.azure.net",
-    "access_token": "{TOKEN}"
+    "access_token": "{access_token}"
 }
 ```
 
-The `{TOKEN}` value will be used in all subsequent Purview API requests.
+The resulting `{access_token}` value will be used in all subsequent Purview API requests.
 
 #### Alation, Refresh Token
 
