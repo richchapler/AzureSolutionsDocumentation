@@ -128,7 +128,7 @@ Body:
 }
 ```
 
-
+The `{TOKEN}` value will be used in all subsequent Purview API requests.
 
 -----
 
