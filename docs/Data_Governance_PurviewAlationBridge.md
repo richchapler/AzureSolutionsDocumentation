@@ -93,7 +93,7 @@ Navigate to "**Data catalog**" >> "**Browse**" and confirm scan results on the "
 ## Exercise 2: Prepare Requests
 In this exercise, we will prepare API Requests manually approximating the flow of data from Purview to Alation.
 
-### Step 1: Authentication
+### Request Type 1: Authentication
 
 #### Purview, OAuth2 Token
 
@@ -190,6 +190,64 @@ Status: `201 Created`<br>
 
 The resulting `{user_id}` and `{api_access_token}` values will be used in all subsequent Alation API requests.
 
+### Request Type 2: Purview `azure_data_explorer_cluster` >> Alation "Virtual Data Source"
+
+#### Purview, Query
+
+Navigate to Postman and click "+" to create a new request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/LOREM" width="800" title="Snipped: May 19, 2023" />
+
+Complete the form:
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | Select `POST`
+**Enter URL or paste text** | Modify and paste: `{Endpoint}/catalog/api/search/query?api-version=2022-08-01-preview`
+**Authorization** >> Type | Select `No Auth`
+**Headers** >> Type | Modify/add `Authorization` "" `Bearer {access_token}`
+**Body** | Enter<br>```
+{
+  "filter": {
+    "and": [
+      {
+        "entityType": "azure_data_explorer_cluster"
+      }
+    ]
+  }
+}```
+
+##### Sample Response
+Status: `200 OK`<br>
+```
+{
+    "@search.count": 1,
+    "value": [
+        {
+            "updateBy": "ServiceAdmin",
+            "id": "f2f00357-afcb-448f-b7c6-620960fb1421",
+            "collectionId": "rchaplerp",
+            "isIndexed": true,
+            "qualifiedName": "https://rchaplerdec.westus3.kusto.windows.net",
+            "entityType": "azure_data_explorer_cluster",
+            "updateTime": 1684431659499,
+            "assetType": [
+                "Azure Data Explorer"
+            ],
+            "createBy": "ServiceAdmin",
+            "createTime": 1684431659499,
+            "name": "rchaplerdec.westus3",
+            "@search.score": 3.2775774
+        }
+    ],
+    "@search.facets": null
+}
+```
+
+
+
+
+
 
 
 LOREM IPSUM
@@ -204,4 +262,7 @@ LOREM IPSUM
 
 * Alation
   * [Refresh & Access Token Overview](https://developer.alation.com/dev/reference/refresh-access-token-overview)
+  * [Create a datasource](https://developer.alation.com/dev/reference/postdatasource)
   * [Create new schemas under a particular data source](https://developer.alation.com/dev/reference/postschemas)
+* Purview
+  * [Discovery - Query](https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query)
