@@ -206,7 +206,7 @@ Prompt | Entry
 **Enter URL or paste text** | Modify and paste: `{Endpoint}/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | Select `No Auth`
 **Headers** >> Type | Modify/add `Authorization` "" `Bearer {access_token}`
-**Body** | Enter<br>`{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
+**Body** | Enter `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
 
 ##### Sample Response
 Status: `200 OK`<br>
