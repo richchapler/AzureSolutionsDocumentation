@@ -13,7 +13,7 @@ This documentation considers the following requirements and goals:
 * Use Postman to prepare API requests for Purview and Alation
 * Use Logic App to bridge metadata into Alation
 
-## Prerequisites
+## Solution Requirements
 The proposed solution requires:
 * [**Alation**](https://www.alation.com/)
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
@@ -95,7 +95,7 @@ In this exercise, we will prepare API Requests manually approximating the flow o
 
 ### Step 1: Authentication
 
-#### Purview
+#### Purview, OAuth2 Token
 
 Navigate to Postman and click "+" to create a new request.<br>
 
@@ -124,11 +124,48 @@ Status: `200 OK`<br>
 }
 ```
 
-The resulting `{access_token}` value will be used in all subsequent Purview API requests.
+The resulting `access_token` value will be used in all subsequent Purview API requests.
 
 #### Alation, Refresh Token
 
 A Refresh Token is a "long living token the users can use to manage and create API Access Tokens, which can be used to interact with the other Alation APIs".
+
+Navigate to Postman and click "+" to create a new request.<br>
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3770cf4e-2b3d-49b0-a6ee-f6ccb544a30e" width="800" title="Snipped: May 18, 2023" />
+
+Complete the form:
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | Select `POST`
+**Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}/integration/v1/createRefreshToken/`
+**Authorization** >> Type | Select `No Auth`
+**Body** | Select `form-data` and add the following key-value pairs:<br>`username` :: `{ALATION_USERNAME}`<br>`password` :: `{ALATION_PASSWORD}`<br>`name` :: `rt` (abbreviation for Refresh Token, but can be anything)
+
+##### Sample Response
+Status: `201 Created`<br>
+```
+{
+    "user_id": {user_id},
+    "created_at": "2023-05-19T15:06:35.830643Z",
+    "token_expires_at": "2023-07-18T15:06:35.830178Z",
+    "token_status": "ACTIVE",
+    "last_used_at": null,
+    "name": "rt",
+    "refresh_token": "{refresh_token}"
+}
+```
+
+The resulting `{user_id}` and `refresh_token` values will be used in the Access Token request.
+
+#### Alation, Access Token
+
+A Refresh Token is a "short-lived access token, which can be passed as the value for the 'TOKEN' header in the requests for other Alation APIs".
+
+
+
+
 
 LOREM IPSUM
 
