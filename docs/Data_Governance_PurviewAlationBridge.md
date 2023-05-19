@@ -235,11 +235,36 @@ Status: `200 OK`<br>
 }
 ```
 
+The resulting `{name}` value will be used in the Alation, CREATE DATA SOURCE request.
+
+
+
+
+#### Alation, CREATE DATA SOURCE
+
+Navigate to Postman and click "+" to create a new request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/LOREM" width="800" title="Snipped: May 19, 2023" />
+
+<br>Complete the form:
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | Select `POST`
+**Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}/integration/v1/datasource/`
+**Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>`dbtype` :: `customdb`<br>`is_virtual` :: `true`<br>`title` :: `{name}`  value from previous "Purview, Query" >>  `entityType`: `azure_data_explorer_cluster`
+
+##### Sample Response
+Status: `200 OK`<br>
+
+_Note: The response detail is LONG (includes metadata for all existing data sources), so I'm not going to include it here_
 
 
 
 
 
+-----
 
 LOREM IPSUM
 
