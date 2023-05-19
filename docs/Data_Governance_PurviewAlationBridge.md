@@ -97,7 +97,7 @@ In this exercise, we will prepare API Requests manually approximating the flow o
 
 #### Purview, OAuth2 Token
 
-Navigate to Postman and click "+" to create a new request.<br>
+Navigate to Postman and click "+" to create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/15e5dd21-850c-42f5-8d93-c2fcfdacc7c3" width="800" title="Snipped: May 18, 2023" />
 
@@ -130,9 +130,9 @@ The resulting `access_token` value will be used in all subsequent Purview API re
 
 A Refresh Token is a "long living token the users can use to manage and create API Access Tokens, which can be used to interact with the other Alation APIs".
 
-Navigate to Postman and click "+" to create a new request.<br>
+Navigate to Postman and click "+" to create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3770cf4e-2b3d-49b0-a6ee-f6ccb544a30e" width="800" title="Snipped: May 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3770cf4e-2b3d-49b0-a6ee-f6ccb544a30e" width="800" title="Snipped: May 19, 2023" />
 
 Complete the form:
 
@@ -157,13 +157,38 @@ Status: `201 Created`<br>
 }
 ```
 
-The resulting `{user_id}` and `refresh_token` values will be used in the Access Token request.
+The resulting `{user_id}` and `{refresh_token}` values will be used in the Access Token request.
 
-#### Alation, Access Token
+#### Alation, API Access Token
 
-A Refresh Token is a "short-lived access token, which can be passed as the value for the 'TOKEN' header in the requests for other Alation APIs".
+An API Access Token is a "short-lived access token, which can be passed as the value for the 'TOKEN' header in the requests for other Alation APIs".
 
+Navigate to Postman and click "+" to create a new request.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5c01dee8-4331-464e-b755-42886b34e789" width="800" title="Snipped: May 19, 2023" />
+
+Complete the form:
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | Select `POST`
+**Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}//integration/v1/createAPIAccessToken/`
+**Authorization** >> Type | Select `No Auth`
+**Body** | Select `form-data` and add the following key-value pairs:<br>`refresh_token` :: `{REFRESH_TOKEN}`<br>`user_id` :: `{USER_ID}`
+
+##### Sample Response
+Status: `201 Created`<br>
+```
+{
+    "user_id": {user_id},
+    "created_at": "2023-05-19T15:16:10.225053Z",
+    "token_expires_at": "2023-05-20T15:16:10.222161Z",
+    "token_status": "ACTIVE",
+    "api_access_token": "{api_access_token}"
+}
+```
+
+The resulting `{user_id}` and `{api_access_token}` values will be used in all subsequent Alation API requests.
 
 
 
