@@ -38,7 +38,7 @@
 
 ### Surface
 
-  Use Case | Source | Surface | Language(s)
+  Use Case | Source | Surface | Method
   :----- | :----- | :----- | :-----
   [Application Programming Interface (API)](Data_Surface_API.md) | | Function App + APIM | C# (Function App)
   [Bulk Export](Data_Surface_BulkExport.md) | | Synapse Pipeline | Low Code
@@ -47,3 +47,10 @@
   [Cognitive Search, PowerApp + Security](Data_Surface_CognitiveSearch_PowerApp+Security.md) | Sample Data | Power Apps | JSON
   [Geo-Spatial Visualization with Power BI](Data_Surface_GeoSpatial_PowerBI.md) | Data Explorer | Power BI | No Code
   [Geo-Spatial Visualization with Azure Maps](Data_Surface_GeoSpatial_AzureMaps.md) | IoT Central + Data Explorer | Web App + Azure Map | CSHTML + Javascript
+
+### Governance
+
+  Use Case | Source | Surface | Method
+  :----- | :----- | :----- | :-----
+  [Purview >> Alation Bridge (WiP)](Data_Governance_PurviewAlationBridge.md) | Purview | Alation | Logic Apps + API
+  
