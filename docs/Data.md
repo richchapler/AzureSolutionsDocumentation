@@ -48,7 +48,7 @@
   [Geo-Spatial Visualization with Power BI](Data_Surface_GeoSpatial_PowerBI.md) | Data Explorer | Power BI | No Code
   [Geo-Spatial Visualization with Azure Maps](Data_Surface_GeoSpatial_AzureMaps.md) | IoT Central + Data Explorer | Web App + Azure Map | CSHTML + Javascript
 
-### Governance
+### Govern
 
   Use Case | Source | Surface | Method
   :----- | :----- | :----- | :-----
