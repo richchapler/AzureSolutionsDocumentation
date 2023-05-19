@@ -101,7 +101,7 @@ Navigate to Postman and click "+" to create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/15e5dd21-850c-42f5-8d93-c2fcfdacc7c3" width="800" title="Snipped: May 18, 2023" />
 
-Complete the form:
+<br>Complete the form:
 
 Prompt | Entry
 :----- | :-----
@@ -134,7 +134,7 @@ Navigate to Postman and click "+" to create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3770cf4e-2b3d-49b0-a6ee-f6ccb544a30e" width="800" title="Snipped: May 19, 2023" />
 
-Complete the form:
+<br>Complete the form:
 
 Prompt | Entry
 :----- | :-----
@@ -167,7 +167,7 @@ Navigate to Postman and click "+" to create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5c01dee8-4331-464e-b755-42886b34e789" width="800" title="Snipped: May 19, 2023" />
 
-Complete the form:
+<br>Complete the form:
 
 Prompt | Entry
 :----- | :-----
