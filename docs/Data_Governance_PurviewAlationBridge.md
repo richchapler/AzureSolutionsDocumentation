@@ -198,7 +198,7 @@ Navigate to Postman and click "+" to create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/957f807e-93f6-4132-8b81-7daa28c66f9a" width="800" title="Snipped: May 19, 2023" />
 
-Complete the form:
+<br>Complete the form:
 
 Prompt | Entry
 :----- | :-----
