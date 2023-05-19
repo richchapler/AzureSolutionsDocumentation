@@ -110,7 +110,7 @@ Prompt | Entry
 **Authorization** >> Type | Select `No Auth`
 **Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>* `client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>* `resource` :: `https://purview.azure.net`
 
-##### Sample Response
+##### Expected Response
 Status: `200 OK`<br>
 ```
 {
@@ -176,7 +176,7 @@ Prompt | Entry
 **Authorization** >> Type | Select `No Auth`
 **Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `refresh_token` :: `{REFRESH_TOKEN}`<br>* `user_id` :: `{USER_ID}`
 
-##### Sample Response
+##### Expected Response
 Status: `201 Created`<br>
 ```
 {
@@ -208,7 +208,7 @@ Prompt | Entry
 **Headers** >> Type | Modify/add `Authorization` :: `Bearer {access_token}`
 **Body** | Enter `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
 
-##### Sample Response
+##### Expected Response
 Status: `200 OK`<br>
 ```
 {
@@ -255,7 +255,7 @@ Prompt | Entry
 **Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
 **Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}`  value from previous step
 
-##### Sample Response
+##### Expected Response
 Status: `200 OK`<br>
 
 _Note: The response detail is LONG (includes metadata for all existing data sources), so I'm not going to include it here_
