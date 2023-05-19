@@ -237,10 +237,9 @@ Status: `200 OK`<br>
 
 The resulting `{name}` value will be used in the Alation, CREATE DATA SOURCE request.
 
-
-
-
 #### Alation, CREATE DATA SOURCE
+
+**PENDING: QUESTION WITH ALATION... DOES API CORRECTLY CREATE DATA SOURCE (SURFACED IN THE UI)?**
 
 Navigate to Postman and click "+" to create a new request.
 
@@ -260,7 +259,9 @@ Status: `200 OK`<br>
 
 _Note: The response detail is LONG (includes metadata for all existing data sources), so I'm not going to include it here_
 
+**PENDING: NEED TO DO A READ DATA SOURCE API REQUEST TO SEE IF THE ITEM CREATED ABOVE SURFACES IN API RESPONSE (BUT NOT IN UI)**
 
+**PENDING: IF IT TURNS OUT THAT THE API CANNOT CREATE A DATA SOURCE THAT WILL SURFACE IN THE UI, WILL NEED TO WRITE-UP MANUAL CREATION**
 
 
 
