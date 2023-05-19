@@ -108,7 +108,7 @@ Prompt | Entry
 **HTTP Method** | Select `POST`
 **Enter URL or paste text** | Modify and paste: `https://login.microsoftonline.com/{TENANTID}/oauth2/token`
 **Authorization** >> Type | Select `No Auth`
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>`grant_type` :: `client_credentials`<br>`client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>`client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>`resource` :: `https://purview.azure.net`
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>* `client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>* `resource` :: `https://purview.azure.net`
 
 ##### Sample Response
 Status: `200 OK`<br>
@@ -141,7 +141,7 @@ Prompt | Entry
 **HTTP Method** | Select `POST`
 **Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}/integration/v1/createRefreshToken/`
 **Authorization** >> Type | Select `No Auth`
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>`username` :: `{ALATION_USERNAME}`<br>`password` :: `{ALATION_PASSWORD}`<br>`name` :: `rt` (abbreviation for Refresh Token, but can be anything)
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `username` :: `{ALATION_USERNAME}`<br>* `password` :: `{ALATION_PASSWORD}`<br>* `name` :: `rt` (abbreviation for Refresh Token, but can be anything)
 
 ##### Sample Response
 Status: `201 Created`<br>
@@ -174,7 +174,7 @@ Prompt | Entry
 **HTTP Method** | Select `POST`
 **Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}//integration/v1/createAPIAccessToken/`
 **Authorization** >> Type | Select `No Auth`
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>`refresh_token` :: `{REFRESH_TOKEN}`<br>`user_id` :: `{USER_ID}`
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `refresh_token` :: `{REFRESH_TOKEN}`<br>* `user_id` :: `{USER_ID}`
 
 ##### Sample Response
 Status: `201 Created`<br>
@@ -253,7 +253,7 @@ Prompt | Entry
 **HTTP Method** | Select `POST`
 **Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}/integration/v1/datasource/`
 **Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>`dbtype` :: `customdb`<br>`is_virtual` :: `true`<br>`title` :: `{name}`  value from previous step
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}`  value from previous step
 
 ##### Sample Response
 Status: `200 OK`<br>
