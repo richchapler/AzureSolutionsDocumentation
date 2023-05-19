@@ -253,7 +253,7 @@ Prompt | Entry
 **HTTP Method** | Select `POST`
 **Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}/integration/v1/datasource/`
 **Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>`dbtype` :: `customdb`<br>`is_virtual` :: `true`<br>`title` :: `{name}`  value from previous "Purview, Query" >>  `entityType`: `azure_data_explorer_cluster`
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>`dbtype` :: `customdb`<br>`is_virtual` :: `true`<br>`title` :: `{name}`  value from previous step
 
 ##### Sample Response
 Status: `200 OK`<br>
