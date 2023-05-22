@@ -371,8 +371,72 @@ The resulting `{name}` value will be used in the **Alation, Create Schema** sect
 
 #### Alation, Create Schema
 
-LOREM IPSUM
+Navigate to Postman and click "+" to create a new request.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a334eb7-3e4f-45a8-a569-d22e4eb2af87" width="800" title="Snipped: May 22, 2023" />
+
+<br>Complete the form:
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | Select `POST`
+**Enter URL or paste text** | Modify and paste: `{ALATIONINSTANCEURL}/integration/v2/schema/`
+**Params** >> Type | Add the following key-value pair:<br>`ds_id` :: `LOREM`
+**Authorization** >> Select `No Auth`
+and enter the previously-generated `{api_access_token}` value in the "**Token**" input
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value created in the **Purview, Query** section<br>* `deployment_setup_complete` :: `true`
+
+Click "**Send**".
+
+##### Expected Response
+Status: `201 Created`
+
+```
+{
+    "host": null,
+    "port": null,
+    "deployment_setup_complete": true,
+    "db_username": null,
+    "dbname": null,
+    "latest_extraction_successful": false,
+    "is_presto_hive": false,
+    "disable_auto_lineage": false,
+    "is_hive": false,
+    "has_hdfs_based_qli": false,
+    "otype": "data",
+    "private": false,
+    "has_aws_s3_based_qli": false,
+    "has_previewable_qli": true,
+    "obfuscate_literals": null,
+    "enable_default_schema_extraction": false,
+    "supports_compose": true,
+    "title": "rchaplerdec.westus3",
+    "profiling_tip": null,
+    "uri": "",
+    "unresolved_mention_fingerprint_method": 0,
+    "can_data_upload": false,
+    "url": "/data/31/",
+    "latest_extraction_time": null,
+    "exclude_additional_columns_in_qli": false,
+    "metastore_type": 0,
+    "has_metastore_uri": false,
+    "webhdfs_username": null,
+    "is_gone": false,
+    "negative_filter_words": null,
+    "metastore_uri": null,
+    "aws_region": null,
+    "deleted": false,
+    "owner_ids": [
+        65
+    ],
+    "builtin_datasource": null,
+    "all_schemas": null,
+    "id": 31,
+    ...
+}
+```
+
+The resulting `id` value will be used in all subsequent Alation API requests.
 
 
 
