@@ -237,6 +237,27 @@ Status: `200 OK`<br>
 
 The resulting `{name}` value will be used in the Alation, CREATE DATA SOURCE request.
 
+LOREM IPSUM
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Reference
+
+* Alation
+  * [Refresh & Access Token Overview](https://developer.alation.com/dev/reference/refresh-access-token-overview)
+  * [Create a datasource](https://developer.alation.com/dev/reference/postdatasource)
+  * [Create new schemas under a particular data source](https://developer.alation.com/dev/reference/postschemas)
+* Purview
+  * [Discovery - Query](https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query)
+
+-----
+
+## DELETE ME
+
 #### Alation, CREATE DATA SOURCE
 
 **PENDING: QUESTION WITH ALATION... DOES API CORRECTLY CREATE DATA SOURCE (SURFACED IN THE UI)?**
@@ -259,27 +280,4 @@ Status: `200 OK`<br>
 
 _Note: The response detail is LONG (includes metadata for all existing data sources), so I'm not going to include it here_
 
-**PENDING: NEED TO DO A READ DATA SOURCE API REQUEST TO SEE IF THE ITEM CREATED ABOVE SURFACES IN API RESPONSE (BUT NOT IN UI)**
-
 **PENDING: IF IT TURNS OUT THAT THE API CANNOT CREATE A DATA SOURCE THAT WILL SURFACE IN THE UI, WILL NEED TO WRITE-UP MANUAL CREATION**
-
-
-
------
-
-LOREM IPSUM
-
------
-
-**Congratulations... you have successfully completed this exercise**
-
------
-
-## Reference
-
-* Alation
-  * [Refresh & Access Token Overview](https://developer.alation.com/dev/reference/refresh-access-token-overview)
-  * [Create a datasource](https://developer.alation.com/dev/reference/postdatasource)
-  * [Create new schemas under a particular data source](https://developer.alation.com/dev/reference/postschemas)
-* Purview
-  * [Discovery - Query](https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query)
