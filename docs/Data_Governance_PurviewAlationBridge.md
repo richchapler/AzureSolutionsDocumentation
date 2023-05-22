@@ -241,7 +241,7 @@ The resulting `{name}` value will be used in the Alation, Create Data Source sec
 
 #### Alation, Create Data Source
 
-_Note: "Create Datasource" API requests for "customdb" do not work (confirmation pending with Alation Support)... so, using Alation UI to create datasource_
+_Note: "Create Datasource" API for "customdb" fails (confirmation pending with Alation Support)... so, using Alation UI to create datasource_
 
 
 
