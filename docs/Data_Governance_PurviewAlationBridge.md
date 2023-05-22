@@ -46,6 +46,8 @@ On the "**Register data source**" pop-out, search for and select "**Azure Data E
 
 Complete the "**Register data source (Azure Data Explorer (Kusto))**" form, then click "**Register**".
 
+-----
+
 ### Step 2: Purview, Scan Data Explorer
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d4f5a783-471c-4efc-862b-d80dec885a80" width="800" title="Snipped: May 18, 2023" />
@@ -71,6 +73,8 @@ Complete the "**Set a scan trigger**" pop-out form, then click "**Continue**".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/61d0a41a-ca51-4ea5-a6e0-4f1a6f2976d9" width="800" title="Snipped: May 18, 2023" />
 
 Review selections on the "**Review your scan**" pop-out form, then click "**Scan and run**".
+
+-----
 
 ### Step 3: Purview, Confirm Success
 
@@ -189,6 +193,8 @@ Status: `201 Created`<br>
 ```
 
 The resulting `{user_id}` and `{api_access_token}` values will be used in all subsequent Alation API requests.
+
+-----
 
 ### Request Type 2: Purview `azure_data_explorer_cluster` >> Alation "Virtual Data Source"
 
