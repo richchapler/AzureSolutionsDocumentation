@@ -114,6 +114,8 @@ Prompt | Entry
 **Authorization** >> Type | Select `No Auth`
 **Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{APPLICATIONREGISTRATION_CLIENTID}`<br>* `client_secret` :: `{APPLICATIONREGISTRATION_CLIENTSECRET}`<br>* `resource` :: `https://purview.azure.net`
 
+Click "**Send**".
+
 ##### Expected Response
 Status: `200 OK`<br>
 ```
@@ -145,6 +147,8 @@ Prompt | Entry
 **Authorization** >> Type | Select `No Auth`
 **Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `username` :: `{ALATION_USERNAME}`<br>* `password` :: `{ALATION_PASSWORD}`<br>* `name` :: `rt` (abbreviation for Refresh Token, but can be anything)
 
+Click "**Send**".
+
 ##### Sample Response
 Status: `201 Created`<br>
 ```
@@ -175,6 +179,8 @@ Prompt | Entry
 **Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}//integration/v1/createAPIAccessToken/`
 **Authorization** >> Type | Select `No Auth`
 **Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `refresh_token` :: `{REFRESH_TOKEN}`<br>* `user_id` :: `{USER_ID}`
+
+Click "**Send**".
 
 ##### Expected Response
 Status: `201 Created`<br>
@@ -209,6 +215,8 @@ Prompt | Entry
 **Authorization** >> Type | Select `No Auth`
 **Headers** >> Type | Modify/add `Authorization` :: `Bearer {access_token}`
 **Body** | Enter `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
+
+Click "**Send**".
 
 ##### Expected Response
 Status: `200 OK`<br>
@@ -272,8 +280,25 @@ Prompt | Entry
 **Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}/catalog/datasource/?title={DATASOURCE_NAME}`
 **Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
 
+Click "**Send**".
+
 ##### Expected Response
 Status: `200 OK`
+
+```
+[
+    {
+        "custom_fields": [],
+        "dbtype": "customdb",
+        "description": "",
+        "id": 29,
+        "is_virtual": true,
+        "title": "rchaplerdec.westus3",
+        "uri": "",
+        "url": "/data/29/"
+    }
+]
+```
 
 LOREM IPSUM
 
