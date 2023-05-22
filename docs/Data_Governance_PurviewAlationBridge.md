@@ -265,7 +265,7 @@ Populate "Title" with the `{name}` value from the **Purview, Query** section, th
 
 On the resulting "**Add a Data Source**" page, select "**Custom DB**" for "**Database Type**", then click "**Save and Continue**".
 
-#### Alation, Get Data Sources
+#### Alation, Get Data Source
 
 In this step, we will get the `id` value to reference the newly created Data Source in future API requests.
 <br>Navigate to Postman and click "+" to create a new request.
