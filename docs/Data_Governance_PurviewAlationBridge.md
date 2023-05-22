@@ -199,7 +199,7 @@ Prompt | Entry
 **HTTP Method** | `POST`
 **Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | `No Auth`
-**Headers** >> Type | Key-Value pair: `Authorization` :: `Bearer {Purview_AccessToken}`
+**Headers** >> Type | Enter key-value pair: `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
 
 Click "**Send**".
@@ -223,7 +223,7 @@ Status: `200 OK`<br>
             ],
             "createBy": "ServiceAdmin",
             "createTime": 1684431659499,
-            "name": "rchaplerdec.westus3",
+            "name": "{Purview_AssetName}",
             "@search.score": 3.2775774
         }
     ],
@@ -237,17 +237,15 @@ Status: `200 OK`<br>
 
 Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a334eb7-3e4f-45a8-a569-d22e4eb2af87" width="800" title="Snipped: May 22, 2023" />
-
-<br>Complete the form:
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/04351026-fa83-4d02-9890-ed769f4bcaba" width="800" title="Snipped: May 22, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL**... | `https://{ALATIONINSTANCE_NAME}.alationcatalog.com/integration/v1/datasource/`
+**Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/datasource/`
 **Authorization** >> Type | `No Auth`
-**Headers** | `token` :: "Alation, API Access Token" section >> resulting `{api_access_token}` value
-**Body** | `form-data` and the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: "Purview Query `azure_data_explorer_cluster`" section >> resulting `{name}` value<br>* `deployment_setup_complete` :: `true`
+**Headers** | `token` :: "Alation, API Access Token" section >> resulting `{Alation_APIAccessToken}` value
+**Body** | Select `form-data` and enter the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{Purview_AssetName}`<br>* `deployment_setup_complete` :: `true`
 
 Click "**Send**".
 
@@ -298,8 +296,6 @@ Status: `201 Created`
     ...
 }
 ```
-
-The resulting `id` value will be used in all subsequent Alation API requests.
 
 -----
 
