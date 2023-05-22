@@ -262,7 +262,7 @@ Prompt | Entry
 **HTTP Method** | Select `POST`
 **Enter URL or paste text** | Modify and paste: `{ALATIONINSTANCEURL}/integration/v1/datasource/`
 **Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value will created in the **Purview, Query** section<br>* `deployment_setup_complete` :: `true`
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value created in the **Purview, Query** section<br>* `deployment_setup_complete` :: `true`
 
 Click "**Send**".
 
@@ -310,44 +310,7 @@ Status: `201 Created`
     "builtin_datasource": null,
     "all_schemas": null,
     "id": 31,
-    "hive_tez_logs_source": null,
-    "supports_profiling": true,
-    "is_hidden": false,
-    "supports_default_schema_extraction": false,
-    "exclude_schemas": null,
-    "supports_profiling_v2": true,
-    "enabled_in_compose": false,
-    "data_upload_disabled_message": "Uploading data into a Virtual Datasource is not supported",
-    "qli_aws_region": "",
-    "supports_qli_diagnostics": false,
-    "favorited_by_list": null,
-    "compose_oauth_enabled": false,
-    "icon": "db",
-    "supports_md_diagnostics": false,
-    "hive_logs_source": null,
-    "qualified_name": "",
-    "qli_aws_access_key_id": "",
-    "hive_logs_source_type": 0,
-    "enable_query_result_export": true,
-    "cron_extraction": "0 22 * * 0",
-    "limit_schemas": null,
-    "aws_access_key_id": null,
-    "supports_qli_daterange": true,
-    "enable_complex_type": false,
-    "webhdfs_server": null,
-    "nosql_mde_sample_size": 100,
-    "has_aws_glue_metastore": false,
-    "supports_explain": false,
-    "is_virtual": true,
-    "jdbc_driver": null,
-    "description": "",
-    "remove_filtered_schemas": false,
-    "qli_hive_connection_source": 0,
-    "enable_designated_credential": false,
-    "dbtype": "customdb",
-    "disable_auto_extraction": true,
-    "can_toggle_ds_privacy": true,
-    "webhdfs_port": 50070
+    ...
 }
 ```
 
