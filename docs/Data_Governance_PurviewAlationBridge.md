@@ -262,8 +262,8 @@ Prompt | Entry
 **HTTP Method** | `POST`
 **Enter URL or paste text** | `https://{ALATIONINSTANCE_NAME}.alationcatalog.com/integration/v1/datasource/`
 **Authorization** >> Type | `No Auth`
-**Headers** >> `token` :: `{api_access_token}` from "Alation, API Access Token" section
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value from "Purview Query `azure_data_explorer_cluster`" section<br>* `deployment_setup_complete` :: `true`
+**Headers** | `token` :: "Alation, API Access Token" section >> resulting `{api_access_token}` value
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: "Purview Query `azure_data_explorer_cluster`" section >> resultling `{name}` value<br>* `deployment_setup_complete` :: `true`
 
 Click "**Send**".
 
