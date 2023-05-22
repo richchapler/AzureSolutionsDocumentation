@@ -300,7 +300,7 @@ Status: `200 OK`
 ]
 ```
 
-LOREM IPSUM
+The resulting `id` value will be used in all subsequent Alation API requests.
 
 -----
 
