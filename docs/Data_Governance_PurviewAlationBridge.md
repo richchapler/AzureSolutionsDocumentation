@@ -132,8 +132,6 @@ The resulting `access_token` value will be used in all subsequent Purview API re
 
 #### Alation, Refresh Token
 
-A Refresh Token is a "long living token the users can use to manage and create API Access Tokens, which can be used to interact with the other Alation APIs".
-
 Navigate to Postman and click "+" to create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3770cf4e-2b3d-49b0-a6ee-f6ccb544a30e" width="800" title="Snipped: May 19, 2023" />
@@ -164,8 +162,6 @@ Status: `201 Created`<br>
 The resulting `{user_id}` and `{refresh_token}` values will be used in the Access Token request.
 
 #### Alation, API Access Token
-
-An API Access Token is a "short-lived access token, which can be passed as the value for the 'TOKEN' header in the requests for other Alation APIs".
 
 Navigate to Postman and click "+" to create a new request.
 
@@ -241,7 +237,13 @@ Status: `200 OK`<br>
 }
 ```
 
-The resulting `{name}` value will be used in the Alation, CREATE DATA SOURCE request.
+The resulting `{name}` value will be used in the Alation, Create Data Source section.
+
+#### Alation, Create Data Source
+
+_Note: It appears that the Alation "Create Datasource" API request does not seem to work for customdb (questions pending with Support), so using the Alation UI for this action_
+
+
 
 LOREM IPSUM
 
