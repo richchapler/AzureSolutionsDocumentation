@@ -259,10 +259,11 @@ Navigate to Postman and click "+" to create a new request.
 
 Prompt | Entry
 :----- | :-----
-**HTTP Method** | Select `POST`
-**Enter URL or paste text** | Modify and paste: `{ALATIONINSTANCEURL}/integration/v1/datasource/`
-**Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
-**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value created in the **Purview, Query** section<br>* `deployment_setup_complete` :: `true`
+**HTTP Method** | `POST`
+**Enter URL or paste text** | `https://{ALATIONINSTANCE_NAME}.alationcatalog.com/integration/v1/datasource/`
+**Authorization** >> Type | `No Auth`
+**Headers** >> `token` :: `{api_access_token}` from "Alation, API Access Token" section
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value from "Purview Query `azure_data_explorer_cluster`" section<br>* `deployment_setup_complete` :: `true`
 
 Click "**Send**".
 
