@@ -249,9 +249,7 @@ The resulting `{name}` value will be used in the **Alation, Create Data Source**
 
 #### Alation, Create Data Source
 
-_Note: "Create Datasource" API for "customdb" fails (confirmation pending with Alation Support)... so, using Alation UI to create datasource_
-
-Navigate to Postman >> "**Apps**" >> "**Sources**".
+Navigate to Alation >> "**Apps**" >> "**Sources**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/55bdeaea-de98-427b-abad-1f6d5cd9cf37" width="800" title="Snipped: May 22, 2023" />
 
