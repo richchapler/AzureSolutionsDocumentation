@@ -253,6 +253,10 @@ Click "**+ Add...**", then select "**Virtual Data Source**" from the resulting m
 
 Populate "Title" with the `{name}` value from the **Purview, Query** section, then click "**Continue Setup**"
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa8a29e0-4c95-4583-ba62-02619e9fd816" width="800" title="Snipped: May 22, 2023" />
+
+On the resulting "**Add a Data Source**" page, select "**Custom DB**" for "**Database Type**", then click "**Save and Continue**".
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
