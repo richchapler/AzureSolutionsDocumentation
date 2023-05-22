@@ -251,59 +251,104 @@ The resulting `{name}` value will be used in the **Alation, Create Data Source**
 
 #### Alation, Create Data Source
 
-##### ...via Portal
+Navigate to Postman and click "+" to create a new request.
 
-Navigate to Alation >> "**Apps**" >> "**Sources**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/55bdeaea-de98-427b-abad-1f6d5cd9cf37" width="800" title="Snipped: May 22, 2023" />
-
-Click "**+ Add...**", then select "**Virtual Data Source**" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ad6cf5d6-f3ef-451a-a5bb-74a73a47b05e" width="800" title="Snipped: May 22, 2023" />
-
-Populate "Title" with the `{name}` value from the **Purview, Query** section, then click "**Continue Setup**"
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa8a29e0-4c95-4583-ba62-02619e9fd816" width="800" title="Snipped: May 22, 2023" />
-
-On the resulting "**Add a Data Source**" page, select "**Custom DB**" for "**Database Type**", then click "**Save and Continue**".
-
-##### ...via API
-
-LOREM IPSUM
-
-#### Alation, Get Data Source
-
-In this step, we will get the `id` value to reference the newly created Data Source in future API requests.
-<br>Navigate to Postman and click "+" to create a new request.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ceda7e50-ec4c-4354-83dc-5923905e3527" width="800" title="Snipped: May 22, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a334eb7-3e4f-45a8-a569-d22e4eb2af87" width="800" title="Snipped: May 22, 2023" />
 
 <br>Complete the form:
 
 Prompt | Entry
 :----- | :-----
-**HTTP Method** | Select `GET`
-**Enter URL or paste text** | Modify and paste: `{AlationInstanceURL}/catalog/datasource/?title={DATASOURCE_NAME}`
+**HTTP Method** | Select `POST`
+**Enter URL or paste text** | Modify and paste: `{ALATIONINSTANCEURL}/integration/v1/datasource/`
 **Authorization** >> Type | Select `Bearer Token` and enter the previously-generated `{api_access_token}` value in the "**Token**" input
+**Body** | Select `form-data` and modify/add the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value will created in the **Purview, Query** section<br>* `deployment_setup_complete` :: `true`
 
 Click "**Send**".
 
 ##### Expected Response
-Status: `200 OK`
+Status: `201 Created`
 
 ```
-[
-    {
-        "custom_fields": [],
-        "dbtype": "customdb",
-        "description": "",
-        "id": 29,
-        "is_virtual": true,
-        "title": "rchaplerdec.westus3",
-        "uri": "",
-        "url": "/data/29/"
-    }
-]
+{
+    "host": null,
+    "port": null,
+    "deployment_setup_complete": true,
+    "db_username": null,
+    "dbname": null,
+    "latest_extraction_successful": false,
+    "is_presto_hive": false,
+    "disable_auto_lineage": false,
+    "is_hive": false,
+    "has_hdfs_based_qli": false,
+    "otype": "data",
+    "private": false,
+    "has_aws_s3_based_qli": false,
+    "has_previewable_qli": true,
+    "obfuscate_literals": null,
+    "enable_default_schema_extraction": false,
+    "supports_compose": true,
+    "title": "rchaplerdec.westus3",
+    "profiling_tip": null,
+    "uri": "",
+    "unresolved_mention_fingerprint_method": 0,
+    "can_data_upload": false,
+    "url": "/data/31/",
+    "latest_extraction_time": null,
+    "exclude_additional_columns_in_qli": false,
+    "metastore_type": 0,
+    "has_metastore_uri": false,
+    "webhdfs_username": null,
+    "is_gone": false,
+    "negative_filter_words": null,
+    "metastore_uri": null,
+    "aws_region": null,
+    "deleted": false,
+    "owner_ids": [
+        65
+    ],
+    "builtin_datasource": null,
+    "all_schemas": null,
+    "id": 31,
+    "hive_tez_logs_source": null,
+    "supports_profiling": true,
+    "is_hidden": false,
+    "supports_default_schema_extraction": false,
+    "exclude_schemas": null,
+    "supports_profiling_v2": true,
+    "enabled_in_compose": false,
+    "data_upload_disabled_message": "Uploading data into a Virtual Datasource is not supported",
+    "qli_aws_region": "",
+    "supports_qli_diagnostics": false,
+    "favorited_by_list": null,
+    "compose_oauth_enabled": false,
+    "icon": "db",
+    "supports_md_diagnostics": false,
+    "hive_logs_source": null,
+    "qualified_name": "",
+    "qli_aws_access_key_id": "",
+    "hive_logs_source_type": 0,
+    "enable_query_result_export": true,
+    "cron_extraction": "0 22 * * 0",
+    "limit_schemas": null,
+    "aws_access_key_id": null,
+    "supports_qli_daterange": true,
+    "enable_complex_type": false,
+    "webhdfs_server": null,
+    "nosql_mde_sample_size": 100,
+    "has_aws_glue_metastore": false,
+    "supports_explain": false,
+    "is_virtual": true,
+    "jdbc_driver": null,
+    "description": "",
+    "remove_filtered_schemas": false,
+    "qli_hive_connection_source": 0,
+    "enable_designated_credential": false,
+    "dbtype": "customdb",
+    "disable_auto_extraction": true,
+    "can_toggle_ds_privacy": true,
+    "webhdfs_port": 50070
+}
 ```
 
 The resulting `id` value will be used in all subsequent Alation API requests.
