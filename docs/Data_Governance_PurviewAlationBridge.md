@@ -247,6 +247,8 @@ Status: `200 OK`<br>
 
 The resulting `{name}` value will be used in the **Alation, Create Data Source** section.
 
+-----
+
 #### Alation, Create Data Source
 
 ##### ...via Portal
