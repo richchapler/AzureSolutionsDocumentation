@@ -101,7 +101,7 @@ In this exercise, we will prepare API Requests manually approximating the flow o
 
 #### Purview, OAuth2 Token
 
-Navigate to Postman and click "+" to create a new request.
+Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b9e86ca9-09bc-4f47-8f3a-e83b542f98fe" width="800" title="Snipped: May 22, 2023" />
 
@@ -130,18 +130,18 @@ Status: `200 OK`<br>
 
 #### Alation, Refresh Token
 
-Navigate to Postman and click "+" to create a new request.
+Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3770cf4e-2b3d-49b0-a6ee-f6ccb544a30e" width="800" title="Snipped: May 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/57743cbe-2da7-4232-a351-c32afea06f4b" width="800" title="Snipped: May 22, 2023" />
 
 <br>Complete the form:
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `{Alation_InstanceName}/integration/v1/createRefreshToken/`
+**Enter URL or paste text** | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/createRefreshToken/`
 **Authorization** >> Type | `No Auth`
-**Body** | `form-data` and the following key-value pairs:<br>* `username` :: `{Alation_UserName}`<br>* `password` :: `{Alation_Password}`<br>* `name` :: `rt` (abbreviation for Refresh Token, but can be anything)
+**Body** | Select `form-data` and enter the following key-value pairs:<br>* `username` :: `{Alation_UserName}`<br>* `password` :: `{Alation_Password}`<br>* `name` :: `rt` (abbreviation for Refresh Token, but can be anything)
 
 Click "**Send**".
 
@@ -149,21 +149,19 @@ Click "**Send**".
 Status: `201 Created`<br>
 ```
 {
-    "user_id": {user_id},
+    "user_id": {Alation_UserId},
     "created_at": "2023-05-19T15:06:35.830643Z",
     "token_expires_at": "2023-07-18T15:06:35.830178Z",
     "token_status": "ACTIVE",
     "last_used_at": null,
     "name": "rt",
-    "refresh_token": "{refresh_token}"
+    "refresh_token": "{Alation_RefreshToken}"
 }
 ```
 
-The resulting `{user_id}` and `{refresh_token}` values will be used in the Access Token request.
-
 #### Alation, API Access Token
 
-Navigate to Postman and click "+" to create a new request.
+Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5c01dee8-4331-464e-b755-42886b34e789" width="800" title="Snipped: May 19, 2023" />
 
@@ -198,7 +196,7 @@ The resulting `{user_id}` and `{api_access_token}` values will be used in all su
 
 #### Purview Query `azure_data_explorer_cluster`
 
-Navigate to Postman and click "+" to create a new request.
+Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/957f807e-93f6-4132-8b81-7daa28c66f9a" width="800" title="Snipped: May 19, 2023" />
 
@@ -247,7 +245,7 @@ The resulting `{name}` value will be used in the **Alation, Create Data Source**
 
 #### Alation, Create Data Source
 
-Navigate to Postman and click "+" to create a new request.
+Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a334eb7-3e4f-45a8-a569-d22e4eb2af87" width="800" title="Snipped: May 22, 2023" />
 
@@ -319,7 +317,7 @@ The resulting `id` value will be used in all subsequent Alation API requests.
 
 #### Purview `azure_data_explorer_database`
 
-Navigate to Postman and click "+" to create a new request.
+Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf61ec70-3380-47af-8e5f-6c521decbec1" width="800" title="Snipped: May 22, 2023" />
 
@@ -368,7 +366,7 @@ The resulting `{name}` value will be used in the **Alation, Create Schema** sect
 
 #### Alation, Create Schema
 
-Navigate to Postman and click "+" to create a new request.
+Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a334eb7-3e4f-45a8-a569-d22e4eb2af87" width="800" title="Snipped: May 22, 2023" />
 
