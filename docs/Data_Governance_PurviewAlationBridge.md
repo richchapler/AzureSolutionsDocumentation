@@ -192,16 +192,14 @@ Status: `201 Created`<br>
 
 Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/957f807e-93f6-4132-8b81-7daa28c66f9a" width="800" title="Snipped: May 19, 2023" />
-
-<br>Complete the form:
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c580a21e-5363-4525-a1c3-1b00a786bec1" width="800" title="Snipped: May 22, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://{PURVIEWACCOUNT_NAME}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Enter URL or paste text** | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | `No Auth`
-**Headers** >> Type | Key-Value pair: `Authorization` :: `Bearer {access_token}`
+**Headers** >> Type | Key-Value pair: `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
 
 Click "**Send**".
@@ -232,8 +230,6 @@ Status: `200 OK`<br>
     "@search.facets": null
 }
 ```
-
-The resulting `{name}` value will be used in the **Alation, Create Data Source** section.
 
 -----
 
