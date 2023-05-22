@@ -134,8 +134,6 @@ Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4edfff14-2aeb-436b-8071-d031d1dd7fbd" width="800" title="Snipped: May 22, 2023" />
 
-<br>Complete the form:
-
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
@@ -163,16 +161,14 @@ Status: `201 Created`<br>
 
 Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5c01dee8-4331-464e-b755-42886b34e789" width="800" title="Snipped: May 19, 2023" />
-
-<br>Complete the form:
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3459a440-8e0e-4a31-b68e-5de48aec753b" width="800" title="Snipped: May 22, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `{AlationInstanceURL}//integration/v1/createAPIAccessToken/`
+**Enter URL or paste text** | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/createAPIAccessToken/`
 **Authorization** >> Type | `No Auth`
-**Body** | `form-data` and the following key-value pairs:<br>* `refresh_token` :: `{Alation_RefreshToken}`<br>* `user_id` :: `{Alation_UserId}`
+**Body** | Select `form-data` and enter the following key-value pairs:<br>* `refresh_token` :: `{Alation_RefreshToken}`<br>* `user_id` :: `{Alation_UserId}`
 
 Click "**Send**".
 
@@ -184,11 +180,9 @@ Status: `201 Created`<br>
     "created_at": "2023-05-19T15:16:10.225053Z",
     "token_expires_at": "2023-05-20T15:16:10.222161Z",
     "token_status": "ACTIVE",
-    "api_access_token": "{api_access_token}"
+    "api_access_token": "{Alation_APIAccessToken}"
 }
 ```
-
-The resulting `{user_id}` and `{api_access_token}` values will be used in all subsequent Alation API requests.
 
 -----
 
