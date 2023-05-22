@@ -103,16 +103,14 @@ In this exercise, we will prepare API Requests manually approximating the flow o
 
 Navigate to Postman and click "+" to create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/15e5dd21-850c-42f5-8d93-c2fcfdacc7c3" width="800" title="Snipped: May 18, 2023" />
-
-<br>Complete the form:
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b9e86ca9-09bc-4f47-8f3a-e83b542f98fe" width="800" title="Snipped: May 22, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://login.microsoftonline.com/{tenantId}/oauth2/token`
+**Enter URL or paste text** | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
 **Authorization** >> Type | Select `No Auth`
-**Body** | `form-data` and the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{ApplicationRegistration_ClientId}`<br>* `client_secret` :: `{ApplicationRegistration_ClientSecret}`<br>* `resource` :: `https://purview.azure.net`
+**Body** | Select `form-data` and enter the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{ApplicationRegistration_ClientId}`<br>* `client_secret` :: `{ApplicationRegistration_ClientSecret}`<br>* `resource` :: `https://purview.azure.net`
 
 Click "**Send**".
 
@@ -126,11 +124,9 @@ Status: `200 OK`<br>
     "expires_on": "1684446114",
     "not_before": "1684442214",
     "resource": "https://purview.azure.net",
-    "access_token": "{access_token}"
+    "access_token": "{Purview_AccessToken}"
 }
 ```
-
-The resulting `access_token` value will be used in all subsequent Purview API requests.
 
 #### Alation, Refresh Token
 
