@@ -237,16 +237,21 @@ Status: `200 OK`<br>
 }
 ```
 
-The resulting `{name}` value will be used in the Alation, Create Data Source section.
+The resulting `{name}` value will be used in the **Alation, Create Data Source** section.
 
 #### Alation, Create Data Source
 
 _Note: "Create Datasource" API for "customdb" fails (confirmation pending with Alation Support)... so, using Alation UI to create datasource_
 
+Navigate to Postman >> "**Apps**" >> "**Sources**".
+
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/55bdeaea-de98-427b-abad-1f6d5cd9cf37" width="800" title="Snipped: May 22, 2023" />
 
+Click "**+ Add...**", then select "**Virtual Data Source**" from the resulting menu.
 
-LOREM IPSUM
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ad6cf5d6-f3ef-451a-a5bb-74a73a47b05e" width="800" title="Snipped: May 22, 2023" />
+
+Populate "Title" with the `{name}` value from the **Purview, Query** section, then click "**Continue Setup**"
 
 -----
 
