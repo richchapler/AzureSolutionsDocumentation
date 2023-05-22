@@ -112,7 +112,7 @@ Prompt | Entry
 **HTTP Method** | `POST`
 **Enter URL or paste text** | `https://login.microsoftonline.com/{tenantId}/oauth2/token`
 **Authorization** >> Type | Select `No Auth`
-**Body** | `form-data` and the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{applicationRegistration_ClientId}`<br>* `client_secret` :: `{applicationRegistration_ClientSecret}`<br>* `resource` :: `https://purview.azure.net`
+**Body** | `form-data` and the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{ApplicationRegistration_ClientId}`<br>* `client_secret` :: `{ApplicationRegistration_ClientSecret}`<br>* `resource` :: `https://purview.azure.net`
 
 Click "**Send**".
 
