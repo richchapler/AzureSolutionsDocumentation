@@ -200,7 +200,7 @@ The resulting `{user_id}` and `{api_access_token}` values will be used in all su
 
 ### Request Type 2: Purview `azure_data_explorer_cluster` >> Alation "Virtual Data Source"
 
-#### Purview, Query
+#### Purview Query `azure_data_explorer_cluster`
 
 Navigate to Postman and click "+" to create a new request.
 
@@ -211,7 +211,7 @@ Navigate to Postman and click "+" to create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | Select `POST`
-**Enter URL or paste text** | Modify and paste: `{Endpoint}/catalog/api/search/query?api-version=2022-08-01-preview`
+**Enter URL or paste text** | Modify and paste: `https://{PURVIEWACCOUNT_NAME}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | Select `No Auth`
 **Headers** >> Type | Modify/add `Authorization` :: `Bearer {access_token}`
 **Body** | Enter `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
@@ -318,19 +318,79 @@ The resulting `id` value will be used in all subsequent Alation API requests.
 
 -----
 
-### Request Type 3: Purview `azure_data_explorer_database` >> Alation "Schema" ???
+### Request Type 3: Purview Query `azure_data_explorer_database` >> Alation "Schema" ???
+
+#### Purview `azure_data_explorer_database`
+
+Navigate to Postman and click "+" to create a new request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a3dfb6e-d98f-4d11-bdc6-ae99648dfc24" width="800" title="Snipped: May 22, 2023" />
+
+<br>Complete the form:
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | Select `POST`
+**Enter URL or paste text** | Modify and paste: `https://{PURVIEWACCOUNT_NAME}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Authorization** >> Type | Select `No Auth`
+**Headers** >> Type | Modify/add `Authorization` :: `Bearer {access_token}`
+**Body** | Enter `{ "filter": { "and": [ { "entityType": "azure_data_explorer_database" } ] } }`
+
+Click "**Send**".
+
+##### Expected Response
+Status: `200 OK`<br>
+```
+{
+    "@search.count": 1,
+    "value": [
+        {
+            "updateBy": "ServiceAdmin",
+            "id": "88a6bfb6-58c6-4cd3-9fdf-a4b3f79b7057",
+            "collectionId": "rchaplerp",
+            "isIndexed": true,
+            "qualifiedName": "https://rchaplerdec.westus3.kusto.windows.net/rchaplerded",
+            "entityType": "azure_data_explorer_database",
+            "updateTime": 1684432574026,
+            "assetType": [
+                "Azure Data Explorer"
+            ],
+            "createBy": "ServiceAdmin",
+            "createTime": 1684431661266,
+            "name": "rchaplerded",
+            "@search.score": 3.496634
+        }
+    ],
+    "@search.facets": null
+}
+```
+
+The resulting `{name}` value will be used in the **Alation, Create Schema** section.
+
+-----
+
+#### Alation, Create Schema
+
+LOREM IPSUM
+
+
+
+
+
+
+
+
+
+
+-----
+
+### Request Type 4: Purview `azure_data_explorer_table` >> Alation "Table" ???
 
 LOREM IPSUM
 
 -----
 
-### Request Type 4: Purview `azure_data_explorer_column` >> Alation "Table" ???
-
-LOREM IPSUM
-
------
-
-### Request Type 5: Purview `azure_data_explorer_table` >> Alation "Column" ???
+### Request Type 5: Purview `azure_data_explorer_column` >> Alation "Column" ???
 
 LOREM IPSUM
 
