@@ -318,13 +318,19 @@ The resulting `id` value will be used in all subsequent Alation API requests.
 
 -----
 
-### Request Type 3: Purview `azure_data_explorer_database` >> Alation "Schema"
+### Request Type 3: Purview `azure_data_explorer_database` >> Alation "Schema" ???
 
 LOREM IPSUM
 
 -----
 
-### Request Type 4: Purview `azure_data_explorer_column` >> Alation "Field"
+### Request Type 4: Purview `azure_data_explorer_column` >> Alation "Table" ???
+
+LOREM IPSUM
+
+-----
+
+### Request Type 5: Purview `azure_data_explorer_table` >> Alation "Column" ???
 
 LOREM IPSUM
 
