@@ -324,7 +324,7 @@ The resulting `id` value will be used in all subsequent Alation API requests.
 
 Navigate to Postman and click "+" to create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a3dfb6e-d98f-4d11-bdc6-ae99648dfc24" width="800" title="Snipped: May 22, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf61ec70-3380-47af-8e5f-6c521decbec1" width="800" title="Snipped: May 22, 2023" />
 
 <br>Complete the form:
 
