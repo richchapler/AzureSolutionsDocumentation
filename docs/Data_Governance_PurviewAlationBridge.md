@@ -249,6 +249,8 @@ The resulting `{name}` value will be used in the **Alation, Create Data Source**
 
 #### Alation, Create Data Source
 
+##### ...via Portal
+
 Navigate to Alation >> "**Apps**" >> "**Sources**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/55bdeaea-de98-427b-abad-1f6d5cd9cf37" width="800" title="Snipped: May 22, 2023" />
@@ -262,6 +264,10 @@ Populate "Title" with the `{name}` value from the **Purview, Query** section, th
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa8a29e0-4c95-4583-ba62-02619e9fd816" width="800" title="Snipped: May 22, 2023" />
 
 On the resulting "**Add a Data Source**" page, select "**Custom DB**" for "**Database Type**", then click "**Save and Continue**".
+
+##### ...via API
+
+LOREM IPSUM
 
 #### Alation, Get Data Source
 
