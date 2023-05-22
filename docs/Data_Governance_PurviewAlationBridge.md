@@ -108,7 +108,7 @@ Navigate to Postman and create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
+**Enter URL**... | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
 **Authorization** >> Type | Select `No Auth`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{ApplicationRegistration_ClientId}`<br>* `client_secret` :: `{ApplicationRegistration_ClientSecret}`<br>* `resource` :: `https://purview.azure.net`
 
@@ -137,7 +137,7 @@ Navigate to Postman and create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/createRefreshToken/`
+**Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/createRefreshToken/`
 **Authorization** >> Type | `No Auth`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `username` :: `{Alation_UserName}`<br>* `password` :: `{Alation_Password}`<br>* `name` :: `rt` (abbreviation for Refresh Token, but can be anything)
 
@@ -166,7 +166,7 @@ Navigate to Postman and create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/createAPIAccessToken/`
+**Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/createAPIAccessToken/`
 **Authorization** >> Type | `No Auth`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `refresh_token` :: `{Alation_RefreshToken}`<br>* `user_id` :: `{Alation_UserId}`
 
@@ -197,7 +197,7 @@ Navigate to Postman and create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | `No Auth`
 **Headers** >> Type | Key-Value pair: `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
@@ -244,7 +244,7 @@ Navigate to Postman and create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://{ALATIONINSTANCE_NAME}.alationcatalog.com/integration/v1/datasource/`
+**Enter URL**... | `https://{ALATIONINSTANCE_NAME}.alationcatalog.com/integration/v1/datasource/`
 **Authorization** >> Type | `No Auth`
 **Headers** | `token` :: "Alation, API Access Token" section >> resulting `{api_access_token}` value
 **Body** | `form-data` and the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: "Purview Query `azure_data_explorer_cluster`" section >> resulting `{name}` value<br>* `deployment_setup_complete` :: `true`
@@ -316,7 +316,7 @@ Navigate to Postman and create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `https://{PURVIEWACCOUNT_NAME}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Enter URL**... | `https://{PURVIEWACCOUNT_NAME}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | `No Auth`
 **Headers** | Key-value pair: `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_database" } ] } }`
@@ -365,7 +365,7 @@ Navigate to Postman and create a new request.
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL or paste text** | `{ALATIONINSTANCEURL}/integration/v2/schema/`
+**Enter URL**... | `{ALATIONINSTANCEURL}/integration/v2/schema/`
 **Params** >> Type | Key-value pair:<br>`ds_id` :: `LOREM`
 **Authorization** >> `No Auth` 
 **Headers** | Key-value pair: `token` :: `{Purview_APIAccessToken}`
