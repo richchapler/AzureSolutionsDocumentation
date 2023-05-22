@@ -244,7 +244,7 @@ Prompt | Entry
 **HTTP Method** | `POST`
 **Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v1/datasource/`
 **Authorization** >> Type | `No Auth`
-**Headers** | `token` :: "Alation, API Access Token" section >> resulting `{Alation_APIAccessToken}` value
+**Headers** | `token` :: `{Alation_APIAccessToken}`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{Purview_AssetName}`<br>* `deployment_setup_complete` :: `true`
 
 Click "**Send**".
