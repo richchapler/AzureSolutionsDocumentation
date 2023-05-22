@@ -132,7 +132,7 @@ Status: `200 OK`<br>
 
 Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/57743cbe-2da7-4232-a351-c32afea06f4b" width="800" title="Snipped: May 22, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4edfff14-2aeb-436b-8071-d031d1dd7fbd" width="800" title="Snipped: May 22, 2023" />
 
 <br>Complete the form:
 
