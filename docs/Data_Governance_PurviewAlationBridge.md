@@ -5,7 +5,7 @@
 ## Use Case
 This documentation considers the following requirements and goals:
 * "Alation is our enterprise data catalog"
-* "We use Azure resources (like Data Explorer) to which Alation cannot connect"
+* "Alation lacks necessary connectors {e.g., Data Explorer} for metadata we want to include"
 * "We want to get Azure resource metadata into Alation without manual effort"
 
 ## Proposed Solution
@@ -565,7 +565,7 @@ Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, sear
 
 Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
-#### Initialize Variable `Purview_BearerToken`
+#### Initialize Variable, `Purview_BearerToken`
 
 Click "+" to insert a step below "**Recurrence**", and then "**Add an action**" on the resulting menu.
 
