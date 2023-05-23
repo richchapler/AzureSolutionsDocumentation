@@ -493,7 +493,7 @@ Status: `200 OK`<br>
                     "guid": "55b852c7-59d5-495c-88bb-33f6f6f6000f",
                     "typeName": "azure_data_explorer_column",
                     "entityStatus": "ACTIVE",
-                    "displayText": "BeginLat",
+                    "displayText": "{Purview_ColumnName}",
                     "relationshipType": "azure_data_explorer_table_columns",
                     "relationshipGuid": "61a8cf20-6eeb-497a-bff9-336931f46577",
                     "relationshipStatus": "ACTIVE",
@@ -511,40 +511,30 @@ Status: `200 OK`<br>
 
 Navigate to Postman and create a new request.
 
-
-
-
-LOREM IPSUM
-
-
-
-
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/79127e2b-b1d7-43c2-9a54-0ded5f0d4925" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dca27a61-cb94-4544-b9d2-29e9cd5d78d8" width="800" title="Snipped: May 23, 2023" />
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
 **Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v2/schema/`
-**Params** | `ds_id` :: `{Alation_DataSourceId}`
 **Authorization** >> Type | `No Auth`
 **Headers** | `token` :: `{Purview_APIAccessToken}`
-**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}.{Purview_TableName}", "title": "{Purview_TableName}" } ]`
+**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}.{Purview_TableName}.{Purview_ColumnName}", "title": "{Purview_ColumnName}", "column_type": "{Purview_ColumnType}" } ]`
 
 Click "**Send**"
 
 ##### Expected Response
-Status: `201 Created`
+Status: `202 Accepted`
 
 ```
 {
-    "job_id": 9901
+    "job_id": 9906
 }
 ```
 
 Open Alation to confirm that the Table has been added to the Virtual Data Source >> Schema.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2cd742ad-4a8a-4f62-8146-1c22709c14be" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b5961b14-0c59-448d-9522-00e4a09670d6" width="800" title="Snipped: May 23, 2023" />
 
 -----
 
