@@ -292,7 +292,7 @@ Status: `201 Created`
     ],
     "builtin_datasource": null,
     "all_schemas": null,
-    "id": 31,
+    "id": {Alation_DataSourceId},
     ...
 }
 ```
@@ -336,7 +336,7 @@ Status: `200 OK`<br>
             ],
             "createBy": "ServiceAdmin",
             "createTime": 1684431661266,
-            "name": "rchaplerded",
+            "name": "{Purview_DatabaseName}",
             "@search.score": 3.496634
         }
     ],
@@ -350,16 +350,17 @@ Status: `200 OK`<br>
 
 Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a334eb7-3e4f-45a8-a569-d22e4eb2af87" width="800" title="Snipped: May 22, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c43cc6a1-bdb8-434b-99c2-623f567f1785" width="800" title="Snipped: May 23, 2023" />
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/)
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL**... | `{ALATIONINSTANCEURL}/integration/v2/schema/`
-**Params** >> Type | Key-value pair:<br>`ds_id` :: `LOREM`
+**Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v2/schema/`
+**Params** | `ds_id` :: `{Alation_DataSourceId}`
 **Authorization** >> `No Auth` 
-**Headers** | Key-value pair: `token` :: `{Purview_APIAccessToken}`
-**Body** |  `form-data` and the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value created in the **Purview, Query** section<br>* `deployment_setup_complete` :: `true`
+**Headers** | `token` :: `{Purview_APIAccessToken}`
+**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}", "title": "{Purview_DatabaseName}" } ]`
 
 Click "**Send**"
 
