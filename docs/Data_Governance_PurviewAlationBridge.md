@@ -372,14 +372,9 @@ Status: `201 Created`
 }
 ```
 
+Open Alation to confirm that the Schema has been added to the Virtual Data Source.
 
-
-
-
-
-
-
-
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0a491a41-e1e8-4d51-b631-17b9f6cd12a7" width="800" title="Snipped: May 23, 2023" />
 
 -----
 
