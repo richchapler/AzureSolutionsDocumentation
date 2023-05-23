@@ -555,7 +555,7 @@ Complete the "**New workflow**" form and then click "**Create**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/909a2843-4ae6-43b8-b083-48dd0c0f2443" width="800" title="Snipped: May 23, 2023" />
 
-Click to open the new workflow and then click "**Get started**" to "**Edit in designer**".
+Click to open the new workflow and then click "**Get started**" in the "**Edit in designer**" rectangle.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/119cd5b1-6d1b-4dd3-bcb2-3a104b152632" width="800" title="Snipped: May 23, 2023" />
 
@@ -565,31 +565,19 @@ Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, sear
 
 Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
+#### Initialize Variable `Purview_BearerToken`
+
+Click "+" to insert a step below "**Recurrence**", and then "**Add an action**" on the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6947d211-dcea-458c-aad6-de56db71d52e" width="800" title="Snipped: May 23, 2023" />
+
+On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**".
 
 
 
------
------
 
-* Navigate to **Designer**
 
-  <img src="https://user-images.githubusercontent.com/44923999/192588119-475c52a0-49ce-4e8c-99c1-a098868a84df.png" width="800" title="Snipped: September 27, 2022" />
 
-* On the resulting screen and "**Add a trigger**" pop-out, search for and then select "**Schedule**" (aka "Recurrence")
-
-  <img src="https://user-images.githubusercontent.com/44923999/192588288-fbf2a72a-04d7-4344-acf0-9588155ba347.png" width="800" title="Snipped: September 27, 2022" />
-
-* Complete the resulting pop-out form and then click **Save**
-
-  _Note: I chose daily because I believe that that is how often Cost Management data updates_
-
-#### Initialize Variable, Date
-
-* Click the **+** icon and then "**Add an action**" on the resulting pop-up menu
-
-  <img src="https://user-images.githubusercontent.com/44923999/192591045-fe09d81e-5ee8-41f9-b688-2d653dfd22fb.png" width="800" title="Snipped: September 27, 2022" />
-
-* On the resulting "**Add an action**" pop-out, search for and then select "**Initialize variable**"
 
   <img src="https://user-images.githubusercontent.com/44923999/192591237-71d8d320-7131-4e15-b535-fff6d43c763d.png" width="800" title="Snipped: September 27, 2022" />
 
