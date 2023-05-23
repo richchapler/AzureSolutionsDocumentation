@@ -380,7 +380,90 @@ Open Alation to confirm that the Schema has been added to the Virtual Data Sourc
 
 ### Request Type 4: Purview `azure_data_explorer_table` >> Alation "Table" ???
 
-LOREM IPSUM
+#### Purview Query `azure_data_explorer_table`
+
+Navigate to Postman and create a new request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2f8436eb-9556-4d8c-9089-80fb3baac9ad" width="800" title="Snipped: May 23, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | `POST`
+**Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Authorization** >> Type | `No Auth`
+**Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
+**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_table" } ] } }`
+
+Click "**Send**"
+
+##### Expected Response
+Status: `200 OK`<br>
+```
+{
+    "@search.count": 1,
+    "value": [
+        {
+            "objectType": "Tables",
+            "updateBy": "ServiceAdmin",
+            "id": "55b852c7-59d5-495c-88bb-33f6f6f60000",
+            "collectionId": "rchaplerp",
+            "isIndexed": true,
+            "qualifiedName": "https://rchaplerdec.westus3.kusto.windows.net/rchaplerded/StormEvents",
+            "entityType": "azure_data_explorer_table",
+            "updateTime": 1684432561179,
+            "classification": [
+                "MICROSOFT.PERSONAL.GEOLOCATION",
+                "MICROSOFT.GOVERNMENT.US.STATE",
+                "MICROSOFT.PERSONAL.PHYSICALADDRESS"
+            ],
+            "assetType": [
+                "Azure Data Explorer"
+            ],
+            "createBy": "ServiceAdmin",
+            "createTime": 1684432561179,
+            "name": "{Purview_TableName}",
+            "@search.score": 35.591343
+        }
+    ],
+    "@search.facets": null
+}
+```
+
+-----
+
+#### Alation, Create Table!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Navigate to Postman and create a new request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c43cc6a1-bdb8-434b-99c2-623f567f1785" width="800" title="Snipped: May 23, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | `POST`
+**Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v2/schema/`
+**Params** | `ds_id` :: `{Alation_DataSourceId}`
+**Authorization** >> Type | `No Auth`
+**Headers** | `token` :: `{Purview_APIAccessToken}`
+**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}", "title": "{Purview_DatabaseName}" } ]`
+
+Click "**Send**"
+
+##### Expected Response
+Status: `201 Created`
+
+```
+{
+    "job_id": 9898
+}
+```
+
+Open Alation to confirm that the Schema has been added to the Virtual Data Source.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0a491a41-e1e8-4d51-b631-17b9f6cd12a7" width="800" title="Snipped: May 23, 2023" />
+
+
+
+
 
 -----
 
