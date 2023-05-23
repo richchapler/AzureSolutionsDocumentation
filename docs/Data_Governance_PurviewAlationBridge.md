@@ -112,7 +112,7 @@ Prompt | Entry
 **Authorization** >> Type | Select `No Auth`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `grant_type` :: `client_credentials`<br>* `client_id` :: `{ApplicationRegistration_ClientId}`<br>* `client_secret` :: `{ApplicationRegistration_ClientSecret}`<br>* `resource` :: `https://purview.azure.net`
 
-Click "**Send**".
+Click "**Send**"
 
 ##### Expected Response
 Status: `200 OK`<br>
@@ -141,7 +141,7 @@ Prompt | Entry
 **Authorization** >> Type | `No Auth`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `username` :: `{Alation_UserName}`<br>* `password` :: `{Alation_Password}`<br>* `name` :: `rt` (abbreviation for Refresh Token, but can be anything)
 
-Click "**Send**".
+Click "**Send**"
 
 ##### Sample Response
 Status: `201 Created`<br>
@@ -170,7 +170,7 @@ Prompt | Entry
 **Authorization** >> Type | `No Auth`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `refresh_token` :: `{Alation_RefreshToken}`<br>* `user_id` :: `{Alation_UserId}`
 
-Click "**Send**".
+Click "**Send**"
 
 ##### Expected Response
 Status: `201 Created`<br>
@@ -202,7 +202,7 @@ Prompt | Entry
 **Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
 
-Click "**Send**".
+Click "**Send**"
 
 ##### Expected Response
 Status: `200 OK`<br>
@@ -247,7 +247,7 @@ Prompt | Entry
 **Headers** | `token` :: `{Alation_APIAccessToken}`
 **Body** | Select `form-data` and enter the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{Purview_AssetName}`<br>* `deployment_setup_complete` :: `true`
 
-Click "**Send**".
+Click "**Send**"
 
 ##### Expected Response
 Status: `201 Created`
@@ -307,8 +307,6 @@ Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6402a8f6-d7cd-4657-8205-2e6d8d62aff7" width="800" title="Snipped: May 22, 2023" />
 
-<br>Complete the form:
-
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
@@ -317,7 +315,7 @@ Prompt | Entry
 **Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_database" } ] } }`
 
-Click "**Send**".
+Click "**Send**"
 
 ##### Expected Response
 Status: `200 OK`<br>
@@ -354,8 +352,6 @@ Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a334eb7-3e4f-45a8-a569-d22e4eb2af87" width="800" title="Snipped: May 22, 2023" />
 
-<br>Complete the form:
-
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
@@ -365,7 +361,7 @@ Prompt | Entry
 **Headers** | Key-value pair: `token` :: `{Purview_APIAccessToken}`
 **Body** |  `form-data` and the following key-value pairs:<br>* `dbtype` :: `customdb`<br>* `is_virtual` :: `true`<br>* `title` :: `{name}` value created in the **Purview, Query** section<br>* `deployment_setup_complete` :: `true`
 
-Click "**Send**".
+Click "**Send**"
 
 ##### Expected Response
 Status: `201 Created`
@@ -415,7 +411,6 @@ Status: `201 Created`
 }
 ```
 
-The resulting `id` value will be used in all subsequent Alation API requests.
 
 
 
