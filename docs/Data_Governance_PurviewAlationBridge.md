@@ -351,7 +351,6 @@ Status: `200 OK`<br>
 Navigate to Postman and create a new request.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c43cc6a1-bdb8-434b-99c2-623f567f1785" width="800" title="Snipped: May 23, 2023" />
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/)
 
 Prompt | Entry
 :----- | :-----
