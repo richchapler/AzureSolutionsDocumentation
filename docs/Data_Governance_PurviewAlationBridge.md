@@ -11,7 +11,7 @@ This documentation considers the following requirements and goals:
 ## Proposed Solution
 * Use Purview to gather metadata from Data Explorer
 * Use Postman to prepare API requests for Purview and Alation
-* Use Logic App to bridge metadata into Alation
+* Use Function / Logic App (???) to automate a metadata "bridge" from Purview to Alation
 
 ## Solution Requirements
 The proposed solution requires:
@@ -465,7 +465,18 @@ Open Alation to confirm that the Table has been added to the Virtual Data Source
 
 ### Request Type 5: Purview `azure_data_explorer_column` >> Alation "Column" ???
 
-LOREM IPSUM
+PENDING AZURE SUPPORT RE: PURVIEW API, SCHEMA
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 3: Automate Requests
+In this exercise, we will automate the bridge between Purview and Alation.
+
+### Step 1: LOREM IPSUM
 
 -----
 
