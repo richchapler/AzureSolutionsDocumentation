@@ -186,7 +186,7 @@ Status: `201 Created`<br>
 
 -----
 
-### Request Type 2: Purview `azure_data_explorer_cluster` >> Alation "Virtual Data Source"
+### Request Type 2: Purview Query `azure_data_explorer_cluster` >> Alation "Virtual Data Source"
 
 #### Purview Query `azure_data_explorer_cluster`
 
@@ -378,7 +378,7 @@ Open Alation to confirm that the Schema has been added to the Virtual Data Sourc
 
 -----
 
-### Request Type 4: Purview `azure_data_explorer_table` >> Alation "Table"
+### Request Type 4: Purview Query `azure_data_explorer_table` >> Alation "Table"
 
 #### Purview Query `azure_data_explorer_table`
 
@@ -405,7 +405,7 @@ Status: `200 OK`<br>
         {
             "objectType": "Tables",
             "updateBy": "ServiceAdmin",
-            "id": "55b852c7-59d5-495c-88bb-33f6f6f60000",
+            "id": "{Purview_TableId}",
             "collectionId": "rchaplerp",
             "isIndexed": true,
             "qualifiedName": "https://rchaplerdec.westus3.kusto.windows.net/rchaplerded/StormEvents",
@@ -463,9 +463,47 @@ Open Alation to confirm that the Table has been added to the Virtual Data Source
 
 -----
 
-### Request Type 5: Purview `azure_data_explorer_column` >> Alation "Column" ???
+### Request Type 5: Purview Entity `azure_data_explorer_column` >> Alation "Column" ???
 
-PENDING AZURE SUPPORT RE: PURVIEW API, SCHEMA
+Navigate to Postman and create a new request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/42071e64-336c-4bec-a585-e7bbdf13ebca" width="800" title="Snipped: May 23, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | `GET`
+**Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/atlas/v2/entity/guid/{Purview_TableId}`
+**Authorization** >> Type | `No Auth`
+**Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
+
+Click "**Send**"
+
+##### Expected Response
+Status: `200 OK`<br>
+```
+{
+     ...
+     "entity": {
+        "typeName": "azure_data_explorer_table",
+        ...
+        "relationshipAttributes": {
+            ...
+            "columns": [
+                {
+                    "guid": "55b852c7-59d5-495c-88bb-33f6f6f6000f",
+                    "typeName": "azure_data_explorer_column",
+                    "entityStatus": "ACTIVE",
+                    "displayText": "BeginLat",
+                    "relationshipType": "azure_data_explorer_table_columns",
+                    "relationshipGuid": "61a8cf20-6eeb-497a-bff9-336931f46577",
+                    "relationshipStatus": "ACTIVE",
+                    "relationshipAttributes": {
+                        "typeName": "azure_data_explorer_table_columns"
+                    }
+                },
+                ...
+}
+```
 
 -----
 
@@ -492,3 +530,4 @@ In this exercise, we will automate the bridge between Purview and Alation.
   * [Create new schemas under a particular data source](https://developer.alation.com/dev/reference/postschemas)
 * Purview
   * [Discovery - Query](https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query)
+  * [Entity - Get By Guid](https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/entity/get-by-guid)
