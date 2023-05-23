@@ -368,46 +368,7 @@ Status: `201 Created`
 
 ```
 {
-    "host": null,
-    "port": null,
-    "deployment_setup_complete": true,
-    "db_username": null,
-    "dbname": null,
-    "latest_extraction_successful": false,
-    "is_presto_hive": false,
-    "disable_auto_lineage": false,
-    "is_hive": false,
-    "has_hdfs_based_qli": false,
-    "otype": "data",
-    "private": false,
-    "has_aws_s3_based_qli": false,
-    "has_previewable_qli": true,
-    "obfuscate_literals": null,
-    "enable_default_schema_extraction": false,
-    "supports_compose": true,
-    "title": "rchaplerdec.westus3",
-    "profiling_tip": null,
-    "uri": "",
-    "unresolved_mention_fingerprint_method": 0,
-    "can_data_upload": false,
-    "url": "/data/31/",
-    "latest_extraction_time": null,
-    "exclude_additional_columns_in_qli": false,
-    "metastore_type": 0,
-    "has_metastore_uri": false,
-    "webhdfs_username": null,
-    "is_gone": false,
-    "negative_filter_words": null,
-    "metastore_uri": null,
-    "aws_region": null,
-    "deleted": false,
-    "owner_ids": [
-        65
-    ],
-    "builtin_datasource": null,
-    "all_schemas": null,
-    "id": 31,
-    ...
+    "job_id": 9898
 }
 ```
 
