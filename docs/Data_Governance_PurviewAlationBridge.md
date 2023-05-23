@@ -557,12 +557,13 @@ Complete the "**New workflow**" form and then click "**Create**".
 
 Click to open the new workflow and then click "**Get started**" to "**Edit in designer**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1ca3f6bd-3a68-411b-a111-5c733ebd2b79" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/119cd5b1-6d1b-4dd3-bcb2-3a104b152632" width="800" title="Snipped: May 23, 2023" />
 
-Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, search for and select "**Schedule**".
+Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, search for and select "**Recurrence**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/36b45f08-44d7-4caa-b682-f1d09a73808d" width="800" title="Snipped: May 23, 2023" />
 
-
+Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
 
 
