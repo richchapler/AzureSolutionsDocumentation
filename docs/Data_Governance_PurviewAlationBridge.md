@@ -557,7 +557,9 @@ Complete the "**New workflow**" form and then click "**Create**".
 
 Click to open the new workflow and then click "**Get started**" to "**Edit in designer**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bfba219f-4089-474c-9b38-f2a6cb587b7c" width="800" title="Snipped: May 23, 2023" />
 
+Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, search for and select "**Time Trigger**".
 
 
 
