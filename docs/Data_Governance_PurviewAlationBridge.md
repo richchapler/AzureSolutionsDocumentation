@@ -358,7 +358,7 @@ Prompt | Entry
 **HTTP Method** | `POST`
 **Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v2/schema/`
 **Params** | `ds_id` :: `{Alation_DataSourceId}`
-**Authorization** >> `No Auth` 
+**Authorization** >> Type | `No Auth`
 **Headers** | `token` :: `{Purview_APIAccessToken}`
 **Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}", "title": "{Purview_DatabaseName}" } ]`
 
