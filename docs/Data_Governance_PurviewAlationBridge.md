@@ -199,7 +199,7 @@ Prompt | Entry
 **HTTP Method** | `POST`
 **Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | `No Auth`
-**Headers** >> Type | Enter key-value pair: `Authorization` :: `Bearer {Purview_AccessToken}`
+**Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
 
 Click "**Send**".
@@ -299,22 +299,22 @@ Status: `201 Created`
 
 -----
 
-### Request Type 3: Purview Query `azure_data_explorer_database` >> Alation "Schema" ???
+### Request Type 3: Purview Query `azure_data_explorer_database` >> Alation "**Schema**"
 
-#### Purview `azure_data_explorer_database`
+#### Purview Query `azure_data_explorer_database`
 
 Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf61ec70-3380-47af-8e5f-6c521decbec1" width="800" title="Snipped: May 22, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6402a8f6-d7cd-4657-8205-2e6d8d62aff7" width="800" title="Snipped: May 22, 2023" />
 
 <br>Complete the form:
 
 Prompt | Entry
 :----- | :-----
 **HTTP Method** | `POST`
-**Enter URL**... | `https://{PURVIEWACCOUNT_NAME}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Authorization** >> Type | `No Auth`
-**Headers** | Key-value pair: `Authorization` :: `Bearer {Purview_AccessToken}`
+**Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
 **Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_database" } ] } }`
 
 Click "**Send**".
@@ -345,8 +345,6 @@ Status: `200 OK`<br>
     "@search.facets": null
 }
 ```
-
-The resulting `{name}` value will be used in the **Alation, Create Schema** section.
 
 -----
 
