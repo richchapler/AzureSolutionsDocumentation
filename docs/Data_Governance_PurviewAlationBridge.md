@@ -378,7 +378,7 @@ Open Alation to confirm that the Schema has been added to the Virtual Data Sourc
 
 -----
 
-### Request Type 4: Purview `azure_data_explorer_table` >> Alation "Table" ???
+### Request Type 4: Purview `azure_data_explorer_table` >> Alation "Table"
 
 #### Purview Query `azure_data_explorer_table`
 
@@ -431,11 +431,11 @@ Status: `200 OK`<br>
 
 -----
 
-#### Alation, Create Table!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#### Alation, Create Table
 
 Navigate to Postman and create a new request.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c43cc6a1-bdb8-434b-99c2-623f567f1785" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/79127e2b-b1d7-43c2-9a54-0ded5f0d4925" width="800" title="Snipped: May 23, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -444,7 +444,7 @@ Prompt | Entry
 **Params** | `ds_id` :: `{Alation_DataSourceId}`
 **Authorization** >> Type | `No Auth`
 **Headers** | `token` :: `{Purview_APIAccessToken}`
-**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}", "title": "{Purview_DatabaseName}" } ]`
+**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}.{Purview_TableName}", "title": "{Purview_TableName}" } ]`
 
 Click "**Send**"
 
@@ -453,17 +453,13 @@ Status: `201 Created`
 
 ```
 {
-    "job_id": 9898
+    "job_id": 9901
 }
 ```
 
-Open Alation to confirm that the Schema has been added to the Virtual Data Source.
+Open Alation to confirm that the Table has been added to the Virtual Data Source >> Schema.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0a491a41-e1e8-4d51-b631-17b9f6cd12a7" width="800" title="Snipped: May 23, 2023" />
-
-
-
-
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2cd742ad-4a8a-4f62-8146-1c22709c14be" width="800" title="Snipped: May 23, 2023" />
 
 -----
 
