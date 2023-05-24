@@ -11,7 +11,7 @@ This documentation considers the following requirements and goals:
 ## Proposed Solution
 * Use Purview to gather metadata from Data Explorer
 * Use Postman to prepare API requests for Purview and Alation
-* Use Function / Logic App (???) to automate a metadata "bridge" from Purview to Alation
+* Use Logic App to automate a metadata "bridge" from Purview to Alation
 
 ## Solution Requirements
 The proposed solution requires:
