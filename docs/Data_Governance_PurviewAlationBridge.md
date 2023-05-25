@@ -561,6 +561,8 @@ Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, sear
 
 Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
+-----
+
 ### Step 2: Authentication, Purview
 
 #### HTTP POST, Purview Bearer Token
@@ -582,7 +584,7 @@ Prompt | Entry
 
 Click "**Save**"
 
-#### Initialize Variable, Purview Bearer Token
+#### Initialize Variable, `Purview_BearerToken`
 
 Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
@@ -597,7 +599,46 @@ Prompt | Entry
 
 Click "**Save**"
 
+-----
+
 ### Step 3: Authentication, Alation
+
+#### Initialize Variable, `Alation_InstanceName`
+
+Click "+" to insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9821d96c-eef2-41e9-8bae-f57545b2b940" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Alation_InstanceName`
+**Type** | `String`
+**Value** | `{Alation_InstanceName}`
+
+Click "**Save**"
+
+#### HTTP POST, Alation Refresh Token
+
+Click "+" to insert a step below "**Initialize Variable, Alation_InstanceName**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1b11586-7b9d-4c80-a19e-c24c1ede0687" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v1/createRefreshToken/`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/x-www-form-urlencoded`
+**Body** | `username={username}&password={password}&name=rt`
+
+Click "**Save**"
+
+
+
+
+
+
 
 LOREM IPSUM
 
@@ -605,7 +646,7 @@ LOREM IPSUM
 
 -----
 
-#### Initialize Variable, Purview_AccountName
+#### Initialize Variable, `Purview_AccountName`
 
 Click "+" to insert a step below "**Initialize Variable, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
