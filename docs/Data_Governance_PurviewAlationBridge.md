@@ -547,21 +547,17 @@ In this exercise, we will automate the bridge between Purview and Alation.
 
 ### Step 1: Create Logic App Workflow
 
-Navigate to Logic App and create a new workflow.
+Navigate to Logic App and create a new "**Stateful**" workflow.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d8d7eac1-e3bf-4a66-bcde-a9e512110645" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3175f084-c54c-4b57-a59f-e304c19a53ca" width="800" title="Snipped: May 25, 2023" />
 
-Complete the "**New workflow**" form and then click "**Create**".
+Open the new workflow and navigate to "**Designer**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/909a2843-4ae6-43b8-b083-48dd0c0f2443" width="800" title="Snipped: May 23, 2023" />
-
-Click to open the new workflow and then click "**Get started**" in the "**Edit in designer**" rectangle.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/119cd5b1-6d1b-4dd3-bcb2-3a104b152632" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/119cd5b1-6d1b-4dd3-bcb2-3a104b152632" width="800" title="Snipped: May 25, 2023" />
 
 Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, search for and select "**Recurrence**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/36b45f08-44d7-4caa-b682-f1d09a73808d" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1304375d-8a6f-4f8b-a702-71d3dad6201e" width="800" title="Snipped: May 25, 2023" />
 
 Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
