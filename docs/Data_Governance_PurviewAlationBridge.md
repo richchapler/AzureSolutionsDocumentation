@@ -561,6 +561,8 @@ Click "**Add a trigger**" and on the resulting "**Add an action**" pop-out, sear
 
 Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
+### Step 2: Authentication, Purview
+
 #### HTTP POST, Purview Bearer Token
 
 Click "+" to insert a step below "**Recurrence**", and then "**Add an action**" on the resulting menu.
@@ -594,6 +596,14 @@ Prompt | Entry
 **Value** | `concat('Bearer ',body('HTTP_POST,_Purview_Bearer_Token').access_token)`
 
 Click "**Save**"
+
+### Step 3: Authentication, Alation
+
+LOREM IPSUM
+
+
+
+-----
 
 #### Initialize Variable, Purview_AccountName
 
