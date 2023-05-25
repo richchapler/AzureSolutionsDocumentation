@@ -1210,6 +1210,7 @@ In this step, we will send the Cost Management API response to Data Explorer usi
   * [Refresh & Access Token Overview](https://developer.alation.com/dev/reference/refresh-access-token-overview)
   * [Create a datasource](https://developer.alation.com/dev/reference/postdatasource)
   * [Create new schemas under a particular data source](https://developer.alation.com/dev/reference/postschemas)
+  * [Create new columns under a particular data source](https://developer.alation.com/dev/reference/postcolumns)
 * Purview
   * [Discovery - Query](https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query)
   * [Entity - Get By Guid](https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/entity/get-by-guid)
