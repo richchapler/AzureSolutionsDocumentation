@@ -585,7 +585,7 @@ Click "**Save**"
 Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/18fdce37-873b-4047-9c12-eac5449b1060" width="800" title="Snipped: May 25, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a812d391-6424-45ae-9830-f85e31c3ea35" width="800" title="Snipped: May 25, 2023" />
 
 Prompt | Entry
 :----- | :-----
