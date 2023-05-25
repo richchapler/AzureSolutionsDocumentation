@@ -656,6 +656,26 @@ Prompt | Entry
 
 Click "**Save**"
 
+-----
+
+#### Initialize Variable, `Alation_APIAccessToken`
+
+Click "+" to insert a step below "**HTTP POST, Alation API Access Token**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6fd1c8d1-ef09-4125-9754-3caa8469ed6a" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Alation_APIAccessToken`
+**Type** | `String`
+**Value** | `@{body('HTTP_POST,_Alation_API_Access_Token').api_access_token}`
+
+Click "**Save**"
+
+-----
+
+
 
 
 
