@@ -595,6 +595,20 @@ Prompt | Entry
 
 Click "**Save**"
 
+#### Initialize Variable, Purview_AccountName
+
+Click "+" to insert a step below "**Initialize Variable, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e716c45b-2db3-426d-9467-ac0ca33f3cc4" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Purview_AccountName`
+**Type** | `String`
+**Value** | `{Purview_AccountName}`
+
+Click "**Save**"
 
 
 
