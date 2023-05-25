@@ -565,9 +565,21 @@ Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
 Click "+" to insert a step below "**Recurrence**", and then "**Add an action**" on the resulting menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a2dc9aa-fea0-4c4f-8d7e-8ebbb19813c2" width="800" title="Snipped: May 23, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a2dc9aa-fea0-4c4f-8d7e-8ebbb19813c2" width="800" title="Snipped: May 25, 2023" />
 
 On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/98df3a2b-0a06-451c-8789-aa06f25882c9" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
+**HTTP Method** | `POST`
+**Headers** | `content-type` :: `application/x-www-form-urlencoded`
+**Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
+
+Click "**Save**"
+
 
 
 
