@@ -584,6 +584,8 @@ Prompt | Entry
 
 Click "**Save**"
 
+-----
+
 #### Initialize Variable, `Purview_BearerToken`
 
 Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
@@ -618,6 +620,8 @@ Prompt | Entry
 
 Click "**Save**"
 
+-----
+
 #### HTTP POST, Alation Refresh Token
 
 Click "+" to insert a step below "**Initialize Variable, Alation_InstanceName**", and then "**Add an action**" on the resulting menu.
@@ -633,6 +637,27 @@ Prompt | Entry
 **Body** | `username={username}&password={password}&name=rt`
 
 Click "**Save**"
+
+-----
+
+#### HTTP POST, Alation API Access Token
+
+Click "+" to insert a step below "**HTTP POST, Alation Refresh Token**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eeb371ee-de5b-45d8-9658-cc7e49fff8eb" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v1/createAPIAccessToken/`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/x-www-form-urlencoded`
+**Body** | `refresh_token=@{body('HTTP_POST,_Alation_Refresh_Token').refresh_token}&user_id=@{body('HTTP_POST,_Alation_Refresh_Token').user_id}`
+
+Click "**Save**"
+
+
+
 
 
 
