@@ -711,31 +711,52 @@ Click "**Save**"
 
 Repeat this process for: 1) `Table` and 2 `Column`
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bc7190bc-46fb-4ffd-8bcc-a23215f6d1a1" width="800" title="Snipped: May 25, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eba99593-bb00-47be-b67f-5db95edfd3bc" width="800" title="Snipped: May 25, 2023" />
 
+-----
 
+### Step 5: Iteration, Cluster >> Virtual Data Source
+_Note: Iteration steps will follow the same three-step pattern: 1) pull data from Purview, 2) setup iteration, and 3) write data to Alation_
 
+#### HTTP POST, Purview Query adxCluster
+
+Click "+" to insert a step below "**HTTP POST, Alation Refresh Token**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 LOREM IPSUM
 
 
-
------
-
-#### Initialize Variable, `Purview_AccountName`
-
-Click "+" to insert a step below "**Initialize Variable, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
-<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e716c45b-2db3-426d-9467-ac0ca33f3cc4" width="800" title="Snipped: May 25, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/" width="800" title="Snipped: May 25, 2023" />
 
 Prompt | Entry
 :----- | :-----
-**Name** | `Purview_AccountName`
-**Type** | `String`
-**Value** | `{Purview_AccountName}`
+**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v1/createAPIAccessToken/`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/x-www-form-urlencoded`
+**Body** | `refresh_token=@{body('HTTP_POST,_Alation_Refresh_Token').refresh_token}&user_id=@{body('HTTP_POST,_Alation_Refresh_Token').user_id}`
 
 Click "**Save**"
+
+
+
+
+#### For Each Cluster
+
+Click "+" to insert a step below "**Initialize Variable, Purview_BearerToken**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bc7190bc-46fb-4ffd-8bcc-a23215f6d1a1" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Add new parameters** | Check "**Select an output from previous steps**"`Database`
+**Type** | `String`
+**Value** | {null}
+
+Click "**Save**"
+
+
+
 
 
 
