@@ -591,7 +591,7 @@ Prompt | Entry
 :----- | :-----
 **Name** | `Purview_BearerToken`
 **Type** | `String`
-**Value** | Expression `concat('Bearer ',body('HTTP_POST,_Purview_Bearer_Token').access_token)`
+**Value** | `concat('Bearer ',body('HTTP_POST,_Purview_Bearer_Token').access_token)`
 
 Click "**Save**"
 
