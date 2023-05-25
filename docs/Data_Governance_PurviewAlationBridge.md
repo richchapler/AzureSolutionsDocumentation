@@ -358,8 +358,8 @@ Prompt | Entry
 **Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v2/schema/`
 **Params** | `ds_id` :: `{Alation_DataSourceId}`
 **Authorization** >> Type | `No Auth`
-**Headers** | `token` :: `{Purview_APIAccessToken}`
-**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}", "title": "{Purview_DatabaseName}" } ]`
+**Headers** | `token` :: `{Alation_APIAccessToken}`
+**Body** |  `[ { "key": "{Alation_DataSourceId}.{Purview_DatabaseName}", "title": "{Purview_DatabaseName}" } ]`
 
 Click "**Send**"
 
@@ -443,8 +443,8 @@ Prompt | Entry
 **Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v2/schema/`
 **Params** | `ds_id` :: `{Alation_DataSourceId}`
 **Authorization** >> Type | `No Auth`
-**Headers** | `token` :: `{Purview_APIAccessToken}`
-**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}.{Purview_TableName}", "title": "{Purview_TableName}" } ]`
+**Headers** | `token` :: `{Alation_APIAccessToken}`
+**Body** |  `[ { "key": "{Alation_DataSourceId}.{Purview_DatabaseName}.{Purview_TableName}", "title": "{Purview_TableName}" } ]`
 
 Click "**Send**"
 
@@ -518,8 +518,8 @@ Prompt | Entry
 **HTTP Method** | `POST`
 **Enter URL**... | `https://{Alation_InstanceName}.alationcatalog.com/integration/v2/schema/`
 **Authorization** >> Type | `No Auth`
-**Headers** | `token` :: `{Purview_APIAccessToken}`
-**Body** |  `[ { "key": "{Purview_APIAccessToken}.{Purview_DatabaseName}.{Purview_TableName}.{Purview_ColumnName}", "title": "{Purview_ColumnName}", "column_type": "{Purview_ColumnType}" } ]`
+**Headers** | `token` :: `{Alation_APIAccessToken}`
+**Body** |  `[ { "key": "{Alation_DataSourceId}.{Purview_DatabaseName}.{Purview_TableName}.{Purview_ColumnName}", "title": "{Purview_ColumnName}", "column_type": "{Purview_ColumnType}" } ]`
 
 Click "**Send**"
 
@@ -574,12 +574,26 @@ On the resulting "**Add an action**" pop-out, search for and then select "**HTTP
 Prompt | Entry
 :----- | :-----
 **URI** | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
-**HTTP Method** | `POST`
+**Method** | `POST`
 **Headers** | `content-type` :: `application/x-www-form-urlencoded`
 **Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
 
 Click "**Save**"
 
+#### Initialize Variable, Purview Bearer Token
+
+Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/18fdce37-873b-4047-9c12-eac5449b1060" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Purview_BearerToken`
+**Type** | `String`
+**Value** | Expression `concat('Bearer ',body('HTTP_POST,_Purview_Bearer_Token').access_token)`
+
+Click "**Save**"
 
 
 
