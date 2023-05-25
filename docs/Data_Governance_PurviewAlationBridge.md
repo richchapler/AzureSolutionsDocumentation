@@ -675,12 +675,43 @@ Click "**Save**"
 
 -----
 
+### Step 4: Variables
 
+#### Initialize Variable, `Purview_AccountName`
 
+Click "+" to insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86a79ab5-f146-463f-8216-25460bd46899" width="800" title="Snipped: May 25, 2023" />
 
+Prompt | Entry
+:----- | :-----
+**Name** | `Purview_AccountName`
+**Type** | `String`
+**Value** | `{Purview_AccountName}`
 
+Click "**Save**"
 
+-----
+
+#### Initialize Variable, `Database`
+
+Click "+" to insert a step below "**Initialize Variable, Purview_AccountName**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bc7190bc-46fb-4ffd-8bcc-a23215f6d1a1" width="800" title="Snipped: May 25, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Database`
+**Type** | `String`
+**Value** | {null}
+
+Click "**Save**"
+
+Repeat this process for: 1) `Table` and 2 `Column`
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bc7190bc-46fb-4ffd-8bcc-a23215f6d1a1" width="800" title="Snipped: May 25, 2023" />
 
 
 
