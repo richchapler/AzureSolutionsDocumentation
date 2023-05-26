@@ -932,7 +932,7 @@ Click "**Save**"
 Insert a step below "**Set Variable, TableId**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/093f8d7f-34a8-4a8b-848f-10712f123986" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eafdd2bd-c098-4637-a14a-973070d393e6" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
