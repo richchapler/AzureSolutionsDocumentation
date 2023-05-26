@@ -739,17 +739,17 @@ Click "**Save**"
 Click "+" to insert a step below "**HTTP POST, Purview Query adxCluster**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bc7190bc-46fb-4ffd-8bcc-a23215f6d1a1" width="800" title="Snipped: May 25, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9e005850-141c-4c6a-96a6-47d3dfd6c082" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
-**Add new parameters** | Check "**Select an output from previous steps**"`Database`
-**Type** | `String`
-**Value** | {null}
+**Add new parameters** | Check "**Select an output**..." and then enter expression `@body('HTTP_POST,_Purview_Query_adxCluster').value`
 
 Click "**Save**"
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0754523e-de1c-4e15-9328-e837da4d7481" width="800" title="Snipped: May 26, 2023" />
 
+On the "**Settings**" tab, expand "Run After" and add dependencies: 1) `Initialize Variable, Column` and 2) `Initialize Variable, Alation_APIAccessToken`
 
 
 
