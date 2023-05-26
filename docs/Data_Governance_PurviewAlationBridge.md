@@ -723,7 +723,7 @@ _Note: Iteration steps will follow the same three-step pattern: 1) pull data fro
 Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/" width="800" title="Snipped: May 25, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/90ab327c-1206-4134-a420-fafd0b19098b" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
