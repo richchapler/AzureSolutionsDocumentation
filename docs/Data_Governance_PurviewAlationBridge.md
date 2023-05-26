@@ -696,7 +696,7 @@ Repeat this process for: 1) `Table` and 2 `Column`
 
 -----
 
-### Step 5: Iteration, Cluster >> Virtual Data Source
+### Step 5: Iteration, Purview adxCluster >> Alation "Virtual Data Source"
 _Note: Iteration steps will follow the same three-step pattern: 1) pull data from Purview, 2) setup iteration, and 3) iteratively write data to Alation_
 
 #### Initialize Variable, `Purview_AccountName`
@@ -769,7 +769,25 @@ Prompt | Entry
 
 Click "**Save**"
 
+-----
 
+### Step 6: Iteration, Purview adxDatabase >> Alation "Schema"
+
+#### HTTP POST, Purview Query adxDatabase
+
+Click "+" to insert a step below "**HTTP POST, Alation Create Data Source**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e6c37896-c5d3-406f-962d-d1ed2bb4c384" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('Purview_BearerToken')}`
+**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_database" } ] } }`
+
+Click "**Save**"
 
 -----
 
