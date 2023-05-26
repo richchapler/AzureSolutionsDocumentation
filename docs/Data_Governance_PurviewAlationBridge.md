@@ -739,7 +739,7 @@ Click "**Save**"
 Click "+" to insert a step below "**HTTP POST, Purview Query adxCluster**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9e005850-141c-4c6a-96a6-47d3dfd6c082" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e9bf32c2-4a13-40a7-9ef1-907b4614ed8e" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -747,13 +747,27 @@ Prompt | Entry
 
 Click "**Save**"
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0754523e-de1c-4e15-9328-e837da4d7481" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/aed8e6d6-48c3-4a38-9fd9-b42536b7c6ba" width="800" title="Snipped: May 26, 2023" />
 
 On the "**Settings**" tab, expand "Run After" and add dependencies: 1) `Initialize Variable, Column` and 2) `Initialize Variable, Alation_APIAccessToken`
 
+-----
 
+#### HTTP POST, Alation Create Data Source
 
+Click the "+" inside "**For Each Cluster**" and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fd42d466-171c-4c60-8e42-43347357d171" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v1/datasource/`
+**Method** | `POST`
+**Headers** | `token` :: `@{variables('Alation_APIAccessToken')}` and `content-type` :: `application/json`
+**Body** | `{ "dbtype": "customdb", "is_virtual": "true", "title": "@{item().name}", "deployment_setup_complete": "true" }`
+
+Click "**Save**"
 
 
 
