@@ -677,29 +677,12 @@ Click "**Save**"
 
 ### Step 4: Variables
 
-#### Initialize Variable, `Purview_AccountName`
+#### Initialize Variable, `Database`
 
 Click "+" to insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86a79ab5-f146-463f-8216-25460bd46899" width="800" title="Snipped: May 25, 2023" />
-
-Prompt | Entry
-:----- | :-----
-**Name** | `Purview_AccountName`
-**Type** | `String`
-**Value** | `{Purview_AccountName}`
-
-Click "**Save**"
-
------
-
-#### Initialize Variable, `Database`
-
-Click "+" to insert a step below "**Initialize Variable, Purview_AccountName**", and then "**Add an action**" on the resulting menu.
-<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bc7190bc-46fb-4ffd-8bcc-a23215f6d1a1" width="800" title="Snipped: May 25, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/394a974c-cd75-4411-b89f-43bb9ed70ca9" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -711,19 +694,34 @@ Click "**Save**"
 
 Repeat this process for: 1) `Table` and 2 `Column`
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eba99593-bb00-47be-b67f-5db95edfd3bc" width="800" title="Snipped: May 25, 2023" />
-
 -----
 
 ### Step 5: Iteration, Cluster >> Virtual Data Source
 _Note: Iteration steps will follow the same three-step pattern: 1) pull data from Purview, 2) setup iteration, and 3) iteratively write data to Alation_
 
+#### Initialize Variable, `Purview_AccountName`
+
+Click "+" to insert a step below "**Initial Variable, Purview_BearerToken**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/be90c0dd-a6e4-4d5e-a625-5eb295363238" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Purview_AccountName`
+**Type** | `String`
+**Value** | `{Purview_AccountName}`
+
+Click "**Save**"
+
+-----
+
 #### HTTP POST, Purview Query adxCluster
 
-Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
+Click "+" to insert a step below "**HTTP POST, Purview_AccountName**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/90ab327c-1206-4134-a420-fafd0b19098b" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c122c4ad-4afa-4548-aba9-117cf75cb60e" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -734,12 +732,11 @@ Prompt | Entry
 
 Click "**Save**"
 
-
-LOREM IPSUM
+-----
 
 #### For Each Cluster
 
-Click "+" to insert a step below "**Initialize Variable, Purview_BearerToken**", and then "**Add an action**" on the resulting menu.
+Click "+" to insert a step below "**HTTP POST, Purview Query adxCluster**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bc7190bc-46fb-4ffd-8bcc-a23215f6d1a1" width="800" title="Snipped: May 25, 2023" />
