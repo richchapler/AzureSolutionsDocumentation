@@ -822,7 +822,21 @@ Click "**Save**"
 
 -----
 
-LOREM IPSUM
+#### HTTP POST, Alation Create Schema
+
+Click "+" to insert a step below "**Set Variable, Database**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1eb5c52c-5563-4085-8f7b-9a235bef3758" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v2/schema/?ds_id=@{body('HTTP_POST,_Alation_Create_Data_Source').id}`
+**Method** | `POST`
+**Headers** | `token` :: `@{variables('Alation_APIAccessToken')}` and `content-type` :: `application/json`
+**Body** | `[ { "key": "@{body('HTTP_POST,_Alation_Create_Data_Source').id}.@{variables('DatabaseName')}", "title": "@{variables('DatabaseName')}" } ]`
+
+Click "**Save**"
 
 -----
 
