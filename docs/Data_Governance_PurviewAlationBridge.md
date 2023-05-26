@@ -975,6 +975,24 @@ Click "**Save**"
 
 -----
 
+#### HTTP POST, Alation Create Column
+
+Insert a step below "**Set Variable, Column**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/78ef6eb8-8699-4cfe-89f2-1f2d2253cdca" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v2/column/?ds_id=@{body('HTTP_POST,_Alation_Create_Data_Source').id}`
+**Method** | `POST`
+**Headers** | `token` :: `@{variables('Alation_APIAccessToken')}` and `content-type` :: `application/json`
+**Body** | `[ { "key": "@{body('HTTP_POST,_Alation_Create_Data_Source').id}.@{variables('Database')}.@{variables('Table')}.@{variables('Column')}", "title": "@{variables('Column')}" } ]`
+
+Click "**Save**"
+
+-----
+
 **Congratulations... you have successfully completed this exercise**
 
 -----
