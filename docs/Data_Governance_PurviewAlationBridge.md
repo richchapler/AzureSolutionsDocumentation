@@ -875,6 +875,40 @@ Click "**Save**"
 
 -----
 
+#### Set Variable, Table
+
+Click "+" inside the "**For Each Table**" action and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d828591-b06c-4c9a-a790-c31fd6085170" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Table`
+**Value** | `@item().name`
+
+Click "**Save**"
+
+-----
+
+#### HTTP POST, Alation Create Table
+
+Click "+" to insert a step below "**Set Variable, Table**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b799712a-e312-4b40-8483-8d10ef3f43d5" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v2/table/?ds_id=@{body('HTTP_POST,_Alation_Create_Data_Source').id}`
+**Method** | `POST`
+**Headers** | `token` :: `@{variables('Alation_APIAccessToken')}` and `content-type` :: `application/json`
+**Body** | `[ { "key": "@{body('HTTP_POST,_Alation_Create_Data_Source').id}.@{variables('Database').@{variables('Table')}", "title": "@{variables('Table')}" } ]`
+
+Click "**Save**"
+
+-----
+
 **Congratulations... you have successfully completed this exercise**
 
 -----
