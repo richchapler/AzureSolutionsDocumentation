@@ -716,29 +716,26 @@ Repeat this process for: 1) `Table` and 2 `Column`
 -----
 
 ### Step 5: Iteration, Cluster >> Virtual Data Source
-_Note: Iteration steps will follow the same three-step pattern: 1) pull data from Purview, 2) setup iteration, and 3) write data to Alation_
+_Note: Iteration steps will follow the same three-step pattern: 1) pull data from Purview, 2) setup iteration, and 3) iteratively write data to Alation_
 
 #### HTTP POST, Purview Query adxCluster
 
-Click "+" to insert a step below "**HTTP POST, Alation Refresh Token**", and then "**Add an action**" on the resulting menu.
+Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
-
-LOREM IPSUM
-
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/" width="800" title="Snipped: May 25, 2023" />
 
 Prompt | Entry
 :----- | :-----
-**URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v1/createAPIAccessToken/`
+**URI** | `https://.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Method** | `POST`
-**Headers** | `content-type` :: `application/x-www-form-urlencoded`
-**Body** | `refresh_token=@{body('HTTP_POST,_Alation_Refresh_Token').refresh_token}&user_id=@{body('HTTP_POST,_Alation_Refresh_Token').user_id}`
+**Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('Purview_BearerToken')}`
+**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_cluster" } ] } }`
 
 Click "**Save**"
 
 
-
+LOREM IPSUM
 
 #### For Each Cluster
 
