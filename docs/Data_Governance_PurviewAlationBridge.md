@@ -588,7 +588,7 @@ Click "**Save**"
 
 #### Initialize Variable, `Purview_BearerToken`
 
-Click "+" to insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Purview Bearer Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a812d391-6424-45ae-9830-f85e31c3ea35" width="800" title="Snipped: May 25, 2023" />
@@ -607,7 +607,7 @@ Click "**Save**"
 
 #### Initialize Variable, `Alation_InstanceName`
 
-Click "+" to insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
+Insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9821d96c-eef2-41e9-8bae-f57545b2b940" width="800" title="Snipped: May 25, 2023" />
@@ -624,7 +624,7 @@ Click "**Save**"
 
 #### HTTP POST, Alation Refresh Token
 
-Click "+" to insert a step below "**Initialize Variable, Alation_InstanceName**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**Initialize Variable, Alation_InstanceName**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1b11586-7b9d-4c80-a19e-c24c1ede0687" width="800" title="Snipped: May 25, 2023" />
@@ -642,7 +642,7 @@ Click "**Save**"
 
 #### HTTP POST, Alation API Access Token
 
-Click "+" to insert a step below "**HTTP POST, Alation Refresh Token**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Alation Refresh Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eeb371ee-de5b-45d8-9658-cc7e49fff8eb" width="800" title="Snipped: May 25, 2023" />
@@ -660,7 +660,7 @@ Click "**Save**"
 
 #### Initialize Variable, `Alation_APIAccessToken`
 
-Click "+" to insert a step below "**HTTP POST, Alation API Access Token**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Alation API Access Token**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6fd1c8d1-ef09-4125-9754-3caa8469ed6a" width="800" title="Snipped: May 25, 2023" />
@@ -679,7 +679,7 @@ Click "**Save**"
 
 #### Initialize Variable, `Database`
 
-Click "+" to insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
+Insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/59ca8d02-b84a-4801-9701-046bd83a8c11" width="800" title="Snipped: May 26, 2023" />
@@ -701,7 +701,7 @@ _Note: Iteration steps will follow the same three-step pattern: 1) pull data fro
 
 #### Initialize Variable, `Purview_AccountName`
 
-Click "+" to insert a step below "**Initial Variable, Purview_BearerToken**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**Initial Variable, Purview_BearerToken**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/be90c0dd-a6e4-4d5e-a625-5eb295363238" width="800" title="Snipped: May 26, 2023" />
@@ -718,7 +718,7 @@ Click "**Save**"
 
 #### HTTP POST, Purview Query adxCluster
 
-Click "+" to insert a step below "**HTTP POST, Purview_AccountName**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Purview_AccountName**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c122c4ad-4afa-4548-aba9-117cf75cb60e" width="800" title="Snipped: May 26, 2023" />
@@ -736,7 +736,7 @@ Click "**Save**"
 
 #### For Each Cluster
 
-Click "+" to insert a step below "**HTTP POST, Purview Query adxCluster**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Purview Query adxCluster**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e9bf32c2-4a13-40a7-9ef1-907b4614ed8e" width="800" title="Snipped: May 26, 2023" />
@@ -775,7 +775,7 @@ Click "**Save**"
 
 #### HTTP POST, Purview Query adxDatabase
 
-Click "+" to insert a step below "**HTTP POST, Alation Create Data Source**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Alation Create Data Source**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e6c37896-c5d3-406f-962d-d1ed2bb4c384" width="800" title="Snipped: May 26, 2023" />
@@ -793,7 +793,7 @@ Click "**Save**"
 
 #### For Each Database
 
-Click "+" to insert a step below "**HTTP POST, Purview Query adxDatabase**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Purview Query adxDatabase**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4093b9c2-4988-4b3d-8bed-0c329eb198f9" width="800" title="Snipped: May 26, 2023" />
@@ -824,7 +824,7 @@ Click "**Save**"
 
 #### HTTP POST, Alation Create Schema
 
-Click "+" to insert a step below "**Set Variable, Database**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**Set Variable, Database**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1eb5c52c-5563-4085-8f7b-9a235bef3758" width="800" title="Snipped: May 26, 2023" />
@@ -844,7 +844,7 @@ Click "**Save**"
 
 #### HTTP POST, Purview Query adxTable
 
-Click "+" to insert a step below "**HTTP POST, Alation Create Schema**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Alation Create Schema**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6bebf390-c495-4c8d-bc99-1bdcce908845" width="800" title="Snipped: May 26, 2023" />
@@ -862,7 +862,7 @@ Click "**Save**"
 
 #### For Each Table
 
-Click "+" to insert a step below "**HTTP POST, Purview Query adxTable**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**HTTP POST, Purview Query adxTable**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c7007a65-b2d4-452a-9cdb-ec609aaa3ee4" width="800" title="Snipped: May 26, 2023" />
@@ -891,9 +891,25 @@ Click "**Save**"
 
 -----
 
+#### Set Variable, TableId
+
+Insert a step below "**Set Variable, Table**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/91a1414d-6617-49e0-a597-73b1a35a24bf" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `TableId`
+**Value** | `@item().id`
+
+Click "**Save**"
+
+-----
+
 #### HTTP POST, Alation Create Table
 
-Click "+" to insert a step below "**Set Variable, Table**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**Set Variable, Table**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1882e6ec-1ddd-47ea-994b-0b32e9869e2c" width="800" title="Snipped: May 26, 2023" />
@@ -913,17 +929,16 @@ Click "**Save**"
 
 #### HTTP POST, Purview Entity adxColumn
 
-Click "+" to insert a step below "**HTTP POST, Alation Create Table**", and then "**Add an action**" on the resulting menu.
+Insert a step below "**Set Variable, TableId**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/blah" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a72fb59-860e-4b22-93bf-04448e9a201f" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
-**URI** | `https://.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
-**Method** | `POST`
+**URI** | `https://@{variables('Purview_AccountName')}.purview.azure.com/catalog/api/atlas/v2/entity/guid/@{variables('TableId')}`
+**Method** | `GET`
 **Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('Purview_BearerToken')}`
-**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_table" } ] } }`
 
 Click "**Save**"
 
