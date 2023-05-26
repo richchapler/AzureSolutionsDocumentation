@@ -755,7 +755,7 @@ On the "**Settings**" tab, expand "Run After" and add dependencies: 1) `Initiali
 
 #### HTTP POST, Alation Create Data Source
 
-Click the "+" inside "**For Each Cluster**" and then "**Add an action**" on the resulting menu.
+Click "+" inside the "**For Each Cluster**" action and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fd42d466-171c-4c60-8e42-43347357d171" width="800" title="Snipped: May 26, 2023" />
