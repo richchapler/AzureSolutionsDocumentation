@@ -1006,8 +1006,9 @@ Navigate to "**Run History**" and click into the latest run.
 Confirm successful processing.
 
 #### Alation
-
 Navigate to Alation and verify success.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5bb27091-9d69-4f17-8705-35148075c879" width="800" title="Snipped: May 26, 2023" />
 
 -----
 
