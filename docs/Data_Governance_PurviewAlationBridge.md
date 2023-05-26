@@ -993,6 +993,20 @@ Click "**Save**"
 
 -----
 
+### Step 9: Confirm Success
+
+Navigate to "**Overview**", click on the "**Run**" dropdown and then "**Run**" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/df9306ea-a1f1-41f1-99db-b47a1b86dcdc" width="800" title="Snipped: May 26, 2023" />
+
+Navigate to "**Run History**" and click into the latest run.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9e98fb2b-fc1b-4556-b5ab-2fe8aa2849f7" width="800" title="Snipped: May 26, 2023" />
+
+Confirm successful processing.
+
+-----
+
 **Congratulations... you have successfully completed this exercise**
 
 -----
