@@ -932,7 +932,7 @@ Click "**Save**"
 Insert a step below "**Set Variable, TableId**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a72fb59-860e-4b22-93bf-04448e9a201f" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/093f8d7f-34a8-4a8b-848f-10712f123986" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -1004,6 +1004,10 @@ Navigate to "**Run History**" and click into the latest run.
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9e98fb2b-fc1b-4556-b5ab-2fe8aa2849f7" width="800" title="Snipped: May 26, 2023" />
 
 Confirm successful processing.
+
+#### Alation
+
+Navigate to Alation and verify success.
 
 -----
 
