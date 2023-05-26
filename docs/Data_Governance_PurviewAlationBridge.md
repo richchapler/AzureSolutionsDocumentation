@@ -682,7 +682,7 @@ Click "**Save**"
 Click "+" to insert a step below "**Recurrence**", and then "**Add a parallel branch**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/394a974c-cd75-4411-b89f-43bb9ed70ca9" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/59ca8d02-b84a-4801-9701-046bd83a8c11" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -692,7 +692,7 @@ Prompt | Entry
 
 Click "**Save**"
 
-Repeat this process for: 1) `Table` and 2 `Column`
+Repeat this process for: 1) `Table`, 2) `TableId` and 3) `Column`
 
 -----
 
@@ -904,6 +904,26 @@ Prompt | Entry
 **Method** | `POST`
 **Headers** | `token` :: `@{variables('Alation_APIAccessToken')}` and `content-type` :: `application/json`
 **Body** | `[ { "key": "@{body('HTTP_POST,_Alation_Create_Data_Source').id}.@{variables('Database').@{variables('Table')}", "title": "@{variables('Table')}" } ]`
+
+Click "**Save**"
+
+-----
+
+### Step 8: Iteration, Purview adxColumn >> Alation "Column"
+
+#### HTTP POST, Purview Entity adxColumn
+
+Click "+" to insert a step below "**HTTP POST, Alation Create Table**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/blah" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('Purview_BearerToken')}`
+**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_table" } ] } }`
 
 Click "**Save**"
 
