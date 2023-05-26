@@ -944,6 +944,37 @@ Click "**Save**"
 
 -----
 
+#### For Each Column
+
+Insert a step below "**HTTP POST, Purview Query adxColumn**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ae7f3bfb-30f8-4419-9b5d-bd33ab36c2c9" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Add new parameters** | Check "**Select an output**..." and then enter expression `@body('HTTP_POST,_Purview_Entity_adxColumn').entity.relationshipAttributes.columns`
+
+Click "**Save**"
+
+-----
+
+#### Set Variable, Column
+
+Click "+" inside the "**For Each Column**" action and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/766324f0-3fdd-429a-bc44-c726c2ea79dc" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Table`
+**Value** | `@item().displayText`
+
+Click "**Save**"
+
+-----
+
 **Congratulations... you have successfully completed this exercise**
 
 -----
