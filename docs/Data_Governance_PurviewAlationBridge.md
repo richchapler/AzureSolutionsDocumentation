@@ -1,4 +1,4 @@
-# Data Governance: Purview >> Alation Bridge (WiP)
+# Data Governance: Purview >> Alation Bridge
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/40433723-dfa4-44b0-bbf3-7632d0278389" width="1000" />
 
