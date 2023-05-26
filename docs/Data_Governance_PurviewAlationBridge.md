@@ -840,6 +840,41 @@ Click "**Save**"
 
 -----
 
+### Step 7: Iteration, Purview adxTable >> Alation "Table"
+
+#### HTTP POST, Purview Query adxTable
+
+Click "+" to insert a step below "**HTTP POST, Alation Create Schema**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6bebf390-c495-4c8d-bc99-1bdcce908845" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('Purview_BearerToken')}`
+**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_table" } ] } }`
+
+Click "**Save**"
+
+-----
+
+#### For Each Table
+
+Click "+" to insert a step below "**HTTP POST, Purview Query adxTable**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c7007a65-b2d4-452a-9cdb-ec609aaa3ee4" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Add new parameters** | Check "**Select an output**..." and then enter expression `@body('HTTP_POST,_Purview_Query_adxTable').value`
+
+Click "**Save**"
+
+-----
+
 **Congratulations... you have successfully completed this exercise**
 
 -----
