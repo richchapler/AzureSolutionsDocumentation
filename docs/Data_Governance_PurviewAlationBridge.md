@@ -791,6 +791,41 @@ Click "**Save**"
 
 -----
 
+#### For Each Database
+
+Click "+" to insert a step below "**HTTP POST, Purview Query adxDatabase**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**For each**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4093b9c2-4988-4b3d-8bed-0c329eb198f9" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Add new parameters** | Check "**Select an output**..." and then enter expression `@body('HTTP_POST,_Purview_Query_adxDatabase').value`
+
+Click "**Save**"
+
+-----
+
+#### Set Variable, Database
+
+Click "+" inside the "**For Each Database**" action and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Set variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/35af8bd0-7228-4e97-a2bf-c95efd873ca9" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `Database`
+**Value** | `@item().name`
+
+Click "**Save**"
+
+-----
+
+LOREM IPSUM
+
+-----
+
 **Congratulations... you have successfully completed this exercise**
 
 -----
