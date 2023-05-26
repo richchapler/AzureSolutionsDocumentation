@@ -834,7 +834,7 @@ Prompt | Entry
 **URI** | `https://@{variables('Alation_InstanceName')}.alationcatalog.com/integration/v2/schema/?ds_id=@{body('HTTP_POST,_Alation_Create_Data_Source').id}`
 **Method** | `POST`
 **Headers** | `token` :: `@{variables('Alation_APIAccessToken')}` and `content-type` :: `application/json`
-**Body** | `[ { "key": "@{body('HTTP_POST,_Alation_Create_Data_Source').id}.@{variables('DatabaseName')}", "title": "@{variables('DatabaseName')}" } ]`
+**Body** | `[ { "key": "@{body('HTTP_POST,_Alation_Create_Data_Source').id}.@{variables('Database')}", "title": "@{variables('Database')}" } ]`
 
 Click "**Save**"
 
