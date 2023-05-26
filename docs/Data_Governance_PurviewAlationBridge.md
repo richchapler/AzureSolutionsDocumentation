@@ -896,7 +896,7 @@ Click "**Save**"
 Click "+" to insert a step below "**Set Variable, Table**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b799712a-e312-4b40-8483-8d10ef3f43d5" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1882e6ec-1ddd-47ea-994b-0b32e9869e2c" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
