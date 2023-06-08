@@ -194,7 +194,7 @@ Complete the form on the "**Settings**" tab, including:
 Prompt | Entry
 :----- | :-----
 **Sequential** | Checked
-**Items** | Paste expression:<br>`@activity('Points').output.value`
+**Items** | `@activity('Points').output.value`
 
 #### Add Sub-Activity: `ForEach` >> `Web`
 
