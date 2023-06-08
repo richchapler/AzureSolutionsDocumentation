@@ -75,8 +75,8 @@ let commonBase = (
     | project batch, points = cleanDynamic(points)
     | mv-expand with_itemindex=i value = points to typeof(string)
     | extend type = iif( i/2.0 == i/2, "latitude", "longitude" ), row = i/2 );
-let latitudes = ( commonBase | where type == "latitude" | project batch, row, latitude = todecimal(value) );
-let longitudes = ( commonBase | where type == "longitude" | project batch, row, longitude = todecimal(value) );
+let latitudes = ( commonBase | where type == "latitude" | project batch, row, latitude = toreal(value) );
+let longitudes = ( commonBase | where type == "longitude" | project batch, row, longitude = toreal(value) );
 let elevations = (
     Elevations_fromAPI
     | project batch, value = cleanDynamic(elevations)
