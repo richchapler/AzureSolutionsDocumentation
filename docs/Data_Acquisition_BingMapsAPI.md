@@ -99,7 +99,9 @@ Logic explained:
 ### `Elevations` Update Policy
 This logic will trigger when data is added to `Elevations_fromAPI` and write data to `Elevations` using the `transformElevations` function.
 
-`.alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'`
+```
+.alter table Elevations policy update '[ { "IsEnabled": true, "Source": "Elevations_fromAPI", "Query": "transformElevations()" } ]'
+```
 
 _Note: Creation of the Update Policy is an important pre-emptive step to the data ingestion that will happen in the next Exercise_
 
