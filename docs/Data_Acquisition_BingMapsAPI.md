@@ -218,7 +218,9 @@ Click the "**+**" button in the "**Activities**" area of the `ForEach` component
 On the "**Connection**" tab, select your Data Explorer Integration Dataset.<br>
 On the "**Command**" tab, paste the following "**Command**" expression:
 
-`.ingest inline into table Elevations_fromAPI with (format="psv") <| @{item().batch} | @{item().points} | @{activity('Web').output.resourceSets[0].resources[0].elevations}"`
+```
+.ingest inline into table Elevations_fromAPI with (format="psv") <| @{item().batch} | @{item().points} | @{activity('Web').output.resourceSets[0].resources[0].elevations}"
+```
 
 Click "**Publish All**".
 
