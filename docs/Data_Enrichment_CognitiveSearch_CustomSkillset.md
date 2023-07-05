@@ -12,28 +12,22 @@ This documentation considers the following requirements and goals:
 
 ## Solution Requirements
 The proposed solution requires:
-* LOREM
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), including:
+  * [Application Insights]
+  * [Application Service Plan]
+  * [Storage Account]
 
 -----
 
 ## Exercise 1: "Get Data API"
-In this exercise, we will LOREMr.
+In this exercise, we will create and publish a Function App-based API that will receive a parameter, query SQL, and package a response.
 
 ### Step 1: LOREM
 
 Open Microsoft Purview Governance Portal and navigate to "**Data map**" >> "**Data sources**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/31d804e0-dc6b-4752-b1d8-6d5329bf9a57" width="800" title="Snipped: May 18, 2023" />
-
-Click "**Register**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2e263fd8-e4d2-45a7-a27c-5ef0fac600c2" width="800" title="Snipped: May 18, 2023" />
-
-On the "**Register data source**" pop-out, search for and select "**Azure Data Explorer (Kusto)**", then click "**Continue**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0f6e0602-761a-4c1d-b40b-cfe1492c359b" width="800" title="Snipped: May 18, 2023" />
-
-Complete the "**Register data source (Azure Data Explorer (Kusto))**" form, then click "**Register**".
 
 -----
 
