@@ -26,47 +26,40 @@ In this exercise, we will create and publish a Function App-based API that will 
 
 ### Step 1: Create Visual Studio Project
 
-* Open Visual Studio
+Open Visual Studio.
 
-  <img src="https://user-images.githubusercontent.com/44923999/212137484-599c9cd8-5e0e-46b1-818d-a3a008fecd5b.png" width="600" title="Snipped: January 12, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/212137484-599c9cd8-5e0e-46b1-818d-a3a008fecd5b.png" width="600" title="Snipped: January 12, 2023" />
 
-* Click "**Create a new project**"
+Click "**Create a new project**".
 
-  <img src="https://user-images.githubusercontent.com/44923999/212137783-9ee34157-17fc-4364-a2d1-d572afbb4d8b.png" width="600" title="Snipped: January 12, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/212137783-9ee34157-17fc-4364-a2d1-d572afbb4d8b.png" width="600" title="Snipped: January 12, 2023" />
 
-* On the "**Create a new project**" page, search for and select "**Azure Functions**", then click **Next**
+On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
 
-  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0d7c77a-af1b-4f72-ade8-a800a34729dc" width="600" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0d7c77a-af1b-4f72-ade8-a800a34729dc" width="600" title="Snipped: July 5, 2023" />
 
-* Complete the "**Configure your new project**" form and then click **Next**
+Complete the "**Configure your new project**" form and then click "**Next**".
 
-  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf45d8ed-27a4-40e4-ac5a-40efbeb30f99" width="600" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf45d8ed-27a4-40e4-ac5a-40efbeb30f99" width="600" title="Snipped: July 5, 2023" />
 
-* Complete the "**Additional information**" form:
+Complete the "**Additional information**" form:
 
-  | Prompt | Entry |
-  | ----- | ----- |
-  | **Functions worker** | **.NET 6.0 (Long Term Support)** |
-  | **Function** | **Http trigger** |
-  | **Use Azurite...** | Checked |
-  | **Authorization level** | Function |
+Prompt | Entry
+:----- | :-----
+**Functions worker** | **.NET 6.0 (Long Term Support)**
+**Function** | **Http trigger**
+**Use Azurite...** | Checked
+**Authorization level** | Function
 
-* Click **Create**
-
-
-
-
-
+Click "**Create**".
 
 ### Step 2: Install NuGet
 
-* In this step, we will install Nuget to pre-empt errors when we update the logic
+<img src="https://user-images.githubusercontent.com/44923999/212140679-25ac45f7-34e2-4c12-8c60-a7cea234fb2d.png" width="800" title="Snipped: January 12, 2023" />
 
-  <img src="https://user-images.githubusercontent.com/44923999/212140679-25ac45f7-34e2-4c12-8c60-a7cea234fb2d.png" width="800" title="Snipped: January 12, 2023" />
+Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
 
-* Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
-
-  <img src="https://user-images.githubusercontent.com/44923999/212140965-c3691ba9-69fe-4d0b-9035-37acac31605b.png" width="800" title="Snipped: January 12, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/212140965-c3691ba9-69fe-4d0b-9035-37acac31605b.png" width="800" title="Snipped: January 12, 2023" />
 
 * On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Azure.Kusto.Data**"
 * On the resulting pop-out, check project **DataMonetization** and then click "**Install**"
