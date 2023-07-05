@@ -53,22 +53,31 @@ Prompt | Entry
 
 Click "**Create**".
 
-### Step 2: Install NuGet
+-----
 
-<img src="https://user-images.githubusercontent.com/44923999/212140679-25ac45f7-34e2-4c12-8c60-a7cea234fb2d.png" width="800" title="Snipped: January 12, 2023" />
+### Step 2: Install NuGet
 
 Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
 
-<img src="https://user-images.githubusercontent.com/44923999/212140965-c3691ba9-69fe-4d0b-9035-37acac31605b.png" width="800" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1695a4b5-ce8d-4c40-b082-c0f716bf40f3" width="800" title="Snipped: July 5, 2023" />
 
-* On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Azure.Kusto.Data**"
-* On the resulting pop-out, check project **DataMonetization** and then click "**Install**"
-* When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
+On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Data.SqlClient**".
 
-  <img src="https://user-images.githubusercontent.com/44923999/212141406-3d1bbf08-1259-4b4c-9a0d-241e0fa72f1b.png" width="800" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e21b7833-b2ef-459e-929d-6398c3f24ff8" width="800" title="Snipped: July 5, 2023" />
 
-* Navigate to the **Updates** tab, check "**Select all packages**" and then click **Update** (as applicable)
-* When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up
+On the resulting pop-out, check the Project in the list, and then click "**Install**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc4eae77-2f17-4869-8e2b-3d033719b8ed" width="800" title="Snipped: July 5, 2023" />
+
+Navigate to the "**Updates**" tab, check "**Select all packages**" and then click **Update** (as applicable).
+
+-----
+
+
+
+
+
+
 
 ### Step 3: Update Logic
 
