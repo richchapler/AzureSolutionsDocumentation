@@ -7,7 +7,7 @@ This documentation considers the following requirements and goals:
 * "We want to enrich our Cognitive Search index with metadata from SQL"
 
 ## Proposed Solution
-* Create a "Get Data" API using Function Apps
+* Create a "Get Data" API using a Function App
 * Add a custom skillset to the Cognitive Search index
 
 ## Solution Requirements
