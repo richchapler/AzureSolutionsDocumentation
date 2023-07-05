@@ -1,6 +1,6 @@
 # Data Enrichment: Cognitive Search, Custom "Get Data" Skillset
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/LOREM" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ee4be331-4ba9-47ce-a891-d146710430b7" width="1000" />
 
 ## Use Case
 This documentation considers the following requirements and goals:
