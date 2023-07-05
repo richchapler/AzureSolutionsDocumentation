@@ -51,13 +51,12 @@ In this exercise, we will create and publish a Function App-based API that will 
   | **Use Azurite...** | Checked |
   | **Authorization level** | Function |
 
-
-
-
-
-
-
 * Click **Create**
+
+
+
+
+
 
 ### Step 2: Install NuGet
 
