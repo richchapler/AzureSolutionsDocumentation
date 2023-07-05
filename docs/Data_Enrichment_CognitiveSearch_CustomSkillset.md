@@ -24,13 +24,6 @@ The proposed solution requires:
 ## Exercise 1: Create API
 In this exercise, we will create and publish a Function App-based API that will receive a parameter, query SQL, and package a response.
 
-
-
-
-
-
-
-
 ### Step 1: Create Visual Studio Project
 
 * Open Visual Studio
@@ -43,20 +36,26 @@ In this exercise, we will create and publish a Function App-based API that will 
 
 * On the "**Create a new project**" page, search for and select "**Azure Functions**", then click **Next**
 
-  <img src="https://user-images.githubusercontent.com/44923999/212138137-5eb64402-c7dd-4b35-8285-d0ffd527f2f9.png" width="600" title="Snipped: January 12, 2023" />
+  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0d7c77a-af1b-4f72-ade8-a800a34729dc" width="600" title="Snipped: July 5, 2023" />
 
 * Complete the "**Configure your new project**" form and then click **Next**
 
-  <img src="https://user-images.githubusercontent.com/44923999/212139114-5874d64a-42dc-449f-8635-d90d2cd319c8.png" width="600" title="Snipped: January 12, 2023" />
+  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf45d8ed-27a4-40e4-ac5a-40efbeb30f99" width="600" title="Snipped: July 5, 2023" />
 
 * Complete the "**Additional information**" form:
 
   | Prompt | Entry |
   | ----- | ----- |
-  | **Functions worker** | Select "**.NET 6.0 (Long Term Support)**" |
-  | **Function** | Select "**Http trigger with OpenAPI**" |
+  | **Functions worker** | "**.NET 6.0 (Long Term Support)**" |
+  | **Function** | "**Http trigger**" |
   | **Use Azurite...** | Checked |
-  | **Authorization level** | Confirm default "Function" |
+  | **Authorization level** | "Function" |
+
+
+
+
+
+
 
 * Click **Create**
 
@@ -397,5 +396,4 @@ In this exercise, we will create and publish a Function App-based API that will 
 
 ## Reference
 
-* Function App
-  * LOREM
+* [Add a custom skill to an Azure Cognitive Search enrichment pipeline](https://learn.microsoft.com/en-us/azure/search/cognitive-search-custom-skill-interface)
