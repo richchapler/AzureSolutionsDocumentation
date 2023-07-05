@@ -14,9 +14,9 @@ This documentation considers the following requirements and goals:
 The proposed solution requires:
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), including:
-  * [Application Insights]
-  * [Application Service Plan]
-  * [Storage Account]
+  * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
+  * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
+  * [Storage Account](Infrastructure_StorageAccount.md)
 
 -----
 
