@@ -46,10 +46,10 @@ In this exercise, we will create and publish a Function App-based API that will 
 
   | Prompt | Entry |
   | ----- | ----- |
-  | **Functions worker** | "**.NET 6.0 (Long Term Support)**" |
-  | **Function** | "**Http trigger**" |
+  | **Functions worker** | **.NET 6.0 (Long Term Support)** |
+  | **Function** | **Http trigger** |
   | **Use Azurite...** | Checked |
-  | **Authorization level** | "Function" |
+  | **Authorization level** | Function |
 
 
 
