@@ -200,58 +200,23 @@ Back on the "...Publish" page, click **Publish** and confirm successful publicat
 
 Navigate to the **GetData** function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/96b3c7ea-8f74-4a51-baaa-64daf05f83ad" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dc516c29-900f-47ab-8afc-ebc7b5cc0dbb" width="800" title="Snipped: July 6, 2023" />
 
-LOREM IPSUM
+Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the following "**Body**" value:
 
-
-
-
-
-
-
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6402a8f6-d7cd-4657-8205-2e6d8d62aff7" width="800" title="Snipped: May 22, 2023" />
-
-Prompt | Entry
-:----- | :-----
-**HTTP Method** | `POST`
-**Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
-**Authorization** >> Type | `No Auth`
-**Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
-**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_database" } ] } }`
-
-Click "**Send**"
-
-##### Expected Response
-Status: `200 OK`<br>
 ```
-{
-    "@search.count": 1,
-    "value": [
-        {
-            "updateBy": "ServiceAdmin",
-            "id": "88a6bfb6-58c6-4cd3-9fdf-a4b3f79b7057",
-            "collectionId": "rchaplerp",
-            "isIndexed": true,
-            "qualifiedName": "https://rchaplerdec.westus3.kusto.windows.net/rchaplerded",
-            "entityType": "azure_data_explorer_database",
-            "updateTime": 1684432574026,
-            "assetType": [
-                "Azure Data Explorer"
-            ],
-            "createBy": "ServiceAdmin",
-            "createTime": 1684431661266,
-            "name": "{Purview_DatabaseName}",
-            "@search.score": 3.496634
-        }
-    ],
-    "@search.facets": null
-}
+{"values":[{"recordId":"0","data":{"text":"Seattle"}},{"recordId":"1","data":{"text":"Redmond"}},{"recordId":"2","data":{"text":"Bothell"}},{"recordId":"3","data":{"text":"St. Louis"}},{"recordId":"4","data":{"text":"Portland"}},{"recordId":"5","data":{"text":"Memphis"}},{"recordId":"6","data":{"text":"Kirkland"}},{"recordId":"7","data":{"text":"West Hartford"}},{"recordId":"8","data":{"text":"San Diego"}},{"recordId":"9","data":{"text":"Mountain View"}},{"recordId":"10","data":{"text":"Detroit"}},{"recordId":"11","data":{"text":"Durham"}},{"recordId":"12","data":{"text":"Wilsonville"}},{"recordId":"13","data":{"text":"Atlanta"}},{"recordId":"14","data":{"text":"Austin"}},{"recordId":"15","data":{"text":"New York"}},{"recordId":"16","data":{"text":"Seattle"}},{"recordId":"17","data":{"text":"Dallas"}},{"recordId":"18","data":{"text":"San Antonio"}},{"recordId":"19","data":{"text":"Portland"}},{"recordId":"20","data":{"text":"Redmond"}},{"recordId":"21","data":{"text":"Aventura"}},{"recordId":"22","data":{"text":"Sarasota"}},{"recordId":"23","data":{"text":"Atlanta"}},{"recordId":"24","data":{"text":"Bellevue"}},{"recordId":"25","data":{"text":"Metairie"}},{"recordId":"26","data":{"text":"San Jose"}},{"recordId":"27","data":{"text":"Seattle"}},{"recordId":"28","data":{"text":"Chicago"}},{"recordId":"29","data":{"text":"Miami"}},{"recordId":"30","data":{"text":"Bellevue"}},{"recordId":"31","data":{"text":"Tulsa"}},{"recordId":"32","data":{"text":"New York"}},{"recordId":"33","data":{"text":"Fargo"}},{"recordId":"34","data":{"text":"Honolulu"}},{"recordId":"35","data":{"text":"Boise"}},{"recordId":"36","data":{"text":"Albuquerque"}},{"recordId":"37","data":{"text":"San Francisco"}},{"recordId":"38","data":{"text":"Cambridge"}},{"recordId":"39","data":{"text":"Scottsdale"}},{"recordId":"40","data":{"text":"Washington D.C."}},{"recordId":"41","data":{"text":"Lexington"}},{"recordId":"42","data":{"text":"Nashville"}},{"recordId":"43","data":{"text":"Denver"}},{"recordId":"44","data":{"text":"Boston"}},{"recordId":"45","data":{"text":"Arlington"}},{"recordId":"46","data":{"text":"San Francisco"}},{"recordId":"47","data":{"text":"New York"}},{"recordId":"48","data":{"text":"Tampa"}},{"recordId":"49","data":{"text":"Santa Clara"}}]}
 ```
 
+Click "**Run**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3b96537a-872f-4f67-b126-b295aaad42e5" width="800" title="Snipped: July 6, 2023" />
 
+The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
+
+```
+{"values":[{"recordId":"0","data":{"customercount":"4"},"errors":null,"warnings":null},{"recordId":"1","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"2","data":{"customercount":"4"},"errors":null,"warnings":null},{"recordId":"3","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"4","data":{"customercount":"3"},"errors":null,"warnings":null},{"recordId":"5","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"6","data":{"customercount":"1"},"errors":null,"warnings":null},{"recordId":"7","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"8","data":{"customercount":"1"},"errors":null,"warnings":null},{"recordId":"9","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"10","data":{"customercount":"1"},"errors":null,"warnings":null},{"recordId":"11","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"12","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"13","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"14","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"15","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"16","data":{"customercount":"4"},"errors":null,"warnings":null},{"recordId":"17","data":{"customercount":"6"},"errors":null,"warnings":null},{"recordId":"18","data":{"customercount":"5"},"errors":null,"warnings":null},{"recordId":"19","data":{"customercount":"3"},"errors":null,"warnings":null},{"recordId":"20","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"21","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"22","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"23","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"24","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"25","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"26","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"27","data":{"customercount":"4"},"errors":null,"warnings":null},{"recordId":"28","data":{"customercount":"5"},"errors":null,"warnings":null},{"recordId":"29","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"30","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"31","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"32","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"33","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"34","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"35","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"36","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"37","data":{"customercount":"1"},"errors":null,"warnings":null},{"recordId":"38","data":{"customercount":"1"},"errors":null,"warnings":null},{"recordId":"39","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"40","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"41","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"42","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"43","data":{"customercount":"2"},"errors":null,"warnings":null},{"recordId":"44","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"45","data":{"customercount":"1"},"errors":null,"warnings":null},{"recordId":"46","data":{"customercount":"1"},"errors":null,"warnings":null},{"recordId":"47","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"48","data":{"customercount":"0"},"errors":null,"warnings":null},{"recordId":"49","data":{"customercount":"0"},"errors":null,"warnings":null}]}
+```
 
 -----
 
