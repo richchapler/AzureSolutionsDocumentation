@@ -178,7 +178,7 @@ Logic Explained:
 
 In Visual Studio, right-click on the project and select **Publish** from the resulting drop-down menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ad817645-8678-4d8c-9b92-c63824a61162" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a48fdfe9-1afb-4628-938d-b327234ebfab" width="800" title="Snipped: July 6, 2023" />
 
 On the **Publish** >> "**Where are you publishing...**" page, select "**Azure**" and then click **Next**.
 
