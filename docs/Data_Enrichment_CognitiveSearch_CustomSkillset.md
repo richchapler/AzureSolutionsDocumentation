@@ -165,45 +165,39 @@ Logic Explained:
 * `req.HttpContext.Response...` sets the `Content-Type` header of the response to indicate that the response body contains JSON data
 * `return new OkObjectResult(...` returns an `HTTP 200 OK` response and serialized JSON version of the previously-created response Dictionary
 
-#### Sample Request Body
+#### Sample Request Body (abridged)
 
 `{"values":[{"recordId":"0","data":{"text":"Seattle"}},{"recordId":"1","data":{"text":"Redmond"}},...,{"recordId":"49","data":{"text":"Santa Clara"}}]}`
 
-#### Sample Response Body
+#### Sample Response Body (abridged)
 
 `{"values":[{"recordId":"0","data":{"customercount":"4"},"errors":null,"warnings":null},{"recordId":"1","data":{"customercount":"2"},"errors":null,"warnings":null},...,{"recordId":"49","data":{"customercount":"0"},"errors":null,"warnings":null}]}`
 
 ### Step 4: Publish to Azure
 
-* Continue in Visual Studio
+In Visual Studio, right-click on the project and select **Publish** from the resulting drop-down menu.
 
-  <img src="https://user-images.githubusercontent.com/44923999/212151843-6221cfc1-86cf-429e-a2a1-dc835102e989.png" width="800" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ad817645-8678-4d8c-9b92-c63824a61162" width="800" title="Snipped: July 6, 2023" />
 
-* Right-click on the project and select **Publish** from the resulting drop-down menu
+On the **Publish** >> "**Where are you publishing...**" page, select "**Azure**" and then click **Next**.
 
-  <img src="https://user-images.githubusercontent.com/44923999/212152235-d37d84e9-9889-48cb-8d02-6d1b040e34e8.png" width="600" title="Snipped: January 12, 2023" />
+<img src="https://user-images.githubusercontent.com/44923999/212152235-d37d84e9-9889-48cb-8d02-6d1b040e34e8.png" width="600" title="Snipped: July 6, 2023" />
 
-* On the **Publish** >> "**Where are you publishing...**" page, select "**Azure**" and then click **Next**
+On the **Publish** >> "**Which Azure service...**" page, select "**Azure Function App (Windows)**" and then click **Next**.
 
-  <img src="https://user-images.githubusercontent.com/44923999/212152644-c26e3467-4499-4ce4-946b-9b7ed376b3b3.png" width="600" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b0f6a61e-b741-4b48-a3d6-eb2ac5f711a7" width="600" title="Snipped: July 6, 2023" />
 
-* On the **Publish** >> "**Which Azure service...**" page, select "**Azure Function App (Windows)**" and then click **Next**
+On the **Publish** >> "**Select existing or...**" page, select your Function App and then click **Finish**.
 
-  <img src="https://user-images.githubusercontent.com/44923999/212153003-da72ba24-8d5b-4929-b187-913e0ba620cc.png" width="600" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4fe7bc1a-9be6-4efc-aa82-158f9e9b14ad" width="600" title="Snipped: July 6, 2023" />
 
-* On the **Publish** >> "**Select existing or...**" page, select your Function App and then click **Next**
+Back on the "...Publish" page, click **Publish** and confirm successful publication in the "**Output**" pane.
 
-  <img src="https://user-images.githubusercontent.com/44923999/212163888-82580072-ae94-4825-95f4-43f18fcc34c7.png" width="600" title="Snipped: January 12, 2023" />
 
-* On the **Publish** >> "**Enable API consumption...**" page, expand your instance of **API Management**, select "**echo-api**" and then click **Finish**
 
-  <img src="https://user-images.githubusercontent.com/44923999/212164072-b11eafdb-f4b5-4ac3-8f5c-bab9f33340ae.png" width="600" title="Snipped: January 12, 2023" />
 
-* On the **Publish profile creation progress**" page, confirm success and then click **Close**
 
-  <img src="https://user-images.githubusercontent.com/44923999/212164829-7fd5ee7a-2f7a-44d6-acef-cb3cd4568fda.png" width="800" title="Snipped: January 12, 2023" />
 
-* Back on the "...Publish" page, click **Publish** and confirm successful publication
 
 ### Step 5: Confirm Success
 
