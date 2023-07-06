@@ -174,6 +174,8 @@ Logic Explained:
 
 `{"values":[{"recordId":"0","data":{"customercount":"4"},"errors":null,"warnings":null},{"recordId":"1","data":{"customercount":"2"},"errors":null,"warnings":null},...,{"recordId":"49","data":{"customercount":"0"},"errors":null,"warnings":null}]}`
 
+-----
+
 ### Step 4: Publish to Azure
 
 In Visual Studio, right-click on the project and select **Publish** from the resulting drop-down menu.
@@ -195,6 +197,8 @@ On the **Publish** >> "**Select existing or...**" page, select your Function App
 Back on the "...Publish" page, click **Publish** and confirm successful publication in the "**Output**" pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e31d913e-62ee-4d6f-a117-aac39e57d4c9" width="800" title="Snipped: July 6, 2023" />
+
+-----
 
 ### Step 5: Confirm Success
 
