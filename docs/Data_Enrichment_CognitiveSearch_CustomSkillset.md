@@ -17,6 +17,7 @@ The proposed solution requires:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
+* [**Postman**](https://www.postman.com/product/workspaces/)
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 * [**Visual Studio**](https://visualstudio.microsoft.com/) with **Azure development** workload
 
@@ -197,18 +198,60 @@ Back on the "...Publish" page, click **Publish** and confirm successful publicat
 
 ### Step 5: Confirm Success
 
-Open the Azure Portal and navigate to the **StormEvents** function
+Navigate to the **GetData** function, "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9e12021-7b36-4586-96f2-dca2b0e3ec98" width="800" title="Snipped: " />
-
-Click "**Get Function URL**" and copy the value from the resulting pop-up.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6daab052-485d-44e0-8973-29bd9b34b61c" width="800" title="Snipped: July 6, 2023" />
-
-
-
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/96b3c7ea-8f74-4a51-baaa-64daf05f83ad" width="800" title="Snipped: July 6, 2023" />
 
 LOREM IPSUM
+
+
+
+
+
+
+
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6402a8f6-d7cd-4657-8205-2e6d8d62aff7" width="800" title="Snipped: May 22, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**HTTP Method** | `POST`
+**Enter URL**... | `https://{Purview_AccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Authorization** >> Type | `No Auth`
+**Headers** | `Authorization` :: `Bearer {Purview_AccessToken}`
+**Body** | `{ "filter": { "and": [ { "entityType": "azure_data_explorer_database" } ] } }`
+
+Click "**Send**"
+
+##### Expected Response
+Status: `200 OK`<br>
+```
+{
+    "@search.count": 1,
+    "value": [
+        {
+            "updateBy": "ServiceAdmin",
+            "id": "88a6bfb6-58c6-4cd3-9fdf-a4b3f79b7057",
+            "collectionId": "rchaplerp",
+            "isIndexed": true,
+            "qualifiedName": "https://rchaplerdec.westus3.kusto.windows.net/rchaplerded",
+            "entityType": "azure_data_explorer_database",
+            "updateTime": 1684432574026,
+            "assetType": [
+                "Azure Data Explorer"
+            ],
+            "createBy": "ServiceAdmin",
+            "createTime": 1684431661266,
+            "name": "{Purview_DatabaseName}",
+            "@search.score": 3.496634
+        }
+    ],
+    "@search.facets": null
+}
+```
+
+
+
 
 -----
 
