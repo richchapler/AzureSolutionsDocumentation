@@ -106,7 +106,7 @@ namespace CognitiveSearch_CustomSkillsetAPI
             SqlConnectionStringBuilder scsb = new SqlConnectionStringBuilder();
             scsb.DataSource = "{SQL_SERVER_NAME}.database.windows.net";
             scsb.UserID = "{SQL_ADMIN_LOGIN}";
-            scsb.Password = "{SQL_ADMIN_PASSWORD";
+            scsb.Password = "{SQL_ADMIN_PASSWORD}";
             scsb.InitialCatalog = "{SQL_DATABASE_NAME}";
 
             string request = await new StreamReader(req.Body).ReadToEndAsync();
