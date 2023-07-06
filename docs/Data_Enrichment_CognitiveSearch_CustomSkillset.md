@@ -97,16 +97,16 @@ using System.Threading.Tasks;
 
 namespace CognitiveSearch_CustomSkillsetAPI
 {
-    public static class getMetadata
+    public static class getData
     {
-        [FunctionName("getMetadata")]
+        [FunctionName("getData")]
         public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
             SqlConnectionStringBuilder scsb = new SqlConnectionStringBuilder();
-            scsb.DataSource = "rchaplersds.database.windows.net";
+            scsb.DataSource = "{SQL_SERVER_NAME}.database.windows.net";
             scsb.UserID = "{SQL_ADMIN_LOGIN}";
             scsb.Password = "{SQL_ADMIN_PASSWORD";
-            scsb.InitialCatalog = "rchaplersd";
+            scsb.InitialCatalog = "{SQL_DATABASE_NAME}";
 
             string request = await new StreamReader(req.Body).ReadToEndAsync();
 
@@ -151,11 +151,27 @@ namespace CognitiveSearch_CustomSkillsetAPI
 }
 ```
 
-  Logic Explained:
+Logic Explained:
 
-  * `using Kusto.Cloud.Platform.Data` and `using Kusto.Data.Common`... necessary to execute Data Explorer queries
-  * [KustoConnectionStringBuilder](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/api/connection-strings/kusto)
-  * `var q = "StormEvents | limit 3...` limits the result to just three rows to keep the exercise simple 
+* `using Microsoft.Data.SqlClient`... necessary to execute Data Explorer queries
+* [SqlConnectionStringBuilder](https://learn.microsoft.com/en-us/dotnet/api/microsoft.data.sqlclient.sqlconnectionstringbuilder?view=sqlclient-dotnet-standard-5.1)
+  * `{SQL_SERVER_NAME}`, etc... replace with values appropriate for your instantiation
+* `string request =...` reads the contents of the HTTP Request Body
+* `var d = new Dictionary...` prepares for response with the creation of a Dictionary; this must occur before the `foreach` loop to allow for iterative additions
+* `foreach (var value in JObject...` begins iteration through the HTTP Request Body
+* `using (SqlConnection...`, etc... runs T-SQL query logic to pull the count of customers for a given City
+* `var r = new Dictionary...` prepares for addition of a new record to previously-created response Dictionary
+* `((List<Dictionary...` adds the new record to the previously-created response Dictionary
+* `req.HttpContext.Response...` sets the `Content-Type` header of the response to indicate that the response body contains JSON data
+* `return new OkObjectResult(...` returns an `HTTP 200 OK` response and serialized JSON version of the previously-created response Dictionary
+
+#### Sample Request Body
+
+`{"values":[{"recordId":"0","data":{"text":"Seattle"}},{"recordId":"1","data":{"text":"Redmond"}},{"recordId":"2","data":{"text":"Bothell"}},{"recordId":"3","data":{"text":"St. Louis"}},{"recordId":"4","data":{"text":"Portland"}},{"recordId":"5","data":{"text":"Memphis"}},{"recordId":"6","data":{"text":"Kirkland"}},{"recordId":"7","data":{"text":"West Hartford"}},{"recordId":"8","data":{"text":"San Diego"}},{"recordId":"9","data":{"text":"Mountain View"}},{"recordId":"10","data":{"text":"Detroit"}},{"recordId":"11","data":{"text":"Durham"}},{"recordId":"12","data":{"text":"Wilsonville"}},{"recordId":"13","data":{"text":"Atlanta"}},{"recordId":"14","data":{"text":"Austin"}},{"recordId":"15","data":{"text":"New York"}},{"recordId":"16","data":{"text":"Seattle"}},{"recordId":"17","data":{"text":"Dallas"}},{"recordId":"18","data":{"text":"San Antonio"}},{"recordId":"19","data":{"text":"Portland"}},{"recordId":"20","data":{"text":"Redmond"}},{"recordId":"21","data":{"text":"Aventura"}},{"recordId":"22","data":{"text":"Sarasota"}},{"recordId":"23","data":{"text":"Atlanta"}},{"recordId":"24","data":{"text":"Bellevue"}},{"recordId":"25","data":{"text":"Metairie"}},{"recordId":"26","data":{"text":"San Jose"}},{"recordId":"27","data":{"text":"Seattle"}},{"recordId":"28","data":{"text":"Chicago"}},{"recordId":"29","data":{"text":"Miami"}},{"recordId":"30","data":{"text":"Bellevue"}},{"recordId":"31","data":{"text":"Tulsa"}},{"recordId":"32","data":{"text":"New York"}},{"recordId":"33","data":{"text":"Fargo"}},{"recordId":"34","data":{"text":"Honolulu"}},{"recordId":"35","data":{"text":"Boise"}},{"recordId":"36","data":{"text":"Albuquerque"}},{"recordId":"37","data":{"text":"San Francisco"}},{"recordId":"38","data":{"text":"Cambridge"}},{"recordId":"39","data":{"text":"Scottsdale"}},{"recordId":"40","data":{"text":"Washington D.C."}},{"recordId":"41","data":{"text":"Lexington"}},{"recordId":"42","data":{"text":"Nashville"}},{"recordId":"43","data":{"text":"Denver"}},{"recordId":"44","data":{"text":"Boston"}},{"recordId":"45","data":{"text":"Arlington"}},{"recordId":"46","data":{"text":"San Francisco"}},{"recordId":"47","data":{"text":"New York"}},{"recordId":"48","data":{"text":"Tampa"}},{"recordId":"49","data":{"text":"Santa Clara"}}]}`
+
+#### Sample Response Body
+
+
 
 ### Step 4: Publish to Azure
 
