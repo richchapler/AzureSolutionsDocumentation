@@ -23,7 +23,7 @@ The proposed solution requires:
 
 -----
 
-## Exercise 1: Create Project
+## Exercise 1: Create API
 In this exercise, we will create and publish a Function App-based API that will receive a parameter, query SQL, and package a response.
 
 ### Step 1: Create Visual Studio Project
