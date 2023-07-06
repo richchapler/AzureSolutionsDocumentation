@@ -21,7 +21,7 @@ The proposed solution requires:
 
 -----
 
-## Exercise 1: Create API
+## Exercise 1: Create Project
 In this exercise, we will create and publish a Function App-based API that will receive a parameter, query SQL, and package a response.
 
 ### Step 1: Create Visual Studio Project
@@ -73,19 +73,13 @@ Navigate to the "**Updates**" tab, check "**Select all packages**" and then clic
 
 -----
 
-
-
-
-
-
-
 ### Step 3: Update Logic
 
-* Rename "Function1.cs" to "StormEvents.cs" and open
+Rename "Function1.cs" to "GetData.cs" and open.
 
   <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: January 12, 2023" />
 
-* Replace the default code with:
+Replace the default code with:
 
   ```
   using Kusto.Cloud.Platform.Data;
