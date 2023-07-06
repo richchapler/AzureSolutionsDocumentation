@@ -189,7 +189,7 @@ On the **Publish** >> "**Which Azure service...**" page, select "**Azure Functio
 
 On the **Publish** >> "**Select existing or...**" page, select your Function App and then click **Finish**.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4fe7bc1a-9be6-4efc-aa82-158f9e9b14ad" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e31d913e-62ee-4d6f-a117-aac39e57d4c9" width="800" title="Snipped: July 6, 2023" />
 
 Back on the "...Publish" page, click **Publish** and confirm successful publication in the "**Output**" pane.
 
