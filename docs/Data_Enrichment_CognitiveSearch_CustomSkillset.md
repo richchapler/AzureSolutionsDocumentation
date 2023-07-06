@@ -8,7 +8,9 @@ This documentation considers the following requirements and goals:
 
 ## Proposed Solution
 * Create a "Get Data" API using a Function App
-* Add a custom skillset to the Cognitive Search index
+* Create a Cognitive Search index that includes a custom skillset
+
+_Note: Our pretend scenario will be that users of a "hotels" search index want to also know the count of customers in a given city {i.e. using sample "hotels" data from Cognitive Search and sample "CustomerAddress" data from SQL Server, AdventureWorks}_
 
 ## Solution Requirements
 The proposed solution requires:
@@ -225,6 +227,17 @@ The pop-out will switch to the "**Output**" tab and you can expect the following
 -----
 
 **Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 2: Create Index
+In this exercise, we will create a Cognitive Search index and then customize index, indexer, and skillset.
+
+### Step 1: Import Data
+
+Navigate to Cognitive Search.
+
+LOREM IPSUM
 
 -----
 
