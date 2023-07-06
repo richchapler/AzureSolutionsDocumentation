@@ -231,7 +231,7 @@ The pop-out will switch to the "**Output**" tab and you can expect the following
 -----
 
 ## Exercise 2: Create Index
-In this exercise, we will create a Cognitive Search index and then customize index, indexer, and skillset.
+In this exercise, we will create a Cognitive Search index and then customize the index, indexer, and skillset.
 
 ### Step 1: Import Data
 
