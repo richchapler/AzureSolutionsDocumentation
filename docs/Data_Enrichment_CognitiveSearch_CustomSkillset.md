@@ -198,7 +198,7 @@ Back on the "...Publish" page, click **Publish** and confirm successful publicat
 
 ### Step 5: Confirm Success
 
-Navigate to the **GetData** function, "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
+Navigate to the **GetData** function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/96b3c7ea-8f74-4a51-baaa-64daf05f83ad" width="800" title="Snipped: July 6, 2023" />
 
