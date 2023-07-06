@@ -195,16 +195,17 @@ Back on the "...Publish" page, click **Publish** and confirm successful publicat
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e31d913e-62ee-4d6f-a117-aac39e57d4c9" width="800" title="Snipped: July 6, 2023" />
 
-
-
-
-
-
 ### Step 5: Confirm Success
 
-* Open the Azure Portal and navigate to the **StormEvents** function
+Open the Azure Portal and navigate to the **StormEvents** function
 
-  <img src="https://user-images.githubusercontent.com/44923999/212186832-c9f2d533-de7f-4f8b-85ab-5043c100619d.png" width="800" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9e12021-7b36-4586-96f2-dca2b0e3ec98" width="800" title="Snipped: July 6, 2023" />
+
+
+
+
+
+
 
 * Click "**Get Function URL**" and copy the value from the resulting pop-up
 
