@@ -17,6 +17,7 @@ The proposed solution requires:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
+* [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 * [**Visual Studio**](https://visualstudio.microsoft.com/) with **Azure development** workload
 
 -----
@@ -77,68 +78,78 @@ Navigate to the "**Updates**" tab, check "**Select all packages**" and then clic
 
 Rename "Function1.cs" to "GetData.cs" and open.
 
-  <img src="https://user-images.githubusercontent.com/44923999/208928042-53491842-c66e-4501-a208-46ca5eadadb2.png" width="800" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ce428390-fb00-410b-aa8e-8d6441a0589d" width="800" title="Snipped: July 6, 2023" />
 
 Replace the default code with:
 
-  ```
-  using Kusto.Cloud.Platform.Data;
-  using Kusto.Data.Common;
-  using Microsoft.AspNetCore.Http;
-  using Microsoft.AspNetCore.Mvc;
-  using Microsoft.Azure.WebJobs;
-  using Microsoft.Azure.WebJobs.Extensions.Http;
-  using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-  using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
-  using Microsoft.Extensions.Logging;
-  using Microsoft.OpenApi.Models;
-  using System;
-  using System.Net;
-  using System.Threading.Tasks;
+```
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
-  namespace StormEvents
-  {
-      public class StormEvents
-      {
-          private readonly ILogger<StormEvents> _logger;
+namespace CognitiveSearch_CustomSkillsetAPI
+{
+    public static class getMetadata
+    {
+        [FunctionName("getMetadata")]
+        public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        {
+            SqlConnectionStringBuilder scsb = new SqlConnectionStringBuilder();
+            scsb.DataSource = "rchaplersds.database.windows.net";
+            scsb.UserID = "{SQL_ADMIN_LOGIN}";
+            scsb.Password = "{SQL_ADMIN_PASSWORD";
+            scsb.InitialCatalog = "rchaplersd";
 
-          public StormEvents(ILogger<StormEvents> log) { _logger = log; }
+            string request = await new StreamReader(req.Body).ReadToEndAsync();
 
-          [FunctionName("StormEvents")]
-          [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
-          [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-          [OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
-          [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "This is the StormEvent data!")]
+            var d = new Dictionary<string, object> { { "values", new List<Dictionary<string, object>>() } };
 
-          public async Task<IActionResult> Run(
-              [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req)
-          {
-              var kcsb = new Kusto.Data.KustoConnectionStringBuilder(
-                  connectionString: "https://rchaplerdec.westus3.kusto.windows.net").WithAadApplicationKeyAuthentication(
-                      applicationClientId: "CLIENT_ID",
-                      applicationKey: "CLIENT_SECRET",
-                      authority: "TENANT_ID"
-                  );
+            foreach (var value in JObject.Parse(request)["values"])
+            {
+                string c = "0";
 
-              try
-              {
-                  var cqp = Kusto.Data.Net.Client.KustoClientFactory.CreateCslQueryProvider(kcsb);
+                string sql = "SELECT COUNT(*)\r\nFROM [SalesLT].[CustomerAddress] CA\r\nINNER JOIN [SalesLT].[Address] A ON CA.AddressId=A.AddressId\r\nWHERE A.City = '" + (string)value["data"]["text"] + "'\r\n";
 
-                  var q = "StormEvents | limit 3 | project StartTime, EventType, State";
-                  var crp = new ClientRequestProperties() { ClientRequestId = Guid.NewGuid().ToString() };
+                using (SqlConnection sc = new SqlConnection(scsb.ConnectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(cmdText: sql, connection: sc))
+                    {
+                        sc.Open();
 
-                  var result = cqp.ExecuteQuery(databaseName: "Customer1", query: q, properties: crp).ToJsonString();
+                        using (SqlDataReader sdr = command.ExecuteReader()) { if (sdr.Read()) { c = sdr.GetInt32(0).ToString(); } }
 
-                  return new OkObjectResult(result);
-              }
-              catch (Exception e)
-              {
-                  return new OkObjectResult(e.ToString());
-              }
-          }
-      }
-  }
-  ```
+                        sc.Close();
+                    }
+                }
+
+                var r = new Dictionary<string, object>
+                {
+                    { "recordId", (string)value["recordId"] },
+                    { "data", new Dictionary<string, string> { { "customercount", c } } },
+                    { "errors", null },
+                    { "warnings", null }
+                };
+
+                ((List<Dictionary<string, object>>)d["values"]).Add(r);
+            }
+
+            req.HttpContext.Response.Headers.Add("Content-Type", "application/json");
+
+            log.LogInformation(JsonConvert.SerializeObject(d));
+
+            return new OkObjectResult(JsonConvert.SerializeObject(d));
+        }
+    }
+}
+```
 
   Logic Explained:
 
