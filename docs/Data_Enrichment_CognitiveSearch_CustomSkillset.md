@@ -300,6 +300,34 @@ Append the following JSON just after `{"name":"keyphrases"...}`:
 
 Click "**Save**".
 
+-----
+
+### Step 3: Customize Indexer
+Navigate to the "**Indexers**" tab and click on the new indexer.<br>
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d70400a-aec3-40d5-b9b4-850d1520fdbf" width="800" title="Snipped: July 7, 2023" />
+
+Click "**Indexer Definition (JSON)**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a6f314df-b945-4dfc-903f-2b8a5dd70f48" width="800" title="Snipped: July 7, 2023" />
+
+Append the following JSON just after `{"sourceFieldName":"/document/HotelId/keyphrases"...}`:
+
+```
+,
+    {
+      "sourceFieldName": "/document/customercount",
+      "targetFieldName": "customercount"
+    }
+```
+
+Click "**Save**".
+
+
+
+
+
+
 
 
 -----
