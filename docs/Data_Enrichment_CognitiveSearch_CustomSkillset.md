@@ -241,17 +241,23 @@ Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1042b042-a8af-4338-a7fe-390d0e7d71ef" width="800" title="Snipped: July 7, 2023" />
 
 On the "**Connect to your data**" tab, select Data Source "**Samples**" and then "**hotels-sample**" on the resulting list.
-<br>Click "**Next: Add cognitive skills** (Optional)".
+<br>Click "**Next: Add cognitive skills (Optional)**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bee429ee-a772-49a4-8400-ceb69db9db4b" width="800" title="Snipped: July 7, 2023" />
 
 On the "****Add cognitive skills (Optional)****" tab, expand "**Attach Cognitive Services**" and select your Cognitive Services instance from the list.
 <br>Collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7e25f1e7-7095-4f6b-b2e8-bb2fb2121d94" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/aacf729e-c64d-445d-9428-3b8799c0ffdd" width="800" title="Snipped: July 7, 2023" />
 
 Check "**Extract key phrases**".
 <br>_Note: we do not require key phrases for this exercise, but adding this enrichment will make later customizations more simple_
+<br><br>Click "**Next: Customize target index".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b4bc3a1e-7101-4913-a549-1a26938f66bf" width="800" title="Snipped: July 7, 2023" />
+
+No changes are necessary on the "Customize target index" tab.
+<br>Click "**Next: Create an indexer**".
 
 
 
@@ -260,12 +266,6 @@ Check "**Extract key phrases**".
 
 
 
-
-
-On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**" and select all available options.<br>
-Click "**Next: Create an indexer**".
-
-<img src="https://user-images.githubusercontent.com/44923999/226385246-bf6f57bf-c315-4513-9920-fd4254f7c4ec.png" width="800" title="Snipped: March 20, 2023" />
 
 On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
 
