@@ -273,9 +273,32 @@ Click "**Edit JSON**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29f6c4c2-6f99-4df6-9697-8e8b5266cf60" width="800" title="Snipped: July 7, 2023" />
 
+Append the following JSON just after `{"name":"keyphrases"...}`:
 
+```
+,
+    {
+      "name": "customercount",
+      "type": "Edm.String",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "indexAnalyzer": null,
+      "searchAnalyzer": null,
+      "analyzer": null,
+      "normalizer": null,
+      "dimensions": null,
+      "vectorSearchConfiguration": null,
+      "synonymMaps": []
+    }
+```
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/803ec460-35f1-4ad9-abcc-57eb3e70b839" width="800" title="Snipped: July 7, 2023" />
 
+Click "**Save**".
 
 
 
