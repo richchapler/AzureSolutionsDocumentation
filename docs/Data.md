@@ -25,6 +25,7 @@
 
   Use Case | Method | Source | Target | Type
   :----- | :----- | :----- | :----- | :-----
+  [Cognitive Search, Custom "Get Data" Skillset](Data_Enrichment_CognitiveSearch_CustomSkillset.md) | Custom Skills >> API | SQL | Cognitive Search Index | C# (Function App)
   [Mid-Stream Processing via Function App](Data_Enrichment_MidStreamProcessing_viaFunctionApp.md) | Continuous Ingestion | Event Hub | Data Explorer | C# (Function App)
   [Mid-Stream Processing via Stream Analytics](Data_Enrichment_MidStreamProcessing_viaStreamAnalytics.md) | Stream Analytics | IoT Hub | Data Explorer | SQL
   [OpenAI](Data_Enrichment_OpenAI.md) | Synapse Pipeline | OpenAI | Data Explorer | API
