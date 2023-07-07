@@ -243,7 +243,15 @@ Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 On the "**Connect to your data**" tab, select Data Source "**Samples**" and then "**hotels-sample**" on the resulting list.
 <br>Click "**Next: Add cognitive skills** (Optional)".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bee429ee-a772-49a4-8400-ceb69db9db4b" width="800" title="Snipped: July 7, 2023" />
+
+On the "****Add cognitive skills (Optional)****" tab, expand "**Attach Cognitive Services**" and select your Cognitive Services instance from the list.
+<br>Collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7e25f1e7-7095-4f6b-b2e8-bb2fb2121d94" width="800" title="Snipped: July 7, 2023" />
+
+Check "**Extract key phrases**".
+<br>_Note: we do not require key phrases for this exercise, but adding this enrichment will make later customizations more simple_
 
 
 
@@ -252,24 +260,7 @@ On the "**Connect to your data**" tab, select Data Source "**Samples**" and then
 
 
 
-On the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
 
-<img src="https://user-images.githubusercontent.com/44923999/226380779-1feebb45-d656-4288-ae6b-f6e67c48a5e8.png" width="800" title="Snipped: March 20, 2023" />
-
-Select your instance of Cognitive Services.<br>
-Collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
-
-<img src="https://user-images.githubusercontent.com/44923999/226403680-d650824d-0b63-4334-b3a9-1179890dfc44.png" width="800" title="Snipped: March 20, 2023" />
-
-On the "**Add cognitive skills**..." tab,  select:
-* "Extract people names"
-* "Extract organization names"
-* "Extract location names"
-* "Extract key phrases"
-
-Click "**Next: Customize target index**".
-
-<img src="https://user-images.githubusercontent.com/44923999/226404041-aa514da5-1a5c-4edd-90c9-a034488f15be.png" width="800" title="Snipped: March 20, 2023" />
 
 On the "**Customize target index**" tab, enter **Suggester** name "**azuresql-suggester**" and select all available options.<br>
 Click "**Next: Create an indexer**".
