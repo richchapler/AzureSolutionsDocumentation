@@ -324,6 +324,50 @@ Append the following JSON just after `{"sourceFieldName":"/document/HotelId/keyp
 Click "**Save**".
 
 
+-----
+
+### Step 4: Customize Skillset
+Navigate to the "**Skillsets**" tab and click on the new skillset.<br>
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9f632991-e6c4-45cf-9527-0c4753c5613c" width="800" title="Snipped: July 7, 2023" />
+
+Append the following JSON just after `"{@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill...}`:
+
+```
+,
+    {
+      "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+      "name": "getData",
+      "description": null,
+      "context": "/document",
+      "uri": "{FUNCTION_URL}",
+      "httpMethod": "POST",
+      "timeout": "PT30S",
+      "batchSize": 1000,
+      "degreeOfParallelism": null,
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/Address/City"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "customercount",
+          "targetName": "customercount"
+        }
+      ],
+      "httpHeaders": {}
+    }
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2880aba-a9f9-43c7-86ff-9f5110b66dac" width="800" title="Snipped: July 7, 2023" />
+
+Click "**Save**".
+
+
+
+
 
 
 
