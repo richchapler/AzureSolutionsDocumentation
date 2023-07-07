@@ -331,7 +331,7 @@ Navigate to the "**Skillsets**" tab and click on the new skillset.<br>
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9f632991-e6c4-45cf-9527-0c4753c5613c" width="800" title="Snipped: July 7, 2023" />
 
-Append the following JSON just after `"{@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill...}`:
+Modify and append the following JSON just after `"{@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill...}`:
 
 ```
 ,
@@ -365,115 +365,22 @@ Append the following JSON just after `"{@odata.type": "#Microsoft.Skills.Text.Ke
 
 Click "**Save**".
 
+-----
 
+### Step 5: Confirm Success
+Navigate to the indexer, click "**Run**" and then "**Yes**", confirming that you want to run the indexer.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3c5959e1-7b71-4ee9-8c0f-d60b09640441" width="800" title="Snipped: July 7, 2023" />
 
+Click "Refresh".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/55774804-b1f4-4b89-84a6-0ad64f2a2630" width="800" title="Snipped: July 7, 2023" />
 
-
-
-
+Confirm successful execution.
 
 -----
 
-### Step X: Confirm Success
-Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
-
-<img src="https://user-images.githubusercontent.com/44923999/226418120-1ab6b78c-8b5d-4abf-a75f-e50a19ab6061.png" width="800" title="Snipped: March 20, 2023" />
-
-Click on the newly-created Indexer.
-
-<img src="https://user-images.githubusercontent.com/44923999/226404925-b1cf0637-b9db-4093-b5e7-62bdaa7d2140.png" width="800" title="Snipped: March 20, 2023" />
-
-Confirm successful execution.<br>
-Navigate to the "**Indexer Definition (JSON)**" tab.
-
-<img src="https://user-images.githubusercontent.com/44923999/226405366-d5a3beaf-4c32-40ad-bd8c-43e3c1059a84.png" width="800" title="Snipped: March 20, 2023" />
-
-Review the produced JSON content... we will use the example below in Exercise Three.
-
-```
-{
-  "@odata.context": "https://rchaplerss.search.windows.net/$metadata#indexers/$entity",
-  "@odata.etag": "\"0x8DB295E944A0232\"",
-  "name": "azuresql-indexer",
-  "description": "",
-  "dataSourceName": "rchaplersds-rchaplersd",
-  "skillsetName": "azuresql-skillset",
-  "targetIndexName": "azuresql-index",
-  "disabled": null,
-  "schedule": null,
-  "parameters": {
-    "batchSize": null,
-    "maxFailedItems": 0,
-    "maxFailedItemsPerBatch": 0,
-    "base64EncodeKeys": false,
-    "configuration": {}
-  },
-  "fieldMappings": [],
-  "outputFieldMappings": [
-    {
-      "sourceFieldName": "/document/ProductID/people",
-      "targetFieldName": "people"
-    },
-    {
-      "sourceFieldName": "/document/ProductID/organizations",
-      "targetFieldName": "organizations"
-    },
-    {
-      "sourceFieldName": "/document/ProductID/locations",
-      "targetFieldName": "locations"
-    },
-    {
-      "sourceFieldName": "/document/ProductID/keyphrases",
-      "targetFieldName": "keyphrases"
-    }
-  ],
-  "cache": null,
-  "encryptionKey": null
-}
-```
-
-Navigate to Cognitive Search, "**Overview**" and then the "**Indexes**" tab.<br>
-Click on the newly-created index.
-
-<img src="https://user-images.githubusercontent.com/44923999/226405949-7cc8aafa-4b24-44b0-90a6-2773ba0275ed.png" width="800" title="Snipped: March 20, 2023" />
-
-Paste the following "**Query string**" value: `$top=1` and then click **Search**.<br>
-Review "**Results**" content; example below:
-
-```
-{
-  "@odata.context": "https://rchaplerss.search.windows.net/indexes('azuresql-index')/$metadata#docs(*)",
-  "value": [
-    {
-      "@search.score": 1,
-      "ProductID": "710",
-      "Name": "Mountain Bike Socks, L",
-      "ProductNumber": "SO-B909-L",
-      "Color": "White",
-      "StandardCost": "3.3963",
-      "ListPrice": "9.5000",
-      "Size": "L",
-      "Weight": null,
-      "ProductCategoryID": 27,
-      "ProductModelID": 18,
-      "SellStartDate": "2005-07-01T00:00:00Z",
-      "SellEndDate": "2006-06-30T00:00:00Z",
-      "DiscontinuedDate": null,
-      "ThumbnailPhotoFileName": "no_image_available_small.gif",
-      "rowguid": "161c035e-21b3-4e14-8e44-af508f35d80a",
-      "ModifiedDate": "2008-03-11T10:01:36.827Z",
-      "people": [],
-      "organizations": [],
-      "locations": [],
-      "keyphrases": []
-    }
-  ]
-}
-```
-
-LOREM IPSUM
+**Congratulations... you have successfully completed this exercise**
 
 -----
 
