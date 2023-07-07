@@ -254,10 +254,24 @@ Check "**Extract key phrases**".
 <br>_Note: we do not require key phrases for this exercise, but adding this enrichment will make later customizations more simple_
 <br><br>Click "**Next: Customize target index".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b4bc3a1e-7101-4913-a549-1a26938f66bf" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/19e45b7c-d7fb-4c7e-b2a8-f52e84b7439a" width="800" title="Snipped: July 7, 2023" />
 
-No changes are necessary on the "Customize target index" tab.
-<br>Click "**Next: Create an indexer**".
+No changes are necessary on the "**Customize target index**" tab... click "**Next: Create an indexer**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e905a174-de1c-4570-974b-8fee57c8fecf" width="800" title="Snipped: July 7, 2023" />
+
+No changes are necessary on the "**Create an indexer**" tab... click "**Submit**".
+
+-----
+
+### Step 2: Customize Index
+Navigate to the "**Indexes**" tab and click on the new index.<br>
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/31306483-1a99-40a7-b6fc-780175900913" width="800" title="Snipped: July 7, 2023" />
+
+Click "**Edit JSON**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29f6c4c2-6f99-4df6-9697-8e8b5266cf60" width="800" title="Snipped: July 7, 2023" />
 
 
 
@@ -265,11 +279,9 @@ No changes are necessary on the "Customize target index" tab.
 
 
 
+-----
 
-
-On the "**Create an indexer**" tab, confirm default values and then click "**Submit**".
-
-### Step 2: Confirm Success
+### Step X: Confirm Success
 Navigate to Cognitive Search, "**Overview**" and then the "**Indexers**" tab.<br>
 
 <img src="https://user-images.githubusercontent.com/44923999/226418120-1ab6b78c-8b5d-4abf-a75f-e50a19ab6061.png" width="800" title="Snipped: March 20, 2023" />
