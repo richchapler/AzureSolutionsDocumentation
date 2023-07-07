@@ -15,6 +15,7 @@ _Note: Our pretend scenario will be that users of a "hotels" search index want t
 ## Solution Requirements
 The proposed solution requires:
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+* [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), including dependencies:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
@@ -237,6 +238,12 @@ In this exercise, we will create a Cognitive Search index and then customize the
 
 Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1042b042-a8af-4338-a7fe-390d0e7d71ef" width="800" title="Snipped: July 7, 2023" />
+
+On the "**Connect to your data**" tab, select Data Source "**Samples**" and then "**hotels-sample**" on the resulting list.
+<br>Click "**Next: Add cognitive skills** (Optional)".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/" width="800" title="Snipped: July 7, 2023" />
 
 
 
@@ -245,20 +252,6 @@ Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
 
 
-
-<img src="https://user-images.githubusercontent.com/44923999/226375829-57106809-9582-46b5-ba64-638d3348e36b.png" width="800" title="Snipped: March 20, 2023" />
-
-Complete the "**Import Data**" >> "**Connect to your data**" form, including:
-
-Prompt | Entry
-:----- | :-----
-**Data Source** | Select "**Azure SQL Database**"
-**Data source name** | Enter a meaningful name aligned with your standard {e.g., SERVER-DATABASE}
-**Connection string** | Click "**Choose an existing connection**", then select your SQL Database from the resulting pop-out menu
-**Managed identity authentication** | Select "**System-assigned**"
-**Table/View** | Enter "**SalesLT.Product**"
-
-Click "**Next: Add cognitive skills**...".<br>
 On the resulting "**Add cognitive skills**..." page, expand "**Attach Cognitive Services**".
 
 <img src="https://user-images.githubusercontent.com/44923999/226380779-1feebb45-d656-4288-ae6b-f6e67c48a5e8.png" width="800" title="Snipped: March 20, 2023" />
