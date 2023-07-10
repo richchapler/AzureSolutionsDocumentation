@@ -271,6 +271,7 @@ print(s.value)
 
 Logic Explained:
 
+* `from azure...` imports Azure classes
 * `{KEYVAULT_URI}`, etc... should be replaced with values specific to your configuration
 * `credential = ...`, etc... creates a DefaultAzureCredential object capable of handling most Azure SDK authentication scenarios
 * `sc =...` creates a SecretClient object that provides methods to manage secrets in the Key Vault
