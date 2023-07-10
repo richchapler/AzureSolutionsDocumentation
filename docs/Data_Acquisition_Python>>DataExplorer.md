@@ -26,13 +26,14 @@ In this exercise, we will create a Databricks Notebook with Python code blocks.
 
 ### Step 1: Prepare Resources
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8d067703-484c-44bc-a433-6ba04d3692ee" width="800" title="Snipped: July 10, 2023" />
-
 Open Databricks and click "**Launch Workspace**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c3a0ed84-f7e9-4fb5-b0a4-bc0aed92fc97" width="800" title="Snipped: July 10, 2023" />
 
 Click "**Create a notebook**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c3a0ed84-f7e9-4fb5-b0a4-bc0aed92fc97" width="800" title="Snipped: July 10, 2023" />
+
 
 -----
 
