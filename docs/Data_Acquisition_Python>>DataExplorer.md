@@ -17,9 +17,10 @@ This documentation considers the following requirements and goals:
 The proposed solution requires:
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 * [**Databricks**](https://learn.microsoft.com/en-us/azure/databricks/)
-* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/) with:
+* [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/), with...
   * [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
-* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with [Secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault), with...
+  * [Secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets) for the Application Registration, Client Secret
 
 _Note: As of July 10, 2023... the Data Explorer / Python libraries do not support authentication with a User-Assigned Managed Identity_
 
@@ -300,9 +301,9 @@ You can expect a response like...
 [10 rows x 22 columns]
 ```
 
-### Step 2: Connect Python >> Data Explorer via Service Principal
+### Step 3: Prepare for Key Vault
 
-
+Navigate to your Key Vault
 
 
 
