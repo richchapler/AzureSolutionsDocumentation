@@ -1,4 +1,4 @@
-# Data Acquisition: Python >> Data Explorer via Service Principal / Key Vault
+# Data Acquisition: Python >> Data Explorer, Secure Connection
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/88915f08-7bfa-4e93-86e6-1f462e3b66a4" width="1000" />
 
