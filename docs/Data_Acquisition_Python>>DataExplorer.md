@@ -187,21 +187,22 @@ Continuing in the notebook... add a cell, then paste and run the following Pytho
 
 ```
 from azure.identity import DefaultAzureCredential
+from azure.keyvault.secrets import SecretClient
 from azure.kusto.data import KustoClient, KustoConnectionStringBuilder
 from azure.kusto.data.helpers import dataframe_from_result_table
 
-kustoCluster = "https://rchaplerdec.westus.kusto.windows.net"
-kustoDatabase = "rchaplerded"
-clientId = "731995c1-a129-4a24-ab99-064dc4cfe2ac"
-clientSecret = "Tqb8Q~AkQ-hO5XN8lhDkUBpDkeDSgiM4RnC0hasR"
-authorityId = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+# Data Explorer
+adxCluster = "{DATAEXPLORER_URI}"
+adxDatabase = "{DATAEXPLORER_DATABASE}"
+clientId = "{APPLICATIONREGISTRATION_CLIENTID}"
+clientSecret = "{APPLICATIONREGISTRATION_CLIENTSECRET}"
+authorityId = "{TENANT_ID}"
 
-kcsb = KustoConnectionStringBuilder.with_aad_application_key_authentication(
-    kustoCluster, clientId, clientSecret, authorityId )
+kcsb = KustoConnectionStringBuilder.with_aad_application_key_authentication( adxCluster, clientId, clientSecret, authorityId )
 
-kustoClient = KustoClient(kcsb)
-kustoQuery = "StormEvents | take 10"
-response = kustoClient.execute(kustoDatabase, kustoQuery)
+kc = KustoClient(kcsb)
+adxQuery = "StormEvents | take 10"
+response = kc.execute(adxDatabase, adxQuery)
 
 df = dataframe_from_result_table(response.primary_results[0])
 
@@ -210,10 +211,92 @@ print(df)
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc7bd2f2-40c2-49a9-867c-b23f45768e4c" width="800" title="Snipped: July 10, 2023" />
 
-Code explained:
+Logic Explained:
 
+* `from azure...` imports Azure classes
+* `{DATAEXPLORER_URI}`, etc... should be replaced with values specific to your configuration
+* `kcsb =...` creates a KustoConnectionStringBuilder object that can be used to connect to Data Explorer using Azure Active Directory, Application Registration authentication
+* `kc =...` creates a KustoClient object that can query Data Explorer databases
+* `response = kc.execute(...` executes a query on Data Explorer
+* `df = dataframe_from_result_table(...` converts a Data Explorer result table into a Pandas DataFrame object
 
+You can expect a response like...
 
+```
+                  StartTime                   EndTime  EpisodeId  EventId  \
+0 2007-01-01 00:00:00+00:00 2007-01-01 00:00:00+00:00       2592    13208   
+1 2007-01-01 00:00:00+00:00 2007-01-01 05:00:00+00:00       4171    23358   
+2 2007-01-01 00:00:00+00:00 2007-01-01 05:00:00+00:00       4171    23357   
+3 2007-01-01 00:00:00+00:00 2007-01-01 06:00:00+00:00       1930     9494   
+4 2007-01-01 00:00:00+00:00 2007-01-01 06:00:00+00:00       1930     9488   
+5 2007-01-01 00:00:00+00:00 2007-01-01 06:00:00+00:00       1930     9487   
+6 2007-01-01 00:00:00+00:00 2007-01-01 06:00:00+00:00       1930     9485   
+7 2007-01-01 00:00:00+00:00 2007-01-01 06:00:00+00:00       1930     9486   
+8 2007-01-01 00:00:00+00:00 2007-01-01 06:00:00+00:00       1930     9493   
+9 2007-01-01 00:00:00+00:00 2007-01-01 06:00:00+00:00       1930     9489   
+
+            State          EventType  InjuriesDirect  InjuriesIndirect  \
+0  NORTH CAROLINA  Thunderstorm Wind               0                 0   
+1       WISCONSIN       Winter Storm               0                 0   
+2       WISCONSIN       Winter Storm               0                 0   
+3        NEW YORK     Winter Weather               0                 0   
+4        NEW YORK     Winter Weather               0                 0   
+5        NEW YORK     Winter Weather               0                 0   
+6        NEW YORK     Winter Weather               0                 0   
+7        NEW YORK     Winter Weather               0                 0   
+8        NEW YORK     Winter Weather               0                 0   
+9        NEW YORK     Winter Weather               0                 0   
+
+   DeathsDirect  DeathsIndirect  ...                  Source  BeginLocation  \
+0             0               0  ...                  Public          CASAR   
+1             0               0  ...           COOP Observer                  
+2             0               0  ...           COOP Observer                  
+3             0               0  ...  Department of Highways                  
+4             0               0  ...  Department of Highways                  
+5             0               0  ...  Department of Highways                  
+6             0               0  ...  Department of Highways                  
+7             0               0  ...  Department of Highways                  
+8             0               0  ...  Department of Highways                  
+9             0               0  ...  Department of Highways                  
+
+  EndLocation BeginLat BeginLon  EndLat  EndLon  \
+0       CASAR    35.52   -81.63   35.52  -81.63   
+1                 <NA>     <NA>    <NA>    <NA>   
+2                 <NA>     <NA>    <NA>    <NA>   
+3                 <NA>     <NA>    <NA>    <NA>   
+4                 <NA>     <NA>    <NA>    <NA>   
+5                 <NA>     <NA>    <NA>    <NA>   
+6                 <NA>     <NA>    <NA>    <NA>   
+7                 <NA>     <NA>    <NA>    <NA>   
+8                 <NA>     <NA>    <NA>    <NA>   
+9                 <NA>     <NA>    <NA>    <NA>   
+
+                                    EpisodeNarrative       EventNarrative  \
+0  A small cluster of thunderstorms moved rapidly...  Several trees down.   
+1  A powerful storm system moved from the souther...                        
+2  A powerful storm system moved from the souther...                        
+3  A weak area of low pressure moved across Ontar...                        
+4  A weak area of low pressure moved across Ontar...                        
+5  A weak area of low pressure moved across Ontar...                        
+6  A weak area of low pressure moved across Ontar...                        
+7  A weak area of low pressure moved across Ontar...                        
+8  A weak area of low pressure moved across Ontar...                        
+9  A weak area of low pressure moved across Ontar...                        
+
+                                        StormSummary  
+0  {'TotalDamages': 0, 'StartTime': '2007-01-01T0...  
+1  {'TotalDamages': 0, 'StartTime': '2007-01-01T0...  
+2  {'TotalDamages': 0, 'StartTime': '2007-01-01T0...  
+3  {'TotalDamages': 2000, 'StartTime': '2007-01-0...  
+4  {'TotalDamages': 2000, 'StartTime': '2007-01-0...  
+5  {'TotalDamages': 2000, 'StartTime': '2007-01-0...  
+6  {'TotalDamages': 3000, 'StartTime': '2007-01-0...  
+7  {'TotalDamages': 3000, 'StartTime': '2007-01-0...  
+8  {'TotalDamages': 2000, 'StartTime': '2007-01-0...  
+9  {'TotalDamages': 2000, 'StartTime': '2007-01-0...  
+
+[10 rows x 22 columns]
+```
 
 
 
