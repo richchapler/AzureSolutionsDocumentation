@@ -20,6 +20,9 @@
   [...from Log Analytics API](Data_Acquisition_LogAnalyticsAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
   [...from Purview API](Data_Acquisition_PurviewAPI.md) | Synapse Pipeline | Azure API | Data Lake | Low Code
   [...from Resource Diagnostics](Data_Acquisition_ResourceDiagnostics.md) | Continuous Ingestion (Event Hub) | Resource Diagnostics | Data Explorer | No Code
+  [Python >> ADX](Data_Acquisition_Python>>DataExplorer.md) | Databricks | Data Explorer | Data Frame | Python
+
+  
 
 ### Enrich
 
