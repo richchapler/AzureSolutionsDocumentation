@@ -1,12 +1,12 @@
 # Data Acquisition: Python >> ADX via Service Principal / Key Vault
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d7ad1df6-3f08-4397-88b6-a4b7b67ea90d" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/88915f08-7bfa-4e93-86e6-1f462e3b66a4" width="1000" />
 
 ## Use Case
 This documentation considers the following requirements and goals:
-* "We want to connect to Data Explorer with Python"
+* "We want to connect our Python Web App to Data Explorer"
 * "We do not want to use device or user login"
-* "We do not want to bake any keys or secrets into our Python code"
+* "We do not want to bake keys or secrets into Python code"
 
 ## Proposed Solution
 * Demonstrate secure Python >> Data Explorer connectivity
@@ -21,7 +21,7 @@ The proposed solution requires:
 
 -----
 
-## Exercise 1: Create API
+## Exercise 1: Create Demonstration
 In this exercise, we will create and publish a Function App-based API that will receive a parameter, query SQL, and package a response.
 
 ### Step 1: Create Visual Studio Project
