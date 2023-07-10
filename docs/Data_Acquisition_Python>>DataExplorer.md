@@ -267,7 +267,7 @@ s = secretClient.get_secret(secretName)
 print(s.value)
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7c4ce4b8-6e08-49e3-b985-4d929b384368" width="800" title="Snipped: July 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d3adc37e-10b7-4569-8a1d-e506eec15806" width="800" title="Snipped: July 10, 2023" />
 
 Logic Explained:
 
