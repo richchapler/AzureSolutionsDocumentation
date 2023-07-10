@@ -21,6 +21,7 @@ The proposed solution requires:
   * [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault), with...
   * [Secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets) for the Application Registration, Client Secret
+  * Databricks Managed Id ("dbmanagedidentity") assigned "Key Vault Secrets User" role
 
 _Note: As of July 10, 2023... the Data Explorer / Python libraries do not support authentication with a User-Assigned Managed Identity_
 
@@ -194,7 +195,6 @@ from azure.keyvault.secrets import SecretClient
 from azure.kusto.data import KustoClient, KustoConnectionStringBuilder
 from azure.kusto.data.helpers import dataframe_from_result_table
 
-# Data Explorer
 adxCluster = "{DATAEXPLORER_URI}"
 adxDatabase = "{DATAEXPLORER_DATABASE}"
 clientId = "{APPLICATIONREGISTRATION_CLIENTID}"
@@ -301,10 +301,23 @@ You can expect a response like...
 [10 rows x 22 columns]
 ```
 
-### Step 3: Prepare for Key Vault
+### Step 3: Test Key Vault
 
-Navigate to your Key Vault
+Continuing in the notebook... add a cell, then paste and run the following Python:
 
+```
+from azure.identity import DefaultAzureCredential
+from azure.keyvault.secrets import SecretClient
+
+vaultUrl = 'https://rchaplerkv.vault.azure.net/'
+secretName = 'rchaplerar-secret'
+
+credential = DefaultAzureCredential()
+secretClient = SecretClient(vault_url=vaultUrl, credential=credential)
+secret = secretClient.get_secret(secretName)
+
+print(secret.value)
+```
 
 
 
