@@ -186,10 +186,37 @@ Python interpreter will be restarted.
 Continuing in the notebook... add a cell, then paste and run the following Python:
 
 ```
-%pip install azure-keyvault-secrets
+from azure.identity import DefaultAzureCredential
+from azure.kusto.data import KustoClient, KustoConnectionStringBuilder
+from azure.kusto.data.helpers import dataframe_from_result_table
+
+kustoCluster = "https://rchaplerdec.westus.kusto.windows.net"
+kustoDatabase = "rchaplerded"
+clientId = "731995c1-a129-4a24-ab99-064dc4cfe2ac"
+clientSecret = "Tqb8Q~AkQ-hO5XN8lhDkUBpDkeDSgiM4RnC0hasR"
+authorityId = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+
+kcsb = KustoConnectionStringBuilder.with_aad_application_key_authentication(
+    kustoCluster, clientId, clientSecret, authorityId )
+
+kustoClient = KustoClient(kcsb)
+kustoQuery = "StormEvents | take 10"
+response = kustoClient.execute(kustoDatabase, kustoQuery)
+
+df = dataframe_from_result_table(response.primary_results[0])
+
+print(df)
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/" width="800" title="Snipped: July 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc7bd2f2-40c2-49a9-867c-b23f45768e4c" width="800" title="Snipped: July 10, 2023" />
+
+Code explained:
+
+
+
+
+
+
 
 You can expect a response like...
 
