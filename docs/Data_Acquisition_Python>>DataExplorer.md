@@ -284,6 +284,41 @@ You can expect a response like...
 Tqb8Q~AkQ-hO5XN8lhDkUBpDkeDSgiM4RnC0hasR
 ```
 
+### Step 4: Merged Logic
+Continuing in the notebook... add a cell, then paste and run the following Python:
+
+```
+from azure.identity import DefaultAzureCredential
+from azure.keyvault.secrets import SecretClient
+from azure.kusto.data import KustoClient, KustoConnectionStringBuilder
+from azure.kusto.data.helpers import dataframe_from_result_table
+
+# Key Vault
+sc = SecretClient(
+    vault_url = 'https://rchaplerkv.vault.azure.net/',
+    credential = DefaultAzureCredential()
+    )
+
+# Data Explorer
+adxCluster = "{DATAEXPLORER_URI}"
+adxDatabase = "{DATAEXPLORER_DATABASE}"
+clientId = "{APPLICATIONREGISTRATION_CLIENTID}"
+clientSecret = sc.get_secret( 'rchaplerar-secret' ).value
+authorityId = "{TENANT_ID}"
+
+kcsb = KustoConnectionStringBuilder.with_aad_application_key_authentication( adxCluster, clientId, clientSecret, authorityId )
+
+kc = KustoClient(kcsb)
+adxQuery = "StormEvents | take 3"
+response = kc.execute(adxDatabase, adxQuery)
+
+df = dataframe_from_result_table(response.primary_results[0])
+
+print(df)
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9659585-817a-4be7-86f3-cce529791794" width="800" title="Snipped: July 10, 2023" />
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
