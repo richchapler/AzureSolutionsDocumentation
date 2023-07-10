@@ -9,7 +9,9 @@ This documentation considers the following requirements and goals:
 * "We do not want to bake keys or secrets into Python code"
 
 ## Proposed Solution
-* Demonstrate secure Python >> Data Explorer connectivity
+* Demonstrate secure Python >> Data Explorer connectivity in the following steps:
+  * Install Libraries
+  * Connect Python >> Data Explorer via Service Principal
 
 ## Solution Requirements
 The proposed solution requires:
@@ -129,7 +131,7 @@ Successfully installed azure-kusto-data-4.2.0 ijson-3.2.2
 Python interpreter will be restarted.
 ```
 
-Add a cell below, then paste and run the following Python:
+Add a cell, then paste and run the following Python:
 
 ```
 import azure.kusto.data
@@ -146,22 +148,54 @@ You can expect a response like...
 
 _Note: Checking Azure-Kusto-Data Library version is not necessary, but might be useful for troubleshooting_
 
+#### Azure-KeyVault-Secrets
 
-
-
-
-
-In the  `Cmd 1` block, paste the following Python:
+Add a cell, then paste and run the following Python:
 
 ```
-%pip install azure-identity
-
-%pip install azure-kusto-data
-import azure.kusto.data
-print(azure.kusto.data.__version__)
-
 %pip install azure-keyvault-secrets
 ```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/591de671-395b-4c6a-a33a-5730adcd806c" width="800" title="Snipped: July 10, 2023" />
+
+You can expect a response like...
+
+```
+Python interpreter will be restarted.
+Collecting azure-keyvault-secrets
+  Downloading azure_keyvault_secrets-4.7.0-py3-none-any.whl (348 kB)
+Collecting azure-common~=1.1
+  Downloading azure_common-1.1.28-py2.py3-none-any.whl (14 kB)
+Collecting isodate>=0.6.1
+  Downloading isodate-0.6.1-py2.py3-none-any.whl (41 kB)
+Requirement already satisfied: azure-core<2.0.0,>=1.24.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from azure-keyvault-secrets) (1.27.1)
+Requirement already satisfied: typing-extensions>=4.0.1 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from azure-keyvault-secrets) (4.7.1)
+Requirement already satisfied: six>=1.11.0 in /databricks/python3/lib/python3.9/site-packages (from azure-core<2.0.0,>=1.24.0->azure-keyvault-secrets) (1.16.0)
+Requirement already satisfied: requests>=2.18.4 in /databricks/python3/lib/python3.9/site-packages (from azure-core<2.0.0,>=1.24.0->azure-keyvault-secrets) (2.27.1)
+Requirement already satisfied: idna<4,>=2.5 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.18.4->azure-core<2.0.0,>=1.24.0->azure-keyvault-secrets) (3.3)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.18.4->azure-core<2.0.0,>=1.24.0->azure-keyvault-secrets) (2.0.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.18.4->azure-core<2.0.0,>=1.24.0->azure-keyvault-secrets) (1.26.9)
+Requirement already satisfied: certifi>=2017.4.17 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.18.4->azure-core<2.0.0,>=1.24.0->azure-keyvault-secrets) (2021.10.8)
+Installing collected packages: isodate, azure-common, azure-keyvault-secrets
+Successfully installed azure-common-1.1.28 azure-keyvault-secrets-4.7.0 isodate-0.6.1
+Python interpreter will be restarted.
+```
+
+### Step 2: Connect Python >> Data Explorer via Service Principal
+
+Continuing in the notebook... add a cell, then paste and run the following Python:
+
+```
+%pip install azure-keyvault-secrets
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/" width="800" title="Snipped: July 10, 2023" />
+
+You can expect a response like...
+
+```
+Python interpreter will be restarted.
+Collecting azure-keyvault-secrets
 
 -----
 
