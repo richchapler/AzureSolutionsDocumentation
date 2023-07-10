@@ -136,7 +136,7 @@ import azure.kusto.data
 print(azure.kusto.data.__version__)
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3fd29237-be7c-4a8a-b685-347e28414f81" width="800" title="Snipped: July 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ff7c675b-d674-4bb7-b05f-288fc9c907fa" width="800" title="Snipped: July 10, 2023" />
 
 You can expect a response like...
 
@@ -144,7 +144,7 @@ You can expect a response like...
 4.2.0
 ```
 
-_Note: Checking Data Explorer version is not necessary, but might be useful for troubleshooting_
+_Note: Checking Azure-Kusto-Data Library version is not necessary, but might be useful for troubleshooting_
 
 
 
