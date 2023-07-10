@@ -18,9 +18,11 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
   * [**Computer Vision**](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview)
 
+* [**Databricks**](https://learn.microsoft.com/en-us/azure/databricks/)
+
 * [**Data Explorer**](https://learn.microsoft.com/en-us/azure/data-explorer/)
   * Configuration >> [Cluster](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) :: [Database](https://learn.microsoft.com/en-us/azure/data-explorer/create-cluster-database-portal) :: [Table](Infrastructure_DataExplorer_Table.md)
-  * Data >> [Continuous Export](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md)
+  * Data >> [Continuous Export](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/management/data-export/continuous-data-export) :: [Ingestion Mapping](Infrastructure_DataExplorer_IngestionMapping.md) :: [Data Connection](Infrastructure_DataExplorer_DataConnection.md) :: [Query Timeout](Infrastructure_DataExplorer_QueryTimeout.md) :: [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data)
   * [FAQ](Infrastructure_DataExplorer.md)
 
 * **Data Factory** >> [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory)
