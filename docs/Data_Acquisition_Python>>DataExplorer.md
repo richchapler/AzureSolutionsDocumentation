@@ -21,6 +21,8 @@ The proposed solution requires:
   * [StormEvents](https://learn.microsoft.com/en-us/azure/data-explorer/ingest-sample-data) sample data
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with [Secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
 
+_Note: As of July 10, 2023... the Data Explorer / Python libraries do not support authentication with a User-Assigned Managed Identity_
+
 -----
 
 ## Exercise 1: Create Demonstration
@@ -298,14 +300,15 @@ You can expect a response like...
 [10 rows x 22 columns]
 ```
 
+### Step 2: Connect Python >> Data Explorer via Service Principal
 
 
 
-You can expect a response like...
 
-```
-Python interpreter will be restarted.
-Collecting azure-keyvault-secrets
+
+
+
+
 
 -----
 
