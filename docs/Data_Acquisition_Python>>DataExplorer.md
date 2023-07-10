@@ -34,6 +34,8 @@ Click "**Create a notebook**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fdfeaaae-39ce-4cd2-9952-9674516f14a4" width="800" title="Snipped: July 10, 2023" />
 
+#### Azure-Identity
+
 In the  `Cmd 1` block, paste the following Python:
 
 ```
@@ -83,27 +85,71 @@ Successfully installed PyJWT-2.7.0 azure-core-1.27.1 azure-identity-1.13.0 msal-
 Python interpreter will be restarted.
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/abab94b0-e0f3-4141-9ecd-66bf4b8a0fde" width="800" title="Snipped: July 10, 2023" />
+Click the downward-pointing carat in the upper-right of the cell and select "Add Cell Below" from the resulting menu.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4dfb28cd-f353-4ecf-bf6d-6ababc8ccd23" width="800" title="Snipped: July 10, 2023" />
 
+#### Azure-Kusto-Data
 
-
-
-
-
-
-
-In the  `Cmd 1` block, paste the following Python:
+In the  `Cmd 2` block, paste and run the following Python:
 
 ```
-%pip install azure-identity
-
 %pip install azure-kusto-data
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4b31f376-712d-4378-9943-71813f1e8963" width="800" title="Snipped: July 10, 2023" />
+
+You can expect a response like...
+
+```
+Python interpreter will be restarted.
+Collecting azure-kusto-data
+  Downloading azure_kusto_data-4.2.0-py2.py3-none-any.whl (54 kB)
+Requirement already satisfied: azure-identity<2,>=1.5.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from azure-kusto-data) (1.13.0)
+Requirement already satisfied: requests>=2.13.0 in /databricks/python3/lib/python3.9/site-packages (from azure-kusto-data) (2.27.1)
+Requirement already satisfied: msal<2,>=1.9.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from azure-kusto-data) (1.22.0)
+Collecting ijson~=3.1
+  Downloading ijson-3.2.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (111 kB)
+Requirement already satisfied: azure-core<2,>=1.11.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from azure-kusto-data) (1.27.1)
+Requirement already satisfied: python-dateutil>=2.8.0 in /databricks/python3/lib/python3.9/site-packages (from azure-kusto-data) (2.8.2)
+Requirement already satisfied: typing-extensions>=4.3.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from azure-core<2,>=1.11.0->azure-kusto-data) (4.7.1)
+Requirement already satisfied: six>=1.11.0 in /databricks/python3/lib/python3.9/site-packages (from azure-core<2,>=1.11.0->azure-kusto-data) (1.16.0)
+Requirement already satisfied: msal-extensions<2.0.0,>=0.3.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from azure-identity<2,>=1.5.0->azure-kusto-data) (1.0.0)
+Requirement already satisfied: cryptography>=2.5 in /databricks/python3/lib/python3.9/site-packages (from azure-identity<2,>=1.5.0->azure-kusto-data) (3.4.8)
+Requirement already satisfied: cffi>=1.12 in /databricks/python3/lib/python3.9/site-packages (from cryptography>=2.5->azure-identity<2,>=1.5.0->azure-kusto-data) (1.15.0)
+Requirement already satisfied: pycparser in /databricks/python3/lib/python3.9/site-packages (from cffi>=1.12->cryptography>=2.5->azure-identity<2,>=1.5.0->azure-kusto-data) (2.21)
+Requirement already satisfied: PyJWT[crypto]<3,>=1.0.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from msal<2,>=1.9.0->azure-kusto-data) (2.7.0)
+Requirement already satisfied: portalocker<3,>=1.0 in /local_disk0/.ephemeral_nfs/envs/pythonEnv-d8929e04-eb72-4534-a423-fe0bc382b0d6/lib/python3.9/site-packages (from msal-extensions<2.0.0,>=0.3.0->azure-identity<2,>=1.5.0->azure-kusto-data) (2.7.0)
+Requirement already satisfied: idna<4,>=2.5 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.13.0->azure-kusto-data) (3.3)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.13.0->azure-kusto-data) (2.0.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.13.0->azure-kusto-data) (1.26.9)
+Requirement already satisfied: certifi>=2017.4.17 in /databricks/python3/lib/python3.9/site-packages (from requests>=2.13.0->azure-kusto-data) (2021.10.8)
+Installing collected packages: ijson, azure-kusto-data
+Successfully installed azure-kusto-data-4.2.0 ijson-3.2.2
+Python interpreter will be restarted.
+```
+
+Add a cell below, then paste and run the following Python:
+
+```
 import azure.kusto.data
 print(azure.kusto.data.__version__)
-
-%pip install azure-keyvault-secrets
 ```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3fd29237-be7c-4a8a-b685-347e28414f81" width="800" title="Snipped: July 10, 2023" />
+
+You can expect a response like...
+
+```
+4.2.0
+```
+
+_Note: Checking Data Explorer version is not necessary, but might be useful for troubleshooting_
+
+
+
+
+
 
 In the  `Cmd 1` block, paste the following Python:
 
