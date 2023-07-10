@@ -22,13 +22,17 @@ The proposed solution requires:
 -----
 
 ## Exercise 1: Create Demonstration
-In this exercise, we will create and publish a Function App-based API that will receive a parameter, query SQL, and package a response.
+In this exercise, we will create a Databricks Notebook with Python code blocks.
 
-### Step 1: Create Visual Studio Project
+### Step 1: Prepare Resources
 
-Open Visual Studio.
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8d067703-484c-44bc-a433-6ba04d3692ee" width="800" title="Snipped: July 10, 2023" />
 
-<img src="https://user-images.githubusercontent.com/44923999/212137484-599c9cd8-5e0e-46b1-818d-a3a008fecd5b.png" width="600" title="Snipped: January 12, 2023" />
+Open Databricks and click "**Launch Workspace**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c3a0ed84-f7e9-4fb5-b0a4-bc0aed92fc97" width="800" title="Snipped: July 10, 2023" />
+
+Click "**Create a notebook**".
 
 -----
 
