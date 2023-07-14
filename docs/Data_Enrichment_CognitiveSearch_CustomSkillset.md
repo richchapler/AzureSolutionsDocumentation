@@ -149,7 +149,7 @@ namespace CognitiveSearch_CustomSkillsetAPI
 
             log.LogInformation(JsonConvert.SerializeObject(d));
 
-            return new OkObjectResult(JsonConvert.SerializeObject(d));
+            return new OkObjectResult(d);
         }
     }
 }
