@@ -30,4 +30,4 @@ Is there anything else you would like to know?
 
 ## Reference
 
-* []()
+* [Create an Azure Synapse Link for Dataverse with your Azure Synapse Workspace](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/azure-synapse-link-synapse)
