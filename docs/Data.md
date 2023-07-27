@@ -56,5 +56,5 @@
 
   Use Case | Source | Surface | Method
   :----- | :----- | :----- | :-----
-  [Purview >> Alation Bridge (WiP)](Data_Governance_PurviewAlationBridge.md) | Purview | Alation | Logic Apps + API
+  [Purview >> Alation Bridge](Data_Governance_PurviewAlationBridge.md) | Purview | Alation | Logic Apps + API
   
