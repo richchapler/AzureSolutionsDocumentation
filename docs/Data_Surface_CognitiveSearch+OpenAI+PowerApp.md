@@ -1,6 +1,7 @@
 # Data_Surface_CognitiveSearch+OpenAI+PowerApp
 ## WORK-IN-PROGRESS!
 
+* Using a Chat GPT 3.5 model deployment (waitlisted for GPT 4)
 * Download forms (sample data) from https://www.irs.gov/forms-instructions
 * Create index in Cognitive Services
   * Be sure to enable generateNormalizedImagePerPage in the indexer (to address multiple-page PDF files)
