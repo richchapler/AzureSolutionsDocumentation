@@ -1,4 +1,5 @@
-# Data_Surface_CognitiveSearch+OpenAI+PowerApp... WORK-IN-PROGRESS!
+# Data_Surface_CognitiveSearch+OpenAI+PowerApp
+## WORK-IN-PROGRESS!
 
 * Download forms (sample data) from https://www.irs.gov/forms-instructions
 * Create index in Cognitive Services
