@@ -7,3 +7,5 @@
     ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/c6aec6f1-c186-424b-bc95-0c724028d25e)
 * Need custom skillset to create a URL
 * Showed up in File Name, etc. when it was Retrievable and Searchable
+
+TO DO: EXPLORE SEMANTIC SEARCH
