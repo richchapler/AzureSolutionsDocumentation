@@ -1,4 +1,4 @@
-# Data Enrichment: Cognitive Search, Custom "Get Data" Skillset
+# Data Enrichment: Cognitive Search, Custom Skillset
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d7ad1df6-3f08-4397-88b6-a4b7b67ea90d" width="1000" />
 
