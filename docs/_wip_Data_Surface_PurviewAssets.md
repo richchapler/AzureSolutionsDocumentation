@@ -23,17 +23,18 @@ You can expect a result like:
 
 Customer reports that the limit of 200 pages (* 50 items per page... i.e., 1000 items) is insufficient and wants to export the body of data to CSV.
 
-SQL Server + Adventureworks + Purview permissions
+SQL Server + Adventureworks + SQL Admin (which will be used by the Purview credentials)
+
+Generate 1,000 random tables to scan with Purview
 
 ```
--- In the master database, create a login for rchaplerp
-CREATE LOGIN [rchaplerp] FROM EXTERNAL PROVIDER;
-
--- Create a user for rchaplerp in the desired database
-CREATE USER [rchaplerp] FROM EXTERNAL PROVIDER;
-
--- Grant the desired role to rchaplerp in the desired database
-ALTER ROLE db_datareader ADD MEMBER [rchaplerp];
-ALTER ROLE db_datawriter ADD MEMBER [rchaplerp];
+DECLARE @i INT = 1;
+WHILE @i <= 1000
+BEGIN
+    DECLARE @randomName VARCHAR(255) = 'Table' + CAST(ABS(CHECKSUM(NEWID())) AS VARCHAR(255));
+    DECLARE @sql NVARCHAR(MAX) = N'CREATE TABLE ' + @randomName + ' (id INT);';
+    EXEC sp_executesql @sql;
+    SET @i = @i + 1;
+END
 ```
 
