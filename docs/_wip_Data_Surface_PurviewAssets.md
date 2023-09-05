@@ -22,3 +22,5 @@ You can expect a result like:
 ```
 
 Customer reports that the limit of 200 pages (* 50 items per page... i.e., 1000 items) is insufficient and wants to export the body of data to CSV.
+
+SQL Server + Adventureworks + Purview permissions
