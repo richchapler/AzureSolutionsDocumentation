@@ -26,13 +26,13 @@ Customer reports that the limit of 200 pages (* 50 items per page... i.e., 1000 
 SQL Server + Adventureworks + Purview permissions
 
 ```
--- In the master database, create a login for UserX
-CREATE LOGIN [UserX] WITH PASSWORD = 'YourStrongPassword';
+-- In the master database, create a login for rchaplerp
+CREATE LOGIN [rchaplerp] FROM EXTERNAL PROVIDER;
 
--- Create a user for UserX in the desired database
-CREATE USER [UserX] FOR LOGIN [UserX];
+-- Create a user for rchaplerp in the desired database
+CREATE USER [rchaplerp] FROM EXTERNAL PROVIDER;
 
--- Grant the desired role to UserX in the desired database
-ALTER ROLE db_datareader ADD MEMBER [UserX];
-ALTER ROLE db_datawriter ADD MEMBER [UserX];
+-- Grant the desired role to rchaplerp in the desired database
+ALTER ROLE db_datareader ADD MEMBER [rchaplerp];
+ALTER ROLE db_datawriter ADD MEMBER [rchaplerp];
 ```
