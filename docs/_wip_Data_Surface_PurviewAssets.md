@@ -38,3 +38,100 @@ BEGIN
 END
 ```
 
+Microsoft Purview API Request Body to search all assets:
+```
+{
+  "keywords": null,
+  "limit": 10,
+  "filter": {
+    "or": [
+      {
+        "assetType": "SQL Server"
+      },
+      {
+        "assetType": "Azure SQL Server"
+      },
+      {
+        "assetType": "Azure SQL Database"
+      },
+      {
+        "assetType": "Azure SQL Data Warehouse"
+      },
+      {
+        "assetType": "Azure SQL Managed Instance"
+      },
+      {
+        "assetType": "Azure Storage Account"
+      },
+      {
+        "assetType": "Azure Blob Storage"
+      },
+      {
+        "assetType": "Azure Files"
+      },
+      {
+        "assetType": "Azure Table Storage"
+      },
+      {
+        "assetType": "Azure Data Lake Storage Gen1"
+      },
+      {
+        "assetType": "Azure Data Lake Storage Gen2"
+      },
+      {
+        "assetType": "Azure Cosmos DB"
+      },
+      {
+        "assetType": "Azure Data Factory"
+      },
+      {
+        "assetType": "Azure Cognitive Search"
+      },
+      {
+        "assetType": "Power BI"
+      },
+      {
+        "assetType": "Azure Data Explorer"
+      },
+      {
+        "assetType": "Amazon S3"
+      },
+      {
+        "assetType": "Azure Data Share"
+      },
+      {
+        "assetType": "Teradata"
+      },
+      {
+        "assetType": "SAP S4HANA"
+      },
+      {
+        "assetType": "SAP ECC"
+      },
+      {
+        "assetType": "SQL Server Integration Services"
+      },
+      {
+        "assetType": "hive"
+      },
+      {
+        "assetType": "Azure Database for MySQL"
+      },
+      {
+        "assetType": "Azure Database for MariaDB"
+      },
+      {
+        "assetType": "Azure Database for PostgreSQL"
+      },
+      {
+        "assetType": "Azure Synapse Analytics"
+      }
+    ]
+  }
+}
+```
+
+## REST API Call
+`POST https://rchaplerp.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
+`{ "filter": { "and": [ { "entityType": "azure_sql_table" } ] } }`
