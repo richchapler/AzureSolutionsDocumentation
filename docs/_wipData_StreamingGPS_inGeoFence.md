@@ -24,6 +24,7 @@ SELECT latitude
         ) 
 INTO rchaplerdls 
 FROM rchaplereh
+WHERE latitude IS NOT NULL and longitude IS NOT NULL
 ```
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/705a6ed9-e672-4298-bb02-8fe7a56317a0)
