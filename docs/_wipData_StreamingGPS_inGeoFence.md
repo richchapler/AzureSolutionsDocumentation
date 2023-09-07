@@ -10,10 +10,10 @@ Event Hub Data Generator, user-defined payload example:
 ```
 
 ```
-SELECT input.latitude
-    , input.longitude
+SELECT latitude
+    , longitude
     , ST_WITHIN(
-            CreatePoint(input.latitude, input.longitude),
+            CreatePoint(latitude, longitude),
             CreatePolygon(
                 CreatePoint(36.992426, -109.060253)
                 , CreatePoint(36.992426, -102.041524)
@@ -25,3 +25,5 @@ SELECT input.latitude
 INTO rchaplerdls 
 FROM rchaplereh
 ```
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/705a6ed9-e672-4298-bb02-8fe7a56317a0)
