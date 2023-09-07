@@ -1,10 +1,18 @@
-Event Hub Data Generator, user-defined payload example:
+Event Hub Data Generator, user-defined payload examples:
 
 ```
 [
     {
         "latitude": "40.82018471253422",
         "longitude": "-102.97433999137931"
+    }
+]
+```
+
+```
+[
+    {
+        "x": "{\"type\": \"Polygon\",\"coordinates\": [[[0, 0],[3, 6],[6, 1],[0, 0]]]}"
     }
 ]
 ```
