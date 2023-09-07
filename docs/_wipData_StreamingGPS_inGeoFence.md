@@ -17,6 +17,8 @@ Event Hub Data Generator, user-defined payload examples:
 ]
 ```
 
+https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-geospatial-functions
+
 ```
 SELECT latitude
     , longitude
