@@ -20,7 +20,7 @@ Resources required:
   * ...with secret for SQL admin password
   * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity
 * Application Registration
-  * ...with Purview Role Assignment "owner" (QUESTION OPEN WITH SUPPORT... WHAT LOWER ROLE COULD BE USED?)
+  * ...with Purview Role Assignment "owner" (&#x1F536;QUESTION OPEN WITH SUPPORT... CAN LOWER ROLE COULD BE USED?&#x1F536;)
   * ...with Purview [Collection Role Assignments](Infrastructure_Purview_CollectionRoleAssignment.md):
     * `Collection Admin` role to access Account Data Plane and Metadata policy Data Plane
     * `Data Curator` role to access Catalog Data plane
