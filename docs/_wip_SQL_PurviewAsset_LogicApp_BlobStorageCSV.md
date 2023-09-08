@@ -4,8 +4,11 @@ Resources required:
 * Key Vault
   * ...with secret for SQL admin password
   * ...with "Owner" role assignment for Purview system-assigned managed identity
-* Microsoft Purview with credential for Azure SQL
-* Azure SQL (with both SQL and AD?), Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data
+* Microsoft Purview
+  * ...with credential for Azure SQL
+* Azure SQL
+  * ...with both SQL and AD authentication
+  * Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data
   * Generate 1,000 random tables to scan with Purview
 
     ```
