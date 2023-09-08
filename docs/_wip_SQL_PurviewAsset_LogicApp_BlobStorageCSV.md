@@ -27,7 +27,7 @@ Resources required:
     * `Collection Admin` role to access Account Data Plane and Metadata policy Data Plane
     * `Data Curator` role to access Catalog Data plane
     * `Data Source Administrator` role to access Scanning Data plane
-      _Note: Be patient when setting permissions for the first time... replication can take some time_
+      <br>_Note: Be patient when setting permissions for the first time... replication can take some time_
 
 To produce the "match this" report using the Purview UI:
 * Click Data Estate Insights
