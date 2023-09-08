@@ -27,8 +27,8 @@ Resources required:
     * `Data Source Administrator` role to access Scanning Data plane
       <br>_Note: Be patient when setting permissions for the first time... replication can take some time_
 * Microsoft Purview
-  * ...with credential for Azure SQL
-  * Register and Scan 2,100 random tables on SQL
+  * ...with Credential for Azure SQL
+  * Register and Scan 2,100 random tables generated in SQL
 
 To produce the "match this" report using the Purview UI:
 * Click Data Estate Insights
