@@ -3,7 +3,7 @@ Microsoft Purview >> "Export as CSV" result >> monthly pull to blob storage as C
 Resources required:
 * Key Vault
   * ...with secret for SQL admin password
-  * ...with "Owner" role assignment for Purview system-assigned managed identity
+  * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity
 * Microsoft Purview
   * ...with credential for Azure SQL
 * Azure SQL
