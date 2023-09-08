@@ -19,10 +19,11 @@ Resources required:
 * Key Vault
   * ...with secret for SQL admin password
   * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity
+* Application Registration
+  * ...with Purview [collection role assignments](Infrastructure_Purview_CollectionRoleAssignment.md) for `Collection admins`, `Data source admins`, and `Data curators`
 * Microsoft Purview
   * ...with credential for Azure SQL
   * Register and Scan 2,100 random tables on SQL
-
 
 To produce the "match this" report using the Purview UI:
 * Click Data Estate Insights
@@ -141,6 +142,9 @@ Microsoft Purview API Request Body to search all assets:
   }
 }
 ```
+
+## Reference
+* https://learn.microsoft.com/en-us/purview/tutorial-using-rest-apis
 
 ## REST API Call
 `POST https://rchaplerp.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
