@@ -1,15 +1,10 @@
 Microsoft Purview >> "Export as CSV" result >> monthly pull to blob storage as CSV using Logic Apps?
 
 Resources required:
-* Key Vault
-  * ...with secret for SQL admin password
-  * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity
-* Microsoft Purview
-  * ...with credential for Azure SQL
 * Azure SQL
   * ...with both SQL and AD authentication
   * Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data
-  * Generate 1,000 random tables to scan with Purview
+  * Generate 2,100 random tables to scan with Purview
 
     ```
     DECLARE @i INT = 1;
@@ -21,6 +16,13 @@ Resources required:
         SET @i = @i + 1;
     END
     ```
+* Key Vault
+  * ...with secret for SQL admin password
+  * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity
+* Microsoft Purview
+  * ...with credential for Azure SQL
+  * Register and Scan 2,100 random tables on SQL
+
 
 To produce the "match this" report using the Purview UI:
 * Click Data Estate Insights
