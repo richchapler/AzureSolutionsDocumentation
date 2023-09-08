@@ -1,6 +1,22 @@
 Microsoft Purview >> "Export as CSV" result >> monthly pull to blob storage as CSV using Logic Apps?
 
-To produce the report using the Purview UI:
+Resources required:
+* Microsoft Purview
+* Azure SQL (with both SQL and AD?), Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data
+  * Generate 1,000 random tables to scan with Purview
+
+    ```
+    DECLARE @i INT = 1;
+    WHILE @i <= 2100
+    BEGIN
+        DECLARE @randomName VARCHAR(255) = 'Table' + CAST(ABS(CHECKSUM(NEWID())) AS VARCHAR(255));
+        DECLARE @sql NVARCHAR(MAX) = N'CREATE TABLE ' + @randomName + ' (id INT);';
+        EXEC sp_executesql @sql;
+        SET @i = @i + 1;
+    END
+    ```
+
+To produce the "match this" report using the Purview UI:
 * Click Data Estate Insights
 * Click Assets
 
@@ -23,20 +39,7 @@ You can expect a result like:
 
 Customer reports that the limit of 200 pages (* 50 items per page... i.e., 1000 items) is insufficient and wants to export the body of data to CSV.
 
-SQL Server + Adventureworks + SQL Admin (which will be used by the Purview credentials)
 
-Generate 1,000 random tables to scan with Purview
-
-```
-DECLARE @i INT = 1;
-WHILE @i <= 1000
-BEGIN
-    DECLARE @randomName VARCHAR(255) = 'Table' + CAST(ABS(CHECKSUM(NEWID())) AS VARCHAR(255));
-    DECLARE @sql NVARCHAR(MAX) = N'CREATE TABLE ' + @randomName + ' (id INT);';
-    EXEC sp_executesql @sql;
-    SET @i = @i + 1;
-END
-```
 
 Microsoft Purview API Request Body to search all assets:
 ```
