@@ -20,10 +20,13 @@ Resources required:
   * ...with secret for SQL admin password
   * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity
 * Application Registration
-  * ...with Purview [collection role assignments](Infrastructure_Purview_CollectionRoleAssignment.md) for `Collection admins`, `Data source admins`, and `Data curators`
 * Microsoft Purview
   * ...with credential for Azure SQL
   * Register and Scan 2,100 random tables on SQL
+  * ...with [Collection Role Assignments](Infrastructure_Purview_CollectionRoleAssignment.md) for the Application Registration:
+    * `Collection Admin` role to access Account Data Plane and Metadata policy Data Plane
+    * `Data Curator` role to access Catalog Data plane
+    * `Data Source Administrator` role to access Scanning Data plane
 
 To produce the "match this" report using the Purview UI:
 * Click Data Estate Insights
