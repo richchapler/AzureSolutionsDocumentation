@@ -155,4 +155,21 @@ Microsoft Purview API Request Body to search all assets:
 ## REST API Call
 `POST https://rchaplerp.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
-`{ "filter": { "and": [ { "entityType": "azure_sql_table" } ] } }`
+```
+{
+  "filter": {
+    "and": [
+      {
+        "entityType": "azure_sql_table"
+      }
+    ]
+  },
+  "orderby": [
+    {
+      "name": "ASC"
+    }
+  ],
+  "limit":3,
+  "offset":1
+}
+```
