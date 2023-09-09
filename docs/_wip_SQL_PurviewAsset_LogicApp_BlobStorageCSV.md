@@ -150,6 +150,7 @@ Microsoft Purview API Request Body to search all assets:
 
 ## Reference
 * https://learn.microsoft.com/en-us/purview/tutorial-using-rest-apis
+* https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query?tabs=HTTP
 
 ## REST API Call
 `POST https://rchaplerp.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
