@@ -7,9 +7,7 @@ This documentation considers the following requirements and goals:
 * "Purview Asset, Export as CSV functionality does not produce a full inventory; we have more than 1,000 assets"
 
 ## Proposed Solution
-* Generate SQL sample data
-* Catalog SQL sample data using Purview
-* Use Postman to prepare PurviewAPI request logic
+* Generate and catalog SQL sample data
 * Automate Process: Use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage
 
 ## Solution Requirements
@@ -37,8 +35,8 @@ The proposed solution requires:
 
 -----
 
-### Exercise 1: Generate SQL sample data
-In this exercise, we will LOREM IPSUM.
+### Exercise 1: Generate Sample
+In this exercise, we will generate and catalog SQL sample data.
 
   * Generate 2,100 random tables to scan with Purview
 
@@ -53,44 +51,11 @@ In this exercise, we will LOREM IPSUM.
     END
     ```
 
------
-
-### Exercise 2: Catalog SQL sample data using Purview
-In this exercise, we will LOREM IPSUM.
-
   * Register and Scan 2,100 random tables generated in SQL
 
-To produce the "match this" report using the Purview UI:
-* Click Data Estate Insights
-* Click Assets
-
-  ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/dbf63ba0-3097-47e0-a4c4-a65600534d33)
-
-* Click "View details"
-* Select your collection on the resulting page
-
-  ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/3c3f44f7-a1cb-4d83-b941-519a7bf87e70)
-
-* Click "Export as CSV" in the upper-right corner, then Export on the resulting pop-up
-
-You can expect a result like:
-
-```
-"Asset ID","Asset name","Asset fully qualified name","Object type","Collection","Classification display name","Classification formal name","Asset data owner","Data owner email","Classification source","Reason for unclassified"
-"d0b5cddd-501d-4509-8c01-e5923cba5a27","rchaplerdec2.westus3","https://rchaplerdec2.westus3.kusto.windows.net","Instances","rchaplerp","","","","","","Not applicable."
-"11b9d5c0-7b10-4a08-9989-1e315297bd81","rchaplerded2","https://rchaplerdec2.westus3.kusto.windows.net/rchaplerded2","Databases","rchaplerp","","","","","","Not applicable."
-```
-
-Customer reports that the limit of 200 pages (* 50 items per page... i.e., 1000 items) is insufficient and wants to export the body of data to CSV.
-
 -----
 
-### Exercise 3: Use Postman to prepare PurviewAPI request logic
-In this exercise, we will LOREM IPSUM.
-
------
-
-### Exercise 4: Automate Process
+### Exercise 2: Automate Process
 In this exercise, we will use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage.
 
 ### Step 1: Create Workflow and Add Trigger
