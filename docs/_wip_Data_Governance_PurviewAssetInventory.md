@@ -299,7 +299,7 @@ Complete the form and click "**Save**".
 
 -----
 
-### Step 6: For Each, `AssetCount`
+### Step 6: For Each Asset Batch
 
 Click "+" to insert a step below "**Initialize Variable, AssetCount**", and then "**Add an action**" on the resulting menu.
 
@@ -309,7 +309,9 @@ On the resulting "**Add an action**" pop-out, search for and then select "**For 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8eb89767-2729-4fe2-bf3d-f8c153e6600b" width="800" title="Snipped: Sep 11, 2023" />
 
-
+```
+add(div(body('HTTP,_Query_Count').value, 1000), 1)
+```
 
 
 
