@@ -24,8 +24,9 @@ The proposed solution requires:
       
 * Key Vault
   * ...with secret for SQL admin password
-  * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity* [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
-<br> _NOT CLEAR IF THIS IS REQUIRED_
+  * ...with Access Policy, Secret "Get" & "List" permissions for Purview system-assigned managed identity
+  <br> _NOT CLEAR IF THIS IS REQUIRED_
+* [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
 
 * [**Postman**](https://www.postman.com/product/workspaces/)
 * [**Purview**](Infrastructure_Purview.md)
@@ -206,7 +207,22 @@ Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
 ### Exercise 4: Use Logic App to iteratively query Purview and write results to Azure Blob Storage
 In this exercise, we will LOREM IPSUM.
 
-* Create workflow "ascend", Stateful
+### Step 1: Create Logic App Workflow
+
+Navigate to Logic App, add and navigate to a new "**Stateful**" workflow.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/688e81f5-b1b1-4258-84ed-cb5c544a06ba" width="800" title="Snipped: Sep 11, 2023" />
+
+Navigate to Designer and click "**Add a trigger**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ed3da0bd-22e5-43fe-9661-4b3f1da7eea9" width="800" title="Snipped: Sep 11, 2023" />
+
+
+
+LOREM!
+
+
+
 ### Add Trigger, Recurrence
 
 ### HTTP POST, Purview Bearer Token
