@@ -246,6 +246,8 @@ Complete the form and click "**Save**"
 
 -----
 
+### Step 3: Initialize Variable, `BearerToken`
+
 LOREM IPSUM!
 
 -----
