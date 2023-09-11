@@ -329,7 +329,7 @@ Prompt | Entry
 **URI** | `https://{PurviewAccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 **Method** | `POST`
 **Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('BearerToken')}`
-**Body** | `{"orderby":[{"name":"ASC"}],"limit":1000,"offset":1}`
+**Body** | `{"orderby":[{"name":"ASC"}],"limit":@{string(mul(item(),1000))},"offset":1}`
 
 Click "**Save**"
 
