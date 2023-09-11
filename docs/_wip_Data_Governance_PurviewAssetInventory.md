@@ -1,4 +1,12 @@
-Microsoft Purview >> "Export as CSV" result >> monthly pull to blob storage as CSV using Logic Apps?
+# Data Governance: Purview Asset Inventory
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/710b6484-af25-473d-ab87-3252ba299bf2" width="1000" />
+
+## Use Case
+This documentation considers the following requirements and goals:
+* "Alation is our enterprise data catalog"
+* "Alation lacks necessary connectors {e.g., Data Explorer} for metadata we want to include"
+* "We want to get Azure resource metadata into Alation without manual effort"Microsoft Purview >> "Export as CSV" result >> monthly pull to blob storage as CSV using Logic Apps?
 
 Resources required:
 * Azure SQL
@@ -148,10 +156,6 @@ Microsoft Purview API Request Body to search all assets:
 }
 ```
 
-## Reference
-* https://learn.microsoft.com/en-us/purview/tutorial-using-rest-apis
-* https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query?tabs=HTTP
-
 ## REST API Call
 `POST https://rchaplerp.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
@@ -173,3 +177,21 @@ Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
   "offset":1
 }
 ```
+
+## Logic App
+* Create workflow "ascend", Stateful
+### Add Trigger, Recurrence
+
+### HTTP POST, Purview Bearer Token
+
+  Prompt | Entry
+  :----- | :-----
+  **URI** | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
+  **Method** | `POST`
+  **Headers** | `content-type` :: `application/x-www-form-urlencoded`
+  **Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
+
+
+## Reference
+* https://learn.microsoft.com/en-us/purview/tutorial-using-rest-apis
+* https://learn.microsoft.com/en-us/rest/api/purview/catalogdataplane/discovery/query?tabs=HTTP
