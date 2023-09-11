@@ -235,6 +235,20 @@ Prompt | Entry
 **Azure Storage Account Name**... | `{StorageAccount_Name}`
 **Azure Storage Account Access Key** | `{StorageAccount_AccessKey}`
 
+Click "**Create New**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b368b0ab-a2c8-4530-b4bb-ba90972244cb" width="800" title="Snipped: Sep 11, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Storage Account Name**... | `{StorageAccount_Name}`
+**Folder Path**... | `{StorageAccount_ContainerName}`
+**Blob Name**... | `@{concat(formatDateTime(utcNow(), 'yyyyMMddHHmmss'), '.json')}`
+**Blob Content**... | `@{body('HTTP,_Query_Assets').value}`
+
+
+
+
 Complete the form and click "**Save**".
 
 
