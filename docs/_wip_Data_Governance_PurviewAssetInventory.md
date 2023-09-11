@@ -207,7 +207,7 @@ Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
 ### Exercise 4: Use Logic App to iteratively query Purview and write results to Azure Blob Storage
 In this exercise, we will LOREM IPSUM.
 
-### Step 1: Create Logic App Workflow
+### Step 1: Create Workflow and Add Trigger
 
 Navigate to Logic App, add and navigate to a new "**Stateful**" workflow.
 
@@ -217,9 +217,24 @@ Navigate to Designer and click "**Add a trigger**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ed3da0bd-22e5-43fe-9661-4b3f1da7eea9" width="800" title="Snipped: Sep 11, 2023" />
 
+Click "**Add a trigger**" and on the resulting "**Add a trigger**" pop-out, search for and select "**Recurrence**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/75314acf-ba05-44cf-a902-fd9e2a0b83c6" width="800" title="Snipped: Sep 11, 2023" />
+
+Complete the "**Recurrence**" pop-out form, and then click "**Save**".
+
+-----
+
+### Step 2: Authentication, Purview
+
+Click "+" to insert a step below "**Recurrence**", and then "**Add an action**" on the resulting menu.
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/a8bb0eda-9e15-4bd0-8241-0d8fe916ff19)
+
+On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
 
-LOREM!
+LOREM IPSUM!
 
 
 
