@@ -317,6 +317,25 @@ Complete the form and click "**Save**".
 
 -----
 
+### Step 7: HTTP, Query Assets
+
+Click "+" inside the "**For Each Asset Batch**" action and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/35af8bd0-7228-4e97-a2bf-c95efd873ca9" width="800" title="Snipped: May 26, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://{PurviewAccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('BearerToken')}`
+**Body** | `{"limit":0}`
+
+Click "**Save**"
+
+
+
+
 LOREM IPSUM!
 
 -----
