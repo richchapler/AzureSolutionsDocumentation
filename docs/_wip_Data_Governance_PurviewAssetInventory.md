@@ -242,6 +242,7 @@ On the resulting "**Add an action**" pop-out, search for and then select "**HTTP
   **Headers** | `content-type` :: `application/x-www-form-urlencoded`
   **Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
 
+Complete the form and click "**Save**"
 
 -----
 
