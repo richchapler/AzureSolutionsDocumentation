@@ -13,7 +13,7 @@ This documentation considers the following requirements and goals:
 ## Solution Requirements
 The proposed solution requires:
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
-  * ...with Purview Role Assignment "owner" (&#x1F536;QUESTION OPEN WITH SUPPORT... CAN LOWER ROLE COULD BE USED?&#x1F536;)
+  * ...with Purview Role Assignment "owner"
   * ...with Purview [Collection Role Assignments](Infrastructure_Purview_CollectionRoleAssignment.md):
     * `Collection Admin` role to access Account Data Plane and Metadata policy Data Plane
     * `Data Curator` role to access Catalog Data plane
