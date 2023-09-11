@@ -254,7 +254,7 @@ Click "+" to insert a step below "**HTTP, Bearer Token**", and then "**Add an ac
 
 On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac947526-12e6-4269-9093-a042b7f63481" width="800" title="Snipped: Sep 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/56b7f385-7a24-4227-a563-7760e0a6c1a6" width="800" title="Snipped: Sep 11, 2023" />
 
 Prompt | Entry
 :----- | :-----
