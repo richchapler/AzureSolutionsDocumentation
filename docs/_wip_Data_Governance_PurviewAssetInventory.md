@@ -4,14 +4,41 @@
 
 ## Use Case
 This documentation considers the following requirements and goals:
-* "Alation is our enterprise data catalog"
-* "Alation lacks necessary connectors {e.g., Data Explorer} for metadata we want to include"
-* "We want to get Azure resource metadata into Alation without manual effort"Microsoft Purview >> "Export as CSV" result >> monthly pull to blob storage as CSV using Logic Apps?
+* "Purview Asset, Export as CSV functionality does not produce a full inventory; we have more than 1,000 assets"
 
-Resources required:
-* Azure SQL
-  * ...with both SQL and AD authentication
-  * Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data
+## Proposed Solution
+* Generate SQL sample data
+* Catalog SQL sample data using Purview
+* Use Postman to prepare PurviewAPI request logic
+* Use Logic App to iteratively query Purview and write results to Azure Blob Storage
+
+## Solution Requirements
+The proposed solution requires:
+* [**Application Registration**](Infrastructure_ApplicationRegistration.md)
+  * ...with Purview Role Assignment "owner" (&#x1F536;QUESTION OPEN WITH SUPPORT... CAN LOWER ROLE COULD BE USED?&#x1F536;)
+  * ...with Purview [Collection Role Assignments](Infrastructure_Purview_CollectionRoleAssignment.md):
+    * `Collection Admin` role to access Account Data Plane and Metadata policy Data Plane
+    * `Data Curator` role to access Catalog Data plane
+    * `Data Source Administrator` role to access Scanning Data plane
+      <br>_Note: Be patient when setting permissions for the first time... replication can take some time_
+      
+* Key Vault
+  * ...with secret for SQL admin password
+  * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity* [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
+<br> _NOT CLEAR IF THIS IS REQUIRED_
+
+* [**Postman**](https://www.postman.com/product/workspaces/)
+* [**Purview**](Infrastructure_Purview.md)
+  * ...with Credential for Azure SQL
+* _SQL_
+  * _...with both SQL and AD authentication??_
+  * _Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data_
+
+-----
+
+### Exercise 1: Generate SQL sample data
+In this exercise, we will LOREM IPSUM.
+
   * Generate 2,100 random tables to scan with Purview
 
     ```
@@ -24,18 +51,12 @@ Resources required:
         SET @i = @i + 1;
     END
     ```
-* Key Vault
-  * ...with secret for SQL admin password
-  * ...with Access Policy, Secret "Get" and "List" permissions for Purview system-assigned managed identity
-* Application Registration
-  * ...with Purview Role Assignment "owner" (&#x1F536;QUESTION OPEN WITH SUPPORT... CAN LOWER ROLE COULD BE USED?&#x1F536;)
-  * ...with Purview [Collection Role Assignments](Infrastructure_Purview_CollectionRoleAssignment.md):
-    * `Collection Admin` role to access Account Data Plane and Metadata policy Data Plane
-    * `Data Curator` role to access Catalog Data plane
-    * `Data Source Administrator` role to access Scanning Data plane
-      <br>_Note: Be patient when setting permissions for the first time... replication can take some time_
-* Microsoft Purview
-  * ...with Credential for Azure SQL
+
+-----
+
+### Exercise 2: Catalog SQL sample data using Purview
+In this exercise, we will LOREM IPSUM.
+
   * Register and Scan 2,100 random tables generated in SQL
 
 To produce the "match this" report using the Purview UI:
@@ -61,7 +82,10 @@ You can expect a result like:
 
 Customer reports that the limit of 200 pages (* 50 items per page... i.e., 1000 items) is insufficient and wants to export the body of data to CSV.
 
+-----
 
+### Exercise 3: Use Postman to prepare PurviewAPI request logic
+In this exercise, we will LOREM IPSUM.
 
 Microsoft Purview API Request Body to search all assets:
 ```
@@ -156,7 +180,6 @@ Microsoft Purview API Request Body to search all assets:
 }
 ```
 
-## REST API Call
 `POST https://rchaplerp.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
 Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
 ```
@@ -178,7 +201,11 @@ Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
 }
 ```
 
-## Logic App
+-----
+
+### Exercise 4: Use Logic App to iteratively query Purview and write results to Azure Blob Storage
+In this exercise, we will LOREM IPSUM.
+
 * Create workflow "ascend", Stateful
 ### Add Trigger, Recurrence
 
