@@ -248,6 +248,24 @@ Complete the form and click "**Save**"
 
 ### Step 3: Initialize Variable, `BearerToken`
 
+Click "+" to insert a step below "**HTTP, Bearer Token**", and then "**Add an action**" on the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/07a99791-f1cc-4f6a-934b-fdbc41e80604" width="800" title="Snipped: Sep 11, 2023" />
+
+On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5e8cee7-1171-48ab-af9b-a850a7a9d8f0" width="800" title="Snipped: Sep 11, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `BearerToken`
+**Type** | `String`
+**Value** | `concat('Bearer ',body('HTTP,_Bearer_Token').access_token)`
+
+Click "**Save**"
+
+
+
 LOREM IPSUM!
 
 -----
