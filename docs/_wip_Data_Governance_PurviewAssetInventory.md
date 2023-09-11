@@ -297,6 +297,21 @@ Prompt | Entry
 
 Complete the form and click "**Save**".
 
+-----
+
+### Step 6: For Each, `AssetCount`
+
+Click "+" to insert a step below "**Initialize Variable, AssetCount**", and then "**Add an action**" on the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/03e9bfc1-a50d-4522-acc8-b03970ec09b1" width="800" title="Snipped: Sep 11, 2023" />
+
+On the resulting "**Add an action**" pop-out, search for and then select "**For Each**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8eb89767-2729-4fe2-bf3d-f8c153e6600b" width="800" title="Snipped: Sep 11, 2023" />
+
+
+
+
 
 LOREM IPSUM!
 
