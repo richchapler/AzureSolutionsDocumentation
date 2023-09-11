@@ -22,8 +22,6 @@
   [...from Resource Diagnostics](Data_Acquisition_ResourceDiagnostics.md) | Continuous Ingestion (Event Hub) | Resource Diagnostics | Data Explorer | No Code
   [Python >> ADX, Secure Connection](Data_Acquisition_Python>>DataExplorer.md) | Databricks | Data Explorer | Data Frame | Python
 
-  
-
 ### Enrich
 
   Use Case | Method | Source | Target | Type
@@ -56,5 +54,5 @@
 
   Use Case | Source | Surface | Method
   :----- | :----- | :----- | :-----
+  [Purview Asset Inventory](_wip_Data_Governance_PurviewAssetInventory.md) | Purview | Blob Storage | Logic Apps + API
   [Purview >> Alation Bridge](Data_Governance_PurviewAlationBridge.md) | Purview | Alation | Logic Apps + API
-  
