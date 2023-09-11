@@ -10,7 +10,7 @@ This documentation considers the following requirements and goals:
 * Generate SQL sample data
 * Catalog SQL sample data using Purview
 * Use Postman to prepare PurviewAPI request logic
-* Use Logic App to iteratively query Purview and write results to Azure Blob Storage
+* Automate Process: Use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage
 
 ## Solution Requirements
 The proposed solution requires:
@@ -204,8 +204,8 @@ Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
 
 -----
 
-### Exercise 4: Use Logic App to iteratively query Purview and write results to Azure Blob Storage
-In this exercise, we will LOREM IPSUM.
+### Exercise 4: Automate Process
+In this exercise, we will use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage.
 
 ### Step 1: Create Workflow and Add Trigger
 
@@ -280,6 +280,22 @@ Prompt | Entry
 **Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('BearerToken')}`
 **Body** | `{"limit":0}`
 
+-----
+
+### Step 5: Initialize Variable, `AssetCount`
+
+Click "+" to insert a step below "**HTTP, Query Count**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bcc3f0ea-70d8-454d-a314-0916ff32c9a3" width="800" title="Snipped: Sep 11, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Name** | `AssetCount`
+**Type** | `Integer`
+**Value** | `body('HTTP,_Query_Count')?['@search.count']`
+
+Complete the form and click "**Save**".
 
 
 LOREM IPSUM!
