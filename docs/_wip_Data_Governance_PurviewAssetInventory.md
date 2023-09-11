@@ -307,8 +307,7 @@ Click "+" to insert a step below "**Initialize Variable, AssetCount**", and then
 
 On the resulting "**Add an action**" pop-out, search for and then select "**For Each**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8eb89767-2729-4fe2-bf3d-f8c153e6600b" width="800" title="Snipped: Sep 11, 2023" />
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/54a31821-8223-49ea-8877-83f620462ea8)
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/54a31821-8223-49ea-8877-83f620462ea8" width="800" title="Snipped: Sep 11, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -317,7 +316,6 @@ Prompt | Entry
 Complete the form and click "**Save**".
 
 -----
-
 
 LOREM IPSUM!
 
