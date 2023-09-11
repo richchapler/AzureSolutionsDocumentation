@@ -264,6 +264,22 @@ Prompt | Entry
 
 Complete the form and click "**Save**".
 
+-----
+
+### Step 4: HTTP, Query `Count`
+
+Click "+" to insert a step below "**Initialize Variable, BearerToken**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2a9fab3-3175-4e5a-96da-5dbb784e66da" width="800" title="Snipped: Sep 11, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**URI** | `https://{PurviewAccountName}.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('BearerToken')}`
+**Body** | `{"limit":0}`
+
 
 
 LOREM IPSUM!
