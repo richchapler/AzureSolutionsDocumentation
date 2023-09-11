@@ -322,7 +322,7 @@ Complete the form and click "**Save**".
 Click "+" inside the "**For Each Asset Batch**" action and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/35af8bd0-7228-4e97-a2bf-c95efd873ca9" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3429738f-9299-48b6-a974-b20f16bec90a" width="800" title="Snipped: May 26, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -331,9 +331,9 @@ Prompt | Entry
 **Headers** | `content-type` :: `application/json` and `authorization` :: `@{variables('BearerToken')}`
 **Body** | `{"orderby":[{"name":"ASC"}],"limit":@{string(mul(item(),1000))},"offset":1}`
 
-Click "**Save**"
+Complete the form and click "**Save**".
 
-
+-----
 
 
 LOREM IPSUM!
