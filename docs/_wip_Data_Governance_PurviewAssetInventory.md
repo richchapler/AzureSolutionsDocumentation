@@ -225,22 +225,15 @@ Complete the "**Recurrence**" pop-out form, and then click "**Save**".
 
 -----
 
-### Step 2: Authentication, Purview
+### Step 2: HTTP, Bearer Token
 
 Click "+" to insert a step below "**Recurrence**", and then "**Add an action**" on the resulting menu.
 
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/a8bb0eda-9e15-4bd0-8241-0d8fe916ff19)
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a8bb0eda-9e15-4bd0-8241-0d8fe916ff19" width="800" title="Snipped: Sep 11, 2023" />
 
 On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-
-LOREM IPSUM!
-
-
-
-### Add Trigger, Recurrence
-
-### HTTP POST, Purview Bearer Token
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b37dc87-2a68-4735-a283-8f626c793be0" width="800" title="Snipped: Sep 11, 2023" />
 
   Prompt | Entry
   :----- | :-----
@@ -249,6 +242,12 @@ LOREM IPSUM!
   **Headers** | `content-type` :: `application/x-www-form-urlencoded`
   **Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
 
+
+-----
+
+LOREM IPSUM!
+
+-----
 
 ## Reference
 * https://learn.microsoft.com/en-us/purview/tutorial-using-rest-apis
