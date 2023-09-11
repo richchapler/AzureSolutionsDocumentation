@@ -242,7 +242,7 @@ On the resulting "**Add an action**" pop-out, search for and then select "**HTTP
   **Headers** | `content-type` :: `application/x-www-form-urlencoded`
   **Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
 
-Complete the form and click "**Save**"
+Complete the form and click "**Save**".
 
 -----
 
@@ -254,7 +254,7 @@ Click "+" to insert a step below "**HTTP, Bearer Token**", and then "**Add an ac
 
 On the resulting "**Add an action**" pop-out, search for and then select "**Initialize Variable**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5e8cee7-1171-48ab-af9b-a850a7a9d8f0" width="800" title="Snipped: Sep 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4722406b-ee02-4573-a9e7-17ee9c07d659" width="800" title="Snipped: Sep 11, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -262,7 +262,7 @@ Prompt | Entry
 **Type** | `String`
 **Value** | `concat('Bearer ',body('HTTP,_Bearer_Token').access_token)`
 
-Click "**Save**"
+Complete the form and click "**Save**".
 
 
 
