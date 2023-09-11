@@ -88,120 +88,6 @@ Customer reports that the limit of 200 pages (* 50 items per page... i.e., 1000 
 ### Exercise 3: Use Postman to prepare PurviewAPI request logic
 In this exercise, we will LOREM IPSUM.
 
-Microsoft Purview API Request Body to search all assets:
-```
-{
-  "keywords": null,
-  "limit": 10,
-  "filter": {
-    "or": [
-      {
-        "assetType": "SQL Server"
-      },
-      {
-        "assetType": "Azure SQL Server"
-      },
-      {
-        "assetType": "Azure SQL Database"
-      },
-      {
-        "assetType": "Azure SQL Data Warehouse"
-      },
-      {
-        "assetType": "Azure SQL Managed Instance"
-      },
-      {
-        "assetType": "Azure Storage Account"
-      },
-      {
-        "assetType": "Azure Blob Storage"
-      },
-      {
-        "assetType": "Azure Files"
-      },
-      {
-        "assetType": "Azure Table Storage"
-      },
-      {
-        "assetType": "Azure Data Lake Storage Gen1"
-      },
-      {
-        "assetType": "Azure Data Lake Storage Gen2"
-      },
-      {
-        "assetType": "Azure Cosmos DB"
-      },
-      {
-        "assetType": "Azure Data Factory"
-      },
-      {
-        "assetType": "Azure Cognitive Search"
-      },
-      {
-        "assetType": "Power BI"
-      },
-      {
-        "assetType": "Azure Data Explorer"
-      },
-      {
-        "assetType": "Amazon S3"
-      },
-      {
-        "assetType": "Azure Data Share"
-      },
-      {
-        "assetType": "Teradata"
-      },
-      {
-        "assetType": "SAP S4HANA"
-      },
-      {
-        "assetType": "SAP ECC"
-      },
-      {
-        "assetType": "SQL Server Integration Services"
-      },
-      {
-        "assetType": "hive"
-      },
-      {
-        "assetType": "Azure Database for MySQL"
-      },
-      {
-        "assetType": "Azure Database for MariaDB"
-      },
-      {
-        "assetType": "Azure Database for PostgreSQL"
-      },
-      {
-        "assetType": "Azure Synapse Analytics"
-      }
-    ]
-  }
-}
-```
-
-`POST https://rchaplerp.purview.azure.com/catalog/api/search/query?api-version=2022-08-01-preview`
-Header: `Authorization` | `Bearer eyJ0eXAiOiJKV1QiLCJh...`
-```
-{
-  "filter": {
-    "and": [
-      {
-        "entityType": "azure_sql_table"
-      }
-    ]
-  },
-  "orderby": [
-    {
-      "name": "ASC"
-    }
-  ],
-  "limit":3,
-  "offset":1
-}
-```
-
 -----
 
 ### Exercise 4: Automate Process
@@ -322,7 +208,7 @@ Complete the form and click "**Save**".
 Click "+" inside the "**For Each Asset Batch**" action and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**HTTP**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3429738f-9299-48b6-a974-b20f16bec90a" width="800" title="Snipped: May 26, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3429738f-9299-48b6-a974-b20f16bec90a" width="800" title="Snipped: Sep 11, 2023" />
 
 Prompt | Entry
 :----- | :-----
@@ -334,6 +220,25 @@ Prompt | Entry
 Complete the form and click "**Save**".
 
 -----
+
+### Step 8: Create Blob
+
+Click "+" to insert a step below "**HTTP, Query Assets**", and then "**Add an action**" on the resulting menu.
+<br>On the resulting "**Add an action**" pop-out, search for and then select "**Create Blob (v2)**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/897b1262-cdfc-4ad7-8524-f28dc5aa9ded" width="800" title="Snipped: Sep 11, 2023" />
+
+Prompt | Entry
+:----- | :-----
+**Connection Name** | `{StorageAccount_Name}`
+**Authentication Key** | Access Key
+**Azure Storage Account Name**... | `{StorageAccount_Name}`
+**Azure Storage Account Access Key** | `{StorageAccount_AccessKey}`
+
+Complete the form and click "**Save**".
+
+
+
 
 
 LOREM IPSUM!
