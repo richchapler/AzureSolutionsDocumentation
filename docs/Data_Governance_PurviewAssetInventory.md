@@ -9,7 +9,7 @@
 
 ## Proposed Solution
 * Generate Sample Data: Generate and catalog SQL sample data
-* Automate Process: Use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage
+* Automate Extraction: Use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage
 
 ## Solution Requirements
 The proposed solution requires:
@@ -62,7 +62,7 @@ LOREM IPSUM!
 
 -----
 
-### Exercise 2: Automate Process
+### Exercise 2: Automate Extraction
 In this exercise, we will use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage.
 
 ### Step 1: Create Workflow and Add Trigger
