@@ -60,15 +60,15 @@ Navigate to Purview Governance Portal >> Data Map >> Data Sources.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cfa007f2-e699-426d-8fc4-eb9f96e1d971" width="800" title="Snipped: Sep 12, 2023" />
 
-Click "**Register**" and on the resulting "**Register data source**" pop-out, search for and select "**Azure SQL Database**".
+Click "**Register**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3eb8a592-a8bb-4862-8c2a-97c3124dad1c" width="800" title="Snipped: Sep 12, 2023" />
 
-Click "**Continue**" and complete the resulting "**Register data source (Azure SQL Database)**" form.
+On the resulting "**Register data source**" pop-out, search for and select "**Azure SQL Database**", then click "**Continue**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b7d51526-0956-435d-9ec8-1e03e1ae0ce1" width="800" title="Snipped: Sep 12, 2023" />
 
-Click "**Register**".
+Complete the resulting "**Register data source (Azure SQL Database)**" form and then click "**Register**".
 
 -----
 
