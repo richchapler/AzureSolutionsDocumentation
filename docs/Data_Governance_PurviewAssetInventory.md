@@ -8,7 +8,7 @@ This documentation considers the following requirements and goals:
 * "Purview Asset, Export as CSV functionality does not produce a full inventory; we have more than 1,000 assets"
 
 ## Proposed Solution
-* Generate and catalog SQL sample data
+* Generate Sample Data: Generate and catalog SQL sample data
 * Automate Process: Use an Azure Logic App to iteratively query Purview and write results to Azure Blob Storage
 
 ## Solution Requirements
@@ -32,10 +32,10 @@ The proposed solution requires:
 
 -----
 
-### Exercise 1: Generate Sample
+### Exercise 1: Generate Sample Data
 In this exercise, we will generate and catalog SQL sample data.
 
-### Step 1: Generate SQL Sample Data
+### Step 1: SQL Sample Data
 
 Navigate to your SQL Database, "Query editor...", and login.
 
