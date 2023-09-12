@@ -217,11 +217,23 @@ Prompt | Entry
 
 Complete the form and click "**Save**".
 
+-----
 
+### Step 9: Confirm Success
 
+Navigate to "**Overview**", click on the "**Run**" dropdown and then "**Run**" from the resulting menu.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/218a7cf9-ee9c-4de2-b4d0-673c8825ffcb" width="800" title="Snipped: Sep 12, 2023" />
 
-LOREM IPSUM!
+Navigate to "**Run History**" and click into the latest run.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/46a16976-c0dc-43d2-a8d1-a2031ca05b4d" width="800" title="Snipped: Sep 12, 2023" />
+
+Confirm successful processing.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
 
 -----
 
