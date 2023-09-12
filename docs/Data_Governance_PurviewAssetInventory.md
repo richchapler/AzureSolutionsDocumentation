@@ -21,38 +21,38 @@ The proposed solution requires:
     * `Data Source Administrator` role to access Scanning Data plane
       <br>_Note: Be patient when setting permissions for the first time... replication can take some time_
       
-* Key Vault
-  * ...with secret for SQL admin password
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault)
+  * ...with [secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets) for SQL admin password
   * ...with Access Policy, Secret "Get" & "List" permissions for Purview system-assigned managed identity
-  <br> _NOT CLEAR IF THIS IS REQUIRED_
 * [**Logic App**](https://learn.microsoft.com/en-us/azure/logic-apps/)
-
-* [**Postman**](https://www.postman.com/product/workspaces/)
 * [**Purview**](Infrastructure_Purview.md)
   * ...with Credential for Azure SQL
-* _SQL_
-  * _...with both SQL and AD authentication??_
-  * _Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data_
+* [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) server and database
+  * ...with SQL authentication, Serverless, Public Endpoint, Allow Azure Services, Add Current Client IP Address, no Defender, No existing data
 
 -----
 
 ### Exercise 1: Generate Sample
 In this exercise, we will generate and catalog SQL sample data.
 
-  * Generate 2,100 random tables to scan with Purview
+### Step 1: Generate SQL Sample Data
 
-    ```
-    DECLARE @i INT = 1;
-    WHILE @i <= 2100
-    BEGIN
-        DECLARE @randomName VARCHAR(255) = 'Table' + CAST(ABS(CHECKSUM(NEWID())) AS VARCHAR(255));
-        DECLARE @sql NVARCHAR(MAX) = N'CREATE TABLE ' + @randomName + ' (id INT);';
-        EXEC sp_executesql @sql;
-        SET @i = @i + 1;
-    END
-    ```
+Navigate to your SQL Database, "Query editor...", and login.
 
-  * Register and Scan 2,100 random tables generated in SQL
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/95c97830-bc7f-450a-81e9-0f630c7dc954" width="800" title="Snipped: Sep 12, 2023" />
+
+Execute the following T-SQL to generate 2,100 random tables (for later scan by Purview):
+
+```
+DECLARE @i INT = 1;
+WHILE @i <= 2100
+BEGIN
+    DECLARE @randomName VARCHAR(255) = 'Table' + CAST(ABS(CHECKSUM(NEWID())) AS VARCHAR(255));
+    DECLARE @sql NVARCHAR(MAX) = N'CREATE TABLE ' + @randomName + ' (id INT);';
+    EXEC sp_executesql @sql;
+    SET @i = @i + 1;
+END
+```
 
 -----
 
