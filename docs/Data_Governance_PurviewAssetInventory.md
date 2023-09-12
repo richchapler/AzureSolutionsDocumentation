@@ -56,9 +56,19 @@ END
 
 ### Step 2: Purview Catalog
 
-Navigate to your Purview...
+Navigate to Purview Governance Portal >> Data Map >> Data Sources.
 
-LOREM IPSUM!
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cfa007f2-e699-426d-8fc4-eb9f96e1d971" width="800" title="Snipped: Sep 12, 2023" />
+
+Click "**Register**" and on the resulting "**Register data source**" pop-out, search for and select "**Azure SQL Database**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3eb8a592-a8bb-4862-8c2a-97c3124dad1c" width="800" title="Snipped: Sep 12, 2023" />
+
+Click "**Continue**" and complete the resulting "**Register data source (Azure SQL Database)**" form.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b7d51526-0956-435d-9ec8-1e03e1ae0ce1" width="800" title="Snipped: Sep 12, 2023" />
+
+Click "**Register**".
 
 -----
 
@@ -93,12 +103,12 @@ On the resulting "**Add an action**" pop-out, search for and then select "**HTTP
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b37dc87-2a68-4735-a283-8f626c793be0" width="800" title="Snipped: Sep 11, 2023" />
 
-  Prompt | Entry
-  :----- | :-----
-  **URI** | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
-  **Method** | `POST`
-  **Headers** | `content-type` :: `application/x-www-form-urlencoded`
-  **Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
+Prompt | Entry
+:----- | :-----
+**URI** | `https://login.microsoftonline.com/{TenantId}/oauth2/token`
+**Method** | `POST`
+**Headers** | `content-type` :: `application/x-www-form-urlencoded`
+**Body** | `grant_type=client_credentials&client_id={ApplicationRegistration_ClientId}&client_secret={ApplicationRegistration_ClientSecret}& resource=https://purview.azure.net`
 
 Complete the form and click "**Save**".
 
