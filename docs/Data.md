@@ -54,5 +54,5 @@
 
   Use Case | Source | Surface | Method
   :----- | :----- | :----- | :-----
-  [Purview Asset Inventory (WiP)](Data_Governance_PurviewAssetInventory.md) | Purview | Blob Storage | Logic Apps + API
+  [Purview Asset Inventory](Data_Governance_PurviewAssetInventory.md) | Purview | Blob Storage | Logic Apps + API
   [Purview >> Alation Bridge](Data_Governance_PurviewAlationBridge.md) | Purview | Alation | Logic Apps + API
