@@ -192,6 +192,7 @@ Complete the form and click "**Save**".
 Click "+" to insert a step below "**HTTP, Query Assets**", and then "**Add an action**" on the resulting menu.
 <br>On the resulting "**Add an action**" pop-out, search for and then select "**Create Blob (v2)**".
 
+#### Create Connection
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/897b1262-cdfc-4ad7-8524-f28dc5aa9ded" width="800" title="Snipped: Sep 11, 2023" />
 
 Prompt | Entry
