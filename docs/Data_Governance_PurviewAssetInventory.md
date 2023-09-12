@@ -70,6 +70,10 @@ On the resulting "**Register data source**" pop-out, search for and select "**Az
 
 Complete the resulting "**Register data source (Azure SQL Database)**" form and then click "**Register**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dc167cf5-a4e8-4167-8ab3-34927b4a4941" width="800" title="Snipped: Sep 12, 2023" />
+
+Scan the new data source and confirm success.
+
 -----
 
 ### Exercise 2: Automate Extraction
