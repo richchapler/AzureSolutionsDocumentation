@@ -5,7 +5,8 @@
 ## Use Case
 This documentation considers the following requirements and goals:
 * "We have cataloged tens of thousands of database assets in Purview"
-* "Purview Asset, Export as CSV functionality does not produce a full inventory; we have more than 1,000 assets"
+* "We want to interact with asset data outside of Purview"
+* "Purview Asset, Export as CSV functionality returns only 1,000 assets"
 
 ## Proposed Solution
 * Generate Sample Data: Generate and catalog SQL sample data
@@ -35,7 +36,7 @@ The proposed solution requires:
 ### Exercise 1: Generate Sample Data
 In this exercise, we will generate and catalog SQL sample data.
 
-### Step 1: SQL Sample Data
+### Step 1: SQL Tables
 
 Navigate to your SQL Database, "Query editor...", and login.
 
@@ -53,6 +54,12 @@ BEGIN
     SET @i = @i + 1;
 END
 ```
+
+### Step 2: Purview Catalog
+
+Navigate to your Purview...
+
+LOREM IPSUM!
 
 -----
 
