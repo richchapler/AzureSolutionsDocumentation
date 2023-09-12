@@ -3,7 +3,6 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/710b6484-af25-473d-ab87-3252ba299bf2" width="1000" />
 
 ## Use Case
-This documentation considers the following requirements and goals:
 * "We have cataloged tens of thousands of database assets in Purview"
 * "We want to interact with asset data outside of Purview"
 * "Purview Asset, Export as CSV functionality returns only 1,000 assets"
