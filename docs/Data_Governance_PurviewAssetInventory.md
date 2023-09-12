@@ -4,6 +4,7 @@
 
 ## Use Case
 This documentation considers the following requirements and goals:
+* "We have cataloged tens of thousands of database assets in Purview"
 * "Purview Asset, Export as CSV functionality does not produce a full inventory; we have more than 1,000 assets"
 
 ## Proposed Solution
