@@ -43,6 +43,11 @@ Sample GeoJSON file (for using Azure Blob Storage, reference)
 https://www.kaggle.com/datasets/pompelmo/usa-states-geojson
 
 ```
+WITH X AS ( SELECT DEALER_CD, REPLACE(SUBSTRING(feature_geometry, 2, LEN(feature_geometry) - 2),'""','"') AS feature_geometry FROM GeoFence )
+SELECT JSON_QUERY(feature_geometry, '$.coordinates') FROM X
+```
+
+```
 SELECT 
     GetRecordPropertyValue(GetArrayElement(feature_geometry.coordinates, 0), '0') AS Longitude,
     GetRecordPropertyValue(GetArrayElement(feature_geometry.coordinates, 0), '1') AS Latitude
