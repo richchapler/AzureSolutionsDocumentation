@@ -54,3 +54,8 @@ SELECT
 FROM [rchaplersds-rchaplersd]
 WHERE feature_geometry.type = 'Polygon'
 ```
+
+## Reference
+
+* [Collect (Azure Stream Analytics)](https://learn.microsoft.com/en-us/stream-analytics-query/collect-azure-stream-analytics)
+* [Introduction to Stream Analytics windowing functions](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-window-functions)
