@@ -41,3 +41,11 @@ WHERE latitude IS NOT NULL and longitude IS NOT NULL
 
 Sample GeoJSON file (for using Azure Blob Storage, reference)
 https://www.kaggle.com/datasets/pompelmo/usa-states-geojson
+
+```
+SELECT 
+    GetRecordPropertyValue(GetArrayElement(feature_geometry.coordinates, 0), '0') AS Longitude,
+    GetRecordPropertyValue(GetArrayElement(feature_geometry.coordinates, 0), '1') AS Latitude
+FROM [rchaplersds-rchaplersd]
+WHERE feature_geometry.type = 'Polygon'
+```
