@@ -39,22 +39,22 @@ WHERE latitude IS NOT NULL and longitude IS NOT NULL
 
 ```
 WITH X AS (
-    SELECT s.latitude lat_s
-        ,s.longitude lon_s
-        ,g.dealer_cd
-        ,g.ordinal
-        ,g.latitude lat_g
-        ,g.longitude lon_g
-    FROM rchaplereh s CROSS JOIN geofence g
-),
-Y AS (
-    SELECT dealer_cd, lon_s longitude, lat_s latitude, Collect(CreatePoint(lon_g,lat_g)) as points
-    FROM X
-    GROUP BY dealer_cd, lon_s, lat_s, SlidingWindow(second,10)
+    SELECT r.dealer_cd,
+        CreatePoint(s.latitude,s.longitude) as geography,
+        CreatePolygon(
+            CreatePoint(r.lat1, r.lon1),
+            CreatePoint(r.lat2, r.lon2),
+            CreatePoint(r.lat3, r.lon3),
+            CreatePoint(r.lat4, r.lon4),
+            CreatePoint(r.lat5, r.lon5),
+            CreatePoint(r.lat6, r.lon6),
+            CreatePoint(r.lat7, r.lon7)
+        ) as polygon
+    FROM rchaplereh s CROSS JOIN rchaplersd r
 )
-SELECT dealer_cd, longitude, latitude, points, CreatePolygon(points) as geofence
+SELECT ST_WITHIN(geography, polygon) as isWithin
 INTO rchaplerdls
-FROM Y
+FROM X
 ```
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/705a6ed9-e672-4298-bb02-8fe7a56317a0)
