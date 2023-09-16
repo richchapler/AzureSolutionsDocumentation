@@ -19,6 +19,7 @@ Event Hub Data Generator, user-defined payload examples:
 
 https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-geospatial-functions
 
+## Original Stream Analytics Logic
 ```
 SELECT latitude
     , longitude
@@ -37,6 +38,29 @@ FROM rchaplereh
 WHERE latitude IS NOT NULL and longitude IS NOT NULL
 ```
 
+## T-SQL Staging
+```
+SELECT *
+FROM (
+    SELECT 
+        dealer_cd,
+        'lat' + CAST(Ordinal AS VARCHAR) AS Attribute,
+        latitude AS Value
+    FROM geofence
+    UNION ALL
+    SELECT 
+        dealer_cd,
+        'lon' + CAST(Ordinal AS VARCHAR) AS Attribute,
+        longitude AS Value
+    FROM geofence
+) AS SourceTable
+PIVOT (
+    MAX(Value)
+    FOR Attribute IN (lat1, lon1, lat2, lon2, lat3, lon3, lat4, lon4, lat5, lon5, lat6, lon6, lat7, lon7)
+) AS PivotTable;
+```
+
+## Stream Analytics Expression
 ```
 WITH X AS (
     SELECT r.dealer_cd,
