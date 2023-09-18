@@ -1,4 +1,5 @@
-Event Hub Data Generator, user-defined payload examples:
+## Event Hub Data Generator
+...user-defined payload example
 
 ```
 [
@@ -9,95 +10,45 @@ Event Hub Data Generator, user-defined payload examples:
 ]
 ```
 
+## T-SQL Table
 ```
-[
-    {
-        "x": "{\"type\": \"Polygon\",\"coordinates\": [[[0, 0],[3, 6],[6, 1],[0, 0]]]}"
-    }
-]
+CREATE TABLE [dbo].[geojson](
+	[dealer_cd] [nvarchar](10) NULL,
+	[geojson] [nvarchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+```
+
+### Sample data for geojson column
+```
+{"type":"Polygon", "coordinates": [[ [10.0, 10.0], [20.0, 10.0], [20.0, 20.0], [10.0, 20.0], [10.0, 10.0] ]]}
 ```
 
 https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-geospatial-functions
 
-## Original Stream Analytics Logic
+## Stream Analytics 'parseJson' Logic
 ```
-SELECT latitude
-    , longitude
-    , ST_WITHIN(
-            CreatePoint(latitude, longitude),
-            CreatePolygon(
-                CreatePoint(36.992426, -109.060253)
-                , CreatePoint(36.992426, -102.041524)
-                , CreatePoint(41.003444, -102.041524)
-                , CreatePoint(41.003444, -109.060253)
-                , CreatePoint(36.992426, -109.060253)
-                )
-        ) 
-INTO rchaplerdls 
-FROM rchaplereh
-WHERE latitude IS NOT NULL and longitude IS NOT NULL
+function parseJson (strjson) { return JSON.parse(strjson); }
 ```
 
-## T-SQL Staging
-```
-SELECT *
-FROM (
-    SELECT 
-        dealer_cd,
-        'lat' + CAST(Ordinal AS VARCHAR) AS Attribute,
-        latitude AS Value
-    FROM geofence
-    UNION ALL
-    SELECT 
-        dealer_cd,
-        'lon' + CAST(Ordinal AS VARCHAR) AS Attribute,
-        longitude AS Value
-    FROM geofence
-) AS SourceTable
-PIVOT (
-    MAX(Value)
-    FOR Attribute IN (lat1, lon1, lat2, lon2, lat3, lon3, lat4, lon4, lat5, lon5, lat6, lon6, lat7, lon7)
-) AS PivotTable;
-```
-
-## Stream Analytics Expression
+## Stream Analytics Query Logic
 ```
 WITH X AS (
-    SELECT r.dealer_cd,
-        CreatePoint(s.latitude,s.longitude) as geography,
-        CreatePolygon(
-            CreatePoint(r.lat1, r.lon1),
-            CreatePoint(r.lat2, r.lon2),
-            CreatePoint(r.lat3, r.lon3),
-            CreatePoint(r.lat4, r.lon4),
-            CreatePoint(r.lat5, r.lon5),
-            CreatePoint(r.lat6, r.lon6),
-            CreatePoint(r.lat7, r.lon7)
-        ) as polygon
-    FROM rchaplereh s CROSS JOIN rchaplersd r
+    SELECT s.dealer_cd,
+        CreatePoint(e.latitude,e.longitude) as geography,
+        s.geojson polygon
+    FROM rchaplereh e CROSS JOIN rchaplersd s
 )
-SELECT ST_WITHIN(geography, polygon) as isWithin
-INTO rchaplerdls
+SELECT dealer_cd,
+    geography,
+    udf.parseJson(polygon) polygon,
+    ST_WITHIN(geography, udf.parseJson(polygon)) as isWithin
+INTO rchaplerdlsfs
 FROM X
 ```
 
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/705a6ed9-e672-4298-bb02-8fe7a56317a0)
-
+## Miscellaneous
 Sample GeoJSON file (for using Azure Blob Storage, reference)
 https://www.kaggle.com/datasets/pompelmo/usa-states-geojson
-
-```
-WITH X AS ( SELECT DEALER_CD, REPLACE(SUBSTRING(feature_geometry, 2, LEN(feature_geometry) - 2),'""','"') AS feature_geometry FROM GeoFence )
-SELECT JSON_QUERY(feature_geometry, '$.coordinates') FROM X
-```
-
-```
-SELECT 
-    GetRecordPropertyValue(GetArrayElement(feature_geometry.coordinates, 0), '0') AS Longitude,
-    GetRecordPropertyValue(GetArrayElement(feature_geometry.coordinates, 0), '1') AS Latitude
-FROM [rchaplersds-rchaplersd]
-WHERE feature_geometry.type = 'Polygon'
-```
 
 ## Reference
 
