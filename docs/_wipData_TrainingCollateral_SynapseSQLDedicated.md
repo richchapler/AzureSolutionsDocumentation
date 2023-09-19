@@ -5,7 +5,7 @@
 * **Caching queries**: Synapse SQL offers multiple forms of query caching, including SSD-based caching, in-memory caching, and result set caching.
 * **Support for external tables**: Synapse SQL allows you to create external tables that reference data stored in Azure Data Lake storage or Dataverse.
 
-## Create Table (including Primary Key)
+## CREATE TABLE (including Primary Key)
 ### ...using a T-SQL query
 ```
 CREATE TABLE TableName (
@@ -84,7 +84,7 @@ Commands for Creating Tables: Familiarize yourself with commands for creating di
 * **Automatic statistics collection** is another feature that works in conjunction with automatic table optimization. When the database AUTO_CREATE_STATISTICS option is enabled, the query optimizer analyzes incoming user queries for missing statistics. If statistics are missing, it creates statistics on individual columns in the query predicate or join condition to improve cardinality estimates for the query plan.
 <br>[Table statistics for dedicated SQL pool in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-statistics) 
 
-## Create Index
+## CREATE INDEX
 ### T-SQL
 ```
 CREATE CLUSTERED COLUMNSTORE INDEX IX_MyTable ON dbo.MyTable;
@@ -149,29 +149,72 @@ _By default, Synapse SQL creates a clustered columnstore index when no index opt
 
 [Indexes on dedicated SQL pool tables in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-index)
 
-## Create Views
-Views are virtual tables that are based on the result of an SQL query.
-
+## CREATE VIEW
+### T-SQL
 ```
-CREATE VIEW ViewName AS
-SELECT Column1, Column2
-FROM TableName
-WHERE Condition;
-```
-
-## Create Stored Procedure
-To create a stored procedure, you can use the CREATE PROCEDURE statement. Here’s an example:
-
-```
-CREATE PROCEDURE ProcedureName
+CREATE VIEW schema_name.view_name
 AS
-BEGIN
-SQL statements here
-END;
+SELECT column1, column2, ...
+FROM table_name;
 ```
 
-Queries in GUI vs. Code(script) interface: You can execute queries both in the GUI and through code/scripting interfaces. The choice depends on your preference and requirements.
-Joins (special considerations?): When working with joins, it’s important to consider the join type (e.g., inner join, left join) and the join condition. Here’s an example of an inner join:
+### ARM template
+```
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspaceName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Synapse workspace."
+      }
+    },
+    "databaseName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the database."
+      }
+    },
+    "viewName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the view."
+      }
+    }
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('workspaceName'), '/', parameters('databaseName'), '/', parameters('viewName'))]",
+      "type": "Microsoft.Synapse/workspaces/databases/views",
+      "apiVersion": "2021-06-01-preview",
+      "properties": {
+        "definition": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-06-01/sql.json#",
+          "contentVersion": "1.0.0.0",
+          "views": [
+            {
+              "name": "[parameters('viewName')]",
+              "definition": "<your SQL query here>"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
+### Considerations
+* **Purpose**: Clearly define the purpose of the view. Is it for data abstraction, security, or simplifying complex queries? Understanding the purpose will help you design the view effectively.
+* **Schema Design**: Ensure that the underlying schema of the tables or other views used in the view is well-designed. This includes proper normalization, appropriate data types, and indexing for performance optimization.
+* **Query Optimization**: Optimize the SQL query used in the view to ensure efficient execution. Consider using appropriate join conditions, filtering criteria, and aggregations to minimize resource consumption.
+* **Data Security**: Implement necessary security measures to protect sensitive data accessed through the view. This may involve setting up appropriate permissions and access controls.
+* **Maintenance and Updates**: Plan for regular maintenance and updates of the view as per your data requirements. This includes handling schema changes, data updates, and ensuring data consistency.
+* **Documentation**: Document the purpose, structure, and usage guidelines of the view for future reference. This will help other developers understand and utilize the view effectively.
+
+### JOINs
+When working with joins, it’s important to consider the join type (e.g., inner join, left join) and the join condition. Here’s an example of an inner join:
 
 ```
 SELECT *
@@ -179,14 +222,114 @@ FROM Table1
 INNER JOIN Table2 ON Table1.Column = Table2.Column;
 ```
 
-Case Statement Equivalent in Gui? Scripting Only?: The case statement is available in both GUI and scripting interfaces. Here’s an example of using a case statement in T-SQL scripting:
-
+## CREATE PROCEDURE
+### T-SQL
 ```
-SELECT Column1,
-CASE
-WHEN Condition1 THEN Result1
-WHEN Condition2 THEN Result2
-ELSE Result3
-END AS NewColumn
-FROM TableName;
+CREATE PROCEDURE procedure_name
+AS
+BEGIN
+    -- SQL statements go here
+END;
+```
+
+### ARM Template
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the database where the stored procedure will be created."
+            }
+        },
+        "procedureName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the stored procedure."
+            }
+        },
+        "procedureBody": {
+            "type": "string",
+            "metadata": {
+                "description": "The body of the stored procedure."
+            }
+        }
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('databaseName'), '/procedures/', parameters('procedureName'))]",
+            "type": "Microsoft.Sql/servers/databases/procedures",
+            "apiVersion": "2021-02-01-preview",
+            "properties": {
+                "definition": "[parameters('procedureBody')]"
+            }
+        }
+    ]
+}
+```
+
+### Views vs. Stored Procedures
+* Views
+  * Represent virtual tables.
+  * Allow you to query data from multiple tables.
+  * Provide a consistent interface to the underlying data.
+  * Are generally used for querying data.
+  * Do not allow modifications to the underlying tables.
+* Stored procedures
+  * Are a group of SQL statements.
+  * Can perform various operations.
+  * Encapsulate business logic.
+  * Provide a reusable and efficient way to execute database operations.
+
+### Considerations
+* **Syntax and Features**: Synapse SQL supports many of the T-SQL features used in SQL Server. However, there may be some differences and limitations specific to Synapse SQL. You can refer to the official documentation provided by Microsoft Learn for more information on the supported features and functionality.
+* **Performance Optimization**: To maximize the performance of your stored procedures, you can leverage scale-out specific features available in Synapse SQL. These features can help you optimize the execution of your SQL code against the data stored in your data warehouse.
+* **Validation and Error Handling**: It’s important to implement proper validation rules and error handling mechanisms in your stored procedures. This ensures that your code handles unexpected scenarios gracefully and provides meaningful error messages when necessary.
+* **Modularity and Reusability**: Stored procedures are a great way to encapsulate your SQL code into manageable units and promote code reusability. Consider designing your stored procedures in a modular fashion, allowing them to be easily reused across different parts of your solution.
+* **Security and Permissions**: Ensure that you have appropriate permissions to create and execute stored procedures in Synapse SQL. You must have CREATE PROCEDURE permission in the database and ALTER permission on the schema where the procedure is being created.
+* **Testing and Debugging**: It’s good practice to thoroughly test your stored procedures before deploying them to a production environment. Use debugging techniques available in Synapse SQL to identify and fix any issues during development.
+
+## Conditional Logic (e.g., CASE expression)
+* **CASE**: The CASE expression is a conditional expression that provides if-then-else type of logic to SQL. It allows you to perform different actions based on conditions specified in the expression.
+```
+CASE 
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ...
+    ELSE result
+END
+```
+
+* **IF…ELSE**: The IF…ELSE statement allows you to perform commands based on a condition. If the condition is true, it executes a SQL statement, and if the condition is false, it executes another SQL statement.
+```
+IF condition 
+    BEGIN
+        -- SQL statement
+    END
+ELSE 
+    BEGIN
+        -- SQL statement
+    END
+```
+
+* **IIF**: The IIF function returns one of two values, depending on whether the Boolean expression evaluates to true or false.
+```
+IIF ( boolean_expression, true_value, false_value )
+```
+
+* **CHOOSE**: The CHOOSE function returns the item at the specified index from a list of values.
+```
+CHOOSE ( index, val_1, val_2 [, val_n ] )
+```
+
+* **COALESCE**: The COALESCE function returns the first non-null value in a list.
+```
+COALESCE ( expression [ ,...n ] )
+```
+
+* **NULLIF**: The NULLIF function returns a null value if the two specified expressions are equal.
+```
+NULLIF ( expression , expression )
 ```
