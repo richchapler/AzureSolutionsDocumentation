@@ -80,20 +80,74 @@ Distributed Tables: Distributed tables are used to distribute data across comput
 Statistics: Statistics help the query optimizer generate efficient query plans by providing information about the distribution of data in columns.
 * **Primary Key and Unique Key**: Define primary key and unique key constraints to enforce data integrity and uniqueness
 Commands for Creating Tables: Familiarize yourself with commands for creating different types of tables, such as regular, temporary, and external tables.
-
-### Synapse SQL-specific Considerations
-* The process of creating tables is similar in both Synapse SQL and Azure SQL
-* However, Synapse SQL provides additional features such as automatic table optimization and automatic statistics collection:
-  * **Automatic table optimization** is a feature that helps improve the performance of your queries. It automatically creates and updates query-optimization statistics on tables in the dedicated SQL pool. By collecting statistics on your data, the dedicated SQL pool query optimizer can make more informed decisions about how to execute queries efficiently. The more the dedicated SQL pool knows about your data, the faster it can execute queries against it.
-  * **Automatic statistics collection** is another feature that works in conjunction with automatic table optimization. When the database AUTO_CREATE_STATISTICS option is enabled, the query optimizer analyzes incoming user queries for missing statistics. If statistics are missing, it creates statistics on individual columns in the query predicate or join condition to improve cardinality estimates for the query plan.
+* **Automatic table optimization** is a feature that helps improve the performance of your queries. It automatically creates and updates query-optimization statistics on tables in the dedicated SQL pool. By collecting statistics on your data, the dedicated SQL pool query optimizer can make more informed decisions about how to execute queries efficiently. The more the dedicated SQL pool knows about your data, the faster it can execute queries against it.
+* **Automatic statistics collection** is another feature that works in conjunction with automatic table optimization. When the database AUTO_CREATE_STATISTICS option is enabled, the query optimizer analyzes incoming user queries for missing statistics. If statistics are missing, it creates statistics on individual columns in the query predicate or join condition to improve cardinality estimates for the query plan.
 <br>[Table statistics for dedicated SQL pool in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-statistics) 
 
-## Index
-To create indexes, you can use the CREATE INDEX statement. Here’s an example:
-CREATE INDEX IndexName ON TableName (Column1, Column2);
+## Create Index
+### T-SQL
+```
+CREATE CLUSTERED COLUMNSTORE INDEX IX_MyTable ON dbo.MyTable;
+```
 
+### ARM template
+```
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "databaseName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Synapse SQL database."
+            }
+        },
+        "tableName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the table to add the index to."
+            }
+        },
+        "indexName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the index to be created."
+            }
+        },
+        "indexColumns": {
+            "type": "array",
+            "metadata": {
+                "description": "The columns to include in the index."
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Synapse/workspaces/sqlDatabases/tables/indexes",
+            "apiVersion": "2020-12-01-preview",
+            "name": "[concat(parameters('databaseName'), '/', parameters('tableName'), '/', parameters('indexName'))]",
+            "properties": {
+                "columns": "[parameters('indexColumns')]"
+            }
+        }
+    ]
+}
+```
 
+### Index Types
+* **Clustered columnstore indexes**
+  * Benefits: **Clustered columnstore tables offer the highest level of data compression and the best overall query performance. They are usually the best choice for large tables**.
+  * Drawbacks: Columnstore tables do not support varchar (max), nvarchar (max), and varbinary (max) data types. They may also be less efficient for transient data and small tables with less than 60 million rows.
+* **Heap tables**
+  * Benefits: Loading data to heap tables is faster than loading it to clustered columnstore tables, especially when you’re temporarily landing data in Synapse SQL. Loading data to a temporary table is even faster than loading it to permanent storage.
+  * Drawbacks: Clustered columnstore tables begin to achieve optimal compression once there are more than 60 million rows. For small lookup tables with less than 60 million rows, consider using heap or clustered index for faster query performance.
+* **Clustered and nonclustered indexes**
+  * Benefits: Clustered indexes may outperform clustered columnstore tables when a single row needs to be quickly retrieved. Nonclustered indexes can improve filter on other columns.
+  * Drawbacks: Each index added to a table increases both space and processing time during loads.
 
+_By default, Synapse SQL creates a clustered columnstore index when no index options are specified on a table_
+
+[Indexes on dedicated SQL pool tables in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-index)
 
 ## Create Views
 Views are virtual tables that are based on the result of an SQL query.
