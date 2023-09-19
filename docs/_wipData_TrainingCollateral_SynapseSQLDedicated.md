@@ -1,5 +1,4 @@
 ## Create Table
-When creating tables, it’s important to consider naming conventions and data types. You can create tables using both the GUI and scripting. Here’s an example of creating a table using T-SQL scripting:
 ```
 CREATE TABLE TableName (
 Column1 INT,
@@ -8,7 +7,9 @@ Column2 VARCHAR(50),
 );
 ```
 
-Create Table: The process of creating tables is similar in both Synapse SQL and Azure SQL. However, Synapse SQL provides additional features such as automatic table optimization and automatic statistics collection1.
+### Considerations
+* The process of creating tables is similar in both Synapse SQL and Azure SQL. However, Synapse SQL provides additional features such as automatic table optimization and automatic statistics collection1.
+* When creating tables, it’s important to consider naming conventions and data types. You can create tables using both the GUI and scripting. Here’s an example of creating a table using T-SQL scripting:
 
 ## Creating Primary Key, Indexes, etc.
 To create a primary key, you can use the PRIMARY KEY constraint in your CREATE TABLE statement. Here’s an example:
