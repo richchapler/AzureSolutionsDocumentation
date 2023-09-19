@@ -5,7 +5,8 @@
 * **Caching queries**: Synapse SQL offers multiple forms of query caching, including SSD-based caching, in-memory caching, and result set caching.
 * **Support for external tables**: Synapse SQL allows you to create external tables that reference data stored in Azure Data Lake storage or Dataverse.
 
-## Create Table (T-SQL)
+## Create Table
+### ...using a T-SQL query
 ```
 CREATE TABLE TableName (
 Column1 INT,
@@ -14,7 +15,7 @@ Column2 VARCHAR(50),
 );
 ```
 
-## Create Table (ARM Template)
+### ...using an ARM template
 ```
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json",
