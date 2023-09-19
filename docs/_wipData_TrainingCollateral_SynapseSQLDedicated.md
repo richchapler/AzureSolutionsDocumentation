@@ -5,11 +5,11 @@
 * **Caching queries**: Synapse SQL offers multiple forms of query caching, including SSD-based caching, in-memory caching, and result set caching.
 * **Support for external tables**: Synapse SQL allows you to create external tables that reference data stored in Azure Data Lake storage or Dataverse.
 
-## Create Table
+## Create Table (including Primary Key)
 ### ...using a T-SQL query
 ```
 CREATE TABLE TableName (
-Column1 INT,
+Column1 INT PRIMARY KEY,
 Column2 VARCHAR(50),
 ...
 );
@@ -67,28 +67,33 @@ Column2 VARCHAR(50),
 }
 ```
 
-### Considerations
+### General Considerations / Recommendations
+* **Table Category**: Determine whether the table belongs to the fact, dimension, or integration category. Fact tables contain quantitative data generated in a transactional system, while dimension tables store attribute data that changes infrequently. Integration tables provide a place for integrating or staging data.
+* **Schema Names**: Schemas are useful for grouping objects used in a similar fashion1. Consider defining user-defined schemas to organize your tables.
+* **Table Names**: Migrate all fact, dimension, and integration tables to one SQL pool schema1. When constructing table names, consider using descriptive names that reflect the table’s purpose and content.
+* **Table Persistence**: Regular tables are used for permanent storage of data1. Temporary tables are used for temporary storage during query execution1. External tables reference data stored outside of Synapse SQL.
+* **Data Types**: Choose appropriate data types for columns based on the nature of the data they will store.
+Distributed Tables: Distributed tables are used to distribute data across compute nodes in a dedicated SQL pool1. Hash-distributed tables distribute rows based on a hash function applied to a distribution column1. Replicated tables duplicate rows across all compute nodes1. Round-robin tables distribute rows evenly across compute nodes.
+* **Common Distribution Methods for Tables**: Consider using hash-distributed tables for large fact tables and replicated or round-robin tables for smaller dimension tables.
+* **Partitions**: Partitions divide a table into smaller, more manageable pieces based on a partitioning column.
+* **Columnstore Indexes**: Columnstore indexes improve query performance by storing columnar data in memory.
+Statistics: Statistics help the query optimizer generate efficient query plans by providing information about the distribution of data in columns.
+* **Primary Key and Unique Key**: Define primary key and unique key constraints to enforce data integrity and uniqueness
+Commands for Creating Tables: Familiarize yourself with commands for creating different types of tables, such as regular, temporary, and external tables.
+
+### Synapse SQL-specific Considerations
 * The process of creating tables is similar in both Synapse SQL and Azure SQL
 * However, Synapse SQL provides additional features such as automatic table optimization and automatic statistics collection:
   * **Automatic table optimization** is a feature that helps improve the performance of your queries. It automatically creates and updates query-optimization statistics on tables in the dedicated SQL pool. By collecting statistics on your data, the dedicated SQL pool query optimizer can make more informed decisions about how to execute queries efficiently. The more the dedicated SQL pool knows about your data, the faster it can execute queries against it.
   * **Automatic statistics collection** is another feature that works in conjunction with automatic table optimization. When the database AUTO_CREATE_STATISTICS option is enabled, the query optimizer analyzes incoming user queries for missing statistics. If statistics are missing, it creates statistics on individual columns in the query predicate or join condition to improve cardinality estimates for the query plan.
 <br>[Table statistics for dedicated SQL pool in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-statistics) 
 
-* When creating tables, it’s important to consider naming conventions and data types. You can create tables using both the GUI and scripting. Here’s an example of creating a table using T-SQL scripting:
-
-## Creating Primary Key, Indexes, etc.
-To create a primary key, you can use the PRIMARY KEY constraint in your CREATE TABLE statement. Here’s an example:
-
-```
-CREATE TABLE TableName (
-Column1 INT PRIMARY KEY,
-Column2 VARCHAR(50),
-...
-);
-```
-
+## Index
 To create indexes, you can use the CREATE INDEX statement. Here’s an example:
 CREATE INDEX IndexName ON TableName (Column1, Column2);
+
+
+
 
 ## Create Views
 Views are virtual tables that are based on the result of an SQL query.
