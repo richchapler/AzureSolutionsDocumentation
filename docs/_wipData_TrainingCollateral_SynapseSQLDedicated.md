@@ -8,7 +8,11 @@ Column2 VARCHAR(50),
 ```
 
 ### Considerations
-* The process of creating tables is similar in both Synapse SQL and Azure SQL. However, Synapse SQL provides additional features such as automatic table optimization and automatic statistics collection1.
+* The process of creating tables is similar in both Synapse SQL and Azure SQL. However, Synapse SQL provides additional features such as automatic table optimization and automatic statistics collection:
+  * Automatic table optimization is a feature that helps improve the performance of your queries. It automatically creates and updates query-optimization statistics on tables in the dedicated SQL pool. By collecting statistics on your data, the dedicated SQL pool query optimizer can make more informed decisions about how to execute queries efficiently. The more the dedicated SQL pool knows about your data, the faster it can execute queries against it.
+  * Automatic statistics collection is another feature that works in conjunction with automatic table optimization. When the database AUTO_CREATE_STATISTICS option is enabled, the query optimizer analyzes incoming user queries for missing statistics. If statistics are missing, it creates statistics on individual columns in the query predicate or join condition to improve cardinality estimates for the query plan.
+[Table statistics for dedicated SQL pool in Azure Synapse Analytics](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-statistics) 
+
 * When creating tables, it’s important to consider naming conventions and data types. You can create tables using both the GUI and scripting. Here’s an example of creating a table using T-SQL scripting:
 
 ## Creating Primary Key, Indexes, etc.
