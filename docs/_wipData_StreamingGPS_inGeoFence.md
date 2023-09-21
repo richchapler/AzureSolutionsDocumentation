@@ -38,12 +38,12 @@ WITH events AS (
     FROM rchaplereh e
     ),
 comparison AS (
-SELECT s.dealer_cd,
-    e.processedOn,
-    e.geography, -- streamed coordinates
-    udf.parseJson(s.feature_geometry) polygon, -- geofence
-    ST_WITHIN(e.geography, udf.parseJson(s.feature_geometry)) as isWithin
-FROM events e CROSS JOIN rchaplers s
+    SELECT s.dealer_cd,
+        e.processedOn,
+        e.geography, -- streamed coordinates
+        udf.parseJson(s.feature_geometry) polygon, -- geofence
+        ST_WITHIN(e.geography, udf.parseJson(s.feature_geometry)) as isWithin
+    FROM events e CROSS JOIN rchaplers s
     ),
 lookback AS (
     SELECT LAG(*,1) OVER (PARTITION BY dealer_cd LIMIT DURATION(minute, 5)) AS previous, *
