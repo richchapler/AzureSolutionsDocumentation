@@ -37,13 +37,23 @@ WITH X AS (
         CreatePoint(e.latitude,e.longitude) as geography,
         s.geojson polygon
     FROM rchaplereh e CROSS JOIN rchaplersd s
-)
+),
+Y AS (
 SELECT dealer_cd,
     geography,
-    udf.parseJson(polygon) polygon,
     ST_WITHIN(geography, udf.parseJson(polygon)) as isWithin
-INTO rchaplerdlsfs
 FROM X
+),
+Z AS ( SELECT LAG(*,1) OVER (PARTITION BY dealer_cd LIMIT DURATION(minute, 5)) AS previous, * FROM Y )
+SELECT dealer_cd,
+    geography gps_current,
+    previous.geography gps_previous,
+    CASE WHEN isWithin = 1 AND previous.isWithin = 0 THEN 'ENTER'
+        WHEN isWithin = 0 AND previous.isWithin = 1 THEN 'EXIT'
+        ELSE ''
+        END Status
+INTO rchaplerdlsfs
+FROM Z
 ```
 
 ## Miscellaneous
