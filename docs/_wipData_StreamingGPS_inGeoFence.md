@@ -32,28 +32,35 @@ function parseJson (strjson) { return JSON.parse(strjson); }
 
 ## Stream Analytics Query Logic
 ```
-WITH X AS (
-    SELECT s.dealer_cd,
-        CreatePoint(e.latitude,e.longitude) as geography,
-        s.geojson polygon
-    FROM rchaplereh e CROSS JOIN rchaplersd s
-),
-Y AS (
+WITH events AS (
+    SELECT e.EventProcessedUtcTime as processedOn,
+        CreatePoint(e.latitude,e.longitude) as geography
+    FROM rchaplereh e
+    ),
+comparison AS (
+SELECT s.dealer_cd,
+    e.processedOn,
+    e.geography, -- streamed coordinates
+    udf.parseJson(s.feature_geometry) polygon, -- geofence
+    ST_WITHIN(e.geography, udf.parseJson(s.feature_geometry)) as isWithin
+FROM events e CROSS JOIN rchaplers s
+    ),
+lookback AS (
+    SELECT LAG(*,1) OVER (PARTITION BY dealer_cd LIMIT DURATION(minute, 5)) AS previous, *
+    FROM comparison
+    )
 SELECT dealer_cd,
-    geography,
-    ST_WITHIN(geography, udf.parseJson(polygon)) as isWithin
-FROM X
-),
-Z AS ( SELECT LAG(*,1) OVER (PARTITION BY dealer_cd LIMIT DURATION(minute, 5)) AS previous, * FROM Y )
-SELECT dealer_cd,
+    processedOn,
     geography gps_current,
     previous.geography gps_previous,
+    polygon geofence,
+    previous.polygon geofence_previous,
     CASE WHEN isWithin = 1 AND previous.isWithin = 0 THEN 'ENTER'
         WHEN isWithin = 0 AND previous.isWithin = 1 THEN 'EXIT'
         ELSE ''
         END Status
 INTO rchaplerdlsfs
-FROM Z
+FROM lookback
 ```
 
 ## Miscellaneous
