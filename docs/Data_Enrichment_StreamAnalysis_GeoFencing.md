@@ -17,7 +17,10 @@
 
 -----
 
-## Event Hub Data Generator
+### Exercise 1: Generate Sample Data
+In this exercise, we will fabricate stream data in Event Hub and reference data in Storage Account.
+
+### Step 1: Event Hub Data Generator
 ...user-defined payload example
 
 ```
