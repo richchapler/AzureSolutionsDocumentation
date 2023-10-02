@@ -1,3 +1,10 @@
+# Data Enrichment: Stream Analysis, Geo-Fencing
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/710b6484-af25-473d-ab87-3252ba299bf2" width="1000" />
+
+## Use Case
+* "Lorem"
+
 ## Event Hub Data Generator
 ...user-defined payload example
 
