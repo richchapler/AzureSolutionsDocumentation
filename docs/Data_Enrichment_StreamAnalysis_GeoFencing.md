@@ -3,8 +3,19 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
 
 ## Use Case
-* "We stream millions of events daily"
-* "The streaming data includes GPS coordinates that must be compared to known geo-fences"
+* "Our devices stream hundreds of millions of events daily"
+* "We need to compare streaming data to known locations and determine whether the device is entering or exiting these locations"
+
+## Proposed Solution
+* Generate Sample Data
+* Automate Comparison
+
+## Solution Requirements
+* [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/) >> Namespace :: Hub :: Consumer Group
+* [**Storage Account**](Infrastructure_StorageAccount.md)
+* [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
+
+-----
 
 ## Event Hub Data Generator
 ...user-defined payload example
