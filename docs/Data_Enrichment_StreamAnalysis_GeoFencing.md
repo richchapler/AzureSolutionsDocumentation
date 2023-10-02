@@ -1,9 +1,10 @@
 # Data Enrichment: Stream Analysis, Geo-Fencing
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/710b6484-af25-473d-ab87-3252ba299bf2" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
 
 ## Use Case
-* "Lorem"
+* "We stream millions of events daily"
+* "The streaming data includes GPS coordinates that must be compared to known geo-fences"
 
 ## Event Hub Data Generator
 ...user-defined payload example
