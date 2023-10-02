@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
 
 ## Use Case
-* "Our devices stream hundreds of millions of events daily"
+* "Our devices stream hundreds of millions of events (including GSP coordinates) daily"
 * "We need to compare streaming data to known locations and determine whether the device is entering or exiting these locations"
 
 ## Proposed Solution
