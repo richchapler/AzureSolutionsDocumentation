@@ -4,7 +4,8 @@
 
 ## Use Case
 * "Our devices stream hundreds of millions of events daily (including GSP coordinates)"
-* "We need to compare streaming data to known locations and determine whether the device is entering or exiting these locations"
+* "We need to compare streaming coordinates, in near real time, to known geofence locations"
+* "We need to capture whether the device is outside of, entering, inside of, or exiting known geofence locations"
 
 ## Proposed Solution
 * Generate Sample Data
