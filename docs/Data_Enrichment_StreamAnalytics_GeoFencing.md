@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
 
 ## Use Case
-* "Our devices stream hundreds of millions of events daily (including GSP coordinates)"
+* "Our devices stream hundreds of millions of events daily (including GSP coordinate data)"
 * "We need to compare streaming coordinates to known geofence locations"
 * "We need to characterize streaming coordinates as 'outside of', 'entering', 'inside of', or 'exiting' known geofence locations"
 
