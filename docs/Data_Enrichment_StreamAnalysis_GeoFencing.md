@@ -8,6 +8,7 @@
 * "We need to characterize streaming coordinates as 'outside of', 'entering', 'inside of', or 'exiting' known geofence locations"
 
 ## Proposed Solution
+* Create Stream Analytics Job
 * Generate Sample Data
 * Automate Comparison
 
@@ -18,7 +19,15 @@
 
 -----
 
-### Exercise 1: Generate Sample Data
+### Exercise 1: Create Stream Analytics Job
+In this exercise, we will create and configure a Stream Analytics Job
+
+### Step 1: Event Hub Data Generator
+...user-defined payload example
+
+-----
+
+### Exercise 2: Generate Sample Data
 In this exercise, we will fabricate stream data in Event Hub and reference data in Storage Account.
 
 ### Step 1: Event Hub Data Generator
