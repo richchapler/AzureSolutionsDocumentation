@@ -41,7 +41,6 @@ Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job 
 Click "**Add input**" and select "**Blob storage/ADLS Gen2**" from the "**Reference input**" group in the resulting dropdown.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9a93d008-9a43-4ebb-9a9a-059ba62a57cb" width="800" title="Snipped: Oct 3, 2023" />
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/)
 
 Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Input**" popout and click "**Save**".
 
