@@ -38,11 +38,14 @@ Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5e52708-0966-42e0-adfc-d13591c1e84a" width="800" title="Snipped: Oct 3, 2023" />
 
-Click "**Add input**" and select "**Event Hub**" from the "**Reference input**" group in the resulting dropdown.
+Click "**Add input**" and select "**Blob storage/ADLS Gen2**" from the "**Reference input**" group in the resulting dropdown.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/162e16c5-5163-42ce-aaf3-707d469060dd" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9a93d008-9a43-4ebb-9a9a-059ba62a57cb" width="800" title="Snipped: Oct 3, 2023" />
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/)
 
+Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Input**" popout and click "**Save**".
 
+### Step 3: Add Output, Lorem Ipsum
 
 
 -----
