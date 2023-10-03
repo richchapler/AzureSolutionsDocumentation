@@ -77,19 +77,11 @@ Paste the following JSON in the "**Enter payload**" textbox:
 ]
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5306e642-6d3d-4ae1-b703-2ecaa17066d5" width="800" title="Snipped: Oct 3, 2023" />
-
 Click "Send".
 
-_Note: This will create a single event that we will pickup in Stream Analytics. You will repeat this in later steps._
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5306e642-6d3d-4ae1-b703-2ecaa17066d5" width="800" title="Snipped: Oct 3, 2023" />
 
-## T-SQL Table
-```
-CREATE TABLE [dbo].[geojson](
-	[dealer_cd] [nvarchar](10) NULL,
-	[geojson] [nvarchar](max) NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-```
+_Note: This will create a single event that we will pickup in Stream Analytics. You will repeat this in later steps._
 
 ### Sample data for geojson column
 ```
