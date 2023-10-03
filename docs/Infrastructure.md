@@ -74,7 +74,7 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 
 * [**Storage Account**](Infrastructure_StorageAccount.md)
 
-* [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction)
+* [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction) [Job](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal)
 
 * [**Synapse**](Infrastructure_Synapse.md)
   * Configuration >> [Firewall Rule](Infrastructure_Synapse_FirewallRules.md) :: [Source Control](https://learn.microsoft.com/en-us/azure/synapse-analytics/cicd/source-control)
