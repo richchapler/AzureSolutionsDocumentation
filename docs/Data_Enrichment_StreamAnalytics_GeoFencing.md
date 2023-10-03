@@ -79,8 +79,6 @@ Paste the following JSON in the "**Enter payload**" textbox:
 
 Click "Send".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5306e642-6d3d-4ae1-b703-2ecaa17066d5" width="800" title="Snipped: Oct 3, 2023" />
-
 _Note: This will create a single event that we will pickup in Stream Analytics. You will repeat this in later steps._
 
 #### Confirm Success
