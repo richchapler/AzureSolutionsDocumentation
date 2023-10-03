@@ -86,11 +86,8 @@ Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job t
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba1e7fae-f7ee-4bb5-b3a7-517dada20291" width="800" title="Snipped: Oct 3, 2023" />
 
-
-
-
-
-
+Click on your Event Hub Input, then "**Refresh**" on the "**Input Preview**" tab.
+<br>You can expect to see the data sent from the Event Hub Data Generator.
 
 ### Step 2: Storage Account
 Use a text editor to create a CSV file with the following content:
@@ -106,24 +103,20 @@ Upload the CSV file to your Storage Account Container.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/768cd4e7-a276-4bd6-97e9-4c267d1d9070" width="800" title="Snipped: Oct 3, 2023" />
 
+#### Confirm Success
+Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b41e7ba-d7c1-41ab-88ac-317dde42dc31" width="800" title="Snipped: Oct 3, 2023" />
+
+Click on your Storage Account Input, then "**Upload sample input**" on the "**Input Preview**" tab.
+<br>Upload the CSV file and confirm that the correct data surfaces.
 
 
 
 
 
-Event Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
 
 
-
-
-
-
-### Sample data for geojson column
-```
-{"type":"Polygon", "coordinates": [[ [10.0, 10.0], [20.0, 10.0], [20.0, 20.0], [10.0, 20.0], [10.0, 10.0] ]]}
-```
-
-https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-geospatial-functions
 
 ## Stream Analytics 'parseJson' Logic
 ```
