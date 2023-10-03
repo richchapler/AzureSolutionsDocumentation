@@ -91,8 +91,6 @@ id, polygon
 ABC123, "{ ""coordinates"": [ [ [ 10.0, 10.0 ], [ 20.0, 10.0 ], [ 20.0, 20.0 ], [ 10.0, 20.0 ], [ 10.0, 10.0 ] ] ], ""type"": ""Polygon""}"
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8922eece-e55f-43d7-8f0a-956c760bbb2c" width="800" title="Snipped: Oct 3, 2023" />
-
 _Note: The GPS coordinates for this polygon were not chosen because they are meaningful._
 
 
