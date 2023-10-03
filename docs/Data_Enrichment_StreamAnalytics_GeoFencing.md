@@ -1,4 +1,4 @@
-# Data Enrichment: Stream Analyts, Geo-Fencing
+# Data Enrichment: Stream Analytics, Geo-Fencing
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
 
