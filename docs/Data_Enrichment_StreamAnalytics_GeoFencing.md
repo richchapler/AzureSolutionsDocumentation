@@ -61,7 +61,7 @@ Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Output**" popout a
 ## Exercise 2: Generate Sample Data
 In this exercise, we will fabricate stream data in the Event Hub and reference data in the Storage Account.
 
-### Step 1: Event Hub Data Generator
+### Step 1: Event Hub
 Navigate to your Event Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6638fc3f-ce28-4c8c-878b-c14f5bd8c0aa" width="800" title="Snipped: Oct 3, 2023" />
@@ -82,6 +82,26 @@ Click "Send".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5306e642-6d3d-4ae1-b703-2ecaa17066d5" width="800" title="Snipped: Oct 3, 2023" />
 
 _Note: This will create a single event that we will pickup in Stream Analytics. You will repeat this in later steps._
+
+### Step 2: Storage Account
+Use a text editor to create a CSV file with the following content:
+
+```
+id, polygon
+ABC123, "{ ""coordinates"": [ [ [ 10.0, 10.0 ], [ 20.0, 10.0 ], [ 20.0, 20.0 ], [ 10.0, 20.0 ], [ 10.0, 10.0 ] ] ], ""type"": ""Polygon""}"
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8922eece-e55f-43d7-8f0a-956c760bbb2c" width="800" title="Snipped: Oct 3, 2023" />
+
+_Note: The GPS coordinates for this polygon were not chosen because they are meaningful._
+
+
+to your Storage Account ContainerEvent Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
+
+
+
+
+
 
 ### Sample data for geojson column
 ```
