@@ -8,7 +8,7 @@
 * "We need to characterize streaming coordinates as 'outside of', 'entering', 'inside of', or 'exiting' known geofence locations"
 
 ## Proposed Solution
-* Create Stream Analytics Job
+* Configure Stream Analytics Job
 * Generate Sample Data
 * Automate Comparison
 
@@ -19,19 +19,24 @@
 
 -----
 
-### Exercise 1: Create Stream Analytics Job
-In this exercise, we will create and configure a Stream Analytics Job
+### Exercise 1: Configure Stream Analytics Job
+In this exercise, we will configure a Stream Analytics Job
 
-### Step 1: Lorem Ipsum
+### Step 1: Add Stream Input, Event Hub
 Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job topology**" group of the navigation pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/589d5957-5d3a-42c7-935e-f9d643c7f47d" width="800" title="Snipped: Oct 3, 2023" />
 
 Click "**Add input**" and select "**Event Hub**" from the resulting dropdown.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b4eb2dca-9034-4d29-9441-059c3bb624cb" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1af03d71-adc8-44d6-ba4c-e07d3f01b37e" width="800" title="Snipped: Oct 3, 2023" />
 
+Complete the resulting "**Event Hub**" >> "**New Input**" popout and click "**Save**".
 
+### Step 2: Add Reference Input, Blob Storage
+Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f26b744d-1a14-4aa0-aec0-59c7a06ded4b" width="800" title="Snipped: Oct 3, 2023" />
 
 
 -----
