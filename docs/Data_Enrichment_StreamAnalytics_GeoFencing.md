@@ -15,7 +15,7 @@
 ## Solution Requirements
 * [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/) >> Namespace :: Hub :: Consumer Group
 * [**Storage Account**](Infrastructure_StorageAccount.md)
-* [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction) [Job](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal)
+* [**Stream Analytics**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction) [**Job**](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal)
 
 -----
 
