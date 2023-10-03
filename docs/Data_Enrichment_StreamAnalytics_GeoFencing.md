@@ -83,6 +83,17 @@ Click "Send".
 
 _Note: This will create a single event that we will pickup in Stream Analytics. You will repeat this in later steps._
 
+#### Confirm Success
+Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba1e7fae-f7ee-4bb5-b3a7-517dada20291" width="800" title="Snipped: Oct 3, 2023" />
+
+
+
+
+
+
+
 ### Step 2: Storage Account
 Use a text editor to create a CSV file with the following content:
 
@@ -93,8 +104,16 @@ ABC123, "{ ""coordinates"": [ [ [ 10.0, 10.0 ], [ 20.0, 10.0 ], [ 20.0, 20.0 ], 
 
 _Note: The GPS coordinates for this polygon were not chosen because they are meaningful._
 
+Upload the CSV file to your Storage Account Container.
 
-to your Storage Account ContainerEvent Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/768cd4e7-a276-4bd6-97e9-4c267d1d9070" width="800" title="Snipped: Oct 3, 2023" />
+
+
+
+
+
+
+Event Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
 
 
 
