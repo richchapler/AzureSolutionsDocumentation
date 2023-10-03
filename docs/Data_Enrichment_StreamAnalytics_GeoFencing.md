@@ -36,7 +36,7 @@ Complete the resulting "**Event Hub**" >> "**New Input**" popout and click "**Sa
 ### Step 2: Add Reference Input, Blob Storage
 Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job topology**" group of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3de319ad-1ceb-4fdd-94b2-f97d044cd50f" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5e52708-0966-42e0-adfc-d13591c1e84a" width="800" title="Snipped: Oct 3, 2023" />
 
 
 
