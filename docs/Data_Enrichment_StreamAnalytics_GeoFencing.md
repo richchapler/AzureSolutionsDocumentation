@@ -22,8 +22,17 @@
 ### Exercise 1: Create Stream Analytics Job
 In this exercise, we will create and configure a Stream Analytics Job
 
-### Step 1: Event Hub Data Generator
-...user-defined payload example
+### Step 1: Lorem Ipsum
+Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/589d5957-5d3a-42c7-935e-f9d643c7f47d" width="800" title="Snipped: Oct 3, 2023" />
+
+Click "**Add input**" and select "**Event Hub**" from the resulting dropdown.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b4eb2dca-9034-4d29-9441-059c3bb624cb" width="800" title="Snipped: Oct 3, 2023" />
+
+
+
 
 -----
 
