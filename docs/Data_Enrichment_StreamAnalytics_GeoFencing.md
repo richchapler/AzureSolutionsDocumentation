@@ -19,7 +19,7 @@
 
 -----
 
-### Exercise 1: Configure Inputs / Outputs
+## Exercise 1: Configure Inputs / Outputs
 In this exercise, we will configure inputs and outputs in the Stream Analytics Job.
 
 ### Step 1: Add Stream Input, Event Hub
@@ -40,7 +40,7 @@ Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job 
 
 Click "**Add input**" and select "**Blob storage/ADLS Gen2**" from the "**Reference input**" group in the resulting dropdown.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b5e370cb-ba89-4d16-9ec3-67e9e95c40e5" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2dcc9363-0a28-40b2-af92-f1b4f71df795" width="800" title="Snipped: Oct 3, 2023" />
 
 Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Input**" popout and click "**Save**".
 
@@ -58,20 +58,30 @@ Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Output**" popout a
 
 -----
 
-### Exercise 2: Generate Sample Data
-In this exercise, we will fabricate stream data in Event Hub and reference data in Storage Account.
+## Exercise 2: Generate Sample Data
+In this exercise, we will fabricate stream data in the Event Hub and reference data in the Storage Account.
 
 ### Step 1: Event Hub Data Generator
-...user-defined payload example
+Navigate to your Event Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6638fc3f-ce28-4c8c-878b-c14f5bd8c0aa" width="800" title="Snipped: Oct 3, 2023" />
+
+Paste the following JSON in the "**Enter payload**" textbox:
 
 ```
 [
     {
-        "latitude": "40.82018471253422",
-        "longitude": "-102.97433999137931"
+        "latitude": "47.6370891183",
+        "longitude": "-122.123736172"
     }
 ]
 ```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5306e642-6d3d-4ae1-b703-2ecaa17066d5" width="800" title="Snipped: Oct 3, 2023" />
+
+Click "Send".
+
+_Note: This will create a single event that we will pickup in Stream Analytics. You will repeat this in later steps._
 
 ## T-SQL Table
 ```
