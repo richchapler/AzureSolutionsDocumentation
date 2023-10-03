@@ -46,6 +46,15 @@ Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Input**" popout an
 
 ### Step 3: Add Output, Lorem Ipsum
 
+Navigate to your Stream Analytics Job, then select "**Outputs**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3bc3ee8d-e63c-4a0a-9ba0-2062ffcfe1cb" width="800" title="Snipped: Oct 3, 2023" />
+
+Click "**Add output**" and select "**Blob storage/ADLS Gen2**" from the the resulting dropdown.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/98d91db0-9b1f-4001-a716-53bbc0f12dc4" width="800" title="Snipped: Oct 3, 2023" />
+
+Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Output**" popout and click "**Save**".
 
 -----
 
