@@ -27,7 +27,7 @@ Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/589d5957-5d3a-42c7-935e-f9d643c7f47d" width="800" title="Snipped: Oct 3, 2023" />
 
-Click "**Add input**" and select "**Event Hub**" from the resulting dropdown.
+Click "**Add input**" and select "**Event Hub**" from the "**Stream input**" group in the resulting dropdown.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1af03d71-adc8-44d6-ba4c-e07d3f01b37e" width="800" title="Snipped: Oct 3, 2023" />
 
@@ -38,7 +38,9 @@ Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5e52708-0966-42e0-adfc-d13591c1e84a" width="800" title="Snipped: Oct 3, 2023" />
 
+Click "**Add input**" and select "**Event Hub**" from the "**Reference input**" group in the resulting dropdown.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/162e16c5-5163-42ce-aaf3-707d469060dd" width="800" title="Snipped: Oct 3, 2023" />
 
 
 
