@@ -111,7 +111,7 @@ Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job t
 Click on your Storage Account Input, then "**Upload sample input**" on the "**Input Preview**" tab.
 <br>Upload the CSV file and confirm that the correct data surfaces.
 
-
+-----
 
 
 
