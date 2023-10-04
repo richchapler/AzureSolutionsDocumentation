@@ -149,7 +149,7 @@ WITH events AS (
     FROM rchaplereh e
     ),
 comparison AS (
-    SELECT s.dealer_cd,
+    SELECT s.id,
         e.processedOn,
         e.geography, -- streamed coordinates
         udf.parseJSON(s.polygon) polygon, -- geofence
@@ -157,10 +157,10 @@ comparison AS (
     FROM events e CROSS JOIN rchaplers s
     ),
 lookback AS (
-    SELECT LAG(*,1) OVER (PARTITION BY dealer_cd LIMIT DURATION(minute, 5)) AS previous, *
+    SELECT LAG(*,1) OVER (PARTITION BY id LIMIT DURATION(minute, 5)) AS previous, *
     FROM comparison
     )
-SELECT dealer_cd,
+SELECT id,
     processedOn,
     geography gps_current,
     previous.geography gps_previous,
@@ -177,15 +177,20 @@ FROM lookback
 #### Logic Explained...
 
 * `WITH events AS (...` is a Common Table Expression (CTE) intended to pull data, first thing, from the stream input
-* `CreatePoint(...` creates a geographical point (usable by later geospatial functions) from latitude and longitude data
-* `comparison AS (...` is a CTE intended to marry stream data with data from the reference input
-* `udf.parseJSON(...` uses the previously-created Function to convert polygon data to JSON
-* `ST_WITHIN(...` determines whether the coordinates from the stream are inside one or more polygon from the reference data
+  * `CreatePoint(...` creates a geographical point (usable by later geospatial functions) from latitude and longitude data
+* `comparison AS (...` marries stream data with data from the reference input
+  * `udf.parseJSON(...` uses the previously-created Function to convert polygon data to JSON
+  * `ST_WITHIN(...` determines whether the coordinates from the stream are inside one or more polygon from the reference data
+* `lookback AS (...` gets previous records for a given `id` in a five-minute window
+  * `LAG(*,1) OVER...` used to get all columns (`*`) from the previous `1` row for each `id`
+* `CASE WHEN...` determines whether the event represents an entrance to or exit from a geofence polygon
 
-LOREM IPSUM
+-----
 
+### Step 3: Confirm Success
+Lorem Ipsum
 
-
+-----
 
 ## Miscellaneous
 Sample GeoJSON file (for using Azure Blob Storage, reference)
