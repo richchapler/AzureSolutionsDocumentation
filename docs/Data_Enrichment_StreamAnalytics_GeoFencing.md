@@ -174,11 +174,11 @@ INTO rchaplerdlsfs
 FROM lookback
 ```
 
-#### Logic Explained
+#### Logic Explained...
 
+* `WITH events AS (...` is a Common Table Expression (CTE) 
 
-
-
+LOREM IPSUM
 
 
 
