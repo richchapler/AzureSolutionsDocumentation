@@ -192,10 +192,6 @@ Lorem Ipsum
 
 -----
 
-## Miscellaneous
-Sample GeoJSON file (for using Azure Blob Storage, reference)
-https://www.kaggle.com/datasets/pompelmo/usa-states-geojson
-
 ## Reference
 
 * [Introducing Event Hubs Data Generator](https://www.microsoft.com/en-gb/industry/blog/technetuk/2020/02/20/introducing-event-hubs-data-generator/)
