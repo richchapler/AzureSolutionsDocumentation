@@ -235,11 +235,15 @@ Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job t
 Click on the Event Hub Input, then "**Refresh**" in the "**Input preview**" tab.
 <br>You should see the newly sent event.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bf3be956-a5e4-47fa-8bae-51b942eade8e" width="800" title="Snipped: October 4, 2023" />
+
+Click "**Test query**" and confirm result.
+
 ```
-[{"id":"ABC123","processedOn":"2023-10-03T20:01:40.0896607Z","gps_current":{"type":"Point","coordinates":[-122.123736172,47.6370891183]},"gps_previous":null,"geofence":{"coordinates":[[[10,10],[20,10],[20,20],[10,20],[10,10]]],"type":"Polygon"},"geofence_previous":null,"Status":""}]
+[...{"id":"ABC123","processedOn":"2023-10-04T17:39:49.3349609Z","gps_current":{"type":"Point","coordinates":[11,11]},"gps_previous":{"type":"Point","coordinates":[-122.123736172,47.6370891183]},"geofence":{"coordinates":[[[10,10],[20,10],[20,20],[10,20],[10,10]]],"type":"Polygon"},"geofence_previous":{"coordinates":[[[10,10],[20,10],[20,20],[10,20],[10,10]]],"type":"Polygon"},"Status":"**ENTER**"}]
 ```
 
-_Note: Because the GPS coordinates from the event are not in the polygon, status is null_
+_Note: Because the GPS coordinates from the second event are in the polygon, status is ENTER_
 
 -----
 
