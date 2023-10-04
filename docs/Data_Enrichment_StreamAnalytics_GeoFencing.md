@@ -192,7 +192,7 @@ Lorem Ipsum
 
 -----
 
-**Congratulations... you have successfully completed this exercise**
+**Congratulations... you have successfully completed all exercises**
 
 -----
 
