@@ -8,9 +8,9 @@
 * "We need to characterize streaming coordinates as 'outside of', 'entering', 'inside of', or 'exiting' known geofence locations"
 
 ## Proposed Solution
-* Configure Inputs / Outputs
+* Add Inputs / Outputs
 * Generate Sample Data
-* Automate Comparison
+* Prepare Function / Query
 
 ## Solution Requirements
 * [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/) >> Namespace :: Hub :: Consumer Group
@@ -19,28 +19,28 @@
 
 -----
 
-## Exercise 1: Configure Inputs / Outputs
-In this exercise, we will configure inputs and outputs in the Stream Analytics Job.
+## Exercise 1: Add Inputs / Outputs
+In this exercise, we will add inputs and outputs in the Stream Analytics Job.
 
 ### Step 1: Add Stream Input, Event Hub
 Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job topology**" group of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/589d5957-5d3a-42c7-935e-f9d643c7f47d" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/589d5957-5d3a-42c7-935e-f9d643c7f47d" width="800" title="Snipped: October 3, 2023" />
 
 Click "**Add input**" and select "**Event Hub**" from the "**Stream input**" group in the resulting dropdown.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1af03d71-adc8-44d6-ba4c-e07d3f01b37e" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1af03d71-adc8-44d6-ba4c-e07d3f01b37e" width="800" title="Snipped: October 3, 2023" />
 
 Complete the resulting "**Event Hub**" >> "**New Input**" popout and click "**Save**".
 
 ### Step 2: Add Reference Input, Blob Storage
 Navigate to your Stream Analytics Job, then select "**Inputs**" from the "**Job topology**" group of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5e52708-0966-42e0-adfc-d13591c1e84a" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5e52708-0966-42e0-adfc-d13591c1e84a" width="800" title="Snipped: October 3, 2023" />
 
 Click "**Add input**" and select "**Blob storage/ADLS Gen2**" from the "**Reference input**" group in the resulting dropdown.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2dcc9363-0a28-40b2-af92-f1b4f71df795" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2dcc9363-0a28-40b2-af92-f1b4f71df795" width="800" title="Snipped: October 3, 2023" />
 
 Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Input**" popout and click "**Save**".
 
@@ -48,11 +48,11 @@ Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Input**" popout an
 
 Navigate to your Stream Analytics Job, then select "**Outputs**" from the "**Job topology**" group of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3bc3ee8d-e63c-4a0a-9ba0-2062ffcfe1cb" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3bc3ee8d-e63c-4a0a-9ba0-2062ffcfe1cb" width="800" title="Snipped: October 3, 2023" />
 
 Click "**Add output**" and select "**Blob storage/ADLS Gen2**" from the the resulting dropdown.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/98d91db0-9b1f-4001-a716-53bbc0f12dc4" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/98d91db0-9b1f-4001-a716-53bbc0f12dc4" width="800" title="Snipped: October 3, 2023" />
 
 Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Output**" popout and click "**Save**".
 
@@ -64,7 +64,7 @@ In this exercise, we will fabricate stream data in the Event Hub and reference d
 ### Step 1: Event Hub
 Navigate to your Event Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6638fc3f-ce28-4c8c-878b-c14f5bd8c0aa" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6638fc3f-ce28-4c8c-878b-c14f5bd8c0aa" width="800" title="Snipped: October 3, 2023" />
 
 Paste the following JSON in the "**Enter payload**" textbox:
 
@@ -84,7 +84,7 @@ _Note: This will create a single event that we will pickup in Stream Analytics. 
 #### Confirm Success
 Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba1e7fae-f7ee-4bb5-b3a7-517dada20291" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba1e7fae-f7ee-4bb5-b3a7-517dada20291" width="800" title="Snipped: October 3, 2023" />
 
 Click on your Event Hub Input, then "**Refresh**" on the "**Input Preview**" tab.
 <br>You can expect to see the data sent from the Event Hub Data Generator.
@@ -101,27 +101,40 @@ _Note: The GPS coordinates for this polygon were not chosen because they are mea
 
 Upload the CSV file to your Storage Account Container.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/768cd4e7-a276-4bd6-97e9-4c267d1d9070" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/768cd4e7-a276-4bd6-97e9-4c267d1d9070" width="800" title="Snipped: October 3, 2023" />
 
 #### Confirm Success
 Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b41e7ba-d7c1-41ab-88ac-317dde42dc31" width="800" title="Snipped: Oct 3, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b41e7ba-d7c1-41ab-88ac-317dde42dc31" width="800" title="Snipped: October 3, 2023" />
 
 Click on your Storage Account Input, then "**Upload sample input**" on the "**Input Preview**" tab.
 <br>Upload the CSV file and confirm that the correct data surfaces.
 
 -----
 
+## Exercise 3: Prepare Function / Query
+In this exercise, we will prepare function and query logic in the Stream Analytics Job.
 
+### Step 1: Add Function, parseJSON
+Navigate to your Stream Analytics Job, then select "**Functions**" from the "**Job topology**" group of the navigation pane.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dfd195d3-6fce-48b2-b9ba-ea8b844121c2" width="800" title="Snipped: October 4, 2023" />
 
+Click "**Add function**" and select "**Javascript UDF**" from the the resulting dropdown.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a663e0b0-122c-405a-8996-0a60a1d48697" width="800" title="Snipped: October 4, 2023" />
 
-## Stream Analytics 'parseJson' Logic
+Complete the resulting "**Javascript function**" page, including the following code:
+
 ```
 function parseJson (strjson) { return JSON.parse(strjson); }
 ```
+
+Click "**Save**".
+
+
+-----
 
 ## Stream Analytics Query Logic
 ```
