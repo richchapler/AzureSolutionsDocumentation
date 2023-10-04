@@ -11,6 +11,7 @@
 * Add Inputs / Outputs
 * Generate Sample Data
 * Prepare Function / Query
+* Confirm Success
 
 ## Solution Requirements
 * [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/) >> Namespace :: Hub :: Consumer Group
@@ -153,8 +154,8 @@ comparison AS (
         e.processedOn,
         e.geography, -- streamed coordinates
         udf.parseJSON(s.polygon) polygon, -- geofence
-        ST_WITHIN(e.geography, udf.parseJSON(s.feature_geometry)) as isWithin
-    FROM events e CROSS JOIN rchaplers s
+        ST_WITHIN(e.geography, udf.parseJSON(s.polygon)) as isWithin
+    FROM events e CROSS JOIN rchaplersa s
     ),
 lookback AS (
     SELECT LAG(*,1) OVER (PARTITION BY id LIMIT DURATION(minute, 5)) AS previous, *
@@ -185,10 +186,24 @@ FROM lookback
   * `LAG(*,1) OVER...` used to get all columns (`*`) from the previous `1` row for each `id`
 * `CASE WHEN...` determines whether the event represents an entrance to or exit from a geofence polygon
 
+Click "**Save query**".
+
 -----
 
-### Step 3: Confirm Success
-Lorem Ipsum
+## Exercise 4: Confirm Success
+In this exercise, we will test inputs and query logic in the Stream Analytics Job.
+
+### Step 1: Test Query
+
+Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a3138c70-1901-4e0e-8a76-97312e96d3b4" width="800" title="Snipped: October 4, 2023" />
+
+Click "**Test query**" and confirm result.
+
+```
+[{"id":"ABC123","processedOn":"2023-10-03T20:01:40.0896607Z","gps_current":{"type":"Point","coordinates":[-122.123736172,47.6370891183]},"gps_previous":null,"geofence":{"coordinates":[[[10,10],[20,10],[20,20],[10,20],[10,10]]],"type":"Polygon"},"geofence_previous":null,"Status":""}]
+```
 
 -----
 
