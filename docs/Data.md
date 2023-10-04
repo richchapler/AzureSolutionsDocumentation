@@ -28,8 +28,9 @@
   :----- | :----- | :----- | :----- | :-----
   [Cognitive Search, Custom Skillset](Data_Enrichment_CognitiveSearch_CustomSkillset.md) | Custom Skills >> API | SQL | Cognitive Search Index | C# (Function App)
   [Mid-Stream Processing via Function App](Data_Enrichment_MidStreamProcessing_viaFunctionApp.md) | Continuous Ingestion | Event Hub | Data Explorer | C# (Function App)
-  [Mid-Stream Processing via Stream Analytics](Data_Enrichment_MidStreamProcessing_viaStreamAnalytics.md) | Stream Analytics | IoT Hub | Data Explorer | SQL
+  [Mid-Stream Processing via Stream Analytics](Data_Enrichment_MidStreamProcessing_viaStreamAnalytics.md) | Stream Analytics Job | IoT Hub | Data Explorer | SQL
   [OpenAI](Data_Enrichment_OpenAI.md) | Synapse Pipeline | OpenAI | Data Explorer | API
+  [Stream Analytics, Geo-Fencing](Data_Enrichment_StreamAnalytics_GeoFencing.md) | Stream Analytics Job | Event Hub and Storage Account | Not Applicable | Stream Analytics Query and Function
 
 ### Analyze
 
