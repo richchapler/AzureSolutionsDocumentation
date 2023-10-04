@@ -4,7 +4,7 @@
 
 ## Use Case
 * "Our devices stream billions of events daily"
-* "We need to compare GPS coordinates from the streaming data to known geofence locations in near-real-time"
+* "We need to compare GPS coordinates from the streaming data to known geofence locations in near real time"
 * "We need to characterize streaming coordinates as 'outside of', 'entering', 'inside of', or 'exiting' known geofence locations"
 
 ## Proposed Solution
