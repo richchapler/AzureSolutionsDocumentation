@@ -152,8 +152,8 @@ comparison AS (
     SELECT s.dealer_cd,
         e.processedOn,
         e.geography, -- streamed coordinates
-        udf.parseJson(s.feature_geometry) polygon, -- geofence
-        ST_WITHIN(e.geography, udf.parseJson(s.feature_geometry)) as isWithin
+        udf.parseJSON(s.polygon) polygon, -- geofence
+        ST_WITHIN(e.geography, udf.parseJSON(s.feature_geometry)) as isWithin
     FROM events e CROSS JOIN rchaplers s
     ),
 lookback AS (
@@ -176,7 +176,11 @@ FROM lookback
 
 #### Logic Explained...
 
-* `WITH events AS (...` is a Common Table Expression (CTE) 
+* `WITH events AS (...` is a Common Table Expression (CTE) intended to pull data, first thing, from the stream input
+* `CreatePoint(...` creates a geographical point (usable by later geospatial functions) from latitude and longitude data
+* `comparison AS (...` is a CTE intended to marry stream data with data from the reference input
+* `udf.parseJSON(...` uses the previously-created Function to convert polygon data to JSON
+* `ST_WITHIN(...` determines whether the coordinates from the stream are inside one or more polygon from the reference data
 
 LOREM IPSUM
 
