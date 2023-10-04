@@ -78,7 +78,7 @@ Paste the following JSON in the "**Enter payload**" textbox:
 ]
 ```
 
-Click "Send".
+Click "**Send**".
 
 _Note: This will create a single event that we will pickup in Stream Analytics. You will repeat this in later steps._
 
@@ -209,6 +209,7 @@ _Note: Because the GPS coordinates from the event are not in the polygon, status
 
 ### Step 2: Test "Enter" / "Exit"
 
+#### Event Hub
 Navigate to your Event Hub, then select "**Generate Data**..." from the "**Features**" group of the navigation pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a65ad150-63f4-47d5-9ad0-b2ada0ae1a14" width="800" title="Snipped: October 3, 2023" />
@@ -224,7 +225,21 @@ Paste the following JSON in the "**Enter payload**" textbox:
 ]
 ```
 
-Click "Send".
+Click "**Send**".
+
+#### Stream Analytics
+Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7dc8b125-f3fd-45e6-8858-0501486e97d9" width="800" title="Snipped: October 4, 2023" />
+
+Click on the Event Hub Input, then "**Refresh**" in the "**Input preview**" tab.
+<br>You should see the newly sent event.
+
+```
+[{"id":"ABC123","processedOn":"2023-10-03T20:01:40.0896607Z","gps_current":{"type":"Point","coordinates":[-122.123736172,47.6370891183]},"gps_previous":null,"geofence":{"coordinates":[[[10,10],[20,10],[20,20],[10,20],[10,10]]],"type":"Polygon"},"geofence_previous":null,"Status":""}]
+```
+
+_Note: Because the GPS coordinates from the event are not in the polygon, status is null_
 
 -----
 
