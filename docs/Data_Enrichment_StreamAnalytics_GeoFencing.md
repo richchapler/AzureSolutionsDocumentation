@@ -192,6 +192,10 @@ Lorem Ipsum
 
 -----
 
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
 ## Reference
 
 * [Introducing Event Hubs Data Generator](https://www.microsoft.com/en-gb/industry/blog/technetuk/2020/02/20/introducing-event-hubs-data-generator/)
