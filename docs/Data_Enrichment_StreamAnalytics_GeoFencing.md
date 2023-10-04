@@ -133,10 +133,15 @@ function parseJson (strjson) { return JSON.parse(strjson); }
 
 Click "**Save**".
 
-
 -----
 
-## Stream Analytics Query Logic
+### Step 2: Write Query
+Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b5c65f6d-5baf-49be-877c-dc86bec8e01d" width="800" title="Snipped: October 4, 2023" />
+
+Paste the following query logic:
+
 ```
 WITH events AS (
     SELECT e.EventProcessedUtcTime as processedOn,
@@ -168,6 +173,15 @@ SELECT dealer_cd,
 INTO rchaplerdlsfs
 FROM lookback
 ```
+
+#### Logic Explained
+
+
+
+
+
+
+
 
 ## Miscellaneous
 Sample GeoJSON file (for using Azure Blob Storage, reference)
