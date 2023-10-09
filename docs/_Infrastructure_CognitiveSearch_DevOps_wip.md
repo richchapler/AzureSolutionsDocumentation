@@ -81,6 +81,9 @@ public class Program
                     new OutputFieldMappingEntry("text") { TargetName = "text" }
                 }
             )
+            {
+                Context = "/document/normalized_images/*"
+            }
         };
 
         var skillset = new SearchIndexerSkillset(skillsetName, skills)
