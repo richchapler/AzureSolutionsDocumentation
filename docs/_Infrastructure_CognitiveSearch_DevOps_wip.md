@@ -57,8 +57,8 @@ public class Program
                 new SearchField("metadata_storage_path", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
                 new SearchField("metadata_storage_size", SearchFieldDataType.Int64) { IsFacetable = true, IsFilterable = true, IsSortable = true },
                 new SearchField("metadata_title", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene }, /* SearchableField specifically designed  */
-                new SearchableField("merged_content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                //new SearchableField("merged_content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
                 new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
             }
         };
@@ -79,24 +79,8 @@ public class Program
                 outputs: new List<OutputFieldMappingEntry>
                 {
                     new OutputFieldMappingEntry("text") { TargetName = "text" }
-                    //new OutputFieldMappingEntry("layoutText") { TargetName = "layoutText" }
                 }
             )
-            //new ShaperSkill(
-            //    inputs: new List<InputFieldMappingEntry>
-            //    {
-            //        new InputFieldMappingEntry("metadata_storage_content_type") { Source = "/document/metadata_storage_content_type" },
-            //        new InputFieldMappingEntry("metadata_storage_size") { Source = "/document/metadata_storage_size" },
-            //        new InputFieldMappingEntry("metadata_storage_last_modified") { Source = "/document/metadata_storage_last_modified" }
-            //    },
-            //    outputs: new List<OutputFieldMappingEntry>
-            //    {
-            //        new OutputFieldMappingEntry("output") { TargetName = "objectprojection" }
-            //    }
-            //)
-            //{
-            //    Context = "/document"
-            //}
         };
 
         var skillset = new SearchIndexerSkillset(skillsetName, skills)
@@ -110,26 +94,21 @@ public class Program
 
         /* ************************* Indexer */
 
-        //FieldMapping fieldMapping = new FieldMapping("/document/merged_content/organizations")
-        //{
-        //    TargetFieldName = "organizations"
-        //};
-
         SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
         {
             Parameters = new IndexingParameters()
             {
                 IndexingParametersConfiguration = new IndexingParametersConfiguration()
                 {
-                    //        DataToExtract = BlobIndexerDataToExtract.ContentAndMetadata
-                    ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage,
-                    //        ParsingMode = BlobIndexerParsingMode.Default
+                    ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
                 }
             },
             SkillsetName = skillsetName
-
-            //FieldMappings = { fieldMapping },
         };
+
+        indexer.OutputFieldMappings.Add(
+            new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" }
+            );
 
         indexerClient.DeleteIndexer(indexer);
 
