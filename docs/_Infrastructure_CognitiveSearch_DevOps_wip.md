@@ -137,6 +137,8 @@ public class Program
     }
 }
 ```
+
+## Content, Merged_Content, and Text
 In Azure Cognitive Search, the fields `content`, `merged_content`, and `text` have different roles when it comes to OCR scanned PDF documents:
 
 1. **Content**: This field is generated when Azure Cognitive Search "cracks" each document to read content from different file formats. The found text originating in the source file is placed into this generated `content` field, one for each document⁴.
@@ -147,3 +149,13 @@ In Azure Cognitive Search, the fields `content`, `merged_content`, and `text` ha
 
 In summary, `content` is the original text content of the document, `merged_content` is a combination of original and additional enriched content (like OCR results), and `text` is specifically the output from the OCR process.
 
+## OCRSkill
+The OcrSkill is a prebuilt AI skill for text extraction from image files. It takes an image as input and outputs the text found in the image.
+
+Here’s what each part does:
+
+new InputFieldMappingEntry("image") { Source = "/document/normalized_images/*" }: This line is defining the input to the OCR skill. It’s saying that the input images will come from the normalized_images field of the documents in your search index.
+
+new OutputFieldMappingEntry("text") { TargetName = "text" }: This line is defining where the output of the OCR skill (the extracted text) will be stored. In this case, it’s stored in a field named text.
+
+So, to sum up, this code is setting up an OCR skill that takes images from the normalized_images field of your documents, extracts text from them, and stores that text in a field named text. This can be useful for making the text within images searchable.
