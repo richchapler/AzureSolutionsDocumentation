@@ -45,26 +45,21 @@ public class Program
         {
             Fields =
             {
-                new SimpleField("id", SearchFieldDataType.String) { IsKey = true },
-                new SimpleField("metadata_storage_content_type", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_storage_size", SearchFieldDataType.Int64) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_storage_last_modified", SearchFieldDataType.DateTimeOffset) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_storage_content_md5", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_storage_name", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_storage_path", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false },
-                new SimpleField("metadata_storage_file_extension", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_content_type", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_language", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_author", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_title", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SimpleField("metadata_creation_date", SearchFieldDataType.DateTimeOffset) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
-                new SearchableField("content") { IsFilterable = false, IsSortable = false, IsFacetable = false, AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
+                new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_language", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_storage_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_storage_file_extension", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_storage_last_modified", SearchFieldDataType.DateTimeOffset) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_storage_name", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_storage_path", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_storage_size", SearchFieldDataType.Int64) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchField("metadata_title", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+                new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene }, /* SearchableField specifically designed  */
                 new SearchableField("merged_content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-                new SearchableField("organizations", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
                 new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-                new SearchableField("layoutText", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-                new SearchableField("imageTags", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-                new SearchableField("imageCaption", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene }
             }
         };
 
@@ -76,25 +71,38 @@ public class Program
 
         var skills = new List<SearchIndexerSkill>
         {
-            new ShaperSkill(
+            new OcrSkill(
                 inputs: new List<InputFieldMappingEntry>
                 {
-                    new InputFieldMappingEntry("metadata_storage_content_type") { Source = "/document/metadata_storage_content_type" },
-                    new InputFieldMappingEntry("metadata_storage_size") { Source = "/document/metadata_storage_size" },
-                    new InputFieldMappingEntry("metadata_storage_last_modified") { Source = "/document/metadata_storage_last_modified" }
+                    new InputFieldMappingEntry("image") { Source = "/document/normalized_images/*" }
                 },
                 outputs: new List<OutputFieldMappingEntry>
                 {
-                    new OutputFieldMappingEntry("output") { TargetName = "objectprojection" }
-
+                    new OutputFieldMappingEntry("text") { TargetName = "text" }
+                    //new OutputFieldMappingEntry("layoutText") { TargetName = "layoutText" }
                 }
             )
-            {
-                Context = "/document"
-            }
+            //new ShaperSkill(
+            //    inputs: new List<InputFieldMappingEntry>
+            //    {
+            //        new InputFieldMappingEntry("metadata_storage_content_type") { Source = "/document/metadata_storage_content_type" },
+            //        new InputFieldMappingEntry("metadata_storage_size") { Source = "/document/metadata_storage_size" },
+            //        new InputFieldMappingEntry("metadata_storage_last_modified") { Source = "/document/metadata_storage_last_modified" }
+            //    },
+            //    outputs: new List<OutputFieldMappingEntry>
+            //    {
+            //        new OutputFieldMappingEntry("output") { TargetName = "objectprojection" }
+            //    }
+            //)
+            //{
+            //    Context = "/document"
+            //}
         };
 
-        var skillset = new SearchIndexerSkillset(skillsetName, skills);
+        var skillset = new SearchIndexerSkillset(skillsetName, skills)
+        {
+            CognitiveServicesAccount = new CognitiveServicesAccountKey(key: "33235fe372ff414a9abf54a29af08825")
+        };
 
         indexerClient.DeleteSkillset(skillset);
 
@@ -102,15 +110,25 @@ public class Program
 
         /* ************************* Indexer */
 
-        FieldMapping fieldMapping = new FieldMapping("/document/merged_content/organizations")
-        {
-            TargetFieldName = "organizations"
-        };
+        //FieldMapping fieldMapping = new FieldMapping("/document/merged_content/organizations")
+        //{
+        //    TargetFieldName = "organizations"
+        //};
 
         SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
         {
-            FieldMappings = { fieldMapping },
+            Parameters = new IndexingParameters()
+            {
+                IndexingParametersConfiguration = new IndexingParametersConfiguration()
+                {
+                    //        DataToExtract = BlobIndexerDataToExtract.ContentAndMetadata
+                    ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage,
+                    //        ParsingMode = BlobIndexerParsingMode.Default
+                }
+            },
             SkillsetName = skillsetName
+
+            //FieldMappings = { fieldMapping },
         };
 
         indexerClient.DeleteIndexer(indexer);
@@ -119,3 +137,13 @@ public class Program
     }
 }
 ```
+In Azure Cognitive Search, the fields `content`, `merged_content`, and `text` have different roles when it comes to OCR scanned PDF documents:
+
+1. **Content**: This field is generated when Azure Cognitive Search "cracks" each document to read content from different file formats. The found text originating in the source file is placed into this generated `content` field, one for each document⁴.
+
+2. **Merged_content**: This field is typically used when you want to merge the textual representation of images (text from an OCR skill, or the caption of an image) into the content field of a document². For example, when you enable OCR and select the checkbox "merge all text into merged_content field", all of the enriched field options become visible³.
+
+3. **Text**: This is the plain text extracted from the image by the OCR skill². The OCR skill recognizes printed and handwritten text in image files and extracts this text².
+
+In summary, `content` is the original text content of the document, `merged_content` is a combination of original and additional enriched content (like OCR results), and `text` is specifically the output from the OCR process.
+
