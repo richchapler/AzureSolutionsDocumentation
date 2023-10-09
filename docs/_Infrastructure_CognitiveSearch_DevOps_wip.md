@@ -46,7 +46,25 @@ public class Program
             Fields =
             {
                 new SimpleField("id", SearchFieldDataType.String) { IsKey = true },
-                new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.EnMicrosoft }
+                new SimpleField("metadata_storage_content_type", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_storage_size", SearchFieldDataType.Int64) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_storage_last_modified", SearchFieldDataType.DateTimeOffset) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_storage_content_md5", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_storage_name", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_storage_path", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false },
+                new SimpleField("metadata_storage_file_extension", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_content_type", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_language", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_author", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_title", SearchFieldDataType.String) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SimpleField("metadata_creation_date", SearchFieldDataType.DateTimeOffset) { IsFilterable = false, IsSortable = false, IsFacetable = false, IsHidden = true },
+                new SearchableField("content") { IsFilterable = false, IsSortable = false, IsFacetable = false, AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SearchableField("merged_content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SearchableField("organizations", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SearchableField("layoutText", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SearchableField("imageTags", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+                new SearchableField("imageCaption", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene }
             }
         };
 
@@ -58,19 +76,21 @@ public class Program
 
         var skills = new List<SearchIndexerSkill>
         {
-            new EntityRecognitionSkill(
+            new ShaperSkill(
                 inputs: new List<InputFieldMappingEntry>
                 {
-                    new InputFieldMappingEntry("text") { Source = "/document/content" }
+                    new InputFieldMappingEntry("metadata_storage_content_type") { Source = "/document/metadata_storage_content_type" },
+                    new InputFieldMappingEntry("metadata_storage_size") { Source = "/document/metadata_storage_size" },
+                    new InputFieldMappingEntry("metadata_storage_last_modified") { Source = "/document/metadata_storage_last_modified" }
                 },
                 outputs: new List<OutputFieldMappingEntry>
                 {
-                    new OutputFieldMappingEntry("organizations") { TargetName = "organizations" }
-                })
+                    new OutputFieldMappingEntry("output") { TargetName = "objectprojection" }
+
+                }
+            )
             {
-                Description = "Entity Recognition Skill",
-                Context = "/document/content",
-                DefaultLanguageCode = EntityRecognitionSkillLanguage.En
+                Context = "/document"
             }
         };
 
@@ -82,8 +102,14 @@ public class Program
 
         /* ************************* Indexer */
 
+        FieldMapping fieldMapping = new FieldMapping("/document/merged_content/organizations")
+        {
+            TargetFieldName = "organizations"
+        };
+
         SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
         {
+            FieldMappings = { fieldMapping },
             SkillsetName = skillsetName
         };
 
