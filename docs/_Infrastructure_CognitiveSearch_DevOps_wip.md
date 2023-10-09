@@ -5,10 +5,8 @@ Goal is to create a Cognitive Search index using C#, then capture in DevOps
 
 ```
 using Azure;
-using Azure.Search.Documents;
 using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Indexes.Models;
-using System;
 
 public class Program
 {
@@ -52,20 +50,46 @@ public class Program
             }
         };
 
+        indexClient.DeleteIndex(index);
+
         indexClient.CreateOrUpdateIndex(index);
 
         /* ************************* Skillset */
-        //Skillset skillset = new Skillset(skillsetName, new List<Skill>());
-        //indexerClient.CreateOrUpdateSkillset(skillset);
+
+        var skills = new List<SearchIndexerSkill>
+        {
+            new EntityRecognitionSkill(
+                inputs: new List<InputFieldMappingEntry>
+                {
+                    new InputFieldMappingEntry("text") { Source = "/document/content" }
+                },
+                outputs: new List<OutputFieldMappingEntry>
+                {
+                    new OutputFieldMappingEntry("organizations") { TargetName = "organizations" }
+                })
+            {
+                Description = "Entity Recognition Skill",
+                Context = "/document/content",
+                DefaultLanguageCode = EntityRecognitionSkillLanguage.En
+            }
+        };
+
+        var skillset = new SearchIndexerSkillset(skillsetName, skills);
+
+        indexerClient.DeleteSkillset(skillset);
+
+        indexerClient.CreateSkillset(skillset);
 
         /* ************************* Indexer */
-        //SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
-        //{
-        //    SkillsetName = skillsetName
-        //};
-        //indexerClient.CreateOrUpdateIndexer(indexer);
+
+        SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
+        {
+            SkillsetName = skillsetName
+        };
+
+        indexerClient.DeleteIndexer(indexer);
+
+        indexerClient.CreateIndexer(indexer);
     }
 }
-
-
 ```
