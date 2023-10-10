@@ -8,7 +8,7 @@
 * "We want to capture our Cogniive Search index creation process in our GitHub repo"
 
 ## Proposed Solution
-* Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of index, skillset, and indexer
+* Develop Logic: Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of index, skillset, and indexer
 * Check in to GitHub repo
 
 ## Solution Requirements
@@ -17,7 +17,7 @@
 
 -----
 
-## Exercise 1: Lorem
+## Exercise 1: Develop Logic
 In this exercise, we will add create a Cognitive Search index, skillset, and indexer using a Console App.
 
 ## Nuget
