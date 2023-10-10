@@ -7,4 +7,4 @@ In this documentation, you will find step-by-step instructions for solutions to 
 
 > [Data](Data.md) >> Migrate :: Acquire :: Enrich :: Analyze :: Surface :: Govern
 
-> [Deployment](Deployment.md) >> Synapse
+> [DevOps](DevOps.md) >> Synapse
