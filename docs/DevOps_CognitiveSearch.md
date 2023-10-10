@@ -14,8 +14,10 @@
 
 -----
 
-## Exercise 1: Add Inputs / Outputs
-In this exercise, we will add inputs and outputs in the Stream Analytics Job.Goal is to create a Cognitive Search index using C#, then capture in DevOps
+## Exercise 1: Lorem
+In this exercise, we will add Lorem.
+
+Goal is to create a Cognitive Search index using C#, then capture in DevOps
 
 ## Nuget
 * Azure.Search.Documents
