@@ -6,4 +6,4 @@
 
   Use Case | Type
   :----- | :-----
-  [Parameterized Linked Services](Deployment_Synapse_ParameterizedLinkedServices.md) | No Code<br>
+  [Parameterized Linked Services](DevOps_DeploySynapse_withParameterizedLinkedServices.md) | No Code<br>
