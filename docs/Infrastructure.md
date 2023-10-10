@@ -5,6 +5,9 @@
 ## Instantiation
 _Note: Most of the links below point to Microsoft documentation... I create additional documentation only to fill gaps_
 
+* [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+  * [**Computer Vision**](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview)
+
 * [**API Management**](https://learn.microsoft.com/en-us/azure/api-management/)
 
 * [**Application Insights**](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
@@ -14,9 +17,6 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 * [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
 
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) >> [FAQ](https://learn.microsoft.com/en-us/azure/search/search-faq-frequently-asked-questions)
-
-* [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
-  * [**Computer Vision**](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview)
 
 * [**Databricks**](https://learn.microsoft.com/en-us/azure/databricks/)
 
@@ -82,6 +82,8 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
   * Development >> [Integration Runtime](https://learn.microsoft.com/en-us/azure/data-factory/create-self-hosted-integration-runtime?tabs=data-factory) :: [Linked Service](https://learn.microsoft.com/en-us/azure/data-factory/concepts-linked-services?tabs=data-factory) :: [Dataset](https://learn.microsoft.com/en-us/azure/data-factory/concepts-datasets-linked-services?tabs=data-factory) 
 
 * [**Virtual Machine**](https://learn.microsoft.com/en-us/azure/virtual-machines/overview)
+
+* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
 ## Migration
 
