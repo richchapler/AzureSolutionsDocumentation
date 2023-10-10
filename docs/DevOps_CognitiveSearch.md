@@ -21,6 +21,28 @@
 ## Exercise 1: Develop Logic
 In this exercise, we will add create a Cognitive Search index, skillset, and indexer using a Console App.
 
+### Step 1: Create Visual Studio Project
+
+Open Visual Studio and click "**Create a new project**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/317959b5-dfd7-4c97-af0c-0578f9e89429" width="600" title="Snipped: October 10, 2023" />
+
+On the "**Create a new project**" form, search for and select "**Console App**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/db8c2898-b607-4441-8b1e-4f4f3dbd56b4" width="600" title="Snipped: October 10, 2023" />
+
+Complete the "Configure your new project" form, then click "**Next**".
+
+
+
+
+
+
+
+
+
+-----
+
 ## Nuget
 * Azure.Search.Documents
 
