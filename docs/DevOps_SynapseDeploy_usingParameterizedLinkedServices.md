@@ -1,4 +1,4 @@
-## D of Synapse using Parameterized Linked Services
+## De of Synapse using Parameterized Linked Services
 
 ![image](https://user-images.githubusercontent.com/44923999/185416361-d8b12426-677b-48ec-9e46-d316cb7902d7.png)
 
