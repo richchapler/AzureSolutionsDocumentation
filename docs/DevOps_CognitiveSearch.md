@@ -1,4 +1,21 @@
-Goal is to create a Cognitive Search index using C#, then capture in DevOps
+# DevOps: Cognitive Search
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
+
+## Use Case
+* "Lorem"
+
+## Proposed Solution
+* Lorem
+
+## Solution Requirements
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
+
+-----
+
+## Exercise 1: Add Inputs / Outputs
+In this exercise, we will add inputs and outputs in the Stream Analytics Job.Goal is to create a Cognitive Search index using C#, then capture in DevOps
 
 ## Nuget
 * Azure.Search.Documents
