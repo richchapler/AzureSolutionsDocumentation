@@ -31,9 +31,31 @@ On the "**Create a new project**" form, search for and select "**Console App**",
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/db8c2898-b607-4441-8b1e-4f4f3dbd56b4" width="600" title="Snipped: October 10, 2023" />
 
-Complete the "Configure your new project" form, then click "**Next**".
+Complete the "**Configure your new project**" form, then click "**Next**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2408d491-ba3b-4ba7-9d84-02caf1dab54d" width="600" title="Snipped: October 10, 2023" />
 
+Complete the "**Additional information**" form, then click "**Create**".
+
+### Step 2: Install NuGet
+
+Paste the following C# into "**Program.cs**":
+
+```
+using Azure;
+using Azure.Search.Documents.Indexes;
+using Azure.Search.Documents.Indexes.Models;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+
+    }
+}
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1c5be15-99d3-4154-88a8-0a58ba3090b9" width="600" title="Snipped: October 10, 2023" />
 
 
 
