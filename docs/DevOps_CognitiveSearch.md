@@ -1,6 +1,6 @@
 # DevOps: Cognitive Search
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f608e46-f5ac-4272-82f9-9ebaf1414b3c" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/acbe3d7f-f08c-42a3-861b-b576302a356b" width="1000" />
 
 ## Use Case
 * "We have paired a Cognitive Search index with an OpenAI deployment and are rapidly iterating through enhancements to the index"
