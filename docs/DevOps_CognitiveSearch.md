@@ -3,10 +3,13 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
 
 ## Use Case
-* "Lorem"
+* "We have paired a Cognitive Search index with an OpenAI deployment and are rapidly iterating through enhancements to the index"
+* "Updating the Cognitive Search index can be difficult and we want a simpler, faster, more consistent experience"
+* "We want to capture our Cogniive Search index creation process in our GitHub repo"
 
 ## Proposed Solution
-* Lorem
+* Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of index, skillset, and indexer
+* Check in to GitHub repo
 
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
@@ -15,9 +18,7 @@
 -----
 
 ## Exercise 1: Lorem
-In this exercise, we will add Lorem.
-
-Goal is to create a Cognitive Search index using C#, then capture in DevOps
+In this exercise, we will add create a Cognitive Search index, skillset, and indexer using a Console App.
 
 ## Nuget
 * Azure.Search.Documents
