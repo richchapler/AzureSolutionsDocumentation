@@ -13,6 +13,7 @@
 
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+* [**DevOps**](https://azure.microsoft.com/en-us/products/devops/)
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
 -----
