@@ -123,6 +123,7 @@ Logic Explained:
 * `var indexerClient...` creates a new SearchIndexerClient object used to manage (run, reset, delete) indexers in your search service
 
 #### Data Source
+
 The logic in this section will create a Cognitive Search Data Source.
 
 Append the following code at the bottom of `Main`:
@@ -144,6 +145,7 @@ Logic Explained:
 * `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the SearchIndexerDataSourceConnection object
 
 #### Index
+
 The logic in this section will create a Cognitive Search Index.
 
 Append the following code at the bottom of `Main`:
@@ -153,7 +155,7 @@ var index = new SearchIndex(indexName)
 {
     Fields =
     {
-        new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
+        new SimpleField("id", SearchFieldDataType.String) { IsKey = true },
         new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
         new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
         new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
@@ -187,13 +189,11 @@ Logic Explained:
 -----
 
 ```
-        /* ************************* Index */
-
         SearchIndex index = new SearchIndex(indexName)
         {
             Fields =
             {
-                new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
+                new SimpleField("id", SearchFieldDataType.String) { IsKey = true },
                 new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
                 new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
                 new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
