@@ -107,7 +107,7 @@ _Notes:_
 #### Service Connection Objects
 The variables set in this section will be used to manage the Cognitive Search resources.
 
-Add the following code to `Main`.
+Append the following code at the bottom of `Main`:
 
 ```
 var serviceEndpoint = new Uri($"https://{serviceName}.search.windows.net/");
@@ -125,7 +125,7 @@ Logic Explained:
 #### Data Source
 The logic in this section will create a Cognitive Search Data Source.
 
-Add the following code to `Main`.
+Append the following code at the bottom of `Main`:
 
 ```
 var sidsc = new SearchIndexerDataSourceConnection(
@@ -139,26 +139,54 @@ indexerClient.CreateDataSourceConnection(sidsc);
 ```
 
 Logic Explained:
-* `var sidsc...` creates a new SearchIndexerDataSourceConnection object that represents a connection to an Azure Blob Storage account
+* `var sidsc...` creates a new SearchIndexerDataSourceConnection object that represents a connection to a Blob Storage account
     * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
 * `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the SearchIndexerDataSourceConnection object
 
+#### Index
+The logic in this section will create a Cognitive Search Index.
+
+Append the following code at the bottom of `Main`:
 
 ```
-        /* ************************* Data Source */
+var index = new SearchIndex(indexName)
+{
+    Fields =
+    {
+        new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
+        new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_language", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_storage_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_storage_file_extension", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_storage_last_modified", SearchFieldDataType.DateTimeOffset) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_storage_name", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_storage_path", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_storage_size", SearchFieldDataType.Int64) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchField("metadata_title", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
+        new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+        new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+    }
+};
 
-        var sidsc = new SearchIndexerDataSourceConnection(
-            dataSourceName,
-            SearchIndexerDataSourceType.AzureBlob,
-            "DefaultEndpointsProtocol=https;AccountName=rchaplers;AccountKey=Pma3aYFLn1KYN3vlhljUwzdxNgfapnk8c4JVcmkGhFCynieXJE4opphYc6W1L4hC1dU13szYyyff+AStT2ZPhw==;EndpointSuffix=core.windows.net",
-            new SearchIndexerDataContainer("forms")
-            );
+indexClient.CreateIndex(index);
+```
 
-        indexerClient.DeleteIndexer(indexerName); /* must be deleted before data source connection */
-        indexerClient.DeleteDataSourceConnection(dataSourceName);
+Logic Explained:
+* `var index...` creates a new SearchIndex object that represents a search index in Cognitive Search
+  * `new SimpleField(...`, `new SearchField(...`,`new SearchableField(...` lines add fields the index
+    * Each field represents a piece of data that can be searched, filtered, sorted, or faceted in the search index
+* `indexClient.CreateIndex...` creates a new index using the SearchIndex object
 
-        indexerClient.CreateDataSourceConnection(sidsc);
 
+
+
+
+
+-----
+
+```
         /* ************************* Index */
 
         SearchIndex index = new SearchIndex(indexName)
