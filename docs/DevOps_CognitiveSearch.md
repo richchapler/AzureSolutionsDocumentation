@@ -144,7 +144,7 @@ Logic Explained:
     * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
 * `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the SearchIndexerDataSourceConnection object
 
-#### Index
+#### ************************* Index
 
 The logic in this section will create a Cognitive Search Index.
 
@@ -189,32 +189,6 @@ Logic Explained:
 -----
 
 ```
-        SearchIndex index = new SearchIndex(indexName)
-        {
-            Fields =
-            {
-                new SimpleField("id", SearchFieldDataType.String) { IsKey = true },
-                new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_language", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_storage_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_storage_file_extension", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_storage_last_modified", SearchFieldDataType.DateTimeOffset) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_storage_name", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_storage_path", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_storage_size", SearchFieldDataType.Int64) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchField("metadata_title", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-                new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-                //new SearchableField("merged_content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-                new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-            }
-        };
-
-        indexClient.DeleteIndex(index);
-
-        indexClient.CreateOrUpdateIndex(index);
-
         /* ************************* Skillset */
 
         var skills = new List<SearchIndexerSkill>
