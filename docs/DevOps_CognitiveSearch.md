@@ -14,8 +14,7 @@
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/)
-* [**Storage Account**](Infrastructure_StorageAccount.md) with:
-  * A container named "forms" and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
+* [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
 -----
@@ -268,7 +267,7 @@ Logic Explained:
 
 ### Step 4: Confirm Success
 
-#### Visual Studio, Debug
+#### Visual Studio Debug
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
 
@@ -278,6 +277,6 @@ Save your changes and then click "**Debug**" >> "**Start Debugging**" in the men
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
 
-#### Cognitive Search, Resource Confirmation
+#### Cognitive Search Resources
 
 LOREM IPSUM
