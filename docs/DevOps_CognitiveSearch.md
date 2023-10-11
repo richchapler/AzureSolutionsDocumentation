@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
-* "We have paired a Cognitive Search index with an OpenAI deployment and are rapidly iterating through enhancements to the index"
+* "We have implemented Cognitive Search with OpenAI and are rapidly iterating through enhancements to the index"
 * "Updating the Cognitive Search index can be difficult and we want a simpler, faster, more consistent experience"
 * "We want to capture our Cogniive Search index creation process in our GitHub repo"
 
