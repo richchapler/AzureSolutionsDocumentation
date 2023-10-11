@@ -275,35 +275,10 @@ Logic Explained:
 
 #### Debug
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/662ca84a-115f-4cf3-b4cf-1450ad1e3892" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
 
 Save your changes and then click "**Debug**" >> "**Start Debugging**" in the menubar.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d00e11c1-5611-49ed-b31e-228eee5428b2" width="600" title="Snipped: October 11, 2023" />
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
-
------
------
-
-## Content, Merged_Content, and Text
-In Azure Cognitive Search, the fields `content`, `merged_content`, and `text` have different roles when it comes to OCR scanned PDF documents:
-
-1. **Content**: This field is generated when Azure Cognitive Search "cracks" each document to read content from different file formats. The found text originating in the source file is placed into this generated `content` field, one for each document⁴.
-
-2. **Merged_content**: This field is typically used when you want to merge the textual representation of images (text from an OCR skill, or the caption of an image) into the content field of a document². For example, when you enable OCR and select the checkbox "merge all text into merged_content field", all of the enriched field options become visible³.
-
-3. **Text**: This is the plain text extracted from the image by the OCR skill². The OCR skill recognizes printed and handwritten text in image files and extracts this text².
-
-In summary, `content` is the original text content of the document, `merged_content` is a combination of original and additional enriched content (like OCR results), and `text` is specifically the output from the OCR process.
-
-## OCRSkill
-The OcrSkill is a prebuilt AI skill for text extraction from image files. It takes an image as input and outputs the text found in the image.
-
-Here’s what each part does:
-
-new InputFieldMappingEntry("image") { Source = "/document/normalized_images/*" }: This line is defining the input to the OCR skill. It’s saying that the input images will come from the normalized_images field of the documents in your search index.
-
-new OutputFieldMappingEntry("text") { TargetName = "text" }: This line is defining where the output of the OCR skill (the extracted text) will be stored. In this case, it’s stored in a field named text.
-
-So, to sum up, this code is setting up an OCR skill that takes images from the normalized_images field of your documents, extracts text from them, and stores that text in a field named text. This can be useful for making the text within images searchable.
