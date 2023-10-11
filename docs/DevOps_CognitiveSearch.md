@@ -70,7 +70,9 @@ On the **Browse** tab of the "**NuGet - Solution**" page, search for and select 
 
 When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 
-  <img src="https://user-images.githubusercontent.com/44923999/212141406-3d1bbf08-1259-4b4c-9a0d-241e0fa72f1b.png" width="800" title="Snipped: January 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="300" title="Snipped: October 11, 2023" />
+
+Close the "**Nuget - Solution**" tab.
 
 -----
 
