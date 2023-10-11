@@ -8,7 +8,6 @@
 * "We want to capture our Cogniive Search index creation process in our DevOps repo"
 
 ## Proposed Solution
-* Sample Data: Download sample PDF files and upload to a Blob Container
 * Develop Logic: Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of data source, index, skillset, and indexer
 * Check-In Logic: Create a pull request in a DevOps repo
 
@@ -79,7 +78,7 @@ Close the "**Nuget - Solution**" tab.
 
 -----
 
-### Step 2: Complete Code
+### Step 3: Complete Code
 
 #### Names and Keys
 The variables set in this section will be used to identify and create various Cognitive Search resources.
