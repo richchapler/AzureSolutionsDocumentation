@@ -41,7 +41,7 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 ### Step 2: Install NuGet
 
-Replace the default code in "**Program.cs**" with the following C#:
+Replace the default code on the "**Program.cs**" tab with the following C#:
 
 ```
 using Azure;
@@ -70,13 +70,31 @@ On the **Browse** tab of the "**NuGet - Solution**" page, search for and select 
 
 When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="300" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
 
 Close the "**Nuget - Solution**" tab.
 
 -----
 
 ### Step 3: Complete Code
+
+#### Names and Keys
+
+Return to the "**Program.cs**" tab and add the following code to `Main`.
+
+```
+string serviceName = "rchaplerss";
+string adminApiKey = "{COGNITIVESEARCH_PRIMARYADMINKEY}";
+string dataSourceName = "rchaplerss-datasource";
+string indexName = "rchaplerss-index";
+string indexerName = "rchaplerss-indexer";
+string skillsetName = "rchaplerss-skillset";
+```
+
+_Notes:_
+* _Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
+* _Replace `COGNITIVESEARCH_PRIMARYADMINKEY` with your Cognitive Search API Key (and considering using a Key Vault)_
+
 
 
 -----
