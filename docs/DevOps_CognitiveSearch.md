@@ -104,6 +104,8 @@ _Notes:_
 * _Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
 * _Replace `COGNITIVESEARCH_PRIMARYADMINKEY` with your Cognitive Search API Key (and considering using a Key Vault)_
 
+-----
+
 #### Service Connection Objects
 The variables set in this section will be used to manage the Cognitive Search resources.
 
@@ -117,10 +119,12 @@ var indexerClient = new SearchIndexerClient(serviceEndpoint, credential);
 ```
 
 Logic Explained:
-* `var serviceEndpoint...` creates a new Uri object that represents the Cognitive Search service endpoint
-* `var credential...` creates a new AzureKeyCredential object used to authenticate your requests to the Cognitive Search service
-* `var indexClient...` creates a new SearchIndexClient object used to manage (create, delete, update) indexes in your search service
-* `var indexerClient...` creates a new SearchIndexerClient object used to manage (run, reset, delete) indexers in your search service
+* `var serviceEndpoint...` creates a new `Uri` object that represents the Cognitive Search service endpoint
+* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the Cognitive Search service
+* `var indexClient...` creates a new `SearchIndexClient` object used to manage (create, delete, update) indexes in your search service
+* `var indexerClient...` creates a new `SearchIndexerClient` object used to manage (run, reset, delete) indexers in your search service
+
+-----
 
 #### Data Source
 
@@ -140,11 +144,13 @@ indexerClient.CreateDataSourceConnection(sidsc);
 ```
 
 Logic Explained:
-* `var sidsc...` creates a new SearchIndexerDataSourceConnection object that represents a connection to a Blob Storage account
+* `var sidsc...` creates a new `SearchIndexerDataSourceConnection` object that represents a connection to a Blob Storage account
     * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
-* `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the SearchIndexerDataSourceConnection object
+* `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the `SearchIndexerDataSourceConnection` object
 
-#### ************************* Index
+-----
+
+#### Index
 
 The logic in this section will create a Cognitive Search Index.
 
@@ -176,48 +182,62 @@ indexClient.CreateIndex(index);
 ```
 
 Logic Explained:
-* `var index...` creates a new SearchIndex object that represents a search index in Cognitive Search
+* `var index...` creates a new `SearchIndex` object that represents a search index in Cognitive Search
   * `new SimpleField(...`, `new SearchField(...`,`new SearchableField(...` lines add fields the index
     * Each field represents a piece of data that can be searched, filtered, sorted, or faceted in the search index
-* `indexClient.CreateIndex...` creates a new index using the SearchIndex object
+* `indexClient.CreateIndex...` creates a new index using the `SearchIndex` object
 
+-----
 
+#### Skillset
 
+The logic in this section will create a Cognitive Search Skillset.
 
+Append the following code at the bottom of `Main`:
+
+```
+var skills = new List<SearchIndexerSkill>
+{
+    new OcrSkill(
+        inputs: new List<InputFieldMappingEntry>
+        {
+            new InputFieldMappingEntry("image") { Source = "/document/normalized_images/*" }
+        },
+        outputs: new List<OutputFieldMappingEntry>
+        {
+            new OutputFieldMappingEntry("text") { TargetName = "text" }
+        }
+    )
+    {
+        Context = "/document/normalized_images/*"
+    }
+};
+
+var skillset = new SearchIndexerSkillset(skillsetName, skills)
+{
+    CognitiveServicesAccount = new CognitiveServicesAccountKey(key: "33235fe372ff414a9abf54a29af08825")
+};
+
+indexerClient.CreateSkillset(skillset);
+```
+
+Logic Explained:
+* `var skills...` creates a new list of `SearchIndexerSkill` objects
+  * Each `SearchIndexerSkill` represents a skill that can be used in an indexing pipeline
+  * Inside the `{...}` block, an `OcrSkill` is added to the list
+    * The `OcrSkill` is used to extract text from image files
+    * The input to the skill is the image field, which comes from the `/document/normalized_images/*` path in your data source
+    * The output of the skill is the `text` field
+* `var skillset...` creates a new `SearchIndexerSkillset` object that represents a skillset in Cognitive Search
+  * Inside the `{...}` block, a `CognitiveServicesAccountKey` is set for the skillset
+    * This key is used to authenticate your requests to the Cognitive Services
+* `indexerClient.CreateSkillset...` creates a new skillset using the `SearchIndexerSkillset` object
 
 
 -----
 
 ```
-        /* ************************* Skillset */
-
-        var skills = new List<SearchIndexerSkill>
-        {
-            new OcrSkill(
-                inputs: new List<InputFieldMappingEntry>
-                {
-                    new InputFieldMappingEntry("image") { Source = "/document/normalized_images/*" }
-                },
-                outputs: new List<OutputFieldMappingEntry>
-                {
-                    new OutputFieldMappingEntry("text") { TargetName = "text" }
-                }
-            )
-            {
-                Context = "/document/normalized_images/*"
-            }
-        };
-
-        var skillset = new SearchIndexerSkillset(skillsetName, skills)
-        {
-            CognitiveServicesAccount = new CognitiveServicesAccountKey(key: "33235fe372ff414a9abf54a29af08825")
-        };
-
-        indexerClient.DeleteSkillset(skillset);
-
-        indexerClient.CreateSkillset(skillset);
-
-        /* ************************* Indexer */
+         /* ************************* Indexer */
 
         SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
         {
