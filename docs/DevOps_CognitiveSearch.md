@@ -273,7 +273,7 @@ Logic Explained:
 
 ### Step 4: Confirm Success
 
-#### Debug
+#### Visual Studio, Debug
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
 
@@ -282,3 +282,7 @@ Save your changes and then click "**Debug**" >> "**Start Debugging**" in the men
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d00e11c1-5611-49ed-b31e-228eee5428b2" width="600" title="Snipped: October 11, 2023" />
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
+
+#### Cognitive Search, Resource Confirmation
+
+LOREM IPSUM
