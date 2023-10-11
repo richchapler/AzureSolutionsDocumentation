@@ -15,18 +15,13 @@
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/)
+* [**Storage Account**](Infrastructure_StorageAccount.md) with:
+  * A container named "forms" and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
 -----
 
-## Exercise 1: Sample Data
-In this exercise, we will download sample PDF files and upload to a Blob Container.
-
-LOREM IPSUM
-
------
-
-## Exercise 2: Develop Logic
+## Exercise 1: Develop Logic
 In this exercise, we will add create a Cognitive Search index, skillset, and indexer using a Console App.
 
 ### Step 1: Create Visual Studio Project
@@ -84,7 +79,7 @@ Close the "**Nuget - Solution**" tab.
 
 -----
 
-### Step 3: Complete Code
+### Step 2: Complete Code
 
 #### Names and Keys
 The variables set in this section will be used to identify and create various Cognitive Search resources.
@@ -146,6 +141,7 @@ Logic Explained:
 * `var sidsc...` creates a new `SearchIndexerDataSourceConnection` object that represents a connection to a Blob Storage account
     * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
 * `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the `SearchIndexerDataSourceConnection` object
+* `forms` refers to the Storage Account Container mentioned in Solution Requirements
 
 -----
 
