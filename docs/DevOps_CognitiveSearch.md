@@ -233,12 +233,20 @@ Logic Explained:
     * This key is used to authenticate your requests to the Cognitive Services
 * `indexerClient.CreateSkillset...` creates a new skillset using the `SearchIndexerSkillset` object
 
+-----
+
+#### Indexer
+
+The logic in this section will create a Cognitive Search Skillset.
+
+Append the following code at the bottom of `Main`:
+
+```
+```
 
 -----
 
 ```
-         /* ************************* Indexer */
-
         SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
         {
             Parameters = new IndexingParameters()
