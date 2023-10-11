@@ -9,7 +9,7 @@
 
 ## Proposed Solution
 * Develop Logic: Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of index, skillset, and indexer
-* Check in to GitHub repo
+* Check-In Logic: Create a pull request in a DevOps repo
 
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
