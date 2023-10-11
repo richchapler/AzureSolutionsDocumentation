@@ -8,7 +8,7 @@
 * "We want to capture our Cogniive Search index creation process in our DevOps repo"
 
 ## Proposed Solution
-* Develop Logic: Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of index, skillset, and indexer
+* Develop Logic: Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of data source, index, skillset, and indexer
 * Check-In Logic: Create a pull request in a DevOps repo
 
 ## Solution Requirements
@@ -17,6 +17,11 @@
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
 -----
+
+
+NEED AN EXERCISE FOR STAGE DATA!!!!
+
+
 
 ## Exercise 1: Develop Logic
 In this exercise, we will add create a Cognitive Search index, skillset, and indexer using a Console App.
@@ -79,6 +84,7 @@ Close the "**Nuget - Solution**" tab.
 ### Step 3: Complete Code
 
 #### Names and Keys
+The variables set in this section will be used to identify and create various Cognitive Search resources.
 
 Return to the "**Program.cs**" tab and add the following code to `Main`.
 
@@ -95,35 +101,47 @@ _Notes:_
 * _Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
 * _Replace `COGNITIVESEARCH_PRIMARYADMINKEY` with your Cognitive Search API Key (and considering using a Key Vault)_
 
+#### Service Connection Objects
+The variables set in this section will be used to manage the Cognitive Search resources.
 
-
------
-
-## Nuget
-* Azure.Search.Documents
+Add the following code to `Main`.
 
 ```
-using Azure;
-using Azure.Search.Documents.Indexes;
-using Azure.Search.Documents.Indexes.Models;
+var serviceEndpoint = new Uri($"https://{serviceName}.search.windows.net/");
+var credential = new AzureKeyCredential(adminApiKey);
+var indexClient = new SearchIndexClient(serviceEndpoint, credential);
+var indexerClient = new SearchIndexerClient(serviceEndpoint, credential);
+```
 
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        string serviceName = "rchaplerss";
-        string adminApiKey = "bUChVfJmk9sWfy68DTY2Y1hAZCCflQ6vALyHCekAVkAzSeAvrFVm";
-        string dataSourceName = "rchaplerss-datasource";
-        string indexName = "rchaplerss-index";
-        string indexerName = "rchaplerss-indexer";
-        string skillsetName = "rchaplerss-skillset";
+Logic Explained:
+* `var serviceEndpoint...` creates a new Uri object that represents the Cognitive Search service endpoint
+* `var credential...` creates a new AzureKeyCredential object used to authenticate your requests to the Cognitive Search service
+* `var indexClient...` creates a new SearchIndexClient object used to manage (create, delete, update) indexes in your search service
+* `var indexerClient...` creates a new SearchIndexerClient object used to manage (run, reset, delete) indexers in your search service
 
-        var serviceEndpoint = new Uri($"https://{serviceName}.search.windows.net/");
-        var credential = new AzureKeyCredential(adminApiKey);
+#### Data Source
+The logic in this section will create a Cognitive Search Data Source.
 
-        var indexClient = new SearchIndexClient(serviceEndpoint, credential);
-        var indexerClient = new SearchIndexerClient(serviceEndpoint, credential);
+Add the following code to `Main`.
 
+```
+var sidsc = new SearchIndexerDataSourceConnection(
+    dataSourceName,
+    SearchIndexerDataSourceType.AzureBlob,
+    "{STORAGEACCOUNT_CONNECTIONSTRING}",
+    new SearchIndexerDataContainer("forms")
+    );
+
+indexerClient.CreateDataSourceConnection(sidsc);
+```
+
+Logic Explained:
+* `var sidsc...` creates a new SearchIndexerDataSourceConnection object that represents a connection to an Azure Blob Storage account
+    * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
+* `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the SearchIndexerDataSourceConnection object
+
+
+```
         /* ************************* Data Source */
 
         var sidsc = new SearchIndexerDataSourceConnection(
