@@ -4,8 +4,8 @@
 
 ## Use Case
 * "We have implemented OpenAI with Cognitive Search and are rapidly iterating through enhancements to the index"
-* "Updating the Cognitive Search index can be difficult and we want a simpler, faster, more consistent experience"
-* "We want to capture our Cogniive Search index creation process in our GitHub repo"
+* "Creating and updating the Cognitive Search index can be difficult... we want a simpler, faster, more consistent experience"
+* "We want to capture our Cogniive Search index creation process in our DevOps repo"
 
 ## Proposed Solution
 * Develop Logic: Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of index, skillset, and indexer
@@ -37,9 +37,11 @@ Complete the "**Configure your new project**" form, then click "**Next**".
 
 Complete the "**Additional information**" form, then click "**Create**".
 
+-----
+
 ### Step 2: Install NuGet
 
-Paste the following C# into "**Program.cs**":
+Replace the default code in "**Program.cs**" with the following C#:
 
 ```
 using Azure;
@@ -55,12 +57,24 @@ public class Program
 }
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1c5be15-99d3-4154-88a8-0a58ba3090b9" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
+Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0b3bc3a-e6af-47ff-8ed2-8c0d0340e44e" width="800" title="Snipped: October 11, 2023" />
 
+On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Azure.Search.Documents**".
+<br>On the resulting pop-out, check the box next to your project and then click "**Install**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b56a92c-594a-4a18-afaa-24a4872ac73b" width="300" title="Snipped: October 11, 2023" />
 
+When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
+
+  <img src="https://user-images.githubusercontent.com/44923999/212141406-3d1bbf08-1259-4b4c-9a0d-241e0fa72f1b.png" width="800" title="Snipped: January 12, 2023" />
+
+-----
+
+### Step 3: Complete Code
 
 
 -----
