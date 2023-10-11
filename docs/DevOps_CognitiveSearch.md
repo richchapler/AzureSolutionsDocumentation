@@ -109,7 +109,7 @@ _Notes:_
 #### Service Connection Objects
 The variables set in this section will be used to manage the Cognitive Search resources.
 
-Append the following code at the bottom of `Main`:
+Append the following code to the bottom of `Main`:
 
 ```
 var serviceEndpoint = new Uri($"https://{serviceName}.search.windows.net/");
@@ -127,10 +127,9 @@ Logic Explained:
 -----
 
 #### Data Source
-
 The logic in this section will create a Cognitive Search Data Source.
 
-Append the following code at the bottom of `Main`:
+Append the following code to the bottom of `Main`:
 
 ```
 var sidsc = new SearchIndexerDataSourceConnection(
@@ -151,10 +150,9 @@ Logic Explained:
 -----
 
 #### Index
-
 The logic in this section will create a Cognitive Search Index.
 
-Append the following code at the bottom of `Main`:
+Append the following code to the bottom of `Main`:
 
 ```
 var index = new SearchIndex(indexName)
@@ -190,10 +188,9 @@ Logic Explained:
 -----
 
 #### Skillset
-
 The logic in this section will create a Cognitive Search Skillset.
 
-Append the following code at the bottom of `Main`:
+Append the following code to the bottom of `Main`:
 
 ```
 var skills = new List<SearchIndexerSkill>
@@ -236,39 +233,58 @@ Logic Explained:
 -----
 
 #### Indexer
+The logic in this section will create a Cognitive Search Indexer.
 
-The logic in this section will create a Cognitive Search Skillset.
-
-Append the following code at the bottom of `Main`:
+Append the following code to the bottom of `Main`:
 
 ```
+var indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
+{
+    Parameters = new IndexingParameters()
+    {
+        IndexingParametersConfiguration = new IndexingParametersConfiguration()
+        {
+            ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage,
+        }
+    },
+    SkillsetName = skillsetName
+};
+
+indexer.OutputFieldMappings.Add(
+    new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" }
+    );
+
+indexerClient.CreateIndexer(indexer);
 ```
+
+Logic Explained:
+* `var indexer...` creates a new SearchIndexer object that represents an indexer in Azure Cognitive Search
+  * The indexer is associated with the data source named `dataSourceName` and the index named `indexName`
+  * Inside the `{...}` block, parameters are set for the indexer; these parameters control how the indexer behaves during indexing
+    * In this case, the `ImageAction` parameter is set to `GenerateNormalizedImagePerPage`, which means the indexer will generate a normalized image for each page of a document
+  * Also inside the `{...}` block, the `SkillsetName` property is set to `skillsetName`
+    * This means the indexer will use the skillset named `skillsetName` to transform and enrich your data during indexing
+* `indexer.OutputFieldMappings...` adds a field mapping to the indexer’s output field mappings
+  * A field mapping defines how a field in your data source maps to a field in your index
+  * In this case, the `/document/normalized_images/*/text` field in your data source is mapped to the `text` field in your index
+* `indexerClient.CreateIndexer...` creates a new indexer using the `SearchIndexer` object
 
 -----
 
-```
-        SearchIndexer indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
-        {
-            Parameters = new IndexingParameters()
-            {
-                IndexingParametersConfiguration = new IndexingParametersConfiguration()
-                {
-                    ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
-                }
-            },
-            SkillsetName = skillsetName
-        };
+### Step 4: Confirm Success
 
-        indexer.OutputFieldMappings.Add(
-            new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" }
-            );
+#### Debug
 
-        indexerClient.DeleteIndexer(indexer);
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/662ca84a-115f-4cf3-b4cf-1450ad1e3892" width="800" title="Snipped: October 11, 2023" />
 
-        indexerClient.CreateIndexer(indexer);
-    }
-}
-```
+Save your changes and then click "**Debug**" >> "**Start Debugging**" in the menubar.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d00e11c1-5611-49ed-b31e-228eee5428b2" width="600" title="Snipped: October 11, 2023" />
+
+A "Microsoft Visual Studio Debug" window will open (as snipped above).
+
+-----
+-----
 
 ## Content, Merged_Content, and Text
 In Azure Cognitive Search, the fields `content`, `merged_content`, and `text` have different roles when it comes to OCR scanned PDF documents:
