@@ -161,12 +161,14 @@ lookback AS (
     SELECT LAG(*,1) OVER (PARTITION BY id LIMIT DURATION(minute, 5)) AS previous, *
     FROM comparison
     )
-SELECT id,
+SELECT dealer_cd,
     processedOn,
     geography gps_current,
     previous.geography gps_previous,
-    polygon geofence,
+    polygon geofence_current,
     previous.polygon geofence_previous,
+    isWithin iswithin_current,
+    previous.isWithin iswithin_previous,
     CASE WHEN isWithin = 1 AND previous.isWithin = 0 THEN 'ENTER'
         WHEN isWithin = 0 AND previous.isWithin = 1 THEN 'EXIT'
         ELSE ''
