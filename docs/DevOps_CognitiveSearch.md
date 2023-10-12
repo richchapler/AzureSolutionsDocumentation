@@ -294,11 +294,13 @@ Click the "**Search**" button and review results.
 ## Exercise 2: Source Control
 In this exercise, we will create a pull request in a DevOps repo.
 
-### Step 1: Add Solution to Source Control
+### Step 1: Create Git Repository
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/051c8452-4f7a-4115-b44d-3f9ff38c2b73" width="800" title="Snipped: October 12, 2023" />
+Open Visual Studio, navigate to "**View**" >> "**Git Changes**", and then click "**Create Git Repository**".
 
-Open Visual Studio, right-click on the solution and select "**Add Solution to Source Control**" from the resulting dropdown.
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/54ffccf9-64db-4e1b-9177-2bde140fa473" width="800" title="Snipped: October 12, 2023" />
+
+Complete the resulting "Create a Git repository" pop-up form.
 
 -----
 
