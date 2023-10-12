@@ -8,7 +8,7 @@
 * "We want to capture our Cogniive Search index creation process in our DevOps repo"
 
 ## Proposed Solution
-* Develop Logic: Use Visual Studio (C#) and the Cognitive Search Development Kit (SDK) to codify creation of data source, index, skillset, and indexer
+* Develop Logic: Use the Cognitive Search Development Kit (SDK) to codify creation of data source, index, skillset, and indexer
 * Check-In Logic: Create a pull request in a DevOps repo
 
 ## Solution Requirements
