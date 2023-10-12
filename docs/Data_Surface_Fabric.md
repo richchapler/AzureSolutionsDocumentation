@@ -1,3 +1,5 @@
+# WIP!!!
+
 * SQL Server Download... https://www.microsoft.com/en-us/sql-server/sql-server-downloads
 * SQL Server Management Studio (SSMS)... https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
 * AdventureWorks2022... https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure
@@ -17,3 +19,6 @@ Create Warehouse... rchaplerfwh
   * The name Gateway Cluster is misleading... you might add more On-Prem Data Gateways to the "cluster", but the "cluster" is created when you create the first on-prem data gateway (and can be used at that point)
 
 Create Data Gateway... Settings >> Manage Connections and Gateways >> + New >> rchaplerdg
+
+_Creating a Fabric pipeline with a connection to an on-prem SQL Server as a source involves several steps. However, as of now, the pipeline copy on-prem access (by SHIR in ADF) is not available yet1. You can refer to Differences between Data Factory in Fabric and Azure to get an idea on what are there and what are not_
+
