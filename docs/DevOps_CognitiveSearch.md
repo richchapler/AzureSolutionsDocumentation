@@ -277,6 +277,18 @@ Save your changes and then click "**Debug**" >> "**Start Debugging**" in the men
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
 
-#### Cognitive Search Resources
+#### Cognitive Search Index
 
-LOREM IPSUM
+Navigate to Cognitive Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/60745fe0-95f6-40f7-a91b-94b10332c237" width="800" title="Snipped: October 12, 2023" />
+
+You should see the index that you programmatically created {e.g., "rchaplerss-index"}. Click to open.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
+
+Click the "**Search**" button and review results.
+
+-----
+
+**Congratulations... you have successfully completed all exercises**
