@@ -8,7 +8,7 @@
 * "We want to capture our Cogniive Search index creation process in our DevOps repo"
 
 ## Proposed Solution
-* Develop Logic: Use the Cognitive Search Development Kit (SDK) to codify creation of data source, index, skillset, and indexer
+* Develop Logic: Use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer
 * Check-In Logic: Create a pull request in a DevOps repo
 
 ## Solution Requirements
@@ -20,7 +20,7 @@
 -----
 
 ## Exercise 1: Develop Logic
-In this exercise, we will add create a Cognitive Search index, skillset, and indexer using a Console App.
+In this exercise, we will use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 ### Step 1: Create Visual Studio Project
 
@@ -288,6 +288,15 @@ You should see the index that you programmatically created {e.g., "rchaplerss-in
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
 
 Click the "**Search**" button and review results.
+
+-----
+
+## Exercise 2: Check-In Logic
+In this exercise, we will create a pull request in a DevOps repo.
+
+### Step 1: LOREM
+
+Open Visual Studio and click "**Create a new project**".
 
 -----
 
