@@ -172,7 +172,6 @@ var index = new SearchIndex(indexName)
 };
 
 indexClient.DeleteIndex(index);
-
 indexClient.CreateIndex(index);
 ```
 
@@ -180,9 +179,10 @@ Logic Explained:
 * `var index...` creates a new `SearchIndex` object that represents a search index in Cognitive Search
   * `new SimpleField(...`, `new SearchField(...`,`new SearchableField(...` lines add fields the index
     * Each field represents a piece of data that can be searched, filtered, sorted, or faceted in the search index
-* `indexClient.CreateIndex...` creates a new index using the `SearchIndex` object
 * `new SearchableField("text"...` will be used by the OCR Skill
 * `new SearchableField("keyphrases"...` will be used by the Key Phrases Extraction Skill
+* `indexClient.DeleteIndex...` deletes any existing index with the same name using the `SearchIndex` object
+* `indexClient.CreateIndex...` creates a new index using the `SearchIndex` object
 
 -----
 
@@ -206,7 +206,20 @@ var skills = new List<SearchIndexerSkill>
     )
     {
         Context = "/document/normalized_images/*"
-    }
+    },
+    new KeyPhraseExtractionSkill(
+        inputs: new List<InputFieldMappingEntry>
+        {
+            new InputFieldMappingEntry("text") { Source = "/document/content" }
+        },
+        outputs: new List<OutputFieldMappingEntry>
+        {
+            new OutputFieldMappingEntry("keyPhrases") { TargetName = "keyphrases" } /* camel-case required for source */
+        }
+    )
+    {
+        Context = "/document/content"
+    },
 };
 
 var skillset = new SearchIndexerSkillset(skillsetName, skills)
@@ -214,6 +227,7 @@ var skillset = new SearchIndexerSkillset(skillsetName, skills)
     CognitiveServicesAccount = new CognitiveServicesAccountKey(key: "33235fe372ff414a9abf54a29af08825")
 };
 
+indexerClient.DeleteSkillset(skillset);
 indexerClient.CreateSkillset(skillset);
 ```
 
@@ -222,11 +236,15 @@ Logic Explained:
   * Each `SearchIndexerSkill` represents a skill that can be used in an indexing pipeline
   * Inside the `{...}` block, an `OcrSkill` is added to the list
     * The `OcrSkill` is used to extract text from image files
-    * The input to the skill is the image field, which comes from the `/document/normalized_images/*` path in your data source
-    * The output of the skill is the `text` field
+      * The input to the skill is the `image` field, which comes from the `/document/normalized_images/*` path in your data source
+      * The output of the skill is the `text` field
+    * The `KeyPhraseExtractionSkill` evaluates unstructured text and returns a list of key phrases for each record
+      * The input to the skill is `text`, which comes from the `/document/content` path in your data source
+      * The output of the skill is the `keyPhrases` field
 * `var skillset...` creates a new `SearchIndexerSkillset` object that represents a skillset in Cognitive Search
   * Inside the `{...}` block, a `CognitiveServicesAccountKey` is set for the skillset
     * This key is used to authenticate your requests to the Cognitive Services
+* `indexerClient.DeleteSkillset...` deletes any existing skillset with the same name using the `SearchIndexerSkillset` object
 * `indexerClient.CreateSkillset...` creates a new skillset using the `SearchIndexerSkillset` object
 
 -----
