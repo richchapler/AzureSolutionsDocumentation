@@ -5,6 +5,7 @@
 ## Use Case
 * "We have implemented OpenAI with Cognitive Search and are rapidly iterating through enhancements to the index"
 * "Creating and updating the Cognitive Search index can be difficult... we want a simpler, faster, more consistent experience"
+* "Codified Cognitive Search skills must include: OCR and Key Phrase Extraction"
 * "We want to capture our Cogniive Search index creation process in our DevOps repo"
 
 ## Proposed Solution
