@@ -262,16 +262,16 @@ var indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
     {
         IndexingParametersConfiguration = new IndexingParametersConfiguration()
         {
-            ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage,
+            ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
         }
     },
     SkillsetName = skillsetName
 };
 
-indexer.OutputFieldMappings.Add(
-    new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" }
-    );
+indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" });
+indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/content/keyphrases") { TargetFieldName = "keyphrases" });
 
+indexerClient.DeleteIndexer(indexer);
 indexerClient.CreateIndexer(indexer);
 ```
 
@@ -282,9 +282,10 @@ Logic Explained:
     * In this case, the `ImageAction` parameter is set to `GenerateNormalizedImagePerPage`, which means the indexer will generate a normalized image for each page of a document
   * Also inside the `{...}` block, the `SkillsetName` property is set to `skillsetName`
     * This means the indexer will use the skillset named `skillsetName` to transform and enrich your data during indexing
-* `indexer.OutputFieldMappings...` adds a field mapping to the indexer’s output field mappings
-  * A field mapping defines how a field in your data source maps to a field in your index
-  * In this case, the `/document/normalized_images/*/text` field in your data source is mapped to the `text` field in your index
+* `indexer.OutputFieldMappings...` adds indexer output field mappings
+  * `/document/normalized_images/*/text` is mapped to the `text` field in your index
+  * `/document/content/keyphrases` is mapped to the `keyphrases` field in your index
+* `indexerClient.DeleteIndexer...` deletes any existing indexer with the same name using the `SearchIndexer` object
 * `indexerClient.CreateIndexer...` creates a new indexer using the `SearchIndexer` object
 
 -----
