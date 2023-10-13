@@ -153,7 +153,7 @@ var index = new SearchIndex(indexName)
 {
     Fields =
     {
-        new SimpleField("id", SearchFieldDataType.String) { IsKey = true },
+        new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
         new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
         new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
         new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
@@ -167,8 +167,11 @@ var index = new SearchIndex(indexName)
         new SearchField("metadata_title", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
         new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
         new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+        new SearchableField("keyphrases", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
     }
 };
+
+indexClient.DeleteIndex(index);
 
 indexClient.CreateIndex(index);
 ```
@@ -178,6 +181,8 @@ Logic Explained:
   * `new SimpleField(...`, `new SearchField(...`,`new SearchableField(...` lines add fields the index
     * Each field represents a piece of data that can be searched, filtered, sorted, or faceted in the search index
 * `indexClient.CreateIndex...` creates a new index using the `SearchIndex` object
+* `new SearchableField("text"...` will be used by the OCR Skill
+* `new SearchableField("keyphrases"...` will be used by the Key Phrases Extraction Skill
 
 -----
 
