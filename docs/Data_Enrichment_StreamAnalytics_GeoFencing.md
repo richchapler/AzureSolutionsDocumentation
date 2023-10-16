@@ -169,8 +169,8 @@ SELECT dealer_cd,
     previous.polygon geofence_previous,
     isWithin iswithin_current,
     previous.isWithin iswithin_previous,
-    CASE WHEN isWithin = 1 AND previous.isWithin = 0 THEN 'ENTER'
-        WHEN isWithin = 0 AND previous.isWithin = 1 THEN 'EXIT'
+    CASE WHEN isWithin = 1 AND ( previous.isWithin = 0 OR previous.isWithin IS NULL ) THEN 'ENTER'
+        WHEN ( isWithin = 0 OR isWithin IS NULL ) AND previous.isWithin = 1 THEN 'EXIT'
         ELSE ''
         END Status
 INTO rchaplerdlsfs
