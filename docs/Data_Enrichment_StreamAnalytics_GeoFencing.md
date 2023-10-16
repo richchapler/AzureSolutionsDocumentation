@@ -152,8 +152,8 @@ WITH events AS (
 comparison AS (
     SELECT s.id,
         e.processedOn,
-        e.geography, -- streamed coordinates
-        udf.parseJSON(s.polygon) polygon, -- geofence
+        e.geography,
+        udf.parseJSON(s.polygon) polygon,
         ST_WITHIN(e.geography, udf.parseJSON(s.polygon)) as isWithin
     FROM events e CROSS JOIN rchaplersa s
     ),
