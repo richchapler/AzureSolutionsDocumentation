@@ -160,21 +160,25 @@ comparison AS (
 lookback AS (
     SELECT LAG(*,1) OVER (PARTITION BY id LIMIT DURATION(minute, 5)) AS previous, *
     FROM comparison
+    ),
+normalized AS (
+    SELECT dealer_cd,
+        processedOn,
+        geography gps_current,
+        previous.geography gps_previous,
+        polygon geofence_current,
+        previous.polygon geofence_previous,
+        CASE WHEN isWithin IS NULL THEN 0 ELSE isWithin END iswithin_current,
+        CASE WHEN previous.isWithin IS NULL THEN 0 ELSE previous.isWithin END iswithin_previous
+    FROM lookback
     )
-SELECT dealer_cd,
-    processedOn,
-    geography gps_current,
-    previous.geography gps_previous,
-    polygon geofence_current,
-    previous.polygon geofence_previous,
-    isWithin iswithin_current,
-    previous.isWithin iswithin_previous,
-    CASE WHEN isWithin = 1 AND ( previous.isWithin = 0 OR previous.isWithin IS NULL ) THEN 'ENTER'
-        WHEN ( isWithin = 0 OR isWithin IS NULL ) AND previous.isWithin = 1 THEN 'EXIT'
+SELECT *,
+    CASE WHEN iswithin_current = 1 AND iswithin_previous = 0 THEN 'ENTER'
+        WHEN iswithin_current = 0 AND iswithin_previous = 1 THEN 'EXIT'
         ELSE ''
         END Status
 INTO rchaplerdlsfs
-FROM lookback
+FROM normalized
 ```
 
 #### Logic Explained...
@@ -186,6 +190,7 @@ FROM lookback
   * `ST_WITHIN(...` determines whether the coordinates from the stream are inside one or more polygon from the reference data
 * `lookback AS (...` gets previous records for a given `id` in a five-minute window
   * `LAG(*,1) OVER...` used to get all columns (`*`) from the previous `1` row for each `id`
+* `normalized AS (...` standardizes the dataset for troubleshooting
 * `CASE WHEN...` determines whether the event represents an entrance to or exit from a geofence polygon
 
 Click "**Save query**".
