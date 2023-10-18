@@ -225,7 +225,7 @@ var skills = new List<SearchIndexerSkill>
 
 var skillset = new SearchIndexerSkillset(skillsetName, skills)
 {
-    CognitiveServicesAccount = new CognitiveServicesAccountKey(key: "{AIServicesKey}")
+    CognitiveServicesAccount = new CognitiveServicesAccountKey(key: "{AI_SERVICES_KEY}")
 };
 
 indexerClient.DeleteSkillset(skillset);
