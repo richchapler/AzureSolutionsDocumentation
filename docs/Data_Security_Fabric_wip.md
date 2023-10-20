@@ -31,6 +31,8 @@ _Documentation, Oct 2023: `CREATE USER` cannot be explicitly executed currently.
 SELECT * FROM sys.fn_my_permissions(NULL, 'Database');
 ```
 
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/5e8cddec-02c6-4b8d-82f6-9743a2d95858)
+
 -----
 
 ## Schema
