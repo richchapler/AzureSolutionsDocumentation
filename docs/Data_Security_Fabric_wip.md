@@ -25,8 +25,15 @@ Navigate to your warehouse.
 
 ## Schema Access
 
-Start by creating necessary objects:
-* Schema: `CREATE SCHEMA [rchaplerfw-s];`
+Start by creating a schema that we can use for demonstration:
+
+```
+CREATE SCHEMA [rchaplerfw-s];
+```
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/07eb8453-c705-4359-b6a6-e481b4db6ca7)
+
+
 * User from Entra: `CREATE USER [bsoltis@microsoft.com] FROM EXTERNAL PROVIDER;`
 
 Then, granted access to User X:
