@@ -3,19 +3,36 @@
 ## Warehouse Access
 [Share your warehouse and manage permissions](https://learn.microsoft.com/en-us/fabric/data-warehouse/share-warehouse-manage-permissions)
 
-Navigate to “My Workspace”, click the ellipses next to your warehouse, select “Share” and then complete the resulting popup
+Navigate to “My Workspace”, click the ellipses next to your warehouse, select “Manage permissions”.
 
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/7674c341-4c5b-430f-9403-5d63e2add4d4)
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/eedeb6e0-6154-4ba8-9cb2-1a67d8ddb991)
 
-**Test Result: User was able to see the warehouse, but not specific data or create a report since permissions have not been granted at that level.**
+Click "+ Add user" and complete the resulting pop-up form:
+* Select user(s) or group(s)
+* Do not add addtional permissions (we will do this in later steps at a more granular level)
 
-_Warehouse Access: Warehouse connectivity is dependent on being granted the Microsoft Fabric Read permission, at a minimum, for the Warehouse._
-_Microsoft Fabric item permissions enable the ability to provide a user with SQL permissions, without needing to grant those permissions within SQL._
+Click "Grant".
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/e455b831-8590-4d0a-81d1-540673cdaf28)
+
+Navigate to your warehouse.
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/5b61e39b-b8d7-4bc1-b95d-e0fac6174d40)
+
+ Click "T-SQL".
+
+-----
 
 ## Schema Access
-_Note: User must have (at minimum) Read permission to the warehouse in order to connect to the database_
 
+Start by creating necessary objects:
+* Schema: `CREATE SCHEMA [rchaplerfw-s];`
+* User from Entra: `CREATE USER [bsoltis@microsoft.com] FROM EXTERNAL PROVIDER;`
 
+Then, granted access to User X:
+```
+GRANT ALL PRIVILEGES ON SCHEMA [rchaplerfw-s] TO UserX;
+```
 
 -----
 
