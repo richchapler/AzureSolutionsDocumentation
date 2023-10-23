@@ -108,6 +108,7 @@ string nameCognitiveSearch_Index = "rchaplerss-index";
 string nameCognitiveSearch_Indexer = "rchaplerss-indexer";
 string nameCognitiveSearch_SemanticConfiguration = "rchaplerss-semanticconfiguration";
 string nameCognitiveSearch_Skillset = "rchaplerss-skillset";
+string nameCognitiveSearch_Suggester = "rchaplerss-suggester";
 
 /* ************************* URIs */
 
@@ -205,6 +206,9 @@ var index = new SearchIndex(nameCognitiveSearch_Index)
         new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
         new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
         new SearchableField("keyphrases", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+    },
+    Suggesters = {
+        new SearchSuggester(name: nameCognitiveSearch_Suggester, sourceFields: new[] { "metadata_storage_name" })
     }
 };
 
