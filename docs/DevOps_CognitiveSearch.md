@@ -16,7 +16,7 @@
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
-* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * ConnectionString_BlobStorage
   * Key_CognitiveSearch
   * Key_CognitiveServices
@@ -94,18 +94,34 @@ Close the "**NuGet - Solution**" tab.
 
 ### Step 3: Complete Code
 
-#### Names and Keys
-The variables set in this section will be used to identify and create various Cognitive Search resources.
+#### Names, URIs, and Keys
+The variables set in this section will be used to identify and create various resources.
 
 Return to the "**Program.cs**" tab and add the following code to `Main`.
 
 ```
-string serviceName = "rchaplerss";
-string adminApiKey = "{COGNITIVESEARCH_PRIMARYADMINKEY}";
-string dataSourceName = "rchaplerss-datasource";
-string indexName = "rchaplerss-index";
-string indexerName = "rchaplerss-indexer";
-string skillsetName = "rchaplerss-skillset";
+/* ************************* Names */
+
+string nameBlobStorage_Container = "forms";
+string nameCognitiveSearch_DataSource = "rchaplerss-datasource";
+string nameCognitiveSearch_Index = "rchaplerss-index";
+string nameCognitiveSearch_Indexer = "rchaplerss-indexer";
+string nameCognitiveSearch_SemanticConfiguration = "rchaplerss-semanticconfiguration";
+string nameCognitiveSearch_Skillset = "rchaplerss-skillset";
+
+/* ************************* URIs */
+
+var uriCognitiveSearch = new Uri($"https://rchaplerss.search.windows.net/");
+var uriKeyVault = new Uri($"https://rchaplerk.vault.azure.net/");
+
+/* ************************* Keys */
+
+var sc = new SecretClient(uriKeyVault, new DefaultAzureCredential());
+
+var ConnectionString_BlobStorage = sc.GetSecret("ConnectionString-BlobStorage").Value.Value.ToString() ?? string.Empty;
+var Key_CognitiveSearch = sc.GetSecret("Key-CognitiveSearch").Value.Value.ToString() ?? string.Empty;
+var Key_CognitiveServices = sc.GetSecret("Key-CognitiveServices").Value.Value.ToString() ?? string.Empty;
+/* use of double ".Value" is a necessary oddity */
 ```
 
 _Notes:_
@@ -114,20 +130,20 @@ _Notes:_
 
 -----
 
-#### Service Connection Objects
+#### Clients
 The variables set in this section will be used to manage the Cognitive Search resources.
 
 Append the following code to the bottom of `Main`:
 
 ```
-var serviceEndpoint = new Uri($"https://{serviceName}.search.windows.net/");
-var credential = new AzureKeyCredential(adminApiKey);
-var indexClient = new SearchIndexClient(serviceEndpoint, credential);
-var indexerClient = new SearchIndexerClient(serviceEndpoint, credential);
+/* ************************* Clients */
+
+var credential = new AzureKeyCredential(Key_CognitiveSearch);
+var indexClient = new SearchIndexClient(uriCognitiveSearch, credential);
+var indexerClient = new SearchIndexerClient(uriCognitiveSearch, credential);
 ```
 
 Logic Explained:
-* `var serviceEndpoint...` creates a new `Uri` object that represents the Cognitive Search service endpoint
 * `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the Cognitive Search service
 * `var indexClient...` creates a new `SearchIndexClient` object used to manage (create, delete, update) indexes in your search service
 * `var indexerClient...` creates a new `SearchIndexerClient` object used to manage (run, reset, delete) indexers in your search service
@@ -140,12 +156,17 @@ The logic in this section will create a Cognitive Search Data Source.
 Append the following code to the bottom of `Main`:
 
 ```
+/* ************************* Data Source */
+
 var sidsc = new SearchIndexerDataSourceConnection(
-    dataSourceName,
-    SearchIndexerDataSourceType.AzureBlob,
-    "{STORAGEACCOUNT_CONNECTIONSTRING}",
-    new SearchIndexerDataContainer("forms")
+    name: nameCognitiveSearch_DataSource,
+    type: SearchIndexerDataSourceType.AzureBlob,
+    connectionString: ConnectionString_BlobStorage,
+    container: new SearchIndexerDataContainer(nameBlobStorage_Container)
     );
+
+indexerClient.DeleteIndexer(nameCognitiveSearch_Indexer); /* indexer must be deleted before data source connection */
+indexerClient.DeleteDataSourceConnection(nameCognitiveSearch_DataSource);
 
 indexerClient.CreateDataSourceConnection(sidsc);
 ```
@@ -164,11 +185,12 @@ The logic in this section will create a Cognitive Search Index.
 Append the following code to the bottom of `Main`:
 
 ```
-var index = new SearchIndex(indexName)
+/* ************************* Index */
+
+var index = new SearchIndex(nameCognitiveSearch_Index)
 {
-    Fields =
-    {
-        new SimpleField("id", SearchFieldDataType.String) { IsKey = true },
+    Fields = {
+        new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
         new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
         new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
         new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
@@ -185,6 +207,25 @@ var index = new SearchIndex(indexName)
         new SearchableField("keyphrases", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
     }
 };
+
+SemanticSettings semanticSettings = new SemanticSettings();
+
+semanticSettings.Configurations.Add(
+    new SemanticConfiguration(
+        nameCognitiveSearch_SemanticConfiguration,
+        new PrioritizedFields()
+        {
+            TitleField = new SemanticField { FieldName = "metadata_title" },
+            ContentFields = {
+                new SemanticField { FieldName = "content" },
+                new SemanticField { FieldName = "text" }
+            },
+            KeywordFields = {
+                new SemanticField { FieldName = "keyphrases" }
+            }
+        }
+    )
+);
 
 indexClient.DeleteIndex(index);
 indexClient.CreateIndex(index);
@@ -207,6 +248,8 @@ The logic in this section will create a Cognitive Search Skillset.
 Append the following code to the bottom of `Main`:
 
 ```
+/* ************************* Skillset */
+
 var skills = new List<SearchIndexerSkill>
 {
     new OcrSkill(
@@ -237,9 +280,9 @@ var skills = new List<SearchIndexerSkill>
     },
 };
 
-var skillset = new SearchIndexerSkillset(skillsetName, skills)
+var skillset = new SearchIndexerSkillset(nameCognitiveSearch_Skillset, skills)
 {
-    CognitiveServicesAccount = new CognitiveServicesAccountKey(key: "{AI_SERVICES_KEY}")
+    CognitiveServicesAccount = new CognitiveServicesAccountKey(key: Key_CognitiveServices)
 };
 
 indexerClient.DeleteSkillset(skillset);
@@ -270,7 +313,9 @@ The logic in this section will create a Cognitive Search Indexer.
 Append the following code to the bottom of `Main`:
 
 ```
-var indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
+/* ************************* Indexer */
+
+var indexer = new SearchIndexer(nameCognitiveSearch_Indexer, nameCognitiveSearch_DataSource, nameCognitiveSearch_Index)
 {
     Parameters = new IndexingParameters()
     {
@@ -279,7 +324,7 @@ var indexer = new SearchIndexer(indexerName, dataSourceName, indexName)
             ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
         }
     },
-    SkillsetName = skillsetName
+    SkillsetName = nameCognitiveSearch_Skillset
 };
 
 indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" });
