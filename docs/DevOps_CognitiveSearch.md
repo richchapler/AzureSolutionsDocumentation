@@ -74,7 +74,14 @@ When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
 
-Close the "**Nuget - Solution**" tab.
+#### Additional Packages
+
+Repeat this process for the following NuGet packages:
+
+* Azure.Identity
+* Azure.Security.KeyVault.Secrets
+
+Close the "**NuGet - Solution**" tab.
 
 -----
 
