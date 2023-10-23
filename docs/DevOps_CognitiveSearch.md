@@ -7,6 +7,7 @@
 * "Creating and updating the Cognitive Search index can be difficult... we want a simpler, faster, more consistent experience"
 * "Codified Cognitive Search skills must include: OCR and Key Phrase Extraction"
 * "We want to capture our Cogniive Search index creation process in our DevOps repo"
+* "All secrets must be stored in Key Vault"
 
 ## Proposed Solution
 * Develop App: Use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer
@@ -15,6 +16,10 @@
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
+  * ConnectionString_BlobStorage
+  * Key_CognitiveSearch
+  * Key_CognitiveServices
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) connected to your DevOps project
 
@@ -47,8 +52,10 @@ Replace the default code on the "**Program.cs**" tab with the following C#:
 
 ```
 using Azure;
+using Azure.Identity;
 using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Indexes.Models;
+using Azure.Security.KeyVault.Secrets;
 
 public class Program
 {
