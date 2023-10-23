@@ -50,6 +50,9 @@ CREATE SCHEMA [rchaplerfw-s];
 
 ### Permissions
 
+```
+GRANT SELECT ON SCHEMA::[rchaplerfwh-s] TO [brsoltis@microsoft.com]
+```
 
 ## Row-Level
 _Documentation, Oct 2023: Row-level security is currently not supported. Dynamic data masking is currently not supported._
