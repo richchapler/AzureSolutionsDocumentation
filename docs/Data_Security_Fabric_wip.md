@@ -50,12 +50,17 @@ CREATE SCHEMA [rchaplerfwh-s];
 
 ### Permissions
 
-To grant permissions to an individual user, execute the following logic:
+To grant permissions to an individual user, personalize / execute the following logic:
 ```
 GRANT SELECT ON SCHEMA::[rchaplerfwh-s] TO [brsoltis@microsoft.com]
 ```
 
-It is supposed to be possible to grant permissions to a group {i.e., "add user in UI" and then `GRANT... [rchaplerg]`}, but I have not seen it work yet... question pending with support
+To grant permissions to a group, you must share the warehouse with the group and then personalize / execute the following logic:
+```
+GRANT SELECT ON SCHEMA::[rchaplerfwh-s] TO [rchaplerg]
+```
+
+_Note: this logic is pending verification_
 
 -----
 
@@ -69,7 +74,7 @@ CREATE TABLE [rchaplerfwh-t] (c1 INT, c2 VARCHAR(32));
 
 ### Permissions
 
-To grant permissions to an individual user, execute the following logic:
+To grant permissions to an individual user, personalize / execute the following logic:
 ```
 GRANT SELECT ON [rchaplerfwh-t] TO [brsoltis@microsoft.com]
 ```
