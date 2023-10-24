@@ -43,7 +43,7 @@ SELECT * FROM sys.fn_my_permissions(NULL, 'Database');
 Start by creating a schema that we can use for demonstration:
 
 ```
-CREATE SCHEMA [rchaplerfw-s];
+CREATE SCHEMA [rchaplerfwh-s];
 ```
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/07eb8453-c705-4359-b6a6-e481b4db6ca7)
@@ -56,6 +56,23 @@ GRANT SELECT ON SCHEMA::[rchaplerfwh-s] TO [brsoltis@microsoft.com]
 ```
 
 It is supposed to be possible to grant permissions to a group {i.e., "add user in UI" and then `GRANT... [rchaplerg]`}, but I have not seen it work yet... question pending with support
+
+-----
+
+## Table
+
+Start by creating a table that we can use for demonstration:
+
+```
+CREATE TABLE [rchaplerfwh-t] (c1 INT, c2 VARCHAR(32));
+```
+
+### Permissions
+
+To grant permissions to an individual user, execute the following logic:
+```
+GRANT SELECT ON [rchaplerfwh-t] TO [brsoltis@microsoft.com]
+```
 
 -----
 
