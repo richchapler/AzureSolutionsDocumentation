@@ -50,9 +50,14 @@ CREATE SCHEMA [rchaplerfw-s];
 
 ### Permissions
 
+To grant permissions to an individual user, execute the following logic:
 ```
 GRANT SELECT ON SCHEMA::[rchaplerfwh-s] TO [brsoltis@microsoft.com]
 ```
+
+It is supposed to be possible to grant permissions to a group {i.e., "add user in UI" and then `GRANT... [rchaplerg]`}, but I have not seen it work yet... question pending with support
+
+-----
 
 ## Row-Level
 _Documentation, Oct 2023: Row-level security is currently not supported. Dynamic data masking is currently not supported._
