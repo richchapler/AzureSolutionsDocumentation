@@ -94,6 +94,7 @@ Logic Explained:
 WORK IN PROGRESS!
 
 -----
+-----
 
 ## Exercise 2: Deployment Application
 In this exercise, we will use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
@@ -447,6 +448,7 @@ You should see the index that you programmatically created {e.g., "rchaplerss-in
 
 Click the "**Search**" button and review results.
 
+-----
 -----
 
 ## Exercise 3: Source Control
