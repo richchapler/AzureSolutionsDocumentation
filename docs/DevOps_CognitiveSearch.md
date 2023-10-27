@@ -35,7 +35,42 @@
 ## Exercise 1: Custom Skillset API
 In this exercise, we will use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset.
 
+### Step 1: Create Visual Studio Project
 
+Open Visual Studio and click "**Create a new project**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/967afae1-a2ed-4093-b7d5-ffba68f2ea52" width="600" title="Snipped: October 10, 2023" />
+
+On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8d1a19ed-bf39-4de0-961c-a21ad10449de" width="600" title="Snipped: October 10, 2023" />
+
+
+
+
+
+
+
+
+
+
+
+Complete the "**Configure your new project**" form and then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf45d8ed-27a4-40e4-ac5a-40efbeb30f99" width="600" title="Snipped: July 5, 2023" />
+
+Complete the "**Additional information**" form:
+
+Prompt | Entry
+:----- | :-----
+**Functions worker** | **.NET 6.0 (Long Term Support)**
+**Function** | **Http trigger**
+**Use Azurite...** | Checked
+**Authorization level** | Function
+
+Click "**Create**".
+
+-----
 
 
 
