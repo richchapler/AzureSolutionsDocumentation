@@ -64,6 +64,11 @@ Click "**Create**".
 
 ### Step 2: Code Function
 
+Rename "Function1.cs" to "CustomSkillset.cs".
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/300ddd0c-e7fa-4d20-abe2-472ef36f2c09)
+
+
 Return to the "**Program.cs**" tab and add the following code to `Main`.
 
 ```
