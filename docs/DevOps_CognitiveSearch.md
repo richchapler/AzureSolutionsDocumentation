@@ -35,7 +35,7 @@
 ## Exercise 1: Custom Skillset API
 In this exercise, we will use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset.
 
-### Step 1: Create Visual Studio Project
+### Step 1: Create Project
 
 Open Visual Studio and click "**Create a new project**".
 
@@ -61,6 +61,29 @@ Prompt | Entry
 Click "**Create**".
 
 -----
+
+### Step 2: Code Function
+
+Return to the "**Program.cs**" tab and add the following code to `Main`.
+
+```
+var Key_CognitiveServices = sc.GetSecret("Key-CognitiveServices").Value.Value.ToString() ?? string.Empty;
+/* use of double ".Value" is a necessary oddity */
+```
+
+Logic Explained:
+* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the Cognitive Search service
+
+
+
+
+
+
+
+
+
+
+
 
 
 
