@@ -20,7 +20,7 @@ The proposed solution requires:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
-* [**Postman**](https://www.postman.com/product/workspaces/)
+* [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 * [**Visual Studio**](https://visualstudio.microsoft.com/) with **Azure development** workload
 
