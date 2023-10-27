@@ -45,25 +45,15 @@ On the "**Create a new project**" page, search for and select "**Azure Functions
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 10, 2023" />
 
-
-
-
-
-
-
-
-
-
-
 Complete the "**Configure your new project**" form and then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf45d8ed-27a4-40e4-ac5a-40efbeb30f99" width="600" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39eeeab1-76b4-4325-8772-0c7aafa3c6d9" width="600" title="Snipped: October 10, 2023" />
 
 Complete the "**Additional information**" form:
 
 Prompt | Entry
 :----- | :-----
-**Functions worker** | **.NET 6.0 (Long Term Support)**
+**Functions worker** | **.NET 7.0 Isolated**
 **Function** | **Http trigger**
 **Use Azurite...** | Checked
 **Authorization level** | Function
