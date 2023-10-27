@@ -39,15 +39,15 @@ In this exercise, we will use a Function App to instantiate a simple API for use
 
 Open Visual Studio and click "**Create a new project**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b9ad75a-370d-4642-98a0-78600a43b772" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b9ad75a-370d-4642-98a0-78600a43b772" width="600" title="Snipped: October 27, 2023" />
 
 On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 27, 2023" />
 
 Complete the "**Configure your new project**" form and then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39eeeab1-76b4-4325-8772-0c7aafa3c6d9" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39eeeab1-76b4-4325-8772-0c7aafa3c6d9" width="600" title="Snipped: October 27, 2023" />
 
 Complete the "**Additional information**" form:
 
@@ -64,20 +64,54 @@ Click "**Create**".
 
 ### Step 2: Code Function
 
-Rename "Function1.cs" to "CustomSkillset.cs".
+Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
 
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/300ddd0c-e7fa-4d20-abe2-472ef36f2c09)
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af1d52cb-5dbd-43b2-9198-ea390dede565" width="600" title="Snipped: October 27, 2023" />
 
-
-Return to the "**Program.cs**" tab and add the following code to `Main`.
+Replace the default logic in "CustomSkillset" with:
 
 ```
-var Key_CognitiveServices = sc.GetSecret("Key-CognitiveServices").Value.Value.ToString() ?? string.Empty;
-/* use of double ".Value" is a necessary oddity */
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using System.Net;
+using System.Text.Json;
+
+namespace FunctionApp_CustomSkillset
+{
+    public class CustomSkillset
+    {
+        [Function("CustomSkillset")]
+        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd)
+        {
+            string request = string.Empty;
+
+            using (var reader = new StreamReader(hrd.Body)) { request = reader.ReadToEnd(); }
+
+            var d = new Dictionary<string, object> { { "values", new List<Dictionary<string, object>>() } };
+
+            foreach (var value in JsonDocument.Parse(request).RootElement.GetProperty("values").EnumerateArray())
+            {
+                var r = new Dictionary<string, object>
+                {
+                    { "recordId", value.GetProperty("recordId").GetString() ?? string.Empty },
+                    { "data", new Dictionary<string, object> { { "myColumn", value.GetProperty("data") } } },
+                    { "errors", string.Empty },
+                    { "warnings", string.Empty }
+                };
+
+                ((List<Dictionary<string, object>>)d["values"]).Add(r);
+            }
+
+            var response = hrd.CreateResponse(HttpStatusCode.OK);
+            response.WriteAsJsonAsync(d);
+            return response;
+        }
+    }
+}
 ```
 
 Logic Explained:
-* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the Cognitive Search service
+* `lorem...` ipsum
 
 
 
