@@ -14,9 +14,9 @@ _Note: Our pretend scenario will be that users of a "hotels" search index want t
 
 ## Solution Requirements
 The proposed solution requires:
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
-* [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
-* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), including dependencies:
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
+  * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), with dependencies:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
