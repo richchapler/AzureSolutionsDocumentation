@@ -15,10 +15,10 @@
 * Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
   * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
-* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), including dependencies:
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), with dependencies:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
