@@ -10,8 +10,8 @@
 * "All secrets must be stored in Key Vault"
 
 ## Proposed Solution
-* Prepare Custom Skillset API: Use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset
-* Develop App: Use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer
+* Custom Skillset API: Use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset
+* Deployment Application: Use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer
 * Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
@@ -32,8 +32,11 @@
 
 -----
 
-## Exercise 1: Prepare Custom Skillset API
+## Exercise 1: Custom Skillset API
 In this exercise, we will use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset.
+
+
+
 
 
 
@@ -44,7 +47,7 @@ WORK IN PROGRESS!
 
 -----
 
-## Exercise 2: Develop App
+## Exercise 2: Deployment Application
 In this exercise, we will use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 ### Step 1: Create Visual Studio Project
