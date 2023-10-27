@@ -39,11 +39,11 @@ In this exercise, we will use a Function App to instantiate a simple API for use
 
 Open Visual Studio and click "**Create a new project**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/967afae1-a2ed-4093-b7d5-ffba68f2ea52" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b9ad75a-370d-4642-98a0-78600a43b772" width="600" title="Snipped: October 10, 2023" />
 
 On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8d1a19ed-bf39-4de0-961c-a21ad10449de" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 10, 2023" />
 
 
 
