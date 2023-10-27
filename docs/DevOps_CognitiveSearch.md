@@ -5,27 +5,46 @@
 ## Use Case
 * "We have implemented OpenAI with Cognitive Search and are rapidly iterating through enhancements to the index"
 * "Creating and updating the Cognitive Search index can be difficult... we want a simpler, faster, more consistent experience"
-* "Codified Cognitive Search skills must include: OCR and Key Phrase Extraction"
 * "We want to capture our Cognitive Search index creation process in our DevOps repo"
+* "Codified Cognitive Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
 * "All secrets must be stored in Key Vault"
 
 ## Proposed Solution
+* Prepare Custom Skillset API: Use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset
 * Develop App: Use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer
 * Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
+  * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), including dependencies:
+  * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
+  * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
+  * [Storage Account](Infrastructure_StorageAccount.md)
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * ConnectionString_BlobStorage
   * Key_CognitiveSearch
   * Key_CognitiveServices
+* [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
-* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) connected to your DevOps project
+* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
 -----
 
-## Exercise 1: Develop App
+## Exercise 1: Prepare Custom Skillset API
+In this exercise, we will use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset.
+
+
+
+
+
+
+WORK IN PROGRESS!
+
+-----
+
+## Exercise 2: Develop App
 In this exercise, we will use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 ### Step 1: Create Visual Studio Project
@@ -379,7 +398,7 @@ Click the "**Search**" button and review results.
 
 -----
 
-## Exercise 2: Source Control
+## Exercise 3: Source Control
 In this exercise, we will create a pull request in a DevOps repo.
 
 ### Step 1: Create and Push
