@@ -18,7 +18,7 @@
 * [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
   * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
-* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview), with dependencies:
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
@@ -66,7 +66,7 @@ Click "**Create**".
 
 Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af1d52cb-5dbd-43b2-9198-ea390dede565" width="600" title="Snipped: October 27, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af1d52cb-5dbd-43b2-9198-ea390dede565" width="800" title="Snipped: October 27, 2023" />
 
 Replace the default logic in "CustomSkillset" with:
 
@@ -132,6 +132,11 @@ On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
 
 On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Service (Windows)**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af141980-d358-4879-b2c9-0277d90882c6" width="600" title="Snipped: October 30, 2023" />
+
+On the **Publish** >> "**Select existing or...**" page, select your Function App and then click "**Finish**".
+
 
 Lorem Ipsum
 
