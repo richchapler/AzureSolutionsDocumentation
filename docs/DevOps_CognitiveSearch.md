@@ -165,26 +165,6 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 ### Step 2: Install NuGet
 
-Replace the default code on the "**Program.cs**" tab with the following C#:
-
-```
-using Azure;
-using Azure.Identity;
-using Azure.Search.Documents.Indexes;
-using Azure.Search.Documents.Indexes.Models;
-using Azure.Security.KeyVault.Secrets;
-
-public class Program
-{
-    public static void Main(string[] args)
-    {
-
-    }
-}
-```
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
-
 Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0b3bc3a-e6af-47ff-8ed2-8c0d0340e44e" width="800" title="Snipped: October 11, 2023" />
@@ -205,11 +185,29 @@ Repeat this process for the following NuGet packages:
 * Azure.Identity
 * Azure.Security.KeyVault.Secrets
 
-Close the "**NuGet - Solution**" tab.
+Close the "**NuGet - Solution**" tab and replace the default code on the "**Program.cs**" tab with the following C#:
+
+```
+using Azure;
+using Azure.Identity;
+using Azure.Search.Documents.Indexes;
+using Azure.Search.Documents.Indexes.Models;
+using Azure.Security.KeyVault.Secrets;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+
+    }
+}
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
 -----
 
-### Step 3: Complete Code
+### Step 3: Code Application
 
 #### Names, URIs, and Keys
 The variables set in this section will be used to identify and create various resources.
