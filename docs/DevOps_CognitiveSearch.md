@@ -129,6 +129,9 @@ Right-click on your project in the Solution Explorer pane and select "**Publish*
 
 On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**Next**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
+
+On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Service (Windows)**", then click "**Next**".
 
 Lorem Ipsum
 
