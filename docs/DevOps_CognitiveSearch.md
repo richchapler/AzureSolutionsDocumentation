@@ -32,8 +32,9 @@
 
 -----
 
-## Exercise 1: Custom Skillset API
+## Exercise 1: Custom Skillset API (optional)
 In this exercise, we will use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset.
+<br>_Note: Only complete this exercise if you intend to include a custom skillset in the Cognitive Search deployment app_
 
 ### Step 1: Create Project
 
@@ -137,24 +138,13 @@ On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Servi
 
 On the **Publish** >> "**Select existing or...**" page, select your Function App and then click "**Finish**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8ed84d8e-1b06-4abf-8cf3-2a158c339d53" width="600" title="Snipped: October 30, 2023" />
 
-Lorem Ipsum
+On the **Publish profile creation progress** >> "**Finish**" page, click "**Close**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/85acb60f-bb87-43a2-9c4a-e4b5f4c12f11" width="800" title="Snipped: October 30, 2023" />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-WORK IN PROGRESS!
+Back on the "...Publish" page, click **Publish**, allow time for processing, and confirm successful publication.
 
 -----
 -----
