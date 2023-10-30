@@ -185,7 +185,13 @@ Repeat this process for the following NuGet packages:
 * Azure.Identity
 * Azure.Security.KeyVault.Secrets
 
-Close the "**NuGet - Solution**" tab and replace the default code on the "**Program.cs**" tab with the following C#:
+Close the "**NuGet - Solution**" tab.
+
+-----
+
+### Step 3: Code Application
+
+Replace the default code on the "**Program.cs**" tab with the following C#:
 
 ```
 using Azure;
@@ -204,10 +210,6 @@ public class Program
 ```
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
-
------
-
-### Step 3: Code Application
 
 #### Names, URIs, and Keys
 The variables set in this section will be used to identify and create various resources.
