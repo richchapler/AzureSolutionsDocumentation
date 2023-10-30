@@ -117,8 +117,11 @@ Logic Explained:
 
 _Note: This is a template function ONLY... add additional logic based on your use case_
 
+-----
 
+### Step 3: Publish Function
 
+Lorem Ipsum
 
 
 
