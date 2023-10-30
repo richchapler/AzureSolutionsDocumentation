@@ -111,7 +111,11 @@ namespace FunctionApp_CustomSkillset
 ```
 
 Logic Explained:
-* `lorem...` ipsum
+* `using (var reader = new StreamReader(hrd.Body)...` parses request body JSON
+* `foreach (var value in JsonDocument.Parse(request)` iterates through request values and packages a response
+* `response.WriteAsJsonAsync(d)... return...` completes response
+
+_Note: This is a template function ONLY... add additional logic based on your use case_
 
 
 
