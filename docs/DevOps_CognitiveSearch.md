@@ -121,6 +121,15 @@ _Note: This is a template function ONLY... add additional logic based on your us
 
 ### Step 3: Publish Function
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
+
+Right-click on your project in the Solution Explorer pane and select "**Publish**" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a090114-5879-44d0-a07c-c78a006d92ff" width="600" title="Snipped: October 30, 2023" />
+
+On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**Next**".
+
+
 Lorem Ipsum
 
 
