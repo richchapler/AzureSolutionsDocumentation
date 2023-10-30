@@ -165,6 +165,8 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 ### Step 2: Install NuGet
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
+
 Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0b3bc3a-e6af-47ff-8ed2-8c0d0340e44e" width="800" title="Snipped: October 11, 2023" />
@@ -208,8 +210,6 @@ public class Program
     }
 }
 ```
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
 #### Names, URIs, and Keys
 The variables set in this section will be used to identify and create various resources.
