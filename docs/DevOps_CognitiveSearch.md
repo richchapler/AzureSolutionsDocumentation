@@ -373,30 +373,12 @@ var index = new SearchIndex(nameCognitiveSearch_Index)
         new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
         new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
         new SearchableField("keyphrases", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
+        new SearchField("myColumn", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true }
     },
     Suggesters = {
         new SearchSuggester(name: nameCognitiveSearch_Suggester, sourceFields: new[] { "metadata_storage_name" })
     }
 };
-
-SemanticSettings semanticSettings = new SemanticSettings();
-
-semanticSettings.Configurations.Add(
-    new SemanticConfiguration(
-        nameCognitiveSearch_SemanticConfiguration,
-        new PrioritizedFields()
-        {
-            TitleField = new SemanticField { FieldName = "metadata_title" },
-            ContentFields = {
-                new SemanticField { FieldName = "content" },
-                new SemanticField { FieldName = "text" }
-            },
-            KeywordFields = {
-                new SemanticField { FieldName = "keyphrases" }
-            }
-        }
-    )
-);
 
 indexClient.DeleteIndex(index);
 indexClient.CreateIndex(index);
@@ -408,6 +390,7 @@ Logic Explained:
     * Each field represents a piece of data that can be searched, filtered, sorted, or faceted in the search index
 * `new SearchableField("text"...` will be used by the OCR Skill
 * `new SearchableField("keyphrases"...` will be used by the Key Phrases Extraction Skill
+* `new SearchableField("myColumn"...` will be used by the WebAPI Skill
 * `indexClient.DeleteIndex...` deletes any existing index with the same name using the `SearchIndex` object
 * `indexClient.CreateIndex...` creates a new index using the `SearchIndex` object
 
@@ -449,6 +432,20 @@ var skills = new List<SearchIndexerSkill>
     {
         Context = "/document/content"
     },
+    new WebApiSkill(
+        inputs: new List<InputFieldMappingEntry>
+        {
+            new InputFieldMappingEntry("text") { Source = "/document/metadata_storage_file_extension" }
+        },
+        outputs: new List<OutputFieldMappingEntry>
+        {
+            new OutputFieldMappingEntry("myColumn") { TargetName = "myColumn" }
+        },
+        uri: "{FUNCTIONAPP_URL}"
+    )
+    {
+        Context = "/document/content"
+    }
 };
 
 var skillset = new SearchIndexerSkillset(nameCognitiveSearch_Skillset, skills)
@@ -470,6 +467,9 @@ Logic Explained:
     * The `KeyPhraseExtractionSkill` evaluates unstructured text and returns a list of key phrases for each record
       * The input to the skill is `text`, which comes from the `/document/content` path in your data source
       * The output of the skill is the `keyPhrases` field
+    * The `WebApiSkill` sends data to a custom web API endpoint (specified by `{FUNCTIONAPP_URL}`) and receives transformed data in return
+      * The input is text, sourced from `/document/metadata_storage_file_extension` (used for simplicity)
+      * The output from the web API is stored in a field named `myColumn`
 * `var skillset...` creates a new `SearchIndexerSkillset` object that represents a skillset in Cognitive Search
   * Inside the `{...}` block, a `CognitiveServicesAccountKey` is set for the skillset
     * This key is used to authenticate your requests to the Cognitive Services
@@ -500,6 +500,7 @@ var indexer = new SearchIndexer(nameCognitiveSearch_Indexer, nameCognitiveSearch
 
 indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" });
 indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/content/keyphrases") { TargetFieldName = "keyphrases" });
+indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/content/myColumn") { TargetFieldName = "myColumn" });
 
 indexerClient.DeleteIndexer(indexer);
 indexerClient.CreateIndexer(indexer);
@@ -515,6 +516,7 @@ Logic Explained:
 * `indexer.OutputFieldMappings...` adds indexer output field mappings
   * `/document/normalized_images/*/text` is mapped to the `text` field in your index
   * `/document/content/keyphrases` is mapped to the `keyphrases` field in your index
+  * `/document/content/myColumn` is mapped to the `myColumn` field in your index
 * `indexerClient.DeleteIndexer...` deletes any existing indexer with the same name using the `SearchIndexer` object
 * `indexerClient.CreateIndexer...` creates a new indexer using the `SearchIndexer` object
 
