@@ -147,6 +147,28 @@ On the **Publish profile creation progress** >> "**Finish**" page, click "**Clos
 Back on the "...Publish" page, click **Publish**, allow time for processing, and confirm successful publication.
 
 -----
+
+### Step 4: Confirm Success
+
+Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a48bae96-a071-440e-912f-dff11e09da87" width="800" title="Snipped: October 31, 2023" />
+
+Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the following "**Body**" value:
+
+```
+{"values":[{"recordId":"0","data":{"text":"Lorem Ipsum"}}]}
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d9fd06a-62d8-4ebe-9304-bdcc2834e860" width="800" title="Snipped: October 31, 2023" />
+
+Click "**Run**".
+
+
+
+
+
+-----
 -----
 
 ## Exercise 2: Deployment Application
