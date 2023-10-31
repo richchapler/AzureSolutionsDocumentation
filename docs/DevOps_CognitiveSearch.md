@@ -164,9 +164,30 @@ Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the fo
 
 Click "**Run**".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f0f47af-5e58-4fd9-822b-215e910c6602" width="800" title="Snipped: October 31, 2023" />
 
+The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
 
+```
+{
+  "values": [
+    {
+      "recordId": "0",
+      "data": {
+        "myColumn": {
+          "text": "Lorem Ipsum"
+        }
+      },
+      "errors": "",
+      "warnings": ""
+    }
+  ]
+}
+```
 
+-----
+
+**Congratulations... you have successfully completed this exercise**
 
 -----
 -----
@@ -522,6 +543,10 @@ You should see the index that you programmatically created {e.g., "rchaplerss-in
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
 
 Click the "**Search**" button and review results.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
 
 -----
 -----
