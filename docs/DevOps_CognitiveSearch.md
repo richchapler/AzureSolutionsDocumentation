@@ -32,7 +32,7 @@
 
 -----
 
-## Exercise 1: Custom Skillset API (optional)
+## Exercise 1: Custom Skillset API
 In this exercise, we will use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset.
 <br>_Note: Only complete this exercise if you intend to include a custom skillset in the Cognitive Search deployment app_
 
