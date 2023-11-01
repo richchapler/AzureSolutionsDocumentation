@@ -213,16 +213,18 @@ Paste the following query logic:
 ```
 WITH events AS (
     SELECT e.EventProcessedUtcTime as processedOn,
-        CreatePoint(e.latitude,e.longitude) as geography
+        CreatePoint(e.latitude,e.longitude) as geography,
+        udf.encodeH3(e.latitude,e.longitude,12) h3
     FROM rchaplereh e
     ),
 comparison AS (
     SELECT s.id,
         e.processedOn,
         e.geography,
+        e.h3,
         udf.parseJSON(s.polygon) polygon,
         ST_WITHIN(e.geography, udf.parseJSON(s.polygon)) as isWithin
-    FROM events e CROSS JOIN rchaplersa s
+    FROM events e CROSS JOIN rchaplers s
     ),
 lookback AS (
     SELECT LAG(*,1) OVER (PARTITION BY id LIMIT DURATION(minute, 5)) AS previous, *
@@ -233,6 +235,8 @@ normalized AS (
         processedOn,
         geography gps_current,
         previous.geography gps_previous,
+        h3 h3_current,
+        previous.h3 h3_previous,
         polygon geofence_current,
         previous.polygon geofence_previous,
         CASE WHEN isWithin IS NULL THEN 0 ELSE isWithin END iswithin_current,
@@ -244,7 +248,7 @@ SELECT *,
         WHEN iswithin_current = 0 AND iswithin_previous = 1 THEN 'EXIT'
         ELSE ''
         END Status
-INTO rchaplerdlsfs
+INTO rchaplersac
 FROM normalized
 ```
 
@@ -252,8 +256,9 @@ FROM normalized
 
 * `WITH events AS (...` is a Common Table Expression (CTE) intended to pull data, first thing, from the stream input
   * `CreatePoint(...` creates a geographical point (usable by later geospatial functions) from latitude and longitude data
+  * `udf.encodeH3(...` uses the `encodeH3` function to convert GPS coordinates to H3
 * `comparison AS (...` marries stream data with data from the reference input
-  * `udf.parseJSON(...` uses the previously-created Function to convert polygon data to JSON
+  * `udf.parseJSON(...` uses the `parseJSON` function to convert polygon data to JSON
   * `ST_WITHIN(...` determines whether the coordinates from the stream are inside one or more polygon from the reference data
 * `lookback AS (...` gets previous records for a given `id` in a five-minute window
   * `LAG(*,1) OVER...` used to get all columns (`*`) from the previous `1` row for each `id`
