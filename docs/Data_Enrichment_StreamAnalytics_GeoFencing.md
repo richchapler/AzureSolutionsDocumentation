@@ -6,7 +6,7 @@
 * "Our devices stream billions of events daily"
 * "We need to compare  from the streaming data to known geofence locations in near real time"
 * "We need to characterize streaming coordinates as 'outside of', 'entering', 'inside of', or 'exiting' known geofence locations"
-* "Output should also include H3 encoding for the GPS coordinates, based on a set resolution"
+* "Output should include H3 encoding for the GPS coordinates, based on a set resolution"
 
 ## Proposed Solution
 * Add Inputs / Outputs: Add inputs and outputs in the Stream Analytics Job
