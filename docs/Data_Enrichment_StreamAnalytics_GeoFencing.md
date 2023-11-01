@@ -149,7 +149,28 @@ Click "**Save**".
 
 ### Step 2: Add Function, encodeH3
 
+
+```
+function GPSToH3(latitude, longitude, resolution)
+{
+    return latitude + longitude + resolution;
+}
+```
+
+
+
 Lorem Ipsum!!!
+
+
+
+
+
+
+
+
+
+
+
 
 ```
 /* Must install node to run javascript on local machine: https://nodejs.org/en/download */
@@ -208,7 +229,7 @@ lookback AS (
     FROM comparison
     ),
 normalized AS (
-    SELECT dealer_cd,
+    SELECT id,
         processedOn,
         geography gps_current,
         previous.geography gps_previous,
