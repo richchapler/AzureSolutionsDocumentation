@@ -148,58 +148,25 @@ Click "**Save**".
 -----
 
 ### Step 2: Add Function, encodeH3
+Navigate to your Stream Analytics Job, then select "**Functions**" from the "**Job topology**" group of the navigation pane.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/LOREM" width="800" title="Snipped: November 1, 2023" />
+
+Click "**Add function**" and select "**Javascript UDF**" from the the resulting dropdown.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/LOREM" width="800" title="Snipped: November 1, 2023" />
+
+Complete the resulting "**Javascript function**" page, including the following code:
 
 ```
-function GPSToH3(latitude, longitude, resolution)
+function encodeH3(latitude, longitude, resolution)
 {
-    return latitude + longitude + resolution;
+    const h3 = require('h3-js');
+    return h3.latLngToCell(latitude, longitude, resolution);
 }
 ```
 
-
-
-Lorem Ipsum!!!
-
-
-
-
-
-
-
-
-
-
-
-
-```
-/* Must install node to run javascript on local machine: https://nodejs.org/en/download */
-/* Must install h3-js module from terminal: npm install h3-js */
-/* Check version of h3-js module with: npm list h3-js */
-/* Call this function with: node encodeh3.js 47.673988 122.121513 12 (Redmond WA coordinates) */
-
-const h3 = require('h3-js');
-
-/* Parameter */
-let latitude = process.argv[2];
-let longitude = process.argv[3];
-let resolution = process.argv[4];
-
-/* Body */
-console.log(`Latitude: ${latitude} | Longitude: ${longitude} | Resolution: ${resolution}`);
-console.log(`H3 Index: ${h3.latLngToCell(latitude, longitude, resolution)}`);
-
-/* Keep window open until keypress */
-const readline = require('readline');
-readline.emitKeypressEvents(process.stdin);
-process.stdin.setRawMode(true);
-process.stdin.once('keypress', () => process.exit());
-
-/* KQL Equivalent
-datatable( id: string, latitude: real, longitude: real, precision: int ) [ '1', 47.673988, 122.121513, 12 ] 
-| extend h3_encoded = geo_point_to_h3cell(longitude, latitude, precision)
-*/
-```
+Click "**Save**".
 
 -----
 
