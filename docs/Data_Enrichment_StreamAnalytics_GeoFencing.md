@@ -1,17 +1,18 @@
-# Data Enrichment: Stream Analytics, Geo-Fencing
+# Data Enrichment: Stream Analytics, Geo-Fencing (new section, work-in-progress)
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92b29e97-31a6-4d39-b494-9d1d4dd5a6c7" width="1000" />
 
 ## Use Case
 * "Our devices stream billions of events daily"
-* "We need to compare GPS coordinates from the streaming data to known geofence locations in near real time"
+* "We need to compare  from the streaming data to known geofence locations in near real time"
 * "We need to characterize streaming coordinates as 'outside of', 'entering', 'inside of', or 'exiting' known geofence locations"
+* "Output should also include H3 encoding for the GPS coordinates, based on a set resolution"
 
 ## Proposed Solution
-* Add Inputs / Outputs
-* Generate Sample Data
-* Prepare Function / Query
-* Confirm Success
+* Add Inputs / Outputs: Add inputs and outputs in the Stream Analytics Job
+* Generate Sample Data: Fabricate stream data in the Event Hub and reference data in the Storage Account
+* Prepare Logic: Prepare functions and query logic in the Stream Analytics Job
+* Confirm Success: Test inputs and query logic in the Stream Analytics Job
 
 ## Solution Requirements
 * [**Event Hub**](https://learn.microsoft.com/en-us/azure/event-hubs/) >> Namespace :: Hub :: Consumer Group
@@ -57,6 +58,11 @@ Click "**Add output**" and select "**Blob storage/ADLS Gen2**" from the the resu
 
 Complete the resulting "**Blob storage/ADLS Gen2**" >> "**New Output**" popout and click "**Save**".
 
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
 -----
 
 ## Exercise 2: Generate Sample Data
@@ -114,8 +120,13 @@ Click on your Storage Account Input, then "**Upload sample input**" on the "**In
 
 -----
 
-## Exercise 3: Prepare Function / Query
-In this exercise, we will prepare function and query logic in the Stream Analytics Job.
+**Congratulations... you have successfully completed this exercise**
+
+-----
+-----
+
+## Exercise 3: Prepare Logic
+In this exercise, we will prepare functions and query logic in the Stream Analytics Job.
 
 ### Step 1: Add Function, parseJSON
 Navigate to your Stream Analytics Job, then select "**Functions**" from the "**Job topology**" group of the navigation pane.
@@ -136,7 +147,42 @@ Click "**Save**".
 
 -----
 
-### Step 2: Write Query
+### Step 2: Add Function, encodeH3
+
+Lorem Ipsum!!!
+
+```
+/* Must install node to run javascript on local machine: https://nodejs.org/en/download */
+/* Must install h3-js module from terminal: npm install h3-js */
+/* Check version of h3-js module with: npm list h3-js */
+/* Call this function with: node encodeh3.js 47.673988 122.121513 12 (Redmond WA coordinates) */
+
+const h3 = require('h3-js');
+
+/* Parameter */
+let latitude = process.argv[2];
+let longitude = process.argv[3];
+let resolution = process.argv[4];
+
+/* Body */
+console.log(`Latitude: ${latitude} | Longitude: ${longitude} | Resolution: ${resolution}`);
+console.log(`H3 Index: ${h3.latLngToCell(latitude, longitude, resolution)}`);
+
+/* Keep window open until keypress */
+const readline = require('readline');
+readline.emitKeypressEvents(process.stdin);
+process.stdin.setRawMode(true);
+process.stdin.once('keypress', () => process.exit());
+
+/* KQL Equivalent
+datatable( id: string, latitude: real, longitude: real, precision: int ) [ '1', 47.673988, 122.121513, 12 ] 
+| extend h3_encoded = geo_point_to_h3cell(longitude, latitude, precision)
+*/
+```
+
+-----
+
+### Step 3: Write Query
 Navigate to your Stream Analytics Job, then select "**Query**" from the "**Job topology**" group of the navigation pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b5c65f6d-5baf-49be-877c-dc86bec8e01d" width="800" title="Snipped: October 4, 2023" />
@@ -195,6 +241,11 @@ FROM normalized
 
 Click "**Save query**".
 
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
 -----
 
 ## Exercise 4: Confirm Success
