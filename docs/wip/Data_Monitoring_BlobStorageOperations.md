@@ -10,7 +10,7 @@ Option | Notes | Pros | Cons
 :----- | :----- | :----- | :-----
 [Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Lorem | Only creates, deletes, modifications
 [Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | No real-time alerts
-[Azure Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal) | Storage Account >> Diagnostic Settings | Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- No "whodunit" info
+[Azure Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal) | Storage Account >> Diagnostic Settings | Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- User not included (only CallerIpAddress)
 Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availability... not operations like create
 Query Logs? | Lorem | Lorem | Lorem
 Function or Logic App + Event Grid | Lorem | Lorem | Will require development and maintenance
