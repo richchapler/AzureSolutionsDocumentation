@@ -15,6 +15,12 @@ Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availabili
 Query Logs? | Lorem | Lorem | Lorem
 Function or Logic App + Event Grid | Lorem | Lorem | Will require development and maintenance
 
+```
+StorageBlobLogs
+| order by TimeGenerated
+| take 25
+```
+
 **Is there auditing functionality that could be turned on to better see who is doing what?**
 
 -----
