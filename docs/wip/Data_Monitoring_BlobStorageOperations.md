@@ -6,14 +6,14 @@
 
 ## Options
 
-Option | Notes | Concerns
-:----- | :----- | :-----
-[Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Only creates, deletes, modifications
-[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | No real-time notifications
-Azure Monitor | Lorem | Focuses on performance, capacity, and availability... not operations like create
-Azure Storage Analytics? | Lorem | "completeness and timeliness... are not guaranteed"
-Query Logs? | Lorem | Lorem
-Function or Logic App + Event Grid | Lorem | Will require development and maintenance
+Option | Notes | Pros | Cons
+:----- | :----- | :----- | :-----
+[Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Lorem | Only creates, deletes, modifications
+[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | No real-time notifications
+[Azure Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal) | Storage Account >> Diagnostic Settings | Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - Only supports "Storage Read", "Storage Write", and "Storage Delete"<br>- Documentation says "completeness and timeliness... not guaranteed"
+Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availability... not operations like create
+Query Logs? | Lorem | Lorem | Lorem
+Function or Logic App + Event Grid | Lorem | Lorem | Will require development and maintenance
 
 -----
 
