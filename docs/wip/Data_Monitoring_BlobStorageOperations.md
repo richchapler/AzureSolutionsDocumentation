@@ -7,7 +7,7 @@
 ## Options
 
 Option | Notes | Concerns
-:----- | :----- | :----- | :-----
+:----- | :----- | :-----
 [Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Only creates, deletes, modifications
 [Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | No real-time notifications
 Azure Monitor | Lorem | Focuses on performance, capacity, and availability... not operations like create
