@@ -15,6 +15,8 @@ Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availabili
 Query Logs? | Lorem | Lorem | Lorem
 Function or Logic App + Event Grid | Lorem | Lorem | Will require development and maintenance
 
+**Is there auditing functionality that could be turned on to better see who is doing what?**
+
 -----
 
 [Enable and manage Azure Storage Analytics logs...](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-logs)
