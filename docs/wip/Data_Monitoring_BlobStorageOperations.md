@@ -9,7 +9,7 @@
 Option | Notes | Pros | Cons
 :----- | :----- | :----- | :-----
 [Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Lorem | Only creates, deletes, modifications
-[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | Lorem | Seems like it is passive and additional analysis would be required to surface when a change has occurred
+[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | Lorem | Run daily {i.e., not real-time}; additional analysis would be required to surface when a change has occurred
 Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availability... not operations like create
 Azure Storage Analytics? | Lorem | Lorem | Lorem
 Query Logs? | Lorem | Lorem | Lorem
