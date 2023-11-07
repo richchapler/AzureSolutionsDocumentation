@@ -6,9 +6,19 @@
 
 ## Options
 
-Option | Pros | Cons
-:----- | :----- | :-----
-[Storage Account > Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Only creates, deletes, modifications
+Option | Notes | Pros | Cons
+:----- | :----- | :----- | :-----
+[Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Lorem | Only creates, deletes, modifications
+[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | Lorem | Seems like it is passive and additional analysis would be required to surface when a change has occurred
+Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availability... not operations like create
+Azure Storage Analytics? | Lorem | Lorem | Lorem
+Query Logs? | Lorem | Lorem | Lorem
+Function or Logic App + Event Grid | Lorem | Lorem | Will require development and maintenance
+
+-----
+
+[Enable and manage Azure Storage Analytics logs...](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-logs)
+[Azure Storage analytics logging](https://learn.microsoft.com/en-us/azure/storage/common/storage-analytics-logging)
 
 -----
 
