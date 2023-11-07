@@ -6,14 +6,14 @@
 
 ## Options
 
-Option | Notes | Pros | Cons
+Option | Notes | Concerns
 :----- | :----- | :----- | :-----
-[Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Lorem | Only creates, deletes, modifications
-[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | Lorem | No real-time notifications
-Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availability... not operations like create
-Azure Storage Analytics? | Lorem | Lorem | Lorem
-Query Logs? | Lorem | Lorem | Lorem
-Function or Logic App + Event Grid | Lorem | Lorem | Will require development and maintenance
+[Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Only creates, deletes, modifications
+[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | No real-time notifications
+Azure Monitor | Lorem | Focuses on performance, capacity, and availability... not operations like create
+Azure Storage Analytics? | Lorem | "completeness and timeliness... are not guaranteed"
+Query Logs? | Lorem | Lorem
+Function or Logic App + Event Grid | Lorem | Will require development and maintenance
 
 -----
 
