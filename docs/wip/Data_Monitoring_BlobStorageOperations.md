@@ -18,6 +18,10 @@ None of the listed solutions...
 * include canned alerts, reports, or analysis
 * specifically identify the user making the change; closest is CallerIpAddress, AuthenticationHash, and UserAgentHeader 
 
+Other solutions:
+* Defender for Cloud does not enable the sort of file activity monitoring described by the use case
+* Purview TBD
+
 ```
 StorageBlobLogs
 | order by TimeGenerated
