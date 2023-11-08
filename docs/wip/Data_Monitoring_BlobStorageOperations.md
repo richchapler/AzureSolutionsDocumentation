@@ -11,8 +11,8 @@ Option | Pros | Cons
 :----- | :----- | :-----
 [Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal)<br><sub>Storage Account >><br>Blob Inventory</sub> | | - No real-time alerts<br>- No User detail
 [Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal)<br><sub>Storage Account >><br>Change Feed</sub> | | Only creates, deletes, modifications
-[Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal)<br><sub>Storage Account >><br>Diagnostic Settings</sub> | - Confirmed Operations:<br>--- Browse (ListBlobs)<br>--- Creates (PutBlob)<br>--- Deletes (DeleteBlob)<br>--- Downloads (GetBlob)<br>--- Edits (PutBlob+)<br>- Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- No User detail (only CallerIpAddress, AuthenticationHash, and UserAgentHeader)
-Event Grid + Function App  | Lorem | Will require development and maintenance
+[Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal)<br><sub>Storage Account >><br>Diagnostic Settings</sub> | - Confirmed Operations:<br>-- Browse (ListBlobs)<br>-- Creates (PutBlob)<br>-- Deletes (DeleteBlob)<br>-- Downloads (GetBlob)<br>-- Edits (PutBlob+)<br>- Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- No User detail (only CallerIpAddress, AuthenticationHash, and UserAgentHeader)
+[Event Handling](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-event-overview)<br><sub>Storage Account >><br>Events</sub> | - Real-time<br>- Event Types<br>-- Blob Created / Deleted / Renamed<br>-- Directory Created / Deleted / Renamed<br>-- Blob Tier Changed | - No User detail<br>- Will require development and maintenance
 
 ```
 StorageBlobLogs
