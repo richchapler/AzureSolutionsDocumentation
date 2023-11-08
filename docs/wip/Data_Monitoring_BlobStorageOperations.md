@@ -1,16 +1,17 @@
 # How to monitor Blob Storage operations
 
 ## Use Case
-* "We need to monitor Storage Account activities: creations, modifications, deletes, downloads, copies, data shares, size changes"
-* "Particularly, we need to know who was responsible for what operation"
+* "We need to monitor Storage Account activities: browse, creates, edits, deletes, downloads, copies, data shares, size changes"
+  * QUESTION: What are copies and shares?
+* "Particularly, we need to know **who** was responsible for what operation"
 
 ## Options
 
 Option | Notes | Pros | Cons
 :----- | :----- | :----- | :-----
 [Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | Lorem | Lorem | Only creates, deletes, modifications
-[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | Lorem | - No real-time alerts<br>- No User detail
-[Azure Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal) | Storage Account >> Diagnostic Settings | - Confirmed Operations:<br>--- Browse (ListBlobs)<br>--- Creates (PutBlob)<br>--- Downloads (GetBlob)<br>- Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- No User detail (only CallerIpAddress, AuthenticationHash, and UserAgentHeader)
+[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | Created rule... waiting to see report | - Might be the only way to get Size Changes | - No real-time alerts<br>- No User detail
+[Azure Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal) | Storage Account >> Diagnostic Settings | - Confirmed Operations:<br>--- Browse (ListBlobs)<br>--- Creates (PutBlob)<br>--- Deletes (DeleteBlob)<br>--- Downloads (GetBlob)<br>--- Edits (PutBlob+)<br>- Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- No User detail (only CallerIpAddress, AuthenticationHash, and UserAgentHeader)
 Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availability... not operations like create
 Query Logs? | Lorem | Lorem | Lorem
 Event Grid + Function App  | Lorem | Lorem | Will require development and maintenance
