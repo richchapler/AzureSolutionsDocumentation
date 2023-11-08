@@ -24,6 +24,15 @@ StorageBlobLogs
 | take 25
 ```
 
+PowerShell Script for checking the size of a container:
+```
+foreach ($container in $containers) {
+    $containerSize = (Get-AzStorageContainerStatistics -Name $container.Name -StorageAccountName $storageAccountName -ResourceGroupName $resourceGroupName).ContainerSize
+    $totalSize += $containerSize
+}
+$totalSize
+```
+
 **Is there auditing functionality that could be turned on to better see who is doing what?**
 
 -----
