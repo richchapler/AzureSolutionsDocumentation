@@ -7,14 +7,12 @@
 
 ## Options
 
-Option | Notes | Pros | Cons
-:----- | :----- | :----- | :-----
-[Storage Account >> Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal) | | | Only creates, deletes, modifications
-[Storage Account >> Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal) | | | - No real-time alerts<br>- No User detail
-Storage Account >> Diagnostic Settings<br><sub>aka [Azure Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal)</sub> | | - Confirmed Operations:<br>--- Browse (ListBlobs)<br>--- Creates (PutBlob)<br>--- Deletes (DeleteBlob)<br>--- Downloads (GetBlob)<br>--- Edits (PutBlob+)<br>- Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- No User detail (only CallerIpAddress, AuthenticationHash, and UserAgentHeader)
-Azure Monitor | Lorem | Lorem | Focuses on performance, capacity, and availability... not operations like create
-Query Logs? | Lorem | Lorem | Lorem
-Event Grid + Function App  | Lorem | Lorem | Will require development and maintenance
+Option | Pros | Cons
+:----- | :----- | :-----
+[Blob Inventory](https://learn.microsoft.com/en-us/azure/storage/blobs/blob-inventory-how-to?tabs=azure-portal)<br><sub>Storage Account >><br>Blob Inventory</sub> | | - No real-time alerts<br>- No User detail
+[Change Feed](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal)<br><sub>Storage Account >><br>Change Feed</sub> | | Only creates, deletes, modifications
+[Storage Analytics](https://learn.microsoft.com/en-us/azure/storage/common/manage-storage-analytics-metrics?tabs=azure-portal)<br><sub>Storage Account >><br>Diagnostic Settings</sub> | - Confirmed Operations:<br>--- Browse (ListBlobs)<br>--- Creates (PutBlob)<br>--- Deletes (DeleteBlob)<br>--- Downloads (GetBlob)<br>--- Edits (PutBlob+)<br>- Native "send to" Log Analytics, Storage Account, Event Hub, Partner Solution | - "completeness and timeliness... not guaranteed"<br>- No real-time alerts<br>- No User detail (only CallerIpAddress, AuthenticationHash, and UserAgentHeader)
+Event Grid + Function App  | Lorem | Will require development and maintenance
 
 ```
 StorageBlobLogs
