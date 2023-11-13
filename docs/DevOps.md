@@ -4,5 +4,5 @@
 
 Use Case | Type
 :----- | :-----
-[Cognitive Search](DevOps_CognitiveSearch.md) | C#<br>
+[AI Search](DevOps_AISearch.md) | C#<br>
 [Synapse, Parameterized Linked Services](DevOps_SynapseDeploy_usingParameterizedLinkedServices.md) | No Code<br>
