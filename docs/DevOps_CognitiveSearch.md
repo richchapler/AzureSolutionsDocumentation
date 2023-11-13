@@ -1,22 +1,22 @@
-# DevOps: Cognitive Search
+# DevOps: AI Search
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
-* "We have implemented OpenAI with Cognitive Search and are rapidly iterating through enhancements to the index"
-* "Creating and updating the Cognitive Search index can be difficult... we want a simpler, faster, more consistent experience"
-* "We want to capture our Cognitive Search index creation process in our DevOps repo"
-* "Codified Cognitive Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
+* "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
+* "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
+* "We want to capture our AI Search index creation process in our DevOps repo"
+* "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
 * "All secrets must be stored in Key Vault"
 
 ## Proposed Solution
-* Custom Skillset API: Use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset
-* Deployment Application: Use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer
+* Custom Skillset API: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
+* Deployment Application: Use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
 * Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
-  * [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
+  * [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
@@ -24,8 +24,8 @@
   * [Storage Account](Infrastructure_StorageAccount.md)
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * ConnectionString_BlobStorage
-  * Key_CognitiveSearch
-  * Key_CognitiveServices
+  * Key_AISearch
+  * Key_AIServices
 * [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
@@ -33,8 +33,8 @@
 -----
 
 ## Exercise 1: Custom Skillset API
-In this exercise, we will use a Function App to instantiate a simple API for use with Cognitive Search, custom skillset.
-<br>_Note: Only complete this exercise if you intend to include a custom skillset in the Cognitive Search deployment app_
+In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
+<br>_Note: Only complete this exercise if you intend to include a custom skillset in the AI Search deployment app_
 
 ### Step 1: Create Project
 
@@ -193,7 +193,7 @@ The pop-out will switch to the "**Output**" tab and you can expect the following
 -----
 
 ## Exercise 2: Deployment Application
-In this exercise, we will use the Cognitive Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
+In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 ### Step 1: Create Visual Studio Project
 
@@ -270,16 +270,16 @@ Return to the "**Program.cs**" tab and add the following code to `Main`.
 /* ************************* Names */
 
 string nameBlobStorage_Container = "forms";
-string nameCognitiveSearch_DataSource = "rchaplerss-datasource";
-string nameCognitiveSearch_Index = "rchaplerss-index";
-string nameCognitiveSearch_Indexer = "rchaplerss-indexer";
-string nameCognitiveSearch_SemanticConfiguration = "rchaplerss-semanticconfiguration";
-string nameCognitiveSearch_Skillset = "rchaplerss-skillset";
-string nameCognitiveSearch_Suggester = "rchaplerss-suggester";
+string nameAISearch_DataSource = "rchaplerss-datasource";
+string nameAISearch_Index = "rchaplerss-index";
+string nameAISearch_Indexer = "rchaplerss-indexer";
+string nameAISearch_SemanticConfiguration = "rchaplerss-semanticconfiguration";
+string nameAISearch_Skillset = "rchaplerss-skillset";
+string nameAISearch_Suggester = "rchaplerss-suggester";
 
 /* ************************* URIs */
 
-var uriCognitiveSearch = new Uri($"https://rchaplerss.search.windows.net/");
+var uriAISearch = new Uri($"https://rchaplerss.search.windows.net/");
 var uriKeyVault = new Uri($"https://rchaplerk.vault.azure.net/");
 
 /* ************************* Keys */
@@ -287,39 +287,39 @@ var uriKeyVault = new Uri($"https://rchaplerk.vault.azure.net/");
 var sc = new SecretClient(uriKeyVault, new DefaultAzureCredential());
 
 var ConnectionString_BlobStorage = sc.GetSecret("ConnectionString-BlobStorage").Value.Value.ToString() ?? string.Empty;
-var Key_CognitiveSearch = sc.GetSecret("Key-CognitiveSearch").Value.Value.ToString() ?? string.Empty;
-var Key_CognitiveServices = sc.GetSecret("Key-CognitiveServices").Value.Value.ToString() ?? string.Empty;
+var Key_AISearch = sc.GetSecret("Key-AISearch").Value.Value.ToString() ?? string.Empty;
+var Key_AIServices = sc.GetSecret("Key-AIServices").Value.Value.ToString() ?? string.Empty;
 /* use of double ".Value" is a necessary oddity */
 ```
 
 _Notes:_
 * _Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
-* _Replace `COGNITIVESEARCH_PRIMARYADMINKEY` with your Cognitive Search API Key (and considering using a Key Vault)_
+* _Replace `AISEARCH_PRIMARYADMINKEY` with your AI Search API Key (and considering using a Key Vault)_
 
 -----
 
 #### Clients
-The variables set in this section will be used to manage the Cognitive Search resources.
+The variables set in this section will be used to manage the AI Search resources.
 
 Append the following code to the bottom of `Main`:
 
 ```
 /* ************************* Clients */
 
-var credential = new AzureKeyCredential(Key_CognitiveSearch);
-var indexClient = new SearchIndexClient(uriCognitiveSearch, credential);
-var indexerClient = new SearchIndexerClient(uriCognitiveSearch, credential);
+var credential = new AzureKeyCredential(Key_AISearch);
+var indexClient = new SearchIndexClient(uriAISearch, credential);
+var indexerClient = new SearchIndexerClient(uriAISearch, credential);
 ```
 
 Logic Explained:
-* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the Cognitive Search service
+* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the AI Search service
 * `var indexClient...` creates a new `SearchIndexClient` object used to manage (create, delete, update) indexes in your search service
 * `var indexerClient...` creates a new `SearchIndexerClient` object used to manage (run, reset, delete) indexers in your search service
 
 -----
 
 #### Data Source
-The logic in this section will create a Cognitive Search Data Source.
+The logic in this section will create a AI Search Data Source.
 
 Append the following code to the bottom of `Main`:
 
@@ -327,14 +327,14 @@ Append the following code to the bottom of `Main`:
 /* ************************* Data Source */
 
 var sidsc = new SearchIndexerDataSourceConnection(
-    name: nameCognitiveSearch_DataSource,
+    name: nameAISearch_DataSource,
     type: SearchIndexerDataSourceType.AzureBlob,
     connectionString: ConnectionString_BlobStorage,
     container: new SearchIndexerDataContainer(nameBlobStorage_Container)
     );
 
-indexerClient.DeleteIndexer(nameCognitiveSearch_Indexer); /* indexer must be deleted before data source connection */
-indexerClient.DeleteDataSourceConnection(nameCognitiveSearch_DataSource);
+indexerClient.DeleteIndexer(nameAISearch_Indexer); /* indexer must be deleted before data source connection */
+indexerClient.DeleteDataSourceConnection(nameAISearch_DataSource);
 
 indexerClient.CreateDataSourceConnection(sidsc);
 ```
@@ -348,14 +348,14 @@ Logic Explained:
 -----
 
 #### Index
-The logic in this section will create a Cognitive Search Index.
+The logic in this section will create a AI Search Index.
 
 Append the following code to the bottom of `Main`:
 
 ```
 /* ************************* Index */
 
-var index = new SearchIndex(nameCognitiveSearch_Index)
+var index = new SearchIndex(nameAISearch_Index)
 {
     Fields = {
         new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
@@ -376,7 +376,7 @@ var index = new SearchIndex(nameCognitiveSearch_Index)
         new SearchField("myColumn", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true }
     },
     Suggesters = {
-        new SearchSuggester(name: nameCognitiveSearch_Suggester, sourceFields: new[] { "metadata_storage_name" })
+        new SearchSuggester(name: nameAISearch_Suggester, sourceFields: new[] { "metadata_storage_name" })
     }
 };
 
@@ -385,7 +385,7 @@ indexClient.CreateIndex(index);
 ```
 
 Logic Explained:
-* `var index...` creates a new `SearchIndex` object that represents a search index in Cognitive Search
+* `var index...` creates a new `SearchIndex` object that represents a search index in AI Search
   * `new SimpleField(...`, `new SearchField(...`,`new SearchableField(...` lines add fields the index
     * Each field represents a piece of data that can be searched, filtered, sorted, or faceted in the search index
 * `new SearchableField("text"...` will be used by the OCR Skill
@@ -397,7 +397,7 @@ Logic Explained:
 -----
 
 #### Skillset
-The logic in this section will create a Cognitive Search Skillset.
+The logic in this section will create a AI Search Skillset.
 
 Append the following code to the bottom of `Main`:
 
@@ -448,9 +448,9 @@ var skills = new List<SearchIndexerSkill>
     }
 };
 
-var skillset = new SearchIndexerSkillset(nameCognitiveSearch_Skillset, skills)
+var skillset = new SearchIndexerSkillset(nameAISearch_Skillset, skills)
 {
-    CognitiveServicesAccount = new CognitiveServicesAccountKey(key: Key_CognitiveServices)
+    AIServicesAccount = new AIServicesAccountKey(key: Key_AIServices)
 };
 
 indexerClient.DeleteSkillset(skillset);
@@ -470,23 +470,23 @@ Logic Explained:
     * The `WebApiSkill` sends data to a custom web API endpoint (specified by `{FUNCTIONAPP_URL}`) and receives transformed data in return
       * The input is text, sourced from `/document/metadata_storage_file_extension` (used for simplicity)
       * The output from the web API is stored in a field named `myColumn`
-* `var skillset...` creates a new `SearchIndexerSkillset` object that represents a skillset in Cognitive Search
-  * Inside the `{...}` block, a `CognitiveServicesAccountKey` is set for the skillset
-    * This key is used to authenticate your requests to the Cognitive Services
+* `var skillset...` creates a new `SearchIndexerSkillset` object that represents a skillset in AI Search
+  * Inside the `{...}` block, a `AIServicesAccountKey` is set for the skillset
+    * This key is used to authenticate your requests to the AI Services
 * `indexerClient.DeleteSkillset...` deletes any existing skillset with the same name using the `SearchIndexerSkillset` object
 * `indexerClient.CreateSkillset...` creates a new skillset using the `SearchIndexerSkillset` object
 
 -----
 
 #### Indexer
-The logic in this section will create a Cognitive Search Indexer.
+The logic in this section will create a AI Search Indexer.
 
 Append the following code to the bottom of `Main`:
 
 ```
 /* ************************* Indexer */
 
-var indexer = new SearchIndexer(nameCognitiveSearch_Indexer, nameCognitiveSearch_DataSource, nameCognitiveSearch_Index)
+var indexer = new SearchIndexer(nameAISearch_Indexer, nameAISearch_DataSource, nameAISearch_Index)
 {
     Parameters = new IndexingParameters()
     {
@@ -495,7 +495,7 @@ var indexer = new SearchIndexer(nameCognitiveSearch_Indexer, nameCognitiveSearch
             ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
         }
     },
-    SkillsetName = nameCognitiveSearch_Skillset
+    SkillsetName = nameAISearch_Skillset
 };
 
 indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" });
@@ -507,7 +507,7 @@ indexerClient.CreateIndexer(indexer);
 ```
 
 Logic Explained:
-* `var indexer...` creates a new SearchIndexer object that represents an indexer in Azure Cognitive Search
+* `var indexer...` creates a new SearchIndexer object that represents an indexer in Azure AI Search
   * The indexer is associated with the data source named `dataSourceName` and the index named `indexName`
   * Inside the `{...}` block, parameters are set for the indexer; these parameters control how the indexer behaves during indexing
     * In this case, the `ImageAction` parameter is set to `GenerateNormalizedImagePerPage`, which means the indexer will generate a normalized image for each page of a document
@@ -534,9 +534,9 @@ Save your changes and then click "**Debug**" >> "**Start Debugging**" in the men
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
 
-#### Cognitive Search Index
+#### AI Search Index
 
-Navigate to Cognitive Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
+Navigate to AI Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/60745fe0-95f6-40f7-a91b-94b10332c237" width="800" title="Snipped: October 12, 2023" />
 
