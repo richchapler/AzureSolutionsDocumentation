@@ -38,7 +38,8 @@ Results: 1
 ```
 The retrieved document mentions a product called "Touring-Panniers, Large" with the product code "PA-T100". It is available in grey color.
 ```
-_Note: This answer demonstrates that OpenAI is not using the Size column, confused by use of "L" for Large, or both_
+_Note: This answer demonstrates that OpenAI is using the "Color" column (name and data) in spite of not being prompted for that information._
+_This answer suggests that OpenAI is not using the Size column, confused by use of "L" as an abbreviation for Large, or both_
 
 #### Follow-up Question: "how much does it cost?"
 ```
