@@ -1,3 +1,21 @@
+# AI: Handling Ambiguous Source Data
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe54b808-31eb-4932-a561-892f53854750" width="1000" />
+
+## Use Case
+* "Given what we know about our source data, it seems like OpenAI should be responding better to certain prompts"
+
+## Proposed Solution
+* Stage Sample: Lorem
+* Test Prompt / Response: Lorem
+* Implement Enhancements: Lorem
+
+## Solution Requirements
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search)
+* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload installed
+
+-----
+
 # EXERCISE 1: WRITE THINNED VERSION OF C# FOR A SQL INDEX
 
 Lorem Ipsum
