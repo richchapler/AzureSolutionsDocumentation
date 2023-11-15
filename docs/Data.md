@@ -26,10 +26,8 @@
 
   Use Case | Method | Source | Target | Type
   :----- | :----- | :----- | :----- | :-----
-  [Cognitive Search, Custom Skillset](Data_Enrichment_CognitiveSearch_CustomSkillset.md) | Custom Skills >> API | SQL | Cognitive Search Index | C# (Function App)
   [Mid-Stream Processing via Function App](Data_Enrichment_MidStreamProcessing_viaFunctionApp.md) | Continuous Ingestion | Event Hub | Data Explorer | C# (Function App)
   [Mid-Stream Processing via Stream Analytics](Data_Enrichment_MidStreamProcessing_viaStreamAnalytics.md) | Stream Analytics Job | IoT Hub | Data Explorer | SQL
-  [OpenAI](Data_Enrichment_OpenAI.md) | Synapse Pipeline | OpenAI | Data Explorer | API
   [Stream Analytics, Geo-Fencing](Data_Enrichment_StreamAnalytics_GeoFencing.md) | Stream Analytics Job | Event Hub and Storage Account | Not Applicable | Stream Analytics Query and Function
 
 ### Analyze
@@ -45,9 +43,6 @@
   :----- | :----- | :----- | :-----
   [Application Programming Interface (API)](Data_Surface_API.md) | | Function App + APIM | C# (Function App)
   [Bulk Export](Data_Surface_BulkExport.md) | | Synapse Pipeline | Low Code
-  [Cognitive Search, from Data Explorer](Data_Surface_CognitiveSearch_fromDataExplorer.md) | Data Explorer (via export) | Cognitive Search | JSON and HTML
-  [Cognitive Search, Multi-Source Index](Data_Surface_CognitiveSearch_MultiSourceIndex.md) | SQL and Blob Storage | Cognitive Search | JSON
-  [Cognitive Search, PowerApp + Security](Data_Surface_CognitiveSearch_PowerApp+Security.md) | Sample Data | Power Apps | JSON
   [Geo-Spatial Visualization with Power BI](Data_Surface_GeoSpatial_PowerBI.md) | Data Explorer | Power BI | No Code
   [Geo-Spatial Visualization with Azure Maps](Data_Surface_GeoSpatial_AzureMaps.md) | IoT Central + Data Explorer | Web App + Azure Map | CSHTML + Javascript
 
