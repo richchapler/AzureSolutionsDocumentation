@@ -1,3 +1,6 @@
+# TO-DO: WRITE THINNED VERSION OF C# FOR A SQL INDEX (EXERCISE 1)
+
+# EXERCISE 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
 ## Scenario #1: SQL Server, AdventureWorks >> Cognitive Search >> OpenAI GPT-4
 
 ### AI Search, Query String: "Large"
@@ -89,3 +92,5 @@ Example: "write a formal product description for a touring-panniers"
 ```
 The Touring-Panniers is a large, high-quality product designed for the discerning traveler. It carries the product code PA-T100 and comes in a sleek grey color. The cost price of the Touring-Panniers is 51.5625, and it retails at a price of 125.0000, offering excellent value for its robust design and functionality.
 ```
+
+# EXERCISE 3: ADD SYNONYMMAP TO EKE MORE INFORMATION FOR "LARGE" FROM SIZE="L"
