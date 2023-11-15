@@ -10,4 +10,5 @@ az keyvault list-deleted --subscription {SUBSCRIPTION_ID}
 az keyvault purge --subscription {SUBSCRIPTION_ID} --name {KEYVAULT_NAME}
 ```
 
-## Permissions: List and Create Secrets (even if you are already a KeyVault Owner)... RBAC Role: "Key Vault Administrator"
+## Permissions: List and Create Secrets
+Even if you are a KeyVault Owner, you will need to be assigned RBAC Role: "Key Vault Administrator"
