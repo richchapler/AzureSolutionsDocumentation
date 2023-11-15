@@ -23,6 +23,7 @@ Use Case | Method | Source | Target | Type
 [Python >> ADX, Secure Connection](Data_Acquisition_Python>>DataExplorer.md) | Databricks | Data Explorer | Data Frame | Python
 
 ## Enrich
+
 Use Case | Method | Source | Target | Type
 :----- | :----- | :----- | :----- | :-----
 [Mid-Stream Processing via Function App](Data_Enrichment_MidStreamProcessing_viaFunctionApp.md) | Continuous Ingestion | Event Hub | Data Explorer | C# (Function App)
@@ -30,12 +31,14 @@ Use Case | Method | Source | Target | Type
 [Stream Analytics, Geo-Fencing](Data_Enrichment_StreamAnalytics_GeoFencing.md) | Stream Analytics Job | Event Hub and Storage Account | Not Applicable | Stream Analytics Query and Function
 
 ## Analyze
+
 Use Case | Method | Language
 :----- | :----- | :-----
 [JSON Discovery](Data_Analysis_JSONDiscovery.md) | Data Explorer | KQL
 [Time Windowing](Data_Analysis_TimeWindowing.md) | Data Explorer | KQL
 
 ## Surface
+
 Use Case | Source | Surface | Method
 :----- | :----- | :----- | :-----
 [Application Programming Interface (API)](Data_Surface_API.md) | | Function App + APIM | C# (Function App)
@@ -44,6 +47,7 @@ Use Case | Source | Surface | Method
 [Geo-Spatial Visualization with Azure Maps](Data_Surface_GeoSpatial_AzureMaps.md) | IoT Central + Data Explorer | Web App + Azure Map | CSHTML + Javascript
 
 ## Govern
+
 Use Case | Source | Surface | Method
 :----- | :----- | :----- | :-----
 [Purview Asset Inventory](Data_Governance_PurviewAssetInventory.md) | Purview | Blob Storage | Logic Apps + API
