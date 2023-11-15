@@ -1,4 +1,4 @@
-## Scenario #1: SQL Server, AdventureWorks >> Cognitive Search >> OpenAI GPT-4, Keyword
+## Scenario #1: SQL Server, AdventureWorks >> Cognitive Search >> OpenAI GPT-4
 
 ### AI Search, Query String: "Large"
 Results: 1
@@ -33,36 +33,51 @@ Results: 1
 }
 ```
 
-### OpenAI Prompt: "what large products are there?"
-Results: 1
+### OpenAI Prompt: Starter Question
+Prompt: "what large products are there?"
 ```
 The retrieved document mentions a product called "Touring-Panniers, Large" with the product code "PA-T100". It is available in grey color.
 ```
 _Note: This answer demonstrates that OpenAI is using the "Color" column (name and data) in spite of not being prompted for that information._
 <br>_This answer suggests that OpenAI is not using the "Size" column, confused by use of "L" as an abbreviation for Large, or both_
 
-#### Follow-up Question: "how much does it cost?"
+#### Follow-up Prompt: Ambiguous Column Reference
+Prompt: "how much does it cost?"
 ```
 The "Touring-Panniers, Large" product costs 125.0000, although the currency is not specified in the retrieved document.
 ```
-_Note: This answer implies use and some understanding of column names... it is not clear why it chose List Price instead of Standard Cost (specifically when the quest was about cost)"_
-  
-#### Follow-up Question: "is that standard cost or list price?"
+_Note: This answer implies use and some understanding of column names... it choose a column that corresponds to the request, but is not clear why it chose List Price instead of Standard Cost (specifically when the question was about cost)"_
+
+#### Follow-up Question: Non-Specific Column Reference
+Prompt: "is that standard cost or list price?"
 ```
 The retrieved document does not specify whether the price of 125.0000 for the "Touring-Panniers, Large" product is the standard cost or the list price.
 ```
 _Note: This answer suggests that OpenAI cannot use column names, or that it is very literal in its interpretation of column names_
-  
-#### Follow-up Question: "is that StandardCost or ListPrice?"
+
+#### Follow-up Prompt: Specific Column Reference
+Prompt: "is that StandardCost or ListPrice?"
 ```
-The price of 125.0000 for the "Touring-Panniers, Large" product is the ListPrice, while the StandardCost is 51.5625, as per the retrieved document.
+The price of 125.00 units for the "Touring-Panniers, Large" product is the ListPrice, while the StandardCost is 51.5625 units.
 ```
 _Note: This answer seems to prove that OpenAI does use column names, specifically as spelled_
 
+#### Follow-up Question: Does Capitalization Matter?
+Prompt: "is that standardcost or listprice?"
+```
+The price of 125.00 units for the "Touring-Panniers, Large" product is the ListPrice, while the StandardCost is 51.5625 units.
+```
+#### Follow-up Question: Does Capitalization Matter?
+Running through the same questions to see if response varys
 
+#### Follow-up Question: Does Semantic Configuration Help?
+I ran through all the previous prompts after re-configuring for use of Semantic Search; example:
 
+Prompt: "what large products are there?"
+```
+The requested information is not found in the retrieved data. Please try another query or topic.
+```
+_Note: Semantic does not return the same response as Keyword_
 
-
-
-
+It is worth noting that responses vary depending on the order of prompts and past history with the data.
 
