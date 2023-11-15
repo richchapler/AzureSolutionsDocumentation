@@ -4,7 +4,7 @@ In this documentation, you will find step-by-step instructions for solutions to 
 
 # Contents
 
-> [Artificial Intelligence (AI)](AI.md) >> Migrate :: Acquire :: Enrich :: Analyze :: Surface :: Govern
+> [Artificial Intelligence (AI)](AI.md) >> Enrich :: Surface
 
 > [Data](Data.md) >> Migrate :: Acquire :: Enrich :: Analyze :: Surface :: Govern
 
