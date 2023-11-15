@@ -4,6 +4,8 @@ In this documentation, you will find step-by-step instructions for solutions to 
 
 ## Contents
 
+> [Artificial Intelligence (AI)](AI.md) >> Migrate :: Acquire :: Enrich :: Analyze :: Surface :: Govern
+> 
 > [Data](Data.md) >> Migrate :: Acquire :: Enrich :: Analyze :: Surface :: Govern
 
 > [DevOps](DevOps.md) >> Cognitive Search :: Synapse
