@@ -1,6 +1,15 @@
-# TO-DO: WRITE THINNED VERSION OF C# FOR A SQL INDEX (EXERCISE 1)
+# EXERCISE 1: WRITE THINNED VERSION OF C# FOR A SQL INDEX
+
+Lorem Ipsum
+
+
 
 # EXERCISE 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
+
+Lorem Ipsum
+
+
+
 ## Scenario #1: SQL Server, AdventureWorks >> Cognitive Search >> OpenAI GPT-4
 
 ### AI Search, Query String: "Large"
@@ -94,3 +103,7 @@ The Touring-Panniers is a large, high-quality product designed for the discernin
 ```
 
 # EXERCISE 3: ADD SYNONYMMAP TO EKE MORE INFORMATION FOR "LARGE" FROM SIZE="L"
+
+Lorem Ipsum
+
+
