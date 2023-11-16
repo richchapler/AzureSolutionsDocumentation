@@ -150,7 +150,8 @@ On the "Search explorer" tab, enter Query Phrase `Large` and press "Search".
 ```
 
 ### Step 3: OpenAI Prompt Experimentation
-Finally, we compare our expectations to reality.
+Finally, we compare our expectations to reality to determine whether it is a schema or data issue.
+
 <br>Navigate to OpenAI Studio >> Chat Playground, and re-add data source (if disconnected).
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/65fbe2ea-3968-48b1-8528-5fe178b13357" width="800" title="Snipped: November 16, 2023" />
@@ -166,21 +167,26 @@ _Note: This answer demonstrates that OpenAI is using the "Color" column (name an
 <br>_This answer confirms that OpenAI is: 1) not using the "Size" column, and / or 2) confused by use of "L" as an abbreviation for "Large"_
 
 <br>
+
 #### Follow-up: Can I ambiguously reference columns that should be available?
+
 Prompt: `how much does it cost?`
 <br>Response:
 ```
 The price of the "Touring-Panniers, Large" product is $125.00.
 ```
+
 _Note: This answer implies use and some understanding of column names... it choose a column that corresponds to the request, but is not clear why it chose List Price instead of Standard Cost (specifically when the question was about cost)"_
 
 <br>
+
 #### Follow-up: Does specific column reference help?
 Prompt: `is that standard cost or list price?`
 <br>Response:
 ```
 The $125.00 price for the "Touring-Panniers, Large" product is the list price.
 ```
+
 _Note: Specificity does help and capitalization / spacing of column names does not appear to matter_
 
 ### Conclusions
