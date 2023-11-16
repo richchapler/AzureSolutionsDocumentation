@@ -183,17 +183,10 @@ The $125.00 price for the "Touring-Panniers, Large" product is the list price.
 ```
 _Note: Specificity does help and capitalization / spacing of column names does not appear to matter_
 
-### Conclusion
-OpenAI uses column information and is fairly comfortable dealing with schema ambiguity.
-<br>It does not, however, deal with data ambiguity quite so well... for this, we will need to use AI Search, Synonym Map functionality.
-
-<br><br>
-#### Follow-up: Use Case Driven Request
-
-Example: "write a formal product description for a touring-panniers"
-```
-The Touring-Panniers is a large, high-quality product designed for the discerning traveler. It carries the product code PA-T100 and comes in a sleek grey color. The cost price of the Touring-Panniers is 51.5625, and it retails at a price of 125.0000, offering excellent value for its robust design and functionality.
-```
+### Conclusions
+1. OpenAI uses column information without including metadata in row-level data
+2. OpenAI appear to be fairly comfortable dealing with schema ambiguity
+3. OpenAI does not deal with data ambiguity quite so well
 
 -----
 
@@ -201,10 +194,6 @@ The Touring-Panniers is a large, high-quality product designed for the discernin
 
 -----
 -----
-
-## Exercise 1: Stage Resources
-In this exercise, we will import AdventureWorks sample data into AI Search and then use the index in the OpenAI Chat Playground.
-<br>_Note: the instructions below are for creating a minimum viable index {i.e., no bells-and-whistles}_
 
 ## Exercise 3: Implement Synonyms
 In this exercise, we will programmatically update the AI Search Index with Synonym Maps and confirm OpenAI response enhancement.
