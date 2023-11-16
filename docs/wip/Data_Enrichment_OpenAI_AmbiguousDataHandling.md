@@ -6,29 +6,41 @@
 * "Given what we know about our source data, it seems like OpenAI should be responding better to certain prompts"
 
 ## Proposed Solution
-* Stage Sample: Lorem
+* Create Index: import data into an AI Search Index from a SQL AdventureWorks sample data
 * Test Prompt / Response: Lorem
 * Implement Enhancements: Lorem
 
 ## Solution Requirements
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search)
+* [**SQL Server**](https://learn.microsoft.com/en-us/azure/azure-sql) and [**Database**](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload installed
 
 -----
 
-# EXERCISE 1: WRITE THINNED VERSION OF C# FOR A SQL INDEX
+## Exercise 1: Create Index
+In this exercise, we will import data into an AI Search Index from a SQL AdventureWorks sample data.
+
+### Step 1: Create Project
+
+Navigate to AI Search > "Overview", click "Import data" and on the resulting page, select "Azure SQL Database" from the "Data Source" dropdown.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b67ee133-abc4-441d-bb38-3eb2ba2ffca9" width="800" title="Snipped: November 16, 2023" />
+
+
+
+
+
+Lorem Ipsum
+
+-----
+
+## EXERCISE 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
 
 Lorem Ipsum
 
 
 
-# EXERCISE 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
-
-Lorem Ipsum
-
-
-
-## Scenario #1: SQL Server, AdventureWorks >> Cognitive Search >> OpenAI GPT-4
+### Scenario #1: SQL Server, AdventureWorks >> Cognitive Search >> OpenAI GPT-4
 
 ### AI Search, Query String: "Large"
 Results: 1
@@ -120,7 +132,7 @@ Example: "write a formal product description for a touring-panniers"
 The Touring-Panniers is a large, high-quality product designed for the discerning traveler. It carries the product code PA-T100 and comes in a sleek grey color. The cost price of the Touring-Panniers is 51.5625, and it retails at a price of 125.0000, offering excellent value for its robust design and functionality.
 ```
 
-# EXERCISE 3: ADD SYNONYMMAP TO EKE MORE INFORMATION FOR "LARGE" FROM SIZE="L"
+## EXERCISE 3: ADD SYNONYMMAP TO EKE MORE INFORMATION FOR "LARGE" FROM SIZE="L"
 
 Lorem Ipsum
 
