@@ -12,7 +12,7 @@
 
 ## Solution Requirements
 * [AI Search](https://azure.microsoft.com/en-us/products/search)
-* [SQL Server](https://learn.microsoft.com/en-us/azure/azure-sql) and [**Database**](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
+* [SQL Server](https://learn.microsoft.com/en-us/azure/azure-sql) and [Database](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload installed
 
 -----
