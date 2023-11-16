@@ -1,4 +1,4 @@
-# AI: Improving Response Quality
+# AI: Improve Prompt Response Quality
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe54b808-31eb-4932-a561-892f53854750" width="1000" />
 
@@ -117,15 +117,6 @@ Navigate to the AI Search index.
 
 On the "Search explorer" tab, enter Query Phrase `Large` and press "Search".
 
-
-
-
-
-Lorem Ipsum
-
-
-### AI Search, Query String: "Large"
-Results: 1
 ```
 {
   "@odata.context": "https://rchaplerss.search.windows.net/indexes('azuresql-index')/$metadata#docs(*)",
