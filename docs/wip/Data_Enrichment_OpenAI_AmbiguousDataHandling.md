@@ -20,8 +20,8 @@
 -----
 
 ## Exercise 1: Stage Resources
-In this exercise, we will import data into an AI Search Index from a SQL AdventureWorks sample data.
-_Note: the instructions below are for creating a minimum viable index {i.e., no bells-and-whistles}_
+In this exercise, we will import AdventureWorks sample data into AI Search and then use the index in the OpenAI Chat Playground.
+<br>_Note: the instructions below are for creating a minimum viable index {i.e., no bells-and-whistles}_
 
 ### Step 1: Create AI Search Index
 
