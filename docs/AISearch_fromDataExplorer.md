@@ -1,4 +1,4 @@
-A Search (from Data Explorer)
+# AI Search (from Data Explorer)
 _Note: Cognitive Search is also known as "Search Services" and "Azure Search"_
 
 ![image](https://user-images.githubusercontent.com/44923999/214475405-ae4cd7af-d318-49e7-854d-3060609c2124.png)
