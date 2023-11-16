@@ -18,4 +18,4 @@ Use Case | Source | Surface | Method
 [AI Search, PowerApp + Security](AISearch_PowerApp+Security.md) | Sample Data | Power Apps | JSON
 
 ## Work-in-Progress (WiP)
-[AI Search / OpenAI, Ambiguous Data Handling](Data_Enrichment_OpenAI_AmbiguousDataHandling)
+[AI Search / OpenAI, Ambiguous Data Handling](/wip/Data_Enrichment_OpenAI_AmbiguousDataHandling.md)
