@@ -6,7 +6,7 @@
 
 Use Case | Method | Source | Target | Type
 :----- | :----- | :----- | :----- | :-----
-[AI Search, Custom Skillset](Data_Enrichment_AISearch_CustomSkillset.md) | Custom Skills >> API | SQL | AI Search Index | C# (Function App)
+[AI Search, Custom Skillset](AISearch_CustomSkillset.md) | Custom Skills >> API | SQL | AI Search Index | C# (Function App)
 [OpenAI](Data_Enrichment_OpenAI.md) | Synapse Pipeline | OpenAI | Data Explorer | API
 
 ## Surface
