@@ -11,10 +11,11 @@
 * Implement Enhancements: Lorem
 
 ## Solution Requirements
-* [**AI Search**](https://azure.microsoft.com/en-us/products/search)
-* [**SQL Server**](https://learn.microsoft.com/en-us/azure/azure-sql) and [**Database**](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
-* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload installed
+* [AI Search](https://azure.microsoft.com/en-us/products/search)
+* [SQL Server](https://learn.microsoft.com/en-us/azure/azure-sql) and [**Database**](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
+* [Visual Studio](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload installed
 
+-----
 -----
 
 ## Exercise 1: Create Index
@@ -26,12 +27,23 @@ Navigate to AI Search > "Overview", click "Import data" and on the resulting pag
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b67ee133-abc4-441d-bb38-3eb2ba2ffca9" width="800" title="Snipped: November 16, 2023" />
 
+Click the "Choose an existing connection" link and select the SQL Database that will be the source.
+<br>Complete the "Import data" form and then click "Test connection".
+<br>Once the connection is validated, select the "[SalesLT].[Product]" table from the added "Table/View" dropdown.
+<br>Click "Next: Add cognitive skills (Optional)".
+
+
+
+
+
+
 
 
 
 
 Lorem Ipsum
 
+-----
 -----
 
 ## EXERCISE 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
