@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe54b808-31eb-4932-a561-892f53854750" width="1000" />
 
 ## Use Case
-* "Given what we know about our source data, it seems like OpenAI should be responding better to certain prompts"
+* "We believe that our source data includes ambiguities that, enhanced, would result in better OpenAI response to prompts"
 
 ## Proposed Solution
 * Stage Resources: create AI Search Index and Open AI Deployment
