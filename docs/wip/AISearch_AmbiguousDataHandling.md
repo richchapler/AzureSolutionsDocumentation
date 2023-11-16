@@ -212,3 +212,7 @@ In this exercise, we will programmatically update the AI Search Index with Synon
 Lorem Ipsum
 
 
+-----
+
+**Congratulations... you have successfully completed all exercises**
+
