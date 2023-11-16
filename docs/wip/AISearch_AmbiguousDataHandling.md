@@ -1,4 +1,4 @@
-# AI: Handling Ambiguous Source Data
+# AI: Improving Response Quality
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe54b808-31eb-4932-a561-892f53854750" width="1000" />
 
@@ -24,7 +24,6 @@ In this exercise, we will import AdventureWorks sample data into AI Search and t
 <br>_Note: the instructions below are for creating a minimum viable index {i.e., no bells-and-whistles}_
 
 ### Step 1: Create AI Search Index
-
 Navigate to AI Search > "Overview", click "Import data" and on the resulting page, select "Azure SQL Database" from the "Data Source" dropdown.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b67ee133-abc4-441d-bb38-3eb2ba2ffca9" width="800" title="Snipped: November 16, 2023" />
@@ -54,7 +53,6 @@ Click "Submit".
 Navigate to the new index and confirm success.
 
 ### Step 2: Create OpenAI Deployment
-
 Navigate to OpenAI Studio > "Chat playground".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc174b2b-9db3-4757-b426-69b9bc65ff37" width="800" title="Snipped: November 16, 2023" />
@@ -66,7 +64,6 @@ Navigate to "Add your data..." and then click "Add a data source" on the "Assist
 Complete the "Add data" forms, then click "Save and close".
 
 #### Confirm Success
-
 Enter a prompt in the "Chat session" pane.
 <br>_Note: In Exercise 2, we will focus on ambiguous Product Size data, so I started with: `Describe a large product`_
 
@@ -88,7 +85,37 @@ The retrieved document provides information about a large product, specifically 
 ## Exercise 2: Test Prompt / Response
 In this exercise, we will evaluate prompt response (expected vs. actual).
 
-### Step 1: Source Data
+### Step 1: Source Data, SQL
+Navigate to the SQL Database >> Query Editor and login.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ba15e7d-84fd-4ec9-b1c3-b9631518d60e" width="800" title="Snipped: November 16, 2023" />
+
+Run the following T-SQL query:
+```
+SELECT TOP 10 ProductID, Name, Color, Size
+FROM [SalesLT].[Product]
+```
+
+You will note that the results do not include anything specifically called out as "Large", which aligns with the limited response we saw from OpenAI earlier.
+<br>There is, however, a column named Size and rows that contain the value "L", which we can assume stands for "Large"
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/afa55b23-efe1-4656-8fec-806c62cae098" width="800" title="Snipped: November 16, 2023" />
+
+Run the following T-SQL query:
+```
+SELECT TOP 10 ProductID, Name, Color, Size
+FROM [SalesLT].[Product]
+WHERE [Name] like '%Large%'
+```
+
+If we specifically query for rows with "Large" in the Name column, we see the single value that surfaced earlier in OpenAI.
+
+### Step 2: Source Data, AI Search
+Navigate to the AI Search index.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/200d99cd-1afd-4ed9-bdf1-6a949fb352d2" width="800" title="Snipped: November 16, 2023" />
+
+On the "Search explorer" tab, enter Query Phrase `Large` and press "Search".
 
 
 
