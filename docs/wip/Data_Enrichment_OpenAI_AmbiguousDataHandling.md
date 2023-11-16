@@ -12,6 +12,7 @@
 
 ## Solution Requirements
 * [AI Search](https://azure.microsoft.com/en-us/products/search)
+* [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 * [SQL Server](https://learn.microsoft.com/en-us/azure/azure-sql) and [Database](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload installed
 
@@ -51,6 +52,12 @@ Click "Submit".
 Navigate to the new index and confirm success.
 
 ### Step 2: Create OpenAI Deployment
+
+Navigate to OpenAI Studio > Chat, and then click "Add your data..." on the "Assistant setup" pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc174b2b-9db3-4757-b426-69b9bc65ff37" width="800" title="Snipped: November 16, 2023" />
+
+
 
 
 
