@@ -21,7 +21,7 @@
 ## Exercise 1: Create Index
 In this exercise, we will import data into an AI Search Index from a SQL AdventureWorks sample data.
 
-### Step 1: Create Project
+### Step 1: Import Data
 
 Navigate to AI Search > "Overview", click "Import data" and on the resulting page, select "Azure SQL Database" from the "Data Source" dropdown.
 
