@@ -6,7 +6,7 @@
 * "Given what we know about our source data, it seems like OpenAI should be responding better to certain prompts"
 
 ## Proposed Solution
-* Create Index: import data into an AI Search Index from a SQL AdventureWorks sample data
+* Stage Resources: create AI Search Index and Open AI Deployment
 * Test Prompt / Response: Lorem
 * Implement Enhancements: Lorem
 
@@ -18,10 +18,11 @@
 -----
 -----
 
-## Exercise 1: Create Index
+## Exercise 1: Stage Resources
 In this exercise, we will import data into an AI Search Index from a SQL AdventureWorks sample data.
+_Note: the instructions below are for creating a minimum viable index {i.e., no bells-and-whistles}_
 
-### Step 1: Import Data
+### Step 1: Create AI Search Index
 
 Navigate to AI Search > "Overview", click "Import data" and on the resulting page, select "Azure SQL Database" from the "Data Source" dropdown.
 
@@ -32,9 +33,24 @@ Click the "Choose an existing connection" link and select the SQL Database that 
 <br>Once the connection is validated, select the "[SalesLT].[Product]" table from the added "Table/View" dropdown.
 <br>Click "Next: Add cognitive skills (Optional)".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d467d9c9-4a10-4479-b383-89a561be3b22" width="800" title="Snipped: November 16, 2023" />
 
+Click "Skip to: Customize target index".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0377231d-3f77-451b-b7c5-a6bb1586d046" width="800" title="Snipped: November 16, 2023" />
 
+Check the top "Retrievable" and "Searchable" boxes (which will check all boxes for all fields).
+<br>Click "Next: Create an indexer".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4e908d25-3801-42c6-b0bb-07b3290eef04" width="800" title="Snipped: November 16, 2023" />
+
+Click "Submit".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/248f073f-b490-47b0-b561-a7aa25e2173d" width="800" title="Snipped: November 16, 2023" />
+
+Navigate to the new index and confirm success.
+
+### Step 2: Create OpenAI Deployment
 
 
 
@@ -44,9 +60,13 @@ Click the "Choose an existing connection" link and select the SQL Database that 
 Lorem Ipsum
 
 -----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
 -----
 
-## EXERCISE 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
+## Exercise 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
 
 Lorem Ipsum
 
