@@ -2,6 +2,11 @@
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/11c755cf-b3eb-4384-9876-8eadbf743b52" width="1000" />
 
+## DevOps
+Use Case | Method | Target
+:----- | :----- | :-----
+[AI Search, DevOps](AISearch_DevOps.md) | Visual Studio (C#) Deployment | DevOps
+
 ## Enrich
 
 Use Case | Method | Source | Target | Type
