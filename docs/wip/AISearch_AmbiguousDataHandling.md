@@ -203,7 +203,7 @@ _Note: Specificity does help and capitalization / spacing of column names does n
 
 ## Exercise 3: Implement Synonyms
 In this exercise, we will programmatically update the AI Search Index with Synonym Maps and confirm OpenAI response enhancement.
-
+<br>_Note: This section builds on skills learned from: [AI Search, DevOps](AISearch_DevOps.md)_
 
 
 
