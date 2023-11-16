@@ -6,8 +6,8 @@
 * "We believe that our source data includes ambiguities that, resolved, would result in better OpenAI response to prompts"
 
 ## Proposed Solution
-* Stage Resources: create AI Search Index and Open AI Deployment
-* Test Prompt / Response: Lorem
+* Stage Resources: Create AI Search Index and Open AI Deployment
+* Test Prompt / Response: Evaluate prompt quality
 * Implement Enhancements: Lorem
 
 ## Solution Requirements
@@ -47,24 +47,36 @@ Check the top "Retrievable" and "Searchable" boxes (which will check all boxes f
 
 Click "Submit".
 
+#### Confirm Success
+
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/248f073f-b490-47b0-b561-a7aa25e2173d" width="800" title="Snipped: November 16, 2023" />
 
 Navigate to the new index and confirm success.
 
 ### Step 2: Create OpenAI Deployment
 
-Navigate to OpenAI Studio > "Chat playground", and then click "Add your data..." on the "Assistant setup" pane.
+Navigate to OpenAI Studio > "Chat playground".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc174b2b-9db3-4757-b426-69b9bc65ff37" width="800" title="Snipped: November 16, 2023" />
 
+Navigate to "Add your data..." and then click "Add a data source" on the "Assistant setup" pane.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/65fe3909-2010-49a1-ba6f-2772bd25b5bd" width="800" title="Snipped: November 16, 2023" />
 
+Complete the "Add data" forms, then click "Save and close".
 
+#### Confirm Success
 
+Enter a prompt in the "Chat session" pane.
+<br>_Note: In Exercise 2, we will focus on ambiguous Product Size data, so I started with: `Describe a large product`_
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eeb2fcff-b5f5-4728-bd93-ebbc752b77b6" width="800" title="Snipped: November 16, 2023" />
 
+Confirm response; for example:
 
-Lorem Ipsum
+```
+The retrieved document provides information about a large product, specifically a "Touring-Panniers" with the model number "PA-T100". It is grey in color. The product has a price of 125.00 units, though it's not clear what currency this is in. There's also a number 51.5625 associated with the product, but without further context, it's unclear what this number represents.
+```
 
 -----
 
@@ -73,13 +85,17 @@ Lorem Ipsum
 -----
 -----
 
-## Exercise 2: TEST NATIVE FUNCTIONALITY (HEAVY ON PROMPTING)
+## Exercise 2: Test Prompt / Response
+In this exercise, we will evaluate prompt response (expected vs. actual).
+
+### Step 1: Source Data
+
+
+
+
 
 Lorem Ipsum
 
-
-
-### Scenario #1: SQL Server, AdventureWorks >> Cognitive Search >> OpenAI GPT-4
 
 ### AI Search, Query String: "Large"
 Results: 1
