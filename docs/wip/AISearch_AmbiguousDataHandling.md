@@ -7,8 +7,8 @@
 
 ## Proposed Solution
 * Stage Resources: Create AI Search Index and Open AI Deployment
-* Test Prompt / Response: Evaluate prompt quality
-* Implement Enhancements: Lorem
+* Test Prompts: Experiment with prompts to learn how OpenAI uses source data
+* Implement Synonyms: Programmatically update the AI Search Index with Synonym Maps
 
 ## Solution Requirements
 * [AI Search](https://azure.microsoft.com/en-us/products/search)
@@ -82,11 +82,12 @@ The retrieved document provides information about a large product, specifically 
 -----
 -----
 
-## Exercise 2: Test Prompt / Response
-In this exercise, we will evaluate prompt response (expected vs. actual).
+## Exercise 2: Experiment with Prompts
+In this exercise, we will experiment with prompts to learn how OpenAI uses source data.
 
 ### Step 1: Source Data, SQL
-Navigate to the SQL Database >> Query Editor and login.
+First, we get an idea what to expect from SQL.
+<br>Navigate to the SQL Database >> Query Editor and login.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ba15e7d-84fd-4ec9-b1c3-b9631518d60e" width="800" title="Snipped: November 16, 2023" />
 
@@ -111,7 +112,8 @@ WHERE [Name] like '%Large%'
 If we specifically query for rows with "Large" in the Name column, we see the single value that surfaced earlier in OpenAI.
 
 ### Step 2: Source Data, AI Search
-Navigate to the AI Search index.
+Next, we get an idea what to expect from AI Search.
+<br>Navigate to the AI Search index.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/200d99cd-1afd-4ed9-bdf1-6a949fb352d2" width="800" title="Snipped: November 16, 2023" />
 
@@ -147,55 +149,43 @@ On the "Search explorer" tab, enter Query Phrase `Large` and press "Search".
 }
 ```
 
-### OpenAI Prompt: Starter Question
-Example: "what large products are there?"
+### Step 3: OpenAI Prompt Experimentation
+Finally, we compare our expectations to reality.
+<br>Navigate to OpenAI Studio >> Chat Playground, and re-add data source (if disconnected).
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/65fbe2ea-3968-48b1-8528-5fe178b13357" width="800" title="Snipped: November 16, 2023" />
+
+#### Base Question
+Prompt: `what large products are there?`
+<br>Response:
 ```
 The retrieved document mentions a product called "Touring-Panniers, Large" with the product code "PA-T100". It is available in grey color.
 ```
-_Note: This answer demonstrates that OpenAI is using the "Color" column (name and data) in spite of not being prompted for that information._
-<br>_This answer suggests that OpenAI is not using the "Size" column, confused by use of "L" as an abbreviation for Large, or both_
 
-<br><br>
-#### Follow-up: Can I ask a question that ambiguously reference columns that should be available?
-Example: "how much does it cost?"
+_Note: This answer demonstrates that OpenAI is using the "Color" column (name and data) in spite of not being prompted for that information._
+<br>_This answer confirms that OpenAI is: 1) not using the "Size" column, and / or 2) confused by use of "L" as an abbreviation for "Large"_
+
+<br>
+#### Follow-up: Can I ambiguously reference columns that should be available?
+Prompt: `how much does it cost?`
+<br>Response:
 ```
-The "Touring-Panniers, Large" product costs 125.0000, although the currency is not specified in the retrieved document.
+The price of the "Touring-Panniers, Large" product is $125.00.
 ```
 _Note: This answer implies use and some understanding of column names... it choose a column that corresponds to the request, but is not clear why it chose List Price instead of Standard Cost (specifically when the question was about cost)"_
 
-<br><br>
-#### Follow-up: Does more specificity help it reference columns?
-Example: "is that standard cost or list price?"
+<br>
+#### Follow-up: Does specific column reference help?
+Prompt: `is that standard cost or list price?`
+<br>Response:
 ```
-The retrieved document does not specify whether the price of 125.0000 for the "Touring-Panniers, Large" product is the standard cost or the list price.
+The $125.00 price for the "Touring-Panniers, Large" product is the list price.
 ```
-_Note: This answer suggests that OpenAI cannot use column names, OR that it is very literal in its interpretation of column names {e.g., spacing in column references confuses response}_
+_Note: Specificity does help and capitalization / spacing of column names does not appear to matter_
 
-<br><br>
-#### Follow-up: What if I am VERY specific {i.e., using the column names directly from the database schema}?
-Example: "is that StandardCost or ListPrice?"
-```
-The price of 125.00 units for the "Touring-Panniers, Large" product is the ListPrice, while the StandardCost is 51.5625 units.
-```
-_Note: This answer seems to prove that OpenAI does use column names, specifically as spelled_
-
-<br><br>
-#### Follow-up: Does capitalization matter?
-Example: "is that standardcost or listprice?"
-```
-The price of 125.00 units for the "Touring-Panniers, Large" product is the ListPrice, while the StandardCost is 51.5625 units.
-```
-_Note: Capitalization does not appear to matter_
-
-<br><br>
-#### Follow-up: Does Semantic Configuration help?
-I ran through all the previous prompts after re-configuring for use of Semantic Search; example:
-
-Example: "what large products are there?"
-```
-The requested information is not found in the retrieved data. Please try another query or topic.
-```
-_Note: Semantic does not return the same response as Keyword_
+### Conclusion
+OpenAI uses column information and is fairly comfortable dealing with schema ambiguity.
+<br>It does not, however, deal with data ambiguity quite so well... for this, we will need to use AI Search, Synonym Map functionality.
 
 <br><br>
 #### Follow-up: Use Case Driven Request
@@ -205,7 +195,30 @@ Example: "write a formal product description for a touring-panniers"
 The Touring-Panniers is a large, high-quality product designed for the discerning traveler. It carries the product code PA-T100 and comes in a sleek grey color. The cost price of the Touring-Panniers is 51.5625, and it retails at a price of 125.0000, offering excellent value for its robust design and functionality.
 ```
 
-## EXERCISE 3: ADD SYNONYMMAP TO EKE MORE INFORMATION FOR "LARGE" FROM SIZE="L"
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+-----
+
+## Exercise 1: Stage Resources
+In this exercise, we will import AdventureWorks sample data into AI Search and then use the index in the OpenAI Chat Playground.
+<br>_Note: the instructions below are for creating a minimum viable index {i.e., no bells-and-whistles}_
+
+## Exercise 3: Implement Synonyms
+In this exercise, we will programmatically update the AI Search Index with Synonym Maps and confirm OpenAI response enhancement.
+
+
+
+
+
+
+
+
+
+
+
 
 Lorem Ipsum
 
