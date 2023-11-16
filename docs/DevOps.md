@@ -4,5 +4,5 @@
 
 Use Case | Type
 :----- | :-----
-[AI Search](DevOps_AISearch.md) | C#<br>
+[AI Search >> DevOps](AISearch_DevOps.md) | C#<br>
 [Synapse, Parameterized Linked Services](DevOps_SynapseDeploy_usingParameterizedLinkedServices.md) | No Code<br>
