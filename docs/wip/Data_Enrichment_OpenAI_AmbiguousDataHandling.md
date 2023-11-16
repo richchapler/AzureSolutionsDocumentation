@@ -53,7 +53,7 @@ Navigate to the new index and confirm success.
 
 ### Step 2: Create OpenAI Deployment
 
-Navigate to OpenAI Studio > Chat, and then click "Add your data..." on the "Assistant setup" pane.
+Navigate to OpenAI Studio > "Chat playground", and then click "Add your data..." on the "Assistant setup" pane.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc174b2b-9db3-4757-b426-69b9bc65ff37" width="800" title="Snipped: November 16, 2023" />
 
