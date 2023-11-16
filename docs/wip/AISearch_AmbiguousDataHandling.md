@@ -205,6 +205,9 @@ _Note: Specificity does help and capitalization / spacing of column names does n
 In this exercise, we will programmatically update the AI Search Index with Synonym Maps and confirm OpenAI response enhancement.
 <br>_Note: This section builds on skills learned from: [AI Search, DevOps](AISearch_DevOps.md)_
 
+### Step 1: Create Visual Studio Project
+
+Open Visual Studio and click "**Create a new project**".
 
 
 
@@ -215,8 +218,154 @@ In this exercise, we will programmatically update the AI Search Index with Synon
 
 
 
-Lorem Ipsum
 
+
+
+
+
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/317959b5-dfd7-4c97-af0c-0578f9e89429" width="600" title="Snipped: October 10, 2023" />
+
+On the "**Create a new project**" form, search for and select "**Console App**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/db8c2898-b607-4441-8b1e-4f4f3dbd56b4" width="600" title="Snipped: October 10, 2023" />
+
+Complete the "**Configure your new project**" form, then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2408d491-ba3b-4ba7-9d84-02caf1dab54d" width="600" title="Snipped: October 10, 2023" />
+
+Complete the "**Additional information**" form, then click "**Create**".
+
+-----
+
+### Step 2: Install NuGet
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
+
+Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0b3bc3a-e6af-47ff-8ed2-8c0d0340e44e" width="800" title="Snipped: October 11, 2023" />
+
+On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Azure.Search.Documents**".
+<br>On the resulting pop-out, check the box next to your project and then click "**Install**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b56a92c-594a-4a18-afaa-24a4872ac73b" width="300" title="Snipped: October 11, 2023" />
+
+When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
+
+#### Additional Packages
+
+Repeat this process for the following NuGet packages:
+
+* Azure.Identity
+* Azure.Security.KeyVault.Secrets
+
+Close the "**NuGet - Solution**" tab.
+
+-----
+
+### Step 3: Code Application
+
+Replace the default code on the "**Program.cs**" tab with the following C#:
+
+```
+using Azure;
+using Azure.Identity;
+using Azure.Search.Documents.Indexes;
+using Azure.Search.Documents.Indexes.Models;
+using Azure.Security.KeyVault.Secrets;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+
+    }
+}
+```
+
+#### Names, URIs, and Keys
+The variables set in this section will be used to identify and create various resources.
+
+Return to the "**Program.cs**" tab and add the following code to `Main`.
+
+```
+/* ************************* Names */
+
+string nameBlobStorage_Container = "forms";
+string nameAISearch_DataSource = "rchaplerss-datasource";
+string nameAISearch_Index = "rchaplerss-index";
+string nameAISearch_Indexer = "rchaplerss-indexer";
+string nameAISearch_SemanticConfiguration = "rchaplerss-semanticconfiguration";
+string nameAISearch_Skillset = "rchaplerss-skillset";
+string nameAISearch_Suggester = "rchaplerss-suggester";
+
+/* ************************* URIs */
+
+var uriAISearch = new Uri($"https://rchaplerss.search.windows.net/");
+var uriKeyVault = new Uri($"https://rchaplerk.vault.azure.net/");
+
+/* ************************* Keys */
+
+var sc = new SecretClient(uriKeyVault, new DefaultAzureCredential());
+
+var ConnectionString_BlobStorage = sc.GetSecret("ConnectionString-BlobStorage").Value.Value.ToString() ?? string.Empty;
+var Key_AISearch = sc.GetSecret("Key-AISearch").Value.Value.ToString() ?? string.Empty;
+var Key_AIServices = sc.GetSecret("Key-AIServices").Value.Value.ToString() ?? string.Empty;
+/* use of double ".Value" is a necessary oddity */
+```
+
+_Notes:_
+* _Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
+* _Replace `AISEARCH_PRIMARYADMINKEY` with your AI Search API Key (and considering using a Key Vault)_
+
+-----
+
+#### Clients
+The variables set in this section will be used to manage the AI Search resources.
+
+Append the following code to the bottom of `Main`:
+
+```
+/* ************************* Clients */
+
+var credential = new AzureKeyCredential(Key_AISearch);
+var indexClient = new SearchIndexClient(uriAISearch, credential);
+var indexerClient = new SearchIndexerClient(uriAISearch, credential);
+```
+
+Logic Explained:
+* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the AI Search service
+* `var indexClient...` creates a new `SearchIndexClient` object used to manage (create, delete, update) indexes in your search service
+* `var indexerClient...` creates a new `SearchIndexerClient` object used to manage (run, reset, delete) indexers in your search service
+
+-----
+
+### Step 4: Confirm Success
+
+#### Visual Studio Debug
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
+
+Save your changes and then click "**Debug**" >> "**Start Debugging**" in the menubar.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d00e11c1-5611-49ed-b31e-228eee5428b2" width="600" title="Snipped: October 11, 2023" />
+
+A "Microsoft Visual Studio Debug" window will open (as snipped above).
+
+#### AI Search Index
+
+Navigate to AI Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/60745fe0-95f6-40f7-a91b-94b10332c237" width="800" title="Snipped: October 12, 2023" />
+
+You should see the index that you programmatically created {e.g., "rchaplerss-index"}. Click to open.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
+
+Click the "**Search**" button and review results.
 
 -----
 
