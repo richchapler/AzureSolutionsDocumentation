@@ -5,15 +5,15 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "We want to share our secured Cognitive Search index with our community of business users"
+* "We want to share our secured AI Search index with our community of business users"
 * "We want to use Role-Based Access Control {i.e., Azure Active Directory} to secure wherever possible"
 * "The Demo App is great, but we need to produce an app that we can easily enhance (with as little code as possible)"
 
 ## Prerequisites
 This solution requires the following resources:
 
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md) created using PowerShell
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search)
 * [**Power Apps**](https://powerapps.microsoft.com/en-us/)
 * [**Power Automate**](https://powerautomate.microsoft.com/en-us/)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with "images" container
@@ -34,7 +34,7 @@ This solution will address requirements in six exercises:
 In this exercise, we will create an index using sample data.
 
 ### Step 1: Create Index
-Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
+Navigate to AI Search, "**Overview**" and then click "**Import data**".
 
 <img src="https://user-images.githubusercontent.com/44923999/230911383-a7135ef7-65e2-45e7-bb4f-38f5addaa8e9.png" width="800" title="Snipped: April 10, 2023" />
 
