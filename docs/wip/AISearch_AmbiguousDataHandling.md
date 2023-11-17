@@ -326,41 +326,50 @@ _Note: Replace name values {e.g., `rchaplerss`} with values appropriate to your 
 
 -----
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Step 4: Confirm Success
 
 #### Visual Studio Debug
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
-
 Save your changes and then click "**Debug**" >> "**Start Debugging**" in the menubar.
+<br>A "Microsoft Visual Studio Debug" window will open.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d00e11c1-5611-49ed-b31e-228eee5428b2" width="600" title="Snipped: October 11, 2023" />
+#### AI Search Index JSON
 
-A "Microsoft Visual Studio Debug" window will open (as snipped above).
+Navigate to the AI Search Index, then click "Edit JSON".
 
-#### AI Search Index
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/48877403-e635-4c63-b2e1-f4b63175d2b0" width="800" title="Snipped: November 17, 2023" />
 
-Navigate to AI Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
+Scroll to the entry for `Size`:
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/60745fe0-95f6-40f7-a91b-94b10332c237" width="800" title="Snipped: October 12, 2023" />
+```
+{
+  "name": "Size",
+  "type": "Edm.String",
+  "searchable": true,
+  "filterable": false,
+  "retrievable": true,
+  "sortable": false,
+  "facetable": false,
+  "key": false,
+  "indexAnalyzer": null,
+  "searchAnalyzer": null,
+  "analyzer": "standard.lucene",
+  "normalizer": null,
+  "dimensions": null,
+  "vectorSearchProfile": null,
+  "synonymMaps": [
+    "**azuresql-synonymmap**"
+  ]
+}
+```
 
-You should see the index that you programmatically created {e.g., "rchaplerss-index"}. Click to open.
+You can expect to see the `synonymMaps` reference (as above).
+<br>Sadly, this is as much as you can expect to see as proof in the UI... any additional evidence will need to be pulled via API or .NET.
+
+#### AI Search Index Query
+
+
+LOREM IPSUM
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
 
