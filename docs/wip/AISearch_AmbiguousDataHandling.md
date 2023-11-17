@@ -368,12 +368,53 @@ You can expect to see the `synonymMaps` reference (as above).
 
 #### AI Search Index Query
 
+Navigate to the AI Search Index, "Search Explorer" tab.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/176c6023-54cf-4c74-834c-495ec5817b0b" width="800" title="Snipped: November 17, 2023" />
+
+You should see a much longer resultset, including entries like:
+
+```
+{
+  "@search.score": 2.9267395,
+  "ProductID": "715",
+  "Name": "Long-Sleeve Logo Jersey, L",
+  "ProductNumber": "LJ-0192-L",
+  "Color": "Multi",
+  "StandardCost": "38.4923",
+  "ListPrice": "49.9900",
+  "Size": "L",
+  "Weight": null,
+  "ProductCategoryID": 25,
+  "ProductModelID": 11,
+  "SellStartDate": "2005-07-01T00:00:00Z",
+  "SellEndDate": null,
+  "DiscontinuedDate": null,
+  "ThumbnailPhotoFileName": "awc_jersey_male_small.gif",
+  "rowguid": "34cf5ef5-c077-4ea0-914a-084814d5cbd5",
+  "ModifiedDate": "2008-03-11T10:01:36.827Z"
+}
+```
+
+You will note that this doesn't have the word "Large", but the `Size` field does have value "L".
+
+#### OpenAI, Chat Playground
+
+
+
+
+
+
+
+
+
+
+
+
 
 LOREM IPSUM
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
 
-Click the "**Search**" button and review results.
 
 -----
 
