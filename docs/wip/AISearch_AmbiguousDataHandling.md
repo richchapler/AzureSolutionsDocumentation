@@ -364,7 +364,7 @@ Scroll to the entry for `Size`:
 ```
 
 You can expect to see the `synonymMaps` reference (as above).
-<br>Sadly, this is as much as you can expect to see as proof in the UI... any additional evidence will need to be pulled via API or .NET.
+<br>Sadly, this is as much as you can expect to see as proof in the UI... any additional evidence needs to be pulled via API or .NET.
 
 #### AI Search Index Query
 
@@ -396,27 +396,17 @@ You should see a much longer resultset, including entries like:
 }
 ```
 
-You will note that this doesn't have the word "Large", but the `Size` field does have value "L".
+You will note that this does not have the word "Large", but the `Size` field does have value "L".
 
 #### OpenAI, Chat Playground
 
+Navigate to OpenAI Studio >> Chat Playground, and re-add data source (if disconnected).
+<br>Re-enter the original prompt: `what large products are there?`
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c4779d49-6089-47a3-8e1b-7d8b830c695c" width="800" title="Snipped: November 17, 2023" />
 
-
-
-
-
-
-
-
-
-
-
-LOREM IPSUM
-
-
+You will see that the response is much improved!
 
 -----
 
 **Congratulations... you have successfully completed all exercises**
-
