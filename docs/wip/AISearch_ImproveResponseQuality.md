@@ -1,4 +1,4 @@
-# AI: Improve Prompt Response Quality
+# AI: Improve  Response Quality
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe54b808-31eb-4932-a561-892f53854750" width="1000" />
 
