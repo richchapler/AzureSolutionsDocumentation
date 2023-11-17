@@ -22,4 +22,4 @@ Use Case | Technologies
 
 Use Case | Technologies
 :----- | :-----
-[AI Search / OpenAI, Ambiguous Data Handling](wip/AISearch_AmbiguousDataHandling.md) | AI Search, Open AI, Visual Studio (C#)
+[AI Search + OpenAI, ImproveResponseQuality](AISearch+OpenAI_ImproveResponseQuality.md) | AI Search, Open AI, Visual Studio (C#)
