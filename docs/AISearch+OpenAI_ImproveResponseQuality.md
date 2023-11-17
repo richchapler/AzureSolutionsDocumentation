@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe54b808-31eb-4932-a561-892f53854750" width="1000" />
 
 ## Use Case
-* "We believe that our source data includes ambiguities that, resolved, would result in better OpenAI response to prompts"
+* "We believe that our source data includes ambiguities that, if resolved, would result in better OpenAI response to prompts"
 
 ## Proposed Solution
 * Stage Resources: Create AI Search Index and Open AI Deployment
