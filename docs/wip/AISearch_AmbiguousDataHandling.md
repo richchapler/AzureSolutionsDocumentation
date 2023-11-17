@@ -208,52 +208,18 @@ In this exercise, we will programmatically update the AI Search Index with Synon
 ### Step 1: Create Visual Studio Project
 
 Open Visual Studio and click "**Create a new project**".
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/317959b5-dfd7-4c97-af0c-0578f9e89429" width="600" title="Snipped: October 10, 2023" />
-
-On the "**Create a new project**" form, search for and select "**Console App**", then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/db8c2898-b607-4441-8b1e-4f4f3dbd56b4" width="600" title="Snipped: October 10, 2023" />
-
-Complete the "**Configure your new project**" form, then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2408d491-ba3b-4ba7-9d84-02caf1dab54d" width="600" title="Snipped: October 10, 2023" />
-
-Complete the "**Additional information**" form, then click "**Create**".
+<br>On the "**Create a new project**" form, search for and select "**Console App**", then click "**Next**".
+<br>Complete the "**Configure your new project**" form, then click "**Next**".
+<br>Complete the "**Additional information**" form, then click "**Create**".
 
 -----
 
 ### Step 2: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
-
 Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0b3bc3a-e6af-47ff-8ed2-8c0d0340e44e" width="800" title="Snipped: October 11, 2023" />
-
-On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Azure.Search.Documents**".
+<br>On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Azure.Search.Documents**".
 <br>On the resulting pop-out, check the box next to your project and then click "**Install**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b56a92c-594a-4a18-afaa-24a4872ac73b" width="300" title="Snipped: October 11, 2023" />
-
-When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
+<br>When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 
 #### Additional Packages
 
@@ -281,67 +247,100 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        /* ************************* Names */
 
+        string nameAISearch_Index = "azuresql-index";
+        string nameAISearch_SynonymMap = "azuresql-synonymmap";
+
+        /* ************************* URIs */
+
+        var uriAISearch = new Uri($"https://rchaplerss.search.windows.net/");
+        var uriKeyVault = new Uri($"https://rchaplerk.vault.azure.net/");
+
+        /* ************************* Keys */
+
+        var sc = new SecretClient(uriKeyVault, new DefaultAzureCredential());
+        var keyAISearch = sc.GetSecret("Key-AISearch").Value.Value.ToString() ?? string.Empty;
+
+        /* ************************* Clients */
+
+        var credential = new AzureKeyCredential(keyAISearch);
+        var indexClient = new SearchIndexClient(uriAISearch, credential);
+
+        /* ************************* SynonymMap */
+
+        var d = new Dictionary<string, List<string>>
+            {
+                { "Large", new List<string> { "L" } },
+                { "Medium", new List<string> { "M" } },
+                { "Small", new List<string> { "S" } }
+            };
+
+        string synonyms = "";
+        foreach (var synonym in d) { synonyms += $"{synonym.Key}, {string.Join(", ", synonym.Value)}\n"; }
+
+        var sm = new SynonymMap(nameAISearch_SynonymMap, synonyms);
+        indexClient.CreateOrUpdateSynonymMap(sm);
+
+        var index = indexClient.GetIndex(nameAISearch_Index);
+
+        int sizeIndex = -1;
+        for (int i = 0; i < index.Value.Fields.Count; i++)
+        {
+            if (index.Value.Fields[i].Name == "Size")
+            {
+                sizeIndex = i;
+                break;
+            }
+        }
+
+        if (sizeIndex != -1)
+        {
+            index.Value.Fields[sizeIndex].SynonymMapNames.Add(sm.Name);
+        }
+        else
+        {
+            Console.WriteLine("Field 'Size' not found.");
+        }
+
+
+        //index.Value.Fields[0].SynonymMapNames.Add(sm.Name);
+
+        indexClient.CreateOrUpdateIndex(index);
     }
 }
 ```
 
-#### Names, URIs, and Keys
-The variables set in this section will be used to identify and create various resources.
+#### Logic Explanation
 
-Return to the "**Program.cs**" tab and add the following code to `Main`.
+1. **Names**: The names of the Azure Cognitive Search index and synonym map are defined.
+2. **URIs**: The URIs for Azure Cognitive Search and Azure Key Vault are defined.
+3. **Keys**: The `SecretClient` is used to connect to Azure Key Vault using the `DefaultAzureCredential`. The secret named "Key-AISearch" is retrieved from the Key Vault.
+4. **Clients**: An `AzureKeyCredential` is created using the secret retrieved from Key Vault. This credential is then used to create a `SearchIndexClient` which will be used to interact with Azure Cognitive Search.
+5. **SynonymMap**: A dictionary is created to map synonyms. For example, "Large" is a synonym for "L", "Medium" for "M", and "Small" for "S". These synonyms are then added to a `SynonymMap` object which is created or updated in Azure Cognitive Search.
+6. **Index**: The index named "azuresql-index" is retrieved from Azure Cognitive Search.
+7. **Size Field**: The code then iterates over the fields in the index to find the field named "Size". If the "Size" field is found, the name of the synonym map is added to the field's `SynonymMapNames` property.
+8. **Update Index**: Finally, the updated index is sent back to Azure Cognitive Search using the `CreateOrUpdateIndex` method.
 
-```
-/* ************************* Names */
-
-string nameBlobStorage_Container = "forms";
-string nameAISearch_DataSource = "rchaplerss-datasource";
-string nameAISearch_Index = "rchaplerss-index";
-string nameAISearch_Indexer = "rchaplerss-indexer";
-string nameAISearch_SemanticConfiguration = "rchaplerss-semanticconfiguration";
-string nameAISearch_Skillset = "rchaplerss-skillset";
-string nameAISearch_Suggester = "rchaplerss-suggester";
-
-/* ************************* URIs */
-
-var uriAISearch = new Uri($"https://rchaplerss.search.windows.net/");
-var uriKeyVault = new Uri($"https://rchaplerk.vault.azure.net/");
-
-/* ************************* Keys */
-
-var sc = new SecretClient(uriKeyVault, new DefaultAzureCredential());
-
-var ConnectionString_BlobStorage = sc.GetSecret("ConnectionString-BlobStorage").Value.Value.ToString() ?? string.Empty;
-var Key_AISearch = sc.GetSecret("Key-AISearch").Value.Value.ToString() ?? string.Empty;
-var Key_AIServices = sc.GetSecret("Key-AIServices").Value.Value.ToString() ?? string.Empty;
-/* use of double ".Value" is a necessary oddity */
-```
-
-_Notes:_
-* _Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
-* _Replace `AISEARCH_PRIMARYADMINKEY` with your AI Search API Key (and considering using a Key Vault)_
+_Note: Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
 
 -----
 
-#### Clients
-The variables set in this section will be used to manage the AI Search resources.
 
-Append the following code to the bottom of `Main`:
 
-```
-/* ************************* Clients */
 
-var credential = new AzureKeyCredential(Key_AISearch);
-var indexClient = new SearchIndexClient(uriAISearch, credential);
-var indexerClient = new SearchIndexerClient(uriAISearch, credential);
-```
 
-Logic Explained:
-* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the AI Search service
-* `var indexClient...` creates a new `SearchIndexClient` object used to manage (create, delete, update) indexes in your search service
-* `var indexerClient...` creates a new `SearchIndexerClient` object used to manage (run, reset, delete) indexers in your search service
 
------
+
+
+
+
+
+
+
+
+
+
 
 ### Step 4: Confirm Success
 
