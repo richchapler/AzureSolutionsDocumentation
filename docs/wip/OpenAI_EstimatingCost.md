@@ -24,4 +24,5 @@ Completion | This refers to the number of tokens in the completions (responses) 
 
 
 
-
+## Reference
+https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/manage-costs
