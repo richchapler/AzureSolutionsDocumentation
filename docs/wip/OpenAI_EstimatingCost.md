@@ -14,10 +14,9 @@ Scroll down and complete the "Azure OpenAI Service" form, including:
 
 Prompt | Description
 :----- | :-----
-Model Type | This refers to the type of AI model you want to use. Azure OpenAI Service offers different types of models, each with its own capabilities and use cases. For example, there are language models (like GPT-3.5-Turbo and GPT-4), base models (like Babbage-002 and Davinci-002), and fine-tuning models
-Model | This is the specific model within the chosen type that you want to use. Each model has different performance characteristics and costs. For example, within the language models, you could choose between GPT-3.5-Turbo 4K, GPT-3.5-Turbo 16K, GPT-4 8K, and GPT-4 32K
-Prompt | This refers to the number of tokens in the prompts you send to the model. A token is roughly equivalent to four characters for typical English text². You're charged per 1,000 tokens for the prompts you send to the model
-Completion | This refers to the number of tokens in the completions (responses) you receive from the model. You're also charged per 1,000 tokens for the completions you receive from the model
+Model Type | * **Language Models** {e.g., GPT-4-8K}: used to add natural language capabilities, build conversational interfaces, identify key terms and phrases, understand sentiments, and more<br><br>* **Image Models** {e.g., Dall-E}: used for image classification, object detection, and more<br><br>* **Embedding Models** {e.g., Ada}: used to convert text into numerical vectors that capture the semantic meaning of the words or sentences
+Language Models >> Prompt | refers to the number of tokens {i.e., four characters of typical English text} in the prompts you send to the model
+Language Models >> Completion | This refers to the number of tokens in the completions (responses) you receive from the model. You're also charged per 1,000 tokens for the completions you receive from the model
 
 
 
