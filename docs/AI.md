@@ -20,6 +20,7 @@ Use Case | Technologies
 [AI Search, DevOps](AISearch_DevOps.md) | Visual Studio (C#), DevOps
 
 ## Work-in-Progress (WiP)
+
 Use Case | Technologies
 :----- | :-----
 [Open AI, Estimating Cost](wip/OpenAI_EstimatingCost.md) | Azure Pricing Calculator
