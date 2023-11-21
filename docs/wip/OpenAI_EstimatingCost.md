@@ -15,8 +15,8 @@ Scroll down and complete the "Azure OpenAI Service" form, including:
 Prompt | Description
 :----- | :-----
 Model Type | * **Language Models** {e.g., GPT-4-8K}: used to add natural language capabilities, build conversational interfaces, identify key terms and phrases, understand sentiments, and more<br><br>* **Image Models** {e.g., Dall-E}: used for image classification, object detection, and more<br><br>* **Embedding Models** {e.g., Ada}: used to convert text into numerical vectors that capture the semantic meaning of the words or sentences
-Language Models >> Prompt | refers to the number of tokens {i.e., four characters of typical English text} in the prompts you send to the model
-Language Models >> Completion | This refers to the number of tokens in the completions (responses) you receive from the model. You're also charged per 1,000 tokens for the completions you receive from the model
+Prompt | refers to the number of tokens {i.e., four characters of typical English text} in the prompts you send to the model
+Completion | refers to the number of tokens in the completions (responses) you receive from the model
 
 
 
