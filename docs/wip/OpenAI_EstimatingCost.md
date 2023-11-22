@@ -41,3 +41,4 @@ _Note: both the prompt and the completion contribute to the total number of toke
 
 ## Reference
 https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/manage-costs
+https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
