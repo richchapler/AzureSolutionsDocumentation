@@ -40,5 +40,5 @@ The number of completions would depend on the maximum token limit set for the mo
 _Note: both the prompt and the completion contribute to the total number of tokens used in a call. If the total token count exceeds the model's maximum limit, the call will fail. Also, very long generations are more likely to be cut off._
 
 ## Reference
-https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/manage-costs
-https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them
+* https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/manage-costs
+* [What are tokens and how to count them?](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them)
