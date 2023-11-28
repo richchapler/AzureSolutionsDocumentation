@@ -31,7 +31,7 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 
 * [**Data Migration Assistant**](https://www.microsoft.com/en-us/download/details.aspx?id=53595)
 
-* [**DevOps**](https://azure.microsoft.com/en-us/products/devops/)
+* [**DevOps**](https://dev.azure.com/)
 
 * **Event Grid** >> [Event Subscription](Infrastructure_EventGrid_EventSubscription.md)
 
