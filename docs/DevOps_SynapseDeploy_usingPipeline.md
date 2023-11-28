@@ -7,8 +7,8 @@
 * "DEV" Environment
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "DEV"
-    * Integration Runtime "DEV" on an on-prem machine with [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) / Database "DEV"
+    * Integration Runtime "irDEV" on an on-prem machine with [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) / Database "dbDEV"
 * "QA" Environment
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "QA"
-    * Integration Runtime "QA" on an on-prem machine with [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) / Database "QA"
+    * Integration Runtime "irQA" on an on-prem machine with [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) / Database "dbQA"
