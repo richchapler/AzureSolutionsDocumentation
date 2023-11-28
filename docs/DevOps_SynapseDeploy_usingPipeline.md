@@ -1,5 +1,8 @@
 # Deploy Synapse Changes using a DevOps Pipeline
 
+## Challenges
+* Deploying from DEV to QA... cannot parameterize integration runtime naming
+
 ## Prepare Environment
 
 * [DevOps](https://dev.azure.com/) with Organization, Project, Repository (dedicated to Synapse), and Branches "DEV" and "QA"
