@@ -11,6 +11,7 @@
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "DEV"
     * Integration Runtime "irDEV" on an on-prem machine with [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) / Database "dbDEV"
+    * Linked Service "lsDEV" that uses integration runtime "irDEV" and is connected to database "dbDEV"
 * "QA" Environment
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "QA"
