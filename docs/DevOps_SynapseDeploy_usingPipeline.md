@@ -6,7 +6,6 @@
 ## Prepare Environment
 
 * [DevOps](https://dev.azure.com/) with Organization, Project, Repository (dedicated to Synapse), and Branches "DEV" and "QA"
-* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) ???
 * "DEV" Environment
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
