@@ -90,10 +90,7 @@ Prompt | Entry
 Name | azureSubscription
 Secret Value | Previously copied Service Connection Name
 
-
-
-
-#### LOREM IPSUM!!!
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/61067fc1-02b1-4b4b-b471-b0095937ae70" width="800" title="Snipped: November 29, 2023" />
 
 -----
 
