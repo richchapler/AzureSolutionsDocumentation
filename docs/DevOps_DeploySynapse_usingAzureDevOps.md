@@ -77,7 +77,7 @@ Navigate to Azure DevOps >> Project >> Project Settings >> Pipelines >> Service 
 
 Copy the name of the Service Connection to your Azure Subscription.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1046dc4-1f3c-401a-aa20-f33c45d16710" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9d2b0d78-76dd-4a3d-a738-29d2fb86d818" width="800" title="Snipped: November 29, 2023" />
 
 Navigate to your Key Vault >> Objects >> Secrets and click "+ Generate/Import".
 
@@ -88,7 +88,7 @@ Complete the "Create a secret" form, including:
 Prompt | Entry
 :----- | :-----
 Name | azureSubscription
-Secret Value | DevOps >> Project Settings >> Service Connection Name
+Secret Value | Previously copied Service Connection Name
 
 
 
