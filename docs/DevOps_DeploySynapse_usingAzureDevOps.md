@@ -77,7 +77,7 @@ Complete the "Create a secret" form, including:
 
 Prompt | Entry
 :----- | :-----
-Lorem | Ipsum
+Name | azureSubscription
 
 
 
