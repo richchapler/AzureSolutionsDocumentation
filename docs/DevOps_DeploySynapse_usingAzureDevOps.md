@@ -67,7 +67,13 @@ You can expect email notification.
 
 -----
 
-### Step 2: Create Variable Group
+### Step 2: Add Key Vault Secret
+
+#### LOREM IPSUM!!!
+
+-----
+
+### Step 3: Create Variable Group
 
 Navigate to Azure DevOps >> Pipelines >> Library.
 
@@ -97,7 +103,7 @@ On the "Properties" page, click "Save".
 
 -----
 
-### Step 3: Edit Pipeline YAML
+### Step 4: Edit Pipeline YAML
 
 Navigate to Azure DevOps >> Pipelines >> Pipelines, select your pipeline and click "Edit".
 
