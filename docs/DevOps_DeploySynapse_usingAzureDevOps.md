@@ -102,7 +102,26 @@ On the "Properties" page, click "Save".
 Navigate to Azure DevOps >> Pipelines >> Pipelines, select your pipeline and click "Edit".
 
 
+```
+pool:
+  vmImage: 'windows-latest'
 
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: $SubscriptionGUID
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      $o = "https://dev.azure.com/rchaplerdo"
+      $p = "rchaplerdp"
+      $r = "rchaplerdr"
+      $b = "QA"
+      $dt = Get-Date -Format "yyyyMMdd_HHmmss"
+
+      $oid = az repos ref show --name "refs/heads/$b" --query objectId --output tsv --project $p --repository $r --organization $o
+      az repos ref create --name "refs/heads/$b_$dt" --object-id $oid --project $p --repository $r --organization $o
+```
 
 
 
