@@ -140,21 +140,22 @@ steps:
 ```
 
 Logic Explained:
-* `pool` specifies use of a virtual machine with the latest version of Windows
-* `steps` contains pipeline tasks
-* `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
-* `inputs` specifies the inputs for the Azure CLI task:
-  * `azureSubscription: $azureSubscription` specifies the Azure subscription to used {i.e., the previously-set variable)}
-  * `scriptType: 'pscore'` indicates a PowerShell Core script
- 
+* `pool...` specifies use of a virtual machine with the latest version of Windows
+* `steps` contains pipeline tasks (in this case, just one)
+  * `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
+    * `inputs` specifies the inputs for the Azure CLI task:
+      * `azureSubscription: $azureSubscription` specifies the Azure subscription to use (using the previously-set variable)
+      * `scriptType: 'pscore'` indicates a PowerShell Core script
+      * `scriptLocation: 'inlineScript'` indicates that the script to be executed is written directly in the YAML file
+      * `inlineScript` is the actual script, which does the following:
+        * Sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and the current date-time (`$dt`).
+        * Retrieves the object ID of the specified branch in the repository with the `az repos ref show` command
+        * Creates a new branch with the same object ID as the original branch using the `az repos ref create` command
+          * The new branch's name is the original branch's name appended with the current date-time
 
-    - `scriptLocation: 'inlineScript'`: This means that the script to be executed is written directly in the YAML file.
-    - `inlineScript`: This is the actual script to be executed. It creates a new reference in an Azure DevOps repository.
 
-The script does the following:
-1. It sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and the current date-time (`$dt`).
-2. It retrieves the object ID of the specified branch in the repository with the `az repos ref show` command.
-3. It creates a new reference (essentially a new branch) with the same object ID as the original branch using the `az repos ref create` command. The new branch's name is the original branch's name appended with the current date-time.
+
+
 
 This pipeline is useful for creating a new branch from an existing one in an Azure DevOps repository. The new branch will have the same commit history as the original branch. The branch name includes a timestamp, which can be useful for keeping track of when the branch was created.
 
