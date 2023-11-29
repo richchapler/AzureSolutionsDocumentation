@@ -71,6 +71,16 @@ You can expect email notification.
 
 #### "azureSubscription"
 
+Navigate to Azure DevOps >> Project >> Project Settings >> Pipelines >> Service Connections.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b85a6960-5827-4578-97bc-55dc366862e0" width="800" title="Snipped: November 29, 2023" />
+
+Copy the name of the Service Connection to your Azure Subscription.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1046dc4-1f3c-401a-aa20-f33c45d16710" width="800" title="Snipped: November 29, 2023" />
+
+Navigate to your Key Vault >> Objects >> Secrets and click "+ Generate/Import".
+
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1046dc4-1f3c-401a-aa20-f33c45d16710" width="800" title="Snipped: November 29, 2023" />
 
 Complete the "Create a secret" form, including:
