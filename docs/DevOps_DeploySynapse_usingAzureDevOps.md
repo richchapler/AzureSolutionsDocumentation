@@ -97,6 +97,12 @@ On the "Properties" page, click "Save".
 
 -----
 
+### Step 3: Edit Pipeline YAML
+
+Navigate to Azure DevOps >> Pipelines >> Pipelines.
+
+
+
 
 
 
