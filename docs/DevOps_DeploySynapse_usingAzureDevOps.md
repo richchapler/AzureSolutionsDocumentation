@@ -65,6 +65,8 @@ Monitor progress and confirm success.
 
 You can expect email notification.
 
+-----
+
 ### Step 2: Create Variable Group
 
 Navigate to Azure DevOps >> Pipelines >> Library.
@@ -88,6 +90,12 @@ Click "+ Add".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4058af94-3595-4526-a68a-ec6d7172520b" width="800" title="Snipped: November 29, 2023" />
 
 Click to select the "SubscriptionGUID" secret and then click "Ok".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0f321460-0304-4da5-81c2-2c6f24f7972c" width="800" title="Snipped: November 29, 2023" />
+
+On the "Properties" page, click "Save".
+
+-----
 
 
 
