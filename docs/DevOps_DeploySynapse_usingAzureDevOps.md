@@ -78,6 +78,7 @@ Complete the "Create a secret" form, including:
 Prompt | Entry
 :----- | :-----
 Name | azureSubscription
+Secret Value | DevOps >> Project Settings >> Service Connection Name
 
 
 
