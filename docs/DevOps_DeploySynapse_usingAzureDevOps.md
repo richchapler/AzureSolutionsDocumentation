@@ -26,7 +26,7 @@
 -----
 -----
 
-## Exercise 1: Prepare Branches
+## Exercise 1: Starter Pipeline
 In this exercise, we will use a DevOps Pipeline to: 1) archive the existing QA branch, 2) create a new branch from the PROD branch, and 3) complete a pull request from the DEV branch.
 
 ### Step 1: Link Subscription
