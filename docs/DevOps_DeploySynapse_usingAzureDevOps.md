@@ -30,7 +30,7 @@ In this exercise, we will use a DevOps Pipeline to: 1) archive the existing QA b
 
 ### Step 1: Create Starter Pipeline
 
-Navigate to Azure DevOps >> Pipelines.
+Navigate to Azure DevOps >> Pipelines >> Pipelines.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4b2f5f9e-530e-4e0b-abb5-a7274a70a0ad" width="800" title="Snipped: November 29, 2023" />
 
@@ -64,7 +64,21 @@ Monitor progress and confirm success.
 
 You can expect email notification.
 
-### Step 2: Edit Pipeline, Rename QA Branch
+### Step 2: Create Variable Group
+
+Navigate to Azure DevOps >> Pipelines >> Library.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9a8677a7-2df5-4eb4-b5a4-5a898157ab2c" width="800" title="Snipped: November 29, 2023" />
+
+Click "+ Variable group".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b724210-ba53-421c-93cb-165be5a37ec1" width="800" title="Snipped: November 29, 2023" />
+
+
+
+
+
+
 Lorem Ipsum
 
 -----
