@@ -6,6 +6,7 @@
 ## Prepare Environment
 
 * [DevOps](https://dev.azure.com/) with Organization, Project, Repository (dedicated to Synapse), and Branches "DEV" and "QA"
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with "SubscriptionGUID" [secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets)
 * "DEV" Environment
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
@@ -72,7 +73,7 @@ Navigate to Azure DevOps >> Pipelines >> Library.
 
 Click "+ Variable group".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b724210-ba53-421c-93cb-165be5a37ec1" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d83881b4-f506-4785-b7cb-02f48e345ed3" width="800" title="Snipped: November 29, 2023" />
 
 Complete the "Properties" form, including:
 
@@ -81,6 +82,12 @@ Prompt | Entry
 Link secrets from an Azure key vault... | Active
 Azure Subscription | Select and Authorize
 Key Vault Name | Select and Authorize<br><sub>_Note: Assign the "Key Vaults Secrets User" role to your Azure DevOps identity to successfully Authorize_</sub>
+
+Click "+ Add".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4058af94-3595-4526-a68a-ec6d7172520b" width="800" title="Snipped: November 29, 2023" />
+
+Click to select the "SubscriptionGUID" secret and then click "Ok".
 
 
 
