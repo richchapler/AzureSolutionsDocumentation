@@ -112,11 +112,7 @@ Review default selections on the "Save and run" pop-out and then click "Save".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f3b830df-6faf-4e59-b467-dbe8eacf4172" width="800" title="Snipped: November 29, 2023" />
 
-Click "Edit".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8fa3d77d-a977-442c-84ac-6f2b8606a426" width="800" title="Snipped: November 29, 2023" />
-
-Paste the following YAML:
+Click "Edit" and on the resulting screen, paste the following YAML:
 
 ```
 pool:
@@ -125,7 +121,7 @@ pool:
 steps:
 - task: AzureCLI@2
   inputs:
-    azureSubscription: $azureSubscription
+    azureSubscription: $(azureSubscription)
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -144,7 +140,7 @@ Logic Explained:
 * `steps` contains pipeline tasks (in this case, just one)
   * `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
     * `inputs` specifies the inputs for the Azure CLI task:
-      * `azureSubscription: $azureSubscription` specifies the Azure subscription to use (using the previously-set variable)
+      * `azureSubscription: $(azureSubscription)` specifies the Azure subscription to use (using the previously-set variable)
       * `scriptType: 'pscore'` indicates a PowerShell Core script
       * `scriptLocation: 'inlineScript'` indicates that the script to be executed is written directly in the YAML file
       * `inlineScript` is the actual script, which does the following:
@@ -152,6 +148,22 @@ Logic Explained:
         * Retrieves the object ID of the specified branch in the repository with the `az repos ref show` command
         * Creates a new branch with the same object ID as the original branch using the `az repos ref create` command
           * The new branch's name is the original branch's name appended with the current datetime
+
+Click "Save".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0badec96-6cb1-47c7-a7b7-d6a4b6b2f03b" width="800" title="Snipped: November 29, 2023" />
+
+#### Confirm Success
+
+Click "Run".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/adb3e906-11f4-4c39-8414-9c413c4f0d87" width="800" title="Snipped: November 29, 2023" />
+
+On the resulting "Run pipeline" pop-out, review default settings and then click "Run".
+
+
+
+
 
 
 
