@@ -73,7 +73,11 @@ You can expect email notification.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1046dc4-1f3c-401a-aa20-f33c45d16710" width="800" title="Snipped: November 29, 2023" />
 
+Complete the "Create a secret" form, including:
 
+Prompt | Entry
+:----- | :-----
+Lorem | Ipsum
 
 
 
