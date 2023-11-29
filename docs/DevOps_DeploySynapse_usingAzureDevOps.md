@@ -82,6 +82,7 @@ Link secrets from an Azure key vault as variable | Active
 Azure Subscription | Select and Authorize
 Key Vault Name | Select and Authorize
 
+_Note: You must assign the "Key Vaults Secrets User" role to your managed identity for Azure DevOps {e.g., "rchaplerdo-rchaplerdp-GUID"} in order to successfully Authorize on the "Key Vault Name" row_
 
 
 
