@@ -148,10 +148,10 @@ Logic Explained:
       * `scriptType: 'pscore'` indicates a PowerShell Core script
       * `scriptLocation: 'inlineScript'` indicates that the script to be executed is written directly in the YAML file
       * `inlineScript` is the actual script, which does the following:
-        * Sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and the current date-time (`$dt`).
+        * Sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and current datetime (`$dt`)
         * Retrieves the object ID of the specified branch in the repository with the `az repos ref show` command
         * Creates a new branch with the same object ID as the original branch using the `az repos ref create` command
-          * The new branch's name is the original branch's name appended with the current date-time
+          * The new branch's name is the original branch's name appended with the current datetime
 
 
 
