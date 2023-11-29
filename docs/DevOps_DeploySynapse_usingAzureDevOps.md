@@ -6,7 +6,7 @@
 ## Prepare Environment
 
 * [DevOps](https://dev.azure.com/) with Organization, Project, Repository (dedicated to Synapse), and Branches "DEV" and "QA"
-* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with "SubscriptionGUID" [secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets) that contains the TenantId value associated with your Azure DevOps
+* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with a [secret](https://learn.microsoft.com/en-us/azure/key-vault/secrets) named "SubscriptionGUID" that contains the TenantId value associated with your Azure DevOps
 * "DEV" Environment
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
