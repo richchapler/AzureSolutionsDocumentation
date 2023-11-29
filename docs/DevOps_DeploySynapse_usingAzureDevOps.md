@@ -123,6 +123,7 @@ steps:
       az repos ref create --name "refs/heads/$b_$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c123b930-43ce-4dd1-9159-1ff31d1be558" width="800" title="Snipped: November 29, 2023" />
 
 
 Lorem Ipsum
