@@ -74,7 +74,13 @@ Click "+ Variable group".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b724210-ba53-421c-93cb-165be5a37ec1" width="800" title="Snipped: November 29, 2023" />
 
+Complete the "Properties" form, including:
 
+Prompt | Entry
+:----- | :-----
+Link secrets from an Azure key vault as variable | Active
+Azure Subscription | Select and Authorize
+Key Vault Name | Select and Authorize
 
 
 
