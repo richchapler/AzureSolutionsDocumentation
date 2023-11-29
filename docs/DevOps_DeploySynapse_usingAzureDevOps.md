@@ -78,9 +78,9 @@ Complete the "Properties" form, including:
 
 Prompt | Entry
 :----- | :-----
-Link secrets from an Azure key vault as variable | Active
+Link secrets from an Azure key vault... | Active
 Azure Subscription | Select and Authorize
-Key Vault Name | Select and Authorize<br>_Note: You must assign the "Key Vaults Secrets User" role to your managed identity for Azure DevOps {e.g., "rchaplerdo-rchaplerdp-GUID"} in order to successfully Authorize_
+Key Vault Name | Select and Authorize<br><sub>_Note: Assign the "Key Vaults Secrets User" role to your Azure DevOps identity to successfully Authorize_</sub>
 
 
 
