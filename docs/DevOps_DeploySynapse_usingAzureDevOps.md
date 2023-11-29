@@ -102,31 +102,21 @@ Complete the "Inventory your pipeline" form and then click "Configure pipeline".
 
 On the "Configure your pipeline" page, select "Starter Pipeline" and then click "Review pipeline".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/beb54c28-61c0-473b-9cfb-06bef3e853a5" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d396c1ea-2843-4b1b-a450-d47b93fc2c4a" width="800" title="Snipped: November 29, 2023" />
 
-Complete the "Review your governed pipeline" page and then click "Save and run".
+Complete the "Review your governed pipeline" page, dropdown "Save and run", and then click "Save".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4062ce4d-ff23-47f0-aa7d-80421978d234" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ed5bd309-9963-48cd-95c1-40c6c800de29" width="800" title="Snipped: November 29, 2023" />
 
-Review default selections on the "Save and run" pop-out and then click "Save and run".
+Review default selections on the "Save and run" pop-out and then click "Save".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b140d488-b6b0-4bf0-b702-70eb0812f508" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f3b830df-6faf-4e59-b467-dbe8eacf4172" width="800" title="Snipped: November 29, 2023" />
 
-Monitor progress and confirm success.
+Click "Edit".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3047b4f9-60a5-43bf-a8ff-caa6f3778deb" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8fa3d77d-a977-442c-84ac-6f2b8606a426" width="800" title="Snipped: November 29, 2023" />
 
-You can expect email notification.
-
------
-
-
------
-
-### Step 4: Edit Pipeline YAML
-
-Navigate to Azure DevOps >> Pipelines >> Pipelines, select your pipeline and click "Edit".
-
+Paste the following YAML:
 
 ```
 pool:
@@ -135,7 +125,7 @@ pool:
 steps:
 - task: AzureCLI@2
   inputs:
-    azureSubscription: $SubscriptionGUID
+    azureSubscription: $azureSubscription
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -149,7 +139,27 @@ steps:
       az repos ref create --name "refs/heads/$b_$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c123b930-43ce-4dd1-9159-1ff31d1be558" width="800" title="Snipped: November 29, 2023" />
+Logic Explained:
+* `pool` specifies use of a virtual machine with the latest version of Windows
+* `steps` contains pipeline tasks
+* `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
+* `inputs` specifies the inputs for the Azure CLI task:
+  * `azureSubscription: $azureSubscription` specifies the Azure subscription to used {i.e., the previously-set variable)}
+  * `scriptType: 'pscore'` indicates a PowerShell Core script
+ 
+
+    - `scriptLocation: 'inlineScript'`: This means that the script to be executed is written directly in the YAML file.
+    - `inlineScript`: This is the actual script to be executed. It creates a new reference in an Azure DevOps repository.
+
+The script does the following:
+1. It sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and the current date-time (`$dt`).
+2. It retrieves the object ID of the specified branch in the repository with the `az repos ref show` command.
+3. It creates a new reference (essentially a new branch) with the same object ID as the original branch using the `az repos ref create` command. The new branch's name is the original branch's name appended with the current date-time.
+
+This pipeline is useful for creating a new branch from an existing one in an Azure DevOps repository. The new branch will have the same commit history as the original branch. The branch name includes a timestamp, which can be useful for keeping track of when the branch was created.
+
+
+
 
 
 Lorem Ipsum
