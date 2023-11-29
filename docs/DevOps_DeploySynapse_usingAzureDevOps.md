@@ -1,4 +1,4 @@
-# Deploy Synapse Changes using a DevOps Pipeline
+# Deploy Synapse using Azure DevOps
 
 ## Challenges
 * Deploying from DEV to QA... cannot parameterize integration runtime naming
