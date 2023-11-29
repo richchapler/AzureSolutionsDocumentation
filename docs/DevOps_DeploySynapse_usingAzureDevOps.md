@@ -69,7 +69,9 @@ You can expect email notification.
 
 ### Step 2: Add Key Vault Secret
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a093d975-3450-449e-9946-4a05fcfb25fe" width="800" title="Snipped: November 29, 2023" />
+#### "azureSubscription"
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1046dc4-1f3c-401a-aa20-f33c45d16710" width="800" title="Snipped: November 29, 2023" />
 
 
 
