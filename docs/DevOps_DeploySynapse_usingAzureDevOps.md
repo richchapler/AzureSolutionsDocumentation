@@ -194,3 +194,25 @@ Lorem Ipsum
 ## Reference
 
 * [Use personal access tokens](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
+
+To create, list, and manage branches in Azure DevOps using a Personal Access Token (PAT), the token needs to have the appropriate permissions¹. Here are the permissions you might need:
+
+1. **Code (Read & Write)**: This permission allows you to read and write to the code, which includes creating and deleting branches¹.
+
+2. **Code (Manage)**: This permission allows you to manage code repositories, which includes managing branches¹.
+
+When creating a PAT, you can select the scopes for the token to authorize for your specific tasks¹. For example, to create a token to enable a build and release agent to authenticate to Azure DevOps Services, limit your token's scope to Agent Pools (Read & manage)¹.
+
+Please note that you should treat and use a PAT like your password and keep it a secret¹.
+
+I hope this helps! If you have any other questions, feel free to ask. 😊
+
+Source: Conversation with Bing, 11/30/2023
+(1) Use personal access tokens - Azure DevOps | Microsoft Learn. https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops.
+(2) Azure devops feed with PAT : what permissions are needed?. https://stackoverflow.com/questions/59575282/azure-devops-feed-with-pat-what-permissions-are-needed.
+(3) Grant VSTS user access to create new branches - Stack Overflow. https://stackoverflow.com/questions/47516974/grant-vsts-user-access-to-create-new-branches.
+(4) Keeping your dependencies updated with Azure Pipelines and Dependabot. https://techcommunity.microsoft.com/t5/azure-devops-blog/keeping-your-dependencies-updated-with-azure-pipelines-and/ba-p/3590020.
+(5) Set Git branch security and permissions - Azure Repos. https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-permissions?view=azure-devops.
+(6) undefined. https://dev.azure.com/.
+
+3v4wuprtwwpto45ws7xakz5a5mb5vptiqxkckkhcmczdhjlt4u7a
