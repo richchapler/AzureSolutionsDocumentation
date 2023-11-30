@@ -115,8 +115,8 @@ Review default selections on the "Save and run" pop-out and then click "Save".
 Click "Edit" and on the resulting screen, paste the following YAML:
 
 ```
-variables:
-- group: 'rchaplerdvg'
+# variables:
+# - group: 'rchaplerdvg'
 
 pool:
   vmImage: 'windows-latest'
@@ -124,21 +124,27 @@ pool:
 steps:
 - task: AzureCLI@2
   inputs:
-    azureSubscription: $(azureSubscription)
+    # azureSubscription: $(azureSubscription)
+    azureSubscription: "MCAPS-Hybrid-REQ-38779-2022-RichardChapler (ed7eaf77-d411-484b-92e6-5cba0b6d8098)"
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
+      # az upgrade
+      # az extension add -n azure-devops
+      # az extension update -n azure-devops
       $o = "https://dev.azure.com/rchaplerdo"
       $p = "rchaplerdp"
       $r = "rchaplerdr"
       $b = "QA"
-      $dt = Get-Date -Format "yyyyMMdd_HHmmss"
+      $dt = Get-Date -Format "yyyyMMddHHmmss"
+      $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
+      $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
+      az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
 
-      $oid = az repos ref show --name "refs/heads/$b" --query objectId --output tsv --project $p --repository $r --organization $o
-      az repos ref create --name "refs/heads/$b_$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
 
 Logic Explained:
+LOREM IPSUM
 * `variables` define variables that can be used throughout the pipeline (in this case, the variable group created in Exercise 1)
 * `pool...` specifies use of a virtual machine with the latest version of Windows
 * `steps` contains pipeline tasks (in this case, just one)
@@ -215,4 +221,6 @@ Source: Conversation with Bing, 11/30/2023
 (5) Set Git branch security and permissions - Azure Repos. https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-permissions?view=azure-devops.
 (6) undefined. https://dev.azure.com/.
 
-3v4wuprtwwpto45ws7xakz5a5mb5vptiqxkckkhcmczdhjlt4u7a
+tqzrk7eseegip2db5gekj32q6dun4ylvh3ewelrscxyydqeufqoq
+
+
