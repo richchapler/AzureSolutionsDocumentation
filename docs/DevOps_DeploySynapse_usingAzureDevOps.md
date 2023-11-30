@@ -139,6 +139,7 @@ steps:
 ```
 
 Logic Explained:
+* `variables` define variables that can be used throughout the pipeline (in this case, a Variable Group named `rchaplerdvg`
 * `pool...` specifies use of a virtual machine with the latest version of Windows
 * `steps` contains pipeline tasks (in this case, just one)
   * `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
