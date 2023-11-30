@@ -122,7 +122,12 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- script: az config set extension.use_dynamic_install=yes_without_prompt
+  displayName: 'Allow extensions'
+- script: echo $(System.AccessToken) | az devops login
+  displayName: 'Login to DevOps'
 - task: AzureCLI@2
+  displayName: 'Archive current QA branch'
   inputs:
     # azureSubscription: $(azureSubscription)
     azureSubscription: "MCAPS-Hybrid-REQ-38779-2022-RichardChapler (ed7eaf77-d411-484b-92e6-5cba0b6d8098)"
@@ -142,6 +147,11 @@ steps:
       az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
 
 ```
+ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this action. Details: identity 'Build\af617e9d-b167-4635-9ddc-21574b369387', scope 'repository'.
+
+### Need to grant these permissions... Build\af617e9d-b167-4635-9ddc-21574b369387, Git 'CreateBranch' permission
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0ae5d1e7-2fa6-454b-bc19-c200a94af997" width="800" title="Snipped: November 29, 2023" />
 
 Logic Explained:
 LOREM IPSUM
