@@ -115,6 +115,9 @@ Review default selections on the "Save and run" pop-out and then click "Save".
 Click "Edit" and on the resulting screen, paste the following YAML:
 
 ```
+variables:
+- group: 'rchaplerdvg'
+
 pool:
   vmImage: 'windows-latest'
 
@@ -157,9 +160,12 @@ Click "Save".
 
 Click "Run".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/810058e4-b916-4e51-bdfb-34704324fd8b" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/810058e4-b916-4e51-bdfb-34704324fd8b" width="800" title="Snipped: November 30, 2023" />
 
 On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b092bda-909e-46fd-bd45-0124d5972002" width="800" title="Snipped: November 30, 2023" />
+
 
 
 
