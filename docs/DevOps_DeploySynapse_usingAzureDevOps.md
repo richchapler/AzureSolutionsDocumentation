@@ -190,3 +190,7 @@ Lorem Ipsum
 
 -----
 -----
+
+## Reference
+
+* [Use personal access tokens](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
