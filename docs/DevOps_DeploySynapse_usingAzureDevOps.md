@@ -151,7 +151,7 @@ ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this acti
 
 ### Need to grant these permissions... Build\af617e9d-b167-4635-9ddc-21574b369387, Git 'CreateBranch' permission
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0ae5d1e7-2fa6-454b-bc19-c200a94af997" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b7e9fce-b282-49ec-b3ef-3889ee22b2b2" width="800" title="Snipped: November 29, 2023" />
 
 Logic Explained:
 LOREM IPSUM
