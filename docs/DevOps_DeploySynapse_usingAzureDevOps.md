@@ -115,28 +115,21 @@ Review default selections on the "Save and run" pop-out and then click "Save".
 Click "Edit" and on the resulting screen, paste the following YAML:
 
 ```
-# variables:
-# - group: 'rchaplerdvg'
-
 pool:
   vmImage: 'windows-latest'
 
 steps:
 - script: az config set extension.use_dynamic_install=yes_without_prompt
-  displayName: 'Allow extensions'
+  displayName: 'Allow Extensions'
 - script: echo $(System.AccessToken) | az devops login
   displayName: 'Login to DevOps'
 - task: AzureCLI@2
-  displayName: 'Archive current QA branch'
+  displayName: 'Prepare Branches'
   inputs:
-    # azureSubscription: $(azureSubscription)
     azureSubscription: "MCAPS-Hybrid-REQ-38779-2022-RichardChapler (ed7eaf77-d411-484b-92e6-5cba0b6d8098)"
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      # az upgrade
-      # az extension add -n azure-devops
-      # az extension update -n azure-devops
       $o = "https://dev.azure.com/rchaplerdo"
       $p = "rchaplerdp"
       $r = "rchaplerdr"
@@ -145,9 +138,15 @@ steps:
       $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
       $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
       az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
-
 ```
-ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this action. Details: identity 'Build\af617e9d-b167-4635-9ddc-21574b369387', scope 'repository'.
+variables:
+- group: 'rchaplerdvg'
+azureSubscription: $(azureSubscription)
+az upgrade
+az extension add -n azure-devops
+az extension update -n azure-devops
+      
+      ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this action. Details: identity 'Build\af617e9d-b167-4635-9ddc-21574b369387', scope 'repository'.
 
 ### Need to grant these permissions... Build\af617e9d-b167-4635-9ddc-21574b369387, Git 'CreateBranch' permission
 
