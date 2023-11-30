@@ -157,9 +157,9 @@ Click "Save".
 
 Click "Run".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/adb3e906-11f4-4c39-8414-9c413c4f0d87" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/810058e4-b916-4e51-bdfb-34704324fd8b" width="800" title="Snipped: November 29, 2023" />
 
-On the resulting "Run pipeline" pop-out, review default settings and then click "Run".
+On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
 
 
 
