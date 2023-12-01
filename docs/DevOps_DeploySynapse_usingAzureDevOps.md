@@ -92,20 +92,20 @@ Replace the default YAML with:
 
 ```
 jobs:
-- job: Login to DevOps
+- job: Login
   pool:
     vmImage: 'windows-latest'
   steps:
   - script: echo $(System.AccessToken) | az devops login
     displayName: 'Login to DevOps'
 
-- job: Manage Branches
+- job: Deploy
   dependsOn: Login
   pool:
     vmImage: 'windows-latest'
   steps:
   - task: AzureCLI@2
-    displayName: 'Prepare Branches'
+    displayName: 'Archive QA Branch'
     inputs:
       azureSubscription: "AzureSubscription"
       scriptType: 'pscore'
