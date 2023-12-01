@@ -106,21 +106,39 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      $o = "https://dev.azure.com/rchaplerdo"
-      $p = "rchaplerdp"
-      $r = "rchaplerdr"
+      $o = "https://dev.azure.com/rchapler"
+      $p = "devops"
+      $r = "synapse"
       $b = "QA"
       $dt = Get-Date -Format "yyyyMMddHHmmss"
       $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
       $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
       az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
-variables:
-- group: 'rchaplerdvg'
-azureSubscription: $(azureSubscription)
-az upgrade
-az extension add -n azure-devops
-az extension update -n azure-devops
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/383bcebf-09ce-4224-bec3-121ac9b26cdf" width="800" title="Snipped: November 30, 2023" />
+
+#### Logic Explained (LOREM IPSUM)
+* `variables` define variables that can be used throughout the pipeline (in this case, the variable group created in Exercise 1)
+* `pool...` specifies use of a virtual machine with the latest version of Windows
+* `steps` contains pipeline tasks (in this case, just one)
+  * `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
+    * `inputs` specifies the inputs for the Azure CLI task:
+      * `azureSubscription: $(azureSubscription)` specifies the Azure subscription to use (using the previously-set variable)
+      * `scriptType: 'pscore'` indicates a PowerShell Core script
+      * `scriptLocation: 'inlineScript'` indicates that the script to be executed is written directly in the YAML file
+      * `inlineScript` is the actual script, which does the following:
+        * Sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and current datetime (`$dt`)
+        * Retrieves the object ID of the specified branch in the repository with the `az repos ref show` command
+        * Creates a new branch with the same object ID as the original branch using the `az repos ref create` command
+          * The new branch's name is the original branch's name appended with the current datetime
+
+
+
+
+`az upgrade`
+`az extension add -n azure-devops`
+`az extension update -n azure-devops`
       
       ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this action. Details: identity 'Build\af617e9d-b167-4635-9ddc-21574b369387', scope 'repository'.
 
