@@ -30,9 +30,7 @@
 ## Exercise 1: Starter Pipeline
 In this exercise, we will prepare a DevOps Pipeline that will: 1) archive the existing QA branch, 2) create a new QA branch copied from the PROD branch, and 3) complete a pull request from the DEV branch.
 
-### Step 1: Link Subscription
-
-#### "azureSubscription"
+### Step 1: Create Service Connection
 
 Navigate to Azure DevOps >> Project >> Project Settings >> Pipelines >> Service Connections.
 
@@ -44,15 +42,20 @@ Click "Create service connection".
 
 On the "New service connection" pop-out, select "Azure Resource Manager" and then click "Next".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eeed2c00-86a0-4394-9393-2ad994f19bac" width="800" title="Snipped: November 30, 2023" />
+
+On the "New Azure service connection" pop-out, select "Workload Identity federation (automatic)" and then click "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/13bd959f-5fbe-49d9-9a3c-a16ed892ed32" width="800" title="Snipped: November 30, 2023" />
+
+Complete the resulting "New Azure service connection" pop-out, and then click "Save".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b69f5927-4d11-4596-8f02-410f18882356" width="800" title="Snipped: November 29, 2023" />
+
+-----
 
 
 
-
-
-
-
-
-Copy the name of the Service Connection to your Azure Subscription.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9d2b0d78-76dd-4a3d-a738-29d2fb86d818" width="800" title="Snipped: November 29, 2023" />
 
