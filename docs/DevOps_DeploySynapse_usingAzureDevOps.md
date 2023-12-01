@@ -30,7 +30,7 @@
 -----
 
 ## Exercise 1: Starter Pipeline
-In this exercise, we will prepare a DevOps Pipeline that will: 1) archive the existing QA branch, 2) create a new QA branch copied from the PROD branch, and 3) complete a pull request from the DEV branch.
+In this exercise, we will create and test a minimum viable pipeline to demonstrate basic functionality.
 
 ### Step 1: Create Service Connection
 
@@ -143,9 +143,9 @@ On the resulting "Run pipeline" pop-out, review default settings, check "Enable 
 
 Click on the "Deploy_toQA" job.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d85fe7f1-3608-4175-b4e7-63179ca41977" width="800" title="Snipped: December 1, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a745dad-3fa5-40b6-88b0-d91edde33288" width="800" title="Snipped: December 1, 2023" />
 
-Navigate to DevOps >> Repos >> Branches and click on the "All tab".
+Confirm job run success and then navigate to DevOps >> Repos >> Branches and click on the "All tab".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4559ae96-5afc-4a3b-8e57-67c955cbaa9c" width="800" title="Snipped: December 1, 2023" />
 
