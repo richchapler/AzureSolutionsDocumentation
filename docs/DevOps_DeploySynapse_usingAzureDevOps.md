@@ -58,9 +58,23 @@ Complete the resulting "New Azure service connection" pop-out, and then click "S
 
 Navigate to Azure DevOps >> Pipelines >> Pipelines.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4b2f5f9e-530e-4e0b-abb5-a7274a70a0ad" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7648bab1-5200-4ac2-ac1e-82ce5a1ce7b0" width="800" title="Snipped: November 30, 2023" />
 
 Click "+ Create Pipeline".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac5d27b4-4bcd-41e7-8bc4-b9cc75d7c8f3" width="800" title="Snipped: November 30, 2023" />
+
+Select "Azure Repos Git".
+
+
+
+-----
+
+
+
+
+
+
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2c9ed00-82f2-4d1a-8312-daed57020761" width="800" title="Snipped: November 29, 2023" />
 
