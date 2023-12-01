@@ -1,12 +1,17 @@
-# Deploy Synapse using Azure DevOps
+# DevOps: Synapse Deployment Automation
 
-## Challenges
-* Deploying from DEV to QA... cannot parameterize integration runtime naming
-* Need to automatically manage branches
-* Handle Default Synapse Objects
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8695974f-8513-4de5-b7cc-d35a4cd89ce5" width="1000" />
 
-## Prepare Environment
+## Use Case
+* "We want to automate the manual parts of our Synapse deployment process {e.g., integration runtime handling}"
 
+## Proposed Solution
+* Starter Pipeline: Create and test a minimum viable pipeline to demonstrate basic functionality
+* "Branch Deployment" Pipeline
+* "Integration Runtime" Pipeline
+* TBD...
+
+## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
   * "Parallel Jobs" enabled
   * Project Settings >> Repos >> Respositories >> Security >> User Permissions... "{repository} Build Service" | Allow "Create branch"
