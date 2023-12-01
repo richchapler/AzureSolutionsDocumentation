@@ -102,7 +102,7 @@ steps:
 - task: AzureCLI@2
   displayName: 'Prepare Branches'
   inputs:
-    azureSubscription: "MCAPS-Hybrid-REQ-38779-2022-RichardChapler (ed7eaf77-d411-484b-92e6-5cba0b6d8098)"
+    azureSubscription: "AzureSubscription"
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
