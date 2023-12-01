@@ -93,18 +93,13 @@ Replace the default YAML with:
 
 ```
 jobs:
-- job: Login
+- job: Deploy_toQA
   pool:
     vmImage: 'windows-latest'
   steps:
   - script: echo $(System.AccessToken) | az devops login
     displayName: 'Login to DevOps'
 
-- job: Deploy
-  dependsOn: Login
-  pool:
-    vmImage: 'windows-latest'
-  steps:
   - task: AzureCLI@2
     displayName: 'Archive QA Branch'
     inputs:
