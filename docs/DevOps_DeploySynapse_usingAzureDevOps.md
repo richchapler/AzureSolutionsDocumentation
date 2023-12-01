@@ -91,31 +91,36 @@ Click "Edit".
 Replace the default YAML with:
 
 ```
-pool:
-  vmImage: 'windows-latest'
+jobs:
+- job: Login to DevOps
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - script: echo $(System.AccessToken) | az devops login
+    displayName: 'Login to DevOps'
 
-steps:
-- script: az config set extension.use_dynamic_install=yes_without_prompt
-  displayName: 'Allow Extensions'
-- script: echo $(System.AccessToken) | az devops login
-  displayName: 'Login to DevOps'
-- task: AzureCLI@2
-  displayName: 'Prepare Branches'
-  inputs:
-    azureSubscription: "AzureSubscription"
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      $o = "https://dev.azure.com/rchapler"
-      $p = "devops"
-      $r = "synapse"
-      $b = "QA"
-      $dt = Get-Date -Format "yyyyMMddHHmmss"
-      $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
-      $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
-      az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
+- job: Manage Branches
+  dependsOn: Login
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - task: AzureCLI@2
+    displayName: 'Prepare Branches'
+    inputs:
+      azureSubscription: "AzureSubscription"
+      scriptType: 'pscore'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        $o = "https://dev.azure.com/rchapler"
+        $p = "devops"
+        $r = "synapse"
+        $b = "QA"
+        $dt = Get-Date -Format "yyyyMMddHHmmss"
+        $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
+        $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
+        az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
-
+Purchase a paid agent. You can do this by going to Organization Settings, selecting Parallel Jobs, and then clicking on Purchase parallel jobs2.
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/383bcebf-09ce-4224-bec3-121ac9b26cdf" width="800" title="Snipped: November 30, 2023" />
 
 #### Logic Explained (LOREM IPSUM)
