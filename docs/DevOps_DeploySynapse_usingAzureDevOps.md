@@ -82,22 +82,13 @@ On the "Review" tab, click to dropdown "Save and run", and then click "Save".
 
 On the resulting pop-out, click "Save".
 
------
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b200aa8-c298-4070-b2f8-b186c63d675a" width="800" title="Snipped: November 30, 2023" />
 
+Click "Edit".
 
-LOREM IPSUM
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d3fefb4-2a0d-479e-947e-90aeb684b74f" width="800" title="Snipped: November 30, 2023" />
 
-
-
-
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ed5bd309-9963-48cd-95c1-40c6c800de29" width="800" title="Snipped: November 29, 2023" />
-
-Review default selections on the "Save and run" pop-out and then click "Save".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f3b830df-6faf-4e59-b467-dbe8eacf4172" width="800" title="Snipped: November 29, 2023" />
-
-Click "Edit" and on the resulting screen, paste the following YAML:
+Replace the default YAML with:
 
 ```
 pool:
