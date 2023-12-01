@@ -54,16 +54,6 @@ Complete the resulting "New Azure service connection" pop-out, and then click "S
 
 -----
 
-
-
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9d2b0d78-76dd-4a3d-a738-29d2fb86d818" width="800" title="Snipped: November 29, 2023" />
-
-LOREM IPSUM
-
-
------
-
 ### Step 2: Create Pipeline
 
 Navigate to Azure DevOps >> Pipelines >> Pipelines.
