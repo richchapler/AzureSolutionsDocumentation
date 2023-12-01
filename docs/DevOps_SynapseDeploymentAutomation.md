@@ -230,7 +230,6 @@ jobs:
         $pbid = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(pb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
         az repos ref create --name "refs/heads/$(qb)" --organization $(o) --project $(p) --repository $(r) --object-id $pbid
 
-
 - job: PullRequest_DEVtoQA
   dependsOn: CopyBranch_PROD
   steps:
