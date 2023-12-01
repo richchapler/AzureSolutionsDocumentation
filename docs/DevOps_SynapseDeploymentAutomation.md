@@ -247,3 +247,5 @@ jobs:
         echo "***** Creating Pull Request (from DEV to QA)"
         az repos pr create --source-ref "$(db)" --target-ref "$(qb)" --title "Pull Request, DEV >> QA" --organization $(o) --project $(p) --repository $(r)
 ```
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/e7deda7c-c7dd-45cb-b554-9f11b438e663)
