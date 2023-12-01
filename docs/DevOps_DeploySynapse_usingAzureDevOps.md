@@ -92,8 +92,7 @@ Click "Edit".
 
 Replace the default YAML with:
 
-```
-jobs:
+```jobs:
 - job: Deploy_toQA
   pool:
     vmImage: 'windows-latest'
@@ -112,44 +111,23 @@ jobs:
         $p = "devops"
         $r = "synapse"
         $b = "QA"
-        $dt = Get-Date -Format "yyyyMMddHHmmss"
+        $dt = Get-Date -Format "yyyyMMddHHmmss"        
         $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
         $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
         az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/383bcebf-09ce-4224-bec3-121ac9b26cdf" width="800" title="Snipped: November 30, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/037b8941-a975-4e88-9a11-cd85a7972e33" width="800" title="Snipped: December 1, 2023" />
 
-#### Logic Explained (LOREM IPSUM)
-* `variables` define variables that can be used throughout the pipeline (in this case, the variable group created in Exercise 1)
-* `pool...` specifies use of a virtual machine with the latest version of Windows
-* `steps` contains pipeline tasks (in this case, just one)
-  * `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
-    * `inputs` specifies the inputs for the Azure CLI task:
-      * `azureSubscription: $(azureSubscription)` specifies the Azure subscription to use (using the previously-set variable)
-      * `scriptType: 'pscore'` indicates a PowerShell Core script
-      * `scriptLocation: 'inlineScript'` indicates that the script to be executed is written directly in the YAML file
-      * `inlineScript` is the actual script, which does the following:
-        * Sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and current datetime (`$dt`)
-        * Retrieves the object ID of the specified branch in the repository with the `az repos ref show` command
-        * Creates a new branch with the same object ID as the original branch using the `az repos ref create` command
-          * The new branch's name is the original branch's name appended with the current datetime
+#### Logic Explained
 
-Logic Explained:
-LOREM IPSUM
-* `variables` define variables that can be used throughout the pipeline (in this case, the variable group created in Exercise 1)
-* `pool...` specifies use of a virtual machine with the latest version of Windows
-* `steps` contains pipeline tasks (in this case, just one)
-  * `task: AzureCLI@2` runs commands using version 2 of the Azure CLI
-    * `inputs` specifies the inputs for the Azure CLI task:
-      * `azureSubscription: $(azureSubscription)` specifies the Azure subscription to use (using the previously-set variable)
-      * `scriptType: 'pscore'` indicates a PowerShell Core script
-      * `scriptLocation: 'inlineScript'` indicates that the script to be executed is written directly in the YAML file
-      * `inlineScript` is the actual script, which does the following:
-        * Sets variables for the organization URL (`$o`), project (`$p`), repository (`$r`), branch (`$b`), and current datetime (`$dt`)
-        * Retrieves the object ID of the specified branch in the repository with the `az repos ref show` command
-        * Creates a new branch with the same object ID as the original branch using the `az repos ref create` command
-          * The new branch's name is the original branch's name appended with the current datetime
+* `Deploy_toQA` is the main job
+* `Login to DevOps` logs into Azure DevOps using the System Access Token
+* `Archive QA Branch` uses the Azure CLI to archive the QA branch by:
+   - Getting the current date and time
+   - Listing all the branches in the repository {i.e., `$branches = az repos ref list...`}
+   - Finding the object identifier of the current QA branch {i.e., `$oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"}...`}
+   - Creating a new branch based on the current QA branch {i.e., `az repos ref create...`}
 
 Click "Save".
 
