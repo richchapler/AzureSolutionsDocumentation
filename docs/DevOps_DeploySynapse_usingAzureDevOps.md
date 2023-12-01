@@ -9,6 +9,7 @@
 
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
   * "Parallel Jobs" enabled
+  * Project Settings >> Repos >> Respositories >> Security >> User Permissions... "{repository} Build Service" | Allow "Create branch"
 * "DEV" Environment
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
@@ -133,14 +134,6 @@ jobs:
         * Retrieves the object ID of the specified branch in the repository with the `az repos ref show` command
         * Creates a new branch with the same object ID as the original branch using the `az repos ref create` command
           * The new branch's name is the original branch's name appended with the current datetime
-
-
-      
-## ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this action. Details: identity 'Build\af617e9d-b167-4635-9ddc-21574b369387', scope 'repository'.
-
-### Need to grant these permissions... Build\af617e9d-b167-4635-9ddc-21574b369387, Git 'CreateBranch' permission
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b7e9fce-b282-49ec-b3ef-3889ee22b2b2" width="800" title="Snipped: November 29, 2023" />
 
 Logic Explained:
 LOREM IPSUM
