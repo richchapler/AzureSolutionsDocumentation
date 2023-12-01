@@ -64,9 +64,19 @@ Click "+ Create Pipeline".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac5d27b4-4bcd-41e7-8bc4-b9cc75d7c8f3" width="800" title="Snipped: November 30, 2023" />
 
-Select "Azure Repos Git".
+On the "Connect" tab, click to select "Azure Repos Git".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fbc1ea37-1460-47c3-8fe6-0dd93597c7a5" width="800" title="Snipped: November 30, 2023" />
 
+On the "Select" tab, click to select your repository.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b9e1b932-6336-4ec2-9580-34b8c887fec6" width="800" title="Snipped: November 30, 2023" />
+
+On the "Configure" tab, click to select "Starter pipeline".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b7a8fcb3-923a-439f-8ca9-b80a33fa3486" width="800" title="Snipped: November 30, 2023" />
+
+On the "Review" tab, click to dropdown "Save and run", and then click "Save".
 
 -----
 
@@ -76,21 +86,6 @@ Select "Azure Repos Git".
 
 
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2c9ed00-82f2-4d1a-8312-daed57020761" width="800" title="Snipped: November 29, 2023" />
-
-On the "Select a repository" page, click on your repository.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/08580679-e6b9-4fd0-b8c8-e069eec21544" width="800" title="Snipped: November 29, 2023" />
-
-Complete the "Inventory your pipeline" form and then click "Configure pipeline".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7a2c6ea2-47f4-4f16-913c-ac4edcf08c87" width="800" title="Snipped: November 29, 2023" />
-
-On the "Configure your pipeline" page, select "Starter Pipeline" and then click "Review pipeline".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d396c1ea-2843-4b1b-a450-d47b93fc2c4a" width="800" title="Snipped: November 29, 2023" />
-
-Complete the "Review your governed pipeline" page, dropdown "Save and run", and then click "Save".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ed5bd309-9963-48cd-95c1-40c6c800de29" width="800" title="Snipped: November 29, 2023" />
 
