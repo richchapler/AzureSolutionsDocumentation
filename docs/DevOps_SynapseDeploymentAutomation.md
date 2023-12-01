@@ -14,7 +14,7 @@
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
   * "Parallel Jobs" enabled
-  * Project Settings >> Repos >> Respositories >> Security >> User Permissions... "{repository} Build Service" | Allow "Create branch"
+  * Project Settings >> Repos >> Respositories >> Security >> User Permissions... "{repository} Build Service" >> Allow "Create branch"
 * "DEV" Environment
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
@@ -119,7 +119,7 @@ Replace the default YAML with:
         $dt = Get-Date -Format "yyyyMMddHHmmss"        
         $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
         $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
-        az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
+        az repos ref create --name "refs/heads/archive/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/037b8941-a975-4e88-9a11-cd85a7972e33" width="800" title="Snipped: December 1, 2023" />
@@ -162,3 +162,51 @@ You can expect to see a new branch named "QA-{datetime}".
 
 -----
 -----
+
+## Exercise 2: QA Deployment
+In this exercise, we will create and test a minimum viable pipeline to demonstrate basic functionality.
+
+### Step 1: Create Service Connection
+
+```
+jobs:
+- job: Deploy_toQA
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - script: echo $(System.AccessToken) | az devops login
+    displayName: 'Login to DevOps'
+
+  - task: AzureCLI@2
+    displayName: 'Copy Branch, QA >> QA-{timestamp}'
+    inputs:
+      azureSubscription: "AzureSubscription"
+      scriptType: 'pscore'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        $o = "https://dev.azure.com/rchapler"
+        $p = "devops"
+        $r = "synapse"
+        $bd = "DEV"
+        $bq = "QA"
+        $bp = "PROD"
+        $dt = Get-Date -Format "yyyyMMddHHmmss"
+
+        # Copy Branch, QA >> QA-{timestamp}
+        $qaBranch = az repos ref list --org $o -p $p -r $r --filter "heads/$bq" | ConvertFrom-Json
+        $qaOid = $qaBranch | Where-Object {$_.name -eq "refs/heads/$bq"} | Select-Object -ExpandProperty objectId
+        az repos ref create --name "refs/heads/archive/$bq-$dt" --object-id $qaOid --project $p --repository $r --organization $o
+
+        # Delete Branch, QA
+        az repos ref delete --name "refs/heads/$bq" --project $p --repository $r --organization $o
+
+        # Copy Branch, PROD >> QA
+        $prodBranch = az repos ref list --org $o -p $p -r $r --filter "heads/$bp" | ConvertFrom-Json
+        $prodOid = $prodBranch | Select-Object -ExpandProperty objectId
+        az repos ref create --name "refs/heads/$bq" --object-id $prodOid --project $p --repository $r --organization $o
+
+        # Pull Request, DEV >> QA
+        $devBranch = az repos ref list --org $o -p $p -r $r --filter "heads/DEV" | ConvertFrom-Json
+        $devOid = $devBranch | Select-Object -ExpandProperty objectId
+        az repos pr create --source-ref "refs/heads/$bd" --target-ref "refs/heads/$bq" --title "Pull Request, DEV >> QA" --project $p --repository $r --organization $o
+```
