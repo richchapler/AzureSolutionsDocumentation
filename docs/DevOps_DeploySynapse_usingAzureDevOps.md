@@ -116,7 +116,7 @@ jobs:
         $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
         az repos ref create --name "refs/heads/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
 ```
-Purchase a paid agent. You can do this by going to Organization Settings, selecting Parallel Jobs, and then clicking on Purchase parallel jobs2.
+
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/383bcebf-09ce-4224-bec3-121ac9b26cdf" width="800" title="Snipped: November 30, 2023" />
 
 #### Logic Explained (LOREM IPSUM)
@@ -135,13 +135,8 @@ Purchase a paid agent. You can do this by going to Organization Settings, select
           * The new branch's name is the original branch's name appended with the current datetime
 
 
-
-
-`az upgrade`
-`az extension add -n azure-devops`
-`az extension update -n azure-devops`
       
-      ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this action. Details: identity 'Build\af617e9d-b167-4635-9ddc-21574b369387', scope 'repository'.
+## ERROR: TF401027: You need the Git 'CreateBranch' permission to perform this action. Details: identity 'Build\af617e9d-b167-4635-9ddc-21574b369387', scope 'repository'.
 
 ### Need to grant these permissions... Build\af617e9d-b167-4635-9ddc-21574b369387, Git 'CreateBranch' permission
 
