@@ -169,8 +169,10 @@ In this exercise, we will create and test a minimum viable pipeline to demonstra
 ### Step 1: Update Pipeline
 
 ```
+variables: {o: "https://dev.azure.com/rchapler", p: "devops", r: "synapse", db: "DEV", qb: "QA", pb: "PROD"}
+
 jobs:
-- job: Deploy_toQA
+- job: ArchiveQA
   pool:
     vmImage: 'windows-latest'
   steps:
@@ -178,35 +180,52 @@ jobs:
     displayName: 'Login to DevOps'
 
   - task: AzureCLI@2
-    displayName: 'Copy Branch, QA >> QA-{timestamp}'
+    displayName: 'Copy QA Branch to ../archive/QA-{timestamp}'
     inputs:
       azureSubscription: "AzureSubscription"
       scriptType: 'pscore'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        $o = "https://dev.azure.com/rchapler"
-        $p = "devops"
-        $r = "synapse"
-        $bd = "DEV"
-        $bq = "QA"
-        $bp = "PROD"
+        echo "***** Copying QA Branch to ../archive/QA-{timestamp}"
+        $qbid = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(qb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
+
+        # $utcNow = [DateTime]::UtcNow
+        # $pacificTimeZone = [System.TimeZoneInfo]::FindSystemTimeZoneById("Pacific Standard Time")
+        # $pacificTime = [System.TimeZoneInfo]::ConvertTimeFromUtc($utcNow, $pacificTimeZone)
+        # $dt = Get-Date $pacificTime -Format "yyyyMMddHHmmss"
         $dt = Get-Date -Format "yyyyMMddHHmmss"
 
-        # Copy Branch, QA >> QA-{timestamp}
-        $qaBranch = az repos ref list --org $o -p $p -r $r --filter "heads/$bq" | ConvertFrom-Json
-        $qaOid = $qaBranch | Where-Object {$_.name -eq "refs/heads/$bq"} | Select-Object -ExpandProperty objectId
-        az repos ref create --name "refs/heads/archive/$bq-$dt" --object-id $qaOid --project $p --repository $r --organization $o
+        az repos ref create --name "refs/heads/archive/$(qb)-$dt" --object-id $qbid --project $(p) --repository $(r) --organization $(o)
 
-        # Delete Branch, QA
-        az repos ref delete --name "refs/heads/$bq" --project $p --repository $r --organization $o
+- job: Deploy_toQA
+  dependsOn: ArchiveQA
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - script: echo $(System.AccessToken) | az devops login
+    displayName: 'Login to DevOps'
 
-        # Copy Branch, PROD >> QA
-        $prodBranch = az repos ref list --org $o -p $p -r $r --filter "heads/$bp" | ConvertFrom-Json
-        $prodOid = $prodBranch | Select-Object -ExpandProperty objectId
-        az repos ref create --name "refs/heads/$bq" --object-id $prodOid --project $p --repository $r --organization $o
+  - task: AzureCLI@2
+    displayName: 'Deploy to QA'
+    inputs:
+      azureSubscription: "AzureSubscription"
+      scriptType: 'pscore'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        $devBranch_Id = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(db)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
+        $qaBranch_Id = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(qb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
+        $prodBranch_Id = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(pb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
 
-        # Pull Request, DEV >> QA
-        $devBranch = az repos ref list --org $o -p $p -r $r --filter "heads/DEV" | ConvertFrom-Json
-        $devOid = $devBranch | Select-Object -ExpandProperty objectId
-        az repos pr create --source-ref "refs/heads/$bd" --target-ref "refs/heads/$bq" --title "Pull Request, DEV >> QA" --project $p --repository $r --organization $o
+        # echo "***** Copying QA Branch to ../archive/QA-{timestamp}"
+        # $dt = Get-Date -Format "yyyyMMddHHmmss"
+        # az repos ref create --name "refs/heads/archive/$(qb)-$dt" --object-id $qaBranch_Id --project $(p) --repository $(r) --organization $(o)
+
+        echo "***** Deleting QA Branch"
+        az repos ref delete --detect --name "refs/heads/$(qb)" --project $(p) --repository $(r) --organization $(o) || echo "QA branch does not exist. Continuing..."
+
+        echo "***** Copying PROD Branch to QA"
+        az repos ref create --name "refs/heads/$(qb)" --object-id $prodBranch_Id --project $(p) --repository $(r) --organization $(o)
+
+        echo "***** Creating Pull Request (from DEV to QA)"
+        az repos pr create --source-ref "refs/heads/$(db)" --target-ref "refs/heads/$(qb)" --title "Pull Request, DEV >> QA" --project $(p) --repository $(r) --organization $(o)
 ```
