@@ -135,30 +135,21 @@ Click "Save".
 
 Click "Run".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/810058e4-b916-4e51-bdfb-34704324fd8b" width="800" title="Snipped: November 30, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc6f9899-dfc4-4eab-9da5-361e33ee1b3b" width="800" title="Snipped: December 1, 2023" />
 
 On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b092bda-909e-46fd-bd45-0124d5972002" width="800" title="Snipped: November 30, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/95b99284-33a1-4215-9391-1034dfc2a1ff" width="800" title="Snipped: December 1, 2023" />
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2daf7503-ce76-4995-b865-d043d2d97991" width="800" title="Snipped: December 1, 2023" />
+Click on the "Deploy_toQA" job.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d85fe7f1-3608-4175-b4e7-63179ca41977" width="800" title="Snipped: December 1, 2023" />
 
 Navigate to DevOps >> Repos >> Branches and click on the "All tab".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4559ae96-5afc-4a3b-8e57-67c955cbaa9c" width="800" title="Snipped: December 1, 2023" />
 
 You can expect to see a new branch named "QA-{datetime}".
-
-
-
-
-
-
-
-
-
-
-Lorem Ipsum
 
 -----
 
