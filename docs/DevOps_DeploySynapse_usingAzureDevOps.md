@@ -153,8 +153,6 @@ LOREM IPSUM
 
 Click "Save".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0badec96-6cb1-47c7-a7b7-d6a4b6b2f03b" width="800" title="Snipped: November 29, 2023" />
-
 #### Confirm Success
 
 Click "Run".
@@ -165,16 +163,18 @@ On the resulting "Run pipeline" pop-out, review default settings, check "Enable 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b092bda-909e-46fd-bd45-0124d5972002" width="800" title="Snipped: November 30, 2023" />
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2daf7503-ce76-4995-b865-d043d2d97991" width="800" title="Snipped: December 1, 2023" />
+
+Navigate to DevOps >> Repos >> Branches and click on the "All tab".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4559ae96-5afc-4a3b-8e57-67c955cbaa9c" width="800" title="Snipped: December 1, 2023" />
+
+You can expect to see a new branch named "QA-{datetime}".
 
 
 
 
 
-
-
-
-
-This pipeline is useful for creating a new branch from an existing one in an Azure DevOps repository. The new branch will have the same commit history as the original branch. The branch name includes a timestamp, which can be useful for keeping track of when the branch was created.
 
 
 
@@ -188,31 +188,3 @@ Lorem Ipsum
 
 -----
 -----
-
-## Reference
-
-* [Use personal access tokens](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate)
-
-To create, list, and manage branches in Azure DevOps using a Personal Access Token (PAT), the token needs to have the appropriate permissions¹. Here are the permissions you might need:
-
-1. **Code (Read & Write)**: This permission allows you to read and write to the code, which includes creating and deleting branches¹.
-
-2. **Code (Manage)**: This permission allows you to manage code repositories, which includes managing branches¹.
-
-When creating a PAT, you can select the scopes for the token to authorize for your specific tasks¹. For example, to create a token to enable a build and release agent to authenticate to Azure DevOps Services, limit your token's scope to Agent Pools (Read & manage)¹.
-
-Please note that you should treat and use a PAT like your password and keep it a secret¹.
-
-I hope this helps! If you have any other questions, feel free to ask. 😊
-
-Source: Conversation with Bing, 11/30/2023
-(1) Use personal access tokens - Azure DevOps | Microsoft Learn. https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops.
-(2) Azure devops feed with PAT : what permissions are needed?. https://stackoverflow.com/questions/59575282/azure-devops-feed-with-pat-what-permissions-are-needed.
-(3) Grant VSTS user access to create new branches - Stack Overflow. https://stackoverflow.com/questions/47516974/grant-vsts-user-access-to-create-new-branches.
-(4) Keeping your dependencies updated with Azure Pipelines and Dependabot. https://techcommunity.microsoft.com/t5/azure-devops-blog/keeping-your-dependencies-updated-with-azure-pipelines-and/ba-p/3590020.
-(5) Set Git branch security and permissions - Azure Repos. https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-permissions?view=azure-devops.
-(6) undefined. https://dev.azure.com/.
-
-tqzrk7eseegip2db5gekj32q6dun4ylvh3ewelrscxyydqeufqoq
-
-
