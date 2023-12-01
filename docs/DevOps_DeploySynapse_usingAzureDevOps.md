@@ -64,7 +64,7 @@ Click "+ Create Pipeline".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac5d27b4-4bcd-41e7-8bc4-b9cc75d7c8f3" width="800" title="Snipped: November 30, 2023" />
 
-On the "Connect" tab, click to select "Azure Repos Git".
+On the "Connect" tab, click "Azure Repos Git".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fbc1ea37-1460-47c3-8fe6-0dd93597c7a5" width="800" title="Snipped: November 30, 2023" />
 
@@ -72,16 +72,20 @@ On the "Select" tab, click to select your repository.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b9e1b932-6336-4ec2-9580-34b8c887fec6" width="800" title="Snipped: November 30, 2023" />
 
-On the "Configure" tab, click to select "Starter pipeline".
+On the "Configure" tab, click "Starter pipeline".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b7a8fcb3-923a-439f-8ca9-b80a33fa3486" width="800" title="Snipped: November 30, 2023" />
 
 On the "Review" tab, click to dropdown "Save and run", and then click "Save".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9a3a3239-1ef7-4e62-b088-61b308d35e28" width="800" title="Snipped: November 30, 2023" />
+
+On the resulting pop-out, click "Save".
+
 -----
 
 
-
+LOREM IPSUM
 
 
 
