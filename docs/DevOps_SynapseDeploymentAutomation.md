@@ -163,10 +163,10 @@ You can expect to see a new branch named "QA-{datetime}".
 -----
 -----
 
-## Exercise 2: QA Deployment
+## Exercise 2: QA Deployment... WORK-IN-PROGRESS!!!
 In this exercise, we will create and test a minimum viable pipeline to demonstrate basic functionality.
 
-### Step 1: Create Service Connection
+### Step 1: Update Pipeline
 
 ```
 jobs:
