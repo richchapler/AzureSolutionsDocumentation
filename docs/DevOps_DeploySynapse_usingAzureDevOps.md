@@ -2,11 +2,12 @@
 
 ## Challenges
 * Deploying from DEV to QA... cannot parameterize integration runtime naming
+* Need to automatically manage branches
+* Handle Default Synapse Objects
 
 ## Prepare Environment
 
-* [DevOps](https://dev.azure.com/) with Organization, Project, Repository (dedicated to Synapse), and Branches "DEV" and "QA"
-* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault)
+* [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
 * "DEV" Environment
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
@@ -27,7 +28,7 @@
 -----
 
 ## Exercise 1: Starter Pipeline
-In this exercise, we will use a DevOps Pipeline to: 1) archive the existing QA branch, 2) create a new branch from the PROD branch, and 3) complete a pull request from the DEV branch.
+In this exercise, we will prepare a DevOps Pipeline that will: 1) archive the existing QA branch, 2) create a new QA branch copied from the PROD branch, and 3) complete a pull request from the DEV branch.
 
 ### Step 1: Link Subscription
 
@@ -35,50 +36,28 @@ In this exercise, we will use a DevOps Pipeline to: 1) archive the existing QA b
 
 Navigate to Azure DevOps >> Project >> Project Settings >> Pipelines >> Service Connections.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b85a6960-5827-4578-97bc-55dc366862e0" width="800" title="Snipped: November 29, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/63837cf5-e23e-4b11-a940-9f4e9ca828b2" width="800" title="Snipped: November 30, 2023" />
+
+Click "Create service connection".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/82b143c8-4347-4ce4-b327-87143c3f3b4f" width="800" title="Snipped: November 30, 2023" />
+
+On the "New service connection" pop-out, select "Azure Resource Manager" and then click "Next".
+
+
+
+
+
+
+
+
 
 Copy the name of the Service Connection to your Azure Subscription.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9d2b0d78-76dd-4a3d-a738-29d2fb86d818" width="800" title="Snipped: November 29, 2023" />
 
-Navigate to your Key Vault >> Objects >> Secrets and click "+ Generate/Import".
+LOREM IPSUM
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e1046dc4-1f3c-401a-aa20-f33c45d16710" width="800" title="Snipped: November 29, 2023" />
-
-Complete the "Create a secret" form, including:
-
-Prompt | Entry
-:----- | :-----
-Name | azureSubscription
-Secret Value | Previously copied Service Connection Name
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/61067fc1-02b1-4b4b-b471-b0095937ae70" width="800" title="Snipped: November 29, 2023" />
-
-Navigate to Azure DevOps >> Pipelines >> Library.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9a8677a7-2df5-4eb4-b5a4-5a898157ab2c" width="800" title="Snipped: November 29, 2023" />
-
-Click "+ Variable group".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d83881b4-f506-4785-b7cb-02f48e345ed3" width="800" title="Snipped: November 29, 2023" />
-
-Complete the "Properties" form, including:
-
-Prompt | Entry
-:----- | :-----
-Link secrets from an Azure key vault... | Active
-Azure Subscription | Select and Authorize
-Key Vault Name | Select and Authorize<br><sub>_Note: Assign the "Key Vaults Secrets User" role to your Azure DevOps identity to successfully Authorize_</sub>
-
-Click "+ Add".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3c74d5d9-8ce0-43b6-9cb8-72255538f7fb" width="800" title="Snipped: November 29, 2023" />
-
-Click to select the "azureSubscription" secret, then click "Ok".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/66199de0-e600-4fd1-8e46-7524b7b467b3" width="800" title="Snipped: November 29, 2023" />
-
-On the "Properties" page, click "Save".
 
 -----
 
