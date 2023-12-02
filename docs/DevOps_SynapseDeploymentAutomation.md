@@ -170,7 +170,7 @@ You can expect to see a new branch named "QA-{datetime}".
 -----
 
 ## Exercise 2: QA Deployment... WORK-IN-PROGRESS!!!
-In this exercise, we will create and test a minimum viable pipeline to demonstrate basic functionality.
+In this exercise, we will update the pipeline to ensure that the QA branch is always up-to-date with the PROD branch, and that any changes in the DEV branch are proposed to be merged into the QA branch via a pull request. This will help maintain a consistent and controlled flow of changes through the different environments.
 
 ### Step 1: Update Pipeline
 
@@ -239,6 +239,14 @@ jobs:
 
 #### Logic Explained
 
-* `archiveQA` is the main job
-
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/e7deda7c-c7dd-45cb-b554-9f11b438e663)
+* `trigger` specifies that the pipeline should be triggered when there are changes to the `DEV` branch
+* `pool` specifies that the latest Windows virtual machine image should be used for the pipeline
+* `variables` defines several variables that are used throughout the pipeline
+* `jobs` contains the jobs that make up the pipeline; each job has a series of steps that are executed in order
+  * `archiveQA` logs into DevOps and archives the QA branch by copying the QA branch to an archive folder with a timestamp
+  * `resetQA` resets the QA branch from the PROD branch using Git commands to:
+    1) fetch the branches
+    2) checkout the QA branch
+    3) reset the QA branch to match the PROD branch
+    4) force push the changes to the QA branch
+  * `pullrequestDEVtoQA` creates a pull request from the DEV branch to the QA branch
