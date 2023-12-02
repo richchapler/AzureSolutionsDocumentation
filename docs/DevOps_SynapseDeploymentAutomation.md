@@ -99,7 +99,7 @@ Click "Edit".
 Replace the default YAML with:
 
 ```jobs:
-- job: Deploy_toQA
+- job: archiveQA
   pool:
     vmImage: 'windows-latest'
   steps:
