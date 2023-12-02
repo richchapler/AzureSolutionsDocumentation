@@ -98,14 +98,22 @@ Click "Edit".
 
 Replace the default YAML with:
 
-```jobs:
-- job: archiveQA
-  pool:
+```
+trigger:
+  branches:
+    include:
+    - DEV
+
+pool:
     vmImage: 'windows-latest'
+
+variables: {o: "https://dev.azure.com/rchapler", p: "devops", r: "synapse", db: "DEV", qb: "QA", pb: "PROD"}
+
+jobs:
+- job: archiveQA
   steps:
   - script: echo $(System.AccessToken) | az devops login
     displayName: 'Login to DevOps'
-
   - task: AzureCLI@2
     displayName: 'Archive QA Branch'
     inputs:
@@ -113,21 +121,18 @@ Replace the default YAML with:
       scriptType: 'pscore'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        $o = "https://dev.azure.com/rchapler"
-        $p = "devops"
-        $r = "synapse"
-        $b = "QA"
-        $dt = Get-Date -Format "yyyyMMddHHmmss"        
-        $branches = az repos ref list --org $o -p $p -r $r --filter "heads/" | ConvertFrom-Json
-        $oid = $branches | Where-Object {$_.name -eq "refs/heads/$b"} | Select-Object -ExpandProperty objectId
-        az repos ref create --name "refs/heads/archive/$b-$dt" --object-id $oid --project $p --repository $r --organization $o
+        echo "***** Copying QA Branch to ../archive/QA-{timestamp}"
+        $qbid = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(qb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
+        $PST = [System.TimeZoneInfo]::ConvertTimeFromUtc([DateTime]::UtcNow, [System.TimeZoneInfo]::FindSystemTimeZoneById("Pacific Standard Time"))
+        $dt = Get-Date $PST -Format "yyyyMMdd-HHmmss"
+        az repos ref create --name "refs/heads/archive/$(qb)-$dt" --organization $(o) --project $(p) --repository $(r) --object-id $qbid
 ```
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/037b8941-a975-4e88-9a11-cd85a7972e33" width="800" title="Snipped: December 1, 2023" />
 
 #### Logic Explained
 
-* `Deploy_toQA` is the main job
+* `archiveQA` is the main job
 * `Login to DevOps` logs into Azure DevOps using the System Access Token
 * `Archive QA Branch` uses the Azure CLI to archive the QA branch by:
    - Getting the current date and time
@@ -169,6 +174,8 @@ In this exercise, we will create and test a minimum viable pipeline to demonstra
 
 ### Step 1: Update Pipeline
 
+Replace the existing YAML with:
+
 ```
 trigger:
   branches:
@@ -181,7 +188,7 @@ pool:
 variables: {o: "https://dev.azure.com/rchapler", p: "devops", r: "synapse", db: "DEV", qb: "QA", pb: "PROD"}
 
 jobs:
-- job: ArchiveBranch_QA
+- job: archiveQA
   steps:
   - script: echo $(System.AccessToken) | az devops login
     displayName: 'Login to DevOps'
@@ -198,40 +205,24 @@ jobs:
         $dt = Get-Date $PST -Format "yyyyMMdd-HHmmss"
         az repos ref create --name "refs/heads/archive/$(qb)-$dt" --organization $(o) --project $(p) --repository $(r) --object-id $qbid
 
-- job: DeleteBranch_QA
-  dependsOn: ArchiveBranch_QA
+- job: resetQA # possible using Git commands, but not CLI/PowerShell or UI
+  dependsOn: archiveQA
   steps:
-  - script: echo $(System.AccessToken) | az devops login
-    displayName: 'Login to DevOps'
   - task: AzureCLI@2
-    displayName: 'Delete QA Branch'
+    displayName: 'Reset QA from PROD'
     inputs:
       azureSubscription: "AzureSubscription"
       scriptType: 'pscore'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        echo "***** Deleting QA Branch"
-        $qbid = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(qb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
-        az repos ref delete --name "refs/heads/$(qb)" --organization $(o) --project $(p) --repository $(r) --object-id $qbid
+        echo "***** Resetting QA from PROD"
+        git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" fetch
+        git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" checkout QA
+        git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" reset --hard origin/PROD
+        git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push origin QA --force
 
-- job: CopyBranch_PROD
-  dependsOn: DeleteBranch_QA
-  steps:
-  - script: echo $(System.AccessToken) | az devops login
-    displayName: 'Login to DevOps'
-  - task: AzureCLI@2
-    displayName: 'Copy PROD Branch'
-    inputs:
-      azureSubscription: "AzureSubscription"
-      scriptType: 'pscore'
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        echo "***** Copying PROD Branch to QA"
-        $pbid = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(pb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
-        az repos ref create --name "refs/heads/$(qb)" --organization $(o) --project $(p) --repository $(r) --object-id $pbid
-
-- job: PullRequest_DEVtoQA
-  dependsOn: CopyBranch_PROD
+- job: pullrequestDEVtoQA
+  dependsOn: resetQA
   steps:
   - script: echo $(System.AccessToken) | az devops login
     displayName: 'Login to DevOps'
@@ -242,10 +233,12 @@ jobs:
       scriptType: 'pscore'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        $devBranch_Id = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(db)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
-        $qaBranch_Id = az repos ref list --org $(o) -p $(p) -r $(r) --filter "heads/$(qb)" | ConvertFrom-Json | Select-Object -ExpandProperty objectId
         echo "***** Creating Pull Request (from DEV to QA)"
-        az repos pr create --source-ref "$(db)" --target-ref "$(qb)" --title "Pull Request, DEV >> QA" --organization $(o) --project $(p) --repository $(r)
+        az repos pr create --title "DEV >> QA" --organization $(o) --project $(p) --repository $(r) --source-branch "$(db)" --target-branch "$(qb)"
 ```
+
+#### Logic Explained
+
+* `archiveQA` is the main job
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/e7deda7c-c7dd-45cb-b554-9f11b438e663)
