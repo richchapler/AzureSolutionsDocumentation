@@ -173,9 +173,9 @@ You can expect to see a new branch named "QA-{datetime}".
 
 ## Exercise 2: QA Deployment (WiP)
 In this exercise, we will create an automated pipeline triggered by a pull request to DEV, that completes the following three tasks:
-1) Archive QA Branch
-2) Reset QA Branch
-3) Create a Pull Request (from DEV branch to QA branch)
+1) **Archive QA Branch**... make a copy of the current QA branch to a timestamped branch in the "archive" folder
+2) **Reset QA Branch**... force copy PROD branch to QA branch
+3) **Create a Pull Request**... from DEV branch to QA branch
 
 ### Step 1: Update Pipeline
 
