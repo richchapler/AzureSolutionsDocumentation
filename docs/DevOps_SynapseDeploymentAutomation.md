@@ -1,4 +1,4 @@
-# DevOps: Synapse Deployment Automation
+# DevOps: Synapse Deployment Automation (WiP)
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8695974f-8513-4de5-b7cc-d35a4cd89ce5" width="1000" />
 
@@ -169,7 +169,7 @@ You can expect to see a new branch named "QA-{datetime}".
 -----
 -----
 
-## Exercise 2: QA Deployment... WORK-IN-PROGRESS!!!
+## Exercise 2: QA Deployment (WiP)
 In this exercise, we will update the pipeline to ensure that the QA branch is always up-to-date with the PROD branch, and that any changes in the DEV branch are proposed to be merged into the QA branch via a pull request. This will help maintain a consistent and controlled flow of changes through the different environments.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa604584-e507-4922-bf70-78b91888c733" width="600" title="Snipped: December 2, 2023" />
