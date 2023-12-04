@@ -16,8 +16,9 @@
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
   * "Parallel Jobs" enabled
-  * Project Settings >> Repos >> Respositories >> Security >> User Permissions... "{repository} Build Service" >> Allow "Create branch"
-  * Project Settings >> Repos >> Respositories >> Security >> User Permissions... "{repository} Build Service" >> Allow "Force push..."
+  * Project Settings >> Repos >> Respositories >> Security >> User Permissions... "{repository} Build Service"
+    * Allow "Create branch"
+    * Allow "Force push..."
 * "DEV" Environment
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
