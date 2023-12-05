@@ -281,6 +281,17 @@ Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b76554b7-52b6-4a86-ac84-38f37d3add2a" width="800" title="Snipped: December 5, 2023" />
 
+Now we will mimic the Synapse deployment process and confirm pipeline functionality.
+
+##### Process Step 1: Recurring Development
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/073c2c84-14d9-4618-9b28-63b5bbc45b2a" width="800" title="Snipped: December 5, 2023" />
+
+Click the branch dropdown and select "+ New branch".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c959b4fc-23f4-43f0-a455-df65796661d9" width="800" title="Snipped: December 5, 2023" />
+
+Complete the "Create a new branch" popup and click "Create".
 
 -----
 
