@@ -279,27 +279,9 @@ Click the "Save & queue" dropdown and select "Save" from the resulting menu. "Sa
 
 -----
 
-LOREM IPSUM
+SUPPORT CASE PENDING RE: TRIGGERS
 
 ### Step 3: Confirm Success
-
-#### Pipeline Logic
-
-None of the branches currently have content, but we will start with a simple confirmation of pipeline logic.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86278a91-d839-4831-9c1b-5a6cca9d6042" width="800" title="Snipped: December 5, 2023" />
-
-Click "Run".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92debc4b-d5cd-4d07-82a3-69bd01f44630" width="800" title="Snipped: December 5, 2023" />
-
-On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0dd1b512-6432-44fd-842c-9ca549144eff" width="800" title="Snipped: December 5, 2023" />
-
-Confirm successful processing of the three jobs.
-
-#### Synapse
 
 Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
 
@@ -342,8 +324,8 @@ On the "New pull request" page, confirm destination "DEV", review default values
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70b02643-52b6-430a-8d73-8d2eeb7a5d6f" width="800" title="Snipped: December 5, 2023" />
 
-##### Process Step 3: Automated Process
-_Note: the primary human in this step will be the Deployment Manager_
+##### Process Step 3: Deploy_toQA Pipeline
+_Note: the primary human in this step will be the Deployment Manager... PENDING SUPPORT CASE RE: TRIGGER_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d19881f-69ea-4a50-9f7e-3193356837e0" width="800" title="Snipped: December 5, 2023" />
 
@@ -354,8 +336,28 @@ Continuing on the "Adding sqlscript: SQL script 1" pull request page, review Fil
 On the resulting "Complete pull request" pop-out, confirm default settings and then click "Complete merge".
 
 -----
+THE FOLLOWING STEPS ARE ONLY NECESSARY UNTIL SUPPORT HELPS ME FIGURE OUT HOW TO GET THE TRIGGER TO AUTOMATICALLY START THE PIPELINE UPON COMMIT TO DEV BRANCH
+
+<br>Navigate to the "Deploy_toQA" pipeline.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86278a91-d839-4831-9c1b-5a6cca9d6042" width="800" title="Snipped: December 5, 2023" />
+
+Click "Run".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92debc4b-d5cd-4d07-82a3-69bd01f44630" width="800" title="Snipped: December 5, 2023" />
+
+On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0dd1b512-6432-44fd-842c-9ca549144eff" width="800" title="Snipped: December 5, 2023" />
+
+Confirm successful processing of the three jobs.
+
+-----
 
 **Congratulations... you have successfully completed this exercise**
 
 -----
 -----
+
+## Exercise 3: Integration Runtimes
+In this exercise, we will LOREM IPSUM
