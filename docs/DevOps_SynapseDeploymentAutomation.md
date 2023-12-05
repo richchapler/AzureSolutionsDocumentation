@@ -257,7 +257,26 @@ jobs:
     4) force push the changes to the QA branch
   * `pullrequestDEVtoQA` creates a pull request from the DEV branch to the QA branch
 
-### Step 2: Confirm Success
+### Step 2: Activate Trigger
+
+Click the vertical ellipses in the upper-right of the Pipeline Edit screen and select "Triggers" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/264a1a79-3acb-4013-972a-ad16b9c1fec3" width="800" title="Snipped: December 5, 2023" />
+
+On the resulting "Deploy_toQA" page, "Triggers" tab, select the item in the "Continuous integration" grouping.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bf7ee994-ea15-4c9f-8e4a-d9d7a4e46e38" width="800" title="Snipped: December 5, 2023" />
+
+Complete the popout form, including:
+
+
+
+
+-----
+
+LOREM IPSUM
+
+### Step 3: Confirm Success
 
 #### Pipeline Logic
 
@@ -284,6 +303,7 @@ Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
 <br>Now we will mimic the Synapse deployment process and confirm pipeline functionality.
 
 ##### Process Step 1: Recurring Development
+_Note: the primary human in this step will be a developer_
 
 Click the branch dropdown and select "+ New branch".
 
@@ -305,6 +325,7 @@ PRINT 'Hello, World';
 Our goal is to capture a simple change in our branch, but run the logic if you are interested. Click "Commit all".
 
 ##### Process Step 2: Pull Request
+_Note: the primary human in this step will be a developer_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/78061d6e-9e63-4a7b-893e-ba19c5650d83" width="800" title="Snipped: December 5, 2023" />
 
@@ -315,9 +336,17 @@ Click the branch dropdown and select "Create pull request".
 On the "New pull request" page, confirm destination "DEV", review default values and update as desired, and then click "Create".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70b02643-52b6-430a-8d73-8d2eeb7a5d6f" width="800" title="Snipped: December 5, 2023" />
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/)
 
+##### Process Step 3: Automated Process
+_Note: the primary human in this step will be the Deployment Manager_
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d19881f-69ea-4a50-9f7e-3193356837e0" width="800" title="Snipped: December 5, 2023" />
+
+Continuing on the "Adding sqlscript: SQL script 1" pull request page, review Files, etc. and then click "Complete".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/59b179af-b6a8-4f91-9c8d-011c29360ece" width="800" title="Snipped: December 5, 2023" />
+
+On the resulting "Complete pull request" pop-out, confirm default settings and then click "Complete merge".
 
 -----
 
