@@ -145,7 +145,7 @@ jobs:
 
 Click "Save".
 
-#### Confirm Success
+### Step 3: Confirm Success
 
 Click "Run".
 
@@ -155,7 +155,7 @@ On the resulting "Run pipeline" pop-out, review default settings, check "Enable 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/95b99284-33a1-4215-9391-1034dfc2a1ff" width="800" title="Snipped: December 1, 2023" />
 
-Click on the "Deploy_toQA" job.
+Click on the "archiveQA" job.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a745dad-3fa5-40b6-88b0-d91edde33288" width="800" title="Snipped: December 1, 2023" />
 
@@ -172,7 +172,7 @@ You can expect to see a new branch named "QA-{datetime}".
 -----
 -----
 
-## Exercise 2: QA Deployment (WiP)
+## Exercise 2: QA Deployment
 In this exercise, we will create an automated pipeline triggered by a pull request to DEV, that completes the following three tasks:
 1) **Archive QA Branch**... make a copy of the current QA branch to a timestamped branch in the "archive" folder
 2) **Reset QA Branch**... force copy PROD branch to QA branch
@@ -256,3 +256,35 @@ jobs:
     3) reset the QA branch to match the PROD branch
     4) force push the changes to the QA branch
   * `pullrequestDEVtoQA` creates a pull request from the DEV branch to the QA branch
+
+### Step 2: Confirm Success
+
+#### Pipeline Logic
+
+None of the branches currently have content, but we will start with a simple confirmation of pipeline logic.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86278a91-d839-4831-9c1b-5a6cca9d6042" width="800" title="Snipped: December 5, 2023" />
+
+Click "Run".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92debc4b-d5cd-4d07-82a3-69bd01f44630" width="800" title="Snipped: December 5, 2023" />
+
+On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0dd1b512-6432-44fd-842c-9ca549144eff" width="800" title="Snipped: December 5, 2023" />
+
+Confirm successful processing of the three jobs.
+
+#### Synapse
+
+Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b76554b7-52b6-4a86-ac84-38f37d3add2a" width="800" title="Snipped: December 5, 2023" />
+
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+-----
