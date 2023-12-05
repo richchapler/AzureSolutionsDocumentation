@@ -269,8 +269,13 @@ On the resulting "Deploy_toQA" page, "Triggers" tab, select the item in the "Con
 
 Complete the popout form, including:
 
+Prompt | Entry
+:----- | :-----
+**Override the YAML continuous integration trigger**... | Checked
+**Enable continuous integration**... | Selected
+**Branch filters** >> Type... | DEV
 
-
+Click the "Save & queue" dropdown and select "Save" from the resulting menu. "Save" again on the resulting popup.
 
 -----
 
