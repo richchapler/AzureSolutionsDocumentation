@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8695974f-8513-4de5-b7cc-d35a4cd89ce5" width="1000" />
 
 ## Use Case
-* "We want to automate our Synapse deployment process (depicted below)"
+* "We want to automate our Synapse deployment process"
   
   <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/780c08a6-57b4-484d-9310-6b269268054d" width="800" title="Snipped: December 4, 2023" />
 
