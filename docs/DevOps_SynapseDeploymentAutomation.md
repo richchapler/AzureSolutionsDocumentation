@@ -281,17 +281,43 @@ Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b76554b7-52b6-4a86-ac84-38f37d3add2a" width="800" title="Snipped: December 5, 2023" />
 
-Now we will mimic the Synapse deployment process and confirm pipeline functionality.
+<br>Now we will mimic the Synapse deployment process and confirm pipeline functionality.
 
 ##### Process Step 1: Recurring Development
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/073c2c84-14d9-4618-9b28-63b5bbc45b2a" width="800" title="Snipped: December 5, 2023" />
 
 Click the branch dropdown and select "+ New branch".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c959b4fc-23f4-43f0-a455-df65796661d9" width="800" title="Snipped: December 5, 2023" />
 
 Complete the "Create a new branch" popup and click "Create".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1d35684d-c499-4b25-a008-135a60fcc88d" width="800" title="Snipped: December 5, 2023" />
+
+Navigate to Synapse >> Develop, click "+", and then select "SQL script" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d7879cb6-8b91-4b91-9f11-92935254b2a9" width="800" title="Snipped: December 5, 2023" />
+
+On the resulting "SQL script 1" tab, paste the following T-SQL:
+```
+PRINT 'Hello, World';
+```
+
+Our goal is to capture a simple change in our branch, but run the logic if you are interested. Click "Commit all".
+
+##### Process Step 2: Pull Request
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/78061d6e-9e63-4a7b-893e-ba19c5650d83" width="800" title="Snipped: December 5, 2023" />
+
+Click the branch dropdown and select "Create pull request".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d475a571-9e87-4bee-a52e-4d405a5849cd" width="800" title="Snipped: December 5, 2023" />
+
+On the "New pull request" page, confirm destination "DEV", review default values and update as desired, and then click "Create".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70b02643-52b6-430a-8d73-8d2eeb7a5d6f" width="800" title="Snipped: December 5, 2023" />
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/)
+
+
 
 -----
 
