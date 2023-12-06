@@ -363,7 +363,7 @@ In this exercise, we will add Synapse Integration Runtime handling to the automa
 
 ### Step 1: Instantiate DEV Runtime
 
-Navigate to Synapse Studio and create a new working branch.
+Navigate to the DEV instance of Synapse Studio and create a new working branch.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7bdd4455-5b2b-4bce-9547-46db3a368e0f" width="800" title="Snipped: December 6, 2023" />
 
@@ -420,10 +420,21 @@ You should see a file in the "integrationRuntime" folder named "ir-DEV.json".
 
 ### Step 2: Automated Pipeline
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/816041ab-0c12-4804-9c34-3b529c4b878d" width="800" title="Snipped: December 6, 2023" />
-
 Navigate to the "Deploy_toQA" pipeline and click "Run". On the resulting "Run pipeline" popout, click "Run" again.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/66ce9b96-c986-4da1-8257-e061f11d93f2" width="800" title="Snipped: December 6, 2023" />
+
+When the pipeline completes successfully, navigate to the pull request at Repos >> Pull requests >> Active.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/34f6ee96-dc0c-499e-9eee-74fca0203136" width="800" title="Snipped: December 6, 2023" />
+
+Click "Complete" and on the resulting "Complete pull request" popout, click "Complete merge" and then confirm success.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/766f65d9-9ed6-4ab4-b963-d9ef271631b3" width="800" title="Snipped: December 6, 2023" />
+
+### Step 3: Validate QA Runtime
+
+Navigate to the QA instance of Synapse Studio and open the QA branch.
 
 
 
