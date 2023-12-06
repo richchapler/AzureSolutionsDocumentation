@@ -434,8 +434,12 @@ Click "Complete" and on the resulting "Complete pull request" popout, click "Com
 
 ### Step 3: Validate QA Runtime
 
-Navigate to the QA instance of Synapse Studio and open the QA branch.
+Navigate to the QA instance of Synapse Studio, select the QA branch, then Manage >> Integration >> Integration runtimes.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d43537ae-89c9-4132-8028-eb32a8156d6c" width="800" title="Snipped: December 6, 2023" />
+
+You will see "ir-DEV" and note that it is "Status: Not Found". This is because an integration runtime can only be associated with a single instance of Synapse.
+<br>Follow the instructions in Step 1 to instantiate a QA runtime.
 
 
 
