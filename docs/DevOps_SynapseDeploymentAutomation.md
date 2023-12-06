@@ -20,20 +20,13 @@
     * Allow "Create branch"
     * Allow "Force push..."
 * "DEV" Environment
-  * On-prem machine with:
-    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
-    * Database "dbDEV"
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "DEV"
-    * Integration Runtime "irDEV" installed on on-prem SQL Server  
-    * Linked Service "lsDEV" using integration runtime "irDEV" and connected to database "dbDEV"
 * "QA" Environment
-  * On-prem machine with:
-    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
-    * Database "dbQA"
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "QA"
-    * Integration Runtime "irQA" installed on on-prem SQL Server  
+
+_Note: We will instantiate additional resources in Exercise 3_
 
 -----
 -----
@@ -360,4 +353,40 @@ Confirm successful processing of the three jobs.
 -----
 
 ## Exercise 3: Integration Runtimes
-In this exercise, we will LOREM IPSUM
+In this exercise, we will add Synapse Integration Runtime handling to the automated pipeline processing.
+
+### Step 1: Instantiate Resources
+
+Instantiate the following resources:
+* "DEV" Environment
+  * On-prem machine with:
+    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
+    * Database "dbDEV"
+  * [Synapse](Infrastructure_Synapse.md)
+    * Integration Runtime "irDEV" installed on on-prem SQL Server  
+* "QA" Environment
+  * On-prem machine with:
+    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
+    * Database "dbQA"
+  * [Synapse](Infrastructure_Synapse.md)
+    * Integration Runtime "irQA" installed on on-prem SQL Server
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+-----
+
+## Exercise 4: Linked Services
+In this exercise, we will add Synapse Linked Service handling to the automated pipeline processing.
+
+### Step 1: Instantiate Resources
+
+Instantiate the following resources:
+* "DEV" Environment
+  * [Synapse](Infrastructure_Synapse.md)
+    * Linked Service "lsDEV" using integration runtime "irDEV" and connected to database "dbDEV"
+* "QA" Environment
+  * [Synapse](Infrastructure_Synapse.md)
+    * Integration Runtime "irQA" installed on on-prem SQL Server  
