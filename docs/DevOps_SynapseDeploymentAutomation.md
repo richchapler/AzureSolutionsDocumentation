@@ -22,9 +22,15 @@
 * "DEV" Environment
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "DEV"
+  * On-prem machine with:
+    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
+    * Database "dbDEV"
 * "QA" Environment
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "QA"
+  * On-prem machine with:
+    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
+    * Database "dbQA"
 
 _Note: We will instantiate additional resources in Exercise 3_
 
@@ -355,21 +361,74 @@ Confirm successful processing of the three jobs.
 ## Exercise 3: Integration Runtimes (WiP)
 In this exercise, we will add Synapse Integration Runtime handling to the automated pipeline processing.
 
-### Step 1: Instantiate Resources
+### Step 1: Instantiate DEV Runtime
 
-Instantiate the following resources:
-* "DEV" Environment
-  * On-prem machine with:
-    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
-    * Database "dbDEV"
-  * [Synapse](Infrastructure_Synapse.md)
-    * Integration Runtime "irDEV" installed on on-prem SQL Server  
-* "QA" Environment
-  * On-prem machine with:
-    * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
-    * Database "dbQA"
-  * [Synapse](Infrastructure_Synapse.md)
-    * Integration Runtime "irQA" installed on on-prem SQL Server
+Navigate to Synapse Studio and create a new working branch.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7bdd4455-5b2b-4bce-9547-46db3a368e0f" width="800" title="Snipped: December 6, 2023" />
+
+Navigate to "Integration runtimes" and click "+ New".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c0d09842-bd91-494d-9c64-4091f23812a7" width="800" title="Snipped: December 6, 2023" />
+
+On the "Integration runtime setup" popout, click "Azure, Self-Hosted" and then "Continue".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5ae30f52-ba48-4f9f-bde2-dfabde391d96" width="800" title="Snipped: December 6, 2023" />
+
+On the next "Integration runtime setup" popout, click "Self-Hosted" and then "Continue".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d4d95808-bbe5-4a79-af8c-265bea8c6389" width="800" title="Snipped: December 6, 2023" />
+
+On the next "Integraton runtime setup" popout, enter a "Name" and then click "Create".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa30dfd2-a18a-4c47-9742-2b75cd7d0333" width="800" title="Snipped: December 6, 2023" />
+
+On the next "Integration runtime setup" popout, click "Option 1: Express setup" >> "Click here to launch..."
+<br>Install Microsoft Integration Runtime with the downloaded installer.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/22b42762-6943-44a1-bcf8-d3ae2ee2f8e9" width="500" title="Snipped: December 6, 2023" />
+
+When installation is complete, return to Synapse Studio and confirm that the new Integration Runtime is "Status: Running".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/adce3cbd-61eb-41d6-8f4a-a9c4341053ae" width="800" title="Snipped: December 6, 2023" />
+
+Click the branch dropdown, and click "Create pull request".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb8c85bd-119d-4a5a-9f3e-5fcd4bd8b4dc" width="800" title="Snipped: December 6, 2023" />
+
+On the Azure DevOps >> "New pull request" page, review default settings and then click "Create".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0574f79f-08b0-41aa-9986-1f1dd6bbaffa" width="800" title="Snipped: December 6, 2023" />
+
+On the Azure DevOps >> "Adding integrationRuntime..." pull request page, click "Complete".
+
+_Note: We are skipping normal DevOps processes like review, approval, tie to work items for the purpose of demonstration only_
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/decd9f75-ba45-40dc-9a56-6ec5598aea08" width="800" title="Snipped: December 6, 2023" />
+
+On the "Complete pull request" popout, review / update default settings and then click "Complete merge".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86b49554-c1ff-4ac6-9694-38948e75d7f6" width="800" title="Snipped: December 6, 2023" />
+
+Navigate to "Repos" >> "Files" and select the "DEV" branch.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1c0febcf-d36b-4284-a362-c9029db774d6" width="800" title="Snipped: December 6, 2023" />
+
+You should see a file in the "integrationRuntime" folder named "ir-DEV.json".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5c560b1b-bc7c-4e5a-b77a-e748faedb337" width="800" title="Snipped: December 6, 2023" />
+
+### Step 2: Automated Pipeline
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/816041ab-0c12-4804-9c34-3b529c4b878d" width="800" title="Snipped: December 6, 2023" />
+
+Navigate to the "Deploy_toQA" pipeline and click "Run". On the resulting "Run pipeline" popout, click "Run" again.
+
+
+
+
+
+
 
 
 
