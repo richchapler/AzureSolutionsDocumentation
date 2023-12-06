@@ -438,8 +438,7 @@ Navigate to the QA instance of Synapse Studio, select the QA branch, then Manage
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d43537ae-89c9-4132-8028-eb32a8156d6c" width="800" title="Snipped: December 6, 2023" />
 
-You will see "ir-DEV" and note that it is "Status: Not Found". This is because an integration runtime can only be associated with a single instance of Synapse.
-<br>Follow the instructions in Step 1 to instantiate a QA runtime.
+You will see "ir-DEV" and note that it is "Status: Not Found". This is because an integration runtime can only be associated with a single instance of Synapse. Follow the instructions in Step 1 to instantiate a QA runtime.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a39d164e-1ceb-48e8-9abf-fcee944f5b3d" width="800" title="Snipped: December 6, 2023" />
 
