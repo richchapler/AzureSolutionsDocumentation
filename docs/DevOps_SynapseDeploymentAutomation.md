@@ -144,6 +144,8 @@ jobs:
 
 Click "Save".
 
+-----
+
 ### Step 3: Confirm Success
 
 Click "Run".
@@ -256,6 +258,8 @@ jobs:
     4) force push the changes to the QA branch
   * `pullrequestDEVtoQA` creates a pull request from the DEV branch to the QA branch
 
+-----
+
 ### Step 2: Activate Trigger
 
 Click the vertical ellipses in the upper-right of the Pipeline Edit screen and select "Triggers" from the resulting menu.
@@ -279,6 +283,8 @@ Click the "Save & queue" dropdown and select "Save" from the resulting menu. "Sa
 -----
 
 SUPPORT CASE PENDING RE: TRIGGERS
+
+-----
 
 ### Step 3: Confirm Success
 
@@ -418,6 +424,8 @@ You should see a file in the "integrationRuntime" folder named "ir-DEV.json".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5c560b1b-bc7c-4e5a-b77a-e748faedb337" width="800" title="Snipped: December 6, 2023" />
 
+-----
+
 ### Step 2: Automated Pipeline
 
 Navigate to the "Deploy_toQA" pipeline and click "Run". On the resulting "Run pipeline" popout, click "Run" again.
@@ -432,7 +440,9 @@ Click "Complete" and on the resulting "Complete pull request" popout, click "Com
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/766f65d9-9ed6-4ab4-b963-d9ef271631b3" width="800" title="Snipped: December 6, 2023" />
 
-### Step 3: Validate QA Runtime
+-----
+
+### Step 3: QA Runtime
 
 Navigate to the QA instance of Synapse Studio, select the QA branch, then Manage >> Integration >> Integration runtimes.
 
@@ -460,13 +470,7 @@ On the "Commit" popout, "Browse" to the downloaded "ir-QA.json" file, and then c
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9c74e10a-a8a6-427c-9729-fba1a2696f51" width="800" title="Snipped: December 6, 2023" />
 
-
-
-
-
-
-
-LOREM IPSUM
+Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 
 -----
 
