@@ -438,11 +438,27 @@ Navigate to the QA instance of Synapse Studio, select the QA branch, then Manage
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d43537ae-89c9-4132-8028-eb32a8156d6c" width="800" title="Snipped: December 6, 2023" />
 
-You will see "ir-DEV" and note that it is "Status: Not Found". This is because an integration runtime can only be associated with a single instance of Synapse. Follow the instructions in Step 1 to instantiate a QA runtime.
+You will see "ir-DEV" and note that it is "Status: Not Found".
+<br>This is because an integration runtime can only be associated with a single instance of Synapse (in this case, "rchaplers-dev").
+<br>Follow the instructions in Step 1 to instantiate a QA runtime.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a39d164e-1ceb-48e8-9abf-fcee944f5b3d" width="800" title="Snipped: December 6, 2023" />
 
+Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "integrationRuntime".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/aaa316c8-e941-4f3d-ba72-330ef917d78d" width="800" title="Snipped: December 6, 2023" />
+
+Roll-over file "ir-QA.json", click the vertical ellipses, and select "Download" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2d9d4e16-873c-41a9-800b-81088e0b5d2e" width="800" title="Snipped: December 6, 2023" />
+
+Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c1e53328-9f45-4069-ac1b-cafc65fe764b" width="800" title="Snipped: December 6, 2023" />
+
+On the "Commit" popout, "Browse" to the downloaded "ir-QA.json" file, and then click "Commit".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9c74e10a-a8a6-427c-9729-fba1a2696f51" width="800" title="Snipped: December 6, 2023" />
 
 
 
