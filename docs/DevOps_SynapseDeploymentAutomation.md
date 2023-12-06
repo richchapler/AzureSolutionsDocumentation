@@ -364,7 +364,7 @@ Confirm successful processing of the three jobs.
 -----
 -----
 
-## Exercise 3: Integration Runtimes (WiP)
+## Exercise 3: Integration Runtimes
 In this exercise, we will add Synapse Integration Runtime handling to the automated pipeline processing.
 
 ### Step 1: Instantiate DEV Runtime
@@ -471,6 +471,8 @@ On the "Commit" popout, "Browse" to the downloaded "ir-QA.json" file, and then c
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9c74e10a-a8a6-427c-9729-fba1a2696f51" width="800" title="Snipped: December 6, 2023" />
 
 Run the "Deploy_toQA" pipeline and complete the resulting pull request.
+<br>"ir-DEV" and "ir-QA" will exist in both environments, but only be "Status: Running" in the related environment.
+<br>We will address use of the correct Integration Runtime in Exercise 4.
 
 -----
 
