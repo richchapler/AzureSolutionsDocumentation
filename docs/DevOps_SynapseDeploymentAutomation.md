@@ -165,7 +165,7 @@ You can expect to see a new branch named "QA-{datetime}".
 -----
 -----
 
-## Exercise 2: QA Deployment
+## Exercise 2: QA Deployment (WiP)
 In this exercise, we will create an automated pipeline triggered by a pull request to DEV, that completes the following three tasks:
 1) **Archive QA Branch**... make a copy of the current QA branch to a timestamped branch in the "archive" folder
 2) **Reset QA Branch**... force copy PROD branch to QA branch
@@ -352,7 +352,7 @@ Confirm successful processing of the three jobs.
 -----
 -----
 
-## Exercise 3: Integration Runtimes
+## Exercise 3: Integration Runtimes (WiP)
 In this exercise, we will add Synapse Integration Runtime handling to the automated pipeline processing.
 
 ### Step 1: Instantiate Resources
@@ -371,6 +371,13 @@ Instantiate the following resources:
   * [Synapse](Infrastructure_Synapse.md)
     * Integration Runtime "irQA" installed on on-prem SQL Server
 
+
+
+
+
+
+LOREM IPSUM
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
@@ -378,7 +385,7 @@ Instantiate the following resources:
 -----
 -----
 
-## Exercise 4: Linked Services
+## Exercise 4: Linked Services (WiP)
 In this exercise, we will add Synapse Linked Service handling to the automated pipeline processing.
 
 ### Step 1: Instantiate Resources
@@ -390,3 +397,12 @@ Instantiate the following resources:
 * "QA" Environment
   * [Synapse](Infrastructure_Synapse.md)
     * Integration Runtime "irQA" installed on on-prem SQL Server  
+
+LOREM IPSUM
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+-----
