@@ -25,12 +25,14 @@
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication and TCP/IP enabled
     * Database "dbDEV"
+    * Table: `CREATE TABLE [dbo].[myTable]( [id] [int] NULL, [name] [varchar](64) NULL ) ON [PRIMARY]`
 * "QA" Environment
   * [Synapse](Infrastructure_Synapse.md)
     * Git Configuration... Repository Type: Azure DevOps Git | Collaboration Branch "QA"
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication and TCP/IP enabled
     * Database "dbQA"
+    * Table: `CREATE TABLE [dbo].[myTable]( [id] [int] NULL, [name] [varchar](64) NULL ) ON [PRIMARY]`
 
 -----
 -----
