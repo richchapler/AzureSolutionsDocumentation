@@ -9,9 +9,9 @@
 
 ## Proposed Solution
 * Starter Pipeline: Create and test a minimum viable pipeline to demonstrate basic functionality
-* Branch Deployment: Lorem Ipsum
-* Integration Runtimes: Lorem Ipsum
-* Synapse Parameterization: Lorem Ipsum
+* Branch Deployment: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
+* Integration Runtimes: Add Synapse Integration Runtime handling to the automated pipeline processing
+* Synapse Components: Incorporate Synapse Linked Services, parameterized Datasets and Pipelines
 
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
@@ -171,7 +171,7 @@ You can expect to see a new branch named "QA-{datetime}".
 -----
 -----
 
-## Exercise 2: QA Deployment (WiP)
+## Exercise 2: Branch Deployment
 In this exercise, we will create an automated pipeline triggered by a pull request to DEV, that completes the following three tasks:
 1) **Archive QA Branch**... make a copy of the current QA branch to a timestamped branch in the "archive" folder
 2) **Reset QA Branch**... force copy PROD branch to QA branch
@@ -479,8 +479,8 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 -----
 -----
 
-## Exercise 4: Synapse Parameterization (WiP)
-In this exercise, we will add parameterized Synapse Linked Service, Dataset and Pipeline handling to the automated pipeline processing.
+## Exercise 4: Synapse Components (WiP)
+In this exercise, we will incorporate Synapse Linked Services, parameterized Datasets and Pipelines.
 
 ### Step 1: Linked Services
 
