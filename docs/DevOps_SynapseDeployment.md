@@ -565,8 +565,6 @@ db@{if(contains(linkedService().WorkspaceName,'dev'), 'DEV', 'QA')}
 
 Re-enter password and tehn Test Connection
 
-**_Reference to Integration Runtime cannot be parameterized... this will need to happen in the YAML pipeline???_**
-
 
 
 -----
