@@ -11,7 +11,7 @@
 * **Starter Pipeline**: Create and test a minimum viable pipeline to demonstrate basic functionality
 * **Branch Deployment**: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
 * **Integration Runtimes**: Add Synapse Integration Runtime handling to the automated pipeline processing
-* **Synapse Components**: Incorporate Synapse Linked Services, parameterized Datasets and Pipelines
+* **Synapse Parameterization**: Incorporate Synapse Linked Services, parameterized Datasets and Pipelines
 
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
@@ -481,7 +481,7 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 -----
 -----
 
-## Exercise 4: Synapse Components (WiP)
+## Exercise 4: Synapse Parameterization (WiP)
 In this exercise, we will incorporate Synapse Linked Services, parameterized Datasets and Pipelines.
 
 ### Step 1: Linked Services
@@ -518,7 +518,59 @@ Create and complete a pull request to move changes to the DEV branch.
 
 #### QA Instance
 
-_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize Datasets and Pipelines to make use of the correct Linked Service... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference in Synapse, we must create Linked Services and Integration Datasets for DEV, QA, and PROD environments and then parameterize Pipelines... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+
+Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
+
+Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "linkedService".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b575f73-43b3-4e59-8c77-17b79210723a" width="800" title="Snipped: December 7, 2023" />
+
+Roll-over file "dbQA.json", click the vertical ellipses, and select "Download" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3ba70440-ef6b-42ee-9c34-82e282c198aa" width="800" title="Snipped: December 7, 2023" />
+
+Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d224d141-2749-42db-9fb5-802d9e5be036" width="800" title="Snipped: December 7, 2023" />
+
+On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then click "Commit".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
+
+Run the "Deploy_toQA" pipeline and complete the resulting pull request. "dbDEV" and "dbQA" will exist in both environments.
+
+-----
+
+### Step 2: Datasets
+
+#### DEV Instance
+
+Navigate to the DEV instance of Synapse Studio and create a new working branch.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29b6eacf-24c1-488c-98c7-16eef11a4594" width="800" title="Snipped: December 7, 2023" />
+
+Navigate to "Data" >> "Linked", click "+" and then "Integration dataset" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/68312e4c-0115-490a-940e-fff03376d9fc" width="800" title="Snipped: December 7, 2023" />
+
+On the "New integration dataset" popout, search for and select "SQL server", then click "Continue".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/51c0e586-80bb-47cf-89d3-aa2e73c8cc1d" width="800" title="Snipped: December 7, 2023" />
+
+On the "Set properties" popout, select the "dbDEV" Linked Service, "myTable" table, then click "OK".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2f47dcd-d76a-4562-bc0c-5e13e8eb2b9a" width="800" title="Snipped: December 7, 2023" />
+
+Click "Test Connection", confirm success and then click "Commit".
+<br>Create and complete a pull request to move changes to the DEV branch.
+<br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
+
+#### QA Instance
+
+_Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Linked Services and Integration Datasets for DEV, QA, and PROD environments and then parameterize Pipelines... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
 Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
 
@@ -543,23 +595,15 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then cl
 Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 <br>"dbDEV" and "dbQA" will exist in both environments.
 
+
+
+
+LOREM IPSUM
+
+-----
 -----
 
-### Step 2: Datasets
-
-Navigate to the DEV instance of Synapse Studio and create a new working branch.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29b6eacf-24c1-488c-98c7-16eef11a4594" width="800" title="Snipped: December 7, 2023" />
-
-Navigate to "Data" >> "Linked", click "+" and then "Integration dataset" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/68312e4c-0115-490a-940e-fff03376d9fc" width="800" title="Snipped: December 7, 2023" />
-
-On the "New integration dataset" popout, search for and select "SQL server", then click "Continue".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ac909a4-ca49-4eae-9207-32a17c3f1c92" width="800" title="Snipped: December 7, 2023" />
-
-On the "Set properties" popout, select the "dbDEV" Linked Service, "myTable" table, then click "OK".
+#### Parameterization
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5ca24da5-ff41-4868-9e1d-038f892b2cee" width="800" title="Snipped: December 7, 2023" />
 
@@ -571,24 +615,9 @@ Prompt | Entry
 **Type** | String
 **Default value** | DEV
 
+Click the `{ }` icon in the upper-left of the UI to view the JSON code representation of the resource.
 
-
-
-
-
-
-
-
-
-
-LOREM IPSUM
-
------
------
-
-#### Parameterization
-
-
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/26559417-d590-4ccd-bbc0-68b9026d6f5e" width="800" title="Snipped: December 7, 2023" />
 
 Click on the "Database name" input and then click the "Add dynamic content" link.
 
