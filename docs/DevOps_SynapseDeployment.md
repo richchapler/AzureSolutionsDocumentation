@@ -518,11 +518,7 @@ Create and complete a pull request to move changes to the DEV branch.
 
 _Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize Datasets and Pipelinse to make use of the correct Linked Service... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
-Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e6fdeff1-7216-4b14-aac9-f13c8d6bf5de" width="800" title="Snipped: December 7, 2023" />
-
-Repeat the process to create a "dbQA" Linked Service.
+Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
 
