@@ -10,8 +10,7 @@
 ## Proposed Solution
 * **Starter Pipeline**: Create and test a minimum viable pipeline to demonstrate basic functionality
 * **Branch Deployment**: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
-* **Integration Runtimes**: Add Synapse Integration Runtime handling to the automated pipeline processing
-* **Synapse Parameterization**: Incorporate Synapse Linked Services, parameterized Datasets and Pipelines
+* **Synapse Resources**: Incorporate Synapse Integration Runtimes, Linked Services, Datasets and parameterized Pipelines
 
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
@@ -364,10 +363,12 @@ Confirm successful processing of the three jobs.
 -----
 -----
 
-## Exercise 3: Integration Runtimes
-In this exercise, we will add Synapse Integration Runtime handling to the automated pipeline processing.
+## Exercise 3: Synapse Resources
+In this exercise, we will incorporate Synapse Integration Runtimes, Linked Services, Datasets and parameterized Pipelines.
 
-### Step 1: Instantiate DEV Runtime
+### Step 1: Integration Runtimes
+
+#### DEV Instance
 
 Navigate to the DEV instance of Synapse Studio and create a new working branch.
 
@@ -395,6 +396,10 @@ On the next "Integration runtime setup" popout, click "Option 1: Express setup" 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/22b42762-6943-44a1-bcf8-d3ae2ee2f8e9" width="500" title="Snipped: December 6, 2023" />
 
 When installation is complete, return to Synapse Studio and confirm that the new Integration Runtime is "Status: Running".
+
+-----
+
+#### Pull Request
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/adce3cbd-61eb-41d6-8f4a-a9c4341053ae" width="800" title="Snipped: December 6, 2023" />
 
@@ -426,7 +431,7 @@ You should see a file in the "integrationRuntime" folder named "ir-DEV.json".
 
 -----
 
-### Step 2: Automated Pipeline
+#### Automated Pipeline
 
 Navigate to the "Deploy_toQA" pipeline and click "Run". On the resulting "Run pipeline" popout, click "Run" again.
 
@@ -442,7 +447,7 @@ Click "Complete" and on the resulting "Complete pull request" popout, click "Com
 
 -----
 
-### Step 3: QA Runtime
+#### QA Instance
 
 Navigate to the QA instance of Synapse Studio, select the QA branch, then Manage >> Integration >> Integration runtimes.
 
@@ -476,15 +481,7 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 
 -----
 
-**Congratulations... you have successfully completed this exercise**
-
------
------
-
-## Exercise 4: Synapse Parameterization (WiP)
-In this exercise, we will incorporate Synapse Linked Services, parameterized Datasets and Pipelines.
-
-### Step 1: Linked Services
+### Step 2: Linked Services
 
 #### DEV Instance
 
@@ -516,6 +513,8 @@ When prompted "Linked service will be published immediately..." click "OK".
 Create and complete a pull request to move changes to the DEV branch.
 <br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
 
+-----
+
 #### QA Instance
 
 _Note: Since it is not possible to parameterize the "Connect via integration runtime" reference in Synapse, we must create Linked Services and Integration Datasets for DEV, QA, and PROD environments and then parameterize Pipelines... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
@@ -544,7 +543,7 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request. "dbDEV" 
 
 -----
 
-### Step 2: Datasets
+### Step 3: Datasets
 
 #### DEV Instance
 
@@ -567,6 +566,8 @@ On the "Set properties" popout, select the "dbDEV" Linked Service, "myTable" tab
 Click "Test Connection", confirm success and then click "Commit".
 <br>Create and complete a pull request to move changes to the DEV branch.
 <br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
+
+-----
 
 #### QA Instance
 
@@ -592,11 +593,11 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then cl
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
 
-Run the "Deploy_toQA" pipeline and complete the resulting pull request.
-<br>"dbDEV" and "dbQA" will exist in both environments.
+Run the "Deploy_toQA" pipeline and complete the resulting pull request. "dbDEV" and "dbQA" will exist in both environments.
 
+-----
 
-
+### Step 4: Parameterized Pipeline
 
 LOREM IPSUM
 
