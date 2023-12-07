@@ -545,6 +545,22 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 
 ### Step 2: Datasets
 
+Navigate to the DEV instance of Synapse Studio and create a new working branch.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29b6eacf-24c1-488c-98c7-16eef11a4594" width="800" title="Snipped: December 7, 2023" />
+
+Navigate to "Data" >> "Linked", click "+" and then "Integration dataset" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ab319cc8-3b8b-4d0f-b725-f966eff70861" width="800" title="Snipped: December 7, 2023" />
+
+
+
+
+
+
+
+
+
 LOREM IPSUM
 
 -----
