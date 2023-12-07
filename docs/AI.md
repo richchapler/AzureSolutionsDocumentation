@@ -17,7 +17,7 @@ Use Case | Technologies
 
 Use Case | Technologies
 :----- | :-----
-[AI Search, DevOps](AISearch_DevOps.md) | Visual Studio (C#), DevOps
+[AI Search Deployment](DevOps_AISearchDeployment.md) | Visual Studio (C#), DevOps
 
 ## Work-in-Progress (WiP)
 
