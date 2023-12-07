@@ -524,6 +524,9 @@ Navigate to the QA instance of Synapse Studio, then Manage >> External Connectio
 
 Repeat the process to create a "dbQA" Linked Service.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
+
+
 
 LOREM IPSUM
 
