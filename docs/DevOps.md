@@ -4,6 +4,6 @@
 
 Use Case | Technologies
 :----- | :-----
-[AI Search Deployment](DevOps_AISearchDeployment.md) | C#, DevOps<br>
-[Synapse Deployment](DevOps_SynapseDeployment.md) | DevOps Pipeline<br>
+[AI Search Deployment](DevOps_AISearchDeployment.md) | AI Search, C#, DevOps<br>
+[Synapse Deployment](DevOps_SynapseDeployment.md) | Synapse, DevOps<br>
 [Synapse, Parameterized Linked Services](DevOps_SynapseDeploy_usingParameterizedLinkedServices.md) | No Code<br>
