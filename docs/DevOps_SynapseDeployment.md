@@ -515,7 +515,8 @@ Create and complete a pull request to move changes to the DEV branch.
 <br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
 
 #### QA Instance
-_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize the Datasets and Pipelinse to make use of the correct Linked Service... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+
+_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize Datasets and Pipelinse to make use of the correct Linked Service... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
 Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services.
 
