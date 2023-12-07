@@ -561,15 +561,15 @@ On the "New integration dataset" popout, search for and select "SQL server", the
 
 On the "Set properties" popout, select the "dbDEV" Linked Service, "myTable" table, then click "OK".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f20765b0-2c83-4137-899a-82237da763f6" width="800" title="Snipped: December 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5ca24da5-ff41-4868-9e1d-038f892b2cee" width="800" title="Snipped: December 7, 2023" />
 
 On the "Parameters" tab, click "+ New" and complete the resulting form:
 
 Prompt | Entry
 :----- | :-----
-**Name** | workspaceName
+**Name** | Environment
 **Type** | String
-**Default value** | {SYNAPSE_WORKSPACE_NAME}
+**Default value** | DEV
 
 
 
