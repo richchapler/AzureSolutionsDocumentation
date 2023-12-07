@@ -502,7 +502,6 @@ Prompt | Entry
 **Authentication type**... | SQL authentication
 
 Click "Test Connection", confirm success and then click "Commit".
-<br>_Note: Two items in the linked service will need to be parameterized in the next step: 1) "Connect via integration runtime" and 2) "Database name"_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/882880ae-827d-4ee5-8945-e7d927096936" width="800" title="Snipped: December 7, 2023" />
 
@@ -518,7 +517,7 @@ Click to open the Linked Service.
 
 On the resulting "Edit linked service" popout, click the pencil icon to the right of the "Connect via integration runtime" dropdown.
 
-
+**_Reference to Integration Runtime cannot be parameterized... this will need to happen in the YAML pipeline???_**
 
 
 
