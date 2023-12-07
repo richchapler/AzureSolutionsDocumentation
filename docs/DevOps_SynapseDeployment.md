@@ -484,6 +484,8 @@ In this exercise, we will add parameterized Synapse Linked Service, Dataset and 
 
 ### Step 1: Linked Services
 
+#### DEV Instance
+
 Navigate to the DEV instance of Synapse Studio >> Manage >> External Connections >> Linked Services, create a new working branch, and then click "+ New".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c51e0d01-a1b3-405c-a4e5-ea4e9c6fa2cb" width="800" title="Snipped: December 7, 2023" />
@@ -509,24 +511,58 @@ When prompted "Linked service will be published immediately..." click "OK".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac025ed0-985f-4900-9230-f42e8fda8494" width="800" title="Snipped: December 7, 2023" />
 
-#### Parameterization
+Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize the Datasets and Pipelinse to make use of the correct Linked Service. We will do this in the same way that we created environmentally-specific Integration Runtimes.
 
-Click to open the Linked Service.
+Create and complete a pull request to move changes to the DEV branch, and then trigger the "Deploy_toQA" pipeline in DevOps.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9c92c556-26b6-4676-8a20-4ff0d978b3b5" width="800" title="Snipped: December 7, 2023" />
-
-On the resulting "Edit linked service" popout, click the pencil icon to the right of the "Connect via integration runtime" dropdown.
-
-**_Reference to Integration Runtime cannot be parameterized... this will need to happen in the YAML pipeline???_**
-
-
-
-
-
+#### QA Instance
 
 
 
 LOREM IPSUM
+
+
+
+
+
+
+-----
+
+### Step 2: Datasets
+
+#### Parameterization
+
+Click to open the new Linked Service.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1c9b0c85-89eb-473e-b8be-eea47ba5b55f" width="800" title="Snipped: December 7, 2023" />
+
+On the resulting "Edit linked service" popout, expand "Parameters", click "+ New" and complete the form:
+
+Prompt | Entry
+:----- | :-----
+**Name** | workspaceName
+**Type** | String
+**Default value** | {SYNAPSE_WORKSPACE_NAME}
+
+Scroll up.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/46e0019b-f750-4da3-8298-6c11ab2c9c7b" width="800" title="Snipped: December 7, 2023" />
+
+Click on the "Database name" input and then click the "Add dynamic content" link.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe1cfd85-4b68-47dc-9c7d-e09a1b260982" width="800" title="Snipped: December 7, 2023" />
+
+
+```
+db@{if(contains(linkedService().WorkspaceName,'dev'), 'DEV', 'QA')}
+
+```
+
+Re-enter password and tehn Test Connection
+
+**_Reference to Integration Runtime cannot be parameterized... this will need to happen in the YAML pipeline???_**
+
+
 
 -----
 
