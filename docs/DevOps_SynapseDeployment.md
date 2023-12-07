@@ -551,7 +551,16 @@ Navigate to the DEV instance of Synapse Studio and create a new working branch.
 
 Navigate to "Data" >> "Linked", click "+" and then "Integration dataset" from the resulting menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ab319cc8-3b8b-4d0f-b725-f966eff70861" width="800" title="Snipped: December 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/68312e4c-0115-490a-940e-fff03376d9fc" width="800" title="Snipped: December 7, 2023" />
+
+On the "New integration dataset" popout, search for and select "SQL server", then click "Continue".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/57db3eb1-e901-4d4b-a521-8baf7d9d7e1f" width="800" title="Snipped: December 7, 2023" />
+
+On the "Set properties" popout, select the "dbDEV" Linked Service, then click "OK".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/88636847-8456-4107-a472-3e5b9b21fcb7" width="800" title="Snipped: December 7, 2023" />
+
 
 
 
