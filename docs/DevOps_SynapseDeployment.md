@@ -557,11 +557,20 @@ Navigate to "Data" >> "Linked", click "+" and then "Integration dataset" from th
 
 On the "New integration dataset" popout, search for and select "SQL server", then click "Continue".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/57db3eb1-e901-4d4b-a521-8baf7d9d7e1f" width="800" title="Snipped: December 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ac909a4-ca49-4eae-9207-32a17c3f1c92" width="800" title="Snipped: December 7, 2023" />
 
-On the "Set properties" popout, select the "dbDEV" Linked Service, then click "OK".
+On the "Set properties" popout, select the "dbDEV" Linked Service, "myTable" table, then click "OK".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/88636847-8456-4107-a472-3e5b9b21fcb7" width="800" title="Snipped: December 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f20765b0-2c83-4137-899a-82237da763f6" width="800" title="Snipped: December 7, 2023" />
+
+On the "Parameters" tab, click "+ New" and complete the resulting form:
+
+Prompt | Entry
+:----- | :-----
+**Name** | workspaceName
+**Type** | String
+**Default value** | {SYNAPSE_WORKSPACE_NAME}
+
 
 
 
