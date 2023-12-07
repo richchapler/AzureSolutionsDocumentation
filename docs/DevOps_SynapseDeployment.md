@@ -8,10 +8,10 @@
   <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/780c08a6-57b4-484d-9310-6b269268054d" width="800" title="Snipped: December 4, 2023" />
 
 ## Proposed Solution
-* Starter Pipeline: Create and test a minimum viable pipeline to demonstrate basic functionality
-* Branch Deployment: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
-* Integration Runtimes: Add Synapse Integration Runtime handling to the automated pipeline processing
-* Synapse Components: Incorporate Synapse Linked Services, parameterized Datasets and Pipelines
+* **Starter Pipeline**: Create and test a minimum viable pipeline to demonstrate basic functionality
+* **Branch Deployment**: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
+* **Integration Runtimes**: Add Synapse Integration Runtime handling to the automated pipeline processing
+* **Synapse Components**: Incorporate Synapse Linked Services, parameterized Datasets and Pipelines
 
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
