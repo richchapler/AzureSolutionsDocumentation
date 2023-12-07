@@ -9,9 +9,9 @@
 
 ## Proposed Solution
 * Starter Pipeline: Create and test a minimum viable pipeline to demonstrate basic functionality
-* "Branch Deployment" Pipeline
-* "Integration Runtime" Pipeline
-* TBD...
+* Branch Deployment: Lorem Ipsum
+* Integration Runtimes: Lorem Ipsum
+* Synapse Parameterization: Lorem Ipsum
 
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
@@ -31,8 +31,6 @@
   * On-prem machine with:
     * [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) configured for SQL Server Authentication
     * Database "dbQA"
-
-_Note: We will instantiate additional resources in Exercise 3_
 
 -----
 -----
@@ -481,18 +479,12 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 -----
 -----
 
-## Exercise 4: Linked Services (WiP)
-In this exercise, we will add Synapse Linked Service handling to the automated pipeline processing.
+## Exercise 4: Synapse Parameterization
+In this exercise, we will add parameterized Synapse Linked Service, Dataset and Pipeline handling to the automated pipeline processing.
 
-### Step 1: Instantiate Resources
+### Step 1: Linked Services
 
-Instantiate the following resources:
-* "DEV" Environment
-  * [Synapse](Infrastructure_Synapse.md)
-    * Linked Service "lsDEV" using integration runtime "irDEV" and connected to database "dbDEV"
-* "QA" Environment
-  * [Synapse](Infrastructure_Synapse.md)
-    * Integration Runtime "irQA" installed on on-prem SQL Server  
+
 
 LOREM IPSUM
 
