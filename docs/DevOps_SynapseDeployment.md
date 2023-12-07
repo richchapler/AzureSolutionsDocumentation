@@ -588,21 +588,7 @@ LOREM IPSUM
 
 #### Parameterization
 
-Click to open the new Linked Service.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1c9b0c85-89eb-473e-b8be-eea47ba5b55f" width="800" title="Snipped: December 7, 2023" />
-
-On the resulting "Edit linked service" popout, expand "Parameters", click "+ New" and complete the form:
-
-Prompt | Entry
-:----- | :-----
-**Name** | workspaceName
-**Type** | String
-**Default value** | {SYNAPSE_WORKSPACE_NAME}
-
-Scroll up.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/46e0019b-f750-4da3-8298-6c11ab2c9c7b" width="800" title="Snipped: December 7, 2023" />
 
 Click on the "Database name" input and then click the "Add dynamic content" link.
 
