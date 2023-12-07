@@ -488,7 +488,36 @@ Navigate to the DEV instance of Synapse Studio >> Manage >> External Connections
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c51e0d01-a1b3-405c-a4e5-ea4e9c6fa2cb" width="800" title="Snipped: December 7, 2023" />
 
-In the "New linked service" popout, search for and select "SQL server", then click "Continue".
+On the "New linked service" popout, search for and select "SQL server", then click "Continue".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0d18d59e-5c1b-469d-adaa-d7b1a992756b" width="800" title="Snipped: December 7, 2023" />
+
+Complete the "New linked service" popout form, including:
+
+Prompt | Entry
+:----- | :-----
+**Connect via integration runtime**... | ir-DEV
+**Server name**... | localhost
+**Database name**... | dbDEV
+**Authentication type**... | SQL authentication
+
+Click "Test Connection", confirm success and then click "Commit".
+<br>_Note: Two items in the linked service will need to be parameterized in the next step: 1) "Connect via integration runtime" and 2) "Database name"_
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/882880ae-827d-4ee5-8945-e7d927096936" width="800" title="Snipped: December 7, 2023" />
+
+When prompted "Linked service will be published immediately..." click "OK".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac025ed0-985f-4900-9230-f42e8fda8494" width="800" title="Snipped: December 7, 2023" />
+
+#### Parameterization
+
+Click to open the Linked Service.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9c92c556-26b6-4676-8a20-4ff0d978b3b5" width="800" title="Snipped: December 7, 2023" />
+
+On the resulting "Edit linked service" popout, click the pencil icon to the right of the "Connect via integration runtime" dropdown.
+
 
 
 
