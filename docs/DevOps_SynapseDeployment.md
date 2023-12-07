@@ -511,7 +511,7 @@ When prompted "Linked service will be published immediately..." click "OK".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac025ed0-985f-4900-9230-f42e8fda8494" width="800" title="Snipped: December 7, 2023" />
 
-Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize the Datasets and Pipelinse to make use of the correct Linked Service. We will do this in the same way that we created environmentally-specific Integration Runtimes.
+_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize the Datasets and Pipelinse to make use of the correct Linked Service... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
 Create and complete a pull request to move changes to the DEV branch.
 <br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
