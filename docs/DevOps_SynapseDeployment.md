@@ -10,7 +10,7 @@
 ## Proposed Solution
 * **Starter Pipeline**: Create and test a minimum viable pipeline to demonstrate basic functionality
 * **Branch Deployment**: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
-* **Synapse Resources**: Incorporate Synapse Integration Runtimes, Linked Services, Datasets and parameterized Pipelines
+* **Synapse Resources**: Create and deploy Integration Runtimes, Linked Services, Datasets and parameterized Pipelines
 
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
@@ -364,7 +364,7 @@ Confirm successful processing of the three jobs.
 -----
 
 ## Exercise 3: Synapse Resources
-In this exercise, we will incorporate Synapse Integration Runtimes, Linked Services, Datasets and parameterized Pipelines.
+In this exercise, we will create and deploy Integration Runtimes, Linked Services, Datasets and parameterized Pipelines.
 
 ### Step 1: Integration Runtimes
 
