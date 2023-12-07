@@ -486,7 +486,7 @@ In this exercise, we will add parameterized Synapse Linked Service, Dataset and 
 
 #### DEV Instance
 
-Navigate to the DEV instance of Synapse Studio >> Manage >> External Connections >> Linked Services, create a new working branch, and then click "+ New".
+Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services, create a new working branch, and then click "+ New".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c51e0d01-a1b3-405c-a4e5-ea4e9c6fa2cb" width="800" title="Snipped: December 7, 2023" />
 
@@ -513,10 +513,16 @@ When prompted "Linked service will be published immediately..." click "OK".
 
 Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize the Datasets and Pipelinse to make use of the correct Linked Service. We will do this in the same way that we created environmentally-specific Integration Runtimes.
 
-Create and complete a pull request to move changes to the DEV branch, and then trigger the "Deploy_toQA" pipeline in DevOps.
+Create and complete a pull request to move changes to the DEV branch.
+<br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
 
 #### QA Instance
 
+Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e6fdeff1-7216-4b14-aac9-f13c8d6bf5de" width="800" title="Snipped: December 7, 2023" />
+
+Repeat the process to create a "dbQA" Linked Service.
 
 
 LOREM IPSUM
