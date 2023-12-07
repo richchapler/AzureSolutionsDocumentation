@@ -479,7 +479,7 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 -----
 -----
 
-## Exercise 4: Synapse Parameterization
+## Exercise 4: Synapse Parameterization (WiP)
 In this exercise, we will add parameterized Synapse Linked Service, Dataset and Pipeline handling to the automated pipeline processing.
 
 ### Step 1: Linked Services
@@ -516,24 +516,39 @@ Create and complete a pull request to move changes to the DEV branch.
 
 #### QA Instance
 
-_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize Datasets and Pipelinse to make use of the correct Linked Service... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference, we must create Linked Services for DEV, QA, and PROD environments and then parameterize Datasets and Pipelines to make use of the correct Linked Service... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
 Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
 
+Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "linkedService".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b575f73-43b3-4e59-8c77-17b79210723a" width="800" title="Snipped: December 7, 2023" />
 
-LOREM IPSUM
+Roll-over file "dbQA.json", click the vertical ellipses, and select "Download" from the resulting menu.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3ba70440-ef6b-42ee-9c34-82e282c198aa" width="800" title="Snipped: December 7, 2023" />
 
+Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d224d141-2749-42db-9fb5-802d9e5be036" width="800" title="Snipped: December 7, 2023" />
 
+On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then click "Commit".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
+
+Run the "Deploy_toQA" pipeline and complete the resulting pull request.
+<br>"dbDEV" and "dbQA" will exist in both environments.
 
 -----
 
 ### Step 2: Datasets
+
+LOREM IPSUM
+
+-----
+-----
 
 #### Parameterization
 
