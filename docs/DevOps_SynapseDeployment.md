@@ -591,9 +591,21 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and
 <br>Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 <br>"dbDEV_myTable" and "dbQA_myTable" will exist in both environments.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a273d019-35ed-4e2f-b39c-ad19cf828818" width="800" title="Snipped: December 8, 2023" />
+
 -----
 
 ### Step 4: Parameterized Pipeline
+
+
+
+
+
+
+
+
+
+
 
 LOREM IPSUM
 
