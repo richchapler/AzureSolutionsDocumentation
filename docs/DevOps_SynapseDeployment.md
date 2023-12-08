@@ -262,7 +262,7 @@ Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
 <br>Now we will mimic the Synapse deployment process and confirm pipeline functionality.
 
 #### Recurring Development
-_Note: the primary human in this step will be a developer_
+_Primary Actor: Member of Development Team_
 
 Click the branch dropdown and select "+ New branch".
 
@@ -284,7 +284,7 @@ PRINT 'Hello, World';
 Our goal is to capture a simple change in our branch, but run the logic if you are interested. Click "Commit all".
 
 #### Pull Request
-_Note: the primary human in this step will be a developer_
+_Primary Actor: Member of Development Team_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/78061d6e-9e63-4a7b-893e-ba19c5650d83" width="800" title="Snipped: December 5, 2023" />
 
@@ -297,7 +297,7 @@ On the "New pull request" page, confirm destination "DEV", review default values
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70b02643-52b6-430a-8d73-8d2eeb7a5d6f" width="800" title="Snipped: December 5, 2023" />
 
 #### Automated Pipeline
-_Note: the primary human in this step will be the Deployment Manager... PENDING SUPPORT CASE RE: TRIGGER_
+_Primary Actor: Deployment Manager_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d19881f-69ea-4a50-9f7e-3193356837e0" width="800" title="Snipped: December 5, 2023" />
 
@@ -491,53 +491,15 @@ Click "Test Connection", enter Environment parameter value "DEV", and then click
 ### Step 4: Pipeline
 
 
-LOREM IPSUM
 
 
-
-
-
-
-
-```
-az synapse linked-service update --workspace-name rchaplers-qa --name myLS --properties '{
-  "type": "SqlServer",
-  "typeProperties": { "connectVia": { "referenceName": "myIR", "type": "IntegrationRuntimeReference" } }
-}'
-
-```
-
-
-```
-{
-    "name": "myLS",
-    "type": "Microsoft.Synapse/workspaces/linkedservices",
-    "properties": {
-        "parameters": {
-            "Environment": {
-                "type": "string"
-            }
-        },
-        "annotations": [],
-        "type": "SqlServer",
-        "typeProperties": {
-            "connectionString": "integrated security=False;data source=localhost;initial catalog=\"@{concat('db',linkedService().Environment)}\";user id=sa",
-            "encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4YjM4YjE1NS04NGJhLTQwYTAtOGQ1Yi01NzIwODBjNmU0ZTAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
-        },
-        "connectVia": {
-            "referenceName": "myIR",
-            "type": "IntegrationRuntimeReference"
-        }
-    }
-}
-```
 
 
 
 LOREM IPSUM
 
------
------
+
+
 
 #### Parameterization
 
