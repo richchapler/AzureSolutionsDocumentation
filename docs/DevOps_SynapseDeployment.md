@@ -452,7 +452,10 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 
 ### Step 2: Linked Service
 
-Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services, create a new working branch, and then click "+ New". On the "New linked service" popout, search for and select "SQL server", then click "Continue".
+Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services.
+<br>Create a new working branch.
+<br>Click "+ New" and on the "New linked service" popout, search for and select "SQL server".
+<br>Click "Continue".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8386afa-9e37-484e-8216-f6a8cc5e8a37" width="800" title="Snipped: December 8, 2023" />
 
@@ -468,38 +471,13 @@ Prompt | Entry
 **User name**... | sa (and then the associated password)
 
 Click "Test Connection", confirm success, and then click "Commit".
-
-
-
-
-
-
-
-LOREM IPSUM
-
-
-
-
-
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/882880ae-827d-4ee5-8945-e7d927096936" width="800" title="Snipped: December 7, 2023" />
-
-When prompted "Linked service will be published immediately..." click "OK".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac025ed0-985f-4900-9230-f42e8fda8494" width="800" title="Snipped: December 7, 2023" />
-
-Create and complete a pull request to move changes to the DEV branch.
-<br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
-
-
+<br>When prompted "Linked service will be published immediately..." click "OK".
 
 -----
 
-### Step 3: Datasets
+### Step 3: Integration Dataset
 
-#### DEV Instance
-
-Navigate to the DEV instance of Synapse Studio and create a new working branch.
+Continue in the DEV instance of Synapse Studio and working branch.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29b6eacf-24c1-488c-98c7-16eef11a4594" width="800" title="Snipped: December 7, 2023" />
 
@@ -649,6 +627,9 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then cl
 Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 <br>"dbDEV" and "dbQA" will exist in both environments.
 
+
+Create and complete a pull request to move changes to the DEV branch.
+<br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
 -----
 
 **Congratulations... you have successfully completed this exercise**
