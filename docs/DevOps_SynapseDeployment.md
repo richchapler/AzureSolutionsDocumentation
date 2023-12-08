@@ -482,43 +482,19 @@ Continue in the DEV instance of Synapse Studio and working branch. Navigate to "
 
 Navigate to the "Parameters" tab and create a new "Environment" parameter. Return to the "Connection" tab and enter Environment value `@dataset().Environment`.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a9da307-24cb-4c7e-90d7-10f00ed28bca" width="800" title="Snipped: December 8, 2023" />
 
-
-
-
-Click "Test Connection", confirm success and then click "Commit".
-<br>Create and complete a pull request to move changes to the DEV branch.
-<br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
+Click "Test Connection", enter Environment parameter value "DEV", and then click "OK". Confirm success and then click "Commit".
 
 -----
 
-#### QA Instance
+### Step 4: Pipeline
 
-_Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Integration Datasets for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
-Navigate to the QA instance of Synapse Studio and repeat the process to create a "dbQA_myTable" Integration Dataset.
+LOREM IPSUM
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e323cd6d-7aa8-45a9-82cc-ba4f865649e1" width="800" title="Snipped: December 8, 2023" />
 
-Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "dataset".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f560412-4d54-43f6-bfbc-28a1d2822fd4" width="800" title="Snipped: December 8, 2023" />
-
-Roll-over file "dbQA_myTable.json", click the vertical ellipses, and select "Download" from the resulting menu.
-<br>Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4aa699d7-0623-41b1-bfd8-af8cb167e8e3" width="800" title="Snipped: December 8, 2023" />
-
-On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and then click "Commit".
-<br>Run the "Deploy_toQA" pipeline and complete the resulting pull request.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a273d019-35ed-4e2f-b39c-ad19cf828818" width="800" title="Snipped: December 8, 2023" />
-
-"dbDEV_myTable" and "dbQA_myTable" will exist in both environments.
-
------
-
-### Step 4: Parameterized Pipeline
 
 
 
@@ -620,6 +596,29 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then cl
 Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 <br>"dbDEV" and "dbQA" will exist in both environments.
 
+#### QA Instance
+
+_Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Integration Datasets for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+
+Navigate to the QA instance of Synapse Studio and repeat the process to create a "dbQA_myTable" Integration Dataset.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e323cd6d-7aa8-45a9-82cc-ba4f865649e1" width="800" title="Snipped: December 8, 2023" />
+
+Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "dataset".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f560412-4d54-43f6-bfbc-28a1d2822fd4" width="800" title="Snipped: December 8, 2023" />
+
+Roll-over file "dbQA_myTable.json", click the vertical ellipses, and select "Download" from the resulting menu.
+<br>Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4aa699d7-0623-41b1-bfd8-af8cb167e8e3" width="800" title="Snipped: December 8, 2023" />
+
+On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and then click "Commit".
+<br>Run the "Deploy_toQA" pipeline and complete the resulting pull request.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a273d019-35ed-4e2f-b39c-ad19cf828818" width="800" title="Snipped: December 8, 2023" />
+
+"dbDEV_myTable" and "dbQA_myTable" will exist in both environments.
 
 Create and complete a pull request to move changes to the DEV branch.
 <br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
