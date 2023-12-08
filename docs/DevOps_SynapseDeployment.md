@@ -602,7 +602,17 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and
 
 
 ```
-Set-AzSynapseIntegrationRuntime -WorkspaceName ContosoWorkspace -ResourceGroupName ContosoResourceGroup -Name test-selfhost-ir -Description "Updated description"
+az synapse linked-service update --workspace-name YourWorkspaceName --name YourLinkedServiceName --properties '{
+  "type": "YourLinkedServiceType",
+  "typeProperties": {
+    "connectVia": {
+      "referenceName": "YourNewIntegrationRuntimeName",
+      "type": "IntegrationRuntimeReference"
+    }
+    // Other type-specific properties go here
+  }
+}'
+
 ```
 
 
