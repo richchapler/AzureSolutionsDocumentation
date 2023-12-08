@@ -261,7 +261,7 @@ Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
 
 <br>Now we will mimic the Synapse deployment process and confirm pipeline functionality.
 
-##### Recurring Development
+#### Recurring Development
 _Note: the primary human in this step will be a developer_
 
 Click the branch dropdown and select "+ New branch".
@@ -283,7 +283,7 @@ PRINT 'Hello, World';
 
 Our goal is to capture a simple change in our branch, but run the logic if you are interested. Click "Commit all".
 
-##### Pull Request
+#### Pull Request
 _Note: the primary human in this step will be a developer_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/78061d6e-9e63-4a7b-893e-ba19c5650d83" width="800" title="Snipped: December 5, 2023" />
@@ -296,7 +296,7 @@ On the "New pull request" page, confirm destination "DEV", review default values
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70b02643-52b6-430a-8d73-8d2eeb7a5d6f" width="800" title="Snipped: December 5, 2023" />
 
-##### Automated Pipeline
+#### Automated Pipeline
 _Note: the primary human in this step will be the Deployment Manager... PENDING SUPPORT CASE RE: TRIGGER_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d19881f-69ea-4a50-9f7e-3193356837e0" width="800" title="Snipped: December 5, 2023" />
