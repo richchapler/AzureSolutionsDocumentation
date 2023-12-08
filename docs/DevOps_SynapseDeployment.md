@@ -10,7 +10,7 @@
 ## Proposed Solution
 * **Starter Pipeline**: Create and test a minimum viable pipeline to demonstrate basic functionality
 * **Branch Deployment**: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
-* **Synapse Resources**: Create and deploy Integration Runtimes, Linked Services, Datasets and parameterized Pipelines
+* **Synapse Parameterization**: Create and deploy environmentally-specific Integration Runtimes, and parameterized Linked Services, Integration Datasets, Pipelines
 
 ## Solution Requirements
 * [DevOps](https://dev.azure.com/) Organization, Project, Repository (dedicated to Synapse), and Branches "DEV", "QA" and "PROD"
@@ -183,11 +183,6 @@ In this exercise, we will create an automated pipeline triggered by a pull reque
 Navigate to Azure DevOps >> Pipelines >> Pipelines and replace the existing YAML with:
 
 ```
-trigger:
-  branches:
-    include:
-    - DEV
-
 pool:
     vmImage: 'windows-latest'
 
@@ -245,7 +240,6 @@ jobs:
 
 #### Logic Explained
 
-* `trigger` specifies that the pipeline should be triggered when there are changes to the `DEV` branch
 * `pool` specifies that the latest Windows virtual machine image should be used for the pipeline
 * `variables` defines several variables that are used throughout the pipeline
 * `jobs` contains the jobs that make up the pipeline; each job has a series of steps that are executed in order
@@ -259,33 +253,7 @@ jobs:
 
 -----
 
-### Step 2: Activate Trigger
-
-Click the vertical ellipses in the upper-right of the Pipeline Edit screen and select "Triggers" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/264a1a79-3acb-4013-972a-ad16b9c1fec3" width="800" title="Snipped: December 5, 2023" />
-
-On the resulting "Deploy_toQA" page, "Triggers" tab, select the item in the "Continuous integration" grouping.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bf7ee994-ea15-4c9f-8e4a-d9d7a4e46e38" width="800" title="Snipped: December 5, 2023" />
-
-Complete the popout form, including:
-
-Prompt | Entry
-:----- | :-----
-**Override the YAML continuous integration trigger**... | Checked
-**Enable continuous integration**... | Selected
-**Branch filters** >> Type... | DEV
-
-Click the "Save & queue" dropdown and select "Save" from the resulting menu. "Save" again on the resulting popup.
-
------
-
-SUPPORT CASE PENDING RE: TRIGGERS
-
------
-
-### Step 3: Confirm Success
+### Step 2: Confirm Success
 
 Navigate to the DEV instance of Synapse Studio and confirm Git Configuration.
 
@@ -363,10 +331,11 @@ Confirm successful processing of the three jobs.
 -----
 -----
 
-## Exercise 3: Synapse Resources
-In this exercise, we will create and deploy Integration Runtimes, Linked Services, Datasets and parameterized Pipelines.
+## Exercise 3: Synapse Parameterization
+In this exercise, we will create and deploy environmentally-specific Integration Runtimes, and parameterized Linked Services, Datasets, Pipelines.
 
 ### Step 1: Integration Runtimes
+Synapse Integration Runtimes are environmentally-specific {i.e., they cannot be shared by both DEV and PROD, and the Synapse resource that references the integration runtime is specifically tied to the installation on the on-prem machine}. All handling of integration runtimes (and use of integration runtimes in Linked Services is manual). In this step, we are going to instantiate DEV and QA Integration Runtimes.
 
 #### DEV Instance
 
@@ -485,13 +454,9 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 
 #### DEV Instance
 
-Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services, create a new working branch, and then click "+ New".
+Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services, create a new working branch, and then click "+ New". On the "New linked service" popout, search for and select "SQL server", then click "Continue".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c51e0d01-a1b3-405c-a4e5-ea4e9c6fa2cb" width="800" title="Snipped: December 7, 2023" />
-
-On the "New linked service" popout, search for and select "SQL server", then click "Continue".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0d18d59e-5c1b-469d-adaa-d7b1a992756b" width="800" title="Snipped: December 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8386afa-9e37-484e-8216-f6a8cc5e8a37" width="800" title="Snipped: December 8, 2023" />
 
 Complete the "New linked service" popout form, including:
 
@@ -499,10 +464,23 @@ Prompt | Entry
 :----- | :-----
 **Connect via integration runtime**... | ir-DEV
 **Server name**... | localhost
-**Database name**... | dbDEV
+**Database name**... | Dynamic Expression: `@{concat('db',linkedService().Environment)}`
 **Authentication type**... | SQL authentication
 
 Click "Test Connection", confirm success and then click "Commit".
+
+
+
+
+
+
+
+LOREM IPSUM
+
+
+
+
+
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/882880ae-827d-4ee5-8945-e7d927096936" width="800" title="Snipped: December 7, 2023" />
 
