@@ -450,15 +450,13 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 
 -----
 
-### Step 2: Linked Services
-
-#### DEV Instance
+### Step 2: Linked Service
 
 Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services, create a new working branch, and then click "+ New". On the "New linked service" popout, search for and select "SQL server", then click "Continue".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8386afa-9e37-484e-8216-f6a8cc5e8a37" width="800" title="Snipped: December 8, 2023" />
 
-Complete the "New linked service" popout form, including:
+At the bottom of the popout form, expand "Parameters", click "+ New" and add a new parameter named "Environment" (string). Complete the "New linked service" popout form, including:
 
 Prompt | Entry
 :----- | :-----
@@ -466,8 +464,9 @@ Prompt | Entry
 **Server name**... | localhost
 **Database name**... | Dynamic Expression: `@{concat('db',linkedService().Environment)}`
 **Authentication type**... | SQL authentication
+**User name**... | sa (and then the associated password)
 
-Click "Test Connection", confirm success and then click "Commit".
+Click "Test Connection", confirm success, and then click "Commit".
 
 
 
@@ -491,34 +490,7 @@ When prompted "Linked service will be published immediately..." click "OK".
 Create and complete a pull request to move changes to the DEV branch.
 <br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
 
------
 
-#### QA Instance
-
-_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference in Synapse, we must create Linked Services for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
-
-Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
-
-Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "linkedService".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b575f73-43b3-4e59-8c77-17b79210723a" width="800" title="Snipped: December 7, 2023" />
-
-Roll-over file "dbQA.json", click the vertical ellipses, and select "Download" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3ba70440-ef6b-42ee-9c34-82e282c198aa" width="800" title="Snipped: December 7, 2023" />
-
-Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d224d141-2749-42db-9fb5-802d9e5be036" width="800" title="Snipped: December 7, 2023" />
-
-On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then click "Commit".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
-
-Run the "Deploy_toQA" pipeline and complete the resulting pull request.
-<br>"dbDEV" and "dbQA" will exist in both environments.
 
 -----
 
@@ -647,7 +619,34 @@ db@{if(contains(linkedService().WorkspaceName,'dev'), 'DEV', 'QA')}
 
 Re-enter password and tehn Test Connection
 
+-----
 
+#### QA Instance
+
+_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference in Synapse, we must create Linked Services for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+
+Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
+
+Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "linkedService".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b575f73-43b3-4e59-8c77-17b79210723a" width="800" title="Snipped: December 7, 2023" />
+
+Roll-over file "dbQA.json", click the vertical ellipses, and select "Download" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3ba70440-ef6b-42ee-9c34-82e282c198aa" width="800" title="Snipped: December 7, 2023" />
+
+Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d224d141-2749-42db-9fb5-802d9e5be036" width="800" title="Snipped: December 7, 2023" />
+
+On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then click "Commit".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
+
+Run the "Deploy_toQA" pipeline and complete the resulting pull request.
+<br>"dbDEV" and "dbQA" will exist in both environments.
 
 -----
 
