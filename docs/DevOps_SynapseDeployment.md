@@ -456,7 +456,8 @@ Navigate to the DEV instance of Synapse Studio, then Manage >> External Connecti
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8386afa-9e37-484e-8216-f6a8cc5e8a37" width="800" title="Snipped: December 8, 2023" />
 
-At the bottom of the popout form, expand "Parameters", click "+ New" and add a new parameter named "Environment" (string). Complete the "New linked service" popout form, including:
+At the bottom of the popout form, expand "Parameters", click "+ New" and add a new parameter named "Environment" (Type: String).
+<br>Complete the "New linked service" popout form, including:
 
 Prompt | Entry
 :----- | :-----
