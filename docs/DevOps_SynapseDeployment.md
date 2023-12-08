@@ -539,7 +539,8 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then cl
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
 
-Run the "Deploy_toQA" pipeline and complete the resulting pull request. "dbDEV" and "dbQA" will exist in both environments.
+Run the "Deploy_toQA" pipeline and complete the resulting pull request.
+<br>"dbDEV" and "dbQA" will exist in both environments.
 
 -----
 
@@ -587,7 +588,8 @@ Roll-over file "dbQA_myTable.json", click the vertical ellipses, and select "Dow
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4aa699d7-0623-41b1-bfd8-af8cb167e8e3" width="800" title="Snipped: December 8, 2023" />
 
 On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and then click "Commit".
-<br>Run the "Deploy_toQA" pipeline and complete the resulting pull request. "dbDEV_myTable" and "dbQA_myTable" will exist in both environments.
+<br>Run the "Deploy_toQA" pipeline and complete the resulting pull request.
+<br>"dbDEV_myTable" and "dbQA_myTable" will exist in both environments.
 
 -----
 
