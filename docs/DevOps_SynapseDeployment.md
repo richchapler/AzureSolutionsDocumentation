@@ -601,7 +601,9 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and
 
 
 
-
+```
+Set-AzSynapseIntegrationRuntime -WorkspaceName ContosoWorkspace -ResourceGroupName ContosoResourceGroup -Name test-selfhost-ir -Description "Updated description"
+```
 
 
 
