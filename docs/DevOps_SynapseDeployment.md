@@ -573,7 +573,14 @@ Click "Test Connection", confirm success and then click "Commit".
 
 _Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Linked Services and Integration Datasets for DEV, QA, and PROD environments and then parameterize Pipelines... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
-Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
+Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA_myTable" Integration Dataset.
+
+
+
+
+
+
+
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
 
