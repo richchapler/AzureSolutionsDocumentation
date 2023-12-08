@@ -517,7 +517,7 @@ Create and complete a pull request to move changes to the DEV branch.
 
 #### QA Instance
 
-_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference in Synapse, we must create Linked Services and Integration Datasets for DEV, QA, and PROD environments and then parameterize Pipelines... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference in Synapse, we must create Linked Services for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
 Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
 
@@ -571,10 +571,19 @@ Click "Test Connection", confirm success and then click "Commit".
 
 #### QA Instance
 
-_Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Linked Services and Integration Datasets for DEV, QA, and PROD environments and then parameterize Pipelines... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
+_Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Integration Datasets for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
 Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA_myTable" Integration Dataset.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e323cd6d-7aa8-45a9-82cc-ba4f865649e1" width="800" title="Snipped: December 8, 2023" />
+
+Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "dataset".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f560412-4d54-43f6-bfbc-28a1d2822fd4" width="800" title="Snipped: December 8, 2023" />
+
+Roll-over file "dbQA_myTable.json", click the vertical ellipses, and select "Download" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4aa699d7-0623-41b1-bfd8-af8cb167e8e3" width="800" title="Snipped: December 8, 2023" />
 
 
 
@@ -582,15 +591,8 @@ Navigate to the QA instance of Synapse Studio, then Manage >> External Connectio
 
 
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
 
-Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "linkedService".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b575f73-43b3-4e59-8c77-17b79210723a" width="800" title="Snipped: December 7, 2023" />
-
-Roll-over file "dbQA.json", click the vertical ellipses, and select "Download" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3ba70440-ef6b-42ee-9c34-82e282c198aa" width="800" title="Snipped: December 7, 2023" />
 
 Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
 
