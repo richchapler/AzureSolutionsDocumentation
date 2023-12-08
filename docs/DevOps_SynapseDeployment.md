@@ -602,21 +602,37 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and
 
 
 ```
-az synapse linked-service update --workspace-name YourWorkspaceName --name YourLinkedServiceName --properties '{
-  "type": "YourLinkedServiceType",
-  "typeProperties": {
-    "connectVia": {
-      "referenceName": "YourNewIntegrationRuntimeName",
-      "type": "IntegrationRuntimeReference"
-    }
-    // Other type-specific properties go here
-  }
+az synapse linked-service update --workspace-name rchaplers-qa --name myLS --properties '{
+  "type": "SqlServer",
+  "typeProperties": { "connectVia": { "referenceName": "myIR", "type": "IntegrationRuntimeReference" } }
 }'
 
 ```
 
 
-
+```
+{
+    "name": "myLS",
+    "type": "Microsoft.Synapse/workspaces/linkedservices",
+    "properties": {
+        "parameters": {
+            "Environment": {
+                "type": "string"
+            }
+        },
+        "annotations": [],
+        "type": "SqlServer",
+        "typeProperties": {
+            "connectionString": "integrated security=False;data source=localhost;initial catalog=\"@{concat('db',linkedService().Environment)}\";user id=sa",
+            "encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4YjM4YjE1NS04NGJhLTQwYTAtOGQ1Yi01NzIwODBjNmU0ZTAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+        },
+        "connectVia": {
+            "referenceName": "myIR",
+            "type": "IntegrationRuntimeReference"
+        }
+    }
+}
+```
 
 
 
