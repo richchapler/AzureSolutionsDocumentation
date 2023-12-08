@@ -551,7 +551,7 @@ Navigate to the DEV instance of Synapse Studio and create a new working branch.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29b6eacf-24c1-488c-98c7-16eef11a4594" width="800" title="Snipped: December 7, 2023" />
 
-Navigate to "Data" >> "Linked", click "+" and then "Integration dataset" from the resulting menu.
+Navigate to Data >> Linked, click "+" and then "Integration dataset" from the resulting menu.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/68312e4c-0115-490a-940e-fff03376d9fc" width="800" title="Snipped: December 7, 2023" />
 
@@ -573,7 +573,7 @@ Click "Test Connection", confirm success and then click "Commit".
 
 _Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Integration Datasets for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
-Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA_myTable" Integration Dataset.
+Navigate to the QA instance of Synapse Studio and repeat the process to create a "dbQA_myTable" Integration Dataset.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e323cd6d-7aa8-45a9-82cc-ba4f865649e1" width="800" title="Snipped: December 8, 2023" />
 
@@ -582,27 +582,12 @@ Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "d
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f560412-4d54-43f6-bfbc-28a1d2822fd4" width="800" title="Snipped: December 8, 2023" />
 
 Roll-over file "dbQA_myTable.json", click the vertical ellipses, and select "Download" from the resulting menu.
+<br>Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4aa699d7-0623-41b1-bfd8-af8cb167e8e3" width="800" title="Snipped: December 8, 2023" />
 
-
-
-
-
-
-
-
-
-
-Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d224d141-2749-42db-9fb5-802d9e5be036" width="800" title="Snipped: December 7, 2023" />
-
-On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then click "Commit".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
-
-Run the "Deploy_toQA" pipeline and complete the resulting pull request. "dbDEV" and "dbQA" will exist in both environments.
+On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and then click "Commit".
+<br>Run the "Deploy_toQA" pipeline and complete the resulting pull request. "dbDEV_myTable" and "dbQA_myTable" will exist in both environments.
 
 -----
 
