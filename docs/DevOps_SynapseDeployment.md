@@ -470,28 +470,21 @@ Prompt | Entry
 **Authentication type**... | SQL authentication
 **User name**... | sa (and then the associated password)
 
-Click "Test Connection", confirm success, and then click "Commit".
-<br>When prompted "Linked service will be published immediately..." click "OK".
+Click "Test Connection", confirm success, and then click "Commit". When prompted "Linked service will be published immediately..." click "OK".
 
 -----
 
 ### Step 3: Integration Dataset
 
-Continue in the DEV instance of Synapse Studio and working branch.
+Continue in the DEV instance of Synapse Studio and working branch. Navigate to "Data" >> "Linked" tab. Click "+" and then "Integration dataset" on the resulting menu. On the "New integration dataset" popout, search for and select "SQL server", then click "Continue". On the "Set properties" popout, select the "dbX" Linked Service, enter schema "dbo" and table "myTable". Click "OK".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29b6eacf-24c1-488c-98c7-16eef11a4594" width="800" title="Snipped: December 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/63a3db7a-90d6-4d13-b332-5737944939cf" width="800" title="Snipped: December 8, 2023" />
 
-Navigate to Data >> Linked, click "+" and then "Integration dataset" from the resulting menu.
+Navigate to the "Parameters" tab and create a new "Environment" parameter. Return to the "Connection" tab and enter Environment value `@dataset().Environment`.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/68312e4c-0115-490a-940e-fff03376d9fc" width="800" title="Snipped: December 7, 2023" />
 
-On the "New integration dataset" popout, search for and select "SQL server", then click "Continue".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/51c0e586-80bb-47cf-89d3-aa2e73c8cc1d" width="800" title="Snipped: December 7, 2023" />
 
-On the "Set properties" popout, select the "dbDEV" Linked Service, "myTable" table, then click "OK".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2f47dcd-d76a-4562-bc0c-5e13e8eb2b9a" width="800" title="Snipped: December 7, 2023" />
 
 Click "Test Connection", confirm success and then click "Commit".
 <br>Create and complete a pull request to move changes to the DEV branch.
