@@ -416,7 +416,7 @@ Click "Complete" and on the resulting "Complete pull request" popout, click "Com
 
 -----
 
-##### QA Instance
+#### QA Instance
 Navigate to the QA instance of Synapse Studio, select the QA branch, then Manage >> Integration >> Integration runtimes.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d43537ae-89c9-4132-8028-eb32a8156d6c" width="800" title="Snipped: December 6, 2023" />
