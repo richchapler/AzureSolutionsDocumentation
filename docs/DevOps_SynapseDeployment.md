@@ -400,7 +400,7 @@ You should see a file in the "integrationRuntime" folder named "ir-DEV.json".
 
 -----
 
-#### Deploy to QA
+##### Deploy to QA
 
 Navigate to the "Deploy_toQA" pipeline and click "Run". On the resulting "Run pipeline" popout, click "Run" again.
 
@@ -414,6 +414,9 @@ Click "Complete" and on the resulting "Complete pull request" popout, click "Com
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/766f65d9-9ed6-4ab4-b963-d9ef271631b3" width="800" title="Snipped: December 6, 2023" />
 
+-----
+
+##### QA Instance
 Navigate to the QA instance of Synapse Studio, select the QA branch, then Manage >> Integration >> Integration runtimes.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d43537ae-89c9-4132-8028-eb32a8156d6c" width="800" title="Snipped: December 6, 2023" />
