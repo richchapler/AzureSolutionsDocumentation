@@ -502,11 +502,11 @@ Continue in the DEV instance of Synapse Studio. Navigate to "Integration". Click
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e0a2efed-6ed8-4541-a81b-c0a188ed02b3" width="800" title="Snipped: December 8, 2023" />
 
-Navigate to "Source" tab.
+Drag a "Copy data" component from the "Move and transform" grouping in the "Activities" pane. Change the name to "Copy myTable" on the "General tab".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39a085f5-d7d1-46ff-b75a-14aa7c5b2156" width="800" title="Snipped: December 8, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/14e9af55-3055-4997-bba2-3a455a946163" width="800" title="Snipped: December 8, 2023" />
 
-Complete the form, including:
+Navigate to "Source" tab and complete the form, including:
 
 Prompt | Entry
 :----- | :-----
