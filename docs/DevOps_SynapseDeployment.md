@@ -476,13 +476,21 @@ Click "Test Connection", confirm success, and then click "Commit". When prompted
 
 ### Step 3: Integration Dataset
 
-Continue in the DEV instance of Synapse Studio and working branch. Navigate to "Data" >> "Linked" tab. Click "+" and then "Integration dataset" on the resulting menu. On the "New integration dataset" popout, search for and select "SQL server", then click "Continue". On the "Set properties" popout, select the "dbX" Linked Service, enter schema "dbo" and table "myTable". Click "OK".
+Continue in the DEV instance of Synapse Studio and working branch. Navigate to "Data" >> "Linked" tab. Click "+" and then "Integration dataset" on the resulting menu. On the "New integration dataset" popout, search for and select "SQL server", then click "Continue". On the "Set properties" popout, select the "dbX" Linked Service, and then click "OK".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/63a3db7a-90d6-4d13-b332-5737944939cf" width="800" title="Snipped: December 8, 2023" />
 
-Navigate to the "Parameters" tab and create a new "Environment" parameter. Return to the "Connection" tab and enter Environment value `@dataset().Environment`.
+Navigate to the "Parameters" tab and create a new "Environment" parameter.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a9da307-24cb-4c7e-90d7-10f00ed28bca" width="800" title="Snipped: December 8, 2023" />
+
+Return to the "Connection" tab and complete the form, including:
+
+Prompt | Entry
+:----- | :-----
+**Linked service** | dbX
+**Environment** | `@dataset().Environment`
+**Table** | Check "Edit" and enter schema "dbo" and table "myTable"
 
 Click "Test Connection", enter Environment parameter value "DEV", and then click "OK". Confirm success and then click "Commit".
 
@@ -498,11 +506,17 @@ Navigate to "Source" tab.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39a085f5-d7d1-46ff-b75a-14aa7c5b2156" width="800" title="Snipped: December 8, 2023" />
 
+Complete the form, including:
+
+Prompt | Entry
+:----- | :-----
+**Source dataset** | dbX
+Parameter: **Environment** | `@{if(contains(pipeline().DataFactory, 'dev'), 'DEV', 'QA')}`
+
+Click "Preview data" and confirm success.
 
 
 
-
-`@{if(contains(pipeline().DataFactory, 'dev'), 'DEV', 'QA')}`
 
 
 
