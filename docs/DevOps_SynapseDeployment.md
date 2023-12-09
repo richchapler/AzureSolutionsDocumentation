@@ -49,15 +49,15 @@ Click "Create service connection".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/82b143c8-4347-4ce4-b327-87143c3f3b4f" width="800" title="Snipped: November 30, 2023" />
 
-On the "New service connection" pop-out, select "Azure Resource Manager" and then click "Next".
+On the "New service connection" pop-out, select "Azure Resource Manager". Click "Next".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eeed2c00-86a0-4394-9393-2ad994f19bac" width="800" title="Snipped: November 30, 2023" />
 
-On the "New Azure service connection" pop-out, select "Workload Identity federation (automatic)" and then click "Next".
+On the "New Azure service connection" pop-out, select "Workload Identity federation (automatic)". Click "Next".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/13bd959f-5fbe-49d9-9a3c-a16ed892ed32" width="800" title="Snipped: November 30, 2023" />
 
-Complete the resulting "New Azure service connection" pop-out, and then click "Save".
+Complete the resulting "New Azure service connection" pop-out. Click "Save".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b69f5927-4d11-4596-8f02-410f18882356" width="800" title="Snipped: November 29, 2023" />
 
@@ -85,7 +85,7 @@ On the "Configure" tab, click "Starter pipeline".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b7a8fcb3-923a-439f-8ca9-b80a33fa3486" width="800" title="Snipped: November 30, 2023" />
 
-On the "Review" tab, click to dropdown "Save and run", and then click "Save".
+On the "Review" tab, click to dropdown "Save and run". Click "Save".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9a3a3239-1ef7-4e62-b088-61b308d35e28" width="800" title="Snipped: November 30, 2023" />
 
@@ -100,11 +100,6 @@ Click "Edit".
 Replace the default YAML with:
 
 ```
-trigger:
-  branches:
-    include:
-    - DEV
-
 pool:
     vmImage: 'windows-latest'
 
@@ -131,7 +126,7 @@ jobs:
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/037b8941-a975-4e88-9a11-cd85a7972e33" width="800" title="Snipped: December 1, 2023" />
 
-#### Logic Explained
+**Logic Explained**
 
 * `archiveQA` is the main job
 * `Login to DevOps` logs into Azure DevOps using the System Access Token
@@ -151,7 +146,7 @@ Click "Run".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc6f9899-dfc4-4eab-9da5-361e33ee1b3b" width="800" title="Snipped: December 1, 2023" />
 
-On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
+On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics". Click "Run".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/95b99284-33a1-4215-9391-1034dfc2a1ff" width="800" title="Snipped: December 1, 2023" />
 
@@ -173,7 +168,7 @@ You can expect to see a new branch named "QA-{datetime}".
 -----
 
 ## Exercise 2: Branch Deployment
-In this exercise, we will create an automated pipeline triggered by a pull request to DEV, that completes the following three tasks:
+In this exercise, we will create an automated pipeline that completes the following three tasks:
 1) **Archive QA Branch**... make a copy of the current QA branch to a timestamped branch in the "archive" folder
 2) **Reset QA Branch**... force copy PROD branch to QA branch
 3) **Create a Pull Request**... from DEV branch to QA branch
@@ -238,7 +233,7 @@ jobs:
         az repos pr create --title "DEV >> QA" --organization $(o) --project $(p) --repository $(r) --source-branch "$(db)" --target-branch "$(qb)"
 ```
 
-#### Logic Explained
+**Logic Explained**
 
 * `pool` specifies that the latest Windows virtual machine image should be used for the pipeline
 * `variables` defines several variables that are used throughout the pipeline
@@ -292,7 +287,7 @@ Click the branch dropdown and select "Create pull request".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d475a571-9e87-4bee-a52e-4d405a5849cd" width="800" title="Snipped: December 5, 2023" />
 
-On the "New pull request" page, confirm destination "DEV", review default values and update as desired, and then click "Create".
+On the "New pull request" page, confirm destination "DEV", review default values and update as desired. Click "Create".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70b02643-52b6-430a-8d73-8d2eeb7a5d6f" width="800" title="Snipped: December 5, 2023" />
 
@@ -301,16 +296,11 @@ _Primary Actor: Deployment Manager_
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d19881f-69ea-4a50-9f7e-3193356837e0" width="800" title="Snipped: December 5, 2023" />
 
-Continuing on the "Adding sqlscript: SQL script 1" pull request page, review Files, etc. and then click "Complete".
+Continuing on the "Adding sqlscript: SQL script 1" pull request page, review Files, etc. Click "Complete".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/59b179af-b6a8-4f91-9c8d-011c29360ece" width="800" title="Snipped: December 5, 2023" />
 
-On the resulting "Complete pull request" pop-out, confirm default settings and then click "Complete merge".
-
------
-THE FOLLOWING STEPS ARE ONLY NECESSARY UNTIL SUPPORT HELPS ME FIGURE OUT HOW TO GET THE TRIGGER TO AUTOMATICALLY START THE PIPELINE UPON COMMIT TO DEV BRANCH
-
-<br>Navigate to the "Deploy_toQA" pipeline.
+On the resulting "Complete pull request" pop-out, confirm default settings. Click "Complete merge". Navigate to the "Deploy_toQA" pipeline.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86278a91-d839-4831-9c1b-5a6cca9d6042" width="800" title="Snipped: December 5, 2023" />
 
@@ -318,7 +308,7 @@ Click "Run".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/92debc4b-d5cd-4d07-82a3-69bd01f44630" width="800" title="Snipped: December 5, 2023" />
 
-On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics", and then click "Run".
+On the resulting "Run pipeline" pop-out, review default settings, check "Enable system diagnostics". Click "Run".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0dd1b512-6432-44fd-842c-9ca549144eff" width="800" title="Snipped: December 5, 2023" />
 
@@ -355,7 +345,7 @@ On the next "Integration runtime setup" popout, click "Self-Hosted" and then "Co
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d4d95808-bbe5-4a79-af8c-265bea8c6389" width="800" title="Snipped: December 6, 2023" />
 
-On the next "Integraton runtime setup" popout, enter a "Name" and then click "Create".
+On the next "Integraton runtime setup" popout, enter a "Name". Click "Create".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa30dfd2-a18a-4c47-9742-2b75cd7d0333" width="800" title="Snipped: December 6, 2023" />
 
@@ -376,7 +366,7 @@ Click the branch dropdown, and click "Create pull request".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb8c85bd-119d-4a5a-9f3e-5fcd4bd8b4dc" width="800" title="Snipped: December 6, 2023" />
 
-On the Azure DevOps >> "New pull request" page, review default settings and then click "Create".
+On the Azure DevOps >> "New pull request" page, review default settings. Click "Create".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0574f79f-08b0-41aa-9986-1f1dd6bbaffa" width="800" title="Snipped: December 6, 2023" />
 
@@ -386,7 +376,7 @@ _Note: We are skipping normal DevOps processes like review, approval, tie to wor
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/decd9f75-ba45-40dc-9a56-6ec5598aea08" width="800" title="Snipped: December 6, 2023" />
 
-On the "Complete pull request" popout, review / update default settings and then click "Complete merge".
+On the "Complete pull request" popout, review / update default settings. Click "Complete merge".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86b49554-c1ff-4ac6-9694-38948e75d7f6" width="800" title="Snipped: December 6, 2023" />
 
@@ -410,7 +400,7 @@ When the pipeline completes successfully, navigate to the pull request at Repos 
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/34f6ee96-dc0c-499e-9eee-74fca0203136" width="800" title="Snipped: December 6, 2023" />
 
-Click "Complete" and on the resulting "Complete pull request" popout, click "Complete merge" and then confirm success.
+Click "Complete" and on the resulting "Complete pull request" popout, click "Complete merge". Confirm success.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/766f65d9-9ed6-4ab4-b963-d9ef271631b3" width="800" title="Snipped: December 6, 2023" />
 
@@ -439,7 +429,7 @@ Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c1e53328-9f45-4069-ac1b-cafc65fe764b" width="800" title="Snipped: December 6, 2023" />
 
-On the "Commit" popout, "Browse" to the downloaded "ir-QA.json" file, and then click "Commit".
+On the "Commit" popout, "Browse" to the downloaded "ir-QA.json" file. Click "Commit".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9c74e10a-a8a6-427c-9729-fba1a2696f51" width="800" title="Snipped: December 6, 2023" />
 
@@ -469,13 +459,13 @@ Prompt | Entry
 **Authentication type**... | SQL authentication
 **User name**... | sa (and then the associated password)
 
-Click "Test Connection", confirm success, and then click "Commit". When prompted "Linked service will be published immediately..." click "OK".
+Click "Test Connection", confirm success. Click "Commit". When prompted "Linked service will be published immediately..." click "OK".
 
 -----
 
 ### Step 3: Integration Dataset
 
-Continue in the DEV instance of Synapse Studio. Navigate to "Data" >> "Linked" tab. Click "+" and then "Integration dataset" on the resulting menu. On the "New integration dataset" popout, search for and select "SQL server", then click "Continue". On the "Set properties" popout, select the "dbX" Linked Service, and then click "OK".
+Continue in the DEV instance of Synapse Studio. Navigate to "Data" >> "Linked" tab. Click "+" and then "Integration dataset" on the resulting menu. On the "New integration dataset" popout, search for and select "SQL server", then click "Continue". On the "Set properties" popout, select the "dbX" Linked Service. Click "OK".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/63a3db7a-90d6-4d13-b332-5737944939cf" width="800" title="Snipped: December 8, 2023" />
 
@@ -491,7 +481,7 @@ Prompt | Entry
 **Environment** | `@dataset().Environment`
 **Table** | Check "Edit" and enter schema "dbo" and table "myTable"
 
-Click "Test Connection", enter Environment parameter value "DEV", and then click "OK". Confirm success and then click "Commit".
+Click "Test Connection", enter Environment parameter value "DEV". Click "OK". Confirm success. Click "Commit".
 
 -----
 
@@ -531,7 +521,7 @@ Click "Commit" and then "Debug". Confirm success.
 
 ### Step 5: Deploy to QA
 
-Create and complete a pull request to move changes to the DEV branch. Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
+Create and complete a pull request to move changes to the DEV branch. Run the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
 
 
 
