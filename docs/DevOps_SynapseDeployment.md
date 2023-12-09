@@ -515,11 +515,16 @@ Parameter: **Environment** | `@{if(contains(pipeline().DataFactory, 'dev'), 'DEV
 
 Click "Preview data" and confirm success.
 
+Navigate to "Sink" tab and complete the form, including:
 
+Prompt | Entry
+:----- | :-----
+**Source dataset** | dbX
+Parameter: **Environment** | `@{if(contains(pipeline().DataFactory, 'dev'), 'DEV', 'QA')}`
 
+_Note: We are copying from and to the same table (with no data) simply as a demonstration of parameterization_
 
-
-
+Click "Commit" and then "Debug". Confirm success.
 
 
 
