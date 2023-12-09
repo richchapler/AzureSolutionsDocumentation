@@ -476,7 +476,7 @@ Click "Test Connection", confirm success, and then click "Commit". When prompted
 
 ### Step 3: Integration Dataset
 
-Continue in the DEV instance of Synapse Studio and working branch. Navigate to "Data" >> "Linked" tab. Click "+" and then "Integration dataset" on the resulting menu. On the "New integration dataset" popout, search for and select "SQL server", then click "Continue". On the "Set properties" popout, select the "dbX" Linked Service, and then click "OK".
+Continue in the DEV instance of Synapse Studio. Navigate to "Data" >> "Linked" tab. Click "+" and then "Integration dataset" on the resulting menu. On the "New integration dataset" popout, search for and select "SQL server", then click "Continue". On the "Set properties" popout, select the "dbX" Linked Service, and then click "OK".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/63a3db7a-90d6-4d13-b332-5737944939cf" width="800" title="Snipped: December 8, 2023" />
 
@@ -498,7 +498,7 @@ Click "Test Connection", enter Environment parameter value "DEV", and then click
 
 ### Step 4: Pipeline
 
-Continue in the DEV instance of Synapse Studio and working branch. Navigate to "Integration". Click "+" and then "Pipeline" on the resulting menu.
+Continue in the DEV instance of Synapse Studio. Navigate to "Integration". Click "+" and then "Pipeline" on the resulting menu.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e0a2efed-6ed8-4541-a81b-c0a188ed02b3" width="800" title="Snipped: December 8, 2023" />
 
@@ -520,67 +520,16 @@ Click "Preview data" and confirm success.
 
 
 
+
+
+
+
+
 LOREM IPSUM
 
 
 
 
-#### Parameterization
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5ca24da5-ff41-4868-9e1d-038f892b2cee" width="800" title="Snipped: December 7, 2023" />
-
-On the "Parameters" tab, click "+ New" and complete the resulting form:
-
-Prompt | Entry
-:----- | :-----
-**Name** | Environment
-**Type** | String
-**Default value** | DEV
-
-Click the `{ }` icon in the upper-left of the UI to view the JSON code representation of the resource.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/26559417-d590-4ccd-bbc0-68b9026d6f5e" width="800" title="Snipped: December 7, 2023" />
-
-Click on the "Database name" input and then click the "Add dynamic content" link.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe1cfd85-4b68-47dc-9c7d-e09a1b260982" width="800" title="Snipped: December 7, 2023" />
-
-
-```
-db@{if(contains(linkedService().WorkspaceName,'dev'), 'DEV', 'QA')}
-
-```
-
-Re-enter password and tehn Test Connection
-
------
-
-#### QA Instance
-
-_Note: Since it is not possible to parameterize the "Connect via integration runtime" reference in Synapse, we must create Linked Services for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
-
-Navigate to the QA instance of Synapse Studio, then Manage >> External Connections >> Linked Services and repeat the process to create a "dbQA" Linked Service.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d1f47a2e-9c44-4288-813d-32d35458c11f" width="800" title="Snipped: December 7, 2023" />
-
-Navigate to DevOps >> "Repos" >> "Files" and select the "QA" branch. Click on "linkedService".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1b575f73-43b3-4e59-8c77-17b79210723a" width="800" title="Snipped: December 7, 2023" />
-
-Roll-over file "dbQA.json", click the vertical ellipses, and select "Download" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3ba70440-ef6b-42ee-9c34-82e282c198aa" width="800" title="Snipped: December 7, 2023" />
-
-Switch to the "DEV" branch, click the vertical ellipses, and select "Upload file(s)" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d224d141-2749-42db-9fb5-802d9e5be036" width="800" title="Snipped: December 7, 2023" />
-
-On the "Commit" popout, "Browse" to the downloaded "dbQA.json" file, and then click "Commit".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc22b962-8ff2-40a1-acb0-3b789854e53b" width="800" title="Snipped: December 7, 2023" />
-
-Run the "Deploy_toQA" pipeline and complete the resulting pull request.
-<br>"dbDEV" and "dbQA" will exist in both environments.
 
 #### QA Instance
 
