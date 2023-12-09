@@ -490,9 +490,19 @@ Click "Test Connection", enter Environment parameter value "DEV", and then click
 
 ### Step 4: Pipeline
 
+Continue in the DEV instance of Synapse Studio and working branch. Navigate to "Integration". Click "+" and then "Pipeline" on the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e0a2efed-6ed8-4541-a81b-c0a188ed02b3" width="800" title="Snipped: December 8, 2023" />
+
+Navigate to "Source" tab.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39a085f5-d7d1-46ff-b75a-14aa7c5b2156" width="800" title="Snipped: December 8, 2023" />
 
 
 
+
+
+`@{if(contains(pipeline().DataFactory, 'dev'), 'DEV', 'QA')}`
 
 
 
