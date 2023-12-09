@@ -526,17 +526,21 @@ _Note: We are copying from and to the same table (with no data) simply as a demo
 
 Click "Commit" and then "Debug". Confirm success.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e585a9a7-3890-4961-ba27-68b39425f8d1" width="800" title="Snipped: December 8, 2023" />
+
+-----
+
+### Step 5: Deploy to QA
+
+
+
+
+
 
 
 
 
 LOREM IPSUM
-
-
-
-
-
-#### QA Instance
 
 _Note: Since it is not possible to parameterize the "Linked Service" reference in Synapse, we must create Integration Datasets for DEV, QA, and PROD environments... to achieve this, we will mimic our creation of environmentally-specific Integration Runtimes_
 
@@ -562,6 +566,7 @@ On the "Commit" popout, "Browse" to the downloaded "dbQA_myTable.json" file, and
 
 Create and complete a pull request to move changes to the DEV branch.
 <br>Then, trigger the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
+
 -----
 
 **Congratulations... you have successfully completed this exercise**
