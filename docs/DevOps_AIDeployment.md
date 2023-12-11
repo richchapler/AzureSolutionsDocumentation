@@ -11,9 +11,12 @@
 * "We want to capture our Open AI deployment creation process in our DevOps repo" (WiP)
 
 ## Proposed Solution
-* Custom Skillset API: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
-* Deployment Application: Use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
-* Source Control: Create a pull request in a DevOps repo
+* AI Search
+  * **Custom Skillset API**: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
+  * **Deployment Application**: Use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
+* OpenAI
+  * Deployment Application???
+* DevOps: Create a pull request in a DevOps repo
 
 ## Solution Requirements
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
