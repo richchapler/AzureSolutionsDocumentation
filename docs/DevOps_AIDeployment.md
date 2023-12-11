@@ -37,6 +37,7 @@
 -----
 
 ## Exercise 1: AI Search
+In this exercise we will: 1) use a Function App to instantiate a simple API for use with an AI Search Custom Skillset, and 2) use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
 
 ### Step 1: Custom Skillset
 In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
@@ -67,7 +68,7 @@ Click "**Create**".
 
 -----
 
-### Step 1a: Code Function
+#### Step 1a: Code Function
 
 Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
 
@@ -124,7 +125,7 @@ _Note: This is a template function ONLY... add additional logic based on your us
 
 -----
 
-### Step 1b: Publish Function
+#### Step 1b: Publish Function
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
 
@@ -152,7 +153,7 @@ Back on the "...Publish" page, click **Publish**, allow time for processing, and
 
 -----
 
-### Step 1c: Confirm Success
+#### Step 1c: Confirm Success
 
 Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
 
@@ -522,7 +523,7 @@ Logic Explained:
 
 -----
 
-### Step 2d: Confirm Success
+#### Step 2d: Confirm Success
 
 **Visual Studio Debug**
 
@@ -534,7 +535,7 @@ Save your changes and then click "**Debug**" >> "**Start Debugging**" in the men
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
 
-#### AI Search Index
+**AI Search Index**
 
 Navigate to AI Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
 
@@ -553,8 +554,10 @@ Click the "**Search**" button and review results.
 -----
 -----
 
-## Exercise 3: OpenAI
+## Exercise 2: OpenAI
 In this exercise, we will create a pull request in a DevOps repo.
+
+LOREM IPSUM
 
 -----
 
@@ -563,7 +566,7 @@ In this exercise, we will create a pull request in a DevOps repo.
 -----
 -----
 
-## Exercise 4: DevOps
+## Exercise 3: DevOps
 In this exercise, we will create a pull request in a DevOps repo.
 
 ### Step 1: Create and Push
