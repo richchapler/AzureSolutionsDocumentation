@@ -1,13 +1,14 @@
-# DevOps: AI Search Deployment 
+# DevOps: AI Deployment (UPDATE IN PROGRESS)
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
 * "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
-* "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
+  * "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
 * "We want to capture our AI Search index creation process in our DevOps repo"
-* "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
-* "All secrets must be stored in Key Vault"
+  * "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
+  * "All secrets must be stored in Key Vault"
+* "We want to capture our Open AI deployment creation process in our DevOps repo" (WiP)
 
 ## Proposed Solution
 * Custom Skillset API: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
