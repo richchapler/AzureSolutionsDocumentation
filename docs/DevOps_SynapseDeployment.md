@@ -446,10 +446,7 @@ Run the "Deploy_toQA" pipeline and complete the resulting pull request.
 
 ### Step 2: Linked Service
 
-Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services.
-<br>Create a new working branch.
-<br>Click "+ New" and on the "New linked service" popout, search for and select "SQL server".
-<br>Click "Continue".
+Navigate to the DEV instance of Synapse Studio, then Manage >> External Connections >> Linked Services. Create a new working branch. Click "+ New" and on the "New linked service" popout, search for and select "SQL server". Click "Continue".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8386afa-9e37-484e-8216-f6a8cc5e8a37" width="800" title="Snipped: December 8, 2023" />
 
