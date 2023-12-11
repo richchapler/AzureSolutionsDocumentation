@@ -196,9 +196,9 @@ The pop-out will switch to the "**Output**" tab and you can expect the following
 -----
 -----
 
-## Step 2: Deployment Application
+### Step 2: Deployment Application
 
-### Step 2a: Create Visual Studio Project
+#### Step 2a: Create Visual Studio Project
 In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 Open Visual Studio and click "**Create a new project**".
@@ -217,7 +217,7 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 -----
 
-### Step 2b: Install NuGet
+#### Step 2b: Install NuGet
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
@@ -234,7 +234,7 @@ When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
 
-#### Additional Packages
+**Additional Packages**
 
 Repeat this process for the following NuGet packages:
 
@@ -245,7 +245,7 @@ Close the "**NuGet - Solution**" tab.
 
 -----
 
-### Step 2c: Code Application
+#### Step 2c: Code Application
 
 Replace the default code on the "**Program.cs**" tab with the following C#:
 
@@ -265,7 +265,7 @@ public class Program
 }
 ```
 
-#### Names, URIs, and Keys
+**Names, URIs, and Keys**
 The variables set in this section will be used to identify and create various resources.
 
 Return to the "**Program.cs**" tab and add the following code to `Main`.
@@ -302,7 +302,7 @@ _Notes:_
 
 -----
 
-#### Clients
+**Clients**
 The variables set in this section will be used to manage the AI Search resources.
 
 Append the following code to the bottom of `Main`:
@@ -322,7 +322,7 @@ Logic Explained:
 
 -----
 
-#### Data Source
+**Data Source**
 The logic in this section will create a AI Search Data Source.
 
 Append the following code to the bottom of `Main`:
@@ -350,7 +350,7 @@ Logic Explained:
 
 -----
 
-#### Index
+**Index**
 The logic in this section will create a AI Search Index.
 
 Append the following code to the bottom of `Main`:
@@ -399,7 +399,7 @@ Logic Explained:
 
 -----
 
-#### Skillset
+**Skillset**
 The logic in this section will create a AI Search Skillset.
 
 Append the following code to the bottom of `Main`:
@@ -481,7 +481,7 @@ Logic Explained:
 
 -----
 
-#### Indexer
+**Indexer**
 The logic in this section will create a AI Search Indexer.
 
 Append the following code to the bottom of `Main`:
@@ -524,7 +524,7 @@ Logic Explained:
 
 ### Step 2d: Confirm Success
 
-#### Visual Studio Debug
+**Visual Studio Debug**
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
 
