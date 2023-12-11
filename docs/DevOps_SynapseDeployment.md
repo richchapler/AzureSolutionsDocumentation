@@ -325,12 +325,12 @@ Confirm successful processing of the three jobs.
 In this exercise, we will create and deploy environmentally-specific Integration Runtimes, and parameterized Linked Services, Datasets, Pipelines.
 
 ### Step 1: Integration Runtimes
-_Notes:_
-_Synapse Self-Hosted Integration Runtimes are environmentally-specific {i.e. they cannot be shared by two environments}._
-_<br>Each Self-Hosted Synapse Integration Runtime must be tied to a dedicated installation on an on-prem machine._
-_<br>All Linked Service that that use a Self-Hosted Integration Runtime be manually updated when deployed from one environment to another._
+In this step, we are going to instantiate DEV and QA Integration Runtimes.
 
-<br>In this step, we are going to instantiate DEV and QA Integration Runtimes.
+_Important things to know about Synapse Self-Hosted Integration Runtimes:_
+* _They cannot be shared by two environments_
+* _Each must be tied to a dedicated on-prem installation_
+* _Linked Service references must be manually updated after being deployed to a new environment_
 
 #### DEV Instance
 
