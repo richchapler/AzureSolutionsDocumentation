@@ -515,9 +515,9 @@ Logic Explained:
 2. **IndexingParametersConfiguration**: The `IndexingParametersConfiguration` is set to `BlobIndexerImageAction.GenerateNormalizedImagePerPage`, which means the indexer will perform Optical Character Recognition (OCR) on images in blobs and generate a normalized image per page
 3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation
 4. **OutputFieldMappings**: These mappings define how the output of a skill is mapped to a field in an index schema:
-   a. `text`... from `OcrSkill` and `/document/normalized_images/*/text`
-   b. `keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
-   c. `myColumn`... from `WebApiSkill` and `/document/content/myColumn` (custom skillset)
+   <br>`text`... from `OcrSkill` and `/document/normalized_images/*/text`
+   <br>`keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
+   <br>`myColumn`... from `WebApiSkill` and `/document/content/myColumn` (custom skillset)
 6. **DeleteIndexer** and **CreateIndexer**: The existing indexer with the same name is deleted if it exists, and then the new indexer is created.
 
 -----
