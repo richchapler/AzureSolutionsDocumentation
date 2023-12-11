@@ -1,4 +1,4 @@
-# DevOps: Synapse Deployment (WiP)
+# DevOps: Synapse Deployment
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8695974f-8513-4de5-b7cc-d35a4cd89ce5" width="1000" />
 
