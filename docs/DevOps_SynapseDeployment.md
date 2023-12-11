@@ -3,13 +3,13 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8695974f-8513-4de5-b7cc-d35a4cd89ce5" width="1000" />
 
 ## Use Case
-* "We want to automate our Synapse deployment process using DevOps"
+* "We want to automate our Synapse deployment process using DevOps everywhere possible"
   
-  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/780c08a6-57b4-484d-9310-6b269268054d" width="800" title="Snipped: December 4, 2023" />
+  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/037777f4-b08d-4bdc-be58-707cfa35631e" width="800" title="Snipped: December 11, 2023" />
 
 ## Proposed Solution
 * **Starter Pipeline**: Create and test a minimum viable pipeline to demonstrate basic functionality
-* **Branch Deployment**: Create an automated pipeline that: archives the QA branch, resets the QA branch, and 3) creates a pull reqeust
+* **Branch Deployment**: Create an automated pipeline that: archives the QA branch, resets the QA branch, and creates a pull reqeust
 * **Synapse Parameterization**: Create and deploy environmentally-specific Integration Runtimes, and parameterized Linked Services, Integration Datasets, Pipelines
 
 ## Solution Requirements
