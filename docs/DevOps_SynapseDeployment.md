@@ -525,10 +525,8 @@ Click "Commit" and then "Debug". Confirm success.
 
 Create and complete a pull request to move changes to the DEV branch. Run the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
 
+Navigate to your QA environment and modify the Integration Runtime reference in the Linked Service to "ir-QA".
 
-
-
-LOREM IPSUM
 -----
 
 **Congratulations... you have successfully completed this exercise**
