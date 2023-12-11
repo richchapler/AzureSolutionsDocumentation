@@ -36,11 +36,11 @@
 
 -----
 
-## Exercise 1: Custom Skillset API
+## Exercise 1: AI Search
+
+### Step 1: Custom Skillset
 In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
 <br>_Note: Only complete this exercise if you intend to include a custom skillset in the AI Search deployment app_
-
-### Step 1: Create Project
 
 Open Visual Studio and click "**Create a new project**".
 
@@ -67,7 +67,7 @@ Click "**Create**".
 
 -----
 
-### Step 2: Code Function
+### Step 1a: Code Function
 
 Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
 
@@ -124,7 +124,7 @@ _Note: This is a template function ONLY... add additional logic based on your us
 
 -----
 
-### Step 3: Publish Function
+### Step 1b: Publish Function
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
 
@@ -152,7 +152,7 @@ Back on the "...Publish" page, click **Publish**, allow time for processing, and
 
 -----
 
-### Step 4: Confirm Success
+### Step 1c: Confirm Success
 
 Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
 
@@ -196,10 +196,10 @@ The pop-out will switch to the "**Output**" tab and you can expect the following
 -----
 -----
 
-## Exercise 2: Deployment Application
-In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
+## Step 2: Deployment Application
 
-### Step 1: Create Visual Studio Project
+### Step 2a: Create Visual Studio Project
+In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 Open Visual Studio and click "**Create a new project**".
 
@@ -217,7 +217,7 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 -----
 
-### Step 2: Install NuGet
+### Step 2b: Install NuGet
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
@@ -245,7 +245,7 @@ Close the "**NuGet - Solution**" tab.
 
 -----
 
-### Step 3: Code Application
+### Step 2c: Code Application
 
 Replace the default code on the "**Program.cs**" tab with the following C#:
 
@@ -522,7 +522,7 @@ Logic Explained:
 
 -----
 
-### Step 4: Confirm Success
+### Step 2d: Confirm Success
 
 #### Visual Studio Debug
 
@@ -553,7 +553,17 @@ Click the "**Search**" button and review results.
 -----
 -----
 
-## Exercise 3: Source Control
+## Exercise 3: OpenAI
+In this exercise, we will create a pull request in a DevOps repo.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+-----
+
+## Exercise 4: DevOps
 In this exercise, we will create a pull request in a DevOps repo.
 
 ### Step 1: Create and Push
