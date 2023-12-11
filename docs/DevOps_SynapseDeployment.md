@@ -523,9 +523,7 @@ Click "Commit" and then "Debug". Confirm success.
 
 ### Step 5: Deploy to QA
 
-Create and complete a pull request to move changes to the DEV branch. Run the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request.
-
-Navigate to your QA environment and modify the Integration Runtime reference in the Linked Service to "ir-QA".
+Create and complete a pull request to move changes to the DEV branch. Run the "Deploy_toQA" pipeline in DevOps and complete the resulting pull request. Navigate to your QA environment and modify the Integration Runtime reference in the Linked Service to "ir-QA".
 
 -----
 
