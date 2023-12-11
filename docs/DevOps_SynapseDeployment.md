@@ -327,7 +327,7 @@ In this exercise, we will create and deploy environmentally-specific Integration
 ### Step 1: Integration Runtimes
 In this step, we are going to instantiate DEV and QA Integration Runtimes.
 
-_Important things to know about Synapse Self-Hosted Integration Runtimes:_
+_Important Synapse Self-Hosted Integration Runtimes facts:_
 * _They cannot be shared by two environments_
 * _Each must be tied to a dedicated on-prem installation_
 * _Linked Service references must be manually updated after being deployed to a new environment_
