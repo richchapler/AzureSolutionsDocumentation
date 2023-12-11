@@ -529,7 +529,7 @@ Navigate to your QA environment and modify the Integration Runtime reference in 
 
 -----
 
-**Congratulations... you have successfully completed this exercise**
+**Congratulations... you have successfully completed all exercises**
 
 -----
 -----
