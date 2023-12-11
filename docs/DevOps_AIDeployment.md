@@ -273,7 +273,7 @@ Return to the "**Program.cs**" tab and add the following code to `Main`.
 ```
 /* ************************* Names */
 
-string nameBlobStorage_Container = "forms";
+string nameBlobStorage_Container = "rchaplersc";
 string nameAISearch_DataSource = "rchaplerss-datasource";
 string nameAISearch_Index = "rchaplerss-index";
 string nameAISearch_Indexer = "rchaplerss-indexer";
@@ -347,7 +347,6 @@ Logic Explained:
 * `var sidsc...` creates a new `SearchIndexerDataSourceConnection` object that represents a connection to a Blob Storage account
     * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
 * `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the `SearchIndexerDataSourceConnection` object
-* `forms` refers to the Storage Account Container mentioned in Solution Requirements
 
 -----
 
@@ -499,7 +498,8 @@ var indexer = new SearchIndexer(nameAISearch_Indexer, nameAISearch_DataSource, n
             ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
         }
     },
-    SkillsetName = nameAISearch_Skillset
+    SkillsetName = nameAISearch_Skillset,
+    IsDisabled = true
 };
 
 indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" });
@@ -511,18 +511,14 @@ indexerClient.CreateIndexer(indexer);
 ```
 
 Logic Explained:
-* `var indexer...` creates a new SearchIndexer object that represents an indexer in Azure AI Search
-  * The indexer is associated with the data source named `dataSourceName` and the index named `indexName`
-  * Inside the `{...}` block, parameters are set for the indexer; these parameters control how the indexer behaves during indexing
-    * In this case, the `ImageAction` parameter is set to `GenerateNormalizedImagePerPage`, which means the indexer will generate a normalized image for each page of a document
-  * Also inside the `{...}` block, the `SkillsetName` property is set to `skillsetName`
-    * This means the indexer will use the skillset named `skillsetName` to transform and enrich your data during indexing
-* `indexer.OutputFieldMappings...` adds indexer output field mappings
-  * `/document/normalized_images/*/text` is mapped to the `text` field in your index
-  * `/document/content/keyphrases` is mapped to the `keyphrases` field in your index
-  * `/document/content/myColumn` is mapped to the `myColumn` field in your index
-* `indexerClient.DeleteIndexer...` deletes any existing indexer with the same name using the `SearchIndexer` object
-* `indexerClient.CreateIndexer...` creates a new indexer using the `SearchIndexer` object
+1. **SearchIndexer Creation**: A `SearchIndexer` named `indexer` is created with a specified indexer name, data source name, and index name. The indexer is configured with specific parameters and a skillset name
+2. **IndexingParametersConfiguration**: The `IndexingParametersConfiguration` is set to `BlobIndexerImageAction.GenerateNormalizedImagePerPage`, which means the indexer will perform Optical Character Recognition (OCR) on images in blobs and generate a normalized image per page
+3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation
+4. **OutputFieldMappings**: These mappings define how the output of a skill is mapped to a field in an index schema:
+   a. `text`... from `OcrSkill` and `/document/normalized_images/*/text`
+   b. `keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
+   c. `myColumn`... from `WebApiSkill` and `/document/content/myColumn` (custom skillset)
+6. **DeleteIndexer** and **CreateIndexer**: The existing indexer with the same name is deleted if it exists, and then the new indexer is created.
 
 -----
 
