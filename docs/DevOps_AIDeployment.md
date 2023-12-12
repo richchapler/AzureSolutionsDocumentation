@@ -555,7 +555,52 @@ Click the "**Search**" button and review results.
 -----
 
 ## Exercise 2: OpenAI
-In this exercise, we will create a pull request in a DevOps repo.
+In this exercise, we will programmatically interact with OpenAI + AI Search index:
+
+
+
+
+```
+using Azure;
+using Azure.AI.OpenAI; /* pre-release NuGet Package: Azure.AI.OpenAI v1.0.0-beta.9 */
+
+var client = new OpenAIClient(
+    endpoint: new Uri("https://rchaplerai.openai.azure.com/"),
+    keyCredential: new AzureKeyCredential("34b586dacbfb4115b15d5c167438a11c")
+    );
+
+AzureCognitiveSearchChatExtensionConfiguration acscec = new()
+{
+    SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
+    IndexName = "rchaplerss-index",
+    QueryType = AzureCognitiveSearchQueryType.Simple, /* ...or: .Semantic, .Vector, .VectorSemanticHybrid, .VectorSimpleHybrid */
+    ShouldRestrictResultScope = false, /* This doesn't appear to work in v1.0.0-beta.9 */
+    DocumentCount = 5
+};
+
+acscec.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
+
+var request = new ChatCompletionsOptions()
+{
+    Messages =
+    {
+        new ChatMessage(ChatRole.System, "Act like you're a tax professional. Be brief."),
+        new ChatMessage(ChatRole.User, "Give me a good recipe for potato soup")
+    },
+    DeploymentName = "rchaplerai-gpt4",
+    AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { acscec } }
+};
+
+var response = await client.GetChatCompletionsAsync(request);
+
+Console.WriteLine(response.Value.Choices[0].Message.Content);
+
+
+
+
+/* Reference: https://learn.microsoft.com/en-us/azure/ai-services/openai/ */
+```
+
 
 LOREM IPSUM
 
