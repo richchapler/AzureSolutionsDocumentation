@@ -555,7 +555,7 @@ Click the "**Search**" button and review results.
 -----
 
 ## Exercise 2: OpenAI
-In this exercise, we will programmatically interact with OpenAI + AI Search index:
+In this exercise, we will test prompts programmatically interact with OpenAI + AI Search index:
 
 ```
 using Azure;
@@ -567,9 +567,7 @@ var client = new OpenAIClient(
     keyCredential: new AzureKeyCredential("34b586dacbfb4115b15d5c167438a11c")
     );
 
-AzureCognitiveSearchChatExtensionConfiguration CreateConfiguration(
-    AzureCognitiveSearchQueryType queryType
-    )
+ChatCompletionsOptions CreateConfigurations(AzureCognitiveSearchQueryType queryType, string prompt)
 {
     AzureCognitiveSearchChatExtensionConfiguration config = new()
     {
@@ -578,10 +576,19 @@ AzureCognitiveSearchChatExtensionConfiguration CreateConfiguration(
         QueryType = queryType,
         ShouldRestrictResultScope = true,
         DocumentCount = 5,
-        SemanticConfiguration = "rchaplerss-semantic" /* Ignored when QueryType != Semantic */
+        SemanticConfiguration = "rchaplerss-semantic" /* Ignored when queryType != Semantic */
     };
     config.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
-    return config;
+
+    ChatCompletionsOptions options = new()
+    {
+        DeploymentName = "rchaplerai-gpt4",
+        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
+    };
+
+    options.Messages.Add(new ChatMessage(ChatRole.User, prompt));
+
+    return options;
 }
 
 Dictionary<string, List<string>> output = new Dictionary<string, List<string>>();
@@ -589,29 +596,11 @@ Dictionary<string, List<string>> output = new Dictionary<string, List<string>>()
 foreach (var prompt in File.ReadLines(@"C:\temp\input.txt"))
 {
     /* ************************* Configuration: Keyword */
-    var configSimple = CreateConfiguration(AzureCognitiveSearchQueryType.Simple);
-
-    ChatCompletionsOptions promptSimple = new()
-    {
-        DeploymentName = "rchaplerai-gpt4",
-        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { configSimple } }
-    };
-
-    promptSimple.Messages.Add(new ChatMessage(ChatRole.User, prompt));
-
+    var promptSimple = CreateConfigurations(AzureCognitiveSearchQueryType.Simple, prompt);
     var responseSimple = await client.GetChatCompletionsAsync(promptSimple);
 
     /* ************************* Configuration: Semantic */
-    var configSemantic = CreateConfiguration(AzureCognitiveSearchQueryType.Semantic);
-
-    ChatCompletionsOptions promptSemantic = new()
-    {
-        DeploymentName = "rchaplerai-gpt4",
-        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { configSemantic } }
-    };
-
-    promptSemantic.Messages.Add(new ChatMessage(ChatRole.User, prompt));
-
+    var promptSemantic = CreateConfigurations(AzureCognitiveSearchQueryType.Semantic, prompt);
     var responseSemantic = await client.GetChatCompletionsAsync(promptSemantic);
 
     output[prompt] = new List<string> { responseSimple.Value.Choices[0].Message.Content, responseSemantic.Value.Choices[0].Message.Content };
