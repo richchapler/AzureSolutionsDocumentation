@@ -567,32 +567,62 @@ var client = new OpenAIClient(
     keyCredential: new AzureKeyCredential("34b586dacbfb4115b15d5c167438a11c")
     );
 
-AzureCognitiveSearchChatExtensionConfiguration acscec = new()
+AzureCognitiveSearchChatExtensionConfiguration CreateConfiguration(
+    AzureCognitiveSearchQueryType queryType
+    )
 {
-    SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
-    IndexName = "rchaplerss-index",
-    QueryType = AzureCognitiveSearchQueryType.Simple, /* ...or: .Semantic, .Vector, .VectorSemanticHybrid, .VectorSimpleHybrid */
-    ShouldRestrictResultScope = true,
-    DocumentCount = 5
-};
-acscec.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
+    AzureCognitiveSearchChatExtensionConfiguration config = new()
+    {
+        SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
+        IndexName = "rchaplerss-index",
+        QueryType = queryType,
+        ShouldRestrictResultScope = true,
+        DocumentCount = 5,
+        SemanticConfiguration = "rchaplerss-semantic" /* Ignored when QueryType != Semantic */
+    };
+    config.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
+    return config;
+}
 
-StringBuilder csvContent = new();
-csvContent.AppendLine("Prompt,Response"); /* CSV Headers */
+Dictionary<string, List<string>> output = new Dictionary<string, List<string>>();
 
 foreach (var prompt in File.ReadLines(@"C:\temp\input.txt"))
 {
-    ChatCompletionsOptions chat = new()
+    /* ************************* Configuration: Keyword */
+    var configSimple = CreateConfiguration(AzureCognitiveSearchQueryType.Simple);
+
+    ChatCompletionsOptions promptSimple = new()
     {
         DeploymentName = "rchaplerai-gpt4",
-        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { acscec } }
+        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { configSimple } }
     };
 
-    chat.Messages.Add(new ChatMessage(ChatRole.User, prompt));
+    promptSimple.Messages.Add(new ChatMessage(ChatRole.User, prompt));
 
-    var response = await client.GetChatCompletionsAsync(chat);
+    var responseSimple = await client.GetChatCompletionsAsync(promptSimple);
 
-    csvContent.AppendLine($"\"{prompt}\",\"{response.Value.Choices[0].Message.Content}\"");
+    /* ************************* Configuration: Semantic */
+    var configSemantic = CreateConfiguration(AzureCognitiveSearchQueryType.Semantic);
+
+    ChatCompletionsOptions promptSemantic = new()
+    {
+        DeploymentName = "rchaplerai-gpt4",
+        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { configSemantic } }
+    };
+
+    promptSemantic.Messages.Add(new ChatMessage(ChatRole.User, prompt));
+
+    var responseSemantic = await client.GetChatCompletionsAsync(promptSemantic);
+
+    output[prompt] = new List<string> { responseSimple.Value.Choices[0].Message.Content, responseSemantic.Value.Choices[0].Message.Content };
+}
+
+StringBuilder csvContent = new();
+csvContent.AppendLine("Prompt,Response_Simple,Response_Semantic"); /* CSV Headers */
+
+foreach (var item in output)
+{
+    csvContent.AppendLine($"\"{item.Key}\",\"{item.Value[0]}\",\"{item.Value[1]}\"");
 }
 
 File.WriteAllText(@"C:\temp\output.csv", csvContent.ToString());
