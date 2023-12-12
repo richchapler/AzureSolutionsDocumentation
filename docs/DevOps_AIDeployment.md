@@ -514,7 +514,7 @@ indexerClient.CreateIndexer(indexer);
 Logic Explained:
 1. **SearchIndexer Creation**: A `SearchIndexer` named `indexer` is created with a specified indexer name, data source name, and index name. The indexer is configured with specific parameters and a skillset name
 2. **IndexingParametersConfiguration**: The `IndexingParametersConfiguration` is set to `BlobIndexerImageAction.GenerateNormalizedImagePerPage`, which means the indexer will perform Optical Character Recognition (OCR) on images in blobs and generate a normalized image per page
-3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation
+3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation... re-enable by modifying Indexer >> "Indexer Definition (JSON)"
 4. **OutputFieldMappings**: These mappings define how the output of a skill is mapped to a field in an index schema:
    <br>`text`... from `OcrSkill` and `/document/normalized_images/*/text`
    <br>`keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
