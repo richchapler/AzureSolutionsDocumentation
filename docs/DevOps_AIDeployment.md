@@ -563,6 +563,7 @@ In this exercise, we will programmatically interact with OpenAI + AI Search inde
 ```
 using Azure;
 using Azure.AI.OpenAI; /* pre-release NuGet Package: Azure.AI.OpenAI v1.0.0-beta.9 */
+using System.Text;
 
 var client = new OpenAIClient(
     endpoint: new Uri("https://rchaplerai.openai.azure.com/"),
@@ -577,23 +578,28 @@ AzureCognitiveSearchChatExtensionConfiguration acscec = new()
     ShouldRestrictResultScope = false, /* This doesn't appear to work in v1.0.0-beta.9 */
     DocumentCount = 5
 };
-
 acscec.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
 
-var request = new ChatCompletionsOptions()
+ChatCompletionsOptions chat = new()
 {
-    Messages =
-    {
-        new ChatMessage(ChatRole.System, "Act like you're a tax professional. Be brief."),
-        new ChatMessage(ChatRole.User, "Give me a good recipe for potato soup")
-    },
     DeploymentName = "rchaplerai-gpt4",
     AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { acscec } }
 };
+chat.Messages.Add(new ChatMessage(ChatRole.System, "Act like you're a tax professional. Be brief."));
 
-var response = await client.GetChatCompletionsAsync(request);
+StringBuilder csvContent = new();
+csvContent.AppendLine("Prompt,Response"); // CSV Headers
 
-Console.WriteLine(response.Value.Choices[0].Message.Content);
+foreach (prompt in File.ReadLines("prompts.txt"))
+{
+    chat.Messages.Add(new ChatMessage(ChatRole.User, prompt));
+    var response = await client.GetChatCompletionsAsync(chat);
+    csvContent.AppendLine($"\"{prompt}\",\"{response.Value.Choices[0].Message.Content}\"");
+}
+
+File.WriteAllText(@"C:\temp\output.csv", csvContent.ToString());
+
+/* prompts.txt file... Change the ‘Copy to Output Directory’ property: In Solution Explorer, select the CSV file. In the Properties window, change the Copy to Output Directory property to Copy if newer. This ensures the CSV file is copied to the output directory of your build. */
 ```
 
 Reference:
