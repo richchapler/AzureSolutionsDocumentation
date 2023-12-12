@@ -4,5 +4,5 @@
 
 Use Case | Technologies
 :----- | :-----
-[AI Deployment](DevOps_AIDeployment.md) | AI Search, OpenAI, C#, DevOps<br>
-[Synapse Deployment](DevOps_SynapseDeployment.md) | Synapse, YAML, DevOps<br>
+[DevOps for AI](DevOps_AI.md) | AI Search, OpenAI, C#, DevOps<br>
+[DevOps for Synapse](DevOps_SynapseDeployment.md) | Synapse, YAML, DevOps<br>
