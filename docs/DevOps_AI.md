@@ -557,12 +557,10 @@ Click the "**Search**" button and review results.
 ## Exercise 2: OpenAI
 In this exercise, we will programmatically interact with OpenAI + AI Search index:
 
-
-
-
 ```
 using Azure;
 using Azure.AI.OpenAI; /* pre-release NuGet Package: Azure.AI.OpenAI v1.0.0-beta.9 */
+using System.IO;
 using System.Text;
 
 var client = new OpenAIClient(
@@ -585,12 +583,13 @@ ChatCompletionsOptions chat = new()
     DeploymentName = "rchaplerai-gpt4",
     AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { acscec } }
 };
-chat.Messages.Add(new ChatMessage(ChatRole.System, "Act like you're a tax professional. Be brief."));
+
+chat.Messages.Add(new ChatMessage(ChatRole.System, "Act like you're a tax professional. Be brief.")); /* System Message */
 
 StringBuilder csvContent = new();
 csvContent.AppendLine("Prompt,Response"); // CSV Headers
 
-foreach (prompt in File.ReadLines("prompts.txt"))
+foreach (var prompt in File.ReadLines("chat.txt"))
 {
     chat.Messages.Add(new ChatMessage(ChatRole.User, prompt));
     var response = await client.GetChatCompletionsAsync(chat);
