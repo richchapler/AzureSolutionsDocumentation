@@ -594,13 +594,11 @@ var request = new ChatCompletionsOptions()
 var response = await client.GetChatCompletionsAsync(request);
 
 Console.WriteLine(response.Value.Choices[0].Message.Content);
-
-
-
-
-/* Reference: https://learn.microsoft.com/en-us/azure/ai-services/openai/ */
 ```
 
+Reference:
+* https://learn.microsoft.com/en-us/azure/ai-services/openai/
+* https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/README.md
 
 LOREM IPSUM
 
