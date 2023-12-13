@@ -1,22 +1,18 @@
-# DevOps: AI (UPDATE IN PROGRESS)
+# DevOps: AI Search
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
 * "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
-  * "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
+* "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
 * "We want to capture our AI Search index creation process in our DevOps repo"
-  * "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
-  * "All secrets must be stored in Key Vault"
-* "We want to capture our Open AI deployment creation process in our DevOps repo" (WiP)
+* "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
+* "All secrets must be stored in Key Vault"
 
 ## Proposed Solution
-* AI Search
-  * **Custom Skillset API**: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
-  * **Deployment Application**: Use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
-* OpenAI
-  * Deployment Application???
-* DevOps: Create a pull request in a DevOps repo
+* Custom Skillset API: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
+* Deployment Application: Use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
+* Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
@@ -36,12 +32,11 @@
 
 -----
 
-## Exercise 1: AI Search
-In this exercise we will: 1) use a Function App to instantiate a simple API for use with an AI Search Custom Skillset, and 2) use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
-
-### Step 1: Custom Skillset
+## Exercise 1: Custom Skillset API
 In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
 <br>_Note: Only complete this exercise if you intend to include a custom skillset in the AI Search deployment app_
+
+### Step 1: Create Project
 
 Open Visual Studio and click "**Create a new project**".
 
@@ -68,7 +63,7 @@ Click "**Create**".
 
 -----
 
-#### Step 1a: Code Function
+### Step 2: Code Function
 
 Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
 
@@ -125,7 +120,7 @@ _Note: This is a template function ONLY... add additional logic based on your us
 
 -----
 
-#### Step 1b: Publish Function
+### Step 3: Publish Function
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
 
@@ -153,7 +148,7 @@ Back on the "...Publish" page, click **Publish**, allow time for processing, and
 
 -----
 
-#### Step 1c: Confirm Success
+### Step 4: Confirm Success
 
 Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
 
@@ -197,10 +192,10 @@ The pop-out will switch to the "**Output**" tab and you can expect the following
 -----
 -----
 
-### Step 2: Deployment Application
-
-#### Step 2a: Create Visual Studio Project
+## Exercise 2: Deployment Application
 In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
+
+### Step 1: Create Visual Studio Project
 
 Open Visual Studio and click "**Create a new project**".
 
@@ -218,7 +213,7 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 -----
 
-#### Step 2b: Install NuGet
+### Step 2: Install NuGet
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
@@ -235,7 +230,7 @@ When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
 
-**Additional Packages**
+#### Additional Packages
 
 Repeat this process for the following NuGet packages:
 
@@ -246,7 +241,7 @@ Close the "**NuGet - Solution**" tab.
 
 -----
 
-#### Step 2c: Code Application
+### Step 3: Code Application
 
 Replace the default code on the "**Program.cs**" tab with the following C#:
 
@@ -266,7 +261,7 @@ public class Program
 }
 ```
 
-**Names, URIs, and Keys**
+#### Names, URIs, and Keys
 The variables set in this section will be used to identify and create various resources.
 
 Return to the "**Program.cs**" tab and add the following code to `Main`.
@@ -274,7 +269,7 @@ Return to the "**Program.cs**" tab and add the following code to `Main`.
 ```
 /* ************************* Names */
 
-string nameBlobStorage_Container = "rchaplersc";
+string nameBlobStorage_Container = "forms";
 string nameAISearch_DataSource = "rchaplerss-datasource";
 string nameAISearch_Index = "rchaplerss-index";
 string nameAISearch_Indexer = "rchaplerss-indexer";
@@ -303,7 +298,7 @@ _Notes:_
 
 -----
 
-**Clients**
+#### Clients
 The variables set in this section will be used to manage the AI Search resources.
 
 Append the following code to the bottom of `Main`:
@@ -323,7 +318,7 @@ Logic Explained:
 
 -----
 
-**Data Source**
+#### Data Source
 The logic in this section will create a AI Search Data Source.
 
 Append the following code to the bottom of `Main`:
@@ -348,10 +343,11 @@ Logic Explained:
 * `var sidsc...` creates a new `SearchIndexerDataSourceConnection` object that represents a connection to a Blob Storage account
     * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
 * `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the `SearchIndexerDataSourceConnection` object
+* `forms` refers to the Storage Account Container mentioned in Solution Requirements
 
 -----
 
-**Index**
+#### Index
 The logic in this section will create a AI Search Index.
 
 Append the following code to the bottom of `Main`:
@@ -400,7 +396,7 @@ Logic Explained:
 
 -----
 
-**Skillset**
+#### Skillset
 The logic in this section will create a AI Search Skillset.
 
 Append the following code to the bottom of `Main`:
@@ -482,7 +478,7 @@ Logic Explained:
 
 -----
 
-**Indexer**
+#### Indexer
 The logic in this section will create a AI Search Indexer.
 
 Append the following code to the bottom of `Main`:
@@ -499,8 +495,7 @@ var indexer = new SearchIndexer(nameAISearch_Indexer, nameAISearch_DataSource, n
             ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
         }
     },
-    SkillsetName = nameAISearch_Skillset,
-    IsDisabled = true
+    SkillsetName = nameAISearch_Skillset
 };
 
 indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" });
@@ -512,20 +507,24 @@ indexerClient.CreateIndexer(indexer);
 ```
 
 Logic Explained:
-1. **SearchIndexer Creation**: A `SearchIndexer` named `indexer` is created with a specified indexer name, data source name, and index name. The indexer is configured with specific parameters and a skillset name
-2. **IndexingParametersConfiguration**: The `IndexingParametersConfiguration` is set to `BlobIndexerImageAction.GenerateNormalizedImagePerPage`, which means the indexer will perform Optical Character Recognition (OCR) on images in blobs and generate a normalized image per page
-3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation... re-enable by modifying Indexer >> "Indexer Definition (JSON)"
-4. **OutputFieldMappings**: These mappings define how the output of a skill is mapped to a field in an index schema:
-   <br>`text`... from `OcrSkill` and `/document/normalized_images/*/text`
-   <br>`keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
-   <br>`myColumn`... from `WebApiSkill` and `/document/content/myColumn` (custom skillset)
-6. **DeleteIndexer** and **CreateIndexer**: The existing indexer with the same name is deleted if it exists, and then the new indexer is created.
+* `var indexer...` creates a new SearchIndexer object that represents an indexer in Azure AI Search
+  * The indexer is associated with the data source named `dataSourceName` and the index named `indexName`
+  * Inside the `{...}` block, parameters are set for the indexer; these parameters control how the indexer behaves during indexing
+    * In this case, the `ImageAction` parameter is set to `GenerateNormalizedImagePerPage`, which means the indexer will generate a normalized image for each page of a document
+  * Also inside the `{...}` block, the `SkillsetName` property is set to `skillsetName`
+    * This means the indexer will use the skillset named `skillsetName` to transform and enrich your data during indexing
+* `indexer.OutputFieldMappings...` adds indexer output field mappings
+  * `/document/normalized_images/*/text` is mapped to the `text` field in your index
+  * `/document/content/keyphrases` is mapped to the `keyphrases` field in your index
+  * `/document/content/myColumn` is mapped to the `myColumn` field in your index
+* `indexerClient.DeleteIndexer...` deletes any existing indexer with the same name using the `SearchIndexer` object
+* `indexerClient.CreateIndexer...` creates a new indexer using the `SearchIndexer` object
 
 -----
 
-#### Step 2d: Confirm Success
+### Step 4: Confirm Success
 
-**Visual Studio Debug**
+#### Visual Studio Debug
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
 
@@ -535,7 +534,7 @@ Save your changes and then click "**Debug**" >> "**Start Debugging**" in the men
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
 
-**AI Search Index**
+#### AI Search Index
 
 Navigate to AI Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
 
@@ -554,83 +553,7 @@ Click the "**Search**" button and review results.
 -----
 -----
 
-## Exercise 2: OpenAI
-In this exercise, we will test prompts programmatically interact with OpenAI + AI Search index:
-
-```
-using Azure;
-using Azure.AI.OpenAI; /* pre-release NuGet Package: Azure.AI.OpenAI v1.0.0-beta.9 */
-using System.Text;
-
-var client = new OpenAIClient(
-    endpoint: new Uri("https://rchaplerai.openai.azure.com/"),
-    keyCredential: new AzureKeyCredential("34b586dacbfb4115b15d5c167438a11c")
-    );
-
-ChatCompletionsOptions CreateConfigurations(AzureCognitiveSearchQueryType queryType, string prompt)
-{
-    AzureCognitiveSearchChatExtensionConfiguration config = new()
-    {
-        SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
-        IndexName = "rchaplerss-index",
-        QueryType = queryType,
-        ShouldRestrictResultScope = true,
-        DocumentCount = 5,
-        SemanticConfiguration = "rchaplerss-semantic" /* Ignored when queryType != Semantic */
-    };
-    config.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
-
-    ChatCompletionsOptions options = new()
-    {
-        DeploymentName = "rchaplerai-gpt4",
-        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
-    };
-
-    options.Messages.Add(new ChatMessage(ChatRole.User, prompt));
-
-    return options;
-}
-
-Dictionary<string, List<string>> output = new Dictionary<string, List<string>>();
-
-foreach (var prompt in File.ReadLines(@"C:\temp\input.txt"))
-{
-    /* ************************* Configuration: Keyword */
-    var promptSimple = CreateConfigurations(AzureCognitiveSearchQueryType.Simple, prompt);
-    var responseSimple = await client.GetChatCompletionsAsync(promptSimple);
-
-    /* ************************* Configuration: Semantic */
-    var promptSemantic = CreateConfigurations(AzureCognitiveSearchQueryType.Semantic, prompt);
-    var responseSemantic = await client.GetChatCompletionsAsync(promptSemantic);
-
-    output[prompt] = new List<string> { responseSimple.Value.Choices[0].Message.Content, responseSemantic.Value.Choices[0].Message.Content };
-}
-
-StringBuilder csvContent = new();
-csvContent.AppendLine("Prompt,Response_Simple,Response_Semantic"); /* CSV Headers */
-
-foreach (var item in output)
-{
-    csvContent.AppendLine($"\"{item.Key}\",\"{item.Value[0]}\",\"{item.Value[1]}\"");
-}
-
-File.WriteAllText(@"C:\temp\output.csv", csvContent.ToString());
-```
-
-Reference:
-* https://learn.microsoft.com/en-us/azure/ai-services/openai/
-* https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/README.md
-
-LOREM IPSUM
-
------
-
-**Congratulations... you have successfully completed this exercise**
-
------
------
-
-## Exercise 3: DevOps
+## Exercise 3: Source Control
 In this exercise, we will create a pull request in a DevOps repo.
 
 ### Step 1: Create and Push
