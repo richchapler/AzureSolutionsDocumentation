@@ -3,20 +3,12 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
-* "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
-  * "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
-* "We want to capture our AI Search index creation process in our DevOps repo"
-  * "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
-  * "All secrets must be stored in Key Vault"
-* "We want to capture our Open AI deployment creation process in our DevOps repo" (WiP)
+* "We want to automate testing of hundreds of prompts with various configurations of AI Search and OpenAI"
 
 ## Proposed Solution
-* AI Search
-  * **Custom Skillset API**: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
-  * **Deployment Application**: Use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
-* OpenAI
-  * Deployment Application???
-* DevOps: Create a pull request in a DevOps repo
+* Stage AI Search Index
+* Customize DevOps Test Case entity
+* Automate Population of DevOps Test Cases
 
 ## Solution Requirements
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
@@ -36,170 +28,10 @@
 
 -----
 
-## Exercise 1: AI Search
-In this exercise we will: 1) use a Function App to instantiate a simple API for use with an AI Search Custom Skillset, and 2) use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
+## Exercise 1: Stage AI Search Index
+In this exercise we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
 
-### Step 1: Custom Skillset
-In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
-<br>_Note: Only complete this exercise if you intend to include a custom skillset in the AI Search deployment app_
-
-Open Visual Studio and click "**Create a new project**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b9ad75a-370d-4642-98a0-78600a43b772" width="600" title="Snipped: October 27, 2023" />
-
-On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 27, 2023" />
-
-Complete the "**Configure your new project**" form and then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39eeeab1-76b4-4325-8772-0c7aafa3c6d9" width="600" title="Snipped: October 27, 2023" />
-
-Complete the "**Additional information**" form:
-
-Prompt | Entry
-:----- | :-----
-**Functions worker** | **.NET 7.0 Isolated**
-**Function** | **Http trigger**
-**Use Azurite...** | Checked
-**Authorization level** | Function
-
-Click "**Create**".
-
------
-
-#### Step 1a: Code Function
-
-Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af1d52cb-5dbd-43b2-9198-ea390dede565" width="800" title="Snipped: October 27, 2023" />
-
-Replace the default logic in "CustomSkillset" with:
-
-```
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
-using System.Net;
-using System.Text.Json;
-
-namespace FunctionApp_CustomSkillset
-{
-    public class CustomSkillset
-    {
-        [Function("CustomSkillset")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd)
-        {
-            string request = string.Empty;
-
-            using (var reader = new StreamReader(hrd.Body)) { request = reader.ReadToEnd(); }
-
-            var d = new Dictionary<string, object> { { "values", new List<Dictionary<string, object>>() } };
-
-            foreach (var value in JsonDocument.Parse(request).RootElement.GetProperty("values").EnumerateArray())
-            {
-                var r = new Dictionary<string, object>
-                {
-                    { "recordId", value.GetProperty("recordId").GetString() ?? string.Empty },
-                    { "data", new Dictionary<string, object> { { "myColumn", value.GetProperty("data") } } },
-                    { "errors", string.Empty },
-                    { "warnings", string.Empty }
-                };
-
-                ((List<Dictionary<string, object>>)d["values"]).Add(r);
-            }
-
-            var response = hrd.CreateResponse(HttpStatusCode.OK);
-            response.WriteAsJsonAsync(d);
-            return response;
-        }
-    }
-}
-```
-
-Logic Explained:
-* `using (var reader = new StreamReader(hrd.Body)...` parses request body JSON
-* `foreach (var value in JsonDocument.Parse(request)` iterates through request values and packages a response
-* `response.WriteAsJsonAsync(d)... return...` completes response
-
-_Note: This is a template function ONLY... add additional logic based on your use case_
-
------
-
-#### Step 1b: Publish Function
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
-
-Right-click on your project in the Solution Explorer pane and select "**Publish**" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a090114-5879-44d0-a07c-c78a006d92ff" width="600" title="Snipped: October 30, 2023" />
-
-On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
-
-On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Service (Windows)**", then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af141980-d358-4879-b2c9-0277d90882c6" width="600" title="Snipped: October 30, 2023" />
-
-On the **Publish** >> "**Select existing or...**" page, select your Function App and then click "**Finish**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8ed84d8e-1b06-4abf-8cf3-2a158c339d53" width="600" title="Snipped: October 30, 2023" />
-
-On the **Publish profile creation progress** >> "**Finish**" page, click "**Close**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/85acb60f-bb87-43a2-9c4a-e4b5f4c12f11" width="800" title="Snipped: October 30, 2023" />
-
-Back on the "...Publish" page, click **Publish**, allow time for processing, and confirm successful publication.
-
------
-
-#### Step 1c: Confirm Success
-
-Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a48bae96-a071-440e-912f-dff11e09da87" width="800" title="Snipped: October 31, 2023" />
-
-Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the following "**Body**" value:
-
-```
-{"values":[{"recordId":"0","data":{"text":"Lorem Ipsum"}}]}
-```
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d9fd06a-62d8-4ebe-9304-bdcc2834e860" width="800" title="Snipped: October 31, 2023" />
-
-Click "**Run**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f0f47af-5e58-4fd9-822b-215e910c6602" width="800" title="Snipped: October 31, 2023" />
-
-The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
-
-```
-{
-  "values": [
-    {
-      "recordId": "0",
-      "data": {
-        "myColumn": {
-          "text": "Lorem Ipsum"
-        }
-      },
-      "errors": "",
-      "warnings": ""
-    }
-  ]
-}
-```
-
------
-
-**Congratulations... you have successfully completed this exercise**
-
------
------
-
-### Step 2: Deployment Application
-
-#### Step 2a: Create Visual Studio Project
+### Step 1: Create Visual Studio Project
 In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 Open Visual Studio and click "**Create a new project**".
@@ -218,7 +50,7 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 -----
 
-#### Step 2b: Install NuGet
+### Step 2: Install NuGet
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
@@ -246,7 +78,7 @@ Close the "**NuGet - Solution**" tab.
 
 -----
 
-#### Step 2c: Code Application
+### Step 3: Code Application
 
 Replace the default code on the "**Program.cs**" tab with the following C#:
 
@@ -523,7 +355,7 @@ Logic Explained:
 
 -----
 
-#### Step 2d: Confirm Success
+### Step 4: Confirm Success
 
 **Visual Studio Debug**
 
@@ -554,7 +386,21 @@ Click the "**Search**" button and review results.
 -----
 -----
 
-## Exercise 2: OpenAI
+## Exercise 2: Customize DevOps
+
+
+
+
+LOREM IPSUM
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+-----
+
+## Exercise 3: Automate Test Case Creation
 In this exercise, we will test prompts programmatically interact with OpenAI + AI Search index:
 
 ```
@@ -622,24 +468,6 @@ Reference:
 * https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/README.md
 
 LOREM IPSUM
-
------
-
-**Congratulations... you have successfully completed this exercise**
-
------
------
-
-## Exercise 3: DevOps
-In this exercise, we will create a pull request in a DevOps repo.
-
-### Step 1: Create and Push
-
-Open Visual Studio, navigate to "**View**" >> "**Git Changes**", and then click "**Create Git Repository**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/54ffccf9-64db-4e1b-9177-2bde140fa473" width="600" title="Snipped: October 12, 2023" />
-
-Complete the resulting "Create a Git repository" pop-up form, then click "**Create and Push**".
 
 -----
 
