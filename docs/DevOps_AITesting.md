@@ -403,64 +403,168 @@ LOREM IPSUM
 ## Exercise 3: Automate Test Case Creation
 In this exercise, we will test prompts programmatically interact with OpenAI + AI Search index:
 
+### Helper Class: DevOps
+
+```
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+using Microsoft.VisualStudio.Services.Common;
+using Microsoft.VisualStudio.Services.WebApi;
+using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
+
+namespace ConsoleApp1.Helpers
+{
+    internal class DevOps
+    {
+        public void createWorkItem(string title, string prompt, string response, string steps)
+        {
+            Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition = new();
+            addField(devopsWorkItem_Definition, "/fields/System.Title", title);
+            addField(devopsWorkItem_Definition, "/fields/Prompt", prompt);
+            addField(devopsWorkItem_Definition, "/fields/Response", response);
+            addField(devopsWorkItem_Definition, "/fields/Microsoft.VSTS.TCM.Steps", steps);
+
+            var credentials = new VssBasicCredential(userName: string.Empty, password: "drwptszvw35wtt3ltuhb7nosis2by6faz6sapgqzeg2f6kifin4q");
+            var connection = new VssConnection(baseUrl: new Uri("https://dev.azure.com/rchapler"), credentials);
+            var clientDevOps = connection.GetClient<WorkItemTrackingHttpClient>();
+
+            var workItem = clientDevOps.CreateWorkItemAsync(devopsWorkItem_Definition, project: "ai1", type: "Test Case").Result;
+        }
+
+        private void addField(Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition, string path, string value)
+        {
+            devopsWorkItem_Definition.Add(
+                new JsonPatchOperation
+                {
+                    Operation = Microsoft.VisualStudio.Services.WebApi.Patch.Operation.Add,
+                    Path = path,
+                    Value = value
+                }
+            );
+        }
+
+        public string defaultSteps()
+        {
+            return @"
+            <steps id='0' last='3'>
+                <step id='2' type='ValidateStep'>
+                    <parameterizedString isformatted='true'>Review Prompt</parameterizedString>
+                    <parameterizedString isformatted='true'>Prompt is well-formed</parameterizedString>
+                    <description/>
+                </step>
+                <step id='3' type='ValidateStep'>
+                    <parameterizedString isformatted='true'>Evaluate Response</parameterizedString>
+                    <parameterizedString isformatted='true'>Response is meaningful and accurate</parameterizedString>
+                    <description/>
+                </step>
+            </steps>";
+        }
+    }
+}
+```
+
+### Helper Class: OpenAI
+
 ```
 using Azure;
 using Azure.AI.OpenAI; /* pre-release NuGet Package: Azure.AI.OpenAI v1.0.0-beta.9 */
+
+namespace ConsoleApp1.Helpers
+{
+    internal class OpenAI
+    {
+        private OpenAIClient clientOpenAI;
+
+        public OpenAI()
+        {
+            clientOpenAI = new OpenAIClient(
+                endpoint: new Uri("https://rchaplerai.openai.azure.com/"),
+                keyCredential: new AzureKeyCredential("34b586dacbfb4115b15d5c167438a11c")
+            );
+        }
+
+        public async Task<string> GetResponseAsync(string queryType, string prompt)
+        {
+            AzureCognitiveSearchQueryType type;
+
+            switch (queryType.ToLower())
+            {
+                case "simple": type = AzureCognitiveSearchQueryType.Simple; break;
+                case "semantic": type = AzureCognitiveSearchQueryType.Semantic; break;
+                default: throw new ArgumentException($"Invalid query type: {queryType}");
+            }
+
+            var promptOptions = Prompt(type, prompt);
+            var response = await clientOpenAI.GetChatCompletionsAsync(promptOptions);
+            return response.Value.Choices[0].Message.Content;
+        }
+
+
+        public ChatCompletionsOptions Prompt(AzureCognitiveSearchQueryType queryType, string prompt)
+        {
+            AzureCognitiveSearchChatExtensionConfiguration config = new()
+            {
+                SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
+                IndexName = "rchaplerss-index",
+                QueryType = queryType,
+                ShouldRestrictResultScope = true,
+                DocumentCount = 5,
+                SemanticConfiguration = "rchaplerss-semantic" /* Ignored when queryType != Semantic */
+            };
+            config.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
+
+            ChatCompletionsOptions response = new()
+            {
+                DeploymentName = "rchaplerai-gpt4",
+                AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
+            };
+
+            response.Messages.Add(new ChatMessage(ChatRole.User, prompt));
+
+            return response;
+        }
+    }
+}
+```
+
+### Program.cs
+
+```
+using ConsoleApp1.Helpers;
 using System.Text;
 
-var client = new OpenAIClient(
-    endpoint: new Uri("https://rchaplerai.openai.azure.com/"),
-    keyCredential: new AzureKeyCredential("34b586dacbfb4115b15d5c167438a11c")
-    );
+DevOps devops = new(); OpenAI openai = new();
 
-ChatCompletionsOptions CreateConfigurations(AzureCognitiveSearchQueryType queryType, string prompt)
+//Dictionary<string, List<string>> output = new Dictionary<string, List<string>>();
+
+foreach (var prompt in File.ReadLines(@"C:\temp\prompts.txt"))
 {
-    AzureCognitiveSearchChatExtensionConfiguration config = new()
-    {
-        SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
-        IndexName = "rchaplerss-index",
-        QueryType = queryType,
-        ShouldRestrictResultScope = true,
-        DocumentCount = 5,
-        SemanticConfiguration = "rchaplerss-semantic" /* Ignored when queryType != Semantic */
-    };
-    config.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
+    var responseSimple = await openai.GetResponseAsync("Simple", prompt);
+    var responseSemantic = await openai.GetResponseAsync("Semantic", prompt);
 
-    ChatCompletionsOptions options = new()
-    {
-        DeploymentName = "rchaplerai-gpt4",
-        AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
-    };
+    //output[prompt] = new List<string> { responseSimple, responseSemantic };
 
-    options.Messages.Add(new ChatMessage(ChatRole.User, prompt));
+    string title = $"Prompt: '{string.Join(" ", prompt.Split(' ').Take(4))}...'";
+    Console.WriteLine(title);
 
-    return options;
+    devops.createWorkItem(
+        title,
+        prompt,
+        response: responseSimple,
+        devops.defaultSteps()
+        );
 }
 
-Dictionary<string, List<string>> output = new Dictionary<string, List<string>>();
+//StringBuilder csvContent = new();
+//csvContent.AppendLine("Prompt,Response_Simple,Response_Semantic"); /* CSV Headers */
 
-foreach (var prompt in File.ReadLines(@"C:\temp\input.txt"))
-{
-    /* ************************* Configuration: Keyword */
-    var promptSimple = CreateConfigurations(AzureCognitiveSearchQueryType.Simple, prompt);
-    var responseSimple = await client.GetChatCompletionsAsync(promptSimple);
+//foreach (var item in output)
+//{
+//    csvContent.AppendLine($"\"{item.Key}\",\"{item.Value[0]}\",\"{item.Value[1]}\"");
+//}
 
-    /* ************************* Configuration: Semantic */
-    var promptSemantic = CreateConfigurations(AzureCognitiveSearchQueryType.Semantic, prompt);
-    var responseSemantic = await client.GetChatCompletionsAsync(promptSemantic);
+//File.WriteAllText(@"C:\temp\output.csv", csvContent.ToString());
 
-    output[prompt] = new List<string> { responseSimple.Value.Choices[0].Message.Content, responseSemantic.Value.Choices[0].Message.Content };
-}
-
-StringBuilder csvContent = new();
-csvContent.AppendLine("Prompt,Response_Simple,Response_Semantic"); /* CSV Headers */
-
-foreach (var item in output)
-{
-    csvContent.AppendLine($"\"{item.Key}\",\"{item.Value[0]}\",\"{item.Value[1]}\"");
-}
-
-File.WriteAllText(@"C:\temp\output.csv", csvContent.ToString());
+/* TO-DOs... 1) Make this an API for use with a DevOps Pipeline, 2) Temperature, 3) Multiple Runs per Prompt and then Reconciliation of Responses */
 ```
 
 Reference:
