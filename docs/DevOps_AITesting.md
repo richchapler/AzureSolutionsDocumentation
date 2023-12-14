@@ -570,6 +570,7 @@ foreach (var prompt in File.ReadLines(@"C:\temp\prompts.txt"))
 Reference:
 * https://learn.microsoft.com/en-us/azure/ai-services/openai/
 * https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/README.md
+* https://learn.microsoft.com/en-us/azure/devops/boards/queries/import-work-items-from-csv?view=azure-devops
 
 LOREM IPSUM
 
