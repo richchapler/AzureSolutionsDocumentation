@@ -407,6 +407,7 @@ In this exercise, we will test prompts programmatically interact with OpenAI + A
 
 ```
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
@@ -415,19 +416,49 @@ namespace ConsoleApp1.Helpers
 {
     internal class DevOps
     {
-        public void createWorkItem(string title, string prompt, string response, string steps)
+        private WorkItemTrackingHttpClient clientDevOps;
+
+        public DevOps()
+        {
+            clientDevOps = new VssConnection(
+                baseUrl: new Uri("https://dev.azure.com/rchapler"),
+                credentials: new VssBasicCredential(
+                    userName: string.Empty,
+                    password: "ltbzzx2dar7drtun6o5bbu7yhiilcjskwf26k662wgzxivrairya"
+                    )
+                ).GetClient<WorkItemTrackingHttpClient>();
+        }
+
+        public async Task<List<WorkItem>> getTestCases()
+        {
+            Wiql q = new() { Query = "SELECT [System.Id], [System.State], [Custom.Prompt] FROM workitems WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'" };
+
+            WorkItemQueryResult wiqr = await clientDevOps.QueryByWiqlAsync(q);
+
+            List<WorkItem> testCases = new();
+
+            if (wiqr != null && wiqr.WorkItems.Any())
+            {
+                int[] ids = wiqr.WorkItems.Select(item => item.Id).ToArray();
+                testCases = await clientDevOps.GetWorkItemsAsync(ids);
+            }
+
+            return testCases;
+        }
+
+        public void updateWorkItem(int id, string title, string prompt, string responseSimple, string responseSemantic, string steps)
         {
             Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition = new();
             addField(devopsWorkItem_Definition, "/fields/System.Title", title);
+            addField(devopsWorkItem_Definition, "/fields/System.State", "Ready for Human");
             addField(devopsWorkItem_Definition, "/fields/Prompt", prompt);
-            addField(devopsWorkItem_Definition, "/fields/Response", response);
+            addField(devopsWorkItem_Definition, "/fields/Response_Simple", responseSimple);
+            addField(devopsWorkItem_Definition, "/fields/Response_Simple_Ranking", "3-Neutral");
+            addField(devopsWorkItem_Definition, "/fields/Response_Semantic", responseSemantic);
+            addField(devopsWorkItem_Definition, "/fields/Response_Semantic_Ranking", "3-Neutral");
             addField(devopsWorkItem_Definition, "/fields/Microsoft.VSTS.TCM.Steps", steps);
 
-            var credentials = new VssBasicCredential(userName: string.Empty, password: "drwptszvw35wtt3ltuhb7nosis2by6faz6sapgqzeg2f6kifin4q");
-            var connection = new VssConnection(baseUrl: new Uri("https://dev.azure.com/rchapler"), credentials);
-            var clientDevOps = connection.GetClient<WorkItemTrackingHttpClient>();
-
-            var workItem = clientDevOps.CreateWorkItemAsync(devopsWorkItem_Definition, project: "ai1", type: "Test Case").Result;
+            var workItem = clientDevOps.UpdateWorkItemAsync(devopsWorkItem_Definition, id).Result;
         }
 
         private void addField(Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition, string path, string value)
@@ -447,13 +478,13 @@ namespace ConsoleApp1.Helpers
             return @"
             <steps id='0' last='3'>
                 <step id='2' type='ValidateStep'>
-                    <parameterizedString isformatted='true'>Review Prompt</parameterizedString>
-                    <parameterizedString isformatted='true'>Prompt is well-formed</parameterizedString>
+                    <parameterizedString isformatted='true'>Review User Message (aka Prompt) and System Message</parameterizedString>
+                    <parameterizedString isformatted='true'>Confirm that messages are well-formed</parameterizedString>
                     <description/>
                 </step>
                 <step id='3' type='ValidateStep'>
-                    <parameterizedString isformatted='true'>Evaluate Response</parameterizedString>
-                    <parameterizedString isformatted='true'>Response is meaningful and accurate</parameterizedString>
+                    <parameterizedString isformatted='true'>Evaluate Responses</parameterizedString>
+                    <parameterizedString isformatted='true'>Rank Responses from each model</parameterizedString>
                     <description/>
                 </step>
             </steps>";
@@ -530,41 +561,36 @@ namespace ConsoleApp1.Helpers
 
 ```
 using ConsoleApp1.Helpers;
-using System.Text;
 
 DevOps devops = new(); OpenAI openai = new();
 
-//Dictionary<string, List<string>> output = new Dictionary<string, List<string>>();
+var testCases = await devops.getTestCases();
 
-foreach (var prompt in File.ReadLines(@"C:\temp\prompts.txt"))
+foreach (var testCase in testCases)
 {
-    var responseSimple = await openai.GetResponseAsync("Simple", prompt);
-    var responseSemantic = await openai.GetResponseAsync("Semantic", prompt);
+    int id;
+    if (testCase.Id.HasValue) { id = testCase.Id.Value; } else { continue; }
 
-    //output[prompt] = new List<string> { responseSimple, responseSemantic };
+    string? prompt = testCase.Fields["Custom.Prompt"].ToString();
 
-    string title = $"Prompt: '{string.Join(" ", prompt.Split(' ').Take(4))}...'";
-    Console.WriteLine(title);
+    if (prompt != null)
+    {
+        string title = $"Prompt: '{string.Join(" ", prompt.Split(' ').Take(4))}...'";
+        Console.WriteLine(title);
 
-    devops.createWorkItem(
-        title,
-        prompt,
-        response: responseSimple,
-        devops.defaultSteps()
-        );
+        var responseSimple = await openai.GetResponseAsync("Simple", prompt);
+        var responseSemantic = await openai.GetResponseAsync("Semantic", prompt);
+
+        devops.updateWorkItem(
+            id,
+            title,
+            prompt,
+            responseSimple,
+            responseSemantic,
+            steps: devops.defaultSteps()
+            );
+    }
 }
-
-//StringBuilder csvContent = new();
-//csvContent.AppendLine("Prompt,Response_Simple,Response_Semantic"); /* CSV Headers */
-
-//foreach (var item in output)
-//{
-//    csvContent.AppendLine($"\"{item.Key}\",\"{item.Value[0]}\",\"{item.Value[1]}\"");
-//}
-
-//File.WriteAllText(@"C:\temp\output.csv", csvContent.ToString());
-
-/* TO-DOs... 1) Make this an API for use with a DevOps Pipeline, 2) Temperature, 3) Multiple Runs per Prompt and then Reconciliation of Responses */
 ```
 
 Reference:
