@@ -34,6 +34,18 @@ This documentation assumes the following resources are ready for use:
 ## Exercise 1: Customize DevOps
 In this exercise we will create a new process with a customized Test Case entity.
 
+### Step 1: Create Inherited Process
+
+Navigate to DevOps >> Organization Settings >> Boards >> Process and then click on "Basic".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/148d988e-2807-47f8-9e2f-279217fc67e9" width="800" title="Snipped: December 15, 2023" />
+
+Click "create an inherited process" in the light blue header.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/10553d8e-e610-418b-adc6-abe2e80e219c" width="800" title="Snipped: December 15, 2023" />
+
+
+
 
 
 
