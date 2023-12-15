@@ -406,7 +406,6 @@ In this exercise, we will test prompts programmatically interact with OpenAI + A
 ### Helper Class: DevOps
 
 ```
-using Azure.Security.KeyVault.Secrets;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
@@ -417,37 +416,39 @@ namespace ConsoleApp1.Helpers
 {
     internal class DevOps
     {
-        private WorkItemTrackingHttpClient clientDevOps;
+        KeyVault keyvault = new();
+
+        private WorkItemTrackingHttpClient client;
 
         public DevOps()
         {
-            KeyVault keyvault = new();
 
-            KeyVaultSecret DevOps_PersonalAccessToken = keyvault.getSecret("DevOps-PersonalAccessToken");
-
-            clientDevOps = new VssConnection(
-                baseUrl: new Uri("https://dev.azure.com/rchapler"),
+            client = new VssConnection(
+                baseUrl: new Uri(keyvault.getSecret("DevOps-Url")),
                 credentials: new VssBasicCredential(
                     userName: string.Empty,
-                    password: DevOps_PersonalAccessToken.Value
+                    password: keyvault.getSecret("DevOps-PersonalAccessToken") /* DevOps Personal Access Token with "Read, write, & manage" permissions */
                     )
-                ).GetClient<WorkItemTrackingHttpClient>();
-
-            /* password = DevOps Personal Access Token with "Read, write, & manage" permissions */
+                ).GetClient<WorkItemTrackingHttpClient>();            
         }
 
         public async Task<List<WorkItem>> getTestCases()
         {
-            Wiql q = new() { Query = "SELECT [System.Id], [System.State], [Custom.SystemMessage], [Custom.Prompt] FROM workitems WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'" };
+            Wiql q = new()
+            {
+                Query = @"SELECT [System.Id], [System.State], [Custom.SystemMessage], [Custom.Prompt]
+                            FROM workitems
+                            WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'"
+            };
 
-            WorkItemQueryResult wiqr = await clientDevOps.QueryByWiqlAsync(q);
+            WorkItemQueryResult wiqr = await client.QueryByWiqlAsync(q);
 
             List<WorkItem> testCases = new();
 
             if (wiqr != null && wiqr.WorkItems.Any())
             {
                 int[] ids = wiqr.WorkItems.Select(item => item.Id).ToArray();
-                testCases = await clientDevOps.GetWorkItemsAsync(ids);
+                testCases = await client.GetWorkItemsAsync(ids);
             }
 
             return testCases;
@@ -465,7 +466,7 @@ namespace ConsoleApp1.Helpers
             addField(devopsWorkItem_Definition, "/fields/Response_Semantic_Ranking", "3-Neutral");
             addField(devopsWorkItem_Definition, "/fields/Microsoft.VSTS.TCM.Steps", steps);
 
-            var workItem = clientDevOps.UpdateWorkItemAsync(devopsWorkItem_Definition, id).Result;
+            var workItem = client.UpdateWorkItemAsync(devopsWorkItem_Definition, id).Result;
         }
 
         private void addField(Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition, string path, string value)
