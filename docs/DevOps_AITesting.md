@@ -44,6 +44,12 @@ Click "create an inherited process" in the light blue header.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/10553d8e-e610-418b-adc6-abe2e80e219c" width="800" title="Snipped: December 15, 2023" />
 
+Complete the form and click "Create process".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7792d59b-a084-4ed3-b0a1-9fe4406877b6" width="800" title="Snipped: December 15, 2023" />
+
+
+
 
 
 
