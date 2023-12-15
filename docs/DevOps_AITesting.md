@@ -424,14 +424,16 @@ namespace ConsoleApp1.Helpers
                 baseUrl: new Uri("https://dev.azure.com/rchapler"),
                 credentials: new VssBasicCredential(
                     userName: string.Empty,
-                    password: "ltbzzx2dar7drtun6o5bbu7yhiilcjskwf26k662wgzxivrairya"
+                    password: "w3eclmjpjdcwfla2idbchloxrn7ykfnriym6hiww3fp7nrin66fa"
                     )
                 ).GetClient<WorkItemTrackingHttpClient>();
+
+            /* password = DevOps Personal Access Token with "Read, write, & manage" permissions */
         }
 
         public async Task<List<WorkItem>> getTestCases()
         {
-            Wiql q = new() { Query = "SELECT [System.Id], [System.State], [Custom.Prompt] FROM workitems WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'" };
+            Wiql q = new() { Query = "SELECT [System.Id], [System.State], [Custom.SystemMessage], [Custom.Prompt] FROM workitems WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'" };
 
             WorkItemQueryResult wiqr = await clientDevOps.QueryByWiqlAsync(q);
 
@@ -513,7 +515,7 @@ namespace ConsoleApp1.Helpers
             );
         }
 
-        public async Task<string> GetResponseAsync(string queryType, string prompt)
+        public async Task<string> Prompt(string queryType, string systemMessage, string userMessage)
         {
             AzureCognitiveSearchQueryType type;
 
@@ -524,34 +526,28 @@ namespace ConsoleApp1.Helpers
                 default: throw new ArgumentException($"Invalid query type: {queryType}");
             }
 
-            var promptOptions = Prompt(type, prompt);
-            var response = await clientOpenAI.GetChatCompletionsAsync(promptOptions);
-            return response.Value.Choices[0].Message.Content;
-        }
-
-
-        public ChatCompletionsOptions Prompt(AzureCognitiveSearchQueryType queryType, string prompt)
-        {
             AzureCognitiveSearchChatExtensionConfiguration config = new()
             {
                 SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
                 IndexName = "rchaplerss-index",
-                QueryType = queryType,
+                QueryType = type,
                 ShouldRestrictResultScope = true,
                 DocumentCount = 5,
                 SemanticConfiguration = "rchaplerss-semantic" /* Ignored when queryType != Semantic */
             };
             config.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
 
-            ChatCompletionsOptions response = new()
+            ChatCompletionsOptions promptOptions = new()
             {
                 DeploymentName = "rchaplerai-gpt4",
                 AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
             };
 
-            response.Messages.Add(new ChatMessage(ChatRole.User, prompt));
+            promptOptions.Messages.Add(new ChatMessage(ChatRole.System, systemMessage));
+            promptOptions.Messages.Add(new ChatMessage(ChatRole.User, userMessage));
 
-            return response;
+            var response = await clientOpenAI.GetChatCompletionsAsync(promptOptions);
+            return response.Value.Choices[0].Message.Content;
         }
     }
 }
@@ -571,20 +567,21 @@ foreach (var testCase in testCases)
     int id;
     if (testCase.Id.HasValue) { id = testCase.Id.Value; } else { continue; }
 
-    string? prompt = testCase.Fields["Custom.Prompt"].ToString();
+    string? systemMessage = testCase.Fields["Custom.SystemMessage"].ToString();
+    string? userMessage = testCase.Fields["Custom.Prompt"].ToString();
 
-    if (prompt != null)
+    if (systemMessage != null && userMessage != null)
     {
-        string title = $"Prompt: '{string.Join(" ", prompt.Split(' ').Take(4))}...'";
+        string title = $"Prompt: '{string.Join(" ", userMessage.Split(' ').Take(5))}...'";
         Console.WriteLine(title);
 
-        var responseSimple = await openai.GetResponseAsync("Simple", prompt);
-        var responseSemantic = await openai.GetResponseAsync("Semantic", prompt);
+        var responseSimple = await openai.Prompt(queryType: "Simple", systemMessage, userMessage);
+        var responseSemantic = await openai.Prompt(queryType: "Semantic", systemMessage, userMessage);
 
         devops.updateWorkItem(
             id,
             title,
-            prompt,
+            userMessage,
             responseSimple,
             responseSemantic,
             steps: devops.defaultSteps()
