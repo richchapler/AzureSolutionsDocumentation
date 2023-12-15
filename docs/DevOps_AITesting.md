@@ -495,6 +495,35 @@ namespace ConsoleApp1.Helpers
 }
 ```
 
+### Helper Class: KeyVault
+
+```using Azure;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+namespace ConsoleApp1.Helpers
+{
+    internal class KeyVault
+    {
+        private SecretClient client;
+
+        public KeyVault()
+        {
+            client = new SecretClient(
+                vaultUri: new Uri("https://myvault.vault.azure.net/"),
+                credential: new DefaultAzureCredential()
+                );
+        }
+
+        public KeyVaultSecret GetSecret(string secretName)
+        {
+            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
+            return responseKeyVaultSecret.Value;
+        }
+    }
+}
+```
+
 ### Helper Class: OpenAI
 
 ```
