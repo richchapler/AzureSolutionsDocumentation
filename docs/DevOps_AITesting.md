@@ -406,6 +406,7 @@ In this exercise, we will test prompts programmatically interact with OpenAI + A
 ### Helper Class: DevOps
 
 ```
+using Azure.Security.KeyVault.Secrets;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
@@ -420,11 +421,15 @@ namespace ConsoleApp1.Helpers
 
         public DevOps()
         {
+            KeyVault keyvault = new();
+
+            KeyVaultSecret DevOps_PersonalAccessToken = keyvault.getSecret("DevOps-PersonalAccessToken");
+
             clientDevOps = new VssConnection(
                 baseUrl: new Uri("https://dev.azure.com/rchapler"),
                 credentials: new VssBasicCredential(
                     userName: string.Empty,
-                    password: "w3eclmjpjdcwfla2idbchloxrn7ykfnriym6hiww3fp7nrin66fa"
+                    password: DevOps_PersonalAccessToken.Value
                     )
                 ).GetClient<WorkItemTrackingHttpClient>();
 
@@ -497,7 +502,8 @@ namespace ConsoleApp1.Helpers
 
 ### Helper Class: KeyVault
 
-```using Azure;
+```
+using Azure;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
@@ -510,12 +516,12 @@ namespace ConsoleApp1.Helpers
         public KeyVault()
         {
             client = new SecretClient(
-                vaultUri: new Uri("https://myvault.vault.azure.net/"),
+                vaultUri: new Uri("https://rchaplerkv.vault.azure.net/"),
                 credential: new DefaultAzureCredential()
                 );
         }
 
-        public KeyVaultSecret GetSecret(string secretName)
+        public KeyVaultSecret getSecret(string secretName)
         {
             Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
             return responseKeyVaultSecret.Value;
