@@ -540,13 +540,15 @@ namespace ConsoleApp1.Helpers
 {
     internal class OpenAI
     {
-        private OpenAIClient clientOpenAI;
+        KeyVault keyvault = new();
+
+        private OpenAIClient client;
 
         public OpenAI()
         {
-            clientOpenAI = new OpenAIClient(
-                endpoint: new Uri("https://rchaplerai.openai.azure.com/"),
-                keyCredential: new AzureKeyCredential("34b586dacbfb4115b15d5c167438a11c")
+            client = new OpenAIClient(
+                endpoint: new Uri(keyvault.getSecret("OpenAI-Endpoint")),
+                keyCredential: new AzureKeyCredential(keyvault.getSecret("OpenAI-Key"))
             );
         }
 
@@ -563,25 +565,25 @@ namespace ConsoleApp1.Helpers
 
             AzureCognitiveSearchChatExtensionConfiguration config = new()
             {
-                SearchEndpoint = new Uri("https://rchaplerss.search.windows.net"),
-                IndexName = "rchaplerss-index",
+                SearchEndpoint = new Uri(keyvault.getSecret("AISearch-Url")),
+                IndexName = keyvault.getSecret("AISearch-IndexName"),
                 QueryType = type,
                 ShouldRestrictResultScope = true,
                 DocumentCount = 5,
-                SemanticConfiguration = "rchaplerss-semantic" /* Ignored when queryType != Semantic */
+                SemanticConfiguration = keyvault.getSecret("AISearch-SemanticConfiguration") /* Ignored when queryType != Semantic */
             };
-            config.SetSearchKey(searchKey: "o5QRwh1S8UUmhCoBSWP4XNAyNWU7K8LqgUvPLJtHeAAzSeDFNRMf");
+            config.SetSearchKey(searchKey: keyvault.getSecret("AISearch-Key"));
 
-            ChatCompletionsOptions promptOptions = new()
+            ChatCompletionsOptions cco = new()
             {
-                DeploymentName = "rchaplerai-gpt4",
+                DeploymentName = keyvault.getSecret("OpenAI-DeploymentName"),
                 AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
             };
 
-            promptOptions.Messages.Add(new ChatMessage(ChatRole.System, systemMessage));
-            promptOptions.Messages.Add(new ChatMessage(ChatRole.User, userMessage));
+            cco.Messages.Add(new ChatMessage(ChatRole.System, systemMessage));
+            cco.Messages.Add(new ChatMessage(ChatRole.User, userMessage));
 
-            var response = await clientOpenAI.GetChatCompletionsAsync(promptOptions);
+            var response = await client.GetChatCompletionsAsync(cco);
             return response.Value.Choices[0].Message.Content;
         }
     }
