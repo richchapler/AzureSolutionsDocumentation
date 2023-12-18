@@ -52,7 +52,7 @@ Click to open "Test Case".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0c4ba82-d816-4aa3-bbdd-0f188ad8602b" width="800" title="Snipped: December 18, 2023" />
 
-**"Steps" tab**
+#### "Steps" tab
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3b4be34c-1c66-4713-8925-9d35ba0ecc76" width="800" title="Snipped: December 18, 2023" />
 
@@ -74,23 +74,36 @@ On the "Layout" page, enter Label "User Message (aka Prompt)". Click "Add field"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e6e68496-fa13-455d-9a26-4109925f3f4e" width="800" title="Snipped: December 18, 2023" />
 
-**"Results" tab**
+#### "Responses" tab
 
-Click "New page".
+Click the eliipses on the "Summary" tab and then "Edit" on the resulting menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2ad6f4d5-4ead-4c3e-9b46-10d8fb950d8f" width="800" title="Snipped: December 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b66bc720-e344-40dd-a07b-2e64a4a616b0" width="800" title="Snipped: December 18, 2023" />
 
-Enter name "Results" and then click "Add page".
+Enter name "Responses" and then click "Save".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9248f45b-06d5-4889-8a39-d33af8aa086a" width="800" title="Snipped: December 18, 2023" />
 
+Hide the "Description" field and add two new fields: "Response_Simple" and "Response_Semantic"
+_Note: "Simple" refers to "Keyword"_
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dd2b6ff4-95cd-4250-a744-6df9fe3b95f7" width="800" title="Snipped: December 18, 2023" />
 
+In the third column, click "Add a field" and then complete the resulting "Add a field to Test Case":
 
+Prompt | Entry
+:----- | :-----
+**Create a field** | Selected
+**Name** | Response_Simple_Ranking
+**Type** | Picklist (string) including: "1-Very Bad", "2-Bad", "3-Neutral", "4-Good", and "5-Very Good"
 
+_Note: This field will be manually populated by testers as they evaluate automatically-generated responses_
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b231935-bddb-40ed-9278-3f1bda401c61" width="800" title="Snipped: December 18, 2023" />
 
+On the "Layout" tab, enter Label "Response (keyword)" and then click "Add field". Repeat for "Response_Semantic_Ranking"
 
-LOREM IPSUM
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f92d269-8d24-4669-855d-e534c3e003c6" width="800" title="Snipped: December 18, 2023" />
 
 -----
 
