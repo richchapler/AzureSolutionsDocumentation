@@ -29,6 +29,19 @@ This documentation assumes the following resources are ready for use:
   * OpenAI-Key
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
+Also prepare a CSV file with OpenAI prompts; example:
+
+```
+Work Item Type,Title,UserMessage
+Test Case,Prompt,"How does Form 1040 provide a comprehensive view of an individual’s various sources of income, including wages, dividends, and capital gains?"
+Test Case,Prompt,What insights can be drawn from the deductions section of Form 1040 about an individual’s financial obligations and contributions?
+Test Case,Prompt,How does the information on a W2 form reflect an individual’s employment history and earnings for the year?
+Test Case,Prompt,What can Form W4 tell us about an individual’s tax withholding preferences and their anticipated tax liability?
+Test Case,Prompt,How does Form W9 provide information about an individual’s or entity’s contractual relationships and responsibilities?
+```
+
+_Note: My sample prompts are about tax forms since we're using the Tax Form index_
+
 -----
 
 ## Exercise 1: Customize DevOps
