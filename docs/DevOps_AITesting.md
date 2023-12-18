@@ -1,7 +1,7 @@
 # DevOps: AI Testing
 ⚠️WORK IN PROGRESS⚠️
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/daff9bd1-16d3-4c09-ba64-996c7ce15e3a" width="1000" />
 
 ## Use Case
 * "We need to test hundreds of prompts with various configurations of AI Search and OpenAI"
