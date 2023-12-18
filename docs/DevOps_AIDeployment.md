@@ -345,6 +345,18 @@ Logic Explained:
 * `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the `SearchIndexerDataSourceConnection` object
 * `forms` refers to the Storage Account Container mentioned in Solution Requirements
 
+##### Alternate Version: SQL
+Note: if you are creating a data source for Azure SQL, `sidsc` will look like this:
+
+```
+var sidsc = new SearchIndexerDataSourceConnection(
+     name: nameAISearch_DataSource,
+     type: SearchIndexerDataSourceType.AzureSql,
+     connectionString: ConnectionString_SQL,
+     container: new SearchIndexerDataContainer("{schemaName}.{tableName}")
+ );
+```
+
 -----
 
 #### Index
