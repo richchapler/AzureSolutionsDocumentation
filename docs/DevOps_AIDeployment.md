@@ -357,6 +357,8 @@ var sidsc = new SearchIndexerDataSourceConnection(
  );
 ```
 
+_Note: Waiting on a Support Case re: credential capture for this alternate version_
+
 -----
 
 #### Index
