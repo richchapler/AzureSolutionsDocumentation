@@ -29,7 +29,7 @@ This documentation assumes the following resources are ready for use:
   * OpenAI-Key
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
-Also prepare a CSV file with OpenAI prompts; example:
+Also prepare a CSV file with sample OpenAI prompts; example:
 
 ```
 Work Item Type,Title,UserMessage
@@ -40,7 +40,7 @@ Test Case,Prompt,What can Form W4 tell us about an individual’s tax withholdin
 Test Case,Prompt,How does Form W9 provide information about an individual’s or entity’s contractual relationships and responsibilities?
 ```
 
-_Note: My sample prompts are about tax forms since we're using the Tax Form index_
+_Note: My sample prompts are about tax forms since we're using the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
 
 -----
 
