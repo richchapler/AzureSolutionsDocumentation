@@ -109,7 +109,7 @@ On the "Layout" tab, enter Label "Response (keyword)" and then click "Add field"
 
 From the Organization page, click "+ New project".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/53d909d7-0173-4d0b-8d47-e45b7d128f39" width="800" title="Snipped: December 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0faee4db-70b8-4b9e-83db-a0954033b5c1" width="800" title="Snipped: December 18, 2023" />
 
 Complete the resulting popout, including "Work item process" selection "AI Testing". Click "Create".
 
