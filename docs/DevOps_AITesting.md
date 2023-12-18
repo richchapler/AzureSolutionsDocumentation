@@ -48,6 +48,39 @@ Complete the form and click "Create process".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7792d59b-a084-4ed3-b0a1-9fe4406877b6" width="800" title="Snipped: December 15, 2023" />
 
+Click to open "Test Case".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0c4ba82-d816-4aa3-bbdd-0f188ad8602b" width="800" title="Snipped: December 18, 2023" />
+
+**"Steps" tab**
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3b4be34c-1c66-4713-8925-9d35ba0ecc76" width="800" title="Snipped: December 18, 2023" />
+
+Rollover the "Deployment", click the ellipses, and then click "Hide from layout". Then, repeat for "Development".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/89a9729c-af39-4cd3-8184-c44ae7cec844" width="800" title="Snipped: December 18, 2023" />
+
+Click "New field" and complete the resulting "Add a field to Test Case":
+
+Prompt | Entry
+:----- | :-----
+**Create a field** | selected
+**Name** | UserMessage
+**Type** | "Text (multiple lines)
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c3018fad-5acc-4cd3-8a02-24fe96c3f921" width="800" title="Snipped: December 18, 2023" />
+
+On the "Layout" page, enter Label "User Message (aka Prompt)". Click "Add field" and then repeat for a new "SystemMessage" field.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e6e68496-fa13-455d-9a26-4109925f3f4e" width="800" title="Snipped: December 18, 2023" />
+
+**"Results" tab**
+
+Click "New page".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2ad6f4d5-4ead-4c3e-9b46-10d8fb950d8f" width="800" title="Snipped: December 18, 2023" />
+
+Enter name "Results" and then click "Add page".
 
 
 
