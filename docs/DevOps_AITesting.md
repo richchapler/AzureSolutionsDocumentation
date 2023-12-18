@@ -102,7 +102,7 @@ Enter name "Responses" and then click "Save".
 Hide the "Description" field and add two new fields: "Response_Simple" and "Response_Semantic"
 _Note: "Simple" refers to "Keyword"_
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dd2b6ff4-95cd-4250-a744-6df9fe3b95f7" width="800" title="Snipped: December 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/884a36ed-fe3b-46ae-9041-bd6c8157ae5d" width="800" title="Snipped: December 18, 2023" />
 
 In the third column, click "Add a field" and then complete the resulting "Add a field to Test Case":
 
