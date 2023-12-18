@@ -113,6 +113,12 @@ From the Organization page, click "+ New project".
 
 Complete the resulting popout, including "Work item process" selection "AI Testing". Click "Create".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b6b50d7-af77-45bb-8820-5005a3b1ba49" width="800" title="Snipped: December 18, 2023" />
+
+Navigate to aiTesting >> Boards >> Work Items and then click "Import Work Items".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/123ba847-5de4-4e0c-a28b-9676f9303ebc" width="800" title="Snipped: December 18, 2023" />
+
 
 
 
