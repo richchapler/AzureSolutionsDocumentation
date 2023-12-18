@@ -47,7 +47,7 @@ _Note: My sample prompts are about tax forms since we're using the Tax Form inde
 ## Exercise 1: Customize DevOps
 In this exercise we will create a new process with a customized Test Case entity.
 
-### Step 1: Prepare Process
+### Step 1: Create Process
 
 Navigate to DevOps >> Organization Settings >> Boards >> Process and then click on "Basic".
 
@@ -61,11 +61,13 @@ Complete the form and click "Create process".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7792d59b-a084-4ed3-b0a1-9fe4406877b6" width="800" title="Snipped: December 15, 2023" />
 
+### Step 2: Add Fields
+
 Click to open "Test Case".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0c4ba82-d816-4aa3-bbdd-0f188ad8602b" width="800" title="Snipped: December 18, 2023" />
 
-#### "Steps" tab
+#### "Layout" >> "Steps"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3b4be34c-1c66-4713-8925-9d35ba0ecc76" width="800" title="Snipped: December 18, 2023" />
 
@@ -87,7 +89,7 @@ On the "Layout" page, enter Label "User Message (aka Prompt)". Click "Add field"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e6e68496-fa13-455d-9a26-4109925f3f4e" width="800" title="Snipped: December 18, 2023" />
 
-#### "Responses" tab
+#### "Layout" >> "Responses"
 
 Click the eliipses on the "Summary" tab and then "Edit" on the resulting menu.
 
@@ -118,7 +120,38 @@ On the "Layout" tab, enter Label "Response (keyword)" and then click "Add field"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f92d269-8d24-4669-855d-e534c3e003c6" width="800" title="Snipped: December 18, 2023" />
 
-### Step 2: Prepare Project
+### Step 3: Modify States
+
+Click on the "States" tab and then click "+ New state".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/91170166-161f-43b9-bb75-c89312e8e8a4" width="800" title="Snipped: December 18, 2023" />
+
+Complete the "Add a state to Test Case" popup, including:
+
+Prompt | Entry
+:----- | :-----
+**Name** | Ready for OpenAI
+**State category** | Proposed
+
+Click "Create".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/36e5aeb9-b45e-45ed-b9ae-b0c19d482333" width="800" title="Snipped: December 18, 2023" />
+
+Rollover "Design", click the ellipses, and then click "Hide" in the dropdown.
+<br>Click "+ New state" and complete the "Add a state to Test Case" popup, including:
+
+Prompt | Entry
+:----- | :-----
+**Name** | Ready for Human
+**State category** | In Progress 
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ad81f183-503d-4255-8e37-63d5b5416320" width="800" title="Snipped: December 18, 2023" />
+
+Click "Create" and then hide "In Progress" state "Ready".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d294e75f-f3d0-4457-b8e6-9d401a009c9e" width="800" title="Snipped: December 18, 2023" />
+
+### Step 4: Prepare Project
 
 From the Organization page, click "+ New project".
 
@@ -134,7 +167,9 @@ Navigate to aiTesting >> Boards >> Work Items and then click "Import Work Items"
 
 Review imported Work Items.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/abfba5a1-0f12-40df-974f-a2816fb6766a" width="800" title="Snipped: December 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0c64317a-2f72-49b4-9d96-41968f40a162" width="800" title="Snipped: December 18, 2023" />
+
+Click "Save items".
 
 -----
 
