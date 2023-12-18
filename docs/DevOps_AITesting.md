@@ -111,7 +111,7 @@ From the Organization page, click "+ New project".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/53d909d7-0173-4d0b-8d47-e45b7d128f39" width="800" title="Snipped: December 18, 2023" />
 
-Complete the resulting popout, including "Work item process" selection "aiTesting". Click "Create".
+Complete the resulting popout, including "Work item process" selection "AI Testing". Click "Create".
 
 
 
