@@ -64,7 +64,7 @@ Click "New field" and complete the resulting "Add a field to Test Case":
 
 Prompt | Entry
 :----- | :-----
-**Create a field** | selected
+**Create a field** | Selected
 **Name** | UserMessage
 **Type** | "Text (multiple lines)
 
