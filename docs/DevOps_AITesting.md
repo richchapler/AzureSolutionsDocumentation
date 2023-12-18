@@ -47,7 +47,7 @@ _Note: My sample prompts are about tax forms since we're using the Tax Form inde
 ## Exercise 1: Customize DevOps
 In this exercise we will create a new process with a customized Test Case entity.
 
-### Step 1: Create Inherited Process
+### Step 1: Prepare Process
 
 Navigate to DevOps >> Organization Settings >> Boards >> Process and then click on "Basic".
 
@@ -118,7 +118,7 @@ On the "Layout" tab, enter Label "Response (keyword)" and then click "Add field"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f92d269-8d24-4669-855d-e534c3e003c6" width="800" title="Snipped: December 18, 2023" />
 
-### Step 2: Create Project
+### Step 2: Prepare Project
 
 From the Organization page, click "+ New project".
 
@@ -132,15 +132,9 @@ Navigate to aiTesting >> Boards >> Work Items and then click "Import Work Items"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/123ba847-5de4-4e0c-a28b-9676f9303ebc" width="800" title="Snipped: December 18, 2023" />
 
+Review imported Work Items.
 
-
-
-
-
-
-
-
-
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/abfba5a1-0f12-40df-974f-a2816fb6766a" width="800" title="Snipped: December 18, 2023" />
 
 -----
 
