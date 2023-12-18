@@ -66,7 +66,7 @@ Prompt | Entry
 :----- | :-----
 **Create a field** | Selected
 **Name** | UserMessage
-**Type** | "Text (multiple lines)
+**Type** | Text (multiple lines)
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c3018fad-5acc-4cd3-8a02-24fe96c3f921" width="800" title="Snipped: December 18, 2023" />
 
