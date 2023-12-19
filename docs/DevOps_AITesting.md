@@ -238,7 +238,9 @@ When prompted, click "I Accept" on the "License Acceptance" pop-up.
 
 Repeat this process for the following NuGet packages:
 
+* Azure.AI.OpenAI (**1.0.0-beta.9**)
 * Azure.Security.KeyVault.Secrets
+* Microsoft.TeamFoundationServer.Client
 
 -----
 
@@ -252,7 +254,7 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 
 ### Helper Class: KeyVault
 
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdown, and enter name "KeyVault.cs" on the resulting popup. Replace the default code on "KeyVault.cs" with:
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup. Replace the default code with:
 
 ```
 using Azure;
@@ -284,13 +286,11 @@ namespace processTestCases.Helpers
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac8e57e3-b9ae-4307-997e-b836db0071da" width="800" title="Snipped: December 19, 2023" />
 
-
-
-
-
-
+Click "Save".
 
 ### Helper Class: DevOps
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "DevOps.cs" on the resulting popup. Replace the default code with:
 
 ```
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
@@ -299,7 +299,7 @@ using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
 
-namespace ConsoleApp1.Helpers
+namespace processTestCases.Helpers
 {
     internal class DevOps
     {
@@ -316,7 +316,7 @@ namespace ConsoleApp1.Helpers
                     userName: string.Empty,
                     password: keyvault.getSecret("DevOps-PersonalAccessToken") /* DevOps Personal Access Token with "Read, write, & manage" permissions */
                     )
-                ).GetClient<WorkItemTrackingHttpClient>();            
+                ).GetClient<WorkItemTrackingHttpClient>();
         }
 
         public async Task<List<WorkItem>> getTestCases()
@@ -388,14 +388,19 @@ namespace ConsoleApp1.Helpers
 }
 ```
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/46413ad5-6ed0-4587-bbcf-8b4675c8b32f" width="800" title="Snipped: December 19, 2023" />
+
+Click "Save".
 
 ### Helper Class: OpenAI
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "OpenAI.cs" on the resulting popup. Replace the default code with:
 
 ```
 using Azure;
 using Azure.AI.OpenAI; /* pre-release NuGet Package: Azure.AI.OpenAI v1.0.0-beta.9 */
 
-namespace ConsoleApp1.Helpers
+namespace processTestCases.Helpers
 {
     internal class OpenAI
     {
@@ -449,53 +454,64 @@ namespace ConsoleApp1.Helpers
 }
 ```
 
-### Program.cs
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2c7305a-4cd2-4745-af60-b85c9bc40be4" width="800" title="Snipped: December 19, 2023" />
+
+Click "Save".
+
+### processTestCases.cs
+
+Open "processTestCases.cs" and replace the default code with:
 
 ```
-using ConsoleApp1.Helpers;
+using Microsoft.Azure.Functions.Worker;
+using processTestCases.Helpers;
 
-DevOps devops = new(); OpenAI openai = new();
-
-var testCases = await devops.getTestCases();
-
-foreach (var testCase in testCases)
+namespace processTestCases
 {
-    int id;
-    if (testCase.Id.HasValue) { id = testCase.Id.Value; } else { continue; }
-
-    string? systemMessage = testCase.Fields["Custom.SystemMessage"].ToString();
-    string? userMessage = testCase.Fields["Custom.Prompt"].ToString();
-
-    if (systemMessage != null && userMessage != null)
+    public class processTestCases
     {
-        string title = $"Prompt: '{string.Join(" ", userMessage.Split(' ').Take(5))}...'";
-        Console.WriteLine(title);
+        [Function("processTestCases")]
+        public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer)
+        {
+            DevOps devops = new(); OpenAI openai = new();
 
-        var responseSimple = await openai.Prompt(queryType: "Simple", systemMessage, userMessage);
-        var responseSemantic = await openai.Prompt(queryType: "Semantic", systemMessage, userMessage);
+            var testCases = await devops.getTestCases();
 
-        devops.updateWorkItem(
-            id,
-            title,
-            userMessage,
-            responseSimple,
-            responseSemantic,
-            steps: devops.defaultSteps()
-            );
+            foreach (var testCase in testCases)
+            {
+                int id;
+                if (testCase.Id.HasValue) { id = testCase.Id.Value; } else { continue; }
+
+                string? systemMessage = testCase.Fields["Custom.SystemMessage"].ToString();
+                string? userMessage = testCase.Fields["Custom.Prompt"].ToString();
+
+                if (systemMessage != null && userMessage != null)
+                {
+                    var responseSimple = await openai.Prompt(queryType: "Simple", systemMessage, userMessage);
+                    var responseSemantic = await openai.Prompt(queryType: "Semantic", systemMessage, userMessage);
+
+                    devops.updateWorkItem(
+                        id,
+                        title: $"Prompt: '{string.Join(" ", userMessage.Split(' ').Take(5))}...'",
+                        userMessage,
+                        responseSimple,
+                        responseSemantic,
+                        steps: devops.defaultSteps()
+                        );
+                }
+            }
+        }
     }
 }
 ```
 
 Logic Explained:
 
-1. **SearchIndexer Creation**: A `SearchIndexer` named `indexer` is created with a specified indexer name, data source name, and index name. The indexer is configured with specific parameters and a skillset name
-2. **IndexingParametersConfiguration**: The `IndexingParametersConfiguration` is set to `BlobIndexerImageAction.GenerateNormalizedImagePerPage`, which means the indexer will perform Optical Character Recognition (OCR) on images in blobs and generate a normalized image per page
-3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation... re-enable by modifying Indexer >> "Indexer Definition (JSON)"
-4. **OutputFieldMappings**: These mappings define how the output of a skill is mapped to a field in an index schema:
-   <br>`text`... from `OcrSkill` and `/document/normalized_images/*/text`
-   <br>`keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
-   <br>`myColumn`... from `WebApiSkill` and `/document/content/myColumn` (custom skillset)
-5. **DeleteIndexer** and **CreateIndexer**: The existing indexer with the same name is deleted if it exists, and then the new indexer is created.
+1. LOREM IPSUM
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2da19329-bf74-4969-9fb8-6548110ebaa8" width="800" title="Snipped: December 19, 2023" />
+
+Click "Save".
 
 -----
 
