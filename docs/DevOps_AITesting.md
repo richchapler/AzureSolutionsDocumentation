@@ -208,11 +208,11 @@ Complete the "**Configure your new project**" form, then click "**Next**".
 
 Complete the "**Additional information**" form, including:
 
-| Prompt             | Entry           |
-| :----------------- | :-------------- |
-| **Functions worker**           | .NET 8.0 Isolated (Long Term Support) |
-| **Function**           | Timer trigger |
-| **Schedule**           | 0 */5 * * * * |
+| Prompt               | Entry                                 |
+| :------------------- | :------------------------------------ |
+| **Functions worker** | .NET 8.0 Isolated (Long Term Support) |
+| **Function**         | Timer trigger                         |
+| **Schedule**         | 0 */5 * * * *                         |
 
 Click "**Create**".
 
@@ -499,15 +499,15 @@ This is a C# class named `OpenAI` in the namespace `processTestCases.Helpers`. I
 
 2. **Prompt Method**: This method accepts three parameters: `queryType`, `systemMessage`, and `userMessage`. It's an asynchronous method that returns a `Task<string>`, meaning it performs operations in the background and returns a string when it's done.
 
-    - It first determines the type of Azure Cognitive Search query to use based on the `queryType` parameter.
+   - It first determines the type of Azure Cognitive Search query to use based on the `queryType` parameter.
 
-    - It then creates an `AzureCognitiveSearchChatExtensionConfiguration` object, which is used to configure the Azure Cognitive Search extension. This includes setting the search endpoint, index name, query type, and other parameters.
+   - It then creates an `AzureCognitiveSearchChatExtensionConfiguration` object, which is used to configure the Azure Cognitive Search extension. This includes setting the search endpoint, index name, query type, and other parameters.
 
-    - A `ChatCompletionsOptions` object is created next. This object is used to configure the chat completion options, including the deployment name and Azure extensions options.
+   - A `ChatCompletionsOptions` object is created next. This object is used to configure the chat completion options, including the deployment name and Azure extensions options.
 
-    - Two `ChatMessage` objects are added to the `ChatCompletionsOptions` object: one for the system message and one for the user message.
+   - Two `ChatMessage` objects are added to the `ChatCompletionsOptions` object: one for the system message and one for the user message.
 
-    - Finally, it calls the `GetChatCompletionsAsync` method on the `OpenAIClient` object, passing in the `ChatCompletionsOptions` object. This method sends a request to the OpenAI API and returns the content of the first choice from the response.
+   - Finally, it calls the `GetChatCompletionsAsync` method on the `OpenAIClient` object, passing in the `ChatCompletionsOptions` object. This method sends a request to the OpenAI API and returns the content of the first choice from the response.
 
 This class essentially serves as a helper for making requests to the OpenAI API, with specific configurations for Azure Cognitive Search. It's designed to be used in a larger application where the `Prompt` method would be called with specific parameters to generate a response from the OpenAI API. The response is then returned to the calling code.
 
