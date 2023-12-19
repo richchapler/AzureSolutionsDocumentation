@@ -286,12 +286,23 @@ namespace processTestCases.Helpers
 
 **Logic Explained**:
 
-1. **Namespace and Class Definition**: The `KeyVault` class is defined within the `processTestCases.Helpers` namespace. This class is designed to interact with Azure Key Vault.
-2. **Private Field**: The `client` field of type `SecretClient` is used to interact with the Azure Key Vault.
-3. **Constructor**: In the `KeyVault` constructor, the `client` field is initialized with a new instance of `SecretClient`. The `SecretClient` is constructed with two parameters:
-  * `vaultUri`: The URI of the Azure Key Vault. In this case, it’s “https://rchaplerkv.vault.azure.net/”.
-  * `credential`: The credentials used to authenticate with Azure. `DefaultAzureCredential()` is a convenient way to create a credential which interacts seamlessly with various Azure authentication methods.
-4. **getSecret Method**: This method retrieves a secret from the Azure Key Vault. It takes a `secretName` as a parameter, uses the `client` to retrieve the secret from Azure Key Vault, and returns the value of the secret.
+1. **Namespace and Class Definition**
+   The code defines a namespace `processTestCases.Helpers` and an internal class `KeyVault` within it. This class is used to interact with Azure Key Vault.
+
+2. **Dependencies**
+   The code uses three Azure libraries:
+   - `Azure`: The main Azure SDK package.
+   - `Azure.Identity`: Provides Azure Active Directory token authentication support across the Azure SDK.
+   - `Azure.Security.KeyVault.Secrets`: Provides functionality to access and manage secrets in Azure Key Vault.
+
+3. **Class Variables**
+   The `KeyVault` class has one private variable `client` of type `SecretClient`. This client interacts with Azure Key Vault.
+
+4. **Constructor**
+   The constructor of the `KeyVault` class initializes the `client` with the URI of the Azure Key Vault and a `DefaultAzureCredential`. The `DefaultAzureCredential` is a type of Azure Identity that provides a simplified authentication experience to quickly start developing applications run in the Azure cloud.
+
+5. **getSecret Method**
+   The `getSecret` method takes a secret name as input, retrieves the secret from Azure Key Vault using the `client`, and returns the value of the secret.
 
 Click "Save".
 
@@ -397,17 +408,24 @@ namespace processTestCases.Helpers
 
 **Logic Explained**:
 
-1. **Initialization (`DevOps()` constructor)**: It initializes a `WorkItemTrackingHttpClient` client using the Azure DevOps URL and a Personal Access Token (PAT) retrieved from a `KeyVault` instance. This client is used to interact with Azure DevOps Work Items.
-2. **Getting Test Cases (`getTestCases()` method)**: This asynchronous method retrieves a list of ‘Test Case’ work items that are in the ‘Ready for OpenAI’ state. It does this by:
-  * Constructing a Work Item Query Language (WIQL) query to select work items of type ‘Test Case’ and state ‘Ready for OpenAI’.
-  * Executing the query using the client and retrieving the results.
-  * If any work items are found, their IDs are extracted and used to fetch the full work item details, which are returned as a list.
-3. **Updating a Work Item (`updateWorkItem()` method)**: This method updates a given work item with new data. It does this by:
-  * Creating a new `JsonPatchDocument` (a list of operations to apply to a JSON document).
-  * Using the `addField()` helper method to add new fields to the work item (like title, prompt, responses, and steps).
-  * Updating the work item on Azure DevOps using the client.
-4. **Adding a Field to a Work Item (`addField()` method)**: This helper method adds a new field to a JsonPatchDocument. It creates a new JsonPatchOperation with the ‘add’ operation and the given path and value, and adds it to the document.
-5. **Default Steps (`defaultSteps()` method)**: This method returns a string representing the default steps for a test case.
+This code is a helper class for interacting with Azure DevOps. Here's a breakdown of its logic:
+
+1. **Initialization (`DevOps()`):**
+   The constructor initializes a `WorkItemTrackingHttpClient` client using the Azure DevOps URL and a Personal Access Token (PAT) retrieved from Azure Key Vault.
+
+2. **Fetching Test Cases (`getTestCases()`):**
+   This method fetches 'Test Case' work items from Azure DevOps that are in the 'Ready for OpenAI' state. It uses the Work Item Query Language (WIQL) to form the query. If any matching work items are found, their details are fetched and returned as a list.
+
+3. **Updating a Work Item (`updateWorkItem()`):**
+   This method updates a specific work item in Azure DevOps. It takes several parameters including the work item ID, title, prompt, responses, and steps. It creates a `JsonPatchDocument` to hold the updates, which are then applied to the work item using the `UpdateWorkItemAsync()` method.
+
+4. **Adding a Field to a Work Item (`addField()`):**
+   This is a helper method used by `updateWorkItem()`. It adds a new field to the `JsonPatchDocument` for the work item. The field is specified by its path and value.
+
+5. **Default Steps (`defaultSteps()`):**
+   This method returns a string representing the default steps for a test case. These steps are formatted in XML.
+
+The purpose of this class is to automate the process of fetching and updating test cases in Azure DevOps. It's designed to work with a specific workflow where test cases are initially set to the 'Ready for OpenAI' state, and then updated with responses from an AI model.
 
 Click "Save".
 
@@ -473,7 +491,25 @@ namespace processTestCases.Helpers
 }
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2c7305a-4cd2-4745-af60-b85c9bc40be4" width="800" title="Snipped: December 19, 2023" />
+**Logic Explained**:
+
+This is a C# class named `OpenAI` in the namespace `processTestCases.Helpers`. It uses the Azure.AI.OpenAI library to interact with the OpenAI API. Here's a breakdown of its functionality:
+
+1. **Initialization**: The `OpenAI` constructor initializes an `OpenAIClient` with the endpoint and key retrieved from a `KeyVault` instance.
+
+2. **Prompt Method**: This method accepts three parameters: `queryType`, `systemMessage`, and `userMessage`. It's an asynchronous method that returns a `Task<string>`, meaning it performs operations in the background and returns a string when it's done.
+
+    - It first determines the type of Azure Cognitive Search query to use based on the `queryType` parameter.
+
+    - It then creates an `AzureCognitiveSearchChatExtensionConfiguration` object, which is used to configure the Azure Cognitive Search extension. This includes setting the search endpoint, index name, query type, and other parameters.
+
+    - A `ChatCompletionsOptions` object is created next. This object is used to configure the chat completion options, including the deployment name and Azure extensions options.
+
+    - Two `ChatMessage` objects are added to the `ChatCompletionsOptions` object: one for the system message and one for the user message.
+
+    - Finally, it calls the `GetChatCompletionsAsync` method on the `OpenAIClient` object, passing in the `ChatCompletionsOptions` object. This method sends a request to the OpenAI API and returns the content of the first choice from the response.
+
+This class essentially serves as a helper for making requests to the OpenAI API, with specific configurations for Azure Cognitive Search. It's designed to be used in a larger application where the `Prompt` method would be called with specific parameters to generate a response from the OpenAI API. The response is then returned to the calling code.
 
 Click "Save".
 
@@ -526,11 +562,36 @@ namespace processTestCases
 
 Logic Explained:
 
-1. LOREM IPSUM
+This is a piece of code written in C# for an Azure Function. The function is named `processTestCases` and it's triggered every 5 minutes (as indicated by the cron expression "0 */5 * * * *"). Here's a step-by-step explanation of the logic:
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2da19329-bf74-4969-9fb8-6548110ebaa8" width="800" title="Snipped: December 19, 2023" />
+1. The function first creates instances of two classes: `DevOps` and `OpenAI`.
+
+2. It then calls the `getTestCases` method from the `devops` instance to fetch test cases.
+
+3. For each test case, it checks if the `Id` field has a value. If it does, it assigns the value to the `id` variable. If not, it skips the current iteration and moves to the next test case.
+
+4. It then retrieves the `systemMessage` and `userMessage` from the test case fields.
+
+5. If both `systemMessage` and `userMessage` are not null, it calls the `Prompt` method from the `openai` instance twice, once with the `queryType` set to "Simple" and once with it set to "Semantic". These calls return `responseSimple` and `responseSemantic` respectively.
+
+6. Finally, it calls the `updateWorkItem` method from the `devops` instance, passing in the `id`, a title constructed from the `userMessage`, the `userMessage` itself, `responseSimple`, `responseSemantic`, and the result of calling `defaultSteps` from the `devops` instance.
+
+In summary, this function is processing test cases by using an AI model to generate responses to prompts and updating the test cases with these responses. The processing is done every 5 minutes. The `DevOps` class is likely responsible for interacting with Azure DevOps to fetch and update work items (test cases), while the `OpenAI` class is likely responsible for interacting with the OpenAI API to generate responses to prompts. The specifics would depend on the implementation of these classes and methods.
 
 Click "Save".
+
+-----
+
+### Step 4: Confirm Success
+
+
+
+
+
+
+
+
+LOREM IPSUM
 
 -----
 
