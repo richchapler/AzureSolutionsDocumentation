@@ -251,7 +251,7 @@ Rename "Function1.cs" to "processTestCases.cs". When prompted "Would you also li
 
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers". 
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d07757f0-5582-4361-b33c-f59eccda60af" width="600" title="Snipped: December 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d07757f0-5582-4361-b33c-f59eccda60af" width="800" title="Snipped: December 19, 2023" />
 
 ### Helper Class: KeyVault
 
