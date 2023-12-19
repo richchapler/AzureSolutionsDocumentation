@@ -284,7 +284,7 @@ namespace processTestCases.Helpers
 }
 ```
 
-##### Logic Explained:
+**Logic Explained**:
 
 1. **Namespace and Class Definition**: The `KeyVault` class is defined within the `processTestCases.Helpers` namespace. This class is designed to interact with Azure Key Vault.
 2. **Private Field**: The `client` field of type `SecretClient` is used to interact with the Azure Key Vault.
@@ -395,7 +395,7 @@ namespace processTestCases.Helpers
 }
 ```
 
-##### Logic Explained:
+**Logic Explained**:
 
 1. **Initialization (`DevOps()` constructor)**: It initializes a `WorkItemTrackingHttpClient` client using the Azure DevOps URL and a Personal Access Token (PAT) retrieved from a `KeyVault` instance. This client is used to interact with Azure DevOps Work Items.
 2. **Getting Test Cases (`getTestCases()` method)**: This asynchronous method retrieves a list of ‘Test Case’ work items that are in the ‘Ready for OpenAI’ state. It does this by:
