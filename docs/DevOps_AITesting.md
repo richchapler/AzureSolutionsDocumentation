@@ -394,7 +394,19 @@ namespace processTestCases.Helpers
 }
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/46413ad5-6ed0-4587-bbcf-8b4675c8b32f" width="800" title="Snipped: December 19, 2023" />
+##### Logic Explained:
+
+1. **Initialization (`DevOps()` constructor)**: It initializes a `WorkItemTrackingHttpClient` client using the Azure DevOps URL and a Personal Access Token (PAT) retrieved from a `KeyVault` instance. This client is used to interact with Azure DevOps Work Items.
+2. **Getting Test Cases (`getTestCases()` method)**: This asynchronous method retrieves a list of ‘Test Case’ work items that are in the ‘Ready for OpenAI’ state. It does this by:
+  * Constructing a Work Item Query Language (WIQL) query to select work items of type ‘Test Case’ and state ‘Ready for OpenAI’.
+  * Executing the query using the client and retrieving the results.
+  * If any work items are found, their IDs are extracted and used to fetch the full work item details, which are returned as a list.
+3. **Updating a Work Item (`updateWorkItem()` method)**: This method updates a given work item with new data. It does this by:
+  * Creating a new `JsonPatchDocument` (a list of operations to apply to a JSON document).
+  * Using the `addField()` helper method to add new fields to the work item (like title, prompt, responses, and steps).
+  * Updating the work item on Azure DevOps using the client.
+4. **Adding a Field to a Work Item (`addField()` method)**: This helper method adds a new field to a JsonPatchDocument. It creates a new JsonPatchOperation with the ‘add’ operation and the given path and value, and adds it to the document.
+5. **Default Steps (`defaultSteps()` method)**: This method returns a string representing the default steps for a test case.
 
 Click "Save".
 
