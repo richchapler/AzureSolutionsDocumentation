@@ -286,11 +286,12 @@ namespace processTestCases.Helpers
 
 ##### Logic Explained:
 
-1. **Namespace and Imports**: The code begins by importing necessary namespaces from the Azure SDK. Azure, Azure.Identity, and Azure.Security.KeyVault.Secrets are namespaces that contain classes for interacting with Azure services, specifically the Key Vault service.
-2. **Class Definition**: The KeyVault class is defined within the processTestCases.Helpers namespace. It’s marked as internal, which means it’s accessible only within the same assembly.
-3. **Private Field**: The client field is a private instance of SecretClient, a class provided by the Azure SDK to interact with a Key Vault.
-4. **Constructor**: The KeyVault constructor initializes the client field. It creates a new SecretClient with a specified vault URI and uses the DefaultAzureCredential for authentication. The vault URI is hardcoded and should be replaced with the correct URI for your environment.
-5. **getSecret Method**: This method takes a secret name as a parameter and retrieves the secret value from the Key Vault. It uses the GetSecret method of the SecretClient to get a Response<KeyVaultSecret> object. The actual secret value is then extracted from this response object and returned as a string.
+1. **Namespace and Class Definition**: The `KeyVault` class is defined within the `processTestCases.Helpers` namespace. This class is designed to interact with Azure Key Vault.
+2. **Private Field**: The `client` field of type `SecretClient` is used to interact with the Azure Key Vault.
+3. **Constructor**: In the `KeyVault` constructor, the `client` field is initialized with a new instance of `SecretClient`. The `SecretClient` is constructed with two parameters:
+  * `vaultUri`: The URI of the Azure Key Vault. In this case, it’s “https://rchaplerkv.vault.azure.net/”.
+  * `credential`: The credentials used to authenticate with Azure. `DefaultAzureCredential()` is a convenient way to create a credential which interacts seamlessly with various Azure authentication methods.
+4. **getSecret Method**: This method retrieves a secret from the Azure Key Vault. It takes a `secretName` as a parameter, uses the `client` to retrieve the secret from Azure Key Vault, and returns the value of the secret.
 
 Click "Save".
 
