@@ -23,7 +23,7 @@ This documentation assumes the following resources are ready for use:
 
   _Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
 
-* [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
+* [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization, project, and a Personal Access Token with "Read, write, & manage" permissions
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
