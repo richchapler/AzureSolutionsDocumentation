@@ -560,7 +560,7 @@ namespace processTestCases
 }
 ```
 
-Logic Explained:
+**Logic Explained**:
 
 This is a piece of code written in C# for an Azure Function. The function is named `processTestCases` and it's triggered every 5 minutes (as indicated by the cron expression "0 */5 * * * *"). Here's a step-by-step explanation of the logic:
 
