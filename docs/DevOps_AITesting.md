@@ -1,23 +1,32 @@
 # DevOps: AI Testing
+
 ⚠️WORK IN PROGRESS⚠️
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/daff9bd1-16d3-4c09-ba64-996c7ce15e3a" width="1000" />
 
 ## Use Case
-* "We need to test hundreds of prompts with various configurations of AI Search and OpenAI"
+
+* "We need to test hundreds of prompts using various solution configurations"
 * "We need to provide testers with a simple and friendly way to capture test cases and results"
 
 ## Proposed Solution
+
 * **Customize DevOps**: Create a new process with a customized Test Case entity
 * **Automate Processing**: Create a scheduled process that prepares new Test Cases for review
 * **Confirm Success**: Demonstrate basic functionality
 
 ## Solution Requirements
+
 This documentation assumes the following resources are ready for use:
+
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with Semantic Configuration
-  <br>_Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
+
+  _Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
+
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
+
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
+
   * AISearch-IndexName
   * AISearch-Key
   * AISearch-SemanticConfiguration
@@ -27,7 +36,10 @@ This documentation assumes the following resources are ready for use:
   * OpenAI-DeploymentName
   * OpenAI-Endpoint
   * OpenAI-Key
+
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
+
+
 
 Also prepare a CSV file with sample OpenAI prompts; example:
 
@@ -45,6 +57,7 @@ _Note: My sample prompts are about tax forms since we're using the Tax Form inde
 -----
 
 ## Exercise 1: Customize DevOps
+
 In this exercise we will create a new process with a customized Test Case entity.
 
 ### Step 1: Create Process
@@ -77,11 +90,11 @@ Rollover the "Deployment", click the ellipses, and then click "Hide from layout"
 
 Click "New field" and complete the resulting "Add a field to Test Case":
 
-Prompt | Entry
-:----- | :-----
-**Create a field** | Selected
-**Name** | UserMessage
-**Type** | Text (multiple lines)
+| Prompt             | Entry                 |
+| :----------------- | :-------------------- |
+| **Create a field** | Selected              |
+| **Name**           | UserMessage           |
+| **Type**           | Text (multiple lines) |
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c3018fad-5acc-4cd3-8a02-24fe96c3f921" width="800" title="Snipped: December 18, 2023" />
 
@@ -106,11 +119,11 @@ _Note: "Simple" refers to "Keyword"_
 
 In the third column, click "Add a field" and then complete the resulting "Add a field to Test Case":
 
-Prompt | Entry
-:----- | :-----
-**Create a field** | Selected
-**Name** | Response_Simple_Ranking
-**Type** | Picklist (string) including: "1-Very Bad", "2-Bad", "3-Neutral", "4-Good", and "5-Very Good"
+| Prompt             | Entry                                                        |
+| :----------------- | :----------------------------------------------------------- |
+| **Create a field** | Selected                                                     |
+| **Name**           | Response_Simple_Ranking                                      |
+| **Type**           | Picklist (string) including: "1-Very Bad", "2-Bad", "3-Neutral", "4-Good", and "5-Very Good" |
 
 _Note: This field will be manually populated by testers as they evaluate automatically-generated responses_
 
@@ -128,10 +141,10 @@ Click on the "States" tab and then click "+ New state".
 
 Complete the "Add a state to Test Case" popup, including:
 
-Prompt | Entry
-:----- | :-----
-**Name** | Ready for OpenAI
-**State category** | Proposed
+| Prompt             | Entry            |
+| :----------------- | :--------------- |
+| **Name**           | Ready for OpenAI |
+| **State category** | Proposed         |
 
 Click "Create".
 
@@ -140,10 +153,10 @@ Click "Create".
 Rollover "Design", click the ellipses, and then click "Hide" in the dropdown.
 <br>Click "+ New state" and complete the "Add a state to Test Case" popup, including:
 
-Prompt | Entry
-:----- | :-----
-**Name** | Ready for Human
-**State category** | In Progress 
+| Prompt             | Entry           |
+| :----------------- | :-------------- |
+| **Name**           | Ready for Human |
+| **State category** | In Progress     |
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ad81f183-503d-4255-8e37-63d5b5416320" width="800" title="Snipped: December 18, 2023" />
 
@@ -178,9 +191,11 @@ Click "Save items".
 -----
 
 ## Exercise 2: Automate Processing
-In this exercise, we will test prompts programmatically interact with OpenAI + AI Search index:
+
+In this exercise, we create a scheduled process that prepares new Test Cases for review.
 
 ### Step 1: Create Visual Studio Project
+
 In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
 
 Open Visual Studio and click "**Create a new project**".
@@ -459,6 +474,7 @@ foreach (var testCase in testCases)
 ```
 
 Logic Explained:
+
 1. **SearchIndexer Creation**: A `SearchIndexer` named `indexer` is created with a specified indexer name, data source name, and index name. The indexer is configured with specific parameters and a skillset name
 2. **IndexingParametersConfiguration**: The `IndexingParametersConfiguration` is set to `BlobIndexerImageAction.GenerateNormalizedImagePerPage`, which means the indexer will perform Optical Character Recognition (OCR) on images in blobs and generate a normalized image per page
 3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation... re-enable by modifying Indexer >> "Indexer Definition (JSON)"
@@ -466,7 +482,7 @@ Logic Explained:
    <br>`text`... from `OcrSkill` and `/document/normalized_images/*/text`
    <br>`keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
    <br>`myColumn`... from `WebApiSkill` and `/document/content/myColumn` (custom skillset)
-6. **DeleteIndexer** and **CreateIndexer**: The existing indexer with the same name is deleted if it exists, and then the new indexer is created.
+5. **DeleteIndexer** and **CreateIndexer**: The existing indexer with the same name is deleted if it exists, and then the new indexer is created.
 
 -----
 
@@ -475,6 +491,7 @@ Logic Explained:
 -----
 
 ## Exercise 3: Confirm Sucess
+
 In this exercise, we will lorem ipsum.
 
 ### Step 1: Lorem Ipsum
@@ -486,6 +503,7 @@ In this exercise, we will lorem ipsum.
 -----
 
 Reference:
+
 * https://learn.microsoft.com/en-us/azure/ai-services/openai/
 * https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/README.md
 * https://learn.microsoft.com/en-us/azure/devops/boards/queries/import-work-items-from-csv?view=azure-devops
