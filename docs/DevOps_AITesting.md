@@ -562,9 +562,7 @@ namespace processTestCases
 
 **Logic Explained**:
 
-This is a piece of code written in C# for an Azure Function. The function is named `processTestCases` and it's triggered every 5 minutes (as indicated by the cron expression "0 */5 * * * *"). Here's a step-by-step explanation of the logic:
-
-1. The function first creates instances of two classes: `DevOps` and `OpenAI`.
+1. `processTestCases` is triggered every 5 minutes (as indicated by the cron expression `0 */5 * * * *`) and begins by creating instances of two classes: `DevOps` and `OpenAI`.
 
 2. It then calls the `getTestCases` method from the `devops` instance to fetch test cases.
 
@@ -575,8 +573,6 @@ This is a piece of code written in C# for an Azure Function. The function is nam
 5. If both `systemMessage` and `userMessage` are not null, it calls the `Prompt` method from the `openai` instance twice, once with the `queryType` set to "Simple" and once with it set to "Semantic". These calls return `responseSimple` and `responseSemantic` respectively.
 
 6. Finally, it calls the `updateWorkItem` method from the `devops` instance, passing in the `id`, a title constructed from the `userMessage`, the `userMessage` itself, `responseSimple`, `responseSemantic`, and the result of calling `defaultSteps` from the `devops` instance.
-
-In summary, this function is processing test cases by using an AI model to generate responses to prompts and updating the test cases with these responses. The processing is done every 5 minutes. The `DevOps` class is likely responsible for interacting with Azure DevOps to fetch and update work items (test cases), while the `OpenAI` class is likely responsible for interacting with the OpenAI API to generate responses to prompts. The specifics would depend on the implementation of these classes and methods.
 
 Click "Save".
 
