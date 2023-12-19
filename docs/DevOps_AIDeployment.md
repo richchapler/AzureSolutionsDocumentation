@@ -357,7 +357,7 @@ var sidsc = new SearchIndexerDataSourceConnection(
  );
 ```
 
-_Note: Waiting on a Support Case re: credential capture for this alternate version_
+_Note: The AI Search, Data Source interface will not correctly show the UserName and Password when it is created programmatically_
 
 -----
 
