@@ -12,7 +12,7 @@
 ## Proposed Solution
 
 * **Customize DevOps**: Create a new process with a customized Test Case entity
-* **Automate Processing**: Create a scheduled process that prepares new Test Cases for review
+* **Automate Processing**: Create and publish a scheduled process that prepares new Test Cases for review
 * **Confirm Success**: Demonstrate basic functionality
 
 ## Solution Requirements
@@ -192,59 +192,104 @@ Click "Save items".
 
 ## Exercise 2: Automate Processing
 
-In this exercise, we create a scheduled process that prepares new Test Cases for review.
+In this exercise, we create and publish a scheduled process that prepares new Test Cases for review.
 
 ### Step 1: Create Visual Studio Project
 
-In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
-
 Open Visual Studio and click "**Create a new project**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/317959b5-dfd7-4c97-af0c-0578f9e89429" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6f0351e0-670b-4dbc-9b84-1ceba120a2cd" width="600" title="Snipped: December 19, 2023" />
 
-On the "**Create a new project**" form, search for and select "**Console App**", then click "**Next**".
+On the "**Create a new project**" form, search for and select "**Azure Functions**", then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/db8c2898-b607-4441-8b1e-4f4f3dbd56b4" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6841ad94-cbc5-49f5-bc2d-0601e5918ffa" width="600" title="Snipped: December 19, 2023" />
 
 Complete the "**Configure your new project**" form, then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2408d491-ba3b-4ba7-9d84-02caf1dab54d" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/97f51669-f00a-4960-8a60-6226a9eb8243" width="600" title="Snipped: December 19, 2023" />
 
-Complete the "**Additional information**" form, then click "**Create**".
+Complete the "**Additional information**" form, including:
+
+| Prompt             | Entry           |
+| :----------------- | :-------------- |
+| **Functions worker**           | .NET 8.0 Isolated (Long Term Support) |
+| **Function**           | Timer trigger |
+| **Schedule**           | 0 */5 * * * * |
+
+Click "**Create**".
 
 -----
 
 ### Step 2: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/693705ea-9706-4c04-9219-ea7b1058275e" width="800" title="Snipped: December 19, 2023" />
 
-Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
+Click "Tools" in the menu bar, expand "NuGet Package Manager" and then click "Manage NuGet Packages for Solution..." in the resulting menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0b3bc3a-e6af-47ff-8ed2-8c0d0340e44e" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0bf233da-6648-4169-aaff-c92b05d00432" width="800" title="Snipped: December 19, 2023" />
 
-On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Azure.Search.Documents**".
-<br>On the resulting pop-out, check the box next to your project and then click "**Install**".
+On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity". On the resulting pop-out, check the box next to your project and then click "Install".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b56a92c-594a-4a18-afaa-24a4872ac73b" width="300" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a3225127-1683-4147-a8b1-02ddda6cc709" width="300" title="Snipped: December 19, 2023" />
 
-When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
+When prompted, click "I Accept" on the "License Acceptance" pop-up.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/306c0f70-0ae2-4b3f-970d-5a4e24137647" width="800" title="Snipped: December 19, 2023" />
 
-**Additional Packages**
+#### Additional Packages
 
 Repeat this process for the following NuGet packages:
 
-* Azure.Identity
 * Azure.Security.KeyVault.Secrets
-
-Close the "**NuGet - Solution**" tab.
+* LOREM IPSUM
 
 -----
 
 ### Step 3: Code Application
 
-Replace the default code on the "**Program.cs**" tab with the following C#:
+Rename "Function1.cs" to "processTestCases.cs". When prompted "Would you also like to perform a rename...", click "Yes".
+
+Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers". 
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d07757f0-5582-4361-b33c-f59eccda60af" width="600" title="Snipped: December 19, 2023" />
+
+### Helper Class: KeyVault
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdown, and enter name "KeyVault.cs" on the resulting popup. Replace the default code on "KeyVault.cs" with:
+
+```
+using Azure;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+namespace processTestCases.Helpers
+{
+    internal class KeyVault
+    {
+        private SecretClient client;
+
+        public KeyVault()
+        {
+            client = new SecretClient(
+                vaultUri: new Uri("https://rchaplerkv.vault.azure.net/"),
+                credential: new DefaultAzureCredential()
+                );
+        }
+
+        public string getSecret(string secretName)
+        {
+            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
+            return responseKeyVaultSecret.Value.Value;
+        }
+    }
+}
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac8e57e3-b9ae-4307-997e-b836db0071da" width="600" title="Snipped: December 19, 2023" />
+
+
+
+
 
 
 
@@ -346,35 +391,6 @@ namespace ConsoleApp1.Helpers
 }
 ```
 
-### Helper Class: KeyVault
-
-```
-using Azure;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-
-namespace ConsoleApp1.Helpers
-{
-    internal class KeyVault
-    {
-        private SecretClient client;
-
-        public KeyVault()
-        {
-            client = new SecretClient(
-                vaultUri: new Uri("https://rchaplerkv.vault.azure.net/"),
-                credential: new DefaultAzureCredential()
-                );
-        }
-
-        public KeyVaultSecret getSecret(string secretName)
-        {
-            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
-            return responseKeyVaultSecret.Value;
-        }
-    }
-}
-```
 
 ### Helper Class: OpenAI
 
