@@ -252,7 +252,7 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d07757f0-5582-4361-b33c-f59eccda60af" width="600" title="Snipped: December 19, 2023" />
 
-### Helper Class: KeyVault
+#### Helper Class: KeyVault
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup. Replace the default code with:
 
@@ -284,11 +284,17 @@ namespace processTestCases.Helpers
 }
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac8e57e3-b9ae-4307-997e-b836db0071da" width="800" title="Snipped: December 19, 2023" />
+##### Logic Explained:
+
+1. **Namespace and Imports**: The code begins by importing necessary namespaces from the Azure SDK. Azure, Azure.Identity, and Azure.Security.KeyVault.Secrets are namespaces that contain classes for interacting with Azure services, specifically the Key Vault service.
+2. **Class Definition**: The KeyVault class is defined within the processTestCases.Helpers namespace. It’s marked as internal, which means it’s accessible only within the same assembly.
+3. **Private Field**: The client field is a private instance of SecretClient, a class provided by the Azure SDK to interact with a Key Vault.
+4. **Constructor**: The KeyVault constructor initializes the client field. It creates a new SecretClient with a specified vault URI and uses the DefaultAzureCredential for authentication. The vault URI is hardcoded and should be replaced with the correct URI for your environment.
+5. **getSecret Method**: This method takes a secret name as a parameter and retrieves the secret value from the Key Vault. It uses the GetSecret method of the SecretClient to get a Response<KeyVaultSecret> object. The actual secret value is then extracted from this response object and returned as a string.
 
 Click "Save".
 
-### Helper Class: DevOps
+#### Helper Class: DevOps
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "DevOps.cs" on the resulting popup. Replace the default code with:
 
@@ -392,7 +398,7 @@ namespace processTestCases.Helpers
 
 Click "Save".
 
-### Helper Class: OpenAI
+#### Helper Class: OpenAI
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "OpenAI.cs" on the resulting popup. Replace the default code with:
 
@@ -458,7 +464,7 @@ namespace processTestCases.Helpers
 
 Click "Save".
 
-### processTestCases.cs
+#### processTestCases.cs
 
 Open "processTestCases.cs" and replace the default code with:
 
