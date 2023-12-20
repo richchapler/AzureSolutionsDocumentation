@@ -521,18 +521,21 @@ On the "Publish" popup, "Functions instance" page, click "Create a new instance"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/48f4bb42-a03c-4517-a957-427c61dde7bf" width="500" title="Snipped: December 20, 2023" />
 
-Complete the "Function App (Windows)" form and then click "Create". Allow time for processing.
+Complete the "Function App (Windows)" form and then click "Create".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0403485-4478-4aa7-bced-1dd6e1681d07" width="600" title="Snipped: December 20, 2023" />
 
+On the "Publish" popup, "Functions instance" page, click "Finish".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/97201165-598a-44ad-8de6-84b7e2d753f8" width="600" title="Snipped: December 20, 2023" />
 
+On the "Publish profile creation progress" popup, "Finish" page, confirm success and then click "Close".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/859d533d-497a-4fe1-b1d0-63c968e72238" width="800" title="Snipped: December 20, 2023" />
 
+On the "processTestCases: Publish" tab, "Publish" page, confirm "Ready to publish" and then click "Publish".
 
-
-
-
-LOREM IPSUM
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/755ad7d5-54b5-4427-8cd1-f643b289b1c3" width="800" title="Snipped: December 20, 2023" />
 
 -----
 
