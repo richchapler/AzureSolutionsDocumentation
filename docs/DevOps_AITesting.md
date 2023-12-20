@@ -284,26 +284,6 @@ namespace processTestCases.Helpers
 }
 ```
 
-**Logic Explained**:
-
-1. **Namespace and Class Definition**
-   The code defines a namespace `processTestCases.Helpers` and an internal class `KeyVault` within it. This class is used to interact with Azure Key Vault.
-
-2. **Dependencies**
-   The code uses three Azure libraries:
-   - `Azure`: The main Azure SDK package.
-   - `Azure.Identity`: Provides Azure Active Directory token authentication support across the Azure SDK.
-   - `Azure.Security.KeyVault.Secrets`: Provides functionality to access and manage secrets in Azure Key Vault.
-
-3. **Class Variables**
-   The `KeyVault` class has one private variable `client` of type `SecretClient`. This client interacts with Azure Key Vault.
-
-4. **Constructor**
-   The constructor of the `KeyVault` class initializes the `client` with the URI of the Azure Key Vault and a `DefaultAzureCredential`. The `DefaultAzureCredential` is a type of Azure Identity that provides a simplified authentication experience to quickly start developing applications run in the Azure cloud.
-
-5. **getSecret Method**
-   The `getSecret` method takes a secret name as input, retrieves the secret from Azure Key Vault using the `client`, and returns the value of the secret.
-
 Click "Save".
 
 #### Helper Class: DevOps
@@ -406,27 +386,6 @@ namespace processTestCases.Helpers
 }
 ```
 
-**Logic Explained**:
-
-This code is a helper class for interacting with Azure DevOps. Here's a breakdown of its logic:
-
-1. **Initialization (`DevOps()`):**
-   The constructor initializes a `WorkItemTrackingHttpClient` client using the Azure DevOps URL and a Personal Access Token (PAT) retrieved from Azure Key Vault.
-
-2. **Fetching Test Cases (`getTestCases()`):**
-   This method fetches 'Test Case' work items from Azure DevOps that are in the 'Ready for OpenAI' state. It uses the Work Item Query Language (WIQL) to form the query. If any matching work items are found, their details are fetched and returned as a list.
-
-3. **Updating a Work Item (`updateWorkItem()`):**
-   This method updates a specific work item in Azure DevOps. It takes several parameters including the work item ID, title, prompt, responses, and steps. It creates a `JsonPatchDocument` to hold the updates, which are then applied to the work item using the `UpdateWorkItemAsync()` method.
-
-4. **Adding a Field to a Work Item (`addField()`):**
-   This is a helper method used by `updateWorkItem()`. It adds a new field to the `JsonPatchDocument` for the work item. The field is specified by its path and value.
-
-5. **Default Steps (`defaultSteps()`):**
-   This method returns a string representing the default steps for a test case. These steps are formatted in XML.
-
-The purpose of this class is to automate the process of fetching and updating test cases in Azure DevOps. It's designed to work with a specific workflow where test cases are initially set to the 'Ready for OpenAI' state, and then updated with responses from an AI model.
-
 Click "Save".
 
 #### Helper Class: OpenAI
@@ -491,26 +450,6 @@ namespace processTestCases.Helpers
 }
 ```
 
-**Logic Explained**:
-
-This is a C# class named `OpenAI` in the namespace `processTestCases.Helpers`. It uses the Azure.AI.OpenAI library to interact with the OpenAI API. Here's a breakdown of its functionality:
-
-1. **Initialization**: The `OpenAI` constructor initializes an `OpenAIClient` with the endpoint and key retrieved from a `KeyVault` instance.
-
-2. **Prompt Method**: This method accepts three parameters: `queryType`, `systemMessage`, and `userMessage`. It's an asynchronous method that returns a `Task<string>`, meaning it performs operations in the background and returns a string when it's done.
-
-   - It first determines the type of Azure Cognitive Search query to use based on the `queryType` parameter.
-
-   - It then creates an `AzureCognitiveSearchChatExtensionConfiguration` object, which is used to configure the Azure Cognitive Search extension. This includes setting the search endpoint, index name, query type, and other parameters.
-
-   - A `ChatCompletionsOptions` object is created next. This object is used to configure the chat completion options, including the deployment name and Azure extensions options.
-
-   - Two `ChatMessage` objects are added to the `ChatCompletionsOptions` object: one for the system message and one for the user message.
-
-   - Finally, it calls the `GetChatCompletionsAsync` method on the `OpenAIClient` object, passing in the `ChatCompletionsOptions` object. This method sends a request to the OpenAI API and returns the content of the first choice from the response.
-
-This class essentially serves as a helper for making requests to the OpenAI API, with specific configurations for Azure Cognitive Search. It's designed to be used in a larger application where the `Prompt` method would be called with specific parameters to generate a response from the OpenAI API. The response is then returned to the calling code.
-
 Click "Save".
 
 #### processTestCases.cs
@@ -559,20 +498,6 @@ namespace processTestCases
     }
 }
 ```
-
-**Logic Explained**:
-
-1. `processTestCases` is triggered every 5 minutes (as indicated by the cron expression `0 */5 * * * *`) and begins by creating instances of two classes: `DevOps` and `OpenAI`.
-
-2. It then calls the `getTestCases` method from the `devops` instance to fetch test cases.
-
-3. For each test case, it checks if the `Id` field has a value. If it does, it assigns the value to the `id` variable. If not, it skips the current iteration and moves to the next test case.
-
-4. It then retrieves the `systemMessage` and `userMessage` from the test case fields.
-
-5. If both `systemMessage` and `userMessage` are not null, it calls the `Prompt` method from the `openai` instance twice, once with the `queryType` set to "Simple" and once with it set to "Semantic". These calls return `responseSimple` and `responseSemantic` respectively.
-
-6. Finally, it calls the `updateWorkItem` method from the `devops` instance, passing in the `id`, a title constructed from the `userMessage`, the `userMessage` itself, `responseSimple`, `responseSemantic`, and the result of calling `defaultSteps` from the `devops` instance.
 
 Click "Save".
 
