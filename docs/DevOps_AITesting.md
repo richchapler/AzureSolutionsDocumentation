@@ -513,6 +513,19 @@ On the "Publish" popup, "Target" page, select "Azure" and then click "Next".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/838267f8-933e-48d5-b918-45a6154e2426" width="600" title="Snipped: December 20, 2023" />
 
+On the "Publish" popup, "Specific target" page, select "Azure Function App (Windows)" and then click "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/69b87003-772e-4c7b-b8c8-d8694486760e" width="600" title="Snipped: December 20, 2023" />
+
+On the "Publish" popup, "Functions instance" page, click "Create a new instance".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/48f4bb42-a03c-4517-a957-427c61dde7bf" width="500" title="Snipped: December 20, 2023" />
+
+Complete the "Function App (Windows)" form and then click "Create". Allow time for processing.
+
+
+
+
 
 
 
