@@ -192,7 +192,7 @@ Click "Save items".
 
 In this exercise, we create and publish a scheduled process that prepares new Test Cases for review.
 
-### Step 1: Create Visual Studio Project
+### Step 1: Create Project
 
 Open Visual Studio and click "**Create a new project**".
 
@@ -244,7 +244,7 @@ Repeat this process for the following NuGet packages:
 
 -----
 
-### Step 3: Code Application
+### Step 3: Code Function
 
 Rename "Function1.cs" to "processTestCases.cs". When prompted "Would you also like to perform a rename...", click "Yes".
 
@@ -503,8 +503,15 @@ Click "Save".
 
 -----
 
-### Step 4: Confirm Success
+### Step 4: Publish Function
 
+Right-click on the "processTestCases" project and click "Publish" in the resulting dropdown.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d3912d7a-4a61-4ff6-88b2-638b28e94212" width="600" title="Snipped: December 20, 2023" />
+
+On the "Publish" popup, "Target" page, select "Azure" and then click "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/838267f8-933e-48d5-b918-45a6154e2426" width="600" title="Snipped: December 20, 2023" />
 
 
 
