@@ -13,7 +13,7 @@
 
 * **Customize DevOps**: Create a new process with a customized Test Case entity
 * **Automate Processing**: Create and publish a scheduled process that prepares new Test Cases for review
-* **Confirm Success**: Demonstrate basic functionality
+* **Confirm Success**: Demonstrate end-to-end solution functionality
 
 ## Solution Requirements
 
@@ -43,11 +43,11 @@ Also prepare a CSV file with sample OpenAI prompts; example:
 
 ```
 Work Item Type,Title,UserMessage
-Test Case,Prompt,"How does Form 1040 provide a comprehensive view of an individual’s various sources of income, including wages, dividends, and capital gains?"
-Test Case,Prompt,What insights can be drawn from the deductions section of Form 1040 about an individual’s financial obligations and contributions?
-Test Case,Prompt,How does the information on a W2 form reflect an individual’s employment history and earnings for the year?
-Test Case,Prompt,What can Form W4 tell us about an individual’s tax withholding preferences and their anticipated tax liability?
-Test Case,Prompt,How does Form W9 provide information about an individual’s or entity’s contractual relationships and responsibilities?
+Test Case,Prompt: Income Sources Overview,"“How does Form 1040 provide a comprehensive view of an individual’s various sources of income, including wages, dividends, and capital gains?”"
+Test Case,Prompt: Deductions Insights,“What insights can be drawn from the deductions section of Form 1040 about an individual’s financial obligations and contributions?”
+Test Case,Prompt: W2 Form Information,“How does the information on a W2 form reflect an individual’s employment history and earnings for the year?”
+Test Case,Prompt: Tax Withholding Preferences,“What can Form W4 tell us about an individual’s tax withholding preferences and their anticipated tax liability?”
+Test Case,Prompt: Contractual Relationships Information,“How does Form W9 provide information about an individual’s or entity’s contractual relationships and responsibilities?”
 ```
 
 _Note: My sample prompts are about tax forms since we're using the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
@@ -543,11 +543,18 @@ On the "processTestCases: Publish" tab, "Publish" page, confirm "Ready to publis
 
 -----
 
-## Exercise 3: Confirm Sucess
+## Exercise 3: Confirm Success
 
-In this exercise, we will lorem ipsum.
+In this exercise, we will demonstrate end-to-end solution functionality.
 
-### Step 1: Lorem Ipsum
+### Step 1: Import Work Items
+
+Navigate to DevOps >> Boards >> Work items.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f79000f2-616f-41ee-b8f5-5a384a1dc46f" width="800" title="Snipped: January 2, 2024" />
+
+Click "Import Work Items".
+
 
 -----
 
@@ -555,8 +562,7 @@ In this exercise, we will lorem ipsum.
 
 -----
 
-Reference:
+## Reference
 
-* https://learn.microsoft.com/en-us/azure/ai-services/openai/
-* https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/README.md
-* https://learn.microsoft.com/en-us/azure/devops/boards/queries/import-work-items-from-csv?view=azure-devops
+* [Azure OpenAI client library for .NET](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_1.0.0-beta.9/sdk/openai/Azure.AI.OpenAI/README.md)
+* [Import & update bulk work items with CSV files](https://learn.microsoft.com/en-us/azure/devops/boards/queries/import-work-items-from-csv?view=azure-devops)
