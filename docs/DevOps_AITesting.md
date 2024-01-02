@@ -25,7 +25,9 @@ This documentation assumes the following resources are ready for use:
 
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization, project, and a Personal Access Token with "Read, write, & manage" permissions
 
-* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) with Application Insights enabled
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) with:
+  * Application Insights enabled
+  * "Key Vault Secrets Officer" role in for System-Assigned Managed Identity
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
