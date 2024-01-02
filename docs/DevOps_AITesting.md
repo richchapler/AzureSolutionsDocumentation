@@ -555,6 +555,13 @@ Navigate to DevOps >> Boards >> Work items.
 
 Click "Import Work Items".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/209591e6-ad4b-47a0-8ed0-d9117871b392" width="800" title="Snipped: January 2, 2024" />
+
+Click "Choose File", browse to your "prompts.csv" file, and then click "Import".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb0867b7-e591-46fb-80b4-9f0eca5d6a68" width="800" title="Snipped: January 2, 2024" />
+
+Click "Save items".
 
 -----
 
