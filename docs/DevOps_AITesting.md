@@ -1,7 +1,5 @@
 # DevOps: AI Testing
 
-⚠️WORK IN PROGRESS⚠️
-
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/daff9bd1-16d3-4c09-ba64-996c7ce15e3a" width="1000" />
 
 ## Use Case
@@ -571,13 +569,23 @@ Click "Choose File", browse to your "prompts.csv" file, and then click "Import".
 
 Click "Save items".
 
-### Step 2: Monitor Function App
+### Step 2: Monitor Progress
 
 Navigate to the "processTestCases" Function App >> Monitor.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7cfed4bc-bd99-4e21-bb04-4de10a0bd3e6" width="800" title="Snipped: January 2, 2024" />
 
-You can expect to see the newly imported Test Cases process one-by-one.
+You can expect to see the newly imported Test Cases process one-by-one in the Function App logs.
+
+Navigate to DevOps >> Boards >> Work Items.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/16a58a42-1164-4828-8d30-09936d3aa7f0" width="800" title="Snipped: January 2, 2024" />
+
+You can expect to see the processed Test Cases change State from "Ready for OpenAI" to "Ready for Human".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c46271b9-643e-430d-bee2-b5bdd5d4bb08" width="800" title="Snipped: January 2, 2024" />
+
+Click into a Test Case and then click the "Responses" tab. You can expect to see the responses from OpenAI, ready for human evaluation!
 
 -----
 
