@@ -248,7 +248,7 @@ Repeat this process for the following NuGet packages:
 
 ### Step 3: Code Function
 
-Rename "Function1.cs" to "processTestCases.cs". When prompted "Would you also like to perform a rename...", click "Yes".
+Rename "Function1.cs" to ".cs". When prompted "Would you also like to perform a rename...", click "Yes".
 
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers". 
 
@@ -460,10 +460,14 @@ Open "processTestCases.cs" and replace the default code with:
 
 ```
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Logging;
 using processTestCases.Helpers;
 
 namespace processTestCases
 {
+    private readonly ILogger log;
+    public processTestCases(ILoggerFactory loggerFactory) { log = loggerFactory.CreateLogger<processTestCases>(); }
+
     public class processTestCases
     {
         [Function("processTestCases")]
