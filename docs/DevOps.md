@@ -5,5 +5,5 @@
 Use Case | Technologies
 :----- | :-----
 [AI Deployment](DevOps_AIDeployment.md) | AI Search, C#, DevOps<br>
-[AI Testing (WiP)](DevOps_AITesting.md) | AI Search, OpenAI, C#, DevOps<br>
+[AI Testing](DevOps_AITesting.md) | AI Search, OpenAI, C#, DevOps<br>
 [Synapse Deployment](DevOps_SynapseDeployment.md) | Synapse, YAML, DevOps<br>
