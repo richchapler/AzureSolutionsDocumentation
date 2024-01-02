@@ -575,7 +575,9 @@ Click "Save items".
 
 Navigate to the "processTestCases" Function App >> Monitor.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e870ee24-75fd-4d4c-b2c7-24c3783fb59b" width="800" title="Snipped: January 2, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6f924534-5fab-40c6-97e4-64b8100d6530" width="800" title="Snipped: January 2, 2024" />
+
+You can expect to see the newly imported Test Cases process one-by-one.
 
 -----
 
