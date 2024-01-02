@@ -45,11 +45,11 @@ Also prepare a CSV file with sample OpenAI prompts; example:
 
 ```
 Work Item Type,Title,UserMessage
-Test Case,Prompt: Income Sources Overview,"“How does Form 1040 provide a comprehensive view of an individual’s various sources of income, including wages, dividends, and capital gains?”"
-Test Case,Prompt: Deductions Insights,“What insights can be drawn from the deductions section of Form 1040 about an individual’s financial obligations and contributions?”
-Test Case,Prompt: W2 Form Information,“How does the information on a W2 form reflect an individual’s employment history and earnings for the year?”
-Test Case,Prompt: Tax Withholding Preferences,“What can Form W4 tell us about an individual’s tax withholding preferences and their anticipated tax liability?”
-Test Case,Prompt: Contractual Relationships Information,“How does Form W9 provide information about an individual’s or entity’s contractual relationships and responsibilities?”
+Test Case,Prompt: Income Sources Overview,"How does Form 1040 provide a comprehensive view of an individuals various sources of income, including wages, dividends, and capital gains?"
+Test Case,Prompt: Deductions Insights,"What insights can be drawn from the deductions section of Form 1040 about an individual’s financial obligations and contributions?"
+Test Case,Prompt: W2 Form Information,"How does the information on a W2 form reflect an individuals employment history and earnings for the year?"
+Test Case,Prompt: Tax Withholding Preferences,"What can Form W4 tell us about an individuals tax withholding preferences and their anticipated tax liability?"
+Test Case,Prompt: Contractual Relationships Information,"How does Form W9 provide information about an individuals or entitys contractual relationships and responsibilities?"
 ```
 
 _Note: My sample prompts are about tax forms since we're using the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
