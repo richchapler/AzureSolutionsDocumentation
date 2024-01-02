@@ -571,6 +571,12 @@ Click "Choose File", browse to your "prompts.csv" file, and then click "Import".
 
 Click "Save items".
 
+### Step 2: Monitor Function App
+
+Navigate to the "processTestCases" Function App >> Monitor.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e870ee24-75fd-4d4c-b2c7-24c3783fb59b" width="800" title="Snipped: January 2, 2024" />
+
 -----
 
 **Congratulations... you have successfully completed all exercises**
