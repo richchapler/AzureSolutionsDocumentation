@@ -293,6 +293,7 @@ Click "Save".
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "DevOps.cs" on the resulting popup. Replace the default code with:
 
 ```
+using Microsoft.Extensions.Logging;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
@@ -307,46 +308,38 @@ namespace processTestCases.Helpers
 
         private WorkItemTrackingHttpClient client;
 
-        public DevOps()
+        public DevOps(ILogger logger)
         {
-
-            client = new VssConnection(
-                baseUrl: new Uri(keyvault.getSecret("DevOps-Url")),
-                credentials: new VssBasicCredential(
-                    userName: string.Empty,
-                    password: keyvault.getSecret("DevOps-PersonalAccessToken") /* DevOps Personal Access Token with "Read, write, & manage" permissions */
-                    )
-                ).GetClient<WorkItemTrackingHttpClient>();
+            try
+            {
+                client = new VssConnection(
+                    baseUrl: new Uri(keyvault.getSecret("DevOps-Url")),
+                    credentials: new VssBasicCredential(
+                        userName: string.Empty,
+                        password: keyvault.getSecret("DevOps-PersonalAccessToken") /* DevOps Personal Access Token with "Read, write, & manage" permissions */
+                        )
+                    ).GetClient<WorkItemTrackingHttpClient>();
+            }
+            catch (Exception ex) { logger.LogError(ex.Message); }
         }
 
         public async Task<List<WorkItem>> getTestCases()
         {
-            Wiql q = new()
-            {
-                Query = @"SELECT [System.Id], [System.State], [Custom.SystemMessage], [Custom.Prompt]
-                            FROM workitems
-                            WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'"
-            };
+            Wiql w = new() { Query = @"SELECT [System.Id] FROM workitems WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'" };
 
-            WorkItemQueryResult wiqr = await client.QueryByWiqlAsync(q);
+            WorkItemQueryResult wiqr = await client.QueryByWiqlAsync(wiql: w, project: keyvault.getSecret("DevOps-Project"));
 
             List<WorkItem> testCases = new();
 
-            if (wiqr != null && wiqr.WorkItems.Any())
-            {
-                int[] ids = wiqr.WorkItems.Select(item => item.Id).ToArray();
-                testCases = await client.GetWorkItemsAsync(ids);
-            }
+            if (wiqr != null && wiqr.WorkItems.Any()) { testCases = await client.GetWorkItemsAsync(wiqr.WorkItems.Select(item => item.Id).ToArray()); }
 
             return testCases;
         }
 
-        public void updateWorkItem(int id, string title, string prompt, string responseSimple, string responseSemantic, string steps)
+        public void updateWorkItem(int id, string title, string systemMessage, string userMessage, string responseSimple, string responseSemantic, string steps)
         {
             Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition = new();
-            addField(devopsWorkItem_Definition, "/fields/System.Title", title);
             addField(devopsWorkItem_Definition, "/fields/System.State", "Ready for Human");
-            addField(devopsWorkItem_Definition, "/fields/Prompt", prompt);
             addField(devopsWorkItem_Definition, "/fields/Response_Simple", responseSimple);
             addField(devopsWorkItem_Definition, "/fields/Response_Simple_Ranking", "3-Neutral");
             addField(devopsWorkItem_Definition, "/fields/Response_Semantic", responseSemantic);
@@ -465,25 +458,26 @@ using processTestCases.Helpers;
 
 namespace processTestCases
 {
-    private readonly ILogger log;
-    public processTestCases(ILoggerFactory loggerFactory) { log = loggerFactory.CreateLogger<processTestCases>(); }
-
     public class processTestCases
     {
+        private readonly ILogger logger;
+        public processTestCases(ILoggerFactory loggerFactory) { logger = loggerFactory.CreateLogger<processTestCases>(); }
+
         [Function("processTestCases")]
         public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer)
         {
-            DevOps devops = new(); OpenAI openai = new();
+            DevOps devops = new(logger); OpenAI openai = new();
 
             var testCases = await devops.getTestCases();
 
             foreach (var testCase in testCases)
             {
-                int id;
-                if (testCase.Id.HasValue) { id = testCase.Id.Value; } else { continue; }
+                int id; if (testCase.Id.HasValue) { id = testCase.Id.Value; } else { continue; }
+                string title = testCase.Fields["System.Title"].ToString() ?? "NULL";
+                logger.LogInformation("Processing Test Case Id: " + id.ToString() + ", " + title);
 
-                string? systemMessage = testCase.Fields["Custom.SystemMessage"].ToString();
-                string? userMessage = testCase.Fields["Custom.Prompt"].ToString();
+                string systemMessage = testCase.Fields["Custom.SystemMessage"].ToString() ?? "NULL";
+                string userMessage = testCase.Fields["Custom.UserMessage"].ToString() ?? "NULL";
 
                 if (systemMessage != null && userMessage != null)
                 {
@@ -492,7 +486,8 @@ namespace processTestCases
 
                     devops.updateWorkItem(
                         id,
-                        title: $"Prompt: '{string.Join(" ", userMessage.Split(' ').Take(5))}...'",
+                        title,
+                        systemMessage,
                         userMessage,
                         responseSimple,
                         responseSemantic,
