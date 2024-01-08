@@ -1,3 +1,47 @@
+# ASP.NET Core Web App (Razor Pages)
+
+Here's a simple guide to help you create a web app using Visual Studio, C#, Azure, and AI Search:  
+   
+1. **Setting up Visual Studio & C#:**  
+   - You need to have the latest version of Visual Studio installed. You can download it from the official Microsoft website.  
+   - Make sure to install the ASP.NET and web development workload during the Visual Studio installation.  
+   - Create a new ASP.NET Core Web App (Model-View-Controller) project. ASP.NET Core is the modern, cross-platform framework for building apps with .NET and C#.  
+   
+2. **Creating the web app:**  
+   - Build your basic web application following MVC (Model-View-Controller) architecture. Your query to AI Search will be made from the Controller, and the response will be sent back to the View for display.  
+   
+3. **Integrating AI Search:**  
+   - To integrate AI Search, you'll need to use the Azure Cognitive Search client library for .NET.  
+   - Add the Azure.Search.Documents package to your project.  
+   - Create an instance of `SearchClient` for connecting to the search index.  
+   - Use `SearchClient.Search` method to send a search query and get the response.  
+   
+4. **Publishing to Azure:**  
+   - Create an Azure App Service from the Azure portal. This will host your web app.  
+   - From Visual Studio, right-click on your project and select Publish.  
+   - Select 'Azure' as the target and 'Azure App Service' as the specific target.  
+   - Follow the prompts to select your subscription, the existing App Service you created, and publish.  
+   
+Remember to store any sensitive data like your Azure Cognitive Search service name, index name, and query API key securely, such as in Azure Key Vault or at least in your appsettings.json configuration file.  
+   
+This is a very simplified guide. Each of these steps can have more detail depending on your exact requirements, so feel free to ask for clarification on any point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----
+
+# PowerApps (delete?)
 ## Exercise 1: Create Custom Connector
 
 ### 1. General
