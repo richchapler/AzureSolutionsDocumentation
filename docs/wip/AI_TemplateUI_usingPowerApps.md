@@ -19,11 +19,33 @@ Operation ID: Query
 
 #### Request
 Click "+ Import from sample"
-* Verb: GET
 * URL: https://rchaplerss.search.windows.net/indexes/rchaplerss-index/docs?search=*&api-version=2020-06-30
 * Headers: Content-Type application/json
+* Verb: GET
 
-Add default response...
+##### Query Parameters
+* search
+  * Default value: *
+  * Is required? No
+  * Visibility: none
+* api-version
+  * Default value: 2020-06-30
+  * Is required: Yes
+  * Visibility: internal
+* Content-Type
+  * Default value: application/json
+  * Is required: Yes
+  * Visibility: none
+
+Turn on "Swagger editor".
+* Authorize with api-key, then Close
+* Click "GET"
+* Click "Try it out"
+* Click "Execute"
+
+Turn off "Swagger editor".
+
+Click "+ Add default response".
 * Headers: Content-Type application/json
 * Body
   ```
@@ -75,7 +97,11 @@ Add default response...
   }
   ```
 
-AI Search >> Settings > CORS... add https://make.preview.powerapps.com/
+Click "Import".
+
+Click "default default" box to confirm import.
+
+Click "Create connector".
 
 ## Reference
 
