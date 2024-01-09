@@ -5,11 +5,12 @@
 
 ## Use Case
 * "The AI Search and OpenAI demonstration apps are insufficient"
-* "We would like to build a web application that allows us to query both AI Search and OpenAI (various configurations) at once"
+* "We want a demonstration application that allows us to query both AI Search and OpenAI at once"
+* "We want to see responses from more than one configuration of Open AI"
 * "We need a User Interface Template that we can customize for our various internal use cases"
 
 ## Proposed Solution
-* **Code Application**: lorem ipsum
+* **Create Application**: lorem ipsum
 * **Publish Application**: lorem ipsum
 
 ## Solution Requirements
@@ -35,9 +36,9 @@ This documentation assumes the following resources are ready for use:
 
 -----
 
-## Exercise 1: Code Application
+## Exercise 1: Create Application
 
-In this exercise we will code a web application.
+In this exercise we will create an application.
 
 ### Step 1: Create Project
 
