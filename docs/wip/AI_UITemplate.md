@@ -253,26 +253,31 @@ using WebApplication1.Helpers;
 
 public class IndexModel : PageModel
 {
-    private readonly IHubContext<ChatHub> _hubContext;
+    private readonly IHubContext<ChatHub> hc;
 
     [BindProperty]
     public string userPrompt { get; set; }
 
-    public IndexModel(IHubContext<ChatHub> hubContext) { _hubContext = hubContext; }
+    public IndexModel(IHubContext<ChatHub> hubContext)
+    {
+        hc = hubContext;
+        userPrompt = string.Empty;
+    }
 
     public async Task<IActionResult> OnPostAsync()
     {
+        await hc.Clients.All.SendAsync("logMessage", $"Processing Prompt: {string.Join(" ", userPrompt.Split(' ').Take(5))+"..."}\n");
         AISearch aisearch = new();
         OpenAI openai = new();
 
-        await _hubContext.Clients.All.SendAsync("logMessage", "Querying AISearch...\n");
+        await hc.Clients.All.SendAsync("logMessage", "* Querying AISearch...\n");
         ViewData["responseAISearch"] = await aisearch.Prompt(query: userPrompt);
 
-        await _hubContext.Clients.All.SendAsync("logMessage", "Prompting OpenAI (keyword)...\n");
+        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (keyword)...\n");
         ViewData["responseOpenAI_Keyword"] = await openai.Prompt(queryType: "Simple", systemMessage: "", userMessage: userPrompt);
 
-        await _hubContext.Clients.All.SendAsync("logMessage", "Prompting OpenAI (semantic)...\n");
-        //ViewData["responseOpenAI_Semantic"] = await openai.Prompt(queryType: "Semantic", systemMessage: "", userMessage: userPrompt);
+        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (semantic)...\n");
+        ViewData["responseOpenAI_Semantic"] = await openai.Prompt(queryType: "Semantic", systemMessage: "", userMessage: userPrompt);
 
         return Page();
     }
