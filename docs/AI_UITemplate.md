@@ -1,6 +1,14 @@
-# AI: UI Template
+# AI Search + OpenAI: User Interface
+
+
+## Use Case
+* "The AI Search and OpenAI demonstration apps are insufficient"
+* "We would like to build a web application that allows us to query both AI Search and OpenAI (various configurations) at once"
+* "We need a User Interface Template that we can customize for our various internal use cases"
 
 -----
+
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/cae46981-77e1-4b41-aea3-d1cab8988400)
 
 ### _Layout.cshtml.css
 ```
