@@ -44,40 +44,39 @@ In this exercise we will create an application.
 
 Open Visual Studio and click "Create a new project".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/138cf716-d18b-424f-a467-5cdeabcd4beb" width="600" title="Snipped: January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/138cf716-d18b-424f-a467-5cdeabcd4beb" width="600" title="Snipped January 9, 2024" />
 
 On the "Create a new project**" form, search for and select "ASP .NET CoreWeb App (Razor Pages)", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6e2b790f-8e37-4a26-8ed2-5e035ea9eda8" width="600" title="Snipped: January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6e2b790f-8e37-4a26-8ed2-5e035ea9eda8" width="600" title="Snipped January 9, 2024" />
 
 Complete the "Configure your new project" form, then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c7878509-dba2-4dd8-ba27-81735fa0d81d" width="600" title="Snipped: January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c7878509-dba2-4dd8-ba27-81735fa0d81d" width="600" title="Snipped January 9, 2024" />
 
 Complete the "Additional information" form, then click "Create".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0ad5937a-e8ce-451f-bb79-b6d2d66e33e1" width="800" title="Snipped: January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe93917f-d763-4026-86af-3ab3ddb22e3d" width="800" title="Snipped January 9, 2024" />
 
 -----
 
-:warning: RESUME HERE! :warning:
-
-
 ### Step 2: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/693705ea-9706-4c04-9219-ea7b1058275e" width="800" title="Snipped: December 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2dbd5b36-79b8-42ec-aaae-c53d6ed114e7" width="800" title="Snipped January 9, 2024" />
 
 Click "Tools" in the menu bar, expand "NuGet Package Manager" and then click "Manage NuGet Packages for Solution..." in the resulting menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0bf233da-6648-4169-aaff-c92b05d00432" width="800" title="Snipped: December 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1662d9f3-56b5-4950-bf0a-db53bf6f0800" width="800" title="Snipped January 9, 2024" />
+
+:warning: RESUME HERE! :warning:
 
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity". On the resulting pop-out, check the box next to your project and then click "Install".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a3225127-1683-4147-a8b1-02ddda6cc709" width="300" title="Snipped: December 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a3225127-1683-4147-a8b1-02ddda6cc709" width="300" title="Snipped December 19, 2023" />
 
 When prompted, click "I Accept" on the "License Acceptance" pop-up.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/306c0f70-0ae2-4b3f-970d-5a4e24137647" width="800" title="Snipped: December 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/306c0f70-0ae2-4b3f-970d-5a4e24137647" width="800" title="Snipped December 19, 2023" />
 
 #### Additional Packages
 
