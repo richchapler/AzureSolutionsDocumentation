@@ -1,10 +1,37 @@
 # AI Search + OpenAI: User Interface
+v WORK-IN-PROGRESS :warning:
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7951bd4a-1806-427c-bf5f-23714f63b73a" width="1000" />
 
 ## Use Case
 * "The AI Search and OpenAI demonstration apps are insufficient"
 * "We would like to build a web application that allows us to query both AI Search and OpenAI (various configurations) at once"
 * "We need a User Interface Template that we can customize for our various internal use cases"
+
+## Proposed Solution
+* **Code Application**: lorem ipsum
+* **Publish Application**: lorem ipsum
+
+## Solution Requirements
+
+This documentation assumes the following resources are ready for use:
+
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with Semantic Configuration
+
+  _Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
+
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
+
+  * AISearch-IndexName
+  * AISearch-Key
+  * AISearch-Url
+  * OpenAI-DeploymentName
+  * OpenAI-Endpoint
+  * OpenAI-Key
+
+:warning: VALIDATE THIS LIST BEFORE PUBLISHING! :warning:
+
+* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
 -----
 
