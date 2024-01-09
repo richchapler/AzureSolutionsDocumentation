@@ -70,7 +70,9 @@ Click "Tools" in the menu bar, expand "NuGet Package Manager" and then click "Ma
 
 :warning: RESUME HERE! :warning:
 
-On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity". On the resulting pop-out, check the box next to your project and then click "Install".
+On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity".
+
+On the resulting pop-out, check the box next to your project and then click "Install".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a3225127-1683-4147-a8b1-02ddda6cc709" width="300" title="Snipped December 19, 2023" />
 
