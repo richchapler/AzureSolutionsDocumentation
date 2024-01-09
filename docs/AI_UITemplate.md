@@ -1,5 +1,5 @@
 # AI Search + OpenAI: User Interface
-v WORK-IN-PROGRESS :warning:
+:warning: WORK-IN-PROGRESS :warning:
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7951bd4a-1806-427c-bf5f-23714f63b73a" width="1000" />
 
