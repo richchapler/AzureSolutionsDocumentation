@@ -31,9 +31,12 @@ This documentation assumes the following resources are ready for use:
 
 :warning: VALIDATE THIS LIST BEFORE PUBLISHING! :warning:
 
-* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
+* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
 -----
+-----
+
+:warning: RESUME HERE! :warning:
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/cae46981-77e1-4b41-aea3-d1cab8988400)
 
