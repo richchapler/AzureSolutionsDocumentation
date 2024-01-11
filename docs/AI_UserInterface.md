@@ -88,7 +88,7 @@ Repeat this process for the following NuGet packages:
 
 -----
 
-### Step 3: Add Helpers
+### Step 3: Helper Classes
 
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
 
@@ -258,9 +258,9 @@ namespace AI_UserInterface.Helpers
 
 -----
 
-### Step 4: Update Visual Elements
+### Step 4: Visual Elements
 
-#### _Layout.cshtml
+#### Visual Element: _Layout.cshtml
 
 Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml".
 
@@ -310,7 +310,7 @@ Replace the default code with:
 </html>
 ```
 
-#### styles.css
+#### Visual Element: styles.css
 
 Expand "wwwroot", right-click on "css", expand "Add" and then click "New Item".
 
@@ -318,7 +318,7 @@ Expand "wwwroot", right-click on "css", expand "Add" and then click "New Item".
 
 On the "Add New Item..." pop-up, expand "C#" >> "ASP.NET Core" >> "Web" >> "Content", click "Style Sheet" on the resulting options, enter Name "styles.css" and then click "Add".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1eafa8fc-37e8-45ae-8ed4-8f4a2d0364d1" width="800" title="Snipped January 11, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/16df93f8-5353-4018-b09a-19c1e0a43d1d" width="800" title="Snipped January 11, 2024" />
 
 Replace the default code with:
 
@@ -374,45 +374,6 @@ Replace the default code with:
 
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/cae46981-77e1-4b41-aea3-d1cab8988400)
-
-
-### Styles.css
-```
-.form {
-    display: flex;
-    text-align: left;
-}
-
-.queryInput {
-    width: 90%;
-}
-
-.queryButton {
-    width: 10%;
-}
-
-.table {
-    text-align: left;
-}
-
-.responseHeader {
-    width: 15%;
-}
-
-.responseBody {
-    width: 85%;
-}
-
-.responses {
-    width: 100%;
-    border: 1px solid black;
-}
-
-.messages {
-    width: 100%;
-    border: none;
-}
-```
 
 
 
