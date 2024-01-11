@@ -599,3 +599,8 @@ On the "...Publish" tab, click the "Publish" button and monitor progress.
 
 Once successfully published, Visual Studio will launch your new web application in a browser.
 
+-----
+
+**Congratulations... you have successfully completed all exercises**
+
+-----
