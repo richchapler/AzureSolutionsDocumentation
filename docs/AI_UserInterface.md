@@ -570,10 +570,3 @@ Lorem Ipsum
 
 
 :warning: RESUME HERE! :warning:
-
-
------
------
-
-
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/cae46981-77e1-4b41-aea3-d1cab8988400)
