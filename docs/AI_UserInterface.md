@@ -385,6 +385,42 @@ public class ChatHub : Hub
 
 #### Program.cs
 
+Double-click to open "Program.cs".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac05f41a-0f85-4bdf-bcf3-6b35af4518cf" width="800" title="Snipped January 11, 2024" />
+
+Replace the default code with:
+
+```
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
+
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+
+app.MapHub<ChatHub>("/chatHub"); // Map your SignalR hub
+
+app.Run();
+```
+
+
+
 
 
 
