@@ -258,9 +258,9 @@ namespace AI_UserInterface.Helpers
 
 -----
 
-### Step 4: Visual Elements
+### Step 4: Front-End
 
-#### Visual Element: _Layout.cshtml
+#### _Layout.cshtml
 
 Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml".
 
@@ -310,7 +310,7 @@ Replace the default code with:
 </html>
 ```
 
-#### Visual Element: styles.css
+#### styles.css
 
 Expand "wwwroot", right-click on "css", expand "Add" and then click "New Item".
 
@@ -359,12 +359,16 @@ Replace the default code with:
 }
 ```
 
-
-
-
-
-
 -----
+
+### Step 4: Back-End
+
+#### Program.cs
+
+
+
+LOREM IPSUM
+
 
 :warning: RESUME HERE! :warning:
 
