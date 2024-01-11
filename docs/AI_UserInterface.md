@@ -190,6 +190,79 @@ namespace AI_UserInterface.Helpers
 }
 ```
 
+#### Helper Class: OpenAI
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/503ef00f-8f06-4ad7-8eca-08d55cca6553" width="800" title="Snipped January 11, 2024" />
+
+Replace the default code with:
+
+```
+using Azure;
+using Azure.AI.OpenAI;
+
+namespace AI_UserInterface.Helpers
+{
+    internal class OpenAI
+    {
+        KeyVault keyvault = new();
+
+        private OpenAIClient client;
+
+        public OpenAI()
+        {
+            client = new OpenAIClient(
+                endpoint: new Uri(keyvault.getSecret("OpenAI-Endpoint")),
+                keyCredential: new AzureKeyCredential(keyvault.getSecret("OpenAI-Key"))
+            );
+        }
+
+        public async Task<string> Prompt(string queryType, string systemMessage, string userMessage)
+        {
+            AzureCognitiveSearchQueryType type;
+
+            switch (queryType.ToLower())
+            {
+                case "simple": type = AzureCognitiveSearchQueryType.Simple; break;
+                case "semantic": type = AzureCognitiveSearchQueryType.Semantic; break;
+                default: throw new ArgumentException($"Invalid query type: {queryType}");
+            }
+
+            AzureCognitiveSearchChatExtensionConfiguration config = new()
+            {
+                SearchEndpoint = new Uri(keyvault.getSecret("AISearch-Url")),
+                IndexName = keyvault.getSecret("AISearch-Name") + "-index",
+                QueryType = type,
+                ShouldRestrictResultScope = true,
+                DocumentCount = 5,
+                SemanticConfiguration = keyvault.getSecret("AISearch-Name") + "-semanticconfiguration" /* Ignored when queryType != Semantic */
+            };
+            config.SetSearchKey(searchKey: keyvault.getSecret("AISearch-Key"));
+
+            ChatCompletionsOptions cco = new()
+            {
+                DeploymentName = keyvault.getSecret("OpenAI-DeploymentName"),
+                AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
+            };
+
+            cco.Messages.Add(new ChatMessage(ChatRole.System, systemMessage));
+            cco.Messages.Add(new ChatMessage(ChatRole.User, userMessage));
+
+            var response = await client.GetChatCompletionsAsync(cco);
+            return response.Value.Choices[0].Message.Content;
+        }
+    }
+}
+```
+
+
+
+
+
+
+
+
 
 
 
@@ -287,64 +360,6 @@ namespace AI_UserInterface.Helpers
 
 
 
-### Helper: OpenAI.cs
-```
-using Azure;
-using Azure.AI.OpenAI;
-
-namespace WebApplication1.Helpers
-{
-    internal class OpenAI
-    {
-        KeyVault keyvault = new();
-
-        private OpenAIClient client;
-
-        public OpenAI()
-        {
-            client = new OpenAIClient(
-                endpoint: new Uri(keyvault.getSecret("OpenAI-Endpoint")),
-                keyCredential: new AzureKeyCredential(keyvault.getSecret("OpenAI-Key"))
-            );
-        }
-
-        public async Task<string> Prompt(string queryType, string systemMessage, string userMessage)
-        {
-            AzureCognitiveSearchQueryType type;
-
-            switch (queryType.ToLower())
-            {
-                case "simple": type = AzureCognitiveSearchQueryType.Simple; break;
-                case "semantic": type = AzureCognitiveSearchQueryType.Semantic; break;
-                default: throw new ArgumentException($"Invalid query type: {queryType}");
-            }
-
-            AzureCognitiveSearchChatExtensionConfiguration config = new()
-            {
-                SearchEndpoint = new Uri(keyvault.getSecret("AISearch-Url")),
-                IndexName = keyvault.getSecret("AISearch-Name")+"-index",
-                QueryType = type,
-                ShouldRestrictResultScope = true,
-                DocumentCount = 5,
-                SemanticConfiguration = keyvault.getSecret("AISearch-SemanticConfiguration") /* Ignored when queryType != Semantic */
-            };
-            config.SetSearchKey(searchKey: keyvault.getSecret("AISearch-Key"));
-
-            ChatCompletionsOptions cco = new()
-            {
-                DeploymentName = keyvault.getSecret("OpenAI-DeploymentName"),
-                AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
-            };
-
-            cco.Messages.Add(new ChatMessage(ChatRole.System, systemMessage));
-            cco.Messages.Add(new ChatMessage(ChatRole.User, userMessage));
-
-            var response = await client.GetChatCompletionsAsync(cco);
-            return response.Value.Choices[0].Message.Content;
-        }
-    }
-}
-```
 
 ### Index.cshtml
 ```
