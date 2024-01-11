@@ -68,13 +68,11 @@ Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manag
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1662d9f3-56b5-4950-bf0a-db53bf6f0800" width="800" title="Snipped January 9, 2024" />
 
-:warning: RESUME HERE! :warning:
-
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity".
 
 On the resulting pop-out, check the box next to your project and then click "Install".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a3225127-1683-4147-a8b1-02ddda6cc709" width="300" title="Snipped December 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d312057-30b7-4579-b08a-1c8b1fa5b47a" width="300" title="Snipped January 9, 2024" />
 
 When prompted, click "I Accept" on the "License Acceptance" pop-up.
 
@@ -85,14 +83,119 @@ When prompted, click "I Accept" on the "License Acceptance" pop-up.
 Repeat this process for the following NuGet packages:
 
 * Azure.AI.OpenAI (**1.0.0-beta.9**)
+* Azure.Search.Documents
 * Azure.Security.KeyVault.Secrets
-* Microsoft.TeamFoundationServer.Client
 
 -----
 
-### Step 3: Code Function
+### Step 3: Add Helpers
 
-Rename "Function1.cs" to ".cs". When prompted "Would you also like to perform a rename...", click "Yes".
+Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4310c7fb-41ff-4f34-b18b-e43771662e18" width="600" title="Snipped January 11, 2024" />
+
+#### Helper Class: KeyVault
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/87a5af20-1942-4500-bb26-6cbe4c74e76b" width="800" title="Snipped January 11, 2024" />
+
+Replace the default code with:
+
+```
+using Azure;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+namespace AI_UserInterface.Helpers
+{
+    internal class KeyVault
+    {
+        private SecretClient client;
+
+        public KeyVault()
+        {
+            client = new SecretClient(
+                vaultUri: new Uri("https://KEYVAULTNAME.vault.azure.net/"),
+                credential: new DefaultAzureCredential()
+                );
+        }
+
+        public string getSecret(string secretName)
+        {
+            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
+            return responseKeyVaultSecret.Value.Value;
+        }
+    }
+}
+```
+
+#### Helper Class: AISearch
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d7ffc067-4bc0-4191-8bd3-c07510ecf5de" width="800" title="Snipped January 11, 2024" />
+
+Replace the default code with:
+
+```
+using Azure;
+using Azure.Search.Documents;
+using Azure.Search.Documents.Models;
+using System.Text.Json;
+
+namespace AI_UserInterface.Helpers
+{
+    internal class AISearch
+    {
+        private readonly KeyVault keyvault;
+
+        public AISearch()
+        {
+            keyvault = new KeyVault();
+        }
+
+        public async Task<string> Prompt(string query)
+        {
+            try
+            {
+                SearchClient client = new(
+                             endpoint: new Uri(keyvault.getSecret("AISearch-Url")),
+                             indexName: $"{keyvault.getSecret("AISearch-Name")}-index",
+                             credential: new AzureKeyCredential(keyvault.getSecret("AISearch-Key"))
+                             );
+
+                SearchResults<SearchDocument> response = await client.SearchAsync<SearchDocument>(query);
+
+                List<SearchDocument> documents = new List<SearchDocument>();
+
+                foreach (SearchResult<SearchDocument> result in response.GetResults())
+                {
+                    documents.Add(result.Document);
+                }
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+
+                return JsonSerializer.Serialize(documents, options);
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
+    }
+}
+```
+
+
+
+
+
+
+:warning: RESUME HERE! :warning:
 
 
 -----
@@ -182,87 +285,7 @@ Rename "Function1.cs" to ".cs". When prompted "Would you also like to perform a 
 }
 ```
 
-### Helper: AISearch.cs
-```
-using Azure;
-using Azure.Search.Documents;
-using Azure.Search.Documents.Models;
-using System.Text.Json;
 
-namespace WebApplication1.Helpers
-{
-    internal class AISearch
-    {
-        private readonly KeyVault keyvault;
-
-        public AISearch()
-        {
-            keyvault = new KeyVault();
-        }
-
-        public async Task<string> Prompt(string query)
-        {
-            try
-            {
-                SearchClient client = new(
-                             endpoint: new Uri(keyvault.getSecret("AISearch-Url")),
-                             indexName: $"{keyvault.getSecret("AISearch-Name")}-index",
-                             credential: new AzureKeyCredential(keyvault.getSecret("AISearch-Key"))
-                             );
-
-                SearchResults<SearchDocument> response = await client.SearchAsync<SearchDocument>(query);
-
-                List<SearchDocument> documents = new List<SearchDocument>();
-
-                foreach (SearchResult<SearchDocument> result in response.GetResults())
-                {
-                    documents.Add(result.Document);
-                }
-
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
-
-                return JsonSerializer.Serialize(documents, options);
-            }
-            catch (Exception ex)
-            {
-                return $"Error: {ex.Message}";
-            }
-        }
-    }
-}
-```
-
-### Helper: KeyVault.cs
-```
-using Azure;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-
-namespace WebApplication1.Helpers
-{
-    internal class KeyVault
-    {
-        private SecretClient client;
-
-        public KeyVault()
-        {
-            client = new SecretClient(
-                vaultUri: new Uri("https://rchaplerkv.vault.azure.net/"),
-                credential: new DefaultAzureCredential()
-                );
-        }
-
-        public string getSecret(string secretName)
-        {
-            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
-            return responseKeyVaultSecret.Value.Value;
-        }
-    }
-}
-```
 
 ### Helper: OpenAI.cs
 ```
