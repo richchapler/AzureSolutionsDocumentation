@@ -493,6 +493,53 @@ Replace the default code with:
 
 #### Index.cshtml.cs
 
+Expand "Index.cshtml" and then double-click to open "Index.cshtml.cs".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/42d22822-f353-4267-aae6-8121735999f5" width="800" title="Snipped January 11, 2024" />
+
+Replace the default code with:
+
+```
+using AI_UserInterface.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
+
+public class IndexModel : PageModel
+{
+    private readonly IHubContext<ChatHub> hc;
+
+    [BindProperty]
+    public string userPrompt { get; set; }
+
+    public IndexModel(IHubContext<ChatHub> hubContext)
+    {
+        hc = hubContext;
+        userPrompt = string.Empty;
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        await hc.Clients.All.SendAsync("logMessage", $"Processing Prompt: {string.Join(" ", userPrompt.Split(' ').Take(5)) + "..."}\n");
+        AISearch aisearch = new();
+        OpenAI openai = new();
+
+        await hc.Clients.All.SendAsync("logMessage", "* Querying AISearch...\n");
+        ViewData["responseAISearch"] = await aisearch.Prompt(query: userPrompt);
+
+        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (keyword)...\n");
+        ViewData["responseOpenAI_Keyword"] = await openai.Prompt(queryType: "Simple", systemMessage: "", userMessage: userPrompt);
+
+        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (semantic)...\n");
+        ViewData["responseOpenAI_Semantic"] = await openai.Prompt(queryType: "Semantic", systemMessage: "", userMessage: userPrompt);
+
+        return Page();
+    }
+}
+```
+
+
+
 
 
 
@@ -517,111 +564,3 @@ LOREM IPSUM
 
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/cae46981-77e1-4b41-aea3-d1cab8988400)
-
-
-
-
-### Index.cshtml
-```
-@page
-@model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
-
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/css/styles.css" />
-</head>
-<body>
-        <div class="container">
-            <form method="post" class="form">
-                <input type="text" name="userPrompt" class="queryInput" placeholder="Enter your query or prompt here..." />
-                <input type="submit" value="Search" class="queryButton" />
-            </form>
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td class="responseHeader">
-                            <h5>AI Search</h5>
-                        </td>
-                        <td class="responseBody">
-                        <textarea id="responseAISearch" rows=5" class="responses" readonly>@ViewData["responseAISearch"]</textarea>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td class="responseHeader"><h5>OpenAI</h5>(keyword)</td>
-                        <td class="responseBody">
-                        <textarea id="responseOpenAI_Keyword" rows="5" class="responses" readonly">@ViewData["responseOpenAI_Keyword"]</textarea>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td class="responseHeader"><h5>OpenAI</h5>(semantic)</td>
-                        <td class="responseBody">
-                        <textarea id="responseOpenAI_Semantic" rows="5" class="responses" readonly">@ViewData["responseOpenAI_Semantic"]</textarea>
-                    </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <textarea id="messages" rows="4" class="messages" readonly>@ViewData["messages"]</textarea>
-    </div>
-
-    @* Libraries *@
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
-
-    @* Real-Time Server to Client-Side Messaging *@
-    <script>
-        const connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-        connection.on("logMessage", function (message) { document.getElementById('messages').value += message; });
-        connection.start().catch(function (err) { return console.error(err.toString()); });
-    </script>
-</body>
-</html>
-```
-
-### Index.cshtml.cs
-```
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.SignalR;
-using WebApplication1.Helpers;
-
-public class IndexModel : PageModel
-{
-    private readonly IHubContext<ChatHub> hc;
-
-    [BindProperty]
-    public string userPrompt { get; set; }
-
-    public IndexModel(IHubContext<ChatHub> hubContext)
-    {
-        hc = hubContext;
-        userPrompt = string.Empty;
-    }
-
-    public async Task<IActionResult> OnPostAsync()
-    {
-        await hc.Clients.All.SendAsync("logMessage", $"Processing Prompt: {string.Join(" ", userPrompt.Split(' ').Take(5))+"..."}\n");
-        AISearch aisearch = new();
-        OpenAI openai = new();
-
-        await hc.Clients.All.SendAsync("logMessage", "* Querying AISearch...\n");
-        ViewData["responseAISearch"] = await aisearch.Prompt(query: userPrompt);
-
-        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (keyword)...\n");
-        ViewData["responseOpenAI_Keyword"] = await openai.Prompt(queryType: "Simple", systemMessage: "", userMessage: userPrompt);
-
-        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (semantic)...\n");
-        ViewData["responseOpenAI_Semantic"] = await openai.Prompt(queryType: "Semantic", systemMessage: "", userMessage: userPrompt);
-
-        return Page();
-    }
-}
-```
-
-
