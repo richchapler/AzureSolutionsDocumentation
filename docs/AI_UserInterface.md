@@ -1,5 +1,4 @@
 # AI Search + OpenAI: User Interface
-:warning: WORK-IN-PROGRESS :warning:
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7951bd4a-1806-427c-bf5f-23714f63b73a" width="1000" />
 
@@ -20,6 +19,8 @@ This documentation assumes the following resources are ready for use:
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with Semantic Configuration
 
   _Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
+
+* App Service (Windows)
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
@@ -68,7 +69,7 @@ Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manag
 
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity".
 
-On the resulting pop-out, check the box next to your project and then click "Install".
+On the resulting pop-out, check the box next to your  and then click "Install".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d312057-30b7-4579-b08a-1c8b1fa5b47a" width="300" title="Snipped January 9, 2024" />
 
@@ -560,13 +561,41 @@ When processing is complete, you can expect to see responses from AI Search and 
 
 ## Exercise 2: Publish Application
 
-Lorem Ipsum
+Right-click on the project and select "Publish..." from the resulting dropdown.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a2f5899-3475-4ee3-a35d-9a06efa8398f" width="600" title="Snipped January 11, 2024" />
 
+On the "Publish" pop-up, "Target" tab, confirm selection of "Azure" and then click "Next".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a8d84ed-49ad-44d9-9acf-0b21182299e8" width="600" title="Snipped January 11, 2024" />
 
+On the "Publish" pop-up, "Specific target" tab, select "Azure App Service (Windows)" and then click "Next".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6e56c98a-d253-45b1-8b75-3e69a3c4cbfd" width="600" title="Snipped January 11, 2024" />
 
+On the "Publish" pop-up, "App Service" tab, click "Create a new instance".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7dc1423e-9d0f-49b9-a5f9-7f0cee728e6e" width="400" title="Snipped January 11, 2024" />
 
-:warning: RESUME HERE! :warning:
+Complete the "App Service (Windows" >> "Create new" pop-up form and then click "Create".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b9fb47e3-2409-42a9-b547-b8c1ae4dfc05" width="600" title="Snipped January 11, 2024" />
+
+On the "Publish" pop-up, "App Service" tab, confirm selection of the new App Service and then click "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2bcd9da9-a647-4c9f-9b31-06a1c6a76677" width="600" title="Snipped January 11, 2024" />
+
+On the "Publish" pop-up, "Deployment type" tab, confirm selection of "Publish..." and then click "Finish".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/67301903-6b0c-430f-91ac-8876f41f3c85" width="600" title="Snipped January 11, 2024" />
+
+On the "Publish" pop-up, "Finish" tab, confirm success and then click "Close".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0699015-b693-4636-867e-1508263943de" width="800" title="Snipped January 11, 2024" />
+
+On the "...Publish" tab, click the "Publish" button and monitor progress.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4de6c06e-899b-4d3a-8487-44fd763ffc9e" width="800" title="Snipped January 11, 2024" />
+
+Once successfully published, Visual Studio will launch your new web application in a browser.
+
