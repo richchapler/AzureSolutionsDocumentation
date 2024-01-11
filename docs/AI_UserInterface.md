@@ -94,7 +94,7 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4310c7fb-41ff-4f34-b18b-e43771662e18" width="600" title="Snipped January 11, 2024" />
 
-#### Helper Class: KeyVault
+#### KeyVault.cs
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
 
@@ -130,7 +130,7 @@ namespace AI_UserInterface.Helpers
 }
 ```
 
-#### Helper Class: AISearch
+#### AISearch.cs
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
 
@@ -190,7 +190,7 @@ namespace AI_UserInterface.Helpers
 }
 ```
 
-#### Helper Class: OpenAI
+#### OpenAI.cs
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
 
@@ -363,7 +363,38 @@ Replace the default code with:
 
 ### Step 4: Back-End
 
+#### ChatHub.cs
+
+Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "ChatHub.cs" on the resulting popup then click "Add".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b0a2eb39-4790-4607-a609-6462fc0191d8" width="800" title="Snipped January 11, 2024" />
+
+Replace the default code with:
+
+```
+using Microsoft.AspNetCore.SignalR;
+
+public class ChatHub : Hub
+{
+    public async Task SendSystemMessage(string message)
+    {
+        await Clients.All.SendAsync("logMessage", message);
+    }
+}
+```
+
 #### Program.cs
+
+
+
+
+
+
+
+
+
+
+
 
 
 
