@@ -258,7 +258,9 @@ namespace AI_UserInterface.Helpers
 
 -----
 
-### Step 4: Simplify Layout
+### Step 4: Update Visual Elements
+
+#### _Layout.cshtml
 
 Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml".
 
@@ -308,14 +310,61 @@ Replace the default code with:
 </html>
 ```
 
+#### styles.css
+
+Expand "wwwroot", right-click on "css", expand "Add" and then click "New Item".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0a195af1-054f-4e20-b9ba-63d173114b69" width="600" title="Snipped January 11, 2024" />
+
+On the "Add New Item..." pop-up, expand "C#" >> "ASP.NET Core" >> "Web" >> "Content", click "Style Sheet" on the resulting options, enter Name "styles.css" and then click "Add".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1eafa8fc-37e8-45ae-8ed4-8f4a2d0364d1" width="800" title="Snipped January 11, 2024" />
+
+Replace the default code with:
+
+```
+.form {
+    display: flex;
+    text-align: left;
+}
+
+.queryInput {
+    width: 90%;
+}
+
+.queryButton {
+    width: 10%;
+}
+
+.table {
+    text-align: left;
+}
+
+.responseHeader {
+    width: 15%;
+}
+
+.responseBody {
+    width: 85%;
+}
+
+.responses {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.messages {
+    width: 100%;
+    border: none;
+}
+```
 
 
 
 
 
 
-
-
+-----
 
 :warning: RESUME HERE! :warning:
 
@@ -326,48 +375,6 @@ Replace the default code with:
 
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/cae46981-77e1-4b41-aea3-d1cab8988400)
 
-### _Layout.cshtml
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication1</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">WebApplication1</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
-```
 
 ### Styles.css
 ```
