@@ -23,14 +23,12 @@ This documentation assumes the following resources are ready for use:
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
-  * AISearch-IndexName
   * AISearch-Key
+  * AISearch-Name
   * AISearch-Url
   * OpenAI-DeploymentName
   * OpenAI-Endpoint
   * OpenAI-Key
-
-:warning: VALIDATE THIS LIST BEFORE PUBLISHING! :warning:
 
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
@@ -361,7 +359,7 @@ Replace the default code with:
 
 -----
 
-### Step 4: Back-End
+### Step 5: Back-End
 
 #### ChatHub.cs
 
@@ -419,7 +417,9 @@ app.MapHub<ChatHub>("/chatHub"); // Map your SignalR hub
 app.Run();
 ```
 
-### Step 5: Model-View-Controller (MVC)
+-----
+
+### Step 6: Model-View-Controller (MVC)
 
 #### Index.cshtml
 
@@ -538,22 +538,35 @@ public class IndexModel : PageModel
 }
 ```
 
+-----
+
+### Step 7: Confirm Success
+
+Click "Debug" >> "Start Debugging" in the menu bar.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2df81a73-a49b-444e-82ac-c84a263153b2" width="800" title="Snipped January 11, 2024" />
+
+Enter a prompt and click "Search"... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/117c6781-06de-4e36-9119-227c41d43fde" width="800" title="Snipped January 11, 2024" />
+
+When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword and semantic configurations).
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Exercise 2: Publish Application
+
+Lorem Ipsum
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-LOREM IPSUM
 
 
 :warning: RESUME HERE! :warning:
