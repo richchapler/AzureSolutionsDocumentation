@@ -7,5 +7,6 @@ _(aka "Cognitive Search")_
 
 ## Frequently-Asked Questions
 
-* Can you selectively delete a document from an index?
-  * Lorem Ipsum
+* How-To: Selectively delete documents from an AI Search Index
+  * Reference: [Add, Update or Delete Documents (Azure AI Search REST API)](https://learn.microsoft.com/en-us/rest/api/searchservice/addupdate-or-delete-documents)
+  * It is typically unnecessary to re-run the indexer after removing a document
