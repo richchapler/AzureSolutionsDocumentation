@@ -5,7 +5,7 @@
 ## Instantiation
 _Note: Most of the links below point to Microsoft documentation... I create additional documentation only to fill gaps_
 
-* [**AI Search**](https://learn.microsoft.com/en-us/azure/search/)
+* [**AI Search**](Infrastructure_AISearch.md)
 
 * [**AI Services**](https://learn.microsoft.com/en-us/azure/ai-services/)
   * [**AI Vision**](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
