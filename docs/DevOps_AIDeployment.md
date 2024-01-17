@@ -21,12 +21,13 @@
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  * Storage-ConnectionString
-  * Storage-ContainerName
   * AISearch-Key
   * AISearch-Name
   * AIServices-Key
-
+  * OpenAI-Key
+  * Storage-ConnectionString
+  * Storage-ContainerName
+ 
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-ada-002" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
  
 * [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
@@ -39,7 +40,6 @@
 If you intend to prepare a custom skillset, also prepare:
 
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
-
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
