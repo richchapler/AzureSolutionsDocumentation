@@ -7,6 +7,12 @@ _(aka "Cognitive Search")_
 
 ## Frequently-Asked Questions
 
-* How-To: Selectively delete documents from an AI Search Index
+* How do I selectively delete documents from an AI Search Index?
   * Reference: [Add, Update or Delete Documents (Azure AI Search REST API)](https://learn.microsoft.com/en-us/rest/api/searchservice/addupdate-or-delete-documents)
   * It is typically unnecessary to re-run the indexer after removing a document
+
+* Are document updates detected by the periodically running schedule?
+  * Reference: [Schedule an indexer in Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-howto-schedule-indexers?tabs=portal)
+  * Yes, document updates are picked up by the periodically running indexer schedule but **changes will only be reflected in the search index after the indexer run is complete**
+  * "Prerequisites... **Change detection in the data source**. Azure Storage and SharePoint have built-in change detection. Other data sources, such as **Azure SQL and Azure Cosmos DB must be enabled manually**."
+
