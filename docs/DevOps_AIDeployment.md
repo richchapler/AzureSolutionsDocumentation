@@ -18,10 +18,6 @@
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
   * [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
-* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
-  * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
-  * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
-  * [Storage Account](Infrastructure_StorageAccount.md)
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * Storage-ConnectionString
   * AISearch-Key
@@ -30,6 +26,12 @@
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
+If you intend to prepare a custom skillset, also prepare:
+* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
+  * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
+  * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
+  * [Storage Account](Infrastructure_StorageAccount.md)
+  * 
 -----
 
 ## Exercise 1: Custom Skillset API
