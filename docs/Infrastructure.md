@@ -5,8 +5,10 @@
 ## Instantiation
 _Note: Most of the links below point to Microsoft documentation... I create additional documentation only to fill gaps_
 
-* [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
-  * [**Computer Vision**](https://learn.microsoft.com/en-us/azure/cognitive-services/computer-vision/overview)
+* [**AI Search**](https://learn.microsoft.com/en-us/azure/search/)
+
+* [**AI Services**](https://learn.microsoft.com/en-us/azure/ai-services/)
+  * [**AI Vision**](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
 
 * [**API Management**](https://learn.microsoft.com/en-us/azure/api-management/)
 
@@ -15,8 +17,6 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 * [**Application Registration**](Infrastructure_ApplicationRegistration.md)
 
 * [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
-
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) >> [FAQ](https://learn.microsoft.com/en-us/azure/search/search-faq-frequently-asked-questions)
 
 * [**Databricks**](https://learn.microsoft.com/en-us/azure/databricks/)
 
