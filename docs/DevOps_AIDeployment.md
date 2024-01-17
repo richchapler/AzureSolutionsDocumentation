@@ -15,16 +15,17 @@
 * Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
-* [**AI Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
-  * [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search)
+
+* [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * AISearch-Key
-  * AISearch-Name
   * AIServices-Key
   * OpenAI-Key
+  * Prefix {e.g., a string that precedes all Azure entities like "rchapler" or "projectx"}
   * Storage-ConnectionString
   * Storage-ContainerName
  
