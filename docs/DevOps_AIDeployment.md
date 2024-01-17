@@ -23,9 +23,9 @@
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  * ConnectionString_BlobStorage
-  * Key_AISearch
-  * Key_AIServices
+  * Storage-ConnectionString
+  * AISearch-Key
+  * AIServices-Key
 * [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
