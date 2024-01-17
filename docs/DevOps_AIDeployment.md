@@ -17,13 +17,21 @@
 ## Solution Requirements
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) with dependency:
   * [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
+ 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * Storage-ConnectionString
+  * Storage-ContainerName
   * AISearch-Key
+  * AISearch-Name
   * AIServices-Key
+* [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-ada-002" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
+ 
 * [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
+ 
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
+ 
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
 If you intend to prepare a custom skillset, also prepare:
