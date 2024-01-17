@@ -31,7 +31,7 @@ If you intend to prepare a custom skillset, also prepare:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
-  * 
+
 -----
 
 ## Exercise 1: Custom Skillset API
