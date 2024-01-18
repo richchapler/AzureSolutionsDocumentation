@@ -269,7 +269,7 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup and then click "Add".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1aeb6ea0-1967-4b6b-a4d5-be5c1061594c" width="800" title="Snipped: January 18, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0c414788-dc12-43ae-b15c-79c4a8751a99" width="800" title="Snipped: January 18, 2024" />
 
 Replace the default code with:
 
