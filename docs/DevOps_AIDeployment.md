@@ -908,7 +908,10 @@ Replace the default code with:
 }
 ```
 
-
+_Notes:_
+* _The included fields are standard for: 1) blob file indexing, 2) OCR and related merge, 3) Key Phrase Extraction, and 4) vectorization_
+* _Parameters will be wrapped in curly brackets {e.g., `{ResourceGroup-Name}`} and replaced with values in the related code_
+* _`{ResourceGroup-Name}` is used as a prefix throughout the code... each created resource will start with `{ResourceGroup-Name}`, and follow with an acronym describing the resource type (as well as any other related identifying information)_
 
 
 
