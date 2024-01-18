@@ -2,6 +2,8 @@
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
+⚠️ **UPDATES IN PROGRESS** ⚠️
+
 ## Use Case
 * "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
 * "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
@@ -39,7 +41,7 @@
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
 <br>
-If you intend to prepare a custom skillset, also prepare:
+If you intend to prepare a custom skillset, also instantiate:
 
 * [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
@@ -257,7 +259,55 @@ Close the "**NuGet - Solution**" tab.
 
 -----
 
-### Step 3: Code Application
+### Step 3: Helper Classes
+
+Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
+
+#### KeyVault.cs
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a2987e0-2e70-4652-8041-1625dc27cc37" width="600" title="Snipped: January 18, 2024" />
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup and then click "Add".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1aeb6ea0-1967-4b6b-a4d5-be5c1061594c" width="800" title="Snipped: January 18, 2024" />
+
+Replace the default code with:
+
+```
+using Azure;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+namespace DevOps_AIDeployment.Helpers
+{
+    internal class KeyVault
+    {
+        private SecretClient client;
+
+        public KeyVault()
+        {
+            client = new SecretClient(
+                vaultUri: new Uri($"https://{KeyVaultName}.vault.azure.net/"),
+                credential: new DefaultAzureCredential()
+                );
+        }
+
+        public string getSecret(string secretName)
+        {
+            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
+            return responseKeyVaultSecret.Value.Value;
+        }
+    }
+}
+```
+
+Replace `{KeyVaultName}` with the name of your Key Vault.
+
+#### AISearch.cs
+
+
+
+LOREM IPSUM
 
 Replace the default code on the "**Program.cs**" tab with the following C#:
 
