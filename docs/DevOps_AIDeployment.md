@@ -620,6 +620,305 @@ _Notes:_
 * _Uncomment `new WebApiSkill(...` lines if you are including a custom skillset_
 * _Uncomment `IsDisabled = true` to stop the indexer from running immediately after creation_
 
+-----
+
+### Step 4: Definitions
+
+Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Definitions".
+
+#### index.json
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe8abcf5-dd66-4357-81bd-b58f5ceabd33" width="600" title="Snipped: January 18, 2024" />
+
+Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, enter name "index.json" on the resulting popup and then click "Add".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb13c1e4-9834-4759-9410-c6c33ea9b910" width="800" title="Snipped: January 18, 2024" />
+
+Replace the default code with:
+
+```
+{
+  "name": "{ResourceGroup-Name}ss-index",
+  "defaultScoringProfile": "",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": true,
+      "analyzer": "keyword"
+    },
+    {
+      "name": "metadata_title",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_name",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_path",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_content_type",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_file_extension",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_size",
+      "type": "Edm.Int64",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "metadata_author",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_language",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_creation_date",
+      "type": "Edm.DateTimeOffset",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "metadata_storage_last_modified",
+      "type": "Edm.DateTimeOffset",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "content",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "text",
+      "type": "Collection(Edm.String)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "layoutText",
+      "type": "Collection(Edm.String)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "merged_content",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "keyphrases",
+      "type": "Collection(Edm.String)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "parent_id",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false
+    },
+    {
+      "name": "chunk",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "vector",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "dimensions": 1536,
+      "vectorSearchProfile": "{ResourceGroup-Name}ss-vectorprofile"
+    }
+  ],
+  "similarity": {
+    "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+  },
+  "semantic": {
+    "configurations": [
+      {
+        "name": "{ResourceGroup-Name}ss-semanticconfiguration",
+        "prioritizedFields": {
+          "titleField": {
+            "fieldName": "metadata_title"
+          },
+          "prioritizedContentFields": [
+            {
+              "fieldName": "merged_content"
+            }
+          ],
+          "prioritizedKeywordsFields": [
+            {
+              "fieldName": "keyphrases"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "vectorSearch": {
+    "algorithms": [
+      {
+        "name": "{ResourceGroup-Name}ss-vectoralgorithm",
+        "kind": "hnsw",
+        "hnswParameters": {
+          "metric": "cosine",
+          "m": 4,
+          "efConstruction": 400,
+          "efSearch": 500
+        }
+      }
+    ],
+    "profiles": [
+      {
+        "name": "{ResourceGroup-Name}ss-vectorprofile",
+        "algorithm": "{ResourceGroup-Name}ss-vectoralgorithm",
+        "vectorizer": "{ResourceGroup-Name}ss-vectorizer"
+      }
+    ],
+    "vectorizers": [
+      {
+        "name": "{ResourceGroup-Name}ss-vectorizer",
+        "kind": "azureOpenAI",
+        "azureOpenAIParameters": {
+          "resourceUri": "https://{ResourceGroup-Name}oai.openai.azure.com",
+          "deploymentId": "{ResourceGroup-Name}oai-ada2",
+          "apiKey": "{OpenAI-Key}",
+          "authIdentity": null
+        }
+      }
+    ]
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
