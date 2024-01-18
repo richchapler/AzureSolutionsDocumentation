@@ -25,7 +25,7 @@
   * AISearch-Key
   * AIServices-Key
   * OpenAI-Key
-  * Prefix {e.g., a string that precedes all Azure entities like "rchapler" or "projectx"}
+  * ResourceGroup-Name {e.g., will be used as a prefix for all newly-created Azure entities}
   * Storage-ConnectionString
   * Storage-ContainerName
   * Subscription
