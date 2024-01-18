@@ -301,7 +301,8 @@ namespace DevOps_AIDeployment.Helpers
 }
 ```
 
-Replace `{KeyVaultName}` with the name of your Key Vault.
+_Note:_
+* _Replace `{KeyVaultName}` with the name of your Key Vault_
 
 #### AISearch.cs
 
