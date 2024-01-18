@@ -28,6 +28,7 @@
   * Prefix {e.g., a string that precedes all Azure entities like "rchapler" or "projectx"}
   * Storage-ConnectionString
   * Storage-ContainerName
+  * Subscription
  
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-ada-002" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
  
