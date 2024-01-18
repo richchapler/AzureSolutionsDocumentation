@@ -1129,311 +1129,96 @@ Replace the default code with:
 }
 ```
 
+_Notes:_
+* _Healthy debate about the ordering or keyword generation re: vectorization chunking is both necessary and reasonable... diagram below starts to describe the necessary conversation_
 
+  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bd79083-5713-4ef2-ab9f-c1c7db4e62f6" width="800" title="Snipped: January 18, 2024" />
 
+#### indexer.json
 
+Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "indexer.json" on the resulting popup and then click "Add".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/824d69e8-8c1c-43c5-af39-45656d96dcd8" width="800" title="Snipped: January 18, 2024" />
 
+Replace the default code with:
 
+```
+{
+  "name": "{ResourceGroup-Name}ss-indexer",
+  "description": "",
+  "dataSourceName": "{ResourceGroup-Name}ss-datasource",
+  "skillsetName": "{ResourceGroup-Name}ss-skillset",
+  "targetIndexName": "{ResourceGroup-Name}ss-index",
+  "disabled": false,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": 0,
+    "maxFailedItemsPerBatch": 0,
+    "base64EncodeKeys": null,
+    "configuration": {
+      "imageAction": "generateNormalizedImages",
+      "dataToExtract": "contentAndMetadata",
+      "parsingMode": "default"
+    }
+  },
+  "outputFieldMappings": [
+    {
+      "sourceFieldName": "/document/normalized_images/*/text",
+      "targetFieldName": "text"
+    },
+    {
+      "sourceFieldName": "/document/normalized_images/*/layoutText",
+      "targetFieldName": "layoutText"
+    },
+    {
+      "sourceFieldName": "/document/merged_content",
+      "targetFieldName": "merged_content"
+    },
+    {
+      "sourceFieldName": "/document/merged_content/keyphrases",
+      "targetFieldName": "keyphrases"
+    }
+  ],
+  "cache": null,
+  "encryptionKey": null
+}
+```
 
+-----
 
-
-
-
-
-
-
-
-
-LOREM IPSUM
+### Step 5: `Program.cs`
 
 Replace the default code on the "**Program.cs**" tab with the following C#:
 
 ```
-using Azure;
-using Azure.Identity;
-using Azure.Search.Documents.Indexes;
-using Azure.Search.Documents.Indexes.Models;
-using Azure.Security.KeyVault.Secrets;
+using DevOps_AIDeployment.Helpers;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
+        AISearch aisearch = new();
 
+        await aisearch.deleteExisting();
+
+        await aisearch.createDataSource_SDK();
+
+        //await aisearch.createIndex_SDK();
+        await aisearch.createResource_API("index");
+
+        //await aisearch.createSkillset_SDK();
+        await aisearch.createResource_API("skillset");
+
+        //await aisearch.createIndexer_SDK();
+        await aisearch.createResource_API("indexer");
     }
 }
 ```
 
-#### Names, URIs, and Keys
-The variables set in this section will be used to identify and create various resources.
-
-Return to the "**Program.cs**" tab and add the following code to `Main`.
-
-```
-/* ************************* Names */
-
-string nameBlobStorage_Container = "forms";
-string nameAISearch_DataSource = "rchaplerss-datasource";
-string nameAISearch_Index = "rchaplerss-index";
-string nameAISearch_Indexer = "rchaplerss-indexer";
-string nameAISearch_SemanticConfiguration = "rchaplerss-semanticconfiguration";
-string nameAISearch_Skillset = "rchaplerss-skillset";
-string nameAISearch_Suggester = "rchaplerss-suggester";
-
-/* ************************* URIs */
-
-var uriAISearch = new Uri($"https://rchaplerss.search.windows.net/");
-var uriKeyVault = new Uri($"https://rchaplerk.vault.azure.net/");
-
-/* ************************* Keys */
-
-var sc = new SecretClient(uriKeyVault, new DefaultAzureCredential());
-
-var ConnectionString_BlobStorage = sc.GetSecret("ConnectionString-BlobStorage").Value.Value.ToString() ?? string.Empty;
-var Key_AISearch = sc.GetSecret("Key-AISearch").Value.Value.ToString() ?? string.Empty;
-var Key_AIServices = sc.GetSecret("Key-AIServices").Value.Value.ToString() ?? string.Empty;
-/* use of double ".Value" is a necessary oddity */
-```
-
 _Notes:_
-* _Replace name values {e.g., `rchaplerss`} with values appropriate to your implementation_
-* _Replace `AISEARCH_PRIMARYADMINKEY` with your AI Search API Key (and considering using a Key Vault)_
-
------
-
-#### Clients
-The variables set in this section will be used to manage the AI Search resources.
-
-Append the following code to the bottom of `Main`:
-
-```
-/* ************************* Clients */
-
-var credential = new AzureKeyCredential(Key_AISearch);
-var indexClient = new SearchIndexClient(uriAISearch, credential);
-var indexerClient = new SearchIndexerClient(uriAISearch, credential);
-```
-
-Logic Explained:
-* `var credential...` creates a new `AzureKeyCredential` object used to authenticate your requests to the AI Search service
-* `var indexClient...` creates a new `SearchIndexClient` object used to manage (create, delete, update) indexes in your search service
-* `var indexerClient...` creates a new `SearchIndexerClient` object used to manage (run, reset, delete) indexers in your search service
-
------
-
-#### Data Source
-The logic in this section will create a AI Search Data Source.
-
-Append the following code to the bottom of `Main`:
-
-```
-/* ************************* Data Source */
-
-var sidsc = new SearchIndexerDataSourceConnection(
-    name: nameAISearch_DataSource,
-    type: SearchIndexerDataSourceType.AzureBlob,
-    connectionString: ConnectionString_BlobStorage,
-    container: new SearchIndexerDataContainer(nameBlobStorage_Container)
-    );
-
-indexerClient.DeleteIndexer(nameAISearch_Indexer); /* indexer must be deleted before data source connection */
-indexerClient.DeleteDataSourceConnection(nameAISearch_DataSource);
-
-indexerClient.CreateDataSourceConnection(sidsc);
-```
-
-Logic Explained:
-* `var sidsc...` creates a new `SearchIndexerDataSourceConnection` object that represents a connection to a Blob Storage account
-    * Replace `STORAGEACCOUNT_CONNECTIONSTRING` with your Storage Account Connection String (and considering using a Key Vault)
-* `indexerClient.CreateDataSourceConnection...` creates a new data source connection using the `SearchIndexerDataSourceConnection` object
-* `forms` refers to the Storage Account Container mentioned in Solution Requirements
-
-##### Alternate Version: SQL
-Note: if you are creating a data source for Azure SQL, `sidsc` will look like this:
-
-```
-var sidsc = new SearchIndexerDataSourceConnection(
-     name: nameAISearch_DataSource,
-     type: SearchIndexerDataSourceType.AzureSql,
-     connectionString: ConnectionString_SQL,
-     container: new SearchIndexerDataContainer("{schemaName}.{tableName}")
- );
-```
-
-_Note: The AI Search, Data Source interface will not correctly show the UserName and Password when it is created programmatically_
-
------
-
-#### Index
-The logic in this section will create a AI Search Index.
-
-Append the following code to the bottom of `Main`:
-
-```
-/* ************************* Index */
-
-var index = new SearchIndex(nameAISearch_Index)
-{
-    Fields = {
-        new SimpleField("id", SearchFieldDataType.String) { IsKey = true }, /* SimpleField = non-searchable */
-        new SearchField("metadata_author", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_creation_date", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_language", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_storage_content_type", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_storage_file_extension", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_storage_last_modified", SearchFieldDataType.DateTimeOffset) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_storage_name", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_storage_path", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_storage_size", SearchFieldDataType.Int64) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchField("metadata_title", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true },
-        new SearchableField("content") { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-        new SearchableField("text", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-        new SearchableField("keyphrases", collection: true) { AnalyzerName = LexicalAnalyzerName.StandardLucene },
-        new SearchField("myColumn", SearchFieldDataType.String) { IsFacetable = true, IsFilterable = true, IsSortable = true }
-    },
-    Suggesters = {
-        new SearchSuggester(name: nameAISearch_Suggester, sourceFields: new[] { "metadata_storage_name" })
-    }
-};
-
-indexClient.DeleteIndex(index);
-indexClient.CreateIndex(index);
-```
-
-Logic Explained:
-* `var index...` creates a new `SearchIndex` object that represents a search index in AI Search
-  * `new SimpleField(...`, `new SearchField(...`,`new SearchableField(...` lines add fields the index
-    * Each field represents a piece of data that can be searched, filtered, sorted, or faceted in the search index
-* `new SearchableField("text"...` will be used by the OCR Skill
-* `new SearchableField("keyphrases"...` will be used by the Key Phrases Extraction Skill
-* `new SearchableField("myColumn"...` will be used by the WebAPI Skill
-* `indexClient.DeleteIndex...` deletes any existing index with the same name using the `SearchIndex` object
-* `indexClient.CreateIndex...` creates a new index using the `SearchIndex` object
-
------
-
-#### Skillset
-The logic in this section will create a AI Search Skillset.
-
-Append the following code to the bottom of `Main`:
-
-```
-/* ************************* Skillset */
-
-var skills = new List<SearchIndexerSkill>
-{
-    new OcrSkill(
-        inputs: new List<InputFieldMappingEntry>
-        {
-            new InputFieldMappingEntry("image") { Source = "/document/normalized_images/*" }
-        },
-        outputs: new List<OutputFieldMappingEntry>
-        {
-            new OutputFieldMappingEntry("text") { TargetName = "text" }
-        }
-    )
-    {
-        Context = "/document/normalized_images/*"
-    },
-    new KeyPhraseExtractionSkill(
-        inputs: new List<InputFieldMappingEntry>
-        {
-            new InputFieldMappingEntry("text") { Source = "/document/content" }
-        },
-        outputs: new List<OutputFieldMappingEntry>
-        {
-            new OutputFieldMappingEntry("keyPhrases") { TargetName = "keyphrases" } /* camel-case required for source */
-        }
-    )
-    {
-        Context = "/document/content"
-    },
-    new WebApiSkill(
-        inputs: new List<InputFieldMappingEntry>
-        {
-            new InputFieldMappingEntry("text") { Source = "/document/metadata_storage_file_extension" }
-        },
-        outputs: new List<OutputFieldMappingEntry>
-        {
-            new OutputFieldMappingEntry("myColumn") { TargetName = "myColumn" }
-        },
-        uri: "{FUNCTIONAPP_URL}"
-    )
-    {
-        Context = "/document/content"
-    }
-};
-
-var skillset = new SearchIndexerSkillset(nameAISearch_Skillset, skills)
-{
-    AIServicesAccount = new AIServicesAccountKey(key: Key_AIServices)
-};
-
-indexerClient.DeleteSkillset(skillset);
-indexerClient.CreateSkillset(skillset);
-```
-
-Logic Explained:
-* `var skills...` creates a new list of `SearchIndexerSkill` objects
-  * Each `SearchIndexerSkill` represents a skill that can be used in an indexing pipeline
-  * Inside the `{...}` block, an `OcrSkill` is added to the list
-    * The `OcrSkill` is used to extract text from image files
-      * The input to the skill is the `image` field, which comes from the `/document/normalized_images/*` path in your data source
-      * The output of the skill is the `text` field
-    * The `KeyPhraseExtractionSkill` evaluates unstructured text and returns a list of key phrases for each record
-      * The input to the skill is `text`, which comes from the `/document/content` path in your data source
-      * The output of the skill is the `keyPhrases` field
-    * The `WebApiSkill` sends data to a custom web API endpoint (specified by `{FUNCTIONAPP_URL}`) and receives transformed data in return
-      * The input is text, sourced from `/document/metadata_storage_file_extension` (used for simplicity)
-      * The output from the web API is stored in a field named `myColumn`
-* `var skillset...` creates a new `SearchIndexerSkillset` object that represents a skillset in AI Search
-  * Inside the `{...}` block, a `AIServicesAccountKey` is set for the skillset
-    * This key is used to authenticate your requests to the AI Services
-* `indexerClient.DeleteSkillset...` deletes any existing skillset with the same name using the `SearchIndexerSkillset` object
-* `indexerClient.CreateSkillset...` creates a new skillset using the `SearchIndexerSkillset` object
-
------
-
-#### Indexer
-The logic in this section will create a AI Search Indexer.
-
-Append the following code to the bottom of `Main`:
-
-```
-/* ************************* Indexer */
-
-var indexer = new SearchIndexer(nameAISearch_Indexer, nameAISearch_DataSource, nameAISearch_Index)
-{
-    Parameters = new IndexingParameters()
-    {
-        IndexingParametersConfiguration = new IndexingParametersConfiguration()
-        {
-            ImageAction = BlobIndexerImageAction.GenerateNormalizedImagePerPage, /* re: OCR */
-        }
-    },
-    SkillsetName = nameAISearch_Skillset,
-    IsDisabled = true
-};
-
-indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/normalized_images/*/text") { TargetFieldName = "text" });
-indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/content/keyphrases") { TargetFieldName = "keyphrases" });
-indexer.OutputFieldMappings.Add(new FieldMapping(sourceFieldName: "/document/content/myColumn") { TargetFieldName = "myColumn" });
-
-indexerClient.DeleteIndexer(indexer);
-indexerClient.CreateIndexer(indexer);
-```
-
-Logic Explained:
-1. **SearchIndexer Creation**: A `SearchIndexer` named `indexer` is created with a specified indexer name, data source name, and index name. The indexer is configured with specific parameters and a skillset name
-2. **IndexingParametersConfiguration**: The `IndexingParametersConfiguration` is set to `BlobIndexerImageAction.GenerateNormalizedImagePerPage`, which means the indexer will perform Optical Character Recognition (OCR) on images in blobs and generate a normalized image per page
-3. **IsDisabled**: The indexer is initially disabled (`IsDisabled = true`) to prevent it from auto-processing after creation... re-enable by modifying Indexer >> "Indexer Definition (JSON)"
-4. **OutputFieldMappings**: These mappings define how the output of a skill is mapped to a field in an index schema:
-   <br>`text`... from `OcrSkill` and `/document/normalized_images/*/text`
-   <br>`keyphrases`... from `KeyPhraseExtractionSkill` and `/document/content/keyphrases`
-   <br>`myColumn`... from `WebApiSkill` and `/document/content/myColumn` (custom skillset)
-6. **DeleteIndexer** and **CreateIndexer**: The existing indexer with the same name is deleted if it exists, and then the new indexer is created.
+* _API handling was added to address the fact that, as of Jan 2024, Vectorization had not been completely surfaced in the `Azure.Search.Documents` library_
+* _I left calls for both `...SDK` and `...API` versions and comment as needed to achieve my goals_
 
 -----
 
