@@ -913,8 +913,221 @@ _Notes:_
 * _Parameters will be wrapped in curly brackets {e.g., `{ResourceGroup-Name}`} and replaced with values in the related code_
 * _`{ResourceGroup-Name}` is used as a prefix throughout the code... each created resource will start with `{ResourceGroup-Name}`, and follow with an acronym describing the resource type (as well as any other related identifying information)_
 
+#### skillset.json
 
+Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "skillset.json" on the resulting popup and then click "Add".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7cc8e7e4-f577-4fb7-af39-a13f9331ae7d" width="800" title="Snipped: January 18, 2024" />
+
+Replace the default code with:
+
+```
+{
+  "name": "{ResourceGroup-Name}ss-skillset",
+  "skills": [
+    {
+      "@odata.type": "#Microsoft.Skills.Vision.OcrSkill",
+      "name": "#1",
+      "description": "Step #1: Extract text from image",
+      "context": "/document/normalized_images/*",
+      "lineEnding": "Space",
+      "defaultLanguageCode": "en",
+      "detectOrientation": true,
+      "inputs": [
+        {
+          "name": "image",
+          "source": "/document/normalized_images/*"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "targetName": "text"
+        },
+        {
+          "name": "layoutText",
+          "targetName": "layoutText"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.MergeSkill",
+      "name": "#2",
+      "description": "Step #2: Merge content, text, and contentOffset",
+      "context": "/document",
+      "insertPreTag": " ",
+      "insertPostTag": " ",
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/content"
+        },
+        {
+          "name": "itemsToInsert",
+          "source": "/document/normalized_images/*/text"
+        },
+        {
+          "name": "offsets",
+          "source": "/document/normalized_images/*/contentOffset"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mergedText",
+          "targetName": "merged_content"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+      "name": "#3",
+      "description": "Step #3: Extract keyphrases from merged_content",
+      "context": "/document/merged_content",
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/merged_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "keyPhrases",
+          "targetName": "keyphrases"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+      "description": "Step #4: Split Chunks, merged_content > pages",
+      "context": "/document",
+      "defaultLanguageCode": "en",
+      "textSplitMode": "pages",
+      "maximumPageLength": 2000,
+      "pageOverlapLength": 500,
+      "maximumPagesToTake": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/merged_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "textItems",
+          "targetName": "pages"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+      "description": "Step #5: Generate Embeddings, pages > vector",
+      "context": "/document/pages/*",
+      "resourceUri": "https://{ResourceGroup-Name}oai.openai.azure.com",
+      "apiKey": "{OpenAI-Key}",
+      "deploymentId": "{ResourceGroup-Name}oai-ada2",
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/pages/*"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "embedding",
+          "targetName": "vector"
+        }
+      ]
+    }
+  ],
+  "cognitiveServices": {
+    "@odata.type": "#Microsoft.Azure.Search.CognitiveServicesByKey",
+    "description": "/subscriptions/{Subscription}/resourceGroups/{ResourceGroup-Name}/providers/Microsoft.CognitiveServices/accounts/{ResourceGroup-Name}ais",
+    "key": "{AIServices-Key}"
+  },
+  "indexProjections": {
+    "selectors": [
+      {
+        "targetIndexName": "{ResourceGroup-Name}ss-index",
+        "parentKeyFieldName": "parent_id",
+        "sourceContext": "/document/pages/*",
+        "mappings": [
+          {
+            "name": "metadata_author",
+            "source": "/document/metadata_author"
+          },
+          {
+            "name": "metadata_creation_date",
+            "source": "/document/metadata_creation_date"
+          },
+          {
+            "name": "metadata_language",
+            "source": "/document/metadata_language"
+          },
+          {
+            "name": "metadata_storage_content_type",
+            "source": "/document/metadata_storage_content_type"
+          },
+          {
+            "name": "metadata_storage_file_extension",
+            "source": "/document/metadata_storage_file_extension"
+          },
+          {
+            "name": "metadata_storage_last_modified",
+            "source": "/document/metadata_storage_last_modified"
+          },
+          {
+            "name": "metadata_storage_name",
+            "source": "/document/metadata_storage_name"
+          },
+          {
+            "name": "metadata_storage_path",
+            "source": "/document/metadata_storage_path"
+          },
+          {
+            "name": "metadata_storage_size",
+            "source": "/document/metadata_storage_size"
+          },
+          {
+            "name": "metadata_title",
+            "source": "/document/metadata_title"
+          },
+          {
+            "name": "content",
+            "source": "/document/content"
+          },
+          {
+            "name": "text",
+            "source": "/document/normalized_images/*/text"
+          },
+          {
+            "name": "layoutText",
+            "source": "/document/normalized_images/*/layoutText"
+          },
+          {
+            "name": "merged_content",
+            "source": "/document/merged_content"
+          },
+          {
+            "name": "keyphrases",
+            "source": "/document/merged_content/keyphrases"
+          },
+          {
+            "name": "chunk",
+            "source": "/document/pages/*"
+          },
+          {
+            "name": "vector",
+            "source": "/document/pages/*/vector"
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "projectionMode": "skipIndexingParentDocuments"
+    }
+  }
+}
+```
 
 
 
