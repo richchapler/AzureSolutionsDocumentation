@@ -630,7 +630,7 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe8abcf5-dd66-4357-81bd-b58f5ceabd33" width="600" title="Snipped: January 18, 2024" />
 
-Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, enter name "index.json" on the resulting popup and then click "Add".
+Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "index.json" on the resulting popup and then click "Add".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bb13c1e4-9834-4759-9410-c6c33ea9b910" width="800" title="Snipped: January 18, 2024" />
 
