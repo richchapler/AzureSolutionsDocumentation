@@ -2,8 +2,6 @@
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
-⚠️ **UPDATES IN PROGRESS** ⚠️
-
 ## Use Case
 * "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
 * "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
