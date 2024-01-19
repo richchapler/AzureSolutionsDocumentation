@@ -24,8 +24,10 @@ This documentation assumes the following resources are ready for use:
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
+  * AISearch-IndexName
   * AISearch-Key
   * AISearch-Name
+  * AISearch-SemanticConfigurationName
   * AISearch-Url
   * OpenAI-DeploymentName
   * OpenAI-Endpoint
