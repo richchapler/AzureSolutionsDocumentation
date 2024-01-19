@@ -7,6 +7,7 @@
 * "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
 * "We want to capture our AI Search index creation process in our DevOps repo"
 * "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
+* "Both semantic and vector should be activated"
 * "All secrets must be stored in Key Vault"
 
 ## Proposed Solution
