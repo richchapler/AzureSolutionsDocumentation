@@ -19,7 +19,7 @@
 
 This documentation assumes the following resources are ready for use:
 
-* [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with Semantic Configuration
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
 
   _Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
 
@@ -138,7 +138,7 @@ namespace AI_UserInterface.Helpers
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d7ffc067-4bc0-4191-8bd3-c07510ecf5de" width="800" title="Snipped January 11, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2df5c3a5-2498-4565-a389-ee91114e610e" width="800" title="Snipped January 24, 2024" />
 
 Replace the default code with:
 
@@ -150,7 +150,7 @@ using System.Text.Json;
 
 namespace AI_UserInterface.Helpers
 {
-    internal class AISearch
+    public class AISearch
     {
         private readonly KeyVault keyvault;
 
@@ -159,35 +159,35 @@ namespace AI_UserInterface.Helpers
             keyvault = new KeyVault();
         }
 
-        public async Task<string> Prompt(string query)
+        public async Task<string> Query(string prompt, string type)
         {
             try
             {
                 SearchClient client = new(
-                             endpoint: new Uri(keyvault.getSecret("AISearch-Url")),
-                             indexName: $"{keyvault.getSecret("AISearch-Name")}-index",
-                             credential: new AzureKeyCredential(keyvault.getSecret("AISearch-Key"))
-                             );
+                    endpoint: new Uri(keyvault.getSecret("AISearch-Url")),
+                    indexName: keyvault.getSecret("AISearch-IndexName"),
+                    credential: new AzureKeyCredential(keyvault.getSecret("AISearch-Key"))
+                    );
 
-                SearchResults<SearchDocument> response = await client.SearchAsync<SearchDocument>(query);
-
-                List<SearchDocument> documents = new List<SearchDocument>();
-
-                foreach (SearchResult<SearchDocument> result in response.GetResults())
+                SearchOptions so = new();
+                switch (type)
                 {
-                    documents.Add(result.Document);
+                    case "Simple": so.QueryType = SearchQueryType.Simple; break;
+                    case "Full": so.QueryType = SearchQueryType.Full; break;
+                    case "Semantic": so.QueryType = SearchQueryType.Semantic; break;
                 }
 
-                var options = new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                };
+                SearchResults<SearchDocument> response = await client.SearchAsync<SearchDocument>(prompt, so);
 
-                return JsonSerializer.Serialize(documents, options);
+                List<SearchResult<SearchDocument>> documents = new List<SearchResult<SearchDocument>>();
+
+                foreach (SearchResult<SearchDocument> result in response.GetResults()) { documents.Add(result); }
+
+                return JsonSerializer.Serialize(documents, new JsonSerializerOptions { WriteIndented = true });
             }
             catch (Exception ex)
             {
-                return $"Error: {ex.Message}";
+                return $"Exception: {ex.Message}";
             }
         }
     }
@@ -198,7 +198,7 @@ namespace AI_UserInterface.Helpers
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/503ef00f-8f06-4ad7-8eca-08d55cca6553" width="800" title="Snipped January 11, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/efd9871f-ad02-4273-a5ee-d6b2bae39674" width="800" title="Snipped January 24, 2024" />
 
 Replace the default code with:
 
@@ -222,25 +222,24 @@ namespace AI_UserInterface.Helpers
             );
         }
 
-        public async Task<string> Prompt(string queryType, string systemMessage, string userMessage)
+        public async Task<string> Prompt(string type, string userMessage, string systemMessage = "")
         {
-            AzureCognitiveSearchQueryType type;
+            var acsqt = AzureCognitiveSearchQueryType.Simple; /* set as a default, need to evaluate whether this is desirable */
 
-            switch (queryType.ToLower())
+            switch (type)
             {
-                case "simple": type = AzureCognitiveSearchQueryType.Simple; break;
-                case "semantic": type = AzureCognitiveSearchQueryType.Semantic; break;
-                default: throw new ArgumentException($"Invalid query type: {queryType}");
+                case "Simple": acsqt = AzureCognitiveSearchQueryType.Simple; break;
+                case "Semantic": acsqt = AzureCognitiveSearchQueryType.Semantic; break;
             }
 
             AzureCognitiveSearchChatExtensionConfiguration config = new()
             {
                 SearchEndpoint = new Uri(keyvault.getSecret("AISearch-Url")),
-                IndexName = keyvault.getSecret("AISearch-Name") + "-index",
-                QueryType = type,
+                IndexName = keyvault.getSecret("AISearch-IndexName"),
+                QueryType = acsqt,
                 ShouldRestrictResultScope = true,
                 DocumentCount = 5,
-                SemanticConfiguration = keyvault.getSecret("AISearch-Name") + "-semanticconfiguration" /* Ignored when queryType != Semantic */
+                SemanticConfiguration = keyvault.getSecret("AISearch-SemanticConfigurationName") /* Ignored when type != Semantic */
             };
             config.SetSearchKey(searchKey: keyvault.getSecret("AISearch-Key"));
 
@@ -314,73 +313,125 @@ Replace the default code with:
 </html>
 ```
 
-#### styles.css
-
-Expand "wwwroot", right-click on "css", expand "Add" and then click "New Item".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0a195af1-054f-4e20-b9ba-63d173114b69" width="600" title="Snipped January 11, 2024" />
-
-On the "Add New Item..." pop-up, expand "C#" >> "ASP.NET Core" >> "Web" >> "Content", click "Style Sheet" on the resulting options, enter Name "styles.css" and then click "Add".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/16df93f8-5353-4018-b09a-19c1e0a43d1d" width="800" title="Snipped January 11, 2024" />
-
-Replace the default code with:
-
-```
-.form {
-    display: flex;
-    text-align: left;
-}
-
-.queryInput {
-    width: 90%;
-}
-
-.queryButton {
-    width: 10%;
-}
-
-.table {
-    text-align: left;
-}
-
-.responseHeader {
-    width: 15%;
-}
-
-.responseBody {
-    width: 85%;
-}
-
-.responses {
-    width: 100%;
-    border: 1px solid black;
-}
-
-.messages {
-    width: 100%;
-    border: none;
-}
-```
-
 -----
 
 ### Step 5: Back-End
 
-#### ChatHub.cs
+#### SignalHub.cs
 
-Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "ChatHub.cs" on the resulting popup then click "Add".
+Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "SignalHub.cs" on the resulting popup then click "Add".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b0a2eb39-4790-4607-a609-6462fc0191d8" width="800" title="Snipped January 11, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a7963763-f63b-4971-94e6-c132a2b1079c" width="800" title="Snipped January 24, 2024" />
 
 Replace the default code with:
 
 ```
+using AI_UserInterface.Helpers;
 using Microsoft.AspNetCore.SignalR;
+using System.Diagnostics;
+using System.Text.Json;
 
-public class ChatHub : Hub
+public class SignalHub : Hub
 {
-    public async Task SendSystemMessage(string message)
+    public async Task ProcessPrompt(string prompt)
+    {
+        try
+        {
+            /* ************************* Query AISearch */
+
+            await queryAISearch("Simple", "queryAISearch_Simple", prompt);
+            await queryAISearch("Full", "queryAISearch_Full", prompt);
+            await queryAISearch("Semantic", "queryAISearch_Semantic", prompt);
+
+            /* ************************* Query OpenAI */
+
+            await queryOpenAI("Simple", "queryOpenAI_Simple", prompt);
+            await queryOpenAI("Semantic", "queryOpenAI_Semantic", prompt);
+        }
+        catch (Exception ex)
+        {
+            await Clients.All.SendAsync("logMessage", $"Exception: {ex}\n");
+        }
+    }
+
+    private async Task queryAISearch(string type, string method, string prompt)
+    {
+        Stopwatch s = new(); s.Start();
+
+        await Clients.Caller.SendAsync(method, arg1: new { response = "Processing...", elapsed = ">0" });
+
+        AISearch ais = new();
+
+        var responseAISearch = await ais.Query(prompt, type);
+
+        s.Stop();
+
+        string response = "";
+        List<Dictionary<string, JsonElement>>? list = new();
+
+        try
+        {
+            list = JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(responseAISearch);
+        }
+        catch (JsonException ex)
+        {
+            await Clients.All.SendAsync("logMessage", $"Failed to deserialize responseAISearch: {ex.Message}. responseAISearch: {responseAISearch}");
+        }
+
+        var maxScorePerName = list
+            .Select(item => new
+            {
+                Name = item["Document"].ToString(),
+                Score = item.ContainsKey("Score") ? ConvertJsonElementToDouble(item["Score"]) : 0.0,
+                RerankerScore = item.ContainsKey("SemanticSearch") && item["SemanticSearch"].ValueKind == JsonValueKind.Object && item["SemanticSearch"].GetProperty("RerankerScore").ValueKind == JsonValueKind.Number ? ConvertJsonElementToDouble(item["SemanticSearch"].GetProperty("RerankerScore")) : 0.0
+            })
+            .GroupBy(item => JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(item.Name)["metadata_storage_name"].ToString())
+            .Select(group => new
+            {
+                Name = group.Key,
+                MaxScore = group.Max(item => item.Score),
+                MaxRerankerScore = group.Max(item => item.RerankerScore)
+            })
+            .OrderByDescending(item => item.MaxScore)  
+            .ThenByDescending(item => item.MaxRerankerScore)  
+            .Take(3);   // Take the top 3  
+
+        foreach (var item in maxScorePerName)
+        {
+            string name = item.Name.Length > 30 ? item.Name.Substring(0, 30) + "..." : item.Name;
+            string score = item.MaxScore.ToString("F1");
+            string rerankerscore = item.MaxRerankerScore.ToString("F1");
+            response += $"- {name}\n  (max score: {score}, rerankerscore: {rerankerscore})\n";
+        }
+
+        await Clients.Caller.SendAsync(method, arg1: new { response = response, json = responseAISearch, elapsed = s.Elapsed.TotalSeconds.ToString("F1") }
+        );
+    }
+
+    public static double ConvertJsonElementToDouble(JsonElement element)
+    {
+        return element.ValueKind == JsonValueKind.Number ? element.GetDouble() : (double)0;
+    }
+
+    private async Task queryOpenAI(string type, string method, string prompt)
+    {
+        Stopwatch s = new(); s.Start();
+
+        OpenAI oai = new();
+
+        await Clients.Caller.SendAsync(method, arg1: new { response = "Processing...", elapsed = "..." });
+        var responseOpenAI = await oai.Prompt(type, systemMessage: "", userMessage: prompt);
+
+        s.Stop();
+
+        await Clients.Caller.SendAsync(
+            method,
+            arg1: new { response = responseOpenAI, elapsed = Math.Round(s.Elapsed.TotalSeconds, 1).ToString("F1") }
+        );
+    }
+
+
+    public async Task LogMessage(string message)
     {
         await Clients.All.SendAsync("logMessage", message);
     }
@@ -431,12 +482,12 @@ app.Run();
 
 Expand "Pages" and then double-click to open "Index.cshtml".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c8f9eadd-29dd-4150-98aa-68cb8037edaf" width="800" title="Snipped January 11, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1c54110d-a774-49dc-b84d-2590d89d694b" width="800" title="Snipped January 24, 2024" />
 
 Replace the default code with:
 
 ```
-@page
+@page "{handler?}"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -444,104 +495,157 @@ Replace the default code with:
 
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/css/styles.css" />
-</head>
 <body>
-        <div class="container">
-            <form method="post" class="form">
-                <input type="text" name="userPrompt" class="queryInput" placeholder="Enter your query or prompt here..." />
-                <input type="submit" value="Search" class="queryButton" />
-            </form>
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td class="responseHeader">
-                            <h5>AI Search</h5>
-                        </td>
-                        <td class="responseBody">
-                        <textarea id="responseAISearch" rows=5" class="responses" readonly>@ViewData["responseAISearch"]</textarea>
+    <div class="container">
+        <form method="post" class="form">
+            <input type="text" class="queryInput" id="userPrompt" name="userPrompt" placeholder="Enter your query or prompt here..." />
+            <button type="button" class="queryButton" onclick="processPrompt()">Search</button>
+        </form>
+        <table class="table">
+            <tbody>
+                <tr class="row">
+                    <td class="responseHeader"><h5>AI Search</h5></td>
+                    <td class="responseBody">
+                        <table class="table" style="width:100%;">
+                            <tr>
+                                <td style="width: 33%;border: none;">
+                                    <textarea id="textareaAISearch_Simple" class="textareas" rows="12" readonly>@ViewData["textareaAISearch_Simple"]</textarea>
+                                    <label id="labelAISearch_Simple">Simple</label>
+                                </td>
+                                <td style="width: 33%;border: none;">
+                                    <textarea id="textareaAISearch_Full" class="textareas" rows="12" readonly>@ViewData["textareaAISearch_Full"]</textarea>
+                                    <label id="labelAISearch_Full">Full</label>
+                                </td>
+                                <td style="width: 33%;border: none;">
+                                    <textarea id="textareaAISearch_Semantic" class="textareas" rows="12" readonly>@ViewData["textareaAISearch_Semantic"]</textarea>
+                                    <label id="labelAISearch_Semantic">Semantic</label>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
-                    </tr>
-                    <tr>
-                        <td class="responseHeader"><h5>OpenAI</h5>(keyword)</td>
-                        <td class="responseBody">
-                        <textarea id="responseOpenAI_Keyword" rows="5" class="responses" readonly">@ViewData["responseOpenAI_Keyword"]</textarea>
+                </tr>
+                <tr class="row">
+                    <td class="responseHeader"><h5>OpenAI</h5></td>
+                    <td class="responseBody">
+                        <table class="table" style="width:100%;">
+                            <tr>
+                                <td style="width: 100%;border: none;">
+                                    <textarea id="textareaOpenAI_Simple" rows="5" class="textareas" readonly>@ViewData["textareaOpenAI_Simple"]</textarea>
+                                    <label id="labelOpenAI_Simple">Simple</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%;border: none;">
+                                    <textarea id="textareaOpenAI_Semantic" rows="5" class="textareas" readonly>@ViewData["textareaOpenAI_Semantic"]</textarea>
+                                    <label id="labelOpenAI_Semantic">Semantic</label>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
-                    </tr>
-                    <tr>
-                        <td class="responseHeader"><h5>OpenAI</h5>(semantic)</td>
-                        <td class="responseBody">
-                        <textarea id="responseOpenAI_Semantic" rows="5" class="responses" readonly">@ViewData["responseOpenAI_Semantic"]</textarea>
+                </tr>
+                <tr class="row">
+                    <td class="responseHeader"><h5>Log</h5></td>
+                    <td class="responseBody">
+                        <textarea id="messages" rows="5" class="textareas" readonly>@ViewData["messages"]</textarea>
                     </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <textarea id="messages" rows="4" class="messages" readonly>@ViewData["messages"]</textarea>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    @* Libraries *@
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+    <style>
+        .form {
+            display: flex;
+            text-align: left;
+        }
 
-    @* Real-Time Server to Client-Side Messaging *@
+        .queryInput {
+            width: 90%;
+        }
+
+        .queryButton {
+            width: 10%;
+        }
+
+        .responseBody {
+            width: 85%;
+            border: none;
+        }
+
+        .responseHeader {
+            width: 15%;
+            border: none;
+        }
+
+        .textareas {
+            width: 100% !important;
+            border: 1px solid black;
+            display: block;
+            font-family: Consolas;
+            font-size: 11px;
+        }
+
+        .row {
+            border-bottom: 1px solid lightgray !important;
+        }
+
+        .table {
+            text-align: left;
+        }
+    </style>
+
+    @* Libraries *@
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js" "></script>
+
+    @* Server >> Client-Side Messaging without Refresh *@
     <script>
-        const connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+        const connection = new signalR.HubConnectionBuilder().withUrl("/signalHub").build();
+
         connection.on("logMessage", function (message) { document.getElementById('messages').value += message; });
-        connection.start().catch(function (err) { return console.error(err.toString()); });
+
+        connection.on("queryAISearch_Simple", function (data) {
+            document.getElementById('textareaAISearch_Simple').value = data.response + (data.json !== undefined ? "\n-------------------------\n" + data.json : "");
+            document.getElementById('labelAISearch_Simple').innerText = "Simple (" + data.elapsed + " seconds)";
+        });
+
+        connection.on("queryAISearch_Full", function (data) {
+            document.getElementById('textareaAISearch_Full').value = data.response + (data.json !== undefined ? "\n-------------------------\n" + data.json : "");
+            document.getElementById('labelAISearch_Full').innerText = "Full (" + data.elapsed + " seconds)";
+        });
+
+        connection.on("queryAISearch_Semantic", function (data) {
+            document.getElementById('textareaAISearch_Semantic').value = data.response + (data.json !== undefined ? "\n-------------------------\n" + data.json : "");
+            document.getElementById('labelAISearch_Semantic').innerText = "Semantic (" + data.elapsed + " seconds)";
+        });
+
+        connection.on("queryOpenAI_Simple", function (data) {
+            document.getElementById('textareaOpenAI_Simple').value = data.response;
+            document.getElementById('labelOpenAI_Simple').innerText = "Simple (" + data.elapsed + " seconds)";
+        });
+
+        connection.on("queryOpenAI_Semantic", function (data) {
+            document.getElementById('textareaOpenAI_Semantic').value = data.response;
+            document.getElementById('labelOpenAI_Semantic').innerText = "Semantic (" + data.elapsed + " seconds)";
+        });
+
+        connection.start()
+
+        function processPrompt() {
+            document.getElementById('textareaAISearch_Simple').value = "Pending...";
+            document.getElementById('textareaAISearch_Full').value = "Pending...";
+            document.getElementById('textareaAISearch_Semantic').value = "Pending...";
+            document.getElementById('textareaOpenAI_Simple').value = "Pending...";
+            document.getElementById('textareaOpenAI_Semantic').value = "Pending...";
+
+            let userPrompt = document.getElementById('userPrompt').value;
+
+            connection.invoke("ProcessPrompt", userPrompt).catch(function (err) { return console.error(err.toString()); });
+        }
     </script>
 </body>
 </html>
-```
-
-#### Index.cshtml.cs
-
-Expand "Index.cshtml" and then double-click to open "Index.cshtml.cs".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/42d22822-f353-4267-aae6-8121735999f5" width="800" title="Snipped January 11, 2024" />
-
-Replace the default code with:
-
-```
-using AI_UserInterface.Helpers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.SignalR;
-
-public class IndexModel : PageModel
-{
-    private readonly IHubContext<ChatHub> hc;
-
-    [BindProperty]
-    public string userPrompt { get; set; }
-
-    public IndexModel(IHubContext<ChatHub> hubContext)
-    {
-        hc = hubContext;
-        userPrompt = string.Empty;
-    }
-
-    public async Task<IActionResult> OnPostAsync()
-    {
-        await hc.Clients.All.SendAsync("logMessage", $"Processing Prompt: {string.Join(" ", userPrompt.Split(' ').Take(5)) + "..."}\n");
-        AISearch aisearch = new();
-        OpenAI openai = new();
-
-        await hc.Clients.All.SendAsync("logMessage", "* Querying AISearch...\n");
-        ViewData["responseAISearch"] = await aisearch.Prompt(query: userPrompt);
-
-        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (keyword)...\n");
-        ViewData["responseOpenAI_Keyword"] = await openai.Prompt(queryType: "Simple", systemMessage: "", userMessage: userPrompt);
-
-        await hc.Clients.All.SendAsync("logMessage", "* Prompting OpenAI (semantic)...\n");
-        ViewData["responseOpenAI_Semantic"] = await openai.Prompt(queryType: "Semantic", systemMessage: "", userMessage: userPrompt);
-
-        return Page();
-    }
-}
 ```
 
 -----
