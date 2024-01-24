@@ -24,12 +24,13 @@
  
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * AISearch-Key
+  * AISearch-SemanticConfigurationName
   * AIServices-Key
   * OpenAI-Key
   * ResourceGroup-Name... will be used in the code as a prefix for all newly-created Azure entities
   * Storage-ConnectionString
   * Storage-ContainerName
-  * Subscription
+  * Subscription-Id
  
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-ada-002" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
  
