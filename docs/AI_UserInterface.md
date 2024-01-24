@@ -2,6 +2,8 @@
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7951bd4a-1806-427c-bf5f-23714f63b73a" width="1000" />
 
+⚠️ UPDATES-IN-PROGRESS (Jan 24, 2024) ⚠️
+
 ## Use Case
 * "The AI Search and OpenAI demonstration apps are insufficient"
 * "We want a demonstration application that allows us to query both AI Search and OpenAI at once"
