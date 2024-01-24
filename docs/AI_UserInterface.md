@@ -2,8 +2,6 @@
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7951bd4a-1806-427c-bf5f-23714f63b73a" width="1000" />
 
-⚠️ UPDATES-IN-PROGRESS (Jan 24, 2024) ⚠️
-
 ## Use Case
 * "The AI Search and OpenAI demonstration apps are insufficient"
 * "We want a demonstration application that allows us to query both AI Search and OpenAI at once"
@@ -654,11 +652,9 @@ Replace the default code with:
 
 Click "Debug" >> "Start Debugging" in the menu bar.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2df81a73-a49b-444e-82ac-c84a263153b2" width="800" title="Snipped January 11, 2024" />
-
 Enter a prompt and click "Search"... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/117c6781-06de-4e36-9119-227c41d43fde" width="800" title="Snipped January 11, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2448cb50-ba16-4ea3-8c08-04f9c74786ef" width="800" title="Snipped January 24, 2024" />
 
 When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword and semantic configurations).
 
