@@ -27,6 +27,7 @@
   * AISearch-SemanticConfigurationName
   * AIServices-Key
   * OpenAI-Key
+  * OpenAI-Name
   * ResourceGroup-Name... will be used in the code as a prefix for all newly-created Azure entities
   * Storage-ConnectionString
   * Storage-ContainerName
