@@ -26,6 +26,7 @@
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * AISearch-Key
   * AISearch-SemanticConfigurationName
+  * AISearch-SynonymMapName
   * AIServices-Key
   * OpenAI-Key
   * OpenAI-Name
