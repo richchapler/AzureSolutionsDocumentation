@@ -24,13 +24,19 @@
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
+  * AISearch-DataSource-Name
+  * AISearch-Index-Name
+  * AISearch-Indexer-Name
   * AISearch-Key
-  * AISearch-SemanticConfigurationName
-  * AISearch-SynonymMapName
+  * AISearch-Name
+  * AISearch-SemanticConfiguration-Name
+  * AISearch-Skillset-Name
+  * AISearch-Suggester-Name
+  * AISearch-SynonymMap-Name
   * AIServices-Key
   * OpenAI-Key
   * OpenAI-Name
-  * ResourceGroup-Name... will be used in the code as a prefix for all newly-created Azure entities
+  * ResourceGroup-Name
   * Storage-ConnectionString
   * Storage-ContainerName
   * Subscription-Id
