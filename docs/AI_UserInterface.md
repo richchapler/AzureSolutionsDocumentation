@@ -6,12 +6,8 @@
 * "The AI Search and OpenAI demonstration apps are insufficient"
 * "We want a demonstration application that allows us to query both AI Search and OpenAI at once"
 * "We want to see responses from more than one configuration of both AI Search and Open AI"
-* "We need an easy way to judge time-to-respond"
+* "We need an easy way to evaluate time-to-respond"
 * "We need a User Interface Template that we can customize for our various internal use cases"
-
-## Proposed Solution
-* **Create Application**: lorem ipsum
-* **Publish Application**: lorem ipsum
 
 ## Solution Requirements
 
@@ -19,19 +15,16 @@ This documentation assumes the following resources are ready for use:
 
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
 
-  _Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
-
-* App Service (Windows)
+* [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
-  * AISearch-IndexName
+  * AISearch-Index-Name
   * AISearch-Key
   * AISearch-Name
-  * AISearch-SemanticConfigurationName
-  * AISearch-Url
-  * OpenAI-DeploymentName
-  * OpenAI-Endpoint
+  * AISearch-SemanticConfiguration-Name
+  * OpenAI-Deployment-Name
+  * OpenAI-Name
   * OpenAI-Key
 
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
@@ -40,7 +33,7 @@ This documentation assumes the following resources are ready for use:
 
 ## Exercise 1: Create Application
 
-In this exercise we will create an application.
+In this exercise we will create a web application.
 
 ### Step 1: Create Project
 
