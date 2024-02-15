@@ -30,6 +30,10 @@ This documentation assumes the following resources are ready for use:
 
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
+## Documentation Note
+
+I used to spend a lot of time explaining code blocks, but I am skipping that part of my sharing process in favor of a recommendation to copy code blocks to Copilot along with prompt "what does this do?" for a really great description!
+
 -----
 
 ### Step 1: Create Project
