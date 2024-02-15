@@ -757,27 +757,17 @@ document.getElementById('userPrompt').addEventListener('keydown', function (e) {
 connection.start();    
 ```
 
-
-
-
-LOREM IPSUM
-
-
-
-
-
-
 -----
 
 ### Step 7: Confirm Success
 
 Click "Debug" >> "Start Debugging" in the menu bar.
 
-Enter a prompt and click "Search"... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
+Enter a prompt and press the Enter key on your keyboard... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2448cb50-ba16-4ea3-8c08-04f9c74786ef" width="800" title="Snipped January 24, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ad8c4c8-a51b-4483-84ef-680b4df54386" width="800" title="Snipped February 15, 2024" />
 
-When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword and semantic configurations).
+When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword, full, and semantic configurations).
 
 -----
 
