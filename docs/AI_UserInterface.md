@@ -424,7 +424,7 @@ builder.Services.AddSignalR();
 
 /* ************************* Singletons (registered for the entire application) */
 
-string KeyVault_Name = "dmsk";
+string KeyVault_Name = "{YOUR KEY VAULT NAME}";
 builder.Services.AddSingleton(x =>
 {
     var secretClient = new SecretClient(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
