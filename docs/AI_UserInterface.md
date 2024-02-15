@@ -263,7 +263,7 @@ namespace AI_Interface.Helpers
 
 Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e5a2bc69-ee94-485f-be3e-6ef2a1327f25" width="800" title="Snipped January 11, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fdb3c74c-6070-46c5-badf-703c4f517f09" width="800" title="Snipped February 15, 2024" />
 
 Replace the default code with:
 
@@ -273,22 +273,27 @@ Replace the default code with:
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AI_UserInterface</title>
+    <title>@ViewData["Title"] - AI_Interface</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AI_UserInterface.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">AI_UserInterface</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">AI_Interface</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                     @*    <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li> *@
                     </ul>
                 </div>
             </div>
@@ -299,6 +304,12 @@ Replace the default code with:
             @RenderBody()
         </main>
     </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            @* &copy; 2024 - AI_Interface - <a asp-area="" asp-page="/Privacy">Privacy</a> *@
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
