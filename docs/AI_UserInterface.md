@@ -32,10 +32,6 @@ This documentation assumes the following resources are ready for use:
 
 -----
 
-## Exercise 1: Create Application
-
-In this exercise we will create a web application.
-
 ### Step 1: Create Project
 
 Open Visual Studio and click "Create a new project".
@@ -782,52 +778,6 @@ Enter a prompt and click "Search"... allow time for processing and monitor progr
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2448cb50-ba16-4ea3-8c08-04f9c74786ef" width="800" title="Snipped January 24, 2024" />
 
 When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword and semantic configurations).
-
------
-
-**Congratulations... you have successfully completed this exercise**
-
------
-
-## Exercise 2: Publish Application
-
-Right-click on the project and select "Publish..." from the resulting dropdown.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6a2f5899-3475-4ee3-a35d-9a06efa8398f" width="600" title="Snipped January 11, 2024" />
-
-On the "Publish" pop-up, "Target" tab, confirm selection of "Azure" and then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a8d84ed-49ad-44d9-9acf-0b21182299e8" width="600" title="Snipped January 11, 2024" />
-
-On the "Publish" pop-up, "Specific target" tab, select "Azure App Service (Windows)" and then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6e56c98a-d253-45b1-8b75-3e69a3c4cbfd" width="600" title="Snipped January 11, 2024" />
-
-On the "Publish" pop-up, "App Service" tab, click "Create a new instance".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7dc1423e-9d0f-49b9-a5f9-7f0cee728e6e" width="400" title="Snipped January 11, 2024" />
-
-Complete the "App Service (Windows" >> "Create new" pop-up form and then click "Create".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b9fb47e3-2409-42a9-b547-b8c1ae4dfc05" width="600" title="Snipped January 11, 2024" />
-
-On the "Publish" pop-up, "App Service" tab, confirm selection of the new App Service and then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2bcd9da9-a647-4c9f-9b31-06a1c6a76677" width="600" title="Snipped January 11, 2024" />
-
-On the "Publish" pop-up, "Deployment type" tab, confirm selection of "Publish..." and then click "Finish".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/67301903-6b0c-430f-91ac-8876f41f3c85" width="600" title="Snipped January 11, 2024" />
-
-On the "Publish" pop-up, "Finish" tab, confirm success and then click "Close".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0699015-b693-4636-867e-1508263943de" width="800" title="Snipped January 11, 2024" />
-
-On the "...Publish" tab, click the "Publish" button and monitor progress.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4de6c06e-899b-4d3a-8487-44fd763ffc9e" width="800" title="Snipped January 11, 2024" />
-
-Once successfully published, Visual Studio will launch your new web application in a browser.
 
 -----
 
