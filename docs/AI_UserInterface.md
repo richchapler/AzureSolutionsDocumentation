@@ -38,7 +38,7 @@ Open Visual Studio and click "Create a new project".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/138cf716-d18b-424f-a467-5cdeabcd4beb" width="600" title="Snipped January 9, 2024" />
 
-On the "Create a new project" form, search for and select "ASP .NET CoreWeb App (Razor Pages)", then click "Next".
+On the "Create a new project" form, search for and select "ASP .NET Core Web App (Razor Pages)", then click "Next".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/226546ce-60de-4596-b7c0-b9a81f8c1e4f" width="600" title="Snipped February 15, 2024" />
 
