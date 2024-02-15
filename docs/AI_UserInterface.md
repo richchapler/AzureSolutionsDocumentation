@@ -57,29 +57,21 @@ Complete the "Additional information" form, then click "Create".
 
 ### Step 2: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2dbd5b36-79b8-42ec-aaae-c53d6ed114e7" width="800" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9e41690c-0c77-4a61-bab8-95d6cea755c4" width="800" title="Snipped February 15, 2024" />
 
 Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manage NuGet Packages for Solution..."
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1662d9f3-56b5-4950-bf0a-db53bf6f0800" width="800" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dd2f9cc3-9b68-435a-9804-0d8c6f18d94e" width="800" title="Snipped February 15, 2024" />
 
-On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity".
+On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolutions.Helpers".
 
 On the resulting pop-out, check the box next to your  and then click "Install".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6d312057-30b7-4579-b08a-1c8b1fa5b47a" width="300" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2a032967-9fe7-4c3e-b555-46f1c0db4ea1" width="300" title="Snipped February 15, 2024" />
 
 When prompted, click "I Accept" on the "License Acceptance" pop-up.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/306c0f70-0ae2-4b3f-970d-5a4e24137647" width="800" title="Snipped December 19, 2023" />
-
-#### Additional Packages
-
-Repeat this process for the following NuGet packages:
-
-* Azure.AI.OpenAI (**1.0.0-beta.9**)
-* Azure.Search.Documents
-* Azure.Security.KeyVault.Secrets
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6c50a96f-aba6-4feb-9b60-1a736c2834aa" width="800" title="Snipped February 15, 2023" />
 
 -----
 
