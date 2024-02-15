@@ -14,6 +14,7 @@
 This documentation assumes the following resources are ready for use:
 
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
+  * My current configuration uses an index pointed at the Azure SQL AdventureWorks sample database
 
 * [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
 
