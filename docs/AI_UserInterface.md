@@ -65,6 +65,8 @@ Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manag
 
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolutions.Helpers".
 
+_Note: This documentation uses [AzureSolution.Helpers](https://www.nuget.org/packages/AzureSolutions.Helpers/) v1.1.0_
+
 On the resulting pop-out, check the box next to your  and then click "Install".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2a032967-9fe7-4c3e-b555-46f1c0db4ea1" width="300" title="Snipped February 15, 2024" />
@@ -77,100 +79,115 @@ When prompted, click "I Accept" on the "License Acceptance" pop-up.
 
 ### Step 3: Helper Classes
 
+_Note: Though most helper logic has been moved to the AzureSolutions.Helpers package, package-specific helper logic remains in this application_
+
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4310c7fb-41ff-4f34-b18b-e43771662e18" width="600" title="Snipped January 11, 2024" />
-
-#### KeyVault.cs
-
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/87a5af20-1942-4500-bb26-6cbe4c74e76b" width="800" title="Snipped January 11, 2024" />
-
-Replace the default code with:
-
-```
-using Azure;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-
-namespace AI_UserInterface.Helpers
-{
-    internal class KeyVault
-    {
-        private SecretClient client;
-
-        public KeyVault()
-        {
-            client = new SecretClient(
-                vaultUri: new Uri("https://KEYVAULTNAME.vault.azure.net/"),
-                credential: new DefaultAzureCredential()
-                );
-        }
-
-        public string getSecret(string secretName)
-        {
-            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
-            return responseKeyVaultSecret.Value.Value;
-        }
-    }
-}
-```
 
 #### AISearch.cs
 
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup and click "Add".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2df5c3a5-2498-4565-a389-ee91114e610e" width="800" title="Snipped January 24, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/562e6636-7f0f-482f-a52e-02e7f78b850c" width="600" title="Snipped February 15, 2024" />
 
 Replace the default code with:
 
 ```
-using Azure;
-using Azure.Search.Documents;
 using Azure.Search.Documents.Models;
+using AzureSolutions.Helpers;
+using System.Diagnostics;
 using System.Text.Json;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace AI_UserInterface.Helpers
+namespace AI_Interface.Helpers
 {
+    public class AISearch_Result
+    {
+        public string? Response { get; set; }
+        public double SecondsToProcess { get; set; }
+    }
+
     public class AISearch
     {
-        private readonly KeyVault keyvault;
-
-        public AISearch()
-        {
-            keyvault = new KeyVault();
-        }
-
-        public async Task<string> Query(string prompt, string type)
+        public static async Task<AISearch_Result> Query(
+            Azure.Search.Documents.SearchClient AISearch_Client,
+            SearchQueryType AISearch_QueryType,
+            string AISearch_Text,
+            string AISearch_SelectField
+            )
         {
             try
             {
-                SearchClient client = new(
-                    endpoint: new Uri(keyvault.getSecret("AISearch-Url")),
-                    indexName: keyvault.getSecret("AISearch-IndexName"),
-                    credential: new AzureKeyCredential(keyvault.getSecret("AISearch-Key"))
+                Stopwatch s = new(); s.Start();
+
+                var response = await AzureSolutions.Helpers.AISearch.Common.Query(
+                    AISearch_Client,
+                    AISearch_QueryType,
+                    AISearch_Text,
+                    AISearch_SelectField
                     );
 
-                SearchOptions so = new();
-                switch (type)
-                {
-                    case "Simple": so.QueryType = SearchQueryType.Simple; break;
-                    case "Full": so.QueryType = SearchQueryType.Full; break;
-                    case "Semantic": so.QueryType = SearchQueryType.Semantic; break;
-                }
+                s.Stop();
 
-                SearchResults<SearchDocument> response = await client.SearchAsync<SearchDocument>(prompt, so);
-
-                List<SearchResult<SearchDocument>> documents = new List<SearchResult<SearchDocument>>();
-
-                foreach (SearchResult<SearchDocument> result in response.GetResults()) { documents.Add(result); }
-
-                return JsonSerializer.Serialize(documents, new JsonSerializerOptions { WriteIndented = true });
+                return new AISearch_Result { Response = response, SecondsToProcess = Math.Round(s.Elapsed.TotalSeconds, 1) };
             }
             catch (Exception ex)
             {
-                return $"Exception: {ex.Message}";
+                Log.Write(message: $"Exception: {ex.Message}", type: "Error");
+                return new AISearch_Result { Response = $"Exception: {ex.Message}", SecondsToProcess = 0 };
+            }
+        }
+
+        public static class ScoreHelper
+        {
+            public static IEnumerable<dynamic> CalculateScores(List<Dictionary<string, JsonElement>> list, string fieldName)
+            {
+                return list
+                    .Select(item =>
+                    {
+                        item.TryGetValue("Score", out JsonElement scoreValue);
+                        double score = ConvertJsonElementToDouble(scoreValue);
+
+                        double rerankerScore = 0.0;
+                        if (item.TryGetValue("SemanticSearch", out JsonElement semanticSearch) && semanticSearch.ValueKind == JsonValueKind.Object)
+                        {
+                            semanticSearch.TryGetProperty("RerankerScore", out JsonElement rerankerScoreValue);
+                            if (rerankerScoreValue.ValueKind == JsonValueKind.Number)
+                            {
+                                rerankerScore = ConvertJsonElementToDouble(rerankerScoreValue);
+                            }
+                        }
+
+                        return new
+                        {
+                            Name = item["Document"].ToString(),
+                            Score = score,
+                            RerankerScore = rerankerScore
+                        };
+                    })
+                    .GroupBy(item =>
+                    {
+                        var itemDictionary = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(item.Name);
+                        string FieldName_AISearchPivot = string.Empty;
+                        if (itemDictionary != null && itemDictionary.TryGetValue(fieldName, out JsonElement storageName))
+                        {
+                            FieldName_AISearchPivot = storageName.ToString();
+                        }
+                        return FieldName_AISearchPivot;
+                    })
+                    .Select(group => new
+                    {
+                        Name = group.Key,
+                        MaxScore = group.Max(item => item.Score),
+                        MaxRerankerScore = group.Max(item => item.RerankerScore),
+                        AvgScore = group.Average(item => item.Score),
+                        AvgRerankerScore = group.Average(item => item.RerankerScore)
+                    });
+            }
+
+            private static double ConvertJsonElementToDouble(JsonElement element)
+            {
+                return element.ValueKind == JsonValueKind.Number ? element.GetDouble() : (double)0;
             }
         }
     }
@@ -179,64 +196,60 @@ namespace AI_UserInterface.Helpers
 
 #### OpenAI.cs
 
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/efd9871f-ad02-4273-a5ee-d6b2bae39674" width="800" title="Snipped January 24, 2024" />
-
-Replace the default code with:
+Repaat the process to create "OpenAI.cs", then replace the default code with:
 
 ```
-using Azure;
 using Azure.AI.OpenAI;
+using AzureSolutions.Helpers;
+using System.Diagnostics;
 
-namespace AI_UserInterface.Helpers
+namespace AI_Interface.Helpers
 {
-    internal class OpenAI
+    public class OpenAIResult
     {
-        KeyVault keyvault = new();
+        public string? Response { get; set; }
+        public double SecondsToProcess { get; set; }
+    }
 
-        private OpenAIClient client;
-
-        public OpenAI()
+    public class OpenAI
+    {
+        public static async Task<OpenAIResult> Query(
+            OpenAIClient OpenAI_Client,
+            string OpenAI_Deployment_Name,
+            string AISearch_Name,
+            string AISearch_Key,
+            string AISearch_Index_Name,
+            AzureCognitiveSearchQueryType AISearch_QueryType,
+            string AISearch_SemanticConfiguration_Name,
+            string UserQuery,
+            string SystemMessage
+        )
         {
-            client = new OpenAIClient(
-                endpoint: new Uri(keyvault.getSecret("OpenAI-Endpoint")),
-                keyCredential: new AzureKeyCredential(keyvault.getSecret("OpenAI-Key"))
-            );
-        }
-
-        public async Task<string> Prompt(string type, string userMessage, string systemMessage = "")
-        {
-            var acsqt = AzureCognitiveSearchQueryType.Simple; /* set as a default, need to evaluate whether this is desirable */
-
-            switch (type)
+            try
             {
-                case "Simple": acsqt = AzureCognitiveSearchQueryType.Simple; break;
-                case "Semantic": acsqt = AzureCognitiveSearchQueryType.Semantic; break;
+                Stopwatch s = new(); s.Start();
+
+                var response = await AzureSolutions.Helpers.OpenAI.Prompt(
+                    OpenAI_Client,
+                    OpenAI_Deployment_Name,
+                    AISearch_Name,
+                    AISearch_Key,
+                    AISearch_Index_Name,
+                    AISearch_QueryType,
+                    AISearch_SemanticConfiguration_Name,
+                    UserQuery,
+                    SystemMessage
+                    );
+
+                s.Stop();
+
+                return new OpenAIResult { Response = response, SecondsToProcess = Math.Round(s.Elapsed.TotalSeconds, 1) };
             }
-
-            AzureCognitiveSearchChatExtensionConfiguration config = new()
+            catch (Exception ex)
             {
-                SearchEndpoint = new Uri(keyvault.getSecret("AISearch-Url")),
-                IndexName = keyvault.getSecret("AISearch-IndexName"),
-                QueryType = acsqt,
-                ShouldRestrictResultScope = true,
-                DocumentCount = 5,
-                SemanticConfiguration = keyvault.getSecret("AISearch-SemanticConfigurationName") /* Ignored when type != Semantic */
-            };
-            config.SetSearchKey(searchKey: keyvault.getSecret("AISearch-Key"));
-
-            ChatCompletionsOptions cco = new()
-            {
-                DeploymentName = keyvault.getSecret("OpenAI-DeploymentName"),
-                AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
-            };
-
-            cco.Messages.Add(new ChatMessage(ChatRole.System, systemMessage));
-            cco.Messages.Add(new ChatMessage(ChatRole.User, userMessage));
-
-            var response = await client.GetChatCompletionsAsync(cco);
-            return response.Value.Choices[0].Message.Content;
+                Log.Write(message: $"Exception: {ex.Message}", type: "Error");
+                return new OpenAIResult { Response = $"Exception: {ex.Message}", SecondsToProcess = 0 };
+            }
         }
     }
 }
