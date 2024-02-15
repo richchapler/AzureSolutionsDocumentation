@@ -32,7 +32,7 @@ This documentation assumes the following resources are ready for use:
 
 ## Documentation Note
 
-I used to spend a lot of time explaining code blocks, but I am skipping that part of my sharing process in favor of a recommendation to copy code blocks to Copilot along with prompt "what does this do?" for a really great description!
+I used to spend a lot of time explaining code blocks, but I am skipping that part of my sharing process in favor of a recommendation to copy code blocks to Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
 
 -----
 
