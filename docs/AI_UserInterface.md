@@ -43,15 +43,15 @@ Open Visual Studio and click "Create a new project".
 
 On the "Create a new project**" form, search for and select "ASP .NET CoreWeb App (Razor Pages)", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6e2b790f-8e37-4a26-8ed2-5e035ea9eda8" width="600" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/226546ce-60de-4596-b7c0-b9a81f8c1e4f" width="600" title="Snipped February 15, 2024" />
 
 Complete the "Configure your new project" form, then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c7878509-dba2-4dd8-ba27-81735fa0d81d" width="600" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2b564a2-7a54-4db6-a07c-08347254deb0" width="600" title="Snipped February 15, 2024" />
 
 Complete the "Additional information" form, then click "Create".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fe93917f-d763-4026-86af-3ab3ddb22e3d" width="800" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ae370f6-60c0-46e1-87a6-65a1fb066311" width="800" title="Snipped February 15, 2024" />
 
 -----
 
