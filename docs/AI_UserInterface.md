@@ -775,6 +775,6 @@ When processing is complete, you can expect to see responses from AI Search and 
 
 -----
 
-**Congratulations... you have successfully completed all exercises**
+**Congratulations... you have successfully completed all steps**
 
 -----
