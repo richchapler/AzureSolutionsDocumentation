@@ -485,12 +485,6 @@ Replace the default code with:
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                     @*    <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li> *@
                     </ul>
                 </div>
             </div>
@@ -504,7 +498,6 @@ Replace the default code with:
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            @* &copy; 2024 - AI_Interface - <a asp-area="" asp-page="/Privacy">Privacy</a> *@
         </div>
     </footer>
 
