@@ -62,7 +62,7 @@ Complete the "Additional information" form, then click "Create".
 
 Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manage NuGet Packages for Solution..."
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dd2f9cc3-9b68-435a-9804-0d8c6f18d94e" width="800" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c96b86db-db7e-462f-9af9-8dc230f184a0" width="800" title="Snipped February 21, 2024" />
 
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolutions.Helpers".
 
