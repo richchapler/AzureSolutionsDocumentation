@@ -66,7 +66,7 @@ Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manag
 
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolutions.Helpers".
 
-_Note: This documentation uses [AzureSolution.Helpers](https://www.nuget.org/packages/AzureSolutions.Helpers/) v1.1.0_
+_Note: This documentation uses [AzureSolution.Helpers](https://www.nuget.org/packages/AzureSolutions.Helpers/) v1.1.1_
 
 On the resulting pop-out, check the box next to your  and then click "Install".
 
