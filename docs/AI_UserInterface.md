@@ -740,38 +740,191 @@ const setupTable = (type) => {
 
 -----
 
-#### aisearch.js
+#### constants.js
 
-Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+Right click on "wwwroot" >> "js" and then add new file "constants.js". Replace the default code with:
 
 ```
+/* ************************* Toggles */
+
+const setupAppState = (keys, defaultValue) => {
+    const state = new Map();
+    keys.forEach(key => state.set(key, defaultValue));
+    return state;
+}
+
+const RUNorNOTs = [
+    'AISearch_Simple_RunOrNot',
+    'AISearch_Full_RunOrNot',
+    'AISearch_Semantic_RunOrNot',
+    'OpenAI_Simple_RunOrNot',
+    'OpenAI_Semantic_RunOrNot'
+];
+
+const RUN = "Run", NOT = "Not";
+
+const appState = setupAppState(RUNorNOTs, RUN);
+
+const getRunOrNotValues = (keys, state, runValue) => keys.map(key => state.get(key) === runValue);
+
+/* ************************* Elements */
+
+const inputUserQuery = document.getElementById('inputUserQuery');
+const inputSystemMessage = document.getElementById('inputSystemMessage');
+const buttonSubmit = document.getElementById('buttonSubmit');
+const progressBar = document.getElementById('progressBar');
+const logArea = document.getElementById('textareaLog');
+
+const clearElementContent = (element) => {
+    while (element.firstChild) { element.removeChild(element.firstChild); }
+};
+
+/* ************************* Initial Setup, Configuration Headers */
+
+const initialSetup_ConfigurationHeaders = (config) => {
+    const id = `header${config}`; const runOrNot = `${config}_RunOrNot`;
+
+    const header = document.getElementById(id);
+
+    appState.set(runOrNot, RUN);
+
+    header.addEventListener("click", () => {
+        const currentState = appState.get(runOrNot);
+        appState.set(runOrNot, currentState === RUN ? NOT : RUN);
+        header.style.textDecoration = appState.get(runOrNot) === RUN ? "none" : "line-through";
+    });
+}
+
+const configurations = [
+    "AISearch_Simple",
+    "AISearch_Full",
+    "AISearch_Semantic",
+    "OpenAI_Simple",
+    "OpenAI_Semantic"
+];
+
+configurations.forEach(initialSetup_ConfigurationHeaders);  
 ```
 
 -----
 
-#### aisearch.js
+#### openai.js
 
-Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+Right click on "wwwroot" >> "js" and then add new file "openai.js". Replace the default code with:
 
 ```
+const createRow = (labelText, data) => {
+    const table = document.getElementById(`tableOpenAI_${labelText}`);
+    const row = table.insertRow();
+    const cell = row.insertCell();
+    cell.style.width = '100%';
+    cell.style.border = 'none';
+
+    const createTextareaAndLabel = (cell, labelText, data) => {
+        let textarea = document.getElementById(`textareaOpenAI_${labelText}`);
+        let label = document.getElementById(`labelOpenAI_${labelText}`);
+
+        if (textarea) {
+            textarea.parentNode.removeChild(textarea);
+        }
+
+        if (label) {
+            label.parentNode.removeChild(label);
+        }
+
+        textarea = document.createElement('textarea');
+        textarea.id = `textareaOpenAI_${labelText}`;
+        textarea.rows = '3';
+        textarea.className = 'textarea';
+        textarea.readOnly = true;
+        textarea.textContent = data.response;
+        cell.appendChild(textarea);
+
+        label = document.createElement('label');
+        label.id = `labelOpenAI_${labelText}`;
+        label.textContent = `${labelText} (${data.elapsed} seconds)`;
+        cell.appendChild(label);
+    }
+
+    createTextareaAndLabel(cell, labelText, data);
+}
+
+connection.on("queryOpenAI_Simple", data => createRow('Simple', data));
+connection.on("queryOpenAI_Semantic", data => createRow('Semantic', data));
 ```
 
 -----
 
-#### aisearch.js
+#### runfirst.js
 
-Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+Right click on "wwwroot" >> "js" and then add new file "runfirst.js". Replace the default code with:
 
 ```
+/* ************************* SignalR Connection (MUST BE FIRST!) */
+
+const connection = new signalR.HubConnectionBuilder().withUrl("/Hub").build();
+
+/* ************************* Logging (must come before user of logMessage, etc.) */
+
+const logMessage = (message, source = 'Client-Side') => {
+    const timestamp = new Date().toLocaleTimeString();
+    logArea.value += `${timestamp}, ${source}... ${message}\n`;
+    logArea.scrollTop = logArea.scrollHeight;
+}
+
+connection.on("logMessage", (message) => logMessage(message, 'Server-Side'));
 ```
 
 -----
 
-#### aisearch.js
+#### submit.js
 
-Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+Right click on "wwwroot" >> "js" and then add new file "submit.js". Replace the default code with:
 
 ```
+const startConnection = async () => {
+    if (connection.state === signalR.HubConnectionState.Disconnected) { await connection.start(); }
+};
+
+const stopConnection = async () => {
+    if (connection.state === signalR.HubConnectionState.Connected) { await connection.stop(); }
+};
+
+const handleEvent = async (e) => {
+    if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter')) {
+        if (buttonSubmit.innerText === 'Submit') {
+            await startConnection();
+            buttonSubmit.innerText = 'Stop';
+            submit();
+        }
+        else {
+            await stopConnection();
+            buttonSubmit.innerText = 'Submit';
+            progressBar.style.display = 'none';
+        }
+    }
+};
+
+buttonSubmit.addEventListener('click', handleEvent);
+inputUserQuery.addEventListener('keydown', handleEvent);
+
+const submit = (e) => {
+    const tables = document.querySelectorAll('.data-table');
+    tables.forEach(clearElementContent);
+    const textareas = document.querySelectorAll('.textarea'); textareas.forEach(textarea => { textarea.value = ''; });
+
+    progressBar.style.display = 'block';
+    logMessage(`Sending User Query '${inputUserQuery.value}' :: System Message '${inputSystemMessage.value}' to Hub > ProcessQuery`);
+
+    const runOrNotValues = getRunOrNotValues(RUNorNOTs, appState, RUN);
+
+    connection.invoke("ProcessQuery", inputUserQuery.value, inputSystemMessage.value, ...runOrNotValues)
+        .then(() => {
+            progressBar.style.display = 'none';
+            buttonSubmit.innerText = 'Submit';
+        })
+        .catch((err) => logMessage(err.toString()));  
+};
 ```
 
 -----
