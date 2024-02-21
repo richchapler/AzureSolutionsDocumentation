@@ -682,93 +682,96 @@ label {
 
 #### site.js
 
-Expand "wwwroot" >> "css" and then double-click to open "site.css".
+Expand "wwwroot" >> "js" and then delete "site.js".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8ce8aacc-0a47-4679-a907-64c058812d3d" width="800" title="Snipped February 15, 2024" />
+-----
 
-Replace the default code with:
+#### aisearch.js
+
+Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
 
 ```
-const connection = new signalR.HubConnectionBuilder().withUrl("/Hub").build();
-
-connection.on("logMessage", function (message) {
-    document.getElementById('messages').value += message;
-});
-
-/* ************************* tableOpenAIResults */
-
-function createRow(labelText) {
-    let row = document.querySelector('table[name="tableOpenAIResults"]').insertRow();
-    let cell = row.insertCell();
-    cell.style.width = '100%';
-    cell.style.border = 'none';
-
-    let textarea = document.createElement('textarea');
-    textarea.id = 'textareaOpenAI_' + labelText;
-    textarea.rows = '5';
-    textarea.className = 'textarea';
-    textarea.readOnly = true;
-    cell.appendChild(textarea);
-
-    let label = document.createElement('label');
-    label.id = 'labelOpenAI_' + labelText;
-    label.textContent = labelText;
-    cell.appendChild(label);
+const createHeaders = (columns, row) => {
+    columns.forEach(header => {
+        const th = document.createElement("th");
+        th.textContent = header;
+        row.appendChild(th);
+    });
 }
 
-connection.on("queryOpenAI_Simple", function (data) {
-    createRow('Simple');
-    document.getElementById("textareaOpenAI_Simple").value = data.response;
-    document.getElementById("labelOpenAI_Simple").innerText = "Simple (" + data.elapsed + " seconds)";
-});
+const setupTable = (type) => {
+    const tableId = `tableAISearch_${type}`; const table = document.getElementById(tableId);
 
-connection.on("queryOpenAI_Semantic", function (data) {
-    createRow('Semantic');
-    document.getElementById("textareaOpenAI_Semantic").value = data.response;
-    document.getElementById("labelOpenAI_Semantic").innerText = "Semantic (" + data.elapsed + " seconds)";
-    var progressBar = document.getElementById('progressBar');
-    progressBar.style.display = 'none';
-});
+    const RUNorNOT = `AISearch_${type}_RunOrNot`;
 
-/* ************************* tableAISearchResults */
+    table.classList.add('data-table');
 
-connection.on("tableAISearchResults_AddRows", function (data) {
-    let table = document.querySelector('table[name="tableAISearchResults"]');
-
-    if (!table.tHead) {
-        let thead = table.createTHead();
-        let row = thead.insertRow();
-        let headers = ["Type", "Name", "Max Score", "Average Score", "Max Re-Ranker Score", "Average Re-Ranker Score"];
-        for (let i = 0; i < headers.length; i++) {
-            let th = document.createElement("th");
-            let text = document.createTextNode(headers[i]);
-            th.appendChild(text);
-            row.appendChild(th);
+    connection.on(`${tableId}_SetHeaders`, (headers) => {
+        if (appState.get(RUNorNOT) === RUN) {
+            if (!table.tHead) {
+                const thead = table.createTHead();
+                let row = thead.insertRow();
+                createHeaders(headers, row);
+            }
         }
-    }
+    });
 
-    let row = table.insertRow();
-    let cell0 = row.insertCell(); cell0.textContent = data.column0;
-    let cell1 = row.insertCell(); cell1.textContent = data.column1;
-    let cell2 = row.insertCell(); cell2.textContent = data.column2;
-    let cell3 = row.insertCell(); cell3.textContent = data.column3;
-    let cell4 = row.insertCell(); cell4.textContent = data.column4;
-    let cell5 = row.insertCell(); cell5.textContent = data.column5;
-});
+    connection.on(`${tableId}_AddRows`, (dataDictionary, SecondsToProcess) => {
+        if (appState.get(RUNorNOT) === RUN) {
+            const row = table.insertRow();
+            for (const key in dataDictionary) {
+                const cell = row.insertCell();
+                cell.textContent = dataDictionary[key];
+            }
 
-/* ************************* EventListener... user presses [Enter] after entering query */
+            let label = document.getElementById(`label${tableId}`);
+            if (!label) {
+                label = document.createElement('label');
+                label.id = `label${tableId}`;
+                label.textContent = `${type} (${SecondsToProcess} seconds)`;
+                table.parentNode.insertBefore(label, table);
+            }
+        }
+    });
+}
 
-document.getElementById('userPrompt').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        var progressBar = document.getElementById('progressBar');
-        progressBar.style.display = 'block';
-        connection.invoke("ProcessPrompt", document.getElementById('userPrompt').value)
-            .catch(function (err) { return console.error(err.toString()); });
-    }
-});
+["Simple", "Full", "Semantic"].forEach(setupTable);    
+```
 
-connection.start();    
+-----
+
+#### aisearch.js
+
+Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+
+```
+```
+
+-----
+
+#### aisearch.js
+
+Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+
+```
+```
+
+-----
+
+#### aisearch.js
+
+Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+
+```
+```
+
+-----
+
+#### aisearch.js
+
+Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
+
+```
 ```
 
 -----
