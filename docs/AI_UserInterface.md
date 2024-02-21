@@ -397,11 +397,7 @@ app.Run();
 
 #### _Layout.cshtml
 
-Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fdb3c74c-6070-46c5-badf-703c4f517f09" width="800" title="Snipped February 15, 2024" />
-
-Replace the default code with:
+Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace the default code with:
 
 ```
 <!DOCTYPE html>
@@ -442,7 +438,12 @@ Replace the default code with:
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/runfirst.js" asp-append-version="true"></script>
+    <script src="~/js/constants.js" asp-append-version="true"></script>
+    <script src="~/js/submit.js" asp-append-version="true"></script>
+    <script src="~/js/aisearch.js" asp-append-version="true"></script>
+    <script src="~/js/openai.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
@@ -453,11 +454,7 @@ Replace the default code with:
 
 #### Index.cshtml
 
-Expand "Pages" and then double-click to open "Index.cshtml".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9ac136e5-ccb1-4bc1-8f7e-84b427ee9a3e" width="800" title="Snipped February 15, 2024" />
-
-Replace the default code with:
+Expand "Pages" and then double-click to open "Index.cshtml". Replace the default code with:
 
 ```
 @page
@@ -470,12 +467,76 @@ Replace the default code with:
 <html>
 <body>
     <div class="container">
-        <input type="text" id="userPrompt" placeholder="Type your query phrase and then press [Enter] to submit..." />
-        <div class="progress-bar" id="progressBar" style="display: none;"><div class="progress-bar-inner"></div></div>
-        <h5>AI Search</h5>
-        <table class="table" name="tableAISearchResults"></table>
-        <h5>OpenAI</h5>
-        <table class="table" name="tableOpenAIResults"></table>
+        <h4>Step 1: Select Types</h4>
+        <label for="toggles">
+            Click to strike-through / exclude types that you do not want to include in query processing.
+        </label>
+        <br />
+
+        <div id="toggles">
+            <h6 id="headerAISearch" style="cursor: pointer; display: inline;">AISearch >> </h6>
+            <h6 id="headerAISearch_Simple" style="cursor: pointer; display: inline;">Simple</h6> |
+            <h6 id="headerAISearch_Full" style="cursor: pointer; display: inline;">Full</h6> |
+            <h6 id="headerAISearch_Semantic" style="cursor: pointer; display: inline;">Semantic</h6> ::
+            <h6 id="headerOpenAI" style="cursor: pointer; display: inline;">OpenAI >> </h6>
+            <h6 id="headerOpenAI_Simple" style="cursor: pointer; display: inline;">Simple</h6> |
+            <h6 id="headerOpenAI_Semantic" style="cursor: pointer; display: inline;">Semantic</h6>
+        </div>
+
+        <h4>Step 2: Submit Query</h4>
+
+        <div class="row">
+            <div class="col">
+                <label for="inputSystemMessage">Enter System Message (if applicable)</label>
+                <input id="inputSystemMessage" type="text" placeholder="Optional, used for OpenAI only... functionality pending Azure Support Case" disabled style="width: 100%;" />
+            </div>
+            <div class="col">
+                <label for="inputUserQuery">...then, enter User Query</label>
+                <input id="inputUserQuery" type="text" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%;" />
+            </div>
+            <div class="col">
+                <div>
+                    <label for="buttonSubmit">...finally, click Submit</label>
+                </div>
+                <div>
+                    <button id="buttonSubmit" type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <h4>Step 3: Review Results</h4>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="ai-search-tab" data-toggle="tab" href="#ai-search" role="tab" aria-controls="ai-search" aria-selected="true">AI Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="open-ai-tab" data-toggle="tab" href="#open-ai" role="tab" aria-controls="open-ai" aria-selected="false">Open AI</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="ai-search" role="tabpanel" aria-labelledby="ai-search-tab">
+                <div class="scrollable-container">
+                    <table id="tableAISearch_Simple" class="table"></table>
+
+                    <table id="tableAISearch_Full" class="table"></table>
+
+                    <table id="tableAISearch_Semantic" class="table"></table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="open-ai" role="tabpanel" aria-labelledby="open-ai-tab">
+                <div class="scrollable-container">
+                    <table id="tableOpenAI_Simple" class="table"></table>
+                    <table id="tableOpenAI_Semantic" class="table"></table>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-bar" id="progressBar" style="display: none;">
+            <div class="progress-bar-inner"></div>
+        </div>
+
+        <h4 id="headerLog">Log</h4>
+        <textarea id="textareaLog" class="textarea" rows="4" readonly>@ViewData["messages"]</textarea>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -510,34 +571,41 @@ namespace AI_Interface.Pages
 
 #### site.css
 
-Expand "wwwroot" >> "css" and then double-click to open "site.css".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b35281bf-a468-4253-bdb5-55a4f6db92d4" width="800" title="Snipped February 15, 2024" />
-
-Replace the default code with:
+Expand "wwwroot" >> "css" and then double-click to open "site.css". Replace the default code with:
 
 ```
 html {
     font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
     position: relative;
     min-height: 100%;
 }
 
-body {
-    margin-bottom: 60px;
+h4 {
+    margin: 20px 0 10px 0;
+}
+
+.container input[type="text"] {
+    width: 100%;
+    height: 30px;
+}
+
+.container button {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}  
+
+
+.scrollable-container {
+    height: 250px;
+    overflow: auto;
+    padding: 10px;
+    background-color: whitesmoke;
+}  
+
+table {
+    background-color: whitesmoke;
 }
 
 .form {
@@ -547,18 +615,8 @@ body {
 
 .textarea {
     width: 100% !important;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     display: block;
-}
-/*
-.row {
-    border-bottom: 1px solid lightgray !important;
-}
-*/
-.table {
-    text-align: left;
-    width: 100%;
-    border: none;
 }
 
 .progress-bar {
@@ -591,16 +649,36 @@ body {
     }
 }
 
-.container input[type="text"] {
-    width: 100%;
+.data-table tr:nth-child(even) {
+    background-color: ghostwhite;
 }
 
-h5 {
+.data-table tr:nth-child(odd) {
+    background-color: white;
+}
+
+#myTab {
     margin-top: 20px;
+} 
+
+.nav-tabs .nav-link {
+    border: none;
+}  
+
+.nav-tabs .nav-link.active {
+    background-color: whitesmoke;
+}
+
+label {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 15px;
 }
 ```
 
 -----
+
+### Step 6: Javascript
 
 #### site.js
 
