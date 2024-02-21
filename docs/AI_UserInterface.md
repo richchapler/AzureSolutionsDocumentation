@@ -86,109 +86,143 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 
 #### AISearch.cs
 
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup and click "Add".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/562e6636-7f0f-482f-a52e-02e7f78b850c" width="600" title="Snipped February 15, 2024" />
-
-Replace the default code with:
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup and click "Add". Replace the default code with:
 
 ```
 using Azure.Search.Documents.Models;
-using AzureSolutions.Helpers;
-using System.Diagnostics;
+using Microsoft.AspNetCore.SignalR;
+using System.Data;
 using System.Text.Json;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace AI_Interface.Helpers
 {
-    public class AISearch_Result
-    {
-        public string? Response { get; set; }
-        public double SecondsToProcess { get; set; }
-    }
-
     public class AISearch
     {
-        public static async Task<AISearch_Result> Query(
-            Azure.Search.Documents.SearchClient AISearch_Client,
+        public static readonly string[] FieldNames = ["CustomerID", "CompanyName"];
+
+        public static async Task Query_AISearch(
+            IHubCallerClients Clients,
             SearchQueryType AISearch_QueryType,
-            string AISearch_Text,
-            string AISearch_SelectField
+            string UserQuery
             )
         {
-            try
+            var AISearch_Query = await AzureSolutions.Helpers.AISearch.Query.Execute(
+                Constants.AISearch_Client,
+                AISearch_QueryType,
+                AISearch_Text: UserQuery,
+                AISearch_SelectField: string.Join(",", AISearch.FieldNames)
+                );
+
+            /* ************************* AISearch_Query >> Data Table */
+
+            DataTable dataTable = new();
+
+            List<Dictionary<string, JsonElement>>? list = AISearch_Query.Response != null ? JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(AISearch_Query.Response) : null;
+
+            if (list != null && list.Count > 0)
             {
-                Stopwatch s = new(); s.Start();
+                foreach (var key in list[0].Keys)
+                {
+                    dataTable.Columns.Add(key, typeof(string)); // Assumes all values are strings    
+                }
 
-                var response = await AzureSolutions.Helpers.AISearch.Common.Query(
-                    AISearch_Client,
-                    AISearch_QueryType,
-                    AISearch_Text,
-                    AISearch_SelectField
-                    );
+                foreach (var item in list)
+                {
+                    DataRow row = dataTable.NewRow();
 
-                s.Stop();
+                    foreach (var key in item.Keys) { row[key] = item[key].ToString(); }
 
-                return new AISearch_Result { Response = response, SecondsToProcess = Math.Round(s.Elapsed.TotalSeconds, 1) };
+                    dataTable.Rows.Add(row);
+                }
             }
-            catch (Exception ex)
+
+            /* ************************* Column Headers >> Client */
+
+            string tableId = $"tableAISearch_{AISearch_QueryType}";
+
+            var columns = new List<string> { "Document", "Score", "SemanticSearch" };
+
+            await Clients.Caller.SendAsync(tableId + "_SetHeaders", columns.ToArray());
+
+            /* ************************* Data >> Client */
+
+            if (dataTable.Rows != null && dataTable.Rows.Count > 0)
             {
-                Log.Write(message: $"Exception: {ex.Message}", type: "Error");
-                return new AISearch_Result { Response = $"Exception: {ex.Message}", SecondsToProcess = 0 };
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    var dataDictionary = new Dictionary<string, string>();
+
+                    foreach (var column in columns)
+                    {
+                        if (dataTable.Columns.Contains(column)) { dataDictionary[column] = row[column]?.ToString() ?? "NULL"; }
+                    }
+
+                    await Clients.Caller.SendAsync(tableId + "_AddRows", dataDictionary, AISearch_Query.SecondsToProcess);
+                }
+            }
+        }
+    }
+}
+```
+
+#### Constants.cs
+
+Repeat the process to create "Constants.cs", then replace the default code with:
+
+```
+using Azure;
+using Azure.AI.OpenAI;
+using Azure.Identity;
+using Azure.Search.Documents;
+using Azure.Security.KeyVault.Secrets;
+
+namespace AI_Interface.Helpers
+{
+    public static class Constants
+    {
+        /* ************************* KeyVault */
+
+        private static readonly string KeyVault_Name = "dmsk";
+
+        private static readonly SecretClient secretClient = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
+
+        private static string GetSecret(string secretName)
+        {
+            var secret = secretClient.GetSecret(secretName);
+            return secret.Value.Value;
+        }
+
+        /* ************************* Constants */
+        public static string AISearch_Name { get; } = GetSecret("AISearch-Name");
+        public static string AISearch_Key { get; } = GetSecret("AISearch-Key");
+        public static string AISearch_Index_Name { get; } = GetSecret("AISearch-Index-Name");
+        public static string OpenAI_Name { get; } = GetSecret("OpenAI-Name");
+        public static string OpenAI_Key { get; } = GetSecret("OpenAI-Key");
+        public static string OpenAI_Deployment_Name { get; } = GetSecret("OpenAI-Deployment-Name");
+        public static string AISearch_SemanticConfiguration_Name { get; } = GetSecret("AISearch-SemanticConfiguration-Name");
+
+        /* ************************* Clients */
+
+        public static SearchClient AISearch_Client
+        {
+            get
+            {
+                return new SearchClient(
+                    endpoint: new Uri($"https://{AISearch_Name}.search.windows.net"),
+                    indexName: AISearch_Index_Name,
+                    credential: new AzureKeyCredential(AISearch_Key)
+                );
             }
         }
 
-        public static class ScoreHelper
+        public static OpenAIClient OpenAI_Client
         {
-            public static IEnumerable<dynamic> CalculateScores(List<Dictionary<string, JsonElement>> list, string fieldName)
+            get
             {
-                return list
-                    .Select(item =>
-                    {
-                        item.TryGetValue("Score", out JsonElement scoreValue);
-                        double score = ConvertJsonElementToDouble(scoreValue);
-
-                        double rerankerScore = 0.0;
-                        if (item.TryGetValue("SemanticSearch", out JsonElement semanticSearch) && semanticSearch.ValueKind == JsonValueKind.Object)
-                        {
-                            semanticSearch.TryGetProperty("RerankerScore", out JsonElement rerankerScoreValue);
-                            if (rerankerScoreValue.ValueKind == JsonValueKind.Number)
-                            {
-                                rerankerScore = ConvertJsonElementToDouble(rerankerScoreValue);
-                            }
-                        }
-
-                        return new
-                        {
-                            Name = item["Document"].ToString(),
-                            Score = score,
-                            RerankerScore = rerankerScore
-                        };
-                    })
-                    .GroupBy(item =>
-                    {
-                        var itemDictionary = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(item.Name);
-                        string FieldName_AISearchPivot = string.Empty;
-                        if (itemDictionary != null && itemDictionary.TryGetValue(fieldName, out JsonElement storageName))
-                        {
-                            FieldName_AISearchPivot = storageName.ToString();
-                        }
-                        return FieldName_AISearchPivot;
-                    })
-                    .Select(group => new
-                    {
-                        Name = group.Key,
-                        MaxScore = group.Max(item => item.Score),
-                        MaxRerankerScore = group.Max(item => item.RerankerScore),
-                        AvgScore = group.Average(item => item.Score),
-                        AvgRerankerScore = group.Average(item => item.RerankerScore)
-                    });
-            }
-
-            private static double ConvertJsonElementToDouble(JsonElement element)
-            {
-                return element.ValueKind == JsonValueKind.Number ? element.GetDouble() : (double)0;
+                return new OpenAIClient(
+                    endpoint: new Uri($"https://{OpenAI_Name}.openai.azure.com/"),
+                    keyCredential: new AzureKeyCredential(OpenAI_Key)
+                );
             }
         }
     }
@@ -197,7 +231,7 @@ namespace AI_Interface.Helpers
 
 #### OpenAI.cs
 
-Repaat the process to create "OpenAI.cs", then replace the default code with:
+Repeat the process to create "OpenAI.cs", then replace the default code with:
 
 ```
 using Azure.AI.OpenAI;
@@ -215,13 +249,7 @@ namespace AI_Interface.Helpers
     public class OpenAI
     {
         public static async Task<OpenAIResult> Query(
-            OpenAIClient OpenAI_Client,
-            string OpenAI_Deployment_Name,
-            string AISearch_Name,
-            string AISearch_Key,
-            string AISearch_Index_Name,
             AzureCognitiveSearchQueryType AISearch_QueryType,
-            string AISearch_SemanticConfiguration_Name,
             string UserQuery,
             string SystemMessage
         )
@@ -231,13 +259,13 @@ namespace AI_Interface.Helpers
                 Stopwatch s = new(); s.Start();
 
                 var response = await AzureSolutions.Helpers.OpenAI.Prompt(
-                    OpenAI_Client,
-                    OpenAI_Deployment_Name,
-                    AISearch_Name,
-                    AISearch_Key,
-                    AISearch_Index_Name,
+                    Constants.OpenAI_Client,
+                    Constants.OpenAI_Deployment_Name,
+                    Constants.AISearch_Name,
+                    Constants.AISearch_Key,
+                    Constants.AISearch_Index_Name,
                     AISearch_QueryType,
-                    AISearch_SemanticConfiguration_Name,
+                    Constants.AISearch_SemanticConfiguration_Name,
                     UserQuery,
                     SystemMessage
                     );
@@ -262,138 +290,67 @@ namespace AI_Interface.Helpers
 
 #### Hub.cs
 
-Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "Hub.cs" on the resulting popup then click "Add".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/396bd000-a069-423a-912b-8002f2e45e72" width="800" title="Snipped February 15, 2024" />
-
-Replace the default code with:
+Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "Hub.cs" on the resulting popup then click "Add". Replace the default code with:
 
 ```
 using AI_Interface.Helpers;
-using Azure;
 using Azure.AI.OpenAI;
-using Azure.Search.Documents;
 using Azure.Search.Documents.Models;
-using Azure.Security.KeyVault.Secrets;
-using AzureSolutions.Helpers;
 using Microsoft.AspNetCore.SignalR;
-using System.Text.Json;
 
 namespace AI_Interface
 {
-    public class Hub(SecretClient sc) : Microsoft.AspNetCore.SignalR.Hub
+    public class Hub() : Microsoft.AspNetCore.SignalR.Hub
     {
-        private readonly SecretClient KeyVault_Client = sc;
-        private SearchClient? AISearch_Client;
-        private OpenAIClient? OpenAI_Client;
-        private string? AISearch_Name, AISearch_Key, AISearch_Index_Name, AISearch_SemanticConfiguration_Name;
-        private string? OpenAI_Name, OpenAI_Key, OpenAI_Deployment_Name;
-        private readonly string fieldName = "CompanyName"; /* the field that AISearch will use for results... "metadata_storage_name" for blob storage */
-
-        public async Task ProcessPrompt(string prompt)
+        public async Task ProcessQuery(
+            string UserQuery,
+            string SystemMessage,
+            bool runAISearch_Simple = true,
+            bool runAISearch_Full = true,
+            bool runAISearch_Semantic = true,
+            bool runOpenAI_Simple = true,
+            bool runOpenAI_Semantic = true
+        )
         {
             try
             {
-                /* ************************* Constants */
+                /* ************************* AISearch */
 
-                AISearch_Name = KeyVault.GetSecret(KeyVault_Client, "AISearch-Name");
-                AISearch_Key = KeyVault.GetSecret(KeyVault_Client, "AISearch-Key");
-                AISearch_Index_Name = KeyVault.GetSecret(KeyVault_Client, "AISearch-Index-Name");
-                AISearch_SemanticConfiguration_Name = KeyVault.GetSecret(KeyVault_Client, "AISearch-SemanticConfiguration-Name");
-                OpenAI_Name = KeyVault.GetSecret(KeyVault_Client, "OpenAI-Name");
-                OpenAI_Key = KeyVault.GetSecret(KeyVault_Client, "OpenAI-Key");
-                OpenAI_Deployment_Name = KeyVault.GetSecret(KeyVault_Client, "OpenAI-Deployment-Name");
-
-                /* ************************* Clients */
-
-                AISearch_Client = new SearchClient(
-                    endpoint: new Uri($"https://{AISearch_Name}.search.windows.net"),
-                    indexName: AISearch_Index_Name,
-                    credential: new AzureKeyCredential(AISearch_Key)
-                    );
-
-                OpenAI_Client = new OpenAIClient(
-                    endpoint: new Uri($"https://{OpenAI_Name}.openai.azure.com/"),
-                    keyCredential: new AzureKeyCredential(OpenAI_Key)
-                    );
-
-                /* ************************* Queries */
-
-                await Query_AISearch(AISearch_QueryType: SearchQueryType.Simple, prompt);
-
-                await Query_AISearch(AISearch_QueryType: SearchQueryType.Full, prompt);
-
-                await Query_AISearch(AISearch_QueryType: SearchQueryType.Semantic, prompt);
-
-                await Query_OpenAI(AISearch_QueryType: AzureCognitiveSearchQueryType.Simple, UserQuery: prompt);
-
-                await Query_OpenAI(AISearch_QueryType: AzureCognitiveSearchQueryType.Semantic, UserQuery: prompt);
-            }
-            catch (Exception ex) { await Clients.All.SendAsync("logMessage", $"Exception: {ex}\n"); }
-        }
-
-        private async Task Query_AISearch(SearchQueryType AISearch_QueryType, string prompt)
-        {
-            if (AISearch_Client == null) { throw new InvalidOperationException("AISearch_Client is null"); }
-
-            var AISearch_Query = await AI_Interface.Helpers.AISearch.Query(
-                 AISearch_Client,
-                 AISearch_QueryType,
-                 AISearch_Text: prompt,
-                 AISearch_SelectField: fieldName
-             );
-
-            if (AISearch_Query.Response == null) { throw new InvalidOperationException("AISearch_Query.Response is null"); }
-
-            List<Dictionary<string, JsonElement>>? list = JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(AISearch_Query.Response);
-
-            if (list != null)
-            {
-                foreach (var item in AISearch.ScoreHelper.CalculateScores(list, fieldName))
+                if (runAISearch_Simple || runAISearch_Full || runAISearch_Semantic)
                 {
-                    await Clients.Caller.SendAsync("tableAISearchResults_AddRows", new
-                    {
-                        column0 = AISearch_QueryType.ToString() + " (" + AISearch_Query.SecondsToProcess.ToString("F1") + " seconds)",
-                        column1 = item.Name,
-                        column2 = item.MaxScore.ToString("F1"),
-                        column3 = item.AvgScore.ToString("F1"),
-                        column4 = item.MaxRerankerScore.ToString("F1"),
-                        column5 = item.AvgRerankerScore.ToString("F1")
-                    });
+                    await Clients.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' with AI Search");
+
+                    if (runAISearch_Simple) { await AISearch.Query_AISearch(Clients, SearchQueryType.Simple, UserQuery); }
+
+                    if (runAISearch_Full) { await AISearch.Query_AISearch(Clients, SearchQueryType.Full, UserQuery); }
+
+                    if (runAISearch_Semantic) { await AISearch.Query_AISearch(Clients, SearchQueryType.Semantic, UserQuery); }
                 }
-            }
-            else
-            { throw new InvalidOperationException("list is null"); }
-        }
 
-        private async Task Query_OpenAI(AzureCognitiveSearchQueryType AISearch_QueryType, string UserQuery)
-        {
-            try
-            {
-                string ClientSide_Script = $"queryOpenAI_{AISearch_QueryType}";
+                /* ************************* OpenAI */
 
-                if (OpenAI_Client == null) { throw new InvalidOperationException("OpenAI_Client is null"); }
-                if (OpenAI_Deployment_Name == null) { throw new InvalidOperationException("OpenAI_Deployment_Name is null"); }
-                if (AISearch_Name == null) { throw new InvalidOperationException("AISearch_Name is null"); }
-                if (AISearch_Key == null) { throw new InvalidOperationException("AISearch_Key is null"); }
-                if (AISearch_Index_Name == null) { throw new InvalidOperationException("AISearch_Index_Name is null"); }
-                if (AISearch_SemanticConfiguration_Name == null) { throw new InvalidOperationException("AISearch_SemanticConfiguration_Name is null"); }
+                if (runOpenAI_Simple || runOpenAI_Semantic)
+                {
+                    await Clients.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' :: System Message '{SystemMessage}' with OpenAI");
 
-                var OpenAI_Prompt = await Helpers.OpenAI.Query(
-                    OpenAI_Client,
-                    OpenAI_Deployment_Name,
-                    AISearch_Name,
-                    AISearch_Key,
-                    AISearch_Index_Name,
-                    AISearch_QueryType,
-                    AISearch_SemanticConfiguration_Name,
-                    UserQuery,
-                    SystemMessage: ""
-                    );
+                    if (runOpenAI_Simple)
+                    {
+                        var OpenAI_Prompt = await Helpers.OpenAI.Query(AISearch_QueryType: AzureCognitiveSearchQueryType.Simple, UserQuery, SystemMessage);
 
-                await Clients.Caller.SendAsync(method: ClientSide_Script,
-                    arg1: new { response = OpenAI_Prompt.Response, elapsed = OpenAI_Prompt.SecondsToProcess } /* resolves to "data" on client-side */
-                );
+                        await Clients.Caller.SendAsync(
+                            method: $"queryOpenAI_Simple",
+                            arg1: new { response = OpenAI_Prompt.Response, elapsed = OpenAI_Prompt.SecondsToProcess });
+                    }
+
+                    if (runOpenAI_Semantic)
+                    {
+                        var OpenAI_Prompt = await Helpers.OpenAI.Query(AISearch_QueryType: AzureCognitiveSearchQueryType.Semantic, UserQuery, SystemMessage);
+
+                        await Clients.Caller.SendAsync(
+                            method: $"queryOpenAI_Semantic",
+                            arg1: new { response = OpenAI_Prompt.Response, elapsed = OpenAI_Prompt.SecondsToProcess });
+                    }
+                }
             }
             catch (Exception ex) { await Clients.All.SendAsync("logMessage", $"Exception: {ex}\n"); }
         }
@@ -408,31 +365,13 @@ namespace AI_Interface
 
 #### Program.cs
 
-Double-click to open "Program.cs".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cffe711b-8c20-47f0-9bea-874e842838a4" width="800" title="Snipped February 15, 2024" />
-
-Replace the default code with:
+Double-click to open "Program.cs". Replace the default code with:
 
 ```
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
-
-/* ************************* Singletons (registered for the entire application) */
-
-string KeyVault_Name = "{YOUR KEY VAULT NAME}";
-builder.Services.AddSingleton(x =>
-{
-    var secretClient = new SecretClient(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
-    return secretClient;
-});
-
-/* ************************* */
 
 var app = builder.Build();
 
