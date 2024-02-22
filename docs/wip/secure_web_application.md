@@ -117,7 +117,7 @@ namespace YourNamespace.Pages
 - In the "Implicit grant and hybrid flows" section, check the box for "ID tokens".  
 - Click on "Save" at the top of the page.  
 - In the "Redirect URIs" section, click on "+ Add a platform".  
-- Choose "Web" and then enter 'https://dmswa.azurewebsites.net/' and 'https://dmswa.azurewebsites.net/.auth/login/aad/callback' in the "Redirect URIs" field.  
+- Choose "Web" and then enter 'https://{APPLICATION_NAME}.azurewebsites.net/' and 'https://{APPLICATION_NAME}.azurewebsites.net/.auth/login/aad/callback' in the "Redirect URIs" field.  
 - Click on "Configure" at the bottom of the page.  
   
 ## Step 12: Enable Authentication/Authorization for your App Service  
@@ -172,5 +172,15 @@ Check if the user has been assigned a role that grants them access to the app. I
 ### Group Membership  
   
 If you've assigned access to the app to a group in Azure AD, and the user is a member of that group, they would be able to access the app. Check the group memberships of the user in Azure AD.  
+  
+### Explicit Permissions  
+  
+To restrict access to your application to only those users who have been explicitly granted permissions, follow these steps:  
+  
+1. In Azure AD, go to "Enterprise applications" > select your application > "Properties". Set "User assignment required?" to "Yes".  
+2. In Azure AD, go to "Enterprise applications" > select your application > "Users and groups". Add the users or groups who should have access to the application.  
+3. In Azure AD, go to "Enterprise applications" > select your application > "Properties". Set "Visible to users?" to "No".  
+4. In Azure AD, go to "App registrations" > select your application > "Authentication". Make sure "Default client type" is set to "Yes" under "Advanced settings".  
+5. In Azure AD, go to "App registrations" > select your application > "Authentication". Under "Supported account types", select "Accounts in this organizational directory only".  
   
 If none of these suggestions help, there might be something else in your setup that's allowing the user to access the app. Please provide more details about your setup for further assistance.  
