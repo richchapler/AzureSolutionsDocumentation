@@ -28,7 +28,7 @@ using System;
 using System.Collections.Generic;  
 using System.Threading.Tasks;  
    
-namespace YourNamespace.Pages  
+namespace {NAMESPACE_NAME}.Pages  
 {  
     public class IndexModel : PageModel  
     {  
@@ -37,7 +37,7 @@ namespace YourNamespace.Pages
         public async Task OnGetAsync()  
         {  
             var credential = new DefaultAzureCredential();  
-            BlobServiceClient blobServiceClient = new BlobServiceClient(new Uri("<your-storage-account-url>"), credential);  
+            BlobServiceClient blobServiceClient = new BlobServiceClient(new Uri("{STORAGE_ACCOUNT_URL}"), credential);  
             var blobContainers = blobServiceClient.GetBlobContainersAsync();  
             Containers = new List<string>();  
   
@@ -49,7 +49,7 @@ namespace YourNamespace.Pages
     }  
 }  
 ```  
-- Replace "YourNamespace" with the namespace of your project and "<your-storage-account-url>" with the URL of your Azure Storage Account.  
+- Replace "{NAMESPACE_NAME}" with the namespace of your project and "{STORAGE_ACCOUNT_URL}" with the URL of your Azure Storage Account.  
    
 ## Step 4: Update the Index view in Index.cshtml  
    
@@ -58,7 +58,7 @@ namespace YourNamespace.Pages
    
 ```html  
 @page  
-@model YourNamespace.Pages.IndexModel  
+@model {NAMESPACE_NAME}.Pages.IndexModel  
    
 <h2>Blob Containers</h2>  
    
@@ -69,7 +69,7 @@ namespace YourNamespace.Pages
     }  
 </ul>  
 ```  
-- Replace "YourNamespace" with the namespace of your project.  
+- Replace "{NAMESPACE_NAME}" with the namespace of your project.  
    
 ## Step 5: Run the application locally  
    
@@ -97,7 +97,7 @@ namespace YourNamespace.Pages
    
 ## Step 9: Publish the application to Azure  
    
-- In Visual Studio, - Right-click on your project in Solution Explorer and select "Publish".  
+- In Visual Studio, right-click on your project in Solution Explorer and select "Publish".  
 - In the "Pick a publish target" window, select "Azure" and click "Next".  
 - Choose "Windows" or "Linux" depending on your preference and click "Next".  
 - In the "App Service" window, select your existing App Service and click "Finish".  
