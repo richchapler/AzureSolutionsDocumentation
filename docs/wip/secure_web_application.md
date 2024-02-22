@@ -107,12 +107,15 @@ namespace YourNamespace.Pages
   
 - After the application is published, navigate to the URL of your Azure App Service. It should display a list of all blob containers in your Azure Storage Account.  
   
-## Step 11: Register your application with Azure AD  
-  
-- In the Azure portal, go to "Azure Active Directory".  
-- Click on "App registrations" and then "New registration".  
-- Enter a name for your application, select the supported account types, and then enter the Redirect URI (the URL where users are sent after they are authenticated, which is typically the base URL of your app).  
-- Click "Register".  
+## Step 11: Register your application with Azure AD    
+    
+- In the Azure portal, go to "Azure Active Directory".    
+- Click on "App registrations" and then "New registration".    
+- Enter a name for your application, select the supported account types, and then enter the Redirect URI (the URL where users are sent after they are authenticated, which is typically the base URL of your app).    
+- Click "Register".    
+- After the application is registered, click on "Authentication" in the left-hand menu.  
+- In the "Implicit grant and hybrid flows" section, check the box for "ID tokens".  
+- Click on "Save" at the top of the page.  
   
 ## Step 12: Enable Authentication/Authorization for your App Service  
   
