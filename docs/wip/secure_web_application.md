@@ -116,6 +116,9 @@ namespace YourNamespace.Pages
 - After the application is registered, click on "Authentication" in the left-hand menu.  
 - In the "Implicit grant and hybrid flows" section, check the box for "ID tokens".  
 - Click on "Save" at the top of the page.  
+- In the "Redirect URIs" section, click on "+ Add a platform".  
+- Choose "Web" and then enter 'https://dmswa.azurewebsites.net/' and 'https://dmswa.azurewebsites.net/.auth/login/aad/callback' in the "Redirect URIs" field.  
+- Click on "Configure" at the bottom of the page.  
   
 ## Step 12: Enable Authentication/Authorization for your App Service  
   
