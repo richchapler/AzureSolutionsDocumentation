@@ -117,11 +117,15 @@ namespace YourNamespace.Pages
 ## Step 12: Enable Authentication/Authorization for your App Service  
   
 - In the Azure portal, go to your App Service.  
-- Click on "Authentication / Authorization".  
-- Switch the "App Service Authentication" to "On".  
-- In "Action to take when request is not authenticated", select "Log in with Azure Active Directory".  
-- In the "Authentication Providers" section, click on "Azure Active Directory", then select "Management mode" as "Express", and select the Azure AD app you registered in the previous step.  
-- Click "OK", then "Save".  
+- In the left-hand menu, click on "Authentication".  
+- Click on "+ Add identity provider".  
+- Select "Microsoft" as the identity provider.  
+- For "App registration type", select "Pick an existing app registration in this directory".  
+- In the dropdown that appears, select the Azure AD app you registered earlier.  
+- For "Client application requirement", select "Allow requests only from this application itself" if you want to restrict access to your app only. If you want to allow requests from specific client applications or any application, select the appropriate option.  
+- For "Identity requirement", select "Allow requests from any identity" if you want to allow requests from any identity. If you want to restrict requests to specific identities, select the appropriate option.  
+- For "App Service authentication settings", select "Require authentication" to ensure that requests to your app include information about the caller.  
+- Click "Add".  
   
 ## Step 13: Assign the user (PersonX) to your application in Azure AD  
   
