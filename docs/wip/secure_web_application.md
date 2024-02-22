@@ -146,3 +146,31 @@ namespace YourNamespace.Pages
 - After the application is published, navigate to the URL of your Azure App Service. PersonX will be prompted to log in with their Azure AD credentials. If the login is successful and they are assigned to the application, they will be able to use it. If not, they will see an error message.  
   
 Remember, the code uses Managed Identity for authentication, which enhances the security of your application by eliminating the need to store sensitive information in your code. The DefaultAzureCredential class from the Azure SDK automatically uses the Managed Identity when your application is running on Azure. The Azure AD authentication ensures that only authorized users (PersonX in this case) can access your web application.  
+
+## Troubleshooting  
+  
+If a user who wasn't explicitly added to your application was able to authenticate and access the app, it could be due to the configuration of your Azure AD and App Service settings. Here are a few possible reasons and solutions:  
+  
+### User Assignment Required  
+  
+In Azure AD, there's a setting called "User assignment required" under the "Enterprise applications" > "Your Application" > "Properties". If this is set to "No", any user in your Azure AD tenant can access the app. If you want to restrict access to only certain users, you should set this to "Yes".  
+  
+### Authentication/Authorization Settings in App Service  
+  
+In your App Service, under "Authentication / Authorization", if "Action to take when request is not authenticated" is set to "Allow Anonymous requests (no action)", then unauthenticated users can access the app. You should set this to "Log in with Azure Active Directory" to ensure only authenticated users can access the app.  
+  
+### Azure AD Application's "Supported account types"  
+  
+In your Azure AD application registration, under "Authentication" > "Supported account types", if you've selected "Accounts in any organizational directory (Any Azure AD directory - Multitenant)", then users from any Azure AD tenant can access the app. You might want to restrict this to "Accounts in this organizational directory only (Only single tenant)".  
+  
+If the "User assignment required" setting is already set to "Yes" and "Restrict Access" is set to "Require Authentication", but a user who wasn't explicitly added to your application was still able to authenticate and access the app, it could be due to the following reasons:  
+  
+### User Roles  
+  
+Check if the user has been assigned a role that grants them access to the app. In Azure AD, go to "Enterprise applications" > select your application > "Users and groups". Check if the user is listed there with a role that grants them access.  
+  
+### Group Membership  
+  
+If you've assigned access to the app to a group in Azure AD, and the user is a member of that group, they would be able to access the app. Check the group memberships of the user in Azure AD.  
+  
+If none of these suggestions help, there might be something else in your setup that's allowing the user to access the app. Please provide more details about your setup for further assistance.  
