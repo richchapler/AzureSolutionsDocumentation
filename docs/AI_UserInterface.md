@@ -89,7 +89,7 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup and click "Add". Replace the default code with:
 
-```
+```csharp
 using Azure.Search.Documents.Models;
 using Microsoft.AspNetCore.SignalR;
 
