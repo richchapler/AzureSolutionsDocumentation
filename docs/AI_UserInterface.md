@@ -556,67 +556,6 @@ namespace AI_Interface.Pages
 Expand "wwwroot" >> "css" and then double-click to open "site.css". Replace the default code with:
 
 ```
-html {
-    font-size: 14px;
-    position: relative;
-    min-height: 100%;
-}
-
-h4 {
-    margin: 20px 0 10px 0;
-}
-
-.container input[type="text"] {
-    width: 100%;
-    height: 30px;
-}
-
-.container button {
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}  
-
-
-.scrollable-container {
-    height: 250px;
-    overflow: auto;
-    padding: 10px;
-    background-color: whitesmoke;
-}  
-
-table {
-    background-color: whitesmoke;
-}
-
-.form {
-    display: flex;
-    text-align: left;
-}
-
-.textarea {
-    width: 100% !important;
-    border: 1px solid lightgray;
-    display: block;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 5px;
-    background-color: whitesmoke;
-    border-radius: 10px;
-    overflow: hidden;
-    padding: 1px;
-}
-
-.progress-bar-inner {
-    height: 100%;
-    width: 50%;
-    background-color: blue;
-    animation: progress 2s ease-in-out infinite;
-}
-
 @keyframes progress {
     0% {
         transform: translateX(-100%);
@@ -631,30 +570,106 @@ table {
     }
 }
 
-.data-table tr:nth-child(even) {
-    background-color: ghostwhite;
+.container button {
+    align-items: center;
+    display: flex;
+    height: 30px;
+    justify-content: center;
 }
 
-.data-table tr:nth-child(odd) {
-    background-color: white;
+.container input[type="text"] {
+    height: 30px;
+    width: 100%;
+}
+
+.data-table {
+    width: 100%;
+}
+
+    .data-table tr:nth-child(even) {
+        background-color: ghostwhite;
+    }
+
+    .data-table tr:nth-child(odd) {
+        background-color: white;
+    }
+
+.form {
+    display: flex;
+    text-align: left;
+}
+
+h4 {
+    margin: 20px 0 10px 0;
+}
+
+html {
+    font-size: 14px;
+    min-height: 100%;
+    position: relative;
 }
 
 #myTab {
     margin-top: 20px;
-} 
+}
+
+.label {
+    font-size: 15px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
+
+.nav-parent {
+    font-size: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
 
 .nav-tabs .nav-link {
     border: none;
-}  
+}
 
-.nav-tabs .nav-link.active {
+    .nav-tabs .nav-link.active {
+        background-color: whitesmoke;
+    }
+
+.progress-bar {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    height: 5px;
+    overflow: hidden;
+    padding: 1px;
+    width: 100%;
+}
+
+.progress-bar-inner {
+    animation: progress 2s ease-in-out infinite;
+    background-color: blue;
+    height: 100%;
+    width: 50%;
+}
+
+.scrollable-container {
+    background-color: whitesmoke;
+    height: 250px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.table {
     background-color: whitesmoke;
 }
 
-label {
-    margin-top: 0px;
-    margin-bottom: 5px;
-    font-size: 15px;
+.textarea {
+    border: 1px solid lightgray;
+    display: block;
+    width: 100% !important;
+}
+
+.tabpanel {
+    background-color: whitesmoke;
+    height: 250px;
+    padding: 10px;
 }
 ```
 
@@ -673,51 +688,67 @@ Expand "wwwroot" >> "js" and then delete "site.js".
 Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
 
 ```
-const createHeaders = (columns, row) => {
-    columns.forEach(header => {
+connection.on("displayResults", (data, type) => { displayResults(JSON.parse(data), type); });
+
+function displayResults(data, type) {
+
+    //logMessage(JSON.stringify(data, null, 2));
+
+    /* ************************* Get tabPanel */
+
+    const tabPanel = document.getElementById(`tabPanel_AISearch_${type}`);
+
+    /* ************************* Create table */
+
+    const tableId = `tableAISearch_${type}`;
+    const table = document.createElement('table');
+    table.id = tableId;
+    table.classList.add("data-table");
+    tabPanel.appendChild(table);
+
+    /* ************************* Create headers */
+
+    const thead = table.createTHead(); let headerRow = thead.insertRow();
+
+    let headers = ['Score', 'RerankerScore'].concat(Object.keys(data[0].Document));
+    headers.forEach(header => {
         const th = document.createElement("th");
         th.textContent = header;
-        row.appendChild(th);
-    });
-}
-
-const setupTable = (type) => {
-    const tableId = `tableAISearch_${type}`; const table = document.getElementById(tableId);
-
-    const RUNorNOT = `AISearch_${type}_RunOrNot`;
-
-    table.classList.add('data-table');
-
-    connection.on(`${tableId}_SetHeaders`, (headers) => {
-        if (appState.get(RUNorNOT) === RUN) {
-            if (!table.tHead) {
-                const thead = table.createTHead();
-                let row = thead.insertRow();
-                createHeaders(headers, row);
-            }
-        }
+        headerRow.appendChild(th);
     });
 
-    connection.on(`${tableId}_AddRows`, (dataDictionary, SecondsToProcess) => {
-        if (appState.get(RUNorNOT) === RUN) {
-            const row = table.insertRow();
-            for (const key in dataDictionary) {
-                const cell = row.insertCell();
-                cell.textContent = dataDictionary[key];
-            }
+    /* ************************* Add rows */
 
-            let label = document.getElementById(`label${tableId}`);
-            if (!label) {
-                label = document.createElement('label');
-                label.id = `label${tableId}`;
-                label.textContent = `${type} (${SecondsToProcess} seconds)`;
-                table.parentNode.insertBefore(label, table);
-            }
-        }
+    data.forEach(item => {
+        const row = table.insertRow();
+        headers.forEach(header => {
+            const cell = row.insertCell();
+            if (header in item) { cell.textContent = item[header]; }
+            else if (header in item.Document) { cell.textContent = item.Document[header]; }
+            else if (header === 'RerankerScore' && item.SemanticSearch && 'RerankerScore' in item.SemanticSearch) { cell.textContent = item.SemanticSearch.RerankerScore; }
+        });
     });
-}
 
-["Simple", "Full", "Semantic"].forEach(setupTable);    
+    /* ************************* Create "JSON Download" and "CSV Download" links */
+
+    const downloadLinkJson = document.createElement('a');
+    downloadLinkJson.href = `${window.location.origin}/?queryType=${type.toLowerCase()}&handler=DownloadJson&file=${type.toLowerCase()}.json`;
+    downloadLinkJson.textContent = 'JSON';
+
+    const downloadLinkCsv = document.createElement('a');
+    downloadLinkCsv.href = `${window.location.origin}/?queryType=${type.toLowerCase()}&handler=DownloadCSV&file=${type.toLowerCase()}.csv`;
+    downloadLinkCsv.textContent = 'CSV';
+
+    const downloadText = document.createTextNode('Download ');
+    const spaceText = document.createTextNode(' ');
+    const lineBreak = document.createElement('br');
+
+    tabPanel.appendChild(lineBreak);
+    tabPanel.appendChild(downloadText);
+    tabPanel.appendChild(downloadLinkJson);
+    tabPanel.appendChild(spaceText);
+    tabPanel.appendChild(downloadLinkCsv);  
+}  
 ```
 
 -----
@@ -795,44 +826,32 @@ configurations.forEach(initialSetup_ConfigurationHeaders);
 Right click on "wwwroot" >> "js" and then add new file "openai.js". Replace the default code with:
 
 ```
-const createRow = (labelText, data) => {
-    const table = document.getElementById(`tableOpenAI_${labelText}`);
-    const row = table.insertRow();
-    const cell = row.insertCell();
-    cell.style.width = '100%';
-    cell.style.border = 'none';
+const buildTabPanel = (type, data) => {
 
-    const createTextareaAndLabel = (cell, labelText, data) => {
-        let textarea = document.getElementById(`textareaOpenAI_${labelText}`);
-        let label = document.getElementById(`labelOpenAI_${labelText}`);
+    /* ************************* Get and empty tabpanel */
+    const tabPanel = document.getElementById(`tabPanel_OpenAI_${type}`);
+    tabPanel.innerHTML = '';
 
-        if (textarea) {
-            textarea.parentNode.removeChild(textarea);
-        }
+    /* ************************* Create label */
 
-        if (label) {
-            label.parentNode.removeChild(label);
-        }
+    label = document.createElement('label');
+    label.id = `labelOpenAI_${type}`;
+    label.textContent = `Time-to-Process: ${data.stp.toFixed(1)} seconds`;
+    tabPanel.appendChild(label);
 
-        textarea = document.createElement('textarea');
-        textarea.id = `textareaOpenAI_${labelText}`;
-        textarea.rows = '3';
-        textarea.className = 'textarea';
-        textarea.readOnly = true;
-        textarea.textContent = data.response;
-        cell.appendChild(textarea);
+    /* ************************* Create textarea */
 
-        label = document.createElement('label');
-        label.id = `labelOpenAI_${labelText}`;
-        label.textContent = `${labelText} (${data.elapsed} seconds)`;
-        cell.appendChild(label);
-    }
-
-    createTextareaAndLabel(cell, labelText, data);
+    textarea = document.createElement('textarea');
+    textarea.id = `textareaOpenAI_${type}`;
+    textarea.rows = '9';
+    textarea.className = 'textarea';
+    textarea.readOnly = true;
+    textarea.textContent = data.response;
+    tabPanel.appendChild(textarea);
 }
 
-connection.on("queryOpenAI_Simple", data => createRow('Simple', data));
-connection.on("queryOpenAI_Semantic", data => createRow('Semantic', data));
+["Simple", "Semantic"].forEach(type => { connection.on(`displayOpenAI_${type}`, data => buildTabPanel(type, data)); });  
+
 ```
 
 -----
@@ -850,9 +869,10 @@ const connection = new signalR.HubConnectionBuilder().withUrl("/Hub").build();
 
 const logMessage = (message, source = 'Client-Side') => {
     const timestamp = new Date().toLocaleTimeString();
+    message = message.replace(/[\r\n]+/g, ' '); // replace carriage returns and newlines with a space  
     logArea.value += `${timestamp}, ${source}... ${message}\n`;
     logArea.scrollTop = logArea.scrollHeight;
-}
+}  
 
 connection.on("logMessage", (message) => logMessage(message, 'Server-Side'));
 ```
@@ -864,48 +884,121 @@ connection.on("logMessage", (message) => logMessage(message, 'Server-Side'));
 Right click on "wwwroot" >> "js" and then add new file "submit.js". Replace the default code with:
 
 ```
-const startConnection = async () => {
-    if (connection.state === signalR.HubConnectionState.Disconnected) { await connection.start(); }
-};
+/* ************************* Handle Events from listeners (below): 1) Submit button clicked, or 2) Enter key pressed */
 
-const stopConnection = async () => {
-    if (connection.state === signalR.HubConnectionState.Connected) { await connection.stop(); }
-};
+const HandleEvent = async (e) => {
 
-const handleEvent = async (e) => {
     if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter')) {
+
         if (buttonSubmit.innerText === 'Submit') {
-            await startConnection();
+
+            if (connection.state === signalR.HubConnectionState.Disconnected) { await connection.start(); }
+
             buttonSubmit.innerText = 'Stop';
-            submit();
+
+            await prepareTabs();
+
+            await prepareTabPanels();
+
+            await processQuery();
         }
         else {
-            await stopConnection();
+
+            if (connection.state === signalR.HubConnectionState.Connected) { await connection.stop(); }
+
             buttonSubmit.innerText = 'Submit';
+
             progressBar.style.display = 'none';
         }
     }
 };
 
-buttonSubmit.addEventListener('click', handleEvent);
-inputUserQuery.addEventListener('keydown', handleEvent);
+/* ***** Event Listeners... MUST follow HandleEvent */
 
-const submit = (e) => {
-    const tables = document.querySelectorAll('.data-table');
-    tables.forEach(clearElementContent);
-    const textareas = document.querySelectorAll('.textarea'); textareas.forEach(textarea => { textarea.value = ''; });
+buttonSubmit.addEventListener('click', HandleEvent);
+inputUserQuery.addEventListener('keydown', HandleEvent);
 
-    progressBar.style.display = 'block';
+/* ************************* Prepare Tabs */
+
+const prepareTabs = async () => {
+
+    var configurations = [
+        { parent: "OpenAI", children: ["Simple", "Semantic"] },
+        { parent: "AISearch", children: ["Simple", "Full", "Semantic"] }
+    ];
+
+    var tabList = $("#resultTabs");
+    tabList.empty();
+
+    configurations.forEach(function (config, index) {
+
+        var parentTab = $('<li class="nav-parent">' + config.parent + '</li>');
+
+        tabList.append(parentTab);
+
+        config.children.forEach(function (child) {
+
+            var childTab = $(`<li class="nav-item ${config.parent}-subtab"><a class="nav-link" id="${config.parent}-${child}-tab"
+                data-toggle="tab" href="#${config.parent.toLowerCase()}-${child.toLowerCase()}">  
+                ${child}</a></li>`);
+            /* the specific data-toggle, href and lowercase appear to be necessary for Bootstrap tab functionality */
+
+            tabList.append(childTab);
+        });
+    });
+};
+
+/* ************************* Prepare Tab Panels */
+
+const prepareTabPanels = async () => {
+
+    var configurations = [
+        { parent: "OpenAI", children: ["Simple", "Semantic"] },
+        { parent: "AISearch", children: ["Simple", "Full", "Semantic"] }
+    ];
+
+    var tabContent = $("#myTabContent");
+    configurations.forEach(function (config, index) {
+        config.children.forEach(function (child) {
+
+            if (config.parent === "OpenAI") {
+
+                var childPane = $(
+                    `<div id="${config.parent.toLowerCase()}-${child.toLowerCase()}" class="tab-pane fade">  
+                        <div id="tabPanel_${config.parent}_${child}" class="scrollable-container"></div></div>`
+                );
+                /* first div: the specific id, lowercase, and class appear to be necessary for Bootstrap tab functionality */
+                /* second div: this is the container actually used to display results */
+
+                tabContent.append(childPane);
+            }
+        });
+    });
+};
+
+
+/* ************************* Process Query */
+
+const processQuery = async (e) => {
+
     logMessage(`Sending User Query '${inputUserQuery.value}' :: System Message '${inputSystemMessage.value}' to Hub > ProcessQuery`);
+
+    document.querySelectorAll('.data-table').forEach(clearElementContent); /* Clear previous results from tables */
+
+    document.querySelectorAll('.textarea').forEach(textarea => { textarea.value = ''; }); /* Clear previous results from text areas */
+
+    progressBar.style.display = 'block'; /* Reset progress bar */
 
     const runOrNotValues = getRunOrNotValues(RUNorNOTs, appState, RUN);
 
     connection.invoke("ProcessQuery", inputUserQuery.value, inputSystemMessage.value, ...runOrNotValues)
+
         .then(() => {
             progressBar.style.display = 'none';
             buttonSubmit.innerText = 'Submit';
         })
-        .catch((err) => logMessage(err.toString()));  
+
+        .catch((err) => logMessage(err.toString()));
 };
 ```
 
