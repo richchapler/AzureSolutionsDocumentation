@@ -1010,7 +1010,7 @@ Click "Debug" >> "Start Debugging" in the menu bar.
 
 Enter a prompt and press the Enter key on your keyboard... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a1830c0f-dd44-434e-8958-7e61c453a1cb" width="800" title="Snipped February 21, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac873cde-1ecd-4a05-b36a-32508e73f210" width="800" title="Snipped February 26, 2024" />
 
 When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword, full, and semantic configurations).
 
