@@ -681,7 +681,7 @@ html {
 
 Expand "wwwroot" >> "js" and then delete "site.js".
 
------js
+-----
 
 #### aisearch.js
 
