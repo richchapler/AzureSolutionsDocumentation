@@ -122,7 +122,7 @@ namespace AI_Interface.Helpers
 
 Repeat the process to create "Constants.cs", then replace the default code with:
 
-```
+```csharp
 using Azure;
 using Azure.AI.OpenAI;
 using Azure.Identity;
@@ -187,7 +187,7 @@ namespace AI_Interface.Helpers
 
 Repeat the process to create "OpenAI.cs", then replace the default code with:
 
-```
+```csharp
 using Azure.AI.OpenAI;
 using Microsoft.AspNetCore.SignalR;
 
@@ -239,7 +239,7 @@ namespace AI_Interface.Helpers
 
 Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "Hub.cs" on the resulting popup then click "Add". Replace the default code with:
 
-```
+```csharp
 using AI_Interface.Helpers;
 using Azure.AI.OpenAI;
 using Azure.Search.Documents.Models;
@@ -298,7 +298,7 @@ namespace AI_Interface
 
 Double-click to open "Program.cs". Replace the default code with:
 
-```
+```csharp
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
@@ -330,7 +330,7 @@ app.Run();
 
 Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace the default code with:
 
-```
+```cshtml
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -387,7 +387,7 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
 
 Expand "Pages" and then double-click to open "Index.cshtml". Replace the default code with:
 
-```
+```cshtml
 @page
 @model IndexModel
 @{
@@ -474,7 +474,7 @@ Expand "Pages" and then double-click to open "Index.cshtml". Replace the default
 
 Expand "Pages" >> "Index.cshtml" and then double-click to open "Index.cshtml.cs". Replace the default code with:
 
-```
+```csharp
 using AI_Interface.Helpers;
 using Azure.Search.Documents.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -555,7 +555,7 @@ namespace AI_Interface.Pages
 
 Expand "wwwroot" >> "css" and then double-click to open "site.css". Replace the default code with:
 
-```
+```css
 @keyframes progress {
     0% {
         transform: translateX(-100%);
@@ -681,13 +681,13 @@ html {
 
 Expand "wwwroot" >> "js" and then delete "site.js".
 
------
+-----js
 
 #### aisearch.js
 
 Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
 
-```
+```js
 connection.on("displayResults", (data, type) => { displayResults(JSON.parse(data), type); });
 
 function displayResults(data, type) {
@@ -757,7 +757,7 @@ function displayResults(data, type) {
 
 Right click on "wwwroot" >> "js" and then add new file "constants.js". Replace the default code with:
 
-```
+```js
 /* ************************* Toggles */
 
 const setupAppState = (keys, defaultValue) => {
@@ -825,7 +825,7 @@ configurations.forEach(initialSetup_ConfigurationHeaders);
 
 Right click on "wwwroot" >> "js" and then add new file "openai.js". Replace the default code with:
 
-```
+```js
 const buildTabPanel = (type, data) => {
 
     /* ************************* Get and empty tabpanel */
@@ -860,7 +860,7 @@ const buildTabPanel = (type, data) => {
 
 Right click on "wwwroot" >> "js" and then add new file "runfirst.js". Replace the default code with:
 
-```
+```js
 /* ************************* SignalR Connection (MUST BE FIRST!) */
 
 const connection = new signalR.HubConnectionBuilder().withUrl("/Hub").build();
@@ -883,7 +883,7 @@ connection.on("logMessage", (message) => logMessage(message, 'Server-Side'));
 
 Right click on "wwwroot" >> "js" and then add new file "submit.js". Replace the default code with:
 
-```
+```js
 /* ************************* Handle Events from listeners (below): 1) Submit button clicked, or 2) Enter key pressed */
 
 const HandleEvent = async (e) => {
