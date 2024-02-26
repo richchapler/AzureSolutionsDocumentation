@@ -135,7 +135,7 @@ namespace AI_Interface.Helpers
     {
         /* ************************* KeyVault */
 
-        private static readonly string KeyVault_Name = "dmsk";
+        private static readonly string KeyVault_Name = "KEY_VAULT_NAME";
 
         private static readonly SecretClient secretClient = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
 
