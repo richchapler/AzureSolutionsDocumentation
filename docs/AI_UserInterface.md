@@ -23,10 +23,11 @@ This documentation assumes the following resources are ready for use:
   * AISearch-Index-Name
   * AISearch-Key
   * AISearch-Name
+  * AISearch-SelectFields
   * AISearch-SemanticConfiguration-Name
   * OpenAI-Deployment-Name
-  * OpenAI-Name
   * OpenAI-Key
+  * OpenAI-Name
 
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
@@ -66,7 +67,7 @@ Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manag
 
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolutions.Helpers".
 
-_Note: This documentation uses [AzureSolution.Helpers](https://www.nuget.org/packages/AzureSolutions.Helpers/) v1.1.1_
+_Note: This documentation uses [AzureSolution.Helpers](https://www.nuget.org/packages/AzureSolutions.Helpers/) v1.1.3_
 
 On the resulting pop-out, check the box next to your  and then click "Install".
 
@@ -91,75 +92,27 @@ Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting 
 ```
 using Azure.Search.Documents.Models;
 using Microsoft.AspNetCore.SignalR;
-using System.Data;
-using System.Text.Json;
 
 namespace AI_Interface.Helpers
 {
     public class AISearch
     {
-        public static readonly string[] FieldNames = ["CustomerID", "CompanyName"];
+        private static readonly Dictionary<SearchQueryType, string> _responses = [];
+        public static IReadOnlyDictionary<SearchQueryType, string> Responses => _responses;
 
-        public static async Task Query_AISearch(
-            IHubCallerClients Clients,
-            SearchQueryType AISearch_QueryType,
-            string UserQuery
-            )
+        public static async Task Query_AISearch(IHubCallerClients HubClient, SearchQueryType AISearch_QueryType, string UserQuery)
         {
+            await HubClient.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' :: Configuration '{AISearch_QueryType}' with AISearch");
+
             var AISearch_Query = await AzureSolutions.Helpers.AISearch.Query.Execute(
                 Constants.AISearch_Client,
                 AISearch_QueryType,
                 AISearch_Text: UserQuery,
-                AISearch_SelectField: string.Join(",", AISearch.FieldNames)
+                AISearch_SelectField: Constants.AISearch_SelectFields
                 );
 
-            /* ************************* AISearch_Query >> Data Table */
-
-            DataTable dataTable = new();
-
-            List<Dictionary<string, JsonElement>>? list = AISearch_Query.Response != null ? JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(AISearch_Query.Response) : null;
-
-            if (list != null && list.Count > 0)
-            {
-                foreach (var key in list[0].Keys)
-                {
-                    dataTable.Columns.Add(key, typeof(string)); // Assumes all values are strings    
-                }
-
-                foreach (var item in list)
-                {
-                    DataRow row = dataTable.NewRow();
-
-                    foreach (var key in item.Keys) { row[key] = item[key].ToString(); }
-
-                    dataTable.Rows.Add(row);
-                }
-            }
-
-            /* ************************* Column Headers >> Client */
-
-            string tableId = $"tableAISearch_{AISearch_QueryType}";
-
-            var columns = new List<string> { "Document", "Score", "SemanticSearch" };
-
-            await Clients.Caller.SendAsync(tableId + "_SetHeaders", columns.ToArray());
-
-            /* ************************* Data >> Client */
-
-            if (dataTable.Rows != null && dataTable.Rows.Count > 0)
-            {
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    var dataDictionary = new Dictionary<string, string>();
-
-                    foreach (var column in columns)
-                    {
-                        if (dataTable.Columns.Contains(column)) { dataDictionary[column] = row[column]?.ToString() ?? "NULL"; }
-                    }
-
-                    await Clients.Caller.SendAsync(tableId + "_AddRows", dataDictionary, AISearch_Query.SecondsToProcess);
-                }
-            }
+            if (AISearch_Query.Response != null) { _responses[AISearch_QueryType] = AISearch_Query.Response; }
+            await HubClient.Caller.SendAsync("displayResults", AISearch_Query.Response, AISearch_QueryType.ToString());
         }
     }
 }
@@ -182,7 +135,7 @@ namespace AI_Interface.Helpers
     {
         /* ************************* KeyVault */
 
-        private static readonly string KeyVault_Name = "YOUR_KEYVAULT_NAME";
+        private static readonly string KeyVault_Name = "dmsk";
 
         private static readonly SecretClient secretClient = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
 
@@ -193,13 +146,14 @@ namespace AI_Interface.Helpers
         }
 
         /* ************************* Constants */
-        public static string AISearch_Name { get; } = GetSecret("AISearch-Name");
-        public static string AISearch_Key { get; } = GetSecret("AISearch-Key");
         public static string AISearch_Index_Name { get; } = GetSecret("AISearch-Index-Name");
-        public static string OpenAI_Name { get; } = GetSecret("OpenAI-Name");
-        public static string OpenAI_Key { get; } = GetSecret("OpenAI-Key");
-        public static string OpenAI_Deployment_Name { get; } = GetSecret("OpenAI-Deployment-Name");
+        public static string AISearch_Key { get; } = GetSecret("AISearch-Key");
+        public static string AISearch_Name { get; } = GetSecret("AISearch-Name");
+        public static string AISearch_SelectFields { get; } = GetSecret("AISearch-SelectFields");
         public static string AISearch_SemanticConfiguration_Name { get; } = GetSecret("AISearch-SemanticConfiguration-Name");
+        public static string OpenAI_Deployment_Name { get; } = GetSecret("OpenAI-Deployment-Name");
+        public static string OpenAI_Key { get; } = GetSecret("OpenAI-Key");
+        public static string OpenAI_Name { get; } = GetSecret("OpenAI-Name");
 
         /* ************************* Clients */
 
@@ -235,51 +189,44 @@ Repeat the process to create "OpenAI.cs", then replace the default code with:
 
 ```
 using Azure.AI.OpenAI;
-using AzureSolutions.Helpers;
-using System.Diagnostics;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AI_Interface.Helpers
 {
-    public class OpenAIResult
-    {
-        public string? Response { get; set; }
-        public double SecondsToProcess { get; set; }
-    }
-
     public class OpenAI
     {
-        public static async Task<OpenAIResult> Query(
+        public static async Task Query(
+            IHubCallerClients HubClient,
             AzureCognitiveSearchQueryType AISearch_QueryType,
             string UserQuery,
             string SystemMessage
         )
         {
-            try
-            {
-                Stopwatch s = new(); s.Start();
+            await HubClient.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' :: System Message '{SystemMessage}' :: Configuration '{AISearch_QueryType}' with OpenAI");
 
-                var response = await AzureSolutions.Helpers.OpenAI.Prompt(
-                    Constants.OpenAI_Client,
-                    Constants.OpenAI_Deployment_Name,
-                    Constants.AISearch_Name,
-                    Constants.AISearch_Key,
-                    Constants.AISearch_Index_Name,
-                    AISearch_QueryType,
-                    Constants.AISearch_SemanticConfiguration_Name,
-                    UserQuery,
-                    SystemMessage
-                    );
+            var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt(
+                Constants.OpenAI_Client,
+                Constants.OpenAI_Deployment_Name,
+                Constants.AISearch_Name,
+                Constants.AISearch_Key,
+                Constants.AISearch_Index_Name,
+                AISearch_QueryType,
+                Constants.AISearch_SemanticConfiguration_Name,
+                UserQuery,
+                SystemMessage
+                );
 
-                s.Stop();
-
-                return new OpenAIResult { Response = response, SecondsToProcess = Math.Round(s.Elapsed.TotalSeconds, 1) };
-            }
-            catch (Exception ex)
-            {
-                Log.Write(message: $"Exception: {ex.Message}", type: "Error");
-                return new OpenAIResult { Response = $"Exception: {ex.Message}", SecondsToProcess = 0 };
-            }
+            await HubClient.Caller.SendAsync(
+                method: $"displayOpenAI_{AISearch_QueryType}",
+                arg1: new { response = OpenAI_Prompt.Response, stp = OpenAI_Prompt.SecondsToProcess }
+                );
         }
+    }
+
+    public class OpenAIResult
+    {
+        public string? Response { get; set; }
+        public double SecondsToProcess { get; set; }
     }
 }
 ```
@@ -314,6 +261,15 @@ namespace AI_Interface
         {
             try
             {
+                /* ************************* OpenAI */
+
+                if (runOpenAI_Simple || runOpenAI_Semantic)
+                {
+                    if (runOpenAI_Simple) { await Helpers.OpenAI.Query(Clients, AISearch_QueryType: AzureCognitiveSearchQueryType.Simple, UserQuery, SystemMessage); }
+
+                    if (runOpenAI_Semantic) { await Helpers.OpenAI.Query(Clients, AISearch_QueryType: AzureCognitiveSearchQueryType.Semantic, UserQuery, SystemMessage); }
+                }
+
                 /* ************************* AISearch */
 
                 if (runAISearch_Simple || runAISearch_Full || runAISearch_Semantic)
@@ -325,31 +281,6 @@ namespace AI_Interface
                     if (runAISearch_Full) { await AISearch.Query_AISearch(Clients, SearchQueryType.Full, UserQuery); }
 
                     if (runAISearch_Semantic) { await AISearch.Query_AISearch(Clients, SearchQueryType.Semantic, UserQuery); }
-                }
-
-                /* ************************* OpenAI */
-
-                if (runOpenAI_Simple || runOpenAI_Semantic)
-                {
-                    await Clients.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' :: System Message '{SystemMessage}' with OpenAI");
-
-                    if (runOpenAI_Simple)
-                    {
-                        var OpenAI_Prompt = await Helpers.OpenAI.Query(AISearch_QueryType: AzureCognitiveSearchQueryType.Simple, UserQuery, SystemMessage);
-
-                        await Clients.Caller.SendAsync(
-                            method: $"queryOpenAI_Simple",
-                            arg1: new { response = OpenAI_Prompt.Response, elapsed = OpenAI_Prompt.SecondsToProcess });
-                    }
-
-                    if (runOpenAI_Semantic)
-                    {
-                        var OpenAI_Prompt = await Helpers.OpenAI.Query(AISearch_QueryType: AzureCognitiveSearchQueryType.Semantic, UserQuery, SystemMessage);
-
-                        await Clients.Caller.SendAsync(
-                            method: $"queryOpenAI_Semantic",
-                            arg1: new { response = OpenAI_Prompt.Response, elapsed = OpenAI_Prompt.SecondsToProcess });
-                    }
                 }
             }
             catch (Exception ex) { await Clients.All.SendAsync("logMessage", $"Exception: {ex}\n"); }
@@ -413,7 +344,7 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">AI_Interface</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Azure Solutions</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -467,81 +398,72 @@ Expand "Pages" and then double-click to open "Index.cshtml". Replace the default
 <html>
 <body>
     <div class="container">
-        <h4>Step 1: Select Types</h4>
-        <label for="toggles">
-            Click to strike-through / exclude types that you do not want to include in query processing.
-        </label>
-        <br />
-
-        <div id="toggles">
-            <h6 id="headerAISearch" style="cursor: pointer; display: inline;">AISearch >> </h6>
-            <h6 id="headerAISearch_Simple" style="cursor: pointer; display: inline;">Simple</h6> |
-            <h6 id="headerAISearch_Full" style="cursor: pointer; display: inline;">Full</h6> |
-            <h6 id="headerAISearch_Semantic" style="cursor: pointer; display: inline;">Semantic</h6> ::
-            <h6 id="headerOpenAI" style="cursor: pointer; display: inline;">OpenAI >> </h6>
-            <h6 id="headerOpenAI_Simple" style="cursor: pointer; display: inline;">Simple</h6> |
-            <h6 id="headerOpenAI_Semantic" style="cursor: pointer; display: inline;">Semantic</h6>
-        </div>
-
-        <h4>Step 2: Submit Query</h4>
+        <h4>Step 1: Submit Query</h4>
 
         <div class="row">
             <div class="col">
-                <label for="inputSystemMessage">Enter System Message (if applicable)</label>
-                <input id="inputSystemMessage" type="text" placeholder="Optional, used for OpenAI only... functionality pending Azure Support Case" disabled style="width: 100%;" />
+                <label for="inputUserQuery">User Query</label>
+                <textarea id="inputUserQuery" rows="2" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%;"></textarea>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
-                <label for="inputUserQuery">...then, enter User Query</label>
-                <input id="inputUserQuery" type="text" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%;" />
+                <label for="inputSystemMessage">System Message</label>
+                <textarea id="inputSystemMessage" disabled rows="2" placeholder="Optional, used for OpenAI only" style="width: 100%;"></textarea>
             </div>
+        </div>
+        <div id="toggles">
+            <span id="headerOpenAI" style="cursor: pointer; display: inline;">OpenAI >> </span>
+            <span id="headerOpenAI_Simple" style="cursor: pointer; display: inline;">Simple</span> |
+            <span id="headerOpenAI_Semantic" style="cursor: pointer; display: inline;">Semantic</span> ::
+            <span id="headerAISearch" style="cursor: pointer; display: inline;">AISearch >> </span>
+            <span id="headerAISearch_Simple" style="cursor: pointer; display: inline;">Simple</span> |
+            <span id="headerAISearch_Full" style="cursor: pointer; display: inline;">Full</span> |
+            <span id="headerAISearch_Semantic" style="cursor: pointer; display: inline;">Semantic</span>
+        </div>
+        <div class="row">
             <div class="col">
-                <div>
-                    <label for="buttonSubmit">...finally, click Submit</label>
-                </div>
                 <div>
                     <button id="buttonSubmit" type="button" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <h4>Step 3: Review Results</h4>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="ai-search-tab" data-toggle="tab" href="#ai-search" role="tab" aria-controls="ai-search" aria-selected="true">AI Search</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="open-ai-tab" data-toggle="tab" href="#open-ai" role="tab" aria-controls="open-ai" aria-selected="false">Open AI</a>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="ai-search" role="tabpanel" aria-labelledby="ai-search-tab">
-                <div class="scrollable-container">
-                    <table id="tableAISearch_Simple" class="table"></table>
 
-                    <table id="tableAISearch_Full" class="table"></table>
+    <h4>Step 2: Review Results</h4>
 
-                    <table id="tableAISearch_Semantic" class="table"></table>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="open-ai" role="tabpanel" aria-labelledby="open-ai-tab">
-                <div class="scrollable-container">
-                    <table id="tableOpenAI_Simple" class="table"></table>
-                    <table id="tableOpenAI_Semantic" class="table"></table>
-                </div>
-            </div>
+    <ul id="resultTabs" class="nav nav-tabs" role="tablist"></ul>
+
+    <div class="tab-content" id="myTabContent">
+
+        <div id="aisearch-simple" class="tab-pane fade">
+            <div id="tabPanel_AISearch_Simple" class="scrollable-container"></div>
         </div>
 
-        <div class="progress-bar" id="progressBar" style="display: none;">
-            <div class="progress-bar-inner"></div>
+        <div id="aisearch-full" class="tab-pane fade">
+            <div id="tabPanel_AISearch_Full" class="scrollable-container"></div>
         </div>
 
-        <h4 id="headerLog">Log</h4>
-        <textarea id="textareaLog" class="textarea" rows="4" readonly>@ViewData["messages"]</textarea>
+        <div id="aisearch-semantic" class="tab-pane fade">
+            <div id="tabPanel_AISearch_Semantic" class="scrollable-container"></div>
+        </div>
+
+    </div>
+
+    <div class="progress-bar" id="progressBar" style="display: none;">
+        <div class="progress-bar-inner"></div>
+    </div>
+
+
+    <h4 id="headerLog">Log</h4>
+    <textarea id="textareaLog" class="textarea" rows="4" readonly>@ViewData["messages"]</textarea>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+
 </body>
 </html>
 ```
@@ -550,19 +472,79 @@ Expand "Pages" and then double-click to open "Index.cshtml". Replace the default
 
 #### Index.cshtml.cs
 
-Expand "Pages" >> "Index.cshtml" and then double-click to open "Index.cshtml.cs".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/06a19926-3585-40a7-9357-6594d49f6ece" width="800" title="Snipped February 15, 2024" />
-
-Replace the default code with:
+Expand "Pages" >> "Index.cshtml" and then double-click to open "Index.cshtml.cs". Replace the default code with:
 
 ```
+using AI_Interface.Helpers;
+using Azure.Search.Documents.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data;
+using System.Text;
+using System.Text.Json;
 
 namespace AI_Interface.Pages
 {
     public class IndexModel : PageModel
     {
+        public IActionResult OnGetDownloadJson(SearchQueryType queryType)
+        {
+            return File(
+                fileContents: Encoding.UTF8.GetBytes(AISearch.Responses[queryType]),
+                contentType: "application/json",
+                fileDownloadName: $"AISearch_{queryType}_{DateTime.Now:yyyyMMdd_HHmm}.json"
+                );
+        }
+
+        public IActionResult OnGetDownloadCSV(SearchQueryType queryType)
+        {
+            var jsonData = AISearch.Responses[queryType];
+            var document = JsonDocument.Parse(jsonData);
+            if (document == null) { return BadRequest("Invalid data"); }
+
+            DataTable dt = new();
+            dt.Columns.Add("Score");
+            dt.Columns.Add("RerankerScore");
+
+            var firstElement = document.RootElement.EnumerateArray().First();
+            var documentPropertiesForColumns = firstElement.GetProperty("Document").EnumerateObject();
+            foreach (var prop in documentPropertiesForColumns) { dt.Columns.Add(prop.Name); }
+
+            foreach (JsonElement element in document.RootElement.EnumerateArray())
+            {
+                DataRow dr = dt.NewRow();
+                dr["Score"] = element.GetProperty("Score").GetDouble();
+
+                if (element.GetProperty("SemanticSearch").TryGetProperty("RerankerScore", out JsonElement rerankerScoreElement)
+                    && rerankerScoreElement.ValueKind == JsonValueKind.Number)
+                {
+                    dr["RerankerScore"] = rerankerScoreElement.GetDouble();
+                }
+                else { dr["RerankerScore"] = (double?)null; }
+
+                var documentPropertiesForRow = element.GetProperty("Document").EnumerateObject();
+                foreach (var prop in documentPropertiesForRow) { dr[prop.Name] = prop.Value.GetString() ?? string.Empty; }
+                dt.Rows.Add(dr);
+            }
+
+            StringBuilder sb = new();
+            var columnNames = dt.Columns.Cast<DataColumn>().Select(column => column.ColumnName);
+            sb.AppendLine(string.Join(",", columnNames));
+
+            foreach (DataRow row in dt.Rows)
+            {
+                var fields = row.ItemArray.Select(field => field?.ToString() ?? string.Empty);
+                sb.AppendLine(string.Join(",", fields));
+            }
+
+            var csvData = sb.ToString();
+
+            return File(
+                fileContents: Encoding.UTF8.GetBytes(csvData),
+                contentType: "text/csv",
+                fileDownloadName: $"AISearch_{queryType}_{DateTime.Now:yyyyMMdd_HHmm}.csv"
+            );
+        }
     }
 }
 ```
