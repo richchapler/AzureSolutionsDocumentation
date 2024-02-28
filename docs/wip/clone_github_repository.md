@@ -23,7 +23,7 @@
    
 After the process is complete, the cloned repository will appear in the `Solution Explorer` where you can start working on it.
 
-# via Command Line
+## via Command Line
  
 1. **Download and Install Git Bash**  
   
