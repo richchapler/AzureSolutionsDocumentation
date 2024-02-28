@@ -42,18 +42,14 @@ After the process is complete, the cloned repository will appear in the `Solutio
    
 3. **Navigate to the Directory Where You Want to Clone the Repository**  
   
-   Use the `cd` (change directory) command to navigate to the directory where you want to clone the repository. For example, if you want to clone the repository in a directory named `projects` on your `D` drive, you would type `cd /d/projects`.  
+   Use the `cd` (change directory) command to navigate to the directory where you want to clone the repository; example: `cd /c/temp`.  
    
 4. **Clone the Repository**  
   
    Now, you can clone the repository by typing the following command:  
   
    ```bash  
-   git clone https://github.com/username/repository.git  
+   git clone https://github.com/richchapler/ai_interface.git  
    ```  
-  
-   Replace `https://github.com/username/repository.git` with the URL of the repository you want to clone. You can get this URL from the GitHub page of the repository by clicking on the `Code` button.  
-   
+     
 After running the `git clone` command, Git will create a new directory in your current directory, which will contain the cloned repository. You can then navigate into this directory using the `cd` command to start working on the project.  
-   
-Remember to replace `username` and `repository` with your actual GitHub username and repository name.
