@@ -1,3 +1,5 @@
+https://learn.microsoft.com/en-us/azure/app-service/scenario-secure-app-authentication-app-service
+
 # Step-by-step instructions to configure Azure, code, and publish a Razor Pages web application  
    
 This guide will help you create a web application that lists all blob containers in an Azure Storage Account using Managed Identity.   
