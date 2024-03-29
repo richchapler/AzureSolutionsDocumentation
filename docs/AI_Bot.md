@@ -687,7 +687,11 @@ Confirm success on "Publish profile creation progress" and then click "Close".
 
 Back on the "AI_Bot: Publish" tab, click "Publish".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/21242bd4-1e32-4cfd-a6ab-2aadab4b3e37" width="800" title="Snipped March 29, 2024" />
 
+### Step 6: Configure Bot
+
+LOREM IPSUM
 
 
 
