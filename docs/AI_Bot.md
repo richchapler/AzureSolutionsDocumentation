@@ -9,7 +9,9 @@
 
 This documentation assumes the following resources are ready for use:
 
-* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
+* [Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service)
+
+* [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 
 ## Documentation Note
 
