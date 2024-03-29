@@ -643,19 +643,19 @@ Delete `Models` and `Views` folders.
 
 Click "Debug" >>  "Start Debugging".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b14998b-a356-4563-bb3f-c17bdf8a9b18" width="600" title="Snipped March 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b14998b-a356-4563-bb3f-c17bdf8a9b18" width="800" title="Snipped March 29, 2024" />
 
 #### Bot Framework Emulator
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2617cc8f-8a3a-4f1d-a46a-5e10ff1ff9fb" width="600" title="Snipped March 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2617cc8f-8a3a-4f1d-a46a-5e10ff1ff9fb" width="800" title="Snipped March 29, 2024" />
 
 On the main page of the Bot Framework Emulator, click "Open Bot".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2265ed14-1d9b-4344-a52d-df1a07f2fbc8" width="600" title="Snipped March 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2265ed14-1d9b-4344-a52d-df1a07f2fbc8" width="800" title="Snipped March 29, 2024" />
 
 Paste the "Bot URL" value and click "Connect".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4b3192ec-609e-4e49-8d84-b605b5f1a76d" width="600" title="Snipped March 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4b3192ec-609e-4e49-8d84-b605b5f1a76d" width="800" title="Snipped March 29, 2024" />
 
 A new "Live Chat" tab will open and you can expect to see an opening "Hello and welcome!" message from PromptBot.
 
@@ -682,6 +682,13 @@ Confirm "App Service" configuration, then click "Finish".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/012d1d8e-3aea-497f-a77c-5c5a90408e72" width="600" title="Snipped March 29, 2024" />
 
 Confirm success on "Publish profile creation progress" and then click "Close".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/886263b5-1b6c-4417-856a-159771c6cd96" width="800" title="Snipped March 29, 2024" />
+
+Back on the "AI_Bot: Publish" tab, click "Publish".
+
+
+
 
 
 
