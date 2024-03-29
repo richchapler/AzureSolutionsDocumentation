@@ -59,7 +59,7 @@ On the "License Acceptance" pop-up, click "I Accept".
 
 -----
 
-### Step 3: Update Logic
+### Step 3: Modify Logic
 
 #### Program.cs
 
@@ -634,6 +634,18 @@ namespace Microsoft.BotBuilderSamples
 #### Miscellaneous
 
 Delete `Models` and `Views` folders.
+
+-----
+
+### Step 4: Confirm Success
+
+Click "Debug" >>  "Start Debugging".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b14998b-a356-4563-bb3f-c17bdf8a9b18" width="600" title="Snipped March 29, 2024" />
+
+
+
+
 
 
 
