@@ -63,7 +63,7 @@ On the "License Acceptance" pop-up, click "I Accept".
 
 #### Program.cs
 
-Replace the default code with:
+Replace the default logic with:
 ```
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder;
@@ -100,8 +100,64 @@ app.MapControllers();
 app.Run();
 ```
 
+#### appsettings.json
 
-Copy LaunchSettings
+Replace the default logic with:
+```
+{
+  "MicrosoftAppType": "",
+  "MicrosoftAppId": "",
+  "MicrosoftAppPassword": "",
+  "MicrosoftAppTenantId": ""
+}
+```
+
+#### Properties >> launchSettings.json
+
+Replace the default logic with:
+```
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:3978",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    ".NET Core": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:3979;http://localhost:3978",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
+```
+
+#### wwwroot
+
+Delete existing contents of the `wwwroot` folder {e.g., `css`, `js`, etc.} and right-click to Add `default.html`.
+
+
+
+
+
+
+
+
+
 
 Remove HomeController.cs and add BotController.cs
 Add AdapterWithErrorHandler.cs
@@ -109,10 +165,6 @@ Add AdapterWithErrorHandler.cs
 Remove everything in wwwroot and add default.html
 
 Delete Models and Views
-
-
-
-
 
 
 
