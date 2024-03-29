@@ -6,8 +6,9 @@
 
 Use Case | Technologies
 :----- | :-----
+[AI, Bot (work-in-progress](AI_Bot.md) | AI Search, Bot Service, Open AI, Teams, Visual Studio (C#)
 [AI, Improve Response Quality](AI_ImproveResponseQuality.md) | AI Search, Open AI, Visual Studio (C#)
-[AI, User Interface](AI_UserInterface.md) | AI Search, Open AI, Visual Studio (C#)
+[AI, Web Application](AI_Interface.md) | AI Search, Open AI, Visual Studio (C#)
 [AI Search, Enrich Data with Custom Skillset](AISearch_CustomSkillset.md) | SQL, AI Search, Function App, C#
 [AI Search, Source from Data Explorer](AISearch_fromDataExplorer.md) | Data Explorer (via export), AI Search, JSON, HTML
 [AI Search, Multi-Source Index](AISearch_MultiSourceIndex.md) | SQL, Blob Storage, AI Search, JSON
