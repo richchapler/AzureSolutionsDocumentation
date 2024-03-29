@@ -1,4 +1,4 @@
-# AI Search + OpenAI: Teams Bot
+# AI Search + OpenAI: Bot
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/49618b54-2b60-4047-b054-2f2bbc062ff1" width="1000" />
 
