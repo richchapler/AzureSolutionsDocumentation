@@ -65,16 +65,21 @@ On the "License Acceptance" pop-up, click "I Accept".
 
 Replace the default code with:
 ```
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector.Authentication;
+using Microsoft.BotBuilderSamples;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient();
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
+builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
+    options.JsonSerializerOptions.WriteIndented = true;
 });
 builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
-builder.Services.AddTransient<IBot, EchoBot>();
+builder.Services.AddTransient<IBot, AI_Bot.Bots.PromptBot>();
 
 var app = builder.Build();
 
