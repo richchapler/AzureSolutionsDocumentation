@@ -23,19 +23,33 @@ I used to spend a lot of time explaining code blocks, but will skip that part of
 
 Open Visual Studio and click "Create a new project".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/138cf716-d18b-424f-a467-5cdeabcd4beb" width="600" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d0f5043e-6668-44de-b05c-be3da3288f95" width="600" title="Snipped March 29, 2024" />
 
-On the "Create a new project" form, search for and select "ASP .NET Core Web App (Razor Pages)", then click "Next".
+On the "Create a new project" form, search for and select "ASP.NET Core Web App (Model-View-Controller)", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/226546ce-60de-4596-b7c0-b9a81f8c1e4f" width="600" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6dcdfa95-5232-4079-b7ff-7c3ba35abda8" width="600" title="Snipped March 29, 2024" />
 
 Complete the "Configure your new project" form, then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2b564a2-7a54-4db6-a07c-08347254deb0" width="600" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/13b9f0fb-60c2-4494-ba43-9ac530ff0e02" width="600" title="Snipped March 29, 2024" />
 
 Complete the "Additional information" form, then click "Create".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ae370f6-60c0-46e1-87a6-65a1fb066311" width="800" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eb046821-afd1-427a-896e-350f0cfa0ac4" width="600" title="Snipped March 29, 2024" />
+
+-----
+
+### Step 2: Develop Bot
+![image](https://github.com/richchapler/AzureSolutions/assets/44923999/8984fa13-4339-4a42-8692-459d03f4851a)
+
+
+
+
+
+
+
+
+
 
 -----
 
