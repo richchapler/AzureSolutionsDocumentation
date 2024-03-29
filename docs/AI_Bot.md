@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/49618b54-2b60-4047-b054-2f2bbc062ff1" width="1000" />
 
 ## Use Case
-* "We want to surface our OpenAI solution as a bot in Teams
+* "We want to surface our OpenAI solution as a bot in various channels (Teams, Alexa, Facebook, etc.)
 
 ## Solution Requirements
 
