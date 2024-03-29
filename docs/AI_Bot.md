@@ -11,6 +11,8 @@
 
 This documentation assumes the following resources are ready for use:
 
+* [Bot Framework Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v4.5.2)
+
 * [Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service)
 
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
@@ -643,7 +645,13 @@ Click "Debug" >>  "Start Debugging".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b14998b-a356-4563-bb3f-c17bdf8a9b18" width="600" title="Snipped March 29, 2024" />
 
+#### Bot Framework Emulator
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2617cc8f-8a3a-4f1d-a46a-5e10ff1ff9fb" width="600" title="Snipped March 29, 2024" />
+
+On the main page of the Bot Framework Emulator, click "Open Bot".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2265ed14-1d9b-4344-a52d-df1a07f2fbc8" width="600" title="Snipped March 29, 2024" />
 
 
 
