@@ -101,6 +101,15 @@ app.Run();
 ```
 
 
+Copy LaunchSettings
+
+Remove HomeController.cs and add BotController.cs
+Add AdapterWithErrorHandler.cs
+
+Remove everything in wwwroot and add default.html
+
+Delete Models and Views
+
 
 
 
