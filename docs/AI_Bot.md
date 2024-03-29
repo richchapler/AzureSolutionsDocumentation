@@ -11,6 +11,8 @@
 
 This documentation assumes the following resources are ready for use:
 
+* App Service / Hosting Plan... will be created as part of exercise
+
 * [Bot Framework Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v4.5.2)
 
 * [Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service)
