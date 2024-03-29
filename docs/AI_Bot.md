@@ -56,8 +56,6 @@ On the "Browse" tab of the "NuGet - Solution" page, search for and select "Micro
 
 On the "License Acceptance" pop-up, click "I Accept".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6c50a96f-aba6-4feb-9b60-1a736c2834aa" width="800" title="Snipped February 15, 2023" />
-
 -----
 
 
