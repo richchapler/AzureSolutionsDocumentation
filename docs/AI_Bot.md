@@ -41,7 +41,30 @@ Complete the "Additional information" form, then click "Create".
 
 -----
 
-### Step 2: Develop Bot
+### Step 2: Install NuGet
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f874628-7617-429b-bc73-de925a3b7f41" width="800" title="Snipped March 29, 2024" />
+
+Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manage NuGet Packages for Solution..."
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a2feba33-ca9c-4b1e-a1ec-ad6df8d377c9" width="800" title="Snipped March 29, 2024" />
+
+On the "Browse" tab of the "NuGet - Solution" page, search for and select "Microsoft.Bot.Builder.Integration.AspNet.Core".
+<br>On the resulting pop-out, check the box next to your project and then click "Install".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f949040-a093-4b83-9112-2f96bb67d6f8" width="300" title="Snipped March 29, 2024" />
+
+On the "License Acceptance" pop-up, click "I Accept".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6c50a96f-aba6-4feb-9b60-1a736c2834aa" width="800" title="Snipped February 15, 2023" />
+
+-----
+
+
+
+
+
+### Step N: Develop Bot
 ![image](https://github.com/richchapler/AzureSolutions/assets/44923999/8984fa13-4339-4a42-8692-459d03f4851a)
 
 
