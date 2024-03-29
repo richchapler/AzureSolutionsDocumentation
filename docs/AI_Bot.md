@@ -661,8 +661,27 @@ A new "Live Chat" tab will open and you can expect to see an opening "Hello and 
 
 ### Step 5: Publish Bot
 
-LOREM IPSUM
+In Visual Studio, right-click on the project name and click "Publish" in the resulting dropdown.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/86dfec81-4456-463a-8222-741f8721dc00" width="600" title="Snipped March 29, 2024" />
+
+On the "Publish" popup, "Target" tab, click "Azure" and then "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cde2991a-7c0d-42cf-8087-1b7a454af14f" width="600" title="Snipped March 29, 2024" />
+
+On the "Publish" popup, "Specific target" tab, click "Azure App Services (Windows)" and then "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/66eae2eb-5889-4bc1-a948-baea3e1cbefd" width="450" title="Snipped March 29, 2024" />
+
+On the "Publish" popup, "App Service" tab, click "new", then complete the resulting "App Services (Windows)" popup, click "Create".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4e2b21c5-426c-463e-8fa4-2d80b85c8c68" width="600" title="Snipped March 29, 2024" />
+
+Confirm "App Service" configuration, then click "Finish".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/012d1d8e-3aea-497f-a77c-5c5a90408e72" width="600" title="Snipped March 29, 2024" />
+
+Confirm success on "Publish profile creation progress" and then click "Close".
 
 
 
