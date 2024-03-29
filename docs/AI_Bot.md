@@ -55,16 +55,45 @@ On the "Browse" tab of the "NuGet - Solution" page, search for and select "Micro
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f949040-a093-4b83-9112-2f96bb67d6f8" width="300" title="Snipped March 29, 2024" />
 
 On the "License Acceptance" pop-up, click "I Accept".
+<br><br>Repeat this process for "Microsoft.AspNetCore.Mvc.NewtonsoftJson".
 
 -----
 
+### Step 3: Update Logic
 
+#### Program.cs
 
+Replace the default code with:
+```
+var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
+});
+builder.Services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+builder.Services.AddTransient<IBot, EchoBot>();
 
-### Step N: Develop Bot
-![image](https://github.com/richchapler/AzureSolutions/assets/44923999/8984fa13-4339-4a42-8692-459d03f4851a)
+var app = builder.Build();
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+else { app.UseDeveloperExceptionPage(); }
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.UseWebSockets();
+app.UseRouting();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();
+```
 
 
 
