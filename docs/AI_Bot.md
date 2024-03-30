@@ -693,25 +693,33 @@ Back on the "AI_Bot: Publish" tab, click "Publish".
 
 ### Step 6: Configure Bot
 
-LOREM IPSUM
+Navigate to the Azure Bot >> Configuration.
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c6cbc18e-77dd-4ba2-b03e-93d3aa573b86" width="800" title="Snipped March 29, 2024" />
 
+Paste the "Messaging endpoint" value from your published bot {e.g., "https://azuresolutions-aibot-asw.azurewebsites.net/api/messages"} and click "Apply".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ed3c7c08-93a8-4a93-87e0-96f24ea87ef6" width="800" title="Snipped March 29, 2024" />
 
+Navigate to Azure Bot >> Channels, scroll through the list of "Available Channels" and click on "Microsoft Teams".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c540e9a6-1e6c-45ba-b79c-493ce01dc4c4" width="800" title="Snipped March 29, 2024" />
 
+Complete "Terms of Service" popup and click "Agree".
 
------
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5f27f86b-3ee1-4455-a893-b17b91d41347" width="800" title="Snipped March 29, 2024" />
 
-### Step 7: Confirm Success
+On the "Messaging" tab, confirm selection of "Microsoft Teams Commercial..." and click "Apply" and then "Close".
 
-Click "Debug" >> "Start Debugging" in the menu bar.
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e543c86f-d8d0-43cd-a580-6b7f30ce9215" width="800" title="Snipped March 29, 2024" />
 
-Enter a prompt and press the Enter key on your keyboard... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
+Click "Open in Teams".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac873cde-1ecd-4a05-b36a-32508e73f210" width="800" title="Snipped February 26, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d5507b4a-7536-45dd-81e7-21de43dc2885" width="800" title="Snipped March 29, 2024" />
 
-When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword, full, and semantic configurations).
+Open Teams and confirm success.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0ed098ba-4cf4-4381-ba78-43ad34c7cf05" width="800" title="Snipped March 29, 2024" />
 
 -----
 
