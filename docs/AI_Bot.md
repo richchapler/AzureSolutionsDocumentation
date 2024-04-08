@@ -33,8 +33,6 @@ This documentation assumes the following resources are ready for use:
 
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 
-This solution builds on the AI Search / OpenAI solution
-
 ## Documentation Note
 
 I used to spend a lot of time explaining code blocks, but will skip that part of my sharing process in favor of a recommendation to copy code blocks to Bing Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
