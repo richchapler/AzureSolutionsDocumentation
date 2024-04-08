@@ -13,12 +13,12 @@
 
 This documentation assumes the following resources are ready for use:
 
-* [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
+* [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
   * My current configuration uses an index pointed at the Azure SQL AdventureWorks sample database
 
-* [**Application Service**](https://learn.microsoft.com/en-us/azure/app-service/)
+* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
 
-* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
+* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
   * AISearch-Index-Name
   * AISearch-Key
@@ -29,9 +29,9 @@ This documentation assumes the following resources are ready for use:
   * OpenAI-Key
   * OpenAI-Name
 
-* OpenAI
+* [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 
-* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
+* [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 
 ## Documentation Note
 
