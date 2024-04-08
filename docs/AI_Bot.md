@@ -691,7 +691,22 @@ Back on the "AI_Bot: Publish" tab, click "Publish".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/21242bd4-1e32-4cfd-a6ab-2aadab4b3e37" width="800" title="Snipped March 29, 2024" />
 
-### Step 6: Configure Bot
+### Step 6: Configure App
+
+Navigate to the Azure Web App >> Configuration.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/09213edf-f31f-4302-bb3f-34c008a6c458" width="800" title="Snipped April 8, 2024" />
+
+
+
+
+
+
+
+
+# ADD SECTION ON ADDING CREDENTIALS TO THE APP FOR APPSETTINGS.JSON ⚠️
+
+### Step 7: Configure Bot
 
 Navigate to the Azure Bot >> Configuration.
 
@@ -720,8 +735,6 @@ Click "Open in Teams".
 Open Teams and confirm success.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f3858ada-cbc8-4d49-988e-c6c2996a09e4" width="800" title="Snipped April 8, 2024" />
-
-# ADD SECTION ON ADDING CREDENTIALS TO THE APP FOR APPSETTINGS.JSON ⚠️
 
 -----
 
