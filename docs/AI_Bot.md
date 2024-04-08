@@ -719,7 +719,7 @@ Click "Open in Teams".
 
 Open Teams and confirm success.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0ed098ba-4cf4-4381-ba78-43ad34c7cf05" width="800" title="Snipped March 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f3858ada-cbc8-4d49-988e-c6c2996a09e4" width="800" title="Snipped April 8, 2024" />
 
 # ADD SECTION ON ADDING CREDENTIALS TO THE APP FOR APPSETTINGS.JSON ⚠️
 
