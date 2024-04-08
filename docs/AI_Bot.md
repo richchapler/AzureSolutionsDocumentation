@@ -11,13 +11,31 @@
 
 This documentation assumes the following resources are ready for use:
 
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
+  * My current configuration uses an index pointed at the Azure SQL AdventureWorks sample database
+
 * App Service / Hosting Plan... will be created as part of exercise
 
 * [Bot Framework Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v4.5.2)
 
 * [Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service)
 
+* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
+
+  * AISearch-Index-Name
+  * AISearch-Key
+  * AISearch-Name
+  * AISearch-SelectFields
+  * AISearch-SemanticConfiguration-Name
+  * OpenAI-Deployment-Name
+  * OpenAI-Key
+  * OpenAI-Name
+
+* OpenAI
+
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+
+This solution builds on the AI Search / OpenAI solution
 
 ## Documentation Note
 
