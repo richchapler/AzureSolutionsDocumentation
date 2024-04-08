@@ -243,6 +243,158 @@ namespace Microsoft.BotBuilderSamples
 }
 ```
 
+#### Bots
+
+Right click on the project and add a `Bots` folder. Repeat on the `Bots` folder to add `PromptBot.cs`.
+
+```
+using Azure.AI.OpenAI;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+
+namespace AI_Bot.Bots
+{
+    public class PromptBot : ActivityHandler
+    {
+        protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt(
+                    OpenAI_Client: Helpers.Constants.OpenAI_Client,
+                    OpenAI_Deployment_Name: Helpers.Constants.OpenAI_Deployment_Name,
+                    UserQuery: turnContext.Activity.Text,
+                    SystemMessage: null,
+                    Temperature: 0.5f,
+                    AISearch_Name: Helpers.Constants.AISearch_Name,
+                    AISearch_Key: Helpers.Constants.AISearch_Key,
+                    AISearch_Index_Name: Helpers.Constants.AISearch_Index_Name,
+                    AISearch_QueryType: AzureSearchQueryType.Semantic,
+                    AISearch_SemanticConfiguration_Name: Helpers.Constants.AISearch_SemanticConfiguration_Name
+                    //AISearch_Filter: null
+                    );
+
+                var replyText = $"Echo: {turnContext.Activity.Text}";
+                await turnContext.SendActivityAsync(MessageFactory.Text(OpenAI_Prompt.Response), cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                var exceptionMessage = $"Exception Message: {ex.Message}\n" +
+                                       $"Exception StackTrace: {ex.StackTrace}\n" +
+                                       $"Inner Exception: {ex.InnerException?.Message ?? "No inner exception"}";
+
+                await turnContext.SendActivityAsync(MessageFactory.Text(exceptionMessage), cancellationToken);
+            }
+
+        }
+
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var welcomeText = "Hello and welcome!";
+            foreach (var member in membersAdded)
+            {
+                if (member.Id != turnContext.Activity.Recipient.Id)
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText, welcomeText), cancellationToken);
+                }
+            }
+        }
+    }
+}
+```
+
+#### Helpers
+
+Right click on the project and add a `Helpers` folder.
+
+##### Constants.cs
+
+Right-click on the `Helpers` folder and add `Constants.cs`.
+
+```
+using Azure;
+using Azure.AI.OpenAI;
+using Azure.Search.Documents;
+
+namespace AI_Bot.Helpers
+{
+    public static class Constants
+    {
+        /* ************************* Constants */
+        public static string AISearch_Index_Name { get; } = KeyVault.GetSecret("AISearch-Index-Name").Result;
+        public static string AISearch_Key { get; } = KeyVault.GetSecret("AISearch-Key").Result;
+        public static string AISearch_Name { get; } = KeyVault.GetSecret("AISearch-Name").Result;
+        public static string AISearch_SelectFields { get; } = KeyVault.GetSecret("AISearch-SelectFields").Result;
+        public static string AISearch_SemanticConfiguration_Name { get; } = KeyVault.GetSecret("AISearch-SemanticConfiguration-Name").Result;
+        public static string OpenAI_Deployment_Name { get; } = KeyVault.GetSecret("OpenAI-Deployment-Name").Result;
+        public static string OpenAI_Key { get; } = KeyVault.GetSecret("OpenAI-Key").Result;
+        public static string OpenAI_Name { get; } = KeyVault.GetSecret("OpenAI-Name").Result;
+
+        /* ************************* Clients */
+
+        public static SearchClient AISearch_Client
+        {
+            get
+            {
+                return new SearchClient(
+                    endpoint: new Uri($"https://{AISearch_Name}.search.windows.net"),
+                    indexName: AISearch_Index_Name,
+                    credential: new AzureKeyCredential(AISearch_Key)
+                );
+            }
+        }
+
+        public static OpenAIClient OpenAI_Client
+        {
+            get
+            {
+                return new OpenAIClient(
+                    endpoint: new Uri($"https://{OpenAI_Name}.openai.azure.com/"),
+                    keyCredential: new AzureKeyCredential(OpenAI_Key)
+                );
+            }
+        }
+    }
+}
+```
+
+##### KeyVault.cs
+
+Right-click on the `Helpers` folder and add `KeyVault.cs`.
+
+```
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+namespace AI_Bot.Helpers
+{
+    public class KeyVault
+    {
+        private static readonly IConfiguration _configuration;
+        public static string KeyVault_Name;
+        public static readonly SecretClient KeyVault_Client;
+
+        static KeyVault()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appSettings.Development.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+            _configuration = builder.Build();
+            KeyVault_Name = _configuration.GetSection("KeyVault_Name").Value ?? "default";
+            KeyVault_Client = new SecretClient(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
+        }
+
+        public static async Task<string> GetSecret(string secretName)
+        {
+            var secret = await KeyVault_Client.GetSecretAsync(secretName);
+            return secret.Value.Value;
+        }
+    }
+}
+```
+
 #### Miscellaneous
 
 Delete `Models` and `Views` folders.
