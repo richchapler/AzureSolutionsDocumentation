@@ -695,10 +695,17 @@ Back on the "AI_Bot: Publish" tab, click "Publish".
 
 Navigate to the Azure Web App >> Configuration.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8446274a-8982-4e1b-b4f5-fe1340e8a300" width="800" title="Snipped April 8, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ed301755-3262-4e09-92f0-4bf73031e9cf" width="800" title="Snipped April 8, 2024" />
 
+Click "+ New application setting".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6e54af67-997d-4c6b-a020-87a811c6541b" width="800" title="Snipped April 8, 2024" />
 
+Complete the resulting "Add/Edit application setting" popout for each of the following items:
+* `MicrosoftAppType`: `MultiTenant`
+* `MicrosoftAppId`: YOUR APP ID
+* `MicrosoftAppPassword`: YOUR APP PASSWORD
+* `MicrosoftAppTenantId`: `common`
 
 
 
