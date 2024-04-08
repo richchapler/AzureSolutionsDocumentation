@@ -737,7 +737,7 @@ Click "Open in Teams".
 
 Open Teams and confirm success.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7c8910f7-ffd6-42c8-82b3-2d252bea77ae" width="800" title="Snipped April 8, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/da7d5d0b-2151-4cb8-abfc-8436d4bd1b1f" width="800" title="Snipped April 8, 2024" />
 
 -----
 
