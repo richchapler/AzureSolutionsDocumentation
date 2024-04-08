@@ -29,7 +29,7 @@ This documentation assumes the following resources are ready for use:
   * OpenAI-Key
   * OpenAI-Name
 
-* OpenAI
+* [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 
