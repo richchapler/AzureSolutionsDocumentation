@@ -707,15 +707,7 @@ Complete the resulting "Add/Edit application setting" popout for each of the fol
 * `MicrosoftAppPassword`: YOUR APP PASSWORD
 * `MicrosoftAppTenantId`: `common`
 
-
-
-
-
-
-
-
-
-# ADD SECTION ON ADDING CREDENTIALS TO THE APP FOR APPSETTINGS.JSON ⚠️
+Click "Save" at the top of the "Configuration" page.
 
 ### Step 7: Configure Bot
 
