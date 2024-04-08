@@ -4,6 +4,7 @@
 
 ## Use Case
 * "We want to surface our OpenAI solution as a bot in various channels (Teams, Alexa, Facebook, etc.)
+* "We must provide for custom bot handling of specific messages types {e.g., model type selection}"
 
 ## Solution Requirements
 
