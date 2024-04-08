@@ -695,7 +695,11 @@ Back on the "AI_Bot: Publish" tab, click "Publish".
 
 Navigate to the Azure Web App >> Configuration.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/09213edf-f31f-4302-bb3f-34c008a6c458" width="800" title="Snipped April 8, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8446274a-8982-4e1b-b4f5-fe1340e8a300" width="800" title="Snipped April 8, 2024" />
+
+
+
+
 
 
 
