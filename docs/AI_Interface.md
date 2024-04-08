@@ -29,6 +29,8 @@ This documentation assumes the following resources are ready for use:
   * OpenAI-Key
   * OpenAI-Name
 
+* OpenAI
+
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/)
 
 ## Documentation Note
