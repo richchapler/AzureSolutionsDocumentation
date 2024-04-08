@@ -703,8 +703,8 @@ Click "+ New application setting".
 
 Complete the resulting "Add/Edit application setting" popout for each of the following items:
 * `MicrosoftAppType`: `MultiTenant`
-* `MicrosoftAppId`: YOUR APP ID
-* `MicrosoftAppPassword`: YOUR APP PASSWORD
+* `MicrosoftAppId`: "Application (client) ID" value for your bot
+* `MicrosoftAppPassword`: client secret for your bot
 * `MicrosoftAppTenantId`: `common`
 
 Click "Save" at the top of the "Configuration" page.
@@ -737,7 +737,7 @@ Click "Open in Teams".
 
 Open Teams and confirm success.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f3858ada-cbc8-4d49-988e-c6c2996a09e4" width="800" title="Snipped April 8, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7c8910f7-ffd6-42c8-82b3-2d252bea77ae" width="800" title="Snipped April 8, 2024" />
 
 -----
 
