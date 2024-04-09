@@ -406,7 +406,7 @@ Delete `Models` and `Views` folders.
 
 Click "Debug" >>  "Start Debugging".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9b14998b-a356-4563-bb3f-c17bdf8a9b18" width="800" title="Snipped March 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9887ce5e-b08f-49ba-8a8a-6fa83ffb186a" width="800" title="Snipped April 9, 2024" />
 
 #### Bot Framework Emulator
 
