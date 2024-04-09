@@ -21,7 +21,6 @@ This documentation assumes the following resources are ready for use:
 * [Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service)
 
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-
   * AISearch-Index-Name
   * AISearch-Key
   * AISearch-Name
