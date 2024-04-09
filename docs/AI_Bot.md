@@ -418,7 +418,7 @@ On the main page of the Bot Framework Emulator, click "Open Bot".
 
 Paste the "Bot URL" value and click "Connect".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4b3192ec-609e-4e49-8d84-b605b5f1a76d" width="800" title="Snipped March 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa382d60-fe39-47eb-bcd4-2672aa9e460f" width="800" title="Snipped April 9, 2024" />
 
 A new "Live Chat" tab will open and you can expect to see an opening "Hello and welcome!" message from PromptBot.
 
