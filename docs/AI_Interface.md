@@ -14,12 +14,12 @@
 This documentation assumes the following resources are ready for use:
 
 * [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
-  * My current configuration uses an index pointed at the Azure SQL AdventureWorks sample database
+  * The documented configuration uses an index pointed at the Azure SQL AdventureWorks sample database
 
-* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
+* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) and Hosting Plan
+  * Once created (as part of exercise), must be granted "Key Vault Secrets User" role assignment on Key Vault
 
-* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-
+* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):\
   * AISearch-Index-Name
   * AISearch-Key
   * AISearch-Name
@@ -35,7 +35,7 @@ This documentation assumes the following resources are ready for use:
 
 ## Documentation Note
 
-I used to spend a lot of time explaining code blocks, but I am skipping that part of my sharing process in favor of a recommendation to copy code blocks to Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
+I used to spend a lot of time explaining code blocks, but now skip that part of my sharing process in favor of a recommendation to copy code blocks to Bing Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
 
 -----
 
