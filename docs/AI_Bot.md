@@ -499,7 +499,7 @@ Click "Open in Teams".
 
 Open Teams and confirm success.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/da7d5d0b-2151-4cb8-abfc-8436d4bd1b1f" width="800" title="Snipped April 8, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/178b935c-21fd-4afa-bb68-834552e42591" width="800" title="Snipped April 9, 2024" />
 
 -----
 
