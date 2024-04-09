@@ -464,9 +464,10 @@ Click "+ New application setting".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6e54af67-997d-4c6b-a020-87a811c6541b" width="800" title="Snipped April 8, 2024" />
 
 Complete the resulting "Add/Edit application setting" popout for each of the following items:
+* `KeyVault_Name`: YOUR KEYVAULT NAME
 * `MicrosoftAppType`: `MultiTenant`
-* `MicrosoftAppId`: "Application (client) ID" value for your bot
-* `MicrosoftAppPassword`: client secret for your bot
+* `MicrosoftAppId`: YOUR CLIENT ID
+* `MicrosoftAppPassword`: YOUR CLIENT SECRET
 * `MicrosoftAppTenantId`: `common`
 
 Click "Save" at the top of the "Configuration" page.
