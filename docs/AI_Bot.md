@@ -13,7 +13,8 @@ This documentation assumes the following resources are ready for use:
 * [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
   * The documented configuration uses an index pointed at the Azure SQL AdventureWorks sample database
 
-* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) / Hosting Plan... will be created as part of exercise
+* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) and Hosting Plan
+  * Once created (as part of exercise), must be granted "Key Vault Secrets User" role assignment on Key Vault
 
 * [Bot Framework Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v4.5.2)
 
