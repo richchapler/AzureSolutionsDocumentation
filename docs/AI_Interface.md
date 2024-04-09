@@ -1008,11 +1008,11 @@ const processQuery = async (e) => {
 
 ### Step 7: Confirm Success
 
-Click "Debug" >> "Start Debugging" in the menu bar.
+Make sure that you have a temporary value in `appsettings.json` for `KeyVault_Name`, then click "Debug" >> "Start Debugging" in the menu bar.
 
 Enter a prompt and press the Enter key on your keyboard... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac873cde-1ecd-4a05-b36a-32508e73f210" width="800" title="Snipped February 26, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0e7d6516-b0b4-40fc-be94-152ddb2eafd0" width="800" title="Snipped April 9, 2024" />
 
 When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword, full, and semantic configurations).
 
