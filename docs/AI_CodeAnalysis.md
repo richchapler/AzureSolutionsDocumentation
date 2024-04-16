@@ -29,7 +29,7 @@ Codeblock explanation is limited... I recommend that you copy code blocks to Bin
 
 -----
 
-### Exercise 1: Chat with Codebase
+### Exercise 1: Chat with Legacy Code
 
 ### Step 1: Create Project
 
@@ -148,3 +148,14 @@ Messages in the console window will iterate through files in your GitHub reposit
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6b2b0bdb-1efb-451b-8cb5-019806bfa7b0" width="800" title="Snipped April 16, 2024" />
 
 Navigate to the "code" container and then the dated folder created by the console app. Browse and confirm success. 
+
+-----
+
+### Step 5: Create Index
+
+LOREM IPSUM
+-----
+
+**Congratulations... you have successfully completed this exercise**
+
+-----
