@@ -4,7 +4,7 @@
 
 ## Use Case
 * "We want to use AI to better understand legacy code"
-* "We want to use AI to suggest code optimizations, at scale"
+* "We want to use AI to suggest code optimizations, **at scale**"
 
 ## Solution Requirements
 
@@ -19,7 +19,9 @@ This documentation assumes the following resources are ready for use:
   * OpenAI-Key
   * GitHub-PersonalAccessToken
 
-* [Storage Account](Infrastructure_StorageAccount.md)
+* [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
+
+* [Storage Account](Infrastructure_StorageAccount.md) with a container named "code"
 
 ## Documentation Note
 
@@ -132,3 +134,17 @@ class Program
     }
 }
 ```
+
+-----
+
+### Step 4: Confirm Success
+
+Click "Debug" >>  "Start Debugging".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/345f39aa-5b36-4bc4-924a-f558dd311a60" width="800" title="Snipped April 16, 2024" />
+
+Messages in the console window will iterate through files in your GitHub repository... and these will correspond with the files being copied to your Azure Storage Account.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6b2b0bdb-1efb-451b-8cb5-019806bfa7b0" width="800" title="Snipped April 16, 2024" />
+
+Navigate to the "code" container and then the dated folder created by the console app. Browse and confirm success. 
