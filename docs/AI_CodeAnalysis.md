@@ -11,7 +11,15 @@
 This documentation assumes the following resources are ready for use:
 
 * [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
-* Lorem
+
+* GitHub >> [Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) and Personal Access Token
+
+* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
+  * BlobServiceClient-ConnectionString
+  * OpenAI-Key
+  * GitHub-PersonalAccessToken
+
+* [Storage Account](Infrastructure_StorageAccount.md)
 
 ## Documentation Note
 
