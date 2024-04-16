@@ -145,7 +145,7 @@ Click "Debug" >>  "Start Debugging".
 
 Messages in the console window will iterate through files in your GitHub repository... and these will correspond with the files being copied to your Azure Storage Account.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6b2b0bdb-1efb-451b-8cb5-019806bfa7b0" width="800" title="Snipped April 16, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fedcf39e-886e-4d14-ab24-318a09156d01" width="800" title="Snipped April 16, 2024" />
 
 Navigate to the "code" container and then the dated folder created by the console app. Browse and confirm success. 
 
