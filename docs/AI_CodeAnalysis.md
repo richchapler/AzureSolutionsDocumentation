@@ -1,4 +1,4 @@
-# AI for Code Analysis
+# AI and at-scale Code Analysis
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a74be382-8c5b-4b17-80f6-bc8c0232f68e" width="1000" />
 
@@ -27,6 +27,21 @@ Codeblock explanation is limited... I recommend that you copy code blocks to Bin
 
 -----
 
-### Step X: Prepare Destination
+### Exercise 1: Chat with Codebase
 
-Set up SQL for Change Data Capture
+### Step 1: Create Project
+
+Open Visual Studio and create a Console App project.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0659d99b-82f5-4d29-8326-e4a78af08818" width="800" title="Snipped April 16, 2024" />
+
+Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manage NuGet Packages for Solution..."
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eb2cb824-3951-488f-813e-7bf9d655e41b" width="800" title="Snipped April 16, 2024" />
+
+On the "Browse" tab of the "NuGet - Solution" page, search for and select "Octokit".
+On the resulting pop-out, check the box next to your project and then click "Install".
+Repeat this process for:
+* Azure.Security.KeyVault.Secrets
+* Azure.Storage.Blobs
+* AzureSolutions.Helpers
