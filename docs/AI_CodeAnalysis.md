@@ -153,6 +153,16 @@ Navigate to the "code" container and then the dated folder created by the consol
 
 ### Step 5: Create Index
 
+Navigate to AI Search.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/27eeda13-84ef-4ae9-8879-592e60268475" width="800" title="Snipped April 16, 2024" />
+
+
+
+
+
+
+
 LOREM IPSUM
 -----
 
