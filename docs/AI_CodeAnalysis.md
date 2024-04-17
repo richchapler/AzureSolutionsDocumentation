@@ -157,6 +157,50 @@ Navigate to AI Search.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/27eeda13-84ef-4ae9-8879-592e60268475" width="800" title="Snipped April 16, 2024" />
 
+Click "Import Data".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3b7317e9-8bfa-4b77-a11b-374b1bf7de4b" width="800" title="Snipped April 17, 2024" />
+
+Select Data Source "Azure Blob Storage".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2dcb1d8d-541d-4099-9382-ff2896ded255" width="800" title="Snipped April 17, 2024" />
+
+Complete the "Connect to your data" tab/form, pointing at the "code" repository in Azure Storage, then click "Next: Add cognitive skills".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0969c04d-abc9-40f6-bdfd-decfd576b350" width="800" title="Snipped April 17, 2024" />
+
+Click "Skip to: Customize target index".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/84f26b2a-fa97-4f9f-adfe-7c257da115dd" width="800" title="Snipped April 17, 2024" />
+
+Enter an index name, check the header checkboxes for "Retrievable" and "Searchable", then click "Next: Create an indexer".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2c4df56c-48ac-4592-8938-d86b4bacda7e" width="800" title="Snipped April 17, 2024" />
+
+Enter an indexer name, then click "Submit".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f8a1fa00-88b6-4cc5-9a18-f08ba26f0503" width="800" title="Snipped April 17, 2024" />
+
+Navigate to "Search Management" >> "Indexers" and confirm successful index processing.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b683039-f6ab-4a99-89ad-bb6c5400ed43" width="800" title="Snipped April 17, 2024" />
+
+Navigate to "Search Management" >> "Index", select the new index and on the resulting page, click "Search" to see results.
+
+-----
+
+### Step 5: Prompt OpenAI
+
+Navigate to OpenAI.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/496b6093-9873-43cc-9290-d90154a00dc9" width="800" title="Snipped April 17, 2024" />
+
+Click "Go to Azure OpenAI Studio" >> "Playground" >> "Chat".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ee9041db-f0d4-444d-a395-a7bd188a7a2d" width="800" title="Snipped April 17, 2024" />
+
+
+
 
 
 
