@@ -199,8 +199,21 @@ Click "Go to Azure OpenAI Studio" >> "Playground" >> "Chat".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ee9041db-f0d4-444d-a395-a7bd188a7a2d" width="800" title="Snipped April 17, 2024" />
 
+On the "Setup" panel, "Add your data" tab, click "+ Add a data source".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/df5f3ea3-54cc-482c-bc00-1e0fbff77e8a" width="800" title="Snipped April 17, 2024" />
 
+Complete the "Select or add data source" form, pointing at the previously-created AI Search Index, and then click "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d4c94c2b-6229-403d-a839-7465d5da3192" width="800" title="Snipped April 17, 2024" />
+
+Complete the "Data management" form, then click "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/531842d9-8f06-478c-93e8-4d78b1b8cc23" width="800" title="Snipped April 17, 2024" />
+
+Confirm values on the "Review and finish" page, then click "Save and close".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f9721f68-4ef8-4892-9426-8f2baf0189e9" width="800" title="Snipped April 17, 2024" />
 
 
 
