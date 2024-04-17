@@ -189,7 +189,7 @@ Navigate to "Search Management" >> "Index", select the new index and on the resu
 
 -----
 
-### Step 5: Prompt OpenAI
+### Step 6: Prompt OpenAI
 
 Navigate to OpenAI.
 
