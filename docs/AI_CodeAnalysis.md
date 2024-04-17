@@ -215,14 +215,12 @@ Confirm values on the "Review and finish" page, then click "Save and close".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f9721f68-4ef8-4892-9426-8f2baf0189e9" width="800" title="Snipped April 17, 2024" />
 
+Try out prompts you might use to query and better understand your legacy codebase.
 
-
-
-
-
-LOREM IPSUM
 -----
 
 **Congratulations... you have successfully completed this exercise**
 
 -----
+
+Exercise #2: LOREM IPSUM
