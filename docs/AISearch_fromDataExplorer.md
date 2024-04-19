@@ -19,7 +19,7 @@ This solution requires the following resources:
 * [**Storage Account**](Infrastructure_StorageAccount.md) with container "stormevents" (and related SAS token)
 
 ## Proposed Solution
-This solution will address requirements in three exercises:
+This solution will address requirements in four exercises:
 
 * Exercise 1: Data Explorer, Export Data
 * Exercise 2: Cognitive Search, Create Index
