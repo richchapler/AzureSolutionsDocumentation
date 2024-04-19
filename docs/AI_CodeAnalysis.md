@@ -6,6 +6,12 @@
 * "We want to use AI to better understand legacy code"
 * "We want to use AI to suggest code optimizations, **at scale**"
 
+## Proposed Solution
+This solution will address requirements in four exercises:
+
+* Exercise 1: Chat with Legacy Code
+* Exercise 2: Iterative Code Suggestions
+* 
 ## Solution Requirements
 
 This documentation assumes the following resources are ready for use:
@@ -223,4 +229,4 @@ Try out prompts you might use to query and better understand your legacy codebas
 
 -----
 
-Exercise #2: Iterative Code Suggestion
+Exercise #2: Iterative Code Suggestions
