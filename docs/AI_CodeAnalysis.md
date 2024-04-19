@@ -319,7 +319,7 @@ class Program
                                        Temperature: 0.0f
                                         );
 
-                            Console.WriteLine($"Code: {fileContent}\nWhat it does...\n{OpenAI_Prompt.Response}");
+                            Console.WriteLine($"Code:\n{fileContent}\nWhat it does...\n{OpenAI_Prompt.Response}");
 
                             Console.ReadLine();
                         }
@@ -342,3 +342,17 @@ Notes:
 * `UserQuery` includes the simple question `What does this code do?`
 * Response is only written to the console... ultimately you might send this through to your DevOps system, a database, etc.
 
+
+-----
+
+### Step 2: Confirm Success
+
+Click "Debug" >>  "Start Debugging".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a37e026-08b0-4793-ab28-2cb1955f3955" width="800" title="Snipped April 19, 2024" />
+
+Messages in the console window will iterate through C# files in your GitHub repository, ask Open AI "what does this code do?", and then surface response.
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
