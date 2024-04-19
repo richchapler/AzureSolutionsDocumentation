@@ -223,4 +223,4 @@ Try out prompts you might use to query and better understand your legacy codebas
 
 -----
 
-Exercise #2: LOREM IPSUM
+Exercise #2: Iterative Code Suggestion
