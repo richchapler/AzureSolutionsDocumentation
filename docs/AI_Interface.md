@@ -564,17 +564,43 @@ Expand "wwwroot" >> "css" and then double-click to open "site.css". Replace the 
     width: 100%;
 }
 
+.container-style {
+    border: 1px solid silver;
+    box-shadow: 5px 5px 0px whitesmoke;
+    padding: 10px;
+    margin: 10px 0;
+}  
+
 .data-table {
     width: 100%;
 }
-
     .data-table tr:nth-child(even) {
         background-color: ghostwhite;
     }
-
     .data-table tr:nth-child(odd) {
         background-color: white;
     }
+
+.fake-textarea {
+    width: 100%;
+    height: 90%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: white;
+}
+
+    .fake-textarea .highlight sup {
+        border: 1px solid lightblue;
+        background-color: aliceblue;
+        padding-top: 5px;
+        padding-right: 3px;
+        padding-bottom: 6px;
+        padding-left: 2px;
+        display: inline-block;
+    }  
 
 .form {
     display: flex;
@@ -610,10 +636,16 @@ html {
 .nav-tabs .nav-link {
     border: none;
 }
-
     .nav-tabs .nav-link.active {
         background-color: whitesmoke;
     }
+
+.popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}    
 
 .progress-bar {
     background-color: whitesmoke;
@@ -633,9 +665,13 @@ html {
 
 .scrollable-container {
     background-color: whitesmoke;
-    height: 250px;
+    height: 275px;
     overflow: auto;
     padding: 10px;
+}
+
+.subtext {
+    font-size: 0.8em;
 }
 
 .table {
@@ -652,6 +688,23 @@ html {
     background-color: whitesmoke;
     height: 250px;
     padding: 10px;
+}
+
+.toolbar-button {
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    margin-right: 2px;
+}
+
+    .toolbar-button:hover {
+        background-color: #f8f9fa;
+    }
+
+.toolbar-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
 ```
 
@@ -670,67 +723,74 @@ Expand "wwwroot" >> "js" and then delete "site.js".
 Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
 
 ```js
-connection.on("displayResults", (data, type) => { displayResults(JSON.parse(data), type); });
+connection.on("displayResults", (data, type, userQuery) => { displayResults(JSON.parse(data), type, userQuery); });
 
-function displayResults(data, type) {
+async function displayResults(data, type, userQuery) {
 
-    //logMessage(JSON.stringify(data, null, 2));
-
-    /* ************************* Get tabPanel */
+    logMessage(JSON.stringify(data, null, 2));    
 
     const tabPanel = document.getElementById(`tabPanel_AISearch_${type}`);
 
-    /* ************************* Create table */
+    async function createTableAndInitialize() {
 
-    const tableId = `tableAISearch_${type}`;
-    const table = document.createElement('table');
-    table.id = tableId;
-    table.classList.add("data-table");
-    tabPanel.appendChild(table);
+        /* ************************* Create table */
 
-    /* ************************* Create headers */
+        const tableId = `tableAISearch_${type}`;
+        const table = document.createElement('table');
+        table.id = tableId;
+        table.classList.add("data-table");
 
-    const thead = table.createTHead(); let headerRow = thead.insertRow();
+        /* ************************* Create headers */
 
-    let headers = ['Score', 'RerankerScore'].concat(Object.keys(data[0].Document));
-    headers.forEach(header => {
-        const th = document.createElement("th");
-        th.textContent = header;
-        headerRow.appendChild(th);
-    });
+        const thead = table.createTHead();
+        const headerRow = thead.insertRow();
+        const headers = [...Object.keys(data[0])];  
+        headers.map(header => {
+            const th = document.createElement('th');
+            th.textContent = header;
+            return headerRow.appendChild(th);
+        });
 
-    /* ************************* Add rows */
+        /* ************************* Create tbody */
 
-    data.forEach(item => {
-        const row = table.insertRow();
-        headers.forEach(header => {
-            const cell = row.insertCell();
-            if (header in item) { cell.textContent = item[header]; }
-            else if (header in item.Document) { cell.textContent = item.Document[header]; }
-            else if (header === 'RerankerScore' && item.SemanticSearch && 'RerankerScore' in item.SemanticSearch) { cell.textContent = item.SemanticSearch.RerankerScore; }
+        const tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+
+        /* ************************* Add rows */
+
+        for (const item of data) {
+            const row = tbody.insertRow();
+            for (const header of headers) {
+                const cell = row.insertCell();
+                if (header in item) { cell.textContent = item[header]; }
+            }  
+        }
+
+        tabPanel.insertAdjacentElement('beforeend', table);
+        return tableId;
+    }
+
+    const tableId = await createTableAndInitialize();
+
+    /* ************************* Initialize DataTable */
+    $(function () {
+        $(`#${tableId}`).DataTable({
+            pageLength: 3,
+            columnDefs: [{
+                targets: '_all',
+                render: function (data, type, row) {
+                    if (type === 'display' && data.length > 25) {
+                        const span = document.createElement('span');
+                        span.title = data;
+                        span.textContent = `${data.substr(0, 22)}...`;
+                        return span.outerHTML;
+                    } else { return data; }
+                }
+            }],
+            autoWidth: true
         });
     });
-
-    /* ************************* Create "JSON Download" and "CSV Download" links */
-
-    const downloadLinkJson = document.createElement('a');
-    downloadLinkJson.href = `${window.location.origin}/?queryType=${type.toLowerCase()}&handler=DownloadJson&file=${type.toLowerCase()}.json`;
-    downloadLinkJson.textContent = 'JSON';
-
-    const downloadLinkCsv = document.createElement('a');
-    downloadLinkCsv.href = `${window.location.origin}/?queryType=${type.toLowerCase()}&handler=DownloadCSV&file=${type.toLowerCase()}.csv`;
-    downloadLinkCsv.textContent = 'CSV';
-
-    const downloadText = document.createTextNode('Download ');
-    const spaceText = document.createTextNode(' ');
-    const lineBreak = document.createElement('br');
-
-    tabPanel.appendChild(lineBreak);
-    tabPanel.appendChild(downloadText);
-    tabPanel.appendChild(downloadLinkJson);
-    tabPanel.appendChild(spaceText);
-    tabPanel.appendChild(downloadLinkCsv);  
-}  
+}
 ```
 
 -----
