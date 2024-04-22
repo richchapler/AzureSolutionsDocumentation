@@ -4,7 +4,7 @@
 
 ## Use Case
 * "The AI Search and OpenAI demonstration apps are insufficient"
-* "We want a demonstration application that allows us to query both AI Search and OpenAI at once"
+* "We want a demonstration application that allows us to simultaneously query AI Search and OpenAI"
 * "We want to see responses from more than one configuration of both AI Search and Open AI"
 * "We need an easy way to evaluate time-to-respond"
 * "We need a User Interface Template that we can customize for our various internal use cases"
