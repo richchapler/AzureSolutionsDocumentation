@@ -1017,9 +1017,9 @@ Click "Close".
 
 On the "...Publish" tab, click "Publish".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e4be1d51-80bb-4559-880c-017c7a0d5ab5" width="800" title="Snipped April 22, 2024" />
 
-
-LOREM IPSUM
+When publication is complete, your browser will open to the published web application.
 
 -----
 
