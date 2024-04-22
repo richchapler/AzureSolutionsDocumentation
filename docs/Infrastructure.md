@@ -18,6 +18,8 @@ _Note: Most of the links below point to Microsoft documentation... I create addi
 
 * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
 
+* [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+
 * [Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service)
 
 * [Databricks](https://learn.microsoft.com/en-us/azure/databricks/)
