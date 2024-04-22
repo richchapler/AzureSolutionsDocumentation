@@ -991,6 +991,15 @@ When processing is complete, you can expect to see responses from AI Search and 
 
 ### Step 8: Publish to Azure
 
+In Visual Studio >> Solution Explorer, right-click on the project name and select "Publish" from the resulting dropdown.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6324c434-9560-4e25-ad15-ab89c698f04f" width="600" title="Snipped April 22, 2024" />
+
+On the "Publish" popup, "Target" tab, select "Azure" and then click "Next".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/73935164-0dc7-4034-977f-fe3838d8a135" width="600" title="Snipped April 22, 2024" />
+
+
 
 
 
