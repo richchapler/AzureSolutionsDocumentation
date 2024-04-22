@@ -999,12 +999,23 @@ On the "Publish" popup, "Target" tab, select "Azure" and then click "Next".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/73935164-0dc7-4034-977f-fe3838d8a135" width="600" title="Snipped April 22, 2024" />
 
+On the "Publish" popup, "Specific target" tab, select "Azure App Service (Windows)" and then click "Next".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/62936cd5-6fc7-4a78-8c28-d3f4ac96f184" width="600" title="Snipped April 22, 2024" />
 
+On the "Publish" popup, "App Service" tab, select existing or create new App Service and then click "Next".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/297c5213-e196-421b-a73c-18e18cd3b908" width="600" title="Snipped April 22, 2024" />
 
+On the "Publish" popup, "Deployment type" tab, select "Publish (generates pubxml file)" and then click "Finish".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/684cca9a-4b78-47dc-a2a2-4b4e9b801e88" width="600" title="Snipped April 22, 2024" />
 
+Click "Close".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8542029-4c67-4723-8660-2dc16728ff03" width="800" title="Snipped April 22, 2024" />
+
+On the "...Publish" tab, click "Publish".
 
 
 
