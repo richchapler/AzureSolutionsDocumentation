@@ -986,6 +986,21 @@ Enter a prompt and press the Enter key on your keyboard... allow time for proces
 
 When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword, full, and semantic configurations).
 
+
+-----
+
+### Step 8: Publish to Azure
+
+
+
+
+
+
+
+
+
+LOREM IPSUM
+
 -----
 
 **Congratulations... you have successfully completed all steps**
