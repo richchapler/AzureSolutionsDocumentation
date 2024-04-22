@@ -16,8 +16,8 @@ This documentation assumes the following resources are ready for use:
 * [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
   * The documented configuration uses an index pointed at the Azure SQL AdventureWorks sample database
 
-* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) and Hosting Plan
-  * Once created (as part of exercise), must be granted "Key Vault Secrets User" role assignment on Key Vault
+* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) and [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
+  _Note: Once created (as part of exercise), App Service must be granted "Key Vault Secrets User" role assignment on Key Vault_
 
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):\
   * AISearch-Index-Name
