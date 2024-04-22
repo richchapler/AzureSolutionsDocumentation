@@ -87,39 +87,6 @@ _Note: Though most helper logic has been moved to the AzureSolutions.Helpers pac
 
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
 
-#### AISearch.cs
-
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup and click "Add". Replace the default code with:
-
-```csharp
-using Azure.Search.Documents.Models;
-using Microsoft.AspNetCore.SignalR;
-
-namespace AI_Interface.Helpers
-{
-    public class AISearch
-    {
-        private static readonly Dictionary<SearchQueryType, string> _responses = [];
-        public static IReadOnlyDictionary<SearchQueryType, string> Responses => _responses;
-
-        public static async Task Query_AISearch(IHubCallerClients HubClient, SearchQueryType AISearch_QueryType, string UserQuery)
-        {
-            await HubClient.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' :: Configuration '{AISearch_QueryType}' with AISearch");
-
-            var AISearch_Query = await AzureSolutions.Helpers.AISearch.Query.Execute(
-                Constants.AISearch_Client,
-                AISearch_QueryType,
-                AISearch_Text: UserQuery,
-                AISearch_SelectField: Constants.AISearch_SelectFields
-                );
-
-            if (AISearch_Query.Response != null) { _responses[AISearch_QueryType] = AISearch_Query.Response; }
-            await HubClient.Caller.SendAsync("displayResults", AISearch_Query.Response, AISearch_QueryType.ToString());
-        }
-    }
-}
-```
-
 #### Constants.cs
 
 Repeat the process to create "Constants.cs", then replace the default code with:
@@ -127,35 +94,21 @@ Repeat the process to create "Constants.cs", then replace the default code with:
 ```csharp
 using Azure;
 using Azure.AI.OpenAI;
-using Azure.Identity;
 using Azure.Search.Documents;
-using Azure.Security.KeyVault.Secrets;
 
 namespace AI_Interface.Helpers
 {
     public static class Constants
     {
-        /* ************************* KeyVault */
-
-        private static readonly string KeyVault_Name = "KEY_VAULT_NAME";
-
-        private static readonly SecretClient secretClient = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
-
-        private static string GetSecret(string secretName)
-        {
-            var secret = secretClient.GetSecret(secretName);
-            return secret.Value.Value;
-        }
-
         /* ************************* Constants */
-        public static string AISearch_Index_Name { get; } = GetSecret("AISearch-Index-Name");
-        public static string AISearch_Key { get; } = GetSecret("AISearch-Key");
-        public static string AISearch_Name { get; } = GetSecret("AISearch-Name");
-        public static string AISearch_SelectFields { get; } = GetSecret("AISearch-SelectFields");
-        public static string AISearch_SemanticConfiguration_Name { get; } = GetSecret("AISearch-SemanticConfiguration-Name");
-        public static string OpenAI_Deployment_Name { get; } = GetSecret("OpenAI-Deployment-Name");
-        public static string OpenAI_Key { get; } = GetSecret("OpenAI-Key");
-        public static string OpenAI_Name { get; } = GetSecret("OpenAI-Name");
+        public static string AISearch_Index_Name { get; } = KeyVault.GetSecret("AISearch-Index-Name").Result;
+        public static string AISearch_Key { get; } = KeyVault.GetSecret("AISearch-Key").Result;
+        public static string AISearch_Name { get; } = KeyVault.GetSecret("AISearch-Name").Result;
+        public static string AISearch_SelectFields { get; } = KeyVault.GetSecret("AISearch-SelectFields").Result;
+        public static string AISearch_SemanticConfiguration_Name { get; } = KeyVault.GetSecret("AISearch-SemanticConfiguration-Name").Result;
+        public static string OpenAI_Deployment_Name { get; } = KeyVault.GetSecret("OpenAI-Deployment-Name").Result;
+        public static string OpenAI_Key { get; } = KeyVault.GetSecret("OpenAI-Key").Result;
+        public static string OpenAI_Name { get; } = KeyVault.GetSecret("OpenAI-Name").Result;
 
         /* ************************* Clients */
 
@@ -185,50 +138,72 @@ namespace AI_Interface.Helpers
 }
 ```
 
-#### OpenAI.cs
+#### KeyVault.cs
 
-Repeat the process to create "OpenAI.cs", then replace the default code with:
+Repeat the process to create "KeyVault.cs", then replace the default code with:
 
 ```csharp
-using Azure.AI.OpenAI;
-using Microsoft.AspNetCore.SignalR;
+using Azure;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 
 namespace AI_Interface.Helpers
 {
-    public class OpenAI
+    public class KeyVault
     {
-        public static async Task Query(
-            IHubCallerClients HubClient,
-            AzureCognitiveSearchQueryType AISearch_QueryType,
-            string UserQuery,
-            string SystemMessage
-        )
+        private static readonly IConfiguration _configuration;
+        public static string KeyVault_Name;
+        public static readonly SecretClient KeyVault_Client;
+
+        static KeyVault()
         {
-            await HubClient.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' :: System Message '{SystemMessage}' :: Configuration '{AISearch_QueryType}' with OpenAI");
-
-            var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt(
-                Constants.OpenAI_Client,
-                Constants.OpenAI_Deployment_Name,
-                Constants.AISearch_Name,
-                Constants.AISearch_Key,
-                Constants.AISearch_Index_Name,
-                AISearch_QueryType,
-                Constants.AISearch_SemanticConfiguration_Name,
-                UserQuery,
-                SystemMessage
-                );
-
-            await HubClient.Caller.SendAsync(
-                method: $"displayOpenAI_{AISearch_QueryType}",
-                arg1: new { response = OpenAI_Prompt.Response, stp = OpenAI_Prompt.SecondsToProcess }
-                );
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appSettings.Development.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+            _configuration = builder.Build();
+            KeyVault_Name = _configuration.GetSection("KeyVault_Name").Value ?? "default";
+            KeyVault_Client = new SecretClient(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
         }
-    }
 
-    public class OpenAIResult
-    {
-        public string? Response { get; set; }
-        public double SecondsToProcess { get; set; }
+        public static readonly List<string> expectedSecrets = [
+            "AISearch-Index-Name",
+            "AISearch-Name",
+            "AISearch-Key",
+            "AISearch-SelectFields",
+            "AISearch-SemanticConfiguration-Name",
+            "OpenAI-Deployment-Name",
+            "OpenAI-Key",
+            "OpenAI-Name"
+        ];
+
+        //public static readonly SecretClient KeyVault_Client = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
+
+        public static async Task<string> GetSecret(string secretName)
+        {
+            var secret = await KeyVault_Client.GetSecretAsync(secretName);
+            return secret.Value.Value;
+        }
+
+        public static async Task<List<Secret>> GetSecrets()
+        {
+            var secrets = new List<Secret>();
+
+            foreach (var s in expectedSecrets)
+            {
+                try { secrets.Add(new Secret { Name = s, Value = await GetSecret(s) }); }
+                catch (RequestFailedException) { secrets.Add(new Secret { Name = s, Value = null }); }
+            }
+
+            return secrets;
+        }
+
+        public class Secret
+        {
+            public string? Name { get; set; }
+            public string? Value { get; set; }
+        }
     }
 }
 ```
@@ -253,37 +228,98 @@ namespace AI_Interface
     {
         public async Task ProcessQuery(
             string UserQuery,
+            string Filter,
             string SystemMessage,
-            bool runAISearch_Simple = true,
-            bool runAISearch_Full = true,
-            bool runAISearch_Semantic = true,
-            bool runOpenAI_Simple = true,
-            bool runOpenAI_Semantic = true
+            float Temperature,
+            Dictionary<string, bool> runFlags
         )
         {
             try
             {
+                await Clients.All.SendAsync("logMessage",
+                    $"Processing User Query: {UserQuery} :: Filter: {Filter} :: System Message: {SystemMessage} :: Temperature: {Temperature}\n");
+
                 /* ************************* OpenAI */
 
-                if (runOpenAI_Simple || runOpenAI_Semantic)
+                var openAITypes = new Dictionary<string, string>
                 {
-                    if (runOpenAI_Simple) { await Helpers.OpenAI.Query(Clients, AISearch_QueryType: AzureCognitiveSearchQueryType.Simple, UserQuery, SystemMessage); }
+                    { "OpenAI_Semantic", "Semantic" },
+                    { "OpenAI_Simple", "Simple" }
+                };
 
-                    if (runOpenAI_Semantic) { await Helpers.OpenAI.Query(Clients, AISearch_QueryType: AzureCognitiveSearchQueryType.Semantic, UserQuery, SystemMessage); }
+                foreach (var openAIType in openAITypes)
+                {
+                    if (runFlags[openAIType.Key])
+                    {
+                        //await Clients.All.SendAsync("logMessage", $"OpenAI >> User Query '{UserQuery}' :: Filter '{Filter}' :: System Message '{SystemMessage}' :: Temperature '{Temperature}' :: {openAIType.Value}");
+
+                        var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt(
+                            OpenAI_Client: Constants.OpenAI_Client,
+                            OpenAI_Deployment_Name: Constants.OpenAI_Deployment_Name,
+                            UserQuery,
+                            SystemMessage,
+                            Temperature,
+                            AISearch_Name: openAIType.Value == null ? null : Constants.AISearch_Name,
+                            AISearch_Key: openAIType.Value == null ? null : Constants.AISearch_Key,
+                            AISearch_Index_Name: openAIType.Value == null ? null : Constants.AISearch_Index_Name,
+                            AISearch_QueryType: openAIType.Value == "Simple" ? AzureSearchQueryType.Simple : AzureSearchQueryType.Semantic,
+                            AISearch_SemanticConfiguration_Name: openAIType.Value == null ? null : Constants.AISearch_SemanticConfiguration_Name,
+                            AISearch_Filter: Filter
+                            );
+
+                        await Clients.Caller.SendAsync(
+                            method: openAIType.Value == null ? "displayEvaluation" : $"displayOpenAI_{openAIType.Value}",
+                            arg1: new { response = OpenAI_Prompt.Response, citations = OpenAI_Prompt.Citations, stp = OpenAI_Prompt.SecondsToProcess }
+                            );
+                    }
                 }
 
                 /* ************************* AISearch */
 
-                if (runAISearch_Simple || runAISearch_Full || runAISearch_Semantic)
+                var searchTypes = new Dictionary<string, SearchQueryType>
                 {
-                    await Clients.All.SendAsync("logMessage", $"Processing User Query '{UserQuery}' with AI Search");
+                    { "AISearch_Semantic", SearchQueryType.Semantic },
+                    { "AISearch_Full", SearchQueryType.Full },
+                    { "AISearch_Simple", SearchQueryType.Simple }
+                };
 
-                    if (runAISearch_Simple) { await AISearch.Query_AISearch(Clients, SearchQueryType.Simple, UserQuery); }
+                foreach (var searchType in searchTypes)
+                {
+                    if (runFlags[searchType.Key])
+                    {
+                        //await Clients.All.SendAsync("logMessage", $"AI Search >> Search Text: {UserQuery} :: Filter {Filter} :: Query Type: {searchType.Value}");
 
-                    if (runAISearch_Full) { await AISearch.Query_AISearch(Clients, SearchQueryType.Full, UserQuery); }
+                        var Query_TopX = await AzureSolutions.Helpers.AISearch.Query.TopX(
+                            AISearch_Client: Constants.AISearch_Client,
+                            AISearch_QueryType: searchType.Value,
+                            AISearch_SearchText: UserQuery,
+                            AISearch_SelectFields: Constants.AISearch_SelectFields,
+                            AISearch_Filter: Filter,
+                            X: 10
+                            );
 
-                    if (runAISearch_Semantic) { await AISearch.Query_AISearch(Clients, SearchQueryType.Semantic, UserQuery); }
+                        await Clients.Caller.SendAsync("displayResults", Query_TopX.Response, searchType.Value.ToString(), UserQuery);
+                    }
                 }
+
+                /* ************************* Generate Prompt Ideas */
+
+                //await Clients.All.SendAsync("logMessage", $"OpenAI >> User Query 'Suggest the single best way to improve user prompt: '{UserQuery}' to help Open AI provide a meaningful response. Suggest an alternate version of the original user prompt that the user might adopt.' :: System Message 'You are an OpenAI Prompt Engineering specialist' :: Temperature '0.5'");
+
+                var OpenAI_Prompt2 = await AzureSolutions.Helpers.OpenAI.Prompt(
+                    OpenAI_Client: Constants.OpenAI_Client,
+                    OpenAI_Deployment_Name: Constants.OpenAI_Deployment_Name,
+                    UserQuery: "Suggest the single best way to improve user prompt: '" + UserQuery + "' to help Open AI provide a meaningful response. Suggest an alternate version of the original user prompt that the user might adopt.",
+                    SystemMessage: "You are an OpenAI Prompt Engineering specialist",
+                    Temperature: 0.5f
+                );
+
+                await Clients.Caller.SendAsync(
+                    method: "displayEvaluation",
+                    arg1: new { response = OpenAI_Prompt2.Response, citations = OpenAI_Prompt2.Citations, stp = OpenAI_Prompt2.SecondsToProcess }
+                );
+
+                //await Clients.All.SendAsync("logMessage", $"Evaluation Result: Query sent for evaluation");
             }
             catch (Exception ex) { await Clients.All.SendAsync("logMessage", $"Exception: {ex}\n"); }
         }
@@ -338,9 +374,11 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AI_Interface</title>
+    <title>Azure Solutions: @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
@@ -353,6 +391,12 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary" style="color: black; border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid whitesmoke; border-top: 1px solid whitesmoke;" asp-area="" asp-page="/Index">OpenAI: @AI_Interface.Helpers.Constants.OpenAI_Name | AI Search:  @AI_Interface.Helpers.Constants.AISearch_Name</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary" style="color: black; border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid whitesmoke; border-top: 1px solid whitesmoke;" asp-area="" asp-page="/KeyVault">KeyVault: @AI_Interface.Helpers.KeyVault.KeyVault_Name</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -364,21 +408,26 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js"></script>
 
     <script src="~/js/runfirst.js" asp-append-version="true"></script>
     <script src="~/js/constants.js" asp-append-version="true"></script>
+
+    <script src="~/js/interface.js" asp-append-version="true"></script>
+    <script>window.onload = async function () { await prepareTabs(); };</script>
+
     <script src="~/js/submit.js" asp-append-version="true"></script>
     <script src="~/js/aisearch.js" asp-append-version="true"></script>
     <script src="~/js/openai.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
 ```
@@ -393,78 +442,73 @@ Expand "Pages" and then double-click to open "Index.cshtml". Replace the default
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "AI";
 }
 
 <!DOCTYPE html>
 <html>
 <body>
-    <div class="container">
-        <h4>Step 1: Submit Query</h4>
+    <partial name="_Toolbar" />
 
-        <div class="row">
-            <div class="col">
-                <label for="inputUserQuery">User Query</label>
-                <textarea id="inputUserQuery" rows="2" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%;"></textarea>
+    <div class="container">
+
+        <div class="container-style">
+
+            @* Input: User Query *@
+            <div style="position: relative;">
+                <textarea id="inputUserQuery" rows="2" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%; padding-right: 30px;"></textarea>
+                <img id="submitIcon" src="~/images/send.svg" style="position: absolute; bottom: 10px; right: 10px; width: 20px; height: 20px;" title="Send">
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="inputSystemMessage">System Message</label>
-                <textarea id="inputSystemMessage" disabled rows="2" placeholder="Optional, used for OpenAI only" style="width: 100%;"></textarea>
-            </div>
-        </div>
-        <div id="toggles">
-            <span id="headerOpenAI" style="cursor: pointer; display: inline;">OpenAI >> </span>
-            <span id="headerOpenAI_Simple" style="cursor: pointer; display: inline;">Simple</span> |
-            <span id="headerOpenAI_Semantic" style="cursor: pointer; display: inline;">Semantic</span> ::
-            <span id="headerAISearch" style="cursor: pointer; display: inline;">AISearch >> </span>
-            <span id="headerAISearch_Simple" style="cursor: pointer; display: inline;">Simple</span> |
-            <span id="headerAISearch_Full" style="cursor: pointer; display: inline;">Full</span> |
-            <span id="headerAISearch_Semantic" style="cursor: pointer; display: inline;">Semantic</span>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div>
-                    <button id="buttonSubmit" type="button" class="btn btn-primary">Submit</button>
+
+            @* Input: AISearch_Filter *@
+            <div class="row">
+                <div class="col">
+                    <label for="inputFilter">Filter</label>
+                    <input id="inputFilter" type="text" placeholder="[OPTIONAL] Enter AI Search filter {e.g., ColumnX eq '12345'}" style="width: 100%;">
                 </div>
             </div>
+
+            @* Input: System Message *@
+            <div class="row">
+                <div class="col">
+                    <label for="inputSystemMessage">System Message</label>
+                    <textarea id="inputSystemMessage" rows="1" placeholder="[OPTIONAL] Used for OpenAI only" style="width: 100%;"></textarea>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', (event) => { document.getElementById('inputSystemMessage').value = localStorage.getItem('systemMessage'); });
+                /* Pull saved setting from localStorage, if possible */
+            </script>
+
+            @* Input: Temperature *@
+            <div class="row">
+                <div class="col">
+                    <label for="inputTemperature">Temperature</label>
+                    <input id="inputTemperature" type="range" min="0" max="1" step="0.01" value="0.5" style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between; white-space: nowrap;">
+                        <span class="subtext">More Precise</span>
+                        <span class="subtext">More Creative</span>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', (event) => { document.getElementById('inputTemperature').value = localStorage.getItem('temperature'); });
+                /* Pull saved setting from localStorage, if possible */
+            </script>
         </div>
-    </div>
 
-
-    <h4>Step 2: Review Results</h4>
-
-    <ul id="resultTabs" class="nav nav-tabs" role="tablist"></ul>
-
-    <div class="tab-content" id="myTabContent">
-
-        <div id="aisearch-simple" class="tab-pane fade">
-            <div id="tabPanel_AISearch_Simple" class="scrollable-container"></div>
+        @* Input: Result Tabs and Panels *@
+        <div class="container-style">
+            <ul id="resultTabs" class="nav nav-tabs" role="tablist"></ul>
+            <div id="resultTabContent" class="tab-content"></div>
+            <div class="progress-bar" id="progressBar" style="display: none;"><div class="progress-bar-inner"></div></div>
         </div>
 
-        <div id="aisearch-full" class="tab-pane fade">
-            <div id="tabPanel_AISearch_Full" class="scrollable-container"></div>
-        </div>
-
-        <div id="aisearch-semantic" class="tab-pane fade">
-            <div id="tabPanel_AISearch_Semantic" class="scrollable-container"></div>
-        </div>
+        @* Log and Popup *@
+        <textarea id="textareaLog" class="textarea" rows="4" style="display: none; width: 100%;" readonly>@ViewData["messages"]</textarea>
+        <div id="popup" class="popup"></div>
 
     </div>
-
-    <div class="progress-bar" id="progressBar" style="display: none;">
-        <div class="progress-bar-inner"></div>
-    </div>
-
-
-    <h4 id="headerLog">Log</h4>
-    <textarea id="textareaLog" class="textarea" rows="4" readonly>@ViewData["messages"]</textarea>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
 
 </body>
 </html>
@@ -477,76 +521,12 @@ Expand "Pages" and then double-click to open "Index.cshtml". Replace the default
 Expand "Pages" >> "Index.cshtml" and then double-click to open "Index.cshtml.cs". Replace the default code with:
 
 ```csharp
-using AI_Interface.Helpers;
-using Azure.Search.Documents.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data;
-using System.Text;
-using System.Text.Json;
 
 namespace AI_Interface.Pages
 {
     public class IndexModel : PageModel
     {
-        public IActionResult OnGetDownloadJson(SearchQueryType queryType)
-        {
-            return File(
-                fileContents: Encoding.UTF8.GetBytes(AISearch.Responses[queryType]),
-                contentType: "application/json",
-                fileDownloadName: $"AISearch_{queryType}_{DateTime.Now:yyyyMMdd_HHmm}.json"
-                );
-        }
-
-        public IActionResult OnGetDownloadCSV(SearchQueryType queryType)
-        {
-            var jsonData = AISearch.Responses[queryType];
-            var document = JsonDocument.Parse(jsonData);
-            if (document == null) { return BadRequest("Invalid data"); }
-
-            DataTable dt = new();
-            dt.Columns.Add("Score");
-            dt.Columns.Add("RerankerScore");
-
-            var firstElement = document.RootElement.EnumerateArray().First();
-            var documentPropertiesForColumns = firstElement.GetProperty("Document").EnumerateObject();
-            foreach (var prop in documentPropertiesForColumns) { dt.Columns.Add(prop.Name); }
-
-            foreach (JsonElement element in document.RootElement.EnumerateArray())
-            {
-                DataRow dr = dt.NewRow();
-                dr["Score"] = element.GetProperty("Score").GetDouble();
-
-                if (element.GetProperty("SemanticSearch").TryGetProperty("RerankerScore", out JsonElement rerankerScoreElement)
-                    && rerankerScoreElement.ValueKind == JsonValueKind.Number)
-                {
-                    dr["RerankerScore"] = rerankerScoreElement.GetDouble();
-                }
-                else { dr["RerankerScore"] = (double?)null; }
-
-                var documentPropertiesForRow = element.GetProperty("Document").EnumerateObject();
-                foreach (var prop in documentPropertiesForRow) { dr[prop.Name] = prop.Value.GetString() ?? string.Empty; }
-                dt.Rows.Add(dr);
-            }
-
-            StringBuilder sb = new();
-            var columnNames = dt.Columns.Cast<DataColumn>().Select(column => column.ColumnName);
-            sb.AppendLine(string.Join(",", columnNames));
-
-            foreach (DataRow row in dt.Rows)
-            {
-                var fields = row.ItemArray.Select(field => field?.ToString() ?? string.Empty);
-                sb.AppendLine(string.Join(",", fields));
-            }
-
-            var csvData = sb.ToString();
-
-            return File(
-                fileContents: Encoding.UTF8.GetBytes(csvData),
-                contentType: "text/csv",
-                fileDownloadName: $"AISearch_{queryType}_{DateTime.Now:yyyyMMdd_HHmm}.csv"
-            );
-        }
     }
 }
 ```
