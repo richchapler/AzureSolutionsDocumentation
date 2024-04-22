@@ -800,65 +800,25 @@ async function displayResults(data, type, userQuery) {
 Right click on "wwwroot" >> "js" and then add new file "constants.js". Replace the default code with:
 
 ```js
-/* ************************* Toggles */
+const ProcessingStart_Constants = new Date();  
 
-const setupAppState = (keys, defaultValue) => {
-    const state = new Map();
-    keys.forEach(key => state.set(key, defaultValue));
-    return state;
-}
+/* ************************* UI Elements */
 
-const RUNorNOTs = [
-    'AISearch_Simple_RunOrNot',
-    'AISearch_Full_RunOrNot',
-    'AISearch_Semantic_RunOrNot',
-    'OpenAI_Simple_RunOrNot',
-    'OpenAI_Semantic_RunOrNot'
-];
-
-const RUN = "Run", NOT = "Not";
-
-const appState = setupAppState(RUNorNOTs, RUN);
-
-const getRunOrNotValues = (keys, state, runValue) => keys.map(key => state.get(key) === runValue);
-
-/* ************************* Elements */
+const buttonClear = document.getElementById('buttonClear');
+const buttonDownload = document.getElementById('buttonDownload');
+const buttonLog = document.getElementById('buttonLog');
+const buttonSave = document.getElementById('buttonSave');
 
 const inputUserQuery = document.getElementById('inputUserQuery');
 const inputSystemMessage = document.getElementById('inputSystemMessage');
-const buttonSubmit = document.getElementById('buttonSubmit');
+const inputTemperature = document.getElementById('inputTemperature');
+
 const progressBar = document.getElementById('progressBar');
-const logArea = document.getElementById('textareaLog');
+const textareaLog = document.getElementById('textareaLog');
 
-const clearElementContent = (element) => {
-    while (element.firstChild) { element.removeChild(element.firstChild); }
-};
+const clearElementContent = (element) => { while (element.firstChild) { element.removeChild(element.firstChild); } };
 
-/* ************************* Initial Setup, Configuration Headers */
-
-const initialSetup_ConfigurationHeaders = (config) => {
-    const id = `header${config}`; const runOrNot = `${config}_RunOrNot`;
-
-    const header = document.getElementById(id);
-
-    appState.set(runOrNot, RUN);
-
-    header.addEventListener("click", () => {
-        const currentState = appState.get(runOrNot);
-        appState.set(runOrNot, currentState === RUN ? NOT : RUN);
-        header.style.textDecoration = appState.get(runOrNot) === RUN ? "none" : "line-through";
-    });
-}
-
-const configurations = [
-    "AISearch_Simple",
-    "AISearch_Full",
-    "AISearch_Semantic",
-    "OpenAI_Simple",
-    "OpenAI_Semantic"
-];
-
-configurations.forEach(initialSetup_ConfigurationHeaders);  
+logMessage(`constants.js processed in ${((new Date() - ProcessingStart_Constants) / 1000).toFixed(3)}s`);  
 ```
 
 -----
@@ -868,32 +828,55 @@ configurations.forEach(initialSetup_ConfigurationHeaders);
 Right click on "wwwroot" >> "js" and then add new file "openai.js". Replace the default code with:
 
 ```js
+connection.on(`displayEvaluation`, data => displayQueryEvaluation(data));
+
 const buildTabPanel = (type, data) => {
+
+    //logMessage(JSON.stringify(data, null, 2));    
 
     /* ************************* Get and empty tabpanel */
     const tabPanel = document.getElementById(`tabPanel_OpenAI_${type}`);
     tabPanel.innerHTML = '';
 
-    /* ************************* Create label */
+    /* ************************* Label: Time-to-Process */
 
     label = document.createElement('label');
     label.id = `labelOpenAI_${type}`;
     label.textContent = `Time-to-Process: ${data.stp.toFixed(1)} seconds`;
     tabPanel.appendChild(label);
 
-    /* ************************* Create textarea */
+    /* ************************* TextArea: Response */
 
-    textarea = document.createElement('textarea');
+    let textarea = document.createElement('div');
     textarea.id = `textareaOpenAI_${type}`;
+    textarea.className = 'fake-textarea';
+    textarea.readOnly = true;
+
+    textarea.innerHTML = data.response.replace(/\[doc(\d+)\]/g, function (match, p1) {
+        return '<span class="highlight" title="' + data.citations[p1-1] + '"><sup>' + p1 + '</sup></span>';
+    });
+
+    tabPanel.appendChild(textarea);  
+}
+
+["Simple", "Semantic"].forEach(type => { connection.on(`displayOpenAI_${type}`, data => buildTabPanel(type, data)); });
+
+const displayQueryEvaluation = (data) => {
+    const tabPanel = document.getElementById('tabPanel_Ideas_Prompt');
+
+    const label = document.createElement('label');
+    label.textContent = "Suggestions";
+    tabPanel.appendChild(label);
+
+    const textarea = document.createElement('textarea');
+    textarea.id = 'evaluationResult';
     textarea.rows = '9';
     textarea.className = 'textarea';
     textarea.readOnly = true;
+    textarea.style.width = '100%';
     textarea.textContent = data.response;
     tabPanel.appendChild(textarea);
 }
-
-["Simple", "Semantic"].forEach(type => { connection.on(`displayOpenAI_${type}`, data => buildTabPanel(type, data)); });  
-
 ```
 
 -----
@@ -912,9 +895,9 @@ const connection = new signalR.HubConnectionBuilder().withUrl("/Hub").build();
 const logMessage = (message, source = 'Client-Side') => {
     const timestamp = new Date().toLocaleTimeString();
     message = message.replace(/[\r\n]+/g, ' '); // replace carriage returns and newlines with a space  
-    logArea.value += `${timestamp}, ${source}... ${message}\n`;
-    logArea.scrollTop = logArea.scrollHeight;
-}  
+    textareaLog.value += `${timestamp}, ${source}... ${message}\n`;
+    textareaLog.scrollTop = textareaLog.scrollHeight;
+}
 
 connection.on("logMessage", (message) => logMessage(message, 'Server-Side'));
 ```
@@ -926,30 +909,28 @@ connection.on("logMessage", (message) => logMessage(message, 'Server-Side'));
 Right click on "wwwroot" >> "js" and then add new file "submit.js". Replace the default code with:
 
 ```js
-/* ************************* Handle Events from listeners (below): 1) Submit button clicked, or 2) Enter key pressed */
+/* ************************* Handle Events from listeners: 1) "Submit" button click or 2) "Enter" key down */
 
 const HandleEvent = async (e) => {
+    if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter' && !e.shiftKey)) {
 
-    if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter')) {
+        e.preventDefault(); /* Prevents the addition of a newline in the text area */
 
-        if (buttonSubmit.innerText === 'Submit') {
+        let submitIcon = document.querySelector('#submitIcon'); // Assuming the id of your img tag is 'submitIcon'  
 
+        if (submitIcon.src.includes('send.svg')) {
             if (connection.state === signalR.HubConnectionState.Disconnected) { await connection.start(); }
-
-            buttonSubmit.innerText = 'Stop';
-
-            await prepareTabs();
-
-            await prepareTabPanels();
+            submitIcon.src = '../images/stop.svg';
+            submitIcon.title = "Stop";
 
             await processQuery();
+            $('#tab_Ideas_Prompt').trigger('click');
         }
         else {
 
             if (connection.state === signalR.HubConnectionState.Connected) { await connection.stop(); }
-
-            buttonSubmit.innerText = 'Submit';
-
+            submitIcon.src = '../images/send.svg';
+            submitIcon.title = "Send";
             progressBar.style.display = 'none';
         }
     }
@@ -957,87 +938,36 @@ const HandleEvent = async (e) => {
 
 /* ***** Event Listeners... MUST follow HandleEvent */
 
-buttonSubmit.addEventListener('click', HandleEvent);
 inputUserQuery.addEventListener('keydown', HandleEvent);
-
-/* ************************* Prepare Tabs */
-
-const prepareTabs = async () => {
-
-    var configurations = [
-        { parent: "OpenAI", children: ["Simple", "Semantic"] },
-        { parent: "AISearch", children: ["Simple", "Full", "Semantic"] }
-    ];
-
-    var tabList = $("#resultTabs");
-    tabList.empty();
-
-    configurations.forEach(function (config, index) {
-
-        var parentTab = $('<li class="nav-parent">' + config.parent + '</li>');
-
-        tabList.append(parentTab);
-
-        config.children.forEach(function (child) {
-
-            var childTab = $(`<li class="nav-item ${config.parent}-subtab"><a class="nav-link" id="${config.parent}-${child}-tab"
-                data-toggle="tab" href="#${config.parent.toLowerCase()}-${child.toLowerCase()}">  
-                ${child}</a></li>`);
-            /* the specific data-toggle, href and lowercase appear to be necessary for Bootstrap tab functionality */
-
-            tabList.append(childTab);
-        });
-    });
-};
-
-/* ************************* Prepare Tab Panels */
-
-const prepareTabPanels = async () => {
-
-    var configurations = [
-        { parent: "OpenAI", children: ["Simple", "Semantic"] },
-        { parent: "AISearch", children: ["Simple", "Full", "Semantic"] }
-    ];
-
-    var tabContent = $("#myTabContent");
-    configurations.forEach(function (config, index) {
-        config.children.forEach(function (child) {
-
-            if (config.parent === "OpenAI") {
-
-                var childPane = $(
-                    `<div id="${config.parent.toLowerCase()}-${child.toLowerCase()}" class="tab-pane fade">  
-                        <div id="tabPanel_${config.parent}_${child}" class="scrollable-container"></div></div>`
-                );
-                /* first div: the specific id, lowercase, and class appear to be necessary for Bootstrap tab functionality */
-                /* second div: this is the container actually used to display results */
-
-                tabContent.append(childPane);
-            }
-        });
-    });
-};
-
+submitIcon.addEventListener('click', HandleEvent);
 
 /* ************************* Process Query */
 
 const processQuery = async (e) => {
 
-    logMessage(`Sending User Query '${inputUserQuery.value}' :: System Message '${inputSystemMessage.value}' to Hub > ProcessQuery`);
+    logMessage(`Sending User Query "${inputUserQuery.value}" :: AISearch_Filter "${inputFilter.value}" :: System Message "${inputSystemMessage.value}" :: Temperature ${inputTemperature.value}`);
 
-    document.querySelectorAll('.data-table').forEach(clearElementContent); /* Clear previous results from tables */
-
-    document.querySelectorAll('.textarea').forEach(textarea => { textarea.value = ''; }); /* Clear previous results from text areas */
+    document.querySelectorAll('[id^="tabPanel_"]').forEach(tabPanel => { tabPanel.innerHTML = ''; });
 
     progressBar.style.display = 'block'; /* Reset progress bar */
 
-    const runOrNotValues = getRunOrNotValues(RUNorNOTs, appState, RUN);
+    const runFlags = {
+        "AISearch_Semantic": false,
+        "AISearch_Full": false,
+        "AISearch_Simple": false,
+        "OpenAI_Semantic": false,
+        "OpenAI_Simple": false
+    };  
 
-    connection.invoke("ProcessQuery", inputUserQuery.value, inputSystemMessage.value, ...runOrNotValues)
+    Object.keys(runFlags).forEach(key => { runFlags[key] = localStorage.getItem(key) === '1'; });  
+
+    connection.invoke("ProcessQuery", inputUserQuery.value, inputFilter.value, inputSystemMessage.value, parseFloat(inputTemperature.value), runFlags)
 
         .then(() => {
             progressBar.style.display = 'none';
-            buttonSubmit.innerText = 'Submit';
+            $('.result-tab:first').tab('show'); /* Show first tab panel */
+            submitIcon.src = '../images/send.svg';
+            submitIcon.title = "Send";
         })
 
         .catch((err) => logMessage(err.toString()));
