@@ -19,7 +19,7 @@ This documentation assumes the following resources are ready for use:
 * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) and [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
   <br>_Note: Once created (as part of exercise), App Service must be granted "Key Vault Secrets User" role assignment on Key Vault_
 
-* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):\
+* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * AISearch-Index-Name
   * AISearch-Key
   * AISearch-Name
