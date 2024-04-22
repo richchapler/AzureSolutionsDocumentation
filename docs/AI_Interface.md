@@ -988,7 +988,7 @@ When processing is complete, you can expect to see responses from AI Search and 
 
 -----
 
-### Step 8: Publish to Azure
+### Step 8: Publish Application
 
 In Visual Studio >> Solution Explorer, right-click on the project name and select "Publish" from the resulting dropdown.
 
@@ -1022,7 +1022,7 @@ When publication is complete, your browser will open to the published web applic
 
 -----
 
-### Step 9: Secure Web Application
+### Step 9: Secure Application
 
 
 
