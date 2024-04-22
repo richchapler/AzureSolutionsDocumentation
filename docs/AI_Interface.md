@@ -986,7 +986,6 @@ Enter a prompt and press the Enter key on your keyboard... allow time for proces
 
 When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword, full, and semantic configurations).
 
-
 -----
 
 ### Step 8: Publish to Azure
@@ -1020,6 +1019,22 @@ On the "...Publish" tab, click "Publish".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e4be1d51-80bb-4559-880c-017c7a0d5ab5" width="800" title="Snipped April 22, 2024" />
 
 When publication is complete, your browser will open to the published web application.
+
+-----
+
+### Step 9: Secure Web Application
+
+
+
+
+
+
+
+
+
+
+
+LOREM IPSUM
 
 -----
 
