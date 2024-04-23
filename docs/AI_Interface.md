@@ -20,7 +20,7 @@ This documentation assumes the following resources are ready for use:
 * [Application Registration](Infrastructure_ApplicationRegistration.md) with the following configuration:
   * Authentication >> Platform Configurations >> "Add a platform" >> Web >> Redirect URI "https://{APP SERVICE NAME}.azurewebsites.net/.auth/login/aad/callback"
   * Authentication >> Implicit Grant and Hybrid Flows >> "ID tokens..." checked
-  * Authentication >> Supported Account Types >> "Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant)" selected
+  * Authentication >> Supported Account Types >> "Accounts in any organizational directory (...Multitenant)" selected
 
 * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) configured for .NET 8 | Windows, identity enabled, and assigned "Key Vault Secrets User" role on Key Vault
   * [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
