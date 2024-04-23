@@ -1053,10 +1053,6 @@ Click "Add".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5572fbf5-97f7-4eb2-8be1-8429ac7102a9" width="800" title="Snipped April 23, 2024" />
 
-
-
-LOREM IPSUM
-
 -----
 
 **Congratulations... you have successfully completed all steps**
