@@ -16,6 +16,8 @@ This documentation assumes the following resources are ready for use:
 * [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
   * The documented configuration uses an index pointed at the Azure SQL AdventureWorks sample database
 
+* [Application Registration](Infrastructure_ApplicationRegistration.md)
+
 * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) and [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
   <br>_Note: Once created (as part of exercise), App Service must be granted "Key Vault Secrets User" role assignment on Key Vault_
 
@@ -1023,6 +1025,13 @@ When publication is complete, your browser will open to the published web applic
 -----
 
 ### Step 9: Secure Application
+
+Go to Azure Portal >> App Service >> Settings >> Authentication.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2c1630ea-03ba-4dec-877c-3129aac203cb" width="800" title="Snipped April 23, 2024" />
+
+Click "Add identity provider".
+
 
 
 
