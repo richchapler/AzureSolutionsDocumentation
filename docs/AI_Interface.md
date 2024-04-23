@@ -1044,9 +1044,11 @@ App registration type | Provide the details of an existing app registration
 Application (client) ID | Name of your application registration
 Client secret | Secret value for your application registration
 Issue URL | "Federation metadata document" url from App Registration >> EndPoints popout
+Tenant requirement | Use default restrictions based on issuer
 
+Click "Add".
 
-
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5572fbf5-97f7-4eb2-8be1-8429ac7102a9" width="800" title="Snipped April 23, 2024" />
 
 
 
