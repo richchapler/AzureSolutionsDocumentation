@@ -1051,7 +1051,17 @@ Click "Add".
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5572fbf5-97f7-4eb2-8be1-8429ac7102a9" width="800" title="Snipped April 23, 2024" />
 
 
-
+Possible Additions:
+* Make Application Registration Multi-Tenant
+* App Registration >> Authentication >> Add a Platform >> Web >> Redirect URI (https://azuresolutions.azurewebsites.net/.auth/login/aad/callback) + "ID Tokens" checked
+    Go to the Azure portal (https://portal.azure.com/).
+    Navigate to Azure Active Directory.
+    Go to App registrations and select your application.
+    In the application's pane, click on "Authentication".
+    Under the "Platform configurations" section, click on "Add a platform".
+    Choose "Web" and then add the "Redirect URIs". The "Redirect URIs" is the endpoint where Azure AD will return the responses to your app's authentication requests.
+    Under "Implicit grant and hybrid flows" section, check the box for "ID tokens".
+    Click on "Configure" to apply the changes.
 
 LOREM IPSUM
 
