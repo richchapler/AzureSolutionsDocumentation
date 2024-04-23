@@ -17,7 +17,7 @@ This documentation assumes the following resources are ready for use:
 * [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
   * The documented configuration uses an index pointed at the Azure SQL AdventureWorks sample database
 
-* [Application Registration](Infrastructure_ApplicationRegistration.md)
+* [Application Registration](Infrastructure_ApplicationRegistration.md) configured for multi-tenant
 
 * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) configured for .NET 8 | Windows, identity enabled, and assigned "Key Vault Secrets User" role on Key Vault
   * [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
