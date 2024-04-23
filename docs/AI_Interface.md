@@ -1051,7 +1051,7 @@ Tenant requirement | Use default restrictions based on issuer
 
 Click "Add".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5572fbf5-97f7-4eb2-8be1-8429ac7102a9" width="800" title="Snipped April 23, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70109dfc-95e5-43fe-bf5a-6defbc573e46" width="800" title="Snipped April 23, 2024" />
 
 -----
 
