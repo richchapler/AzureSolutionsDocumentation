@@ -18,8 +18,8 @@ This documentation assumes the following resources are ready for use:
 
 * [Application Registration](Infrastructure_ApplicationRegistration.md)
 
-* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) and [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
-  <br>_Note: Once created (as part of exercise), App Service must be granted "Key Vault Secrets User" role assignment on Key Vault_
+* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) configured for .NET 8 and Windows, granted "Key Vault Secrets User" role assignment on Key Vault
+  * [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   * AISearch-Index-Name
@@ -1004,7 +1004,7 @@ On the "Publish" popup, "Specific target" tab, select "Azure App Service (Window
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/62936cd5-6fc7-4a78-8c28-d3f4ac96f184" width="600" title="Snipped April 22, 2024" />
 
-On the "Publish" popup, "App Service" tab, select existing or create new App Service and then click "Next".
+On the "Publish" popup, "App Service" tab, select App Service and then click "Next".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/297c5213-e196-421b-a73c-18e18cd3b908" width="600" title="Snipped April 22, 2024" />
 
