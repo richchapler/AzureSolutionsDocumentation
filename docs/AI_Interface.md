@@ -1032,10 +1032,18 @@ Go to Azure Portal >> App Service >> Settings >> Authentication.
 
 Click "Add identity provider".
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/64688615-12a9-42f6-8a08-c1e85048e0cd" width="800" title="Snipped April 23, 2024" />
 
+Complete the "Add an identity provider" form.
 
-
-
+Prompt | Entry
+:----- | :-----
+Identity Provider | Microsoft
+Choose a tenant... | Workforce configuration (current tenant)
+App registration type | Provide the details of an existing app registration
+Application (client) ID | Name of your application registration
+Client secret | Secret value for your application registration
+Issue URL | "Federation metadata document" url from App Registration >> EndPoints popout
 
 
 
