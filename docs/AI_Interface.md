@@ -1043,7 +1043,6 @@ Choose a tenant... | Workforce configuration (current tenant)
 App registration type | Provide the details of an existing app registration
 Application (client) ID | Name of your application registration
 Client secret | Secret value for your application registration
-Issue URL | "Federation metadata document" url from App Registration >> EndPoints popout
 Tenant requirement | Use default restrictions based on issuer
 
 Click "Add".
