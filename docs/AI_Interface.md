@@ -1053,6 +1053,9 @@ Click "Add".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70109dfc-95e5-43fe-bf5a-6defbc573e46" width="800" title="Snipped April 23, 2024" />
 
+Individual Permissions... possible configuration
+* Enterprise Application >> Properties >> Assignment Required? >> yes
+
 -----
 
 **Congratulations... you have successfully completed all steps**
