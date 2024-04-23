@@ -8,6 +8,7 @@
 * "We want to see responses from more than one configuration of both AI Search and Open AI"
 * "We need an easy way to evaluate time-to-respond"
 * "We need a User Interface Template that we can customize for our various internal use cases"
+* "We need the application to be secured for use by only specific individuals in the organization"
 
 ## Solution Requirements
 
