@@ -1,4 +1,4 @@
-| Use Case: **"Justin Case"**... Improved Time-to-Resolution |  
+| Use Case: Improved Mean Time-to-Resolution |  
 :-----
 | This use case describes the process of using AI to improve the resolution time of issues. It involves the interaction between Jira, a Logic App, and a User. <br> <br> <sub>**Description**: Clear, concise description that reflects what the use case is about</sub> <br> |    
 | Jira, Logic App, User <br> <br> <sub>**Actor(s)**: Person or system that will be interacting with the system</sub> <br> |  
