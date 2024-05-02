@@ -1,6 +1,6 @@
-| Use Case: AI Transformation for Improved Resolution Time |  
+| Use Case: **"Justin Case"**... Improved Time-to-Resolution |  
 :-----
-| <br> <br> <sub>**Description**: Clear, concise description that reflects what the use case is about</sub> <br> |  
+| This use case describes the process of using AI to improve the resolution time of issues. It involves the interaction between Jira, a Logic App, and a User. <br> <br> <sub>**Description**: Clear, concise description that reflects what the use case is about</sub> <br> |    
 | Jira, Logic App, User <br> <br> <sub>**Actor(s)**: Person or system that will be interacting with the system</sub> <br> |  
 | A trigger is set off in Jira <br> <br> <sub>**Precondition(s)**: State of the system before the use case starts</sub> <br> |  
 | 1. Jira triggers the AI transformation <br> 2. Logic App sends a Teams chat to the user <br> 3. User sends back a message to Teams <br> 4. The message is processed <br> <br> <sub>**Basic Flow**: Sequence of events when everything goes as expected</sub> <br> |  
