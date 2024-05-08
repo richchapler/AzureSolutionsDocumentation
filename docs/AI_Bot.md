@@ -416,7 +416,7 @@ On the main page of the Bot Framework Emulator, click "Open Bot".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2265ed14-1d9b-4344-a52d-df1a07f2fbc8" width="800" title="Snipped March 29, 2024" />
 
-Paste the "Bot URL" value and click "Connect".
+Paste the "Bot URL" value and click "Connect"... neither "Microsoft App ID" or "Microsoft App password" are required.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fa382d60-fe39-47eb-bcd4-2672aa9e460f" width="800" title="Snipped April 9, 2024" />
 
