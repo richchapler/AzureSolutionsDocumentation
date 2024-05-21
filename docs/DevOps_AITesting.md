@@ -112,8 +112,7 @@ Enter name "Responses" and then click "Save".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9248f45b-06d5-4889-8a39-d33af8aa086a" width="800" title="Snipped: December 18, 2023" />
 
-Hide the "Description" field and add two new fields: "Response_Simple" and "Response_Semantic"
-_Note: "Simple" refers to "Keyword"_
+Hide the "Description" field and add five new fields: "Response_Simple", "Response_Semantic", "Response_Vector", "Response_VectorSimple", and "Response_VectorSemantic"
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/884a36ed-fe3b-46ae-9041-bd6c8157ae5d" width="800" title="Snipped: December 18, 2023" />
 
@@ -129,9 +128,9 @@ _Note: This field will be manually populated by testers as they evaluate automat
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b231935-bddb-40ed-9278-3f1bda401c61" width="800" title="Snipped: December 18, 2023" />
 
-On the "Layout" tab, enter Label "Response (keyword)" and then click "Add field". Repeat for "Response_Semantic_Ranking".
+On the "Layout" tab, enter Label "Response (keyword)" and then click "Add field". Repeat for "Response_Semantic_Ranking", "Response_Vector_Ranking", "Response_VectorSimple_Ranking", "Response_VectorSemantic_Ranking".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4f92d269-8d24-4669-855d-e534c3e003c6" width="800" title="Snipped: December 18, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/11d2c111-88fb-48d9-9dc7-7f4f8fa808b9" width="800" title="Snipped: May 21, 2024" />
 
 ### Step 3: Modify States
 
