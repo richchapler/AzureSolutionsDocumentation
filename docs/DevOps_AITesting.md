@@ -201,7 +201,7 @@ Open Visual Studio and click "**Create a new project**".
 
 On the "**Create a new project**" form, search for and select "**Azure Functions**", then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6841ad94-cbc5-49f5-bc2d-0601e5918ffa" width="600" title="Snipped: December 19, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0f239926-fd80-4377-897a-06127c372d70" width="600" title="Snipped: May 21, 2024" />
 
 Complete the "**Configure your new project**" form, then click "**Next**".
 
@@ -227,7 +227,7 @@ Click "Tools" in the menu bar, expand "NuGet Package Manager" and then click "Ma
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0bf233da-6648-4169-aaff-c92b05d00432" width="800" title="Snipped: December 19, 2023" />
 
-On the "Browse" tab of the "NuGet - Solution" page, search for and select "Azure.Identity". On the resulting pop-out, check the box next to your project and then click "Install".
+On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolutions.Helpers". On the resulting pop-out, check the box next to your project and then click "Install".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a3225127-1683-4147-a8b1-02ddda6cc709" width="300" title="Snipped: December 19, 2023" />
 
@@ -237,17 +237,15 @@ When prompted, click "I Accept" on the "License Acceptance" pop-up.
 
 #### Additional Packages
 
-Repeat this process for the following NuGet packages:
+Repeat this process for the following NuGet package:
 
-* Azure.AI.OpenAI (**1.0.0-beta.9**)
-* Azure.Security.KeyVault.Secrets
 * Microsoft.TeamFoundationServer.Client
 
 -----
 
 ### Step 3: Code Function
 
-Rename "Function1.cs" to ".cs". When prompted "Would you also like to perform a rename...", click "Yes".
+Rename "Function1.cs" to "AI_Test.cs". When prompted "Would you also like to perform a rename...", click "Yes".
 
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers". 
 
