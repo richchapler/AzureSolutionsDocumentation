@@ -69,6 +69,10 @@ If you intend to prepare a custom skillset, also instantiate:
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
 
+## Documentation Note
+
+I used to spend a lot of time explaining code blocks, but now skip that part of my sharing process in favor of a recommendation to copy code blocks to Bing Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
+
 -----
 
 ## Exercise 1: Custom Skillset API
