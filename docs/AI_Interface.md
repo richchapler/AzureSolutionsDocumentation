@@ -369,7 +369,6 @@ app.Run();
 ### Step 5: Front-End
 
 #### _Layout.cshtml
-
 Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace the default code with:
 
 ```cshtml
@@ -396,7 +395,7 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-secondary" style="color: black; border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid whitesmoke; border-top: 1px solid whitesmoke;" asp-area="" asp-page="/Index">OpenAI: @AI_Interface.Helpers.Constants.OpenAI_Name | AI Search:  @AI_Interface.Helpers.Constants.AISearch_Name</a>
+                            <a class="nav-link btn btn-outline-secondary" style="color: black; border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid whitesmoke; border-top: 1px solid whitesmoke;" asp-area="" asp-page="/Index">OpenAI: @AI_Interface.Helpers.Config.oaic.OpenAI_Name | AI Search:  @AI_Interface.Helpers.Config.aisc.AISearch_Name</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-outline-secondary" style="color: black; border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid whitesmoke; border-top: 1px solid whitesmoke;" asp-area="" asp-page="/KeyVault">KeyVault: @AI_Interface.Helpers.KeyVault.KeyVault_Name</a>
@@ -439,11 +438,46 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
 -----
 
 #### Index.cshtml
-
 Expand "Pages" and then double-click to open "Index.cshtml". Replace the default code with:
 
 ```cshtml
 @page
+@model IndexModel
+@{
+    ViewData["Title"] = "AI";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+    <partial name="_Toolbar" />
+
+    <div class="container">
+
+        <div class="container-style">
+
+            @* Input: User Query *@
+            <div style="position: relative;">
+                <textarea id="inputUserQuery" rows="2" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%; padding-right: 30px;"></textarea>
+                <img id="submitIcon" src="~/images/send.svg" style="position: absolute; bottom: 10px; right: 10px; width: 20px; height: 20px;" title="Send">
+            </div>
+
+            @* Input: AISearch_Filter *@
+            <div class="row">
+                <div class="col">
+                    <label for="inputFilter">Filter</label>
+                    <input id="inputFilter" type="text" placeholder="[OPTIONAL] Enter AI Search filter {e.g., ColumnX eq '12345'}" style="width: 100%;">
+                </div>
+            </div>
+
+            @* Input: System Message *@
+            <div class="row">
+                <div class="col">
+                    <label for="inputSystemMessage">System Message</label>
+                    <textarea id="inputSystemMessage" rows="1" placeholder="[OPTIONAL] Used for OpenAI only" style="width: 100%;"></textarea>
+                </div>
+            </div>
+            <script>@page
 @model IndexModel
 @{
     ViewData["Title"] = "AI";
@@ -827,6 +861,88 @@ logMessage(`constants.js processed in ${((new Date() - ProcessingStart_Constants
 
 -----
 
+#### interface.js
+
+Right click on "wwwroot" >> "js" and then add new file "interface.js". Replace the default code with:
+
+```js
+const prepareTabs = async () => {
+
+    /* Start seconds-to-process timer */
+    const ProcessingStart_Interface = new Date();
+
+    /* ************************* Get (and empty) index.cshtml containers */
+    const resultTabs = $("#resultTabs"), resultTabContent = $("#resultTabContent");
+    resultTabs.empty();
+
+    /* ************************* Define tab configurations */
+    const configurations = [
+        { parent: "OpenAI", children: ["VectorSemantic", "VectorSimple", "Vector", "Semantic", "Simple"] },
+        { parent: "AISearch", children: ["Vector", "Semantic", "Simple"] },
+        { parent: "Ideas", children: ["Prompt"] }
+    ];
+
+    /* ************************* Loop through configurations */
+    configurations.forEach(function (config, parentIndex) {  
+
+        /* ************************* Create and append parent tab */
+        const P = config.parent; const p = P.toLowerCase();
+        resultTabs.append(`<li class="nav-parent">${P}</li>`);
+
+        /* ************************* Loop through children */
+        config.children.forEach(function (child, childIndex) {  
+
+            /* ************************* Create and append child tab */
+            const C = child, PC = `${P}-${C}`, P_C = `${P}_${C}`, c = C.toLowerCase(), pc = `${p}-${c}`;
+
+            const childTab = $(`<li class="nav-item ${P}-subtab ${parentIndex === 0 && childIndex === 0 ? 'active' : ''}"><a class="nav-link result-tab" id="${PC}-tab" data-toggle="tab" href="#${pc}">${C}</a></li>`);  
+            /* the specific data-toggle, href and lowercase appear to be necessary for Bootstrap tab functionality */
+
+            resultTabs.append(childTab);
+
+            /* ************************* Get "strike-through or not" from LocalStorage */
+            const isActive = localStorage.getItem(P_C); // logMessage(`${P_C} isActive ${isActive}`);
+
+            /* ************************* Get link element from child tab and set strike-through based on current state */
+            const link = $(childTab).find('a'); link.css('text-decoration', isActive === '1' ? 'none' : 'line-through');
+
+            /* ************************* Create a new tab panel for the child tab */
+            const childTabPanel = $(`<div id="${pc}" class="tab-pane fade ${parentIndex === 0 && childIndex === 0 ? 'show active' : ''}"><div id="tabPanel_${P_C}" class="scrollable-container"></div></div>`);  
+            /* first div: the specific id, lowercase, and class necessary for Bootstrap tab functionality, second div: this is the container actually used to display results */
+
+            /* ************************* Append the new tab panel to the tab content container */
+            resultTabContent.append(childTabPanel);
+
+            /* ************************* Add right-click event listener to the child tab */
+            childTab.on('contextmenu', (e) => {
+
+                $(childTab).find('a').trigger('click');  
+
+                /* ************************* Prevent default right-click action */
+                e.preventDefault();
+
+                /* ************************* Toggle state in LocalStorage based on its current value */
+                localStorage.setItem(P_C, localStorage.getItem(P_C) === '1' ? '0' : '1');
+
+                /* ************************* Get link element from child tab and set strike-through based on updated state */
+                const link = $(childTab).find('a'); link.css('text-decoration', localStorage.getItem(P_C) === '1' ? 'none' : 'line-through');
+
+                /* ************************* Get and empty the tab panel element */
+                const tabPanel = $(`#tabPanel_${P_C}`); tabPanel.empty();
+
+                /* ************************* If the tab is deselected, show a message in the tab panel */
+                if (localStorage.getItem(P_C) === '0') { tabPanel.append(`<p>${PC} de-selected</p>`); }
+
+            });
+        });
+    });
+
+    logMessage(`interface.js processed in ${((new Date() - ProcessingStart_Interface) / 1000).toFixed(3)}s`);
+};  
+```
+
+-----
+
 #### openai.js
 
 Right click on "wwwroot" >> "js" and then add new file "openai.js". Replace the default code with:
@@ -842,14 +958,14 @@ const buildTabPanel = (type, data) => {
     const tabPanel = document.getElementById(`tabPanel_OpenAI_${type}`);
     tabPanel.innerHTML = '';
 
-    /* ************************* Label: Time-to-Process */
+    /* ************************* Create label */
 
     label = document.createElement('label');
     label.id = `labelOpenAI_${type}`;
     label.textContent = `Time-to-Process: ${data.stp.toFixed(1)} seconds`;
     tabPanel.appendChild(label);
 
-    /* ************************* TextArea: Response */
+    /* ************************* Create textarea */
 
     let textarea = document.createElement('div');
     textarea.id = `textareaOpenAI_${type}`;
@@ -863,7 +979,7 @@ const buildTabPanel = (type, data) => {
     tabPanel.appendChild(textarea);  
 }
 
-["Simple", "Semantic"].forEach(type => { connection.on(`displayOpenAI_${type}`, data => buildTabPanel(type, data)); });
+["VectorSemantic", "VectorSimple", "Vector", "Semantic", "Simple"].forEach(type => { connection.on(`displayOpenAI_${type}`, data => buildTabPanel(type, data)); });
 
 const displayQueryEvaluation = (data) => {
     const tabPanel = document.getElementById('tabPanel_Ideas_Prompt');
