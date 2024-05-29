@@ -82,64 +82,42 @@ On the **Browse** tab of the "**NuGet - Solution**" page, search for and select 
 
 ### Step 3: Helper Classes
 
-_Note: Though most helper logic has been moved to the AzureSolutions.Helpers package, package-specific helper logic remains in this application_
+_Note: Though most helper logic has been moved to the AzureSolutions.Helpers NuGet, package-specific helper logic remains in this application_
 
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
 
-#### Constants.cs
-
-Repeat the process to create "Constants.cs", then replace the default code with:
+#### Config.cs
+Create a new class and then replace the default code with:
 
 ```csharp
-using Azure;
 using Azure.AI.OpenAI;
-using Azure.Search.Documents;
+using Azure.Search.Documents.Models;
 
 namespace AI_Interface.Helpers
 {
-    public static class Constants
+    public static class Config
     {
-        /* ************************* Constants */
-        public static string AISearch_Index_Name { get; } = KeyVault.GetSecret("AISearch-Index-Name").Result;
-        public static string AISearch_Key { get; } = KeyVault.GetSecret("AISearch-Key").Result;
-        public static string AISearch_Name { get; } = KeyVault.GetSecret("AISearch-Name").Result;
-        public static string AISearch_SelectFields { get; } = KeyVault.GetSecret("AISearch-SelectFields").Result;
-        public static string AISearch_SemanticConfiguration_Name { get; } = KeyVault.GetSecret("AISearch-SemanticConfiguration-Name").Result;
-        public static string OpenAI_Deployment_Name { get; } = KeyVault.GetSecret("OpenAI-Deployment-Name").Result;
-        public static string OpenAI_Key { get; } = KeyVault.GetSecret("OpenAI-Key").Result;
-        public static string OpenAI_Name { get; } = KeyVault.GetSecret("OpenAI-Name").Result;
+        public static readonly AzureSolutions.Helpers.AISearch.Configuration aisc = AzureSolutions.Helpers.AISearch.Configuration.PrepareConfiguration(Helpers.KeyVault.KeyVault_Client);
 
-        /* ************************* Clients */
+        public static readonly AzureSolutions.Helpers.OpenAI.Configuration oaic = AzureSolutions.Helpers.OpenAI.Configuration.PrepareConfiguration(Helpers.KeyVault.KeyVault_Client);
 
-        public static SearchClient AISearch_Client
+        public static readonly Dictionary<string, Tuple<string, string, object>> Expressions = new()
         {
-            get
-            {
-                return new SearchClient(
-                    endpoint: new Uri($"https://{AISearch_Name}.search.windows.net"),
-                    indexName: AISearch_Index_Name,
-                    credential: new AzureKeyCredential(AISearch_Key)
-                );
-            }
-        }
-
-        public static OpenAIClient OpenAI_Client
-        {
-            get
-            {
-                return new OpenAIClient(
-                    endpoint: new Uri($"https://{OpenAI_Name}.openai.azure.com/"),
-                    keyCredential: new AzureKeyCredential(OpenAI_Key)
-                );
-            }
-        }
+            { "AISearch_Vector", new Tuple<string, string, object>("AISearch", "Vector", null) },
+            { "AISearch_Semantic", new Tuple<string, string, object>("AISearch", "Semantic", SearchQueryType.Semantic) },
+            { "AISearch_Simple", new Tuple<string, string, object>("AISearch", "Simple", SearchQueryType.Simple) },
+            { "OpenAI_VectorSemantic", new Tuple<string, string, object>("OpenAI", "VectorSemantic", AzureSearchQueryType.VectorSemanticHybrid) },
+            { "OpenAI_VectorSimple", new Tuple<string, string, object>("OpenAI", "VectorSimple", AzureSearchQueryType.VectorSimpleHybrid) },
+            { "OpenAI_Vector", new Tuple<string, string, object>("OpenAI", "Vector", AzureSearchQueryType.Vector) },
+            { "OpenAI_Semantic", new Tuple<string, string, object>("OpenAI", "Semantic", AzureSearchQueryType.Semantic) },
+            { "OpenAI_Simple", new Tuple<string, string, object>("OpenAI", "Simple", AzureSearchQueryType.Simple) }
+        };
     }
 }
 ```
 
 #### KeyVault.cs
-
-Repeat the process to create "KeyVault.cs", then replace the default code with:
+Create a new class and then replace the default code with:
 
 ```csharp
 using Azure;
@@ -151,7 +129,7 @@ namespace AI_Interface.Helpers
     public class KeyVault
     {
         private static readonly IConfiguration _configuration;
-        public static string KeyVault_Name;
+        public static string KeyVault_Name { get; private set; }
         public static readonly SecretClient KeyVault_Client;
 
         static KeyVault()
@@ -172,7 +150,8 @@ namespace AI_Interface.Helpers
             "AISearch-Key",
             "AISearch-SelectFields",
             "AISearch-SemanticConfiguration-Name",
-            "OpenAI-Deployment-Name",
+            "OpenAI-Deployment-Embedding",
+            "OpenAI-Deployment-GPT",
             "OpenAI-Key",
             "OpenAI-Name"
         ];
