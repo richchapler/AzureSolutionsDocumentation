@@ -67,23 +67,16 @@ Complete the "Additional information" form, then click "Create".
 
 ### Step 2: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9e41690c-0c77-4a61-bab8-95d6cea755c4" width="800" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
-Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manage NuGet Packages for Solution..."
+Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/c96b86db-db7e-462f-9af9-8dc230f184a0" width="800" title="Snipped February 21, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/00248893-859f-4db5-96b4-dcbbf5cbc752" width="800" title="Snipped: May 29, 2024" />
 
-On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolutions.Helpers".
-
-_Note: This documentation uses [AzureSolution.Helpers](https://www.nuget.org/packages/AzureSolutions.Helpers/) v1.1.3_
-
-On the resulting pop-out, check the box next to your  and then click "Install".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2a032967-9fe7-4c3e-b555-46f1c0db4ea1" width="300" title="Snipped February 15, 2024" />
-
-When prompted, click "I Accept" on the "License Acceptance" pop-up.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6c50a96f-aba6-4feb-9b60-1a736c2834aa" width="800" title="Snipped February 15, 2023" />
+On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**AzureSolutions.Helpers**".
+<br>On the resulting pop-out, check the box next to your project and then click "**Install**".
+<br>When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
+<br>When complete, close the "**NuGet - Solution**" tab.
 
 -----
 
