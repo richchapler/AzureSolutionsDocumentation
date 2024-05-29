@@ -1170,29 +1170,6 @@ You should see the index that you programmatically created {e.g., "rchaplerss-in
 
 Click the "**Search**" button and review results.
 
-#### SynonymMaps
-
-Use Postman to test a GET call to https://rchaplerss.search.windows.net/synonymmaps?api-version=2023-11-01 with Headers "api-key" and "Content-Type" "application/json"
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a7e51dac-9516-47f9-9f5c-9903f565fe45" width="800" title="Snipped: January 28, 2024" />
-
-You can expect response JSON like:
-
-```
-{
-  "@odata.context": "https://rchaplerss.search.windows.net/$metadata#synonymmaps",
-  "value": [
-    {
-      "@odata.etag": "\"0x8DC1DEB5153ECD1\"",
-      "name": "rchaplerss-index-synonymmap",
-      "format": "solr",
-      "synonyms": "United States, US, USA\nMexico, MX\nCanada, CA\n",
-      "encryptionKey": null
-    }
-  ]
-}
-```
-
 -----
 
 **Congratulations... you have successfully completed this exercise**
