@@ -4,16 +4,17 @@
 
 ## Use Case
 * "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
-* "Creating and updating the AI Search index can be difficult... we want a simpler, faster, more consistent experience"
-* "We want to capture our AI Search index creation process in our DevOps repo"
-* "Codified AI Search skills must include: OCR, Key Phrase Extraction, and Custom Skillset"
+  * "We have found that creating and updating the AI Search index with the Azure Portal tools can be difficult... we want a simpler, faster, more consistent experience"
+  * "We want to capture our AI Search index creation process in our GitHub or DevOps repository"
 * "Both semantic and vector should be activated"
+  * "Codified AI Search skills must include: OCR, Key Phrase Extraction, and a Custom Skillset... also, for vectorization, Split and OpenAI Embedding"
+  * "Because a lot of the code for vectorization is not yet surfaced in the Search Development Kit (SDK), we must also be able to leverage Application Programming Interface (API)"
 * "To optimize response quality, we should include synonyms for country codes"
 * "All secrets must be stored in Key Vault"
 
 ## Proposed Solution
 * Custom Skillset API: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
-* Deployment Application: Use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer
+* Deployment Application: Use a combination of API and SDK to create data source, index, skillset, indexer, and synonym map
 * Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
@@ -24,22 +25,33 @@
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  * AISearch-DataSource-Name
-  * AISearch-Index-Name
-  * AISearch-Indexer-Name
-  * AISearch-Key
-  * AISearch-Name
-  * AISearch-SemanticConfiguration-Name
-  * AISearch-Skillset-Name
-  * AISearch-Suggester-Name
-  * AISearch-SynonymMap-Name
-  * AIServices-Key
-  * OpenAI-Key
-  * OpenAI-Name
-  * ResourceGroup-Name
-  * Storage-ConnectionString
-  * Storage-ContainerName
-  * Subscription-Id
+  - Subscription-Id  
+  - ResourceGroup-Name  
+  - AISearch-Name  
+  - AISearch-Key  
+  - AISearch-DataSource-Name  
+  - AISearch-DataSource-Blob-ConnectionString  
+  - AISearch-DataSource-Blob-Container  
+  - AISearch-DataSource-SQL-Server-Name  
+  - AISearch-DataSource-SQL-Server-User  
+  - AISearch-DataSource-SQL-Server-Password  
+  - AISearch-DataSource-SQL-Database-Name  
+  - AISearch-DataSource-SQL-Table  
+  - AISearch-DataSource-SQL-Query  
+  - AISearch-Index-Name  
+  - AISearch-Skillset-Name  
+  - AISearch-Indexer-Name  
+  - AISearch-Suggester-Name  
+  - AISearch-SynonymMap-Name  
+  - AISearch-SemanticConfiguration-Name  
+  - AISearch-VectorProfile-Name  
+  - AISearch-VectorAlgorithm-Name  
+  - AISearch-Vectorizer-Name  
+  - AIServices-Name  
+  - AIServices-Key  
+  - OpenAI-Name  
+  - OpenAI-Key  
+  - OpenAI-Deployment-Embedding  
  
 * [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-ada-002" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
  
@@ -220,7 +232,7 @@ The pop-out will switch to the "**Output**" tab and you can expect the following
 -----
 
 ## Exercise 2: Deployment Application
-In this exercise, we will use the AI Search Development Kit (SDK) to create a data source, index, skillset, and indexer.
+In this exercise, we will prepare to use a combination of API and SDK to create data source, index, skillset, indexer, and synonym map.
 
 ### Step 1: Create Visual Studio Project
 
@@ -246,25 +258,12 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0b3bc3a-e6af-47ff-8ed2-8c0d0340e44e" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/00248893-859f-4db5-96b4-dcbbf5cbc752" width="800" title="Snipped: May 29, 2024" />
 
-On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Azure.Search.Documents**".
+On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**AzureSolutions.Helpers**".
 <br>On the resulting pop-out, check the box next to your project and then click "**Install**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b56a92c-594a-4a18-afaa-24a4872ac73b" width="300" title="Snipped: October 11, 2023" />
-
-When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d9906b3b-848d-4807-bc0c-441daf502865" width="800" title="Snipped: October 11, 2023" />
-
-#### Additional Packages
-
-Repeat this process for the following NuGet packages:
-
-* Azure.Identity
-* Azure.Security.KeyVault.Secrets
-
-Close the "**NuGet - Solution**" tab.
+<br>When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
+<br>When complete, close the "**NuGet - Solution**" tab.
 
 -----
 
