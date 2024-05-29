@@ -87,7 +87,7 @@ _Note: Though most helper logic has been moved to the AzureSolutions.Helpers NuG
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
 
 #### Config.cs
-Create a new class and then replace the default code with:
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "Config.cs" on the resulting popup then click "Add". Replace the default code with:
 
 ```csharp
 using Azure.AI.OpenAI;
@@ -117,7 +117,7 @@ namespace AI_Interface.Helpers
 ```
 
 #### KeyVault.cs
-Create a new class and then replace the default code with:
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup then click "Add". Replace the default code with:
 
 ```csharp
 using Azure;
@@ -191,102 +191,124 @@ namespace AI_Interface.Helpers
 ### Step 4: Back-End
 
 #### Hub.cs
-
 Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "Hub.cs" on the resulting popup then click "Add". Replace the default code with:
 
 ```csharp
 using AI_Interface.Helpers;
-using Azure.AI.OpenAI;
-using Azure.Search.Documents.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AI_Interface
 {
-    public class Hub() : Microsoft.AspNetCore.SignalR.Hub
+    public class Hub : Microsoft.AspNetCore.SignalR.Hub
     {
-        public async Task ProcessQuery(
-            string UserQuery,
-            string Filter,
-            string SystemMessage,
-            float Temperature,
-            Dictionary<string, bool> runFlags
-        )
+        public async Task ProcessQuery(string UserQuery, string SystemMessage, float Temperature, string Filter, Dictionary<string, bool> runFlags)
         {
             try
             {
                 await Clients.All.SendAsync("logMessage",
                     $"Processing User Query: {UserQuery} :: Filter: {Filter} :: System Message: {SystemMessage} :: Temperature: {Temperature}\n");
 
-                /* ************************* OpenAI */
+                /* ************************* OpenAI and AISearch */
 
-                var openAITypes = new Dictionary<string, string>
-                {
-                    { "OpenAI_Semantic", "Semantic" },
-                    { "OpenAI_Simple", "Simple" }
-                };
+                Task vectorsemanticTask = Task.CompletedTask, vectorsimpleTask = Task.CompletedTask, vectorTask = Task.CompletedTask, semanticTask = Task.CompletedTask, simpleTask = Task.CompletedTask;
 
-                foreach (var openAIType in openAITypes)
+                if (runFlags["OpenAI_VectorSemantic"])
                 {
-                    if (runFlags[openAIType.Key])
+                    vectorsemanticTask = Task.Run(async () =>
                     {
-                        //await Clients.All.SendAsync("logMessage", $"OpenAI >> User Query '{UserQuery}' :: Filter '{Filter}' :: System Message '{SystemMessage}' :: Temperature '{Temperature}' :: {openAIType.Value}");
-
-                        var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt(
-                            OpenAI_Client: Constants.OpenAI_Client,
-                            OpenAI_Deployment_Name: Constants.OpenAI_Deployment_Name,
-                            UserQuery,
-                            SystemMessage,
-                            Temperature,
-                            AISearch_Name: openAIType.Value == null ? null : Constants.AISearch_Name,
-                            AISearch_Key: openAIType.Value == null ? null : Constants.AISearch_Key,
-                            AISearch_Index_Name: openAIType.Value == null ? null : Constants.AISearch_Index_Name,
-                            AISearch_QueryType: openAIType.Value == "Simple" ? AzureSearchQueryType.Simple : AzureSearchQueryType.Semantic,
-                            AISearch_SemanticConfiguration_Name: openAIType.Value == null ? null : Constants.AISearch_SemanticConfiguration_Name,
-                            AISearch_Filter: Filter
-                            );
+                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.VectorSemantic(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
 
                         await Clients.Caller.SendAsync(
-                            method: openAIType.Value == null ? "displayEvaluation" : $"displayOpenAI_{openAIType.Value}",
-                            arg1: new { response = OpenAI_Prompt.Response, citations = OpenAI_Prompt.Citations, stp = OpenAI_Prompt.SecondsToProcess }
-                            );
-                    }
+                            method: $"displayOpenAI_{"VectorSemantic"}",
+                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
+                        );
+                    });
                 }
 
-                /* ************************* AISearch */
-
-                var searchTypes = new Dictionary<string, SearchQueryType>
+                if (runFlags["OpenAI_VectorSimple"])
                 {
-                    { "AISearch_Semantic", SearchQueryType.Semantic },
-                    { "AISearch_Full", SearchQueryType.Full },
-                    { "AISearch_Simple", SearchQueryType.Simple }
-                };
-
-                foreach (var searchType in searchTypes)
-                {
-                    if (runFlags[searchType.Key])
+                    vectorsimpleTask = Task.Run(async () =>
                     {
-                        //await Clients.All.SendAsync("logMessage", $"AI Search >> Search Text: {UserQuery} :: Filter {Filter} :: Query Type: {searchType.Value}");
+                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.VectorSimple(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
 
-                        var Query_TopX = await AzureSolutions.Helpers.AISearch.Query.TopX(
-                            AISearch_Client: Constants.AISearch_Client,
-                            AISearch_QueryType: searchType.Value,
-                            AISearch_SearchText: UserQuery,
-                            AISearch_SelectFields: Constants.AISearch_SelectFields,
-                            AISearch_Filter: Filter,
-                            X: 10
-                            );
+                        await Clients.Caller.SendAsync(
+                            method: $"displayOpenAI_{"VectorSimple"}",
+                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
+                        );
+                    });
+                }
 
-                        await Clients.Caller.SendAsync("displayResults", Query_TopX.Response, searchType.Value.ToString(), UserQuery);
+                if (runFlags["OpenAI_Vector"])
+                {
+                    vectorTask = Task.Run(async () =>
+                    {
+                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.Vector(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
+
+                        await Clients.Caller.SendAsync(
+                            method: $"displayOpenAI_{"Vector"}",
+                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
+                        );
+                    });
+                }
+
+                if (runFlags["OpenAI_Semantic"])
+                {
+                    semanticTask = Task.Run(async () =>
+                    {
+                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.Semantic(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
+
+                        await Clients.Caller.SendAsync(method: $"displayOpenAI_{"Semantic"}", arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
+                        );
+                    });
+                }
+
+                if (runFlags["OpenAI_Simple"])
+                {
+                    simpleTask = Task.Run(async () =>
+                    {
+                        await Clients.All.SendAsync("logMessage", $"Processing Simple\n");
+                        
+                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.Simple(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
+
+                        await Clients.All.SendAsync("logMessage", $"Simple: {r.Response}\n");
+
+                        await Clients.Caller.SendAsync(
+                            method: $"displayOpenAI_{"Simple"}",
+                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
+                        );
+                    });
+                }
+
+                await Task.WhenAll(vectorsemanticTask, vectorsimpleTask, vectorTask, semanticTask, simpleTask);
+
+                foreach (var expression in Config.Expressions)
+                {
+                    if (runFlags[expression.Key])
+                    {
+                        if (expression.Value.Item1 == "AISearch")
+                        {
+                            var AISearch_QueryResult =
+                                expression.Value.Item2 == "Vector" ? await AzureSolutions.Helpers.AISearch.Query.Vector(Config.oaic, Config.aisc, AISearch_SearchText: UserQuery, AISearch_Filter: Filter, X: 10)
+
+                                : expression.Value.Item2 == "Semantic" ? await AzureSolutions.Helpers.AISearch.Query.Semantic(Config.aisc, AISearch_SearchText: UserQuery, AISearch_Filter: Filter, X: 10)
+
+                                : expression.Value.Item2 == "Simple" ? await AzureSolutions.Helpers.AISearch.Query.Simple(Config.aisc, AISearch_SearchText: UserQuery, AISearch_Filter: Filter, X: 10)
+
+                                : null;
+
+                            if (AISearch_QueryResult != null)
+                            {
+                                await Clients.All.SendAsync("logMessage", $"{expression.Value.Item2}: {AISearch_QueryResult.Response}\n");
+
+                                await Clients.Caller.SendAsync("displayResults", AISearch_QueryResult.Response, expression.Value.Item2, UserQuery);
+                            }
+                        }
                     }
                 }
 
                 /* ************************* Generate Prompt Ideas */
 
-                //await Clients.All.SendAsync("logMessage", $"OpenAI >> User Query 'Suggest the single best way to improve user prompt: '{UserQuery}' to help Open AI provide a meaningful response. Suggest an alternate version of the original user prompt that the user might adopt.' :: System Message 'You are an OpenAI Prompt Engineering specialist' :: Temperature '0.5'");
-
-                var OpenAI_Prompt2 = await AzureSolutions.Helpers.OpenAI.Prompt(
-                    OpenAI_Client: Constants.OpenAI_Client,
-                    OpenAI_Deployment_Name: Constants.OpenAI_Deployment_Name,
+                var OpenAI_PromptEvaluation = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
                     UserQuery: "Suggest the single best way to improve user prompt: '" + UserQuery + "' to help Open AI provide a meaningful response. Suggest an alternate version of the original user prompt that the user might adopt.",
                     SystemMessage: "You are an OpenAI Prompt Engineering specialist",
                     Temperature: 0.5f
@@ -294,10 +316,15 @@ namespace AI_Interface
 
                 await Clients.Caller.SendAsync(
                     method: "displayEvaluation",
-                    arg1: new { response = OpenAI_Prompt2.Response, citations = OpenAI_Prompt2.Citations, stp = OpenAI_Prompt2.SecondsToProcess }
+                    arg1: new
+                    {
+                        response = OpenAI_PromptEvaluation.Response,
+                        citations = OpenAI_PromptEvaluation.Citations,
+                        stp = OpenAI_PromptEvaluation.SecondsToProcess
+                    }
                 );
 
-                //await Clients.All.SendAsync("logMessage", $"Evaluation Result: Query sent for evaluation");
+                //await Clients.All.SendAsync("logMessage", $"Evaluation Result: Query sent for evaluation");  
             }
             catch (Exception ex) { await Clients.All.SendAsync("logMessage", $"Exception: {ex}\n"); }
         }
@@ -311,7 +338,6 @@ namespace AI_Interface
 ```
 
 #### Program.cs
-
 Double-click to open "Program.cs". Replace the default code with:
 
 ```csharp
