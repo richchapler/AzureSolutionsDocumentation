@@ -80,7 +80,7 @@ On the "License Acceptance" pop-up, click "I Accept".
 
 ### Step 3: Modify Logic
 
-#### Program.cs
+#### `Program.cs`
 Replace the default logic with:
 
 ```csharp
@@ -119,7 +119,7 @@ app.MapControllers();
 app.Run();
 ```
 
-#### appsettings.json
+#### `appsettings.json`
 
 Replace the default logic with:
 ```json
@@ -132,7 +132,7 @@ Replace the default logic with:
 }
 ```
 
-#### Properties >> launchSettings.json
+#### Properties >> `launchSettings.json`
 
 Replace the default logic with:
 ```json
@@ -166,7 +166,7 @@ Replace the default logic with:
 }
 ```
 
-#### wwwroot
+#### `wwwroot`
 
 Delete existing contents of the `wwwroot` folder {e.g., `css`, `js`, etc.} and right-click to Add `default.html`.
 ```html
@@ -215,7 +215,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
 }
 ```
 
-#### AdapterWithErrorHandler.cs
+#### `AdapterWithErrorHandler.cs`
 
 Right-click to Add `AdapterWithErrorHandler.cs`
 ```csharp
@@ -300,7 +300,7 @@ namespace AI_Bot.Bots
 
 Right click on the project and add a `Helpers` folder.
 
-##### Config.cs
+##### `Config.cs`
 
 Right-click on the `Helpers` folder and add `Config.cs`.
 
@@ -316,7 +316,7 @@ namespace AI_Bot.Helpers
 }
 ```
 
-##### KeyVault.cs
+##### `KeyVault.cs`
 
 Right-click on the `Helpers` folder and add `KeyVault.cs`.
 
