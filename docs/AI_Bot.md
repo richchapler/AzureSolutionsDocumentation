@@ -21,14 +21,14 @@ This documentation assumes the following resources are ready for use:
 * [Bot Service](https://azure.microsoft.com/en-us/products/ai-services/ai-bot-service)
 
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  * AISearch-Index-Name
-  * AISearch-Key
   * AISearch-Name
-  * AISearch-SelectFields
+  * AISearch-Key
+  * AISearch-Index-Name
   * AISearch-SemanticConfiguration-Name
-  * OpenAI-Deployment-Name
-  * OpenAI-Key
+  * AISearch-SelectFields
   * OpenAI-Name
+  * OpenAI-Key
+  * OpenAI-Deployment-GPT
 
 * [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 
@@ -81,9 +81,9 @@ On the "License Acceptance" pop-up, click "I Accept".
 ### Step 3: Modify Logic
 
 #### Program.cs
-
 Replace the default logic with:
-```
+
+```csharp
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector.Authentication;
@@ -122,7 +122,7 @@ app.Run();
 #### appsettings.json
 
 Replace the default logic with:
-```
+```json
 {
   "MicrosoftAppType": "",
   "MicrosoftAppId": "",
@@ -135,7 +135,7 @@ Replace the default logic with:
 #### Properties >> launchSettings.json
 
 Replace the default logic with:
-```
+```json
 {
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
@@ -169,7 +169,7 @@ Replace the default logic with:
 #### wwwroot
 
 Delete existing contents of the `wwwroot` folder {e.g., `css`, `js`, etc.} and right-click to Add `default.html`.
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,7 +186,7 @@ Delete existing contents of the `wwwroot` folder {e.g., `css`, `js`, etc.} and r
 #### Controllers
 
 Delete existing contents of the `Controllers` folder {e.g., `HomeController`, etc.} and right-click to Add `BotController.cs`.
-```
+```csharp
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
@@ -218,7 +218,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
 #### AdapterWithErrorHandler.cs
 
 Right-click to Add `AdapterWithErrorHandler.cs`
-```
+```csharp
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;
@@ -248,8 +248,7 @@ namespace Microsoft.BotBuilderSamples
 
 Right click on the project and add a `Bots` folder. Repeat on the `Bots` folder to add `PromptBot.cs`.
 
-```
-using Azure.AI.OpenAI;
+```csharp
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 
@@ -261,18 +260,10 @@ namespace AI_Bot.Bots
         {
             try
             {
-                var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt(
-                    OpenAI_Client: Helpers.Constants.OpenAI_Client,
-                    OpenAI_Deployment_Name: Helpers.Constants.OpenAI_Deployment_Name,
+                var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt.VectorSemantic(AI_Bot.Helpers.Config.oaic, AI_Bot.Helpers.Config.aisc,
                     UserQuery: turnContext.Activity.Text,
                     SystemMessage: null,
-                    Temperature: 0.5f,
-                    AISearch_Name: Helpers.Constants.AISearch_Name,
-                    AISearch_Key: Helpers.Constants.AISearch_Key,
-                    AISearch_Index_Name: Helpers.Constants.AISearch_Index_Name,
-                    AISearch_QueryType: AzureSearchQueryType.Semantic,
-                    AISearch_SemanticConfiguration_Name: Helpers.Constants.AISearch_SemanticConfiguration_Name
-                    //AISearch_Filter: null
+                    Temperature: 0.5f
                     );
 
                 var replyText = $"Echo: {turnContext.Activity.Text}";
@@ -302,59 +293,25 @@ namespace AI_Bot.Bots
         }
     }
 }
+
 ```
 
 #### Helpers
 
 Right click on the project and add a `Helpers` folder.
 
-##### Constants.cs
+##### Config.cs
 
-Right-click on the `Helpers` folder and add `Constants.cs`.
+Right-click on the `Helpers` folder and add `Config.cs`.
 
-```
-using Azure;
-using Azure.AI.OpenAI;
-using Azure.Search.Documents;
-
+```csharp
 namespace AI_Bot.Helpers
 {
-    public static class Constants
+    public static class Config
     {
-        /* ************************* Constants */
-        public static string AISearch_Index_Name { get; } = KeyVault.GetSecret("AISearch-Index-Name").Result;
-        public static string AISearch_Key { get; } = KeyVault.GetSecret("AISearch-Key").Result;
-        public static string AISearch_Name { get; } = KeyVault.GetSecret("AISearch-Name").Result;
-        public static string AISearch_SelectFields { get; } = KeyVault.GetSecret("AISearch-SelectFields").Result;
-        public static string AISearch_SemanticConfiguration_Name { get; } = KeyVault.GetSecret("AISearch-SemanticConfiguration-Name").Result;
-        public static string OpenAI_Deployment_Name { get; } = KeyVault.GetSecret("OpenAI-Deployment-Name").Result;
-        public static string OpenAI_Key { get; } = KeyVault.GetSecret("OpenAI-Key").Result;
-        public static string OpenAI_Name { get; } = KeyVault.GetSecret("OpenAI-Name").Result;
+        public static readonly AzureSolutions.Helpers.AISearch.Configuration aisc = AzureSolutions.Helpers.AISearch.Configuration.PrepareConfiguration(Helpers.KeyVault.KeyVault_Client);
 
-        /* ************************* Clients */
-
-        public static SearchClient AISearch_Client
-        {
-            get
-            {
-                return new SearchClient(
-                    endpoint: new Uri($"https://{AISearch_Name}.search.windows.net"),
-                    indexName: AISearch_Index_Name,
-                    credential: new AzureKeyCredential(AISearch_Key)
-                );
-            }
-        }
-
-        public static OpenAIClient OpenAI_Client
-        {
-            get
-            {
-                return new OpenAIClient(
-                    endpoint: new Uri($"https://{OpenAI_Name}.openai.azure.com/"),
-                    keyCredential: new AzureKeyCredential(OpenAI_Key)
-                );
-            }
-        }
+        public static readonly AzureSolutions.Helpers.OpenAI.Configuration oaic = AzureSolutions.Helpers.OpenAI.Configuration.PrepareConfiguration(Helpers.KeyVault.KeyVault_Client);
     }
 }
 ```
@@ -363,7 +320,7 @@ namespace AI_Bot.Helpers
 
 Right-click on the `Helpers` folder and add `KeyVault.cs`.
 
-```
+```csharp
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
