@@ -1,4 +1,4 @@
-# DevOps: AI Testing
+# AI: Test
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/daff9bd1-16d3-4c09-ba64-996c7ce15e3a" width="1000" />
 
