@@ -1097,7 +1097,6 @@ const processQuery = async (e) => {
 -----
 
 ### Step 7: Confirm Success
-
 Make sure that you have a temporary value in `appsettings.json` for `KeyVault_Name`.
 Click "Debug" >> "Start Debugging" in the menu bar.
 Enter a prompt and press the Enter key on your keyboard... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
