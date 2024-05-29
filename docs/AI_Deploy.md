@@ -629,22 +629,293 @@ _Note: Parameters are wrapped in curly brackets {e.g., `{ResourceGroup-Name}`} a
 
 ##### `skillset_blob.json`
 ```json
+{
+  "name": "{AISearch-Skillset-Name}",
+  "skills": [
+    {
+      "@odata.type": "#Microsoft.Skills.Vision.OcrSkill",
+      "description": "Step #1: Extract text from image",
+      "context": "/document/normalized_images/*",
+      "lineEnding": "Space",
+      "defaultLanguageCode": "en",
+      "detectOrientation": true,
+      "inputs": [
+        {
+          "name": "image",
+          "source": "/document/normalized_images/*"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "targetName": "text"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.MergeSkill",
+      "description": "Step #2: Merge content, text, and contentOffset",
+      "context": "/document",
+      "insertPreTag": " ",
+      "insertPostTag": " ",
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/content"
+        },
+        {
+          "name": "itemsToInsert",
+          "source": "/document/normalized_images/*/text"
+        },
+        {
+          "name": "offsets",
+          "source": "/document/normalized_images/*/contentOffset"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mergedText",
+          "targetName": "merged_content"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+      "description": "Step #3: Split to vector-izable chunks, merged_content > pages",
+      "context": "/document",
+      "defaultLanguageCode": "en",
+      "textSplitMode": "pages",
+      "maximumPageLength": 2000,
+      "pageOverlapLength": 500,
+      "maximumPagesToTake": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/merged_content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "textItems",
+          "targetName": "pages"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+      "description": "Step #4: Generate Embeddings, pages > vector",
+      "context": "/document/pages/*",
+      "resourceUri": "https://{OpenAI-Name}.openai.azure.com",
+      "apiKey": "{OpenAI-Key}",
+      "deploymentId": "{OpenAI-Deployment-Embedding}",
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/pages/*"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "embedding",
+          "targetName": "vectors"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+      "description": "Step #5: Extract keyphrases from pages",
+      "context": "/document/pages/*",
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/pages/*"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "keyPhrases",
+          "targetName": "keyphrases"
+        }
+      ]
+    }
+  ],
+  "cognitiveServices": {
+    "@odata.type": "#Microsoft.Azure.Search.CognitiveServicesByKey",
+    "description": "/subscriptions/{Subscription-Id}/resourceGroups/{ResourceGroup-Name}/providers/Microsoft.CognitiveServices/accounts/{AIServices-Name}a",
+    "key": "{AIServices-Key}"
+  },
+  "indexProjections": {
+    "selectors": [
+      {
+        "targetIndexName": "{AISearch-Index-Name}",
+        "parentKeyFieldName": "parent_id",
+        "sourceContext": "/document/pages/*",
+        "mappings": [
+          {
+            "name": "metadata_author",
+            "source": "/document/metadata_author"
+          },
+          {
+            "name": "metadata_creation_date",
+            "source": "/document/metadata_creation_date"
+          },
+          {
+            "name": "metadata_language",
+            "source": "/document/metadata_language"
+          },
+          {
+            "name": "metadata_storage_content_type",
+            "source": "/document/metadata_storage_content_type"
+          },
+          {
+            "name": "metadata_storage_file_extension",
+            "source": "/document/metadata_storage_file_extension"
+          },
+          {
+            "name": "metadata_storage_last_modified",
+            "source": "/document/metadata_storage_last_modified"
+          },
+          {
+            "name": "metadata_storage_name",
+            "source": "/document/metadata_storage_name"
+          },
+          {
+            "name": "metadata_storage_path",
+            "source": "/document/metadata_storage_path"
+          },
+          {
+            "name": "metadata_storage_size",
+            "source": "/document/metadata_storage_size"
+          },
+          {
+            "name": "metadata_title",
+            "source": "/document/metadata_title"
+          },
+          {
+            "name": "chunk",
+            "source": "/document/pages/*"
+          },
+          {
+            "name": "keyphrases",
+            "source": "/document/pages/*/keyphrases"
+          },
+          {
+            "name": "vectors",
+            "source": "/document/pages/*/vectors"
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "projectionMode": "skipIndexingParentDocuments"
+    }
+  }
+}
 ```
 
 ##### `skillset_sql.json`
 
 ```json
+{
+  "name": "{AISearch-Skillset-Name}",
+  "skills": [
+    {
+      "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+      "name": "#1",
+      "description": null,
+      "context": "/document/Description",
+      "defaultLanguageCode": "en",
+      "maxKeyPhraseCount": null,
+      "modelVersion": null,
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/Description"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "keyPhrases",
+          "targetName": "keyphrases"
+        }
+      ]
+    }
+  ],
+  "cognitiveServices": {
+    "@odata.type": "#Microsoft.Azure.Search.CognitiveServicesByKey",
+    "description": "/subscriptions/{Subscription-Id}/resourceGroups/{ResourceGroup-Name}/providers/Microsoft.CognitiveServices/accounts/{AIServices-Name}",
+    "key": "{AIServices-Key}"
+  },
+  "knowledgeStore": null,
+  "indexProjections": null,
+  "encryptionKey": null
+}
 ```
 
 #### Indexer
 
 ##### `indexer_blob.json`
 ```json
+{
+  "name": "{AISearch-Indexer-Name}",
+  "description": "",
+  "dataSourceName": "{AISearch-DataSource-Name}",
+  "skillsetName": "{AISearch-Skillset-Name}",
+  "targetIndexName": "{AISearch-Index-Name}",
+  "disabled": true,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": 0,
+    "maxFailedItemsPerBatch": 0,
+    "base64EncodeKeys": null,
+    "configuration": {
+      "imageAction": "generateNormalizedImagePerPage",
+      "dataToExtract": "contentAndMetadata",
+      "parsingMode": "default"
+    }
+  },
+  "outputFieldMappings": [
+    {
+      "sourceFieldName": "/document/pages/*/keyphrases",
+      "targetFieldName": "keyphrases"
+    }
+  ],
+  "cache": null,
+  "encryptionKey": null
+}
 ```
 
 ##### `indexer_sql.json`
 
 ```json
+{
+  "name": "{AISearch-Indexer-Name}",
+  "description": "",
+  "dataSourceName": "{AISearch-DataSource-Name}",
+  "skillsetName": "{AISearch-Skillset-Name}",
+  "targetIndexName": "{AISearch-Index-Name}",
+  "disabled": true,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": 0,
+    "maxFailedItemsPerBatch": 0,
+    "base64EncodeKeys": false,
+    "configuration": {
+      "queryTimeout": "00:10:00"
+    }
+  },
+  "fieldMappings": [],
+  "outputFieldMappings": [
+    {
+      "sourceFieldName": "/document/ProductDescriptionID/keyphrases",
+      "targetFieldName": "keyphrases"
+    }
+  ],
+  "cache": null,
+  "encryptionKey": null
+}
 ```
 
 #### Synonym Map
@@ -664,36 +935,214 @@ _Note: Parameters are wrapped in curly brackets {e.g., `{ResourceGroup-Name}`} a
 
 Replace the default code on the "**Program.cs**" tab with the following C#:
 
-```
-using DevOps_AIDeployment.Helpers;
+```csharp
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using AzureSolutions.Helpers.AISearch;
+using System.Text.RegularExpressions;
 
-public class Program
+namespace AI_Deploy
 {
-    public static async Task Main(string[] args)
+    public class Program
     {
-        AISearch aisearch = new();
+        private static SecretClient? keyvault;
 
-        await aisearch.deleteExisting();
+        private static string GetUserChoice(string variableName)
+        {
+            var options = new Dictionary<string, Dictionary<string, (string Choice, string Final)>>
+            {
+                {
+                    "Data Source Type?",
+                    new Dictionary<string, (string Choice, string Final)>
+                    {
+                        { "1", ("Azure Blob Storage", "blob") },
+                        { "2", ("Azure SQL", "sql") }
+                    }
+                },
+                {
+                    "Create Method?",
+                    new Dictionary<string, (string Choice, string Final)>
+                    {
+                        { "1", ("API", "API") },
+                        { "2", ("SDK", "SDK") }
+                    }
+                }
+            };
 
-        await aisearch.createDataSource_SDK();
+            var message = $"\n{variableName}: " + string.Join(" or ", options[variableName].Select(o => $"{o.Key}. {o.Value.Choice}"));
 
-        //await aisearch.createIndex_SDK();
-        await aisearch.createResource_API("index");
+            Console.WriteLine(message);
+            string? userChoice = Console.ReadLine();
+            return userChoice != null && options[variableName].TryGetValue(userChoice, out var value)
+                ? value.Final
+                : string.Empty;
+        }
 
-        await aisearch.addSynonyms_SDK();
+        public static async Task Main()
+        {
+            try
+            {
+                /* ************************* User Choices */
 
-        //await aisearch.createSkillset_SDK();
-        await aisearch.createResource_API("skillset");
+                Console.WriteLine("\nConfigure...");
+                
+                string DataSourceType = GetUserChoice("Data Source Type?");
+                string CreateMethod = GetUserChoice("Create Method?");
 
-        //await aisearch.createIndexer_SDK();
-        await aisearch.createResource_API("indexer");
+                /* ************************* KeyVault */
+
+                Console.WriteLine("\nKeyVault Name?");
+
+                string? KeyVault_Name = Console.ReadLine();
+
+                keyvault = new(vaultUri: new Uri($"https://{KeyVault_Name}.vault.azure.net"), credential: new DefaultAzureCredential());
+
+                Dictionary<string, string> secret = [];
+
+                string[] secretNames = [
+                    "Subscription-Id",
+                    "ResourceGroup-Name",
+                    "AISearch-Name",
+                    "AISearch-Key",
+                    "AISearch-DataSource-Name",
+                    "AISearch-DataSource-Blob-ConnectionString",
+                    "AISearch-DataSource-Blob-Container",
+                    "AISearch-DataSource-SQL-Server-Name",
+                    "AISearch-DataSource-SQL-Server-User",
+                    "AISearch-DataSource-SQL-Server-Password",
+                    "AISearch-DataSource-SQL-Database-Name",
+                    "AISearch-DataSource-SQL-Table",
+                    "AISearch-DataSource-SQL-Query",
+                    "AISearch-Index-Name",
+                    "AISearch-Skillset-Name",
+                    "AISearch-Indexer-Name",
+                    "AISearch-Suggester-Name",
+                    "AISearch-SynonymMap-Name",
+                    "AISearch-SemanticConfiguration-Name",
+                    "AISearch-VectorProfile-Name",
+                    "AISearch-VectorAlgorithm-Name",
+                    "AISearch-Vectorizer-Name",
+                    "AIServices-Name",
+                    "AIServices-Key",
+                    "OpenAI-Name",
+                    "OpenAI-Key",
+                    "OpenAI-Deployment-Embedding"
+                ];
+
+                foreach (var secretName in secretNames)
+                {
+                    string secretValue = AzureSolutions.Helpers.KeyVault.GetSecret(keyvault, secretName, () =>
+                    {
+                        Console.WriteLine($"\nEnter value for missing KeyVault Secret '{secretName}':");
+                        return Console.ReadLine() ?? string.Empty;
+                    });
+
+                    secret[secretName] = secretValue;
+                }
+
+                switch (DataSourceType)
+                {
+                    case "Azure Blob Storage":
+                        string Storage_ConnectionString = GetSecret(keyvault, "AISearch-DataSource-Blob-ConnectionString");
+                        string Storage_ContainerName = GetSecret(keyvault, "AISearch-DataSource-Blob-Container");
+                        break;
+                    case "Azure SQL Database":
+                        break;
+                }
+
+                /* ************************* Delete Existing */
+
+                Console.WriteLine("\nDelete Existing...");
+
+                await Indexer.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-Indexer-Name"]);
+
+                await Skillset.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-Skillset-Name"]);
+
+                await AzureSolutions.Helpers.AISearch.Index.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-Index-Name"]);
+                /* Fully-articulated because "Index" is a reserved word */
+
+                await SynonymMap.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-SynonymMap-Name"]);
+
+                await DataSource.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-DataSource-Name"]);
+
+                /* ************************* Create New */
+
+                Console.WriteLine("\nCreate New...");
+
+                await DataSource.Create(
+                    CreateMethod,
+                    AISearch_Name: secret["AISearch-Name"],
+                    AISearch_Key: secret["AISearch-Key"],
+                    AISearch_DataSource_Name: secret["AISearch-DataSource-Name"],
+                    jsonDefinition: GetDefinition($"datasource_{DataSourceType}.json")
+                    );
+
+                await AzureSolutions.Helpers.AISearch.Index.Create(
+                    CreateMethod,
+                    AISearch_Name: secret["AISearch-Name"],
+                    AISearch_Key: secret["AISearch-Key"],
+                    AISearch_Index_Name: secret["AISearch-Index-Name"],
+                    AISearch_Suggester_Name: secret["AISearch-Suggester-Name"],
+                    AISearch_SemanticConfiguration_Name: secret["AISearch-SemanticConfiguration-Name"],
+                    jsonDefinition: GetDefinition($"index_{DataSourceType}.json")
+                    );
+
+                await Skillset.Create(
+                    CreateMethod,
+                    AISearch_Name: secret["AISearch-Name"],
+                    AISearch_Key: secret["AISearch-Key"],
+                    AISearch_Skillset_Name: secret["AISearch-Skillset-Name"],
+                    AIServices_Key: secret["AIServices-Key"],
+                    jsonDefinition: GetDefinition($"skillset_{DataSourceType}.json")
+                    );
+
+                await Indexer.Create(
+                    CreateMethod,
+                    AISearch_Name: secret["AISearch-Name"],
+                    AISearch_Key: secret["AISearch-Key"],
+                    AISearch_Indexer_Name: secret["AISearch-Indexer-Name"],
+                    AISearch_DataSource_Name: secret["AISearch-DataSource-Name"],
+                    AISearch_Index_Name: secret["AISearch-Index-Name"],
+                    AISearch_Skillset_Name: secret["AISearch-Skillset-Name"],
+                    jsonDefinition: GetDefinition($"indexer_{DataSourceType}.json")
+                    );
+
+                await SynonymMap.Create(
+                    AISearch_Name: secret["AISearch-Name"],
+                    AISearch_Key: secret["AISearch-Key"],
+                    AISearch_Index_Name: secret["AISearch-Index-Name"],
+                    AISearch_SynonymMap_Name: secret["AISearch-SynonymMap-Name"]
+                    );
+            }
+            catch (Exception ex) { Console.WriteLine($"Exception: {ex}\n"); }
+        }
+
+        private static string GetSecret(SecretClient keyvault, string secretName)
+        {
+            return keyvault.GetSecret(secretName).Value.Value ?? string.Empty;
+        }
+
+        private static string GetDefinition(string fileName)
+        {
+            string directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\Definitions\\");
+
+            string path = Path.GetFullPath(Path.Combine(directory, fileName));
+
+            string jsonDefinition = File.ReadAllText(path);
+
+            foreach (Match m in Regex.Matches(jsonDefinition, @"\{(.+?)\}").Cast<Match>())
+            {
+                string secretName = m.Groups[1].Value;
+                if (keyvault != null) { jsonDefinition = jsonDefinition.Replace(oldValue: $"{{{secretName}}}", newValue: GetSecret(keyvault, secretName)); }
+            }
+
+            //Log.Write(message: $"JSON Definition...\n{jsonDefinition}");
+
+            return jsonDefinition;
+        }
     }
 }
 ```
-
-_Notes:_
-* _API handling was added to address the fact that, as of Jan 2024, Vectorization had not been completely surfaced in the `Azure.Search.Documents` library_
-* _Calls included for both `...SDK` and `...API` versions... comment, as needed, to achieve goals_
 
 -----
 
