@@ -275,7 +275,7 @@ JSON Definitions are used by API logic to create AI Search resources.
 #### Data Source
 Definition JSON for Blob and SQL versions are sufficiently different to merit separate handling... examples for both are included below.
 
-##### datasource_blob.json
+##### `datasource_blob.json`
 Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "datasource_blob.json" on the resulting popup and then click "Add".
 
 Replace the default code with:
@@ -294,10 +294,7 @@ Replace the default code with:
 }
 ```
 
-##### datasource_sql.json
-Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "datasource_sql.json" on the resulting popup and then click "Add".
-
-Replace the default code with:
+##### `datasource_sql.json`
 
 ```json
 {
@@ -321,299 +318,344 @@ Replace the default code with:
   "identity": null
 }
 ```
-
 _Note: Parameters are wrapped in curly brackets {e.g., `{ResourceGroup-Name}`} and replaced with values at run-time_
 
+#### Index
 
-
-
-
-
-
-#### synonyms.json
-
-Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "synonyms.json" on the resulting popup and then click "Add".
-
-Replace the default code with:
-
-```
+##### `index_blob.json`
+```json
 {
-  "United States": [ "US", "USA" ],
-  "Mexico": [ "MX" ],
-  "Canada": [ "CA" ]
-}
-```
-
-#### skillset.json
-
-Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "skillset.json" on the resulting popup and then click "Add".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7cc8e7e4-f577-4fb7-af39-a13f9331ae7d" width="800" title="Snipped: January 18, 2024" />
-
-Replace the default code with:
-
-```
-{
-  "name": "{ResourceGroup-Name}ss-skillset",
-  "skills": [
+  "name": "{AISearch-Index-Name}",
+  "fields": [
     {
-      "@odata.type": "#Microsoft.Skills.Vision.OcrSkill",
-      "name": "#1",
-      "description": "Step #1: Extract text from image",
-      "context": "/document/normalized_images/*",
-      "lineEnding": "Space",
-      "defaultLanguageCode": "en",
-      "detectOrientation": true,
-      "inputs": [
-        {
-          "name": "image",
-          "source": "/document/normalized_images/*"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "text",
-          "targetName": "text"
-        },
-        {
-          "name": "layoutText",
-          "targetName": "layoutText"
-        }
-      ]
+      "name": "parent_id",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false
     },
     {
-      "@odata.type": "#Microsoft.Skills.Text.MergeSkill",
-      "name": "#2",
-      "description": "Step #2: Merge content, text, and contentOffset",
-      "context": "/document",
-      "insertPreTag": " ",
-      "insertPostTag": " ",
-      "inputs": [
-        {
-          "name": "text",
-          "source": "/document/content"
-        },
-        {
-          "name": "itemsToInsert",
-          "source": "/document/normalized_images/*/text"
-        },
-        {
-          "name": "offsets",
-          "source": "/document/normalized_images/*/contentOffset"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "mergedText",
-          "targetName": "merged_content"
-        }
-      ]
+      "name": "id",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": true,
+      "analyzer": "keyword"
     },
     {
-      "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
-      "name": "#3",
-      "description": "Step #3: Extract keyphrases from merged_content",
-      "context": "/document/merged_content",
-      "inputs": [
-        {
-          "name": "text",
-          "source": "/document/merged_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "keyPhrases",
-          "targetName": "keyphrases"
-        }
-      ]
+      "name": "metadata_title",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
     },
     {
-      "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
-      "description": "Step #4: Split Chunks, merged_content > pages",
-      "context": "/document",
-      "defaultLanguageCode": "en",
-      "textSplitMode": "pages",
-      "maximumPageLength": 2000,
-      "pageOverlapLength": 500,
-      "maximumPagesToTake": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "source": "/document/merged_content"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "textItems",
-          "targetName": "pages"
-        }
-      ]
+      "name": "metadata_storage_name",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
     },
     {
-      "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
-      "description": "Step #5: Generate Embeddings, pages > vector",
-      "context": "/document/pages/*",
-      "resourceUri": "https://{OpenAI-Name}.openai.azure.com",
-      "apiKey": "{OpenAI-Key}",
-      "deploymentId": "{OpenAI-Name}-ada2",
-      "inputs": [
-        {
-          "name": "text",
-          "source": "/document/pages/*"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "embedding",
-          "targetName": "vector"
-        }
-      ]
+      "name": "metadata_storage_path",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_content_type",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_file_extension",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_storage_size",
+      "type": "Edm.Int64",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "metadata_author",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_language",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "metadata_creation_date",
+      "type": "Edm.DateTimeOffset",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "metadata_storage_last_modified",
+      "type": "Edm.DateTimeOffset",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "chunk",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
+    },
+    {
+      "name": "keyphrases",
+      "type": "Collection(Edm.String)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
+    },
+    {
+      "name": "vectors",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "dimensions": 3072,
+      "vectorSearchProfile": "{AISearch-VectorProfile-Name}"
     }
   ],
-  "cognitiveServices": {
-    "@odata.type": "#Microsoft.Azure.Search.CognitiveServicesByKey",
-    "description": "/subscriptions/{Subscription-Id}/resourceGroups/{ResourceGroup-Name}/providers/Microsoft.CognitiveServices/accounts/{ResourceGroup-Name}ais",
-    "key": "{AIServices-Key}"
+  "similarity": {
+    "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
   },
-  "indexProjections": {
-    "selectors": [
+  "semantic": {
+    "defaultConfiguration": "{AISearch-SemanticConfiguration-Name}",
+    "configurations": [
       {
-        "targetIndexName": "{ResourceGroup-Name}ss-index",
-        "parentKeyFieldName": "parent_id",
-        "sourceContext": "/document/pages/*",
-        "mappings": [
-          {
-            "name": "metadata_author",
-            "source": "/document/metadata_author"
+        "name": "{AISearch-SemanticConfiguration-Name}",
+        "prioritizedFields": {
+          "titleField": {
+            "fieldName": "metadata_title"
           },
-          {
-            "name": "metadata_creation_date",
-            "source": "/document/metadata_creation_date"
-          },
-          {
-            "name": "metadata_language",
-            "source": "/document/metadata_language"
-          },
-          {
-            "name": "metadata_storage_content_type",
-            "source": "/document/metadata_storage_content_type"
-          },
-          {
-            "name": "metadata_storage_file_extension",
-            "source": "/document/metadata_storage_file_extension"
-          },
-          {
-            "name": "metadata_storage_last_modified",
-            "source": "/document/metadata_storage_last_modified"
-          },
-          {
-            "name": "metadata_storage_name",
-            "source": "/document/metadata_storage_name"
-          },
-          {
-            "name": "metadata_storage_path",
-            "source": "/document/metadata_storage_path"
-          },
-          {
-            "name": "metadata_storage_size",
-            "source": "/document/metadata_storage_size"
-          },
-          {
-            "name": "metadata_title",
-            "source": "/document/metadata_title"
-          },
-          {
-            "name": "content",
-            "source": "/document/content"
-          },
-          {
-            "name": "text",
-            "source": "/document/normalized_images/*/text"
-          },
-          {
-            "name": "layoutText",
-            "source": "/document/normalized_images/*/layoutText"
-          },
-          {
-            "name": "merged_content",
-            "source": "/document/merged_content"
-          },
-          {
-            "name": "keyphrases",
-            "source": "/document/merged_content/keyphrases"
-          },
-          {
-            "name": "chunk",
-            "source": "/document/pages/*"
-          },
-          {
-            "name": "vector",
-            "source": "/document/pages/*/vector"
-          }
-        ]
+          "prioritizedContentFields": [
+            {
+              "fieldName": "chunk"
+            }
+          ],
+          "prioritizedKeywordsFields": [
+            {
+              "fieldName": "keyphrases"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "vectorSearch": {
+    "algorithms": [
+      {
+        "name": "{AISearch-VectorAlgorithm-Name}",
+        "kind": "hnsw",
+        "hnswParameters": {
+          "metric": "cosine",
+          "m": 4,
+          "efConstruction": 400,
+          "efSearch": 500
+        }
       }
     ],
-    "parameters": {
-      "projectionMode": "skipIndexingParentDocuments"
-    }
+    "vectorizers": [
+      {
+        "name": "{AISearch-Vectorizer-Name}",
+        "kind": "azureOpenAI",
+        "azureOpenAIParameters": {
+          "resourceUri": "https://{OpenAI-Name}.openai.azure.com",
+          "apiKey": "{OpenAI-Key}",
+          "deploymentId": "{OpenAI-Deployment-Embedding}",
+          "authIdentity": null
+        }
+      }
+    ],
+    "profiles": [
+      {
+        "name": "{AISearch-VectorProfile-Name}",
+        "algorithm": "{AISearch-VectorAlgorithm-Name}",
+        "vectorizer": "{AISearch-Vectorizer-Name}"
+      }
+    ]
   }
 }
 ```
 
-_Notes:_
-* _Healthy debate about the ordering or keyword generation re: vectorization chunking is both necessary and reasonable... diagram below starts to describe the necessary conversation_
+##### `index_sql.json`
 
-  <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bd79083-5713-4ef2-ab9f-c1c7db4e62f6" width="800" title="Snipped: January 18, 2024" />
-
-#### indexer.json
-
-Right-click on the "Definitions" folder, select "Add" >> "New Item" from the resulting dropdowns, search for and select "JSON", enter name "indexer.json" on the resulting popup and then click "Add".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/824d69e8-8c1c-43c5-af39-45656d96dcd8" width="800" title="Snipped: January 18, 2024" />
-
-Replace the default code with:
-
-```
+```json
 {
-  "name": "{ResourceGroup-Name}ss-indexer",
-  "description": "",
-  "dataSourceName": "{ResourceGroup-Name}ss-datasource",
-  "skillsetName": "{ResourceGroup-Name}ss-skillset",
-  "targetIndexName": "{ResourceGroup-Name}ss-index",
-  "disabled": false,
-  "schedule": null,
-  "parameters": {
-    "batchSize": null,
-    "maxFailedItems": 0,
-    "maxFailedItemsPerBatch": 0,
-    "base64EncodeKeys": null,
-    "configuration": {
-      "imageAction": "generateNormalizedImagePerPage",
-      "dataToExtract": "contentAndMetadata",
-      "parsingMode": "default"
-    }
-  },
-  "outputFieldMappings": [
+  "name": "{AISearch-Index-Name}",
+  "fields": [
     {
-      "sourceFieldName": "/document/normalized_images/*/text",
-      "targetFieldName": "text"
+      "name": "ProductDescriptionID",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": true
     },
     {
-      "sourceFieldName": "/document/normalized_images/*/layoutText",
-      "targetFieldName": "layoutText"
+      "name": "Description",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
     },
     {
-      "sourceFieldName": "/document/merged_content",
-      "targetFieldName": "merged_content"
+      "name": "ModifiedDate",
+      "type": "Edm.DateTimeOffset",
+      "searchable": false,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false
     },
     {
-      "sourceFieldName": "/document/merged_content/keyphrases",
-      "targetFieldName": "keyphrases"
+      "name": "keyphrases",
+      "type": "Collection(Edm.String)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": true,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "analyzer": "standard.lucene"
     }
   ],
-  "cache": null,
-  "encryptionKey": null
-}
+  "semantic": {
+    "defaultConfiguration": "{AISearch-SemanticConfiguration-Name}",
+    "configurations": [
+      {
+        "name": "{AISearch-SemanticConfiguration-Name}",
+        "prioritizedFields": {
+          "titleField": {
+            "fieldName": "ProductDescriptionID"
+          },
+          "prioritizedContentFields": [
+            {
+              "fieldName": "Description"
+            }
+          ],
+          "prioritizedKeywordsFields": [
+            {
+              "fieldName": "keyphrases"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}  
+```
+
+#### Skillset
+
+##### `skillset_blob.json`
+```json
+```
+
+##### `skillset_sql.json`
+
+```json
+```
+
+#### Indexer
+
+##### `indexer_blob.json`
+```json
+```
+
+##### `indexer_sql.json`
+
+```json
+```
+
+#### Synonym Map
+
+##### `synonyms.json`
+
+```json
+[
+  [ "US", "USA", "U.S.A.", "United States", "United States of America" ],
+  [ "MX", "Mexico" ]
+]  
 ```
 
 -----
