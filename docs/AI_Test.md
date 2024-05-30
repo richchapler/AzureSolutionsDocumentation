@@ -29,15 +29,16 @@ This documentation assumes the following resources are ready for use:
 
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
 
-  * AISearch-IndexName
+  * AISearch-Name
   * AISearch-Key
+  * AISearch-Index-Name
   * AISearch-SemanticConfiguration
-  * AISearch-Url
   * DevOps-PersonalAccessToken
   * DevOps-Url
-  * OpenAI-DeploymentName
-  * OpenAI-Endpoint
+  * OpenAI-Name
   * OpenAI-Key
+  * OpenAI-Deployment-GPT
+  * OpenAI-Deployment-Embedding
 
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
