@@ -257,28 +257,27 @@ Right-click on the project, select "Add" >> "New folder" from the resulting drop
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "KeyVault.cs" on the resulting popup. Replace the default code with:
 
 ```
-using Azure;
-using Azure.Identity;
+using System.Threading.Tasks;
 using Azure.Security.KeyVault.Secrets;
 
-namespace processTestCases.Helpers
+namespace AI_Test.Helpers
 {
-    internal class KeyVault
+    public class KeyVault
     {
-        private SecretClient client;
-
-        public KeyVault()
+        public static async Task<string?> GetSecret(string secretName)
         {
-            client = new SecretClient(
-                vaultUri: new Uri("https://rchaplerkv.vault.azure.net/"),
-                credential: new DefaultAzureCredential()
-                );
+            KeyVaultSecret? secret = null;
+            if (Config.kvc.KeyVault_Client != null)
+            {
+                secret = await Config.kvc.KeyVault_Client.GetSecretAsync(secretName);
+            }
+            return secret?.Value;
         }
 
-        public string getSecret(string secretName)
+        public class Secret
         {
-            Response<KeyVaultSecret> responseKeyVaultSecret = client.GetSecret(secretName);
-            return responseKeyVaultSecret.Value.Value;
+            public string? Name { get; set; }
+            public string? Value { get; set; }
         }
     }
 }
@@ -286,68 +285,114 @@ namespace processTestCases.Helpers
 
 Click "Save".
 
+-----
+
+#### Helper Class: Config
+
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "Config.cs" on the resulting popup. Replace the default code with:
+
+```
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Configuration;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
+using Microsoft.VisualStudio.Services.Common;
+using Microsoft.VisualStudio.Services.WebApi;
+using static AzureSolutions.Helpers.KeyVault;
+
+namespace AI_Test.Helpers
+{
+    public static class Config
+    {
+        public static readonly string KeyVault_Name = new ConfigurationBuilder().AddJsonFile("local.settings.json").Build().GetValue<string>("Values:KeyVault_Name");
+
+        public static readonly AzureSolutions.Helpers.KeyVault.KeyVault_Configuration kvc = new()
+        {
+            KeyVault_Name = KeyVault_Name,
+            KeyVault_Client = new SecretClient(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential())
+        };
+
+        public static readonly AzureSolutions.Helpers.AISearch.Configuration aisc = AzureSolutions.Helpers.AISearch.Configuration.PrepareConfiguration(kvc.KeyVault_Client);
+
+        public static readonly AzureSolutions.Helpers.OpenAI.Configuration oaic = AzureSolutions.Helpers.OpenAI.Configuration.PrepareConfiguration(kvc.KeyVault_Client);
+
+        public class DevOps_Configuration
+        {
+            public WorkItemTrackingHttpClient? DevOps_Client { get; set; }
+            public string? DevOps_Url { get; set; }
+            public string? DevOps_Project { get; set; }
+            public string? DevOps_PersonalAccessToken { get; set; }
+        }
+
+        public static readonly DevOps_Configuration doc = new()
+        {
+            DevOps_Client = new VssConnection(
+                baseUrl: new Uri(GetSecret(kvc.KeyVault_Client, "DevOps-Url")),
+                credentials: new VssBasicCredential(userName: string.Empty, password: GetSecret(kvc.KeyVault_Client, "DevOps-PersonalAccessToken"))
+                ).GetClient<WorkItemTrackingHttpClient>(),
+            DevOps_Url = GetSecret(kvc.KeyVault_Client, "DevOps-Url"),
+            DevOps_Project = GetSecret(kvc.KeyVault_Client, "DevOps-Project"),
+            DevOps_PersonalAccessToken = GetSecret(kvc.KeyVault_Client, "DevOps-PersonalAccessToken")
+        };
+    }
+}
+```
+
+Click "Save".
+
+-----
+
 #### Helper Class: DevOps
 
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "DevOps.cs" on the resulting popup. Replace the default code with:
 
 ```
-using Microsoft.Extensions.Logging;
-using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
-using Microsoft.VisualStudio.Services.Common;
-using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
 
-namespace processTestCases.Helpers
+namespace AI_Test.Helpers
 {
     internal class DevOps
     {
-        KeyVault keyvault = new();
-
-        private WorkItemTrackingHttpClient client;
-
-        public DevOps(ILogger logger)
-        {
-            try
-            {
-                client = new VssConnection(
-                    baseUrl: new Uri(keyvault.getSecret("DevOps-Url")),
-                    credentials: new VssBasicCredential(
-                        userName: string.Empty,
-                        password: keyvault.getSecret("DevOps-PersonalAccessToken") /* DevOps Personal Access Token with "Read, write, & manage" permissions */
-                        )
-                    ).GetClient<WorkItemTrackingHttpClient>();
-            }
-            catch (Exception ex) { logger.LogError(ex.Message); }
-        }
-
-        public async Task<List<WorkItem>> getTestCases()
+        public static async Task<List<WorkItem>> GetTestCases()
         {
             Wiql w = new() { Query = @"SELECT [System.Id] FROM workitems WHERE [System.WorkItemType] = 'Test Case' AND [System.State] = 'Ready for OpenAI'" };
 
-            WorkItemQueryResult wiqr = await client.QueryByWiqlAsync(wiql: w, project: keyvault.getSecret("DevOps-Project"));
+            WorkItemQueryResult? wiqr = null;
+            if (Config.doc.DevOps_Client != null) wiqr = await Config.doc.DevOps_Client.QueryByWiqlAsync(wiql: w, project: Config.doc.DevOps_Project);
 
-            List<WorkItem> testCases = new();
+            List<WorkItem> testCases = [];
 
-            if (wiqr != null && wiqr.WorkItems.Any()) { testCases = await client.GetWorkItemsAsync(wiqr.WorkItems.Select(item => item.Id).ToArray()); }
+            if (Config.doc.DevOps_Client != null && wiqr != null && wiqr.WorkItems.Any())
+            { testCases = await Config.doc.DevOps_Client.GetWorkItemsAsync(wiqr.WorkItems.Select(item => item.Id).ToArray()); }
 
             return testCases;
         }
 
-        public void updateWorkItem(int id, string title, string systemMessage, string userMessage, string responseSimple, string responseSemantic, string steps)
+        public static void UpdateWorkItem(WorkItemUpdate update)
         {
-            Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition = new();
-            addField(devopsWorkItem_Definition, "/fields/System.State", "Ready for Human");
-            addField(devopsWorkItem_Definition, "/fields/Response_Simple", responseSimple);
-            addField(devopsWorkItem_Definition, "/fields/Response_Simple_Ranking", "3-Neutral");
-            addField(devopsWorkItem_Definition, "/fields/Response_Semantic", responseSemantic);
-            addField(devopsWorkItem_Definition, "/fields/Response_Semantic_Ranking", "3-Neutral");
-            addField(devopsWorkItem_Definition, "/fields/Microsoft.VSTS.TCM.Steps", steps);
+            Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition = [];
+            AddField(devopsWorkItem_Definition, "/fields/System.State", "Ready for Human");
 
-            var workItem = client.UpdateWorkItemAsync(devopsWorkItem_Definition, id).Result;
+            if (update.ResponseBest != null) AddField(devopsWorkItem_Definition, "/fields/Response_Best", update.ResponseBest);
+            if (update.ResponseVectorSemantic != null) AddField(devopsWorkItem_Definition, "/fields/Response_VectorSemantic", update.ResponseVectorSemantic);
+            if (update.ResponseVectorSimple != null) AddField(devopsWorkItem_Definition, "/fields/Response_VectorSimple", update.ResponseVectorSimple);
+            if (update.ResponseVector != null) AddField(devopsWorkItem_Definition, "/fields/Response_Vector", update.ResponseVector);
+            if (update.ResponseSemantic != null) AddField(devopsWorkItem_Definition, "/fields/Response_Semantic", update.ResponseSemantic);
+            if (update.ResponseSimple != null) AddField(devopsWorkItem_Definition, "/fields/Response_Simple", update.ResponseSimple);
+
+            if (update.RankingVectorSemantic != null) AddField(devopsWorkItem_Definition, "/fields/Response_VectorSemantic_Ranking", update.RankingVectorSemantic);
+            if (update.RankingVectorSimple != null) AddField(devopsWorkItem_Definition, "/fields/Response_VectorSimple_Ranking", update.RankingVectorSimple);
+            if (update.RankingVector != null) AddField(devopsWorkItem_Definition, "/fields/Response_Vector_Ranking", update.RankingVector);
+            if (update.RankingSemantic != null) AddField(devopsWorkItem_Definition, "/fields/Response_Semantic_Ranking", update.RankingSemantic);
+            if (update.RankingSimple != null) AddField(devopsWorkItem_Definition, "/fields/Response_Simple_Ranking", update.RankingSimple);
+
+            if (update.Steps != null) AddField(devopsWorkItem_Definition, "/fields/Microsoft.VSTS.TCM.Steps", update.Steps);
+
+            Config.doc.DevOps_Client?.UpdateWorkItemAsync(devopsWorkItem_Definition, update.Id).Wait();
         }
 
-        private void addField(Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition, string path, string value)
+        private static void AddField(Microsoft.VisualStudio.Services.WebApi.Patch.Json.JsonPatchDocument devopsWorkItem_Definition, string path, string value)
         {
             devopsWorkItem_Definition.Add(
                 new JsonPatchOperation
@@ -359,7 +404,7 @@ namespace processTestCases.Helpers
             );
         }
 
-        public string defaultSteps()
+        public static string DefaultSteps()
         {
             return @"
             <steps id='0' last='3'>
@@ -375,69 +420,22 @@ namespace processTestCases.Helpers
                 </step>
             </steps>";
         }
-    }
-}
-```
 
-Click "Save".
-
-#### Helper Class: OpenAI
-
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, and enter name "OpenAI.cs" on the resulting popup. Replace the default code with:
-
-```
-using Azure;
-using Azure.AI.OpenAI; /* pre-release NuGet Package: Azure.AI.OpenAI v1.0.0-beta.9 */
-
-namespace processTestCases.Helpers
-{
-    internal class OpenAI
-    {
-        KeyVault keyvault = new();
-
-        private OpenAIClient client;
-
-        public OpenAI()
+        public class WorkItemUpdate
         {
-            client = new OpenAIClient(
-                endpoint: new Uri(keyvault.getSecret("OpenAI-Endpoint")),
-                keyCredential: new AzureKeyCredential(keyvault.getSecret("OpenAI-Key"))
-            );
-        }
-
-        public async Task<string> Prompt(string queryType, string systemMessage, string userMessage)
-        {
-            AzureCognitiveSearchQueryType type;
-
-            switch (queryType.ToLower())
-            {
-                case "simple": type = AzureCognitiveSearchQueryType.Simple; break;
-                case "semantic": type = AzureCognitiveSearchQueryType.Semantic; break;
-                default: throw new ArgumentException($"Invalid query type: {queryType}");
-            }
-
-            AzureCognitiveSearchChatExtensionConfiguration config = new()
-            {
-                SearchEndpoint = new Uri(keyvault.getSecret("AISearch-Url")),
-                IndexName = keyvault.getSecret("AISearch-IndexName"),
-                QueryType = type,
-                ShouldRestrictResultScope = true,
-                DocumentCount = 5,
-                SemanticConfiguration = keyvault.getSecret("AISearch-SemanticConfiguration") /* Ignored when queryType != Semantic */
-            };
-            config.SetSearchKey(searchKey: keyvault.getSecret("AISearch-Key"));
-
-            ChatCompletionsOptions cco = new()
-            {
-                DeploymentName = keyvault.getSecret("OpenAI-DeploymentName"),
-                AzureExtensionsOptions = new AzureChatExtensionsOptions() { Extensions = { config } }
-            };
-
-            cco.Messages.Add(new ChatMessage(ChatRole.System, systemMessage));
-            cco.Messages.Add(new ChatMessage(ChatRole.User, userMessage));
-
-            var response = await client.GetChatCompletionsAsync(cco);
-            return response.Value.Choices[0].Message.Content;
+            public int Id { get; set; }
+            public string? ResponseBest { get; set; }
+            public string? ResponseVectorSemantic { get; set; }
+            public string? RankingVectorSemantic { get; set; }
+            public string? ResponseVectorSimple { get; set; }
+            public string? RankingVectorSimple { get; set; }
+            public string? ResponseVector { get; set; }
+            public string? RankingVector { get; set; }
+            public string? ResponseSemantic { get; set; }
+            public string? RankingSemantic { get; set; }
+            public string? ResponseSimple { get; set; }
+            public string? RankingSimple { get; set; }
+            public string? Steps { get; set; }
         }
     }
 }
@@ -445,52 +443,99 @@ namespace processTestCases.Helpers
 
 Click "Save".
 
-#### processTestCases.cs
+#### Processor.cs
 
-Open "processTestCases.cs" and replace the default code with:
+Open "Processor.cs" and replace the default code with:
 
 ```
+using AI_Test.Helpers;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
-using processTestCases.Helpers;
 
-namespace processTestCases
+namespace AI_Test
 {
-    public class processTestCases
+    public class Processor(ILoggerFactory loggerFactory)
     {
-        private readonly ILogger logger;
-        public processTestCases(ILoggerFactory loggerFactory) { logger = loggerFactory.CreateLogger<processTestCases>(); }
+        private readonly ILogger logger = loggerFactory.CreateLogger<Processor>();
 
-        [Function("processTestCases")]
-        public async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer)
+        [Function("AI_Test")]
+        public async Task Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
         {
-            DevOps devops = new(logger); OpenAI openai = new();
+            //DevOps devops = new(logger);
 
-            var testCases = await devops.getTestCases();
+            var testCases = await Helpers.DevOps.GetTestCases();
 
             foreach (var testCase in testCases)
             {
                 int id; if (testCase.Id.HasValue) { id = testCase.Id.Value; } else { continue; }
                 string title = testCase.Fields["System.Title"].ToString() ?? "NULL";
-                logger.LogInformation("Processing Test Case Id: " + id.ToString() + ", " + title);
+                logger.LogInformation("\nProcessing Test Case Id: {Id}, Title: '{Title}'", id, title);
 
-                string systemMessage = testCase.Fields["Custom.SystemMessage"].ToString() ?? "NULL";
-                string userMessage = testCase.Fields["Custom.UserMessage"].ToString() ?? "NULL";
+                string UserQuery = testCase.Fields["Custom.UserMessage"].ToString() ?? "NULL";
+                string SystemMessage = testCase.Fields["Custom.SystemMessage"].ToString() ?? "NULL";
 
-                if (systemMessage != null && userMessage != null)
+                if (UserQuery != null)
                 {
-                    var responseSimple = await openai.Prompt(queryType: "Simple", systemMessage, userMessage);
-                    var responseSemantic = await openai.Prompt(queryType: "Semantic", systemMessage, userMessage);
+                    var responseVectorSemantic = await AzureSolutions.Helpers.OpenAI.Prompt.VectorSemantic(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: 0.5f);
 
-                    devops.updateWorkItem(
-                        id,
-                        title,
-                        systemMessage,
-                        userMessage,
-                        responseSimple,
-                        responseSemantic,
-                        steps: devops.defaultSteps()
-                        );
+                    var rankingVectorSemantic = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
+                        UserQuery: $"Rank the quality of this response '{responseVectorSemantic.Response}' to this prompt '{UserQuery}'. Respond with only one of the following ranking values: ''2-Bad','4-Good'",
+                        SystemMessage: "You are a world-class editor trained in evaluating responses from OpenAI",
+                        Temperature: 0.5f);
+
+                    var responseVectorSimple = await AzureSolutions.Helpers.OpenAI.Prompt.VectorSimple(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: 0.5f);
+
+                    var rankingVectorSimple = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
+                        UserQuery: $"Rank the quality of this response '{responseVectorSimple.Response}' to this prompt '{UserQuery}'. Respond with only one of the following ranking values: ''2-Bad','4-Good'",
+                        SystemMessage: "You are a world-class editor trained in evaluating responses from OpenAI",
+                        Temperature: 0.5f);
+
+                    var responseVector = await AzureSolutions.Helpers.OpenAI.Prompt.Vector(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: 0.5f);
+
+                    var rankingVector = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
+                        UserQuery: $"Rank the quality of this response '{responseVector.Response}' to this prompt '{UserQuery}'. Respond with only one of the following ranking values: ''2-Bad','4-Good'",
+                        SystemMessage: "You are a world-class editor trained in evaluating responses from OpenAI",
+                        Temperature: 0.5f);
+
+                    var responseSemantic = await AzureSolutions.Helpers.OpenAI.Prompt.Semantic(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: 0.5f);
+
+                    var rankingSemantic = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
+                        UserQuery: $"Rank the quality of this response '{responseSemantic.Response}' to this prompt '{UserQuery}'. Respond with only one of the following ranking values: ''2-Bad','4-Good'",
+                        SystemMessage: "You are a world-class editor trained in evaluating responses from OpenAI",
+                        Temperature: 0.5f);
+
+                    var responseSimple = await AzureSolutions.Helpers.OpenAI.Prompt.Simple(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: 0.5f);
+
+                    var rankingSimple = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
+                        UserQuery: $"Rank the quality of this response '{responseSimple.Response}' to this prompt '{UserQuery}'. Respond with only one of the following ranking values: 2-Bad or 4-Good",
+                        SystemMessage: "You are a world-class editor trained in evaluating responses from OpenAI",
+                        Temperature: 0.5f);
+
+                    var responseBest = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
+                        UserQuery: $"Create a composite 'best response' from the following five OpenAI responses to the prompt '{UserQuery}'... Simple: '{responseSimple.Response}'\n Semantic: '{responseSemantic.Response}'\n Vector: '{responseVector.Response}'\n VectorSimple: '{responseVectorSimple.Response}'\n VectorSemantic: '{responseVectorSemantic.Response}'",
+                        SystemMessage: "You are a world-class editor trained in evaluating responses from OpenAI",
+                        Temperature: 0.5f);
+
+                    var update = new DevOps.WorkItemUpdate
+                    {
+                        Id = id,
+                        ResponseBest = responseBest.Response ?? string.Empty,
+                        ResponseVectorSemantic = responseVectorSemantic.Response ?? string.Empty,
+                        RankingVectorSemantic = rankingVectorSemantic.Response ?? string.Empty,
+                        ResponseVectorSimple = responseVectorSimple.Response ?? string.Empty,
+                        RankingVectorSimple = rankingVectorSimple.Response ?? string.Empty,
+                        ResponseVector = responseVector.Response ?? string.Empty,
+                        RankingVector = rankingVector.Response ?? string.Empty,
+                        ResponseSemantic = responseSemantic.Response ?? string.Empty,
+                        RankingSemantic = rankingSemantic.Response ?? string.Empty,
+                        ResponseSimple = responseSimple.Response ?? string.Empty,
+                        RankingSimple = rankingSimple.Response ?? string.Empty,
+                        Steps = DevOps.DefaultSteps()
+                    };
+
+                    Helpers.DevOps.UpdateWorkItem(update);
+
+                    logger.LogInformation("Completed Test Case Id: {Id}, Title: '{Title}'\n", id, title);
                 }
             }
         }
