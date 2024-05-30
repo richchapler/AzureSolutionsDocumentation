@@ -19,7 +19,7 @@ This documentation assumes the following resources are ready for use:
 
 * [**AI Search**](https://azure.microsoft.com/en-us/products/search) index with Semantic and Vector
 
-  _Note: I used the Tax Form index created in [DevOps: AI Deployment](https://github.com/richchapler/AzureSolutions/blob/main/docs/DevOps_AIDeployment.md)_
+  _Note: I used the Tax Form index created in [AI: Deploy](https://github.com/richchapler/AzureSolutions/blob/main/docs/AI_Deploy.md)_
 
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization, project, and a Personal Access Token with "Read, write, & manage" permissions on Work Items
 
