@@ -11,7 +11,7 @@ This solution will address requirements in four exercises:
 
 * Exercise 1: Chat with Legacy Code
 * Exercise 2: Iterative Code Suggestions
-* 
+
 ## Solution Requirements
 
 This documentation assumes the following resources are ready for use:
