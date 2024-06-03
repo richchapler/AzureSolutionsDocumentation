@@ -18,12 +18,12 @@ This documentation assumes the following resources are ready for use:
 
 * [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
 
-* GitHub [Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) and [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+* GitHub [Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) and [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) with `repo` permissions
 
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  * BlobServiceClient-ConnectionString
-  * OpenAI-Key
   * GitHub-PersonalAccessToken
+  * OpenAI-Key
+  * Storage-ConnectionString
 
 * [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
 
