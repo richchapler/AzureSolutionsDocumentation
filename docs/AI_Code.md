@@ -1,13 +1,15 @@
-# AI and at-scale Code Analysis
+# AI: Code Analysis
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/08ff9047-68f4-4829-b35e-7606d0305630" width="1000" />
 
 ## Use Case
-* "We want to use AI to better understand legacy code"
-* "We want to use AI to suggest code optimizations, **at scale**"
+* "We want to regularly snapshot GitHub Respository content"
+* "Each snapshot should include documentation of specific code files {e.g., C#}, including enhancement suggestions"
+* "We want to create a high-level README summary of the documented code"
+* "Documentation should be template-based, so we can evolve over time, at scale"
 
 ## Proposed Solution
-This solution will address requirements in four exercises:
+This solution will address requirements in two exercises:
 
 * Exercise 1: Chat with Legacy Code
 * Exercise 2: Iterative Code Suggestions
