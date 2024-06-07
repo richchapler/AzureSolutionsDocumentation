@@ -49,6 +49,55 @@ Repeat this process for Octokit.
 
 -----
 
+### Step 2: Add Templates
+
+Right-click on the project and select "Add" >> "New Folder" from the resulting dropdown. Name the new folder "Templates".
+
+#### codereview.md
+
+Right-click on the "Templates" and select "Add" >> "New Item" from the resulting dropdown. Name the new file "codereview.md" and paste the following markdown:
+
+```
+Produce meaningful documentation including all of the following items in the following form:
+
+-----
+# {Name of File}
+
+## Purpose  
+Describe the overall purpose of the code. What is it designed to accomplish?
+
+## Functionality  
+Describe the specific functionality of the code. What does it do and how does it do it?
+
+## Dependencies  
+List any dependencies the code has. Are there any external libraries or packages it relies on?
+
+## Inputs/Outputs  
+Describe the inputs the code takes and the outputs it produces. What data does it work with?
+   
+## Enhancement Opportunities  
+List a "top three" of things that would make the code better {e.g., faster, more modern, less expensive} 
+```
+
+#### nuget_readme.md
+
+Right-click on the "Templates" and select "Add" >> "New Item" from the resulting dropdown. Name the new file "nuget_readme.md" and paste the following markdown:
+
+```
+Description
+
+## Dependencies 
+List Nuget Package / Version dependencies  
+
+## Classes  
+A full and sorted list of Key Vault Secrets referenced in the code.
+
+## Configuration  
+A full and sorted list of Key Vault Secrets referenced in the code.
+```
+
+-----
+
 ### Step 3: Modify Logic
 
 #### Program.cs
