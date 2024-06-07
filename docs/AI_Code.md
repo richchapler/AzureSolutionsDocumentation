@@ -104,49 +104,73 @@ A full and sorted list of Key Vault Secrets referenced in the code.
 
 Replace the default logic with:
 ```
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Octokit;
 using System.Text;
 
-class Program
+namespace AI_Code
 {
-    static readonly string KeyVault_Name = "azuresolutions";
-    static readonly SecretClient KeyVault_Client = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
-
-    static readonly HttpClient hc = new();
-
-    static async Task Main()
+    class Program
     {
-        BlobServiceClient bsc = new(connectionString: await GetSecret("BlobServiceClient-ConnectionString"));
-        var blobContainerClient = bsc.GetBlobContainerClient("code");
+        static readonly HttpClient hc = new();
+        static GitHubClient? GitHub_Client;
+        static string? Path_Destination;
 
-        GitHubClient ghc = new(new ProductHeaderValue("Lorem")) { Credentials = new Credentials(await GetSecret("GitHub-PersonalAccessToken")) };
-
-        var repos = await ghc.Repository.GetAllForCurrent();
-
-        var currentDateTime = DateTime.Now.ToString("yyyyMMdd-HHmmss");
-
-        foreach (var repo in repos)
+        static async Task Main()
         {
-            var directories = new Stack<string>();
-            directories.Push("");
+            /* ************************* User Input: KeyVault */
+
+            var keyVaultName = AzureSolutions.Helpers.KeyVault.Name.Get("KeyVault_Name");
+            if (keyVaultName == null) throw new ArgumentNullException(nameof(keyVaultName));
+
+            var kvc = AzureSolutions.Helpers.KeyVault.Configuration.PrepareConfiguration(keyVaultName);
+
+            if (kvc?.KeyVault_Client == null) throw new Exception("KeyVault Client is not initialized.");
+
+            /* ************************* User Input: GitHub Repositories  */
+
+            var ghc = AzureSolutions.Helpers.GitHub.Configuration.PrepareConfiguration(kvc.KeyVault_Client);
+
+            if (ghc?.GitHub_Client == null) throw new Exception("GitHub client is not initialized.");
+
+            GitHub_Client = ghc.GitHub_Client;
+
+            var repos = await GitHub_Client.Repository.GetAllForCurrent();
+
+            repos.Select((repo, index) => $"{index + 1}. {repo.Name}").ToList().ForEach(Console.WriteLine);
+
+            Console.WriteLine("\nSelect Repository:");
+
+            if (!int.TryParse(Console.ReadLine(), out int repoIndex) || repoIndex < 1 || repoIndex > repos.Count) { throw new ArgumentException("Invalid repository selection."); }
+            var selectedRepo = repos[repoIndex - 1];
+
+            /* ************************* Storage Account (destination) */
+
+            var sc = AzureSolutions.Helpers.Storage.Configuration.PrepareConfiguration(kvc.KeyVault_Client);
+
+            if (sc?.Storage_Client == null) throw new Exception("Storage Client is not initialized.");
+
+            var container = sc.Storage_Client.GetBlobContainerClient("code") ?? throw new Exception("Container is null");
+
+            Path_Destination = $"{selectedRepo.Name}/{DateTime.Now:yyyyMMdd-HHmm}";
+
+            var directories = new Stack<string>(); directories.Push(""); /* ...Push("") represents root directory */
+
+            Console.WriteLine($"\n************************* Copying files from repository '{selectedRepo.Name}' to storage account '{container?.AccountName}'...");
 
             while (directories.Count > 0)
             {
                 var dir = directories.Pop();
-                IReadOnlyList<RepositoryContent> contents;
-                if (string.IsNullOrEmpty(dir))
-                {
-                    contents = await ghc.Repository.Content.GetAllContents(repo.Owner.Login, repo.Name);
-                }
-                else
-                {
-                    contents = await ghc.Repository.Content.GetAllContents(repo.Owner.Login, repo.Name, dir);
-                }
 
-                foreach (var content in contents)
+                IEnumerable<RepositoryContent>? contents = null;
+
+                contents = GitHub_Client is { }
+                    ? string.IsNullOrEmpty(dir)
+                        ? await GitHub_Client.Repository.Content.GetAllContents(selectedRepo.Owner.Login, selectedRepo.Name)
+                        : await GitHub_Client.Repository.Content.GetAllContents(selectedRepo.Owner.Login, selectedRepo.Name, dir)
+                    : throw new Exception("GitHub client is not initialized.");
+
+                (contents ?? throw new Exception("Contents is null")).ToList().ForEach(async content =>
                 {
                     if (content.Type == ContentType.Dir)
                     {
@@ -154,27 +178,70 @@ class Program
                     }
                     else if (content.Type == ContentType.File)
                     {
-                        Console.WriteLine($"Url: {content.Url}");
+                        Console.WriteLine(content.Url);
 
-                        var file = await hc.GetByteArrayAsync(content.DownloadUrl);
-                        var fileContent = Encoding.UTF8.GetString(file);
+                        using var stream = await hc.GetStreamAsync(content.DownloadUrl);
 
-                        var blobName = $"{currentDateTime}/{repo.Name}/{content.Path}";
-                        var blobClient = blobContainerClient.GetBlobClient(blobName);
+                        if (container == null) throw new Exception("Container is null");
 
-                        using var stream = new MemoryStream(file);
-
-                        await blobClient.UploadAsync(stream, true);
+                        await container.GetBlobClient($"{Path_Destination}/{content.Path}").UploadAsync(stream, true);
                     }
+                });
+            }
+
+            Console.WriteLine("\n************************* Documenting C# Code...");
+
+            var oaic = AzureSolutions.Helpers.OpenAI.Configuration.PrepareConfiguration(kvc.KeyVault_Client);
+
+            var template_codereview = File.ReadAllText(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\Templates\\codereview.md")));
+
+            var CodeReviews = new List<string>();
+
+            if (container == null) throw new Exception("Container is null");
+
+            var blobs = container.GetBlobs(BlobTraits.None, BlobStates.None, $"{Path_Destination}") ?? throw new Exception("Blobs is null");
+            {
+                var blobNames = blobs.Select(b => b.Name).ToList();
+
+                foreach (var b in blobNames)
+                    {
+                        Console.WriteLine(b);
+                        
+                        if (b.Contains(".cs") && !b.Contains(".git"))
+                        {
+                            var r_bdi = await container.GetBlobClient(b).DownloadAsync();
+
+                            using var streamReader = new StreamReader(r_bdi?.Value.Content ?? throw new Exception("Content is null"));
+
+                            if (oaic == null) throw new Exception("OpenAI configuration is not initialized");
+
+                            var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(oaic,
+                                UserQuery: await streamReader.ReadToEndAsync(),
+                                SystemMessage: $"Use {b} as markdown file header.\n\n{template_codereview}",
+                                Temperature: 0.25f);
+
+                            using var Stream_Response = new MemoryStream(Encoding.UTF8.GetBytes(OpenAI_Prompt?.Response ?? string.Empty));
+
+                            await container.GetBlobClient(b.Replace(".cs", ".md")).UploadAsync(Stream_Response, true);
+
+                            CodeReviews.Add(OpenAI_Prompt?.Response ?? throw new Exception("Response is null"));
+                        }
                 }
             }
-        }
-    }
 
-    public static async Task<string> GetSecret(string secretName)
-    {
-        var secret = await KeyVault_Client.GetSecretAsync(secretName);
-        return secret.Value.Value;
+            Console.WriteLine("\n************************* Producing README.md...");
+
+            var template_readme = File.ReadAllText(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\Templates\\nuget_readme.md")));
+
+            var combinedOpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(oaic ?? throw new Exception("OpenAI configuration is not initialized"),
+                UserQuery: $"Produce README content that will be included with a NuGet package publication based on the code review content below:\n\n{string.Join("\n", CodeReviews)}",
+                SystemMessage: $"Use the README template below:\n\n{template_readme}",
+                Temperature: 0.0f);
+
+            using var Stream_README = new MemoryStream(Encoding.UTF8.GetBytes(combinedOpenAI_Prompt?.Response ?? string.Empty));
+
+            container.GetBlobClient($"{Path_Destination}/readme.md").Upload(Stream_README, overwrite: true);
+        }
     }
 }
 ```
@@ -185,211 +252,51 @@ class Program
 
 Click "Debug" >>  "Start Debugging".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/345f39aa-5b36-4bc4-924a-f558dd311a60" width="800" title="Snipped April 16, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac4453bf-ca14-42ae-8ed2-b0a3341d6d21" width="800" title="Snipped June 7, 2024" />
 
 Messages in the console window will iterate through files in your GitHub repository... and these will correspond with the files being copied to your Azure Storage Account.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fedcf39e-886e-4d14-ab24-318a09156d01" width="800" title="Snipped April 16, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/76602c7d-1939-482a-bf1a-cd758f0d20f0" width="800" title="Snipped June 7, 2024" />
 
-Navigate to the "code" container and then the dated folder created by the console app. Browse and confirm success. 
+Navigate to the "code" container, browse and confirm success.
+Identify and review a markdown file... for example, `index.md` describes helper class `index.cs`.
 
------
+```markdown
+# AzureSolutions/Helpers/AISearch/Index.cs
 
-### Step 5: Create Index
+## Purpose  
+This code is designed to interact with Azure's Search Index Client. It provides functionality to create and delete indexes, and list columns of an index. It is part of a larger project that uses Azure's AI Search capabilities.
 
-Navigate to AI Search.
+## Functionality  
+The code provides three main functions:
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/27eeda13-84ef-4ae9-8879-592e60268475" width="800" title="Snipped April 16, 2024" />
+- `Client`: This function initializes and returns an instance of Azure's SearchIndexClient using the provided Azure Search name and key.
+- `Create`: This function creates a new search index with the provided parameters. It supports creation via both Azure's API and SDK.
+- `Delete`: This function deletes an existing search index.
+- `ListColumns`: This function lists the columns of a given search index. It can filter the columns based on whether they are filterable or not.
 
-Click "Import Data".
+## Dependencies  
+This code depends on the Azure.Search.Documents.Indexes namespace from the Azure SDK for .NET. It specifically uses the SearchIndexClient, SearchIndex, SimpleField, SearchField, SearchableField, SearchSuggester, SemanticSearch, SemanticConfiguration, SemanticPrioritizedFields, SemanticField, and LexicalAnalyzerName classes.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3b7317e9-8bfa-4b77-a11b-374b1bf7de4b" width="800" title="Snipped April 17, 2024" />
+## Inputs/Outputs  
+The code primarily works with the following inputs:
 
-Select Data Source "Azure Blob Storage".
+- Azure Search name and key: These are used to authenticate and interact with Azure's Search service.
+- Index name: The name of the search index to create, delete, or list columns for.
+- Other parameters for index creation: These include the suggester name, semantic configuration name, and optionally a JSON definition.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2dcb1d8d-541d-4099-9382-ff2896ded255" width="800" title="Snipped April 17, 2024" />
+The outputs of the code are:
 
-Complete the "Connect to your data" tab/form, pointing at the "code" repository in Azure Storage, then click "Next: Add cognitive skills".
+- `Client`: Returns an instance of Azure's SearchIndexClient.
+- `Create`: No return value, but creates a new search index in Azure.
+- `Delete`: No return value, but deletes an existing search index in Azure.
+- `ListColumns`: Returns a list of column names from the specified search index.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0969c04d-abc9-40f6-bdfd-decfd576b350" width="800" title="Snipped April 17, 2024" />
-
-Click "Skip to: Customize target index".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/84f26b2a-fa97-4f9f-adfe-7c257da115dd" width="800" title="Snipped April 17, 2024" />
-
-Enter an index name, check the header checkboxes for "Retrievable" and "Searchable", then click "Next: Create an indexer".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2c4df56c-48ac-4592-8938-d86b4bacda7e" width="800" title="Snipped April 17, 2024" />
-
-Enter an indexer name, then click "Submit".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f8a1fa00-88b6-4cc5-9a18-f08ba26f0503" width="800" title="Snipped April 17, 2024" />
-
-Navigate to "Search Management" >> "Indexers" and confirm successful index processing.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8b683039-f6ab-4a99-89ad-bb6c5400ed43" width="800" title="Snipped April 17, 2024" />
-
-Navigate to "Search Management" >> "Index", select the new index and on the resulting page, click "Search" to see results.
-
------
-
-### Step 6: Prompt OpenAI
-
-Navigate to OpenAI.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/496b6093-9873-43cc-9290-d90154a00dc9" width="800" title="Snipped April 17, 2024" />
-
-Click "Go to Azure OpenAI Studio" >> "Playground" >> "Chat".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ee9041db-f0d4-444d-a395-a7bd188a7a2d" width="800" title="Snipped April 17, 2024" />
-
-On the "Setup" panel, "Add your data" tab, click "+ Add a data source".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/df5f3ea3-54cc-482c-bc00-1e0fbff77e8a" width="800" title="Snipped April 17, 2024" />
-
-Complete the "Select or add data source" form, pointing at the previously-created AI Search Index, and then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d4c94c2b-6229-403d-a839-7465d5da3192" width="800" title="Snipped April 17, 2024" />
-
-Complete the "Data management" form, then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/531842d9-8f06-478c-93e8-4d78b1b8cc23" width="800" title="Snipped April 17, 2024" />
-
-Confirm values on the "Review and finish" page, then click "Save and close".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f9721f68-4ef8-4892-9426-8f2baf0189e9" width="800" title="Snipped April 17, 2024" />
-
-Try out prompts you might use to query and better understand your legacy codebase.
-
------
-
-**Congratulations... you have successfully completed this exercise**
-
------
-
-## Exercise #2: Iterative Code Suggestions
-
-### Step 1: Update Project
-
-Return to the Visual Studio project and update the code:
-
+## Enhancement Opportunities  
+1. Error handling: The code could be enhanced to handle more specific error scenarios and provide more detailed error messages.
+2. Input validation: The code could include more robust input validation to ensure the provided parameters are valid before attempting to interact with Azure's Search service.
+3. Asynchronous operations: The code could be enhanced to support asynchronous operations, allowing for better performance in scenarios where multiple indexes need to be created, deleted, or queried at once.
 ```
-using Azure;
-using Azure.AI.OpenAI;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using Azure.Storage.Blobs;
-using Octokit;
-using System.Text;
-
-class Program
-{
-    static readonly string KeyVault_Name = "azuresolutions";
-    static readonly SecretClient KeyVault_Client = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
-
-    static readonly HttpClient hc = new();
-
-    static async Task Main()
-    {
-        BlobServiceClient bsc = new(connectionString: await GetSecret("BlobServiceClient-ConnectionString"));
-        var blobContainerClient = bsc.GetBlobContainerClient("code");
-
-        GitHubClient ghc = new(new ProductHeaderValue("Lorem")) { Credentials = new Credentials(await GetSecret("GitHub-PersonalAccessToken")) };
-
-        OpenAIClient oaic = new(
-           endpoint: new Uri($"https://{await GetSecret("OpenAI-Name")}.openai.azure.com/"),
-           keyCredential: new AzureKeyCredential(await GetSecret("OpenAI-Key"))
-       );
-
-        var repos = await ghc.Repository.GetAllForCurrent();
-
-        var currentDateTime = DateTime.Now.ToString("yyyyMMdd-HHmmss");
-
-        foreach (var repo in repos)
-        {
-            var directories = new Stack<string>();
-            directories.Push("");
-
-            while (directories.Count > 0)
-            {
-                var dir = directories.Pop();
-                IReadOnlyList<RepositoryContent> contents;
-                if (string.IsNullOrEmpty(dir))
-                {
-                    contents = await ghc.Repository.Content.GetAllContents(repo.Owner.Login, repo.Name);
-                }
-                else
-                {
-                    contents = await ghc.Repository.Content.GetAllContents(repo.Owner.Login, repo.Name, dir);
-                }
-
-                foreach (var content in contents)
-                {
-                    if (content.Type == ContentType.Dir)
-                    {
-                        directories.Push(content.Path);
-                    }
-                    else if (content.Type == ContentType.File)
-                    {
-                        var file = await hc.GetByteArrayAsync(content.DownloadUrl);
-                        var fileContent = Encoding.UTF8.GetString(file);
-
-                        using var stream = new MemoryStream(file);
-
-                        /* Write to Azure Storage */
-
-                        // Console.WriteLine($"Copying {content.Url}");
-
-                        // var blobName = $"{currentDateTime}/{repo.Name}/{content.Path}";
-                        // var blobClient = blobContainerClient.GetBlobClient(blobName);
-
-                        // await blobClient.UploadAsync(stream, true);
-
-                        /* Prompt OpenAI */
-
-                        if (content.Name.EndsWith(".cs"))
-                        {
-                            var OpenAI_Prompt = await AzureSolutions.Helpers.OpenAI.Prompt(
-                                       OpenAI_Client: oaic,
-                                       OpenAI_Deployment_Name: "gpt-4-32k",
-                                       UserQuery: $"What does this code do?\n\n{fileContent}",
-                                       SystemMessage: "You are a code expert",
-                                       Temperature: 0.0f
-                                        );
-
-                            Console.WriteLine($"Code:\n{fileContent}\nWhat it does...\n{OpenAI_Prompt.Response}");
-
-                            Console.ReadLine();
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public static async Task<string> GetSecret(string secretName)
-    {
-        var secret = await KeyVault_Client.GetSecretAsync(secretName);
-        return secret.Value.Value;
-    }
-}
-```
-
-Notes:
-* Additions to: `using...`, `OpenAIClient...`, commenting of prior `blob` logic, and addition of `Prompt OpenAI` logic
-* `UserQuery` includes the simple question `What does this code do?`
-* Response is only written to the console... ultimately you might send this through to your DevOps system, a database, etc.
-
-
------
-
-### Step 2: Confirm Success
-
-Click "Debug" >>  "Start Debugging".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1a37e026-08b0-4793-ab28-2cb1955f3955" width="800" title="Snipped April 19, 2024" />
-
-Messages in the console window will iterate through C# files in your GitHub repository, ask Open AI "what does this code do?", and then surface response.
 
 -----
 
