@@ -8,7 +8,7 @@ Use Case | Technologies
 [AI, Interface](AI_Interface.md) | AI Search, Open AI, Visual Studio (C#)
 [AI, Bot](AI_Bot.md) | AI Search, Bot Service, Open AI, Teams, Visual Studio (C#)
 [AI, Test](AI_Test.md) | AI Search, OpenAI, C#, DevOps<br>
-[AI, at-scale Code Analysis](AI_CodeAnalysis.md) | AI Search, Open AI, Visual Studio (C#)
+[AI, Code Analysis](AI_Code.md) | GitHub, Open AI, Visual Studio (C#)
 [AI, Improve Response Quality](AI_ImproveResponseQuality.md) | AI Search, Open AI, Visual Studio (C#)
 [AI Search, Enrich Data with Custom Skillset](AISearch_CustomSkillset.md) | SQL, AI Search, Function App, C#
 [AI Search, Source from Data Explorer](AISearch_fromDataExplorer.md) | Data Explorer (via export), AI Search, JSON, HTML
