@@ -8,12 +8,6 @@
 * "We want to create a high-level README summary of the documented code"
 * "Documentation should be template-based, so we can evolve over time, at scale"
 
-## Proposed Solution
-This solution will address requirements in two exercises:
-
-* Exercise 1: Chat with Legacy Code
-* Exercise 2: Iterative Code Suggestions
-
 ## Solution Requirements
 
 This documentation assumes the following resources are ready for use:
@@ -37,28 +31,21 @@ Codeblock explanation is limited... I recommend that you copy code blocks to Bin
 
 -----
 
-## Exercise 1: Chat with Legacy Code
-
-### Step 1: Create Project
+### Step 1: Prepare Project
 
 Open Visual Studio and create a Console App project.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0659d99b-82f5-4d29-8326-e4a78af08818" width="800" title="Snipped April 16, 2024" />
-
-### Step 2: Install Nuget
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2deb0e6-0b23-4f78-a4dc-64b7cf7d07fb" width="800" title="Snipped June 7, 2024" />
 
 Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manage NuGet Packages for Solution..."
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/eb2cb824-3951-488f-813e-7bf9d655e41b" width="800" title="Snipped April 16, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/064d2f4b-6f1d-45bf-975e-e135849703de" width="800" title="Snipped June 7, 2024" />
 
-On the "Browse" tab of the "NuGet - Solution" page, search for and select "Octokit".
+On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolution_Helpers".
 On the resulting pop-out, check the box next to your project and then click "Install".
-Repeat this process for:
-* Azure.Security.KeyVault.Secrets
-* Azure.Storage.Blobs
-* AzureSolutions.Helpers
+Repeat this process for Octokit.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/26207ff5-ae91-4df6-a3d3-fcf12b73d7d8" width="800" title="Snipped April 16, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6fd5ad84-3cd3-4ef9-a1ae-f2bf06307309" width="800" title="Snipped June 7, 2024" />
 
 -----
 
