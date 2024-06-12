@@ -20,6 +20,7 @@ This solution requires the following resources:
   * AISearch-DataSource-SQL-Server-User... in form "{SQL-Server-Admin-User}@{database name}"
 
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
+  * Don't use a Server Name or Database Name with dashes... it causes a bug in AISearch and inability to run index
   * Include sample data {e.g., AdventureWorks}
   * SQL Authentication with known admin credentials
   * Networking: Enable "Allow Azure services and resources to access this server"
