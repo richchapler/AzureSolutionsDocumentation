@@ -16,10 +16,13 @@ This solution requires the following resources:
   * Identity >> System Assigned: Set status "On" and confirm when prompted
 
 * [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* Key Vault with secrets:
+  * AISearch-DataSource-SQL-Server-User... in form "{SQL-Server-Admin-User}@{database name}"
 
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
   * Include sample data {e.g., AdventureWorks}
-  * Networking: Enable "**Allow Azure services and resources to access this server**"
+  * SQL Authentication with known admin credentials
+  * Networking: Enable "Allow Azure services and resources to access this server"
   * Access Control (IAM): Add Role Assignment "Reader" role for Search Service, System-Assigned Managed Identity
   * Grant access to AI Search using the following T-SQL:
     ```sql
