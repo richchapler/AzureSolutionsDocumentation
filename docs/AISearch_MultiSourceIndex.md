@@ -12,20 +12,19 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**Cognitive Search**](https://azure.microsoft.com/en-us/products/search) (aka "Search Service")
-  * Enable **System-Assigned Managed Identity**
-  * Use a Region that supports Cognitive Search {e.g., West}
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search) (aka "Search Service")
+  * Identity >> System Assigned: Set status "On" and confirm when prompted
 
-* [**Cognitive Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
 * [**SQL**](https://learn.microsoft.com/en-us/azure/azure-sql) Server and Database
-  * Include sample data
-  * Enable "**Allow Azure services and resources to access this server**"
-  * Grant Role Assignment "Reader" role for Search Service, System-Assigned Managed Identity
-  * Grant access to Cognitive Search using the following T-SQL:
-    ```
-    CREATE USER [rchaplerss] FROM EXTERNAL PROVIDER;
-    EXEC sp_addrolemember 'db_datareader', [rchaplerss];
+  * Include sample data {e.g., AdventureWorks}
+  * Networking: Enable "**Allow Azure services and resources to access this server**"
+  * Access Control (IAM): Add Role Assignment "Reader" role for Search Service, System-Assigned Managed Identity
+  * Grant access to AI Search using the following T-SQL:
+    ```sql
+    CREATE USER [azuresolutions-aisearch] FROM EXTERNAL PROVIDER;
+    EXEC sp_addrolemember 'db_datareader', [azuresolutions-aisearch];
     ```
     
 * [**Storage Account**](Infrastructure_StorageAccount.md)
