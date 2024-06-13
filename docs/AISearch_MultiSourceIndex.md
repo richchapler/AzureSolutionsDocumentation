@@ -12,7 +12,7 @@ This solution considers the following requirements:
 ## Required Infrastructure
 This solution requires the following resources:
 
-* [**AI Search**](https://azure.microsoft.com/en-us/products/search) (aka "Search Service")
+* [**AI Search**](https://azure.microsoft.com/en-us/products/search)
   * Identity >> System Assigned: Set status "On" and confirm when prompted
 
 * [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
