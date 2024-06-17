@@ -5,7 +5,7 @@
 ## Use Case
 This solution considers the following requirements:
 
-* "We have structured data {e.g., SQL Database} and unstructured data {e.g., CAD drawings} that want to search"
+* "We have structured data {e.g., SQL Database} and unstructured data {e.g., CAD drawings} that want to search using a single index"
 * "We want to have a single search experience, not one for each source"
 * "We are eager to embrace Azure OpenAI when it becomes available"
 
