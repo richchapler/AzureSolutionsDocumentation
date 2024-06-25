@@ -3,14 +3,13 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
-* "We have implemented OpenAI with AI Search and are rapidly iterating through enhancements to the index"
-  * "We have found that creating and updating the AI Search index with the Azure Portal tools can be difficult... we want a simpler, faster, more consistent experience"
-  * "We want to capture our AI Search index creation process in our GitHub or DevOps repository"
+* "We implement OpenAI with AI Search and are rapidly iterating through enhancements to the configuration"
+* "We find that creating and updating the AI Search configuration with Azure Portal, "Import data", and "Import and vectorize data" is difficult"
+* "We want to capture our AI Search configuration in our GitHub or DevOps repository"
+* "Our AI Search index includes multiple data sources"
 * "Both semantic and vector should be activated"
-  * "Codified AI Search skills must include: OCR, Key Phrase Extraction, and a Custom Skillset... also, for vectorization, Split and OpenAI Embedding"
-  * "Because a lot of the code for vectorization is not yet surfaced in the Search Development Kit (SDK), we must also be able to leverage Application Programming Interface (API)"
 * "To optimize response quality, we should include synonyms for country codes"
-* "All secrets must be stored in Key Vault"
+* "All keys must be stored in Key Vault"
 
 ## Proposed Solution
 * Custom Skillset API: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
@@ -25,39 +24,23 @@
 * [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
 * [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  - Subscription-Id  
-  - ResourceGroup-Name  
-  - AISearch-Name  
-  - AISearch-Key  
-  - AISearch-DataSource-Name  
-  - AISearch-DataSource-Blob-ConnectionString  
-  - AISearch-DataSource-Blob-Container  
-  - AISearch-DataSource-SQL-Server-Name  
-  - AISearch-DataSource-SQL-Server-User  
-  - AISearch-DataSource-SQL-Server-Password  
-  - AISearch-DataSource-SQL-Database-Name  
-  - AISearch-DataSource-SQL-Table  
-  - AISearch-DataSource-SQL-Query  
-  - AISearch-Index-Name  
-  - AISearch-Skillset-Name  
-  - AISearch-Indexer-Name  
-  - AISearch-Suggester-Name  
-  - AISearch-SynonymMap-Name  
-  - AISearch-SemanticConfiguration-Name  
-  - AISearch-VectorProfile-Name  
-  - AISearch-VectorAlgorithm-Name  
-  - AISearch-Vectorizer-Name  
-  - AIServices-Name  
-  - AIServices-Key  
-  - OpenAI-Name  
-  - OpenAI-Key  
+  - Subscription-Id
+  - ResourceGroup-Name
+  - AISearch-Name
+  - AISearch-Key
+  - AIServices-Name
+  - AIServices-Key
+  - OpenAI-Name
+  - OpenAI-Key
   - OpenAI-Deployment-Embedding  
  
-* [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-ada-002" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
+* [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-3-large" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
  
 * [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
  
 * [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
+ 
+* [**SQL**] with Adventureworks
  
 * [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
