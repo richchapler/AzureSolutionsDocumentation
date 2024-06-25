@@ -4,7 +4,7 @@
 
 ## Use Case
 * "We implement OpenAI with AI Search and are rapidly iterating through enhancements to the configuration"
-* "We find that creating and updating the AI Search configuration with Azure Portal, "Import data", and "Import and vectorize data" is difficult"
+* "Creating and updating the AI Search configuration with Azure Portal, "Import data", and "Import and vectorize data" is difficult"
 * "We want to capture our AI Search configuration in our GitHub or DevOps repository"
 * "Our AI Search index includes multiple data sources"
 * "Both semantic and vector should be activated"
@@ -17,13 +17,13 @@
 * Source Control: Create a pull request in a DevOps repo
 
 ## Solution Requirements
-* [**AI Search**](https://azure.microsoft.com/en-us/products/search)
+* [AI Search](https://azure.microsoft.com/en-us/products/search)
 
-* [**AI Services**](https://learn.microsoft.com/en-us/azure/cognitive-services/)
+* [AI Services](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
-* [**DevOps**](https://azure.microsoft.com/en-us/products/devops/) with organization and project
+* [DevOps](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
-* [**Key Vault**](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
+* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
   - Subscription-Id
   - ResourceGroup-Name
   - AISearch-Name
@@ -34,20 +34,20 @@
   - OpenAI-Key
   - OpenAI-Deployment-Embedding  
  
-* [**OpenAI**](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-3-large" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
+* [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-3-large" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
  
-* [**Postman**](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
+* [Postman](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
  
-* [**Storage Account**](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
+* [Storage Account](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
  
-* [**SQL**] with Adventureworks
+* [SQL Server](https://learn.microsoft.com/en-us/azure/azure-sql) and [Database](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
  
-* [**Visual Studio**](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
+* [Visual Studio](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
 
 <br>
 If you intend to prepare a custom skillset, also instantiate:
 
-* [**Function App**](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
+* [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
   * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
