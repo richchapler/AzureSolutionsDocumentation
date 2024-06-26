@@ -12,9 +12,9 @@
 * "All keys must be stored in Key Vault"
 
 ## Proposed Solution
-* Custom Skillset API: Use a Function App to instantiate a simple API for use with AI Search, custom skillset
-* Deployment Application: Use a combination of API and SDK to create data source, index, skillset, indexer, and synonym map
+* Deployment Application: Prepare for automated deployment of a multi-source index (and skillset, indexer, synonym map)
 * Source Control: Create a pull request in a DevOps repo
+* Custom Skillset API (Bonus Exercise): Use a Function App to instantiate a simple API for use with AI Search, custom skillset
 
 ## Solution Requirements
 * [AI Search](https://azure.microsoft.com/en-us/products/search)
@@ -57,169 +57,27 @@ If you intend to prepare a custom skillset, also instantiate:
 I used to spend a lot of time explaining code blocks, but now skip that part of my sharing process in favor of a recommendation to copy code blocks to Bing Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
 
 -----
-
-## Exercise 1: Custom Skillset API
-In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
-<br>_Note: Only complete this exercise if you intend to include a custom skillset in the AI Search deployment app_
-
-### Step 1: Create Project
-
-Open Visual Studio and click "**Create a new project**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b9ad75a-370d-4642-98a0-78600a43b772" width="600" title="Snipped: October 27, 2023" />
-
-On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 27, 2023" />
-
-Complete the "**Configure your new project**" form and then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39eeeab1-76b4-4325-8772-0c7aafa3c6d9" width="600" title="Snipped: October 27, 2023" />
-
-Complete the "**Additional information**" form:
-
-Prompt | Entry
-:----- | :-----
-**Functions worker** | **.NET 7.0 Isolated**
-**Function** | **Http trigger**
-**Use Azurite...** | Checked
-**Authorization level** | Function
-
-Click "**Create**".
-
 -----
 
-### Step 2: Code Function
+## Exercise 1: Deployment Application
+In this exercise, we will prepare for automated deployment of a multi-source index (and skillset, indexer, synonym map).
 
-Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
+### Step 1: Data Sources
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af1d52cb-5dbd-43b2-9198-ea390dede565" width="800" title="Snipped: October 27, 2023" />
+_Philosophical Note: When I write (either articles or code), I strive to limit myself to only what is absolutely necessary and never duplicative with existing functionality. Azure AI Search, Data Source functionality is perfectly adequate and re-creating it would add no value. So, in this step, we'll simply review the creation of a data source (with slight specifics for this use case)._
 
-Replace the default logic in "CustomSkillset" with:
+Navigate to Azure portal >> AI Search >> Data Sources and then click "+ Add data source". Complete the form (examples below):
 
-```csharp
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
-using System.Net;
-using System.Text.Json;
+#### Blob Storage
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e94da228-1906-4d78-bd19-a0b6e5cca203" width="800" title="Snipped: June 26, 2024" />
 
-namespace FunctionApp_CustomSkillset
-{
-    public class CustomSkillset
-    {
-        [Function("CustomSkillset")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd)
-        {
-            string request = string.Empty;
+Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to stardardized multi-source index columns (like `name`).
 
-            using (var reader = new StreamReader(hrd.Body)) { request = reader.ReadToEnd(); }
+#### SQL Database
 
-            var d = new Dictionary<string, object> { { "values", new List<Dictionary<string, object>>() } };
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba9fa875-607a-4e3b-9047-1f29588d75bd" width="800" title="Snipped: June 26, 2024" />
 
-            foreach (var value in JsonDocument.Parse(request).RootElement.GetProperty("values").EnumerateArray())
-            {
-                var r = new Dictionary<string, object>
-                {
-                    { "recordId", value.GetProperty("recordId").GetString() ?? string.Empty },
-                    { "data", new Dictionary<string, object> { { "myColumn", value.GetProperty("data") } } },
-                    { "errors", string.Empty },
-                    { "warnings", string.Empty }
-                };
-
-                ((List<Dictionary<string, object>>)d["values"]).Add(r);
-            }
-
-            var response = hrd.CreateResponse(HttpStatusCode.OK);
-            response.WriteAsJsonAsync(d);
-            return response;
-        }
-    }
-}
-```
-
-Logic Explained:
-* `using (var reader = new StreamReader(hrd.Body)...` parses request body JSON
-* `foreach (var value in JsonDocument.Parse(request)` iterates through request values and packages a response
-* `response.WriteAsJsonAsync(d)... return...` completes response
-
-_Note: This is a template function ONLY... add additional logic based on your use case_
-
------
-
-### Step 3: Publish Function
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
-
-Right-click on your project in the Solution Explorer pane and select "**Publish**" from the resulting menu.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a090114-5879-44d0-a07c-c78a006d92ff" width="600" title="Snipped: October 30, 2023" />
-
-On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
-
-On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Service (Windows)**", then click "**Next**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af141980-d358-4879-b2c9-0277d90882c6" width="600" title="Snipped: October 30, 2023" />
-
-On the **Publish** >> "**Select existing or...**" page, select your Function App and then click "**Finish**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8ed84d8e-1b06-4abf-8cf3-2a158c339d53" width="600" title="Snipped: October 30, 2023" />
-
-On the **Publish profile creation progress** >> "**Finish**" page, click "**Close**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/85acb60f-bb87-43a2-9c4a-e4b5f4c12f11" width="800" title="Snipped: October 30, 2023" />
-
-Back on the "...Publish" page, click **Publish**, allow time for processing, and confirm successful publication.
-
------
-
-### Step 4: Confirm Success
-
-Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a48bae96-a071-440e-912f-dff11e09da87" width="800" title="Snipped: October 31, 2023" />
-
-Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the following "**Body**" value:
-
-```
-{"values":[{"recordId":"0","data":{"text":"Lorem Ipsum"}}]}
-```
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d9fd06a-62d8-4ebe-9304-bdcc2834e860" width="800" title="Snipped: October 31, 2023" />
-
-Click "**Run**".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f0f47af-5e58-4fd9-822b-215e910c6602" width="800" title="Snipped: October 31, 2023" />
-
-The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
-
-```json
-{
-  "values": [
-    {
-      "recordId": "0",
-      "data": {
-        "myColumn": {
-          "text": "Lorem Ipsum"
-        }
-      },
-      "errors": "",
-      "warnings": ""
-    }
-  ]
-}
-```
-
------
-
-**Congratulations... you have successfully completed this exercise**
-
------
------
-
-## Exercise 2: Deployment Application
-In this exercise, we will prepare to use a combination of API and SDK to create data source, index, skillset, indexer, and synonym map.
+SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; example:`SELECT [AddressID] [id], [AddressLine1] [name] FROM [SalesLT].[Address] WITH (NOLOCK)`
 
 ### Step 1: Create Visual Studio Project
 
@@ -254,24 +112,7 @@ On the **Browse** tab of the "**NuGet - Solution**" page, search for and select 
 
 -----
 
-### Step 3: Data Sources
 
-Philiosophical Note: When I write (either articles or code), I limit myself to only what is absolutely necessary and never duplicative with existing functionality. Azure AI Search, Data Source functionality is perfectly adequate and re-creating it would add no value. So, in this step, we'll simply review the creation of a data source (with slight specifics for this use case).
-
-Navigate to Azure portal >> AI Search >> Data Sources and then click "+ Add data source".
-
-#### Blob Storage
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e94da228-1906-4d78-bd19-a0b6e5cca203" width="800" title="Snipped: June 26, 2024" />
-
-Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to stardardized multi-source index columns (like `name`).
-
-#### SQL Database
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba9fa875-607a-4e3b-9047-1f29588d75bd" width="800" title="Snipped: June 26, 2024" />
-
-SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index.
-
-`SELECT [AddressID] [id], [AddressLine1] [name] FROM [SalesLT].[Address] WITH (NOLOCK)`
 
 
 
@@ -554,4 +395,163 @@ Complete the resulting "Create a Git repository" pop-up form, then click "**Crea
 
 -----
 
-**Congratulations... you have successfully completed all exercises**
+**Congratulations... you have successfully completed this exercise**
+
+-----
+
+## Bonus Exercise: Custom Skillset API
+In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
+<br>_Note: Only complete this exercise if you intend to include a custom skillset in the AI Search deployment app_
+
+### Step 1: Create Project
+
+Open Visual Studio and click "**Create a new project**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b9ad75a-370d-4642-98a0-78600a43b772" width="600" title="Snipped: October 27, 2023" />
+
+On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 27, 2023" />
+
+Complete the "**Configure your new project**" form and then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39eeeab1-76b4-4325-8772-0c7aafa3c6d9" width="600" title="Snipped: October 27, 2023" />
+
+Complete the "**Additional information**" form:
+
+Prompt | Entry
+:----- | :-----
+**Functions worker** | **.NET 7.0 Isolated**
+**Function** | **Http trigger**
+**Use Azurite...** | Checked
+**Authorization level** | Function
+
+Click "**Create**".
+
+-----
+
+### Step 2: Code Function
+
+Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af1d52cb-5dbd-43b2-9198-ea390dede565" width="800" title="Snipped: October 27, 2023" />
+
+Replace the default logic in "CustomSkillset" with:
+
+```csharp
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using System.Net;
+using System.Text.Json;
+
+namespace FunctionApp_CustomSkillset
+{
+    public class CustomSkillset
+    {
+        [Function("CustomSkillset")]
+        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd)
+        {
+            string request = string.Empty;
+
+            using (var reader = new StreamReader(hrd.Body)) { request = reader.ReadToEnd(); }
+
+            var d = new Dictionary<string, object> { { "values", new List<Dictionary<string, object>>() } };
+
+            foreach (var value in JsonDocument.Parse(request).RootElement.GetProperty("values").EnumerateArray())
+            {
+                var r = new Dictionary<string, object>
+                {
+                    { "recordId", value.GetProperty("recordId").GetString() ?? string.Empty },
+                    { "data", new Dictionary<string, object> { { "myColumn", value.GetProperty("data") } } },
+                    { "errors", string.Empty },
+                    { "warnings", string.Empty }
+                };
+
+                ((List<Dictionary<string, object>>)d["values"]).Add(r);
+            }
+
+            var response = hrd.CreateResponse(HttpStatusCode.OK);
+            response.WriteAsJsonAsync(d);
+            return response;
+        }
+    }
+}
+```
+
+Logic Explained:
+* `using (var reader = new StreamReader(hrd.Body)...` parses request body JSON
+* `foreach (var value in JsonDocument.Parse(request)` iterates through request values and packages a response
+* `response.WriteAsJsonAsync(d)... return...` completes response
+
+_Note: This is a template function ONLY... add additional logic based on your use case_
+
+-----
+
+### Step 3: Publish Function
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
+
+Right-click on your project in the Solution Explorer pane and select "**Publish**" from the resulting menu.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a090114-5879-44d0-a07c-c78a006d92ff" width="600" title="Snipped: October 30, 2023" />
+
+On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
+
+On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Service (Windows)**", then click "**Next**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af141980-d358-4879-b2c9-0277d90882c6" width="600" title="Snipped: October 30, 2023" />
+
+On the **Publish** >> "**Select existing or...**" page, select your Function App and then click "**Finish**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8ed84d8e-1b06-4abf-8cf3-2a158c339d53" width="600" title="Snipped: October 30, 2023" />
+
+On the **Publish profile creation progress** >> "**Finish**" page, click "**Close**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/85acb60f-bb87-43a2-9c4a-e4b5f4c12f11" width="800" title="Snipped: October 30, 2023" />
+
+Back on the "...Publish" page, click **Publish**, allow time for processing, and confirm successful publication.
+
+-----
+
+### Step 4: Confirm Success
+
+Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a48bae96-a071-440e-912f-dff11e09da87" width="800" title="Snipped: October 31, 2023" />
+
+Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the following "**Body**" value:
+
+```
+{"values":[{"recordId":"0","data":{"text":"Lorem Ipsum"}}]}
+```
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d9fd06a-62d8-4ebe-9304-bdcc2834e860" width="800" title="Snipped: October 31, 2023" />
+
+Click "**Run**".
+
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f0f47af-5e58-4fd9-822b-215e910c6602" width="800" title="Snipped: October 31, 2023" />
+
+The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
+
+```json
+{
+  "values": [
+    {
+      "recordId": "0",
+      "data": {
+        "myColumn": {
+          "text": "Lorem Ipsum"
+        }
+      },
+      "errors": "",
+      "warnings": ""
+    }
+  ]
+}
+```
+
+-----
+
+**Congratulations... you have successfully completed this exercise**
