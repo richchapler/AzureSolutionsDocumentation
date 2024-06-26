@@ -110,22 +110,13 @@ On the **Browse** tab of the "**NuGet - Solution**" page, search for and select 
 <br>When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 <br>When complete, close the "**NuGet - Solution**" tab.
 
------
-
-
-
-
-
-
-
-
-
+_Note: I am steadily moving more and more functionality from one-off solutions to AzureSolutions.Helpers and I'm happy to share those details to interested parties. Ping me!_
 
 -----
 
-#### Synonym Map
+### Step 4: Synonym Map
 
-##### `synonyms.json`
+Right-click on the project and add new file `synonyms.json`.
 
 ```json
 [
@@ -138,212 +129,112 @@ On the **Browse** tab of the "**NuGet - Solution**" page, search for and select 
 
 ### Step 5: `Program.cs`
 
-Replace the default code on the "**Program.cs**" tab with the following C#:
+Replace the default code in `Program.cs` with the following C#:
 
 ```csharp
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using AzureSolutions.Helpers.AISearch;
-using System.Text.RegularExpressions;
+#pragma warning disable IDE1006 // Disable Warning: Naming Styles
+
+using AzureSolutions.Helpers;
 
 namespace AI_Deploy
 {
     public class Program
     {
-        private static SecretClient? keyvault;
-
-        private static string GetUserChoice(string variableName)
-        {
-            var options = new Dictionary<string, Dictionary<string, (string Choice, string Final)>>
-            {
-                {
-                    "Data Source Type?",
-                    new Dictionary<string, (string Choice, string Final)>
-                    {
-                        { "1", ("Azure Blob Storage", "blob") },
-                        { "2", ("Azure SQL", "sql") }
-                    }
-                },
-                {
-                    "Create Method?",
-                    new Dictionary<string, (string Choice, string Final)>
-                    {
-                        { "1", ("API", "API") },
-                        { "2", ("SDK", "SDK") }
-                    }
-                }
-            };
-
-            var message = $"\n{variableName}: " + string.Join(" or ", options[variableName].Select(o => $"{o.Key}. {o.Value.Choice}"));
-
-            Console.WriteLine(message);
-            string? userChoice = Console.ReadLine();
-            return userChoice != null && options[variableName].TryGetValue(userChoice, out var value)
-                ? value.Final
-                : string.Empty;
-        }
+        public static AzureSolutions.Helpers.KeyVault.Configuration kvc { get; set; } = new AzureSolutions.Helpers.KeyVault.Configuration();
+        public static AzureSolutions.Helpers.AISearch.Configuration aisc { get; set; } = new AzureSolutions.Helpers.AISearch.Configuration();
+        public static AzureSolutions.Helpers.OpenAI.Configuration oaic { get; set; } = new AzureSolutions.Helpers.OpenAI.Configuration();
 
         public static async Task Main()
         {
             try
             {
-                /* ************************* User Choices */
+                /* ************************* User Input: KeyVault and Configurations */
 
-                Console.WriteLine("\nConfigure...");
-                
-                string DataSourceType = GetUserChoice("Data Source Type?");
-                string CreateMethod = GetUserChoice("Create Method?");
+                var KeyVault_Name = AzureSolutions.Helpers.KeyVault.Name.Get("KeyVault_Name");
+                if (KeyVault_Name == null) throw new ArgumentNullException(nameof(KeyVault_Name));
 
-                /* ************************* KeyVault */
+                kvc = AzureSolutions.Helpers.KeyVault.Configuration.Prepare(KeyVault_Name);
+                if (kvc?.Client == null) throw new Exception("KeyVault Client is not initialized.");
+                Console.WriteLine($".KeyVault '{kvc.Name}' prepared...");
 
-                Console.WriteLine("\nKeyVault Name?");
+                aisc = AzureSolutions.Helpers.AISearch.Configuration.Prepare(kvc.Client);
+                if (aisc.Name == null || aisc.Key == null || aisc.Index == null) { throw new ArgumentNullException("Config_AISearch.Name or Config_AISearch.Key is null"); }
+                Console.WriteLine($".AI Search '{aisc.Name}' prepared...");
 
-                string? KeyVault_Name = Console.ReadLine();
+                oaic = AzureSolutions.Helpers.OpenAI.Configuration.Prepare(kvc.Client);
+                if (oaic.Name == null || oaic.Key == null) { throw new ArgumentNullException("Config_OpenAI.Name or Config_OpenAI.Key is null"); }
+                Console.WriteLine($".OpenAI '{oaic.Name}' prepared...");
 
-                keyvault = new(vaultUri: new Uri($"https://{KeyVault_Name}.vault.azure.net"), credential: new DefaultAzureCredential());
+                /* ************************* Required Secrets */
 
-                Dictionary<string, string> secret = [];
-
-                string[] secretNames = [
+                var Secrets = AzureSolutions.Helpers.KeyVault.Secret.GetList(kvc, [
                     "Subscription-Id",
                     "ResourceGroup-Name",
                     "AISearch-Name",
                     "AISearch-Key",
-                    "AISearch-DataSource-Name",
-                    "AISearch-DataSource-Blob-ConnectionString",
-                    "AISearch-DataSource-Blob-Container",
-                    "AISearch-DataSource-SQL-Server-Name",
-                    "AISearch-DataSource-SQL-Server-User",
-                    "AISearch-DataSource-SQL-Server-Password",
-                    "AISearch-DataSource-SQL-Database-Name",
-                    "AISearch-DataSource-SQL-Table",
-                    "AISearch-DataSource-SQL-Query",
-                    "AISearch-Index-Name",
-                    "AISearch-Skillset-Name",
-                    "AISearch-Indexer-Name",
-                    "AISearch-Suggester-Name",
-                    "AISearch-SynonymMap-Name",
-                    "AISearch-SemanticConfiguration-Name",
-                    "AISearch-VectorProfile-Name",
-                    "AISearch-VectorAlgorithm-Name",
-                    "AISearch-Vectorizer-Name",
                     "AIServices-Name",
                     "AIServices-Key",
                     "OpenAI-Name",
                     "OpenAI-Key",
                     "OpenAI-Deployment-Embedding"
-                ];
+                ]);
 
-                foreach (var secretName in secretNames)
+                /* ************************* User Input: Data Sources */
+
+                Console.WriteLine($"\nExisting Data Sources on Azure AI Search instance '{aisc.Name}'");
+
+                List<AzureSolutions.Helpers.AISearch.DataSource> DataSources = [];
+
+                var existingDataSources = await AzureSolutions.Helpers.AISearch.DataSource.List_Existing(aisc);
+
+                existingDataSources.Select((dataSource, index) => $"{index + 1}. {dataSource.Name}").ToList().ForEach(Console.WriteLine);
+
+                Console.WriteLine("\nEnter Data Sources using a comma-separated list {e.g., 1,2,4}:");
+                var selectedIndices = Console.ReadLine().Split(',').Select(int.Parse).ToList();
+
+                foreach (var index in selectedIndices)
                 {
-                    string secretValue = AzureSolutions.Helpers.KeyVault.GetSecret(keyvault, secretName, () =>
-                    {
-                        Console.WriteLine($"\nEnter value for missing KeyVault Secret '{secretName}':");
-                        return Console.ReadLine() ?? string.Empty;
-                    });
-
-                    secret[secretName] = secretValue;
+                    if (index < 1 || index > existingDataSources.Count) { throw new ArgumentException("Invalid selection."); }
+                    var selectedDataSource = existingDataSources[index - 1];
+                    DataSources.Add(selectedDataSource);
                 }
 
-                switch (DataSourceType)
+
+                Console.WriteLine("\n************************* Delete Resources");
+
+                foreach (var DataSource in DataSources)
                 {
-                    case "Azure Blob Storage":
-                        string Storage_ConnectionString = GetSecret(keyvault, "AISearch-DataSource-Blob-ConnectionString");
-                        string Storage_ContainerName = GetSecret(keyvault, "AISearch-DataSource-Blob-Container");
-                        break;
-                    case "Azure SQL Database":
-                        break;
+                    await AzureSolutions.Helpers.AISearch.Indexer.Delete(aisc, $"indexer-{DataSource.Name}");
+
+                    await AzureSolutions.Helpers.AISearch.Skillset.Delete(aisc, $"skillset-{DataSource.Name}");
+
+                    await AzureSolutions.Helpers.AISearch.SynonymMap.Delete(aisc);
                 }
 
-                /* ************************* Delete Existing */
+                await AzureSolutions.Helpers.AISearch.Index.Delete(aisc); /* Fully-articulated because "Index" is a reserved word */
 
-                Console.WriteLine("\nDelete Existing...");
+                Console.WriteLine("\n************************* Create Resources");
 
-                await Indexer.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-Indexer-Name"]);
+                await AzureSolutions.Helpers.AISearch.Index.Create(aisc, oaic);
 
-                await Skillset.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-Skillset-Name"]);
+                await AzureSolutions.Helpers.AISearch.SynonymMap.Create(aisc, IndexName: aisc.Index, SynonymsJson_Path: $"..\\..\\..\\synonyms.json");
 
-                await AzureSolutions.Helpers.AISearch.Index.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-Index-Name"]);
-                /* Fully-articulated because "Index" is a reserved word */
+                for (int i = 0; i < DataSources.Count; i++)
+                {
+                    var DataSource = DataSources[i];
 
-                await SynonymMap.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-SynonymMap-Name"]);
+                    await AzureSolutions.Helpers.AISearch.Skillset.Create(kvc, aisc, oaic, Name: $"skillset-{DataSource.Name}", DataSource.Type);
 
-                await DataSource.Delete(secret["AISearch-Name"], secret["AISearch-Key"], secret["AISearch-DataSource-Name"]);
-
-                /* ************************* Create New */
-
-                Console.WriteLine("\nCreate New...");
-
-                await DataSource.Create(
-                    CreateMethod,
-                    AISearch_Name: secret["AISearch-Name"],
-                    AISearch_Key: secret["AISearch-Key"],
-                    AISearch_DataSource_Name: secret["AISearch-DataSource-Name"],
-                    jsonDefinition: GetDefinition($"datasource_{DataSourceType}.json")
-                    );
-
-                await AzureSolutions.Helpers.AISearch.Index.Create(
-                    CreateMethod,
-                    AISearch_Name: secret["AISearch-Name"],
-                    AISearch_Key: secret["AISearch-Key"],
-                    AISearch_Index_Name: secret["AISearch-Index-Name"],
-                    AISearch_Suggester_Name: secret["AISearch-Suggester-Name"],
-                    AISearch_SemanticConfiguration_Name: secret["AISearch-SemanticConfiguration-Name"],
-                    jsonDefinition: GetDefinition($"index_{DataSourceType}.json")
-                    );
-
-                await Skillset.Create(
-                    CreateMethod,
-                    AISearch_Name: secret["AISearch-Name"],
-                    AISearch_Key: secret["AISearch-Key"],
-                    AISearch_Skillset_Name: secret["AISearch-Skillset-Name"],
-                    AIServices_Key: secret["AIServices-Key"],
-                    jsonDefinition: GetDefinition($"skillset_{DataSourceType}.json")
-                    );
-
-                await Indexer.Create(
-                    CreateMethod,
-                    AISearch_Name: secret["AISearch-Name"],
-                    AISearch_Key: secret["AISearch-Key"],
-                    AISearch_Indexer_Name: secret["AISearch-Indexer-Name"],
-                    AISearch_DataSource_Name: secret["AISearch-DataSource-Name"],
-                    AISearch_Index_Name: secret["AISearch-Index-Name"],
-                    AISearch_Skillset_Name: secret["AISearch-Skillset-Name"],
-                    jsonDefinition: GetDefinition($"indexer_{DataSourceType}.json")
-                    );
-
-                await SynonymMap.Create(
-                    AISearch_Name: secret["AISearch-Name"],
-                    AISearch_Key: secret["AISearch-Key"],
-                    AISearch_Index_Name: secret["AISearch-Index-Name"],
-                    AISearch_SynonymMap_Name: secret["AISearch-SynonymMap-Name"]
-                    );
+                    await AzureSolutions.Helpers.AISearch.Indexer.Create(aisc,
+                        Name: $"indexer-{DataSource.Name}",
+                        Type: DataSource.Type,
+                        DataSource_Name: DataSource.Name,
+                        Index_Name: aisc.Index,
+                        Skillset_Name: $"skillset-{DataSource.Name}"
+                        );
+                }
             }
             catch (Exception ex) { Console.WriteLine($"Exception: {ex}\n"); }
-        }
-
-        private static string GetSecret(SecretClient keyvault, string secretName)
-        {
-            return keyvault.GetSecret(secretName).Value.Value ?? string.Empty;
-        }
-
-        private static string GetDefinition(string fileName)
-        {
-            string directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\Definitions\\");
-
-            string path = Path.GetFullPath(Path.Combine(directory, fileName));
-
-            string jsonDefinition = File.ReadAllText(path);
-
-            foreach (Match m in Regex.Matches(jsonDefinition, @"\{(.+?)\}").Cast<Match>())
-            {
-                string secretName = m.Groups[1].Value;
-                if (keyvault != null) { jsonDefinition = jsonDefinition.Replace(oldValue: $"{{{secretName}}}", newValue: GetSecret(keyvault, secretName)); }
-            }
-
-            //Log.Write(message: $"JSON Definition...\n{jsonDefinition}");
-
-            return jsonDefinition;
         }
     }
 }
@@ -351,7 +242,7 @@ namespace AI_Deploy
 
 -----
 
-### Step 4: Confirm Success
+### Step 6: Confirm Success
 
 #### Visual Studio Debug
 
@@ -382,7 +273,7 @@ Click the "**Search**" button and review results.
 -----
 -----
 
-## Exercise 3: Source Control
+## Exercise 2: Source Control
 In this exercise, we will create a pull request in a DevOps repo.
 
 ### Step 1: Create and Push
