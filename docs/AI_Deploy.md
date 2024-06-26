@@ -79,8 +79,6 @@ Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to
 
 SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; example: `SELECT [AddressID] [id], [AddressLine1] [name] FROM [SalesLT].[Address] WITH (NOLOCK)`
 
-<br>Once all data sources are ready, we can flip to leveraging those data sources.
-
 ### Step 2: Create Visual Studio Project
 
 Open Visual Studio and click "**Create a new project**".
