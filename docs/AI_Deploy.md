@@ -97,7 +97,7 @@ Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a 
 
 Replace the default logic in "CustomSkillset" with:
 
-```
+```csharp
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using System.Net;
@@ -194,7 +194,7 @@ Click "**Run**".
 
 The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
 
-```
+```json
 {
   "values": [
     {
