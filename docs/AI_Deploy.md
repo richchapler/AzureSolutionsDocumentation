@@ -3,7 +3,7 @@
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
-* "We implement OpenAI with AI Search and are rapidly iterating through enhancements to the configuration"
+* "We are implementing OpenAI + AI Search and rapidly iterating through configuration enhancements"
 * "Creating and updating the AI Search configuration with Azure Portal, "Import data", and "Import and vectorize data" is difficult"
 * "We want to capture our AI Search configuration in our GitHub or DevOps repository"
 * "Our AI Search index includes multiple data sources"
