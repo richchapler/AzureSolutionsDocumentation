@@ -77,9 +77,11 @@ Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba9fa875-607a-4e3b-9047-1f29588d75bd" width="800" title="Snipped: June 26, 2024" />
 
-SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; example:`SELECT [AddressID] [id], [AddressLine1] [name] FROM [SalesLT].[Address] WITH (NOLOCK)`
+SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; example: `SELECT [AddressID] [id], [AddressLine1] [name] FROM [SalesLT].[Address] WITH (NOLOCK)`
 
-### Step 1: Create Visual Studio Project
+<br>Once all data sources are ready, we can flip to leveraging those data sources.
+
+### Step 2: Create Visual Studio Project
 
 Open Visual Studio and click "**Create a new project**".
 
@@ -97,7 +99,7 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 -----
 
-### Step 2: Install NuGet
+### Step 3: Install NuGet
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
