@@ -260,7 +260,7 @@ Philiosophical Note: When I write (either articles or code), I limit myself to o
 
 Navigate to Azure portal >> AI Search >> Data Sources and then click "+ Add data source".
 
-#### Blob
+#### Blob Storage
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e94da228-1906-4d78-bd19-a0b6e5cca203" width="800" title="Snipped: June 26, 2024" />
 
 Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to stardardized multi-source index columns (like `name`).
