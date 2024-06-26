@@ -4,9 +4,9 @@
 
 ## Use Case
 * "We are implementing OpenAI + AI Search and rapidly iterating through configuration enhancements"
-* "Creating and updating the AI Search configuration with Azure Portal, "Import data", and "Import and vectorize data" is difficult"
-* "We want to capture our AI Search configuration in our GitHub or DevOps repository"
-* "Our AI Search index includes multiple data sources"
+  * "Creating and updating the AI Search configuration with Azure Portal, "Import data", and "Import and vectorize data" is difficult"
+  * "We want to capture our AI Search configuration in our GitHub or DevOps repository"
+* "Our AI Search index must include multiple data sources"
 * "Both semantic and vector should be activated"
 * "To optimize response quality, we should include synonyms for country codes"
 * "All keys must be stored in Key Vault"
