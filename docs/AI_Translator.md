@@ -1,6 +1,6 @@
 # AI: Translator
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3f04c676-a006-4fbf-b2d2-52b01f7e64c1" width="1000" />
+<img src="https://github.com/user-attachments/assets/3f04c676-a006-4fbf-b2d2-52b01f7e64c1" width="1000" />
 
 ## Use Case
 * "We operate in multiple countries and languages"
