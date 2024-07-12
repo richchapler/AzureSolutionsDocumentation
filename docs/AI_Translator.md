@@ -1,50 +1,22 @@
 # AI: Translator
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7951bd4a-1806-427c-bf5f-23714f63b73a" width="1000" />
-
-
-
-
-
-
-
-
-
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3f04c676-a006-4fbf-b2d2-52b01f7e64c1" width="1000" />
 
 ## Use Case
-* "The AI Search and OpenAI demonstration apps are insufficient"
-* "We want a demonstration application that allows us to simultaneously query AI Search and OpenAI"
-* "We want to see responses from more than one configuration of both AI Search and Open AI"
-* "We need an easy way to evaluate time-to-respond"
-* "We need a User Interface Template that we can customize for our various internal use cases"
-* "We need the application to be secured for use by only specific individuals in the organization"
+* "We operate in multiple countries and languages"
+* "We have built a custom model supporting translation of company- and product-specific terms"
+* "We want a web application that will support translation of input and documents using our custom model"
 
 ## Solution Requirements
 
 This documentation assumes the following resources are ready for use:
 
-* [AI Search](https://azure.microsoft.com/en-us/products/search) index with default Semantic Configuration
-  * The documented configuration uses an index pointed at the Azure SQL AdventureWorks sample database
-
-* [Application Registration](Infrastructure_ApplicationRegistration.md) with the following configuration:
-  * Authentication >> Platform Configurations >> "Add a platform" >> Web >> Redirect URI "https://{APP SERVICE NAME}.azurewebsites.net/.auth/login/aad/callback"
-  * Authentication >> Implicit Grant and Hybrid Flows >> "ID tokens..." checked
-  * Authentication >> Supported Account Types >> "Accounts in any organizational directory (...Multitenant)" selected
-
-* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) configured for .NET 8 Windows, identity enabled, and assigned "Key Vault Secrets User" role on Key Vault
-  * [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
-
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  * AISearch-Index-Name
-  * AISearch-Key
-  * AISearch-Name
-  * AISearch-SelectFields
-  * AISearch-SemanticConfiguration-Name
-  * OpenAI-Deployment-Name
-  * OpenAI-Key
-  * OpenAI-Name
-
-* [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview)
+  * Storage-ConnectionString
+  * Storage-Endpoint
+  * Translator-Key
+  * DocumentTranslation-Endpoint
+  * TextTranslation-Endpoint
 
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 
