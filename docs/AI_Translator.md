@@ -18,6 +18,8 @@ This documentation assumes the following resources are ready for use:
   * DocumentTranslation-Endpoint
   * TextTranslation-Endpoint
 
+* [Storage Account](Infrastructure_StorageAccount.md) with two containers, "source" and "target"
+
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 
 ## Documentation Note
@@ -30,19 +32,19 @@ I used to spend a lot of time explaining code blocks, but now skip that part of 
 
 Open Visual Studio and click "Create a new project".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/138cf716-d18b-424f-a467-5cdeabcd4beb" width="600" title="Snipped January 9, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d4291e30-134c-46e3-98a9-884a1fc7d1fb" width="600" title="Snipped July 12, 2024" />
 
-On the "Create a new project" form, search for and select "ASP .NET Core Web App (Razor Pages)", then click "Next".
+On the "Create a new project" form, search for / select "ASP.NET Core Web App (Model-View-Controller)", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/226546ce-60de-4596-b7c0-b9a81f8c1e4f" width="600" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/53119690-fac6-46d6-b9bc-17730c0c8f30" width="600" title="Snipped July 12, 2024" />
 
 Complete the "Configure your new project" form, then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/f2b564a2-7a54-4db6-a07c-08347254deb0" width="600" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1f2472fb-31af-4d91-9d52-220545aae624" width="600" title="Snipped July 12, 2024" />
 
 Complete the "Additional information" form, then click "Create".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6ae370f6-60c0-46e1-87a6-65a1fb066311" width="800" title="Snipped February 15, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e67cdb10-d6de-4300-bec0-cd5fb6a7d8ab" width="800" title="Snipped July 12, 2024" />
 
 -----
 
