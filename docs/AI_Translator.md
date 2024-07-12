@@ -369,6 +369,7 @@ using AI_Translator.Models;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Diagnostics;
 
 namespace AI_Translator.Controllers
@@ -412,7 +413,7 @@ namespace AI_Translator.Controllers
 
                         var urlUploaded = await new Upload(_logger).File(file);
 
-                        await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{urlUploaded}'>Upload Complete (click to download)</a>");
+                        await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{urlUploaded}'>Upload Complete</a>");
 
                         /* ************************* Translate */
 
@@ -423,12 +424,7 @@ namespace AI_Translator.Controllers
 
                         if (urlTranslated != "Translation Failed")
                         {
-                            await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{urlTranslated}'>Translation Complete (click to download)</a>");
-
-                            /* ************************* Reformat */
-
-                            var reformattedUrl = new Reformat(_logger).File(file, urlTranslated);
-                            await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{reformattedUrl}'>Reformat Complete (click to download)</a>");
+                            await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{urlTranslated}'>Translation Complete</a>");
                         }
                     }
                 }
@@ -787,70 +783,6 @@ Enter a prompt and press the Enter key on your keyboard... allow time for proces
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/0e7d6516-b0b4-40fc-be94-152ddb2eafd0" width="800" title="Snipped April 9, 2024" />
 
 When processing is complete, you can expect to see responses from AI Search and OpenAI (both keyword, full, and semantic configurations).
-
------
-
-### Step 8: Publish Application
-
-In Visual Studio >> Solution Explorer, right-click on the project name and select "Publish" from the resulting dropdown.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6324c434-9560-4e25-ad15-ab89c698f04f" width="600" title="Snipped April 22, 2024" />
-
-On the "Publish" popup, "Target" tab, select "Azure" and then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/73935164-0dc7-4034-977f-fe3838d8a135" width="600" title="Snipped April 22, 2024" />
-
-On the "Publish" popup, "Specific target" tab, select "Azure App Service (Windows)" and then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/62936cd5-6fc7-4a78-8c28-d3f4ac96f184" width="600" title="Snipped April 22, 2024" />
-
-On the "Publish" popup, "App Service" tab, select App Service and then click "Next".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/297c5213-e196-421b-a73c-18e18cd3b908" width="600" title="Snipped April 22, 2024" />
-
-On the "Publish" popup, "Deployment type" tab, select "Publish (generates pubxml file)" and then click "Finish".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/684cca9a-4b78-47dc-a2a2-4b4e9b801e88" width="600" title="Snipped April 22, 2024" />
-
-Click "Close".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e8542029-4c67-4723-8660-2dc16728ff03" width="800" title="Snipped April 22, 2024" />
-
-On the "...Publish" tab, click "Publish".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e4be1d51-80bb-4559-880c-017c7a0d5ab5" width="800" title="Snipped April 22, 2024" />
-
-When publication is complete, your browser will open to the published web application.
-
------
-
-### Step 9: Secure Application
-
-Go to Azure Portal >> App Service >> Settings >> Authentication.
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2c1630ea-03ba-4dec-877c-3129aac203cb" width="800" title="Snipped April 23, 2024" />
-
-Click "Add identity provider".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/64688615-12a9-42f6-8a08-c1e85048e0cd" width="800" title="Snipped April 23, 2024" />
-
-Complete the "Add an identity provider" form.
-
-Prompt | Entry
-:----- | :-----
-Identity Provider | Microsoft
-Choose a tenant... | Workforce configuration (current tenant)
-App registration type | Provide the details of an existing app registration
-Application (client) ID | Name of your application registration
-Client secret | Secret value for your application registration
-Tenant requirement | Use default restrictions based on issuer
-
-Click "Add".
-
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/70109dfc-95e5-43fe-bf5a-6defbc573e46" width="800" title="Snipped April 23, 2024" />
-
-Individual Permissions... possible configuration
-* Enterprise Application >> Properties >> Assignment Required? >> yes
 
 -----
 
