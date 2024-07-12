@@ -363,144 +363,15 @@ namespace AI_Translator.Helpers
 Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "Hub.cs" on the resulting popup then click "Add". Replace the default code with:
 
 ```csharp
-using AI_Interface.Helpers;
 using Microsoft.AspNetCore.SignalR;
 
-namespace AI_Interface
+namespace AI_Translator
 {
-    public class Hub : Microsoft.AspNetCore.SignalR.Hub
+    public class LogHub : Hub
     {
-        public async Task ProcessQuery(string UserQuery, string SystemMessage, float Temperature, string Filter, Dictionary<string, bool> runFlags)
+        public async Task SendMessage(string message)
         {
-            try
-            {
-                await Clients.All.SendAsync("logMessage",
-                    $"Processing User Query: {UserQuery} :: Filter: {Filter} :: System Message: {SystemMessage} :: Temperature: {Temperature}\n");
-
-                /* ************************* OpenAI and AISearch */
-
-                Task vectorsemanticTask = Task.CompletedTask, vectorsimpleTask = Task.CompletedTask, vectorTask = Task.CompletedTask, semanticTask = Task.CompletedTask, simpleTask = Task.CompletedTask;
-
-                if (runFlags["OpenAI_VectorSemantic"])
-                {
-                    vectorsemanticTask = Task.Run(async () =>
-                    {
-                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.VectorSemantic(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
-
-                        await Clients.Caller.SendAsync(
-                            method: $"displayOpenAI_{"VectorSemantic"}",
-                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
-                        );
-                    });
-                }
-
-                if (runFlags["OpenAI_VectorSimple"])
-                {
-                    vectorsimpleTask = Task.Run(async () =>
-                    {
-                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.VectorSimple(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
-
-                        await Clients.Caller.SendAsync(
-                            method: $"displayOpenAI_{"VectorSimple"}",
-                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
-                        );
-                    });
-                }
-
-                if (runFlags["OpenAI_Vector"])
-                {
-                    vectorTask = Task.Run(async () =>
-                    {
-                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.Vector(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
-
-                        await Clients.Caller.SendAsync(
-                            method: $"displayOpenAI_{"Vector"}",
-                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
-                        );
-                    });
-                }
-
-                if (runFlags["OpenAI_Semantic"])
-                {
-                    semanticTask = Task.Run(async () =>
-                    {
-                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.Semantic(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
-
-                        await Clients.Caller.SendAsync(method: $"displayOpenAI_{"Semantic"}", arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
-                        );
-                    });
-                }
-
-                if (runFlags["OpenAI_Simple"])
-                {
-                    simpleTask = Task.Run(async () =>
-                    {
-                        await Clients.All.SendAsync("logMessage", $"Processing Simple\n");
-                        
-                        var r = await AzureSolutions.Helpers.OpenAI.Prompt.Simple(Config.oaic, Config.aisc, UserQuery: UserQuery, SystemMessage: SystemMessage, Temperature: Temperature, AISearch_Filter: Filter);
-
-                        await Clients.All.SendAsync("logMessage", $"Simple: {r.Response}\n");
-
-                        await Clients.Caller.SendAsync(
-                            method: $"displayOpenAI_{"Simple"}",
-                            arg1: new { response = r.Response, citations = r.Citations, stp = r.SecondsToProcess }
-                        );
-                    });
-                }
-
-                await Task.WhenAll(vectorsemanticTask, vectorsimpleTask, vectorTask, semanticTask, simpleTask);
-
-                foreach (var expression in Config.Expressions)
-                {
-                    if (runFlags[expression.Key])
-                    {
-                        if (expression.Value.Item1 == "AISearch")
-                        {
-                            var AISearch_QueryResult =
-                                expression.Value.Item2 == "Vector" ? await AzureSolutions.Helpers.AISearch.Query.Vector(Config.oaic, Config.aisc, AISearch_SearchText: UserQuery, AISearch_Filter: Filter, X: 10)
-
-                                : expression.Value.Item2 == "Semantic" ? await AzureSolutions.Helpers.AISearch.Query.Semantic(Config.aisc, AISearch_SearchText: UserQuery, AISearch_Filter: Filter, X: 10)
-
-                                : expression.Value.Item2 == "Simple" ? await AzureSolutions.Helpers.AISearch.Query.Simple(Config.aisc, AISearch_SearchText: UserQuery, AISearch_Filter: Filter, X: 10)
-
-                                : null;
-
-                            if (AISearch_QueryResult != null)
-                            {
-                                await Clients.All.SendAsync("logMessage", $"{expression.Value.Item2}: {AISearch_QueryResult.Response}\n");
-
-                                await Clients.Caller.SendAsync("displayResults", AISearch_QueryResult.Response, expression.Value.Item2, UserQuery);
-                            }
-                        }
-                    }
-                }
-
-                /* ************************* Generate Prompt Ideas */
-
-                var OpenAI_PromptEvaluation = await AzureSolutions.Helpers.OpenAI.Prompt.NoIndex(Config.oaic,
-                    UserQuery: "Suggest the single best way to improve user prompt: '" + UserQuery + "' to help Open AI provide a meaningful response. Suggest an alternate version of the original user prompt that the user might adopt.",
-                    SystemMessage: "You are an OpenAI Prompt Engineering specialist",
-                    Temperature: 0.5f
-                );
-
-                await Clients.Caller.SendAsync(
-                    method: "displayEvaluation",
-                    arg1: new
-                    {
-                        response = OpenAI_PromptEvaluation.Response,
-                        citations = OpenAI_PromptEvaluation.Citations,
-                        stp = OpenAI_PromptEvaluation.SecondsToProcess
-                    }
-                );
-
-                //await Clients.All.SendAsync("logMessage", $"Evaluation Result: Query sent for evaluation");  
-            }
-            catch (Exception ex) { await Clients.All.SendAsync("logMessage", $"Exception: {ex}\n"); }
-        }
-
-        public async Task LogMessage(string message)
-        {
-            await Clients.All.SendAsync("logMessage", message);
+            await Clients.All.SendAsync("ReceiveMessage", message);
         }
     }
 }
@@ -510,25 +381,37 @@ namespace AI_Interface
 Double-click to open "Program.cs". Replace the default code with:
 
 ```csharp
+using AI_Translator;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<KestrelServerOptions>(options => { options.Limits.MaxRequestBodySize = 100 * 1024 * 1024; }); /* Upload max... Translator file size maximum is ~40MB */
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
+
 app.UseAuthorization();
-app.MapRazorPages();
-app.MapHub<AI_Interface.Hub>("/Hub");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<LogHub>("/logHub");
 
 app.Run();
 ```
@@ -538,7 +421,7 @@ app.Run();
 ### Step 5: Front-End
 
 #### _Layout.cshtml
-Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace the default code with:
+Expand "Views" >> "Shared" and double-click to open "_Layout.cshtml". Replace the default code with:
 
 ```cshtml
 <!DOCTYPE html>
@@ -546,60 +429,48 @@ Expand "Pages" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Azure Solutions: @ViewData["Title"]</title>
+    <title>@ViewData["Title"] - Translator</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Translator.styles.css" asp-append-version="true" />
 
+    <style>
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 20px;
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Azure Solutions</a>
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Translator</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-outline-secondary" style="color: black; border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid whitesmoke; border-top: 1px solid whitesmoke;" asp-area="" asp-page="/Index">OpenAI: @AI_Interface.Helpers.Config.oaic.OpenAI_Name | AI Search:  @AI_Interface.Helpers.Config.aisc.AISearch_Name</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-outline-secondary" style="color: black; border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid whitesmoke; border-top: 1px solid whitesmoke;" asp-area="" asp-page="/KeyVault">KeyVault: @AI_Interface.Helpers.KeyVault.KeyVault_Name</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="container"><main role="main" class="pb-3"> @RenderBody() </main></div>
+
+    <footer class="border-top footer text-muted"></footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js"></script>
 
     <script src="~/js/runfirst.js" asp-append-version="true"></script>
-    <script src="~/js/constants.js" asp-append-version="true"></script>
-
-    <script src="~/js/interface.js" asp-append-version="true"></script>
-    <script>window.onload = async function () { await prepareTabs(); };</script>
-
-    <script src="~/js/submit.js" asp-append-version="true"></script>
-    <script src="~/js/aisearch.js" asp-append-version="true"></script>
-    <script src="~/js/openai.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
 </html>
 ```
