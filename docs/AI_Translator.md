@@ -72,7 +72,7 @@ Repeat this process for the following NuGet packages:
 
 -----
 
-### Step 3: Helper Classes
+### Step 3: Helpers
 
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
 
@@ -355,9 +355,95 @@ namespace AI_Translator.Helpers
     }
 }
 ```
+
 -----
 
-### Step 4: Back-End
+### Step 4: Controllers
+
+#### HomeController.cs
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "Config.cs" on the resulting popup then click "Add". Replace the default code with:
+
+```csharp
+using AI_Translator.Helpers;
+using AI_Translator.Models;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using System.Diagnostics;
+
+namespace AI_Translator.Controllers
+{
+    public class HomeController(IHubContext<LogHub> hubContext) : Controller
+    {
+        private readonly IHubContext<LogHub> _logger = hubContext;
+
+        public IActionResult Index() { return View(); }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error() { return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }); }
+
+        [HttpPost]
+        public async Task<IActionResult> TranslateEnteredText(string text, string sourceLanguage, string targetLanguage)
+        {
+            await _logger.Clients.All.SendAsync("ReceiveMessage", $"<b>Translating Entered Text</b>");
+
+            var translatedText = await new Translate(_logger).Input(text, sourceLanguage, targetLanguage);
+
+            await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translation Result: <b>{translatedText}</b>");
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue)]
+        public async Task<IActionResult> ProcessDroppedFiles(IFormCollection collection)
+        {
+            await _logger.Clients.All.SendAsync("ReceiveMessage", $"<b>Processing Dropped File</b>");
+
+            string success = string.Empty; string error = string.Empty;
+
+            try
+            {
+                if (collection["source_language"].Count > 0 && collection["target_language"].Count > 0)
+                {
+                    foreach (var file in collection.Files)
+                    {
+                        /* ************************* Upload */
+
+                        var urlUploaded = await new Upload(_logger).File(file);
+
+                        await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{urlUploaded}'>Upload Complete (click to download)</a>");
+
+                        /* ************************* Translate */
+
+                        var urlTranslated = await new Helpers.Translate(_logger).File(file, urlUploaded
+                            , collection["source_language"].ToString()
+                            , collection["target_language"].ToString()
+                        );
+
+                        if (urlTranslated != "Translation Failed")
+                        {
+                            await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{urlTranslated}'>Translation Complete (click to download)</a>");
+
+                            /* ************************* Reformat */
+
+                            var reformattedUrl = new Reformat(_logger).File(file, urlTranslated);
+                            await _logger.Clients.All.SendAsync("ReceiveMessage", $"<a href='{reformattedUrl}'>Reformat Complete (click to download)</a>");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { await _logger.Clients.All.SendAsync("ReceiveMessage", $"Exception: {ex.Message}"); }
+
+            return Json(new { message = new HtmlString(success), error });
+        }
+    }
+}
+```
+
+-----
+
+### Step 5: Back-End
 
 #### Hub.cs
 Right-click on the project, select "Add" >> "Class" from the resulting dropdowns, enter name "Hub.cs" on the resulting popup then click "Add". Replace the default code with:
@@ -418,7 +504,7 @@ app.Run();
 
 -----
 
-### Step 5: Front-End
+### Step 6: Front-End
 
 #### _Layout.cshtml
 Expand "Views" >> "Shared" and double-click to open "_Layout.cshtml". Replace the default code with:
@@ -660,7 +746,7 @@ body {
 
 -----
 
-### Step 6: Javascript
+### Step 7: Javascript
 
 #### site.js
 
@@ -693,7 +779,7 @@ connection.start().catch(function (err) {
 
 -----
 
-### Step 7: Confirm Success
+### Step 8: Confirm Success
 Make sure that you have a temporary value in `appsettings.json` for `KeyVault_Name`.
 Click "Debug" >> "Start Debugging" in the menu bar.
 Enter a prompt and press the Enter key on your keyboard... allow time for processing and monitor progress in the messages logged at the bottom of the interface.
