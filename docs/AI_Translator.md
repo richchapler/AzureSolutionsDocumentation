@@ -68,6 +68,8 @@ Repeat this process for the following NuGet packages:
 * Azure.Storage.Blobs
 * Newtonsoft.Json
 
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6497d1e8-b840-47c4-9299-5c0281e35c42" width="800" title="Snipped July 12, 2024" />
+
 -----
 
 ### Step 3: Helper Classes
