@@ -74,110 +74,287 @@ Repeat this process for the following NuGet packages:
 
 ### Step 3: Helper Classes
 
-_Note: Though most helper logic has been moved to the AzureSolutions.Helpers NuGet, package-specific helper logic remains in this application_
-
 Right-click on the project, select "Add" >> "New folder" from the resulting dropdown, and enter name "Helpers".
 
-#### Config.cs
+#### Configuration.cs
 Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "Config.cs" on the resulting popup then click "Add". Replace the default code with:
 
 ```csharp
-using Azure.AI.OpenAI;
-using Azure.Search.Documents.Models;
-
-namespace AI_Interface.Helpers
-{
-    public static class Config
-    {
-        public static readonly AzureSolutions.Helpers.AISearch.Configuration aisc = AzureSolutions.Helpers.AISearch.Configuration.PrepareConfiguration(Helpers.KeyVault.KeyVault_Client);
-
-        public static readonly AzureSolutions.Helpers.OpenAI.Configuration oaic = AzureSolutions.Helpers.OpenAI.Configuration.PrepareConfiguration(Helpers.KeyVault.KeyVault_Client);
-
-        public static readonly Dictionary<string, Tuple<string, string, object>> Expressions = new()
-        {
-            { "AISearch_Vector", new Tuple<string, string, object>("AISearch", "Vector", null) },
-            { "AISearch_Semantic", new Tuple<string, string, object>("AISearch", "Semantic", SearchQueryType.Semantic) },
-            { "AISearch_Simple", new Tuple<string, string, object>("AISearch", "Simple", SearchQueryType.Simple) },
-            { "OpenAI_VectorSemantic", new Tuple<string, string, object>("OpenAI", "VectorSemantic", AzureSearchQueryType.VectorSemanticHybrid) },
-            { "OpenAI_VectorSimple", new Tuple<string, string, object>("OpenAI", "VectorSimple", AzureSearchQueryType.VectorSimpleHybrid) },
-            { "OpenAI_Vector", new Tuple<string, string, object>("OpenAI", "Vector", AzureSearchQueryType.Vector) },
-            { "OpenAI_Semantic", new Tuple<string, string, object>("OpenAI", "Semantic", AzureSearchQueryType.Semantic) },
-            { "OpenAI_Simple", new Tuple<string, string, object>("OpenAI", "Simple", AzureSearchQueryType.Simple) }
-        };
-    }
-}
-```
-
-#### KeyVault.cs
-Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "KeyVault.cs" on the resulting popup then click "Add". Replace the default code with:
-
-```csharp
 using Azure;
+using Azure.AI.Translation.Document;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using Azure.Storage.Blobs;
 
-namespace AI_Interface.Helpers
+namespace AI_Translator.Helpers
 {
-    public class KeyVault
+    public static class Configuration
     {
-        private static readonly IConfiguration _configuration;
-        public static string KeyVault_Name { get; private set; }
-        public static readonly SecretClient KeyVault_Client;
+        static readonly SecretClient KeyVault_Client = new(
+                vaultUri: new Uri("https://hmckeyvault.vault.azure.net/"),
+                credential: new DefaultAzureCredential(new DefaultAzureCredentialOptions()
+                )
+            );
+        public static string Storage_Endpoint { get; private set; }
+        public static string Storage_ConnectionString { get; private set; }
+        public static BlobServiceClient Storage_Client { get; private set; }
 
-        static KeyVault()
+        public static string Translator_Key { get; private set; }
+        public static string DocumentTranslation_Endpoint { get; private set; }
+        public static DocumentTranslationClient DocumentTranslation_Client { get; private set; }
+
+        public static string TextTranslation_Endpoint { get; private set; }
+
+        static Configuration()
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("appSettings.Development.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
-            _configuration = builder.Build();
-            KeyVault_Name = _configuration.GetSection("KeyVault_Name").Value ?? "default";
-            KeyVault_Client = new SecretClient(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
-        }
-
-        public static readonly List<string> expectedSecrets = [
-            "AISearch-Index-Name",
-            "AISearch-Name",
-            "AISearch-Key",
-            "AISearch-SelectFields",
-            "AISearch-SemanticConfiguration-Name",
-            "OpenAI-Deployment-Embedding",
-            "OpenAI-Deployment-GPT",
-            "OpenAI-Key",
-            "OpenAI-Name"
-        ];
-
-        //public static readonly SecretClient KeyVault_Client = new(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());
-
-        public static async Task<string> GetSecret(string secretName)
-        {
-            var secret = await KeyVault_Client.GetSecretAsync(secretName);
-            return secret.Value.Value;
-        }
-
-        public static async Task<List<Secret>> GetSecrets()
-        {
-            var secrets = new List<Secret>();
-
-            foreach (var s in expectedSecrets)
+            try
             {
-                try { secrets.Add(new Secret { Name = s, Value = await GetSecret(s) }); }
-                catch (RequestFailedException) { secrets.Add(new Secret { Name = s, Value = null }); }
-            }
+                Storage_Endpoint = GetSecret("Storage-Endpoint").Result;
+                Storage_ConnectionString = GetSecret("Storage-ConnectionString").Result;
+                Storage_Client = new BlobServiceClient(Storage_ConnectionString);
 
-            return secrets;
+                Translator_Key = GetSecret("Translator-Key").Result;
+
+                DocumentTranslation_Endpoint = GetSecret("DocumentTranslation-Endpoint").Result;
+                DocumentTranslation_Client = new DocumentTranslationClient(
+                   endpoint: new Uri(DocumentTranslation_Endpoint),
+                   credential: new AzureKeyCredential(Translator_Key)
+                    );
+
+                TextTranslation_Endpoint = GetSecret("TextTranslation-Endpoint").Result;
+            }
+            catch (Exception ex) { throw new Exception($"Exception: {ex}", ex); }
         }
 
-        public class Secret
+        public async static Task<string> GetSecret(string secretName)
         {
-            public string? Name { get; set; }
-            public string? Value { get; set; }
+            try
+            {
+                Response<KeyVaultSecret> secret = await KeyVault_Client.GetSecretAsync(secretName);
+                return secret.Value.Value;
+            }
+            catch (Exception ex) { throw new Exception($"Failed to get secret '{secretName}' from Key Vault: {ex.Message}", ex); }
         }
     }
 }
 ```
 
+#### Storage.cs
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "Storage.cs" on the resulting popup then click "Add". Replace the default code with:
+
+```csharp
+using Azure.Storage.Blobs;
+using Azure.Storage.Sas;
+
+namespace AI_Translator.Helpers
+{
+    public class Storage
+    {
+        public Task<string> GenerateSasToken(BlobContainerClient bcc, string containerName)
+        {
+            var sasBuilder_Source = new BlobSasBuilder()
+            {
+                BlobContainerName = containerName,
+                Resource = "c",
+                ExpiresOn = DateTimeOffset.UtcNow.AddHours(1)
+            };
+
+            sasBuilder_Source.SetPermissions(BlobContainerSasPermissions.All);
+
+            return Task.FromResult(bcc.GenerateSasUri(sasBuilder_Source).Query[1..]);
+        }
+    }
+}
+```
+
+#### Translate.cs
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "Translate.cs" on the resulting popup then click "Add". Replace the default code with:
+
+```csharp
+using Azure.AI.Translation.Document;
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
+using System.Text;
+
+namespace AI_Translator.Helpers
+{
+    public class Translate
+    {
+        private readonly IHubContext<LogHub> _logger;
+        private readonly string containerName = "target";
+        private readonly BlobContainerClient bcc;
+
+        public Translate(IHubContext<LogHub> hubContext)
+        {
+            _logger = hubContext;
+            bcc = Configuration.Storage_Client.GetBlobContainerClient(containerName);
+        }
+
+        public async Task<string> File(IFormFile file, string url, string sourceLanguage, string targetLanguage)
+        {
+            string? urlTarget = null;
+            DocumentTranslationOperation? operation = null;
+
+            try
+            {
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translating {file.FileName}");
+
+                if (!bcc.CanGenerateSasUri) { throw new Exception($"{bcc.Name} can't generate a SAS token"); }
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"SAS token generation checked");
+
+                string sasToken = await new Storage().GenerateSasToken(bcc, containerName);
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"SAS token generated");
+
+                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName).Replace(" ", "_");
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"File name without extension: {fileNameWithoutExtension}");
+
+                string extension = Path.GetExtension(file.FileName);
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"File extension: {extension}");
+
+                string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmm");
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"Timestamp: {timestamp}");
+
+                urlTarget = new Uri($"{Configuration.Storage_Endpoint}{containerName}/{fileNameWithoutExtension}_{timestamp}_{targetLanguage}{extension}?{sasToken}").ToString();
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"Generated target URL");
+
+                var input = new DocumentTranslationInput(
+                    source: new TranslationSource(new Uri(url)) { LanguageCode = sourceLanguage },
+                    targets: [new(new Uri(urlTarget), targetLanguage) { CategoryId = "c941a43f-8744-4408-b210-8f2f2bdb62ea-GENERAL" }]  /* CategoryId references Custom Model */
+                )
+                { StorageUriKind = StorageInputUriKind.File };
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"DocumentTranslationInput created with source URL and target URL");
+
+                operation = await Configuration.DocumentTranslation_Client.StartTranslationAsync(input);
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translation operation started");
+
+                while (!operation.HasCompleted)
+                {
+                    await Task.Delay(1000); // Wait for 1 second  
+                    await operation.UpdateStatusAsync();
+
+                    await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translation operation status: {operation.Status}");
+                }
+            }
+            catch (Exception ex) { await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translate.cs Exception: {ex}"); }
+
+            if (operation?.Status == DocumentTranslationStatus.Succeeded && urlTarget is not null) { return urlTarget; }
+            else
+            {
+                if (operation != null)
+                {
+                    await foreach (var document in operation.GetValuesAsync())
+                    {
+                        if (document.Status == DocumentTranslationStatus.Failed)
+                        { await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translation Failed: {document.Error.Message}"); }
+                    }
+                }
+                return "Translation Failed";
+            }
+        }
+
+        public async Task<string> Input(string textToTranslate, string sourceLanguage, string targetLanguage)
+        {
+            try
+            {
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translating from {sourceLanguage} to {targetLanguage}");
+
+                var requestBody = JsonConvert.SerializeObject(new object[] { new { Text = textToTranslate } });
+
+                using var client = new HttpClient();
+                using var request = new HttpRequestMessage();
+                request.Method = HttpMethod.Post;
+
+                request.RequestUri = new Uri($"{Configuration.TextTranslation_Endpoint}/translate?api-version=3.0&from={sourceLanguage}&to={targetLanguage}");
+
+                request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
+
+                request.Headers.Add("Ocp-Apim-Subscription-Key", Configuration.Translator_Key);
+                request.Headers.Add("Ocp-Apim-Subscription-Region", "westus");
+
+                HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
+
+                string result = await response.Content.ReadAsStringAsync();
+
+                var translation = JsonConvert.DeserializeObject<dynamic>(result);
+
+                if (translation is not null) return translation[0].translations[0].text; else return "Translation Failed";
+            }
+
+            catch (Exception ex) { await _logger.Clients.All.SendAsync("ReceiveMessage", $"Translate.cs Exception: {ex}"); }
+
+            return "Translation Failed";
+        }
+    }
+}
+```
+
+#### Upload.cs
+Right-click on the "Helpers" folder, select "Add" >> "Class" from the resulting dropdowns, enter name "Upload.cs" on the resulting popup then click "Add". Replace the default code with:
+
+```csharp
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using Microsoft.AspNetCore.SignalR;
+
+namespace AI_Translator.Helpers
+{
+    public class Upload
+    {
+        public readonly IHubContext<LogHub> _logger;
+        private readonly string containerName = "source";
+        private readonly BlobContainerClient bcc;
+
+        public Upload(IHubContext<LogHub> hubContext)
+        {
+            _logger = hubContext;
+            bcc = Configuration.Storage_Client.GetBlobContainerClient(containerName);
+            if (!bcc.CanGenerateSasUri) { _logger.Clients.All.SendAsync("ReceiveMessage", $"{bcc.Name} cannot generate a SAS token").Wait(); }
+        }
+
+        public async Task<string> File(IFormFile file)
+        {
+            try
+            {
+                await _logger.Clients.All.SendAsync("ReceiveMessage", $"Uploading {file.FileName}");
+            
+            string sasToken = await new Storage().GenerateSasToken(bcc, containerName);
+
+            var urlSource = new Uri($"{Configuration.Storage_Endpoint}{containerName}/{file.FileName}?{sasToken}");
+
+            var blob = Configuration.Storage_Client.GetBlobContainerClient(containerName).GetBlobClient(file.FileName);
+
+            await blob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots);
+
+                var lastReportedTime = DateTime.Now;
+                var lastReportedProgress = 0.0;
+
+                var uploadOptions = new BlobUploadOptions
+                {
+                    ProgressHandler = new Progress<long>(bytesUploaded =>
+                    {
+                        var percentUploaded = Math.Round((double)bytesUploaded / file.Length * 100, 1);
+                        if ((DateTime.Now - lastReportedTime).TotalSeconds >= 1 && percentUploaded != lastReportedProgress)
+                        {
+                            lastReportedTime = DateTime.Now;
+                            lastReportedProgress = percentUploaded;
+                            _logger.Clients.All.SendAsync("ReceiveMessage", $"Upload operation status: {percentUploaded:F1}%").Wait();
+                        }
+                    })
+                };
+
+                await blob.UploadAsync(file.OpenReadStream(), uploadOptions, cancellationToken: CancellationToken.None);
+
+                return urlSource.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Exception: {ex}", ex);
+            }
+        }
+    }
+}
+```
 -----
 
 ### Step 4: Back-End
