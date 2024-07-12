@@ -478,134 +478,152 @@ Expand "Views" >> "Shared" and double-click to open "_Layout.cshtml". Replace th
 -----
 
 #### Index.cshtml
-Expand "Pages" and then double-click to open "Index.cshtml". Replace the default code with:
+Expand "Views" >> "Home" and then double-click to open "Index.cshtml". Replace the default code with:
 
 ```cshtml
-@page
-@model IndexModel
 @{
-    ViewData["Title"] = "AI";
+    ViewData["Title"] = "Home Page";
 }
 
-<!DOCTYPE html>
-<html>
-<body>
-    <partial name="_Toolbar" />
+@using (Html.BeginForm("UploadFiles", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
+{
+    <div>
+        <div>
+            <select name="source_language" id="source_language" style="display: inline-block;">
+                <option value="" disabled>Select language</option>
+                <option value="en">English</option>
+                <option value="ja" selected>Japanese</option>
+                <option value="es">Spanish</option>
+                <option value="fr-ca">French (Canada)</option>
+                <option value="zh-Hans">Chinese (Simplified)</option>
+            </select>
+            >>
+            <select name="target_language" id="target_language" style="display: inline-block;">
+                <option value="" disabled>Select language</option>
+                <option value="en" selected>English</option>
+                <option value="ja">Japanese</option>
+                <option value="es">Spanish</option>
+                <option value="fr-ca">French (Canada)</option>
+                <option value="zh-Hans">Chinese (Simplified)</option>
+            </select>
+        </div>
 
-    <div class="container">
+        <div style="display: flex; align-items: flex-start;">
 
-        <div class="container-style">
+            <div id="leftSide" style="width: 50%; height: 75vh; display: flex; flex-direction: column;">
+                <div style="display: flex; flex-direction: column; position: relative;" padding: 5px;>
 
-            @* Input: User Query *@
-            <div style="position: relative;">
-                <textarea id="inputUserQuery" rows="2" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%; padding-right: 30px;"></textarea>
-                <img id="submitIcon" src="~/images/send.svg" style="position: absolute; bottom: 10px; right: 10px; width: 20px; height: 20px;" title="Send">
-            </div>
+                    <textarea id="text-entry" placeholder="[Enter] text to translate" style="height: 75vh; overflow: auto;"></textarea>
 
-            @* Input: AISearch_Filter *@
-            <div class="row">
-                <div class="col">
-                    <label for="inputFilter">Filter</label>
-                    <input id="inputFilter" type="text" placeholder="[OPTIONAL] Enter AI Search filter {e.g., ColumnX eq '12345'}" style="width: 100%;">
-                </div>
-            </div>
-
-            @* Input: System Message *@
-            <div class="row">
-                <div class="col">
-                    <label for="inputSystemMessage">System Message</label>
-                    <textarea id="inputSystemMessage" rows="1" placeholder="[OPTIONAL] Used for OpenAI only" style="width: 100%;"></textarea>
-                </div>
-            </div>
-            <script>@page
-@model IndexModel
-@{
-    ViewData["Title"] = "AI";
-}
-
-<!DOCTYPE html>
-<html>
-<body>
-    <partial name="_Toolbar" />
-
-    <div class="container">
-
-        <div class="container-style">
-
-            @* Input: User Query *@
-            <div style="position: relative;">
-                <textarea id="inputUserQuery" rows="2" placeholder="Type your query phrase and then press [Enter] to submit..." style="width: 100%; padding-right: 30px;"></textarea>
-                <img id="submitIcon" src="~/images/send.svg" style="position: absolute; bottom: 10px; right: 10px; width: 20px; height: 20px;" title="Send">
-            </div>
-
-            @* Input: AISearch_Filter *@
-            <div class="row">
-                <div class="col">
-                    <label for="inputFilter">Filter</label>
-                    <input id="inputFilter" type="text" placeholder="[OPTIONAL] Enter AI Search filter {e.g., ColumnX eq '12345'}" style="width: 100%;">
-                </div>
-            </div>
-
-            @* Input: System Message *@
-            <div class="row">
-                <div class="col">
-                    <label for="inputSystemMessage">System Message</label>
-                    <textarea id="inputSystemMessage" rows="1" placeholder="[OPTIONAL] Used for OpenAI only" style="width: 100%;"></textarea>
-                </div>
-            </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', (event) => { document.getElementById('inputSystemMessage').value = localStorage.getItem('systemMessage'); });
-                /* Pull saved setting from localStorage, if possible */
-            </script>
-
-            @* Input: Temperature *@
-            <div class="row">
-                <div class="col">
-                    <label for="inputTemperature">Temperature</label>
-                    <input id="inputTemperature" type="range" min="0" max="1" step="0.01" value="0.5" style="width: 100%;">
-                    <div style="display: flex; justify-content: space-between; white-space: nowrap;">
-                        <span class="subtext">More Precise</span>
-                        <span class="subtext">More Creative</span>
+                    <div id="drop-area" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75%; height: 25%; border: 1px dashed black; background-color: whitesmoke; display: flex; justify-content: center; align-items: center;">
+                        Drag-and-drop files here
                     </div>
+
                 </div>
             </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', (event) => { document.getElementById('inputTemperature').value = localStorage.getItem('temperature'); });
-                /* Pull saved setting from localStorage, if possible */
-            </script>
+
+            <div id="rightSide" style="width: 50%; height: 75vh; display: flex; flex-direction: column;">
+                <div class="message-table-wrapper">
+                    <table id="divMessages" class="message-table"></table>
+                </div>
+            </div>
+
         </div>
-
-        @* Input: Result Tabs and Panels *@
-        <div class="container-style">
-            <ul id="resultTabs" class="nav nav-tabs" role="tablist"></ul>
-            <div id="resultTabContent" class="tab-content"></div>
-            <div class="progress-bar" id="progressBar" style="display: none;"><div class="progress-bar-inner"></div></div>
-        </div>
-
-        @* Log and Popup *@
-        <textarea id="textareaLog" class="textarea" rows="4" style="display: none; width: 100%;" readonly>@ViewData["messages"]</textarea>
-        <div id="popup" class="popup"></div>
-
     </div>
 
-</body>
-</html>
-```
+    <style>
+        .message-table-wrapper {
+            width: 100%;
+            height: 100vh;
+            border: 1px solid black;
+            overflow: auto;
+        }
 
------
+        .message-table {
+            width: 100%;
+        }
+            .message-table tr:nth-child(even) {
+                background: whitesmoke;
+            }
 
-#### Index.cshtml.cs
+            .message-table tr:nth-child(odd) {
+                background: white;
+            }
+    </style>
+}
 
-Expand "Pages" >> "Index.cshtml" and then double-click to open "Index.cshtml.cs". Replace the default code with:
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-```csharp
-using Microsoft.AspNetCore.Mvc.RazorPages;
+            $('#text-entry').on('keypress', function (e) {
+                if (e.which == 13) {  // Enter key
+                    e.preventDefault();  // Prevents the default action to be triggered (newline)
 
-namespace AI_Interface.Pages
-{
-    public class IndexModel : PageModel
-    {
-    }
+                    var text = $(this).val().trim();
+                    var sourceLanguage = $('#source_language').val();
+                    var targetLanguage = $('#target_language').val();
+
+                    if (!sourceLanguage || !targetLanguage) {
+                        var timestamp = new Date().toLocaleTimeString();
+                        $('#divMessages').append(timestamp + ': Please select both source and target languages.\n\n');
+                        return;
+                    }
+
+                    $.ajax({
+                        url: '/Home/TranslateEnteredText',
+                        type: 'post',
+                        data: { text: text, sourceLanguage: sourceLanguage, targetLanguage: targetLanguage },
+                        success: function (response) { $('#divMessages').append(response + '\n'); },
+                        fail: function (jqXHR, textStatus, errorThrown) { $('#divMessages').append('Error: ' + textStatus + ' ' + errorThrown + '\n'); }
+                    });
+                }
+            });
+
+            $('#drop-area').on({
+                dragover: function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                },
+                dragleave: function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                },
+                drop: function (e) {
+                    if (e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        $('#divMessages').html(''); // Clear the messages div
+                        upload(e.originalEvent.dataTransfer.files);
+                        sendFiles();
+                    }
+                }
+            });
+
+            const formData = new FormData();
+
+            function sendFiles() {
+                $.ajax({
+                    url: '/Home/ProcessDroppedFiles',
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                }).always(function () { formData.delete('file'); });
+            }
+
+            function upload(files) {
+                formData.append('source_language', $('#source_language').val());
+                formData.append('target_language', $('#target_language').val());
+
+                for (let i = 0; i < files.length; i++) {
+                    $('#divMessages').append('<b>' + files[i].name + '</b> (' + (files[i].size / 1024 / 1024).toFixed(2) + 'MB)<br>');
+                    formData.append('file', files[i]);
+                }
+            }
+        });
+    </script>
 }
 ```
 
@@ -616,173 +634,27 @@ namespace AI_Interface.Pages
 Expand "wwwroot" >> "css" and then double-click to open "site.css". Replace the default code with:
 
 ```css
-@keyframes progress {
-    0% {
-        transform: translateX(-100%);
-    }
-
-    50% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(100%);
-    }
+html {
+  font-size: 14px;
 }
 
-.container button {
-    align-items: center;
-    display: flex;
-    height: 30px;
-    justify-content: center;
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
 }
 
-.container input[type="text"] {
-    height: 30px;
-    width: 100%;
-}
-
-.container-style {
-    border: 1px solid silver;
-    box-shadow: 5px 5px 0px whitesmoke;
-    padding: 10px;
-    margin: 10px 0;
-}  
-
-.data-table {
-    width: 100%;
-}
-    .data-table tr:nth-child(even) {
-        background-color: ghostwhite;
-    }
-    .data-table tr:nth-child(odd) {
-        background-color: white;
-    }
-
-.fake-textarea {
-    width: 100%;
-    height: 90%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    overflow: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    background-color: white;
-}
-
-    .fake-textarea .highlight sup {
-        border: 1px solid lightblue;
-        background-color: aliceblue;
-        padding-top: 5px;
-        padding-right: 3px;
-        padding-bottom: 6px;
-        padding-left: 2px;
-        display: inline-block;
-    }  
-
-.form {
-    display: flex;
-    text-align: left;
-}
-
-h4 {
-    margin: 20px 0 10px 0;
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-    font-size: 14px;
-    min-height: 100%;
-    position: relative;
+  position: relative;
+  min-height: 100%;
 }
 
-#myTab {
-    margin-top: 20px;
-}
-
-.label {
-    font-size: 15px;
-    margin-bottom: 5px;
-    margin-top: 0px;
-}
-
-.nav-parent {
-    font-size: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
-.nav-tabs .nav-link {
-    border: none;
-}
-    .nav-tabs .nav-link.active {
-        background-color: whitesmoke;
-    }
-
-.popup {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-}    
-
-.progress-bar {
-    background-color: whitesmoke;
-    border-radius: 10px;
-    height: 5px;
-    overflow: hidden;
-    padding: 1px;
-    width: 100%;
-}
-
-.progress-bar-inner {
-    animation: progress 2s ease-in-out infinite;
-    background-color: blue;
-    height: 100%;
-    width: 50%;
-}
-
-.scrollable-container {
-    background-color: whitesmoke;
-    height: 275px;
-    overflow: auto;
-    padding: 10px;
-}
-
-.subtext {
-    font-size: 0.8em;
-}
-
-.table {
-    background-color: whitesmoke;
-}
-
-.textarea {
-    border: 1px solid lightgray;
-    display: block;
-    width: 100% !important;
-}
-
-.tabpanel {
-    background-color: whitesmoke;
-    height: 250px;
-    padding: 10px;
-}
-
-.toolbar-button {
-    display: inline-block;
-    vertical-align: middle;
-    border: none;
-    margin-right: 2px;
-}
-
-    .toolbar-button:hover {
-        background-color: #f8f9fa;
-    }
-
-.toolbar-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+body {
+  margin-bottom: 60px;
 }
 ```
 
@@ -796,251 +668,6 @@ Expand "wwwroot" >> "js" and then delete "site.js".
 
 -----
 
-#### aisearch.js
-
-Right click on "wwwroot" >> "js" and then add new file "aisearch.js". Replace the default code with:
-
-```js
-connection.on("displayResults", (data, type, userQuery) => { displayResults(JSON.parse(data), type, userQuery); });
-
-async function displayResults(data, type, userQuery) {
-
-    logMessage(JSON.stringify(data, null, 2));    
-
-    const tabPanel = document.getElementById(`tabPanel_AISearch_${type}`);
-
-    async function createTableAndInitialize() {
-
-        /* ************************* Create table */
-
-        const tableId = `tableAISearch_${type}`;
-        const table = document.createElement('table');
-        table.id = tableId;
-        table.classList.add("data-table");
-
-        /* ************************* Create headers */
-
-        const thead = table.createTHead();
-        const headerRow = thead.insertRow();
-        const headers = [...Object.keys(data[0])];  
-        headers.map(header => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            return headerRow.appendChild(th);
-        });
-
-        /* ************************* Create tbody */
-
-        const tbody = document.createElement('tbody');
-        table.appendChild(tbody);
-
-        /* ************************* Add rows */
-
-        for (const item of data) {
-            const row = tbody.insertRow();
-            for (const header of headers) {
-                const cell = row.insertCell();
-                if (header in item) { cell.textContent = item[header]; }
-            }  
-        }
-
-        tabPanel.insertAdjacentElement('beforeend', table);
-        return tableId;
-    }
-
-    const tableId = await createTableAndInitialize();
-
-    /* ************************* Initialize DataTable */
-    $(function () {
-        $(`#${tableId}`).DataTable({
-            pageLength: 3,
-            columnDefs: [{
-                targets: '_all',
-                render: function (data, type, row) {
-                    if (type === 'display' && data.length > 25) {
-                        const span = document.createElement('span');
-                        span.title = data;
-                        span.textContent = `${data.substr(0, 22)}...`;
-                        return span.outerHTML;
-                    } else { return data; }
-                }
-            }],
-            autoWidth: true
-        });
-    });
-}
-```
-
------
-
-#### constants.js
-
-Right click on "wwwroot" >> "js" and then add new file "constants.js". Replace the default code with:
-
-```js
-const ProcessingStart_Constants = new Date();  
-
-/* ************************* UI Elements */
-
-const buttonClear = document.getElementById('buttonClear');
-const buttonDownload = document.getElementById('buttonDownload');
-const buttonLog = document.getElementById('buttonLog');
-const buttonSave = document.getElementById('buttonSave');
-
-const inputUserQuery = document.getElementById('inputUserQuery');
-const inputSystemMessage = document.getElementById('inputSystemMessage');
-const inputTemperature = document.getElementById('inputTemperature');
-
-const progressBar = document.getElementById('progressBar');
-const textareaLog = document.getElementById('textareaLog');
-
-const clearElementContent = (element) => { while (element.firstChild) { element.removeChild(element.firstChild); } };
-
-logMessage(`constants.js processed in ${((new Date() - ProcessingStart_Constants) / 1000).toFixed(3)}s`);  
-```
-
------
-
-#### interface.js
-
-Right click on "wwwroot" >> "js" and then add new file "interface.js". Replace the default code with:
-
-```js
-const prepareTabs = async () => {
-
-    /* Start seconds-to-process timer */
-    const ProcessingStart_Interface = new Date();
-
-    /* ************************* Get (and empty) index.cshtml containers */
-    const resultTabs = $("#resultTabs"), resultTabContent = $("#resultTabContent");
-    resultTabs.empty();
-
-    /* ************************* Define tab configurations */
-    const configurations = [
-        { parent: "OpenAI", children: ["VectorSemantic", "VectorSimple", "Vector", "Semantic", "Simple"] },
-        { parent: "AISearch", children: ["Vector", "Semantic", "Simple"] },
-        { parent: "Ideas", children: ["Prompt"] }
-    ];
-
-    /* ************************* Loop through configurations */
-    configurations.forEach(function (config, parentIndex) {  
-
-        /* ************************* Create and append parent tab */
-        const P = config.parent; const p = P.toLowerCase();
-        resultTabs.append(`<li class="nav-parent">${P}</li>`);
-
-        /* ************************* Loop through children */
-        config.children.forEach(function (child, childIndex) {  
-
-            /* ************************* Create and append child tab */
-            const C = child, PC = `${P}-${C}`, P_C = `${P}_${C}`, c = C.toLowerCase(), pc = `${p}-${c}`;
-
-            const childTab = $(`<li class="nav-item ${P}-subtab ${parentIndex === 0 && childIndex === 0 ? 'active' : ''}"><a class="nav-link result-tab" id="${PC}-tab" data-toggle="tab" href="#${pc}">${C}</a></li>`);  
-            /* the specific data-toggle, href and lowercase appear to be necessary for Bootstrap tab functionality */
-
-            resultTabs.append(childTab);
-
-            /* ************************* Get "strike-through or not" from LocalStorage */
-            const isActive = localStorage.getItem(P_C); // logMessage(`${P_C} isActive ${isActive}`);
-
-            /* ************************* Get link element from child tab and set strike-through based on current state */
-            const link = $(childTab).find('a'); link.css('text-decoration', isActive === '1' ? 'none' : 'line-through');
-
-            /* ************************* Create a new tab panel for the child tab */
-            const childTabPanel = $(`<div id="${pc}" class="tab-pane fade ${parentIndex === 0 && childIndex === 0 ? 'show active' : ''}"><div id="tabPanel_${P_C}" class="scrollable-container"></div></div>`);  
-            /* first div: the specific id, lowercase, and class necessary for Bootstrap tab functionality, second div: this is the container actually used to display results */
-
-            /* ************************* Append the new tab panel to the tab content container */
-            resultTabContent.append(childTabPanel);
-
-            /* ************************* Add right-click event listener to the child tab */
-            childTab.on('contextmenu', (e) => {
-
-                $(childTab).find('a').trigger('click');  
-
-                /* ************************* Prevent default right-click action */
-                e.preventDefault();
-
-                /* ************************* Toggle state in LocalStorage based on its current value */
-                localStorage.setItem(P_C, localStorage.getItem(P_C) === '1' ? '0' : '1');
-
-                /* ************************* Get link element from child tab and set strike-through based on updated state */
-                const link = $(childTab).find('a'); link.css('text-decoration', localStorage.getItem(P_C) === '1' ? 'none' : 'line-through');
-
-                /* ************************* Get and empty the tab panel element */
-                const tabPanel = $(`#tabPanel_${P_C}`); tabPanel.empty();
-
-                /* ************************* If the tab is deselected, show a message in the tab panel */
-                if (localStorage.getItem(P_C) === '0') { tabPanel.append(`<p>${PC} de-selected</p>`); }
-
-            });
-        });
-    });
-
-    logMessage(`interface.js processed in ${((new Date() - ProcessingStart_Interface) / 1000).toFixed(3)}s`);
-};  
-```
-
------
-
-#### openai.js
-
-Right click on "wwwroot" >> "js" and then add new file "openai.js". Replace the default code with:
-
-```js
-connection.on(`displayEvaluation`, data => displayQueryEvaluation(data));
-
-const buildTabPanel = (type, data) => {
-
-    //logMessage(JSON.stringify(data, null, 2));    
-
-    /* ************************* Get and empty tabpanel */
-    const tabPanel = document.getElementById(`tabPanel_OpenAI_${type}`);
-    tabPanel.innerHTML = '';
-
-    /* ************************* Create label */
-
-    label = document.createElement('label');
-    label.id = `labelOpenAI_${type}`;
-    label.textContent = `Time-to-Process: ${data.stp.toFixed(1)} seconds`;
-    tabPanel.appendChild(label);
-
-    /* ************************* Create textarea */
-
-    let textarea = document.createElement('div');
-    textarea.id = `textareaOpenAI_${type}`;
-    textarea.className = 'fake-textarea';
-    textarea.readOnly = true;
-
-    textarea.innerHTML = data.response.replace(/\[doc(\d+)\]/g, function (match, p1) {
-        return '<span class="highlight" title="' + data.citations[p1-1] + '"><sup>' + p1 + '</sup></span>';
-    });
-
-    tabPanel.appendChild(textarea);  
-}
-
-["VectorSemantic", "VectorSimple", "Vector", "Semantic", "Simple"].forEach(type => { connection.on(`displayOpenAI_${type}`, data => buildTabPanel(type, data)); });
-
-const displayQueryEvaluation = (data) => {
-    const tabPanel = document.getElementById('tabPanel_Ideas_Prompt');
-
-    const label = document.createElement('label');
-    label.textContent = "Suggestions";
-    tabPanel.appendChild(label);
-
-    const textarea = document.createElement('textarea');
-    textarea.id = 'evaluationResult';
-    textarea.rows = '9';
-    textarea.className = 'textarea';
-    textarea.readOnly = true;
-    textarea.style.width = '100%';
-    textarea.textContent = data.response;
-    tabPanel.appendChild(textarea);
-}
-```
-
------
-
 #### runfirst.js
 
 Right click on "wwwroot" >> "js" and then add new file "runfirst.js". Replace the default code with:
@@ -1048,90 +675,20 @@ Right click on "wwwroot" >> "js" and then add new file "runfirst.js". Replace th
 ```js
 /* ************************* SignalR Connection (MUST BE FIRST!) */
 
-const connection = new signalR.HubConnectionBuilder().withUrl("/Hub").build();
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/logHub")
+    .build();
 
-/* ************************* Logging (must come before user of logMessage, etc.) */
+connection.on("ReceiveMessage", function (message) {
+    const textarea = document.getElementById("divMessages");
+    let row = textarea.insertRow(0);
+    let cell = row.insertCell(0);
+    cell.innerHTML = `${new Date().toLocaleTimeString()}: ${message}`;
+});
 
-const logMessage = (message, source = 'Client-Side') => {
-    const timestamp = new Date().toLocaleTimeString();
-    message = message.replace(/[\r\n]+/g, ' '); // replace carriage returns and newlines with a space  
-    textareaLog.value += `${timestamp}, ${source}... ${message}\n`;
-    textareaLog.scrollTop = textareaLog.scrollHeight;
-}
-
-connection.on("logMessage", (message) => logMessage(message, 'Server-Side'));
-```
-
------
-
-#### submit.js
-
-Right click on "wwwroot" >> "js" and then add new file "submit.js". Replace the default code with:
-
-```js
-/* ************************* Handle Events from listeners: 1) "Submit" button click or 2) "Enter" key down */
-
-const HandleEvent = async (e) => {
-    if (e.type === 'click' || (e.type === 'keydown' && e.key === 'Enter' && !e.shiftKey)) {
-
-        e.preventDefault(); /* Prevents the addition of a newline in the text area */
-
-        let submitIcon = document.querySelector('#submitIcon'); // Assuming the id of your img tag is 'submitIcon'  
-
-        if (submitIcon.src.includes('send.svg')) {
-            if (connection.state === signalR.HubConnectionState.Disconnected) { await connection.start(); }
-            submitIcon.src = '../images/stop.svg';
-            submitIcon.title = "Stop";
-
-            await processQuery();
-            $('#tab_Ideas_Prompt').trigger('click');
-        }
-        else {
-
-            if (connection.state === signalR.HubConnectionState.Connected) { await connection.stop(); }
-            submitIcon.src = '../images/send.svg';
-            submitIcon.title = "Send";
-            progressBar.style.display = 'none';
-        }
-    }
-};
-
-/* ***** Event Listeners... MUST follow HandleEvent */
-
-inputUserQuery.addEventListener('keydown', HandleEvent);
-submitIcon.addEventListener('click', HandleEvent);
-
-/* ************************* Process Query */
-
-const processQuery = async (e) => {
-
-    logMessage(`Sending User Query "${inputUserQuery.value}" :: AISearch_Filter "${inputFilter.value}" :: System Message "${inputSystemMessage.value}" :: Temperature ${inputTemperature.value}`);
-
-    document.querySelectorAll('[id^="tabPanel_"]').forEach(tabPanel => { tabPanel.innerHTML = ''; });
-
-    progressBar.style.display = 'block'; /* Reset progress bar */
-
-    const runFlags = {
-        "AISearch_Semantic": false,
-        "AISearch_Full": false,
-        "AISearch_Simple": false,
-        "OpenAI_Semantic": false,
-        "OpenAI_Simple": false
-    };  
-
-    Object.keys(runFlags).forEach(key => { runFlags[key] = localStorage.getItem(key) === '1'; });  
-
-    connection.invoke("ProcessQuery", inputUserQuery.value, inputFilter.value, inputSystemMessage.value, parseFloat(inputTemperature.value), runFlags)
-
-        .then(() => {
-            progressBar.style.display = 'none';
-            $('.result-tab:first').tab('show'); /* Show first tab panel */
-            submitIcon.src = '../images/send.svg';
-            submitIcon.title = "Send";
-        })
-
-        .catch((err) => logMessage(err.toString()));
-};
+connection.start().catch(function (err) {
+    return console.error(err.toString());
+});
 ```
 
 -----
