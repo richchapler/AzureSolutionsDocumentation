@@ -85,28 +85,40 @@ using Azure.AI.Translation.Document;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Configuration;
 
 namespace AI_Translator.Helpers
 {
-    public static class Configuration
+    public class Configuration
     {
-        static readonly SecretClient KeyVault_Client = new(
-                vaultUri: new Uri("https://hmckeyvault.vault.azure.net/"),
-                credential: new DefaultAzureCredential(new DefaultAzureCredentialOptions()
-                )
-            );
-        public static string Storage_Endpoint { get; private set; }
-        public static string Storage_ConnectionString { get; private set; }
-        public static BlobServiceClient Storage_Client { get; private set; }
+        private readonly IHubContext<LogHub> _logger;
 
-        public static string Translator_Key { get; private set; }
-        public static string DocumentTranslation_Endpoint { get; private set; }
-        public static DocumentTranslationClient DocumentTranslation_Client { get; private set; }
+        public  string KeyVault_Name { get; private set; }
+        private readonly SecretClient KeyVault_Client;
 
-        public static string TextTranslation_Endpoint { get; private set; }
+        public string Storage_Endpoint { get; private set; }
+        public string Storage_ConnectionString { get; private set; }
+        public BlobServiceClient Storage_Client { get; private set; }
 
-        static Configuration()
+        public string Translator_Key { get; private set; }
+        public string DocumentTranslation_Endpoint { get; private set; }
+        public DocumentTranslationClient DocumentTranslation_Client { get; private set; }
+
+        public string TextTranslation_Endpoint { get; private set; }
+
+        public Configuration(IHubContext<LogHub> logger)
         {
+            _logger = logger;
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            KeyVault_Name = builder.Build().GetSection("KeyVault_Name").Value ?? "default";
+            KeyVault_Client = new SecretClient(new Uri($"https://{KeyVault_Name}.vault.azure.net"), new DefaultAzureCredential());  
+
             try
             {
                 Storage_Endpoint = GetSecret("Storage-Endpoint").Result;
@@ -119,21 +131,31 @@ namespace AI_Translator.Helpers
                 DocumentTranslation_Client = new DocumentTranslationClient(
                    endpoint: new Uri(DocumentTranslation_Endpoint),
                    credential: new AzureKeyCredential(Translator_Key)
-                    );
+                );
 
                 TextTranslation_Endpoint = GetSecret("TextTranslation-Endpoint").Result;
+
+                _logger.Clients.All.SendAsync("ReceiveMessage", $"Configuration initialized");
             }
-            catch (Exception ex) { throw new Exception($"Exception: {ex}", ex); }
+            catch (Exception ex)
+            {
+                _logger.Clients.All.SendAsync("ReceiveMessage", $"Configuration initialization failed: {ex}");
+                throw new Exception($"Exception: {ex}", ex);
+            }
         }
 
-        public async static Task<string> GetSecret(string secretName)
+        public async Task<string> GetSecret(string secretName)
         {
             try
             {
                 Response<KeyVaultSecret> secret = await KeyVault_Client.GetSecretAsync(secretName);
                 return secret.Value.Value;
             }
-            catch (Exception ex) { throw new Exception($"Failed to get secret '{secretName}' from Key Vault: {ex.Message}", ex); }
+            catch (Exception ex)
+            {
+                _logger.Clients.All.SendAsync("ReceiveMessage", $"Configuration initialization failed: {ex}").GetAwaiter().GetResult();
+                throw new Exception($"Failed to get secret '{secretName}' from Key Vault: {ex.Message}", ex);
+            }
         }
     }
 }
