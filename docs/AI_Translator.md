@@ -50,16 +50,23 @@ Complete the "Additional information" form, then click "Create".
 
 ### Step 2: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/79700c52-8221-4cc1-9d3c-259ec9973b56" width="800" title="Snipped July 12, 2024" />
 
-Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
+Click **Tools** in the menu bar, expand "NuGet Package Manager" in the resulting menu and then click "Manage NuGet Packages for Solution...".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/00248893-859f-4db5-96b4-dcbbf5cbc752" width="800" title="Snipped: May 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/38e6bc7d-2c91-4cb3-a4e7-5ab033294e8c" width="800" title="Snipped July 12, 2024" />
 
-On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**AzureSolutions.Helpers**".
+On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**AzureSolutions.Identity**".
 <br>On the resulting pop-out, check the box next to your project and then click "**Install**".
 <br>When prompted, click "**I Accept**" on the "**License Acceptance**" pop-up.
 <br>When complete, close the "**NuGet - Solution**" tab.
+
+Repeat this process for the following NuGet packages:
+* Azure.AI.Translation.Document
+* Azure.AI.Translation.Text
+* Azure.Security.KeyVault.Secrets
+* Azure.Storage.Blobs
+* Newtonsoft.Json
 
 -----
 
