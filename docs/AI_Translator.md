@@ -32,29 +32,29 @@ I used to spend a lot of time explaining code blocks, but now skip that part of 
 
 Open Visual Studio and click "Create a new project".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d4291e30-134c-46e3-98a9-884a1fc7d1fb" width="600" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/d4291e30-134c-46e3-98a9-884a1fc7d1fb" width="600" title="Snipped July 12, 2024" />
 
 On the "Create a new project" form, search for / select "ASP.NET Core Web App (Model-View-Controller)", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/53119690-fac6-46d6-b9bc-17730c0c8f30" width="600" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/53119690-fac6-46d6-b9bc-17730c0c8f30" width="600" title="Snipped July 12, 2024" />
 
 Complete the "Configure your new project" form, then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1f2472fb-31af-4d91-9d52-220545aae624" width="600" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/1f2472fb-31af-4d91-9d52-220545aae624" width="600" title="Snipped July 12, 2024" />
 
 Complete the "Additional information" form, then click "Create".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e67cdb10-d6de-4300-bec0-cd5fb6a7d8ab" width="800" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/e67cdb10-d6de-4300-bec0-cd5fb6a7d8ab" width="800" title="Snipped July 12, 2024" />
 
 -----
 
 ### Step 2: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/79700c52-8221-4cc1-9d3c-259ec9973b56" width="800" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/79700c52-8221-4cc1-9d3c-259ec9973b56" width="800" title="Snipped July 12, 2024" />
 
 Click **Tools** in the menu bar, expand "NuGet Package Manager" in the resulting menu and then click "Manage NuGet Packages for Solution...".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/38e6bc7d-2c91-4cb3-a4e7-5ab033294e8c" width="800" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/38e6bc7d-2c91-4cb3-a4e7-5ab033294e8c" width="800" title="Snipped July 12, 2024" />
 
 On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**AzureSolutions.Identity**".
 <br>On the resulting pop-out, check the box next to your project and then click "**Install**".
@@ -68,7 +68,7 @@ Repeat this process for the following NuGet packages:
 * Azure.Storage.Blobs
 * Newtonsoft.Json
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6497d1e8-b840-47c4-9299-5c0281e35c42" width="800" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/6497d1e8-b840-47c4-9299-5c0281e35c42" width="800" title="Snipped July 12, 2024" />
 
 -----
 
@@ -800,7 +800,7 @@ connection.start().catch(function (err) {
 ### Step 8: Confirm Success
 Click "Debug" >> "Start Debugging" in the menu bar.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bf43761-30a9-4dd1-b827-0605f15ab8f1" width="800" title="Snipped July 12, 2024" />
+<img src="https://github.com/user-attachments/assets/1bf43761-30a9-4dd1-b827-0605f15ab8f1" width="800" title="Snipped July 12, 2024" />
 
 -----
 
