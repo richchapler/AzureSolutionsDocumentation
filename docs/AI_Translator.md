@@ -490,17 +490,17 @@ Expand "Views" >> "Home" and then double-click to open "Index.cshtml". Replace t
     <div>
         <div>
             <select name="source_language" id="source_language" style="display: inline-block;">
-                <option value="" disabled>Select language</option>
+                <option value="" disabled selected>Select language</option>
                 <option value="en">English</option>
-                <option value="ja" selected>Japanese</option>
+                <option value="ja">Japanese</option>
                 <option value="es">Spanish</option>
                 <option value="fr-ca">French (Canada)</option>
                 <option value="zh-Hans">Chinese (Simplified)</option>
             </select>
             >>
             <select name="target_language" id="target_language" style="display: inline-block;">
-                <option value="" disabled>Select language</option>
-                <option value="en" selected>English</option>
+                <option value="" disabled selected>Select language</option>
+                <option value="en">English</option>
                 <option value="ja">Japanese</option>
                 <option value="es">Spanish</option>
                 <option value="fr-ca">French (Canada)</option>
