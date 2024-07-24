@@ -242,7 +242,7 @@ namespace AI_Translator.Helpers
 
                 var input = new DocumentTranslationInput(
                     source: new TranslationSource(new Uri(url)) { LanguageCode = sourceLanguage },
-                    targets: [new(new Uri(urlTarget), targetLanguage) { CategoryId = "c941a43f-8744-4408-b210-8f2f2bdb62ea-GENERAL" }]  /* CategoryId references Custom Model */
+                    targets: [new(new Uri(urlTarget), targetLanguage) { CategoryId = "{CUSTOM_MODEL}" }]
                 )
                 { StorageUriKind = StorageInputUriKind.File };
                 await _logger.Clients.All.SendAsync("ReceiveMessage", $"DocumentTranslationInput created with source URL and target URL");
