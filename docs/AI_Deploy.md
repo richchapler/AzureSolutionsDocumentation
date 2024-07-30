@@ -47,8 +47,8 @@
 <br>
 If you intend to prepare a custom skillset, also instantiate:
 
-* [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 7, with dependencies:
-  * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
+* [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 8 and CORS ("Access-Control-Allow-Credentials" enabled), with dependencies:
+  * [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)... optional, but recommended
   * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
   * [Storage Account](Infrastructure_StorageAccount.md)
 
