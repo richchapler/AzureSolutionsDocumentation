@@ -36,13 +36,11 @@
  
 * [OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/overview) with "text-embedding-3-large" [deployment model](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource) 
  
-* [Postman](https://www.postman.com/product/workspaces/) (with Desktop Agent for localhost testing)
- 
 * [Storage Account](Infrastructure_StorageAccount.md) with a container and uploaded sample data {e.g., [IRS Tax Forms](https://www.irs.gov/forms-instructions)}
  
 * [SQL Server](https://learn.microsoft.com/en-us/azure/azure-sql) and [Database](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql) with [AdventureWorks sample data](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure)
  
-* [Visual Studio](https://visualstudio.microsoft.com/downloads/) with **Azure development** workload and connected to your DevOps project
+* [Visual Studio](https://visualstudio.microsoft.com/downloads/) with "Azure development" workload and connected to your DevOps project
 
 <br>
 If you intend to prepare a custom skillset, also instantiate:
