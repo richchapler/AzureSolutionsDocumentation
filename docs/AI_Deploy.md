@@ -325,7 +325,7 @@ Click "Create".
 
 Rename "Function1.cs" to "CustomSkillset.cs". When prompted "You are renaming a file...", click "**Yes**" to perform rename on all references.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af1d52cb-5dbd-43b2-9198-ea390dede565" width="800" title="Snipped: October 27, 2023" />
+<img src="https://github.com/user-attachments/assets/83be381a-ab8d-4e09-9edd-4e8c733cc710" width="800" title="Snipped: July 30, 2024" />
 
 Replace the default logic in "CustomSkillset" with:
 
@@ -369,40 +369,33 @@ namespace FunctionApp_CustomSkillset
 }
 ```
 
-Logic Explained:
-* `using (var reader = new StreamReader(hrd.Body)...` parses request body JSON
-* `foreach (var value in JsonDocument.Parse(request)` iterates through request values and packages a response
-* `response.WriteAsJsonAsync(d)... return...` completes response
-
-_Note: This is a template function ONLY... add additional logic based on your use case_
-
 -----
 
 ### Step 3: Publish Function
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1bed8055-1d94-4c88-bde2-e1c6e557625e" width="800" title="Snipped: October 30, 2023" />
+<img src="https://github.com/user-attachments/assets/406e884b-5364-4e71-8470-4567169029c1" width="600" title="Snipped: July 30, 2024" />
 
-Right-click on your project in the Solution Explorer pane and select "**Publish**" from the resulting menu.
+Right-click on your project in the Solution Explorer pane and select "Publish" from the resulting menu.
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a090114-5879-44d0-a07c-c78a006d92ff" width="600" title="Snipped: October 30, 2023" />
 
-On the "**Publish**" popup, "**Target**" tab, select "**Azure**", then click "**Next**".
+On the "Publish" >> "Target" page, select "Azure", then click "Next".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
 
-On the "**Publish**" popup, "**Specific target**" tab, select "**Azure App Service (Windows)**", then click "**Next**".
+On the "Publish" >> "Specific target" page, select "Azure App Service (Windows)", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/af141980-d358-4879-b2c9-0277d90882c6" width="600" title="Snipped: October 30, 2023" />
+<img src="https://github.com/user-attachments/assets/1a02b31a-f7b2-4672-a39f-33e7c3071212" width="600" title="Snipped: July 30, 2024" />
 
-On the **Publish** >> "**Select existing or...**" page, select your Function App and then click "**Finish**".
+On the "Publish" >> "Functions instance" page, select your Function App and then click "Finish".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/8ed84d8e-1b06-4abf-8cf3-2a158c339d53" width="600" title="Snipped: October 30, 2023" />
+<img src="https://github.com/user-attachments/assets/355bd31a-1b70-4a72-a843-6e1b30596025" width="600" title="Snipped: July 30, 2024" />
 
-On the **Publish profile creation progress** >> "**Finish**" page, click "**Close**".
+On the "Publish profile creation progress" >> "Finish" page, click "Close".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/85acb60f-bb87-43a2-9c4a-e4b5f4c12f11" width="800" title="Snipped: October 30, 2023" />
+<img src="https://github.com/user-attachments/assets/fe69130a-e418-4ada-9a5d-526cbe75db88" width="800" title="Snipped: July 30, 2024" />
 
-Back on the "...Publish" page, click **Publish**, allow time for processing, and confirm successful publication.
+Back on the "...Publish" page, click "Publish", allow time for processing, and confirm successful publication.
 
 -----
 
