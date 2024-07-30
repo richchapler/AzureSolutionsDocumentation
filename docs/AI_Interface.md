@@ -1174,3 +1174,7 @@ Individual Permissions... possible configuration
 **Congratulations... you have successfully completed all steps**
 
 -----
+
+## Reference
+
+* [Deploy files to App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-zip)
