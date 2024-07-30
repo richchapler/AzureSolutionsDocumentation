@@ -292,32 +292,32 @@ Complete the resulting "Create a Git repository" pop-up form, then click "**Crea
 
 ## Bonus Exercise: Custom Skillset API
 In this exercise, we will use a Function App to instantiate a simple API for use with AI Search, custom skillset.
-<br>_Note: Only complete this exercise if you intend to include a custom skillset in the AI Search deployment app_
+<br>_Note: Complete this exercise to include a custom skillset in the AI Search deployment application_
 
 ### Step 1: Create Project
 
-Open Visual Studio and click "**Create a new project**".
+Open Visual Studio and click "Create a new project".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2b9ad75a-370d-4642-98a0-78600a43b772" width="600" title="Snipped: October 27, 2023" />
+<img src="https://github.com/user-attachments/assets/0a3b222f-09ad-4b5b-8add-6f29c8492f1b" width="800" title="Snipped: July 30, 2024" />
 
-On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
+On the "Create a new project" page, search for and select "Azure Functions", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/877158e8-9b6e-4c88-9346-307bc73095f6" width="600" title="Snipped: October 27, 2023" />
+<img src="https://github.com/user-attachments/assets/9da2a11c-f5e8-4008-adf5-96ca152e5b99" width="800" title="Snipped: July 30, 2024" />
 
-Complete the "**Configure your new project**" form and then click "**Next**".
+Complete the "Configure your new project" form and then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/39eeeab1-76b4-4325-8772-0c7aafa3c6d9" width="600" title="Snipped: October 27, 2023" />
+<img src="https://github.com/user-attachments/assets/2e730487-319b-424d-9369-f7998fe472a5" width="800" title="Snipped: July 30, 2024" />
 
-Complete the "**Additional information**" form:
+Complete the "Additional information" form:
 
 Prompt | Entry
 :----- | :-----
-**Functions worker** | **.NET 7.0 Isolated**
-**Function** | **Http trigger**
-**Use Azurite...** | Checked
-**Authorization level** | Function
+Functions worker | .NET 8.0 Isolated
+Function | Http trigger
+Use Azurite... | Checked
+Authorization level | Function
 
-Click "**Create**".
+Click "Create".
 
 -----
 
