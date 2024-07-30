@@ -401,19 +401,17 @@ Back on the "...Publish" page, click "Publish", allow time for processing, and c
 
 ### Step 4: Confirm Success
 
-Navigate to your Azure Function App, then the "**CustomSkillset**" function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
+Navigate to your Function App >> "CustomSkillset" function >> "Code + Test".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a48bae96-a071-440e-912f-dff11e09da87" width="800" title="Snipped: October 31, 2023" />
+<img src="https://github.com/user-attachments/assets/be9424fb-21dd-401e-8ffb-e1e592c1f22e" width="800" title="Snipped: July 30, 2024" />
 
-Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the following "**Body**" value:
+Click "Test/Run" and on the resulting pop-out, "Input" tab, paste the following "Body" value:
 
-```
+```json
 {"values":[{"recordId":"0","data":{"text":"Lorem Ipsum"}}]}
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d9fd06a-62d8-4ebe-9304-bdcc2834e860" width="800" title="Snipped: October 31, 2023" />
-
-Click "**Run**".
+Click "Run".
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f0f47af-5e58-4fd9-822b-215e910c6602" width="800" title="Snipped: October 31, 2023" />
 
