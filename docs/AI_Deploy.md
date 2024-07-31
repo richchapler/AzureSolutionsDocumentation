@@ -45,8 +45,8 @@
 <br>
 If you intend to prepare a custom skillset, also instantiate:
 
-* [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 8 and CORS enabled to allow "https://ms.portal.azure.com", with dependency:
-  * [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
+* [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) configured for .NET 8 and CORS enabled to allow "https://ms.portal.azure.com"
+* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/)
 
 ## Documentation Note
 
