@@ -409,7 +409,7 @@ Click "Test/Run" and on the resulting pop-out, "Input" tab, paste the following 
 
 Click "Run".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/7f0f47af-5e58-4fd9-822b-215e910c6602" width="800" title="Snipped: October 31, 2023" />
+<img src="https://github.com/user-attachments/assets/7f3b0031-e099-4f5f-a16e-d5c64eb87093" width="800" title="Snipped: July 31, 2024" />
 
 The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
 
