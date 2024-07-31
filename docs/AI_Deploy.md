@@ -73,7 +73,9 @@ Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to
 
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba9fa875-607a-4e3b-9047-1f29588d75bd" width="800" title="Snipped: June 26, 2024" />
 
-SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; example: `SELECT [AddressID] [id], [AddressLine1] [name] FROM [SalesLT].[Address] WITH (NOLOCK)`
+SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; examples:
+* `SELECT [AddressID] [id], [AddressLine1] [name] FROM [SalesLT].[Address] WITH (NOLOCK)`
+* `SELECT [CustomerID] [id], [LastName] + ', ' + [FirstName] [name] FROM [SalesLT].[Customer] WITH (NOLOCK)`
 
 ### Step 2: Create Visual Studio Project
 
