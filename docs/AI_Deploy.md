@@ -336,11 +336,11 @@ namespace FunctionApp_CustomSkillset
     public class CustomSkillset
     {
         [Function("CustomSkillset")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd)
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd)
         {
             string request = string.Empty;
 
-            using (var reader = new StreamReader(hrd.Body)) { request = reader.ReadToEnd(); }
+            using (var reader = new StreamReader(hrd.Body)) { request = await reader.ReadToEndAsync(); }
 
             var d = new Dictionary<string, object> { { "values", new List<Dictionary<string, object>>() } };
 
@@ -358,7 +358,7 @@ namespace FunctionApp_CustomSkillset
             }
 
             var response = hrd.CreateResponse(HttpStatusCode.OK);
-            response.WriteAsJsonAsync(d);
+            await response.WriteAsJsonAsync(d);
             return response;
         }
     }
@@ -391,7 +391,7 @@ On the "Publish profile creation progress" >> "Finish" page, click "Close".
 
 <img src="https://github.com/user-attachments/assets/fe69130a-e418-4ada-9a5d-526cbe75db88" width="800" title="Snipped: July 30, 2024" />
 
-Back on the "...Publish" page, click "Publish", allow time for processing, and confirm successful publication.
+Back on the "...Publish" page, click "Publish" and monitor through successful completion.
 
 -----
 
