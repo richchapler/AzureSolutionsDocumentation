@@ -22,7 +22,7 @@ This documentation assumes the following resources are ready for use:
   * Authentication >> Implicit Grant and Hybrid Flows >> "ID tokens..." checked
   * Authentication >> Supported Account Types >> "Accounts in any organizational directory (...Multitenant)" selected
 
-* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) configured for .NET 8 Windows, identity enabled, and assigned "Key Vault Secrets User" role on Key Vault
+* [Application Service](https://learn.microsoft.com/en-us/azure/app-service/) configured for .NET 8 Windows, SCM publishing enabled, identity enabled, and assigned "Key Vault Secrets User" role on Key Vault
   * [Application Service Plan](https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans)
 
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
