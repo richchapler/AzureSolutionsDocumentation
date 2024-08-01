@@ -331,6 +331,7 @@ Replace the default logic in "CustomSkillset" with:
 ```csharp
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Text.Json;
 
@@ -339,11 +340,16 @@ namespace FunctionApp_CustomSkillset
     public class CustomSkillset
     {
         [Function("CustomSkillset")]
-        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd)
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData hrd, FunctionContext context)
         {
+            var logger = context.GetLogger("CustomSkillset");
             string request = string.Empty;
 
-            using (var reader = new StreamReader(hrd.Body)) { request = await reader.ReadToEndAsync(); }
+            using (var reader = new StreamReader(hrd.Body))
+            {
+                request = await reader.ReadToEndAsync();
+                logger.LogInformation("Incoming request: {request}", request);
+            }
 
             var d = new Dictionary<string, object> { { "values", new List<Dictionary<string, object>>() } };
 
