@@ -50,7 +50,7 @@
    
 Now, your Azure Data Factory logs will be sent to Log Analytics. You can run queries on these logs in Log Analytics to generate reports.  
 
-## Sample
+## Sample #1: `AzureDiagnostics`
 
 1. Navigate to Monitor >> Logs
   
