@@ -14,49 +14,51 @@
    | Category Groups | Check "allLogs" |
    | Destination Details | Send to Log Analytics workspace |
 
-### Supporting Descriptions
+### Category Groups
 
-* Category Groups - This is a collective term for the various categories of logs available in Log Analytics. They help group related log types together. For example, all logs related to pipeline runs might be grouped together under one category group.  
+* **allLogs** - Choose to send all types of logs {e.g., pipeline runs, trigger runs, activity runs, and more}
+
+### Categories
+
+* **Pipeline activity runs log** - This log captures details about the execution of activities within a pipeline. For instance, if a pipeline includes activities to extract data from a source, transform it, and load it into a destination, this log would capture details about the execution of each of these activities.  
    
-* allLogs - This represents all the logs available in Log Analytics. If you select this, you are choosing to send all types of logs to Log Analytics. This includes logs related to pipeline runs, trigger runs, activity runs, and more.  
+* **Pipeline runs log** - This log records information about each pipeline run, including its start time, end time, and status. For example, if a pipeline is scheduled to run once a day, this log would contain a record for each daily run.  
    
-* Categories - These represent the different types of logs that you can send to Log Analytics. You can select one or more categories. For example, you might choose to send only pipeline run logs and trigger run logs.  
+* **Trigger runs log** - This log captures information about trigger runs, which are instances where a trigger has fired to start a pipeline. This could include details about the time the trigger fired and the pipeline that was started.  
    
-* Pipeline activity runs log - This log captures details about the execution of activities within a pipeline. For instance, if a pipeline includes activities to extract data from a source, transform it, and load it into a destination, this log would capture details about the execution of each of these activities.  
+* **Sandbox Pipeline runs log** - This is a specialized log for capturing information about pipeline runs in a sandbox environment. A sandbox environment is a separate instance of your data factory used for testing and development. This log can help you monitor and troubleshoot your pipelines in the sandbox environment.  
    
-* Pipeline runs log - This log records information about each pipeline run, including its start time, end time, and status. For example, if a pipeline is scheduled to run once a day, this log would contain a record for each daily run.  
+* **Sandbox Activity runs log** - This is a specialized log for capturing information about activity runs in a sandbox environment. It provides similar benefits to the Sandbox Pipeline runs log but focuses on individual activities within the pipelines.  
+
+* SSIS
+
+   * **SSIS package event messages** - This log captures event messages from the execution of SQL Server Integration Services (SSIS) packages. SSIS packages are a type of ETL tool used to extract, transform, and load data. The event messages could include information about the start and end of a package run, errors encountered, or other significant events during execution.  
+      
+   * **SSIS package executable statistics** - This log captures detailed statistical data about the execution of SSIS packages. These statistics could include the start time, end time, duration, success or failure status, the number of rows processed, and more. This can help identify performance bottlenecks and troubleshoot issues.  
+      
+   * **SSIS package event message context** - This log captures context information about event messages during the execution of SSIS packages. This could include details about the data source, destination, or transformations applied, helping you understand the context in which each event occurred.  
+      
+   * **SSIS package execution component phases** - This log records information about the different phases of execution for components within an SSIS package. For example, it might record when a data extraction phase started and ended, followed by the transformation phase, and so on.  
+      
+   * **SSIS package execution data statistics** - This log captures data statistics from the execution of SSIS packages. These could include the number of rows extracted, transformed, and loaded, helping you monitor the effectiveness of your SSIS packages.  
+      
+   * **SSIS integration runtime logs** - This log records information about the runtime environment for SSIS packages. This can be useful for troubleshooting issues related to the environment in which your SSIS packages are running.  
+
+* Airflow
+
+   * **Airflow task execution logs** - This log captures details about the execution of tasks within an Apache Airflow workflow. For example, it might record the start time, end time, and status of each task within a workflow.  
+      
+   * **Airflow worker logs** - This log records information about the operation of Apache Airflow workers. Workers in Airflow are the processes that execute tasks. The logs could include details about task execution, worker status, errors, and more, which can be useful for troubleshooting and understanding worker performance.  
+      
+   * **Airflow dag processing logs** - This log captures information about the processing of Directed Acyclic Graphs (DAGs), which are the workflows defined in Apache Airflow. It can include information about DAG parsing, scheduling decisions, and execution status, which can be useful for understanding how your workflows are performing and identifying any issues.  
+      
+   * **Airflow scheduler logs** - This log records information about the operation of the Apache Airflow scheduler. The scheduler in Airflow is responsible for deciding when to run workflows based on their schedules. Logs could include details about scheduling decisions, errors, and more, which can help in troubleshooting and understanding scheduler performance.  
+      
+   * **Airflow web logs** - This log captures information about the operation of the Apache Airflow web interface. This could include details about user interactions, errors, and more. This can be useful for understanding how users are interacting with the web interface and identifying any issues.  
    
-* Trigger runs log - This log captures information about trigger runs, which are instances where a trigger has fired to start a pipeline. This could include details about the time the trigger fired and the pipeline that was started.  
-   
-* Sandbox Pipeline runs log - This is a specialized log for capturing information about pipeline runs in a sandbox environment. A sandbox environment is a separate instance of your data factory used for testing and development. This log can help you monitor and troubleshoot your pipelines in the sandbox environment.  
-   
-* Sandbox Activity runs log - This is a specialized log for capturing information about activity runs in a sandbox environment. It provides similar benefits to the Sandbox Pipeline runs log but focuses on individual activities within the pipelines.  
-   
-* SSIS package event messages - This log captures event messages from the execution of SQL Server Integration Services (SSIS) packages. SSIS packages are a type of ETL tool used to extract, transform, and load data. The event messages could include information about the start and end of a package run, errors encountered, or other significant events during execution.  
-   
-* SSIS package executable statistics - This log captures detailed statistical data about the execution of SSIS packages. These statistics could include the start time, end time, duration, success or failure status, the number of rows processed, and more. This can help identify performance bottlenecks and troubleshoot issues.  
-   
-* SSIS package event message context - This log captures context information about event messages during the execution of SSIS packages. This could include details about the data source, destination, or transformations applied, helping you understand the context in which each event occurred.  
-   
-* SSIS package execution component phases - This log records information about the different phases of execution for components within an SSIS package. For example, it might record when a data extraction phase started and ended, followed by the transformation phase, and so on.  
-   
-* SSIS package execution data statistics - This log captures data statistics from the execution of SSIS packages. These could include the number of rows extracted, transformed, and loaded, helping you monitor the effectiveness of your SSIS packages.  
-   
-* SSIS integration runtime logs - This log records information about the runtime environment for SSIS packages. This can be useful for troubleshooting issues related to the environment in which your SSIS packages are running.  
-   
-* Airflow task execution logs - This log captures details about the execution of tasks within an Apache Airflow workflow. For example, it might record the start time, end time, and status of each task within a workflow.  
-   
-* Airflow worker logs - This log records information about the operation of Apache Airflow workers. Workers in Airflow are the processes that execute tasks. The logs could include details about task execution, worker status, errors, and more, which can be useful for troubleshooting and understanding worker performance.  
-   
-* Airflow dag processing logs - This log captures information about the processing of Directed Acyclic Graphs (DAGs), which are the workflows defined in Apache Airflow. It can include information about DAG parsing, scheduling decisions, and execution status, which can be useful for understanding how your workflows are performing and identifying any issues.  
-   
-* Airflow scheduler logs - This log records information about the operation of the Apache Airflow scheduler. The scheduler in Airflow is responsible for deciding when to run workflows based on their schedules. Logs could include details about scheduling decisions, errors, and more, which can help in troubleshooting and understanding scheduler performance.  
-   
-* Airflow web logs - This log captures information about the operation of the Apache Airflow web interface. This could include details about user interactions, errors, and more. This can be useful for understanding how users are interacting with the web interface and identifying any issues.  
-   
-* Metrics - These are numerical values that measure specific aspects of your system's operation. They can be used to track performance over time. Metrics in Log Analytics could include things like the number of pipeline runs, the average duration of pipeline runs, the number of errors, and more. These can be used to create charts and alerts, helping you monitor and improve your system's performance.  
-   
-* AllMetrics - This represents all the metrics available in Log Analytics. If you select this, you are choosing to send all types of metrics to Log Analytics. This could include metrics related to pipeline runs, activity runs, trigger runs, and more, giving you a comprehensive view of your system's performance.
+### Metrics
+
+* **AllMetrics** - This represents all the metrics available in Log Analytics. If you select this, you are choosing to send all types of metrics to Log Analytics. This could include metrics related to pipeline runs, activity runs, trigger runs, and more, giving you a comprehensive view of your system's performance.
 
 6. In the "Diagnostic settings" form, fill in the name for your settings, and under "Destination details", choose "Send to Log Analytics".  
    
