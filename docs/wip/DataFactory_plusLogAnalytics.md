@@ -52,11 +52,11 @@ Now, your Azure Data Factory logs will be sent to Log Analytics. You can run que
 
 ## Sample #1: `AzureDiagnostics`
 
-1. Navigate to Monitor >> Logs
+1. Navigate to Data Factory >> Monitoring >> Logs
   
-2. Close the "Welcome to Log Analytics" popup  
+2. Close the "Welcome to Log Analytics" or "Queries hub" popups  
    
-3. On the "Select a scope" popout, filter to resource type "Data factories (V2)", check the box next to your data factory, and then click "Apply"
+3. Click the "Simple mode" dropdown and select "KQL mode"
    
 4. In the new query window, paste the very simple starter query:  
    
@@ -65,3 +65,14 @@ AzureDiagnostics
 ```  
    
 5. Click "Run" to execute the query.  
+
+## Sample #2: PipelineRuns
+
+Repeat with the following KQL
+
+```kql  
+AzureDiagnostics    
+| where ResourceProvider == "MICROSOFT.DATAFACTORY" and Category == "PipelineRuns"    
+| where TimeGenerated > ago(1d)    
+| order by TimeGenerated desc       
+```  
