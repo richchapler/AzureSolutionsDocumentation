@@ -2,15 +2,14 @@
 
 ## Connect Data Factory to Log Analytics
 
-1. Start by creating an instance of Log Analytics if you don't have one already. You can do this from the Azure portal by navigating to the Log Analytics workspaces page and clicking on "Add".  
+1. Instantiate Data Factory and Log Analytics
+   a. Note the Log Analytics Workspace ID and Primary Key
    
-2. After creating the Log Analytics instance, make note of the Workspace ID and Primary Key as you'll need these later.  
+2. Navigate to Data Factory >> Monitoring >> Diagnostic Settings
    
-3. Next, navigate to your Azure Data Factory instance in the Azure portal.  
+3. Click on "+ Add diagnostic setting" and complete the resulting form:
+
    
-4. In the left menu, click on "Diagnostic settings".  
-   
-5. Click on "+ Add diagnostic setting".  
    
 6. In the "Diagnostic settings" form, fill in the name for your settings, and under "Destination details", choose "Send to Log Analytics".  
    
