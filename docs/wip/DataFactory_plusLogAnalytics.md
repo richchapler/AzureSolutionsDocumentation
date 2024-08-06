@@ -49,7 +49,7 @@
    
 Now, your Azure Data Factory logs will be sent to Log Analytics. You can run queries on these logs in Log Analytics to generate reports.  
 
-## Sample Reports
+## Sample
 
 A great report to run might be one that shows the status of all pipeline runs over the last 7 days. Here's an example of such a query:  
    
