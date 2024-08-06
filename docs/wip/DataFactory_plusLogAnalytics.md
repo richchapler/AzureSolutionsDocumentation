@@ -3,11 +3,12 @@
 ## Configure
 
 1. Instantiate Data Factory and Log Analytics
+
    a. Note the Log Analytics Workspace ID and Primary Key
    
-2. Navigate to Data Factory >> Monitoring >> Diagnostic Settings
+3. Navigate to Data Factory >> Monitoring >> Diagnostic Settings
    
-3. Click on "+ Add diagnostic setting" and complete the resulting form:
+4. Click on "+ Add diagnostic setting" and complete the resulting form:
 
    | Prompt | Entry |
    | ----- | ----- |
@@ -45,7 +46,7 @@
    * **Azure Diagnostics** - When you choose "Azure Diagnostics", **all your diagnostic logs from all resource types are sent to a single table called AzureDiagnostics**. This can make querying easier if you want to correlate events across different resource types, as you only need to query one table. However, the AzureDiagnostics table is a flat table, so complex properties are serialized into JSON strings which can make some data harder to work with.  
    * **Resource Specific** - When you choose "Resource Specific", your **logs are sent to a table that corresponds to the resource type**. For example, if you're working with a Storage Account, your logs might be sent to a table like StorageAccountLogs. These tables are designed to best fit the schema of the log data of the specific resource type, and complex properties are represented as distinct fields, which can make queries more intuitive and the data easier to work with. However, if you want to correlate events across different resource types, you would need to query multiple tables.  
    
-4. Click "Save".  
+5. Click "Save".  
    
 Now, your Azure Data Factory logs will be sent to Log Analytics. You can run queries on these logs in Log Analytics to generate reports.  
 
