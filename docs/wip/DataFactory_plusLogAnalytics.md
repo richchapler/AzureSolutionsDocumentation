@@ -12,7 +12,7 @@
    | Prompt | Entry |
    | ----- | ----- |
    | Category Groups | Check "**allLogs**" and "**allMetrics**"<br>...or those specific logs which make sense for your instance |
-   | Destination Details | Check "**Send to Log Analytics workspace**" |
+   | Destination Details | Check "**Send to Log Analytics workspace**" and then configure connection |
 
 ### Category Groups
 
