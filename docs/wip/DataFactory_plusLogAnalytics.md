@@ -16,9 +16,9 @@
 
    ### Logs
 
-   * Category Groups
+   * **Category Groups**
       * **allLogs** - Choose to send all types of logs {e.g., pipeline runs, trigger runs, activity runs, and more}
-   * Categories
+   * **Categories**
       * **Pipeline activity runs log** - This log captures details about the execution of activities within a pipeline. For instance, if a pipeline includes activities to extract data from a source, transform it, and load it into a destination, this log would capture details about the execution of each of these activities.  
       * **Pipeline runs log** - This log records information about each pipeline run, including its start time, end time, and status. For example, if a pipeline is scheduled to run once a day, this log would contain a record for each daily run.  
       * **Trigger runs log** - This log captures information about trigger runs, which are instances where a trigger has fired to start a pipeline. This could include details about the time the trigger fired and the pipeline that was started.  
@@ -37,7 +37,7 @@
          * **Airflow dag processing logs** - This log captures information about the processing of Directed Acyclic Graphs (DAGs), which are the workflows defined in Apache Airflow. It can include information about DAG parsing, scheduling decisions, and execution status, which can be useful for understanding how your workflows are performing and identifying any issues.
          * **Airflow scheduler logs** - This log records information about the operation of the Apache Airflow scheduler. The scheduler in Airflow is responsible for deciding when to run workflows based on their schedules. Logs could include details about scheduling decisions, errors, and more, which can help in troubleshooting and understanding scheduler performance.  
          * **Airflow web logs** - This log captures information about the operation of the Apache Airflow web interface. This could include details about user interactions, errors, and more. This can be useful for understanding how users are interacting with the web interface and identifying any issues.
-   * Metrics   
+   * **Metrics**   
       * **AllMetrics** - This represents all the metrics available in Log Analytics. If you select this, you are choosing to send all types of metrics to Log Analytics. This could include metrics related to pipeline runs, activity runs, trigger runs, and more, giving you a comprehensive view of your system's performance.
    
    ### Destination Details
