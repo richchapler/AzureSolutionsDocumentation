@@ -1,6 +1,6 @@
 # Data Factory plus Log Analytics
 
-## Connect Data Factory to Log Analytics
+## Configure
 
 1. Instantiate Data Factory and Log Analytics
    a. Note the Log Analytics Workspace ID and Primary Key
