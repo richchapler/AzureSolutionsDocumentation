@@ -51,16 +51,22 @@ Now, your Azure Data Factory logs will be sent to Log Analytics. You can run que
 
 ## Sample
 
-A great report to run might be one that shows the status of all pipeline runs over the last 7 days. Here's an example of such a query:  
+To run the report, you need to use Azure Monitor's Log Analytics. Here is a step-by-step guide:  
    
-```KQL  
-AzureDiagnostics  
-| where ResourceProvider == "MICROSOFT.DATAPROCESSING" and Category == "PipelineRuns"  
-| where TimeGenerated > ago(7d)  
-| project TimeGenerated, Resource, operationName, status_s, Duration_d  
-| order by TimeGenerated desc  
+1. Sign in to the Azure portal.  
+   
+2. In the left-hand menu, click on "Monitor" or search for "Monitor" in the search box.  
+   
+3. In the Monitor blade, under the "Insights" section, click on "Logs".  
+   
+4. In the new query window, paste the query:  
+   
+```kql  
+AzureDiagnostics    
+| where ResourceProvider == "MICROSOFT.DATAPROCESSING" and Category == "PipelineRuns"    
+| where TimeGenerated > ago(7d)    
+| project TimeGenerated, Resource, operationName, status_s, Duration_d    
+| order by TimeGenerated desc    
 ```  
    
-This query filters logs to only show pipeline run logs from the last 7 days. It then projects the time the log was generated, the resource involved, the operation name, the status of the pipeline run, and its duration. The results are ordered by the time they were generated in descending order.  
-   
-This report can be useful for getting a quick overview of your pipeline runs, identifying any failures, and understanding how long your pipelines are taking to run.
+5. Click "Run" to execute the query.  
