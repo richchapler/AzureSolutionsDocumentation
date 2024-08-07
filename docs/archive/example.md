@@ -1,5 +1,5 @@
 | Starting Location | Ending Location | Travel Time | Train Number | Travel Date   | Earliest Departure | Website Link         |
-|-------------------|-----------------|-------------|--------------|---------------|--------------------|----------------------|
+:-------------------|-----------------|-------------|--------------|---------------|--------------------|----------------------|
 | London            | Paris           | 2h 15m      | Eurostar 9001| Sep 30, 2025  | 07:01              | [London-Paris](https://www.eurail.com/en/get-inspired/trains/routes/london-paris) |
 | Paris             | Barcelona       | 6h 25m      | Renfe-SNCF 9740| Oct 1, 2025   | 06:38              | [Paris-Barcelona](https://www.eurail.com/en/get-inspired/trains/routes/paris-barcelona) |
 | Barcelona         | Marseille       | 4h 30m      | Renfe-SNCF 9732| Oct 2, 2025   | 08:00              | [Barcelona-Marseille](https://www.eurail.com/en/get-inspired/trains/routes/barcelona-marseille) |
