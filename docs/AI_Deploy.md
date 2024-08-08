@@ -21,6 +21,8 @@
 
 * [AI Services](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
+* [Application Registration](Infrastructure_ApplicationRegistration.md) with "Key Vault Secrets User" permission to the Key Vault
+
 * [DevOps](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
 * [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
@@ -76,7 +78,7 @@ Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to
 SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; examples:
 * `SELECT [AddressID] [id], [AddressLine1] [name], [AddressLine1], ISNULL([AddressLine2],'null') [AddressLine2], [City], [StateProvince], [CountryRegion] FROM [SalesLT].[Address] WITH (NOLOCK)`
 * `SELECT [CustomerID] [id], [LastName] + ', ' + [FirstName] [name], [LastName], [FirstName] FROM [SalesLT].[Customer] WITH (NOLOCK)`
-* `SELECT DISTINCT [ProductID] [id], [Name] [name] FROM [SalesLT].[Product] WITH (NOLOCK)`
+* `SELECT DISTINCT [ProductID] [id], [Name] [name], [ProductNumber], [Color], [StandardCost] FROM [SalesLT].[Product] WITH (NOLOCK)`
 
 ### Step 2: Create Visual Studio Project
 
@@ -186,7 +188,7 @@ namespace AI_Deploy
 
                 var existingDataSources = await AzureSolutions.Helpers.AISearch.DataSource.List_Existing(aisc);
 
-                existingDataSources.Select((dataSource, index) => $"{index + 1}. {dataSource.Name}").ToList().ForEach(Console.WriteLine);
+                existingDataSources.((dataSource, index) => $"{index + 1}. {dataSource.Name}").ToList().ForEach(Console.WriteLine);
 
                 Console.WriteLine("\nEnter Data Sources using a comma-separated list {e.g., 1,2,4}:");
                 var selectedIndices = Console.ReadLine().Split(',').Select(int.Parse).ToList();
