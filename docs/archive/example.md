@@ -1,5 +1,6 @@
 | Starting City     | Starting Country | Ending City       | Ending Country | Travel Time | Train Number | Travel Date   | Earliest Departure | Things to See                                      |
 |-------------------|------------------|-------------------|----------------|-------------|--------------|---------------|--------------------|----------------------------------------------------|
+| Washington State  | USA              | London            | England        | -           | -            | Sep 29, 2025  | -                  | Explore London                                     |
 | London            | England          | Paris             | France         | 2h 15m      | Eurostar 9001| Sep 30, 2025  | 07:01              | Eiffel Tower, Champs-Élysées, Notre-Dame Cathedral |
 | Paris             | France           | Paris             | France         | -           | -            | Oct 1, 2025   | -                  | Musée Rodin, Louvre                                  |
 | Paris             | France           | Barcelona         | Spain          | 6h 25m      | Renfe-SNCF 9740| Oct 2, 2025   | 06:38              | Sagrada Família, Park Güell, La Rambla             |
@@ -17,3 +18,4 @@
 | Brussels          | Belgium          | Copenhagen        | Denmark        | 7h 15m      | EuroCity 30  | Oct 13, 2025  | 07:25              | Nyhavn, Tivoli Gardens, **The Little Mermaid** |
 | Copenhagen        | Denmark          | Geneva            | Switzerland    | 5h 45m      | EuroCity 90  | Oct 14, 2025  | 06:17              | Jet d'Eau, St. Pierre Cathedral, **Large Hadron Collider** |
 | Geneva            | Switzerland      | Bern              | Switzerland    | 1h 45m      | InterCity 730| Oct 15, 2025  | 06:33              | Zytglogge, Bern Minster, **Family Tree Exploration** |
+| Bern              | Switzerland      | Washington State  | USA            | -           | -            | -             | -                  | Return home                                          |
