@@ -21,7 +21,8 @@
 
 * [AI Services](https://learn.microsoft.com/en-us/azure/cognitive-services/)
 
-* [Application Registration](Infrastructure_ApplicationRegistration.md) with "Key Vault Secrets User" permission to the Key Vault
+* [Application Registration](Infrastructure_ApplicationRegistration.md) with "Key Vault Secrets Officer" permission to the Key Vault
+  * "Key Vault Secrets User" permission is sufficient if Key Vault secrets have already been created
 
 * [DevOps](https://azure.microsoft.com/en-us/products/devops/) with organization and project
  
