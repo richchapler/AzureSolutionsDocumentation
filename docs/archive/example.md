@@ -10,16 +10,6 @@
 
 ## Sep 29 - Sep 30, 2025 (2 nights)
 
-Big Ben, London Bridge, Buckingham Palace, 
-
-| Route                            | Travel Time | Train Number  | Travel Date  | Earliest Departure |
-| -------------------------------- | ----------- | ------------- | ------------ | ------------------ |
-| London, England >> Paris, France | 2h 15m      | Eurostar 9001 | Sep 30, 2025 | 07:01              |
-
-# London, England
-
-## Sep 29 - Sep 30, 2025 (2 nights)
-
 - **Big Ben**: Iconic clock tower and symbol of London.
 - **London Bridge**: Historic bridge with stunning views of the Thames.
 - **Buckingham Palace**: Official residence of the British monarch.
