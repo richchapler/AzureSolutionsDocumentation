@@ -48,12 +48,7 @@
 - **The Marais**: Trendy district with boutiques, galleries, and cafés.
 - **Luxembourg Gardens**: Beautiful public garden perfect for a leisurely stroll.
 - **Arc de Triomphe**: Monument honoring those who fought for France, located at the end of the Champs-Élysées.
-
-| Route                                         | Travel Time | Train Number | Travel Date | Earliest Departure |
-| --------------------------------------------- | ----------- | ------------ | ----------- | ------------------ |
-| Paris, France >> **Disneyland Paris**, France | -           | -            | Oct 2, 2025 | -                  |
-
-**Overnight in Disneyland Paris**: Disneyland Paris
+- **Disneyland Paris**: Disneyland Paris
 
 | Route                             | Travel Time | Train Number | Travel Date | Earliest Departure |
 | --------------------------------- | ----------- | ------------ | ----------- | ------------------ |
