@@ -44,7 +44,7 @@ This documentation assumes the following resources are ready for use:
 
 Also prepare a CSV file with sample OpenAI prompts; example:
 
-```
+```csv
 Work Item Type,Title,UserMessage
 Test Case,Prompt: Income Sources Overview,You are a tax professional,"How does Form 1040 provide a comprehensive view of an individuals various sources of income, including wages, dividends, and capital gains?"
 Test Case,Prompt: Deductions Insights,You are a tax professional,"What insights can be drawn from the deductions section of Form 1040 about an individual’s financial obligations and contributions?"
