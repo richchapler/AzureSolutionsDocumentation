@@ -8,13 +8,25 @@ These are instructions for setting up an environment in which to develop an Azur
 
    ![image](https://github.com/user-attachments/assets/d8feaa4e-89e5-4bc3-bdf2-4e923b5fb0f8)
   
-     Note: Confirm by running command line: `"C:\Program Files\Java\jdk-11\bin\java" -version`    
+     Note: Confirm by running command line:
+     ```shell
+     "C:\Program Files\Java\jdk-11\bin\java" -version
+     ```    
+
+   ![image](https://github.com/user-attachments/assets/eeb64307-69c9-477c-ad36-3d37cf4caf84)
   
 3. **Add to "Path" Environment Variable (System)**: "%JAVA_HOME%\bin
 
    ![image](https://github.com/user-attachments/assets/6d0018d5-89f2-4894-86e4-adf2e93987f8)
 
-6.     
+     Note: Confirm by running command line:
+     ```shell
+     where java
+     ```
+
+     ![image](https://github.com/user-attachments/assets/cf71e1c6-c02a-4cb6-9dbe-80d05a0af8ae)
+
+4.     Lorem Ipsum
    1. Press Win + X and choose System.    
    2. Click on Advanced system settings.    
    3. In the System Properties window that appears, click on Environment Variables.    
