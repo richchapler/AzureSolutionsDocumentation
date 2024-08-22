@@ -1,3 +1,7 @@
+# Prepare Environment: Java-based Function App Development
+
+These are instructions for setting up an environment in which to develop an Azure Function App based on Java
+
 1. **Install IntelliJ IDEA**: You can download it from the official JetBrains website (Download IntelliJ IDEA – The Leading Java and Kotlin IDE (jetbrains.com)). Choose the version that suits your needs (Community or Ultimate). After downloading, install it following the instructions.    
   
 2. **Install Java on your system**:  
