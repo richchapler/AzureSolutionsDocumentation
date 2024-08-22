@@ -57,17 +57,7 @@ These are instructions for setting up an environment in which to develop an Azur
    - In the `Project` window, navigate to `src/main/java/<YourPackageName>`.  
    - Right-click on the package and select `New -> Azure Function`.  
    - In the new window, enter the function name and choose the trigger type (for example, HttpTrigger). The trigger determines how your function is invoked. An HttpTrigger means your function will run whenever it receives an HTTP request.  
-   - Click `OK` to create the function. IntelliJ IDEA will generate a function class with a method that gets called when your function is triggered.  
-   
-11. **Test your function locally**: Before deploying your function to Azure, you should test it locally to make sure it works correctly.  
-   - Right-click on your project and select `Run -> Functions: host start`.  
-   - IntelliJ IDEA will start the Azure Functions runtime and your function will be ready to test locally.  
-   
-11. **Deploy your function to Azure**: Once you're satisfied with your function, you can deploy it to Azure to make it publicly accessible.  
-   - Right-click on your project and select `Deploy -> Deploy to Azure`.  
-   - In the new window, sign in to your Azure account. If you don't have one, you'll need to create one.  
-   - Select your subscription, and choose or create a new Function App. The Function App is a way to organize and collectively manage your functions.  
-   - Click `Run` to deploy your function to Azure.  
+   - Click `OK` to create the function. IntelliJ IDEA will generate a function class with a method that gets called when your function is triggered.
 
 12. **Install Azurite**: Azurite is a lightweight Azure Storage emulator that is ideal for testing your Azure applications locally. It emulates Azure Blob, Queue, and Table services.    
    1. Install Azurite using npm (Node Package Manager): Open a command prompt and run the following command: `npm install -g azurite`. If you don't have npm installed, you can download it from the official Node.js website.    
@@ -98,7 +88,19 @@ These are instructions for setting up an environment in which to develop an Azur
      
 14. **Test your function with Azurite**: Now, you can test your Azure Function with Azurite.    
    - In IntelliJ IDEA, right-click on your project and select `Run -> Functions: host start`.    
-   - IntelliJ IDEA will start the Azure Functions runtime, and your function will be ready to test locally with Azurite.    
+   - IntelliJ IDEA will start the Azure Functions runtime, and your function will be ready to test locally with Azurite.   
+
+11. **Test your function locally**: Before deploying your function to Azure, you should test it locally to make sure it works correctly.  
+   - Right-click on your project and select `Run -> Functions: host start`.  
+   - IntelliJ IDEA will start the Azure Functions runtime and your function will be ready to test locally.  
+   
+11. **Deploy your function to Azure**: Once you're satisfied with your function, you can deploy it to Azure to make it publicly accessible.  
+   - Right-click on your project and select `Deploy -> Deploy to Azure`.  
+   - In the new window, sign in to your Azure account. If you don't have one, you'll need to create one.  
+   - Select your subscription, and choose or create a new Function App. The Function App is a way to organize and collectively manage your functions.  
+   - Click `Run` to deploy your function to Azure.  
+
+ 
      
 15. **Deploy your function to Azure**: Once you're satisfied with your function and it works correctly with Azurite, you can deploy it to Azure.    
    - Right-click on your project and select `Deploy -> Deploy to Azure`.    
