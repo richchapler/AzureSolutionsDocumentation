@@ -25,20 +25,6 @@ These are instructions for setting up an environment in which to develop an Azur
      ```
 
      ![image](https://github.com/user-attachments/assets/cf71e1c6-c02a-4cb6-9dbe-80d05a0af8ae)
-
-4.     Lorem Ipsum
-   1. Press Win + X and choose System.    
-   2. Click on Advanced system settings.    
-   3. In the System Properties window that appears, click on Environment Variables.    
-   4. In the Environment Variables window, under System variables, find and select the Path variable, then click on Edit.    
-   5. In the Edit Environment Variable window, find the entry for JDK 22 and replace it with %JAVA_HOME%\bin.    
-   6. Click OK in all windows to apply the changes.    
-  
-7. **Choose your project SDK in IntelliJ IDEA**:    
-   - Open IntelliJ IDEA.    
-   - Go to `File -> Project Structure -> Project`.    
-   - In the Project SDK dropdown, select the JDK 11. If it's not listed, click on `New -> JDK` and navigate to the location where you installed JDK 11.    
-   - Click `OK` to apply the changes.    
    
 8. **Install Maven and add it to your PATH**:  
    1. Download Maven: You can download Maven from the official Apache Maven website. Choose the binary zip archive (apache-maven-3.x.x-bin.zip).  
@@ -56,8 +42,14 @@ These are instructions for setting up an environment in which to develop an Azur
    - Go to `File -> Settings -> Plugins`.  
    - In the search bar, type `Azure Toolkit for IntelliJ` and click on the search result.  
    - Click on `Install` and wait for the installation to complete.  
-   - Restart IntelliJ IDEA to complete the installation.  
-   
+   - Restart IntelliJ IDEA to complete the installation. 
+     
+7. **Choose your project SDK in IntelliJ IDEA**:    
+   - Open IntelliJ IDEA.    
+   - Go to `File -> Project Structure -> Project`.    
+   - In the Project SDK dropdown, select the JDK 11. If it's not listed, click on `New -> JDK` and navigate to the location where you installed JDK 11.    
+   - Click `OK` to apply the changes.
+   - 
 10. **Create a new Azure Functions project**: Azure Functions is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs.  
    - In IntelliJ IDEA, click on `File -> New -> Project`.  
    - In the new window, select `Azure Functions` under `Azure` on the left panel.  
