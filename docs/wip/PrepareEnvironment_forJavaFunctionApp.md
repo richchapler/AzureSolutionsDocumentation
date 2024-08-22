@@ -30,18 +30,22 @@ These are instructions for setting up an environment in which to develop an Azur
 
 5. **Install IntelliJ**: Download and install from https://www.jetbrains.com/idea/download 
    
-6. **Install IntelliJ IDEA, Azure Toolkit plug-in**  
+6. **Choose your project SDK in IntelliJ IDEA**:    
+
+  - Navigate to IntelliJ IDEA > File > Project Structure > Platform Settings > SDKs 
+  - Click "+" and on the resulting pop-up, select "Add JDK from disk..."
+  - On the "Select Home Directory for JDK" popup, navigate to the JDK installation directory and then click "OK" and "OK" again
+
+    ![image](https://github.com/user-attachments/assets/fd6afc39-0a2f-4c3c-86e3-58ad2c411518)
+
+7. **Install IntelliJ IDEA, Azure Toolkit plug-in**  
    - Open IntelliJ IDEA.  
    - Go to `File -> Settings -> Plugins`.  
    - In the search bar, type `Azure Toolkit for IntelliJ` and click on the search result.  
    - Click on `Install` and wait for the installation to complete.  
    - Restart IntelliJ IDEA to complete the installation. 
      
-7. **Choose your project SDK in IntelliJ IDEA**:    
-   - Open IntelliJ IDEA.    
-   - Go to `File -> Project Structure -> Project`.    
-   - In the Project SDK dropdown, select the JDK 11. If it's not listed, click on `New -> JDK` and navigate to the location where you installed JDK 11.    
-   - Click `OK` to apply the changes.
+7. 
    - 
 10. **Create a new Azure Functions project**: Azure Functions is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs.  
    - In IntelliJ IDEA, click on `File -> New -> Project`.  
