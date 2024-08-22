@@ -2,30 +2,31 @@
 
 These are instructions for setting up an environment in which to develop an Azure Function App based on Java
 
-1. **Install IntelliJ IDEA**: You can download it from the official JetBrains website (Download IntelliJ IDEA – The Leading Java and Kotlin IDE (jetbrains.com)). Choose the version that suits your needs (Community or Ultimate). After downloading, install it following the instructions.    
+1. **Install Java Development Kit (JDK)**: Download and install Java JDK (https://www.oracle.com/java/technologies)   
+
+2. **Set JAVA_HOME to point to Java 11 on Windows**:    
+   1. Right-click on My Computer or This PC and select Properties.    
+   2. Click on Advanced system settings.    
+   3. In the System Properties window that opens, go to the Advanced tab and click on Environment Variables.    
+   4. In the Environment Variables window, under System variables, find the JAVA_HOME variable and click Edit.    
+   5. In the Edit System Variable window, change the variable value to the path where you installed JDK 11. For example, “C:\Program Files\Java\jdk-11” (NO TRAILING WHACK and DOUBLE QUOTES ARE IMPORTANT)    
+   6. Click OK in all windows to apply the changes.    
   
-2. **Install Java on your system**:  
-   1. Download Java JDK: Go to the Oracle website (for Java 11) or AdoptOpenJDK (for other versions). Download the appropriate JDK for your operating system.  
-   2. Install Java JDK: Run the installer and follow the instructions to install the JDK on your system.  
-   
-3. **Set JAVA_HOME on Windows**:  
-   1. Right-click on My Computer or This PC and select Properties.  
-   2. Click on Advanced system settings.  
-   3. In the System Properties window that opens, go to the Advanced tab and click on Environment Variables.  
-   4. In the Environment Variables window, under System variables, click New.  
-   5. In the New System Variable window, enter JAVA_HOME as the variable name and “C:\Program Files\Java\jdk-22” as the variable value (NO TRAILING WHACK and DOUBLE QUOTES ARE IMPORTANT)  
-   6. Click OK in all windows to apply the changes.  
-   
-4. **Test by entering this directly in a command line**: "C:\Program Files\Java\jdk-22\bin\java" -version  
-   
-5. **To add the JDK to your Path, follow these steps**:  
-   1. Press Win + X and choose System.  
-   2. Click on Advanced system settings.  
-   3. In the System Properties window that appears, click on Environment Variables.  
-   4. In the Environment Variables window, under System variables, find and select the Path variable, then click on Edit.  
-   5. In the Edit Environment Variable window, click on New.  
-   6. Type %JAVA_HOME%\bin and press Enter.  
-   7. Click OK in all windows to apply the changes.  
+  _Note: Test by entering this directly in a command line**: "C:\Program Files\Java\jdk-11\bin\java" -version_    
+  
+4. **To add the JDK 11 to your Path, follow these steps**:    
+   1. Press Win + X and choose System.    
+   2. Click on Advanced system settings.    
+   3. In the System Properties window that appears, click on Environment Variables.    
+   4. In the Environment Variables window, under System variables, find and select the Path variable, then click on Edit.    
+   5. In the Edit Environment Variable window, find the entry for JDK 22 and replace it with %JAVA_HOME%\bin.    
+   6. Click OK in all windows to apply the changes.    
+  
+5. **Choose your project SDK in IntelliJ IDEA**:    
+   - Open IntelliJ IDEA.    
+   - Go to `File -> Project Structure -> Project`.    
+   - In the Project SDK dropdown, select the JDK 11. If it's not listed, click on `New -> JDK` and navigate to the location where you installed JDK 11.    
+   - Click `OK` to apply the changes.    
    
 6. **Install Maven and add it to your PATH**:  
    1. Download Maven: You can download Maven from the official Apache Maven website. Choose the binary zip archive (apache-maven-3.x.x-bin.zip).  
