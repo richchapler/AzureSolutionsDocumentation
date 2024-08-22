@@ -4,17 +4,17 @@ These are instructions for setting up an environment in which to develop an Azur
 
 1. **Install Java Development Kit (JDK)**: Download and install Java JDK (https://www.oracle.com/java/technologies)   
 
-2. **Set JAVA_HOME to point to Java 11 on Windows**:    
-   1. Right-click on My Computer or This PC and select Properties.    
-   2. Click on Advanced system settings.    
-   3. In the System Properties window that opens, go to the Advanced tab and click on Environment Variables.    
-   4. In the Environment Variables window, under System variables, find the JAVA_HOME variable and click Edit.    
-   5. In the Edit System Variable window, change the variable value to the path where you installed JDK 11. For example, “C:\Program Files\Java\jdk-11” (NO TRAILING WHACK and DOUBLE QUOTES ARE IMPORTANT)    
-   6. Click OK in all windows to apply the changes.    
+2. **Set "JAVA_HOME" Environment Variable (System)**: "C:\Program Files\Java\jdk-11" (as appropriate for the desired version)
+
+   ![image](https://github.com/user-attachments/assets/d8feaa4e-89e5-4bc3-bdf2-4e923b5fb0f8)
   
-  _Note: Test by entering this directly in a command line**: "C:\Program Files\Java\jdk-11\bin\java" -version_    
+     Note: Confirm by running command line: `"C:\Program Files\Java\jdk-11\bin\java" -version`    
   
-4. **To add the JDK 11 to your Path, follow these steps**:    
+3. **Add to "Path" Environment Variable (System)**: "%JAVA_HOME%\bin
+
+   ![image](https://github.com/user-attachments/assets/6d0018d5-89f2-4894-86e4-adf2e93987f8)
+
+6.     
    1. Press Win + X and choose System.    
    2. Click on Advanced system settings.    
    3. In the System Properties window that appears, click on Environment Variables.    
@@ -22,13 +22,13 @@ These are instructions for setting up an environment in which to develop an Azur
    5. In the Edit Environment Variable window, find the entry for JDK 22 and replace it with %JAVA_HOME%\bin.    
    6. Click OK in all windows to apply the changes.    
   
-5. **Choose your project SDK in IntelliJ IDEA**:    
+7. **Choose your project SDK in IntelliJ IDEA**:    
    - Open IntelliJ IDEA.    
    - Go to `File -> Project Structure -> Project`.    
    - In the Project SDK dropdown, select the JDK 11. If it's not listed, click on `New -> JDK` and navigate to the location where you installed JDK 11.    
    - Click `OK` to apply the changes.    
    
-6. **Install Maven and add it to your PATH**:  
+8. **Install Maven and add it to your PATH**:  
    1. Download Maven: You can download Maven from the official Apache Maven website. Choose the binary zip archive (apache-maven-3.x.x-bin.zip).  
    2. Extract the zip file: Once the download is complete, extract the zip file to a directory on your system. For example, you might extract it to C:\Program Files\Apache\Maven.  
    3. Add Maven to your PATH:  
@@ -39,14 +39,14 @@ These are instructions for setting up an environment in which to develop an Azur
          4. In the Edit Environment Variable window, click on "New", and then add the path to the bin directory of your Maven installation. For example, if you extracted Maven to C:\Program Files\Apache\maven, you would add C:\Program Files\Apache\maven\bin.  
          5. Click "OK" in each window to close them.  
    
-7. **Install Azure Toolkit for IntelliJ**: This toolkit allows you to develop, run, and debug Azure applications directly from IntelliJ IDEA.  
+9. **Install Azure Toolkit for IntelliJ**: This toolkit allows you to develop, run, and debug Azure applications directly from IntelliJ IDEA.  
    - Open IntelliJ IDEA.  
    - Go to `File -> Settings -> Plugins`.  
    - In the search bar, type `Azure Toolkit for IntelliJ` and click on the search result.  
    - Click on `Install` and wait for the installation to complete.  
    - Restart IntelliJ IDEA to complete the installation.  
    
-8. **Create a new Azure Functions project**: Azure Functions is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs.  
+10. **Create a new Azure Functions project**: Azure Functions is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs.  
    - In IntelliJ IDEA, click on `File -> New -> Project`.  
    - In the new window, select `Azure Functions` under `Azure` on the left panel.  
    - Choose your project SDK (Software Development Kit). If you have installed the JDK as per the previous steps, it should appear in the dropdown menu.  
@@ -54,13 +54,13 @@ These are instructions for setting up an environment in which to develop an Azur
    - Enter your project name and choose a location on your system where the project files will be stored.  
    - Click `Finish` to create the project.  
    
-9. **Write your function code**: Now, you'll write the code for your Azure Function.  
+11. **Write your function code**: Now, you'll write the code for your Azure Function.  
    - In the `Project` window, navigate to `src/main/java/<YourPackageName>`.  
    - Right-click on the package and select `New -> Azure Function`.  
    - In the new window, enter the function name and choose the trigger type (for example, HttpTrigger). The trigger determines how your function is invoked. An HttpTrigger means your function will run whenever it receives an HTTP request.  
    - Click `OK` to create the function. IntelliJ IDEA will generate a function class with a method that gets called when your function is triggered.  
    
-10. **Test your function locally**: Before deploying your function to Azure, you should test it locally to make sure it works correctly.  
+11. **Test your function locally**: Before deploying your function to Azure, you should test it locally to make sure it works correctly.  
    - Right-click on your project and select `Run -> Functions: host start`.  
    - IntelliJ IDEA will start the Azure Functions runtime and your function will be ready to test locally.  
    
