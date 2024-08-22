@@ -2,7 +2,7 @@
 
 These are instructions for setting up an environment in which to develop an Azure Function App based on Java
 
-1. **Install Java Development Kit (JDK)**: Download and install Java JDK (https://www.oracle.com/java/technologies)   
+1. **Install Java Development Kit (JDK)**: Download and install from https://www.oracle.com/java/technologies  
 
 2. **Set "JAVA_HOME" Environment Variable (System)**: "C:\Program Files\Java\jdk-11" (as appropriate for the desired version)
 
@@ -26,18 +26,11 @@ These are instructions for setting up an environment in which to develop an Azur
 
      ![image](https://github.com/user-attachments/assets/cf71e1c6-c02a-4cb6-9dbe-80d05a0af8ae)
    
-8. **Install Maven and add it to your PATH**:  
-   1. Download Maven: You can download Maven from the official Apache Maven website. Choose the binary zip archive (apache-maven-3.x.x-bin.zip).  
-   2. Extract the zip file: Once the download is complete, extract the zip file to a directory on your system. For example, you might extract it to C:\Program Files\Apache\Maven.  
-   3. Add Maven to your PATH:  
-      1. On Windows:  
-         1. Search for "Environment Variables" in your start menu and select "Edit the system environment variables".  
-         2. In the System Properties window that appears, click on "Environment Variables".  
-         3. In the Environment Variables window, under "System variables", find the Path variable, select it, and click on "Edit".  
-         4. In the Edit Environment Variable window, click on "New", and then add the path to the bin directory of your Maven installation. For example, if you extracted Maven to C:\Program Files\Apache\maven, you would add C:\Program Files\Apache\maven\bin.  
-         5. Click "OK" in each window to close them.  
+4. **Install Maven**: Download and install from https://maven.apache.org/download.cgi
+
+5. **Install IntelliJ**: Download and install from https://www.jetbrains.com/idea/download 
    
-9. **Install Azure Toolkit for IntelliJ**: This toolkit allows you to develop, run, and debug Azure applications directly from IntelliJ IDEA.  
+6. **Install IntelliJ IDEA, Azure Toolkit plug-in**  
    - Open IntelliJ IDEA.  
    - Go to `File -> Settings -> Plugins`.  
    - In the search bar, type `Azure Toolkit for IntelliJ` and click on the search result.  
