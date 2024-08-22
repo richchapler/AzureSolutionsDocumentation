@@ -64,5 +64,50 @@
    - In the new window, sign in to your Azure account. If you don't have one, you'll need to create one.  
    - Select your subscription, and choose or create a new Function App. The Function App is a way to organize and collectively manage your functions.  
    - Click `Run` to deploy your function to Azure.  
-   
-Remember, you need to have an active Azure subscription to deploy your function to Azure. If you don't have one, you can create a free account.
+
+12. **Install Azurite**: Azurite is a lightweight Azure Storage emulator that is ideal for testing your Azure applications locally. It emulates Azure Blob, Queue, and Table services.    
+   1. Install Azurite using npm (Node Package Manager): Open a command prompt and run the following command: `npm install -g azurite`. If you don't have npm installed, you can download it from the official Node.js website.    
+   2. Create a directory for Azurite: For example, you can create a directory at `C:\azurite`.    
+     
+13. **Start Azurite**:    
+   1. Open a new command prompt window.    
+   2. Navigate to the directory where you installed Azurite.    
+   3. Run the following command:
+
+      ```shell
+      azurite --silent --location C:\azurite --debug C:\azurite\debug.log --blobHost 127.0.0.1 --blobPort 10002 --queuePort 10003 --tablePort 10004  
+      ```  
+      In this command:    
+      - `--silent` runs Azurite in silent mode.    
+      - `--location C:\azurite` specifies the directory where Azurite should store its data.    
+      - `--debug C:\azurite\debug.log` specifies the file where Azurite should write debug logs.    
+      - `--blobHost 127.0.0.1` specifies the IP address that the Blob service should use.    
+      - `--blobPort 10002` specifies the port that the Blob service should use.    
+      - `--queuePort 10003` specifies the port that the Queue service should use.    
+      - `--tablePort 10004` specifies the port that the Table service should use.    
+     
+   After running this command, each service should start on its own port.
+
+   ![image](https://github.com/user-attachments/assets/32ad764a-d058-4d59-9dd7-17dacbe1a1b6)
+     
+   **Note**: The Azurite command prompt window needs to be left active during testing. If you close the window, Azurite will stop running, and your Azure application won't be able to access the emulated storage services.    
+     
+14. **Test your function with Azurite**: Now, you can test your Azure Function with Azurite.    
+   - In IntelliJ IDEA, right-click on your project and select `Run -> Functions: host start`.    
+   - IntelliJ IDEA will start the Azure Functions runtime, and your function will be ready to test locally with Azurite.    
+     
+15. **Deploy your function to Azure**: Once you're satisfied with your function and it works correctly with Azurite, you can deploy it to Azure.    
+   - Right-click on your project and select `Deploy -> Deploy to Azure`.    
+   - In the new window, sign in to your Azure account. If you don't have one, you'll need to create one.    
+   - Select your subscription, and choose or create a new Function App. The Function App is a way to organize and collectively manage your functions.    
+   - Click `Run` to deploy your function to Azure.
+
+   16. Build your project: Before running your function, you need to build your project. In the root directory of your project, run the command mvn clean package. This will clean any previous build and create a new package.
+
+17. Run your function locally: After building your project, navigate to the target\azure-functions\<function-app-name> directory in your project root and run the func start command. Replace <function-app-name> with the name of your function app.
+
+18. Debugging: If you encounter any issues while running your function, you can use the --verbose flag with the func start command to get more detailed output. This might help identify the issue.
+
+19. Rebuilding: If you make any changes to your function code, you need to rebuild your project using mvn clean package before running your function again.
+
+20. Azure Functions Core Tools: Ensure that you have the correct version of Azure Functions Core Tools installed. You can check this by running func --version in your command line. For Java functions, you should have version 3.x or later.
