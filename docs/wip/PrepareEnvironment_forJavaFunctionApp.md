@@ -75,20 +75,20 @@
    3. Run the following command:
 
       ```shell
-      azurite --silent --location C:\azurite --debug C:\azurite\debug.log --blobHost 127.0.0.1 --blobPort 10002 --queuePort 10003 --tablePort 10004  
+      azurite --silent --location C:\azurite --debug C:\azurite\debug.log --blobHost  --blobPort 10000 --queuePort 10001 --tablePort 10002  
       ```  
       In this command:    
       - `--silent` runs Azurite in silent mode.    
       - `--location C:\azurite` specifies the directory where Azurite should store its data.    
       - `--debug C:\azurite\debug.log` specifies the file where Azurite should write debug logs.    
       - `--blobHost 127.0.0.1` specifies the IP address that the Blob service should use.    
-      - `--blobPort 10002` specifies the port that the Blob service should use.    
-      - `--queuePort 10003` specifies the port that the Queue service should use.    
-      - `--tablePort 10004` specifies the port that the Table service should use.    
+      - `--blobPort 10000` specifies the port that the Blob service should use.    
+      - `--queuePort 10001` specifies the port that the Queue service should use.    
+      - `--tablePort 10002` specifies the port that the Table service should use.    
      
    After running this command, each service should start on its own port.
 
-   ![image](https://github.com/user-attachments/assets/32ad764a-d058-4d59-9dd7-17dacbe1a1b6)
+![image](https://github.com/user-attachments/assets/fa1e95d8-f630-48fb-abc1-ccab0ff32e84)
      
    **Note**: The Azurite command prompt window needs to be left active during testing. If you close the window, Azurite will stop running, and your Azure application won't be able to access the emulated storage services.    
      
