@@ -67,40 +67,15 @@ Download and install from https://www.jetbrains.com/idea/download
 - Enter your project name and choose a location on your system where the project files will be stored.  
 - Click `Finish` to create the project.  
 
-### Libraries
+### Dependencies
 
-add the Azure SDK for Java to your project's dependencies by following these steps:
-Open your project in IntelliJ IDEA.
-Go to File -> Project Structure (or press Ctrl + Alt + Shift + S).
-In the Project Structure dialog, select Modules under the Project Settings section.
-Select your module where you want to add the Azure SDK.
-Go to the Dependencies tab.
-Click on the + button at the bottom of the dialog -> Library -> From Maven.
-In the Download Library from Maven dialog, enter **com.azure:azure-identity:1.3.1** in the Search for class field and click on the Search button.
-Select the library from the search results and click on the OK button.
-Repeat steps 6 to 8 for com.azure:**azure-security-keyvault-secrets:4.3.0**.
-Click on the Apply button and then the OK button to close the Project Structure dialog.
+Navigate to IntelliJ IDEA >> File >> Project Structure.
+On the resulting `Project Structure` popup, click `+` and select `Library` from the resulting dropdown.
+One the resulting `Choose Libraries` popup, click `New Library` and select `From Maven` from the resulting dropdown.
 
-### Environment Variables
+Do this for `azure.identity` and for `azure.security.keyvault.secrets`
 
-Navigate to Run >> Edit Configurations
-
-![image](https://github.com/user-attachments/assets/5deab8db-efc4-480f-bffb-e862705fdc46)
-
-In the `App Settings` section, click `+`. Complete the resulting `Add App Settings` popup form and repeat for the following key-value pairs:
-* KeyVault_Name
-* TenantId
-* ClientId
-* ClientSecret
-
-### Code
-
-- In the `Project` window, navigate to `src/main/java/<YourPackageName>`.  
-- Right-click on the package and select `New -> Azure Function`.  
-- In the new window, enter the function name and choose the trigger type (for example, HttpTrigger). The trigger determines how your function is invoked. An HttpTrigger means your function will run whenever it receives an HTTP request.  
-- Click `OK` to create the function. IntelliJ IDEA will generate a function class with a method that gets called when your function is triggered.
-
-#### pom.xml
+Open `pom.xml` and replace default XML with:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -127,20 +102,38 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
         <functionAppName>azure-function-examples-1724336857796</functionAppName>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.microsoft.azure.functions</groupId>
             <artifactId>azure-functions-java-library</artifactId>
             <version>${azure.functions.java.library.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-identity</artifactId>
+            <version>1.13.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-security-keyvault-secrets</artifactId>
+            <version>4.8.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-storage-blob</artifactId>
+            <version>12.27.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -179,7 +172,6 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
                     <appName>${functionAppName}</appName>
                     <resourceGroup>java-functions-group</resourceGroup>
                     <appServicePlanName>java-functions-app-service-plan</appServicePlanName>
-                    <region>westus</region>
                     <runtime>
                         <os>windows</os>
                         <javaVersion>8</javaVersion>
@@ -210,6 +202,40 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
     </build>
 </project>
 ```
+
+Go to File -> Project Structure (or press Ctrl + Alt + Shift + S).
+In the Project Structure dialog, select Modules under the Project Settings section.
+Select your module where you want to add the Azure SDK.
+
+Go to the Dependencies tab.
+
+Click on the + button at the bottom of the dialog -> Library -> From Maven.
+
+In the Download Library from Maven dialog, enter **com.azure:azure-identity:1.3.1** in the Search for class field and click on the Search button.
+Select the library from the search results and click on the OK button.
+
+Repeat steps 6 to 8 for com.azure:**azure-security-keyvault-secrets:4.3.0**.
+
+Click on the Apply button and then the OK button to close the Project Structure dialog.
+
+### Environment Variables
+
+Navigate to Run >> Edit Configurations
+
+![image](https://github.com/user-attachments/assets/5deab8db-efc4-480f-bffb-e862705fdc46)
+
+In the `App Settings` section, click `+`. Complete the resulting `Add App Settings` popup form and repeat for the following key-value pairs:
+* KeyVault_Name
+* TenantId
+* ClientId
+* ClientSecret
+
+### Code
+
+- In the `Project` window, navigate to `src/main/java/<YourPackageName>`.  
+- Right-click on the package and select `New -> Azure Function`.  
+- In the new window, enter the function name and choose the trigger type (for example, HttpTrigger). The trigger determines how your function is invoked. An HttpTrigger means your function will run whenever it receives an HTTP request.  
+- Click `OK` to create the function. IntelliJ IDEA will generate a function class with a method that gets called when your function is triggered.
 
 #### TimerTriggerJava.java
 ```java
