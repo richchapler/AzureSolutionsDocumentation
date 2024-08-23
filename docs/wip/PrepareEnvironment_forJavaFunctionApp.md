@@ -247,19 +247,20 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
 ```java
 package org.example.functions;
 
-import com.microsoft.azure.functions.ExecutionContext;
-import com.microsoft.azure.functions.annotation.FunctionName;
-import com.microsoft.azure.functions.annotation.TimerTrigger;
-import com.azure.identity.ClientSecretCredential;
-import com.azure.identity.ClientSecretCredentialBuilder;
-import com.azure.security.keyvault.secrets.SecretClient;
-import com.azure.security.keyvault.secrets.SecretClientBuilder;
-import com.azure.storage.blob.BlobServiceClient;
-import com.azure.storage.blob.BlobServiceClientBuilder;
-import com.azure.storage.blob.BlobContainerClient;
-import com.azure.storage.blob.models.BlobItem;
-import com.azure.storage.blob.BlobClient;
-import java.io.ByteArrayOutputStream;
+import com.microsoft.azure.functions.*;
+import com.microsoft.azure.functions.annotation.*;
+import com.azure.identity.*;
+import com.azure.security.keyvault.secrets.*;
+import com.azure.storage.blob.*;
+import com.azure.storage.blob.models.*;
+
+import java.io.*;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.*;
+import javax.xml.parsers.*;
+
+import org.w3c.dom.*;
+import org.xml.sax.*;
 
 public class TimerTriggerJava {
     @FunctionName("TimerTriggerJava")
@@ -294,27 +295,32 @@ public class TimerTriggerJava {
 
             context.getLogger().info("*************** Processing " + blobItem.getName());
 
-            BlobClient blobClient = inbound.getBlobClient(blobItem.getName());
+            BlobClient bc = inbound.getBlobClient(blobItem.getName());
 
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-//            blobClient.download(outputStream);
-//            byte[] byteArray = outputStream.toByteArray();
-//
-//            String path = Paths.get(System.getProperty("user.dir"), "Functions", "Storage_ConvertXMLtoSQL", "schema.xsd").toString();
-//
-//            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//            Schema schema = factory.newSchema(new File(path));
-//
-//            Source xmlFile = new StreamSource(new ByteArrayInputStream(byteArray));
-//            Validator validator = schema.newValidator();
-//            validator.validate(xmlFile);
-//
-//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-//            Document doc = dBuilder.parse(new ByteArrayInputStream(byteArray));
-//
-//            // Assuming you have a method to convert Document to DataSet equivalent in Java
+            bc.download(baos);
+
+            byte[] b = baos.toByteArray();
+
+            Source s = new StreamSource(new ByteArrayInputStream(b));
+
+            try {
+                DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+                DocumentBuilder db = dbf.newDocumentBuilder();
+
+                Document doc = db.parse(new ByteArrayInputStream(b));
+
+            } catch (ParserConfigurationException e) {
+                context.getLogger().severe("Error configuring parser: " + e.getMessage());
+            } catch (SAXException e) {
+                context.getLogger().severe("Error parsing document: " + e.getMessage());
+            } catch (IOException e) {
+                context.getLogger().severe("Error reading document: " + e.getMessage());
+            }
+
+
 //            DataSet dataSet = convertDocumentToDataSet(doc);
 //
 //            for (DataTable xmlSource : dataSet.getTables()) {
