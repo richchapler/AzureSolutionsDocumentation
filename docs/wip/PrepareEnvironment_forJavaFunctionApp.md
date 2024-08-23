@@ -1,4 +1,4 @@
-# Prepare Environment: Java-based Function App Development
+# Java-based Function App Development
 
 These are instructions for setting up an environment in which to develop an Azure Function App based on Java
 
