@@ -254,6 +254,8 @@ import com.azure.identity.ClientSecretCredential;
 import com.azure.identity.ClientSecretCredentialBuilder;
 import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
+import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.blob.BlobServiceClientBuilder;
 
 public class TimerTriggerJava {
     @FunctionName("TimerTriggerJava")
@@ -279,6 +281,11 @@ public class TimerTriggerJava {
         context.getLogger().info("*************** Key Vault Secret, Storage-ConnectionString: " + storageConnectionString);
 
         context.getLogger().info("*************** Azure Storage");
+
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(storageConnectionString).buildClient();
+
+        //        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient("inbound");
+
     }
 }
 ```
