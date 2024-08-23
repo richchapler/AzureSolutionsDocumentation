@@ -79,6 +79,18 @@ Select the library from the search results and click on the OK button.
 Repeat steps 6 to 8 for com.azure:**azure-security-keyvault-secrets:4.3.0**.
 Click on the Apply button and then the OK button to close the Project Structure dialog.
 
+### Environment Variables
+
+Navigate to Run >> Edit Configurations
+
+![image](https://github.com/user-attachments/assets/5deab8db-efc4-480f-bffb-e862705fdc46)
+
+In the `App Settings` section, click `+`. Complete the resulting `Add App Settings` popup form and repeat for the following key-value pairs:
+* KeyVault_Name
+* TenantId
+* ClientId
+* ClientSecret
+
 ### Code
 
 - In the `Project` window, navigate to `src/main/java/<YourPackageName>`.  
