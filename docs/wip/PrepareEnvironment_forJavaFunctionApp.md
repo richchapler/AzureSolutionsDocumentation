@@ -4,10 +4,12 @@ These are instructions for setting up an environment in which to develop an Azur
 
 ## Installations
 
-### Install Java Development Kit (JDK)
+### Java
+
+#### Install Java Development Kit (JDK)
 Download and install from https://www.oracle.com/java/technologies  
 
-### Set "JAVA_HOME" Environment Variable (System)
+#### Set Windows Environment Variable `JAVA_HOME`
 "C:\Program Files\Java\jdk-11" (as appropriate for the desired version)
 
    ![image](https://github.com/user-attachments/assets/d8feaa4e-89e5-4bc3-bdf2-4e923b5fb0f8)
@@ -19,7 +21,7 @@ Download and install from https://www.oracle.com/java/technologies
 
    ![image](https://github.com/user-attachments/assets/eeb64307-69c9-477c-ad36-3d37cf4caf84)
   
-### Add to "Path" Environment Variable (System)**
+#### Add to "Path" Environment Variable (System)**
 
 %JAVA_HOME%\bin
 
