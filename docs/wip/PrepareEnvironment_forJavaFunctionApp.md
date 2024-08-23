@@ -104,7 +104,6 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -114,7 +113,11 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Azure Java Functions</name>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.4</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -124,52 +127,40 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
         <functionAppName>azure-function-examples-1724336857796</functionAppName>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.azure</groupId>
-                <artifactId>azure-sdk-bom</artifactId>
-                <version>1.0.6</version> <!-- updated version -->
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>com.microsoft.azure.functions</groupId>
             <artifactId>azure-functions-java-library</artifactId>
             <version>${azure.functions.java.library.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-identity</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-security-keyvault-secrets</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.4.2</version>
+            <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.23.4</version>
+            <version>5.12.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -213,11 +204,6 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>obj</directory>
-                        </fileset>
-                    </filesets>
                 </configuration>
             </plugin>
         </plugins>
@@ -229,9 +215,15 @@ In the `App Settings` section, click `+`. Complete the resulting `Add App Settin
 ```java
 package org.example.functions;
 
-import java.time.*;
-import com.microsoft.azure.functions.annotation.*;
-import com.microsoft.azure.functions.*;
+import com.microsoft.azure.functions.ExecutionContext;
+import com.microsoft.azure.functions.annotation.FunctionName;
+import com.microsoft.azure.functions.annotation.TimerTrigger;
+import com.azure.identity.ClientSecretCredential;
+import com.azure.identity.ClientSecretCredentialBuilder;
+import com.azure.security.keyvault.secrets.SecretClient;
+import com.azure.security.keyvault.secrets.SecretClientBuilder;
+
+import java.time.LocalDateTime;
 
 public class TimerTriggerJava {
     @FunctionName("TimerTriggerJava")
@@ -239,7 +231,20 @@ public class TimerTriggerJava {
             @TimerTrigger(name = "timerInfo", schedule = "0 * * * * *") String timerInfo,
             final ExecutionContext context
     ) {
-        context.getLogger().info("**** Java Timer trigger function executed at: " + LocalDateTime.now());
+        context.getLogger().info("***** Azure KeyVault, SecretClient");
+
+//        ClientSecretCredential clientSecretCredential = new ClientSecretCredentialBuilder()
+//                .tenantId(System.getenv("TenantId"))
+//                .clientId(System.getenv("ClientId"))
+//                .clientSecret(System.getenv("ClientSecret"))
+//                .build();
+//
+//        SecretClient secretClient = new SecretClientBuilder()
+//                .vaultUrl("https://" + System.getenv("KeyVault_Name") + ".vault.azure.net/")
+//                .credential(clientSecretCredential)
+//                .buildClient();
+//
+//        context.getLogger().info("***** Lorem Ipsum");
     }
 }
 ```
@@ -306,3 +311,15 @@ public class TimerTriggerJava {
 19. Rebuilding: If you make any changes to your function code, you need to rebuild your project using mvn clean package before running your function again.
 
 20. Azure Functions Core Tools: Ensure that you have the correct version of Azure Functions Core Tools installed. You can check this by running func --version in your command line. For Java functions, you should have version 3.x or later.
+
+## Notes
+
+update all Maven dependencies to their latest versions using the versions plugin. Here's how you can do it:
+Open a terminal and navigate to your project directory: C:\Users\rchapler\IdeaProjects\azure-function-examples
+Run the following command:
+
+mvn versions:use-latest-versions -DallowSnapshots=true  
+ 
+This command will update all your dependencies to their latest versions, including snapshot versions.
+ 
+After running these commands, check your pom.xml file. The versions of your dependencies should be updated to their latest versions.
