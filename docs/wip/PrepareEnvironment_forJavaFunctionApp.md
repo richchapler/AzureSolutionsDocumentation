@@ -256,6 +256,8 @@ import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
+import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.models.BlobItem;
 
 public class TimerTriggerJava {
     @FunctionName("TimerTriggerJava")
@@ -271,12 +273,12 @@ public class TimerTriggerJava {
                 .clientSecret(System.getenv("ClientSecret"))
                 .build();
 
-        SecretClient secretClient = new SecretClientBuilder()
+        SecretClient sc = new SecretClientBuilder()
                 .vaultUrl("https://" + System.getenv("KeyVault_Name") + ".vault.azure.net/")
                 .credential(clientSecretCredential)
                 .buildClient();
 
-        String storageConnectionString = secretClient.getSecret("Storage-ConnectionString", "").getValue();
+        String storageConnectionString = sc.getSecret("Storage-ConnectionString", "").getValue();
 
         context.getLogger().info("*************** Key Vault Secret, Storage-ConnectionString: " + storageConnectionString);
 
@@ -284,8 +286,11 @@ public class TimerTriggerJava {
 
         BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(storageConnectionString).buildClient();
 
-        //        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient("inbound");
+        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient("inbound");
 
+        for (BlobItem blobItem : containerClient.listBlobs()) {
+            context.getLogger().info("Processing " + blobItem.getName());
+        }
     }
 }
 ```
