@@ -258,6 +258,8 @@ import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.models.BlobItem;
+import com.azure.storage.blob.BlobClient;
+import java.io.ByteArrayOutputStream;
 
 public class TimerTriggerJava {
     @FunctionName("TimerTriggerJava")
@@ -267,7 +269,7 @@ public class TimerTriggerJava {
     ) {
         context.getLogger().info("*************** Azure KeyVault");
 
-        ClientSecretCredential clientSecretCredential = new ClientSecretCredentialBuilder()
+        ClientSecretCredential csc = new ClientSecretCredentialBuilder()
                 .tenantId(System.getenv("TenantId"))
                 .clientId(System.getenv("ClientId"))
                 .clientSecret(System.getenv("ClientSecret"))
@@ -275,21 +277,70 @@ public class TimerTriggerJava {
 
         SecretClient sc = new SecretClientBuilder()
                 .vaultUrl("https://" + System.getenv("KeyVault_Name") + ".vault.azure.net/")
-                .credential(clientSecretCredential)
+                .credential(csc)
                 .buildClient();
 
-        String storageConnectionString = sc.getSecret("Storage-ConnectionString", "").getValue();
+        String scs = sc.getSecret("Storage-ConnectionString", "").getValue();
 
-        context.getLogger().info("*************** Key Vault Secret, Storage-ConnectionString: " + storageConnectionString);
+        context.getLogger().info("*************** Key Vault Secret, Storage-ConnectionString: " + scs);
 
         context.getLogger().info("*************** Azure Storage");
 
-        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(storageConnectionString).buildClient();
+        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(scs).buildClient();
 
-        BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient("inbound");
+        BlobContainerClient inbound = blobServiceClient.getBlobContainerClient("inbound");
 
-        for (BlobItem blobItem : containerClient.listBlobs()) {
-            context.getLogger().info("Processing " + blobItem.getName());
+        for (BlobItem blobItem : inbound.listBlobs()) {
+
+            context.getLogger().info("*************** Processing " + blobItem.getName());
+
+            BlobClient blobClient = inbound.getBlobClient(blobItem.getName());
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+//            blobClient.download(outputStream);
+//            byte[] byteArray = outputStream.toByteArray();
+//
+//            String path = Paths.get(System.getProperty("user.dir"), "Functions", "Storage_ConvertXMLtoSQL", "schema.xsd").toString();
+//
+//            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//            Schema schema = factory.newSchema(new File(path));
+//
+//            Source xmlFile = new StreamSource(new ByteArrayInputStream(byteArray));
+//            Validator validator = schema.newValidator();
+//            validator.validate(xmlFile);
+//
+//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+//            Document doc = dBuilder.parse(new ByteArrayInputStream(byteArray));
+//
+//            // Assuming you have a method to convert Document to DataSet equivalent in Java
+//            DataSet dataSet = convertDocumentToDataSet(doc);
+//
+//            for (DataTable xmlSource : dataSet.getTables()) {
+//                Map<String, String> columns = new HashMap<>();
+//
+//                for (DataColumn column : xmlSource.getColumns()) {
+//                    columns.put(column.getColumnName(), "NVARCHAR(MAX)");
+//                }
+//
+//                await SQL.Table.create(sqc, "dbo", xmlSource.getTableName(), columns);
+//
+//                int countExisting = await SQL.Table.rowCount(sqc, "dbo", xmlSource.getTableName()),
+//                        countAdded = xmlSource.getRows().size();
+//
+//                String sqlSink = "dbo." + xmlSource.getTableName();
+//
+//                await SQL.Table.bulkCopy(sqc, xmlSource, sqlSink);
+//
+//                int countFinal = await SQL.Table.rowCount(sqc, "dbo", xmlSource.getTableName());
+//
+//                logger.info("{} (existing: {} | added: {} | final: {})", xmlSource.getTableName(), countExisting, countAdded, countFinal);
+//            }
+//
+//            stc.getBlobContainerClient("processed").getBlobClient(blobItem.getName()).startCopyFromUrl(blobClient.getBlobUrl());
+//
+//            blobClient.deleteIfExists();
         }
     }
 }
