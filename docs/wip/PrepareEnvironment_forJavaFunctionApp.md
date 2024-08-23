@@ -118,6 +118,12 @@ Open `pom.xml` and replace default XML with:
 
         <dependency>
             <groupId>com.azure</groupId>
+            <artifactId>azure-core</artifactId>
+            <version>1.51.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.azure</groupId>
             <artifactId>azure-identity</artifactId>
             <version>1.13.2</version>
         </dependency>
@@ -249,28 +255,30 @@ import com.azure.identity.ClientSecretCredentialBuilder;
 import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
 
-import java.time.LocalDateTime;
-
 public class TimerTriggerJava {
     @FunctionName("TimerTriggerJava")
     public void run(
             @TimerTrigger(name = "timerInfo", schedule = "0 * * * * *") String timerInfo,
             final ExecutionContext context
     ) {
-        context.getLogger().info("***** Azure KeyVault, SecretClient");
+        context.getLogger().info("*************** Azure KeyVault");
 
-//        ClientSecretCredential clientSecretCredential = new ClientSecretCredentialBuilder()
-//                .tenantId(System.getenv("TenantId"))
-//                .clientId(System.getenv("ClientId"))
-//                .clientSecret(System.getenv("ClientSecret"))
-//                .build();
-//
-//        SecretClient secretClient = new SecretClientBuilder()
-//                .vaultUrl("https://" + System.getenv("KeyVault_Name") + ".vault.azure.net/")
-//                .credential(clientSecretCredential)
-//                .buildClient();
-//
-//        context.getLogger().info("***** Lorem Ipsum");
+        ClientSecretCredential clientSecretCredential = new ClientSecretCredentialBuilder()
+                .tenantId(System.getenv("TenantId"))
+                .clientId(System.getenv("ClientId"))
+                .clientSecret(System.getenv("ClientSecret"))
+                .build();
+
+        SecretClient secretClient = new SecretClientBuilder()
+                .vaultUrl("https://" + System.getenv("KeyVault_Name") + ".vault.azure.net/")
+                .credential(clientSecretCredential)
+                .buildClient();
+
+        String storageConnectionString = secretClient.getSecret("Storage-ConnectionString", "").getValue();
+
+        context.getLogger().info("*************** Key Vault Secret, Storage-ConnectionString: " + storageConnectionString);
+
+        context.getLogger().info("*************** Azure Storage");
     }
 }
 ```
