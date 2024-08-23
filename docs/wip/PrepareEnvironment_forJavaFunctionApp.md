@@ -323,3 +323,8 @@ mvn versions:use-latest-versions -DallowSnapshots=true
 This command will update all your dependencies to their latest versions, including snapshot versions.
  
 After running these commands, check your pom.xml file. The versions of your dependencies should be updated to their latest versions.
+
+## Reference
+
+* https://learn.microsoft.com/en-us/java/api/overview/azure/security-keyvault-secrets-readme
+* https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-java
