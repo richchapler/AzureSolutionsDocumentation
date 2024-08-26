@@ -57,7 +57,10 @@ Download and install from https://www.jetbrains.com/idea/download
 - In the search bar, type `Azure Toolkit for IntelliJ` and click on the search result.  
 - Click on `Install` and wait for the installation to complete.  
 - Restart IntelliJ IDEA to complete the installation. 
-     
+
+### Install Microsoft JDBC Driver for SQL
+https://learn.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver16
+
 ### Create a new Azure Functions project
 
 - In IntelliJ IDEA, click on `File -> New -> Project`.  
