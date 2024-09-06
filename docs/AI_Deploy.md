@@ -77,9 +77,9 @@ Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to
 <img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba9fa875-607a-4e3b-9047-1f29588d75bd" width="800" title="Snipped: June 26, 2024" />
 
 SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; examples:
-* `SELECT 'adventureworks-saleslt-address' [Source], [AddressID] [id], [AddressLine1] [name], [AddressLine1], ISNULL([AddressLine2],'null') [AddressLine2], [City], [StateProvince], [CountryRegion] FROM [SalesLT].[Address] WITH (NOLOCK)`
-* `SELECT 'adventureworks-saleslt-customer' [Source], [CustomerID] [id], [LastName] + ', ' + [FirstName] [name], [LastName], [FirstName] FROM [SalesLT].[Customer] WITH (NOLOCK)`
-* `SELECT 'adventureworks-saleslt-product' [Source], [ProductID] [id], [Name] [name], [ProductNumber], [Color], [StandardCost] FROM [SalesLT].[Product] WITH (NOLOCK)`
+* `SELECT 'adventureworks-saleslt-address' [source], [AddressID] [id], [AddressLine1] [name], [AddressLine1], ISNULL([AddressLine2],'null') [AddressLine2], [City], [StateProvince], [CountryRegion] FROM [SalesLT].[Address] WITH (NOLOCK)`
+* `SELECT 'adventureworks-saleslt-customer' [source], [CustomerID] [id], [LastName] + ', ' + [FirstName] [name], [LastName], [FirstName] FROM [SalesLT].[Customer] WITH (NOLOCK)`
+* `SELECT 'adventureworks-saleslt-product' [source], [ProductID] [id], [Name] [name], [ProductNumber], [Color], [StandardCost] FROM [SalesLT].[Product] WITH (NOLOCK)`
 
 ### Step 2: Create Visual Studio Project
 
