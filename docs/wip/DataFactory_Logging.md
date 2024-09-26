@@ -21,7 +21,7 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
 
 ## Portal > Monitoring: Diagnostic Settings, Alerts, Metrics, Logs
 
-## Log Analytics: Configure
+### Log Analytics: Configure
 Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
 
 1. Instantiate Data Factory and Log Analytics
