@@ -11,8 +11,10 @@
 Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
 
  * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
- * Click on **+ New Alert Rule** to start creating an alert.
-   - Select the resource you want to monitor (e.g., your Azure Data Factory).
+ * Click "New alert rule" and complete the resulting pop-out form, including:
+
++----- | -----
+Severity | Sev0 is most severe... Sev5 is least severe
 
 **5. Define the Alert Condition**
    - In the **Condition** section, specify the criteria for triggering the alert.
