@@ -66,56 +66,18 @@ Be sure to click "Save".
 ## Portal >> Monitoring >> Alerts
 
 * Navigate to Azure Data Factory >> Monitoring >> Alerts
+* Click "Create" and select "Alert rule" from the resulting dropdown
+* Complete the resulting "Create an alert rule" page, including:
 
-**1. Access the Azure Portal**
-   - Open your browser and navigate to the [Azure portal](https://portal.azure.com/).
+   Label | Value
+   :----- | :-----
+   Signal name | Select and configure the desired Signal<br><sub>Signal descriptions included in Appendix</sub>
 
-**2. Navigate to Azure Data Factory**
-   - In the left-hand menu, select **Resource groups**.
-   - Find and select the resource group that contains your Azure Data Factory instance.
-   - Click on your Azure Data Factory resource.
-
-**3. Go to the Monitoring Section**
-   - In the Azure Data Factory blade, scroll down to the **Monitoring** section.
-   - Click on **Alerts & Metrics**.
-
-**4. Create a New Alert Rule**
-   - Click on **+ New alert rule** to start creating a new alert.
-
-**5. Define the Resource**
-   - Ensure that your Azure Data Factory instance is selected as the resource.
-
-**6. Define the Condition**
-   - Under **Condition**, click on **Add condition**.
-   - Select a signal type (e.g., **PipelineRuns**, **TriggerRuns**).
-   - Set the logic for the condition (e.g., “Greater than”, “Less than”).
-   - Define the threshold value that triggers the alert (e.g., number of failed pipeline runs).
-
-**7. Configure the Action Group**
-   - Under **Actions**, click on **Select action group**.
-   - Choose an existing action group or create a new one.
-   - Specify how you want to be notified when the alert is triggered (e.g., email, SMS, push notifications).
-
-**8. Set the Alert Rule Details**
-   - Provide a name and description for your alert rule.
-   - Assign a severity level to the alert (e.g., Sev 0 for critical, Sev 4 for informational).
-   - Define the frequency of evaluations to determine how often the alert conditions should be checked.
-
-**9. Review and Create the Alert Rule**
-   - Review your settings.
-   - Click **Create alert rule** to save and activate the alert.
-
-**10. Monitor Alerts**
-   - After creating the alert rule, go back to the **Alerts & Metrics** section.
-   - You can view and track any alerts that have been triggered.
-   - Check the **Alert History** for details on past alerts and their status.
-
-
-## Portal >> Monitoring >> Metrics
-
-Lorem
+* Review additional tabs {e.g., Scope, Actions, Details, Tags}, then "Review + create"
 
 ## Custom Logging: Pipeline / Activity failures and error handling
+
+Lorem
 
 ## Appendix
 
