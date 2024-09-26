@@ -7,9 +7,6 @@
 * Click into a specific log entry and review
 * Repeat for Trigger Runs
 
-**8. Set Up Alerts for Pipeline Runs**
-   - Go to the **Alerts and Metrics** section within the Monitor tab.
-
 ## Studio >> Monitor: Alerts & Metrics
 
  * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
