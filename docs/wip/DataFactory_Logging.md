@@ -1,6 +1,12 @@
-# Data Factory plus Log Analytics
+# Data Factory:Logging
 
-## Configure
+•	Studio > Monitor: Pipeline Runs, Trigger Runs, Alerts & Metrics
+•	Portal > Monitoring: Diagnostic Settings, Alerts, Metrics, Logs
+•	Log Analytics: Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
+•	Custom Logging: Pipeline / Activity failures and error handling
+
+
+## Log Analytics: Configure
 
 1. Instantiate Data Factory and Log Analytics
    
