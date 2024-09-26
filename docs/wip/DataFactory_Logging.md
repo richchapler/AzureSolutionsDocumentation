@@ -13,8 +13,8 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
  * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
  * Click "New alert rule" and complete the resulting pop-out form, including:
 
-+----- | -----
-Severity | Sev0 is most severe... Sev5 is least severe
+   :----- | :-----
+   Severity | Sev0 is most severe... Sev5 is least severe
 
 **5. Define the Alert Condition**
    - In the **Condition** section, specify the criteria for triggering the alert.
