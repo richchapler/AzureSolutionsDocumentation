@@ -5,7 +5,7 @@
 * Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs
 * Review filter settings {e.g., date, name, status, etc.}
 * Click into a specific log entry and review
-* Repeat for Trigger Runs
+* Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
 
 ## Studio >> Monitor: Alerts & Metrics
 
