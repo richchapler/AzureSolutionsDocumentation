@@ -44,7 +44,7 @@ Be sure to click "Save".
 
 * Navigate to Azure Data Factory >> Monitoring >> Logs
 * Close the "Welcome to Log Analytics" and "Queries hub" popups  
-* In the query window, paste this very simple starter query:  
+* In the query window, paste this very simple starter KQL query:  
    
    ```kql  
    AzureDiagnostics   
@@ -54,17 +54,22 @@ Be sure to click "Save".
 
 ### Sample #2: PipelineRuns
 
-Repeat with the following KQL
+* Repeat with the following KQL:
 
-```kql  
-AzureDiagnostics    
-| where ResourceProvider == "MICROSOFT.DATAFACTORY" and Category == "PipelineRuns"    
-| where TimeGenerated > ago(1d)    
-| order by TimeGenerated desc       
-```
+   ```kql  
+   AzureDiagnostics    
+   | where ResourceProvider == "MICROSOFT.DATAFACTORY" and Category == "PipelineRuns"    
+   | where TimeGenerated > ago(1d)    
+   | order by TimeGenerated desc       
+   ```
 
-## Portal >> Monitoring >> Diagnostic Settings, Alerts, Metrics, Logs
+## Portal >> Monitoring >> Alerts
 
+Lorem
+
+## Portal >> Monitoring >> Metrics
+
+Lorem
 
 ## Custom Logging: Pipeline / Activity failures and error handling
 
