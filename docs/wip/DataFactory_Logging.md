@@ -15,11 +15,45 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
 
    Label | Value
    :----- | :-----
-   Severity | Sev0 is most severe... Sev5 is least severe
+   Severity | Sev0 = most severe... Sev5 = least severe
    Add criteria | Select and configure the desired Metric on the resulting pop-out<br><sub>Metric descriptions included in Appendix</sub>
    Configure Notification | Define "action group" {i.e., notification action and recipient
 
-## Portal > Monitoring: Diagnostic Settings, Alerts, Metrics, Logs
+## Portal >> Monitoring >> Diagnostic Settings
+
+* Navigate to Azure Data Factory >> Monitoring >> Diagnostic Settings
+* Click "+ Add diagnostic setting" and complete the resulting screen, including:
+
+   Label | Value
+   :----- | :-----
+   Logs | Select and configure the desired Log Categories <br><sub>Category descriptions included in Appendix</sub>
+
+
+
+
+**5. Name Your Diagnostic Setting**
+   - Provide a name for your diagnostic setting in the **Name** field.
+
+**6. Choose Log Categories and Metrics**
+   - Select the log categories you want to collect, such as **PipelineRuns**, **TriggerRuns**, **ActivityRuns**, and **IntegrationRuntimeMonitoring**.
+   - Check the **Metrics** option if you want to collect metrics.
+
+**7. Define the Destination**
+   - Choose where you want to send the diagnostic data. You can send it to:
+     - A **Log Analytics workspace**.
+     - An **Azure Storage account**.
+     - An **Event Hub**.
+   - Configure the chosen destination by providing the necessary details (e.g., selecting an existing Log Analytics workspace or creating a new one).
+
+**8. Save the Diagnostic Setting**
+   - Review your configuration and click **Save** to apply the settings.
+
+**9. Verify Data Collection**
+   - After saving, verify that the diagnostic data is being collected in the chosen destination.
+   - For Log Analytics, you can use the **Logs** section to query and analyze the collected data.
+   - For Storage accounts, check the **Blob Containers** for the log data.
+   - For Event Hubs, use the **Event Hub capture** feature to process and analyze the events.
+
 
 ### Log Analytics: Configure
 Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
@@ -97,7 +131,11 @@ AzureDiagnostics
 | where ResourceProvider == "MICROSOFT.DATAFACTORY" and Category == "PipelineRuns"    
 | where TimeGenerated > ago(1d)    
 | order by TimeGenerated desc       
-```  
+```
+
+## Portal >> Monitoring >> Diagnostic Settings, Alerts, Metrics, Logs
+
+
 ## Custom Logging: Pipeline / Activity failures and error handling
 
 ## Appendix
