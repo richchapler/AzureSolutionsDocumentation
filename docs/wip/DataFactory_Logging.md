@@ -8,9 +8,41 @@
 * Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
 
 ## Studio >> Monitor: Alerts & Metrics
+Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
 
  * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
- * Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
+ * Click on **+ New Alert Rule** to start creating an alert.
+   - Select the resource you want to monitor (e.g., your Azure Data Factory).
+
+**5. Define the Alert Condition**
+   - In the **Condition** section, specify the criteria for triggering the alert.
+   - Choose the signal type (e.g., Pipeline Runs, Trigger Runs, etc.).
+   - Set the condition logic, such as "greater than," "less than," or "equal to" a certain value.
+
+**6. Configure the Alert Details**
+   - Provide a name and description for your alert rule.
+   - Set the severity level of the alert (e.g., Sev 0 for critical, Sev 4 for informational).
+   - Define the frequency of evaluations to determine how often the alert conditions should be checked.
+
+**7. Set Up Action Groups**
+   - Action groups determine who gets notified and how when an alert is triggered.
+   - Click on **+ New Action Group** to create a new action group.
+   - Specify the notification methods (e.g., email, SMS, push notifications).
+   - Add the recipients who should be notified when the alert is triggered.
+
+**8. Review and Create the Alert Rule**
+   - Review all the configured settings for your alert rule.
+   - Click on **Create Alert Rule** to save and activate the alert.
+
+**9. Monitor Metrics and Alerts**
+   - Back in the **Monitor** tab, you can now view and track the metrics related to your pipelines and triggers.
+   - Use the provided charts and graphs to analyze performance over time.
+   - Check the **Alert History** to see any triggered alerts and their statuses.
+
+**10. Respond to Alerts**
+   - When an alert is triggered, review the details and take necessary actions to address the issue.
+   - Use the information provided by the alert to troubleshoot and resolve any problems in your data workflows.
+
 
 ## Portal > Monitoring: Diagnostic Settings, Alerts, Metrics, Logs
 
