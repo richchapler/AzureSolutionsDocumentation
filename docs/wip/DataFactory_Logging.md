@@ -40,23 +40,17 @@ Be sure to click "Save".
 
 ## Portal >> Monitoring >> Logs
 
-* Navigate to Azure Data Factory >> Monitoring >> Logs
-
 ### Sample #1: `AzureDiagnostics`
 
-
-  
-2. Close the "Welcome to Log Analytics" or "Queries hub" popups  
-   
-3. Click the "Simple mode" dropdown and select "KQL mode"
-   
-4. In the new query window, paste the very simple starter query:  
+* Navigate to Azure Data Factory >> Monitoring >> Logs
+* Close the "Welcome to Log Analytics" and "Queries hub" popups  
+* In the query window, paste this very simple starter query:  
    
 ```kql  
 AzureDiagnostics   
 ```  
    
-5. Click "Run" to execute the query.  
+* Click "Run" to execute the query.  
 
 ### Sample #2: PipelineRuns
 
