@@ -29,34 +29,15 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    Logs | Select and configure the desired Log Categories<br><sub>Category descriptions included in Appendix</sub>
    Destination Details | Select and configure the desired Log Categories<br><sub>Destination descriptions included in Appendix</sub><br><sub>Note that destination selection expands the interface and necessitates additional entries</sub>
 
+### ...Diagnostic Setting >> Log Analytics
+
+Selection of "Send to Log Analytics workspace" necessitates selection of "Destination table":
+   
+   * **Azure Diagnostics** - When you choose "Azure Diagnostics", **all your diagnostic logs from all resource types are sent to a single table called AzureDiagnostics**. This can make querying easier if you want to correlate events across different resource types, as you only need to query one table. However, the AzureDiagnostics table is a flat table, so complex properties are serialized into JSON strings which can make some data harder to work with.  
+   * **Resource Specific** - When you choose "Resource Specific", your **logs are sent to a table that corresponds to the resource type**. For example, if you're working with a Storage Account, your logs might be sent to a table like StorageAccountLogs. These tables are designed to best fit the schema of the log data of the specific resource type, and complex properties are represented as distinct fields, which can make queries more intuitive and the data easier to work with. However, if you want to correlate events across different resource types, you would need to query multiple tables.  
 
 
 
-**5. Name Your Diagnostic Setting**
-   - Provide a name for your diagnostic setting in the **Name** field.
-
-**6. Choose Log Categories and Metrics**
-   - Select the log categories you want to collect, such as **PipelineRuns**, **TriggerRuns**, **ActivityRuns**, and **IntegrationRuntimeMonitoring**.
-   - Check the **Metrics** option if you want to collect metrics.
-
-**7. Define the Destination**
-   - Choose where you want to send the diagnostic data. You can send it to:
-     - A **Log Analytics workspace**.
-     - An **Azure Storage account**.
-     - An **Event Hub**.
-   - Configure the chosen destination by providing the necessary details (e.g., selecting an existing Log Analytics workspace or creating a new one).
-
-**8. Save the Diagnostic Setting**
-   - Review your configuration and click **Save** to apply the settings.
-
-**9. Verify Data Collection**
-   - After saving, verify that the diagnostic data is being collected in the chosen destination.
-   - For Log Analytics, you can use the **Logs** section to query and analyze the collected data.
-   - For Storage accounts, check the **Blob Containers** for the log data.
-   - For Event Hubs, use the **Event Hub capture** feature to process and analyze the events.
-
-
-### Log Analytics: Configure
 Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
 
 1. Instantiate Data Factory and Log Analytics
@@ -71,14 +52,8 @@ Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
    | Destination Details | Check "**Send to Log Analytics workspace**" and then configure connection (including "Destination table") |
 
 
+   
 
-   * **Metrics**   
-      * **AllMetrics** - This represents all the metrics available in Log Analytics. If you select this, you are choosing to send all types of metrics to Log Analytics. This could include metrics related to pipeline runs, activity runs, trigger runs, and more, giving you a comprehensive view of your system's performance.
-   
-   #### Destination Details
-   
-   * **Azure Diagnostics** - When you choose "Azure Diagnostics", **all your diagnostic logs from all resource types are sent to a single table called AzureDiagnostics**. This can make querying easier if you want to correlate events across different resource types, as you only need to query one table. However, the AzureDiagnostics table is a flat table, so complex properties are serialized into JSON strings which can make some data harder to work with.  
-   * **Resource Specific** - When you choose "Resource Specific", your **logs are sent to a table that corresponds to the resource type**. For example, if you're working with a Storage Account, your logs might be sent to a table like StorageAccountLogs. These tables are designed to best fit the schema of the log data of the specific resource type, and complex properties are represented as distinct fields, which can make queries more intuitive and the data easier to work with. However, if you want to correlate events across different resource types, you would need to query multiple tables.  
    
 4. Click "Save".  
    
