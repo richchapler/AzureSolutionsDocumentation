@@ -26,8 +26,8 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
 
    Label | Value
    :----- | :-----
-   Logs | Select and configure the desired Log Categories <br><sub>Category descriptions included in Appendix</sub>
-   Destination Details | Select and configure the desired Log Categories <br><sub>Category descriptions included in Appendix</sub>
+   Logs | Select and configure the desired Log Categories<br><sub>Category descriptions included in Appendix</sub>
+   Destination Details | Select and configure the desired Log Categories<br><sub>Destination descriptions included in Appendix</sub><br><sub>Note that destination selection expands the interface and necessitates additional entries</sub>
 
 
 
