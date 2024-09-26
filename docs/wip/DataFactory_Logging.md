@@ -1,25 +1,10 @@
 # Data Factory:Logging
 
-## Data Factory Studio
+## Pipeline Runs
 
-### Pipeline Runs
-
-**1. Open Data Factory Studio**
-   - Open your browser and navigate to the Azure portal.
-   - Go to your Azure Data Factory resource.
-   - Click on **Author & Monitor** to open the ADF Studio.
-
-**2. Navigate to the Monitor Tab**
-   - Once in ADF Studio, find the menu on the left-hand side.
-   - Click on the **Monitor** tab to enter the monitoring interface.
-
-**3. View Pipeline Runs**
-   - In the Monitor tab, you'll see options for **Pipeline Runs**, **Trigger Runs**, **Integration Runtimes**, and more.
-   - Select **Pipeline Runs** to see a list of all pipeline executions.
-
-**4. Filter and Search Pipeline Runs**
-   - Use the search bar or filter options to find specific pipeline runs based on criteria such as status, date range, or pipeline name.
-   - This helps you quickly identify runs that need attention.
+* Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs**
+* Review filter settings {e.g., date, name, status, etc.}
+* Click into a specific log entry and review
 
 **5. Check Pipeline Run Status**
    - Each pipeline run will have a status, such as **In Progress**, **Succeeded**, **Failed**, or **Cancelled**.
