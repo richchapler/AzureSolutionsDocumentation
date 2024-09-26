@@ -1,33 +1,24 @@
 # Data Factory: Logging Options
 
-## Studio >> Monitor: Pipeline Runs
+## Studio >> Monitor: Pipeline and Trigger Runs
 
-* Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs**
+* Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs
 * Review filter settings {e.g., date, name, status, etc.}
 * Click into a specific log entry and review
-
-**5. Check Pipeline Run Status**
-   - Each pipeline run will have a status, such as **In Progress**, **Succeeded**, **Failed**, or **Cancelled**.
-   - Click on a pipeline run to view detailed information about its activities and their statuses.
-
-**6. Investigate Pipeline Run Details**
-   - Within the selected pipeline run, you can see a breakdown of each activity, its duration, and any errors encountered.
-   - This detailed view helps you pinpoint where issues may have occurred.
-
-**7. Take Action Based on Run Status**
-   - If a pipeline run failed, investigate the error messages to understand what went wrong.
-   - Use this information to debug and fix issues in your pipeline definition or data.
+* Repeat for Trigger Runs
 
 **8. Set Up Alerts for Pipeline Runs**
    - Go to the **Alerts and Metrics** section within the Monitor tab.
-   - Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
 
-* Studio > Monitor: Pipeline Runs, Trigger Runs, Alerts & Metrics
-* Portal > Monitoring: Diagnostic Settings, Alerts, Metrics, Logs
-* Log Analytics: Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
-* Custom Logging: Pipeline / Activity failures and error handling
+## Studio >> Monitor: Alerts & Metrics
+
+ * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
+ * Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
+
+## Portal > Monitoring: Diagnostic Settings, Alerts, Metrics, Logs
 
 ## Log Analytics: Configure
+Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
 
 1. Instantiate Data Factory and Log Analytics
    
@@ -40,7 +31,7 @@
    | Logs | Check "**allLogs**" and "**allMetrics**"<br>...or those specific logs which make sense for your instance |
    | Destination Details | Check "**Send to Log Analytics workspace**" and then configure connection (including "Destination table") |
 
-   ### Logs
+   #### Logs
 
    * **Category Groups**
       * **allLogs** - Choose to send all types of logs {e.g., pipeline runs, trigger runs, activity runs, and more}
@@ -68,7 +59,7 @@
    * **Metrics**   
       * **AllMetrics** - This represents all the metrics available in Log Analytics. If you select this, you are choosing to send all types of metrics to Log Analytics. This could include metrics related to pipeline runs, activity runs, trigger runs, and more, giving you a comprehensive view of your system's performance.
    
-   ### Destination Details
+   #### Destination Details
    
    * **Azure Diagnostics** - When you choose "Azure Diagnostics", **all your diagnostic logs from all resource types are sent to a single table called AzureDiagnostics**. This can make querying easier if you want to correlate events across different resource types, as you only need to query one table. However, the AzureDiagnostics table is a flat table, so complex properties are serialized into JSON strings which can make some data harder to work with.  
    * **Resource Specific** - When you choose "Resource Specific", your **logs are sent to a table that corresponds to the resource type**. For example, if you're working with a Storage Account, your logs might be sent to a table like StorageAccountLogs. These tables are designed to best fit the schema of the log data of the specific resource type, and complex properties are represented as distinct fields, which can make queries more intuitive and the data easier to work with. However, if you want to correlate events across different resource types, you would need to query multiple tables.  
@@ -77,7 +68,7 @@
    
 Now, your Azure Data Factory logs will be sent to Log Analytics. You can run queries on these logs in Log Analytics to generate reports.  
 
-## Sample #1: `AzureDiagnostics`
+### Sample #1: `AzureDiagnostics`
 
 1. Navigate to Data Factory >> Monitoring >> Logs
   
@@ -93,7 +84,7 @@ AzureDiagnostics
    
 5. Click "Run" to execute the query.  
 
-## Sample #2: PipelineRuns
+### Sample #2: PipelineRuns
 
 Repeat with the following KQL
 
@@ -103,3 +94,4 @@ AzureDiagnostics
 | where TimeGenerated > ago(1d)    
 | order by TimeGenerated desc       
 ```  
+## Custom Logging: Pipeline / Activity failures and error handling
