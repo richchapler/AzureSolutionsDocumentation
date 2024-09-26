@@ -1,5 +1,42 @@
 # Data Factory:Logging
 
+## Data Factory Studio
+
+### Pipeline Runs
+
+**1. Open Data Factory Studio**
+   - Open your browser and navigate to the Azure portal.
+   - Go to your Azure Data Factory resource.
+   - Click on **Author & Monitor** to open the ADF Studio.
+
+**2. Navigate to the Monitor Tab**
+   - Once in ADF Studio, find the menu on the left-hand side.
+   - Click on the **Monitor** tab to enter the monitoring interface.
+
+**3. View Pipeline Runs**
+   - In the Monitor tab, you'll see options for **Pipeline Runs**, **Trigger Runs**, **Integration Runtimes**, and more.
+   - Select **Pipeline Runs** to see a list of all pipeline executions.
+
+**4. Filter and Search Pipeline Runs**
+   - Use the search bar or filter options to find specific pipeline runs based on criteria such as status, date range, or pipeline name.
+   - This helps you quickly identify runs that need attention.
+
+**5. Check Pipeline Run Status**
+   - Each pipeline run will have a status, such as **In Progress**, **Succeeded**, **Failed**, or **Cancelled**.
+   - Click on a pipeline run to view detailed information about its activities and their statuses.
+
+**6. Investigate Pipeline Run Details**
+   - Within the selected pipeline run, you can see a breakdown of each activity, its duration, and any errors encountered.
+   - This detailed view helps you pinpoint where issues may have occurred.
+
+**7. Take Action Based on Run Status**
+   - If a pipeline run failed, investigate the error messages to understand what went wrong.
+   - Use this information to debug and fix issues in your pipeline definition or data.
+
+**8. Set Up Alerts for Pipeline Runs**
+   - Go to the **Alerts and Metrics** section within the Monitor tab.
+   - Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
+
 * Studio > Monitor: Pipeline Runs, Trigger Runs, Alerts & Metrics
 * Portal > Monitoring: Diagnostic Settings, Alerts, Metrics, Logs
 * Log Analytics: Sample queries {e.g., Pipeline Success Rate, Pipeline Duration, Activity Errors}
