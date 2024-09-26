@@ -46,9 +46,9 @@ Be sure to click "Save".
 * Close the "Welcome to Log Analytics" and "Queries hub" popups  
 * In the query window, paste this very simple starter query:  
    
-```kql  
-AzureDiagnostics   
-```  
+   ```kql  
+   AzureDiagnostics   
+   ```  
    
 * Click "Run" to execute the query.  
 
