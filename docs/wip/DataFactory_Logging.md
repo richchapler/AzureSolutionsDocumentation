@@ -1,6 +1,6 @@
-# Data Factory:Logging
+# Data Factory: Logging Options
 
-## Pipeline Runs
+## Studio >> Monitor: Pipeline Runs
 
 * Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs**
 * Review filter settings {e.g., date, name, status, etc.}
