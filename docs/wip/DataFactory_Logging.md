@@ -38,13 +38,13 @@ Selection of "Send to Log Analytics workspace" necessitates selection of "Destin
 
 Be sure to click "Save".
 
-## Log Analytics
+## Portal >> Monitoring >> Logs
 
-Navigate to Log Analytics.
+* Navigate to Azure Data Factory >> Monitoring >> Logs
 
 ### Sample #1: `AzureDiagnostics`
 
-1. Navigate to Data Factory >> Monitoring >> Logs
+
   
 2. Close the "Welcome to Log Analytics" or "Queries hub" popups  
    
