@@ -16,7 +16,7 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    Label | Value
    :----- | :-----
    Severity | Sev0 is most severe... Sev5 is least severe
-   Add criteria | Select and configure the desired Metric on the resulting pop-out
+   Add criteria | Select and configure the desired Metric on the resulting pop-out<br><sub>Metric descriptions included in Appendix</sub>
    Configure Notification | Define "action group" {i.e., notification action and recipient
 
 
