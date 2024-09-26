@@ -52,7 +52,7 @@ Be sure to click "Save".
    
 * Click "Run" to execute the query.  
 
-### Sample #2: PipelineRuns
+### Sample #2: `PipelineRuns`
 
 * Repeat with the following KQL:
 
