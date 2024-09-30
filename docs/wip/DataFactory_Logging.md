@@ -77,7 +77,31 @@ Be sure to click "Save".
 
 ## Custom Logging: Pipeline / Activity failures and error handling
 
-Lorem
+Create a New Pipeline:
+
+Open Azure Data Factory Studio.
+Click on the "Author" tab and then click on the "+" button to create a new pipeline.
+Add Activities to the Pipeline:
+
+Drag and drop the activities you want to include in your pipeline from the Activities pane to the pipeline canvas. For example, you might have a Copy Data activity that copies data from one source to another.
+Configure the "onFail" Feature:
+
+Click on the activity for which you want to configure the "onFail" feature.
+In the "Activities" pane, click on the "Add activity" button under the "onFail" section.
+Select the activity you want to execute when the primary activity fails. For example, you can use a Stored Procedure activity to log the failure information to a SQL Server table.
+Set Up the Stored Procedure Activity:
+
+Drag and drop a Stored Procedure activity onto the pipeline canvas.
+Configure the Stored Procedure activity to connect to your SQL Server database.
+Specify the stored procedure that will log the failure information. The stored procedure should have parameters to accept the necessary log information, such as the error message, activity name, and timestamp.
+Link the Activities:
+
+Link the primary activity to the Stored Procedure activity using the "onFail" dependency.
+Ensure that the pipeline is configured to execute the Stored Procedure activity only when the primary activity fails.
+Publish and Test the Pipeline:
+
+Click on the "Publish" button to save and publish your pipeline.
+Trigger the pipeline to test its execution. If the primary activity fails, the "onFail" feature should execute the Stored Procedure activity and log the failure information to the SQL Server table.
 
 ## Appendix
 
