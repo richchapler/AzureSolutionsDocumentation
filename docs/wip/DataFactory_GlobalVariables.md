@@ -1,8 +1,6 @@
 # Azure Data Factory: "Global Variables"
 
-While Azure Data Factory (ADF) doesn't support global variables in the traditional sense, you can achieve similar functionality using parameters and pipeline activities.
-
-Here's a simple demonstration:  
+While Azure Data Factory (ADF) doesn't support global variables in the traditional sense, you can achieve similar functionality using parameters and pipeline activities. Here's a simple demonstration:  
    
 ## Step 1: Create `GlobalVariable` Pipeline
 This pipeline will act as the main orchestrator. It will set the initial values of the variables and call the other pipelines.  
