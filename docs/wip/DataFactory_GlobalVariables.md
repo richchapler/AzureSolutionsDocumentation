@@ -4,21 +4,19 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
 
 Here's a simple demonstration:  
    
-## Step 1: Create a Master Pipeline:  
+## Step 1: Create `GlobalVariable` Pipeline
+This pipeline will act as the main orchestrator. It will set the initial values of the variables and call the other pipelines.  
   
-   This pipeline will act as the main orchestrator. It will set the initial values of the variables and call the other pipelines.  
-  
-   - Go to the ADF authoring UI and click on '+', then 'Pipeline'.  
-   - Name it 'MasterPipeline'.  
-   - Add a 'Set variable' activity to initialize your variable. Name the variable 'MyVariable' and set its value to whatever you want.  
-   - Add an 'Execute pipeline' activity to call the other pipeline. Set the 'Pipeline name' to the name of your other pipeline and pass the variable as a parameter.  
+* Navigate to Data Factory Studio >> Author
+* Click on '+', then 'Pipeline' in the resulting dropdown
+* In the 'Properties' pop-out, change default name to `GlobalVariable`
+* Create new variable `theVariable` of type string (with no default value)
+* Drag-and-drop a 'Set variable' activity onto the pipeline canvas
    
-2. **Create a Child Pipeline:**  
+## Step 2: Create `GlobalVariable_Child` Pipeline
+This pipeline will receive the variable value, use it, and update it.  
   
-   This pipeline will receive the variable value, use it, and update it.  
-  
-   - Create a new pipeline and name it 'ChildPipeline'.  
-   - In the pipeline's parameters, create a new parameter. Name it 'MyParameter'.  
+* Create a pipeline and name it `GlobalVariable_Child`  
    - Add a 'Set variable' activity to update the variable value. Use the expression '@add(pipeline().parameters.MyParameter, 1)' to increment the value by 1.  
    - Add a 'Web activity' to return the updated value. Set the 'URL' to 'http://httpbin.org/post', the 'Method' to 'POST', and the 'Body' to '@variables('MyVariable')'.  
    
