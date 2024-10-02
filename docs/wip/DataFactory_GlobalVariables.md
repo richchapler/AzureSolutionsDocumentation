@@ -11,14 +11,23 @@ This pipeline will act as the main orchestrator. It will set the initial values 
 * Click on '+', then 'Pipeline' in the resulting dropdown
 * In the 'Properties' pop-out, change default name to `GlobalVariable`
 * Create new variable `theVariable` of type string (with no default value)
-* Drag-and-drop a 'Set variable' activity onto the pipeline canvas
+* Drag-and-drop a 'Set Variable' activity onto the pipeline canvas
+  * Configure 'Settings' to set `theVariable` to `Initial Value`
    
 ## Step 2: Create `GlobalVariable_Child` Pipeline
 This pipeline will receive the variable value, use it, and update it.  
   
-* Create a pipeline and name it `GlobalVariable_Child`  
-   - Add a 'Set variable' activity to update the variable value. Use the expression '@add(pipeline().parameters.MyParameter, 1)' to increment the value by 1.  
-   - Add a 'Web activity' to return the updated value. Set the 'URL' to 'http://httpbin.org/post', the 'Method' to 'POST', and the 'Body' to '@variables('MyVariable')'.  
+* Create a pipeline and name it `GlobalVariable_Child`
+* Drag-and-drop a 'Set variable' activity onto the pipeline canvas
+* Configure 'Settings' to set `theVariable` to `Changed Value`
+
+## Step 3: Enhance `GlobalVariable` Pipeline
+
+* Return to the `GlobalVariable` Pipeline
+* Drag-and-drop an 'Execute Pipeline' activity onto the pipeline canvas
+  * Configure 'Settings' to set `Invoked pipeline` to `GlobalVariable_Child`
+* Add an 'Execute pipeline' activity to call the other pipeline. Set the 'Pipeline name' to the name of your other pipeline and pass the variable as a parameter.
+
    
 3. **Create a Data Flow:**  
   
