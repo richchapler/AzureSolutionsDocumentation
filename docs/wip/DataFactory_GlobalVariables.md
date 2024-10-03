@@ -29,7 +29,10 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
 * Drag-and-drop an 'Execute Pipeline' activity onto the pipeline canvas
   * Create a success dependency from the `Set Variable` activity
   * Configure 'Settings' to set `Invoked pipeline` to `GlobalVariable_Child`
-* Add an 'Execute pipeline' activity to call the other pipeline. Set the 'Pipeline name' to the name of your other pipeline and pass the variable as a parameter.
+* Add a 'Execute pipeline' activity to the pipeline canvas with settings:
+  * Invoked Pipeline: `GlobalVariable_Child`
+  * Wait on Completion: checked
+  * Parameters >> `passedValue` >> Value: `@variables('globalVariable')`
 
 ### Step 4: Confirm Success
 
