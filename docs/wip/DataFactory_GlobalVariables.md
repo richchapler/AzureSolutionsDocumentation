@@ -2,12 +2,11 @@
 
 While Azure Data Factory (ADF) doesn't support global variables in the traditional sense, there are various work-arounds:
 
-| Method | Pros | Cons | Feasible? |    
-| :--- | :--- | :--- | :--- |    
-| Pipeline / Data Flow | * Conceptually simple | * Unidirectional {i.e., parent >> child only} | Partially |    
-| Key Vault | * Secure data storage | * Cannot be used as a Source or Sink | No |    
-| SQL Database | * Easy to implement<br>* No extra services needed | * Additional latency<br>* Risk of data overwrite | Yes |    
-| Blob Storage | * Large data storage<br>* Can pass complex data types | * Additional latency<br>* Risk of data overwrite | Yes |    
+| Method | Comment | Feasibility |      
+| :--- | :--- | :--- |      
+| Pipeline / Data Flow | Unidirectional {i.e., parent >> child only} | 50% |      
+| SQL Database | Additional latency / complexity | 100% |      
+| Blob Storage | Additional latency / complexity | 100% |   
    
 ## ...via Pipeline
 
