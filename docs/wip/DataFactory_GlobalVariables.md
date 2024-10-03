@@ -52,3 +52,4 @@ The common workaround for this limitation is to use an external service such as 
 
 Another possible workaround is to restructure your pipelines so that all the necessary data transformations are done within a single pipeline, thus avoiding the need to pass data between pipelines.
 
+_Note: The same limitation applies to Data Flows. Data Flows do not support output parameters and cannot pass values back to the parent pipeline._
