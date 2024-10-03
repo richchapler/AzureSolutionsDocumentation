@@ -72,11 +72,11 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
    
 * Navigate to Data Factory Studio >> Author 
 * Create a pipeline and name it `GlobalVariable_SQL`
-* Add a new variable named `X` of type String with no default value
 * Add a 'Lookup' activity to the pipeline canvas with settings:
   * Source Dataset: `...globalvariables`
   * First Row Only: checked
   * Use Query: Query `SELECT * WHERE [Name] = 'X'`
+* Add a new variable named `X` of type String with no default value
 * Add a 'Set Variable' activity to the pipeline canvas with settings:
   * Name: `X`
   * Value: `@activity('Lookup').output.firstRow.Value`
