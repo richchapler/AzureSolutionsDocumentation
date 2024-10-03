@@ -72,11 +72,26 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
    
 * Navigate to Data Factory Studio >> Author 
 * Create a pipeline and name it `GlobalVariable_SQL`
-* Add a 'Lookup' activity to the pipeline canvas with settings:
+* Add a 'Lookup' activity named `Count` to the pipeline canvas with settings:
   * Source Dataset: `...globalvariables`
   * First Row Only: checked
-  * Use Query: Query `SELECT * WHERE [Name] = 'X'`
+  * Use Query: 'Query' with logic: `SELECT COUNT(*) AS RecordCount FROM [GlobalVariables] WITH (NOLOCK) WHERE [Name] = 'X'`
+* Add an 'If Condition' activity named `Confirm Data Availability` to the pipeline canvas with settings:
+  * Expression: `@equals(activity('Count').output.firstRow.RecordCount, 0)`
+  * Click the pencil icon on the 'True' case
+    * Add a 'Script' activity to the 'True activities' pipeline canvas with settings:
+      * Linked Service: `...sqldatabase`
+      * Script: `NonQuery` with logic: `INSERT INTO GlobalVariables ([Name], [Value]) VALUES ('X', NULL)`
+* Return to the main pipeline canvas
+* Add a 'Lookup' activity named `Value` to the pipeline canvas with settings:
+  * Source Dataset: `...globalvariables`
+  * First Row Only: checked
+  * Use Query: 'Query' with logic: `SELECT [Value] FROM [GlobalVariables] WHERE [Name] = 'X'`
 * Add a new variable named `X` of type String with no default value
+
+
+
+
 * Add a 'Set Variable' activity to the pipeline canvas with settings:
   * Name: `X`
   * Value: `@activity('Lookup').output.firstRow.Value`
