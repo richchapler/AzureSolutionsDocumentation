@@ -64,13 +64,13 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
    
 ### Step 1: Set Up a SQL Database  
    
-* Navigate to the Azure portal and create a new SQL Database.  
-* Create a table to store the global variables. The table should have at least two columns: `Name` for the variable name and `Value` for the variable value.  
+* Navigate to SQL Database >> Query Editor
+* Execute the following T-SQL query: `CREATE TABLE GlobalVariables ( Name NVARCHAR(64) PRIMARY KEY, Value NVARCHAR(MAX) );` 
    
 ### Step 2: Create `GlobalVariable` Pipeline  
    
-* Navigate to Data Factory Studio >> Author.  
-* Create a pipeline and name it `GlobalVariable`.  
+* Navigate to Data Factory Studio >> Author 
+* Create a pipeline and name it `GlobalVariable`
 * Add a 'Lookup' activity to the pipeline canvas. Configure it to retrieve the value of the global variable from the SQL Database using a SQL script. For example, `SELECT Value FROM GlobalVariable WHERE Name = 'YourVariableName'`.  
 * Add a 'Set Variable' activity to the pipeline canvas. Configure it to set the value of a pipeline variable to the value retrieved by the 'Lookup' activity.  
    
