@@ -4,8 +4,8 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
 
 | Method | Pros | Cons | Feasible? |    
 | :--- | :--- | :--- | :--- |    
-| Pipeline | * Conceptually simple | * Unidirectional {i.e., parent >> child only} | Partially |    
-| Key Vault | * Secure data storage | * Cannot be used as a Data Factory Source or Sink | No |    
+| Pipeline / Data Flow | * Conceptually simple | * Unidirectional {i.e., parent >> child only} | Partially |    
+| Key Vault | * Secure data storage | * Cannot be used as a Source or Sink | No |    
 | SQL Database | * Easy to implement<br>* No extra services needed | * Additional latency<br>* Risk of data overwrite | Yes |    
 | Blob Storage | * Large data storage<br>* Can pass complex data types | * Additional latency<br>* Risk of data overwrite | Yes |    
    
@@ -60,3 +60,36 @@ The common workaround for this limitation is to use an external service such as 
 Another possible workaround is to restructure your pipelines so that all the necessary data transformations are done within a single pipeline, thus avoiding the need to pass data between pipelines.
 
 _Note: The same limitation applies to Data Flows. Data Flows do not support output parameters and cannot pass values back to the parent pipeline._
+
+## ...via SQL Database  
+   
+### Step 1: Create a SQL Database  
+   
+* Navigate to the Azure portal and create a new SQL Database.  
+* Create a table to store the global variables. The table should have at least two columns: one for the variable name and one for the variable value.  
+   
+### Step 2: Create `GlobalVariable_Parent` Pipeline  
+   
+* Navigate to Data Factory Studio >> Author.  
+* Create a pipeline and name it `GlobalVariable_Parent`.  
+* Add a 'Lookup' activity to the pipeline canvas. Configure it to retrieve the value of the global variable from the SQL Database.  
+* Add a 'Set Variable' activity to the pipeline canvas. Configure it to set the value of a pipeline variable to the value retrieved by the 'Lookup' activity.  
+   
+### Step 3: Create `GlobalVariable_Child` Pipeline  
+   
+* Create another pipeline and name it `GlobalVariable_Child`.  
+* Add a new parameter named `input` of type String (with no default value).  
+* Add a 'Set Variable' activity to the pipeline canvas. Configure it to set the value of a pipeline variable to the value of the `input` parameter.  
+* Add a 'SQL Stored Procedure' activity to the pipeline canvas. Configure it to update the value of the global variable in the SQL Database.  
+   
+### Step 4: `GlobalVariable_Parent` Pipeline + 'Execute Pipeline'  
+   
+* Return to the `GlobalVariable_Parent` pipeline.  
+* Add a 'Execute Pipeline' activity to the pipeline canvas. Configure it to invoke the `GlobalVariable_Child` pipeline and pass the value of the global variable as a parameter.  
+   
+### Step 5: `GlobalVariable_Child` Pipeline + 'Lookup'  
+   
+* Return to the `GlobalVariable_Child` pipeline.  
+* Add a 'Lookup' activity to the pipeline canvas. Configure it to retrieve the updated value of the global variable from the SQL Database.  
+   
+With this setup, the `GlobalVariable_Parent` pipeline can pass the value of the global variable to the `GlobalVariable_Child` pipeline, which can then update the value of the global variable in the SQL Database. The updated value can be retrieved by the `GlobalVariable_Parent` pipeline in subsequent runs.
