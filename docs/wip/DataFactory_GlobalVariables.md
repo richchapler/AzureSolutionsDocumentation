@@ -8,48 +8,57 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
   
 * Navigate to Data Factory Studio >> Author
 * Create a pipeline and name it `GlobalVariable_Parent`
-* Add a new variable named `globalVariable` of type string with default value `Initial Value`
+* Add a new variable named `globalVariable` of type Array with default value `["Initial Value"]`
 
 ### Step 2: Create `GlobalVariable_Child` Pipeline
   
 * Create another pipeline and name it `GlobalVariable_Child`
-* Add a new parameter named `passedValue` of type string (with no default value)
-* Add a new variable named `localVariable` of type string (with no default value)
+* Add a new parameter named `passedValue` of type Array (with no default value)
+* Add a new variable named `localVariable` of type Array (with no default value)
 * Add a 'Set Variable' activity to the pipeline canvas with settings:
   * Name: `localVariable`
   * Value: `@pipeline().parameters.passedValue`
-* Add a 'Web' activity to the pipeline canvas with settings:
+* Add a 'Web' activity to the pipeline canvas, name it `Web_Original` and change default settings:
   * URL: `http://httpbin.org/post`
   * Method: POST
   * Body: `@variables('localVariable')`
+* Create a success dependency from the 'Set Variable' activity to the 'Web' activity
 
-### Step 3: Enhance `GlobalVariable` Pipeline
+### Step 3: `GlobalVariable_Parent` Pipeline + 'Execute Pipeline'
 
-* Return to the `GlobalVariable` pipeline
-* Drag-and-drop an 'Execute Pipeline' activity onto the pipeline canvas
-  * Create a success dependency from the `Set Variable` activity
-  * Configure 'Settings' to set `Invoked pipeline` to `GlobalVariable_Child`
-* Add a 'Execute pipeline' activity to the pipeline canvas with settings:
+* Return to the `GlobalVariable_Parent` pipeline
+* Add a 'Execute Pipeline' activity to the pipeline canvas with settings:
   * Invoked Pipeline: `GlobalVariable_Child`
   * Wait on Completion: checked
   * Parameters >> `passedValue` >> Value: `@variables('globalVariable')`
 
-### Step 4: Confirm Success
-
-* Click 'Debug' on the `GlobalVariable` pipeline and wait for completion
-* Navigate to Monitor >> Pipeline Runs >> Debug tab and 
-   
-3. **Create a Data Flow:**  
+### Step 4: `GlobalVariable_Child` Pipeline + `Append Variable`
   
-   This data flow will also receive the variable value and use it.  
+* Return to the `GlobalVariable_Child` pipeline
+* Add a 'Append Variable' activity to the pipeline canvas with settings:
+  * Name: `localVariable`
+  * Value: `New Value`
+* Add a 'Web' activity to the pipeline canvas, name it `Web_Changed` and change default settings:
+  * URL: `http://httpbin.org/post`
+  * Method: POST
+  * Body: `@variables('localVariable')`
+* Create a success dependency from the 'Set Variable' activity to the 'Web' activity
   
-   - Create a new data flow and name it 'MyDataFlow'.  
-   - In the data flow's parameters, create a new parameter. Name it 'MyParameter'.  
-   - Use the parameter in your transformations. For example, you can use the expression 'iif({MyParameter} > 10, 'High', 'Low')' to categorize your data based on the variable value.  
-   
-4. **Update the Master Pipeline:**  
+### Step 5: Pass the Changed Variable Value Back to the Parent Pipeline  
   
-   - Add another 'Execute pipeline' activity to call the data flow. Set the 'Pipeline name' to 'MyDataFlow' and pass the variable as a parameter.  
-   - Add a 'Get variable' activity to retrieve the updated variable value. Set the 'Name' to 'MyVariable'.  
-   
-Now, when you run the MasterPipeline, it will initialize the variable, pass it to the ChildPipeline and the data flow, and retrieve the updated value. This is a simple demonstration, but you can extend it to fit your needs.
+* In the `GlobalVariable_Child` pipeline, add an 'Output' activity to the pipeline canvas with settings:  
+  * Value: `@variables('localVariable')`  
+* In the `GlobalVariable_Parent` pipeline, add a new variable named `receivedValue` of type string (with no default value)  
+* In the 'Execute Pipeline' activity, under 'Settings', add an output parameter:  
+  * Name: `outputValue`  
+  * Value: `@activity('Name of your Execute Pipeline activity').output.firstRow.localVariable`  
+  
+### Step 6: Confirm Success  
+  
+* Click on 'Debug' to run the pipeline  
+* Once the pipeline run is complete, navigate to the 'Monitor' tab  
+* Click on the pipeline run to view the details  
+* Under 'Activity Runs', click on the 'Execute Pipeline' activity  
+* In the 'Output' tab, you should see the changed value of the variable  
+  
+Please note that the 'Output' activity is not a built-in activity in Azure Data Factory. You can use a 'Set Variable' activity to set the value of a variable in the parent pipeline, and then use a 'Web' activity to send the value to an HTTP endpoint, or a 'Lookup' activity to retrieve the value from a database or other data source.  
