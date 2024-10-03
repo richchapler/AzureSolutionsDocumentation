@@ -8,13 +8,13 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
   
 * Navigate to Data Factory Studio >> Author
 * Create a pipeline and name it `GlobalVariable_Parent`
-* Add a new `globalVariable` variable of type string with default value `Initial Value`
+* Add a new variable named `globalVariable` of type string with default value `Initial Value`
 
 ### Step 2: Create `GlobalVariable_Child` Pipeline
   
 * Create another pipeline and name it `GlobalVariable_Child`
-* Add a new `passedValue` parameter of type string (with no default value)
-* Add a new `localVariable` variable of type string (with no default value)
+* Add a new parameter named `passedValue` of type string (with no default value)
+* Add a new variable named `localVariable` of type string (with no default value)
 * Add a 'Set Variable' activity to the pipeline canvas with settings:
   * Name: `localVariable`
   * Value: `@pipeline().parameters.passedValue`
