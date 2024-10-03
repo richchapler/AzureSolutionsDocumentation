@@ -4,7 +4,8 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
 
 | Method | Comment | Feasibility |      
 | :--- | :--- | :--- |      
-| Pipeline / Data Flow | Unidirectional {i.e., parent >> child only} | 50% |      
+| Pipeline | Unidirectional {i.e., parent >> child only} | 50% |      
+| Data Flow | Might be possible using "Set Variable" > Variable Type: "Pipeline Return Value" | TBD |      
 | SQL Database | Additional latency / complexity | 100% |      
 | Blob Storage | Additional latency / complexity | 100% |   
    
@@ -41,7 +42,7 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
 ### Step 4: `GlobalVariable_Child` Pipeline + `Append Variable`
   
 * Return to the `GlobalVariable_Child` pipeline
-* Add a 'Append Variable' activity to the pipeline canvas with settings:
+* Add an 'Append Variable' activity to the pipeline canvas with settings:
   * Name: `localVariable`
   * Value: `New Value`
 * Add a 'Web' activity to the pipeline canvas, name it `Web_Changed` and change default settings:
@@ -67,12 +68,19 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
 * Navigate to SQL Database >> Query Editor
 * Execute the following T-SQL query: `CREATE TABLE GlobalVariables ( Name NVARCHAR(64) PRIMARY KEY, Value NVARCHAR(MAX) );` 
    
-### Step 2: Create `GlobalVariable` Pipeline  
+### Step 2: Create `GlobalVariable_SQL` Pipeline  
    
 * Navigate to Data Factory Studio >> Author 
-* Create a pipeline and name it `GlobalVariable`
-* Add a 'Lookup' activity to the pipeline canvas. Configure it to retrieve the value of the global variable from the SQL Database using a SQL script. For example, `SELECT Value FROM GlobalVariable WHERE Name = 'YourVariableName'`.  
-* Add a 'Set Variable' activity to the pipeline canvas. Configure it to set the value of a pipeline variable to the value retrieved by the 'Lookup' activity.  
+* Create a pipeline and name it `GlobalVariable_SQL`
+* Add a new variable named `X` of type String with no default value
+* Add a 'Lookup' activity to the pipeline canvas with settings:
+  * Source Dataset: `...globalvariables`
+  * First Row Only: checked
+  * Use Query: Query `SELECT * WHERE [Name] = 'X'`
+* Add a 'Set Variable' activity to the pipeline canvas with settings:
+  * Name: `X`
+  * Value: `@activity('Lookup').output.firstRow.Value`
+* Create a success dependency from the 'Lookup' activity to the 'Set Variable' activity
    
 ### Step 3: Update Global Variable in SQL Database  
    
