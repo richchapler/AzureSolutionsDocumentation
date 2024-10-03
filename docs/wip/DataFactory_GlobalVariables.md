@@ -1,6 +1,13 @@
 # Azure Data Factory: "Global Variables"
 
-While Azure Data Factory (ADF) doesn't support global variables in the traditional sense, you can achieve similar functionality using parameters and pipeline activities.  
+While Azure Data Factory (ADF) doesn't support global variables in the traditional sense, there are various work-arounds:
+
+| Method | Pros | Cons | Can work? |    
+| :--- | :--- | :--- | :--- |    
+| **Single Pipeline** | * Conceptually simple | * Unidirectional {i.e., parent >> child only} | Partial |    
+| **Azure Key Vault** | * Secure data storage | * Cannot be used as a Data Factory Source or Sink | Can't be used as data source/sink |    
+| **Azure SQL Database** | * Easy to implement<br>* No extra services needed | * Additional latency<br>* Risk of data overwrite | Yes |    
+| **Azure Blob Storage** | * Large data storage<br>* Can pass complex data types | * Additional latency<br>* Risk of data overwrite | Yes |    
    
 ## ...via Pipeline
 
