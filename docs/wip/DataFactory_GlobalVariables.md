@@ -99,5 +99,5 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
 * Finally, we'll write a value back to SQL
    * Add a 'Script' activity named `Update Variable` to the pipeline canvas with settings:
       * Linked Service: `...sqldatabase`
-      * Script: `NonQuery` with logic: `UPDATE GlobalVariable SET Value = 'NewValue' WHERE Name = 'YourVariableName'`  
+      * Script: `NonQuery` with logic: `UPDATE GlobalVariables SET Value = 'NewValue' WHERE Name = 'X'`  
    * Create success dependency from the 'Set Variable' activity to the 'Update Variable' activity
