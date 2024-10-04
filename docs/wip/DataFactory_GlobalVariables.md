@@ -2,12 +2,12 @@
 
 While Azure Data Factory (ADF) doesn't support global variables in the traditional sense, there are various work-arounds:
 
-| Method | Comment | Feasibility |      
-| :--- | :--- | :--- |      
-| Pipeline | Unidirectional {i.e., parent >> child only} | 50% |      
-| Data Flow | Might be possible using "Set Variable" > Variable Type: "Pipeline Return Value" | TBD |      
-| SQL Database | Additional latency / complexity | 100% |      
-| Blob Storage | Additional latency / complexity | 100% |   
+| Method | Comment | Feasibility | Documented? |      
+| :--- | :--- | :--- | :--- |     
+| Pipeline | Unidirectional {i.e., parent >> child only} | 50% | Yes |      
+| Data Flow | Might be possible using "Set Variable" > Variable Type: "Pipeline Return Value" | TBD | Not Yet |     
+| SQL Database | Additional latency / complexity | 100% | Yes |
+| Blob Storage | Additional latency / complexity | 100% | Not Yet |
    
 ## ...via Pipeline
 
