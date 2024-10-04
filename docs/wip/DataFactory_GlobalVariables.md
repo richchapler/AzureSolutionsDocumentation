@@ -80,7 +80,7 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
    * Add an 'If Condition' activity named `Confirm Data Availability` to the pipeline canvas with settings:
      * Expression: `@equals(activity('Count').output.firstRow.RecordCount, 0)`
      * Click the pencil icon on the 'True' case
-       * Add a 'Script' activity to the 'True activities' pipeline canvas with settings:
+       * Add a 'Script' activity named 'Insert Variable' to the 'True activities' pipeline canvas with settings:
          * Linked Service: `...sqldatabase`
          * Script: `NonQuery` with logic: `INSERT INTO GlobalVariables ([Name], [Value]) VALUES ('X', NULL)`
    * Return to the main pipeline canvas
@@ -96,14 +96,8 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
      * Name: `X`
      * Value: `@activity('Lookup').output.firstRow.Value`
    * Create success dependency from the 'Value' lookup activity to the 'Set Variable' activity
-   
-### Step 3: Update Global Variable in SQL Database  
-   
-* In the `GlobalVariable` pipeline, add a 'SQL Server Stored Procedure' activity to the pipeline canvas. Instead of calling a stored procedure, use a SQL script to update the value of the global variable in the SQL Database. For example, `UPDATE GlobalVariable SET Value = 'NewValue' WHERE Name = 'YourVariableName'`.  
-   
-### Step 4: `GlobalVariable` Pipeline + 'Lookup'  
-   
-* Return to the `GlobalVariable` pipeline.  
-* Add another 'Lookup' activity to the pipeline canvas. Configure it to retrieve the updated value of the global variable from the SQL Database using a SQL script.  
-   
-With this setup, the `GlobalVariable` pipeline can retrieve the value of the global variable from the SQL Database, use it in the pipeline, update the value in the SQL Database, and then retrieve the updated value.
+* Finally, we'll write a value back to SQL
+   * Add a 'Script' activity named `Update Variable` to the pipeline canvas with settings:
+      * Linked Service: `...sqldatabase`
+      * Script: `NonQuery` with logic: `UPDATE GlobalVariable SET Value = 'NewValue' WHERE Name = 'YourVariableName'`  
+   * Create success dependency from the 'Set Variable' activity to the 'Update Variable' activity
