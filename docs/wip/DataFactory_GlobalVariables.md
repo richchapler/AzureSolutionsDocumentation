@@ -85,7 +85,7 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
 
 ## ...via SQL Database  
    
-### Step 1: Set Up a SQL Database  
+### Step 1: Prepare SQL Database  
    
 * Navigate to SQL Database >> Query Editor
 * Execute the following T-SQL query: `CREATE TABLE GlobalVariables ( Name NVARCHAR(64) PRIMARY KEY, Value NVARCHAR(MAX) );` 
