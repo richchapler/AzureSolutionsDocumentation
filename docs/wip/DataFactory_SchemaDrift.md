@@ -2,8 +2,7 @@
 
 This guide demonstrates how to handle schema drift using Azure Data Factory (ADF) by ingesting multiple versions of a source dataset, detecting schema changes, and adjusting the pipeline accordingly.
 
-## Prepare Data
-Create and upload the following JSON files to a container in Azure Storage...
+## Step 1: Source Data
 
 ### Version1.json
 ```json
@@ -73,26 +72,24 @@ Create and upload the following JSON files to a container in Azure Storage...
 }
 ```
 
-## Prepare Data Factory
+## Step 2: Data Factory
 
-### Step 2: Create a Linked Service
-Create a linked service to connect to the storage location where your JSON files are stored.
+* Navigate to Azure Data Factory >> Manage >> Linked Services
+  * Create a new Azure Blob Storage linked service for the Storage Account (using System-Assigned Managed Identity) 
+* Navigate to Azure Data Factory >> Author
+  * Create a new Azure Blob Storage >> JSON dataset for the Storage Account / container
+* Create a Data Flow
+  * Lorem
 
-1. In Data Factory, go to **Manage > Linked Services > New**.
-2. Select the linked service type based on where your files are stored (e.g., Azure Blob Storage or Azure Data Lake).
-3. Configure the connection by providing the necessary credentials (storage account name, access key, etc.).
-4. Test the connection and click **Create**.
 
-### 3. Create a Dataset for JSON Files
-1. In the ADF pane, go to **Author > Datasets > New Dataset**.
-2. Select **JSON** as the dataset type.
-3. Choose your previously created linked service and provide the path to the folder where your versioned JSON files are stored.
-4. In the **Schema** section, allow the schema to drift by enabling the "Allow Schema Drift" option.
-5. Click **OK** to create the dataset.
 
-### 4. Create a Data Pipeline
-1. Go to **Author > Pipelines > New Pipeline**.
-2. Name the pipeline **SchemaDriftPipeline**.
+----- 
+Pipeline
+
+* Create a pipeline and name it `SchemaDrift`
+  * Add a 'Copy Data' activity to the pipeline canvas with settings:
+    * Source >> Source Dataset: JSON dataset created in Step 1
+
 3. In the **Activities** pane, drag in a **Copy Data** activity to the canvas.
 4. Configure the **Source** tab:
    - Choose the JSON dataset created in step 3.
