@@ -94,6 +94,10 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
   * Activities... click the pencil icon and on the resulting canvas, add an 'Append Variable' activity with settings:
     * Name: `DistinctColors`
     * Value: `@item().Color`
+* Return to the main canvas and add a 'Web' activity to the pipeline canvas with settings:
+  * URL: `http://httpbin.org/post`
+  * Method: POST
+  * Body: `@variables('DistinctColors')`
 
 -----
 
