@@ -10,7 +10,7 @@ Create and upload the following JSON files to a container in Azure Storage...
 {  
   "id": "1",  
   "name": "John Doe",  
-  "email": johndoe@email.com,  
+  "email": "johndoe@email.com",  
   "phone": "123-456-7890",  
   "age": 30,  
   "address": {  
