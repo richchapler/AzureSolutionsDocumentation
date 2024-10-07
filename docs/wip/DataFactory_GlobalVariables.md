@@ -7,7 +7,7 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
 | Pipeline | Unidirectional {i.e., parent >> child only} | 50% | Yes |      
 | Data Flow | Bidirectional {i.e., both pipeline >> data flow and back | 100% | Yes |     
 | SQL Database | Additional latency / complexity | 100% | Yes |
-| Blob Storage | Additional latency / complexity | 100% | Not Yet |
+| Blob Storage | Additional latency / complexity | 100% | No |
 
 -----
 
