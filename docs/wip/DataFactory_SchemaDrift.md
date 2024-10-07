@@ -2,16 +2,80 @@
 
 This guide demonstrates how to handle schema drift using Azure Data Factory (ADF) by ingesting multiple versions of a source dataset, detecting schema changes, and adjusting the pipeline accordingly.
 
-## Version 1: Initial Load
+## Prepare Data
+Create and upload the following JSON files to a container in Azure Storage...
 
-### 1. Create a Data Factory Instance
-1. Go to the [Azure portal](https://portal.azure.com).
-2. Search for **Azure Data Factory** and click **Create**.
-3. Select your subscription, resource group, and give your Data Factory a unique name.
-4. Choose the appropriate region and click **Review + Create**.
-5. Click **Create** after the validation completes.
+### Version1.json
+```json
+{  
+  "id": "1",  
+  "name": "John Doe",  
+  "email": johndoe@email.com,  
+  "phone": "123-456-7890",  
+  "age": 30,  
+  "address": {  
+    "street": "123 Main St",  
+    "city": "Anytown",  
+    "state": "Anystate",  
+    "zip": "12345"  
+  }  
+}
+```
 
-### 2. Create a Linked Service
+### Version2.json
+```json
+{
+  "id": "1",
+  "gender": "Male"
+}
+```
+
+### Version3.json
+```json
+{
+  "id": "2",
+  "name": "Jane Doe",
+  "email": "janedoe@email.com",
+  "phone": "987-654-3210",
+  "age": 28,
+  "address": {
+    "street": "456 Main St",
+    "city": "Anytown",
+    "state": "Anystate",
+    "zip": "54321"
+  }
+}
+```
+
+### Version4.json
+```json
+{
+  "id": "1",
+  "phone": null,
+  "dateOfBirth": "1991-01-01"
+}
+```
+
+### Version5.json
+```json
+{
+  "id": "3",
+  "name": "Mark Smith",
+  "email": "marksmith@email.com",
+  "dateOfBirth": "1990-12-12",
+  "gender": "Male",
+  "address": {
+    "street": "789 Main St",
+    "city": "Anytown",
+    "state": "Anystate",
+    "zip": "67890"
+  }
+}
+```
+
+## Prepare Data Factory
+
+### Step 2: Create a Linked Service
 Create a linked service to connect to the storage location where your JSON files are stored.
 
 1. In Data Factory, go to **Manage > Linked Services > New**.
