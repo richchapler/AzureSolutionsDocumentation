@@ -68,18 +68,17 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
 ## ...via Data Flows
 
 ### Step 1: Create a Data Flow
-* Navigate to Data Factory Studio >> Author.
-* Create a new **Data Flow** and name it `GlobalVariable_DataFlow`.
-* Add a **Source** transformation to read or generate data that will represent your variable value (e.g., from a file, database, or a computed value).
-* Add a **Derived Column** transformation (optional) if you need to manipulate or transform the data.
-
-### Step 2: Set Variable in Data Flow
-* After your transformations, add a **Sink** transformation if needed to persist data (e.g., in a database or storage).
-* In the **Settings** tab of the Data Flow, set a **Variable** with the value you want to pass back to the parent pipeline using the **"Set Variable"** activity with a **Pipeline Return Value**.
-
-### Step 3: Execute Data Flow from Parent Pipeline
-* In your parent pipeline, use a **Data Flow activity** to execute the `GlobalVariable_DataFlow`.
-* Capture the output of the Data Flow using the **"Pipeline Return Value"** variable type and pass it back to a variable or other activities in the parent pipeline.
+* Navigate to Data Factory Studio >> Author
+* Create a new Data Flow' and name it `GlobalVariable`
+  * Add a Source and set dataset: `sql_adventureworks_product`
+  * Add a 'Aggregate' transformation with settings:
+    * Group By >> Column: `Color`
+    * Aggregates >> Column: `Count` | Expression: `count(ProductID)`
+  * Add a 'Filter' transformation with setting:
+    * Filter on: `not(isNull(Color))`
+  * Add a Sink with settings:
+    * Sink Type: Cache
+    * Options >> Write to Activity Output: Checked
 
 -----
 
