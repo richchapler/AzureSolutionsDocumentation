@@ -4,8 +4,8 @@ While Azure Data Factory (ADF) doesn't support global variables in the tradition
 
 | Method | Comment | Feasibility | Documented? |      
 | :--- | :--- | :--- | :--- |     
-| Data Factory, Pipeline | Unidirectional {i.e., parent >> child only} | 50% | Yes |      
-| Data Factory, Data Flow | Might be possible using "Set Variable" > Variable Type: "Pipeline Return Value" | TBD | In Progress |     
+| Pipeline | Unidirectional {i.e., parent >> child only} | 50% | Yes |      
+| Data Flow | Bidirectional {i.e., both pipeline >> data flow and back | 100% | Yes |     
 | SQL Database | Additional latency / complexity | 100% | Yes |
 | Blob Storage | Additional latency / complexity | 100% | Not Yet |
 
@@ -67,7 +67,7 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
 
 ## ...via Data Flows
 
-### Step 1: Create a Data Flow
+### Step 1: Create `GlobalVariable` Data Flow
 * Navigate to Data Factory Studio >> Author
 * Create a new Data Flow' and name it `GlobalVariable`
   * Add a Source and set dataset: `sql_adventureworks_product`
@@ -79,6 +79,21 @@ _Note: The same limitation applies to Data Flows. Data Flows do not support outp
   * Add a Sink with settings:
     * Sink Type: Cache
     * Options >> Write to Activity Output: Checked
+
+### Step 2: Create `GlobalVariable_Dataflow` Pipeline
+  
+* Create a pipeline and name it `GlobalVariable_Dataflow`
+* Add a new variable named `DistinctColors` of type Array (with no default value)
+* Add a 'Data Flow' activity to the pipeline canvas with settings:
+  * Data Flow: `GlobalVariable`
+  * Logging Level: None
+  * Sink Properties >> First Row Only: Unchecked
+* Add a 'ForEach' activity to the pipeline canvas with settings:
+  * Settings >> Sequential: Checked
+  * Settings >> Items: `@activity('GlobalVariable').output.runStatus.output.Sink.value`
+  * Activities... click the pencil icon and on the resulting canvas, add an 'Append Variable' activity with settings:
+    * Name: `DistinctColors`
+    * Value: `@item().Color`
 
 -----
 
