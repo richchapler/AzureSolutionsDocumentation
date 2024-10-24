@@ -39,3 +39,8 @@ Here are the chunking rules and control options for Azure AI Search's SplitSkill
   ]
 }
 ```
+
+## Reference
+
+* [SplitSkill Class](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.search.models.splitskill?view=azure-dotnet-legacy)
+* [SplitSkill.TextSplitMode Property](https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.search.models.splitskill.textsplitmode?view=azure-dotnet-legacy#microsoft-azure-search-models-splitskill-textsplitmode)
