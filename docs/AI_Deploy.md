@@ -1,6 +1,6 @@
 # AI: Deploy
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/20ef5226-59b5-4876-b8b2-789373480cb4" width="1000" />
 
 ## Use Case
 * "We are implementing OpenAI + AI Search and rapidly iterating through configuration enhancements"
@@ -68,13 +68,13 @@ _Philosophical Note: When I write (either articles or code), I strive to limit m
 Navigate to Azure portal >> AI Search >> Data Sources and then click "+ Add data source". Complete the form (examples below):
 
 #### Blob Storage
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e94da228-1906-4d78-bd19-a0b6e5cca203" width="800" title="Snipped: June 26, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/e94da228-1906-4d78-bd19-a0b6e5cca203" width="800" title="Snipped: June 26, 2024" />
 
 Blob storage has standard fields {e.g., `metadata_title`} which can be mapped to stardardized multi-source index columns (like `name`).
 
 #### SQL Database
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ba9fa875-607a-4e3b-9047-1f29588d75bd" width="800" title="Snipped: June 26, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/ba9fa875-607a-4e3b-9047-1f29588d75bd" width="800" title="Snipped: June 26, 2024" />
 
 SQL database tables will not have standard fields, so we add a SQL Query that provides necessary mapping for inclusion in a multi-source index; examples:
 * `SELECT 'adventureworks-saleslt-address' [source], [AddressID] [id], [AddressLine1] [name], [AddressLine1], ISNULL([AddressLine2],'null') [AddressLine2], [City], [StateProvince], [CountryRegion] FROM [SalesLT].[Address] WITH (NOLOCK)`
@@ -85,15 +85,15 @@ SQL database tables will not have standard fields, so we add a SQL Query that pr
 
 Open Visual Studio and click "**Create a new project**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/317959b5-dfd7-4c97-af0c-0578f9e89429" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/317959b5-dfd7-4c97-af0c-0578f9e89429" width="600" title="Snipped: October 10, 2023" />
 
 On the "**Create a new project**" form, search for and select "**Console App**", then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/db8c2898-b607-4441-8b1e-4f4f3dbd56b4" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/db8c2898-b607-4441-8b1e-4f4f3dbd56b4" width="600" title="Snipped: October 10, 2023" />
 
 Complete the "**Configure your new project**" form, then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2408d491-ba3b-4ba7-9d84-02caf1dab54d" width="600" title="Snipped: October 10, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/2408d491-ba3b-4ba7-9d84-02caf1dab54d" width="600" title="Snipped: October 10, 2023" />
 
 Complete the "**Additional information**" form, then click "**Create**".
 
@@ -101,11 +101,11 @@ Complete the "**Additional information**" form, then click "**Create**".
 
 ### Step 3: Install NuGet
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/464851d5-30c0-4b72-87d5-cb95658d919d" width="800" title="Snipped: October 11, 2023" />
 
 Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/00248893-859f-4db5-96b4-dcbbf5cbc752" width="800" title="Snipped: May 29, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/00248893-859f-4db5-96b4-dcbbf5cbc752" width="800" title="Snipped: May 29, 2024" />
 
 On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**AzureSolutions.Helpers**".
 <br>On the resulting pop-out, check the box next to your project and then click "**Install**".
@@ -248,11 +248,11 @@ namespace AI_Deploy
 
 #### Visual Studio Debug
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/94ba39d5-0a55-4439-b2d1-188917087aa4" width="800" title="Snipped: October 11, 2023" />
 
 Save your changes and then click "**Debug**" >> "**Start Debugging**" in the menubar.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d00e11c1-5611-49ed-b31e-228eee5428b2" width="600" title="Snipped: October 11, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/d00e11c1-5611-49ed-b31e-228eee5428b2" width="600" title="Snipped: October 11, 2023" />
 
 A "Microsoft Visual Studio Debug" window will open (as snipped above).
 
@@ -260,11 +260,11 @@ A "Microsoft Visual Studio Debug" window will open (as snipped above).
 
 Navigate to AI Search, then "**Indexes**" in the "**Search management**" grouping of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/60745fe0-95f6-40f7-a91b-94b10332c237" width="800" title="Snipped: October 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/60745fe0-95f6-40f7-a91b-94b10332c237" width="800" title="Snipped: October 12, 2023" />
 
 You should see the index that you programmatically created {e.g., "rchaplerss-index"}. Click to open.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/302f8a28-e828-44de-b04c-cb9511bf19a2" width="800" title="Snipped: October 12, 2023" />
 
 Click the "**Search**" button and review results.
 
@@ -282,7 +282,7 @@ In this exercise, we will create a pull request in a DevOps repo.
 
 Open Visual Studio, navigate to "**View**" >> "**Git Changes**", and then click "**Create Git Repository**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/54ffccf9-64db-4e1b-9177-2bde140fa473" width="600" title="Snipped: October 12, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/54ffccf9-64db-4e1b-9177-2bde140fa473" width="600" title="Snipped: October 12, 2023" />
 
 Complete the resulting "Create a Git repository" pop-up form, then click "**Create and Push**".
 
@@ -385,11 +385,11 @@ namespace FunctionApp_CustomSkillset
 
 Right-click on your project in the Solution Explorer pane and select "Publish" from the resulting menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/5a090114-5879-44d0-a07c-c78a006d92ff" width="600" title="Snipped: October 30, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/5a090114-5879-44d0-a07c-c78a006d92ff" width="600" title="Snipped: October 30, 2023" />
 
 On the "Publish" >> "Target" page, select "Azure", then click "Next".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/de97bbd3-ee15-4b1f-af0e-4299f14d6085" width="600" title="Snipped: October 30, 2023" />
 
 On the "Publish" >> "Specific target" page, select "Azure App Service (Windows)", then click "Next".
 
