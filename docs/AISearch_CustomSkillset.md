@@ -1,6 +1,6 @@
 # Data Enrichment: Cognitive Search, Custom Skillset
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/d7ad1df6-3f08-4397-88b6-a4b7b67ea90d" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/d7ad1df6-3f08-4397-88b6-a4b7b67ea90d" width="1000" />
 
 ## Use Case
 This documentation considers the following requirements and goals:
@@ -41,11 +41,11 @@ Click "**Create a new project**".
 
 On the "**Create a new project**" page, search for and select "**Azure Functions**", then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a0d7c77a-af1b-4f72-ade8-a800a34729dc" width="600" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a0d7c77a-af1b-4f72-ade8-a800a34729dc" width="600" title="Snipped: July 5, 2023" />
 
 Complete the "**Configure your new project**" form and then click "**Next**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/cf45d8ed-27a4-40e4-ac5a-40efbeb30f99" width="600" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/cf45d8ed-27a4-40e4-ac5a-40efbeb30f99" width="600" title="Snipped: July 5, 2023" />
 
 Complete the "**Additional information**" form:
 
@@ -64,15 +64,15 @@ Click "**Create**".
 
 Click **Tools** in the menu bar, expand "**NuGet Package Manager**" in the resulting menu and then click "**Manage NuGet Packages for Solution...**"
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1695a4b5-ce8d-4c40-b082-c0f716bf40f3" width="800" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/1695a4b5-ce8d-4c40-b082-c0f716bf40f3" width="800" title="Snipped: July 5, 2023" />
 
 On the **Browse** tab of the "**NuGet - Solution**" page, search for and select "**Microsoft.Data.SqlClient**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e21b7833-b2ef-459e-929d-6398c3f24ff8" width="800" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/e21b7833-b2ef-459e-929d-6398c3f24ff8" width="800" title="Snipped: July 5, 2023" />
 
 On the resulting pop-out, check the Project in the list, and then click "**Install**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/fc4eae77-2f17-4869-8e2b-3d033719b8ed" width="800" title="Snipped: July 5, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/fc4eae77-2f17-4869-8e2b-3d033719b8ed" width="800" title="Snipped: July 5, 2023" />
 
 Navigate to the "**Updates**" tab, check "**Select all packages**" and then click **Update** (as applicable).
 
@@ -82,7 +82,7 @@ Navigate to the "**Updates**" tab, check "**Select all packages**" and then clic
 
 Rename "Function1.cs" to "GetData.cs" and open.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ce428390-fb00-410b-aa8e-8d6441a0589d" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/ce428390-fb00-410b-aa8e-8d6441a0589d" width="800" title="Snipped: July 6, 2023" />
 
 Replace the default code with:
 
@@ -183,7 +183,7 @@ Logic Explained:
 
 In Visual Studio, right-click on the project and select **Publish** from the resulting drop-down menu.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a48fdfe9-1afb-4628-938d-b327234ebfab" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a48fdfe9-1afb-4628-938d-b327234ebfab" width="800" title="Snipped: July 6, 2023" />
 
 On the **Publish** >> "**Where are you publishing...**" page, select "**Azure**" and then click **Next**.
 
@@ -191,15 +191,15 @@ On the **Publish** >> "**Where are you publishing...**" page, select "**Azure**"
 
 On the **Publish** >> "**Which Azure service...**" page, select "**Azure Function App (Windows)**" and then click **Next**.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/b0f6a61e-b741-4b48-a3d6-eb2ac5f711a7" width="600" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/b0f6a61e-b741-4b48-a3d6-eb2ac5f711a7" width="600" title="Snipped: July 6, 2023" />
 
 On the **Publish** >> "**Select existing or...**" page, select your Function App and then click **Finish**.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/2333abe2-d9e0-4674-84ca-aba15be28be9" width="600" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/2333abe2-d9e0-4674-84ca-aba15be28be9" width="600" title="Snipped: July 6, 2023" />
 
 Back on the "...Publish" page, click **Publish** and confirm successful publication in the "**Output**" pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e31d913e-62ee-4d6f-a117-aac39e57d4c9" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/e31d913e-62ee-4d6f-a117-aac39e57d4c9" width="800" title="Snipped: July 6, 2023" />
 
 -----
 
@@ -207,7 +207,7 @@ Back on the "...Publish" page, click **Publish** and confirm successful publicat
 
 Navigate to the **GetData** function, and then "**Code + Test**" in the "**Developer**" grouping of the navigation pane.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/dc516c29-900f-47ab-8afc-ebc7b5cc0dbb" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/dc516c29-900f-47ab-8afc-ebc7b5cc0dbb" width="800" title="Snipped: July 6, 2023" />
 
 Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the following "**Body**" value:
 
@@ -217,7 +217,7 @@ Click "**Test/Run**" and on the resulting pop-out, "**Input**" tab, paste the fo
 
 Click "**Run**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3b96537a-872f-4f67-b126-b295aaad42e5" width="800" title="Snipped: July 6, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3b96537a-872f-4f67-b126-b295aaad42e5" width="800" title="Snipped: July 6, 2023" />
 
 The pop-out will switch to the "**Output**" tab and you can expect the following "**HTTP response content**" value:
 
@@ -238,27 +238,27 @@ In this exercise, we will create a Cognitive Search index and then customize the
 
 Navigate to Cognitive Search, "**Overview**" and then click "**Import data**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/1042b042-a8af-4338-a7fe-390d0e7d71ef" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/1042b042-a8af-4338-a7fe-390d0e7d71ef" width="800" title="Snipped: July 7, 2023" />
 
 On the "**Connect to your data**" tab, select Data Source "**Samples**" and then "**hotels-sample**" on the resulting list.
 <br>Click "**Next: Add cognitive skills (Optional)**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/bee429ee-a772-49a4-8400-ceb69db9db4b" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/bee429ee-a772-49a4-8400-ceb69db9db4b" width="800" title="Snipped: July 7, 2023" />
 
 On the "****Add cognitive skills (Optional)****" tab, expand "**Attach Cognitive Services**" and select your Cognitive Services instance from the list.
 <br>Collapse "**Attach Cognitive Services**" and expand "**Add enrichments**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/aacf729e-c64d-445d-9428-3b8799c0ffdd" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/aacf729e-c64d-445d-9428-3b8799c0ffdd" width="800" title="Snipped: July 7, 2023" />
 
 Check "**Extract key phrases**".
 <br>_Note: we do not require key phrases for this exercise, but adding this enrichment will make later customizations more simple_
 <br><br>Click "**Next: Customize target index".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/19e45b7c-d7fb-4c7e-b2a8-f52e84b7439a" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/19e45b7c-d7fb-4c7e-b2a8-f52e84b7439a" width="800" title="Snipped: July 7, 2023" />
 
 No changes are necessary on the "**Customize target index**" tab... click "**Next: Create an indexer**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e905a174-de1c-4570-974b-8fee57c8fecf" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/e905a174-de1c-4570-974b-8fee57c8fecf" width="800" title="Snipped: July 7, 2023" />
 
 No changes are necessary on the "**Create an indexer**" tab... click "**Submit**".
 
@@ -267,11 +267,11 @@ No changes are necessary on the "**Create an indexer**" tab... click "**Submit**
 ### Step 2: Customize Index
 Navigate to the "**Indexes**" tab and click on the new index.<br>
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/31306483-1a99-40a7-b6fc-780175900913" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/31306483-1a99-40a7-b6fc-780175900913" width="800" title="Snipped: July 7, 2023" />
 
 Click "**Edit JSON**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/29f6c4c2-6f99-4df6-9697-8e8b5266cf60" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/29f6c4c2-6f99-4df6-9697-8e8b5266cf60" width="800" title="Snipped: July 7, 2023" />
 
 Append the following JSON just after `{"name":"keyphrases"...}`:
 
@@ -296,7 +296,7 @@ Append the following JSON just after `{"name":"keyphrases"...}`:
     }
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/803ec460-35f1-4ad9-abcc-57eb3e70b839" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/803ec460-35f1-4ad9-abcc-57eb3e70b839" width="800" title="Snipped: July 7, 2023" />
 
 Click "**Save**".
 
@@ -305,11 +305,11 @@ Click "**Save**".
 ### Step 3: Customize Indexer
 Navigate to the "**Indexers**" tab and click on the new indexer.<br>
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/4d70400a-aec3-40d5-b9b4-850d1520fdbf" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/4d70400a-aec3-40d5-b9b4-850d1520fdbf" width="800" title="Snipped: July 7, 2023" />
 
 Click "**Indexer Definition (JSON)**".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/a6f314df-b945-4dfc-903f-2b8a5dd70f48" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a6f314df-b945-4dfc-903f-2b8a5dd70f48" width="800" title="Snipped: July 7, 2023" />
 
 Append the following JSON just after `{"sourceFieldName":"/document/HotelId/keyphrases"...}`:
 
@@ -329,7 +329,7 @@ Click "**Save**".
 ### Step 4: Customize Skillset
 Navigate to the "**Skillsets**" tab and click on the new skillset.<br>
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/9f632991-e6c4-45cf-9527-0c4753c5613c" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/9f632991-e6c4-45cf-9527-0c4753c5613c" width="800" title="Snipped: July 7, 2023" />
 
 Modify and append the following JSON just after `"{@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill...}`:
 
@@ -361,7 +361,7 @@ Modify and append the following JSON just after `"{@odata.type": "#Microsoft.Ski
     }
 ```
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2880aba-a9f9-43c7-86ff-9f5110b66dac" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/e2880aba-a9f9-43c7-86ff-9f5110b66dac" width="800" title="Snipped: July 7, 2023" />
 
 Click "**Save**".
 
@@ -370,11 +370,11 @@ Click "**Save**".
 ### Step 5: Confirm Success
 Navigate to the indexer, click "**Run**" and then "**Yes**", confirming that you want to run the indexer.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/3c5959e1-7b71-4ee9-8c0f-d60b09640441" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3c5959e1-7b71-4ee9-8c0f-d60b09640441" width="800" title="Snipped: July 7, 2023" />
 
 Click "Refresh".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/55774804-b1f4-4b89-84a6-0ad64f2a2630" width="800" title="Snipped: July 7, 2023" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/55774804-b1f4-4b89-84a6-0ad64f2a2630" width="800" title="Snipped: July 7, 2023" />
 
 Confirm successful execution.
 
