@@ -15,5 +15,5 @@ Use Case | Technologies
 [AI Search, Source from Data Explorer](AISearch_fromDataExplorer.md) | Data Explorer (via export), AI Search, JSON, HTML
 [AI Search, Multi-Source Index](AISearch_MultiSourceIndex.md) | SQL, Blob Storage, AI Search, JSON
 [AI Search, PowerApp UI + Security](AISearch_PowerApp+Security.md) | AI Search, Power Apps, JSON
-[OpenAI, Enriching Data via API](Data_Enrichment_OpenAI.md) | Synapse Pipeline, OpenAI, Data Explorer, API
+[Open AI, Enriching Data via API](Data_Enrichment_OpenAI.md) | Synapse Pipeline, OpenAI, Data Explorer, API
 [Open AI, Estimating Cost](wip/OpenAI_EstimatingCost.md) | Azure Pricing Calculator
