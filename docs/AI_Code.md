@@ -1,6 +1,6 @@
 # AI: Code Analysis
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/08ff9047-68f4-4829-b35e-7606d0305630" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/08ff9047-68f4-4829-b35e-7606d0305630" width="1000" />
 
 ## Use Case
 * "We want to regularly snapshot GitHub Respository content"
@@ -33,17 +33,17 @@ Codeblock explanation is limited... I recommend that you copy code blocks to Bin
 
 Open Visual Studio and create a Console App project.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/e2deb0e6-0b23-4f78-a4dc-64b7cf7d07fb" width="800" title="Snipped June 7, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/e2deb0e6-0b23-4f78-a4dc-64b7cf7d07fb" width="800" title="Snipped June 7, 2024" />
 
 Click "Tools" in the menu bar, expand "NuGet Package Manager", then click "Manage NuGet Packages for Solution..."
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/064d2f4b-6f1d-45bf-975e-e135849703de" width="800" title="Snipped June 7, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/064d2f4b-6f1d-45bf-975e-e135849703de" width="800" title="Snipped June 7, 2024" />
 
 On the "Browse" tab of the "NuGet - Solution" page, search for and select "AzureSolution_Helpers".
 On the resulting pop-out, check the box next to your project and then click "Install".
 Repeat this process for Octokit.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/6fd5ad84-3cd3-4ef9-a1ae-f2bf06307309" width="800" title="Snipped June 7, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/6fd5ad84-3cd3-4ef9-a1ae-f2bf06307309" width="800" title="Snipped June 7, 2024" />
 
 -----
 
@@ -250,11 +250,11 @@ namespace AI_Code
 
 Click "Debug" >>  "Start Debugging".
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/ac4453bf-ca14-42ae-8ed2-b0a3341d6d21" width="800" title="Snipped June 7, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/ac4453bf-ca14-42ae-8ed2-b0a3341d6d21" width="800" title="Snipped June 7, 2024" />
 
 Messages in the console window will iterate through files in your GitHub repository... and these will correspond with the files being copied to your Azure Storage Account.
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/76602c7d-1939-482a-bf1a-cd758f0d20f0" width="800" title="Snipped June 7, 2024" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/76602c7d-1939-482a-bf1a-cd758f0d20f0" width="800" title="Snipped June 7, 2024" />
 
 Navigate to the "code" container, browse and confirm success.
 Identify and review a markdown file... for example, `index.md` describes helper class `index.cs`.
