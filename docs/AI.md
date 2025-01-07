@@ -1,6 +1,6 @@
 # Artificial Intelligence (AI)
 
-<img src="https://github.com/richchapler/AzureSolutions/assets/44923999/11c755cf-b3eb-4384-9876-8eadbf743b52" width="1000" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/11c755cf-b3eb-4384-9876-8eadbf743b52" width="1000" />
 
 Use Case | Technologies
 :----- | :-----
