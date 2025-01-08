@@ -1,4 +1,4 @@
-# Data Factory: Logging Options
+# Data Factory: Logging + Error Handling
 
 ## Studio >> Monitor: Pipeline and Trigger Runs
 
