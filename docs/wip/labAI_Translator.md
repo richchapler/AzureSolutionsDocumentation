@@ -1,30 +1,25 @@
-# AI: Translator
+# Lab: AI Translator
 
-<img src="https://github.com/user-attachments/assets/c57bea17-8029-4544-8a01-ec9d9644d1a5" width="1000" />
-
-## Use Case
-* "We operate in multiple countries and languages"
-* "We have built a custom model supporting translation of company- and product-specific terms"
-* "We want a web application that will support translation of input and documents using our custom model"
+<img src="https://github.com/user-attachments/assets/96481bac-c772-4dae-98c3-139bfd04f9db" width="1000" />
 
 ## Solution Requirements
 
 This documentation assumes the following resources are ready for use:
 
-* [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault) with the following [secrets](https://learn.microsoft.com/en-us/azure/key-vault/secrets):
-  * Storage-ConnectionString
-  * Storage-Endpoint
-  * Translator-Key
-  * DocumentTranslation-Endpoint
-  * TextTranslation-Endpoint
-
-* [Storage Account](Infrastructure_StorageAccount.md) with two containers, "source" and "target"
-
-* [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+* [Translator](https://learn.microsoft.com/en-us/azure/ai-services/translator/create-translator-resource)
 
 ## Documentation Note
 
-I used to spend a lot of time explaining code blocks, but now skip that part of my sharing process in favor of a recommendation to copy code blocks to Bing Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
+I used to spend a lot of time explaining code blocks, but now skip that part of my sharing process in favor of a recommendation to copy code blocks to Copilot along with prompts like "what does this do?" or "how does this work" for amazing description and detail!
+
+
+
+
+
+
+
+
+
 
 -----
 
