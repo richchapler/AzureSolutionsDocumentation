@@ -44,34 +44,38 @@
 ##### Step 1: Create a New Data Flow
 
 1. **Open Azure Data Factory Studio**:
-   - Navigate to **Author** > **+** > **Data Flow**.
+   - Navigate to **Author** > **+** > **Data Flow**
+   - Enable **Data Flow Debug** (toggle at the top of the interface)
 
 2. **Add Source Dataset**:
-   - In the data flow canvas, click **Add Source**.
-   - Name the source (e.g., `Source_Customers`).
-   - Click **Source options** > **New dataset**.
-     - Select a source type (e.g., **Azure Blob Storage**, **SQL Server**, etc.).
-     - Configure the dataset by pointing to a data file or table (e.g., `customers.csv` or `Customers` table).
+   - In the data flow canvas, click **Add Source**
+   - Name the source (e.g., `saleslt_customer`)
+   - Click **Source options** > **New dataset**
+     - Select **Azure SQL Database** as the source type
+     - Configure the dataset
+       - Choose an **Azure SQL Database linked service** (or create a new one)
+         - Specify the server name, database name (e.g., `AdventureWorks`), and authentication credentials
+       - Select table `SalesLT.Customer`
 
-3. **Inspect Source Schema**:
-   - Click the **Data Preview** tab.
-   - Enable **Data Flow Debug** (toggle at the top of the interface).
-   - Click **Refresh** to load a sample of data for preview.
+3. **Inspect Source Schema**
+   - Click the **Data Preview** tab
+   - Click **Refresh** to load a sample of the data from the **Customer** table
 
 4. **Add a Transformation Activity**:
-   - Drag and drop a transformation activity (e.g., **Filter**, **Derived Column**, or **Aggregate**) onto the canvas.
-   - Connect the source to the transformation.
-   - Configure the transformation:
-     - **Filter**: Add a condition (e.g., `Country == 'US'`).
-     - **Derived Column**: Add a new column (e.g., `FullName = FirstName + ' ' + LastName`).
+   - Click + in the bottom right of the Source
+   - Search and select **Filter** transformation
+   - Configure the transformation: Add a filter condition (e.g., `startsWith(upper(LastName), 'A')`)
 
 5. **Add a Sink Dataset**:
-   - Drag and drop a **Sink** activity onto the canvas.
-   - Connect the transformation to the sink.
-   - Name the sink (e.g., `Sink_ValidCustomers`).
-   - Click **Sink options** > **New dataset**.
-     - Select a destination type (e.g., **Azure SQL Database**, **Azure Blob Storage**, etc.).
-     - Configure the dataset by specifying the destination (e.g., a `ValidCustomers` table or `valid_customers.csv` file).
+   - Drag and drop a **Sink** activity onto the canvas
+   - Connect the transformation to the sink
+   - Name the sink (e.g., `Sink_ValidUSCustomers`)
+   - Click **Sink options** > **New dataset**
+     - Select **Azure SQL Database** as the destination type
+     - Configure the dataset
+       - Choose the same **Azure SQL Database linked service** as the source
+       - Create a new table (e.g., `ValidUSCustomers`)
+       - Ensure the table schema matches the output from the transformation
 
 ---
 
@@ -95,12 +99,12 @@
 ##### Step 3: Test Data Transformations
 
 1. **Use Data Preview**:
-   - Open the **Data Preview** tab for each activity.
+   - Open the **Data Preview** tab for each activity (source, transformation, and sink).
    - Click **Refresh** to load a sample of data at each step.
    - Verify:
-     - Source data is loaded correctly.
-     - Transformations produce the expected results.
-     - Sink configurations align with the target dataset/table.
+     - Source data from the **Customer** table is loaded correctly.
+     - The filter transformation produces only customers from the United States.
+     - The sink configuration aligns with the target table **ValidUSCustomers**.
 
 ---
 
@@ -115,7 +119,7 @@
    - Examine detailed execution logs, including:
      - Row counts at each step.
      - Errors encountered during transformations or data writing.
-     - Connectivity issues.
+     - Connectivity issues with the Azure SQL Database.
 
 ---
 
@@ -124,14 +128,12 @@
 1. **Monitor Common Error Sources**:
    - **Schema Mismatch**:
      - Ensure the source and sink schemas align.
-     - If column mismatches occur, use a **Select** transformation to map columns explicitly.
+     - Use a **Select** transformation to explicitly map columns if necessary.
    - **Data Type Issues**:
-     - Check for incompatible data types between source and transformations.
-     - Use **Data Preview** to confirm column types.
+     - Check for incompatible data types between the **Customer** table and the sink.
      - Use a **Derived Column** or **Cast** transformation to adjust types as needed.
    - **Connectivity Issues**:
-     - Ensure proper credentials and network configurations are set for source and sink datasets.
-     - Verify the linked service associated with the dataset.
+     - Ensure proper credentials, firewall settings, and network configurations are correct for the Azure SQL Database.
 
 2. **Examine Detailed Logs**:
    - Open the **Monitor** tab in Azure Data Factory.
@@ -147,8 +149,8 @@
 
 1. **Adjust Configurations**:
    - Based on error analysis, refine:
-     - Transformation logic.
-     - Dataset schemas.
+     - Transformation logic (e.g., filter conditions).
+     - Dataset schemas (e.g., adding or renaming columns).
      - Source or sink configurations.
 
 2. **Re-run the Debug Session**:
@@ -163,7 +165,7 @@
    - This minimizes performance impacts.
 
 2. **Test with Real Data**:
-   - Run the data flow with production-scale datasets.
+   - Run the data flow with the full dataset in the **Customer** table.
    - Use the **Monitor** tab to track performance metrics (e.g., execution time, resource utilization).
 
 ---
@@ -171,7 +173,7 @@
 ##### Step 8: Explore Additional Error Detection Methods
 
 1. **Use Alert Rules**:
-   - Set up alerts to notify when a data flow fails.
+   - Set up alerts to notify when the data flow fails.
    - Navigate to **Monitor** > **Alerts & Metrics** to create alert rules.
 
 2. **Enable Diagnostic Settings**:
@@ -181,109 +183,7 @@
      - **Event Hubs** for streaming to third-party tools.
 
 3. **Query Logs in Log Analytics**:
-   - Use KQL to find specific errors in the **AzureDiagnostics** table.
-     ```kql
-     AzureDiagnostics
-     | where ResourceProvider == "MICROSOFT.DATAFACTORY"
-     | where Category == "DataFlowActivityRuns"
-     | where Status == "Failed"
-     | order by TimeGenerated desc
-     ```
-
----
-
-## **Step 3: Test Data Transformations**
-
-### Use Data Preview:
-1. Open the **Data Preview** tab for each activity.
-2. Click **Refresh** to load a sample of data at each step.
-3. Verify:
-   - Source data is loaded correctly.
-   - Transformations produce the expected results.
-   - Sink configurations align with the target dataset/table.
-
----
-
-## **Step 4: Execute and Debug the Data Flow**
-
-1. **Run the Data Flow in Debug Mode**:
-   - Click **Debug** to run the pipeline interactively (instead of using **Trigger Now**).
-   - Monitor the execution in real-time via the **Output** pane.
-
-2. **Review Debug Results**:
-   - Expand each activity in the debug results.
-   - Examine detailed execution logs, including:
-     - Row counts at each step.
-     - Errors encountered during transformations or data writing.
-     - Connectivity issues.
-
----
-
-## **Step 5: Analyze Errors in Data Flow Activities**
-
-### Monitor Common Error Sources:
-1. **Schema Mismatch**:
-   - Ensure the source and sink schemas align.
-   - If column mismatches occur, use a **Select** transformation to map columns explicitly.
-
-2. **Data Type Issues**:
-   - Check for incompatible data types between source and transformations.
-   - Use **Data Preview** to confirm column types.
-   - Use a **Derived Column** or **Cast** transformation to adjust types as needed.
-
-3. **Connectivity Issues**:
-   - Ensure proper credentials and network configurations are set for source and sink datasets.
-   - Verify the linked service associated with the dataset.
-
-### Examine Detailed Logs:
-   - Open the **Monitor** tab in Azure Data Factory.
-   - Navigate to **Pipeline Runs** > **Data Flow Debug Runs**.
-   - Click on the specific activity to view:
-     - Error messages.
-     - Stack traces.
-     - Detailed execution steps.
-
----
-
-## **Step 6: Iterate and Refine**
-
-1. **Adjust Configurations**:
-   - Based on error analysis, refine:
-     - Transformation logic.
-     - Dataset schemas.
-     - Source or sink configurations.
-
-2. **Re-run the Debug Session**:
-   - Execute the pipeline again to validate the changes.
-
----
-
-## **Step 7: Optimize for Performance**
-
-1. **Reduce Logging Overhead**:
-   - After debugging, set the **Logging Level** to **Basic** or **None** for production runs.
-   - This minimizes performance impacts.
-
-2. **Test with Real Data**:
-   - Run the data flow with production-scale datasets.
-   - Use the **Monitor** tab to track performance metrics (e.g., execution time, resource utilization).
-
----
-
-## **Step 8: Explore Additional Error Detection Methods**
-
-1. **Use Alert Rules**:
-   - Set up alerts to notify when a data flow fails.
-   - Navigate to **Monitor** > **Alerts & Metrics** to create alert rules.
-
-2. **Enable Diagnostic Settings**:
-   - Configure diagnostic logs to send detailed activity and pipeline logs to:
-     - **Log Analytics** for querying and monitoring.
-     - **Azure Blob Storage** for long-term archival.
-     - **Event Hubs** for streaming to third-party tools.
-
-3. **Query Logs in Log Analytics**:
-   - Use KQL to find specific errors in the **AzureDiagnostics** table.
+   - Use KQL to find specific errors in the **AzureDiagnostics** table:
      ```kql
      AzureDiagnostics
      | where ResourceProvider == "MICROSOFT.DATAFACTORY"
