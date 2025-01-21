@@ -2,30 +2,9 @@
 
 ## Studio
 
-### Monitor
+### Author
 
-#### Runs >> "Pipeline runs" and "Trigger runs"
-
-* Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs
-* Review filter settings {e.g., date, name, status, etc.}
-* Click into a specific log entry and review
-* Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
-
-#### Notifications >> "Alerts & metrics"
-Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
-
- * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
- * Click "New alert rule" and complete the resulting pop-out form, including:
-
-   Label | Value
-   :----- | :-----
-   Severity | Sev0 = most severe... Sev5 = least severe
-   Add criteria | Select and configure the desired Metric on the resulting pop-out<br><sub>Metric descriptions included in Appendix</sub>
-   Configure Notification | Define "action group" {i.e., notification action and recipient
-
----
-
-### Author >> Pipelines
+#### Pipelines
 
 1. **Open Azure Data Factory Studio**:
    - Launch Azure Data Factory Studio.
@@ -58,11 +37,9 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    - Trigger the pipeline to test its execution.
    - Verify that if the primary activity fails, the **onFail** feature triggers the Stored Procedure activity, logging failure details to your SQL Server table.
 
-Let me know if this format works for you or if you'd like further refinements!
-
 ---
 
-### Author >> Data Flows
+#### Data Flows
 
 1. **Enable Data Flow Debug Mode**:
    - Open Azure Data Factory Studio and navigate to the **Author** tab.
@@ -103,6 +80,29 @@ Let me know if this format works for you or if you'd like further refinements!
 7. **Optimize for Performance**:
    - After debugging, disable the **Verbose** logging level to reduce runtime overhead.
    - Test with real production datasets to validate scalability and performance.
+
+---
+
+### Monitor
+
+#### Runs >> "Pipeline runs" and "Trigger runs"
+
+* Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs
+* Review filter settings {e.g., date, name, status, etc.}
+* Click into a specific log entry and review
+* Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
+
+#### Notifications >> "Alerts & metrics"
+Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
+
+ * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
+ * Click "New alert rule" and complete the resulting pop-out form, including:
+
+   Label | Value
+   :----- | :-----
+   Severity | Sev0 = most severe... Sev5 = least severe
+   Add criteria | Select and configure the desired Metric on the resulting pop-out<br><sub>Metric descriptions included in Appendix</sub>
+   Configure Notification | Define "action group" {i.e., notification action and recipient
 
 ---
 
