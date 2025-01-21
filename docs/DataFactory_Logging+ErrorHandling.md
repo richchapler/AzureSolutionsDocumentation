@@ -70,15 +70,17 @@
      - Select **Azure SQL Database** as the destination type
      - Configure the dataset
        - Choose the same **Azure SQL Database linked service** as the source
-       - Create a new table (e.g., `FilteredCustomers`)
+       - Copy the existing `Address` table with:
+         ```sql
+         SELECT * INTO [SalesLT].[Address2] FROM [SalesLT].[Address] WHERE 1 = 0 /* only schema */
+         ALTER TABLE [SalesLT].[Address2] DROP COLUMN AddressID; /* identity column */
+         ```
        - Ensure the table schema matches the output from the transformation
 
 6. **Add Data Flow to a Pipeline**
    - Navigate to **Author** > **+** > **Pipeline**
    - Drag and drop the **Data Flow** activity into the pipeline canvas
-   - Configure the data flow activity:
-     - Select the created data flow (e.g., `dataflow1`)
-     - Settings >> Logging Level: confirm "Verbose"
+   - Configure the data flow activity: Select the created data flow (e.g., `dataflow1`)
 
 #### Step 2: Configure Debugging and Logging
 
@@ -97,17 +99,17 @@
    - Open the **Data Preview** tab for each activity (source, transformation, and sink)
    - Click **Refresh** to load a sample of data at each step
    - Verify:
-     - Source data from the **Customer** table is loaded correctly
-     - The filter transformation produces only customers whose last name starts with `A`
-     - The sink configuration aligns with the target table **FilteredCustomers**
+     - Source data from the **Address** table is loaded correctly
+     - The filter transformation produces only Arizona addresses
+     - The sink configuration aligns with the target table `Address2`
 
 #### Step 4: Execute and Debug the Data Flow
 
-1. **Run the Data Flow in Debug Mode**:
+1. **Run the Data Flow in Debug Mode**
    - Click **Debug** to run the pipeline interactively (instead of using **Trigger Now**)
    - Monitor the execution in real-time via the **Output** pane
 
-2. **Review Debug Results**:
+2. **Review Debug Results**
    - Expand each activity in the debug results
    - Examine detailed execution logs, including:
      - Row counts at each step
@@ -116,7 +118,7 @@
 
 #### Step 5: Analyze Errors in Data Flow Activities
 
-1. **Monitor Common Error Sources**:
+1. **Monitor Common Error Sources**
    - **Schema Mismatch**:
      - Ensure the source and sink schemas align
      - Use a **Select** transformation to explicitly map columns if necessary
