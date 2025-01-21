@@ -1,15 +1,20 @@
 # Data Factory: Logging + Error Handling
 
-## Studio
+## Studio >> Monitor
 
-### Monitor >> Runs >> "Pipeline runs" and "Trigger runs"
+This section discusses Studio-level monitoring and configuration:  
+1. Reviewing pipeline runs
+2. Setting up notifications 
+3. Creating alerts for effective workflow management
+
+### Runs >> "Pipeline runs" and "Trigger runs"
 
 * Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs
 * Review filter settings {e.g., date, name, status, etc.}
 * Click into a specific log entry and review
 * Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
 
-### Monitor >> Notifications >> "Alerts & metrics"
+### Notifications >> "Alerts & metrics"
 Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
 
  * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
@@ -33,7 +38,7 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    Logs | Select and configure the desired Log Categories<br><sub>Category descriptions included in Appendix</sub>
    Destination Details | Select and configure the desired Log Categories<br><sub>Destination descriptions included in Appendix</sub><br><sub>Note that destination selection expands the interface and necessitates additional entries</sub>
 
-### Destination: Log Analytics
+#### Destination: Log Analytics
 
 Selection of "Send to Log Analytics workspace" necessitates selection of "Destination table":
    
@@ -42,9 +47,9 @@ Selection of "Send to Log Analytics workspace" necessitates selection of "Destin
 
 Be sure to click "Save".
 
-## Portal >> Monitoring >> Logs
+### Monitoring >> Logs
 
-### Sample #1: `AzureDiagnostics`
+#### Sample #1: `AzureDiagnostics`
 
 * Navigate to Azure Data Factory >> Monitoring >> Logs
 * Close the "Welcome to Log Analytics" and "Queries hub" popups  
@@ -56,7 +61,7 @@ Be sure to click "Save".
    
 * Click "Run" to execute the query.  
 
-### Sample #2: `PipelineRuns`
+#### Sample #2: `PipelineRuns`
 
 * Repeat with the following KQL:
 
@@ -67,7 +72,7 @@ Be sure to click "Save".
    | order by TimeGenerated desc       
    ```
 
-## Portal >> Monitoring >> Alerts
+### Monitoring >> Alerts
 
 * Navigate to Azure Data Factory >> Monitoring >> Alerts
 * Click "Create" and select "Alert rule" from the resulting dropdown
@@ -79,33 +84,42 @@ Be sure to click "Save".
 
 * Review additional tabs {e.g., Scope, Actions, Details, Tags}, then "Review + create"
 
-## Custom Logging: Pipeline / Activity failures and error handling
+## Custom Logging
 
-Create a New Pipeline:
+### Creating a New Pipeline with Error Handling in Azure Data Factory
 
-Open Azure Data Factory Studio.
-Click on the "Author" tab and then click on the "+" button to create a new pipeline.
-Add Activities to the Pipeline:
+1. **Open Azure Data Factory Studio:**
+   - Launch Azure Data Factory Studio.
+   - Navigate to the **Author** tab.
+   - Click the **+** button and select **Pipeline** to create a new pipeline.
 
-Drag and drop the activities you want to include in your pipeline from the Activities pane to the pipeline canvas. For example, you might have a Copy Data activity that copies data from one source to another.
-Configure the "onFail" Feature:
+2. **Add Activities to the Pipeline:**
+   - Drag and drop the required activities from the **Activities pane** onto the pipeline canvas.
+   - Example: Add a **Copy Data activity** to copy data from one source to another.
 
-Click on the activity for which you want to configure the "onFail" feature.
-In the "Activities" pane, click on the "Add activity" button under the "onFail" section.
-Select the activity you want to execute when the primary activity fails. For example, you can use a Stored Procedure activity to log the failure information to a SQL Server table.
-Set Up the Stored Procedure Activity:
+3. **Configure the "onFail" Feature:**
+   - Select the activity you want to monitor for failures.
+   - In the **Activities pane**, locate the **onFail** section and click **Add activity**.
+   - Choose the activity to execute if the primary activity fails. For example, add a **Stored Procedure activity** to log failure details.
 
-Drag and drop a Stored Procedure activity onto the pipeline canvas.
-Configure the Stored Procedure activity to connect to your SQL Server database.
-Specify the stored procedure that will log the failure information. The stored procedure should have parameters to accept the necessary log information, such as the error message, activity name, and timestamp.
-Link the Activities:
+4. **Set Up the Stored Procedure Activity:**
+   - Drag and drop a **Stored Procedure activity** onto the pipeline canvas.
+   - Configure the activity to connect to your SQL Server database.
+   - Specify the stored procedure to log failure details. Ensure the stored procedure accepts parameters for:
+     - **Error message**: A description of the failure.
+     - **Activity name**: The name of the activity that failed.
+     - **Timestamp**: When the failure occurred.
 
-Link the primary activity to the Stored Procedure activity using the "onFail" dependency.
-Ensure that the pipeline is configured to execute the Stored Procedure activity only when the primary activity fails.
-Publish and Test the Pipeline:
+5. **Link Activities Using "onFail":**
+   - Link the primary activity to the Stored Procedure activity by creating an **onFail dependency**.
+   - Verify that the Stored Procedure activity executes only when the primary activity fails.
 
-Click on the "Publish" button to save and publish your pipeline.
-Trigger the pipeline to test its execution. If the primary activity fails, the "onFail" feature should execute the Stored Procedure activity and log the failure information to the SQL Server table.
+6. **Publish and Test the Pipeline:**
+   - Click **Publish** to save and publish your pipeline.
+   - Trigger the pipeline to test its execution.
+   - Confirm that if the primary activity fails, the **onFail** feature triggers the Stored Procedure activity to log the failure details in your SQL Server table.
+
+---
 
 ## Appendix
 
