@@ -68,29 +68,28 @@ Navigate to the "Projection" tab and click "Import projection" to import schema.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/892d51b7-3ad5-470a-9f04-68e4df88f943" width="800" title="Snipped January 21, 2025" />
 
-
-
-
-
-
 Navigate to the "Data preview" tab and click "Refresh" to see source data.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/49575d15-8760-4649-a9df-ffda4dd774de" width="800" title="Snipped January 21, 2025" />
 
-Note that the interface may not gracefully flex to a source with many columns (even showing columns with a single letter or nothing at all).
-
-
-
+_Note: The interface may not gracefully flex to a source with many columns (even showing columns with a single letter or nothing at all)_
 
 ##### Add Transformation
 
-Click the "+" icon in the bottom right of the Source arrow.
+Click the "+" icon in the bottom right of the Source arrow and on the resulting dropdown, search for and select "Filter"
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/da2d10de-f631-4c08-8642-0cce2a49b9f7" width="800" title="Snipped January 21, 2025" />
 
-On the resulting dropdown, search for and select "Filter"
+On the "Filter settings" tab, enter "Filter on" expression `StateProvince == 'Arizona'`
 
-   - Configure the transformation: Add a filter condition `StateProvince == 'Arizona'`
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/2bfd255b-9681-4597-987f-406d383e5667" width="800" title="Snipped January 21, 2025" />
+
+Navigate to the "Data preview" tab and click "Refresh" to see source data.
+
+
+
+
+
 
 5. **Add a Sink Dataset**  
    - Click + in the bottom right of the Filter  
