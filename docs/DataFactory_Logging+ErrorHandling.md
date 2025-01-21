@@ -39,7 +39,7 @@
 
 ### Data Flows
 
-#### Step 1: Stage
+#### Step 1: Prepare Example
 
 1. **Open Azure Data Factory Studio**  
    - Navigate to **Author** > **+** > **Data Flow**  
