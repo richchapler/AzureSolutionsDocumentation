@@ -23,7 +23,9 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    Add criteria | Select and configure the desired Metric on the resulting pop-out<br><sub>Metric descriptions included in Appendix</sub>
    Configure Notification | Define "action group" {i.e., notification action and recipient
 
-### Pipeline
+---
+
+### Author >> Pipelines
 
 1. **Open Azure Data Factory Studio**:
    - Launch Azure Data Factory Studio.
@@ -58,7 +60,9 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
 
 Let me know if this format works for you or if you'd like further refinements!
 
-### Data Flow
+---
+
+### Author >> Data Flows
 
 1. **Enable Data Flow Debug Mode**:
    - Open Azure Data Factory Studio and navigate to the **Author** tab.
@@ -122,6 +126,8 @@ Selection of "Send to Log Analytics workspace" necessitates selection of "Destin
    * **Resource Specific** - When you choose "Resource Specific", your **logs are sent to a table that corresponds to the resource type**. For example, if you're working with a Storage Account, your logs might be sent to a table like StorageAccountLogs. These tables are designed to best fit the schema of the log data of the specific resource type, and complex properties are represented as distinct fields, which can make queries more intuitive and the data easier to work with. However, if you want to correlate events across different resource types, you would need to query multiple tables.  
 
 Be sure to click "Save".
+
+---
 
 ### Monitoring >> Logs
 
