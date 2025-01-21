@@ -48,7 +48,7 @@
 
 #### Step 1: Prepare Example
 
-Navigate to Data Factory Studio >> Author. Add a new Data Flow.
+Navigate to Data Factory Studio >> Author and add a new Data Flow.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/b9b25a94-93a1-42eb-9643-debdefa471da" width="800" title="Snipped January 21, 2025" />
 
