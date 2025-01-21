@@ -52,3 +52,9 @@ Use Case | Source | Surface | Method
 :----- | :----- | :----- | :-----
 [Purview Asset Inventory](Data_Governance_PurviewAssetInventory.md) | Purview | Blob Storage | Logic Apps + API
 [Purview >> Alation Bridge](Data_Governance_PurviewAlationBridge.md) | Purview | Alation | Logic Apps + API
+
+## Manage
+
+Use Case | Source | Surface | Method
+:----- | :----- | :----- | :-----
+[Data Factory: Debugging](DataFactory_Debugging.md) | non-specific | non-specific | Data Factory, Log Analytics
