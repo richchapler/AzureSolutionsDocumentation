@@ -54,8 +54,9 @@ Navigate to Data Factory Studio >> Author and add a new Data Flow.
 
 Toggle "Data flow debug" and in the resulting pop-out, set "Debug time to live" to four hours.
 
-2. **Add Source Dataset**  
-   - In the data flow canvas, click **Add Source**  
+##### Add Source Dataset
+
+Click "Add Source".  
    - Click **Source options** > **New dataset**  
      - Select **Azure SQL Database** as the source type  
      - Configure the dataset:  
