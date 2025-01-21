@@ -86,10 +86,13 @@ On the "Filter settings" tab, enter "Filter on" expression `StateProvince == 'Ar
 
 Navigate to the "Data preview" tab and click "Refresh" to see source data.
 
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/d1e876e8-0580-42d5-9e38-deba4043ecc9" width="800" title="Snipped January 21, 2025" />
 
+_Note: The "INSERT" value has dropped to 13_
 
+##### Add Sink
 
-
+LOREM IPSUM
 
 5. **Add a Sink Dataset**  
    - Click + in the bottom right of the Filter  
