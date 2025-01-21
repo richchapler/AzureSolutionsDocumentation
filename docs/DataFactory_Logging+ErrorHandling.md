@@ -108,7 +108,9 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
 
 ## Portal
 
-### Monitoring >> Diagnostic Settings
+### Monitoring
+
+#### Diagnostic Settings
 
 * Navigate to Azure Data Factory >> Monitoring >> Diagnostic Settings
 * Click "+ Add diagnostic setting" and complete the resulting screen, including:
@@ -118,7 +120,7 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    Logs | Select and configure the desired Log Categories<br><sub>Category descriptions included in Appendix</sub>
    Destination Details | Select and configure the desired Log Categories<br><sub>Destination descriptions included in Appendix</sub><br><sub>Note that destination selection expands the interface and necessitates additional entries</sub>
 
-#### Destination: Log Analytics
+##### Destination: Log Analytics
 
 Selection of "Send to Log Analytics workspace" necessitates selection of "Destination table":
    
@@ -129,9 +131,9 @@ Be sure to click "Save".
 
 ---
 
-### Monitoring >> Logs
+#### Logs
 
-#### Sample #1: `AzureDiagnostics`
+##### Sample #1: `AzureDiagnostics`
 
 * Navigate to Azure Data Factory >> Monitoring >> Logs
 * Close the "Welcome to Log Analytics" and "Queries hub" popups  
@@ -143,7 +145,7 @@ Be sure to click "Save".
    
 * Click "Run" to execute the query.  
 
-#### Sample #2: `PipelineRuns`
+##### Sample #2: `PipelineRuns`
 
 * Repeat with the following KQL:
 
@@ -154,7 +156,7 @@ Be sure to click "Save".
    | order by TimeGenerated desc       
    ```
 
-### Monitoring >> Alerts
+#### Alerts
 
 * Navigate to Azure Data Factory >> Monitoring >> Alerts
 * Click "Create" and select "Alert rule" from the resulting dropdown
@@ -170,7 +172,7 @@ Be sure to click "Save".
 
 ## Appendix
 
-### Azure Data Factory >> Alert Metrics
+### Alert Metrics
 
 | Metric | Description |  
 | --- | --- |  
@@ -269,7 +271,7 @@ Be sure to click "Save".
 | Total entities count | Total number of entities. |  
 | Total factory size (GB unit) | Total size of the factory in GB. |  
 
-### Azure Data Factory >> Diagnostic Setting >> Log Categories
+### Diagnostic Setting >> Log Categories
 
 | Category | Description |  
 | --- | --- |  
@@ -291,7 +293,7 @@ Be sure to click "Save".
 | Airflow scheduler logs | This log records information about the operation of the Apache Airflow scheduler. |  
 | Airflow web logs | This log captures information about the operation of the Apache Airflow web interface. | 
 
-### Azure Data Factory >> Diagnostic Setting >> Destinations
+### Diagnostic Setting >> Destinations
 
 | Destination | Description |  
 | --- | --- |  
@@ -300,7 +302,7 @@ Be sure to click "Save".
 | Stream to an event hub | This option allows you to stream the logs to an event hub. Event Hubs is a real-time data ingestion service that is capable of receiving and processing millions of events per second. You can use this option to integrate your logs with third-party services or custom analytics systems. |  
 | Send to partner solution | This option allows you to send the logs to a partner solution. Azure has a number of partner solutions that provide advanced analytics and visualization capabilities. This option requires you to have a subscription with the partner solution. |  
 
-### Azure Data Factory >> Alert Rules >> Signals
+### Alert Rules >> Signals
 
 | Signal Name | Signal Type | Description |  
 | --- | --- | --- |  
