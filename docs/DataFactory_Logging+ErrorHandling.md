@@ -1,20 +1,17 @@
 # Data Factory: Logging + Error Handling
 
-## Studio >> Monitor
+## Studio
 
-This section discusses Studio-level monitoring and configuration:  
-1. Reviewing pipeline runs
-2. Setting up notifications 
-3. Creating alerts for effective workflow management
+### Monitor
 
-### Runs >> "Pipeline runs" and "Trigger runs"
+#### Runs >> "Pipeline runs" and "Trigger runs"
 
 * Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs
 * Review filter settings {e.g., date, name, status, etc.}
 * Click into a specific log entry and review
 * Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
 
-### Notifications >> "Alerts & metrics"
+#### Notifications >> "Alerts & metrics"
 Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
 
  * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
@@ -25,6 +22,85 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    Severity | Sev0 = most severe... Sev5 = least severe
    Add criteria | Select and configure the desired Metric on the resulting pop-out<br><sub>Metric descriptions included in Appendix</sub>
    Configure Notification | Define "action group" {i.e., notification action and recipient
+
+### Pipeline
+
+1. **Open Azure Data Factory Studio**:
+   - Launch Azure Data Factory Studio.
+   - Navigate to the **Author** tab.
+   - Click the **+** button and select **Pipeline** to create a new pipeline.
+
+2. **Add Activities to the Pipeline**:
+   - Drag and drop the required activities from the **Activities pane** onto the pipeline canvas.
+   - Example: Add a **Copy Data activity** to copy data from one source to another.
+
+3. **Configure the "onFail" Feature**:
+   - Select the activity you want to monitor for failures.
+   - In the **Activities pane**, locate the **onFail** section and click **Add activity**.
+   - Choose the activity to execute if the primary activity fails, such as a **Stored Procedure activity** to log failure details.
+
+4. **Set Up the Stored Procedure Activity**:
+   - Drag and drop a **Stored Procedure activity** onto the pipeline canvas.
+   - Configure the activity to connect to your SQL Server database.
+   - Specify the stored procedure to log failure details, ensuring it accepts parameters for:
+     - **Error message**: A description of the failure.
+     - **Activity name**: The name of the failed activity.
+     - **Timestamp**: The time the failure occurred.
+
+5. **Link Activities Using "onFail"**:
+   - Link the primary activity to the Stored Procedure activity using an **onFail dependency**.
+   - Ensure the Stored Procedure activity only executes when the primary activity fails.
+
+6. **Publish and Test the Pipeline**:
+   - Click **Publish** to save and publish your pipeline.
+   - Trigger the pipeline to test its execution.
+   - Verify that if the primary activity fails, the **onFail** feature triggers the Stored Procedure activity, logging failure details to your SQL Server table.
+
+Let me know if this format works for you or if you'd like further refinements!
+
+### Data Flow
+
+1. **Enable Data Flow Debug Mode**:
+   - Open Azure Data Factory Studio and navigate to the **Author** tab.
+   - Select the pipeline containing the data flow you want to debug.
+   - Enable the **Data Flow Debug** toggle at the top of the interface.  
+     > This starts a debug session, allowing you to inspect and test data transformations interactively.
+
+2. **Set the Logging Level for Debugging**:
+   - Open the **Settings** tab of your Data Flow activity.
+   - Locate the **Logging Level** setting and select the appropriate level:
+     - **None**: No logs are collected (default setting, minimal impact on performance).
+     - **Basic**: Captures high-level details like the start and end of data flow runs.
+     - **Verbose**: Provides detailed logs, including transformation steps and data lineage.
+
+   > For detailed troubleshooting, use **Verbose** logging, but note that it may impact performance.
+
+3. **Test Data Transformations**:
+   - Use the **Data Preview** tab in the data flow canvas to inspect transformations at each step.
+   - Click **Refresh** to load sample data from the connected source into the preview window.
+   - Check for anomalies or unexpected transformations by reviewing the output of each step.
+
+4. **Review Debug Run Results**:
+   - Execute the pipeline with debugging enabled by clicking **Debug** instead of **Trigger Now**.
+   - Monitor the progress in the **Output** pane to view real-time execution details.
+   - Examine the logs generated during execution based on the selected logging level.
+
+5. **Analyze Errors in Data Flow Activities**:
+   - If errors occur, expand the **Activity details** in the **Monitor** tab for the debug run.
+   - Review the error messages and stack traces to pinpoint issues, such as:
+     - Incorrect transformations.
+     - Data type mismatches.
+     - Connectivity issues with data sources or sinks.
+
+6. **Iterate and Refine**:
+   - Based on debug logs and error analysis, refine your data flow configurations.
+   - Re-run the debug session to verify that changes resolve the issues.
+
+7. **Optimize for Performance**:
+   - After debugging, disable the **Verbose** logging level to reduce runtime overhead.
+   - Test with real production datasets to validate scalability and performance.
+
+---
 
 ## Portal
 
@@ -83,41 +159,6 @@ Be sure to click "Save".
    Signal name | Select and configure the desired Signal<br><sub>Signal descriptions included in Appendix</sub>
 
 * Review additional tabs {e.g., Scope, Actions, Details, Tags}, then "Review + create"
-
-## Custom Logging
-
-### Creating a New Pipeline with Error Handling in Azure Data Factory
-
-1. **Open Azure Data Factory Studio:**
-   - Launch Azure Data Factory Studio.
-   - Navigate to the **Author** tab.
-   - Click the **+** button and select **Pipeline** to create a new pipeline.
-
-2. **Add Activities to the Pipeline:**
-   - Drag and drop the required activities from the **Activities pane** onto the pipeline canvas.
-   - Example: Add a **Copy Data activity** to copy data from one source to another.
-
-3. **Configure the "onFail" Feature:**
-   - Select the activity you want to monitor for failures.
-   - In the **Activities pane**, locate the **onFail** section and click **Add activity**.
-   - Choose the activity to execute if the primary activity fails. For example, add a **Stored Procedure activity** to log failure details.
-
-4. **Set Up the Stored Procedure Activity:**
-   - Drag and drop a **Stored Procedure activity** onto the pipeline canvas.
-   - Configure the activity to connect to your SQL Server database.
-   - Specify the stored procedure to log failure details. Ensure the stored procedure accepts parameters for:
-     - **Error message**: A description of the failure.
-     - **Activity name**: The name of the activity that failed.
-     - **Timestamp**: When the failure occurred.
-
-5. **Link Activities Using "onFail":**
-   - Link the primary activity to the Stored Procedure activity by creating an **onFail dependency**.
-   - Verify that the Stored Procedure activity executes only when the primary activity fails.
-
-6. **Publish and Test the Pipeline:**
-   - Click **Publish** to save and publish your pipeline.
-   - Trigger the pipeline to test its execution.
-   - Confirm that if the primary activity fails, the **onFail** feature triggers the Stored Procedure activity to log the failure details in your SQL Server table.
 
 ---
 
