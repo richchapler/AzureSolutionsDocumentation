@@ -1,8 +1,13 @@
 # Data Factory: Debugging
 
-This documentation speaks to the various methods of debugging Azure Data Factory.
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/ead90204-81af-4428-a47c-803cae65a214" width="1000" />
+
+## Use Case
+* "We need to understand all of the ways that we can debug our Data Factory pipelines, data flows, etc."
 
 ## Studio
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/56315a73-0864-4319-a568-63bc84a01b40" width="800" title="Snipped January 21, 2025" />
 
 ### Pipelines
 
