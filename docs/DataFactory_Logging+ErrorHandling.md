@@ -41,45 +41,256 @@
 
 #### Data Flows
 
-1. **Enable Data Flow Debug Mode**:
-   - Open Azure Data Factory Studio and navigate to the **Author** tab.
-   - Select the pipeline containing the data flow you want to debug.
-   - Enable the **Data Flow Debug** toggle at the top of the interface.  
-     > This starts a debug session, allowing you to inspect and test data transformations interactively.
+##### Step 1: Create a New Data Flow
 
-2. **Set the Logging Level for Debugging**:
-   - Open the **Settings** tab of your Data Flow activity.
-   - Locate the **Logging Level** setting and select the appropriate level:
-     - **None**: No logs are collected (default setting, minimal impact on performance).
-     - **Basic**: Captures high-level details like the start and end of data flow runs.
-     - **Verbose**: Provides detailed logs, including transformation steps and data lineage.
+1. **Open Azure Data Factory Studio**:
+   - Navigate to **Author** > **+** > **Data Flow**.
 
-   > For detailed troubleshooting, use **Verbose** logging, but note that it may impact performance.
+2. **Add Source Dataset**:
+   - In the data flow canvas, click **Add Source**.
+   - Name the source (e.g., `Source_Customers`).
+   - Click **Source options** > **New dataset**.
+     - Select a source type (e.g., **Azure Blob Storage**, **SQL Server**, etc.).
+     - Configure the dataset by pointing to a data file or table (e.g., `customers.csv` or `Customers` table).
 
-3. **Test Data Transformations**:
-   - Use the **Data Preview** tab in the data flow canvas to inspect transformations at each step.
-   - Click **Refresh** to load sample data from the connected source into the preview window.
-   - Check for anomalies or unexpected transformations by reviewing the output of each step.
+3. **Inspect Source Schema**:
+   - Click the **Data Preview** tab.
+   - Enable **Data Flow Debug** (toggle at the top of the interface).
+   - Click **Refresh** to load a sample of data for preview.
 
-4. **Review Debug Run Results**:
-   - Execute the pipeline with debugging enabled by clicking **Debug** instead of **Trigger Now**.
-   - Monitor the progress in the **Output** pane to view real-time execution details.
-   - Examine the logs generated during execution based on the selected logging level.
+4. **Add a Transformation Activity**:
+   - Drag and drop a transformation activity (e.g., **Filter**, **Derived Column**, or **Aggregate**) onto the canvas.
+   - Connect the source to the transformation.
+   - Configure the transformation:
+     - **Filter**: Add a condition (e.g., `Country == 'US'`).
+     - **Derived Column**: Add a new column (e.g., `FullName = FirstName + ' ' + LastName`).
 
-5. **Analyze Errors in Data Flow Activities**:
-   - If errors occur, expand the **Activity details** in the **Monitor** tab for the debug run.
-   - Review the error messages and stack traces to pinpoint issues, such as:
-     - Incorrect transformations.
-     - Data type mismatches.
-     - Connectivity issues with data sources or sinks.
+5. **Add a Sink Dataset**:
+   - Drag and drop a **Sink** activity onto the canvas.
+   - Connect the transformation to the sink.
+   - Name the sink (e.g., `Sink_ValidCustomers`).
+   - Click **Sink options** > **New dataset**.
+     - Select a destination type (e.g., **Azure SQL Database**, **Azure Blob Storage**, etc.).
+     - Configure the dataset by specifying the destination (e.g., a `ValidCustomers` table or `valid_customers.csv` file).
 
-6. **Iterate and Refine**:
-   - Based on debug logs and error analysis, refine your data flow configurations.
-   - Re-run the debug session to verify that changes resolve the issues.
+---
 
-7. **Optimize for Performance**:
-   - After debugging, disable the **Verbose** logging level to reduce runtime overhead.
-   - Test with real production datasets to validate scalability and performance.
+##### Step 2: Configure Debugging and Logging
+
+1. **Enable Debug Mode**:
+   - Ensure **Data Flow Debug** is enabled.
+   - This will allow interactive debugging and sampling of data.
+
+2. **Set the Logging Level**:
+   - Open the **Settings** tab of the data flow activity.
+   - Under **Monitoring**:
+     - Set **Logging Level** to:
+       - **None**: No logs collected (default).
+       - **Basic**: Captures high-level details (start, end, and general activity).
+       - **Verbose**: Captures detailed logs, including transformation steps and data lineage.
+   - For this exercise, set the level to **Verbose** to capture maximum details.
+
+---
+
+##### Step 3: Test Data Transformations
+
+1. **Use Data Preview**:
+   - Open the **Data Preview** tab for each activity.
+   - Click **Refresh** to load a sample of data at each step.
+   - Verify:
+     - Source data is loaded correctly.
+     - Transformations produce the expected results.
+     - Sink configurations align with the target dataset/table.
+
+---
+
+##### Step 4: Execute and Debug the Data Flow
+
+1. **Run the Data Flow in Debug Mode**:
+   - Click **Debug** to run the pipeline interactively (instead of using **Trigger Now**).
+   - Monitor the execution in real-time via the **Output** pane.
+
+2. **Review Debug Results**:
+   - Expand each activity in the debug results.
+   - Examine detailed execution logs, including:
+     - Row counts at each step.
+     - Errors encountered during transformations or data writing.
+     - Connectivity issues.
+
+---
+
+##### Step 5: Analyze Errors in Data Flow Activities
+
+1. **Monitor Common Error Sources**:
+   - **Schema Mismatch**:
+     - Ensure the source and sink schemas align.
+     - If column mismatches occur, use a **Select** transformation to map columns explicitly.
+   - **Data Type Issues**:
+     - Check for incompatible data types between source and transformations.
+     - Use **Data Preview** to confirm column types.
+     - Use a **Derived Column** or **Cast** transformation to adjust types as needed.
+   - **Connectivity Issues**:
+     - Ensure proper credentials and network configurations are set for source and sink datasets.
+     - Verify the linked service associated with the dataset.
+
+2. **Examine Detailed Logs**:
+   - Open the **Monitor** tab in Azure Data Factory.
+   - Navigate to **Pipeline Runs** > **Data Flow Debug Runs**.
+   - Click on the specific activity to view:
+     - Error messages.
+     - Stack traces.
+     - Detailed execution steps.
+
+---
+
+##### Step 6: Iterate and Refine
+
+1. **Adjust Configurations**:
+   - Based on error analysis, refine:
+     - Transformation logic.
+     - Dataset schemas.
+     - Source or sink configurations.
+
+2. **Re-run the Debug Session**:
+   - Execute the pipeline again to validate the changes.
+
+---
+
+##### Step 7: Optimize for Performance
+
+1. **Reduce Logging Overhead**:
+   - After debugging, set the **Logging Level** to **Basic** or **None** for production runs.
+   - This minimizes performance impacts.
+
+2. **Test with Real Data**:
+   - Run the data flow with production-scale datasets.
+   - Use the **Monitor** tab to track performance metrics (e.g., execution time, resource utilization).
+
+---
+
+##### Step 8: Explore Additional Error Detection Methods
+
+1. **Use Alert Rules**:
+   - Set up alerts to notify when a data flow fails.
+   - Navigate to **Monitor** > **Alerts & Metrics** to create alert rules.
+
+2. **Enable Diagnostic Settings**:
+   - Configure diagnostic logs to send detailed activity and pipeline logs to:
+     - **Log Analytics** for querying and monitoring.
+     - **Azure Blob Storage** for long-term archival.
+     - **Event Hubs** for streaming to third-party tools.
+
+3. **Query Logs in Log Analytics**:
+   - Use KQL to find specific errors in the **AzureDiagnostics** table.
+     ```kql
+     AzureDiagnostics
+     | where ResourceProvider == "MICROSOFT.DATAFACTORY"
+     | where Category == "DataFlowActivityRuns"
+     | where Status == "Failed"
+     | order by TimeGenerated desc
+     ```
+
+---
+
+## **Step 3: Test Data Transformations**
+
+### Use Data Preview:
+1. Open the **Data Preview** tab for each activity.
+2. Click **Refresh** to load a sample of data at each step.
+3. Verify:
+   - Source data is loaded correctly.
+   - Transformations produce the expected results.
+   - Sink configurations align with the target dataset/table.
+
+---
+
+## **Step 4: Execute and Debug the Data Flow**
+
+1. **Run the Data Flow in Debug Mode**:
+   - Click **Debug** to run the pipeline interactively (instead of using **Trigger Now**).
+   - Monitor the execution in real-time via the **Output** pane.
+
+2. **Review Debug Results**:
+   - Expand each activity in the debug results.
+   - Examine detailed execution logs, including:
+     - Row counts at each step.
+     - Errors encountered during transformations or data writing.
+     - Connectivity issues.
+
+---
+
+## **Step 5: Analyze Errors in Data Flow Activities**
+
+### Monitor Common Error Sources:
+1. **Schema Mismatch**:
+   - Ensure the source and sink schemas align.
+   - If column mismatches occur, use a **Select** transformation to map columns explicitly.
+
+2. **Data Type Issues**:
+   - Check for incompatible data types between source and transformations.
+   - Use **Data Preview** to confirm column types.
+   - Use a **Derived Column** or **Cast** transformation to adjust types as needed.
+
+3. **Connectivity Issues**:
+   - Ensure proper credentials and network configurations are set for source and sink datasets.
+   - Verify the linked service associated with the dataset.
+
+### Examine Detailed Logs:
+   - Open the **Monitor** tab in Azure Data Factory.
+   - Navigate to **Pipeline Runs** > **Data Flow Debug Runs**.
+   - Click on the specific activity to view:
+     - Error messages.
+     - Stack traces.
+     - Detailed execution steps.
+
+---
+
+## **Step 6: Iterate and Refine**
+
+1. **Adjust Configurations**:
+   - Based on error analysis, refine:
+     - Transformation logic.
+     - Dataset schemas.
+     - Source or sink configurations.
+
+2. **Re-run the Debug Session**:
+   - Execute the pipeline again to validate the changes.
+
+---
+
+## **Step 7: Optimize for Performance**
+
+1. **Reduce Logging Overhead**:
+   - After debugging, set the **Logging Level** to **Basic** or **None** for production runs.
+   - This minimizes performance impacts.
+
+2. **Test with Real Data**:
+   - Run the data flow with production-scale datasets.
+   - Use the **Monitor** tab to track performance metrics (e.g., execution time, resource utilization).
+
+---
+
+## **Step 8: Explore Additional Error Detection Methods**
+
+1. **Use Alert Rules**:
+   - Set up alerts to notify when a data flow fails.
+   - Navigate to **Monitor** > **Alerts & Metrics** to create alert rules.
+
+2. **Enable Diagnostic Settings**:
+   - Configure diagnostic logs to send detailed activity and pipeline logs to:
+     - **Log Analytics** for querying and monitoring.
+     - **Azure Blob Storage** for long-term archival.
+     - **Event Hubs** for streaming to third-party tools.
+
+3. **Query Logs in Log Analytics**:
+   - Use KQL to find specific errors in the **AzureDiagnostics** table.
+     ```kql
+     AzureDiagnostics
+     | where ResourceProvider == "MICROSOFT.DATAFACTORY"
+     | where Category == "DataFlowActivityRuns"
+     | where Status == "Failed"
+     | order by TimeGenerated desc
+     ```
 
 ---
 
