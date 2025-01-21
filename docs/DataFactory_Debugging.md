@@ -52,7 +52,7 @@ Navigate to Data Factory Studio >> Author and add a new Data Flow.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/b9b25a94-93a1-42eb-9643-debdefa471da" width="800" title="Snipped January 21, 2025" />
 
-Toggle "Data flow debug** at the top of the interface. In the resulting pop-out, set "Debug time to live" to four hours and then click "OK".
+Toggle "Data flow debug** and in the resulting pop-out, set "Debug time to live" to four hours.
 
 2. **Add Source Dataset**  
    - In the data flow canvas, click **Add Source**  
