@@ -56,13 +56,21 @@ Toggle "Data flow debug" and in the resulting pop-out, set "Debug time to live" 
 
 ##### Add Source Dataset
 
-Click "Add Source".  
-   - Click **Source options** > **New dataset**  
-     - Select **Azure SQL Database** as the source type  
-     - Configure the dataset:  
-       - Choose an **Azure SQL Database linked service** (or create a new one)  
-       - Specify the server name, database name (e.g., `AdventureWorks`), and authentication credentials  
-       - Select table `SalesLT.Address`
+Click "Add Source".
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a080ebb9-def5-485a-b932-514a75c0dd6c" width="800" title="Snipped January 21, 2025" />
+
+Select "Dataset" and confirm successful connection. For this example, I am using `SalesLT.Address` in an AdventureWorks sample database.
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a080ebb9-def5-485a-b932-514a75c0dd6c" width="800" title="Snipped January 21, 2025" />
+
+Navigate to the "Data preview" tab and click "Refresh" to see source data.
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a080ebb9-def5-485a-b932-514a75c0dd6c" width="800" title="Snipped January 21, 2025" />
+
+
+
+Note that the interface may not gracefully flex to a source with many columns.
 
 3. **Inspect Source Schema**  
    - Click the **Data Preview** tab  
