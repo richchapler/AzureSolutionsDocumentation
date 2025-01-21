@@ -1,13 +1,15 @@
 # Data Factory: Logging + Error Handling
 
-## Studio >> Monitor: Pipeline and Trigger Runs
+## Studio
+
+### Monitor >> Runs >> "Pipeline runs" and "Trigger runs"
 
 * Navigate to Azure Data Factory >> Studio >> Monitor >> Pipeline Runs
 * Review filter settings {e.g., date, name, status, etc.}
 * Click into a specific log entry and review
 * Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
 
-## Studio >> Monitor: Alerts & Metrics
+### Monitor >> Notifications >> "Alerts & metrics"
 Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
 
  * Navigate to Azure Data Factory >> Studio >> Monitor >> Alerts & Metrics
@@ -19,7 +21,9 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
    Add criteria | Select and configure the desired Metric on the resulting pop-out<br><sub>Metric descriptions included in Appendix</sub>
    Configure Notification | Define "action group" {i.e., notification action and recipient
 
-## Portal >> Monitoring >> Diagnostic Settings
+## Portal
+
+### Monitoring >> Diagnostic Settings
 
 * Navigate to Azure Data Factory >> Monitoring >> Diagnostic Settings
 * Click "+ Add diagnostic setting" and complete the resulting screen, including:
