@@ -66,11 +66,9 @@ Select "Dataset" and confirm successful connection. For this example, I am using
 
 Navigate to the "Data preview" tab and click "Refresh" to see source data.
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a080ebb9-def5-485a-b932-514a75c0dd6c" width="800" title="Snipped January 21, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/49575d15-8760-4649-a9df-ffda4dd774de" width="800" title="Snipped January 21, 2025" />
 
-
-
-Note that the interface may not gracefully flex to a source with many columns.
+Note that the interface may not gracefully flex to a source with many columns (even to the point of showing a single letter or nothing at all in each column).
 
 3. **Inspect Source Schema**  
    - Click the **Data Preview** tab  
