@@ -1,4 +1,6 @@
-# Data Factory: Logging + Error Handling
+# Data Factory: Debugging
+
+This documentation speaks to the various methods of debugging Azure Data Factory.
 
 ## Studio
 
