@@ -234,6 +234,10 @@ _Note: I've compacted the JSON above for presentation_
 
 ##### Data Flow Details
 
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/db449c99-4d5f-41fd-ac17-38d3158ee0c0" width="800" title="Snipped January 22, 2025" />
+
+###### Stages
+
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/d0e85c47-d469-4a79-aef4-7c128eb8745b" width="800" title="Snipped January 22, 2025" />
 
 Click into "Stages" and note that since Logging was set to "None", very little data is presented.
@@ -244,15 +248,27 @@ Return to the pipeline, change the data flow "Logging level" setting to "Verbose
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3127c591-9184-49ff-a7f0-8aa8c16e13e8" width="800" title="Snipped January 22, 2025" />
 
-_Note: "Lineage" doesn't vary based on logging level setting_
+"Verbose" setting presents a little more Stages data.
 
-##### Logging Levels Overview
-- None: Minimal details (pipeline status only)  
-- Basic: High-level details (row counts, activity times)  
-- Verbose: Complete details (data lineage, transformation logs, error traces)  
+###### Lineage
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/e20e9b99-c424-42d6-8409-64f2594c3ef9" width="800" title="Snipped January 22, 2025" />
+
+"Lineage" doesn't vary based on logging level setting.
+
+###### Activities
+
+Click on the first activity arrow.
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/2f1e925b-85ea-4016-8eb4-679c32d02dfd" width="800" title="Snipped January 22, 2025" />
+
+Repeat for each activity arrow to see presented information.
+
+
+
+
 
 Areas Affected by Logging Levels
-- Pipeline Runs Monitoring: Shows pipeline-level or activity-level details  
 - Activity Runs: Provides row counts and processing times  
 - Debug Mode: Enables intermediate metrics and data lineage  
 - Output Pane During Execution: Displays activity status, row counts, and errors  
@@ -270,21 +286,7 @@ Areas Affected by Logging Levels
 
 ---
 
-#### Step 3: Iterate, Refine, and Optimize
 
-1. Adjust Configurations  
-   - Refine transformation logic, schemas, or sink settings based on error analysis  
-
-2. Re-run the Debug Session  
-   - Validate changes by executing the pipeline again  
-
-3. Reduce Logging Overhead  
-   - Switch to Basic or None logging for production to improve performance  
-
-4. Test with Real Data  
-   - Run the data flow with the full dataset and monitor execution metrics  
-
----
 
 #### Step 3: Explore Additional Error Detection Methods
 
