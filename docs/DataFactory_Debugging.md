@@ -11,36 +11,36 @@
 
 ### Pipelines
 
-1. **Open Azure Data Factory Studio**:
+1. Open Azure Data Factory Studio:
    - Launch Azure Data Factory Studio.
-   - Navigate to the **Author** tab.
-   - Click the **+** button and select **Pipeline** to create a new pipeline.
+   - Navigate to the Author tab.
+   - Click the + button and select Pipeline to create a new pipeline.
 
-2. **Add Activities to the Pipeline**:
-   - Drag and drop the required activities from the **Activities pane** onto the pipeline canvas.
-   - Example: Add a **Copy Data activity** to copy data from one source to another.
+2. Add Activities to the Pipeline:
+   - Drag and drop the required activities from the Activities pane onto the pipeline canvas.
+   - Example: Add a Copy Data activity to copy data from one source to another.
 
-3. **Configure the "onFail" Feature**:
+3. Configure the "onFail" Feature:
    - Select the activity you want to monitor for failures.
-   - In the **Activities pane**, locate the **onFail** section and click **Add activity**.
-   - Choose the activity to execute if the primary activity fails, such as a **Stored Procedure activity** to log failure details.
+   - In the Activities pane, locate the onFail section and click Add activity.
+   - Choose the activity to execute if the primary activity fails, such as a Stored Procedure activity to log failure details.
 
-4. **Set Up the Stored Procedure Activity**:
-   - Drag and drop a **Stored Procedure activity** onto the pipeline canvas.
+4. Set Up the Stored Procedure Activity:
+   - Drag and drop a Stored Procedure activity onto the pipeline canvas.
    - Configure the activity to connect to your SQL Server database.
    - Specify the stored procedure to log failure details, ensuring it accepts parameters for:
-     - **Error message**: A description of the failure.
-     - **Activity name**: The name of the failed activity.
-     - **Timestamp**: The time the failure occurred.
+     - Error message: A description of the failure.
+     - Activity name: The name of the failed activity.
+     - Timestamp: The time the failure occurred.
 
-5. **Link Activities Using "onFail"**:
-   - Link the primary activity to the Stored Procedure activity using an **onFail dependency**.
+5. Link Activities Using "onFail":
+   - Link the primary activity to the Stored Procedure activity using an onFail dependency.
    - Ensure the Stored Procedure activity only executes when the primary activity fails.
 
-6. **Publish and Test the Pipeline**:
-   - Click **Publish** to save and publish your pipeline.
+6. Publish and Test the Pipeline:
+   - Click Publish to save and publish your pipeline.
    - Trigger the pipeline to test its execution.
-   - Verify that if the primary activity fails, the **onFail** feature triggers the Stored Procedure activity, logging failure details to your SQL Server table.
+   - Verify that if the primary activity fails, the onFail feature triggers the Stored Procedure activity, logging failure details to your SQL Server table.
 
 ---
 
@@ -364,23 +364,25 @@ Return to the pipeline, change the data flow "Logging level" setting to "Verbose
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3127c591-9184-49ff-a7f0-8aa8c16e13e8" width="800" title="Snipped January 22, 2025" />
 
+"Lineage" doesn't vary based on logging level setting.
+
 ##### Logging Levels Overview
-- **None**: Minimal details (pipeline status only)  
-- **Basic**: High-level details (row counts, activity times)  
-- **Verbose**: Complete details (data lineage, transformation logs, error traces)  
+- None: Minimal details (pipeline status only)  
+- Basic: High-level details (row counts, activity times)  
+- Verbose: Complete details (data lineage, transformation logs, error traces)  
 
-3. **Areas Affected by Logging Levels**  
-   - **Pipeline Runs Monitoring**: Shows pipeline-level or activity-level details  
-   - **Activity Runs**: Provides row counts and processing times  
-   - **Debug Mode**: Enables intermediate metrics and data lineage  
-   - **Output Pane During Execution**: Displays activity status, row counts, and errors  
-   - **Sink-Level Details**: Shows row counts and errors  
-   - **Data Preview**: Uses debug session to load sample data  
-   - **Log Analytics Integration**: Sends detailed logs when logging is set to **Basic** or **Verbose**
+Areas Affected by Logging Levels
+- Pipeline Runs Monitoring: Shows pipeline-level or activity-level details  
+- Activity Runs: Provides row counts and processing times  
+- Debug Mode: Enables intermediate metrics and data lineage  
+- Output Pane During Execution: Displays activity status, row counts, and errors  
+- Sink-Level Details: Shows row counts and errors  
+- Data Preview: Uses debug session to load sample data  
+- Log Analytics Integration: Sends detailed logs when logging is set to Basic or Verbose
 
-4. **Examine Detailed Logs**  
-   - Open the **Monitor** tab in Azure Data Factory  
-   - Navigate to **Pipeline Runs** > **Data Flow Debug Runs**  
+4. Examine Detailed Logs  
+   - Open the Monitor tab in Azure Data Factory  
+   - Navigate to Pipeline Runs > Data Flow Debug Runs  
    - Click on the specific activity to view:  
      - Error messages  
      - Stack traces  
@@ -390,33 +392,33 @@ Return to the pipeline, change the data flow "Logging level" setting to "Verbose
 
 #### Step 3: Iterate, Refine, and Optimize
 
-1. **Adjust Configurations**  
+1. Adjust Configurations  
    - Refine transformation logic, schemas, or sink settings based on error analysis  
 
-2. **Re-run the Debug Session**  
+2. Re-run the Debug Session  
    - Validate changes by executing the pipeline again  
 
-3. **Reduce Logging Overhead**  
-   - Switch to **Basic** or **None** logging for production to improve performance  
+3. Reduce Logging Overhead  
+   - Switch to Basic or None logging for production to improve performance  
 
-4. **Test with Real Data**  
+4. Test with Real Data  
    - Run the data flow with the full dataset and monitor execution metrics  
 
 ---
 
 #### Step 3: Explore Additional Error Detection Methods
 
-1. **Use Alert Rules**  
-   - Navigate to **Monitor** > **Alerts & Metrics**  
+1. Use Alert Rules  
+   - Navigate to Monitor > Alerts & Metrics  
    - Create alerts for data flow or pipeline failures  
 
-2. **Enable Diagnostic Settings**  
+2. Enable Diagnostic Settings  
    - Configure logs to be sent to:  
-     - **Log Analytics** for querying  
-     - **Blob Storage** for archival  
-     - **Event Hubs** for third-party integration  
+     - Log Analytics for querying  
+     - Blob Storage for archival  
+     - Event Hubs for third-party integration  
 
-3. **Query Logs in Log Analytics**  
+3. Query Logs in Log Analytics  
    - Use the following KQL for errors:  
      ```kql
      AzureDiagnostics
@@ -428,7 +430,7 @@ Return to the pipeline, change the data flow "Logging level" setting to "Verbose
 
 ---
 
-This structure collapses **Debug** into **Step 1**, moves **Review Debug Results** into **Step 2**, and cleanly separates stages while retaining all relevant content. Let me know if further refinements are needed!
+This structure collapses Debug into Step 1, moves Review Debug Results into Step 2, and cleanly separates stages while retaining all relevant content. Let me know if further refinements are needed!
 
 ---
 
@@ -473,8 +475,8 @@ Create alerts to notify you via email, SMS, or other means when a pipeline run m
 
 Selection of "Send to Log Analytics workspace" necessitates selection of "Destination table":
    
-   * **Azure Diagnostics** - When you choose "Azure Diagnostics", **all your diagnostic logs from all resource types are sent to a single table called AzureDiagnostics**. This can make querying easier if you want to correlate events across different resource types, as you only need to query one table. However, the AzureDiagnostics table is a flat table, so complex properties are serialized into JSON strings which can make some data harder to work with.  
-   * **Resource Specific** - When you choose "Resource Specific", your **logs are sent to a table that corresponds to the resource type**. For example, if you're working with a Storage Account, your logs might be sent to a table like StorageAccountLogs. These tables are designed to best fit the schema of the log data of the specific resource type, and complex properties are represented as distinct fields, which can make queries more intuitive and the data easier to work with. However, if you want to correlate events across different resource types, you would need to query multiple tables.  
+   * Azure Diagnostics - When you choose "Azure Diagnostics", all your diagnostic logs from all resource types are sent to a single table called AzureDiagnostics. This can make querying easier if you want to correlate events across different resource types, as you only need to query one table. However, the AzureDiagnostics table is a flat table, so complex properties are serialized into JSON strings which can make some data harder to work with.  
+   * Resource Specific - When you choose "Resource Specific", your logs are sent to a table that corresponds to the resource type. For example, if you're working with a Storage Account, your logs might be sent to a table like StorageAccountLogs. These tables are designed to best fit the schema of the log data of the specific resource type, and complex properties are represented as distinct fields, which can make queries more intuitive and the data easier to work with. However, if you want to correlate events across different resource types, you would need to query multiple tables.  
 
 Be sure to click "Save".
 
