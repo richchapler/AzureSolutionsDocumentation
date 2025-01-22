@@ -103,50 +103,26 @@ SELECT * INTO [SalesLT].[Address2] FROM [SalesLT].[Address] WHERE 1 = 0
 ALTER TABLE [SalesLT].[Address2] DROP COLUMN AddressID
 ```
 
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/aa06786e-83e7-4644-baa0-a47fd98f3a2e" width="800" title="Snipped January 22, 2025" />
 
+_Note: Once the Sink has been added you can "Publish all" to save progress.
 
-LOREM IPSUM
+##### Add Pipeline
 
-5. **Add a Sink Dataset**  
-   - Click + in the bottom right of the Filter  
-   - Search and select **Sink** transformation  
-   - Click **Sink options** > **New dataset**  
-     - Select **Azure SQL Database** as the destination type  
-     - Configure the dataset:  
-       - Choose the same **Azure SQL Database linked service** as the source  
-       - 
-       - Ensure the sink table schema matches the output from the transformation
+Add a new pipeline with a "Data flow" activity. Set "Logging level" to "None".
 
-  
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/9ef1fab8-120a-47b4-b647-4f980fe2a925" width="800" title="Snipped January 22, 2025" />
 
-6. **Add Data Flow to Pipeline**  
-   - Navigate to **Author** > **+** > **Pipeline**  
-   - Drag and drop the **Data Flow** activity into the pipeline canvas  
-   - Configure the activity: Select the created data flow (e.g., `dataflow1`)
+Click "Debug" to execute the pipeline interactively and then monitor execution in real-time on the "Output" tab.
 
-7. **Set the Logging Level**  
-   - Open the **Settings** tab of the data flow activity in the pipeline  
-   - Under **Monitoring**, set **Logging Level** to:  
-     - **None**: No logs collected (default)  
-     - **Basic**: Captures high-level details (start, end, row counts)  
-     - **Verbose**: Captures detailed logs, including transformation steps and data lineage  
-   - For this exercise, set the level to **Verbose**
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/4ecddf3d-f7b0-4a4d-afd5-c121836fb7cf" width="800" title="Snipped January 22, 2025" />
 
-8. **Preview Data**  
-   - Open the **Data Preview** tab for each activity (source, transformation, and sink)  
-   - Click **Refresh** to load sample data  
-   - Verify:  
-     - Source data is correctly loaded from the **Address** table  
-     - The filter transformation produces only Arizona addresses  
-     - The sink configuration aligns with the target table `Address2`
+#### Step 2: Iterative Review
 
-9. **Run the Data Flow in Debug Mode**  
-   - Click **Debug** to execute the pipeline interactively  
-   - Monitor execution in real-time via the **Output** pane
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/13455cfd-c95c-4908-97e6-3f1276c36cce" width="800" title="Snipped January 22, 2025" />
 
----
+Once execution is complete, roll-over the output row to see icons otherwise hidden {e.g., Input, Output, Data Flow Details}.
 
-#### Step 2: Review
 
 1. **Review Debug Results**  
    - Expand each activity in the debug results  
