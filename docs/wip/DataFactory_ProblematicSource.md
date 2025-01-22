@@ -1,15 +1,11 @@
 ### Lab: Identifying Problematic Records in Azure Data Factory Pipeline
 
-This lab demonstrates how to create an Azure Data Factory (ADF) pipeline that identifies and logs problematic records during a data copy operation. The errors will be logged to Azure Blob Storage or Data Lake, with an optional step to load them into an Azure SQL Database.
-
----
-
 ### **Objective**
 
-- Create a sample dataset with problematic records
-- Build an ADF pipeline to process the dataset and handle errors
-- Log errors in Azure Blob Storage or Data Lake
-- Optionally, load error logs into an Azure SQL Database for further analysis
+1. Enable row-level error logging in an ADF pipeline
+2. Capture detailed error logs in Azure Blob Storage
+3. Parse error logs to extract meaningful details (row numbers, column names, error messages)
+4. Optionally store parsed error details in Azure SQL Database
 
 ---
 
@@ -26,98 +22,130 @@ This lab demonstrates how to create an Azure Data Factory (ADF) pipeline that id
      4,Emily,not_a_number
      5,Michael,35
      ```
-   - Problematic records:
-     - Record 3: Missing value in `Name`
-     - Record 4: Non-numeric value in `Age`
+   - Problematic rows:
+     - **Row 3**: Missing `Name`.
+     - **Row 4**: Non-numeric value for `Age`.
 
-2. **Upload the File to Blob Storage or Data Lake**:
-   - Upload the file to a container or folder, e.g., `input/` in your Azure Blob Storage or Data Lake.
-
----
-
-#### **Step 2: Set Up the Azure SQL Database (Optional)**
-1. **Create a Table for Valid Records**:
-   ```sql
-   CREATE TABLE ValidRecords (
-       ID INT,
-       Name NVARCHAR(100),
-       Age INT
-   );
-   ```
-
-2. **Create a Table for Error Logs**:
-   ```sql
-   CREATE TABLE Errors (
-       RowNumber INT,
-       ColumnName NVARCHAR(100),
-       ErrorDescription NVARCHAR(255)
-   );
-   ```
-
-3. **Grant Permissions to ADF’s Managed Identity**:
-   - In SQL Server:
-     ```sql
-     CREATE LOGIN [<ManagedIdentityObjectID>] FROM EXTERNAL PROVIDER;
-     USE <DatabaseName>;
-     CREATE USER [<ManagedIdentityObjectID>] FOR LOGIN [<ManagedIdentityObjectID>];
-     ALTER ROLE db_datareader ADD MEMBER [<ManagedIdentityObjectID>];
-     ALTER ROLE db_datawriter ADD MEMBER [<ManagedIdentityObjectID>];
-     ```
-   - Replace `<ManagedIdentityObjectID>` with the object ID of ADF’s managed identity.
+2. **Upload the File to Blob Storage**:
+   - Upload `sample_data.csv` to a container (e.g., `input/`) in your Azure Blob Storage account.
 
 ---
 
-#### **Step 3: Set Up the ADF Pipeline**
+#### **Step 2: Set Up the ADF Pipeline**
 
-1. **Create the Pipeline**:
-   - In Azure Data Factory, create a pipeline named `DetectProblematicRecords`.
+1. **Create a Pipeline**:
+   - Name the pipeline `DetectProblematicRecords`.
 
 2. **Add a Copy Data Activity**:
-   - Drag a **Copy Data** activity onto the pipeline canvas.
+   - Configure the Copy Data activity as follows:
+     - **Source**:
+       - Dataset: Use a delimited text dataset pointing to `sample_data.csv`.
+       - Format: CSV with headers.
+     - **Sink**:
+       - Dataset: Use an Azure SQL Database table (`ValidRecords`) as the Sink.
+       - Table definition:
+         ```sql
+         CREATE TABLE ValidRecords (
+             ID INT,
+             Name NVARCHAR(100),
+             Age INT
+         );
+         ```
+     - **Fault Tolerance**:
+       - Enable **Skip incompatible rows**.
+       - Set the error file path to a folder in your Blob Storage, such as `copyactivity-logs/`.
+       - Enable logging with the following settings:
+         ```json
+         "logSettings": {
+             "enableCopyActivityLog": true,
+             "copyActivityLogSettings": {
+                 "logLevel": "Warning",
+                 "enableReliableLogging": true
+             },
+             "logLocationSettings": {
+                 "linkedServiceName": {
+                     "referenceName": "AzureBlobStorage2",
+                     "type": "LinkedServiceReference"
+                 },
+                 "path": "copyactivity-logs/"
+             }
+         }
+         ```
+
+---
+
+#### **Step 3: Parse the Error Logs**
+1. **Create a Dataset for Error Logs**:
+   - Type: **Delimited Text**
+   - File path: Point to the `copyactivity-logs/` folder.
+   - Use wildcard file selection to process log files dynamically.
+   - Schema: Include fields such as `Timestamp`, `Level`, `OperationName`, `OperationItem`, `Message`.
+
+2. **Add a Data Flow**:
+   - Add a **Data Flow** activity to parse the error log file.
+
+3. **Data Flow Configuration**:
    - **Source**:
-     - Dataset: Point to the `sample_data.csv` file in Blob Storage or Data Lake.
+     - Use the error log dataset.
+   - **Derived Column Transformation**:
+     - Use expressions to extract the following details from the `Message` column:
+       - **RowNumber**:
+         Extract the first value inside quotes (e.g., `"4"`).
+         Expression: 
+         ```expression
+         substring(Message, indexOf(Message, 'TabularRowSkip,') + 15, indexOf(Message, ',') - indexOf(Message, 'TabularRowSkip,') - 15)
+         ```
+       - **ColumnName**:
+         Extract the column name causing the error (e.g., `"Age"`).
+         Expression:
+         ```expression
+         substring(Message, indexOf(Message, "column name '") + 13, indexOf(Message, "' from type") - indexOf(Message, "column name '") - 13)
+         ```
+       - **ErrorDescription**:
+         Extract the full error description.
+         Expression:
+         ```expression
+         substring(Message, indexOf(Message, 'Exception occurred'), len(Message))
+         ```
    - **Sink**:
-     - Dataset: Point to the `ValidRecords` table in Azure SQL Database (if configured).
-   - **Fault Tolerance**:
-     - Enable **Skip incompatible rows**.
-     - Set the **Error log file path** to a location in Blob Storage or Data Lake, e.g., `errors/`.
+     - Write the parsed data to an Azure SQL Database table (`Errors`).
 
-3. **Add a Dataset for Error Logs**:
-   - Create a dataset for the error log file:
-     - Format: **Delimited Text** or **JSON**.
-     - Linked Service: Point to the Blob Storage or Data Lake location where the error logs are written.
-
----
-
-#### **Step 4: Optional - Load Errors into SQL**
-1. **Add a Second Copy Data Activity**:
-   - **Source**: Use the dataset pointing to the error logs.
-   - **Sink**: Use the dataset pointing to the `Errors` table in Azure SQL Database.
-   - Map the error log fields (`RowNumber`, `ColumnName`, `ErrorDescription`) to the table columns.
-
----
-
-#### **Step 5: Test and Debug**
-1. **Run the Pipeline**:
-   - Trigger the pipeline with the `sample_data.csv` file.
-   - Verify that:
-     - Valid records are written to the `ValidRecords` table.
-     - Errors are logged to Blob Storage or Data Lake.
-
-2. **Optional - Verify SQL Error Logs**:
-   - Check the `Errors` table for records like:
-     ```plaintext
-     RowNumber | ColumnName  | ErrorDescription
-     --------------------------------------------
-     3         | Name        | Missing value
-     4         | Age         | Invalid value 'not_a_number'
+4. **Create an Errors Table**:
+   - Use the following SQL script to create the table:
+     ```sql
+     CREATE TABLE Errors (
+         RowNumber INT,
+         ColumnName NVARCHAR(100),
+         ErrorDescription NVARCHAR(255)
+     );
      ```
 
 ---
 
-### **Key Notes**
-- **Storage for Error Logs**: ADF writes errors by default to Blob Storage or Data Lake. Use this as the primary mechanism for error logging.
-- **Optional SQL Integration**: If SQL-based analysis is required, error logs can be loaded into the `Errors` table.
-- **Advanced Error Handling**: Use ADF's **Data Flow** activity for more complex error validation and processing.
+#### **Step 4: Test the Pipeline**
+1. **Upload Test Data**:
+   - Use the `sample_data.csv` file containing known errors.
+2. **Run the Pipeline**:
+   - Trigger the pipeline and monitor its execution.
+3. **Verify the Results**:
+   - Check the `ValidRecords` table for successfully processed rows.
+   - Inspect the `Errors` table for row-level error details.
+   - Optionally, review the raw error file in the `copyactivity-logs/` folder.
 
-This lab equips you with the ability to handle data errors in ADF pipelines efficiently, ensuring both valid data processing and clear error tracking.
+---
+
+### **Summary of Results**
+- **Valid Records**:
+  The `ValidRecords` table will contain rows with IDs `1`, `2`, and `5`.
+
+- **Error Records**:
+  The `Errors` table will contain entries like:
+  ```plaintext
+  RowNumber | ColumnName  | ErrorDescription
+  --------------------------------------------
+  3         | Name        | Missing value
+  4         | Age         | Invalid value 'not_a_number'
+  ```
+
+- **Error Logs**:
+  The raw error logs in Blob Storage (`copyactivity-logs/`) provide traceability for debugging.
