@@ -117,7 +117,7 @@ Click "Debug" to execute the pipeline interactively and then monitor execution i
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/4ecddf3d-f7b0-4a4d-afd5-c121836fb7cf" width="800" title="Snipped January 22, 2025" />
 
-#### Step 2: Iterative Review
+#### Step 2: Review Results
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/13455cfd-c95c-4908-97e6-3f1276c36cce" width="800" title="Snipped January 22, 2025" />
 
@@ -262,57 +262,7 @@ Click on the first activity arrow.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/2f1e925b-85ea-4016-8eb4-679c32d02dfd" width="800" title="Snipped January 22, 2025" />
 
-Repeat for each activity arrow to see presented information.
-
-
-
-
-
-Areas Affected by Logging Levels
-- Activity Runs: Provides row counts and processing times  
-- Debug Mode: Enables intermediate metrics and data lineage  
-- Output Pane During Execution: Displays activity status, row counts, and errors  
-- Sink-Level Details: Shows row counts and errors  
-- Data Preview: Uses debug session to load sample data  
-- Log Analytics Integration: Sends detailed logs when logging is set to Basic or Verbose
-
-4. Examine Detailed Logs  
-   - Open the Monitor tab in Azure Data Factory  
-   - Navigate to Pipeline Runs > Data Flow Debug Runs  
-   - Click on the specific activity to view:  
-     - Error messages  
-     - Stack traces  
-     - Detailed execution steps  
-
----
-
-
-
-#### Step 3: Explore Additional Error Detection Methods
-
-1. Use Alert Rules  
-   - Navigate to Monitor > Alerts & Metrics  
-   - Create alerts for data flow or pipeline failures  
-
-2. Enable Diagnostic Settings  
-   - Configure logs to be sent to:  
-     - Log Analytics for querying  
-     - Blob Storage for archival  
-     - Event Hubs for third-party integration  
-
-3. Query Logs in Log Analytics  
-   - Use the following KQL for errors:  
-     ```kql
-     AzureDiagnostics
-     | where ResourceProvider == "MICROSOFT.DATAFACTORY"
-     | where Category == "DataFlowActivityRuns"
-     | where Status == "Failed"
-     | order by TimeGenerated desc
-     ```
-
----
-
-This structure collapses Debug into Step 1, moves Review Debug Results into Step 2, and cleanly separates stages while retaining all relevant content. Let me know if further refinements are needed!
+Repeat for each activity arrow to see presented information {e.g., row count, processing times, errors, etc.}.
 
 ---
 
@@ -324,6 +274,10 @@ This structure collapses Debug into Step 1, moves Review Debug Results into Step
 * Review filter settings {e.g., date, name, status, etc.}
 * Click into a specific log entry and review
 * Repeat for Trigger Runs... note that a Trigger Run might have "Succeeded" even though the corresponding Pipeline Run failed
+
+#### Runs >> "Pipeline runs" and "Trigger runs"
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/20701095-b85b-4bfa-8010-ec89bba8cae8" width="800" title="Snipped January 22, 2025" />
 
 #### Notifications >> "Alerts & metrics"
 Create alerts to notify you via email, SMS, or other means when a pipeline run meets certain conditions, such as failure or success.
@@ -362,11 +316,9 @@ Selection of "Send to Log Analytics workspace" necessitates selection of "Destin
 
 Be sure to click "Save".
 
----
-
 #### Logs
 
-##### Sample #1: `AzureDiagnostics`
+#### Sample #1: `AzureDiagnostics`
 
 * Navigate to Azure Data Factory >> Monitoring >> Logs
 * Close the "Welcome to Log Analytics" and "Queries hub" popups  
@@ -388,6 +340,8 @@ Be sure to click "Save".
    | where TimeGenerated > ago(1d)    
    | order by TimeGenerated desc       
    ```
+
+_Note: Error details (when applicable) are captured in ADFActivityRuns, not in ADFPipelineRuns_
 
 #### Alerts
 
