@@ -246,6 +246,8 @@ Click into "Stages" and note that since Logging was set to "None", very little d
 
 Return to the pipeline, change the data flow "Logging level" setting to "Verbose", then re-execute with "Debug".
 
+_Note: While it might seem logical to always set "verbose", there is a performance cost that some customers want to avoid_
+
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3127c591-9184-49ff-a7f0-8aa8c16e13e8" width="800" title="Snipped January 22, 2025" />
 
 "Verbose" setting presents a little more Stages data.
