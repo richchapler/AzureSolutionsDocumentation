@@ -17,4 +17,4 @@ Use Case | Technologies
 [AI Search, PowerApp UI + Security](AISearch_PowerApp+Security.md) | AI Search, Power Apps, JSON
 [Open AI, Enriching Data via API](Data_Enrichment_OpenAI.md) | Synapse Pipeline, OpenAI, Data Explorer, API
 [Open AI, Estimating Cost](wip/OpenAI_EstimatingCost.md) | Azure Pricing Calculator
-[Translator, Lab](Translator_Lab.md) | Translator, Lab
+[Translator, Lab](Translator_Lab.html) | Translator, Lab
