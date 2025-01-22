@@ -92,6 +92,19 @@ _Note: The "INSERT" value has dropped to 13_
 
 ##### Add Sink
 
+Click the "+" icon in the bottom right of the Source arrow and on the resulting dropdown, search for and select "Sink"
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/9073854c-5d28-455b-9bc9-488e7ca8124d" width="800" title="Snipped January 22, 2025" />
+
+On the "Settings" tab, click "+ New" to create a new dataset pointing at your sink. For this example, I am creating `SalesLT.Address2` in the AdventureWorks sample database.
+
+```sql
+SELECT * INTO [SalesLT].[Address2] FROM [SalesLT].[Address] WHERE 1 = 0
+ALTER TABLE [SalesLT].[Address2] DROP COLUMN AddressID
+```
+
+
+
 LOREM IPSUM
 
 5. **Add a Sink Dataset**  
@@ -101,12 +114,10 @@ LOREM IPSUM
      - Select **Azure SQL Database** as the destination type  
      - Configure the dataset:  
        - Choose the same **Azure SQL Database linked service** as the source  
-       - Create the table schema with:  
-         ```sql
-         SELECT * INTO [SalesLT].[Address2] FROM [SalesLT].[Address] WHERE 1 = 0
-         ALTER TABLE [SalesLT].[Address2] DROP COLUMN AddressID
-         ```  
+       - 
        - Ensure the sink table schema matches the output from the transformation
+
+  
 
 6. **Add Data Flow to Pipeline**  
    - Navigate to **Author** > **+** > **Pipeline**  
