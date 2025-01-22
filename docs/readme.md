@@ -4,10 +4,10 @@ In this documentation, you will find step-by-step instructions for solutions to 
 
 # Contents
 
-> [Artificial Intelligence (AI)](AI.md) >> Enrich :: Surface
+> [Artificial Intelligence (AI)](AI.html) >> Enrich :: Surface
 
-> [Data](Data.md) >> Migrate :: Acquire :: Enrich :: Analyze :: Surface :: Govern
+> [Data](Data.html) >> Migrate :: Acquire :: Enrich :: Analyze :: Surface :: Govern
 
-> [DevOps](DevOps.md) >> AI Search :: OpenAI :: Synapse
+> [DevOps](DevOps.html) >> AI Search :: OpenAI :: Synapse
 
-> [Infrastructure](Infrastructure.md) >> Instantiate :: Migrate
+> [Infrastructure](Infrastructure.html) >> Instantiate :: Migrate
