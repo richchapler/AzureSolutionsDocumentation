@@ -9,8 +9,8 @@ AI | [Interface](AI_Interface.html) | AI Search, Open AI, Visual Studio (C#)
 AI | [Bot](AI_Bot.html) | AI Search, Bot Service, Open AI, Teams, Visual Studio (C#)
 AI | [Test](AI_Test.html) | AI Search, OpenAI, C#, DevOps<br>
 AI | [Code Analysis](AI_Code.html) | GitHub, Open AI, Visual Studio (C#)
-AI | [Translator, Interface](AI_Translator.html) | Translator, Visual Studio (C#)
-AI | [Translator, Lab](Translator_Lab.html) | Translator, Lab
+AI | [Translator, Interface](AI_Translator_Interface.html) | Translator, Visual Studio (C#)
+AI | [Translator, Lab](AI_Translator_Lab.html) | Translator, Python
 AI | [Improve Response Quality](AI_ImproveResponseQuality.html) | AI Search, Open AI, Visual Studio (C#)
 AI Search | [Enrich Data with Custom Skillset](AISearch_CustomSkillset.html) | SQL, AI Search, Function App, C#
 AI Search | [Source from Data Explorer](AISearch_fromDataExplorer.html) | Data Explorer (via export), AI Search, JSON, HTML
