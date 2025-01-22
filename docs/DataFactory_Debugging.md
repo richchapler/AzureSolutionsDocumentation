@@ -123,7 +123,67 @@ Click "Debug" to execute the pipeline interactively and then monitor execution i
 
 Once execution is complete, roll-over the output row to see icons otherwise hidden {e.g., Input, Output, Data Flow Details}.
 
+##### Input
 
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/760e765b-a4dd-450a-8b91-10ad4da9d595" width="800" title="Snipped January 22, 2025" />
+
+```json
+{
+    "dataflow": {
+        "referenceName": "dataflow1",
+        "type": "DataFlowReference",
+        "parameters": {},
+        "datasetParameters": {
+            "source1": {},
+            "sink1": {}
+        }
+    },
+    "staging": {},
+    "compute": {
+        "coreCount": 8,
+        "computeType": "General"
+    },
+    "traceLevel": "None",
+    "cacheSinks": {
+        "firstRowOnly": true
+    },
+    "dataFlowDebugSessionId": "2cba1f56-bb3e-48b6-8bd3-becd0416441f",
+    "continuationSettings": {
+        "customizedCheckpointKey": "pipeline1-Data flow1-4615720a-b514-4354-b4d7-12e184c20fd6"
+    }
+}
+```
+
+##### Output
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/760e765b-a4dd-450a-8b91-10ad4da9d595" width="800" title="Snipped January 22, 2025" />
+
+```json
+{
+    "dataflow": {
+        "referenceName": "dataflow1",
+        "type": "DataFlowReference",
+        "parameters": {},
+        "datasetParameters": {
+            "source1": {},
+            "sink1": {}
+        }
+    },
+    "staging": {},
+    "compute": {
+        "coreCount": 8,
+        "computeType": "General"
+    },
+    "traceLevel": "None",
+    "cacheSinks": {
+        "firstRowOnly": true
+    },
+    "dataFlowDebugSessionId": "2cba1f56-bb3e-48b6-8bd3-becd0416441f",
+    "continuationSettings": {
+        "customizedCheckpointKey": "pipeline1-Data flow1-4615720a-b514-4354-b4d7-12e184c20fd6"
+    }
+}
+```
 1. **Review Debug Results**  
    - Expand each activity in the debug results  
    - Examine details, including:  
