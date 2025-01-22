@@ -160,197 +160,77 @@ Once execution is complete, roll-over the output row to see icons otherwise hidd
 
 ```json
 {
-	"runStatus": {
-		"ClusterId": "azuresolutionsdatafactory.AutoResolveIntegrationRuntime.2",
-		"sparkVersion": "3.3",
-		"computeAcquisitionDuration": 4563,
-		"version": "20241104.1",
-		"profile": {
-			"source1": {
-				"computed": [],
-				"lineage": {},
-				"dropped": 0,
-				"drifted": 0,
-				"newer": 9,
-				"total": 9,
-				"updated": 0
-			},
-			"filter1": {
-				"computed": [],
-				"lineage": {},
-				"dropped": 0,
-				"drifted": 0,
-				"newer": 0,
-				"total": 9,
-				"updated": 0
-			},
-			"sink1": {
-				"computed": [
-					{
-						"source": "source1",
-						"columns": [
-							"StateProvince"
-						]
-					}
-				],
-				"lineage": {
-					"ModifiedDate": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"ModifiedDate"
-								]
-							}
-						]
-					},
-					"CountryRegion": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"CountryRegion"
-								]
-							}
-						]
-					},
-					"rowguid": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"rowguid"
-								]
-							}
-						]
-					},
-					"StateProvince": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"StateProvince"
-								]
-							}
-						]
-					},
-					"AddressLine1": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"AddressLine1"
-								]
-							}
-						]
-					},
-					"City": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"City"
-								]
-							}
-						]
-					},
-					"AddressLine2": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"AddressLine2"
-								]
-							}
-						]
-					},
-					"PostalCode": {
-						"mapped": true,
-						"from": [
-							{
-								"source": "source1",
-								"columns": [
-									"PostalCode"
-								]
-							}
-						]
-					}
-				},
-				"dropped": 0,
-				"drifted": 0,
-				"newer": 0,
-				"total": 9,
-				"updated": 8
-			}
-		},
-		"metrics": {
-			"sink1": {
-				"format": "",
-				"stages": [
-					{
-						"stage": 0,
-						"partitionTimes": [],
-						"recordsWritten": 0,
-						"lastUpdateTime": "2025-01-22 13:18:06.497",
-						"bytesWritten": 0,
-						"recordsRead": 13,
-						"bytesRead": 0,
-						"partitionStatus": "Success",
-						"streams": {},
-						"target": "sink1",
-						"time": 12057,
-						"progressState": "Completed"
-					}
-				],
-				"sinkPostProcessingTime": 0,
-				"store": "",
-				"rowsWritten": 0,
-				"details": {
-					"preSQLDuration": [
-						0
-					],
-					"tempTable": [
-						"##T_8327_00c4524df3a24d83b71cbef69d2597ee"
-					],
-					"tableOperationSQLDuration": [
-						17
-					],
-					"postSQLDuration": [
-						0
-					]
-				},
-				"progressState": "Completed",
-				"sources": {},
-				"sinkProcessingTime": 16028
-			}
-		},
-		"clusterComputeId": "ffdf999b-3127-4db8-abb1-e40f55965261",
-		"dsl": "\nsource() ~> source1\n\nsource1 filter() ~> filter1\n\nfilter1 sink() ~> sink1"
-	},
-	"effectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (West US)",
-	"billingReference": {
-		"activityType": "executedataflow",
-		"billableDuration": [
-			{
-				"meterType": "Data Flow",
-				"duration": 0.08176134266666667,
-				"unit": "coreHour",
-				"sessionType": "JobCluster"
-			}
-		]
-	},
-	"reportLineageToPurview": {
-		"status": "NotReported"
-	}
+  "runStatus": {
+    "ClusterId": "azuresolutionsdatafactory.AutoResolveIntegrationRuntime.2",
+    "sparkVersion": "3.3",
+    "computeAcquisitionDuration": 4563,
+    "version": "20241104.1",
+    "profile": {
+      "source1": { "computed": [], "lineage": {}, "dropped": 0, "drifted": 0, "newer": 9, "total": 9, "updated": 0 },
+      "filter1": { "computed": [], "lineage": {}, "dropped": 0, "drifted": 0, "newer": 0, "total": 9, "updated": 0 },
+      "sink1": {
+        "computed": [{ "source": "source1", "columns": ["StateProvince"] }],
+        "lineage": {
+          "ModifiedDate": { "mapped": true, "from": [{ "source": "source1", "columns": ["ModifiedDate"] }] },
+          "CountryRegion": { "mapped": true, "from": [{ "source": "source1", "columns": ["CountryRegion"] }] },
+          "rowguid": { "mapped": true, "from": [{ "source": "source1", "columns": ["rowguid"] }] },
+          "StateProvince": { "mapped": true, "from": [{ "source": "source1", "columns": ["StateProvince"] }] },
+          "AddressLine1": { "mapped": true, "from": [{ "source": "source1", "columns": ["AddressLine1"] }] },
+          "City": { "mapped": true, "from": [{ "source": "source1", "columns": ["City"] }] },
+          "AddressLine2": { "mapped": true, "from": [{ "source": "source1", "columns": ["AddressLine2"] }] },
+          "PostalCode": { "mapped": true, "from": [{ "source": "source1", "columns": ["PostalCode"] }] }
+        },
+        "dropped": 0,
+        "drifted": 0,
+        "newer": 0,
+        "total": 9,
+        "updated": 8
+      }
+    },
+    "metrics": {
+      "sink1": {
+        "format": "",
+        "stages": [{
+          "stage": 0,
+          "partitionTimes": [],
+          "recordsWritten": 0,
+          "lastUpdateTime": "2025-01-22 13:18:06.497",
+          "bytesWritten": 0,
+          "recordsRead": 13,
+          "bytesRead": 0,
+          "partitionStatus": "Success",
+          "streams": {},
+          "target": "sink1",
+          "time": 12057,
+          "progressState": "Completed"
+        }],
+        "sinkPostProcessingTime": 0,
+        "store": "",
+        "rowsWritten": 0,
+        "details": {
+          "preSQLDuration": [0],
+          "tempTable": ["##T_8327_00c4524df3a24d83b71cbef69d2597ee"],
+          "tableOperationSQLDuration": [17],
+          "postSQLDuration": [0]
+        },
+        "progressState": "Completed",
+        "sources": {},
+        "sinkProcessingTime": 16028
+      }
+    },
+    "clusterComputeId": "ffdf999b-3127-4db8-abb1-e40f55965261",
+    "dsl": "source() ~> source1\nsource1 filter() ~> filter1\nfilter1 sink() ~> sink1"
+  },
+  "effectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (West US)",
+  "billingReference": {
+    "activityType": "executedataflow",
+    "billableDuration": [{ "meterType": "Data Flow", "duration": 0.08176134266666667, "unit": "coreHour", "sessionType": "JobCluster" }]
+  },
+  "reportLineageToPurview": { "status": "NotReported" }
 }
 ```
+
+_Note: I've compacted the JSON above for presentation_
 
 ##### Data Flow Details
 
