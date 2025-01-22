@@ -156,45 +156,218 @@ Once execution is complete, roll-over the output row to see icons otherwise hidd
 
 ##### Output
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/760e765b-a4dd-450a-8b91-10ad4da9d595" width="800" title="Snipped January 22, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a5949165-baaa-45d1-ab9b-8381721eb2c6" width="800" title="Snipped January 22, 2025" />
 
 ```json
 {
-    "dataflow": {
-        "referenceName": "dataflow1",
-        "type": "DataFlowReference",
-        "parameters": {},
-        "datasetParameters": {
-            "source1": {},
-            "sink1": {}
-        }
-    },
-    "staging": {},
-    "compute": {
-        "coreCount": 8,
-        "computeType": "General"
-    },
-    "traceLevel": "None",
-    "cacheSinks": {
-        "firstRowOnly": true
-    },
-    "dataFlowDebugSessionId": "2cba1f56-bb3e-48b6-8bd3-becd0416441f",
-    "continuationSettings": {
-        "customizedCheckpointKey": "pipeline1-Data flow1-4615720a-b514-4354-b4d7-12e184c20fd6"
-    }
+	"runStatus": {
+		"ClusterId": "azuresolutionsdatafactory.AutoResolveIntegrationRuntime.2",
+		"sparkVersion": "3.3",
+		"computeAcquisitionDuration": 4563,
+		"version": "20241104.1",
+		"profile": {
+			"source1": {
+				"computed": [],
+				"lineage": {},
+				"dropped": 0,
+				"drifted": 0,
+				"newer": 9,
+				"total": 9,
+				"updated": 0
+			},
+			"filter1": {
+				"computed": [],
+				"lineage": {},
+				"dropped": 0,
+				"drifted": 0,
+				"newer": 0,
+				"total": 9,
+				"updated": 0
+			},
+			"sink1": {
+				"computed": [
+					{
+						"source": "source1",
+						"columns": [
+							"StateProvince"
+						]
+					}
+				],
+				"lineage": {
+					"ModifiedDate": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"ModifiedDate"
+								]
+							}
+						]
+					},
+					"CountryRegion": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"CountryRegion"
+								]
+							}
+						]
+					},
+					"rowguid": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"rowguid"
+								]
+							}
+						]
+					},
+					"StateProvince": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"StateProvince"
+								]
+							}
+						]
+					},
+					"AddressLine1": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"AddressLine1"
+								]
+							}
+						]
+					},
+					"City": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"City"
+								]
+							}
+						]
+					},
+					"AddressLine2": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"AddressLine2"
+								]
+							}
+						]
+					},
+					"PostalCode": {
+						"mapped": true,
+						"from": [
+							{
+								"source": "source1",
+								"columns": [
+									"PostalCode"
+								]
+							}
+						]
+					}
+				},
+				"dropped": 0,
+				"drifted": 0,
+				"newer": 0,
+				"total": 9,
+				"updated": 8
+			}
+		},
+		"metrics": {
+			"sink1": {
+				"format": "",
+				"stages": [
+					{
+						"stage": 0,
+						"partitionTimes": [],
+						"recordsWritten": 0,
+						"lastUpdateTime": "2025-01-22 13:18:06.497",
+						"bytesWritten": 0,
+						"recordsRead": 13,
+						"bytesRead": 0,
+						"partitionStatus": "Success",
+						"streams": {},
+						"target": "sink1",
+						"time": 12057,
+						"progressState": "Completed"
+					}
+				],
+				"sinkPostProcessingTime": 0,
+				"store": "",
+				"rowsWritten": 0,
+				"details": {
+					"preSQLDuration": [
+						0
+					],
+					"tempTable": [
+						"##T_8327_00c4524df3a24d83b71cbef69d2597ee"
+					],
+					"tableOperationSQLDuration": [
+						17
+					],
+					"postSQLDuration": [
+						0
+					]
+				},
+				"progressState": "Completed",
+				"sources": {},
+				"sinkProcessingTime": 16028
+			}
+		},
+		"clusterComputeId": "ffdf999b-3127-4db8-abb1-e40f55965261",
+		"dsl": "\nsource() ~> source1\n\nsource1 filter() ~> filter1\n\nfilter1 sink() ~> sink1"
+	},
+	"effectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (West US)",
+	"billingReference": {
+		"activityType": "executedataflow",
+		"billableDuration": [
+			{
+				"meterType": "Data Flow",
+				"duration": 0.08176134266666667,
+				"unit": "coreHour",
+				"sessionType": "JobCluster"
+			}
+		]
+	},
+	"reportLineageToPurview": {
+		"status": "NotReported"
+	}
 }
 ```
-1. **Review Debug Results**  
-   - Expand each activity in the debug results  
-   - Examine details, including:  
-     - Row counts at each step  
-     - Errors during transformations or data writing  
-     - Connectivity issues with the database  
 
-2. **Logging Levels Overview**  
-   - **None**: Minimal details (pipeline status only)  
-   - **Basic**: High-level details (row counts, activity times)  
-   - **Verbose**: Complete details (data lineage, transformation logs, error traces)  
+##### Data Flow Details
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/d0e85c47-d469-4a79-aef4-7c128eb8745b" width="800" title="Snipped January 22, 2025" />
+
+Click into "Stages" and note that since Logging was set to "None", very little data is presented.
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a3271f93-ceac-4c9d-80b6-f0c963fd7988" width="800" title="Snipped January 22, 2025" />
+
+Return to the pipeline, change the data flow "Logging level" setting to "Verbose", then re-execute with "Debug".
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3127c591-9184-49ff-a7f0-8aa8c16e13e8" width="800" title="Snipped January 22, 2025" />
+
+##### Logging Levels Overview
+- **None**: Minimal details (pipeline status only)  
+- **Basic**: High-level details (row counts, activity times)  
+- **Verbose**: Complete details (data lineage, transformation logs, error traces)  
 
 3. **Areas Affected by Logging Levels**  
    - **Pipeline Runs Monitoring**: Shows pipeline-level or activity-level details  
