@@ -1,4 +1,4 @@
-# AI: Translator
+# AI: Translator, Interface
 
 <img src="https://github.com/user-attachments/assets/c57bea17-8029-4544-8a01-ec9d9644d1a5" width="1000" />
 
