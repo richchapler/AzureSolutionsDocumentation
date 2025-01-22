@@ -1,4 +1,4 @@
-# Lab: AI Translator
+# Lab: Translator
 
 <img src="https://github.com/user-attachments/assets/96481bac-c772-4dae-98c3-139bfd04f9db" width="1000" />
 
