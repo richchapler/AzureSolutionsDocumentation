@@ -113,6 +113,8 @@ Add a new pipeline with a "Data flow" activity. Set "Logging level" to "None".
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/9ef1fab8-120a-47b4-b647-4f980fe2a925" width="800" title="Snipped January 22, 2025" />
 
+_Note: Logging level primarily enhances result statistics_
+
 Click "Debug" to execute the pipeline interactively and then monitor execution in real-time on the "Output" tab.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/4ecddf3d-f7b0-4a4d-afd5-c121836fb7cf" width="800" title="Snipped January 22, 2025" />
