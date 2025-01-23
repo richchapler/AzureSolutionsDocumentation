@@ -23,12 +23,6 @@ Navigate to Translator.
 
 <img src="https://github.com/user-attachments/assets/ec31fd03-cc7c-4148-b551-b14dd881cde0" width="800" title="Snipped January 22, 2025" />
 
-
-
-1. Access the Translator Resource
-   - Navigate to the Azure Portal and open the Translator resource already assigned to your account.
-
-
 2. Use the Portal Interface for Text Translation
    - Go to the "Try It" section available within the Translator resource.
    - Input the text you want to translate, for example:  
@@ -91,10 +85,6 @@ Objective: Use the Azure Portal and Document Translation API to translate files 
 #### Bonus Activity
 - Experiment with translating documents into multiple languages simultaneously by specifying more than one target language.
 - Test with large documents or batches to explore the performance and scalability of the service.
-
----
-
-Here is the Exercise 3: Speech Translation content:
 
 ---
 
@@ -296,3 +286,8 @@ Objective: Identify common API issues and implement error-handling strategies wh
 #### Bonus Activity
 - Use retry logic to automatically resend requests after a delay if they fail with transient errors (e.g., 429 or 503).
 - Create dashboards in Azure Monitor to visualize resource usage trends and API performance.
+
+
+## Reference
+
+- [What is Azure Text Translation?](https://learn.microsoft.com/en-us/azure/ai-services/translator/text-translation-overview)
