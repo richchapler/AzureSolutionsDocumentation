@@ -119,15 +119,40 @@ To manually trigger workflows in **Azure DevOps**, you need a **self-hosted agen
 ---
 
 ## **📌 Step 3: Create a Service Connection to Azure**
-1. **Go to Azure DevOps** → **Project Settings → Service Connections**.
+Azure DevOps no longer provides a direct option to **manually enter a Service Principal ID and Key**. Instead, you must use **"App Registration (Automatic)"**, which automatically creates a Service Principal in Azure Active Directory.
+
+### **3.1: Create a New Azure Service Connection**
+1. **Go to** Azure DevOps → **Project Settings** → **Service Connections**.
 2. Click **New service connection** → **Azure Resource Manager**.
-3. Choose **"Service Principal (manual)"**.
-4. **Enter:**
-   - **Subscription:** Select your Azure subscription.
-   - **Tenant ID:** Paste the **Directory (Tenant) ID**.
-   - **Service Principal ID:** Paste the **Application (Client) ID**.
-   - **Service Principal Key:** Paste the **Client Secret**.
-5. Click **Verify** → **Save**.
+3. **Select**:
+   - **Identity Type** → `"App Registration (Automatic)"` (Recommended)
+   - **Credential** → `"Workload Identity Federation"` (default)
+   - **Scope Level** → `"Subscription"` (Resource Group is no longer an option)
+   - **Subscription** → Select your Azure subscription.
+4. **Service Connection Name** → Enter a meaningful name (e.g., `AzureDataExplorerService`).
+5. **Grant Access to Pipelines** (Optional) → Check this box to allow pipelines to use this connection without further approval.
+
+### **3.2: Complete the Setup**
+1. Click **Save**.
+2. **Azure DevOps will automatically create an App Registration (Service Principal)** in Azure Active Directory.
+3. The connection will appear in **Project Settings → Service Connections**.
+
+---
+
+### **3.3: Restrict Access to a Specific Resource Group (Manual Step)**
+Since **Resource Group is not an option during service connection setup**, you must manually restrict permissions **in the Azure Portal**.
+
+#### **🔹 Steps to Restrict Permissions**
+1. **Go to** [Azure Portal](https://portal.azure.com).
+2. Navigate to **Subscriptions** → Select the subscription used in the service connection.
+3. Click **Access Control (IAM)** → **Role Assignments**.
+4. **Find the newly created Service Principal (App Registration)**.
+   - The name will match your **Service Connection Name** in DevOps.
+5. **Remove** any roles assigned at the **Subscription level** (optional).
+6. **Go to the desired Resource Group**.
+7. Click **Access Control (IAM)** → **Add Role Assignment**.
+8. Assign the necessary **RBAC roles** (e.g., "Contributor", "Monitoring Reader").
+9. Click **Save**.
 
 ---
 
