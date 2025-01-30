@@ -1,16 +1,17 @@
-# **Setting Up a Self-Hosted Azure DevOps Agent for Azure Data Explorer**
+# **Setting Up a Manual Workflow in Azure DevOps to Run Azure CLI Commands**
 
-This guide walks through setting up a **self-hosted agent** in **Azure DevOps** to execute **Azure CLI commands** against **Azure Data Explorer**.
+This guide walks through setting up a **self-hosted agent** in **Azure DevOps** and configuring a **manual pipeline** that runs **Azure CLI commands** against **Azure Data Explorer**.
 
 ---
 
-## **🚀 Prerequisites**
+## **📌 Prerequisites**
 Before starting, ensure you have:
 - ✅ **An Azure DevOps Organization** (`intlkusto`)
 - ✅ **A DevOps Project** (`DataExplorer_Delta`)
 - ✅ **Azure CLI installed** on the agent machine
 - ✅ **A service connection with correct Azure permissions**
 - ✅ **Administrator access to the Agent Pool**
+- ✅ **A self-hosted agent registered in Azure DevOps**
 
 ---
 
@@ -24,10 +25,10 @@ If you're using a **corporate Azure DevOps account** and facing restrictions, cr
 
 ---
 
-## **📌 Step 2: Create & Expand a Personal Access Token (PAT)**
-A **Personal Access Token (PAT)** is required for agent authentication.
+## **📌 Step 2: Set Up a Self-Hosted Agent**
+To manually trigger workflows in **Azure DevOps**, you need a **self-hosted agent** that runs commands on your machine.
 
-### **2.1: Create the PAT**
+### **2.1: Create & Expand a Personal Access Token (PAT)**
 1. **Go to** [https://dev.azure.com/intlkusto/_usersSettings/tokens](https://dev.azure.com/intlkusto/_usersSettings/tokens).
 2. Click **New Token**.
 3. Set:
@@ -46,7 +47,7 @@ A **Personal Access Token (PAT)** is required for agent authentication.
 
 ---
 
-## **📌 Step 3: Create an Agent Pool & Assign Permissions**
+### **2.3: Create an Agent Pool & Assign Permissions**
 1. **Go to** [https://dev.azure.com/intlkusto/_settings/agentpools](https://dev.azure.com/intlkusto/_settings/agentpools).
 2. Click **New Agent Pool**.
 3. Set:
@@ -54,7 +55,7 @@ A **Personal Access Token (PAT)** is required for agent authentication.
    - **Auto-provision in all projects:** ✅
 4. Click **Create**.
 
-### **3.1: Assign Agent Pool Permissions**
+### **2.4: Assign Agent Pool Permissions**
 1. Click **SelfHostedPool** → **Security**.
 2. **Ensure your DevOps user is listed as an Administrator**.
 3. If missing, click **Add**:
@@ -64,31 +65,7 @@ A **Personal Access Token (PAT)** is required for agent authentication.
 
 ---
 
-## **📌 Step 4: Install & Configure the Self-Hosted Agent**
-### **4.1: Remove Any Existing Agent Installations**
-1. **Open PowerShell as Administrator**.
-2. **Check for any existing agent processes**:
-   ```powershell
-   Get-Process | Where-Object { $_.Path -like "C:\AzureDevOpsAgent\*" }
-   ```
-3. **If processes exist, stop them**:
-   ```powershell
-   Stop-Process -Name "Agent.Listener" -Force -ErrorAction SilentlyContinue
-   Stop-Process -Name "Agent.Worker" -Force -ErrorAction SilentlyContinue
-   ```
-4. **If the agent is installed as a service, stop it**:
-   ```powershell
-   Stop-Service -Name "vstsagent.intlkusto.SelfHostedPool" -Force -ErrorAction SilentlyContinue
-   ```
-5. **Delete any old agent files**:
-   ```powershell
-   Remove-Item -Recurse -Force C:\AzureDevOpsAgent
-   ```
-6. **Restart your machine**.
-
----
-
-### **4.2: Download & Configure the Agent**
+### **2.5: Install & Configure the Self-Hosted Agent**
 1. **Go to** [https://dev.azure.com/intlkusto/_settings/agentpools](https://dev.azure.com/intlkusto/_settings/agentpools).
 2. Click **SelfHostedPool → New Agent**.
 3. Select **Windows** as the OS.
@@ -113,16 +90,13 @@ A **Personal Access Token (PAT)** is required for agent authentication.
    - **Agent Pool Name:** `SelfHostedPool`
    - **Agent Name:** *(Press Enter to use the default)*
 
----
-
-## **📌 Step 5: Start the Agent**
-### **For Temporary Execution (Manual Start)**
+### **2.6: Start the Agent**
 ```powershell
 .\run.cmd
 ```
-*(The agent will stay online as long as this PowerShell window remains open.)*
+*(This keeps the agent running in the background.)*
 
-### **For Automatic Execution (Install as a Windows Service)**
+To install it as a **Windows service**, run:
 ```powershell
 .\svcInstall.cmd
 .\svcStart.cmd
@@ -130,29 +104,19 @@ A **Personal Access Token (PAT)** is required for agent authentication.
 
 ---
 
-## **📌 Step 6: Verify the Agent in Azure DevOps**
-1. **Go to** [https://dev.azure.com/intlkusto/_settings/agentpools](https://dev.azure.com/intlkusto/_settings/agentpools).
-2. Click **SelfHostedPool**.
-3. Ensure the **agent appears as Online and Available**.
-
----
-
-## **📌 Step 7: Create a Service Connection to Azure**
-### **7.1: Create a Service Principal in Azure**
+## **📌 Step 3: Create a Service Connection to Azure**
+### **3.1: Create a Service Principal in Azure**
 1. **Go to Azure Portal** → **Azure Active Directory**.
 2. Navigate to **App registrations** → **New registration**.
 3. **Set:**
    - **Name:** `AzureDevOpsAgentSP`
    - **Supported account types:** "Single tenant"
-   - **Redirect URI:** Leave blank
 4. Click **Register**.
 5. **Copy the Application (Client) ID and Directory (Tenant) ID**.
 6. **Go to Certificates & Secrets → New client secret**.
 7. **Copy the generated client secret**.
 
----
-
-### **7.2: Assign RBAC Permissions in Azure**
+### **3.2: Assign RBAC Permissions in Azure**
 1. **Go to Azure Portal → Resource Groups**.
 2. Select the **resource group** where **Azure Data Explorer** exists.
 3. Click **Access control (IAM) → Add role assignment**.
@@ -161,9 +125,7 @@ A **Personal Access Token (PAT)** is required for agent authentication.
    - **"Monitoring Reader"**
 5. Click **Save**.
 
----
-
-### **7.3: Add the Service Connection in Azure DevOps**
+### **3.3: Add the Service Connection in Azure DevOps**
 1. **Go to Azure DevOps** → **Project Settings → Service Connections**.
 2. Click **New service connection** → **Azure Resource Manager**.
 3. Choose **"Service Principal (manual)"**.
@@ -176,11 +138,37 @@ A **Personal Access Token (PAT)** is required for agent authentication.
 
 ---
 
+## **📌 Step 4: Create a Manual Azure DevOps Pipeline**
+1. **Go to Azure DevOps** → **DataExplorer_Delta** → **Pipelines**.
+2. Click **New Pipeline**.
+3. Select **"Azure Repos Git"** and choose your repository.
+4. Click **"Starter pipeline"** and replace the YAML with:
+
+```yaml
+trigger: none  
+
+pool:
+  name: SelfHostedPool  
+
+steps:
+- task: AzureCLI@2
+  displayName: "List Tables in Azure Data Explorer"
+  inputs:
+    azureSubscription: "<Your-Service-Connection-Name>"  
+    scriptType: "bash"
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      az login --service-principal -u "<Your-SP-App-ID>" -p "<Your-SP-Secret>" --tenant "<Your-Tenant-ID>"
+      az kusto query --cluster-name "<adx-cluster-name>" --database-name "<database-name>" --query "Tables | project TableName"
+```
+
+---
+
 ## **✅ Summary**
 This guide ensures:
-- 🔹 **Correct PAT permissions (expanded after creation)**
-- 🔹 **Full agent installation with troubleshooting steps**
-- 🔹 **Proper Azure authentication via Service Principal**
+- 🔹 **A properly configured self-hosted agent**
+- 🔹 **Secure authentication via Azure Service Principal**
 - 🔹 **RBAC assignments scoped to the Resource Group level**
+- 🔹 **A manual Azure DevOps pipeline for running Azure CLI commands**
 
-🚀 **Your Azure DevOps Self-Hosted Agent is now fully configured!** 🚀
+🚀 **Your Azure DevOps Manual Workflow is now fully set up!** 🚀
