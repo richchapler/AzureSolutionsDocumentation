@@ -66,66 +66,59 @@ To manually trigger workflows in **Azure DevOps**, you need a **self-hosted agen
 ---
 
 ### **2.5: Install & Configure the Self-Hosted Agent**
-1. **Go to** [https://dev.azure.com/intlkusto/_settings/agentpools](https://dev.azure.com/intlkusto/_settings/agentpools).
-2. Click **SelfHostedPool → New Agent**.
-3. Select **Windows** as the OS.
-4. **Download the agent ZIP file**.
-5. **Extract it to**:
+1. **Open PowerShell as Administrator**.
+2. **Verify that no existing agent is running**:
+   ```powershell
+   Get-Process | Where-Object { $_.Path -like "C:\AzureDevOpsAgent\*" }
+   ```
+3. **Verify the agent folder doesn't exist**:
+   ```powershell
+   Test-Path C:\AzureDevOpsAgent
+   ```
+   - If this returns `True`, delete the folder:
+     ```powershell
+     Remove-Item -Recurse -Force C:\AzureDevOpsAgent
+     ```
+4. **Go to** [https://dev.azure.com/intlkusto/_settings/agentpools](https://dev.azure.com/intlkusto/_settings/agentpools).
+5. Click **SelfHostedPool → New Agent**.
+6. Select **Windows** as the OS.
+7. **Download the agent ZIP file**.
+8. **Extract it to**:
    ```plaintext
    C:\AzureDevOpsAgent
    ```
-6. **Open PowerShell as Administrator**.
-7. **Navigate to the extracted agent directory**:
+9. **Navigate to the extracted agent directory**:
    ```powershell
    cd C:\AzureDevOpsAgent
    ```
-8. **Run the configuration script**:
+10. **Run the configuration script**:
    ```powershell
    .\config.cmd
    ```
-9. **Enter the following details when prompted**:
-   - **Server URL:** `https://dev.azure.com/intlkusto`
-   - **Authentication Type:** Press **Enter** (default is PAT)
-   - **Enter Personal Access Token (PAT):** Paste the **SelfHostedAgentToken**
-   - **Agent Pool Name:** `SelfHostedPool`
-   - **Agent Name:** *(Press Enter to use the default)*
+11. **Enter the following details when prompted**:
+   ```
+   Enter server URL > https://dev.azure.com/intlkusto
+   Enter authentication type (press enter for PAT) > (Press Enter)
+   Enter personal access token > (Paste SelfHostedAgentToken)
+   Enter agent pool (press enter for default) > SelfHostedPool
+   Enter agent name (press enter for LAPTOP-XXXXX) > (Press Enter)
+   Enter work folder (press enter for _work) > (Press Enter)
+   Enter run agent as service? (Y/N) (press enter for N) > Y
+   Enter enable SERVICE_SID_TYPE_UNRESTRICTED for agent service (Y/N) (press enter for N) > (Press Enter)
+   Enter User account to use for the service (press enter for NT AUTHORITY\NETWORK SERVICE) > (Press Enter)
+   Enter whether to prevent service starting immediately after configuration is finished? (Y/N) (press enter for N) > (Press Enter)
+   ```
 
-### **2.6: Start the Agent**
-```powershell
-.\run.cmd
-```
-*(This keeps the agent running in the background.)*
+---
 
-To install it as a **Windows service**, run:
-```powershell
-.\svcInstall.cmd
-.\svcStart.cmd
-```
+### **2.6: Verify the Agent in Azure DevOps**
+1. **Go to** [https://dev.azure.com/intlkusto/_settings/agentpools](https://dev.azure.com/intlkusto/_settings/agentpools).
+2. Click **SelfHostedPool**.
+3. Ensure the **agent appears as Online and Available**.
 
 ---
 
 ## **📌 Step 3: Create a Service Connection to Azure**
-### **3.1: Create a Service Principal in Azure**
-1. **Go to Azure Portal** → **Azure Active Directory**.
-2. Navigate to **App registrations** → **New registration**.
-3. **Set:**
-   - **Name:** `AzureDevOpsAgentSP`
-   - **Supported account types:** "Single tenant"
-4. Click **Register**.
-5. **Copy the Application (Client) ID and Directory (Tenant) ID**.
-6. **Go to Certificates & Secrets → New client secret**.
-7. **Copy the generated client secret**.
-
-### **3.2: Assign RBAC Permissions in Azure**
-1. **Go to Azure Portal → Resource Groups**.
-2. Select the **resource group** where **Azure Data Explorer** exists.
-3. Click **Access control (IAM) → Add role assignment**.
-4. Assign these roles to the **Service Principal (`AzureDevOpsAgentSP`)**:
-   - **"Contributor"**
-   - **"Monitoring Reader"**
-5. Click **Save**.
-
-### **3.3: Add the Service Connection in Azure DevOps**
 1. **Go to Azure DevOps** → **Project Settings → Service Connections**.
 2. Click **New service connection** → **Azure Resource Manager**.
 3. Choose **"Service Principal (manual)"**.
@@ -167,6 +160,7 @@ steps:
 ## **✅ Summary**
 This guide ensures:
 - 🔹 **A properly configured self-hosted agent**
+- 🔹 **Accurate documentation of every agent setup prompt**
 - 🔹 **Secure authentication via Azure Service Principal**
 - 🔹 **RBAC assignments scoped to the Resource Group level**
 - 🔹 **A manual Azure DevOps pipeline for running Azure CLI commands**
