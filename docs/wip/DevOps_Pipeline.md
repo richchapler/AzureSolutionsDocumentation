@@ -156,17 +156,28 @@ Since **Resource Group is not an option during service connection setup**, you m
 
 ---
 
-## **📌 Step 4: Create a Manual Azure DevOps Pipeline**
-1. **Go to Azure DevOps** → **DataExplorer_Delta** → **Pipelines**.
-2. Click **New Pipeline**.
-3. Select **"Azure Repos Git"** and choose your repository.
-4. Click **"Starter pipeline"** and replace the YAML with:
+You're now selecting the repository for your **YAML pipeline** using the **Start Right experience**. Since classic pipelines are no longer available, continue with the following steps:
+
+---
+
+### **📌 Step 4.1: Select the Repository**
+1. Click **"DataExplorer_Delta"** (your repository).
+2. Proceed to the **Inventory** step.
+
+---
+
+### **📌 Step 4.2: Configure the Pipeline**
+1. **Select a template**:
+   - Choose **"Starter pipeline"** (recommended).
+   - OR select **"Existing YAML file"** if you have a `.yml` pipeline already.
+
+2. If using **"Starter pipeline"**, replace the contents with:
 
 ```yaml
-trigger: none  
+trigger: none  # Manual trigger only
 
 pool:
-  name: SelfHostedPool  
+  name: SelfHostedPool  # Ensure this matches your agent pool name
 
 steps:
 - task: AzureCLI@2
@@ -176,18 +187,12 @@ steps:
     scriptType: "bash"
     scriptLocation: "inlineScript"
     inlineScript: |
-      az login --service-principal -u "<Your-SP-App-ID>" -p "<Your-SP-Secret>" --tenant "<Your-Tenant-ID>"
+      az login --identity
       az kusto query --cluster-name "<adx-cluster-name>" --database-name "<database-name>" --query "Tables | project TableName"
 ```
 
 ---
 
-## **✅ Summary**
-This guide ensures:
-- 🔹 **A properly configured self-hosted agent**
-- 🔹 **Accurate documentation of every agent setup prompt**
-- 🔹 **Secure authentication via Azure Service Principal**
-- 🔹 **RBAC assignments scoped to the Resource Group level**
-- 🔹 **A manual Azure DevOps pipeline for running Azure CLI commands**
-
-🚀 **Your Azure DevOps Manual Workflow is now fully set up!** 🚀
+### **📌 Step 4.3: Review and Run**
+1. Proceed to **Review**.
+2. Click **Save and Run** to test the pipeline.
