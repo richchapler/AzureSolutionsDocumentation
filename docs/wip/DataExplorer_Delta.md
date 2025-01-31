@@ -1,7 +1,3 @@
-Here is the full updated documentation with the **Kusto NuGet installation and configuration** section included.
-
----
-
 # Data Explorer Delta  
 ...using DevOps Pipeline  
 
@@ -13,13 +9,15 @@ Here is the full updated documentation with the **Kusto NuGet installation and c
 - Azure CLI installed on the agent machine  
 - Administrator access to the agent pool  
 
-### Special:
-- PowerShell Core installed and available in `PATH`
-- Azure CLI and PowerShell updates applied
-- Azure CLI Kusto extension installed
-- Microsoft.Azure.Kusto.Data installed via NuGet
-- A self-hosted agent registered in Azure DevOps
-- A service connection with correct Azure permissions
+### Special:  
+- PowerShell Core installed and available in `PATH`  
+- Azure CLI and PowerShell updates applied  
+- Azure CLI Kusto extension installed  
+- Microsoft.Azure.Kusto.Data installed via NuGet  
+- A self-hosted agent registered in Azure DevOps  
+- A service connection with correct Azure permissions  
+
+---
 
 ## Special Pre-Requisite: PowerShell Core  
 
@@ -56,6 +54,8 @@ Restart and verify:
 where.exe pwsh
 ```
 
+---
+
 ## Special Pre-Requisite: Azure CLI and PowerShell Updates  
 
 ### Check for Available Updates  
@@ -66,6 +66,8 @@ $PSVersionTable.PSVersion
 winget upgrade --id Microsoft.PowerShell
 ```
 Restart after updating.  
+
+---
 
 ## Special Pre-Requisite: Azure CLI Kusto Extension  
 
@@ -83,59 +85,7 @@ az extension list --output table
 az kusto -h
 ```
 
-## Special Pre-Requisite: Self-Hosted Agent  
-
-### Create and Expand a Personal Access Token (PAT)  
-1. Go to [DevOps Tokens](https://dev.azure.com/rchapler/_usersSettings/tokens).  
-2. Click "New Token".  
-3. Set:  
-   - "Token Name": `SelfHostedAgentToken`  
-   - "Expiration": 90 days or more  
-   - "Scopes": `"Build (Read & Execute)"`  
-4. Click "Create" and copy the PAT.  
-
-### Expand the PAT Permissions  
-- Enable `"Agent Pools (Read & Manage)"` and `"Project and Team (Read & Write)"`.  
-
-### Create an Agent Pool and Assign Permissions  
-1. Go to [Agent Pools](https://dev.azure.com/rchapler/_settings/agentpools).  
-2. Click "New Agent Pool".  
-3. Set:  
-   - "Pool Name": `SelfHostedPool`  
-   - Enable "Auto-provision in all projects".  
-4. Assign "Administrator" role to your DevOps account.  
-
-### Install and Configure the Self-Hosted Agent  
-```
-Test-Path C:\AzureDevOpsAgent
-Remove-Item -Recurse -Force C:\AzureDevOpsAgent
-```
-1. Download and extract:  
-```
-Expand-Archive -Path "$HOME\Downloads\vsts-agent-win-x64-4.248.0.zip" -DestinationPath "C:\AzureDevOpsAgent"
-cd C:\AzureDevOpsAgent
-```
-2. Run the configuration:  
-```
-.\config.cmd
-```
-3. Enter:  
-```
-Server URL: https://dev.azure.com/rchapler
-Auth Type: (Press Enter)
-PAT: (Paste SelfHostedAgentToken)
-Pool: SelfHostedPool
-```
-
-## Special Pre-Requisite: Service Connection  
-
-### Create a New Azure Service Connection  
-1. Go to "Azure DevOps" → "Project Settings" → "Service Connections".  
-2. Click "New service connection" → "Azure Resource Manager".  
-3. Select:  
-   - "Identity Type" → `"App Registration (Automatic)"`  
-   - "Scope Level" → `"Subscription"`  
-4. Set "Service Connection Name" (e.g., `AzureDataExplorerService`).  
+---
 
 ## Special Pre-Requisite: Microsoft.Azure.Kusto.Data via NuGet  
 
@@ -203,6 +153,66 @@ az rest --method post `
   --body "{ \"db\": \"<your-database-name>\", \"csl\": \"Tables | project TableName\" }"
 ```
 
+---
+
+## Special Pre-Requisite: Self-Hosted Agent  
+
+### Create and Expand a Personal Access Token (PAT)  
+1. Go to [DevOps Tokens](https://dev.azure.com/rchapler/_usersSettings/tokens).  
+2. Click "New Token".  
+3. Set:  
+   - "Token Name": `SelfHostedAgentToken`  
+   - "Expiration": 90 days or more  
+   - "Scopes": `"Build (Read & Execute)"`  
+4. Click "Create" and copy the PAT.  
+
+### Expand the PAT Permissions  
+- Enable `"Agent Pools (Read & Manage)"` and `"Project and Team (Read & Write)"`.  
+
+### Create an Agent Pool and Assign Permissions  
+1. Go to [Agent Pools](https://dev.azure.com/rchapler/_settings/agentpools).  
+2. Click "New Agent Pool".  
+3. Set:  
+   - "Pool Name": `SelfHostedPool`  
+   - Enable "Auto-provision in all projects".  
+4. Assign "Administrator" role to your DevOps account.  
+
+### Install and Configure the Self-Hosted Agent  
+```
+Test-Path C:\AzureDevOpsAgent
+Remove-Item -Recurse -Force C:\AzureDevOpsAgent
+```
+1. Download and extract:  
+```
+Expand-Archive -Path "$HOME\Downloads\vsts-agent-win-x64-4.248.0.zip" -DestinationPath "C:\AzureDevOpsAgent"
+cd C:\AzureDevOpsAgent
+```
+2. Run the configuration:  
+```
+.\config.cmd
+```
+3. Enter:  
+```
+Server URL: https://dev.azure.com/rchapler
+Auth Type: (Press Enter)
+PAT: (Paste SelfHostedAgentToken)
+Pool: SelfHostedPool
+```
+
+---
+
+## Special Pre-Requisite: Service Connection  
+
+### Create a New Azure Service Connection  
+1. Go to "Azure DevOps" → "Project Settings" → "Service Connections".  
+2. Click "New service connection" → "Azure Resource Manager".  
+3. Select:  
+   - "Identity Type" → `"App Registration (Automatic)"`  
+   - "Scope Level" → `"Subscription"`  
+4. Set "Service Connection Name" (e.g., `AzureDataExplorerService`).  
+
+---
+
 ## Pipeline Definition  
 ```
 trigger: none
@@ -221,6 +231,8 @@ steps:
       az kusto query --cluster-name "rc05dataexplorercluste" --database-name "rc05dataexplorerdatabase" --query "Tables | project TableName"
 ```
 
+---
+
 ## Review and Run  
 1. Proceed to "Review".  
-2. Click "Save and Run" to test the pipeline. 🚀
+2. Click "Save and Run" to test the pipeline. 🚀  
