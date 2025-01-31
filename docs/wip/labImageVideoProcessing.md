@@ -1,16 +1,22 @@
-# Lab: Image and Video Processing with Azure AI Services
+# Lab: AI Vision
+
+<img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
+
+## Solution Requirements
+
+This documentation assumes the following resources are ready for use:
+
+* [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+* [Visual Studio Code](https://code.visualstudio.com/download)
 
 ## Exercise 0: Setting Up Visual Studio Code for Python Development
 
-## Objective
+### Objective
 Ensure that participants have a properly configured environment to develop and run Python applications, particularly for integrating with the Azure AI Vision API.
 
-## Prerequisites
-- Windows, macOS, or Linux system
-- Internet connection
-- Azure Subscription (for API key and endpoint)
+### Steps
 
-## Steps
+<img src="https://github.com/user-attachments/assets/ec31fd03-cc7c-4148-b551-b14dd881cde0" width="800" title="Snipped January 22, 2025" />
 
 1. Install Python
    - Download the latest version of Python from [python.org](https://www.python.org/)
