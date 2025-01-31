@@ -7,8 +7,8 @@
 This documentation assumes the following resources are ready for use:
 
 * [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
-* [Visual Studio Code](https://code.visualstudio.com/download)
-* [Python](https://www.python.org/)
+* [Visual Studio Code](https://code.visualstudio.com/download) with Python extension
+* [Python](https://www.python.org/) with "Add Python to PATH"
 
 ## Exercise 1: Set Up Visual Studio Code for Python Development
 
@@ -17,17 +17,8 @@ Ensure that participants have a properly configured environment to develop and r
 
 ### Steps
 
+Open Vision Studio Code
 <img src="https://github.com/user-attachments/assets/ec31fd03-cc7c-4148-b551-b14dd881cde0" width="800" title="Snipped January 22, 2025" />
-
-1. Install Python
-   - Install Python, ensuring you check "Add Python to PATH"
-
-2. Install Visual Studio Code (VS Code)
-   - Download and install [VS Code](https://code.visualstudio.com/)
-   - Open VS Code and install the Python extension:
-     - Go to Extensions (`Ctrl+Shift+X` or `Cmd+Shift+X` on macOS)
-     - Search for "Python"
-     - Click Install
 
 3. Set Up a Virtual Environment
    - Open a new terminal in VS Code
