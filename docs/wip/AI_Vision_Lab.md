@@ -10,12 +10,7 @@ This documentation assumes the following resources are ready for use:
 * [Visual Studio Code](https://code.visualstudio.com/download) with Python extension
 * [Python](https://www.python.org/) with "Add Python to PATH"
 
-## Exercise 1: Set Up Visual Studio Code for Python Development
-
-### Objective
-Ensure that participants have a properly configured environment to develop and run Python applications, particularly for integrating with the Azure AI Vision API.
-
-### Step 1: Prepare Visual Studio Code
+## Exercise 1: Prepare Visual Studio Code
 
 Open Vision Studio Code >> Extensions, then search for and select Python from the "Extensions: Marketplace" pane.
 
@@ -42,15 +37,29 @@ Download and install the latest version of `azure-ai-vision-imageanalysis` by ex
 pip install azure-ai-vision-imageanalysis
 ```
 
-### Step 2: Lorem Ispum
+### Exercise 2: Vision Studio
 
-Open Azure Portal
+Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and browse the interface
 
-4. Obtain Azure AI Vision API Key and Endpoint
-   - Sign in to the [Azure Portal](https://portal.azure.com/)
-   - Search for Cognitive Services
-   - Create an AI Vision resource
-   - Copy the API Key and Endpoint for use in the exercises
+<img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />
+
+We will focus on the following topics:
+
+- **Optical Character Recognition (OCR)** - Extract text from images, including handwriting and printed text
+- **Spatial Analysis** - Detect people, movement, and zones in real-time video (used for surveillance, retail, etc.) ... **HARTIHA: IN SCOPE?**
+- **Face** - Detect and analyze faces, including emotions and age estimation ... **HARTIHA: IN SCOPE?**
+- Image Analysis
+  - **Object Detection** - Identify objects and returns bounding boxes
+  - **Caption Images** - Generate descriptions of images in natural language
+
+### Exercise 2a: Vision Studio | Optical Character Recognition (OCR)
+
+
+
+
+
+
+
 
 ---
 
