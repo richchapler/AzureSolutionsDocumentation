@@ -15,10 +15,13 @@ This documentation assumes the following resources are ready for use:
 ### Objective
 Ensure that participants have a properly configured environment to develop and run Python applications, particularly for integrating with the Azure AI Vision API.
 
-### Steps
+### Step 1: Prepare Visual Studio Code
 
-Open Vision Studio Code
-<img src="https://github.com/user-attachments/assets/ec31fd03-cc7c-4148-b551-b14dd881cde0" width="800" title="Snipped January 22, 2025" />
+Open Vision Studio Code >> Extensions, then search for and select Python from the "Extensions: Marketplace" pane.
+
+<img src="https://github.com/user-attachments/assets/815273f0-a430-4e08-9056-d2fc91b4cec9" width="800" title="Snipped January 31, 2025" />
+
+Confirm installation, then close.
 
 3. Set Up a Virtual Environment
    - Open a new terminal in VS Code
