@@ -39,7 +39,7 @@ pip install azure-ai-vision-imageanalysis
 
 ### Exercise 2: Vision Studio
 
-Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and browse the interface
+Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and browse the interface.
 
 <img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />
 
@@ -54,7 +54,70 @@ We will focus on the following topics:
 
 ### Exercise 2a: Vision Studio | Optical Character Recognition (OCR)
 
+### **Exercise 2a: Vision Studio | Optical Character Recognition (OCR)**
 
+<img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />
+
+Select **Optical Character Recognition (OCR)** from the left menu
+
+---
+
+### **Step 2: Upload an Image**
+1. Click **"Try OCR"**
+2. Upload an image containing text (handwritten or printed)
+3. Click **Analyze**
+
+---
+
+### **Step 3: Review Extracted Text**
+After processing, Vision Studio will display:
+- **Extracted text from the image**
+- **Confidence scores** for accuracy
+- **JSON output** (expand to view full response)
+
+---
+
+### **Step 4: Compare with Python SDK (Optional)**
+If needed, use **Python in VS Code** to replicate the results:
+
+1. Create `ocr.py`  
+2. Add the following:
+   ```python
+   from azure.ai.vision.imageanalysis import ImageAnalysisClient
+   from azure.ai.vision.imageanalysis.models import VisualFeatures
+   from azure.core.credentials import AzureKeyCredential
+   from config import API_KEY, ENDPOINT
+
+   def perform_ocr(image_path):
+       client = ImageAnalysisClient(endpoint=ENDPOINT, credential=AzureKeyCredential(API_KEY))
+       with open(image_path, "rb") as image:
+           result = client.analyze_image(image, visual_features=[VisualFeatures.READ])
+
+       return {"text": result.read.text if result.read else "No text detected"}
+
+   if __name__ == "__main__":
+       print(perform_ocr("test.jpg"))
+   ```
+3. Run in **PowerShell**:
+   ```powershell
+   python ocr.py
+   ```
+4. Compare the **Vision Studio JSON output** with the **Python script JSON output**.
+
+---
+
+### **Step 5: Discussion**
+- What differences exist between **Vision Studio OCR output** and **Python SDK OCR output**?
+- When would you **prefer the SDK** over **Vision Studio** (e.g., automation, real-time processing)?
+
+---
+
+### **Next Steps**
+Proceed to **Exercise 2b: Vision Studio | Image Analysis (Object Detection & Captions)**.
+
+---
+
+Would you like to keep Python in this section, or remove it entirely and keep it **purely Vision Studio**? 🚀
 
 
 
