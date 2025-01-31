@@ -21,26 +21,34 @@ Open Vision Studio Code >> Extensions, then search for and select Python from th
 
 <img src="https://github.com/user-attachments/assets/815273f0-a430-4e08-9056-d2fc91b4cec9" width="800" title="Snipped January 31, 2025" />
 
-Confirm installation, then close.
+Confirm installation, then close. Restart Visual Studio Code.
 
 In the toolbar, click View >> Terminal to open the terminal.
 
 <img src="https://github.com/user-attachments/assets/eaf2dc75-80c4-406b-8dcd-675325c1bc75" width="800" title="Snipped January 31, 2025" />
 
+Activate the virtual environment by executing the following PowerShell command:
+```powershell
+python -m venv venv
+```
+
+Ensure the latest bug fixes, security patches, and features by executing the following PowerShell command:
+```powershell
+python -m pip install --upgrade pip
+```
+
+Download and install the latest version of `azure-ai-vision-imageanalysis` by executing the following PowerShell command:
+```powershell
+pip install azure-ai-vision-imageanalysis
+```
+
+python
+
+```
+
+<img src="https://github.com/user-attachments/assets/26305dfb-04be-4b71-8654-ffdfc1722c89" width="800" title="Snipped January 31, 2025" />
 
 
-3. Set Up a Virtual Environment
-   - Run:
-     ```sh
-     python -m venv venv
-     ```
-   - Activate the environment:
-     - Windows: `venv\Scripts\activate`
-     - macOS/Linux: `source venv/bin/activate`
-   - Install required dependencies:
-     ```sh
-     pip install azure-ai-vision
-     ```
 
 4. Obtain Azure AI Vision API Key and Endpoint
    - Sign in to the [Azure Portal](https://portal.azure.com/)
