@@ -1,232 +1,211 @@
-# Data Explorer Delta
-...using DevOps Pipeline
+Here is the full updated documentation with the **Kusto NuGet installation and configuration** section included.
 
-## Prerequisites
+---
 
-Basics:
-- An Azure DevOps organization ("rchapler")
-- A DevOps project ("DataExplorer_Delta")
-- Azure CLI installed on the agent machine
-- Administrator access to the agent pool
+# Data Explorer Delta  
+...using DevOps Pipeline  
 
-Special:
+## Prerequisites  
+
+### Basics:  
+- An Azure DevOps organization ("rchapler")  
+- A DevOps project ("DataExplorer_Delta")  
+- Azure CLI installed on the agent machine  
+- Administrator access to the agent pool  
+
+### Special:
 - PowerShell Core installed and available in `PATH`
 - Azure CLI and PowerShell updates applied
 - Azure CLI Kusto extension installed
+- Microsoft.Azure.Kusto.Data installed via NuGet
 - A self-hosted agent registered in Azure DevOps
 - A service connection with correct Azure permissions
 
-## Special Pre-Requisite: PowerShell Core
+## Special Pre-Requisite: PowerShell Core  
 
-If PowerShell Core (`pwsh`) is not installed or not available in `PATH`, install it using the following steps.
+If PowerShell Core (`pwsh`) is not installed or not available in `PATH`, install it.  
 
-### Verify if PowerShell Core is Installed
-
-Run:
-```powershell
+### Verify if PowerShell Core is Installed  
+```
 pwsh -v
 ```
-If the command is not recognized, proceed with installation.
+If the command is not recognized, proceed with installation.  
 
-### Install PowerShell Core
-
-1. Open PowerShell as Administrator.
-2. Run:
-   ```powershell
-   winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements
-   ```
-3. Restart the machine to ensure `pwsh` is available in `PATH`.
-
-### Verify Installation Path
-
-Run:
-```powershell
-Get-ChildItem "C:\Program Files\PowerShell"
+### Install PowerShell Core  
 ```
-If a `7` folder exists, check if `pwsh.exe` is inside:
-```powershell
+winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements
+```
+Restart the machine to ensure `pwsh` is available in `PATH`.  
+
+### Verify Installation Path  
+```
+Get-ChildItem "C:\Program Files\PowerShell"
 Test-Path "C:\Program Files\PowerShell\7\pwsh.exe"
 ```
 
-### Add PowerShell Core to `PATH` (If Needed)
-
-If `pwsh.exe` exists but is not found, run:
-```powershell
+### Add PowerShell Core to `PATH` (If Needed)  
+```
 $pwshPath = "C:\Program Files\PowerShell\7\"
 $envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 if ($envPath -notlike "*$pwshPath*") {
     [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$pwshPath", "Machine")
 }
 ```
-Restart the machine and verify by running:
-```powershell
+Restart and verify:  
+```
 where.exe pwsh
 ```
 
-## Special Pre-Requisite: Azure CLI and PowerShell Updates
+## Special Pre-Requisite: Azure CLI and PowerShell Updates  
 
-Keeping Azure CLI and PowerShell updated ensures compatibility with the latest features.
-
-### Check for Available Updates
-
-Run:
-```powershell
+### Check for Available Updates  
+```
 az version
-```
-To check for available updates:
-```powershell
 az upgrade
-```
-For PowerShell updates, check the installed version:
-```powershell
 $PSVersionTable.PSVersion
-```
-If outdated, update using:
-```powershell
 winget upgrade --id Microsoft.PowerShell
 ```
-Restart the machine after updating.
+Restart after updating.  
 
-## Special Pre-Requisite: Azure CLI Kusto Extension
+## Special Pre-Requisite: Azure CLI Kusto Extension  
 
-If the `az kusto` command is not recognized, install the **Azure Data Explorer (Kusto) CLI extension**.
-
-### Verify if the Kusto Extension is Installed
-
-Run:
-```powershell
+### Verify if the Kusto Extension is Installed  
+```
 az extension list --output table
 ```
-If `kusto` is not listed, install it.
-
-### Install the Kusto Extension
-
-Run:
-```powershell
+If `kusto` is not listed, install:  
+```
 az extension add --name kusto
 ```
-Verify installation:
-```powershell
-az extension list --output table
+Verify installation:  
 ```
-Test the command:
-```powershell
+az extension list --output table
 az kusto -h
 ```
 
-## Special Pre-Requisite: Self-Hosted Agent
+## Special Pre-Requisite: Self-Hosted Agent  
 
-To manually trigger workflows in Azure DevOps, you need a self-hosted agent that runs commands on your machine.
+### Create and Expand a Personal Access Token (PAT)  
+1. Go to [DevOps Tokens](https://dev.azure.com/rchapler/_usersSettings/tokens).  
+2. Click "New Token".  
+3. Set:  
+   - "Token Name": `SelfHostedAgentToken`  
+   - "Expiration": 90 days or more  
+   - "Scopes": `"Build (Read & Execute)"`  
+4. Click "Create" and copy the PAT.  
 
-### Create and Expand a Personal Access Token (PAT)
+### Expand the PAT Permissions  
+- Enable `"Agent Pools (Read & Manage)"` and `"Project and Team (Read & Write)"`.  
 
-1. Go to [https://dev.azure.com/rchapler/_usersSettings/tokens](https://dev.azure.com/rchapler/_usersSettings/tokens).
-2. Click "New Token".
-3. Set:
-   - "Token Name": `SelfHostedAgentToken`
-   - "Expiration": 90 days or more.
-   - "Scopes":
-     - "Build (Read & Execute)"
-4. Click "Create" and copy the PAT immediately.
+### Create an Agent Pool and Assign Permissions  
+1. Go to [Agent Pools](https://dev.azure.com/rchapler/_settings/agentpools).  
+2. Click "New Agent Pool".  
+3. Set:  
+   - "Pool Name": `SelfHostedPool`  
+   - Enable "Auto-provision in all projects".  
+4. Assign "Administrator" role to your DevOps account.  
 
-#### Expand the PAT Permissions
+### Install and Configure the Self-Hosted Agent  
+```
+Test-Path C:\AzureDevOpsAgent
+Remove-Item -Recurse -Force C:\AzureDevOpsAgent
+```
+1. Download and extract:  
+```
+Expand-Archive -Path "$HOME\Downloads\vsts-agent-win-x64-4.248.0.zip" -DestinationPath "C:\AzureDevOpsAgent"
+cd C:\AzureDevOpsAgent
+```
+2. Run the configuration:  
+```
+.\config.cmd
+```
+3. Enter:  
+```
+Server URL: https://dev.azure.com/rchapler
+Auth Type: (Press Enter)
+PAT: (Paste SelfHostedAgentToken)
+Pool: SelfHostedPool
+```
 
-5. Go back to the PAT page → Edit `SelfHostedAgentToken`.
-6. Enable these additional scopes:
-   - "Agent Pools (Read & Manage)"
-   - "Project and Team (Read & Write)"
-7. Click "Save" and copy the updated PAT.
+## Special Pre-Requisite: Service Connection  
 
-### Create an Agent Pool and Assign Permissions
+### Create a New Azure Service Connection  
+1. Go to "Azure DevOps" → "Project Settings" → "Service Connections".  
+2. Click "New service connection" → "Azure Resource Manager".  
+3. Select:  
+   - "Identity Type" → `"App Registration (Automatic)"`  
+   - "Scope Level" → `"Subscription"`  
+4. Set "Service Connection Name" (e.g., `AzureDataExplorerService`).  
 
-1. Go to [https://dev.azure.com/rchapler/_settings/agentpools](https://dev.azure.com/rchapler/_settings/agentpools).
-2. Click "New Agent Pool".
-3. Set:
-   - "Pool Name": `SelfHostedPool`
-   - "Auto-provision in all projects": ✅
-4. Click "Create".
+## Special Pre-Requisite: Microsoft.Azure.Kusto.Data via NuGet  
 
-#### Assign Agent Pool Permissions
+### 1. Disable VPN (If Applicable)  
+If using a VPN, **turn it off** before installation.  
 
-1. Click "SelfHostedPool" → "Security".
-2. Ensure your DevOps user is listed as an "Administrator".
-3. If missing, click "Add":
-   - "User": Select your DevOps account.
-   - "Role": `Administrator`.
-4. Click "Save".
+### 2. Verify Network Connectivity  
+```
+Test-NetConnection -ComputerName api.nuget.org -Port 443
+Test-NetConnection -ComputerName www.nuget.org -Port 443
+```
+If `www.nuget.org` fails, update DNS:  
+```
+netsh interface ip set dns "Wi-Fi" static 8.8.8.8
+ipconfig /flushdns
+```
+Restart the adapter and test again.  
 
-### Install and Configure the Self-Hosted Agent
+### 3. Install NuGet CLI  
+```
+Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile C:\KustoSDK\nuget.exe
+C:\KustoSDK\nuget.exe help
+```
 
-1. Open PowerShell as Administrator.
-2. Verify that no existing agent is running:
-   ```powershell
-   Get-Process | Where-Object { $_.Path -like "C:\AzureDevOpsAgent\*" }
-   ```
-3. Verify the agent folder doesn't exist:
-   ```powershell
-   Test-Path C:\AzureDevOpsAgent
-   ```
-   - If this returns `True`, delete the folder:
-     ```powershell
-     Remove-Item -Recurse -Force C:\AzureDevOpsAgent
-     ```
-4. Go to [https://dev.azure.com/rchapler/_settings/agentpools](https://dev.azure.com/rchapler/_settings/agentpools).
-5. Click "SelfHostedPool" → "New Agent".
-6. Select "Windows" as the OS.
-7. Download the agent ZIP file.
-8. Extract it to:
-   ```powershell
-   Expand-Archive -Path "$HOME\Downloads\vsts-agent-win-x64-4.248.0.zip" -DestinationPath "C:\AzureDevOpsAgent"
-   ```
-9. Navigate to the extracted agent directory:
-   ```powershell
-   cd C:\AzureDevOpsAgent
-   ```
-10. Run the configuration script:
-    ```powershell
-    .\config.cmd
-    ```
-11. Enter the following details when prompted:
-    ```
-    Enter server URL > https://dev.azure.com/rchapler
-    Enter authentication type (press enter for PAT) > (Press Enter)
-    Enter personal access token > (Paste SelfHostedAgentToken)
-    Enter agent pool (press enter for default) > SelfHostedPool
-    Enter agent name (press enter for LAPTOP-XXXXX) > (Press Enter)
-    Enter work folder (press enter for _work) > (Press Enter)
-    Enter run agent as service? (Y/N) (press enter for N) > Y
-    Enter enable SERVICE_SID_TYPE_UNRESTRICTED for agent service (Y/N) (press enter for N) > (Press Enter)
-    Enter User account to use for the service (press enter for NT AUTHORITY\NETWORK SERVICE) > (Press Enter)
-    Enter whether to prevent service starting immediately after configuration is finished? (Y/N) (press enter for N) > (Press Enter)
-    ```
+### 4. Install Required Packages  
+```
+C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Data -OutputDirectory C:\KustoSDK
+C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Ingest -OutputDirectory C:\KustoSDK
+C:\KustoSDK\nuget.exe install Newtonsoft.Json -OutputDirectory C:\KustoSDK
+C:\KustoSDK\nuget.exe install Microsoft.IdentityModel.Tokens -OutputDirectory C:\KustoSDK
+```
 
-### Verify the Agent in Azure DevOps
+### 5. Locate and Load the DLLs  
+```
+Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll"
+Add-Type -Path "C:\KustoSDK\Microsoft.Azure.Kusto.Data.13.0.0\lib\netstandard2.0\Kusto.Data.dll"
+```
 
-1. Go to [https://dev.azure.com/rchapler/_settings/agentpools](https://dev.azure.com/rchapler/_settings/agentpools).
-2. Click "SelfHostedPool".
-3. Ensure the agent appears as "Online" and "Available".
+### 6. Authenticate with Azure  
+```
+az login
+az account show
+$Token = az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
+```
 
-## Special Pre-Requisite: Service Connection
+### 7. Run a Test Query  
+```
+$Cluster = "https://<your-cluster-name>.eastus.kusto.windows.net"
+$Database = "<your-database-name>"
+$Query = "Tables | project TableName"
 
-Azure DevOps no longer provides a direct option to manually enter a Service Principal ID and Key. Instead, you must use "App Registration (Automatic)", which automatically creates a Service Principal in Azure Active Directory.
+$ConnectionString = "Data Source=$Cluster;Initial Catalog=$Database;Fed=True;Authorization=Bearer $Token"
+$KustoClient = New-Object Microsoft.Azure.Kusto.Data.KustoClient -ArgumentList $ConnectionString
+$QueryProvider = $KustoClient.GetQueryProvider()
+$QueryResults = $QueryProvider.ExecuteQuery($Query, $null, $null)
 
-### Create a New Azure Service Connection
+$QueryResults.Tables[0].Rows | Format-Table
+```
 
-1. Go to Azure DevOps → "Project Settings" → "Service Connections".
-2. Click "New service connection" → "Azure Resource Manager".
-3. Select:
-   - "Identity Type" → `"App Registration (Automatic)"`
-   - "Credential" → `"Workload Identity Federation"`
-   - "Scope Level" → `"Subscription"`
-   - "Subscription" → Select your Azure subscription.
-4. Enter a meaningful name for "Service Connection Name" (e.g., `AzureDataExplorerService`).
-5. Check "Grant Access to Pipelines" (Optional).
+### Alternative: Use `az rest` Instead  
+```
+az rest --method post `
+  --url "https://<your-cluster-name>.eastus.kusto.windows.net/v1/rest/query" `
+  --headers "Content-Type=application/json" `
+  --body "{ \"db\": \"<your-database-name>\", \"csl\": \"Tables | project TableName\" }"
+```
 
-## Create Pipeline
-
-```yaml
+## Pipeline Definition  
+```
 trigger: none
-
 pool:
   name: SelfHostedPool
 
@@ -242,7 +221,6 @@ steps:
       az kusto query --cluster-name "rc05dataexplorercluste" --database-name "rc05dataexplorerdatabase" --query "Tables | project TableName"
 ```
 
-## Review and Run
-
-1. Proceed to "Review".
-2. Click "Save and Run" to test the pipeline.
+## Review and Run  
+1. Proceed to "Review".  
+2. Click "Save and Run" to test the pipeline. 🚀
