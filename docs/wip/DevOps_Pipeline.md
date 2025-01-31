@@ -83,15 +83,26 @@ To manually trigger workflows in **Azure DevOps**, you need a **self-hosted agen
 5. Click **SelfHostedPool → New Agent**.
 6. Select **Windows** as the OS.
 7. **Download the agent ZIP file**.
-8. **Extract it to**:
+8. 
+
+
+Create the agent
+PS C:\> mkdir agent ; cd agent
+PS C:\agent> Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$HOME\Downloads\vsts-agent-win-x64-4.248.0.zip", "$PWD")
+
+REVIEW HERE
+
+
+
+9. **Extract it to**:
    ```plaintext
    C:\AzureDevOpsAgent
    ```
-9. **Navigate to the extracted agent directory**:
+10. **Navigate to the extracted agent directory**:
    ```powershell
    cd C:\AzureDevOpsAgent
    ```
-10. **Run the configuration script**:
+11. **Run the configuration script**:
    ```powershell
    .\config.cmd
    ```
