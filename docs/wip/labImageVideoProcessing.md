@@ -1,4 +1,4 @@
-# Lab Outline: Image and Video Processing with Azure AI Services
+# Lab: Image and Video Processing with Azure AI Services
 
 ## Exercise 0: Setting Up Visual Studio Code for Python Development
 
