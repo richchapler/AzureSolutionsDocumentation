@@ -23,8 +23,13 @@ Open Vision Studio Code >> Extensions, then search for and select Python from th
 
 Confirm installation, then close.
 
+In the toolbar, click View >> Terminal to open the terminal.
+
+<img src="https://github.com/user-attachments/assets/eaf2dc75-80c4-406b-8dcd-675325c1bc75" width="800" title="Snipped January 31, 2025" />
+
+
+
 3. Set Up a Virtual Environment
-   - Open a new terminal in VS Code
    - Run:
      ```sh
      python -m venv venv
