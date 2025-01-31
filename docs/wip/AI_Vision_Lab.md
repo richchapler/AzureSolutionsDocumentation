@@ -1,4 +1,4 @@
-# Lab: AI Vision
+# Lab: Vision Studio
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
