@@ -1,4 +1,5 @@
-# Data Explorer "Sniff-and-Diff" (using DevOps Pipeline)
+# Data Explorer Delta
+...using DevOps Pipeline
 
 ## Prerequisites
 
