@@ -54,11 +54,9 @@ We will focus on the following topics:
 
 ### Exercise 2a: Vision Studio | Optical Character Recognition (OCR)
 
-### **Exercise 2a: Vision Studio | Optical Character Recognition (OCR)**
-
 <img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />
 
-Select **Optical Character Recognition (OCR)** from the left menu
+Select **Optical Character Recognition (OCR)**.
 
 ---
 
