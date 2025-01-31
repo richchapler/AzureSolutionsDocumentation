@@ -10,14 +10,16 @@ Basics:
 
 Special:
 - PowerShell Core installed and available in `PATH`
+- Azure CLI and PowerShell updates applied
+- Azure CLI Kusto extension installed
 - A self-hosted agent registered in Azure DevOps
 - A service connection with correct Azure permissions
 
-### Special Pre-Requisite: PowerShell Core
+## Special Pre-Requisite: PowerShell Core
 
 If PowerShell Core (`pwsh`) is not installed or not available in `PATH`, install it using the following steps.
 
-#### Verify if PowerShell Core is Installed
+### Verify if PowerShell Core is Installed
 
 Run:
 ```powershell
@@ -34,7 +36,7 @@ If the command is not recognized, proceed with installation.
    ```
 3. Restart the machine to ensure `pwsh` is available in `PATH`.
 
-#### Verify Installation Path
+### Verify Installation Path
 
 Run:
 ```powershell
@@ -45,7 +47,7 @@ If a `7` folder exists, check if `pwsh.exe` is inside:
 Test-Path "C:\Program Files\PowerShell\7\pwsh.exe"
 ```
 
-#### Add PowerShell Core to `PATH` (If Needed)
+### Add PowerShell Core to `PATH` (If Needed)
 
 If `pwsh.exe` exists but is not found, run:
 ```powershell
@@ -60,11 +62,62 @@ Restart the machine and verify by running:
 where.exe pwsh
 ```
 
-### Special Pre-Requisite: Self-Hosted Agent
+## Special Pre-Requisite: Azure CLI and PowerShell Updates
+
+Keeping Azure CLI and PowerShell updated ensures compatibility with the latest features.
+
+### Check for Available Updates
+
+Run:
+```powershell
+az version
+```
+To check for available updates:
+```powershell
+az upgrade
+```
+For PowerShell updates, check the installed version:
+```powershell
+$PSVersionTable.PSVersion
+```
+If outdated, update using:
+```powershell
+winget upgrade --id Microsoft.PowerShell
+```
+Restart the machine after updating.
+
+## Special Pre-Requisite: Azure CLI Kusto Extension
+
+If the `az kusto` command is not recognized, install the **Azure Data Explorer (Kusto) CLI extension**.
+
+### Verify if the Kusto Extension is Installed
+
+Run:
+```powershell
+az extension list --output table
+```
+If `kusto` is not listed, install it.
+
+### Install the Kusto Extension
+
+Run:
+```powershell
+az extension add --name kusto
+```
+Verify installation:
+```powershell
+az extension list --output table
+```
+Test the command:
+```powershell
+az kusto -h
+```
+
+## Special Pre-Requisite: Self-Hosted Agent
 
 To manually trigger workflows in Azure DevOps, you need a self-hosted agent that runs commands on your machine.
 
-#### Create and Expand a Personal Access Token (PAT)
+### Create and Expand a Personal Access Token (PAT)
 
 1. Go to [https://dev.azure.com/rchapler/_usersSettings/tokens](https://dev.azure.com/rchapler/_usersSettings/tokens).
 2. Click "New Token".
@@ -75,7 +128,7 @@ To manually trigger workflows in Azure DevOps, you need a self-hosted agent that
      - "Build (Read & Execute)"
 4. Click "Create" and copy the PAT immediately.
 
-##### Expand the PAT Permissions
+#### Expand the PAT Permissions
 
 5. Go back to the PAT page → Edit `SelfHostedAgentToken`.
 6. Enable these additional scopes:
@@ -83,7 +136,7 @@ To manually trigger workflows in Azure DevOps, you need a self-hosted agent that
    - "Project and Team (Read & Write)"
 7. Click "Save" and copy the updated PAT.
 
-#### Create an Agent Pool and Assign Permissions
+### Create an Agent Pool and Assign Permissions
 
 1. Go to [https://dev.azure.com/rchapler/_settings/agentpools](https://dev.azure.com/rchapler/_settings/agentpools).
 2. Click "New Agent Pool".
@@ -92,7 +145,7 @@ To manually trigger workflows in Azure DevOps, you need a self-hosted agent that
    - "Auto-provision in all projects": ✅
 4. Click "Create".
 
-##### Assign Agent Pool Permissions
+#### Assign Agent Pool Permissions
 
 1. Click "SelfHostedPool" → "Security".
 2. Ensure your DevOps user is listed as an "Administrator".
@@ -101,7 +154,7 @@ To manually trigger workflows in Azure DevOps, you need a self-hosted agent that
    - "Role": `Administrator`.
 4. Click "Save".
 
-#### Install and Configure the Self-Hosted Agent
+### Install and Configure the Self-Hosted Agent
 
 1. Open PowerShell as Administrator.
 2. Verify that no existing agent is running:
@@ -146,17 +199,17 @@ To manually trigger workflows in Azure DevOps, you need a self-hosted agent that
     Enter whether to prevent service starting immediately after configuration is finished? (Y/N) (press enter for N) > (Press Enter)
     ```
 
-#### Verify the Agent in Azure DevOps
+### Verify the Agent in Azure DevOps
 
 1. Go to [https://dev.azure.com/rchapler/_settings/agentpools](https://dev.azure.com/rchapler/_settings/agentpools).
 2. Click "SelfHostedPool".
 3. Ensure the agent appears as "Online" and "Available".
 
-### Special Pre-Requisite: Service Connection
+## Special Pre-Requisite: Service Connection
 
 Azure DevOps no longer provides a direct option to manually enter a Service Principal ID and Key. Instead, you must use "App Registration (Automatic)", which automatically creates a Service Principal in Azure Active Directory.
 
-#### Create a New Azure Service Connection
+### Create a New Azure Service Connection
 
 1. Go to Azure DevOps → "Project Settings" → "Service Connections".
 2. Click "New service connection" → "Azure Resource Manager".
