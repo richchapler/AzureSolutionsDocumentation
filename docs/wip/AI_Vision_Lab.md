@@ -37,7 +37,7 @@ Download and install the latest version of `azure-ai-vision-imageanalysis` by ex
 pip install azure-ai-vision-imageanalysis
 ```
 
-### Exercise 2: Vision Studio
+## Exercise 2: Vision Studio
 
 Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.
 
@@ -52,17 +52,13 @@ We will focus on the following topics:
   - **Object Detection** - Identify objects and returns bounding boxes
   - **Caption Images** - Generate descriptions of images in natural language
 
-### Exercise 3: Vision Studio | Optical Character Recognition (OCR)
-
-This exercise demonstrates how to extract text from images using **Optical Character Recognition (OCR)** in two ways:
-1. **Vision Studio** – A web-based interface for testing OCR capabilities without coding
-2. **Python SDK** – Programmatically perform OCR using the **Azure AI Vision API**
+## Exercise 3: Vision Studio | Optical Character Recognition (OCR)
 
 <img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />
 
 Select **Optical Character Recognition (OCR)** and then click "Extract text from images".
 
-<img src="https://github.com/user-attachments/assets/baf63886-ec7f-488c-bbdd-b4b1552e3293" width="800" title="Snipped January 31, 2025" />
+<img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />
 
 ### **Step 2: Extract Text from an Image**
 1. Click **"Try OCR"**
