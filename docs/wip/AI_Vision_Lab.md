@@ -42,13 +42,9 @@ Download and install the latest version of `azure-ai-vision-imageanalysis` by ex
 pip install azure-ai-vision-imageanalysis
 ```
 
-python
+### Step 2: Lorem Ispum
 
-```
-
-<img src="https://github.com/user-attachments/assets/26305dfb-04be-4b71-8654-ffdfc1722c89" width="800" title="Snipped January 31, 2025" />
-
-
+Open Azure Portal
 
 4. Obtain Azure AI Vision API Key and Endpoint
    - Sign in to the [Azure Portal](https://portal.azure.com/)
