@@ -213,22 +213,48 @@ Pool: SelfHostedPool
 
 ---
 
+## Special Pre-Requisite: mySecrets  
+
+To securely store and access sensitive values, use **Azure DevOps Pipeline Variables** or **Variable Groups**.  
+
+### **1. Create a Variable Group**  
+1. Navigate to **Azure DevOps → Pipelines → Library**  
+2. Click **"New Variable Group"**, name it `"mySecrets"`  
+3. Add the following variables (**check "Keep this value secret" for sensitive values**):  
+   - `AZURE_TENANT_ID` → Your **Azure Tenant ID**  
+   - `AZURE_SUBSCRIPTION_ID` → Your **Azure Subscription ID**  
+   - `AZURE_CLIENT_ID` → Your **App Registration Client ID**  
+   - `AZURE_CLIENT_SECRET` → Your **App Registration Client Secret**  
+4. Click **Save**  
+
+### **2. Link the Variable Group to Your Pipeline**  
+Ensure your pipeline YAML includes:  
+```yaml
+variables:
+- group: mySecrets
+```  
+This securely injects secrets into the pipeline for authentication.
+
+---
+
 ## Pipeline Definition  
 ```
-trigger: none
-pool:
-  name: SelfHostedPool
-
-steps:
 - task: AzureCLI@2
   displayName: "Authenticate & Query Azure Data Explorer via API"
   inputs:
     azureSubscription: "AzureServiceConnection"
-    scriptType: "powershell"
+    scriptType: "pscore"
     scriptLocation: "inlineScript"
     inlineScript: |
-      # Authenticate with Azure and retrieve the access token
-      $Token = az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
+      # Ensure authentication to the correct tenant
+      $TenantId = "<YOUR_TENANT_ID>"  # Replace with actual Tenant ID
+      $SubscriptionId = "<YOUR_SUBSCRIPTION_ID>"  # Replace if necessary
+
+      az login --service-principal --username "<YOUR_APP_ID>" --password "<YOUR_APP_SECRET>" --tenant $TenantId
+      az account set --subscription $SubscriptionId
+
+      # Get Azure Data Explorer access token
+      $Token = az account get-access-token --resource "https://help.kusto.windows.net" --query accessToken -o tsv
 
       # Define Kusto API endpoint
       $Cluster = "https://rc05dataexplorercluste.eastus.kusto.windows.net"
@@ -248,10 +274,13 @@ steps:
       }
 
       # Send request to Kusto Data Explorer API
-      $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
-
-      # Display results
-      $Response.tables[0].rows | Format-Table
+      try {
+        $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+        $Response.tables[0].rows | Format-Table
+      } catch {
+        Write-Host "ERROR: $_"
+        exit 1
+      }
 ```
 
 ---
