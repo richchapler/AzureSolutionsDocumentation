@@ -236,7 +236,7 @@ To securely store and access sensitive values, link Azure Key Vault secrets as v
 ### Grant DevOps Access to Key Vault  
 
 - In Azure Portal, go to Key Vault → "Access control (IAM)"  
-- Assign the following roles to the Application Registration used in the Azure DevOps Service Connection:
+- Assign the following roles to the Application Registration created for the Service Connection {e.g., rchapler-DataExplorer_Delta-GUID}:
   - Key Vault Reader
   - Key Vault Secrets User  
 - Click Save  
