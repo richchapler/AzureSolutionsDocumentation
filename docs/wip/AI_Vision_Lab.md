@@ -166,24 +166,29 @@ After processing, Vision Studio will display:
 
 ---
 
-### ...using Python 
+### ...using Python  
 
-Open Visual Studio Code and click File > New Text File.
+Open Visual Studio Code and click **File > New Text File**.  
 
-<img src="https://github.com/user-attachments/assets/dbf375c2-b3ee-4275-80f0-0a4cdc61047e" width="800" title="Snipped February 3, 2025" />
+<img src="https://github.com/user-attachments/assets/dbf375c2-b3ee-4275-80f0-0a4cdc61047e" width="800" title="Snipped February 3, 2025" />  
 
-Click "Select a language", then search for and select `Python`.
+Click **"Select a language"**, then search for and select `Python`.  
 
-#### Step 2: Set Up API Credentials
-Create a file called `config.py` and add:
+### Implement OCR in Python  
 
-```python
-API_KEY = "your-azure-ai-vision-api-key"
-ENDPOINT = "your-azure-ai-vision-endpoint"
+Execute the following command to create an `ocr.py` file:  
+
+```powershell
+New-Item -Path ocr.py -ItemType File
 ```
 
-#### Step 3: Implement OCR in Python
-Create a file called `ocr.py` and add the following:
+Execute the following command to open `ocr.py` in Notepad:  
+
+```powershell
+notepad ocr.py
+```
+
+Modify and paste the following content into `ocr.py`:  
 
 ```python
 from azure.ai.vision.imageanalysis import ImageAnalysisClient
@@ -203,10 +208,9 @@ if __name__ == "__main__":
     print(perform_ocr(image_path))
 ```
 
----
+### Run the Python Script  
 
-#### Step 4: Run the Python Script
-Execute the script in PowerShell:
+Execute the following command in PowerShell to run the OCR script:  
 
 ```powershell
 python ocr.py
