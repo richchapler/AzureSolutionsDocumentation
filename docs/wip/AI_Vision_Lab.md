@@ -47,8 +47,7 @@ Search for, select and install `Python`, then restart Visual Studio Code.
 
 Open Visual Studio Code and click View > Terminal to open the PowerShell terminal.
 
-<img src="https://github.com/user-attachments/assets/9da3d469-3daf-4354-b25c-f59cc1b4b20b" width="800" title="Snipped February 3, 2025" />
-![Uploading image.png…]()
+<img src="https://github.com/user-attachments/assets/7883cea1-f6d2-4352-953b-cbf81eaf5c7c" width="800" title="Snipped February 3, 2025" />
 
 Execute the following command to create and then navigate to a project directory:
 
@@ -68,6 +67,8 @@ Execute the following command to activate the virtual environment:
 ```powershell
 venv\Scripts\Activate
 ```
+
+After running this command, note that your prompt changes to include prefix  `(venv)` showing that it working instide the virtual environment.
 
 ---
 
