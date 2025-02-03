@@ -47,30 +47,27 @@ Search for, select and install `Python`, then restart Visual Studio Code.
 
 Open Visual Studio Code and click View > Terminal to open the PowerShell terminal.
 
-<img src="https://github.com/user-attachments/assets/c5a8b922-259c-4add-9637-6f83d825e97b" width="800" title="Snipped February 3, 2025" />
+<img src="https://github.com/user-attachments/assets/9da3d469-3daf-4354-b25c-f59cc1b4b20b" width="800" title="Snipped February 3, 2025" />
 ![Uploading image.png…]()
 
-3. Navigate to your project directory:
+Execute the following command to create and then navigate to a project directory:
 
-   ```powershell
-   cd path\to\your\project
-   ```
+```powershell
+mkdir "$HOME\Documents\AI-Vision-Lab"
+cd "$HOME\Documents\AI-Vision-Lab"
+```
 
-4. Create a virtual environment:
+Execute the following command to create a virtual environment:
 
-   ```powershell
-   python -m venv venv
-   ```
+```powershell
+python -m venv venv
+```
 
-5. Activate the virtual environment:
-   - Windows (PowerShell):
-     ```powershell
-     venv\Scripts\Activate
-     ```
-   - macOS/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
+Execute the following command to activate the virtual environment:
+
+```powershell
+venv\Scripts\Activate
+```
 
 ---
 
