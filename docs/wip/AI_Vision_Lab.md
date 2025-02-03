@@ -39,6 +39,8 @@ pip install azure-ai-vision-imageanalysis
 
 ## Exercise 2: Optical Character Recognition (OCR)
 
+### ...using Vision Studio 
+
 Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.
 
 <img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />
@@ -52,7 +54,6 @@ We will focus on the following topics:
   - **Object Detection** - Identify objects and returns bounding boxes
   - **Caption Images** - Generate descriptions of images in natural language
 
-### Optical Character Recognition (OCR) | Vision Studio 
 _NOTE: ON HOLD WHILE SUPPORT WORKS THROUGH VISION STUDIO UI ISSUES_
 
 <img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />
