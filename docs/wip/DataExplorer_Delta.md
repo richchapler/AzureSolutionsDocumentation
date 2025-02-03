@@ -221,14 +221,37 @@ pool:
 
 steps:
 - task: AzureCLI@2
-  displayName: "Authenticate & List Tables in Azure Data Explorer"
+  displayName: "Authenticate & Query Azure Data Explorer via API"
   inputs:
     azureSubscription: "AzureServiceConnection"
     scriptType: "powershell"
     scriptLocation: "inlineScript"
     inlineScript: |
-      az account show
-      az kusto query --cluster-name "rc05dataexplorercluste" --database-name "rc05dataexplorerdatabase" --query "Tables | project TableName"
+      # Authenticate with Azure and retrieve the access token
+      $Token = az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
+
+      # Define Kusto API endpoint
+      $Cluster = "https://rc05dataexplorercluste.eastus.kusto.windows.net"
+      $Database = "rc05dataexplorerdatabase"
+      $Query = "Tables | project TableName"
+
+      # Prepare API request body
+      $Body = @{
+        db = $Database
+        csl = $Query
+      } | ConvertTo-Json -Depth 3
+
+      # Set API headers
+      $Headers = @{
+        "Authorization" = "Bearer $Token"
+        "Content-Type"  = "application/json"
+      }
+
+      # Send request to Kusto Data Explorer API
+      $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+
+      # Display results
+      $Response.tables[0].rows | Format-Table
 ```
 
 ---
