@@ -72,24 +72,25 @@ After running this command, note that your prompt changes to include prefix  `(v
 
 ---
 
-### 4. Install Required Dependencies
-1. Ensure `pip` is up to date:
+### Install Dependencies  
 
-   ```powershell
-   python -m pip install --upgrade pip
-   ```
+Execute the following command to upgrade `pip`:  
 
-2. Install `azure-ai-vision-imageanalysis`:
+```powershell
+python -m pip install --upgrade pip
+```  
 
-   ```powershell
-   pip install azure-ai-vision-imageanalysis
-   ```
+Execute the following command to install the Azure AI Vision SDK:  
 
-3. Install `python-dotenv` for secure API key storage:
+```powershell
+pip install azure-ai-vision-imageanalysis
+```  
 
-   ```powershell
-   pip install python-dotenv
-   ```
+Execute the following command to install `python-dotenv` for secure API key storage:  
+
+```powershell
+pip install python-dotenv
+```
 
 ---
 
