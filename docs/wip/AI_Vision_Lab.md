@@ -43,11 +43,11 @@ Search for, select and install `Python`, then restart Visual Studio Code.
 
 ---
 
-### Visual Studio Code >> Python Virtual Environment
+### Python Virtual Environment
 
 Open Visual Studio Code and click View > Terminal to open the PowerShell terminal.
 
-<img src="https://github.com/user-attachments/assets/7883cea1-f6d2-4352-953b-cbf81eaf5c7c" width="800" title="Snipped February 3, 2025" />
+<img src="https://github.com/user-attachments/assets/e74ffba0-e515-42f9-b267-74631bef954f" width="800" title="Snipped February 3, 2025" />
 
 Execute the following command to create and then navigate to a project directory:
 
@@ -70,51 +70,61 @@ venv\Scripts\Activate
 
 After running this command, note that your prompt changes to include prefix  `(venv)` showing that it working instide the virtual environment.
 
----
-
-### Install Dependencies  
+### Dependencies  
 
 Execute the following command to upgrade `pip`:  
-
 ```powershell
 python -m pip install --upgrade pip
 ```  
 
 Execute the following command to install the Azure AI Vision SDK:  
-
 ```powershell
 pip install azure-ai-vision-imageanalysis
 ```  
 
 Execute the following command to install `python-dotenv` for secure API key storage:  
-
 ```powershell
 pip install python-dotenv
 ```
 
----
+### API Credentials  
 
-### 5. Configure API Credentials Securely
-Instead of hardcoding API keys in your script, use a .env file:
+Execute the following command to create a `.env` file in the project directory:  
+```powershell
+New-Item -Path .env -ItemType File
+```  
 
-1. Create a `.env` file in your project directory:
+Execute the following command to open the `.env` file in Notepad:
+```powershell
+notepad .env
+```
 
-   ```
-   API_KEY=your-azure-ai-vision-api-key
-   ENDPOINT=your-azure-ai-vision-endpoint
-   ```
+Modify and paste the following content into your `.env` file:
+```text
+API_KEY=<your-azure-ai-vision-api-key>
+ENDPOINT=<your-azure-ai-vision-endpoint>
+```  
 
-2. Modify `config.py` to load from `.env`:
+Execute the following command to create a `config.py` file in the project directory:  
+```powershell
+New-Item -Path config.py -ItemType File
+```
 
-   ```python
-   from dotenv import load_dotenv
-   import os
+Execute the following command to open the `config.py` file in Notepad:
+```powershell
+notepad config.py
+```
 
-   load_dotenv()
+Paste the following content into your `config.py` file:
+```python
+from dotenv import load_dotenv
+import os
 
-   API_KEY = os.getenv("API_KEY")
-   ENDPOINT = os.getenv("ENDPOINT")
-   ```
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+ENDPOINT = os.getenv("ENDPOINT")
+```
 
 ## Exercise 2: Optical Character Recognition (OCR)
 
