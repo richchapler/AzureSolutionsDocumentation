@@ -260,7 +260,7 @@ pool:
   name: SelfHostedPool
 
 variables:
-- group: mySecrets
+- group: Secrets
 
 steps:
 - task: AzureCLI@2
@@ -271,10 +271,10 @@ steps:
     scriptLocation: "inlineScript"
     inlineScript: |
       # Retrieve secret values from DevOps variable group (linked to Key Vault)
-      $TenantId = "${{ variables.AZURE-TENANT-ID }}"
-      $SubscriptionId = "${{ variables.AZURE-SUBSCRIPTION-ID }}"
-      $ClientId = "${{ variables.AZURE-CLIENT-ID }}"
-      $ClientSecret = "${{ variables.AZURE-CLIENT-SECRET }}"
+      $TenantId = "${{ variables['AZURE-TENANT-ID'] }}"
+      $SubscriptionId = "${{ variables['AZURE-SUBSCRIPTION-ID'] }}"
+      $ClientId = "${{ variables['AZURE-CLIENT-ID'] }}"
+      $ClientSecret = "${{ variables['AZURE-CLIENT-SECRET'] }}"
 
       # Login using the service principal
       az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId"
