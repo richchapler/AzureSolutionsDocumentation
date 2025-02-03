@@ -126,6 +126,8 @@ API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
 ```
 
+_Note: Visual Studio Code + Python will be used throughout exercises in this documentation_
+
 ## Exercise 2: Optical Character Recognition (OCR)
 
 ### ...using Vision Studio 
