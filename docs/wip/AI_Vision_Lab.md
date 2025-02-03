@@ -2,7 +2,7 @@
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
-## Solution Requirements
+## Exercise 1: Prepare Environment
 
 This documentation assumes the following resources are ready for use:
 
@@ -10,7 +10,7 @@ This documentation assumes the following resources are ready for use:
 * [Visual Studio Code](https://code.visualstudio.com/download) with Python extension
 * [Python](https://www.python.org/) with "Add Python to PATH"
 
-## Exercise 1: Prepare Visual Studio Code
+...prepare Visual Studio Code
 
 Open Vision Studio Code >> Extensions, then search for and select Python from the "Extensions: Marketplace" pane.
 
