@@ -242,8 +242,7 @@ Pool: SelfHostedPool
 - Click "Add" and select the secrets from Key Vault  
 - Click "Save"  
 
-![Uploading image.png…]()
-
+![image](https://github.com/user-attachments/assets/ac3d697c-c4c3-4327-8f98-32855e19be25)
 
 ### Link the Variable Group in Your Pipeline  
 Add this to your pipeline YAML:  
@@ -256,6 +255,14 @@ This automatically injects Key Vault secrets into the pipeline for authenticatio
 
 ## Pipeline Definition  
 ```
+trigger: none
+pool:
+  name: SelfHostedPool
+
+variables:
+- group: mySecrets
+
+steps:
 - task: AzureCLI@2
   displayName: "Authenticate & Query Azure Data Explorer via API"
   inputs:
@@ -263,12 +270,15 @@ This automatically injects Key Vault secrets into the pipeline for authenticatio
     scriptType: "pscore"
     scriptLocation: "inlineScript"
     inlineScript: |
-      # Ensure authentication to the correct tenant
-      $TenantId = "<YOUR_TENANT_ID>"  # Replace with actual Tenant ID
-      $SubscriptionId = "<YOUR_SUBSCRIPTION_ID>"  # Replace if necessary
+      # Retrieve secret values from DevOps variable group (linked to Key Vault)
+      $TenantId = "${{ variables.AZURE-TENANT-ID }}"
+      $SubscriptionId = "${{ variables.AZURE-SUBSCRIPTION-ID }}"
+      $ClientId = "${{ variables.AZURE-CLIENT-ID }}"
+      $ClientSecret = "${{ variables.AZURE-CLIENT-SECRET }}"
 
-      az login --service-principal --username "<YOUR_APP_ID>" --password "<YOUR_APP_SECRET>" --tenant $TenantId
-      az account set --subscription $SubscriptionId
+      # Login using the service principal
+      az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId"
+      az account set --subscription "$SubscriptionId"
 
       # Get Azure Data Explorer access token
       $Token = az account get-access-token --resource "https://help.kusto.windows.net" --query accessToken -o tsv
