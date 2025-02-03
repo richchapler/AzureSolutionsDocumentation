@@ -1,4 +1,4 @@
-# Lab: Vision Studio
+# Lab: AI Vision
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
@@ -37,7 +37,7 @@ Download and install the latest version of `azure-ai-vision-imageanalysis` by ex
 pip install azure-ai-vision-imageanalysis
 ```
 
-## Exercise 2: Vision Studio
+## Exercise 2: Optical Character Recognition (OCR)
 
 Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.
 
@@ -52,7 +52,8 @@ We will focus on the following topics:
   - **Object Detection** - Identify objects and returns bounding boxes
   - **Caption Images** - Generate descriptions of images in natural language
 
-## Exercise 3: Vision Studio | Optical Character Recognition (OCR)
+### Optical Character Recognition (OCR) | Vision Studio 
+_NOTE: ON HOLD WHILE SUPPORT WORKS THROUGH VISION STUDIO UI ISSUES_
 
 <img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />
 
@@ -60,32 +61,27 @@ Select **Optical Character Recognition (OCR)** and then click "Extract text from
 
 <img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />
 
-### **Step 2: Extract Text from an Image**
+#### **Step 1: Extract Text from an Image**
 1. Click **"Try OCR"**
 2. Upload an image containing printed or handwritten text
 3. Click **Analyze**
 
----
-
-### **Step 3: Review the Results**
+#### **Step 2: Review the Results**
 After processing, Vision Studio will display:
 - **Extracted text**
 - **Confidence scores**
 - **JSON output** (expand to view full response)
 
----
+### Optical Character Recognition (OCR) using Python 
 
-## **2. Using Python SDK for OCR**
-### **Step 1: Install Dependencies**
+#### **Step 1: Install Dependencies**
 Ensure the required package is installed by running:
 
 ```powershell
 pip install azure-ai-vision-imageanalysis
 ```
 
----
-
-### **Step 2: Set Up API Credentials**
+#### **Step 2: Set Up API Credentials**
 Create a file called **`config.py`** and add:
 
 ```python
@@ -93,9 +89,7 @@ API_KEY = "your-azure-ai-vision-api-key"
 ENDPOINT = "your-azure-ai-vision-endpoint"
 ```
 
----
-
-### **Step 3: Implement OCR in Python**
+#### **Step 3: Implement OCR in Python**
 Create a file called **`ocr.py`** and add the following:
 
 ```python
@@ -118,25 +112,9 @@ if __name__ == "__main__":
 
 ---
 
-### **Step 4: Run the Python Script**
+#### **Step 4: Run the Python Script**
 Execute the script in **PowerShell**:
 
 ```powershell
 python ocr.py
-```
-
----
-
-## **3. Compare Vision Studio vs. Python SDK Results**
-- Check the **Vision Studio JSON output** and compare it with the **Python script JSON output**
-- Discuss **differences** (if any) between the two methods
-- When would **Python SDK** be preferable over **Vision Studio**? (e.g., automation, real-time processing)
-
----
-
-## **Expected JSON Output**
-```json
-{
-  "text": "Welcome to Azure AI Vision"
-}
 ```
