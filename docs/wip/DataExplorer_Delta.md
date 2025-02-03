@@ -217,15 +217,7 @@ Pool: SelfHostedPool
 
 ## Special Pre-Requisite: Key Vault, Secrets  
 
-To securely store and access sensitive values, link Azure Key Vault secrets as variables in Azure DevOps.  
-
-### Create an Azure Key Vault and Add Secrets  
-- Go to Azure Portal → Key Vaults  
-- Click "Create" and set the following:  
-  - Name: `...keyvault`  
-  - Resource Group: Select or create one  
-  - Region: Choose the appropriate region  
-- Once created, go to "Secrets" → "Generate/Import"  
+- Navigate to "Secrets" → "Generate/Import"  
 - Add the following secrets using these exact names:  
   - `AZURE-TENANT-ID` → Your Azure Tenant ID  
   - `AZURE-SUBSCRIPTION-ID` → Your Azure Subscription ID  
@@ -243,12 +235,15 @@ To securely store and access sensitive values, link Azure Key Vault secrets as v
 
 ### Create a Variable Group in Azure DevOps  
 - Go to Azure DevOps → Pipelines → Library  
-- Click "New Variable Group" and name it `mySecrets`  
+- Click "New Variable Group" and name it `Secrets`  
 - Enable "Link secrets from an Azure key vault as variables"  
 - Select the Azure subscription and the Key Vault (`myKeyVault`)  
 - Click "Authorize" to allow Azure Pipelines to set the necessary permissions or manually apply them in the Azure portal  
 - Click "Add" and select the secrets from Key Vault  
 - Click "Save"  
+
+![Uploading image.png…]()
+
 
 ### Link the Variable Group in Your Pipeline  
 Add this to your pipeline YAML:  
