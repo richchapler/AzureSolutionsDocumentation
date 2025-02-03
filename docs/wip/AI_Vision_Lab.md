@@ -73,7 +73,7 @@ After processing, Vision Studio will display:
 - **Confidence scores**
 - **JSON output** (expand to view full response)
 
-### Optical Character Recognition (OCR) using Python 
+### ...using Python 
 
 #### **Step 1: Install Dependencies**
 Ensure the required package is installed by running:
