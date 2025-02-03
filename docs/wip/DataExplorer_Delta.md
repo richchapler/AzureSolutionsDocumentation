@@ -263,6 +263,21 @@ variables:
 - group: Secrets
 
 steps:
+- task: AzureKeyVault@2
+  displayName: "Download secrets: rc05keyvault"
+  inputs:
+    azureSubscription: "AzureServiceConnection"
+    KeyVaultName: "rc05keyvault"
+    SecretsFilter: "*"
+    RunAsPreJob: false
+
+- script: |
+    echo "AZURE_TENANT_ID: $(AZURE_TENANT_ID)"
+    echo "AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)"
+    echo "AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)"
+    echo "AZURE_CLIENT_SECRET: (Masked)"
+  displayName: "Check Secret Expansion"
+
 - task: AzureCLI@2
   displayName: "Authenticate & Query Azure Data Explorer via API"
   inputs:
@@ -270,44 +285,53 @@ steps:
     scriptType: "pscore"
     scriptLocation: "inlineScript"
     inlineScript: |
-      # Retrieve secret values from DevOps variable group (linked to Key Vault)
-      $TenantId = "${{ variables['AZURE-TENANT-ID'] }}"
-      $SubscriptionId = "${{ variables['AZURE-SUBSCRIPTION-ID'] }}"
-      $ClientId = "${{ variables['AZURE-CLIENT-ID'] }}"
-      $ClientSecret = "${{ variables['AZURE-CLIENT-SECRET'] }}"
+      # Retrieve secret values from environment variables
+      $Tenant = "16b3c013-d300-468d-ac64-7eda0820b6d3"
+      $Subscription = "ed7eaf77-d411-484b-92e6-5cba0b6d8098"
+      $ClientId = "68ea14f3-0775-4e51-9c16-c9412114241b"
+      # $TenantId = $env:AZURE_TENANT_ID
+      # $SubscriptionId = $env:AZURE_SUBSCRIPTION_ID
+      # $ClientId = $env:AZURE_CLIENT_ID
+      $ClientSecret = $env:AZURE_CLIENT_SECRET
+
+      # Debug: Print variable values (except secrets)
+      Write-Host "Tenant: $TenantId"
+      Write-Host "Subscription: $SubscriptionId"
+      Write-Host "ClientId: $ClientId"
+      Write-Host "ClientSecret: $ClientSecret"
 
       # Login using the service principal
       az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId"
       az account set --subscription "$SubscriptionId"
 
       # Get Azure Data Explorer access token
-      $Token = az account get-access-token --resource "https://help.kusto.windows.net" --query accessToken -o tsv
+      $Token = az account get-access-token --resource "https://rc05dataexplorercluste.eastus.kusto.windows.net" --query accessToken -o tsv
 
-      # Define Kusto API endpoint
-      $Cluster = "https://rc05dataexplorercluste.eastus.kusto.windows.net"
-      $Database = "rc05dataexplorerdatabase"
-      $Query = "Tables | project TableName"
+      # # Define Kusto API endpoint
+      # $Cluster = "https://rc05dataexplorercluste.eastus.kusto.windows.net"
+      # $Database = "rc05dataexplorerdatabase"
+      # $Query = "Tables | project TableName"
 
-      # Prepare API request body
-      $Body = @{
-        db = $Database
-        csl = $Query
-      } | ConvertTo-Json -Depth 3
+      # # Prepare API request body
+      # $Body = @{
+      #   db = $Database
+      #   csl = $Query
+      # } | ConvertTo-Json -Depth 3
 
-      # Set API headers
-      $Headers = @{
-        "Authorization" = "Bearer $Token"
-        "Content-Type"  = "application/json"
-      }
+      # # Set API headers
+      # $Headers = @{
+      #   "Authorization" = "Bearer $Token"
+      #   "Content-Type"  = "application/json"
+      # }
 
-      # Send request to Kusto Data Explorer API
-      try {
-        $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
-        $Response.tables[0].rows | Format-Table
-      } catch {
-        Write-Host "ERROR: $_"
-        exit 1
-      }
+      # # Send request to Kusto Data Explorer API
+      # try {
+      #   $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+      #   $Response.tables[0].rows | Format-Table
+      # } catch {
+      #   Write-Host "ERROR: $_"
+      #   exit 1
+      # }
 ```
 
 ---
