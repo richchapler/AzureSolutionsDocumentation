@@ -7,7 +7,9 @@
 - An Azure DevOps organization ("rchapler")  
 - A DevOps project ("DataExplorer_Delta")  
 - Azure CLI installed on the agent machine  
-- Administrator access to the agent pool  
+- Administrator access to the agent pool
+- Azure Key Vault
+- Application Registration
 
 ### Special:  
 - PowerShell Core installed and available in `PATH`  
@@ -90,7 +92,7 @@ az kusto -h
 ## Special Pre-Requisite: Microsoft.Azure.Kusto.Data via NuGet  
 
 ### 1. Disable VPN (If Applicable)  
-If using a VPN, **turn it off** before installation.  
+If using a VPN, turn it off before installation.  
 
 ### 2. Verify Network Connectivity  
 ```
@@ -213,28 +215,48 @@ Pool: SelfHostedPool
 
 ---
 
-## Special Pre-Requisite: mySecrets  
+## Special Pre-Requisite: Key Vault, Secrets  
 
-To securely store and access sensitive values, use **Azure DevOps Pipeline Variables** or **Variable Groups**.  
+To securely store and access sensitive values, link Azure Key Vault secrets as variables in Azure DevOps.  
 
-### **1. Create a Variable Group**  
-1. Navigate to **Azure DevOps → Pipelines → Library**  
-2. Click **"New Variable Group"**, name it `"mySecrets"`  
-3. Add the following variables (**check "Keep this value secret" for sensitive values**):  
-   - `AZURE_TENANT_ID` → Your **Azure Tenant ID**  
-   - `AZURE_SUBSCRIPTION_ID` → Your **Azure Subscription ID**  
-   - `AZURE_CLIENT_ID` → Your **App Registration Client ID**  
-   - `AZURE_CLIENT_SECRET` → Your **App Registration Client Secret**  
-4. Click **Save**  
+### Create an Azure Key Vault and Add Secrets  
+- Go to Azure Portal → Key Vaults  
+- Click "Create" and set the following:  
+  - Name: `...keyvault`  
+  - Resource Group: Select or create one  
+  - Region: Choose the appropriate region  
+- Once created, go to "Secrets" → "Generate/Import"  
+- Add the following secrets using these exact names:  
+  - `AZURE-TENANT-ID` → Your Azure Tenant ID  
+  - `AZURE-SUBSCRIPTION-ID` → Your Azure Subscription ID  
+  - `AZURE-CLIENT-ID` → Your App Registration Client ID  
+  - `AZURE-CLIENT-SECRET` → Your App Registration Client Secret  
+- Click "Save"  
 
-### **2. Link the Variable Group to Your Pipeline**  
-Ensure your pipeline YAML includes:  
+### Grant DevOps Access to Key Vault  
+
+- In Azure Portal, go to Key Vault → "Access control (IAM)"  
+- Assign the following roles to the Application Registration used in the Azure DevOps Service Connection:
+  - Key Vault Reader
+  - Key Vault Secrets User  
+- Click Save  
+
+### Create a Variable Group in Azure DevOps  
+- Go to Azure DevOps → Pipelines → Library  
+- Click "New Variable Group" and name it `mySecrets`  
+- Enable "Link secrets from an Azure key vault as variables"  
+- Select the Azure subscription and the Key Vault (`myKeyVault`)  
+- Click "Authorize" to allow Azure Pipelines to set the necessary permissions or manually apply them in the Azure portal  
+- Click "Add" and select the secrets from Key Vault  
+- Click "Save"  
+
+### Link the Variable Group in Your Pipeline  
+Add this to your pipeline YAML:  
 ```yaml
 variables:
 - group: mySecrets
 ```  
-This securely injects secrets into the pipeline for authentication.
-
+This automatically injects Key Vault secrets into the pipeline for authentication.
 ---
 
 ## Pipeline Definition  
