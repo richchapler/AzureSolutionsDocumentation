@@ -73,6 +73,8 @@ After processing, Vision Studio will display:
 - **Confidence scores**
 - **JSON output** (expand to view full response)
 
+---
+
 ### ...using Python 
 
 #### **Step 1: Install Dependencies**
