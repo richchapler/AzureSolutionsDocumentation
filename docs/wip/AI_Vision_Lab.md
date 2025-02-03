@@ -43,11 +43,12 @@ Search for, select and install `Python`, then restart Visual Studio Code.
 
 ---
 
-### 3. Set Up Python Virtual Environment
-1. Open Visual Studio Code
-2. Click View > Terminal to open the terminal
+### Visual Studio Code >> Python Virtual Environment
 
-   <img src="https://github.com/user-attachments/assets/eaf2dc75-80c4-406b-8dcd-675325c1bc75" width="800" title="Snipped January 31, 2025" />
+Open Visual Studio Code and click View > Terminal to open the PowerShell terminal.
+
+<img src="https://github.com/user-attachments/assets/c5a8b922-259c-4add-9637-6f83d825e97b" width="800" title="Snipped February 3, 2025" />
+![Uploading image.png…]()
 
 3. Navigate to your project directory:
 
