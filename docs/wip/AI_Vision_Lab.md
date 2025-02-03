@@ -4,38 +4,117 @@
 
 ## Exercise 1: Prepare Environment
 
-This documentation assumes the following resources are ready for use:
+This documentation assumes the following Azure resources are ready for use:
+* [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
 
-* [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
-* [Visual Studio Code](https://code.visualstudio.com/download) with Python extension
-* [Python](https://www.python.org/) with "Add Python to PATH"
+### Python
 
-...prepare Visual Studio Code
+Install the latest version of [Python.org](https://www.python.org/downloads/)
 
-Open Vision Studio Code >> Extensions, then search for and select Python from the "Extensions: Marketplace" pane.
+<img src="https://github.com/user-attachments/assets/1f103580-e5a3-46fc-82c7-2c91e700e75c" width="800" title="Snipped February 3, 2025" />
+
+_Note: Select "Add Python to PATH" before clicking "Install Now"_
+
+Open PowerShell and verify the installation:
+
+```powershell
+python --version
+```
+
+Expected output (version may vary):
+
+```
+Python 3.13.1
+```
+
+---
+
+### Visual Studio Code
+
+Install [Visual Studio Code](https://code.visualstudio.com/download)
+
+<img src="https://github.com/user-attachments/assets/c5a8b922-259c-4add-9637-6f83d825e97b" width="800" title="Snipped February 3, 2025" />
+
+After installation, open Visual Studio Code and navigate to the "Extensions: Marketplace" pane (`Ctrl+Shift+X`)
 
 <img src="https://github.com/user-attachments/assets/815273f0-a430-4e08-9056-d2fc91b4cec9" width="800" title="Snipped January 31, 2025" />
 
-Confirm installation, then close. Restart Visual Studio Code.
+Search for, select and install `Python`, then restart Visual Studio Code.
 
-In the toolbar, click View >> Terminal to open the terminal.
+---
 
-<img src="https://github.com/user-attachments/assets/eaf2dc75-80c4-406b-8dcd-675325c1bc75" width="800" title="Snipped January 31, 2025" />
+### 3. Set Up Python Virtual Environment
+1. Open Visual Studio Code
+2. Click View > Terminal to open the terminal
 
-Activate the virtual environment by executing the following PowerShell command:
-```powershell
-python -m venv venv
-```
+   <img src="https://github.com/user-attachments/assets/eaf2dc75-80c4-406b-8dcd-675325c1bc75" width="800" title="Snipped January 31, 2025" />
 
-Ensure the latest bug fixes, security patches, and features by executing the following PowerShell command:
-```powershell
-python -m pip install --upgrade pip
-```
+3. Navigate to your project directory:
 
-Download and install the latest version of `azure-ai-vision-imageanalysis` by executing the following PowerShell command:
-```powershell
-pip install azure-ai-vision-imageanalysis
-```
+   ```powershell
+   cd path\to\your\project
+   ```
+
+4. Create a virtual environment:
+
+   ```powershell
+   python -m venv venv
+   ```
+
+5. Activate the virtual environment:
+   - Windows (PowerShell):
+     ```powershell
+     venv\Scripts\Activate
+     ```
+   - macOS/Linux:
+     ```bash
+     source venv/bin/activate
+     ```
+
+---
+
+### 4. Install Required Dependencies
+1. Ensure `pip` is up to date:
+
+   ```powershell
+   python -m pip install --upgrade pip
+   ```
+
+2. Install `azure-ai-vision-imageanalysis`:
+
+   ```powershell
+   pip install azure-ai-vision-imageanalysis
+   ```
+
+3. Install `python-dotenv` for secure API key storage:
+
+   ```powershell
+   pip install python-dotenv
+   ```
+
+---
+
+### 5. Configure API Credentials Securely
+Instead of hardcoding API keys in your script, use a .env file:
+
+1. Create a `.env` file in your project directory:
+
+   ```
+   API_KEY=your-azure-ai-vision-api-key
+   ENDPOINT=your-azure-ai-vision-endpoint
+   ```
+
+2. Modify `config.py` to load from `.env`:
+
+   ```python
+   from dotenv import load_dotenv
+   import os
+
+   load_dotenv()
+
+   API_KEY = os.getenv("API_KEY")
+   ENDPOINT = os.getenv("ENDPOINT")
+   ```
 
 ## Exercise 2: Optical Character Recognition (OCR)
 
@@ -47,53 +126,52 @@ Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and 
 
 We will focus on the following topics:
 
-- **Optical Character Recognition (OCR)** - Extract text from images, including handwriting and printed text
-- **Spatial Analysis** - Detect people, movement, and zones in real-time video (used for surveillance, retail, etc.) ... **HARTIHA: IN SCOPE?**
-- **Face** - Detect and analyze faces, including emotions and age estimation ... **HARTIHA: IN SCOPE?**
+- Optical Character Recognition (OCR) - Extract text from images, including handwriting and printed text
+- Spatial Analysis - Detect people, movement, and zones in real-time video (used for surveillance, retail, etc.) ... HARTIHA: IN SCOPE?
+- Face - Detect and analyze faces, including emotions and age estimation ... HARTIHA: IN SCOPE?
 - Image Analysis
-  - **Object Detection** - Identify objects and returns bounding boxes
-  - **Caption Images** - Generate descriptions of images in natural language
+  - Object Detection - Identify objects and returns bounding boxes
+  - Caption Images - Generate descriptions of images in natural language
 
 _NOTE: ON HOLD WHILE SUPPORT WORKS THROUGH VISION STUDIO UI ISSUES_
 
 <img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />
 
-Select **Optical Character Recognition (OCR)** and then click "Extract text from images".
+Select Optical Character Recognition (OCR) and then click "Extract text from images".
 
 <img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />
 
-#### **Step 1: Extract Text from an Image**
-1. Click **"Try OCR"**
+#### Step 1: Extract Text from an Image
+1. Click "Try OCR"
 2. Upload an image containing printed or handwritten text
-3. Click **Analyze**
+3. Click Analyze
 
-#### **Step 2: Review the Results**
+#### Step 2: Review the Results
 After processing, Vision Studio will display:
-- **Extracted text**
-- **Confidence scores**
-- **JSON output** (expand to view full response)
+- Extracted text
+- Confidence scores
+- JSON output (expand to view full response)
 
 ---
 
 ### ...using Python 
 
-#### **Step 1: Install Dependencies**
-Ensure the required package is installed by running:
+Open Visual Studio Code and click File > New Text File.
 
-```powershell
-pip install azure-ai-vision-imageanalysis
-```
+<img src="https://github.com/user-attachments/assets/dbf375c2-b3ee-4275-80f0-0a4cdc61047e" width="800" title="Snipped February 3, 2025" />
 
-#### **Step 2: Set Up API Credentials**
-Create a file called **`config.py`** and add:
+Click "Select a language", then search for and select `Python`.
+
+#### Step 2: Set Up API Credentials
+Create a file called `config.py` and add:
 
 ```python
 API_KEY = "your-azure-ai-vision-api-key"
 ENDPOINT = "your-azure-ai-vision-endpoint"
 ```
 
-#### **Step 3: Implement OCR in Python**
-Create a file called **`ocr.py`** and add the following:
+#### Step 3: Implement OCR in Python
+Create a file called `ocr.py` and add the following:
 
 ```python
 from azure.ai.vision.imageanalysis import ImageAnalysisClient
@@ -115,8 +193,8 @@ if __name__ == "__main__":
 
 ---
 
-#### **Step 4: Run the Python Script**
-Execute the script in **PowerShell**:
+#### Step 4: Run the Python Script
+Execute the script in PowerShell:
 
 ```powershell
 python ocr.py
