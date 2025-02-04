@@ -284,7 +284,81 @@ jobs:
         }
 
         Write-Host "Access token retrieved successfully."
+
         echo "##vso[task.setvariable variable=ADX_ACCESS_TOKEN;isOutput=true]$Token"
+
+        # Write token to a file for debugging
+        $DebugFile = "$(Build.ArtifactStagingDirectory)/token_debug.txt"
+        $Token | Out-File -FilePath $DebugFile -Encoding utf8
+        Write-Host "Token written to file: $DebugFile"
+
+  - task: AzureCLI@2
+    displayName: "Task: Verify Configuration"
+    inputs:
+      azureSubscription: "AzureServiceConnection"
+      scriptType: "pscore"
+      scriptLocation: "inlineScript"
+      inlineScript: |
+        Write-Host "Starting configuration verification..."
+
+        $Cluster = "rc05dataexplorercluster.westus.kusto.windows.net"
+        $Database = "rc05dataexplorerdatabase"
+
+        Write-Host "Checking DNS Resolution..."
+        $DnsCheck = nslookup $Cluster
+        if ($DnsCheck -match "Non-existent domain") {
+            Write-Host "ERROR: DNS resolution failed for $Cluster"
+        } else {
+            Write-Host "DNS resolution successful: $DnsCheck"
+        }
+
+        Write-Host "Checking Network Connectivity..."
+        $NetCheck = Test-NetConnection -ComputerName $Cluster -Port 443
+        if ($NetCheck.TcpTestSucceeded) {
+            Write-Host "Network connectivity to $Cluster on port 443: SUCCESS"
+        } else {
+            Write-Host "ERROR: Network connectivity to $Cluster on port 443 FAILED"
+        }
+
+        Write-Host "Checking Azure Authentication..."
+        $AuthCheck = az account show --query user.name -o tsv --only-show-errors
+        if ([string]::IsNullOrEmpty($AuthCheck)) {
+            Write-Host "ERROR: Authentication check failed."
+        } else {
+            Write-Host "Authentication successful. Logged in as: $AuthCheck"
+        }
+
+        Write-Host "Checking Access Token Retrieval..."
+        $Token = az account get-access-token --resource "https://$Cluster" --query accessToken -o tsv --only-show-errors
+        if ([string]::IsNullOrEmpty($Token)) {
+            Write-Host "ERROR: Failed to retrieve access token."
+            exit 1
+        } else {
+            Write-Host "Access token retrieved successfully."
+        }
+
+        Write-Host "Checking ADX Query Permissions..."
+        $Query = ".show tables details"
+        $Body = @"
+        {
+          "db": "$Database",
+          "csl": "$Query"
+        }
+        "@
+
+        $Headers = @{
+            "Authorization" = "Bearer $Token"
+            "Content-Type"  = "application/json"
+        }
+
+        try {
+            $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+            Write-Host "ADX Query Permissions: SUCCESS"
+        } catch {
+            Write-Host "ERROR: ADX query test failed. $_"
+        }
+
+        Write-Host "Configuration verification completed."
 
   - task: AzureCLI@2
     displayName: "Task: List Tables"
