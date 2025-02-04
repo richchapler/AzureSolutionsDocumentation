@@ -245,7 +245,7 @@ Pool: SelfHostedPool
 ![image](https://github.com/user-attachments/assets/ac3d697c-c4c3-4327-8f98-32855e19be25)
 
 ## Pipeline Definition  
-```
+```yaml
 trigger: none
 pool:
   name: SelfHostedPool
@@ -253,7 +253,7 @@ pool:
 variables:
 - group: Secrets
 - name: Cluster
-  value: "https://rc05dataexplorercluste.westus.kusto.windows.net"
+  value: "rc05dataexplorercluste.westus.kusto.windows.net"
 - name: Database
   value: "rc05dataexplorerdatabase"
 
@@ -280,21 +280,19 @@ jobs:
         az account set --subscription "$SubscriptionId" --only-show-errors
 
         Write-Host "Retrieving Azure Data Explorer access token..."
-        $Token = az account get-access-token --resource "$Cluster" --query accessToken -o tsv --only-show-errors
-        
+        $Token = az account get-access-token --resource "https://$Cluster" --query accessToken -o tsv --only-show-errors
+
         if ([string]::IsNullOrEmpty($Token)) {
           Write-Host "ERROR: Failed to retrieve access token."
           exit 1
         }
 
         Write-Host "Access token retrieved successfully."
+        echo "##vso[task.setvariable variable=ADO_TOKEN]$Token"
 
-        echo "##vso[task.setvariable variable=ADX_ACCESS_TOKEN;isOutput=true]$Token"
-
-        # Write token to a file for debugging
-        $DebugFile = "$(Build.ArtifactStagingDirectory)/token_debug.txt"
-        $Token | Out-File -FilePath $DebugFile -Encoding utf8
-        Write-Host "Token written to file: $DebugFile"
+        $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
+        $Token | Out-File -FilePath $TokenPath -Encoding utf8
+        Write-Host "Token written to: $TokenPath"
 
   - task: AzureCLI@2
     displayName: "Task: Verify Configuration"
@@ -307,29 +305,59 @@ jobs:
 
         $Cluster = "$(Cluster)"
         $Database = "$(Database)"
-        $Token = "$(GetToken.ADX_ACCESS_TOKEN)"
+        $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
+
+        if (Test-Path $TokenPath) {
+            Write-Host "Reading token from file..."
+            $Token = (Get-Content -Path $TokenPath -Raw).Trim()
+        } else {
+            Write-Host "ERROR: Token file not found at $TokenPath"
+            exit 1
+        }
 
         if ([string]::IsNullOrEmpty($Token)) {
-          Write-Host "ERROR: ADX_ACCESS_TOKEN is empty. Authentication might have failed."
+          Write-Host "ERROR: ADO_TOKEN is empty. Authentication might have failed."
           exit 1
         }
 
+        $ClusterHost = $Cluster -replace "^https://",""
+
         Write-Host "Checking DNS Resolution..."
-        $DnsCheck = nslookup $Cluster
+        $DnsCheck = nslookup $ClusterHost
+
         if ($DnsCheck -match "Non-existent domain") {
-            Write-Host "ERROR: DNS resolution failed for $Cluster"
+            Write-Host "ERROR: DNS resolution failed for $ClusterHost, retrying..."
+            Start-Sleep -Seconds 5
+            $DnsCheck = nslookup $ClusterHost
+        }
+
+        if ($DnsCheck -match "Non-existent domain") {
+            Write-Host "ERROR: DNS resolution failed for $ClusterHost after retry."
             exit 1
         } else {
             Write-Host "DNS resolution successful: $DnsCheck"
         }
 
         Write-Host "Checking Network Connectivity..."
-        $NetCheck = Test-NetConnection -ComputerName $Cluster -Port 443
-        if (-not $NetCheck.TcpTestSucceeded) {
-            Write-Host "ERROR: Network connectivity to $Cluster on port 443 FAILED"
+        $Retries = 3
+        $Success = $false
+
+        for ($i = 1; $i -le $Retries; $i++) {
+            $NetCheck = Test-NetConnection -ComputerName $ClusterHost -Port 443
+
+            if ($NetCheck.TcpTestSucceeded) {
+                Write-Host "Network connectivity to $ClusterHost on port 443: SUCCESS"
+                $Success = $true
+                break
+            } else {
+                Write-Host "WARNING: Network connectivity test failed. Retrying ($i/$Retries)..."
+                Start-Sleep -Seconds 5
+            }
+        }
+
+        if (-not $Success) {
+            Write-Host "ERROR: Network connectivity to $ClusterHost on port 443 FAILED after retries."
             exit 1
-        } else {
-            Write-Host "Network connectivity to $Cluster on port 443: SUCCESS"
         }
 
         Write-Host "Checking Azure Authentication..."
@@ -356,7 +384,7 @@ jobs:
         }
 
         try {
-            $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+            $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
             Write-Host "ADX Query Permissions: SUCCESS"
         } catch {
             Write-Host "ERROR: ADX query test failed. $_"
@@ -373,10 +401,18 @@ jobs:
       scriptLocation: "inlineScript"
       inlineScript: |
         Write-Host "Starting Data Explorer query..."
-        $Token = "$(GetToken.ADX_ACCESS_TOKEN)"
+        $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
+
+        if (Test-Path $TokenPath) {
+            Write-Host "Reading token from file..."
+            $Token = (Get-Content -Path $TokenPath -Raw).Trim()
+        } else {
+            Write-Host "ERROR: Token file not found at $TokenPath"
+            exit 1
+        }
 
         if ([string]::IsNullOrEmpty($Token)) {
-          Write-Host "ERROR: ADX_ACCESS_TOKEN is empty. Authentication might have failed."
+          Write-Host "ERROR: ADO_TOKEN is empty. Authentication might have failed."
           exit 1
         }
 
@@ -386,16 +422,25 @@ jobs:
 
         Write-Host "Querying ADX: $Database with query: $Query"
 
-        $Body = @'
-        {
-          "db": "'"$Database"'",
-          "csl": "'"$Query"'"
-        }
-        '@
+        # Create JSON Body with Correct Formatting
+        $Body = @{
+          db  = $Database
+          csl = $Query
+        } | ConvertTo-Json -Compress
 
-        az rest --method post --uri "$Cluster/v1/rest/query" `
-          --headers "Authorization=Bearer $Token" --headers "Content-Type=application/json" `
-          --body "$Body" `
+        # Ensure JSON is Properly Encoded
+        $EncodedBody = $Body -replace '"', '\"'
+
+        # Set Headers
+        $Headers = @(
+          "Authorization=Bearer $Token"
+          "Content-Type=application/json"
+        )
+
+        # Execute API Call with Correct JSON Formatting
+        az rest --method post --uri "https://$Cluster/v1/rest/query" `
+          --headers $Headers `
+          --body "$EncodedBody" `
           --only-show-errors
 
         if ($LASTEXITCODE -ne 0) {
