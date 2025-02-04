@@ -329,6 +329,99 @@ jobs:
 
 ---
 
+## Testing API Query Logic
+This section covers manual API testing using PowerShell and Azure CLI to verify that authentication and query execution are working correctly.
+
+### 1️⃣ Retrieve a Fresh Access Token
+Before testing, obtain a fresh access token:
+```powershell
+$Cluster = "https://rc05dataexplorercluster.westus.kusto.windows.net"
+$Token = az account get-access-token --resource "$Cluster" --query accessToken -o tsv --only-show-errors
+Write-Host "Access Token Retrieved"
+```
+- Ensure that the correct cluster URL is used (`westus`).
+- This command should return a valid access token. If it fails, verify authentication settings.
+
+---
+
+### 2️⃣ Manually Run the ADX Query
+Using the token retrieved, execute an API request to run the `.show tables details` query:
+```powershell
+$Database = "rc05dataexplorerdatabase"
+$Query = ".show tables details"
+
+$Body = @{
+    db  = $Database
+    csl = $Query
+} | ConvertTo-Json -Depth 3
+
+$Headers = @{
+    "Authorization" = "Bearer $Token"
+    "Content-Type"  = "application/json"
+}
+
+Write-Host "Querying ADX..."
+try {
+    $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+    Write-Host "Query Response:"
+    $Response.tables[0].rows | Format-Table
+} catch {
+    Write-Host "ERROR: $_"
+    exit 1
+}
+```
+- If successful, this will list all tables with details.
+- If 403 Forbidden occurs, ensure that the service principal or user identity has at least `"AllDatabasesAdmin"` or `"Viewer"` role.
+
+---
+
+### 3️⃣ Verify Role Assignments
+Check the current permissions for the user or service principal running the query:
+```sh
+az kusto database-principal-assignment list \
+    --cluster-name "rc05dataexplorercluster" \
+    --database-name "rc05dataexplorerdatabase" \
+    --query "[].{Principal:principalId, Role:role}" -o table
+```
+If the user is missing the required roles, assign the `"Viewer"` role:
+```sh
+az kusto database-principal-assignment create \
+    --cluster-name "rc05dataexplorercluster" \
+    --database-name "rc05dataexplorerdatabase" \
+    --principal-id "<YOUR_USER_OBJECT_ID>" \
+    --principal-type "User" \
+    --role "Viewer" \
+    --tenant-id "<YOUR_TENANT_ID>" \
+    --name "ADX-User-Viewer-Role"
+```
+
+---
+
+### 4️⃣ Debugging Issues
+#### Token Issues
+- If the token is empty, confirm that authentication is working:
+  ```sh
+  az login
+  az account show --query user.name -o tsv
+  ```
+- If the token is expired, retrieve a fresh token and retry.
+
+#### 403 Forbidden
+- Ensure that the correct identity is retrieving the token (`az account show`).
+- Verify the identity has necessary role permissions (`az kusto database-principal-assignment list`).
+
+---
+
+### Conclusion
+This process ensures that:
+- The Azure authentication process is working correctly.
+- The token has the required permissions to execute ADX queries.
+- The correct API endpoint and payload format are being used.
+
+🚀 Run these steps before deploying pipeline changes to validate API query logic manually.
+
+---
+
 ## Review and Run  
 1. Proceed to "Review".  
 2. Click "Save and Run" to test the pipeline. 🚀  
