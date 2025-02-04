@@ -257,16 +257,8 @@ jobs:
 - job: RunPipeline
   displayName: "Data Explorer Delta"
   steps:
-  - task: AzureKeyVault@2
-    displayName: "Get Secrets: rc05keyvault"
-    inputs:
-      azureSubscription: "AzureServiceConnection"
-      KeyVaultName: "rc05keyvault"
-      SecretsFilter: "*"
-      RunAsPreJob: false
-
   - task: AzureCLI@2
-    displayName: "Authenticate → Token"
+    displayName: "Task: Authenticate"
     name: GetToken
     inputs:
       azureSubscription: "AzureServiceConnection"
@@ -278,29 +270,61 @@ jobs:
         $ClientId = $env:AZURE_CLIENT_ID
         $ClientSecret = $env:AZURE_CLIENT_SECRET
 
+        Write-Host "Starting Azure login..."
         az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId" --only-show-errors
         az account set --subscription "$SubscriptionId" --only-show-errors
 
-        # Get Azure Data Explorer access token
-        $Token = az account get-access-token --resource "https://rc05dataexplorercluste.eastus.kusto.windows.net" --query accessToken -o tsv --only-show-errors
+        Write-Host "Retrieving Azure Data Explorer access token..."
+        $Cluster="https://rc05dataexplorercluster.westus.kusto.windows.net"
+        $Token = az account get-access-token --resource "$Cluster" --query accessToken -o tsv --only-show-errors
         
-        # Ensure token is properly set as an output variable
+        if ([string]::IsNullOrEmpty($Token)) {
+          Write-Host "ERROR: Failed to retrieve access token."
+          exit 1
+        }
+
+        Write-Host "Access token retrieved successfully."
         echo "##vso[task.setvariable variable=ADX_ACCESS_TOKEN;isOutput=true]$Token"
 
   - task: AzureCLI@2
-    displayName: "Query Data Explorer"
+    displayName: "Task: List Tables"
     inputs:
       azureSubscription: "AzureServiceConnection"
       scriptType: "pscore"
       scriptLocation: "inlineScript"
       inlineScript: |
-        $Token = "$(ADX_ACCESS_TOKEN)"
+        Write-Host "Starting Data Explorer query..."
+        $Token = "$(GetToken.ADX_ACCESS_TOKEN)"
 
-        # Use az rest for simplified API call
-        az rest --method post --uri "https://rc05dataexplorercluste.eastus.kusto.windows.net/v1/rest/query" \
-          --headers "Authorization=Bearer $Token" \
-          --body "{ \"db\": \"rc05dataexplorerdatabase\", \"csl\": \"Tables | project TableName\" }" \
-          --only-show-errors || exit 1
+        if ([string]::IsNullOrEmpty($Token)) {
+          Write-Host "ERROR: ADX_ACCESS_TOKEN is empty. Authentication might have failed."
+          exit 1
+        }
+
+        $Cluster="https://rc05dataexplorercluster.westus.kusto.windows.net"
+        $Database="rc05dataexplorerdatabase"
+        $Query=".show tables details"
+
+        Write-Host "Querying ADX: $Database with query: $Query"
+
+        $Body = @'
+        {
+          "db": "'"$Database"'",
+          "csl": "'"$Query"'"
+        }
+        '@
+
+        az rest --method post --uri "$Cluster/v1/rest/query" `
+          --headers "Authorization=Bearer $Token" "Content-Type=application/json" `
+          --body "$Body" `
+          --only-show-errors
+
+        if ($LASTEXITCODE -ne 0) {
+          Write-Host "ERROR: Query failed."
+          exit 1
+        }
+
+        Write-Host "ADX Query Completed Successfully."
 ```
 
 ---
