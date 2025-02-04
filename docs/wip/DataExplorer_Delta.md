@@ -244,15 +244,6 @@ Pool: SelfHostedPool
 
 ![image](https://github.com/user-attachments/assets/ac3d697c-c4c3-4327-8f98-32855e19be25)
 
-### Link the Variable Group in Your Pipeline  
-Add this to your pipeline YAML:  
-```yaml
-variables:
-- group: mySecrets
-```  
-This automatically injects Key Vault secrets into the pipeline for authentication.
----
-
 ## Pipeline Definition  
 ```
 trigger: none
