@@ -159,16 +159,21 @@ az rest --method post `
 
 ### **Special Pre-Requisite: Git Installation and Configuration**  
 
-For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.  
+For the pipeline to commit and push generated `.kql` files to the repository, **Git must be installed and properly configured** on the agent machine.
+
+---
 
 #### **1️⃣ Verify if Git is Installed**  
 Run the following command:  
 ```powershell
 where.exe git
 ```
-If no output is returned, Git is not installed.  
+If no output is returned, Git is **not installed**.
+
+---
 
 #### **2️⃣ Install Git**  
+Install Git using **winget**:  
 ```powershell
 winget install --id Git.Git --source winget --accept-package-agreements --accept-source-agreements
 ```
@@ -176,24 +181,55 @@ Alternatively, download and install Git manually from [https://git-scm.com/downl
 - ✅ "Add Git to PATH"
 - ✅ "Enable credential manager"  
 
-Restart the terminal after installation.  
-
-#### **3️⃣ Verify Installation**  
-Run:  
+After installation, **restart the terminal** and verify:  
 ```powershell
 git --version
 ```
-If Git is installed, it will return the installed version.  
+If Git is installed correctly, it will return the installed version.
 
-#### **4️⃣ Configure Git for DevOps Authentication**  
+---
+
+#### **3️⃣ Ensure Git is in PATH**  
+If `git` is installed but not recognized, manually add it to the system **PATH**:
 ```powershell
-git config --global user.email "pipeline@devops.com"
-git config --global user.name "Azure DevOps Pipeline"
-git config --global credential.helper store
-echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
+$GitPath = "C:\Program Files\Git\bin"
+$envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+if ($envPath -notlike "*$GitPath*") {
+    [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$GitPath", "Machine")
+}
+```
+**Restart the terminal** and verify:  
+```powershell
+where.exe git
 ```
 
-#### **5️⃣ Verify Git is Tracking the Repository**  
+---
+
+#### **4️⃣ Ensure the DevOps Agent Can Access Git**  
+If Git is installed under a different user, but the **DevOps Agent** runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
+
+**Verify that the agent process can find `git.exe`**:  
+```powershell
+Get-Command git | Select-Object -ExpandProperty Source
+```
+If this fails, restart the **Azure DevOps Agent** service and try again.
+
+---
+
+#### **5️⃣ Configure Git as a Safe Directory**  
+If you see an error like:
+```
+fatal: detected dubious ownership in repository at 'C:/agent/_work/1/s'
+```
+Run the following command to mark the DevOps workspace as safe:  
+```powershell
+git config --global --add safe.directory C:/agent/_work/1/s
+```
+
+---
+
+#### **6️⃣ Verify Git is Tracking the Repository**  
+Run:
 ```powershell
 cd C:\agent\_work\1\s
 git status
@@ -206,14 +242,37 @@ git status
   git checkout main
   ```
 
-#### **6️⃣ Manually Push Missing Files**  
-If Git is now installed, manually push the `.kql` files:  
+---
+
+#### **7️⃣ Configure Git for DevOps Authentication**  
+Ensure Git uses the **System.AccessToken** for authentication:
+```powershell
+git config --global user.email "pipeline@devops.com"
+git config --global user.name "Azure DevOps Pipeline"
+git config --global credential.helper store
+echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
+```
+
+---
+
+#### **8️⃣ Manually Push Missing Files**  
+If Git is now installed but the pipeline failed to commit `.kql` files, manually push them:  
 ```powershell
 cd C:\agent\_work\1\s
 git add -A
 git commit -m "Manually adding missing .kql files"
 git push origin main
 ```
+
+---
+
+### **When to Use This Section?**
+- If **Git is missing or not recognized** (`git --version` fails)
+- If **Git is installed but not in PATH**
+- If **DevOps Agent cannot access Git**
+- If **Pipelines fail to commit and push files**
+- If **"detected dubious ownership"** error appears
+- If **Pipeline changes do not appear in the repository**
 
 ---
 
