@@ -448,7 +448,76 @@ jobs:
           exit 1
         }
 
-        Write-Host "ADX Query Completed Successfully."
+  - task: AzureCLI@2
+    displayName: "Task: Iterate thru Tables"
+    inputs:
+      azureSubscription: "AzureServiceConnection"
+      scriptType: "pscore"
+      scriptLocation: "inlineScript"
+      inlineScript: |
+        Write-Host "Retrieving table list from ADX..."
+        $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
+
+        if (Test-Path $TokenPath) {
+            Write-Host "Reading token from file..."
+            $Token = (Get-Content -Path $TokenPath -Raw).Trim()
+        } else {
+            Write-Host "ERROR: Token file not found at $TokenPath"
+            exit 1
+        }
+
+        if ([string]::IsNullOrEmpty($Token)) {
+          Write-Host "ERROR: ADO_TOKEN is empty. Authentication might have failed."
+          exit 1
+        }
+
+        $Cluster = "$(Cluster)"
+        $Database = "$(Database)"
+        $Query = ".show tables details"
+
+        Write-Host "Executing query to get table list..."
+        
+        # Create JSON request body
+        $Body = @{
+          db  = $Database
+          csl = $Query
+        } | ConvertTo-Json -Compress
+
+        # Set Headers
+        $Headers = @{
+          "Authorization" = "Bearer $Token"
+          "Content-Type"  = "application/json"
+        }
+
+        # Execute Query
+        try {
+            $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+            $Tables = $Response.tables[0].rows
+        } catch {
+            Write-Host "ERROR: Failed to retrieve table list. $_"
+            exit 1
+        }
+
+        if (-not $Tables -or $Tables.Count -eq 0) {
+            Write-Host "No tables found."
+            exit 0
+        }
+
+        # Define dated output folder in repo
+        $DateString = Get-Date -Format "yyyy-MM-dd"
+        $OutputFolder = "$(Build.SourcesDirectory)/ADX_Tables_$DateString"
+
+        if (!(Test-Path $OutputFolder)) {
+            New-Item -ItemType Directory -Path $OutputFolder | Out-Null
+        }
+
+        Write-Host "Creating .kql files for tables in $OutputFolder..."
+        foreach ($Table in $Tables) {
+            $TableName = $Table[0]
+            $FilePath = "$OutputFolder\$TableName.kql"
+            Write-Host "Creating file: $FilePath"
+            New-Item -Path $FilePath -ItemType File -Force | Out-Null
+        }
 ```
 
 ---
