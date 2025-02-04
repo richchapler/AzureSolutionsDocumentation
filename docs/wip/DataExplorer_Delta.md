@@ -452,23 +452,16 @@ jobs:
         Write-Host "Token written to: $TokenPath"
 
   - task: AzureCLI@2
-    displayName: "Task: Set Timestamp"
-    name: SetTimestamp
+    displayName: "Task: Verify Configuration"
     inputs:
       azureSubscription: "AzureServiceConnection"
       scriptType: "pscore"
       scriptLocation: "inlineScript"
       inlineScript: |
-        echo "##vso[task.setvariable variable=DateString]$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+        Write-Host "Starting configuration verification..."
 
-  - task: AzureCLI@2
-    displayName: "Task: List Tables"
-    inputs:
-      azureSubscription: "AzureServiceConnection"
-      scriptType: "pscore"
-      scriptLocation: "inlineScript"
-      inlineScript: |
-        Write-Host "Starting Data Explorer query..."
+        $Cluster = "$(Cluster)"
+        $Database = "$(Database)"
         $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
 
         if (Test-Path $TokenPath) {
@@ -484,36 +477,81 @@ jobs:
           exit 1
         }
 
-        $Cluster = "$(Cluster)"
-        $Database = "$(Database)"
-        $Query = ".show tables details"
+        $ClusterHost = $Cluster -replace "^https://",""
 
-        Write-Host "Querying ADX: $Database with query: $Query"
+        Write-Host "Checking DNS Resolution..."
+        $DnsCheck = nslookup $ClusterHost
 
-        $Body = @{
-          db  = $Database
-          csl = $Query
-        } | ConvertTo-Json -Compress
-
-        $EncodedBody = $Body -replace '"', '\"'
-
-        $Headers = @(
-          "Authorization=Bearer $Token"
-          "Content-Type=application/json"
-        )
-
-        az rest --method post --uri "https://$Cluster/v1/rest/query" `
-          --headers $Headers `
-          --body "$EncodedBody" `
-          --only-show-errors
-
-        if ($LASTEXITCODE -ne 0) {
-          Write-Host "ERROR: Query failed."
-          exit 1
+        if ($DnsCheck -match "Non-existent domain") {
+            Write-Host "ERROR: DNS resolution failed for $ClusterHost, retrying..."
+            Start-Sleep -Seconds 5
+            $DnsCheck = nslookup $ClusterHost
         }
 
+        if ($DnsCheck -match "Non-existent domain") {
+            Write-Host "ERROR: DNS resolution failed for $ClusterHost after retry."
+            exit 1
+        } else {
+            Write-Host "DNS resolution successful: $DnsCheck"
+        }
+
+        Write-Host "Checking Network Connectivity..."
+        $Retries = 3
+        $Success = $false
+
+        for ($i = 1; $i -le $Retries; $i++) {
+            $NetCheck = Test-NetConnection -ComputerName $ClusterHost -Port 443
+
+            if ($NetCheck.TcpTestSucceeded) {
+                Write-Host "Network connectivity to $ClusterHost on port 443: SUCCESS"
+                $Success = $true
+                break
+            } else {
+                Write-Host "WARNING: Network connectivity test failed. Retrying ($i/$Retries)..."
+                Start-Sleep -Seconds 5
+            }
+        }
+
+        if (-not $Success) {
+            Write-Host "ERROR: Network connectivity to $ClusterHost on port 443 FAILED after retries."
+            exit 1
+        }
+
+        Write-Host "Checking Azure Authentication..."
+        $AuthCheck = az account show --query user.name -o tsv --only-show-errors
+        if ([string]::IsNullOrEmpty($AuthCheck)) {
+            Write-Host "ERROR: Authentication check failed."
+            exit 1
+        } else {
+            Write-Host "Authentication successful. Logged in as: $AuthCheck"
+        }
+
+        Write-Host "Checking ADX Query Permissions..."
+        $Query = ".show tables details"
+        $Body = @"
+        {
+          "db": "$Database",
+          "csl": "$Query"
+        }
+        "@
+
+        $Headers = @{
+            "Authorization" = "Bearer $Token"
+            "Content-Type"  = "application/json"
+        }
+
+        try {
+            $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+            Write-Host "ADX Query Permissions: SUCCESS"
+        } catch {
+            Write-Host "ERROR: ADX query test failed. $_"
+            exit 1
+        }
+
+        Write-Host "Configuration verification completed."
+
   - task: AzureCLI@2
-    displayName: "Task: Iterate thru Tables"
+    displayName: "Task: Iterate Through Tables and Write KQL"
     inputs:
       azureSubscription: "AzureServiceConnection"
       scriptType: "pscore"
@@ -523,24 +561,17 @@ jobs:
         $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
 
         if (Test-Path $TokenPath) {
-            Write-Host "Reading token from file..."
             $Token = (Get-Content -Path $TokenPath -Raw).Trim()
         } else {
             Write-Host "ERROR: Token file not found at $TokenPath"
             exit 1
         }
 
-        if ([string]::IsNullOrEmpty($Token)) {
-          Write-Host "ERROR: ADO_TOKEN is empty. Authentication might have failed."
-          exit 1
-        }
-
         $Cluster = "$(Cluster)"
         $Database = "$(Database)"
         $Query = ".show tables details"
 
-        Write-Host "Executing query to get table list..."
-        
+        Write-Host "Querying ADX..."
         $Body = @{
           db  = $Database
           csl = $Query
@@ -564,18 +595,16 @@ jobs:
             exit 0
         }
 
-        $DateString = "$(DateString)"
-        $OutputFolder = "$(Build.SourcesDirectory)/ADX_Tables_$DateString"
+        $Timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+        $OutputFolder = "$(Build.SourcesDirectory)/ADX_Tables_$Timestamp"
 
         if (!(Test-Path $OutputFolder)) {
             New-Item -ItemType Directory -Path $OutputFolder | Out-Null
         }
 
-        Write-Host "Creating .kql files for tables in $OutputFolder..."
         foreach ($Table in $Tables) {
             $TableName = $Table[0]
             $FilePath = "$OutputFolder\$TableName.kql"
-            Write-Host "Creating file: $FilePath"
             New-Item -Path $FilePath -ItemType File -Force | Out-Null
         }
 
@@ -585,31 +614,15 @@ jobs:
       targetType: "inline"
       script: |
         cd "$(Build.SourcesDirectory)"
-
-        $DateString = Get-Date -Format "yyyyMMdd-HHmmss"
-        $folderPath = "ADX_Tables_$DateString"
-
-        Write-Host "Checking for new .kql files in $folderPath..."
+        $Timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+        $folderPath = "ADX_Tables_$Timestamp"
 
         if (Test-Path $folderPath) {
             git config --global user.email "pipeline@devops.com"
             git config --global user.name "Azure DevOps Pipeline"
-
-            # Configure Git to use a PAT for authentication
-            $PatToken = "$(System.AccessToken)"
-            git config --global credential.helper store
-            echo "https://user:$PatToken@dev.azure.com" | git credential approve
-
-            # Ensure we are on the correct branch and update local branch
-            git checkout main
-            git fetch origin main
-            git reset --hard origin/main
-
             git add $folderPath/*.kql
-            git commit -m "Auto-commit: Adding .kql files for $DateString"
-            git push https://user:$PatToken@dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta main --force
-
-            Write-Host "Successfully committed and pushed .kql files."
+            git commit -m "Auto-commit: Adding .kql files for $Timestamp"
+            git push
         } else {
             Write-Host "No .kql files found to commit."
         }
