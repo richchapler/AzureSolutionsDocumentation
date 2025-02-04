@@ -157,6 +157,43 @@ az rest --method post `
 
 ---
 
+### Special Pre-Requisite: Azure DevOps Repository Permissions  
+
+For the pipeline to commit and push generated `.kql` files back to the repository, ensure that the DevOps Build Service has the correct permissions.  
+
+#### 1️⃣ Verify Build Service Permissions  
+1. Navigate to **Azure DevOps** → **Project Settings** → **Repositories**  
+2. Select the repository **"DataExplorer_Delta"**  
+3. Go to the **Security** tab  
+4. Locate **"DataExplorer_Delta Build Service (rchapler)"**  
+5. Ensure the following permissions are **set to "Allow"**:  
+   - `Contribute`  
+   - `Create branch`  
+   - `Contribute to pull requests`  
+   - `Bypass policies when pushing` (if necessary)  
+
+#### 2️⃣ Confirm and Apply Changes  
+- **If a "Save" button appears**, click it  
+- **If no "Save" button appears**, refresh the page to confirm that permissions were applied  
+
+#### 3️⃣ Validate with a Manual Push  
+After setting permissions, validate push access by running the following on the agent machine:  
+```sh
+git config --global user.email "pipeline@devops.com"
+git config --global user.name "Azure DevOps Pipeline"
+
+git checkout main
+git pull origin main
+echo "Test Commit" > test_file.txt
+git add test_file.txt
+git commit -m "Test commit from pipeline"
+git push origin main
+```
+- If authentication fails, verify that `System.AccessToken` is being used correctly in the pipeline  
+- If permission errors occur, recheck the repository settings  
+
+---
+
 ## Special Pre-Requisite: Self-Hosted Agent  
 
 ### Create and Expand a Personal Access Token (PAT)  
