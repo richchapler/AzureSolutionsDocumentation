@@ -157,6 +157,66 @@ az rest --method post `
 
 ---
 
+### **Special Pre-Requisite: Git Installation and Configuration**  
+
+For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.  
+
+#### **1️⃣ Verify if Git is Installed**  
+Run the following command:  
+```powershell
+where.exe git
+```
+If no output is returned, Git is not installed.  
+
+#### **2️⃣ Install Git**  
+```powershell
+winget install --id Git.Git --source winget --accept-package-agreements --accept-source-agreements
+```
+Alternatively, download and install Git manually from [https://git-scm.com/downloads](https://git-scm.com/downloads), ensuring you enable:
+- ✅ "Add Git to PATH"
+- ✅ "Enable credential manager"  
+
+Restart the terminal after installation.  
+
+#### **3️⃣ Verify Installation**  
+Run:  
+```powershell
+git --version
+```
+If Git is installed, it will return the installed version.  
+
+#### **4️⃣ Configure Git for DevOps Authentication**  
+```powershell
+git config --global user.email "pipeline@devops.com"
+git config --global user.name "Azure DevOps Pipeline"
+git config --global credential.helper store
+echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
+```
+
+#### **5️⃣ Verify Git is Tracking the Repository**  
+```powershell
+cd C:\agent\_work\1\s
+git status
+```
+- If it says **"Not a git repository"**, initialize it:  
+  ```powershell
+  git init
+  git remote add origin https://dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta
+  git fetch
+  git checkout main
+  ```
+
+#### **6️⃣ Manually Push Missing Files**  
+If Git is now installed, manually push the `.kql` files:  
+```powershell
+cd C:\agent\_work\1\s
+git add -A
+git commit -m "Manually adding missing .kql files"
+git push origin main
+```
+
+---
+
 ### Special Pre-Requisite: Azure DevOps Repository Permissions  
 
 For the pipeline to commit and push generated `.kql` files back to the repository, ensure that the DevOps Build Service has the correct permissions.  
