@@ -252,6 +252,10 @@ pool:
 
 variables:
 - group: Secrets
+- name: Cluster
+  value: "https://rc05dataexplorercluste.westus.kusto.windows.net"
+- name: Database
+  value: "rc05dataexplorerdatabase"
 
 jobs:
 - job: RunPipeline
@@ -269,13 +273,13 @@ jobs:
         $SubscriptionId = $env:AZURE_SUBSCRIPTION_ID
         $ClientId = $env:AZURE_CLIENT_ID
         $ClientSecret = $env:AZURE_CLIENT_SECRET
+        $Cluster = "$(Cluster)"
 
         Write-Host "Starting Azure login..."
         az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId" --only-show-errors
         az account set --subscription "$SubscriptionId" --only-show-errors
 
         Write-Host "Retrieving Azure Data Explorer access token..."
-        $Cluster="https://rc05dataexplorercluster.westus.kusto.windows.net"
         $Token = az account get-access-token --resource "$Cluster" --query accessToken -o tsv --only-show-errors
         
         if ([string]::IsNullOrEmpty($Token)) {
@@ -301,40 +305,40 @@ jobs:
       inlineScript: |
         Write-Host "Starting configuration verification..."
 
-        $Cluster = "rc05dataexplorercluster.westus.kusto.windows.net"
-        $Database = "rc05dataexplorerdatabase"
+        $Cluster = "$(Cluster)"
+        $Database = "$(Database)"
+        $Token = "$(GetToken.ADX_ACCESS_TOKEN)"
+
+        if ([string]::IsNullOrEmpty($Token)) {
+          Write-Host "ERROR: ADX_ACCESS_TOKEN is empty. Authentication might have failed."
+          exit 1
+        }
 
         Write-Host "Checking DNS Resolution..."
         $DnsCheck = nslookup $Cluster
         if ($DnsCheck -match "Non-existent domain") {
             Write-Host "ERROR: DNS resolution failed for $Cluster"
+            exit 1
         } else {
             Write-Host "DNS resolution successful: $DnsCheck"
         }
 
         Write-Host "Checking Network Connectivity..."
         $NetCheck = Test-NetConnection -ComputerName $Cluster -Port 443
-        if ($NetCheck.TcpTestSucceeded) {
-            Write-Host "Network connectivity to $Cluster on port 443: SUCCESS"
-        } else {
+        if (-not $NetCheck.TcpTestSucceeded) {
             Write-Host "ERROR: Network connectivity to $Cluster on port 443 FAILED"
+            exit 1
+        } else {
+            Write-Host "Network connectivity to $Cluster on port 443: SUCCESS"
         }
 
         Write-Host "Checking Azure Authentication..."
         $AuthCheck = az account show --query user.name -o tsv --only-show-errors
         if ([string]::IsNullOrEmpty($AuthCheck)) {
             Write-Host "ERROR: Authentication check failed."
-        } else {
-            Write-Host "Authentication successful. Logged in as: $AuthCheck"
-        }
-
-        Write-Host "Checking Access Token Retrieval..."
-        $Token = az account get-access-token --resource "https://$Cluster" --query accessToken -o tsv --only-show-errors
-        if ([string]::IsNullOrEmpty($Token)) {
-            Write-Host "ERROR: Failed to retrieve access token."
             exit 1
         } else {
-            Write-Host "Access token retrieved successfully."
+            Write-Host "Authentication successful. Logged in as: $AuthCheck"
         }
 
         Write-Host "Checking ADX Query Permissions..."
@@ -352,10 +356,11 @@ jobs:
         }
 
         try {
-            $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+            $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
             Write-Host "ADX Query Permissions: SUCCESS"
         } catch {
             Write-Host "ERROR: ADX query test failed. $_"
+            exit 1
         }
 
         Write-Host "Configuration verification completed."
@@ -375,9 +380,9 @@ jobs:
           exit 1
         }
 
-        $Cluster="https://rc05dataexplorercluster.westus.kusto.windows.net"
-        $Database="rc05dataexplorerdatabase"
-        $Query=".show tables details"
+        $Cluster = "$(Cluster)"
+        $Database = "$(Database)"
+        $Query = ".show tables details"
 
         Write-Host "Querying ADX: $Database with query: $Query"
 
@@ -389,7 +394,7 @@ jobs:
         '@
 
         az rest --method post --uri "$Cluster/v1/rest/query" `
-          --headers "Authorization=Bearer $Token" "Content-Type=application/json" `
+          --headers "Authorization=Bearer $Token" --headers "Content-Type=application/json" `
           --body "$Body" `
           --only-show-errors
 
