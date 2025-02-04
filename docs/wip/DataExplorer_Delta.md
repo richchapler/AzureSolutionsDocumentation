@@ -263,8 +263,8 @@ variables:
 - group: Secrets
 
 jobs:
-- job: GetSecrets
-  displayName: "Get Secrets from Azure Key Vault"
+- job: RunPipeline
+  displayName: "Data Explorer Delta"
   steps:
   - task: AzureKeyVault@2
     displayName: "Get Secrets: rc05keyvault"
@@ -274,13 +274,9 @@ jobs:
       SecretsFilter: "*"
       RunAsPreJob: false
 
-- job: AuthenticateAzure
-  displayName: "Authenticate to Azure & Get Token"
-  dependsOn: GetSecrets
-  steps:
   - task: AzureCLI@2
-    displayName: "Authenticate & Retrieve Access Token"
-    name: GetToken  # This step is named to reference output
+    displayName: "Authenticate → Token"
+    name: GetToken
     inputs:
       azureSubscription: "AzureServiceConnection"
       scriptType: "pscore"
@@ -291,19 +287,15 @@ jobs:
         $ClientId = $env:AZURE_CLIENT_ID
         $ClientSecret = $env:AZURE_CLIENT_SECRET
 
-        az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId"
-        az account set --subscription "$SubscriptionId"
+        az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId" --only-show-errors
+        az account set --subscription "$SubscriptionId" --only-show-errors
 
-        # Get Azure Data Explorer access token and set it as an output variable
-        $Token = az account get-access-token --resource "https://rc05dataexplorercluste.eastus.kusto.windows.net" --query accessToken -o tsv
+        # Get Azure Data Explorer access token
+        $Token = az account get-access-token --resource "https://rc05dataexplorercluste.eastus.kusto.windows.net" --query accessToken -o tsv --only-show-errors
+        
+        # Ensure token is properly set as an output variable
         echo "##vso[task.setvariable variable=ADX_ACCESS_TOKEN;isOutput=true]$Token"
 
-- job: QueryDataExplorer
-  displayName: "Query Data Explorer"
-  dependsOn: AuthenticateAzure
-  variables:
-    ADX_ACCESS_TOKEN: $[ dependencies.AuthenticateAzure.outputs['GetToken.ADX_ACCESS_TOKEN'] ]
-  steps:
   - task: AzureCLI@2
     displayName: "Query Data Explorer"
     inputs:
@@ -313,19 +305,11 @@ jobs:
       inlineScript: |
         $Token = "$(ADX_ACCESS_TOKEN)"
 
-        # Uncomment to query ADX if needed
-        # $Cluster = "https://rc05dataexplorercluste.eastus.kusto.windows.net"
-        # $Database = "rc05dataexplorerdatabase"
-        # $Query = "Tables | project TableName"
-        # $Body = @{ db = $Database; csl = $Query } | ConvertTo-Json -Depth 3
-        # $Headers = @{ "Authorization" = "Bearer $Token"; "Content-Type" = "application/json" }
-        # try {
-        #   $Response = Invoke-RestMethod -Uri "$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
-        #   $Response.tables[0].rows | Format-Table
-        # } catch {
-        #   Write-Host "ERROR: $_"
-        #   exit 1
-        # }
+        # Use az rest for simplified API call
+        az rest --method post --uri "https://rc05dataexplorercluste.eastus.kusto.windows.net/v1/rest/query" \
+          --headers "Authorization=Bearer $Token" \
+          --body "{ \"db\": \"rc05dataexplorerdatabase\", \"csl\": \"Tables | project TableName\" }" \
+          --only-show-errors || exit 1
 ```
 
 ---
