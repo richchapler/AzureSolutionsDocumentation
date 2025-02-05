@@ -190,28 +190,37 @@ env_file = ".env"
 
 if not os.path.isfile(env_file):
     with open(env_file, "w") as f:
-        f.write("API_KEY=\nENDPOINT=\n")
-    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials.")
+        f.write("API_KEY=\nENDPOINT=\nIMAGE_PATH=\n")
+    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
 
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
+IMAGE_PATH = os.getenv("IMAGE_PATH")
 
-missing_keys = []
+missing_messages = []
+
 if not API_KEY:
-    missing_keys.append("API_KEY")
+    missing_messages.append("\n*** Error: Missing API_KEY ***\n"
+                            "1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service\n"
+                            "2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'\n"
+                            "3. Copy 'Key 1' and paste it into the .env file as API_KEY")
+
 if not ENDPOINT:
-    missing_keys.append("ENDPOINT")
+    missing_messages.append("\n*** Error: Missing ENDPOINT ***\n"
+                            "1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service\n"
+                            "2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'\n"
+                            "3. Copy the 'Endpoint' value and paste it into the .env file as ENDPOINT")
 
-if missing_keys:
-    print("*** Error: Missing Environment Variables ***")
+if not IMAGE_PATH:
+    missing_messages.append("\n*** Error: Missing IMAGE_PATH ***\n"
+                            "1. Store a sample file {e.g., https://www.irs.gov/pub/irs-pdf/f1040.pdf} in your local device {e.g, c:\\temp\\f1040.pdf}\n"
+                            "2. Open the .env file and set IMAGE_PATH to the full path of the image file")
 
-    print(f"\n1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service.")
-    print("2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'.")
-    print("3. Copy 'Key 1' and 'Endpoint' values.")
-    print(f"4. Open {os.path.abspath(env_file).lower()}, paste the corresponding values and Save.")
-    print("5. Restart the kernel and then re-execute this cell.")
+if missing_messages:
+    print("\n".join(missing_messages))
+    print(f"\nOpen {os.path.abspath(env_file).lower()}, update the missing values, save changes, restart the kernel, and re-execute this cell.")
 ```
 
 The resulting `.env` file should look like:
