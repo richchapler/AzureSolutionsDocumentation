@@ -144,22 +144,27 @@ Select the "Recommended" interpreter.
 
 ---
 
-### Dependencies  
+### **Dependencies**  
 
 Execute the following command to upgrade `pip`:  
+
 ```powershell
 python -m pip install --upgrade pip
-```  
-
-Execute the following command to install the Azure AI Vision SDK:  
-```powershell
-pip install azure-ai-vision-imageanalysis
-```  
-
-Execute the following command to install `python-dotenv` for secure API key storage:  
-```powershell
-pip install python-dotenv
 ```
+
+Execute the following command to install the required dependencies:  
+
+```powershell
+pip install azure-ai-vision-imageanalysis python-dotenv opencv-python matplotlib requests
+```
+
+- `azure-ai-vision-imageanalysis` – Azure AI Vision SDK for OCR  
+- `python-dotenv` – Secure storage of API credentials in a `.env` file  
+- `opencv-python` – Image processing library (used to display images)  
+- `matplotlib` – Library for image visualization  
+- `requests` – HTTP library for downloading images from URLs  
+
+Run the command to install all dependencies.
 
 ---
 
