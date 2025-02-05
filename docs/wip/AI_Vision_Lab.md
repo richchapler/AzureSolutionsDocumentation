@@ -253,31 +253,41 @@ Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
 import os
-
-env_path = ".env"
-
-# Check if .env file exists, if not, create one
-if not os.path.isfile(env_path):
-    with open(env_path, "w") as f:
-        f.write("API_KEY=\nENDPOINT=\n")
-    print(".env file created. Please open it and add your API credentials.")
-
-# Load environment variables
 from dotenv import load_dotenv
+
+env_file = ".env"
+
+if not os.path.isfile(env_file):
+    with open(env_file, "w") as f:
+        f.write("API_KEY=\nENDPOINT=\n")
+    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials.")
+
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
 
-# Display results
-print(f"API Key: {'Loaded' if API_KEY else 'Missing'}")
-print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
+missing_keys = []
+if not API_KEY:
+    missing_keys.append("API_KEY")
+if not ENDPOINT:
+    missing_keys.append("ENDPOINT")
 
-# Prompt user if credentials are missing
-if not API_KEY or not ENDPOINT:
-    print("\nOpen the .env file and add:")
-    print("API_KEY=your-actual-key")
-    print("ENDPOINT=your-actual-endpoint")
+if missing_keys:
+    print("*** Error: Missing Environment Variables ***")
+
+    print(f"\n1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service.")
+    print("2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'.")
+    print("3. Copy 'Key 1' and 'Endpoint' values.")
+    print("4. Open {os.path.abspath(env_file)}, paste the corresponding values and Save.")
+    print("5. Restart the kernel and then re-execute this cell.")
+```
+
+The resulting `.env` file should look like:
+
+```text
+API_KEY={KEY 1}
+ENDPOINT={Endpoint}
 ```
 
 Click "Run All" to test.
