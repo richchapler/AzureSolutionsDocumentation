@@ -130,7 +130,7 @@ Click "Install".
 
 <img src="https://github.com/user-attachments/assets/d618a771-041c-40a2-a351-6c63cc51d0bc" width="800" title="Snipped February 5, 2025" />
 
-Click "File" >> "New File", then search for and select "Jupyter Notebook".
+Test added functionality by clicking "File" >> "New File", then search for and select "Jupyter Notebook".
 
 <img src="https://github.com/user-attachments/assets/066afd03-d3ff-435e-a651-ae6a28a57bc3" width="800" title="Snipped February 5, 2025" />
 
@@ -206,37 +206,167 @@ _Note: Visual Studio Code + Python will be used throughout exercises in this doc
 
 ---
 
-## Exercise 3: Optical Character Recognition (OCR)
+## Exercise 3: Optical Character Recognition (OCR)  
 
-### ...using Jupyter Notebook  
+This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. You will:  
+- Use Jupyter Notebooks in Visual Studio Code for interactive coding  
+- Analyze images using Azure AI Vision OCR  
+- Retrieve text and confidence scores  
 
-Open `notebook.ipynb` and add the following code:
+### Open Jupyter Notebook in Visual Studio Code
+
+Click "File" >> "New File", then search for and select "Jupyter Notebook".
+
+<img src="https://github.com/user-attachments/assets/98efe3de-41dd-4b5a-ac9d-4cf6ca8947b8" width="800" title="Snipped February 5, 2025" />
+
+Save the file as `ocr.ipynb`  
+
+## Load Credentials  
+
+In the first cell of `ocr.ipynb`, add:  
+
+```python
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+ENDPOINT = os.getenv("ENDPOINT")
+
+print(f"API Key: {'Loaded' if API_KEY else 'Missing'}")
+print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
+```
+
+Run the cell (`Shift+Enter`) to confirm the API key and endpoint are loaded.
+
+---
+
+## Install required dependencies  
+
+In the next cell, install the Azure AI Vision SDK if not already installed:  
+
+```python
+!pip install azure-ai-vision-imageanalysis
+```
+
+Run the cell to install.
+
+---
+
+## Define OCR function  
+
+In the next cell, add:  
 
 ```python
 from azure.ai.vision.imageanalysis import ImageAnalysisClient
 from azure.ai.vision.imageanalysis.models import VisualFeatures
 from azure.core.credentials import AzureKeyCredential
-from config import API_KEY, ENDPOINT
+
+client = ImageAnalysisClient(endpoint=ENDPOINT, credential=AzureKeyCredential(API_KEY))
 
 def perform_ocr(image_path):
-    client = ImageAnalysisClient(endpoint=ENDPOINT, credential=AzureKeyCredential(API_KEY))
     with open(image_path, "rb") as image:
         result = client.analyze_image(image, visual_features=[VisualFeatures.READ])
 
-    return {"text": result.read.text if result.read else "No text detected"}
+    if result.read and result.read.text:
+        return result.read.text
+    return "No text detected"
 
-image_path = "test.jpg"  # Replace with actual image path
-print(perform_ocr(image_path))
+print("OCR function ready")
 ```
 
-Run the cell by pressing `Shift+Enter`.
+Run the cell to load the function.
 
 ---
 
-### Run OCR in PowerShell  
+## Upload and analyze an image  
 
-Execute the following command in PowerShell:
+### Local image  
 
-```powershell
-python ocr.py
+In a new cell, add:  
+
+```python
+image_path = "test.jpg"  # Replace with your image path
+
+extracted_text = perform_ocr(image_path)
+
+print("Extracted Text:\n", extracted_text)
 ```
+
+Run the cell and verify the extracted text.
+
+### Web image  
+
+To analyze an image from a URL instead, add:
+
+```python
+import requests
+
+def download_image(url, save_path="downloaded_image.jpg"):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(save_path, "wb") as file:
+            file.write(response.content)
+        return save_path
+    return None
+
+image_url = "https://example.com/sample.jpg"  # Replace with actual image URL
+
+image_path = download_image(image_url)
+if image_path:
+    extracted_text = perform_ocr(image_path)
+    print("Extracted Text:\n", extracted_text)
+else:
+    print("Failed to download image")
+```
+
+Run the cell to analyze text from a web image.
+
+---
+
+## Display image with OCR results  
+
+```python
+import matplotlib.pyplot as plt
+import cv2
+
+def display_image(image_path, extracted_text):
+    img = cv2.imread(image_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    plt.figure(figsize=(8, 6))
+    plt.imshow(img)
+    plt.axis("off")
+    plt.title("Extracted Text:\n" + extracted_text, fontsize=12)
+    plt.show()
+
+display_image(image_path, extracted_text)
+```
+
+Run the cell to display the image with recognized text.
+
+---
+
+## Export OCR results to a file  
+
+```python
+output_file = "ocr_results.txt"
+
+with open(output_file, "w", encoding="utf-8") as file:
+    file.write(extracted_text)
+
+print(f"OCR results saved to {output_file}")
+```
+
+Run the cell to save results.
+
+---
+
+## Summary  
+
+You have successfully:  
+- Set up Jupyter Notebooks in Visual Studio Code  
+- Loaded API credentials securely  
+- Used Azure AI Vision OCR to extract text from images  
+- Displayed and saved extracted text  
