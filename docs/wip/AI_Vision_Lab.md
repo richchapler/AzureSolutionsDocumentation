@@ -260,15 +260,18 @@ After processing, Vision Studio will display:
 
 ### Pro Code  
 
-This section demonstrates how to run OCR with the Azure AI Vision API using Python in a Jupyter Notebook.  
-
-#### Jupyter Notebook  
-
 Click "File" >> "New File", then search for and select "Jupyter Notebook". Save the file as `ocr.ipynb`.  
 
-#### Load credentials  
+<img src="https://github.com/user-attachments/assets/4a5bc580-1867-4c5f-9813-d4c28f81714b" width="800" title="Snipped February 5, 2025" />
 
-In the first cell of `ocr.ipynb`, add:  
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+
+```markdown
+## Load API Credentials  
+This cell loads the API key and endpoint from the `.env` file to authenticate with Azure AI services.
+```
+
+Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
 from dotenv import load_dotenv
@@ -282,6 +285,13 @@ ENDPOINT = os.getenv("ENDPOINT")
 print(f"API Key: {'Loaded' if API_KEY else 'Missing'}")
 print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
 ```
+
+Click "Run All" to test
+
+
+
+
+
 
 Run the cell (`Shift+Enter`) to confirm the API key and endpoint are loaded.  
 
