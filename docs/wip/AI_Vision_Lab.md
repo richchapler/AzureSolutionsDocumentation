@@ -239,40 +239,43 @@ Click "File" >> "New File", then search for and select "Jupyter Notebook". Save 
 
 <img src="https://github.com/user-attachments/assets/4a5bc580-1867-4c5f-9813-d4c28f81714b" width="800" title="Snipped February 5, 2025" />
 
-#### Verifications  
+#### Environment Variables 
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:  
 
 ```markdown
 ## Verify .env File  
-This cell checks if the `.env` file exists in the working directory before attempting to load API credentials.
+This cell checks if the `.env` file exists before attempting to load API credentials.  
+If missing, it creates one and prompts you to update it.
 ```
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
 
-<img src="https://github.com/user-attachments/assets/ffcc64e6-add5-4275-976a-9cd5a22d0a81" width="800" title="Snipped February 5, 2025" />  
+<img src="https://github.com/user-attachments/assets/df103c2b-8aa3-41a0-a78a-829ee3f1ea8a" width="800" title="Snipped February 5, 2025" />
 
 Click "+ Code" and paste the following code into the resulting cell:  
 
 ```python
-import os
+from dotenv import load_dotenv
 
-# Get the current working directory
-cwd = os.getcwd()
-print(f"Current directory: {cwd}")
+# Load environment variables
+load_dotenv()
 
-# Check if the .env file exists in the working directory
-env_path = os.path.join(cwd, ".env")
-if os.path.isfile(env_path):
-    print("✅ .env file found")
-else:
-    print("❌ .env file missing - Ensure it's placed in the correct directory")
+API_KEY = os.getenv("API_KEY")
+ENDPOINT = os.getenv("ENDPOINT")
+
+# Display results
+print(f"API Key: {'✅ Loaded' if API_KEY else '❌ Missing'}")
+print(f"Endpoint: {'✅ Loaded' if ENDPOINT else '❌ Missing'}")
+
+# If missing, prompt user
+if not API_KEY or not ENDPOINT:
+    print("\n🔹 Open the .env file and add:")
+    print("API_KEY=your-actual-key")
+    print("ENDPOINT=your-actual-endpoint")
 ```
 
-Click "Run All" to test.  
-
-- If **✅ .env file found** appears, continue to the next step.  
-- If **❌ .env file missing**, move the `.env` file into the correct directory before proceeding.
+Click "Run All" to test.
 
 #### Credentials
 
@@ -285,7 +288,7 @@ This cell loads the API key and endpoint from the `.env` file to authenticate wi
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
 
-<img src="https://github.com/user-attachments/assets/ffcc64e6-add5-4275-976a-9cd5a22d0a81" width="800" title="Snipped February 5, 2025" />
+<img src="https://github.com/user-attachments/assets/df103c2b-8aa3-41a0-a78a-829ee3f1ea8a" width="800" title="Snipped February 5, 2025" />
 
 Click "+ Code" and paste the following code into the resulting cell:
 
@@ -305,6 +308,13 @@ print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
 #### Confirm Success
 
 Click "Run All" to test
+
+
+
+
+
+
+
 
 
 
