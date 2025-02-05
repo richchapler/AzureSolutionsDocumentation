@@ -279,7 +279,7 @@ if missing_keys:
     print(f"\n1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service.")
     print("2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'.")
     print("3. Copy 'Key 1' and 'Endpoint' values.")
-    print("4. Open {os.path.abspath(env_file)}, paste the corresponding values and Save.")
+    print(f"4. Open {os.path.abspath(env_file).lower()}, paste the corresponding values and Save.")
     print("5. Restart the kernel and then re-execute this cell.")
 ```
 
