@@ -2,6 +2,20 @@
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
+## Table of Contents  
+
+- [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
+  - [Python](#python)  
+  - [Visual Studio Code](#visual-studio-code)  
+  - [Python Virtual Environment](#python-virtual-environment)  
+  - [Jupyter](#jupyter)  
+  - [Dependencies](#dependencies)  
+  - [API Credentials](#api-credentials)  
+- [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
+  - [Low Code](#low-code)  
+  - [Pro Code](#pro-code)  
+- [Summary](#summary)  
+
 ## Exercise 1: Prepare Environment
 
 ### Python
