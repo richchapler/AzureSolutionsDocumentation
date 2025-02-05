@@ -198,7 +198,7 @@ Click "File" >> "New File", then search for and select "Jupyter Notebook". Save 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
-## Verify .env File  
+## Environment Variables 
 This cell checks if the `.env` file exists before attempting to load API credentials.  
 If missing, it creates one and prompts you to update it.
 ```
@@ -252,46 +252,50 @@ Click "Run All" to test.
 
 ---
 
+### Install Required Dependencies  
 
+Click "+ Markdown" and paste the following annotation into the resulting cell:  
 
-
-
-
-
-
-#### Install required dependencies  
-
-In the next cell, install the Azure AI Vision SDK if not already installed:  
-
-```python
-!pip install azure-ai-vision-imageanalysis
+```markdown
+## Install Required Dependencies  
+This cell ensures all necessary Python packages are installed for Azure AI Vision OCR.  
+If any package is missing, it will be installed automatically.
 ```
 
-Run the cell to install.  
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
 
-#### Define OCR function  
-
-In the next cell, add:  
+Click "+ Code" and paste the following code into the resulting cell:  
 
 ```python
-from azure.ai.vision.imageanalysis import ImageAnalysisClient
-from azure.ai.vision.imageanalysis.models import VisualFeatures
-from azure.core.credentials import AzureKeyCredential
+import sys
+import subprocess
 
-client = ImageAnalysisClient(endpoint=ENDPOINT, credential=AzureKeyCredential(API_KEY))
+required_packages = [
+    "azure-ai-vision-imageanalysis",
+    "python-dotenv",
+    "opencv-python",
+    "matplotlib",
+    "requests"
+]
 
-def perform_ocr(image_path):
-    with open(image_path, "rb") as image:
-        result = client.analyze_image(image, visual_features=[VisualFeatures.READ])
+for package in required_packages:
+    subprocess.call([sys.executable, "-m", "pip", "install", "--quiet", "--upgrade", package])
 
-    if result.read and result.read.text:
-        return result.read.text
-    return "No text detected"
-
-print("OCR function ready")
+print("All required dependencies are installed and up to date.")
 ```
 
-Run the cell to load the function.  
+Click "Run All" to install dependencies.
+
+
+
+
+
+
+
+
+
+
+
 
 #### Upload and analyze an image  
 
