@@ -227,7 +227,7 @@ Execute the cell.
 
 ---
 
-### Install Required Dependencies  
+### Dependencies  
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:  
 
