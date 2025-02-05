@@ -11,7 +11,7 @@ This section guides you through setting up an Azure Compute Gallery to manage an
 
 ### Create Compute Gallery  
 
-Open the [Azure Portal](https://portal.azure.com/), search for and select "Azure compute galleries".
+Open the [Azure Portal](https://portal.azure.com/), then search for and select "Azure compute galleries".
 
 <img src="https://github.com/user-attachments/assets/4a5bc580-1867-4c5f-9813-d4c28f81714b" width="800" title="Snipped February 5, 2025" />
 
@@ -36,7 +36,18 @@ Click "Go to resource".
 
 ---
 
-### Step 2: Create a Base Virtual Machine  
+### Create Virtual Machine  
+
+Open the [Azure Portal](https://portal.azure.com/), then search for and select "Virtual machines".
+
+<img src="https://github.com/user-attachments/assets/88e923c3-dead-4e20-ae49-8d44c642a7ad" width="800" title="Snipped February 5, 2025" />
+
+Click "+ Create".
+
+<img src="https://github.com/user-attachments/assets/04295a2c-57f1-4876-8f74-580ad67eabf5" width="800" title="Snipped February 5, 2025" />
+
+
+
 
 1. Navigate to Azure Virtual Machines and click + Create  
 2. Configure the virtual machine:  
