@@ -5,17 +5,30 @@
 ## Table of Contents  
 
 - [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
-  - [Python](#python)  
   - [Visual Studio Code](#visual-studio-code)  
+  - [Python](#python)  
   - [Python Virtual Environment](#python-virtual-environment)  
   - [Jupyter](#jupyter)  
-  - [Dependencies](#dependencies)  
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
   - [Low Code](#low-code)  
   - [Pro Code](#pro-code)  
 - [Summary](#summary)  
 
 ## Exercise 1: Prepare Environment
+
+### Visual Studio Code
+
+Install [Visual Studio Code](https://code.visualstudio.com/download)
+
+<img src="https://github.com/user-attachments/assets/c5a8b922-259c-4add-9637-6f83d825e97b" width="800" title="Snipped February 3, 2025" />
+
+After installation, open Visual Studio Code and navigate to the "Extensions: Marketplace" pane (`Ctrl+Shift+X`)
+
+<img src="https://github.com/user-attachments/assets/815273f0-a430-4e08-9056-d2fc91b4cec9" width="800" title="Snipped January 31, 2025" />
+
+Search for, select and install `Python`, then restart Visual Studio Code.
+
+---
 
 ### Python
 
@@ -36,20 +49,6 @@ Expected output (version may vary):
 ```
 Python 3.13.1
 ```
-
----
-
-### Visual Studio Code
-
-Install [Visual Studio Code](https://code.visualstudio.com/download)
-
-<img src="https://github.com/user-attachments/assets/c5a8b922-259c-4add-9637-6f83d825e97b" width="800" title="Snipped February 3, 2025" />
-
-After installation, open Visual Studio Code and navigate to the "Extensions: Marketplace" pane (`Ctrl+Shift+X`)
-
-<img src="https://github.com/user-attachments/assets/815273f0-a430-4e08-9056-d2fc91b4cec9" width="800" title="Snipped January 31, 2025" />
-
-Search for, select and install `Python`, then restart Visual Studio Code.
 
 ---
 
@@ -113,30 +112,6 @@ Click "View" >> "Command Palette", then search for and select "Python: Select In
 Select the "Recommended" interpreter.
 
 <img src="https://github.com/user-attachments/assets/4abe9278-ecf8-49bd-aa00-330e06fed88b" width="800" title="Snipped February 5, 2025" />
-
----
-
-### **Dependencies**  
-
-Execute the following command to upgrade `pip`:  
-
-```powershell
-python -m pip install --upgrade pip
-```
-
-Execute the following command to install the required dependencies:  
-
-```powershell
-pip install azure-ai-vision-imageanalysis python-dotenv opencv-python matplotlib requests
-```
-
-- `azure-ai-vision-imageanalysis` – Azure AI Vision SDK for OCR  
-- `python-dotenv` – Secure storage of API credentials in a `.env` file  
-- `opencv-python` – Image processing library (used to display images)  
-- `matplotlib` – Library for image visualization  
-- `requests` – HTTP library for downloading images from URLs  
-
-Run the command to install all dependencies.
 
 ---
 
