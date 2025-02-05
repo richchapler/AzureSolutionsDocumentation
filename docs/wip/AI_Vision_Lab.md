@@ -262,13 +262,9 @@ After processing, Vision Studio will display:
 
 This section demonstrates how to run OCR with the Azure AI Vision API using Python in a Jupyter Notebook.  
 
-#### Open Jupyter Notebook  
+#### Jupyter Notebook  
 
-Click "File" >> "New File", then search for and select "Jupyter Notebook".  
-
-<img src="https://github.com/user-attachments/assets/98efe3de-41dd-4b5a-ac9d-4cf6ca8947b8" width="800" title="Snipped February 5, 2025" />  
-
-Save the file as `ocr.ipynb`.  
+Click "File" >> "New File", then search for and select "Jupyter Notebook". Save the file as `ocr.ipynb`.  
 
 #### Load credentials  
 
