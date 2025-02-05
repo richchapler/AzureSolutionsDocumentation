@@ -110,37 +110,37 @@ After running this command, note that your prompt changes to include prefix `(ve
 
 ---
 
-### Jupyter Notebook in Visual Studio Code
+### Jupyter
 
-1. Install Jupyter in your virtual environment:
+Open Visual Studio Code and click View > Terminal to open the PowerShell terminal.
 
-   ```powershell
-   pip install jupyter
-   ```
+<img src="https://github.com/user-attachments/assets/b86a2382-9dea-4dd4-81f9-41a191da00a3" width="800" title="Snipped February 5, 2025" />
 
-2. Install the VS Code Jupyter extension:
+Execute the following command to install Jupyter:
 
-   - Open Visual Studio Code
-   - Navigate to "Extensions" (`Ctrl+Shift+X`)
-   - Search for and install `Jupyter`
+```powershell
+pip install jupyter
+```
 
-3. Open a Jupyter Notebook:
+Navigate to Extensions, then search for and select "Jupyter"
 
-   - Click `File > New File`
-   - Click `Select a language`, then select `Jupyter Notebook`
-   - Save the file as `notebook.ipynb`
+<img src="https://github.com/user-attachments/assets/3ac8dc62-cc5a-4264-992f-a809c0524c55" width="800" title="Snipped February 5, 2025" />
 
-4. Ensure the virtual environment is selected in Jupyter:
+Click "Install".
 
-   - Open the Command Palette (`Ctrl+Shift+P`)
-   - Search for `Python: Select Interpreter`
-   - Choose `venv` from the list
+<img src="https://github.com/user-attachments/assets/d618a771-041c-40a2-a351-6c63cc51d0bc" width="800" title="Snipped February 5, 2025" />
 
-5. Test Jupyter by running:
+Click "File" >> "New File", then search for and select "Jupyter Notebook".
 
-   ```python
-   print("Jupyter Notebook is working!")
-   ```
+<img src="https://github.com/user-attachments/assets/066afd03-d3ff-435e-a651-ae6a28a57bc3" width="800" title="Snipped February 5, 2025" />
+
+Click "View" >> "Command Palette", then search for and select "Python: Select Interpreter".
+
+<img src="https://github.com/user-attachments/assets/bfd68ebc-350c-421e-9ec1-1f1f8fd3b35e" width="800" title="Snipped February 5, 2025" />
+
+Select the "Recommended" interpreter.
+
+<img src="https://github.com/user-attachments/assets/4abe9278-ecf8-49bd-aa00-330e06fed88b" width="800" title="Snipped February 5, 2025" />
 
 ---
 
