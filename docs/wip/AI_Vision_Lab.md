@@ -246,9 +246,9 @@ API_KEY={KEY 1}
 ENDPOINT={Endpoint}
 ```
 
-Click "Run All" to test.
+Execute the cell.
 
-<img src="https://github.com/user-attachments/assets/e4266f28-8af5-433e-8481-2bc3b6a4adf7" width="800" title="Snipped February 5, 2025" />
+<img src="https://github.com/user-attachments/assets/f3d67bdc-8ee5-4232-80e0-9af96fdf29e9" width="800" title="Snipped February 5, 2025" />
 
 ---
 
@@ -286,7 +286,9 @@ else:
     print("All dependencies are already installed.")
 ```
 
-Click "Run All" to install dependencies.
+Execute the cell.
+
+<img src="https://github.com/user-attachments/assets/a33e70c2-dbeb-417e-ab9a-aed24e32d6d8" width="800" title="Snipped February 5, 2025" />
 
 ---
 
