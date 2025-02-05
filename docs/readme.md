@@ -11,5 +11,3 @@ In this documentation, you will find step-by-step instructions for solutions to 
 > [DevOps](DevOps.html) >> AI Search :: OpenAI :: Synapse
 
 > [Infrastructure](Infrastructure.html) >> Instantiate :: Migrate
->
-> - CH: 2/5/2025
