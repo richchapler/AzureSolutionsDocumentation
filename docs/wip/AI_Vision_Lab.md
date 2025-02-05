@@ -277,15 +277,6 @@ Execute the cell.
 
 ---
 
-
-
-
-
-
-
-
-
-
 ### **Analyze a Local Image**  
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
@@ -300,18 +291,25 @@ Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and re
 Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
-image_path = "test.jpg"  # Replace with your image path
-
-if os.path.isfile(image_path):
-    extracted_text = perform_ocr(image_path)
+if IMAGE_PATH and os.path.isfile(IMAGE_PATH):
+    extracted_text = perform_ocr(IMAGE_PATH)
     print("Extracted Text:\n", extracted_text)
 else:
-    print(f"*** Error: File not found ***\n{image_path}")
+    print(f"*** Error: File not found or IMAGE_PATH is missing ***\n{IMAGE_PATH}")
 ```
 
 Execute the cell.
 
 ---
+
+
+
+
+
+
+
+
+
 
 ### **Analyze an Image from a URL**  
 
