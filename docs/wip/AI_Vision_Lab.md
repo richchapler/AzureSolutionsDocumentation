@@ -4,9 +4,6 @@
 
 ## Exercise 1: Prepare Environment
 
-This documentation assumes the following Azure resources are ready for use:
-* [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
-
 ### Python
 
 Install the latest version of [Python.org](https://www.python.org/downloads/)
@@ -182,6 +179,9 @@ This exercise demonstrates how to use Azure AI Vision OCR to extract text from i
 - Retrieve text and confidence scores  
 
 ### Low Code  
+
+This documentation assumes the following Azure resources are ready for use:
+* [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
 
 Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.  
 
