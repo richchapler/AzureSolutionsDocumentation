@@ -237,9 +237,9 @@ After processing, Vision Studio will display:
 
 Click "File" >> "New File", then search for and select "Jupyter Notebook". Save the file as `ocr.ipynb`.  
 
-#### Environment Variables 
+### Environment Variables
 
-Click "+ Markdown" and paste the following annotation into the resulting cell:  
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Verify .env File  
@@ -247,28 +247,35 @@ This cell checks if the `.env` file exists before attempting to load API credent
 If missing, it creates one and prompts you to update it.
 ```
 
-Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
 
-<img src="https://github.com/user-attachments/assets/df103c2b-8aa3-41a0-a78a-829ee3f1ea8a" width="800" title="Snipped February 5, 2025" />
-
-Click "+ Code" and paste the following code into the resulting cell:  
+Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
-from dotenv import load_dotenv
+import os
+
+env_path = ".env"
+
+# Check if .env file exists, if not, create one
+if not os.path.isfile(env_path):
+    with open(env_path, "w") as f:
+        f.write("API_KEY=\nENDPOINT=\n")
+    print(".env file created. Please open it and add your API credentials.")
 
 # Load environment variables
+from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
 
 # Display results
-print(f"API Key: {'✅ Loaded' if API_KEY else '❌ Missing'}")
-print(f"Endpoint: {'✅ Loaded' if ENDPOINT else '❌ Missing'}")
+print(f"API Key: {'Loaded' if API_KEY else 'Missing'}")
+print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
 
-# If missing, prompt user
+# Prompt user if credentials are missing
 if not API_KEY or not ENDPOINT:
-    print("\n🔹 Open the .env file and add:")
+    print("\nOpen the .env file and add:")
     print("API_KEY=your-actual-key")
     print("ENDPOINT=your-actual-endpoint")
 ```
