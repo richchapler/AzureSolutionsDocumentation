@@ -1,15 +1,19 @@
+Here’s the updated documentation with Jupyter activation in Visual Studio Code for Python development.
+
+---
+
 # Lab: AI Vision
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
-## Exercise 1: Compute Gallery  
+## Exercise 1: Compute Gallery
 
-This section guides you through setting up an Azure Compute Gallery to manage and version your virtual machine images. You will:  
-- Create an Azure Compute Gallery  
-- Capture a virtual machine image  
-- Share or export the image for portability  
+This section guides you through setting up an Azure Compute Gallery to manage and version your virtual machine images. You will:
+- Create an Azure Compute Gallery
+- Capture a virtual machine image
+- Share or export the image for portability
 
-### Create Compute Gallery  
+### Create Compute Gallery
 
 Open the [Azure Portal](https://portal.azure.com/), then search for and select "Azure compute galleries".
 
@@ -24,7 +28,7 @@ Complete the form on the "Basics" tab and click "Next: Sharing method >".
 <img src="https://github.com/user-attachments/assets/678ebbd5-4511-4528-baf5-b90afb1579dd" width="800" title="Snipped February 5, 2025" />
 
 Confirm settings on the "Sharing" tab and click "Review + create".
-<br>⚠️_Note: We will probably want to select "RBAC + share to public community gallery"_⚠️
+⚠️ _Note: We will probably want to select "RBAC + share to public community gallery"_ ⚠️
 
 <img src="https://github.com/user-attachments/assets/8cc43646-3f71-4b3e-89a3-448c1df187bc" width="800" title="Snipped February 5, 2025" />
 
@@ -35,62 +39,6 @@ Click "Create".
 Click "Go to resource".
 
 ---
-
-### Create Virtual Machine  
-
-Open the [Azure Portal](https://portal.azure.com/), then search for and select "Virtual machines".
-
-<img src="https://github.com/user-attachments/assets/88e923c3-dead-4e20-ae49-8d44c642a7ad" width="800" title="Snipped February 5, 2025" />
-
-Click "+ Create".
-
-<img src="https://github.com/user-attachments/assets/04295a2c-57f1-4876-8f74-580ad67eabf5" width="800" title="Snipped February 5, 2025" />
-
-
-
-
-1. Navigate to Azure Virtual Machines and click + Create  
-2. Configure the virtual machine:  
-   - Image: Choose Windows or Linux  
-   - Size: Select an appropriate VM size  
-   - Authentication: Choose Password or SSH key  
-3. Click Review + Create → Create  
-4. After deployment, install the required tools inside the VM  
-
----
-
-### Step 3: Capture and Version the VM Image  
-
-1. Prepare the VM for Imaging:  
-   - Connect to the VM via RDP (Windows) or SSH (Linux)  
-   - Run Sysprep (Windows) or waagent -deprovision+user (Linux)  
-   - Shut down the VM  
-
-2. Capture the Image:  
-   - Navigate to Azure Compute Gallery  
-   - Click + Create Image Definition  
-   - Set a Name, OS Type, and VM Generation  
-   - Click Create  
-
-3. Version the Image:  
-   - Select the created Image Definition  
-   - Click + Create Image Version  
-   - Choose the source VM and specify the version (e.g., `1.0.0`)  
-   - Click Create  
-
----
-
-### Step 4: Share or Export the Image  
-
-#### Share within Azure  
-1. Navigate to Compute Gallery → Select the image  
-2. Click Sharing → Add users, groups, or external tenants  
-3. Click Save  
-
-#### Export as a VHD  
-1. Navigate to the Managed Disk of the VM  
-2. Click Export → Generate URL  
-3. Download the VHD file for use outside Azure  
 
 ## Exercise 2: Prepare Environment
 
@@ -158,7 +106,43 @@ Execute the following command to activate the virtual environment:
 venv\Scripts\Activate
 ```
 
-After running this command, note that your prompt changes to include prefix  `(venv)` showing that it working instide the virtual environment.
+After running this command, note that your prompt changes to include prefix `(venv)`, showing that it is working inside the virtual environment.
+
+---
+
+### Jupyter Notebook in Visual Studio Code
+
+1. Install Jupyter in your virtual environment:
+
+   ```powershell
+   pip install jupyter
+   ```
+
+2. Install the VS Code Jupyter extension:
+
+   - Open Visual Studio Code
+   - Navigate to "Extensions" (`Ctrl+Shift+X`)
+   - Search for and install `Jupyter`
+
+3. Open a Jupyter Notebook:
+
+   - Click `File > New File`
+   - Click `Select a language`, then select `Jupyter Notebook`
+   - Save the file as `notebook.ipynb`
+
+4. Ensure the virtual environment is selected in Jupyter:
+
+   - Open the Command Palette (`Ctrl+Shift+P`)
+   - Search for `Python: Select Interpreter`
+   - Choose `venv` from the list
+
+5. Test Jupyter by running:
+
+   ```python
+   print("Jupyter Notebook is working!")
+   ```
+
+---
 
 ### Dependencies  
 
@@ -176,6 +160,8 @@ Execute the following command to install `python-dotenv` for secure API key stor
 ```powershell
 pip install python-dotenv
 ```
+
+---
 
 ### API Credentials  
 
@@ -218,67 +204,13 @@ ENDPOINT = os.getenv("ENDPOINT")
 
 _Note: Visual Studio Code + Python will be used throughout exercises in this documentation_
 
-## Exercise 3: Optical Character Recognition (OCR)
-
-### ...using Vision Studio 
-
-Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.
-
-<img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />
-
-We will focus on the following topics:
-
-- Optical Character Recognition (OCR) - Extract text from images, including handwriting and printed text
-- Spatial Analysis - Detect people, movement, and zones in real-time video (used for surveillance, retail, etc.) ... HARTIHA: IN SCOPE?
-- Face - Detect and analyze faces, including emotions and age estimation ... HARTIHA: IN SCOPE?
-- Image Analysis
-  - Object Detection - Identify objects and returns bounding boxes
-  - Caption Images - Generate descriptions of images in natural language
-
-_NOTE: ON HOLD WHILE SUPPORT WORKS THROUGH VISION STUDIO UI ISSUES_
-
-<img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />
-
-Select Optical Character Recognition (OCR) and then click "Extract text from images".
-
-<img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />
-
-#### Step 1: Extract Text from an Image
-1. Click "Try OCR"
-2. Upload an image containing printed or handwritten text
-3. Click Analyze
-
-#### Step 2: Review the Results
-After processing, Vision Studio will display:
-- Extracted text
-- Confidence scores
-- JSON output (expand to view full response)
-
 ---
 
-### ...using Python  
+## Exercise 3: Optical Character Recognition (OCR)
 
-Open Visual Studio Code and click File > New Text File.  
+### ...using Jupyter Notebook  
 
-<img src="https://github.com/user-attachments/assets/dbf375c2-b3ee-4275-80f0-0a4cdc61047e" width="800" title="Snipped February 3, 2025" />  
-
-Click "Select a language", then search for and select `Python`.  
-
-### Implement OCR in Python  
-
-Execute the following command to create an `ocr.py` file:  
-
-```powershell
-New-Item -Path ocr.py -ItemType File
-```
-
-Execute the following command to open `ocr.py` in Notepad:  
-
-```powershell
-notepad ocr.py
-```
-
-Modify and paste the following content into `ocr.py`:  
+Open `notebook.ipynb` and add the following code:
 
 ```python
 from azure.ai.vision.imageanalysis import ImageAnalysisClient
@@ -293,14 +225,17 @@ def perform_ocr(image_path):
 
     return {"text": result.read.text if result.read else "No text detected"}
 
-if __name__ == "__main__":
-    image_path = "test.jpg"  # Replace with actual image path
-    print(perform_ocr(image_path))
+image_path = "test.jpg"  # Replace with actual image path
+print(perform_ocr(image_path))
 ```
 
-### Run the Python Script  
+Run the cell by pressing `Shift+Enter`.
 
-Execute the following command in PowerShell to run the OCR script:  
+---
+
+### Run OCR in PowerShell  
+
+Execute the following command in PowerShell:
 
 ```powershell
 python ocr.py
