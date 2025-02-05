@@ -2,41 +2,7 @@
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
-## Exercise 1: Compute Gallery
-
-This section guides you through setting up an Azure Compute Gallery to manage and version your virtual machine images. You will:
-- Create an Azure Compute Gallery
-- Capture a virtual machine image
-- Share or export the image for portability
-
-### Create Compute Gallery
-
-Open the [Azure Portal](https://portal.azure.com/), then search for and select "Azure compute galleries".
-
-<img src="https://github.com/user-attachments/assets/4a5bc580-1867-4c5f-9813-d4c28f81714b" width="800" title="Snipped February 5, 2025" />
-
-Click "+ Create".
-
-<img src="https://github.com/user-attachments/assets/5e31f45e-2b73-4881-a872-b8abe528a0ae" width="800" title="Snipped February 5, 2025" />
-
-Complete the form on the "Basics" tab and click "Next: Sharing method >".
-
-<img src="https://github.com/user-attachments/assets/678ebbd5-4511-4528-baf5-b90afb1579dd" width="800" title="Snipped February 5, 2025" />
-
-Confirm settings on the "Sharing" tab and click "Review + create".
-⚠️ _Note: We will probably want to select "RBAC + share to public community gallery"_ ⚠️
-
-<img src="https://github.com/user-attachments/assets/8cc43646-3f71-4b3e-89a3-448c1df187bc" width="800" title="Snipped February 5, 2025" />
-
-Click "Create".
-
-<img src="https://github.com/user-attachments/assets/c5455f0c-d893-4080-8635-e5cf8cd0d66e" width="800" title="Snipped February 5, 2025" />
-
-Click "Go to resource".
-
----
-
-## Exercise 2: Prepare Environment
+## Exercise 1: Prepare Environment
 
 This documentation assumes the following Azure resources are ready for use:
 * [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
@@ -207,7 +173,7 @@ _Note: Visual Studio Code + Python will be used throughout exercises in this doc
 
 ---
 
-## Exercise 3: Optical Character Recognition (OCR)  
+## Exercise 2: Optical Character Recognition (OCR)  
 
 This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. You will:  
 - Use Vision Studio to analyze images with OCR  
