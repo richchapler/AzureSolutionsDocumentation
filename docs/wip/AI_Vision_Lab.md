@@ -276,56 +276,96 @@ Execute the cell.
 
 
 
-#### Upload and analyze an image  
+### **Analyze a Local Image**  
 
-##### Local image  
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
-In a new cell, add:  
+```markdown
+## Analyze a Local Image  
+This cell analyzes a local image using Azure AI Vision OCR.
+```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
+
+Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
 image_path = "test.jpg"  # Replace with your image path
 
-extracted_text = perform_ocr(image_path)
-
-print("Extracted Text:\n", extracted_text)
+if os.path.isfile(image_path):
+    extracted_text = perform_ocr(image_path)
+    print("Extracted Text:\n", extracted_text)
+else:
+    print(f"*** Error: File not found ***\n{image_path}")
 ```
 
-Run the cell and verify the extracted text.  
+Execute the cell.
 
-##### Web image  
+---
 
-To analyze an image from a URL instead, add:  
+### **Analyze an Image from a URL**  
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+
+```markdown
+## Analyze an Image from a URL  
+This cell downloads an image from a URL and extracts text using OCR.
+```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
+
+Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
 import requests
 
 def download_image(url, save_path="downloaded_image.jpg"):
-    response = requests.get(url)
-    if response.status_code == 200:
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
         with open(save_path, "wb") as file:
             file.write(response.content)
         return save_path
-    return None
+    except requests.RequestException as e:
+        print(f"*** Error: Failed to download image ***\n{e}")
+        return None
 
 image_url = "https://example.com/sample.jpg"  # Replace with actual image URL
-
 image_path = download_image(image_url)
-if image_path:
+
+if image_path and os.path.isfile(image_path):
     extracted_text = perform_ocr(image_path)
     print("Extracted Text:\n", extracted_text)
 else:
-    print("Failed to download image")
+    print("*** Error: Image could not be analyzed ***")
 ```
 
-Run the cell to analyze text from a web image.  
+Execute the cell.
 
-#### Display image with OCR results  
+---
+
+### **Display Image with OCR Results**  
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+
+```markdown
+## Display Image with OCR Results  
+This cell visualizes the analyzed image and extracted text.
+```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
+
+Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
 import matplotlib.pyplot as plt
 import cv2
 
 def display_image(image_path, extracted_text):
+    if not os.path.isfile(image_path):
+        print(f"*** Error: File not found ***\n{image_path}")
+        return
+
     img = cv2.imread(image_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
@@ -338,28 +378,32 @@ def display_image(image_path, extracted_text):
 display_image(image_path, extracted_text)
 ```
 
-Run the cell to display the image with recognized text.  
+Execute the cell.
 
-#### Export OCR results to a file  
+---
+
+### **Export OCR Results to a File**  
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+
+```markdown
+## Export OCR Results to a File  
+This cell saves the extracted text to a file.
+```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
+
+Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
 output_file = "ocr_results.txt"
 
-with open(output_file, "w", encoding="utf-8") as file:
-    file.write(extracted_text)
-
-print(f"OCR results saved to {output_file}")
+if extracted_text:
+    with open(output_file, "w", encoding="utf-8") as file:
+        file.write(extracted_text)
+    print(f"OCR results saved to {output_file}")
+else:
+    print("*** Error: No text to save ***")
 ```
 
-Run the cell to save results.  
-
----
-
-## Summary  
-
-You have successfully:  
-- Used Vision Studio for OCR  
-- Set up Jupyter Notebooks in Visual Studio Code  
-- Loaded API credentials securely  
-- Used Azure AI Vision OCR to extract text from images  
-- Displayed and saved extracted text  
+Execute the cell.
