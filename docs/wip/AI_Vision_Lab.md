@@ -2,7 +2,86 @@
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
-## Exercise 1: Prepare Environment
+## Exercise 1: Compute Gallery  
+
+This section guides you through setting up an Azure Compute Gallery to manage and version your virtual machine images. You will:  
+- Create an Azure Compute Gallery  
+- Capture a virtual machine image  
+- Share or export the image for portability  
+
+### Create Compute Gallery  
+
+Open the [Azure Portal](https://portal.azure.com/), search for and select "Azure compute galleries".
+
+<img src="https://github.com/user-attachments/assets/4a5bc580-1867-4c5f-9813-d4c28f81714b" width="800" title="Snipped February 5, 2025" />
+
+Click "+ Create".
+
+<img src="https://github.com/user-attachments/assets/5e31f45e-2b73-4881-a872-b8abe528a0ae" width="800" title="Snipped February 5, 2025" />
+
+Complete the form on the "Basics" tab and click "Next: Sharing method >".
+
+<img src="https://github.com/user-attachments/assets/678ebbd5-4511-4528-baf5-b90afb1579dd" width="800" title="Snipped February 5, 2025" />
+
+Confirm settings on the "Sharing" tab and click "Review + create".
+<br>⚠️_Note: We will probably want to select "RBAC + share to public community gallery"_⚠️
+
+<img src="https://github.com/user-attachments/assets/8cc43646-3f71-4b3e-89a3-448c1df187bc" width="800" title="Snipped February 5, 2025" />
+
+Click "Create".
+
+<img src="https://github.com/user-attachments/assets/c5455f0c-d893-4080-8635-e5cf8cd0d66e" width="800" title="Snipped February 5, 2025" />
+
+Click "Go to resource".
+
+---
+
+### Step 2: Create a Base Virtual Machine  
+
+1. Navigate to Azure Virtual Machines and click + Create  
+2. Configure the virtual machine:  
+   - Image: Choose Windows or Linux  
+   - Size: Select an appropriate VM size  
+   - Authentication: Choose Password or SSH key  
+3. Click Review + Create → Create  
+4. After deployment, install the required tools inside the VM  
+
+---
+
+### Step 3: Capture and Version the VM Image  
+
+1. Prepare the VM for Imaging:  
+   - Connect to the VM via RDP (Windows) or SSH (Linux)  
+   - Run Sysprep (Windows) or waagent -deprovision+user (Linux)  
+   - Shut down the VM  
+
+2. Capture the Image:  
+   - Navigate to Azure Compute Gallery  
+   - Click + Create Image Definition  
+   - Set a Name, OS Type, and VM Generation  
+   - Click Create  
+
+3. Version the Image:  
+   - Select the created Image Definition  
+   - Click + Create Image Version  
+   - Choose the source VM and specify the version (e.g., `1.0.0`)  
+   - Click Create  
+
+---
+
+### Step 4: Share or Export the Image  
+
+#### Share within Azure  
+1. Navigate to Compute Gallery → Select the image  
+2. Click Sharing → Add users, groups, or external tenants  
+3. Click Save  
+
+#### Export as a VHD  
+1. Navigate to the Managed Disk of the VM  
+2. Click Export → Generate URL  
+3. Download the VHD file for use outside Azure  
+
+## Exercise 2: Prepare Environment
 
 This documentation assumes the following Azure resources are ready for use:
 * [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
@@ -128,7 +207,7 @@ ENDPOINT = os.getenv("ENDPOINT")
 
 _Note: Visual Studio Code + Python will be used throughout exercises in this documentation_
 
-## Exercise 2: Optical Character Recognition (OCR)
+## Exercise 3: Optical Character Recognition (OCR)
 
 ### ...using Vision Studio 
 
@@ -168,11 +247,11 @@ After processing, Vision Studio will display:
 
 ### ...using Python  
 
-Open Visual Studio Code and click **File > New Text File**.  
+Open Visual Studio Code and click File > New Text File.  
 
 <img src="https://github.com/user-attachments/assets/dbf375c2-b3ee-4275-80f0-0a4cdc61047e" width="800" title="Snipped February 3, 2025" />  
 
-Click **"Select a language"**, then search for and select `Python`.  
+Click "Select a language", then search for and select `Python`.  
 
 ### Implement OCR in Python  
 
