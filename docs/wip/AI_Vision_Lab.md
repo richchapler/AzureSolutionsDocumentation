@@ -228,6 +228,7 @@ The resulting `.env` file should look like:
 ```text
 API_KEY={KEY 1}
 ENDPOINT={Endpoint}
+IMAGE_PATH={Local File Path}
 ```
 
 Execute the cell.
