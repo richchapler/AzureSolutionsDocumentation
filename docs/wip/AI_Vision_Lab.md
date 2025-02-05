@@ -257,9 +257,8 @@ Click "Run All" to test.
 Click "+ Markdown" and paste the following annotation into the resulting cell:  
 
 ```markdown
-## Install Required Dependencies  
-This cell ensures all necessary Python packages are installed for Azure AI Vision OCR.  
-If any package is missing, it will be installed automatically.
+## Dependencies  
+This cell checks for missing dependencies and installs them if necessary.
 ```
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
@@ -278,10 +277,13 @@ required_packages = [
     "requests"
 ]
 
-for package in required_packages:
-    subprocess.call([sys.executable, "-m", "pip", "install", "--quiet", "--upgrade", package])
+missing_packages = [pkg for pkg in required_packages if subprocess.run([sys.executable, "-m", "pip", "show", pkg], capture_output=True, text=True).returncode != 0]
 
-print("All required dependencies are installed and up to date.")
+if missing_packages:
+    print(f"Installing missing dependencies: {', '.join(missing_packages)}")
+    subprocess.run([sys.executable, "-m", "pip", "install", *missing_packages])
+else:
+    print("All dependencies are already installed.")
 ```
 
 Click "Run All" to install dependencies.
