@@ -232,7 +232,7 @@ ENDPOINT={Endpoint}
 
 Execute the cell.
 
-<img src="https://github.com/user-attachments/assets/f3d67bdc-8ee5-4232-80e0-9af96fdf29e9" width="800" title="Snipped February 5, 2025" />
+<img src="https://github.com/user-attachments/assets/f213b897-ff09-4b80-b235-64b22e8c60fd" width="800" title="Snipped February 5, 2025" />
 
 ---
 
