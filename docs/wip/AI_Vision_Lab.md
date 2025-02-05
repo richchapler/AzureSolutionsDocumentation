@@ -225,6 +225,43 @@ Click "File" >> "New File", then search for and select "Jupyter Notebook". Save 
 
 <img src="https://github.com/user-attachments/assets/4a5bc580-1867-4c5f-9813-d4c28f81714b" width="800" title="Snipped February 5, 2025" />
 
+#### Verifications  
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:  
+
+```markdown
+## Verify .env File  
+This cell checks if the `.env` file exists in the working directory before attempting to load API credentials.
+```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
+
+<img src="https://github.com/user-attachments/assets/ffcc64e6-add5-4275-976a-9cd5a22d0a81" width="800" title="Snipped February 5, 2025" />  
+
+Click "+ Code" and paste the following code into the resulting cell:  
+
+```python
+import os
+
+# Get the current working directory
+cwd = os.getcwd()
+print(f"Current directory: {cwd}")
+
+# Check if the .env file exists in the working directory
+env_path = os.path.join(cwd, ".env")
+if os.path.isfile(env_path):
+    print("✅ .env file found")
+else:
+    print("❌ .env file missing - Ensure it's placed in the correct directory")
+```
+
+Click "Run All" to test.  
+
+- If **✅ .env file found** appears, continue to the next step.  
+- If **❌ .env file missing**, move the `.env` file into the correct directory before proceeding.
+
+#### Credentials
+
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
@@ -250,6 +287,8 @@ ENDPOINT = os.getenv("ENDPOINT")
 print(f"API Key: {'Loaded' if API_KEY else 'Missing'}")
 print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
 ```
+
+#### Confirm Success
 
 Click "Run All" to test
 
