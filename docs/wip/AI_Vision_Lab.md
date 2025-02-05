@@ -292,6 +292,17 @@ ENDPOINT={Endpoint}
 
 Click "Run All" to test.
 
+<img src="https://github.com/user-attachments/assets/e4266f28-8af5-433e-8481-2bc3b6a4adf7" width="800" title="Snipped February 5, 2025" />
+
+---
+
+
+
+
+
+
+
+
 #### Credentials
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
@@ -302,8 +313,6 @@ This cell loads the API key and endpoint from the `.env` file to authenticate wi
 ```
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
-
-<img src="https://github.com/user-attachments/assets/df103c2b-8aa3-41a0-a78a-829ee3f1ea8a" width="800" title="Snipped February 5, 2025" />
 
 Click "+ Code" and paste the following code into the resulting cell:
 
@@ -323,20 +332,6 @@ print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
 #### Confirm Success
 
 Click "Run All" to test
-
-
-
-
-
-
-
-
-
-
-
-
-
-Run the cell (`Shift+Enter`) to confirm the API key and endpoint are loaded.  
 
 #### Install required dependencies  
 
