@@ -237,8 +237,6 @@ After processing, Vision Studio will display:
 
 Click "File" >> "New File", then search for and select "Jupyter Notebook". Save the file as `ocr.ipynb`.  
 
-<img src="https://github.com/user-attachments/assets/4a5bc580-1867-4c5f-9813-d4c28f81714b" width="800" title="Snipped February 5, 2025" />
-
 #### Environment Variables 
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:  
