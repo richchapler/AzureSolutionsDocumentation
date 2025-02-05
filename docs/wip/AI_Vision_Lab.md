@@ -215,7 +215,7 @@ if not ENDPOINT:
 
 if not IMAGE_PATH:
     missing_messages.append("\n*** Error: Missing IMAGE_PATH ***\n"
-                            "1. Store a sample file {e.g., https://www.irs.gov/pub/irs-pdf/f1040.pdf} on your device {e.g, c:\\temp\\f1040.pdf}\n"
+                            "1. Store a sample file {e.g., https://ocr.space/Content/Images/receipt-ocr-original.jpg} on your device {e.g, c:\\downloads\\receipt-ocr-original.jpg}\n"
                             f"2. Paste the local file path into {os.path.abspath(env_file).lower()} as IMAGE_PATH")
 
 if missing_messages:
@@ -231,7 +231,7 @@ ENDPOINT={Endpoint}
 IMAGE_PATH={Local File Path}
 ```
 
-Execute the cell.
+Execute the code cell.
 
 <img src="https://github.com/user-attachments/assets/f213b897-ff09-4b80-b235-64b22e8c60fd" width="800" title="Snipped February 5, 2025" />
 
@@ -271,7 +271,7 @@ else:
     print("All dependencies are already installed.")
 ```
 
-Execute the cell.
+Execute the code cell.
 
 <img src="https://github.com/user-attachments/assets/a33e70c2-dbeb-417e-ab9a-aed24e32d6d8" width="800" title="Snipped February 5, 2025" />
 
@@ -283,7 +283,8 @@ Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Analyze a Local Image  
-This cell analyzes a local image using Azure AI Vision OCR.
+This cell performs OCR on an image file using Azure AI Vision.  
+Only image formats (JPEG, PNG, BMP, GIF, TIFF) are supported.
 ```
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
@@ -291,14 +292,18 @@ Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and re
 Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
-if IMAGE_PATH and os.path.isfile(IMAGE_PATH):
+import os
+
+if not IMAGE_PATH:
+    print("*** Error: IMAGE_PATH is not set in the .env file ***")
+elif not os.path.isfile(IMAGE_PATH):
+    print(f"*** Error: File not found ***\n{IMAGE_PATH}")
+else:
     extracted_text = perform_ocr(IMAGE_PATH)
     print("Extracted Text:\n", extracted_text)
-else:
-    print(f"*** Error: File not found or IMAGE_PATH is missing ***\n{IMAGE_PATH}")
 ```
 
-Execute the cell.
+Execute the code cell.
 
 ---
 
@@ -348,7 +353,7 @@ else:
     print("*** Error: Image could not be analyzed ***")
 ```
 
-Execute the cell.
+Execute the code cell.
 
 ---
 
@@ -386,7 +391,7 @@ def display_image(image_path, extracted_text):
 display_image(image_path, extracted_text)
 ```
 
-Execute the cell.
+Execute the code cell.
 
 ---
 
@@ -414,4 +419,4 @@ else:
     print("*** Error: No text to save ***")
 ```
 
-Execute the cell.
+Execute the code cell.
