@@ -180,8 +180,7 @@ This exercise demonstrates how to use Azure AI Vision OCR to extract text from i
 
 ### Low Code  
 
-This documentation assumes the following Azure resources are ready for use:
-* [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview)
+_Note: This documentation assumes that [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) is ready for use_
 
 Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.  
 
@@ -232,6 +231,10 @@ Click "+ Markdown" and paste the following annotation into the resulting cell:
 ## Load API Credentials  
 This cell loads the API key and endpoint from the `.env` file to authenticate with Azure AI services.
 ```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
+
+<img src="https://github.com/user-attachments/assets/ffcc64e6-add5-4275-976a-9cd5a22d0a81" width="800" title="Snipped February 5, 2025" />
 
 Click "+ Code" and paste the following code into the resulting cell:
 
