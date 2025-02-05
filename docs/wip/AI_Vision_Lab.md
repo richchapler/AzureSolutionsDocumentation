@@ -1,7 +1,3 @@
-Here’s the updated documentation with Jupyter activation in Visual Studio Code for Python development.
-
----
-
 # Lab: AI Vision
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
