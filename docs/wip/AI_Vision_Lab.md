@@ -214,19 +214,63 @@ _Note: Visual Studio Code + Python will be used throughout exercises in this doc
 ## Exercise 3: Optical Character Recognition (OCR)  
 
 This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. You will:  
+- Use Vision Studio to analyze images with OCR  
 - Use Jupyter Notebooks in Visual Studio Code for interactive coding  
-- Analyze images using Azure AI Vision OCR  
+- Analyze images using Azure AI Vision OCR via API  
 - Retrieve text and confidence scores  
 
-### Open Jupyter Notebook in Visual Studio Code
+### Low Code  
 
-Click "File" >> "New File", then search for and select "Jupyter Notebook".
+Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.  
 
-<img src="https://github.com/user-attachments/assets/98efe3de-41dd-4b5a-ac9d-4cf6ca8947b8" width="800" title="Snipped February 5, 2025" />
+<img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />  
 
-Save the file as `ocr.ipynb`  
+This section covers:  
 
-## Load Credentials  
+- Optical Character Recognition (OCR) – Extract text from images, including handwriting and printed text  
+- Spatial Analysis – Detect people, movement, and zones in real-time video  
+- Face – Detect and analyze faces, including emotions and age estimation  
+- Image Analysis  
+  - Object Detection – Identify objects and return bounding boxes  
+  - Caption Images – Generate descriptions of images in natural language  
+
+**Note: On hold while support works through Vision Studio UI issues**  
+
+<img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />  
+
+Select Optical Character Recognition (OCR) and then click "Extract text from images".  
+
+<img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />  
+
+#### Extract text from an image  
+
+1. Click "Try OCR"  
+2. Upload an image containing printed or handwritten text  
+3. Click "Analyze"  
+
+#### Review the results  
+
+After processing, Vision Studio will display:  
+
+- Extracted text  
+- Confidence scores  
+- JSON output (expand to view full response)  
+
+---
+
+### Pro Code  
+
+This section demonstrates how to run OCR with the Azure AI Vision API using Python in a Jupyter Notebook.  
+
+#### Open Jupyter Notebook  
+
+Click "File" >> "New File", then search for and select "Jupyter Notebook".  
+
+<img src="https://github.com/user-attachments/assets/98efe3de-41dd-4b5a-ac9d-4cf6ca8947b8" width="800" title="Snipped February 5, 2025" />  
+
+Save the file as `ocr.ipynb`.  
+
+#### Load credentials  
 
 In the first cell of `ocr.ipynb`, add:  
 
@@ -243,11 +287,9 @@ print(f"API Key: {'Loaded' if API_KEY else 'Missing'}")
 print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
 ```
 
-Run the cell (`Shift+Enter`) to confirm the API key and endpoint are loaded.
+Run the cell (`Shift+Enter`) to confirm the API key and endpoint are loaded.  
 
----
-
-## Install required dependencies  
+#### Install required dependencies  
 
 In the next cell, install the Azure AI Vision SDK if not already installed:  
 
@@ -255,11 +297,9 @@ In the next cell, install the Azure AI Vision SDK if not already installed:
 !pip install azure-ai-vision-imageanalysis
 ```
 
-Run the cell to install.
+Run the cell to install.  
 
----
-
-## Define OCR function  
+#### Define OCR function  
 
 In the next cell, add:  
 
@@ -281,13 +321,11 @@ def perform_ocr(image_path):
 print("OCR function ready")
 ```
 
-Run the cell to load the function.
+Run the cell to load the function.  
 
----
+#### Upload and analyze an image  
 
-## Upload and analyze an image  
-
-### Local image  
+##### Local image  
 
 In a new cell, add:  
 
@@ -299,11 +337,11 @@ extracted_text = perform_ocr(image_path)
 print("Extracted Text:\n", extracted_text)
 ```
 
-Run the cell and verify the extracted text.
+Run the cell and verify the extracted text.  
 
-### Web image  
+##### Web image  
 
-To analyze an image from a URL instead, add:
+To analyze an image from a URL instead, add:  
 
 ```python
 import requests
@@ -326,11 +364,9 @@ else:
     print("Failed to download image")
 ```
 
-Run the cell to analyze text from a web image.
+Run the cell to analyze text from a web image.  
 
----
-
-## Display image with OCR results  
+#### Display image with OCR results  
 
 ```python
 import matplotlib.pyplot as plt
@@ -349,11 +385,9 @@ def display_image(image_path, extracted_text):
 display_image(image_path, extracted_text)
 ```
 
-Run the cell to display the image with recognized text.
+Run the cell to display the image with recognized text.  
 
----
-
-## Export OCR results to a file  
+#### Export OCR results to a file  
 
 ```python
 output_file = "ocr_results.txt"
@@ -364,13 +398,14 @@ with open(output_file, "w", encoding="utf-8") as file:
 print(f"OCR results saved to {output_file}")
 ```
 
-Run the cell to save results.
+Run the cell to save results.  
 
 ---
 
 ## Summary  
 
 You have successfully:  
+- Used Vision Studio for OCR  
 - Set up Jupyter Notebooks in Visual Studio Code  
 - Loaded API credentials securely  
 - Used Azure AI Vision OCR to extract text from images  
