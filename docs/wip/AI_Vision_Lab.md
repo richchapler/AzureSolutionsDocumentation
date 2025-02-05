@@ -10,7 +10,6 @@
   - [Python Virtual Environment](#python-virtual-environment)  
   - [Jupyter](#jupyter)  
   - [Dependencies](#dependencies)  
-  - [API Credentials](#api-credentials)  
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
   - [Low Code](#low-code)  
   - [Pro Code](#pro-code)  
@@ -141,49 +140,6 @@ Run the command to install all dependencies.
 
 ---
 
-### API Credentials  
-
-Execute the following command to create a `.env` file in the project directory:  
-```powershell
-New-Item -Path .env -ItemType File
-```  
-
-Execute the following command to open the `.env` file in Notepad:
-```powershell
-notepad .env
-```
-
-Modify and paste the following content into your `.env` file:
-```text
-API_KEY=<your-azure-ai-vision-api-key>
-ENDPOINT=<your-azure-ai-vision-endpoint>
-```  
-
-Execute the following command to create a `config.py` file in the project directory:  
-```powershell
-New-Item -Path config.py -ItemType File
-```
-
-Execute the following command to open the `config.py` file in Notepad:
-```powershell
-notepad config.py
-```
-
-Paste the following content into your `config.py` file:
-```python
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-API_KEY = os.getenv("API_KEY")
-ENDPOINT = os.getenv("ENDPOINT")
-```
-
-_Note: Visual Studio Code + Python will be used throughout exercises in this documentation_
-
----
-
 ## Exercise 2: Optical Character Recognition (OCR)  
 
 This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. You will:  
@@ -302,36 +258,6 @@ Click "Run All" to test.
 
 
 
-
-#### Credentials
-
-Click "+ Markdown" and paste the following annotation into the resulting cell:
-
-```markdown
-## Load API Credentials  
-This cell loads the API key and endpoint from the `.env` file to authenticate with Azure AI services.
-```
-
-Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
-
-Click "+ Code" and paste the following code into the resulting cell:
-
-```python
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-API_KEY = os.getenv("API_KEY")
-ENDPOINT = os.getenv("ENDPOINT")
-
-print(f"API Key: {'Loaded' if API_KEY else 'Missing'}")
-print(f"Endpoint: {'Loaded' if ENDPOINT else 'Missing'}")
-```
-
-#### Confirm Success
-
-Click "Run All" to test
 
 #### Install required dependencies  
 
