@@ -205,22 +205,22 @@ if not API_KEY:
     missing_messages.append("\n*** Error: Missing API_KEY ***\n"
                             "1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service\n"
                             "2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'\n"
-                            "3. Copy 'Key 1' and paste it into the .env file as API_KEY")
+                            f"3. Paste the 'Key 1' value into {os.path.abspath(env_file).lower()} as API_KEY")
 
 if not ENDPOINT:
     missing_messages.append("\n*** Error: Missing ENDPOINT ***\n"
                             "1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service\n"
                             "2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'\n"
-                            "3. Copy the 'Endpoint' value and paste it into the .env file as ENDPOINT")
+                            f"3. Paste the 'Endpoint' value into {os.path.abspath(env_file).lower()} as ENDPOINT")
 
 if not IMAGE_PATH:
     missing_messages.append("\n*** Error: Missing IMAGE_PATH ***\n"
-                            "1. Store a sample file {e.g., https://www.irs.gov/pub/irs-pdf/f1040.pdf} in your local device {e.g, c:\\temp\\f1040.pdf}\n"
-                            "2. Open the .env file and set IMAGE_PATH to the full path of the image file")
+                            "1. Store a sample file {e.g., https://www.irs.gov/pub/irs-pdf/f1040.pdf} on your device {e.g, c:\\temp\\f1040.pdf}\n"
+                            f"2. Paste the local file path into {os.path.abspath(env_file).lower()} as IMAGE_PATH")
 
 if missing_messages:
     print("\n".join(missing_messages))
-    print(f"\nOpen {os.path.abspath(env_file).lower()}, update the missing values, save changes, restart the kernel, and re-execute this cell.")
+    print(f"\nAfter correction, restart the kernel and re-execute this cell.")
 ```
 
 The resulting `.env` file should look like:
