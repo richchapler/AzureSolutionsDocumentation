@@ -277,14 +277,50 @@ Execute the code cell.
 
 ---
 
-### **Analyze a Local Image**  
+### OCR Function  
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:  
+
+```markdown
+## OCR Function  
+Define `perform_ocr` function, which sends an image to Azure AI Vision for text extraction.
+```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
+
+Click "+ Code" and paste the following code into the resulting cell:  
+
+```python
+import os
+import requests
+
+with open(IMAGE_PATH, "rb") as image_file:
+    image_data = image_file.read()
+
+headers = {
+    "Ocp-Apim-Subscription-Key": API_KEY,
+    "Content-Type": "application/octet-stream"
+}
+
+url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=read"
+response = requests.post(url, headers=headers, data=image_data)
+result = response.json()
+print("API Response:", result)
+```
+
+Execute the code cell.
+
+<img src="https://github.com/user-attachments/assets/6f48c7aa-d0ed-4b12-bbf8-2a46cf0f2a6e" width="800" title="Snipped February 5, 2025" />
+
+---
+
+### **Analyze Image**  
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
-## Analyze a Local Image  
-This cell performs OCR on an image file using Azure AI Vision.  
-Only image formats (JPEG, PNG, BMP, GIF, TIFF) are supported.
+## Analyze Image  
+Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF).  
 ```
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
@@ -303,9 +339,55 @@ else:
     print("Extracted Text:\n", extracted_text)
 ```
 
-Execute the code cell.
+Execute the code cell and review response. Response should look like the following formatted and abbreviated JSON:
+
+```json
+{
+  "readResult": {
+    "stringIndexType": "TextElements",
+    "content": "Walmart\nSave money. Live better.\n( 330 ) 339 - 3991\nMANAGER DIANA EARNEST\n231 BLUEBELL DR SW\nNEW PHILADELPHIA OH 44663\nST# 02115 OP# 009044 TE# 44 TR# 01301\n...\nSUBTOTAL 93.62\nTAX 1 6.750% 4.59\nTOTAL 98.21\nVISA TEND 98.21\n...\n07/28/17\n02:39:48\nCHANGE DUE 0.00\n# ITEMS SOLD 25\n...",
+    "pages": [
+      {
+        "height": 1373.0,
+        "width": 554.0,
+        "angle": 0.0,
+        "pageNumber": 1,
+        "words": [
+          {"content": "Walmart", "boundingBox": [...], "confidence": 0.996, "span": {"offset": 0, "length": 7}},
+          {"content": "Save", "boundingBox": [...], "confidence": 0.994, "span": {"offset": 8, "length": 4}},
+          ...
+          {"content": "TOTAL", "boundingBox": [...], "confidence": 0.998, "span": {"offset": 1023, "length": 5}},
+          {"content": "98.21", "boundingBox": [...], "confidence": 0.994, "span": {"offset": 1029, "length": 5}}
+        ],
+        "spans": [{"offset": 0, "length": 1421}],
+        "lines": [
+          {"content": "Walmart", "boundingBox": [...], "spans": [{"offset": 0, "length": 7}]},
+          {"content": "Save money. Live better.", "boundingBox": [...], "spans": [{"offset": 8, "length": 24}]},
+          ...
+          {"content": "TOTAL", "boundingBox": [...], "spans": [{"offset": 1023, "length": 5}]},
+          {"content": "98.21", "boundingBox": [...], "spans": [{"offset": 1029, "length": 5}]}
+        ]
+      }
+    ],
+    "styles": [],
+    "modelVersion": "2022-04-30"
+  },
+  "modelVersion": "2023-02-01-preview",
+  "metadata": {"width": 554, "height": 1373}
+}
+```
+
+<img src="https://github.com/user-attachments/assets/b1ba0db4-fc9b-4762-9655-4306639be53b" width="800" title="Snipped February 5, 2025" />
 
 ---
+---
+---
+
+
+
+
+
+
 
 
 
