@@ -401,16 +401,10 @@ On the "Source Settings" tab, click "+ New" to create a new dataset pointed at t
 On the "Projection" tab, click "Import projection".
 
 After configuring the Source dataset, click "+" and select "Derived Column" from the transformation list.
-On the "Derived column's settings" tab, add column `HashedValue` with expression: `sha2(CustomerID, 512)`
+On the "Derived column's settings" tab, add column `CustomerID_Hashed` with expression: `sha2(CustomerID, 512)`
+_Note: `sha2` function computes SHA-512 hash, which is computationally expensive_
 
-#### 4. Add a Derived Column Transformation
-- Click `+` and select `Derived Column`
-- Define an artificial transformation that forces **high computation**:
 
-```sql
-SHA2(CONCAT(StringColumn, IntColumn, DateColumn), 512)
-```
-- This transformation applies a SHA-512 hash function, which is computationally expensive
 
 #### 5. Add a Sort Transformation
 - Click `+` and select `Sort`
