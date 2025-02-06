@@ -365,10 +365,30 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 To effectively troubleshoot failures in Azure Data Factory (ADF), you can simulate errors in your pipeline runs and then query the logs using KQL (Kusto Query Language). This section demonstrates how to intentionally trigger failures and analyze them using Log Analytics.
 
-### Simulating Failures
+### 1. Cluster Failures
 
-#### 1. Failing the Cluster or Self-hosted Integration Runtime Activity
+#### Simulating Failure
+To simulate a cluster failure:
+- If using **AutoResolveIntegrationRuntime**, deliberately trigger a high-memory or high-CPU workload to stress the cluster.
+- If using a **Custom Integration Runtime**, forcibly stop or deallocate the VM hosting the runtime.
+- If using **Azure Synapse Integration Runtime**, pause or scale down the Synapse Dedicated SQL Pool.
+- Run a pipeline that depends on the cluster.
 
+#### Querying Logs
+```kql
+AzureDiagnostics
+| where Category == "ActivityRuns" 
+| where Status == "Failed"
+| where ErrorMessage contains "Cluster is unavailable" or ErrorMessage contains "Compute resource is not available"
+| project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
+| order by TimeGenerated desc
+```
+
+---
+
+### 2. Integration Runtime Failures
+
+#### Simulating Failure
 To simulate a failure in the integration runtime:
 - If using an **Azure Integration Runtime**, delete or disable the integration runtime before executing a pipeline that depends on it.
 - If using a **Self-hosted Integration Runtime**, stop the service on the machine running the integration runtime:
@@ -377,8 +397,22 @@ To simulate a failure in the integration runtime:
   ```
 - Trigger the pipeline and observe the failure.
 
-#### 2. Failing the Pipeline Activity
+#### Querying Logs
+```kql
+AzureDiagnostics
+| where Category == "ActivityRuns" 
+| where ActivityType == "DataFlow" or ActivityType == "Copy"
+| where Status == "Failed"
+| where ErrorMessage contains "Integration runtime is not available"
+| project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
+| order by TimeGenerated desc
+```
 
+---
+
+### 3. Pipeline Activity Failures
+
+#### Simulating Failure
 To simulate an activity failure:
 - Modify a Copy Data activity to point to an invalid dataset (e.g., use a non-existent table).
 - Introduce an intentional error in a script-based activity such as a Stored Procedure or Web activity (e.g., call a non-existent stored procedure).
@@ -387,49 +421,27 @@ To simulate an activity failure:
   RAISERROR ('Intentional Failure', 16, 1);
   ```
 
-#### 3. Failing the Permissions of the Linked Service
+#### Querying Logs
+```kql
+AzureDiagnostics
+| where Category == "PipelineRuns"
+| where Status == "Failed"
+| project TimeGenerated, Resource, PipelineName, Status, ErrorMessage
+| order by TimeGenerated desc
+```
 
+---
+
+### 4. Permissions Failures in Linked Services
+
+#### Simulating Failure
 To simulate a permissions issue:
 - Modify the linked service authentication:
   - For Azure SQL Database, use an incorrect **Managed Identity** or SQL user.
   - For Blob Storage, remove **Storage Blob Data Reader** from the service principal.
 - Run the pipeline to trigger an authentication failure.
 
-#### 4. Failing the Actual Resource
-
-To simulate a resource failure:
-- For SQL Database, temporarily pause the database:
-  ```sql
-  ALTER DATABASE [DatabaseName] SET OFFLINE WITH ROLLBACK IMMEDIATE;
-  ```
-- For Blob Storage, change the firewall settings to block access.
-
----
-
-### Querying Logs for Failures
-
-Once failures occur, use KQL queries in **Azure Monitor Logs** to analyze them.
-
-#### 1. Detecting Integration Runtime Failures
-```kql
-AzureDiagnostics
-| where Category == "ActivityRuns" 
-| where ActivityType == "DataFlow" or ActivityType == "Copy"
-| where Status == "Failed"
-| project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
-| order by TimeGenerated desc
-```
-
-#### 2. Identifying Pipeline Activity Failures
-```kql
-AzureDiagnostics
-| where Category == "PipelineRuns"
-| where Status == "Failed"
-| project TimeGenerated, Resource, PipelineName, ErrorMessage
-| order by TimeGenerated desc
-```
-
-#### 3. Checking for Permission Failures
+#### Querying Logs
 ```kql
 AzureDiagnostics
 | where Category == "ActivityRuns"
@@ -439,7 +451,19 @@ AzureDiagnostics
 | order by TimeGenerated desc
 ```
 
-#### 4. Identifying Resource Failures
+---
+
+### 5. Resource Failures
+
+#### Simulating Failure
+To simulate a resource failure:
+- For SQL Database, temporarily pause the database:
+  ```sql
+  ALTER DATABASE [DatabaseName] SET OFFLINE WITH ROLLBACK IMMEDIATE;
+  ```
+- For Blob Storage, change the firewall settings to block access.
+
+#### Querying Logs
 ```kql
 AzureDiagnostics
 | where Category == "ActivityRuns"
@@ -448,8 +472,6 @@ AzureDiagnostics
 | project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
 | order by TimeGenerated desc
 ```
-
-These queries help pinpoint failure points, their timestamps, and specific error messages, allowing for rapid troubleshooting.
 
 ---
 
