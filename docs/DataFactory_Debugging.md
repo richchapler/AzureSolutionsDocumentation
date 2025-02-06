@@ -361,11 +361,11 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 ---
 
-## Analyzing Failures Using Logs and KQL
+## Analyzing Failures
 
-To effectively troubleshoot failures in Azure Data Factory (ADF), you can simulate errors in your pipeline runs and then query the logs using KQL (Kusto Query Language). This section demonstrates how to intentionally trigger failures and analyze them using Log Analytics.
+This section demonstrates how to effectively troubleshoot failures, by: 1) simulating errors and 2) querying the logs using Kusto Query Language (KQL)
 
-### 1. Cluster Failures
+### Example 1: Cluster Failures
 
 #### Simulating Failure
 To simulate a cluster failure:
