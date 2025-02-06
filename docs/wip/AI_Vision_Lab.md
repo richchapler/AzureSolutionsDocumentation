@@ -16,12 +16,7 @@
   - [Pro Code](#pro-code)  
     - [Environment Variables](#environment-variables)  
     - [Dependencies](#dependencies)  
-    - [OCR Function](#ocr-function)  
     - [Analyze Image](#analyze-image)  
-    - [Analyze an Image from a URL](#analyze-an-image-from-a-url)  
-    - [Display Image with OCR Results](#display-image-with-ocr-results)  
-    - [Export OCR Results to a File](#export-ocr-results-to-a-file)  
-- [Summary](#summary)  
 
 ## Exercise 1: Prepare Environment
 
