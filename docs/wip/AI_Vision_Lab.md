@@ -286,51 +286,14 @@ Execute the code cell.
 
 ---
 
-### OCR Function  
-
-Click "+ Markdown" and paste the following annotation into the resulting cell:  
-
-```markdown
-## OCR Function  
-Define `perform_ocr` function, which sends an image to Azure AI Vision for text extraction.
-```
-
-Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
-
-Click "+ Code" and paste the following code into the resulting cell:  
-
-```python
-import os
-import requests
-
-with open(IMAGE_PATH, "rb") as image_file:
-    image_data = image_file.read()
-
-headers = {
-    "Ocp-Apim-Subscription-Key": API_KEY,
-    "Content-Type": "application/octet-stream"
-}
-
-url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=read"
-response = requests.post(url, headers=headers, data=image_data)
-result = response.json()
-print("API Response:", result)
-```
-
-Execute the code cell.
-
-<img src="https://github.com/user-attachments/assets/6f48c7aa-d0ed-4b12-bbf8-2a46cf0f2a6e" width="800" title="Snipped February 5, 2025" />
-
----
-
 ### **Analyze Image**  
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
-## Analyze Image  
-Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF).  
-```
+## Analyze Image 
+Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF).
+```  
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
 
@@ -338,23 +301,33 @@ Click "+ Code" and paste the following code into the resulting cell:
 
 ```python
 import os
+import requests
 
-if not IMAGE_PATH:
-    print("*** Error: IMAGE_PATH is not set in the .env file ***")
-elif not os.path.isfile(IMAGE_PATH):
-    print(f"*** Error: File not found ***\n{IMAGE_PATH}")
-else:
-    extracted_text = perform_ocr(IMAGE_PATH)
-    print("Extracted Text:\n", extracted_text)
+def perform_ocr(image_path):
+    with open(image_path, "rb") as image_file:
+        image_data = image_file.read()
+
+    headers = {
+        "Ocp-Apim-Subscription-Key": API_KEY,
+        "Content-Type": "application/octet-stream"
+    }
+
+    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=read"
+    response = requests.post(url, headers=headers, data=image_data)
+    return response
+
+if os.path.isfile(IMAGE_PATH):
+    response = perform_ocr(IMAGE_PATH)
+    print(response.json())
 ```
 
 Execute the code cell.
 
-<img src="https://github.com/user-attachments/assets/b1ba0db4-fc9b-4762-9655-4306639be53b" width="800" title="Snipped February 5, 2025" />
+<img src="https://github.com/user-attachments/assets/80f09c5c-1042-42f6-a9cb-6e196afde291" width="800" title="Snipped February 5, 2025" />
 
 Response should look like the following formatted and abbreviated JSON:
 
-```json
+json
 {
   "readResult": {
     "stringIndexType": "TextElements",
@@ -388,4 +361,3 @@ Response should look like the following formatted and abbreviated JSON:
   "modelVersion": "2023-02-01-preview",
   "metadata": {"width": 554, "height": 1373}
 }
-```
