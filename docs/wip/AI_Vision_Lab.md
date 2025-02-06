@@ -321,7 +321,7 @@ Execute the code cell.
 <img src="https://github.com/user-attachments/assets/80f09c5c-1042-42f6-a9cb-6e196afde291" width="800" title="Snipped February 5, 2025" />
 
 #### Expected Response
-...JSON formatted and abbreviated for convenience:
+_Note: JSON formatted and abbreviated for convenience_
 
 ```json
 {
