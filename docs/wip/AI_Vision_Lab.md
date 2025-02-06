@@ -322,7 +322,7 @@ Execute the code cell.
 
 Response should look like the following formatted and abbreviated JSON:
 
-json
+```json
 {
   "readResult": {
     "stringIndexType": "TextElements",
@@ -356,3 +356,4 @@ json
   "modelVersion": "2023-02-01-preview",
   "metadata": {"width": 554, "height": 1373}
 }
+```
