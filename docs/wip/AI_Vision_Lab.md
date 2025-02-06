@@ -339,7 +339,11 @@ else:
     print("Extracted Text:\n", extracted_text)
 ```
 
-Execute the code cell and review response. Response should look like the following formatted and abbreviated JSON:
+Execute the code cell.
+
+<img src="https://github.com/user-attachments/assets/b1ba0db4-fc9b-4762-9655-4306639be53b" width="800" title="Snipped February 5, 2025" />
+
+Response should look like the following formatted and abbreviated JSON:
 
 ```json
 {
@@ -377,7 +381,6 @@ Execute the code cell and review response. Response should look like the followi
 }
 ```
 
-<img src="https://github.com/user-attachments/assets/b1ba0db4-fc9b-4762-9655-4306639be53b" width="800" title="Snipped February 5, 2025" />
 
 ---
 ---
