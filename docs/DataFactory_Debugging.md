@@ -363,26 +363,145 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 ## Analyzing Failures
 
-This section demonstrates how to effectively troubleshoot failures, by: 1) simulating errors and 2) querying the logs using Kusto Query Language (KQL)
+Learn how to troubleshoot failures, by: 1) simulating errors and 2) querying logs using Kusto Query Language (KQL)
 
 ### Example 1: Cluster Failures
 
-#### Simulating Failure
-To simulate a cluster failure:
-- If using **AutoResolveIntegrationRuntime**, deliberately trigger a high-memory or high-CPU workload to stress the cluster.
-- If using a **Custom Integration Runtime**, forcibly stop or deallocate the VM hosting the runtime.
-- If using **Azure Synapse Integration Runtime**, pause or scale down the Synapse Dedicated SQL Pool.
-- Run a pipeline that depends on the cluster.
+#### Simulate Failure
 
-#### Querying Logs
+##### Generate Sample Data
+Navigate to SQL and execute the following T-SQL to generate sample data records:
+
+```sql
+DROP TABLE IF EXISTS SalesLT.LargeCustomer;
+CREATE TABLE SalesLT.LargeCustomer (
+    CustomerID INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    CompanyName NVARCHAR(100),
+    Phone NVARCHAR(20),
+    CreatedDate DATETIME DEFAULT GETDATE()
+);
+
+INSERT INTO SalesLT.LargeCustomer (FirstName, LastName, CompanyName, Phone)
+SELECT TOP (10000000)
+    'John',
+    'Doe',
+    'SampleCorp',
+    '555-0100'
+FROM sys.all_objects a CROSS JOIN sys.all_objects b;
+```
+
+##### Add Data Flow
+Navigate to Data Factory Studio >> Author and create a new data flow.
+_Note: Start by toggling "Data flow debug" in order to enable live execution_
+
+Click `Add Source`.
+On the "Source Settings" tab, click "+ New" to create a new dataset pointed at the `LargeCustomer` table on SQL.
+On the "Projection" tab, click "Import projection".
+
+After configuring the Source dataset, click "+" and select "Derived Column" from the transformation list.
+On the "Derived column's settings" tab, add column `HashedValue` with expression: `sha2(CustomerID, 512)`
+
+#### 4. Add a Derived Column Transformation
+- Click `+` and select `Derived Column`
+- Define an artificial transformation that forces **high computation**:
+
+```sql
+SHA2(CONCAT(StringColumn, IntColumn, DateColumn), 512)
+```
+- This transformation applies a SHA-512 hash function, which is computationally expensive
+
+#### 5. Add a Sort Transformation
+- Click `+` and select `Sort`
+- Set sorting on a **string column** with no partitioning to force full cluster memory usage
+
+#### 6. Add an Aggregate Transformation
+- Click `+` and select `Aggregate`
+- Compute aggregates that require large-scale group-by operations:
+  - `COUNT(*)`
+  - `SUM(HighCardinalityColumn)`
+  - `AVG(LowCardinalityColumn)`
+
+#### 7. Set Sink to a Slow Destination
+- Add a `Sink` that writes the output to a slow-performing destination:
+  - `Azure Blob Storage (Single File Mode)` (forces cluster memory retention)
+  - `Azure SQL Database with bulk inserts disabled`
+- Ensure that **batching is turned off** in the sink settings
+
+#### 8. Execute in Debug Mode and Monitor Performance
+- Click `Debug` and monitor CPU and memory usage in the `Monitor` tab
+- If the pipeline runs for a prolonged time or fails due to **memory pressure**, the cluster is struggling
+
+---
+
+#### **Method 2: Forcing Cluster Timeout or Resource Deallocation**
+If using a **Custom Integration Runtime**, you can force a cluster failure by stopping the associated VM.
+
+1. **Identify the Integration Runtime VM:**
+   - Navigate to **Azure Portal** >> **Virtual Machines**.
+   - Find the VM running your **Custom Integration Runtime**.
+
+2. **Simulate a Failure by Stopping the VM:**
+   - Open **PowerShell** and execute:
+     ```powershell
+     Stop-AzVM -Name "YourIntegrationRuntimeVM" -ResourceGroupName "YourResourceGroup" -Force
+     ```
+   - This will **immediately stop** the VM.
+
+3. **Trigger a Pipeline That Depends on the Integration Runtime:**
+   - Start a pipeline that relies on this integration runtime.
+   - Observe logs in the **Monitor** tab, looking for errors related to unavailable resources.
+
+---
+
+#### **Method 3: Simulating Failure in Azure Synapse Integration Runtime**
+If using **Azure Synapse Integration Runtime**, you can create a failure scenario by pausing or scaling down the SQL pool.
+
+1. **Identify the Synapse Dedicated SQL Pool:**
+   - Navigate to **Azure Synapse Studio**.
+   - Go to **Manage** >> **SQL Pools**.
+
+2. **Pause the SQL Pool While Running a Query:**
+   - Start a Data Flow that loads data into a Synapse table.
+   - Open **Azure SQL Query Editor** and run:
+     ```sql
+     ALTER DATABASE [YourSynapseDB] SET PAUSED;
+     ```
+   - This forces an **immediate disconnection** from Synapse.
+
+3. **Observe Pipeline Failure:**
+   - Check the **Monitor** tab for logs indicating loss of connectivity.
+
+---
+
+#### **Querying Logs for Cluster Failures**
+Use **Kusto Query Language (KQL)** in Azure Monitor Logs to track cluster-related failures.
+
 ```kql
 AzureDiagnostics
-| where Category == "ActivityRuns" 
+| where Category == "ActivityRuns"
 | where Status == "Failed"
-| where ErrorMessage contains "Cluster is unavailable" or ErrorMessage contains "Compute resource is not available"
+| where ErrorMessage contains "Cluster is unavailable" 
+   or ErrorMessage contains "Compute resource is not available"
 | project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
 | order by TimeGenerated desc
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
