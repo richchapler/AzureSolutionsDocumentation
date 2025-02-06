@@ -373,23 +373,44 @@ Learn how to troubleshoot failures, by: 1) simulating errors and 2) querying log
 Navigate to SQL and execute the following T-SQL to generate sample data records:
 
 ```sql
-DROP TABLE IF EXISTS SalesLT.LargeCustomer;
-CREATE TABLE SalesLT.LargeCustomer (
-    CustomerID INT IDENTITY(1,1) PRIMARY KEY,
-    FirstName NVARCHAR(50),
-    LastName NVARCHAR(50),
-    CompanyName NVARCHAR(100),
-    Phone NVARCHAR(20),
-    CreatedDate DATETIME DEFAULT GETDATE()
+DROP TABLE IF EXISTS ClusterOverloader;
+CREATE TABLE ClusterOverloader (
+    CustomerID BIGINT IDENTITY(1,1) PRIMARY KEY,
+    HighCardinalityString VARCHAR(255),
+    WideStringColumn VARCHAR(4000),
+    NumericalLoadFactor DECIMAL(18,5),
+    DateHeavyUsage DATETIME,
+    RandomBinaryBlob VARBINARY(MAX)
 );
 
-INSERT INTO SalesLT.LargeCustomer (FirstName, LastName, CompanyName, Phone)
-SELECT TOP (10000000)
-    'John',
-    'Doe',
-    'SampleCorp',
-    '555-0100'
-FROM sys.all_objects a CROSS JOIN sys.all_objects b;
+SET NOCOUNT ON;
+DECLARE @BatchSize INT = 100000; -- Rows per batch
+DECLARE @TotalRows INT = 10000000;
+DECLARE @Counter INT = 0;
+
+WHILE @Counter < @TotalRows
+BEGIN
+    INSERT INTO ClusterOverloader (HighCardinalityString, WideStringColumn, NumericalLoadFactor, DateHeavyUsage, RandomBinaryBlob)
+    SELECT TOP (@BatchSize)
+        LEFT(NEWID(), 255) AS HighCardinalityString, -- Unique high-cardinality string
+        REPLICATE(CHAR(65 + ABS(CHECKSUM(NEWID())) % 26), 4000) AS WideStringColumn, -- Large text field
+        RAND() * 100000 AS NumericalLoadFactor, -- Random decimal value
+        DATEADD(SECOND, ABS(CHECKSUM(NEWID())) % 31536000, '2020-01-01') AS DateHeavyUsage, -- Random date within 1 year
+        CAST(NEWID() AS VARBINARY(MAX)) AS RandomBinaryBlob -- Random binary data
+    FROM 
+        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS A(n)) AS A
+    CROSS JOIN 
+        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS B(n)) AS B
+    CROSS JOIN
+        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS C(n)) AS C
+    CROSS JOIN
+        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS D(n)) AS D;
+
+    SET @Counter = @Counter + @BatchSize;
+    PRINT CONCAT('Inserted ', @Counter, ' rows...');
+END
+
+SELECT COUNT(*) FROM [dbo].[ClusterOverloader]
 ```
 
 ##### Add Data Flow
