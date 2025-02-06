@@ -11,7 +11,16 @@
   - [Jupyter](#jupyter)  
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
   - [Low Code](#low-code)  
+    - [Extract text from an image](#extract-text-from-an-image)  
+    - [Review the results](#review-the-results)  
   - [Pro Code](#pro-code)  
+    - [Environment Variables](#environment-variables)  
+    - [Dependencies](#dependencies)  
+    - [OCR Function](#ocr-function)  
+    - [Analyze Image](#analyze-image)  
+    - [Analyze an Image from a URL](#analyze-an-image-from-a-url)  
+    - [Display Image with OCR Results](#display-image-with-ocr-results)  
+    - [Export OCR Results to a File](#export-ocr-results-to-a-file)  
 - [Summary](#summary)  
 
 ## Exercise 1: Prepare Environment
