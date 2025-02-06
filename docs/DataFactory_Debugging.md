@@ -367,6 +367,33 @@ Learn how to troubleshoot failures, by: 1) simulating errors and 2) querying log
 
 ### Example 1: Cluster Failures
 
+Cluster failure causes include:
+
+#### High-memory and high-CPU computation
+- Use nested functions like `SHA2`, `CONCAT`, and `UPPER/LOWER` on large text columns
+- Perform `CROSS JOINs` between large tables
+- Sort a high-cardinality column (like `UUID`) with no partitioning
+- Use multiple layers of transformations in a single Data Flow
+
+#### I/O bottlenecks
+- Store data in single-file mode in Azure Blob Storage
+- Write to a low-throughput database like a small SKU SQL DB
+- Write one row at a time to a database by disabling batching
+- Use a dataset from another region or an on-prem source with slow response times
+
+#### Overloading the cluster’s parallel processing
+- Trigger 10+ pipelines simultaneously, each performing heavy operations
+- Force unnecessary repartitioning by increasing data partitions to maximum
+- Reduce Data Flow core count to 8 but process millions of records
+
+#### Overwhelming the integration runtime
+- Start and stop the self-hosted integration runtime during execution
+- Set up linked services with long-running HTTP requests
+
+#### API rate limits and service restrictions
+- Create a loop inside a Data Flow that makes API calls to external services
+- Fetch huge JSON payloads from slow endpoints
+
 #### Simulate Failure
 
 ##### Generate Sample Data
