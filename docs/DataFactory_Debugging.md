@@ -361,6 +361,98 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 ---
 
+## Analyzing Failures Using Logs and KQL
+
+To effectively troubleshoot failures in Azure Data Factory (ADF), you can simulate errors in your pipeline runs and then query the logs using KQL (Kusto Query Language). This section demonstrates how to intentionally trigger failures and analyze them using Log Analytics.
+
+### Simulating Failures
+
+#### 1. Failing the Cluster or Self-hosted Integration Runtime Activity
+
+To simulate a failure in the integration runtime:
+- If using an **Azure Integration Runtime**, delete or disable the integration runtime before executing a pipeline that depends on it.
+- If using a **Self-hosted Integration Runtime**, stop the service on the machine running the integration runtime:
+  ```powershell
+  Stop-Service -Name "DIAHostService"
+  ```
+- Trigger the pipeline and observe the failure.
+
+#### 2. Failing the Pipeline Activity
+
+To simulate an activity failure:
+- Modify a Copy Data activity to point to an invalid dataset (e.g., use a non-existent table).
+- Introduce an intentional error in a script-based activity such as a Stored Procedure or Web activity (e.g., call a non-existent stored procedure).
+- Add a script-based activity with an explicit failure:
+  ```sql
+  RAISERROR ('Intentional Failure', 16, 1);
+  ```
+
+#### 3. Failing the Permissions of the Linked Service
+
+To simulate a permissions issue:
+- Modify the linked service authentication:
+  - For Azure SQL Database, use an incorrect **Managed Identity** or SQL user.
+  - For Blob Storage, remove **Storage Blob Data Reader** from the service principal.
+- Run the pipeline to trigger an authentication failure.
+
+#### 4. Failing the Actual Resource
+
+To simulate a resource failure:
+- For SQL Database, temporarily pause the database:
+  ```sql
+  ALTER DATABASE [DatabaseName] SET OFFLINE WITH ROLLBACK IMMEDIATE;
+  ```
+- For Blob Storage, change the firewall settings to block access.
+
+---
+
+### Querying Logs for Failures
+
+Once failures occur, use KQL queries in **Azure Monitor Logs** to analyze them.
+
+#### 1. Detecting Integration Runtime Failures
+```kql
+AzureDiagnostics
+| where Category == "ActivityRuns" 
+| where ActivityType == "DataFlow" or ActivityType == "Copy"
+| where Status == "Failed"
+| project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
+| order by TimeGenerated desc
+```
+
+#### 2. Identifying Pipeline Activity Failures
+```kql
+AzureDiagnostics
+| where Category == "PipelineRuns"
+| where Status == "Failed"
+| project TimeGenerated, Resource, PipelineName, ErrorMessage
+| order by TimeGenerated desc
+```
+
+#### 3. Checking for Permission Failures
+```kql
+AzureDiagnostics
+| where Category == "ActivityRuns"
+| where Status == "Failed"
+| where ErrorMessage contains "Authentication" or ErrorMessage contains "Permission"
+| project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
+| order by TimeGenerated desc
+```
+
+#### 4. Identifying Resource Failures
+```kql
+AzureDiagnostics
+| where Category == "ActivityRuns"
+| where Status == "Failed"
+| where ErrorMessage contains "Database is unavailable" or ErrorMessage contains "Storage account not reachable"
+| project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
+| order by TimeGenerated desc
+```
+
+These queries help pinpoint failure points, their timestamps, and specific error messages, allowing for rapid troubleshooting.
+
+---
+
 ## Appendix
 
 ### Alert Metrics
