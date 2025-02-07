@@ -13,14 +13,14 @@
     - [Environment Variables](#environment-variables)  
     - [Dependencies](#dependencies)  
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
-  - [Low Code](#low-code)  
+  - [Low Code](#low-code-ocr)  
     - [Extract text from an image](#extract-text-from-an-image)  
     - [Review the results](#review-the-results)  
-  - [Pro Code](#pro-code)  
+  - [Pro Code](#pro-code-ocr)  
     - [Analyze Image](#analyze-image)  
 - [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis)  
-  - [Low Code](#low-code-1)  
-  - [Pro Code](#pro-code-1)  
+  - [Low Code](#low-code-spatial-analysis)  
+  - [Pro Code](#pro-code-spatial-analysis)  
     - [Analyze Image (Spatial Analysis)](#analyze-image-spatial-analysis)  
 
 ## Exercise 1: Prepare Environment
