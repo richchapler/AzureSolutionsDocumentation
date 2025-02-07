@@ -793,7 +793,7 @@ AzureDiagnostics
 | <sub>Synapse</sub> | <sub>`Synapse Link Event`</sub> | <sub>`SynapseLinkEvent`</sub> | <sub>Logs events related to Synapse Link operations.</sub> |
 | <sub>Synapse</sub> | <sub>`Synapse RBAC Operations`</sub> | <sub>`SynapseRBACOperations`</sub> | <sub>Logs role-based access control (RBAC) changes.</sub> |
 
-#### Table: ADFSandboxPipelineRun
+#### Data Factory | Logs | Table: `ADFSandboxPipelineRun`
 
 | <sub>Column Name</sub> | <sub>Description</sub> |
 :----- | :-----
@@ -817,7 +817,32 @@ AzureDiagnostics
 | <sub>`SystemParameters`</sub> | <sub>System-defined parameters for execution</sub> |
 | <sub>`Type`</sub> | <sub>Log table type, which is `ADFSandboxPipelineRun`</sub> |
 | <sub>`_ResourceId`</sub> | <sub>Normalized Azure resource ID</sub> |
-```
+
+#### Data Factory | Logs | Table: `ADFSandboxActivityRun`
+
+| <sub>Column Name</sub> | <sub>Description</sub> |
+:----- | :-----
+| <sub>`TenantId`</sub> | <sub>Unique identifier for the Azure tenant</sub> |
+| <sub>`SourceSystem`</sub> | <sub>Indicates the log source, typically Azure</sub> |
+| <sub>`TimeGenerated [UTC]`</sub> | <sub>Timestamp of the log event</sub> |
+| <sub>`ResourceId`</sub> | <sub>Fully qualified Azure Resource ID of the Data Factory</sub> |
+| <sub>`OperationName`</sub> | <sub>Current state of the activity (Queued, InProgress, Succeeded, etc.)</sub> |
+| <sub>`Category`</sub> | <sub>Log category, which is `SandboxActivityRuns` for debug activities</sub> |
+| <sub>`CorrelationId`</sub> | <sub>Identifier for correlating related log entries</sub> |
+| <sub>`Level`</sub> | <sub>Severity level of the log entry (e.g., Informational)</sub> |
+| <sub>`Location`</sub> | <sub>Azure region where the activity execution occurred</sub> |
+| <sub>`Tags`</sub> | <sub>Metadata tags associated with the activity run</sub> |
+| <sub>`Start [UTC]`</sub> | <sub>Start time of the activity execution</sub> |
+| <sub>`End [UTC]`</sub> | <sub>End time of the activity execution</sub> |
+| <sub>`FailureType`</sub> | <sub>Indicates failure type if the activity execution failed</sub> |
+| <sub>`PipelineName`</sub> | <sub>Name of the pipeline containing the executed activity</sub> |
+| <sub>`Input`</sub> | <sub>Serialized input data provided to the activity</sub> |
+| <sub>`Output`</sub> | <sub>Serialized output data from the activity</sub> |
+| <sub>`ErrorCode`</sub> | <sub>Error code if the activity failed</sub> |
+| <sub>`ErrorMessage`</sub> | <sub>Error message details if the activity failed</sub> |
+| <sub>`Error`</sub> | <sub>Additional error information</sub> |
+| <sub>`Type`</sub> | <sub>Log table type, which is `ADFSandboxActivityRun`</sub> |
+| <sub>`_ResourceId`</sub> | <sub>Normalized Azure resource ID</sub> |
 
 ---
 
