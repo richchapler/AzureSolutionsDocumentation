@@ -750,19 +750,17 @@ AzureDiagnostics
 
 ### Logs
 
-### Logs
-
 #### Category Groups
 
 | <sub>Category Group</sub> | <sub>Description</sub> | <sub>Data Factory</sub> | <sub>Synapse</sub> |
-|-----------------|-----------------------------------------------------------------|:-----:|:-----:|
+:----- | :----- | :----- | :-----
 | <sub>`allLogs`</sub> | <sub>Logs all available events, including audit logs and operational logs (e.g., pipeline runs, activity execution, SQL requests, Spark metrics)</sub> | ✅ | ✅ |
 | <sub>`audit`</sub> | <sub>Logs security and access control events, including role assignments, security audits, and authentication failures</sub> | ❌ | ✅ |
 
 #### Categories
 
 | <sub>Service</sub> | <sub>Category</sub> | <sub>Description</sub> | <sub>Included in `audit`</sub> | <sub>Included in `allLogs`</sub> |
-|-------------------|----------------------|-----------------------------------------------------------|:-----:|:-----:|
+:----- | :----- | :----- | :----- | :-----
 | <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>Logs scheduler operations for Apache Airflow</sub> | ❌ | ✅ |
 | <sub>Data Factory</sub> | <sub>`Pipeline activity runs log`</sub> | <sub>Captures details about the execution of activities within a pipeline</sub> | ❌ | ✅ |
 | <sub>Data Factory</sub> | <sub>`Pipeline runs log`</sub> | <sub>Records information about each pipeline run, including start time, end time, and status</sub> | ❌ | ✅ |
@@ -780,7 +778,7 @@ AzureDiagnostics
 ### Tables
 
 | <sub>Service</sub> | <sub>Category</sub> | <sub>Log Table</sub> | <sub>Description</sub> |
-|----------|----------------------|----------------------|------------------------|
+:----- | :----- | :----- | :-----
 | <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>`ADFAirflowSchedulerLogs`</sub> | <sub>Logs scheduler operations for Apache Airflow.</sub> |
 | <sub>Data Factory</sub> | <sub>`Pipeline activity runs log`</sub> | <sub>`ADFActivityRun`</sub> | <sub>Logs activity executions within pipelines (non-debug).</sub> |
 | <sub>Data Factory</sub> | <sub>`Pipeline runs log`</sub> | <sub>`ADFPipelineRun`</sub> | <sub>Logs triggered pipeline executions (non-debug).</sub> |
@@ -794,6 +792,32 @@ AzureDiagnostics
 | <sub>Synapse</sub> | <sub>`Synapse Gateway API Requests`</sub> | <sub>`SynapseGatewayApiRequests`</sub> | <sub>Logs API requests for Synapse Gateway.</sub> |
 | <sub>Synapse</sub> | <sub>`Synapse Link Event`</sub> | <sub>`SynapseLinkEvent`</sub> | <sub>Logs events related to Synapse Link operations.</sub> |
 | <sub>Synapse</sub> | <sub>`Synapse RBAC Operations`</sub> | <sub>`SynapseRBACOperations`</sub> | <sub>Logs role-based access control (RBAC) changes.</sub> |
+
+#### Table: ADFSandboxPipelineRun
+
+| <sub>Column Name</sub> | <sub>Description</sub> |
+:----- | :-----
+| <sub>`TenantId`</sub> | <sub>Unique identifier for the Azure tenant</sub> |
+| <sub>`SourceSystem`</sub> | <sub>Indicates the log source, typically Azure</sub> |
+| <sub>`TimeGenerated [UTC]`</sub> | <sub>Timestamp of the log event</sub> |
+| <sub>`ResourceId`</sub> | <sub>Fully qualified Azure Resource ID of the Data Factory</sub> |
+| <sub>`OperationName`</sub> | <sub>Current state of the pipeline (Queued, InProgress, Succeeded, etc.)</sub> |
+| <sub>`Category`</sub> | <sub>Log category, which is `SandboxPipelineRuns` for debug pipelines</sub> |
+| <sub>`CorrelationId`</sub> | <sub>Identifier for correlating related log entries</sub> |
+| <sub>`Level`</sub> | <sub>Severity level of the log entry (e.g., Informational)</sub> |
+| <sub>`Location`</sub> | <sub>Azure region where the pipeline execution occurred</sub> |
+| <sub>`Tags`</sub> | <sub>Metadata tags associated with the pipeline run</sub> |
+| <sub>`Start [UTC]`</sub> | <sub>Start time of the pipeline execution</sub> |
+| <sub>`End [UTC]`</sub> | <sub>End time of the pipeline execution</sub> |
+| <sub>`FailureType`</sub> | <sub>Indicates failure type if the pipeline execution failed</sub> |
+| <sub>`PipelineName`</sub> | <sub>Name of the executed pipeline</sub> |
+| <sub>`RunId`</sub> | <sub>Unique identifier for the pipeline execution</sub> |
+| <sub>`Predecessors`</sub> | <sub>Links to any preceding pipeline runs</sub> |
+| <sub>`Parameters`</sub> | <sub>Input parameters for the pipeline execution</sub> |
+| <sub>`SystemParameters`</sub> | <sub>System-defined parameters for execution</sub> |
+| <sub>`Type`</sub> | <sub>Log table type, which is `ADFSandboxPipelineRun`</sub> |
+| <sub>`_ResourceId`</sub> | <sub>Normalized Azure resource ID</sub> |
+```
 
 ---
 
