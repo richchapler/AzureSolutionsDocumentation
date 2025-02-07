@@ -4,19 +4,26 @@
 
 ## Table of Contents  
 
+## Table of Contents  
+
 - [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
   - [Visual Studio Code](#visual-studio-code)  
   - [Python](#python)  
-  - [Python Virtual Environment](#python-virtual-environment)  
+    - [Python Virtual Environment](#python-virtual-environment)  
   - [Jupyter](#jupyter)  
+  - [Notebook](#notebook)  
+    - [Environment Variables](#environment-variables)  
+    - [Dependencies](#dependencies)  
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
   - [Low Code](#low-code)  
     - [Extract text from an image](#extract-text-from-an-image)  
     - [Review the results](#review-the-results)  
   - [Pro Code](#pro-code)  
-    - [Environment Variables](#environment-variables)  
-    - [Dependencies](#dependencies)  
     - [Analyze Image](#analyze-image)  
+- [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis)  
+  - [Low Code](#low-code-1)  
+  - [Pro Code](#pro-code-1)  
+    - [Analyze Image (Spatial Analysis)](#analyze-image-spatial-analysis)  
 
 ## Exercise 1: Prepare Environment
 
@@ -56,7 +63,7 @@ Python 3.13.1
 
 ---
 
-### Python Virtual Environment
+#### Python Virtual Environment
 
 Open Visual Studio Code and click View > Terminal to open the PowerShell terminal.
 
@@ -119,60 +126,11 @@ Select the "Recommended" interpreter.
 
 ---
 
-## Exercise 2: Optical Character Recognition (OCR)  
+### Notebook
 
-This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. You will:  
-- Use Vision Studio to analyze images with OCR  
-- Use Jupyter Notebooks in Visual Studio Code for interactive coding  
-- Analyze images using Azure AI Vision OCR via API  
-- Retrieve text and confidence scores  
+In Visual Studio Code, click "File" >> "New File", then search for and select "Jupyter Notebook". Save the file as `ocr.ipynb`.  
 
-### Low Code  
-
-_Note: This documentation assumes that [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) is ready for use_
-
-Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.  
-
-<img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />  
-
-This section covers:  
-
-- Optical Character Recognition (OCR) – Extract text from images, including handwriting and printed text  
-- Spatial Analysis – Detect people, movement, and zones in real-time video  
-- Face – Detect and analyze faces, including emotions and age estimation  
-- Image Analysis  
-  - Object Detection – Identify objects and return bounding boxes  
-  - Caption Images – Generate descriptions of images in natural language  
-
-**Note: On hold while support works through Vision Studio UI issues**  
-
-<img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />  
-
-Select Optical Character Recognition (OCR) and then click "Extract text from images".  
-
-<img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />  
-
-#### Extract text from an image  
-
-1. Click "Try OCR"  
-2. Upload an image containing printed or handwritten text  
-3. Click "Analyze"  
-
-#### Review the results  
-
-After processing, Vision Studio will display:  
-
-- Extracted text  
-- Confidence scores  
-- JSON output (expand to view full response)  
-
----
-
-### Pro Code  
-
-Click "File" >> "New File", then search for and select "Jupyter Notebook". Save the file as `ocr.ipynb`.  
-
-### Environment Variables
+#### Environment Variables
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -241,7 +199,7 @@ Execute the code cell.
 
 ---
 
-### Dependencies  
+#### Dependencies  
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:  
 
@@ -281,13 +239,62 @@ Execute the code cell.
 
 ---
 
-### **Analyze Image**  
+## Exercise 2: Optical Character Recognition (OCR)  
+
+This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. You will:  
+- Use Vision Studio to analyze images with OCR  
+- Use Jupyter Notebooks in Visual Studio Code for interactive coding  
+- Analyze images using Azure AI Vision OCR via API  
+- Retrieve text and confidence scores  
+
+### Low Code  
+
+_Note: This documentation assumes that [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) is ready for use_
+
+Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.  
+
+<img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />  
+
+This section covers:  
+
+- Optical Character Recognition (OCR) – Extract text from images, including handwriting and printed text  
+- Spatial Analysis – Detect people, movement, and zones in real-time video  
+- Face – Detect and analyze faces, including emotions and age estimation  
+- Image Analysis  
+  - Object Detection – Identify objects and return bounding boxes  
+  - Caption Images – Generate descriptions of images in natural language  
+
+**Note: On hold while support works through Vision Studio UI issues**  
+
+<img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />  
+
+Select Optical Character Recognition (OCR) and then click "Extract text from images".  
+
+<img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />  
+
+#### Extract text from an image  
+
+1. Click "Try OCR"  
+2. Upload an image containing printed or handwritten text  
+3. Click "Analyze"  
+
+#### Review the results  
+
+After processing, Vision Studio will display:  
+
+- Extracted text  
+- Confidence scores  
+- JSON output (expand to view full response)  
+
+---
+
+### Pro Code  
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
-## Analyze Image 
-Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF).
+## Exercise 2: Optical Character Recognition (OCR) 
+Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF)
 ```  
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
@@ -357,4 +364,52 @@ _Note: JSON formatted and abbreviated for convenience_
   "modelVersion": "2023-02-01-preview",
   "metadata": {"width": 554, "height": 1373}
 }
+```
+
+---
+
+## Exercise 3: Spatial Analysis  
+
+This section demonstrates how to use Azure AI Vision Spatial Analysis to detect people and movement in an image.
+
+### Low Code
+
+Lorem Ipsum
+
+## ProCode
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:  
+
+```markdown
+## Exercise 3: Spatial Analysis
+Use Spatial Analysis to detect people and movement in an image.
+```
+
+Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
+
+Click "+ Code" and paste the following code into the resulting cell:  
+
+```python
+import os
+import requests
+
+def perform_spatial_analysis(image_path):
+    with open(image_path, "rb") as image_file:
+        image_data = image_file.read()
+
+    headers = {
+        "Ocp-Apim-Subscription-Key": API_KEY,
+        "Content-Type": "application/octet-stream"
+    }
+
+    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=people"
+    response = requests.post(url, headers=headers, data=image_data)
+    return response
+
+if os.path.isfile(IMAGE_PATH):
+    response = perform_spatial_analysis(IMAGE_PATH)
+    print(response.json())
+```
+
+Execute the code cell.  
 ```
