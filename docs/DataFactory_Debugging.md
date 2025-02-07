@@ -748,34 +748,34 @@ AzureDiagnostics
 
 ---
 
-### Diagnostic Setting >> Log Categories
+### Diagnostic Setting: Log Categories
 
-| Service  | Category | Description |
+| <sub>Service</sub>  | <sub>Category</sub> | <sub>Description</sub> |
 |----------|----------|-------------|
-| Data Factory | `allLogs` | Choose to send all types of logs (e.g., pipeline runs, trigger runs, activity runs, and more). |
-| Data Factory | `Pipeline activity runs log` | Captures details about the execution of activities within a pipeline. |
-| Data Factory | `Pipeline runs log` | Records information about each pipeline run, including start time, end time, and status. |
-| Data Factory | `Trigger runs log` | Captures information about trigger runs that fired to start a pipeline. |
-| Data Factory | `Sandbox Pipeline runs log` | Specialized log capturing information about pipeline runs in a sandbox environment. |
-| Data Factory | `Sandbox Activity runs log` | Specialized log capturing information about activity runs in a sandbox environment. |
-| Data Factory | `SSIS package event messages` | Captures event messages from SQL Server Integration Services (SSIS) package execution. |
-| Data Factory | `SSIS package executable statistics` | Captures detailed statistical data about SSIS package execution. |
-| Data Factory | `SSIS package event message context` | Captures context information about SSIS package event messages. |
-| Data Factory | `SSIS package execution component phases` | Records execution phases of SSIS package components. |
-| Data Factory | `SSIS package execution data statistics` | Captures data statistics from SSIS package execution. |
-| Data Factory | `SSIS integration runtime logs` | Logs information about the runtime environment for SSIS packages. |
-| Data Factory | `Airflow task execution logs` | Captures execution details for Apache Airflow workflow tasks. |
-| Data Factory | `Airflow worker logs` | Logs operation details of Apache Airflow workers. |
-| Data Factory | `Airflow dag processing logs` | Captures information about the processing of Directed Acyclic Graphs (DAGs) in Airflow. |
-| Data Factory | `Airflow scheduler logs` | Logs scheduler operations for Apache Airflow. |
-| Data Factory | `Airflow web logs` | Logs operations for the Apache Airflow web interface. |
-| Synapse | `Synapse RBAC Operations` | Logs Synapse role-based access control (RBAC) operations. |
-| Synapse | `Synapse Gateway API Requests` | Captures API request logs for Synapse Gateway. |
-| Synapse | `Built-in SQL Pool Requests Ended` | Logs requests that have completed in the built-in SQL pool. |
-| Synapse | `Integration Pipeline Runs` | Logs details of pipeline executions inside Synapse. |
-| Synapse | `Integration Activity Runs` | Captures information about activities executed in Synapse pipelines. |
-| Synapse | `Integration Trigger Runs` | Logs details about triggers that fired to start Synapse pipelines. |
-| Synapse | `Synapse Link Event` | Captures logs related to Synapse Link operations. |
+| <sub>Data Factory</sub> | <sub>`allLogs`</sub> | <sub>Choose to send all types of logs (e.g., pipeline runs, trigger runs, activity runs, and more).</sub> |
+| <sub>Data Factory</sub> | <sub>`Pipeline activity runs log`</sub> | <sub>Captures details about the execution of activities within a pipeline.</sub> |
+| <sub>Data Factory</sub> | <sub>`Pipeline runs log`</sub> | <sub>Records information about each pipeline run, including start time, end time, and status.</sub> |
+| <sub>Data Factory</sub> | <sub>`Trigger runs log`</sub> | <sub>Captures information about trigger runs that fired to start a pipeline.</sub> |
+| <sub>Data Factory</sub> | <sub>`Sandbox Pipeline runs log`</sub> | <sub>Specialized log capturing information about pipeline runs in a sandbox environment.</sub> |
+| <sub>Data Factory</sub> | <sub>`Sandbox Activity runs log`</sub> | <sub>Specialized log capturing information about activity runs in a sandbox environment.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package event messages`</sub> | <sub>Captures event messages from SQL Server Integration Services (SSIS) package execution.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package executable statistics`</sub> | <sub>Captures detailed statistical data about SSIS package execution.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package event message context`</sub> | <sub>Captures context information about SSIS package event messages.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package execution component phases`</sub> | <sub>Records execution phases of SSIS package components.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package execution data statistics`</sub> | <sub>Captures data statistics from SSIS package execution.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS integration runtime logs`</sub> | <sub>Logs information about the runtime environment for SSIS packages.</sub> |
+| <sub>Data Factory</sub> | <sub>`Airflow task execution logs`</sub> | <sub>Captures execution details for Apache Airflow workflow tasks.</sub> |
+| <sub>Data Factory</sub> | <sub>`Airflow worker logs`</sub> | <sub>Logs operation details of Apache Airflow workers.</sub> |
+| <sub>Data Factory</sub> | <sub>`Airflow dag processing logs`</sub> | <sub>Captures information about the processing of Directed Acyclic Graphs (DAGs) in Airflow.</sub> |
+| <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>Logs scheduler operations for Apache Airflow.</sub> |
+| <sub>Data Factory</sub> | <sub>`Airflow web logs`</sub> | <sub>Logs operations for the Apache Airflow web interface.</sub> |
+| <sub>Synapse</sub> | <sub>`Synapse RBAC Operations`</sub> | <sub>Logs Synapse role-based access control (RBAC) operations.</sub> |
+| <sub>Synapse</sub> | <sub>`Synapse Gateway API Requests`</sub> | <sub>Captures API request logs for Synapse Gateway.</sub> |
+| <sub>Synapse</sub> | <sub>`Built-in SQL Pool Requests Ended`</sub> | <sub>Logs requests that have completed in the built-in SQL pool.</sub> |
+| <sub>Synapse</sub> | <sub>`Integration Pipeline Runs`</sub> | <sub>Logs details of pipeline executions inside Synapse.</sub> |
+| <sub>Synapse</sub> | <sub>`Integration Activity Runs`</sub> | <sub>Captures information about activities executed in Synapse pipelines.</sub> |
+| <sub>Synapse</sub> | <sub>`Integration Trigger Runs`</sub> | <sub>Logs details about triggers that fired to start Synapse pipelines.</sub> |
+| <sub>Synapse</sub> | <sub>`Synapse Link Event`</sub> | <sub>Captures logs related to Synapse Link operations.</sub> |
 
 ---
 
