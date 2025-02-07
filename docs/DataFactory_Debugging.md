@@ -2,9 +2,6 @@
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/ead90204-81af-4428-a47c-803cae65a214" width="1000" />
 
-## Use Case
-* "We need to understand all of the ways that we can debug our Data Factory pipelines, data flows, etc."
-
 ## Studio
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/56315a73-0864-4319-a568-63bc84a01b40" width="800" title="Snipped January 21, 2025" />
@@ -375,6 +372,18 @@ Cluster failure causes include:
 - Sort a high-cardinality column (like `UUID`) with no partitioning
 - Use multiple layers of transformations in a single Data Flow
 
+
+
+
+
+
+
+
+
+
+
+
+
 #### I/O bottlenecks
 - Store data in single-file mode in Azure Blob Storage
 - Write to a low-throughput database like a small SKU SQL DB
@@ -737,27 +746,38 @@ AzureDiagnostics
 | Total entities count | Total number of entities. |  
 | Total factory size (GB unit) | Total size of the factory in GB. |  
 
+---
+
 ### Diagnostic Setting >> Log Categories
 
-| Category | Description |  
-| --- | --- |  
-| allLogs | Choose to send all types of logs {e.g., pipeline runs, trigger runs, activity runs, and more} |  
-| Pipeline activity runs log | This log captures details about the execution of activities within a pipeline. |  
-| Pipeline runs log | This log records information about each pipeline run, including its start time, end time, and status. |  
-| Trigger runs log | This log captures information about trigger runs, which are instances where a trigger has fired to start a pipeline. |  
-| Sandbox Pipeline runs log | This is a specialized log for capturing information about pipeline runs in a sandbox environment. |  
-| Sandbox Activity runs log | This is a specialized log for capturing information about activity runs in a sandbox environment. |  
-| SSIS package event messages | This log captures event messages from the execution of SQL Server Integration Services (SSIS) packages. |  
-| SSIS package executable statistics | This log captures detailed statistical data about the execution of SSIS packages. |  
-| SSIS package event message context | This log captures context information about event messages during the execution of SSIS packages. |  
-| SSIS package execution component phases | This log records information about the different phases of execution for components within an SSIS package. |  
-| SSIS package execution data statistics | This log captures data statistics from the execution of SSIS packages. |  
-| SSIS integration runtime logs | This log records information about the runtime environment for SSIS packages. |  
-| Airflow task execution logs | This log captures details about the execution of tasks within an Apache Airflow workflow. |  
-| Airflow worker logs | This log records information about the operation of Apache Airflow workers. |  
-| Airflow dag processing logs | This log captures information about the processing of Directed Acyclic Graphs (DAGs), which are the workflows defined in Apache Airflow. |  
-| Airflow scheduler logs | This log records information about the operation of the Apache Airflow scheduler. |  
-| Airflow web logs | This log captures information about the operation of the Apache Airflow web interface. | 
+| Service  | Category | Description |
+|----------|----------|-------------|
+| Data Factory | `allLogs` | Choose to send all types of logs (e.g., pipeline runs, trigger runs, activity runs, and more). |
+| Data Factory | `Pipeline activity runs log` | Captures details about the execution of activities within a pipeline. |
+| Data Factory | `Pipeline runs log` | Records information about each pipeline run, including start time, end time, and status. |
+| Data Factory | `Trigger runs log` | Captures information about trigger runs that fired to start a pipeline. |
+| Data Factory | `Sandbox Pipeline runs log` | Specialized log capturing information about pipeline runs in a sandbox environment. |
+| Data Factory | `Sandbox Activity runs log` | Specialized log capturing information about activity runs in a sandbox environment. |
+| Data Factory | `SSIS package event messages` | Captures event messages from SQL Server Integration Services (SSIS) package execution. |
+| Data Factory | `SSIS package executable statistics` | Captures detailed statistical data about SSIS package execution. |
+| Data Factory | `SSIS package event message context` | Captures context information about SSIS package event messages. |
+| Data Factory | `SSIS package execution component phases` | Records execution phases of SSIS package components. |
+| Data Factory | `SSIS package execution data statistics` | Captures data statistics from SSIS package execution. |
+| Data Factory | `SSIS integration runtime logs` | Logs information about the runtime environment for SSIS packages. |
+| Data Factory | `Airflow task execution logs` | Captures execution details for Apache Airflow workflow tasks. |
+| Data Factory | `Airflow worker logs` | Logs operation details of Apache Airflow workers. |
+| Data Factory | `Airflow dag processing logs` | Captures information about the processing of Directed Acyclic Graphs (DAGs) in Airflow. |
+| Data Factory | `Airflow scheduler logs` | Logs scheduler operations for Apache Airflow. |
+| Data Factory | `Airflow web logs` | Logs operations for the Apache Airflow web interface. |
+| Synapse | `Synapse RBAC Operations` | Logs Synapse role-based access control (RBAC) operations. |
+| Synapse | `Synapse Gateway API Requests` | Captures API request logs for Synapse Gateway. |
+| Synapse | `Built-in SQL Pool Requests Ended` | Logs requests that have completed in the built-in SQL pool. |
+| Synapse | `Integration Pipeline Runs` | Logs details of pipeline executions inside Synapse. |
+| Synapse | `Integration Activity Runs` | Captures information about activities executed in Synapse pipelines. |
+| Synapse | `Integration Trigger Runs` | Logs details about triggers that fired to start Synapse pipelines. |
+| Synapse | `Synapse Link Event` | Captures logs related to Synapse Link operations. |
+
+---
 
 ### Diagnostic Setting >> Destinations
 
