@@ -4,8 +4,6 @@
 
 ## Table of Contents  
 
-## Table of Contents  
-
 - [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
   - [Visual Studio Code](#visual-studio-code)  
   - [Python](#python)  
