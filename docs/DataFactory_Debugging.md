@@ -777,7 +777,7 @@ AzureDiagnostics
 
 ### Tables
 
-| <sub>Service</sub> | <sub>Category</sub> | <sub>Log Table</sub> | <sub>Description</sub> |
+| <sub>Service</sub> | <sub>Category</sub> | <sub>Table</sub> | <sub>Description</sub> |
 :----- | :----- | :----- | :-----
 | <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>`ADFAirflowSchedulerLogs`</sub> | <sub>Logs scheduler operations for Apache Airflow.</sub> |
 | <sub>Data Factory</sub> | <sub>`Pipeline activity runs log`</sub> | <sub>`ADFActivityRun`</sub> | <sub>Logs activity executions within pipelines (non-debug).</sub> |
