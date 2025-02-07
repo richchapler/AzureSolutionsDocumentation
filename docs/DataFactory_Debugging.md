@@ -750,46 +750,50 @@ AzureDiagnostics
 
 ### Logs
 
+### Logs
+
 #### Category Groups
 
 | <sub>Category Group</sub> | <sub>Description</sub> | <sub>Data Factory</sub> | <sub>Synapse</sub> |
-:----- | :----- | :----- | :-----
-| <sub>`audit`</sub> | <sub>Logs security and access control events, including role assignments, security audits, and authentication failures</sub> | ❌ | ✅ |
+|-----------------|-----------------------------------------------------------------|:-----:|:-----:|
 | <sub>`allLogs`</sub> | <sub>Logs all available events, including audit logs and operational logs (e.g., pipeline runs, activity execution, SQL requests, Spark metrics)</sub> | ✅ | ✅ |
+| <sub>`audit`</sub> | <sub>Logs security and access control events, including role assignments, security audits, and authentication failures</sub> | ❌ | ✅ |
 
 #### Categories
 
-| <sub>Service</sub>  | <sub>Category</sub> | <sub>Description</sub> | <sub>Included in `audit`</sub> | <sub>Included in `allLogs`</sub> |
-:----- | :----- | :----- | :----- | :-----
-| <sub>Data Factory</sub> | <sub>`allLogs`</sub> | <sub>Choose to send all types of logs (e.g., pipeline runs, trigger runs, activity runs, and more)</sub> | ❌ | ✅ |
+| <sub>Service</sub> | <sub>Category</sub> | <sub>Description</sub> | <sub>Included in `audit`</sub> | <sub>Included in `allLogs`</sub> |
+|-------------------|----------------------|-----------------------------------------------------------|:-----:|:-----:|
+| <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>Logs scheduler operations for Apache Airflow</sub> | ❌ | ✅ |
 | <sub>Data Factory</sub> | <sub>`Pipeline activity runs log`</sub> | <sub>Captures details about the execution of activities within a pipeline</sub> | ❌ | ✅ |
 | <sub>Data Factory</sub> | <sub>`Pipeline runs log`</sub> | <sub>Records information about each pipeline run, including start time, end time, and status</sub> | ❌ | ✅ |
-| <sub>Data Factory</sub> | <sub>`Trigger runs log`</sub> | <sub>Captures information about trigger runs that fired to start a pipeline</sub> | ❌ | ✅ |
 | <sub>Data Factory</sub> | <sub>`SSIS package execution data statistics`</sub> | <sub>Captures data statistics from SSIS package execution</sub> | ❌ | ✅ |
-| <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>Logs scheduler operations for Apache Airflow</sub> | ❌ | ✅ |
-| <sub>Synapse</sub> | <sub>`Synapse RBAC Operations`</sub> | <sub>Logs Synapse role-based access control (RBAC) operations</sub> | ✅ | ✅ |
-| <sub>Synapse</sub> | <sub>`Synapse Gateway API Requests`</sub> | <sub>Captures API request logs for Synapse Gateway</sub> | ❌ | ✅ |
-| <sub>Synapse</sub> | <sub>`SQL Security Audit Event`</sub> | <sub>Captures security-related SQL events (e.g., authentication failures, permission changes)</sub> | ✅ | ✅ |
+| <sub>Data Factory</sub> | <sub>`Trigger runs log`</sub> | <sub>Captures information about trigger runs that fired to start a pipeline</sub> | ❌ | ✅ |
 | <sub>Synapse</sub> | <sub>`Built-in SQL Pool Requests Ended`</sub> | <sub>Logs requests that have completed in the built-in SQL pool</sub> | ❌ | ✅ |
-| <sub>Synapse</sub> | <sub>`Integration Pipeline Runs`</sub> | <sub>Logs details of pipeline executions inside Synapse</sub> | ❌ | ✅ |
 | <sub>Synapse</sub> | <sub>`Integration Activity Runs`</sub> | <sub>Captures information about activities executed in Synapse pipelines</sub> | ❌ | ✅ |
+| <sub>Synapse</sub> | <sub>`Integration Pipeline Runs`</sub> | <sub>Logs details of pipeline executions inside Synapse</sub> | ❌ | ✅ |
 | <sub>Synapse</sub> | <sub>`Integration Trigger Runs`</sub> | <sub>Logs details about triggers that fired to start Synapse pipelines</sub> | ❌ | ✅ |
+| <sub>Synapse</sub> | <sub>`SQL Security Audit Event`</sub> | <sub>Captures security-related SQL events (e.g., authentication failures, permission changes)</sub> | ✅ | ✅ |
+| <sub>Synapse</sub> | <sub>`Synapse Gateway API Requests`</sub> | <sub>Captures API request logs for Synapse Gateway</sub> | ❌ | ✅ |
 | <sub>Synapse</sub> | <sub>`Synapse Link Event`</sub> | <sub>Captures logs related to Synapse Link operations</sub> | ❌ | ✅ |
+| <sub>Synapse</sub> | <sub>`Synapse RBAC Operations`</sub> | <sub>Logs Synapse role-based access control (RBAC) operations</sub> | ✅ | ✅ |
 
 ### Tables
 
-| <sub>Service</sub> | <sub>Category</sub> | <sub>Table</sub> | <sub>Description</sub> |
-|----------|----------------|----------------|----------------|
+| <sub>Service</sub> | <sub>Category</sub> | <sub>Log Table</sub> | <sub>Description</sub> |
+|----------|----------------------|----------------------|------------------------|
+| <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>`ADFAirflowSchedulerLogs`</sub> | <sub>Logs scheduler operations for Apache Airflow.</sub> |
 | <sub>Data Factory</sub> | <sub>`Pipeline activity runs log`</sub> | <sub>`ADFActivityRun`</sub> | <sub>Logs activity executions within pipelines (non-debug).</sub> |
 | <sub>Data Factory</sub> | <sub>`Pipeline runs log`</sub> | <sub>`ADFPipelineRun`</sub> | <sub>Logs triggered pipeline executions (non-debug).</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package execution data statistics`</sub> | <sub>`ADFSSISPackageExecutionDataStatistics`</sub> | <sub>Logs data statistics from SSIS package executions.</sub> |
 | <sub>Data Factory</sub> | <sub>`Trigger runs log`</sub> | <sub>`ADFTriggerRun`</sub> | <sub>Logs triggers that fired pipeline executions.</sub> |
-| <sub>Data Factory</sub> | <sub>`Sandbox Activity runs log`</sub> | <sub>`ADFSandboxActivityRun`</sub> | <sub>Logs debug runs in Data Factory.</sub> |
-| <sub>Synapse</sub> | <sub>`Integration Pipeline Runs`</sub> | <sub>`IntegrationPipelineRuns`</sub> | <sub>Logs triggered pipeline executions in Synapse.</sub> |
+| <sub>Synapse</sub> | <sub>`Built-in SQL Pool Requests Ended`</sub> | <sub>`SynapseBuiltinSqlPoolRequestsEnded`</sub> | <sub>Logs completed requests in the built-in SQL pool.</sub> |
 | <sub>Synapse</sub> | <sub>`Integration Activity Runs`</sub> | <sub>`IntegrationActivityRuns`</sub> | <sub>Logs activity executions within pipelines in Synapse.</sub> |
+| <sub>Synapse</sub> | <sub>`Integration Pipeline Runs`</sub> | <sub>`IntegrationPipelineRuns`</sub> | <sub>Logs triggered pipeline executions in Synapse.</sub> |
 | <sub>Synapse</sub> | <sub>`Integration Trigger Runs`</sub> | <sub>`IntegrationTriggerRuns`</sub> | <sub>Logs triggers that fired pipeline executions in Synapse.</sub> |
+| <sub>Synapse</sub> | <sub>`SQL Security Audit Event`</sub> | <sub>`SQLSecurityAuditEvent`</sub> | <sub>Logs SQL authentication failures and permission changes.</sub> |
 | <sub>Synapse</sub> | <sub>`Synapse Gateway API Requests`</sub> | <sub>`SynapseGatewayApiRequests`</sub> | <sub>Logs API requests for Synapse Gateway.</sub> |
+| <sub>Synapse</sub> | <sub>`Synapse Link Event`</sub> | <sub>`SynapseLinkEvent`</sub> | <sub>Logs events related to Synapse Link operations.</sub> |
 | <sub>Synapse</sub> | <sub>`Synapse RBAC Operations`</sub> | <sub>`SynapseRBACOperations`</sub> | <sub>Logs role-based access control (RBAC) changes.</sub> |
-| <sub>Synapse</sub> | <sub>`SQL Security Audit Event`</sub> | <sub>`SQLSecurityAuditEvent`</sub> | <sub>Logs SQL authentication failures, permission changes.</sub> |
 
 ---
 
