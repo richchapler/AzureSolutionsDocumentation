@@ -782,16 +782,24 @@ AzureDiagnostics
 | <sub>Data Factory</sub> | <sub>`Airflow scheduler logs`</sub> | <sub>`ADFAirflowSchedulerLogs`</sub> | <sub>Logs scheduler operations for Apache Airflow.</sub> |
 | <sub>Data Factory</sub> | <sub>`Pipeline activity runs log`</sub> | <sub>`ADFActivityRun`</sub> | <sub>Logs activity executions within pipelines (non-debug).</sub> |
 | <sub>Data Factory</sub> | <sub>`Pipeline runs log`</sub> | <sub>`ADFPipelineRun`</sub> | <sub>Logs triggered pipeline executions (non-debug).</sub> |
-| <sub>Data Factory</sub> | <sub>`SSIS package execution data statistics`</sub> | <sub>`ADFSSISPackageExecutionDataStatistics`</sub> | <sub>Logs data statistics from SSIS package executions.</sub> |
 | <sub>Data Factory</sub> | <sub>`Trigger runs log`</sub> | <sub>`ADFTriggerRun`</sub> | <sub>Logs triggers that fired pipeline executions.</sub> |
-| <sub>Synapse</sub> | <sub>`Built-in SQL Pool Requests Ended`</sub> | <sub>`SynapseBuiltinSqlPoolRequestsEnded`</sub> | <sub>Logs completed requests in the built-in SQL pool.</sub> |
-| <sub>Synapse</sub> | <sub>`Integration Activity Runs`</sub> | <sub>`IntegrationActivityRuns`</sub> | <sub>Logs activity executions within pipelines in Synapse.</sub> |
+| <sub>Data Factory</sub> | <sub>`Sandbox activity runs log`</sub> | <sub>`ADFSandboxActivityRun`</sub> | <sub>Logs debug activity runs in Data Factory.</sub> |
+| <sub>Data Factory</sub> | <sub>`Sandbox pipeline runs log`</sub> | <sub>`ADFSandboxPipelineRun`</sub> | <sub>Logs debug pipeline runs in Data Factory.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package event messages`</sub> | <sub>`ADFSSISPackageEventMessages`</sub> | <sub>Logs events from SSIS package executions.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package executable statistics`</sub> | <sub>`ADFSSISPackageExecutableStatistics`</sub> | <sub>Logs executable statistics from SSIS packages.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package event message context`</sub> | <sub>`ADFSSISPackageEventMessageContext`</sub> | <sub>Provides context for SSIS package event messages.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package execution component phases`</sub> | <sub>`ADFSSISPackageExecutionComponentPhases`</sub> | <sub>Logs component phase details of SSIS package executions.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS package execution data statistics`</sub> | <sub>`ADFSSISPackageExecutionDataStatistics`</sub> | <sub>Logs data statistics from SSIS package executions.</sub> |
+| <sub>Data Factory</sub> | <sub>`SSIS integration runtime logs`</sub> | <sub>`ADFSSISIntegrationRuntimeLogs`</sub> | <sub>Logs related to SSIS integration runtime operations.</sub> |
 | <sub>Synapse</sub> | <sub>`Integration Pipeline Runs`</sub> | <sub>`IntegrationPipelineRuns`</sub> | <sub>Logs triggered pipeline executions in Synapse.</sub> |
+| <sub>Synapse</sub> | <sub>`Integration Activity Runs`</sub> | <sub>`IntegrationActivityRuns`</sub> | <sub>Logs activity executions within pipelines in Synapse.</sub> |
 | <sub>Synapse</sub> | <sub>`Integration Trigger Runs`</sub> | <sub>`IntegrationTriggerRuns`</sub> | <sub>Logs triggers that fired pipeline executions in Synapse.</sub> |
-| <sub>Synapse</sub> | <sub>`SQL Security Audit Event`</sub> | <sub>`SQLSecurityAuditEvent`</sub> | <sub>Logs SQL authentication failures and permission changes.</sub> |
 | <sub>Synapse</sub> | <sub>`Synapse Gateway API Requests`</sub> | <sub>`SynapseGatewayApiRequests`</sub> | <sub>Logs API requests for Synapse Gateway.</sub> |
-| <sub>Synapse</sub> | <sub>`Synapse Link Event`</sub> | <sub>`SynapseLinkEvent`</sub> | <sub>Logs events related to Synapse Link operations.</sub> |
 | <sub>Synapse</sub> | <sub>`Synapse RBAC Operations`</sub> | <sub>`SynapseRBACOperations`</sub> | <sub>Logs role-based access control (RBAC) changes.</sub> |
+| <sub>Synapse</sub> | <sub>`SQL Security Audit Event`</sub> | <sub>`SQLSecurityAuditEvent`</sub> | <sub>Logs SQL authentication failures and permission changes.</sub> |
+| <sub>Synapse</sub> | <sub>`Built-in SQL Pool Requests Ended`</sub> | <sub>`SynapseBuiltinSqlPoolRequestsEnded`</sub> | <sub>Logs completed requests in the built-in SQL pool.</sub> |
+| <sub>Synapse</sub> | <sub>`Synapse Link Event`</sub> | <sub>`SynapseLinkEvent`</sub> | <sub>Logs events related to Synapse Link operations.</sub> |
+| <sub>Synapse</sub> | <sub>`Apache Spark Applications`</sub> | <sub>`SynapseBigDataPoolApplicationsEnded`</sub> | <sub>Logs information about ended Apache Spark applications.</sub> |
 
 #### Data Factory | Logs | Table: `ADFSandboxPipelineRun`
 
