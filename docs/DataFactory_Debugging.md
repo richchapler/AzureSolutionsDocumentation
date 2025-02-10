@@ -360,220 +360,47 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 ## Analyzing Failures
 
-Learn how to troubleshoot failures, by: 1) simulating errors and 2) querying logs using Kusto Query Language (KQL)
+This section outlines practical failure scenarios and troubleshooting methods by simulating errors using simple, controlled changes—such as modifying resource names, disabling components, or removing permissions.
 
-### Example 1: Cluster Failures
+### 1. Cluster Failures
 
-Cluster failure causes include:
+Cluster failures typically occur when compute resources become unavailable. Instead of overloading the cluster, simulate failure with a simple incorrect configuration.
 
-#### High-memory and high-CPU computation
-- Use nested functions like `SHA2`, `CONCAT`, and `UPPER/LOWER` on large text columns
-- Perform `CROSS JOINs` between large tables
-- Sort a high-cardinality column (like `UUID`) with no partitioning
-- Use multiple layers of transformations in a single Data Flow
+#### **Simulating Failure**
+- Modify the Data Flow source to reference a **nonexistent table or file**.
+- Change the dataset's connection string to an **invalid database name**.
+- Set the **Integration Runtime** to a region where the service is not deployed.
 
-
-
-
-
-
-
-
-
-
-
-
-
-#### I/O bottlenecks
-- Store data in single-file mode in Azure Blob Storage
-- Write to a low-throughput database like a small SKU SQL DB
-- Write one row at a time to a database by disabling batching
-- Use a dataset from another region or an on-prem source with slow response times
-
-#### Overloading the cluster’s parallel processing
-- Trigger 10+ pipelines simultaneously, each performing heavy operations
-- Force unnecessary repartitioning by increasing data partitions to maximum
-- Reduce Data Flow core count to 8 but process millions of records
-
-#### Overwhelming the integration runtime
-- Start and stop the self-hosted integration runtime during execution
-- Set up linked services with long-running HTTP requests
-
-#### API rate limits and service restrictions
-- Create a loop inside a Data Flow that makes API calls to external services
-- Fetch huge JSON payloads from slow endpoints
-
-#### Simulate Failure
-
-##### Generate Sample Data
-Navigate to SQL and execute the following T-SQL to generate sample data records:
-
-```sql
-DROP TABLE IF EXISTS ClusterOverloader;
-CREATE TABLE ClusterOverloader (
-    CustomerID BIGINT IDENTITY(1,1) PRIMARY KEY,
-    HighCardinalityString VARCHAR(255),
-    WideStringColumn VARCHAR(4000),
-    NumericalLoadFactor DECIMAL(18,5),
-    DateHeavyUsage DATETIME,
-    RandomBinaryBlob VARBINARY(MAX)
-);
-
-SET NOCOUNT ON;
-DECLARE @BatchSize INT = 100000; -- Rows per batch
-DECLARE @TotalRows INT = 10000000;
-DECLARE @Counter INT = 0;
-
-WHILE @Counter < @TotalRows
-BEGIN
-    INSERT INTO ClusterOverloader (HighCardinalityString, WideStringColumn, NumericalLoadFactor, DateHeavyUsage, RandomBinaryBlob)
-    SELECT TOP (@BatchSize)
-        LEFT(NEWID(), 255) AS HighCardinalityString, -- Unique high-cardinality string
-        REPLICATE(CHAR(65 + ABS(CHECKSUM(NEWID())) % 26), 4000) AS WideStringColumn, -- Large text field
-        RAND() * 100000 AS NumericalLoadFactor, -- Random decimal value
-        DATEADD(SECOND, ABS(CHECKSUM(NEWID())) % 31536000, '2020-01-01') AS DateHeavyUsage, -- Random date within 1 year
-        CAST(NEWID() AS VARBINARY(MAX)) AS RandomBinaryBlob -- Random binary data
-    FROM 
-        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS A(n)) AS A
-    CROSS JOIN 
-        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS B(n)) AS B
-    CROSS JOIN
-        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS C(n)) AS C
-    CROSS JOIN
-        (SELECT 1 AS n FROM (VALUES (1),(1),(1),(1),(1),(1),(1),(1),(1),(1)) AS D(n)) AS D;
-
-    SET @Counter = @Counter + @BatchSize;
-    PRINT CONCAT('Inserted ', @Counter, ' rows...');
-END
-
-SELECT COUNT(*) FROM [dbo].[ClusterOverloader]
-```
-
-##### Add Data Flow
-Navigate to Data Factory Studio >> Author and create a new data flow.
-_Note: Start by toggling "Data flow debug" in order to enable live execution_
-
-Click `Add Source`.
-On the "Source Settings" tab, click "+ New" to create a new dataset pointed at the `LargeCustomer` table on SQL.
-On the "Projection" tab, click "Import projection".
-
-After configuring the Source dataset, click "+" and select "Derived Column" from the transformation list.
-On the "Derived column's settings" tab, add column `CustomerID_Hashed` with expression: `sha2(CustomerID, 512)`
-_Note: `sha2` function computes SHA-512 hash, which is computationally expensive_
-
-
-
-#### 5. Add a Sort Transformation
-- Click `+` and select `Sort`
-- Set sorting on a **string column** with no partitioning to force full cluster memory usage
-
-#### 6. Add an Aggregate Transformation
-- Click `+` and select `Aggregate`
-- Compute aggregates that require large-scale group-by operations:
-  - `COUNT(*)`
-  - `SUM(HighCardinalityColumn)`
-  - `AVG(LowCardinalityColumn)`
-
-#### 7. Set Sink to a Slow Destination
-- Add a `Sink` that writes the output to a slow-performing destination:
-  - `Azure Blob Storage (Single File Mode)` (forces cluster memory retention)
-  - `Azure SQL Database with bulk inserts disabled`
-- Ensure that **batching is turned off** in the sink settings
-
-#### 8. Execute in Debug Mode and Monitor Performance
-- Click `Debug` and monitor CPU and memory usage in the `Monitor` tab
-- If the pipeline runs for a prolonged time or fails due to **memory pressure**, the cluster is struggling
-
----
-
-#### **Method 2: Forcing Cluster Timeout or Resource Deallocation**
-If using a **Custom Integration Runtime**, you can force a cluster failure by stopping the associated VM.
-
-1. **Identify the Integration Runtime VM:**
-   - Navigate to **Azure Portal** >> **Virtual Machines**.
-   - Find the VM running your **Custom Integration Runtime**.
-
-2. **Simulate a Failure by Stopping the VM:**
-   - Open **PowerShell** and execute:
-     ```powershell
-     Stop-AzVM -Name "YourIntegrationRuntimeVM" -ResourceGroupName "YourResourceGroup" -Force
-     ```
-   - This will **immediately stop** the VM.
-
-3. **Trigger a Pipeline That Depends on the Integration Runtime:**
-   - Start a pipeline that relies on this integration runtime.
-   - Observe logs in the **Monitor** tab, looking for errors related to unavailable resources.
-
----
-
-#### **Method 3: Simulating Failure in Azure Synapse Integration Runtime**
-If using **Azure Synapse Integration Runtime**, you can create a failure scenario by pausing or scaling down the SQL pool.
-
-1. **Identify the Synapse Dedicated SQL Pool:**
-   - Navigate to **Azure Synapse Studio**.
-   - Go to **Manage** >> **SQL Pools**.
-
-2. **Pause the SQL Pool While Running a Query:**
-   - Start a Data Flow that loads data into a Synapse table.
-   - Open **Azure SQL Query Editor** and run:
-     ```sql
-     ALTER DATABASE [YourSynapseDB] SET PAUSED;
-     ```
-   - This forces an **immediate disconnection** from Synapse.
-
-3. **Observe Pipeline Failure:**
-   - Check the **Monitor** tab for logs indicating loss of connectivity.
-
----
-
-#### **Querying Logs for Cluster Failures**
-Use **Kusto Query Language (KQL)** in Azure Monitor Logs to track cluster-related failures.
-
+#### **Querying Logs**
 ```kql
 AzureDiagnostics
 | where Category == "ActivityRuns"
 | where Status == "Failed"
-| where ErrorMessage contains "Cluster is unavailable" 
-   or ErrorMessage contains "Compute resource is not available"
+| where ErrorMessage contains "Dataset does not exist" or ErrorMessage contains "Connection failed"
 | project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
 | order by TimeGenerated desc
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
 ### 2. Integration Runtime Failures
 
-#### Simulating Failure
-To simulate a failure in the integration runtime:
-- If using an **Azure Integration Runtime**, delete or disable the integration runtime before executing a pipeline that depends on it.
-- If using a **Self-hosted Integration Runtime**, stop the service on the machine running the integration runtime:
+Integration runtime failures occur when the compute resource used to process pipeline activities becomes unavailable.
+
+#### **Simulating Failure**
+- **Azure Integration Runtime**: Set the **linked service** to an **invalid integration runtime**.
+- **Self-Hosted Integration Runtime**: Stop the service on the machine:
   ```powershell
   Stop-Service -Name "DIAHostService"
   ```
-- Trigger the pipeline and observe the failure.
+- Modify the linked service to use an **incorrect authentication method**.
 
-#### Querying Logs
+#### **Querying Logs**
 ```kql
 AzureDiagnostics
-| where Category == "ActivityRuns" 
-| where ActivityType == "DataFlow" or ActivityType == "Copy"
+| where Category == "ActivityRuns"
 | where Status == "Failed"
-| where ErrorMessage contains "Integration runtime is not available"
+| where ErrorMessage contains "Integration runtime not found" or ErrorMessage contains "Authentication failed"
 | project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
 | order by TimeGenerated desc
 ```
@@ -582,16 +409,17 @@ AzureDiagnostics
 
 ### 3. Pipeline Activity Failures
 
-#### Simulating Failure
-To simulate an activity failure:
-- Modify a Copy Data activity to point to an invalid dataset (e.g., use a non-existent table).
-- Introduce an intentional error in a script-based activity such as a Stored Procedure or Web activity (e.g., call a non-existent stored procedure).
-- Add a script-based activity with an explicit failure:
-  ```sql
-  RAISERROR ('Intentional Failure', 16, 1);
-  ```
+Pipeline activities can fail due to invalid configurations or missing dependencies.
 
-#### Querying Logs
+#### **Simulating Failure**
+- In a **Copy Data** activity, change the destination dataset to a **nonexistent table**.
+- In a **Stored Procedure** activity, reference a **nonexistent stored procedure**:
+  ```sql
+  EXEC NonExistentProcedure
+  ```
+- In a **Web Activity**, set the API URL to an **invalid endpoint**.
+
+#### **Querying Logs**
 ```kql
 AzureDiagnostics
 | where Category == "PipelineRuns"
@@ -604,19 +432,19 @@ AzureDiagnostics
 
 ### 4. Permissions Failures in Linked Services
 
-#### Simulating Failure
-To simulate a permissions issue:
-- Modify the linked service authentication:
-  - For Azure SQL Database, use an incorrect **Managed Identity** or SQL user.
-  - For Blob Storage, remove **Storage Blob Data Reader** from the service principal.
-- Run the pipeline to trigger an authentication failure.
+Permissions issues often cause authentication failures when accessing external resources.
 
-#### Querying Logs
+#### **Simulating Failure**
+- Remove the **Storage Blob Data Reader** role for a managed identity accessing **Azure Blob Storage**.
+- Modify the **linked service authentication** to use an **incorrect database user**.
+- Disable **Azure SQL Database firewall rules**, blocking pipeline access.
+
+#### **Querying Logs**
 ```kql
 AzureDiagnostics
 | where Category == "ActivityRuns"
 | where Status == "Failed"
-| where ErrorMessage contains "Authentication" or ErrorMessage contains "Permission"
+| where ErrorMessage contains "Permission denied" or ErrorMessage contains "Authentication failed"
 | project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
 | order by TimeGenerated desc
 ```
@@ -625,20 +453,22 @@ AzureDiagnostics
 
 ### 5. Resource Failures
 
-#### Simulating Failure
-To simulate a resource failure:
-- For SQL Database, temporarily pause the database:
+Resource failures occur when a required service or storage account becomes unavailable.
+
+#### **Simulating Failure**
+- **Azure SQL Database**: Temporarily **disable the database**:
   ```sql
   ALTER DATABASE [DatabaseName] SET OFFLINE WITH ROLLBACK IMMEDIATE;
   ```
-- For Blob Storage, change the firewall settings to block access.
+- **Blob Storage**: Change the storage **account key** in the linked service to an **invalid value**.
+- **Key Vault**: Remove access permissions for **Data Factory**.
 
-#### Querying Logs
+#### **Querying Logs**
 ```kql
 AzureDiagnostics
 | where Category == "ActivityRuns"
 | where Status == "Failed"
-| where ErrorMessage contains "Database is unavailable" or ErrorMessage contains "Storage account not reachable"
+| where ErrorMessage contains "Resource not found" or ErrorMessage contains "Storage account unavailable"
 | project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
 | order by TimeGenerated desc
 ```
