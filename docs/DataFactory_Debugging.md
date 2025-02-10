@@ -398,7 +398,7 @@ Instead, we will simulate failure with simple incorrect configurations, such as 
 
 #### Simulate Failure
 
-To similulate cluster failure, click "Debug" on the pipeline, then immediately flip over to the dataflow and switch "Data flow debug" to off.
+To simulate cluster failure, click "Debug" on the pipeline, then immediately flip over to the dataflow and switch "Data flow debug" to off.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/caf0e349-8fa3-4a3e-aad2-ad0cf9e0e110" width="800" title="Snipped February 10, 2025" />
 
@@ -429,8 +429,9 @@ Navigate to Data Factory >> Logs >> New Query >> "KQL mode" (in the portal).
 ADFActivityRun
 | order by TimeGenerated desc
 | take 1
-| project TenantId, SourceSystem, TimeGenerated, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
-| project output = pack_all()
+| extend TimeGenerated_Pacific = TimeGenerated - 8h
+| project TenantId, SourceSystem, TimeGenerated, TimeGenerated_Pacific, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
+| project TimeGenerated_Pacific, Output = pack_all()
 ```
 
 _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) `output` logic included to output JSON rather than columnar data_
@@ -593,8 +594,9 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
 ADFSandboxActivityRun
 | order by TimeGenerated desc
 | take 1
-| project TenantId, SourceSystem, TimeGenerated, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
-| project output = pack_all()
+| extend TimeGenerated_Pacific = TimeGenerated - 8h
+| project TenantId, SourceSystem, TimeGenerated, TimeGenerated_Pacific, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
+| project TimeGenerated_Pacific, Output = todynamic(pack_all())
 ```
 
 ###### Results
