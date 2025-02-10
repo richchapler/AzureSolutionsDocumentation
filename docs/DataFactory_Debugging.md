@@ -414,6 +414,10 @@ Click the "Error" icon next to the "Failed" message in the Activity grid.
 
 The error message: `Internal Server Error: An error occurred while executing the data flow activity. Please try again later.` is underwhelming.
 
+"Debug" produces logs: `ADFSandboxActivityRun` and `ADFSandboxPipelineRun`.
+
+Repeat with "Trigger Now" to see logs: `ADFActivityRun` and `ADFPipelineRun`.
+
 #### Querying Logs
 ```kql
 AzureDiagnostics
