@@ -431,8 +431,7 @@ ADFActivityRun
 | order by TimeGenerated desc
 | take 1
 | project TenantId, SourceSystem, TimeGenerated, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
-| extend output = pack_all()
-| project output
+| project output = pack_all()
 ```
 
 _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) `output` logic included to output JSON rather than columnar data_
@@ -595,7 +594,7 @@ ADFSandboxActivityRun
 | order by TimeGenerated desc
 | take 1
 | project TenantId, SourceSystem, TimeGenerated, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
-| extend JsonOutput = pack_all()
+| project output = pack_all()
 ```
 
 ###### Results
