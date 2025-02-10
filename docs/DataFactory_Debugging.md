@@ -360,11 +360,17 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 ## Analyzing Failures
 
-### 1. Cluster Failures
+### Cluster Failures
 
 Clusters in Azure Data Factory fail when they become unavailable, overloaded, or misconfigured. However, getting a cluster to fail intentionally is very difficult.
 
 In the examples below, instead of attempting to overload the cluster, we will simulate failure with simple incorrect configurations, such as referencing nonexistent resources, using invalid connection strings, or misconfiguring integration runtimes.
+
+#### Base Configuration
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/76e6ff4d-3be6-469a-9b22-a927c17a7f20" width="800" title="Snipped February 10, 2025" />
+
+We will begin with an existing pipeline / dataflow configuration (or create a simple example).
 
 #### **Simulating Failure**
 - Modify the Data Flow source to reference a **nonexistent table or file**.
