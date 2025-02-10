@@ -360,24 +360,63 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 ## Analyzing Failures
 
-### Cluster Failures
-
-Clusters in Azure Data Factory fail when they become unavailable, overloaded, or misconfigured. However, getting a cluster to fail intentionally is very difficult.
-
-In the examples below, instead of attempting to overload the cluster, we will simulate failure with simple incorrect configurations, such as referencing nonexistent resources, using invalid connection strings, or misconfiguring integration runtimes.
-
-#### Base Configuration
+### Starter Configuration
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/76e6ff4d-3be6-469a-9b22-a927c17a7f20" width="800" title="Snipped February 10, 2025" />
 
-We will begin with an existing pipeline / dataflow configuration (or create a simple example).
+Begin with an existing pipeline / dataflow configuration. If an existing configuration is unavailable, you can create a simple example with the following items:
 
-#### **Simulating Failure**
-- Modify the Data Flow source to reference a **nonexistent table or file**.
-- Change the dataset's connection string to an **invalid database name**.
-- Set the **Integration Runtime** to a region where the service is not deployed.
+- Data Flow Name: `customer_sql_to_storage`  
+  - Reads from a source dataset (`{prefix}sqldatabase_customer`) pointing to table SalesLT.Customer in an Azure SQL Database.  
+  - Writes to a sink dataset (`{prefix}storagecontainer`) referencing a JSON file in an Azure Blob Storage container.
 
-#### **Querying Logs**
+- Pipeline Name: `customer_sql_to_storage`  
+  - Contains a single Execute Data Flow activity, also named `customer_sql_to_storage`.  
+  - The activity points to the data flow of the same name and uses 8 General cores (compute) with `traceLevel` set to Fine.
+
+- Source Dataset: `{prefix}sqldatabase_customer` (Type: AzureSqlTable)  
+  - References a linked service named `{prefix}sqldatabase` (Azure SQL DB).  
+  - Table properties specify SalesLT.Customer and columns like `CustomerID`, `FirstName`, `LastName`, etc.
+
+- Sink Dataset: `{prefix}storagecontainer` (Type: Json)  
+  - References a linked service named `{prefix}storage` (Azure Blob Storage).  
+  - Configured to write JSON files to a container named {prefix}storagecontainer.
+
+- Data Flow Script:  
+  - Declares the source output columns (`CustomerID`, `NameStyle`, `Title`, etc.).  
+  - Specifies `allowSchemaDrift` and `validateSchema` options.  
+  - Directly maps source data into the sink (no intermediate transformations).
+
+Run the starter configuration to confirm that is functional before we begin simulating failures.
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/df16c7ad-fcac-4aea-833e-7481d61b3d23" width="800" title="Snipped February 10, 2025" />
+
+### Cluster Failure
+
+Clusters fail when they become unavailable, overloaded, or are misconfigured.
+
+In the examples below, we will not try to overload the cluster (which is difficult because Azure is robust)
+Instead, we will simulate failure with simple incorrect configurations, such as referencing nonexistent resources, using invalid connection strings, or misconfiguring integration runtimes.
+
+#### Simulate Failure
+
+To similulate cluster failure, click "Debug" on the pipeline, then immediately flip over to the dataflow and switch "Data flow debug" to off.
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/caf0e349-8fa3-4a3e-aad2-ad0cf9e0e110" width="800" title="Snipped February 10, 2025" />
+
+Flip back to the pipeline and watch the debug run until it fails.
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/2bdefa42-fd5a-4f5d-a974-10dec7ba2a9c" width="800" title="Snipped February 10, 2025" />
+
+
+
+
+
+
+
+
+
+#### Querying Logs
 ```kql
 AzureDiagnostics
 | where Category == "ActivityRuns"
