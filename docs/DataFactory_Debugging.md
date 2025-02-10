@@ -360,11 +360,11 @@ _Note: Error details (when applicable) are captured in ADFActivityRuns, not in A
 
 ## Analyzing Failures
 
-This section outlines practical failure scenarios and troubleshooting methods by simulating errors using simple, controlled changes—such as modifying resource names, disabling components, or removing permissions.
-
 ### 1. Cluster Failures
 
-Cluster failures typically occur when compute resources become unavailable. Instead of overloading the cluster, simulate failure with a simple incorrect configuration.
+Clusters in Azure Data Factory fail when they become unavailable, overloaded, or misconfigured. However, getting a cluster to fail intentionally is very difficult.
+
+In the examples below, instead of attempting to overload the cluster, we will simulate failure with simple incorrect configurations, such as referencing nonexistent resources, using invalid connection strings, or misconfiguring integration runtimes.
 
 #### **Simulating Failure**
 - Modify the Data Flow source to reference a **nonexistent table or file**.
