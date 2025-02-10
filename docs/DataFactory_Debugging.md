@@ -691,12 +691,12 @@ AzureDiagnostics
 
 ### Diagnostic Setting >> Destinations
 
-| Destination | Description |  
-| --- | --- |  
-| Send to Log Analytics workspace | This option allows you to send the logs to a Log Analytics workspace. This is a cloud-based service for log data ingestion and storage. It provides real-time and historical analysis, visualizations, and insights for the data. |  
-| Archive to a storage account | This option allows you to archive the logs to a storage account. This is useful for long-term storage and for compliance purposes. The logs can be retrieved and analyzed at a later date if needed. |  
-| Stream to an event hub | This option allows you to stream the logs to an event hub. Event Hubs is a real-time data ingestion service that is capable of receiving and processing millions of events per second. You can use this option to integrate your logs with third-party services or custom analytics systems. |  
-| Send to partner solution | This option allows you to send the logs to a partner solution. Azure has a number of partner solutions that provide advanced analytics and visualization capabilities. This option requires you to have a subscription with the partner solution. |  
+| <sub>Destination</sub> | <sub>Description</sub> |  
+:----- | :-----
+| <sub>Send to Log Analytics workspace</sub> | <sub>This option allows you to send the logs to a Log Analytics workspace. This is a cloud-based service for log data ingestion and storage. It provides real-time and historical analysis, visualizations, and insights for the data.</sub> |  
+| <sub>Archive to a storage account</sub> | <sub>This option allows you to archive the logs to a storage account. This is useful for long-term storage and for compliance purposes. The logs can be retrieved and analyzed at a later date if needed.</sub> |  
+| <sub>Stream to an event hub</sub> | <sub>This option allows you to stream the logs to an event hub. Event Hubs is a real-time data ingestion service that is capable of receiving and processing millions of events per second. You can use this option to integrate your logs with third-party services or custom analytics systems.</sub> |  
+| <sub>Send to partner solution</sub> | <sub>This option allows you to send the logs to a partner solution. Azure has a number of partner solutions that provide advanced analytics and visualization capabilities. This option requires you to have a subscription with the partner solution.</sub> |  
 
 ### Alert Rules >> Signals
 
