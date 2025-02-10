@@ -418,15 +418,245 @@ The error message: `Internal Server Error: An error occurred while executing the
 
 Repeat with "Trigger Now" to see logs: `ADFActivityRun` and `ADFPipelineRun`.
 
-#### Querying Logs
+#### Resulting Logs
+
+Navigate to Data Factory >> Logs >> New Query >> "KQL mode" (in the portal).
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/16345a43-8bda-44d6-b824-bf57c91ac517" width="800" title="Snipped February 10, 2025" />
+
+##### `ADFActivityRun`
+
 ```kql
-AzureDiagnostics
-| where Category == "ActivityRuns"
-| where Status == "Failed"
-| where ErrorMessage contains "Dataset does not exist" or ErrorMessage contains "Connection failed"
-| project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
+ADFActivityRun
 | order by TimeGenerated desc
+| take 1
+| project TenantId, SourceSystem, TimeGenerated, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
+| extend output = pack_all()
+| project output
 ```
+
+_Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) `output` logic included to output JSON rather than columnar data_
+
+###### Results
+(manually pivoted for readability)
+
+```json
+{
+{
+  "TenantId": "696b4f93-a588-41cd-a945-76bf106b8cde",
+  "SourceSystem": "Azure",
+  "TimeGenerated": "2025-02-10T16:34:40.1810160Z",
+  "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/UBSAG/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/UBSAGDATAFACTORY",
+  "OperationName": "customer_sql_to_storage - Succeeded",
+  "Category": "ActivityRuns",
+  "CorrelationId": "04901bdc-f92f-46a7-98e6-2037581006a2",
+  "Level": "Informational",
+  "Location": "westus",
+  "Tags": {},
+  "Status": "Succeeded",
+  "UserProperties": {},
+  "Annotations": [],
+  "EventMessage": "",
+  "Start": "2025-02-10T16:31:34.0000000Z",
+  "End": "2025-02-10T16:34:40.0000000Z",
+  "Activity": {
+    "Name": "customer_sql_to_storage",
+    "RunId": "f3c4a3de-bc18-43dc-880b-b88679678118",
+    "Type": "ExecuteDataFlow",
+    "IterationCount": 1,
+    "LinkedServiceName": ""
+  },
+  "Pipeline": {
+    "Name": "customer_sql_to_storage",
+    "RunId": "04901bdc-f92f-46a7-98e6-2037581006a2"
+  },
+  "EffectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (West US)",
+  "Failure": {
+    "Type": "",
+    "ErrorCode": "",
+    "ErrorMessage": "",
+    "ErrorDetails": {
+      "errorCode": "",
+      "message": "",
+      "failureType": "",
+      "target": "customer_sql_to_storage",
+      "details": ""
+    }
+  },
+  "Input": {
+    "Dataflow": {
+      "ReferenceName": "customer_sql_to_storage",
+      "Type": "DataFlowReference",
+      "Parameters": {},
+      "DatasetParameters": {
+        "ubsagsqldatabase": {},
+        "ubsagstoragecontainer": {}
+      }
+    },
+    "Staging": {},
+    "Compute": {
+      "CoreCount": 8,
+      "ComputeType": "General"
+    },
+    "TraceLevel": "Fine",
+    "DataFlowETag": "390225c1-0000-0700-0000-67a620e70000"
+  },
+  "Output": {
+    "RunStatus": {
+      "IdleTimeBeforeCurrentJob": 0,
+      "SparkVersion": "3.3",
+      "ComputeAcquisitionDuration": 145868,
+      "Version": "20241104.1",
+      "Metrics": {
+        "ubsagstoragecontainer": {
+          "Format": "json",
+          "Stages": [
+            {
+              "Stage": 0,
+              "PartitionTimes": [7821],
+              "RecordsWritten": 847,
+              "LastUpdateTime": "2025-02-10 16:34:36.253",
+              "BytesWritten": 359128,
+              "RecordsRead": 847,
+              "BytesRead": 0,
+              "PartitionStatus": "Success",
+              "Streams": {
+                "ubsagstoragecontainer": {
+                  "Count": 847,
+                  "Cached": false,
+                  "TotalPartitions": 1,
+                  "PartitionStatus": "Success",
+                  "PartitionCounts": [847],
+                  "Type": "sink"
+                },
+                "ubsagsqldatabase": {
+                  "Count": 847,
+                  "Cached": false,
+                  "TotalPartitions": 1,
+                  "PartitionStatus": "Success",
+                  "PartitionCounts": [847],
+                  "Type": "source"
+                }
+              },
+              "Target": "ubsagstoragecontainer",
+              "Time": 23667,
+              "ProgressState": "Completed"
+            }
+          ],
+          "SinkPostProcessingTime": 0,
+          "Store": "adlsgen2",
+          "RowsWritten": 847,
+          "Details": {
+            "PreCommandsDuration": [0],
+            "PostCommandsDuration": [0]
+          },
+          "ProgressState": "Completed",
+          "Sources": {
+            "ubsagsqldatabase": {
+              "RowsRead": 847,
+              "Store": "sqlserver",
+              "Details": {},
+              "Format": "table"
+            }
+          },
+          "SinkProcessingTime": 26306
+        }
+      },
+      "ClusterComputeId": "f3c4a3de-bc18-43dc-880b-b88679678118",
+      "DSL": "\nsource() ~> ubsagsqldatabase\n\nubsagsqldatabase sink() ~> ubsagstoragecontainer",
+      "IntegrationRuntimeName": "General-8-1-15a24942-8030-4b79-b812-6132bd83edad",
+      "SparkRunId": "0"
+    },
+    "EffectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (West US)",
+    "BillingReference": {
+      "ActivityType": "executedataflow",
+      "BillableDuration": [
+        {
+          "MeterType": "Data Flow",
+          "Duration": 0.38505121488888888,
+          "Unit": "coreHour",
+          "SessionType": "JobCluster"
+        }
+      ]
+    },
+    "ReportLineageToPurview": {
+      "Status": "NotReported"
+    }
+  },
+  "Type": "ADFActivityRun",
+  "_ResourceId": "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourcegroups/ubsag/providers/microsoft.datafactory/factories/ubsagdatafactory"
+}
+```
+
+##### `ADFActivityRun`
+
+```kql
+ADFSandboxActivityRun
+| order by TimeGenerated desc
+| take 1
+| project TenantId, SourceSystem, TimeGenerated, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
+| extend JsonOutput = pack_all()
+```
+
+###### Results
+(manually pivoted for readability)
+
+```json
+{
+  "TenantId": "696b4f93-a588-41cd-a945-76bf106b8cde",
+  "SourceSystem": "Azure",
+  "TimeGenerated": "2025-02-10T15:27:24.333Z",
+  "Resource": {
+    "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/UBSAG/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/UBSAGDATAFACTORY",
+    "Factory": "ubsagdatafactory",
+    "ResourceGroup": "ubsag",
+    "SubscriptionId": "ED7EAF77-D411-484B-92E6-5CBA0B6D8098"
+  },
+  "Operation": {
+    "OperationName": "customer_sql_to_storage - Failed",
+    "Category": "SandboxActivityRuns",
+    "CorrelationId": "470cd111-a9c3-4689-9d81-697cb13f1159",
+    "Level": "Error",
+    "Location": "westus",
+    "Status": "Failed",
+    "FailureType": "SystemError"
+  },
+  "Activity": {
+    "ActivityName": "customer_sql_to_storage",
+    "ActivityRunId": "76616b84-637c-42e6-abea-ec60b2f634da",
+    "PipelineRunId": "470cd111-a9c3-4689-9d81-697cb13f1159",
+    "PipelineName": "customer_sql_to_storage",
+    "ActivityType": "ExecuteDataFlow",
+    "ActivityIterationCount": 1,
+    "LinkedServiceName": null
+  },
+  "ExecutionTime": {
+    "Start": "2025-02-10T15:27:04.000Z",
+    "End": "2025-02-10T15:27:24.000Z"
+  },
+  "UserProperties": {},
+  "Annotations": [],
+  "EventMessage": "",
+  "Input": {},
+  "Output": {},
+  "Error": {
+    "ErrorCode": "",
+    "ErrorMessage": "",
+    "Details": ""
+  },
+  "Type": "ADFSandboxActivityRun"
+}
+```
+
+
+
+
+
+
+
+
+
+
 
 ---
 
