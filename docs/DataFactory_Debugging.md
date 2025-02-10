@@ -446,7 +446,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
   "TenantId": "696b4f93-a588-41cd-a945-76bf106b8cde",
   "SourceSystem": "Azure",
   "TimeGenerated": "2025-02-10T16:34:40.1810160Z",
-  "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/UBSAG/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/UBSAGDATAFACTORY",
+  "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/{prefix}/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/{prefix}DATAFACTORY",
   "OperationName": "customer_sql_to_storage - Succeeded",
   "Category": "ActivityRuns",
   "CorrelationId": "04901bdc-f92f-46a7-98e6-2037581006a2",
@@ -489,8 +489,8 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
       "Type": "DataFlowReference",
       "Parameters": {},
       "DatasetParameters": {
-        "ubsagsqldatabase": {},
-        "ubsagstoragecontainer": {}
+        "{prefix}sqldatabase": {},
+        "{prefix}storagecontainer": {}
       }
     },
     "Staging": {},
@@ -508,7 +508,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
       "ComputeAcquisitionDuration": 145868,
       "Version": "20241104.1",
       "Metrics": {
-        "ubsagstoragecontainer": {
+        "{prefix}storagecontainer": {
           "Format": "json",
           "Stages": [
             {
@@ -521,7 +521,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
               "BytesRead": 0,
               "PartitionStatus": "Success",
               "Streams": {
-                "ubsagstoragecontainer": {
+                "{prefix}storagecontainer": {
                   "Count": 847,
                   "Cached": false,
                   "TotalPartitions": 1,
@@ -529,7 +529,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
                   "PartitionCounts": [847],
                   "Type": "sink"
                 },
-                "ubsagsqldatabase": {
+                "{prefix}sqldatabase": {
                   "Count": 847,
                   "Cached": false,
                   "TotalPartitions": 1,
@@ -538,7 +538,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
                   "Type": "source"
                 }
               },
-              "Target": "ubsagstoragecontainer",
+              "Target": "{prefix}storagecontainer",
               "Time": 23667,
               "ProgressState": "Completed"
             }
@@ -552,7 +552,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
           },
           "ProgressState": "Completed",
           "Sources": {
-            "ubsagsqldatabase": {
+            "{prefix}sqldatabase": {
               "RowsRead": 847,
               "Store": "sqlserver",
               "Details": {},
@@ -563,7 +563,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
         }
       },
       "ClusterComputeId": "f3c4a3de-bc18-43dc-880b-b88679678118",
-      "DSL": "\nsource() ~> ubsagsqldatabase\n\nubsagsqldatabase sink() ~> ubsagstoragecontainer",
+      "DSL": "\nsource() ~> {prefix}sqldatabase\n\n{prefix}sqldatabase sink() ~> {prefix}storagecontainer",
       "IntegrationRuntimeName": "General-8-1-15a24942-8030-4b79-b812-6132bd83edad",
       "SparkRunId": "0"
     },
@@ -584,7 +584,7 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
     }
   },
   "Type": "ADFActivityRun",
-  "_ResourceId": "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourcegroups/ubsag/providers/microsoft.datafactory/factories/ubsagdatafactory"
+  "_ResourceId": "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourcegroups/{prefix}/providers/microsoft.datafactory/factories/{prefix}datafactory"
 }
 ```
 
@@ -607,9 +607,9 @@ ADFSandboxActivityRun
   "SourceSystem": "Azure",
   "TimeGenerated": "2025-02-10T15:27:24.333Z",
   "Resource": {
-    "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/UBSAG/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/UBSAGDATAFACTORY",
-    "Factory": "ubsagdatafactory",
-    "ResourceGroup": "ubsag",
+    "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/{prefix}/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/{prefix}DATAFACTORY",
+    "Factory": "{prefix}datafactory",
+    "ResourceGroup": "{prefix}",
     "SubscriptionId": "ED7EAF77-D411-484B-92E6-5CBA0B6D8098"
   },
   "Operation": {
