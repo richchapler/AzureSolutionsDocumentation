@@ -4,8 +4,6 @@
 
 ## Studio
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/56315a73-0864-4319-a568-63bc84a01b40" width="800" title="Snipped January 21, 2025" />
-
 ### Pipelines
 
 1. Open Azure Data Factory Studio:
