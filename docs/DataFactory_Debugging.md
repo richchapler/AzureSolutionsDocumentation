@@ -408,13 +408,11 @@ Flip back to the pipeline and watch the debug run until it fails.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/2bdefa42-fd5a-4f5d-a974-10dec7ba2a9c" width="800" title="Snipped February 10, 2025" />
 
+Click the "Error" icon next to the "Failed" message in the Activity grid.
 
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/9a78b826-0977-4b76-a329-2312607262d4" width="800" title="Snipped February 10, 2025" />
 
-
-
-
-
-
+The error message: `Internal Server Error: An error occurred while executing the data flow activity. Please try again later.` is underwhelming.
 
 #### Querying Logs
 ```kql
