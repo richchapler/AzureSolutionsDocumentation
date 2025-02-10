@@ -522,104 +522,66 @@ AzureDiagnostics
 
 ### Alert Metrics
 
-| Metric | Description |  
-| --- | --- |  
-| Airflow Integration Runtime Celery Task Timeout Error | Number of Celery tasks that have timed out. |  
-| Airflow Integration Runtime Collect DB Dags | Number of DAGs collected from the database. |  
-| Airflow Integration Runtime Cpu Percentage | CPU usage percentage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Cpu Usage | CPU usage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Dag Bag Size | Size of the DAG bag in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Dag Callback Exceptions | Number of exceptions occurred during DAG callbacks. |  
-| Airflow Integration Runtime DAG File Refresh Error | Number of errors occurred during DAG file refresh. |  
-| Airflow Integration Runtime DAG Processing Import Errors | Number of import errors occurred during DAG processing. |  
-| Airflow Integration Runtime DAG Processing Last Duration | Duration of the last DAG processing. |  
-| Airflow Integration Runtime DAG Processing Last Run Seconds Ago | Time in seconds since the last DAG processing run. |  
-| Airflow Integration Runtime DAG Processing Processes | Number of processes used for DAG processing. |  
-| Airflow Integration Runtime DAG Processing Processor Timeouts | Number of processor timeouts during DAG processing. |  
-| Airflow Integration Runtime DAG Processing Total Parse Time | Total parse time for DAG processing. |  
-| Airflow Integration Runtime DAG ProcessingManager Stalls | Number of stalls in the DAG ProcessingManager. |  
-| Airflow Integration Runtime DAG Run Dependency Check | Number of dependency checks run for DAGs. |  
-| Airflow Integration Runtime DAG Run Duration Failed | Duration of failed DAG runs. |  
-| Airflow Integration Runtime DAG Run Duration Success | Duration of successful DAG runs. |  
-| Airflow Integration Runtime DAG Run First Task Scheduling Delay | Delay in scheduling the first task of a DAG run. |  
-| Airflow Integration Runtime DAG Run Schedule Delay | Delay in scheduling a DAG run. |  
-| Airflow Integration Runtime Executor Open Slots | Number of open slots in the executor. |  
-| Airflow Integration Runtime Executor Queued Tasks | Number of tasks queued in the executor. |  
-| Airflow Integration Runtime Executor Running Tasks | Number of tasks running in the executor. |  
-| Airflow Integration Runtime Heartbeat Failure | Number of heartbeat failures in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Job End | Number of jobs ended in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Job Start | Number of jobs started in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Memory Percentage | Memory usage percentage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Memory Usage | Memory usage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Node Count | Number of nodes in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Operator Failures | Number of operator failures in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Operator Successes | Number of operator successes in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Pool Open Slots | Number of open slots in the pool. |  
-| Airflow Integration Runtime Pool Queued Slots | Number of queued slots in the pool. |  
-| Airflow Integration Runtime Pool Running Slots | Number of running slots in the pool. |  
-| Airflow Integration Runtime Pool Starving Tasks | Number of starving tasks in the pool. |  
-| Airflow Integration Runtime Scheduler Critical Section Busy | Number of times the scheduler critical section was busy. |  
-| Airflow Integration Runtime Scheduler Critical Section Duration | Duration of the scheduler critical section. |  
-| Airflow Integration Runtime Scheduler Failed SLA Email Attempts | Number of failed attempts to send SLA emails by the scheduler. |  
-| Airflow Integration Runtime Scheduler Heartbeats | Number of heartbeats from the scheduler. |  
-| Airflow Integration Runtime Scheduler Orphaned Tasks Adopted | Number of orphaned tasks adopted by the scheduler. |  
-| Airflow Integration Runtime Scheduler Orphaned Tasks Cleared | Number of orphaned tasks cleared by the scheduler. |  
-| Airflow Integration Runtime Scheduler Tasks Executable | Number of executable tasks in the scheduler. |  
-| Airflow Integration Runtime Scheduler Tasks Killed Externally | Number of tasks killed externally in the scheduler. |  
-| Airflow Integration Runtime Scheduler Tasks Running | Number of running tasks in the scheduler. |  
-| Airflow Integration Runtime Scheduler Tasks Starving | Number of starving tasks in the scheduler. |  
-| Airflow Integration Runtime Started Task Instances | Number of task instances started in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Created Using Operator | Number of task instances created using an operator. |  
-| Airflow Integration Runtime Task Instance Duration | Duration of task instances in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Failures | Number of task instance failures in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Finished | Number of finished task instances in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Previously Succeeded | Number of task instances that previously succeeded. |  
-| Airflow Integration Runtime Task Instance Successes | Number of successful task instances in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Removed From DAG | Number of tasks removed from a DAG. |  
-| Airflow Integration Runtime Task Restored To DAG | Number of tasks restored to a DAG. |  
-| Airflow Integration Runtime Triggers Blocked Main Thread | Number of triggers that blocked the main thread. |  
-| Airflow Integration Runtime Triggers Failed | Number of failed triggers in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Triggers Running | Number of running triggers in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Triggers Succeeded | Number of successful triggers in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Zombie Tasks Killed | Number of zombie tasks killed in the Airflow Integration Runtime. |  
-| Cancelled activity runs metrics | Number of cancelled activity runs. |  
-| Cancelled pipeline runs metrics | Number of cancelled pipeline runs. |  
-| Cancelled SSIS integration runtime start metrics | Number of cancelled SSIS integration runtime starts. |  
-| Cancelled SSIS package execution metrics | Number of cancelled SSIS package executions. |  
-| Cancelled trigger runs metrics | Number of cancelled trigger runs. |  
-| Copy available capacity percentage of MVNet integration runtime | Percentage of available capacity for copy operations in the MVNet integration runtime. |  
-| Copy capacity utilization of MVNet integration runtime | Capacity utilization for copy operations in the MVNet integration runtime. |  
-| Copy waiting queue length of MVNet integration runtime | Length of the waiting queue for copy operations in the MVNet integration runtime. |  
-| Elapsed Time Pipeline Runs Metrics | Elapsed time for pipeline runs. |  
-| External available capacity percentage of MVNet integration runtime | Percentage of available capacity for external operations in the MVNet integration runtime. |  
-| External capacity utilization of MVNet integration runtime | Capacity utilization for external operations in the MVNet integration runtime. |  
-| External waiting queue length of MVNet integration runtime | Length of the waiting queue for external operations in the MVNet integration runtime. |  
-| Failed activity runs metrics | Number of failed activity runs. |  
-| Failed pipeline runs metrics | Number of failed pipeline runs. |  
-| Failed SSIS integration runtime start metrics | Number of failed SSIS integration runtime starts. |  
-| Failed SSIS package execution metrics | Number of failed SSIS package executions. |  
-| Failed trigger runs metrics | Number of failed trigger runs. |  
-| Integration runtime available memory | Available memory in the integration runtime. |  
-| Integration runtime available node count | Number of available nodes in the integration runtime. |  
-| Integration runtime CPU utilization | CPU utilization in the integration runtime. |  
-| Integration runtime queue duration | Duration of the queue in the integration runtime. |  
-| Integration runtime queue length | Length of the queue in the integration runtime. |  
-| Maximum allowed entities count | Maximum number of entities allowed. |  
-| Maximum allowed factory size (GB unit) | Maximum size of the factory allowed in GB. |  
-| Pipeline available capacity percentage of MVNet integration runtime | Percentage of available capacity for pipeline operations in the MVNet integration runtime. |  
-| Pipeline capacity utilization of MVNet integration runtime | Capacity utilization for pipeline operations in the MVNet integration runtime. |  
-| Pipeline waiting queue length of MVNet integration runtime | Length of the waiting queue for pipeline operations in the MVNet integration runtime. |  
-| Stuck SSIS integration runtime stop metrics | Number of stuck SSIS integration runtime stops. |  
-| Succeeded activity runs metrics | Number of successful activity runs. |  
-| Succeeded pipeline runs metrics | Number of successful pipeline runs. |  
-| Succeeded SSIS integration runtime start metrics | Number of successful SSIS integration runtime starts. |  
-| Succeeded SSIS integration runtime stop metrics | Number of successful SSIS integration runtime stops. |  
-| Succeeded SSIS package execution metrics | Number of successful SSIS package executions. |  
-| Succeeded trigger runs metrics | Number of successful trigger runs. |  
-| Total entities count | Total number of entities. |  
-| Total factory size (GB unit) | Total size of the factory in GB. |  
-
----
+| <sub>Metric</sub> | <sub>Description</sub> |  
+:----- | :-----
+| <sub>Airflow Integration Runtime Celery Task Timeout Error</sub> | <sub>Number of Celery tasks that have timed out.</sub> |  
+| <sub>Airflow Integration Runtime Collect DB Dags</sub> | <sub>Number of DAGs collected from the database.</sub> |  
+| <sub>Airflow Integration Runtime Cpu Percentage</sub> | <sub>CPU usage percentage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Cpu Usage</sub> | <sub>CPU usage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Dag Bag Size</sub> | <sub>Size of the DAG bag in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Dag Callback Exceptions</sub> | <sub>Number of exceptions occurred during DAG callbacks.</sub> |  
+| <sub>Airflow Integration Runtime DAG File Refresh Error</sub> | <sub>Number of errors occurred during DAG file refresh.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Import Errors</sub> | <sub>Number of import errors occurred during DAG processing.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Last Duration</sub> | <sub>Duration of the last DAG processing.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Last Run Seconds Ago</sub> | <sub>Time in seconds since the last DAG processing run.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Processes</sub> | <sub>Number of processes used for DAG processing.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Processor Timeouts</sub> | <sub>Number of processor timeouts during DAG processing.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Total Parse Time</sub> | <sub>Total parse time for DAG processing.</sub> |  
+| <sub>Airflow Integration Runtime DAG ProcessingManager Stalls</sub> | <sub>Number of stalls in the DAG ProcessingManager.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Dependency Check</sub> | <sub>Number of dependency checks run for DAGs.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Duration Failed</sub> | <sub>Duration of failed DAG runs.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Duration Success</sub> | <sub>Duration of successful DAG runs.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run First Task Scheduling Delay</sub> | <sub>Delay in scheduling the first task of a DAG run.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Schedule Delay</sub> | <sub>Delay in scheduling a DAG run.</sub> |  
+| <sub>Airflow Integration Runtime Executor Open Slots</sub> | <sub>Number of open slots in the executor.</sub> |  
+| <sub>Airflow Integration Runtime Executor Queued Tasks</sub> | <sub>Number of tasks queued in the executor.</sub> |  
+| <sub>Airflow Integration Runtime Executor Running Tasks</sub> | <sub>Number of tasks running in the executor.</sub> |  
+| <sub>Airflow Integration Runtime Heartbeat Failure</sub> | <sub>Number of heartbeat failures in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Job End</sub> | <sub>Number of jobs ended in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Job Start</sub> | <sub>Number of jobs started in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Memory Percentage</sub> | <sub>Memory usage percentage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Memory Usage</sub> | <sub>Memory usage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Node Count</sub> | <sub>Number of nodes in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Operator Failures</sub> | <sub>Number of operator failures in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Operator Successes</sub> | <sub>Number of operator successes in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Pool Open Slots</sub> | <sub>Number of open slots in the pool.</sub> |  
+| <sub>Airflow Integration Runtime Pool Queued Slots</sub> | <sub>Number of queued slots in the pool.</sub> |  
+| <sub>Airflow Integration Runtime Pool Running Slots</sub> | <sub>Number of running slots in the pool.</sub> |  
+| <sub>Airflow Integration Runtime Pool Starving Tasks</sub> | <sub>Number of starving tasks in the pool.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Critical Section Busy</sub> | <sub>Number of times the scheduler critical section was busy.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Critical Section Duration</sub> | <sub>Duration of the scheduler critical section.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Failed SLA Email Attempts</sub> | <sub>Number of failed attempts to send SLA emails by the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Heartbeats</sub> | <sub>Number of heartbeats from the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Orphaned Tasks Adopted</sub> | <sub>Number of orphaned tasks adopted by the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Orphaned Tasks Cleared</sub> | <sub>Number of orphaned tasks cleared by the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Tasks Executable</sub> | <sub>Number of executable tasks in the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Tasks Killed Externally</sub> | <sub>Number of tasks killed externally in the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Tasks Running</sub> | <sub>Number of running tasks in the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Tasks Starving</sub> | <sub>Number of starving tasks in the scheduler.</sub> |  
+| <sub>Airflow Integration Runtime Started Task Instances</sub> | <sub>Number of task instances started in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Task Instance Created Using Operator</sub> | <sub>Number of task instances created using an operator.</sub> |  
+| <sub>Airflow Integration Runtime Task Instance Duration</sub> | <sub>Duration of task instances in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Task Instance Failures</sub> | <sub>Number of task instance failures in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Task Instance Finished</sub> | <sub>Number of finished task instances in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Task Instance Previously Succeeded</sub> | <sub>Number of task instances that previously succeeded.</sub> |  
+| <sub>Airflow Integration Runtime Task Instance Successes</sub> | <sub>Number of successful task instances in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Task Removed From DAG</sub> | <sub>Number of tasks removed from a DAG.</sub> |  
+| <sub>Airflow Integration Runtime Task Restored To DAG</sub> | <sub>Number of tasks restored to a DAG.</sub> |  
+| <sub>Airflow Integration Runtime Triggers Blocked Main Thread</sub> | <sub>Number of triggers that blocked the main thread.</sub> |  
+| <sub>Airflow Integration Runtime Triggers Failed</sub> | <sub>Number of failed triggers in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Triggers Running</sub> | <sub>Number of running triggers in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Triggers Succeeded</sub> | <sub>Number of successful triggers in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Zombie Tasks Killed</sub> | <sub>Number of zombie tasks killed in the Airflow Integration Runtime.</sub> |  
 
 ### Logs
 
