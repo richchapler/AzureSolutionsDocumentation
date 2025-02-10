@@ -425,6 +425,7 @@ Navigate to Data Factory >> Logs >> New Query >> "KQL mode" (in the portal).
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/16345a43-8bda-44d6-b824-bf57c91ac517" width="800" title="Snipped February 10, 2025" />
 
 ##### `ADFActivityRun`
+...resulting from "Trigger Now"
 
 ```kql
 ADFActivityRun
@@ -587,7 +588,8 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
 }
 ```
 
-##### `ADFActivityRun`
+##### `ADFSandboxActivityRun`
+...resulting from "Debug" >> "Activity"
 
 ```kql
 ADFSandboxActivityRun
