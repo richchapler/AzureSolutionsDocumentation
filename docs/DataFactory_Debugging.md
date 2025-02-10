@@ -700,104 +700,47 @@ AzureDiagnostics
 
 ### Alert Rules >> Signals
 
-| Signal Name | Signal Type | Description |  
-| --- | --- | --- |  
-| Custom log search | Log Analytics | Allows you to perform a custom search on the logs. |  
-| Activity Runs Availability | Log Analytics | Provides information about the availability of activity runs. |  
-| PipelineRuns Availability | Log Analytics | Provides information about the availability of pipeline runs. |  
-| TriggerRuns Availability | Log Analytics | Provides information about the availability of trigger runs. |  
-| Resource health | Resource health | Provides information about the health of the resource. |  
-| Airflow Integration Runtime Celery Task Timeout Error | Platform metrics | Number of Celery tasks that have timed out in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Collect DB Dags | Platform metrics | Number of DAGs collected from the database in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Cpu Percentage | Platform metrics | CPU usage percentage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Cpu Usage | Platform metrics | CPU usage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Dag Bag Size | Platform metrics | Size of the DAG bag in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Dag Callback Exceptions | Platform metrics | Number of exceptions occurred during DAG callbacks in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG File Refresh Error | Platform metrics | Number of errors occurred during DAG file refresh in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Processing Import Errors | Platform metrics | Number of import errors occurred during DAG processing in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Processing Last Duration | Platform metrics | Duration of the last DAG processing in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Processing Last Run Seconds Ago | Platform metrics | Time in seconds since the last DAG processing run in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Processing Processes | Platform metrics | Number of processes used for DAG processing in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Processing Processor Timeouts | Platform metrics | Number of processor timeouts during DAG processing in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Processing Total Parse Time | Platform metrics | Total parse time for DAG processing in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG ProcessingManager Stalls | Platform metrics | Number of stalls in the DAG ProcessingManager in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Run Dependency Check | Platform metrics | Number of dependency checks run for DAGs in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Run Duration Failed | Platform metrics | Duration of failed DAG runs in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Run Duration Success | Platform metrics | Duration of successful DAG runs in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Run First Task Scheduling Delay | Platform metrics | Delay in scheduling the first task of a DAG run in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime DAG Run Schedule Delay | Platform metrics | Delay in scheduling a DAG run in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Executor Open Slots | Platform metrics | Number of open slots in the executor in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Executor Queued Tasks | Platform metrics | Number of tasks queued in the executor in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Executor Running Tasks | Platform metrics | Number of tasks running in the executor in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Heartbeat Failure | Platform metrics | Number of heartbeat failures in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Job End | Platform metrics | Number of jobs ended in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Job Start | Platform metrics | Number of jobs started in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Memory Percentage | Platform metrics | Memory usage percentage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Memory Usage | Platform metrics | Memory usage of the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Node Count | Platform metrics | Number of nodes in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Operator Failures | Platform metrics | Number of operator failures in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Operator Successes | Platform metrics | Number of operator successes in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Pool Open Slots | Platform metrics | Number of open slots in the pool in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Pool Queued Slots | Platform metrics | Number of queued slots in the pool in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Pool Running Slots | Platform metrics | Number of running slots in the pool in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Pool Starving Tasks | Platform metrics | Number of starving tasks in the pool in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Critical Section Busy | Platform metrics | Number of times the scheduler critical section was busy in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Critical Section Duration | Platform metrics | Duration of the scheduler critical section in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Failed SLA Email Attempts | Platform metrics | Number of failed attempts to send SLA emails by the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Heartbeats | Platform metrics | Number of heartbeats from the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Orphaned Tasks Adopted | Platform metrics | Number of orphaned tasks adopted by the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Orphaned Tasks Cleared | Platform metrics | Number of orphaned tasks cleared by the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Tasks Executable | Platform metrics | Number of executable tasks in the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Tasks Killed Externally | Platform metrics | Number of tasks killed externally in the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Tasks Running | Platform metrics | Number of running tasks in the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Scheduler Tasks Starving | Platform metrics | Number of starving tasks in the scheduler in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Started Task Instances | Platform metrics | Number of task instances started in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Created Using Operator | Platform metrics | Number of task instances created using an operator in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Duration | Platform metrics | Duration of task instances in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Failures | Platform metrics | Number of task instance failures in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Finished | Platform metrics | Number of finished task instances in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Previously Succeeded | Platform metrics | Number of task instances that previously succeeded in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Instance Successes | Platform metrics | Number of successful task instances in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Removed From DAG | Platform metrics | Number of tasks removed from a DAG in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Task Restored To DAG | Platform metrics | Number of tasks restored to a DAG in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Triggers Blocked Main Thread | Platform metrics | Number of triggers that blocked the main thread in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Triggers Failed | Platform metrics | Number of failed triggers in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Triggers Running | Platform metrics | Number of running triggers in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Triggers Succeeded | Platform metrics | Number of successful triggers in the Airflow Integration Runtime. |  
-| Airflow Integration Runtime Zombie Tasks Killed | Platform metrics | Number of zombie tasks killed in the Airflow Integration Runtime. |  
-| Cancelled activity runs metrics | Platform metrics | Number of cancelled activity runs. |  
-| Cancelled pipeline runs metrics | Platform metrics | Number of cancelled pipeline runs. |  
-| Cancelled SSIS integration runtime start metrics | Platform metrics | Number of cancelled SSIS integration runtime starts. |  
-| Cancelled SSIS package execution metrics | Platform metrics | Number of cancelled SSIS package executions. |  
-| Cancelled trigger runs metrics | Platform metrics | Number of cancelled trigger runs. |  
-| Copy available capacity percentage of MVNet integration runtime | Platform metrics | Percentage of available capacity for copy operations in the MVNet integration runtime. |  
-| Copy capacity utilization of MVNet integration runtime | Platform metrics | Capacity utilization for copy operations in the MVNet integration runtime. |  
-| Copy waiting queue length of MVNet integration runtime | Platform metrics | Length of the waiting queue for copy operations in the MVNet integration runtime. |  
-| Elapsed Time Pipeline Runs Metrics | Platform metrics | Elapsed time for pipeline runs. |  
-| External available capacity percentage of MVNet integration runtime | Platform metrics | Percentage of available capacity for external operations in the MVNet integration runtime. |  
-| External capacity utilization of MVNet integration runtime | Platform metrics | Capacity utilization for external operations in the MVNet integration runtime. |  
-| External waiting queue length of MVNet integration runtime | Platform metrics | Length of the waiting queue for external operations in the MVNet integration runtime. |  
-| Failed activity runs metrics | Platform metrics | Number of failed activity runs. |  
-| Failed pipeline runs metrics | Platform metrics | Number of failed pipeline runs. |  
-| Failed SSIS integration runtime start metrics | Platform metrics | Number of failed SSIS integration runtime starts. |  
-| Failed SSIS package execution metrics | Platform metrics | Number of failed SSIS package executions. |  
-| Failed trigger runs metrics | Platform metrics | Number of failed trigger runs. |  
-| Integration runtime available memory | Platform metrics | Available memory in the integration runtime. |  
-| Integration runtime available node count | Platform metrics | Number of available nodes in the integration runtime. |  
-| Integration runtime CPU utilization | Platform metrics | CPU utilization in the integration runtime. |  
-| Integration runtime queue duration | Platform metrics | Duration of the queue in the integration runtime. |  
-| Integration runtime queue length | Platform metrics | Length of the queue in the integration runtime. |
-| Maximum allowed entities count | Platform metrics | Maximum number of entities allowed. |  
-| Maximum allowed factory size (GB unit) | Platform metrics | Maximum size of the factory allowed in GB. |  
-| Pipeline available capacity percentage of MVNet integration runtime | Platform metrics | Percentage of available capacity for pipeline operations in the MVNet integration runtime. |  
-| Pipeline capacity utilization of MVNet integration runtime | Platform metrics | Capacity utilization for pipeline operations in the MVNet integration runtime. |  
-| Pipeline waiting queue length of MVNet integration runtime | Platform metrics | Length of the waiting queue for pipeline operations in the MVNet integration runtime. |  
-| Stuck SSIS integration runtime stop metrics | Platform metrics | Number of stuck SSIS integration runtime stops. |  
-| Succeeded activity runs metrics | Platform metrics | Number of successful activity runs. |  
-| Succeeded pipeline runs metrics | Platform metrics | Number of successful pipeline runs. |  
-| Succeeded SSIS integration runtime start metrics | Platform metrics | Number of successful SSIS integration runtime starts. |  
-| Succeeded SSIS integration runtime stop metrics | Platform metrics | Number of successful SSIS integration runtime stops. |  
-| Succeeded SSIS package execution metrics | Platform metrics | Number of successful SSIS package executions. |  
-| Succeeded trigger runs metrics | Platform metrics | Number of successful trigger runs. |  
-| Total entities count | Platform metrics | Total number of entities. |  
-| Total factory size (GB unit) | Platform metrics | Total size of the factory in GB. |
+| <sub>Signal Name</sub> | <sub>Signal Type</sub> | <sub>Description</sub> |  
+:----- | :----- | :-----
+| <sub>Custom log search</sub> | <sub>Log Analytics</sub> | <sub>Allows you to perform a custom search on the logs.</sub> |  
+| <sub>Activity Runs Availability</sub> | <sub>Log Analytics</sub> | <sub>Provides information about the availability of activity runs.</sub> |  
+| <sub>PipelineRuns Availability</sub> | <sub>Log Analytics</sub> | <sub>Provides information about the availability of pipeline runs.</sub> |  
+| <sub>TriggerRuns Availability</sub> | <sub>Log Analytics</sub> | <sub>Provides information about the availability of trigger runs.</sub> |  
+| <sub>Resource health</sub> | <sub>Resource health</sub> | <sub>Provides information about the health of the resource.</sub> |  
+| <sub>Airflow Integration Runtime Celery Task Timeout Error</sub> | <sub>Platform</sub> | <sub>Number of Celery tasks that have timed out in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Collect DB Dags</sub> | <sub>Platform</sub> | <sub>Number of DAGs collected from the database in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Cpu Percentage</sub> | <sub>Platform</sub> | <sub>CPU usage percentage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Cpu Usage</sub> | <sub>Platform</sub> | <sub>CPU usage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Dag Bag Size</sub> | <sub>Platform</sub> | <sub>Size of the DAG bag in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Dag Callback Exceptions</sub> | <sub>Platform</sub> | <sub>Number of exceptions occurred during DAG callbacks in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG File Refresh Error</sub> | <sub>Platform</sub> | <sub>Number of errors occurred during DAG file refresh in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Import Errors</sub> | <sub>Platform</sub> | <sub>Number of import errors occurred during DAG processing in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Last Duration</sub> | <sub>Platform</sub> | <sub>Duration of the last DAG processing in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Last Run Seconds Ago</sub> | <sub>Platform</sub> | <sub>Time in seconds since the last DAG processing run in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Processes</sub> | <sub>Platform</sub> | <sub>Number of processes used for DAG processing in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Processor Timeouts</sub> | <sub>Platform</sub> | <sub>Number of processor timeouts during DAG processing in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Processing Total Parse Time</sub> | <sub>Platform</sub> | <sub>Total parse time for DAG processing in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG ProcessingManager Stalls</sub> | <sub>Platform</sub> | <sub>Number of stalls in the DAG ProcessingManager in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Dependency Check</sub> | <sub>Platform</sub> | <sub>Number of dependency checks run for DAGs in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Duration Failed</sub> | <sub>Platform</sub> | <sub>Duration of failed DAG runs in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Duration Success</sub> | <sub>Platform</sub> | <sub>Duration of successful DAG runs in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run First Task Scheduling Delay</sub> | <sub>Platform</sub> | <sub>Delay in scheduling the first task of a DAG run in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime DAG Run Schedule Delay</sub> | <sub>Platform</sub> | <sub>Delay in scheduling a DAG run in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Executor Open Slots</sub> | <sub>Platform</sub> | <sub>Number of open slots in the executor in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Executor Queued Tasks</sub> | <sub>Platform</sub> | <sub>Number of tasks queued in the executor in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Executor Running Tasks</sub> | <sub>Platform</sub> | <sub>Number of tasks running in the executor in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Heartbeat Failure</sub> | <sub>Platform</sub> | <sub>Number of heartbeat failures in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Job End</sub> | <sub>Platform</sub> | <sub>Number of jobs ended in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Job Start</sub> | <sub>Platform</sub> | <sub>Number of jobs started in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Memory Percentage</sub> | <sub>Platform</sub> | <sub>Memory usage percentage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Memory Usage</sub> | <sub>Platform</sub> | <sub>Memory usage of the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Node Count</sub> | <sub>Platform</sub> | <sub>Number of nodes in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Operator Failures</sub> | <sub>Platform</sub> | <sub>Number of operator failures in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Operator Successes</sub> | <sub>Platform</sub> | <sub>Number of operator successes in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Pool Open Slots</sub> | <sub>Platform</sub> | <sub>Number of open slots in the pool in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Pool Queued Slots</sub> | <sub>Platform</sub> | <sub>Number of queued slots in the pool in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Pool Running Slots</sub> | <sub>Platform</sub> | <sub>Number of running slots in the pool in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Pool Starving Tasks</sub> | <sub>Platform</sub> | <sub>Number of starving tasks in the pool in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Heartbeats</sub> | <sub>Platform</sub> | <sub>Number of heartbeats from the scheduler in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Scheduler Tasks Running</sub> | <sub>Platform</sub> | <sub>Number of running tasks in the scheduler in the Airflow Integration Runtime.</sub> |  
+| <sub>Airflow Integration Runtime Task Instance Successes</sub> | <sub>Platform</sub> | <sub>Number of successful task instances in the Airflow Integration Runtime.</sub> |  
