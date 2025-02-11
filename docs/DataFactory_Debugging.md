@@ -677,7 +677,7 @@ Integration runtime failures occur when the compute resource used to process pip
 
 We have been using the default `AutoResolveIntegrationRuntime` integration runtime, but will create a new one over which we have greater control for this exercise.
 
-Navigate to "Manage" > "Integration runtimes", then click "+ New"
+Navigate to "Manage" >> "Integration runtimes", then click "+ New"
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3b1f3870-3277-4cee-8944-40c1047c3503" width="800" title="Snipped February 11, 2025" />
 
@@ -687,14 +687,19 @@ On the "Integration runtime setup" popout, select "Azure, Self-Hosted" and then 
 
 On the "Integration runtime setup" >> "Network environment:" popout, select "Azure" and then click "Continue".
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/966eb028-33a6-4200-b7f4-d705e19fae9b" width="800" title="Snipped February 11, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3f9c2132-2bbb-4780-ac5f-6460c4670c98" width="800" title="Snipped February 11, 2025" />
 
-![Uploading image.png…]()
+Name the integration runtime and then click "Create".
 
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/37ac5c4e-5988-49be-a006-31143fc8f934" width="800" title="Snipped February 11, 2025" />
 
+Navigate to "Manage" >> "Linked services" and reconfigure to use the new Integration Runtime.
 
-Azure (Self-hosted or Managed VNet)
-Configure your Data Flow to use this new IR instead of AutoResolveIntegrationRuntime
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3b952b11-49b5-4d28-acb3-5f5d0cc3f23c" width="800" title="Snipped February 11, 2025" />
+
+Once complete, click "Publish all".
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a8a27f74-745b-4e1b-9ea1-56ce482b9dea" width="800" title="Snipped February 11, 2025" />
 
 #### **Simulating Failure**
 - **Azure Integration Runtime**: Set the **linked service** to an **invalid integration runtime**.
