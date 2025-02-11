@@ -694,10 +694,11 @@ Name the integration runtime and then click "Create".
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/8c82c43a-8ac0-4345-a73c-16bd012292f4" width="800" title="Snipped February 11, 2025" />
 
 Follow the instructions to install "Microsoft Integration Runtime" (latest version) on your computer.
+Navigate to "Manage" >> "Linked services" and click "+New".
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/acda3654-1df0-42b2-9d1e-09f4649b6d2f" width="800" title="Snipped February 11, 2025" />
 
-Navigate to "Manage" >> "Linked services" and click "+New". On the "New linked service" popout, select "SQL server" and then click "Continue".
+On the "New linked service" popout, select "SQL server" and then click "Continue".
 
 
 
