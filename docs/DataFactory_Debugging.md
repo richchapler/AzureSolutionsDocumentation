@@ -481,7 +481,7 @@ You will notice that the logged data for this failure is limited:
 * `"ErrorMessage": ""`
 * `"Error": ""`
 
-#### Trigger
+#### Simulate Failure (Trigger)
 
 Next, we want to repeat with "Trigger Now" to see logs: `**ADFActivityRun**` and `ADFPipelineRun`, but trigger is harder.
 
@@ -683,9 +683,9 @@ Navigate to "Manage" >> "Integration runtimes", then click "+ New"
 
 On the "Integration runtime setup" popout, select "Azure, Self-Hosted" and then click "Continue".
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/966eb028-33a6-4200-b7f4-d705e19fae9b" width="800" title="Snipped February 11, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/blah" width="800" title="Snipped February 11, 2025" />
 
-On the "Integration runtime setup" >> "Network environment:" popout, select "Azure" and then click "Continue".
+On the "Integration runtime setup" >> "Network environment:" popout, select "Self-Hosted" and then click "Continue".
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3f9c2132-2bbb-4780-ac5f-6460c4670c98" width="800" title="Snipped February 11, 2025" />
 
@@ -701,7 +701,10 @@ Once complete, click "Publish all".
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/a8a27f74-745b-4e1b-9ea1-56ce482b9dea" width="800" title="Snipped February 11, 2025" />
 
-#### **Simulating Failure**
+#### Simulate Failure
+
+Simulate an Integration Runtime failure by deleting the integration runtime immediately after triggering the pipeline.
+
 - **Azure Integration Runtime**: Set the **linked service** to an **invalid integration runtime**.
 - **Self-Hosted Integration Runtime**: Stop the service on the machine:
   ```powershell
