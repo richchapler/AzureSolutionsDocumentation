@@ -416,7 +416,7 @@ The error message: `Internal Server Error: An error occurred while executing the
 
 Navigate to Data Factory >> Logs >> New Query >> "KQL mode" (in the portal).
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/16345a43-8bda-44d6-b824-bf57c91ac517" width="800" title="Snipped February 10, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3ac9bc90-104c-49cb-841d-2a224ea9f601" width="800" title="Snipped February 10, 2025" />
 
 ##### `ADFSandboxActivityRun`
 ...resulting from "Debug" >> "Use activity runtime" and "Use data flow debug session"
@@ -471,7 +471,7 @@ ADFSandboxActivityRun
 }
 ```
 
-You will notice that the logged data for this failure is limited; only three references and not very detailed:
+You will notice that the logged data for this failure is limited:
 
 * `"OperationName": "customer_sql_to_storage - Failed"`
 * `"Level": "Error"`
