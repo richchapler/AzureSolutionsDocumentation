@@ -387,7 +387,9 @@ Pool: SelfHostedPool
 - Assign the following roles to the Application Registration created for the Service Connection {e.g., rchapler-DataExplorer_Delta-GUID}:
   - Key Vault Reader
   - Key Vault Secrets User  
-- Click Save  
+- Click Save
+
+************************* THERE MAY BE A CHANGE TO KEYVAULT POLICY RE: "DISABLE PUBLIC ACCESS"... IF SO, WE'LL NEED TO CREATE A PRIVATE ENDPOINT
 
 ### Create a Variable Group in Azure DevOps  
 - Go to Azure DevOps → Pipelines → Library  
