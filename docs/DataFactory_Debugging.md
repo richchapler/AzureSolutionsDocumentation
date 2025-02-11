@@ -695,7 +695,22 @@ Name the integration runtime and then click "Create".
 
 Follow the instructions to install "Microsoft Integration Runtime" (latest version) on your computer.
 
-Navigate to "Manage" >> "Linked services" and reconfigure to use the new Integration Runtime / on-prem data source {e.g., [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)}.
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/blah" width="800" title="Snipped February 11, 2025" />
+![Uploading image.png…]()
+
+Navigate to "Manage" >> "Linked services" and click "+New". On the "New linked service" popout, select "SQL server" and then click "Continue".
+
+
+
+
+
+
+
+
+
+
+
+to use the new Integration Runtime / on-prem data source {e.g., [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)}.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3b952b11-49b5-4d28-acb3-5f5d0cc3f23c" width="800" title="Snipped February 11, 2025" />
 
