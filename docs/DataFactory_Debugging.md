@@ -683,17 +683,19 @@ Navigate to "Manage" >> "Integration runtimes", then click "+ New"
 
 On the "Integration runtime setup" popout, select "Azure, Self-Hosted" and then click "Continue".
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/blah" width="800" title="Snipped February 11, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/98d96e7a-e17d-4ab7-bc00-0896ef5d93d8" width="800" title="Snipped February 11, 2025" />
 
 On the "Integration runtime setup" >> "Network environment:" popout, select "Self-Hosted" and then click "Continue".
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3f9c2132-2bbb-4780-ac5f-6460c4670c98" width="800" title="Snipped February 11, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/17bcd4a6-ebd0-48e4-8be8-27ea850b4d08" width="800" title="Snipped February 11, 2025" />
 
 Name the integration runtime and then click "Create".
 
-<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/37ac5c4e-5988-49be-a006-31143fc8f934" width="800" title="Snipped February 11, 2025" />
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/8c82c43a-8ac0-4345-a73c-16bd012292f4" width="800" title="Snipped February 11, 2025" />
 
-Navigate to "Manage" >> "Linked services" and reconfigure to use the new Integration Runtime.
+Follow the instructions to install "Microsoft Integration Runtime" (latest version) on your computer.
+
+Navigate to "Manage" >> "Linked services" and reconfigure to use the new Integration Runtime / on-prem data source {e.g., [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)}.
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3b952b11-49b5-4d28-acb3-5f5d0cc3f23c" width="800" title="Snipped February 11, 2025" />
 
