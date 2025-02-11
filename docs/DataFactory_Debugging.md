@@ -393,10 +393,10 @@ Run the starter configuration to confirm that is functional before we begin simu
 
 Clusters fail when they become unavailable, overloaded, or are misconfigured.
 
-In the examples below, we will not try to overload the cluster (which is difficult because Azure is robust)
+In the examples below, we will not try to overload the cluster (which is difficult because Azure is robust).
 Instead, we will simulate failure with simple incorrect configurations, such as referencing nonexistent resources, using invalid connection strings, or misconfiguring integration runtimes.
 
-#### Simulate Failure
+#### Simulate Failure (Debug)
 
 To simulate cluster failure, click "Debug" on the pipeline, then immediately flip over to the dataflow and switch "Data flow debug" to off.
 
@@ -412,15 +412,78 @@ Click the "Error" icon next to the "Failed" message in the Activity grid.
 
 The error message: `Internal Server Error: An error occurred while executing the data flow activity. Please try again later.` is underwhelming.
 
-"Debug" produces logs: `ADFSandboxActivityRun` and `ADFSandboxPipelineRun`.
-
-Repeat with "Trigger Now" to see logs: `ADFActivityRun` and `ADFPipelineRun`.
-
-#### Resulting Logs
+"Debug" produces logs: `**ADFSandboxActivityRun**` and `ADFSandboxPipelineRun`. Activity logs include error messages.
 
 Navigate to Data Factory >> Logs >> New Query >> "KQL mode" (in the portal).
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/16345a43-8bda-44d6-b824-bf57c91ac517" width="800" title="Snipped February 10, 2025" />
+
+##### `ADFSandboxActivityRun`
+...resulting from "Debug" >> "Use activity runtime" and "Use data flow debug session"
+
+```kql
+ADFSandboxActivityRun
+| order by TimeGenerated desc
+| take 1
+| extend TimeGenerated_Pacific = TimeGenerated - 8h
+| project TenantId, SourceSystem, TimeGenerated, TimeGenerated_Pacific, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
+| project TimeGenerated_Pacific, Output = todynamic(pack_all())
+```
+
+###### Results
+(manually pivoted for readability)
+
+```json
+{
+  "TenantId": "696b4f93-a588-41cd-a945-76bf106b8cde",
+  "SourceSystem": "Azure",
+  "TimeGenerated": "2025-02-11T14:36:02.7883900Z",
+  "TimeGenerated_Pacific": "2025-02-11T06:36:02.7883900Z",
+  "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/UBSAG/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/UBSAGDATAFACTORY",
+  "OperationName": "customer_sql_to_storage - Failed",
+  "Category": "SandboxActivityRuns",
+  "CorrelationId": "ef259719-6310-4bf3-84c8-322e11fa5c85",
+  "Level": "Error",
+  "Location": "westus",
+  "Tags": "{}",
+  "Status": "Failed",
+  "UserProperties": "",
+  "Annotations": "",
+  "EventMessage": "",
+  "Start": "2025-02-11T14:35:40.0000000Z",
+  "ActivityName": "customer_sql_to_storage",
+  "ActivityRunId": "fdd9938a-8c33-457f-8d56-2a9567e0602b",
+  "PipelineRunId": "ef259719-6310-4bf3-84c8-322e11fa5c85",
+  "EffectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (West US)",
+  "ActivityType": "ExecuteDataFlow",
+  "ActivityIterationCount": 1,
+  "LinkedServiceName": "",
+  "End": "2025-02-11T14:36:02.0000000Z",
+  "FailureType": "SystemError",
+  "PipelineName": "customer_sql_to_storage",
+  "Input": "",
+  "Output": "",
+  "ErrorCode": "",
+  "ErrorMessage": "",
+  "Error": "",
+  "Type": "ADFSandboxActivityRun",
+  "_ResourceId": "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourcegroups/ubsag/providers/microsoft.datafactory/factories/ubsagdatafactory"
+}
+```
+
+You will notice that the logged data for this failure is limited; only three references and not very detailed:
+
+* `"OperationName": "customer_sql_to_storage - Failed"`
+* `"Level": "Error"`
+* `"Status": "Failed"`
+* `"FailureType": "SystemError"`
+* `"ErrorCode": ""`
+* `"ErrorMessage": ""`
+* `"Error": ""`
+
+#### Trigger
+
+Repeat with "Trigger Now" to see logs: `**ADFActivityRun**` and `ADFPipelineRun`.
 
 ##### `ADFActivityRun`
 ...resulting from "Add trigger" >> "Trigger now"
@@ -586,69 +649,6 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
   "_ResourceId": "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourcegroups/{prefix}/providers/microsoft.datafactory/factories/{prefix}datafactory"
 }
 ```
-
-##### `ADFSandboxActivityRun`
-...resulting from "Debug" >> "Use activity runtime" and "Use data flow debug session"
-
-```kql
-ADFSandboxActivityRun
-| order by TimeGenerated desc
-| take 1
-| extend TimeGenerated_Pacific = TimeGenerated - 8h
-| project TenantId, SourceSystem, TimeGenerated, TimeGenerated_Pacific, ResourceId, OperationName, Category, CorrelationId, Level, Location, Tags, Status, UserProperties, Annotations, EventMessage, Start, ActivityName, ActivityRunId, PipelineRunId, EffectiveIntegrationRuntime, ActivityType, ActivityIterationCount, LinkedServiceName, End, FailureType, PipelineName, Input, Output, ErrorCode, ErrorMessage, Error, Type, _ResourceId
-| project TimeGenerated_Pacific, Output = todynamic(pack_all())
-```
-
-###### Results
-(manually pivoted for readability)
-
-```json
-{
-  "TenantId": "696b4f93-a588-41cd-a945-76bf106b8cde",
-  "SourceSystem": "Azure",
-  "TimeGenerated": "2025-02-10T15:27:24.333Z",
-  "Resource": {
-    "ResourceId": "/SUBSCRIPTIONS/ED7EAF77-D411-484B-92E6-5CBA0B6D8098/RESOURCEGROUPS/{prefix}/PROVIDERS/MICROSOFT.DATAFACTORY/FACTORIES/{prefix}DATAFACTORY",
-    "Factory": "{prefix}datafactory",
-    "ResourceGroup": "{prefix}",
-    "SubscriptionId": "ED7EAF77-D411-484B-92E6-5CBA0B6D8098"
-  },
-  "Operation": {
-    "OperationName": "customer_sql_to_storage - Failed",
-    "Category": "SandboxActivityRuns",
-    "CorrelationId": "470cd111-a9c3-4689-9d81-697cb13f1159",
-    "Level": "Error",
-    "Location": "westus",
-    "Status": "Failed",
-    "FailureType": "SystemError"
-  },
-  "Activity": {
-    "ActivityName": "customer_sql_to_storage",
-    "ActivityRunId": "76616b84-637c-42e6-abea-ec60b2f634da",
-    "PipelineRunId": "470cd111-a9c3-4689-9d81-697cb13f1159",
-    "PipelineName": "customer_sql_to_storage",
-    "ActivityType": "ExecuteDataFlow",
-    "ActivityIterationCount": 1,
-    "LinkedServiceName": null
-  },
-  "ExecutionTime": {
-    "Start": "2025-02-10T15:27:04.000Z",
-    "End": "2025-02-10T15:27:24.000Z"
-  },
-  "UserProperties": {},
-  "Annotations": [],
-  "EventMessage": "",
-  "Input": {},
-  "Output": {},
-  "Error": {
-    "ErrorCode": "",
-    "ErrorMessage": "",
-    "Details": ""
-  },
-  "Type": "ADFSandboxActivityRun"
-}
-```
-
 
 
 
