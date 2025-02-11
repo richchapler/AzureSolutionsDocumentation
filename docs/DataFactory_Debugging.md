@@ -483,7 +483,28 @@ You will notice that the logged data for this failure is limited:
 
 #### Trigger
 
-Repeat with "Trigger Now" to see logs: `**ADFActivityRun**` and `ADFPipelineRun`.
+Next, we want to repeat with "Trigger Now" to see logs: `**ADFActivityRun**` and `ADFPipelineRun`, but trigger is harder.
+
+If debug mode is off when a pipeline with a data flow is triggered, Azure Data Factory (ADF) will restart a new Spark cluster to execute the data flow.
+
+##### How Data Flow Clusters Work
+
+1. Debug Mode On:  
+   - When you enable Data Flow Debug, ADF pre-warms a Spark cluster.
+   - The cluster stays alive for up to 4 hours for interactive development and testing.
+   - When you run a data flow while debug mode is on, it reuses the existing cluster (faster execution).
+
+2. Debug Mode Off:  
+   - When you trigger a pipeline execution (via "Trigger Now" or scheduled runs) and debug mode is off, ADF does not use the debug cluster.
+   - Instead, ADF provisions a new Spark cluster to execute the data flow.
+   - This startup process introduces cold start latency, adding several minutes to the execution time.
+
+###### Impact on Cluster Behavior
+- If debug mode was previously on, but you turn it off before triggering, the debug cluster remains but is not used.
+- A new cluster is created for the execution, and once the pipeline finishes, the cluster is deallocated.
+- Each new pipeline execution (with debug off) repeats the cluster provisioning process unless using Azure IR with TTL (Time-to-Live).
+
+Would you like a query to check cluster restarts from logs?
 
 ##### `ADFActivityRun`
 ...resulting from "Add trigger" >> "Trigger now"
