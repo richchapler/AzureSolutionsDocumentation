@@ -389,7 +389,7 @@ Run the starter configuration to confirm that is functional before we begin simu
 
 <img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/df16c7ad-fcac-4aea-833e-7481d61b3d23" width="800" title="Snipped February 10, 2025" />
 
-### Cluster Failure
+### Cluster Failures
 
 Clusters fail when they become unavailable, overloaded, or are misconfigured.
 
@@ -671,20 +671,30 @@ _Notes: 1) `project` includes all possible columns (not shown otherwise) and 2) 
 }
 ```
 
-
-
-
-
-
-
-
-
-
----
-
-### 2. Integration Runtime Failures
+### Integration Runtime Failures
 
 Integration runtime failures occur when the compute resource used to process pipeline activities becomes unavailable.
+
+We have been using the default `AutoResolveIntegrationRuntime` integration runtime, but will create a new one over which we have greater control for this exercise.
+
+Navigate to "Manage" > "Integration runtimes", then click "+ New"
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/3b1f3870-3277-4cee-8944-40c1047c3503" width="800" title="Snipped February 11, 2025" />
+
+On the "Integration runtime setup" popout, select "Azure, Self-Hosted" and then click "Continue".
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/966eb028-33a6-4200-b7f4-d705e19fae9b" width="800" title="Snipped February 11, 2025" />
+
+On the "Integration runtime setup" >> "Network environment:" popout, select "Azure" and then click "Continue".
+
+<img src="https://github.com/richchapler/AzureSolutionsDocumentation/assets/44923999/966eb028-33a6-4200-b7f4-d705e19fae9b" width="800" title="Snipped February 11, 2025" />
+
+![Uploading image.png…]()
+
+
+
+Azure (Self-hosted or Managed VNet)
+Configure your Data Flow to use this new IR instead of AutoResolveIntegrationRuntime
 
 #### **Simulating Failure**
 - **Azure Integration Runtime**: Set the **linked service** to an **invalid integration runtime**.
@@ -703,6 +713,20 @@ AzureDiagnostics
 | project TimeGenerated, Resource, ActivityName, Status, ErrorMessage
 | order by TimeGenerated desc
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
