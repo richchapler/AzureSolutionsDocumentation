@@ -32,7 +32,7 @@ The following must be installed in order to avoid compatibility issues and pipel
 
 Each step builds upon the previous one, ensuring a smooth setup without redundant troubleshooting.
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: PowerShell Core  
 
@@ -77,13 +77,14 @@ If pwsh is still not recognized, restart the machine and try again.
 where.exe pwsh
 ```
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: Azure CLI  
 
 Azure CLI is required for pipeline execution, authentication, and querying Azure Data Explorer.  
 
 ### Verify if Azure CLI is Installed  
+
   
 ```powershell
 where.exe az
@@ -92,11 +93,25 @@ where.exe az
 - If a path is returned (e.g., `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin\az.cmd`), Azure CLI is installed.  
 - If no output is returned, install Azure CLI.  
 
-### Install Azure CLI (If Missing)  
+### Install or Update Azure CLI  
 
   
 ```powershell
 winget install --id Microsoft.AzureCLI --source winget --accept-package-agreements --accept-source-agreements
+```
+  
+If Azure CLI is already installed, update it:  
+
+  
+```powershell
+az upgrade
+```
+  
+If `az upgrade` fails, use `winget`:  
+
+  
+```powershell
+winget upgrade --id Microsoft.AzureCLI
 ```
   
 Restart the PowerShell terminal and verify:  
@@ -106,7 +121,9 @@ Restart the PowerShell terminal and verify:
 where.exe az
 ```
   
-If `az` is still not recognized, manually add Azure CLI to `PATH`:  
+### Ensure Azure CLI is Recognized  
+
+If `az` is installed but not recognized, manually add it to `PATH`:  
 
   
 ```powershell
@@ -117,7 +134,7 @@ if ($envPath -notlike "*$AzPath*") {
 }
 ```
   
-Restart the PowerShell terminal and verify:  
+Restart the PowerShell terminal and verify again:  
 
   
 ```powershell
@@ -126,20 +143,7 @@ where.exe az
   
 If `az` is still not recognized, restart the machine.
 
--------------------------
-
-### 3️⃣ Check for Azure CLI Updates  
-Once Azure CLI is installed, check for updates:  
-```powershell
-az upgrade
-```
-If `az upgrade` fails, manually update it using `winget`:  
-```powershell
-winget upgrade --id Microsoft.AzureCLI
-```
-Restart the terminal after updating.
-
--------------------------
+------------------------- -------------------------
 
 ### 4️⃣ Verify Azure CLI Kusto Extension  
 Run:  
@@ -156,17 +160,17 @@ az extension list --output table
 az kusto -h
 ```
 
--------------------------
+------------------------- -------------------------
 
 ### 5️⃣ Debugging Common Issues  
 | Issue | Solution |
-|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+|------------------------- -------------------------------------------------- -------------------------------------------------- ---------------------------|------------------------- -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- --------------------------|
 | `az: command not found` | Ensure CLI is installed (`where.exe az`). If missing, install via `winget`. |
 | CLI installed but not recognized | Add `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin` to `PATH` and restart. |
 | `az upgrade` fails | Manually update using `winget upgrade --id Microsoft.AzureCLI`. |
 | Kusto extension missing | Install it using `az extension add --name kusto`. |
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: PowerShell Core Installation & Updates  
 
@@ -194,7 +198,7 @@ winget upgrade --id Microsoft.PowerShell
 ```
 Restart the machine after the update.
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: Azure CLI Kusto Extension  
 
@@ -212,7 +216,7 @@ az extension list --output table
 az kusto -h
 ```
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: Microsoft.Azure.Kusto.Data via NuGet  
 
@@ -280,13 +284,13 @@ az rest --method post `
   --body "{ \"db\": \"<your-database-name>\", \"csl\": \"Tables | project TableName\" }"
 ```
 
--------------------------
+------------------------- -------------------------
 
 ### Special Pre-Requisite: Git Installation and Configuration  
 
 For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.
 
--------------------------
+------------------------- -------------------------
 
 #### 1️⃣ Verify if Git is Installed  
 Run the following command:  
@@ -295,7 +299,7 @@ where.exe git
 ```
 If no output is returned, Git is not installed.
 
--------------------------
+------------------------- -------------------------
 
 #### 2️⃣ Install Git  
 Install Git using winget:  
@@ -312,7 +316,7 @@ git --version
 ```
 If Git is installed correctly, it will return the installed version.
 
--------------------------
+------------------------- -------------------------
 
 #### 3️⃣ Ensure Git is in PATH  
 If `git` is installed but not recognized, manually add it to the system PATH:
@@ -328,7 +332,7 @@ Restart the terminal and verify:
 where.exe git
 ```
 
--------------------------
+------------------------- -------------------------
 
 #### 4️⃣ Ensure the DevOps Agent Can Access Git  
 If Git is installed under a different user, but the DevOps Agent runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
@@ -339,7 +343,7 @@ Get-Command git | Select-Object -ExpandProperty Source
 ```
 If this fails, restart the Azure DevOps Agent service and try again.
 
--------------------------
+------------------------- -------------------------
 
 #### 5️⃣ Configure Git as a Safe Directory  
 If you see an error like:
@@ -351,7 +355,7 @@ Run the following command to mark the DevOps workspace as safe:
 git config --global --add safe.directory C:/agent/_work/1/s
 ```
 
--------------------------
+------------------------- -------------------------
 
 #### 6️⃣ Verify Git is Tracking the Repository  
 Run:
@@ -367,7 +371,7 @@ git status
   git checkout main
   ```
 
--------------------------
+------------------------- -------------------------
 
 #### 7️⃣ Configure Git for DevOps Authentication  
 Ensure Git uses the System.AccessToken for authentication:
@@ -378,7 +382,7 @@ git config --global credential.helper store
 echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
 ```
 
--------------------------
+------------------------- -------------------------
 
 #### 8️⃣ Manually Push Missing Files  
 If Git is now installed but the pipeline failed to commit `.kql` files, manually push them:  
@@ -389,7 +393,7 @@ git commit -m "Manually adding missing .kql files"
 git push origin main
 ```
 
--------------------------
+------------------------- -------------------------
 
 ### When to Use This Section?
 - If Git is missing or not recognized (`git --version` fails)
@@ -399,7 +403,7 @@ git push origin main
 - If "detected dubious ownership" error appears
 - If Pipeline changes do not appear in the repository
 
--------------------------
+------------------------- -------------------------
 
 ### Special Pre-Requisite: Azure DevOps Repository Permissions  
 
@@ -436,7 +440,7 @@ git push origin main
 - If authentication fails, verify that `System.AccessToken` is being used correctly in the pipeline  
 - If permission errors occur, recheck the repository settings  
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: Azure DevOps Initial Setup  
 
@@ -450,7 +454,7 @@ Before setting up the self-hosted agent and pipelines, Azure DevOps must be conf
 5. Select a region close to your Azure resources  
 6. Click `"Continue"`  
 
--------------------------
+------------------------- -------------------------
 
 ### 2️⃣ Create a New DevOps Project  
 1. Once inside the DevOps organization, click `"New project"`  
@@ -458,7 +462,7 @@ Before setting up the self-hosted agent and pipelines, Azure DevOps must be conf
 3. Set visibility to `"Private"`  
 4. Click `"Create"`  
 
--------------------------
+------------------------- -------------------------
 
 ### 3️⃣ Create a Git Repository  
 1. Inside the project, go to `"Repos"`  
@@ -471,7 +475,7 @@ git clone https://dev.azure.com/rchapler-devops/DataExplorer_Delta/_git/DataExpl
 cd DataExplorer_Delta
 ```
 
--------------------------
+------------------------- -------------------------
 
 ### 4️⃣ Configure the Repository for Pipeline Execution  
 1. Add a `.gitignore` file to exclude unnecessary files  
@@ -481,7 +485,7 @@ cd DataExplorer_Delta
    git push -u origin dev
    ```
 
--------------------------
+------------------------- -------------------------
 
 ### 5️⃣ Create a New Pipeline  
 1. Navigate to `"Pipelines"`  
@@ -503,7 +507,7 @@ steps:
 
 7. Click `"Save and Run"`  
 
--------------------------
+------------------------- -------------------------
 
 ### 6️⃣ Set Up DevOps Service Connections  
 1. Navigate to `"Project Settings"` → `"Service Connections"`  
@@ -513,7 +517,7 @@ steps:
 5. Name the service connection (e.g., `"AzureServiceConnection"`)  
 6. Click `"Save"`  
 
--------------------------
+------------------------- -------------------------
 
 ### 7️⃣ Configure DevOps Repository Permissions  
 1. Go to `"Project Settings"` → `"Repositories"`  
@@ -522,7 +526,7 @@ steps:
 4. Set `"Contribute"` and `"Create Branch"` to `"Allow"`  
 5. Click `"Save"`  
 
--------------------------
+------------------------- -------------------------
 
 ### Next Steps  
 Once DevOps is set up, proceed with:  
@@ -574,7 +578,7 @@ PAT: (Paste SelfHostedAgentToken)
 Pool: SelfHostedPool
 ```
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: Service Connection  
 
@@ -586,7 +590,7 @@ Pool: SelfHostedPool
    - "Scope Level" → `"Subscription"`  
 4. Set "Service Connection Name" (e.g., `AzureDataExplorerService`).  
 
--------------------------
+------------------------- -------------------------
 
 ## Special Pre-Requisite: Key Vault, Secrets  
 
@@ -847,7 +851,7 @@ jobs:
         }
 ```
 
--------------------------
+------------------------- -------------------------
 
 ## Testing API Query Logic
 This section covers manual API testing using PowerShell and Azure CLI to verify that authentication and query execution are working correctly.
@@ -862,7 +866,7 @@ Write-Host "Access Token Retrieved"
 - Ensure that the correct cluster URL is used (`westus`).
 - This command should return a valid access token. If it fails, verify authentication settings.
 
--------------------------
+------------------------- -------------------------
 
 ### 2️⃣ Manually Run the ADX Query
 Using the token retrieved, execute an API request to run the `.show tables details` query:
@@ -893,7 +897,7 @@ try {
 - If successful, this will list all tables with details.
 - If 403 Forbidden occurs, ensure that the service principal or user identity has at least `"AllDatabasesAdmin"` or `"Viewer"` role.
 
--------------------------
+------------------------- -------------------------
 
 ### 3️⃣ Verify Role Assignments
 Check the current permissions for the user or service principal running the query:
@@ -915,7 +919,7 @@ az kusto database-principal-assignment create \
     --name "ADX-User-Viewer-Role"
 ```
 
--------------------------
+------------------------- -------------------------
 
 ### 4️⃣ Debugging Issues
 #### Token Issues
@@ -930,7 +934,7 @@ az kusto database-principal-assignment create \
 - Ensure that the correct identity is retrieving the token (`az account show`).
 - Verify the identity has necessary role permissions (`az kusto database-principal-assignment list`).
 
--------------------------
+------------------------- -------------------------
 
 ### Conclusion
 This process ensures that:
@@ -940,7 +944,7 @@ This process ensures that:
 
 🚀 Run these steps before deploying pipeline changes to validate API query logic manually.
 
--------------------------
+------------------------- -------------------------
 
 ## Review and Run  
 1. Proceed to "Review".  
