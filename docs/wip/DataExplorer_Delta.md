@@ -11,13 +11,23 @@
 - Azure Key Vault
 - Application Registration
 
-### Special:  
-- PowerShell Core installed and available in `PATH`  
-- Azure CLI and PowerShell updates applied  
-- Azure CLI Kusto extension installed  
-- Microsoft.Azure.Kusto.Data installed via NuGet  
-- A self-hosted agent registered in Azure DevOps  
-- A service connection with correct Azure permissions  
+### **Special:**  
+The following **must be installed in order** to avoid compatibility issues and pipeline failures:  
+
+1. **PowerShell Core installed and available in `PATH`**  
+   - Required for running scripts and ensuring compatibility with Azure CLI  
+2. **Azure CLI and PowerShell updates applied**  
+   - Ensures the latest features and fixes before installing dependencies  
+3. **Azure CLI Kusto extension installed**  
+   - Needed for querying Azure Data Explorer (ADX)  
+4. **Microsoft.Azure.Kusto.Data installed via NuGet**  
+   - Required for Kusto client operations and authentication  
+5. **A self-hosted agent registered in Azure DevOps**  
+   - Required for running the pipeline on a dedicated machine  
+6. **A service connection with correct Azure permissions**  
+   - Ensures the pipeline can access necessary Azure resources  
+
+Each step builds upon the previous one, ensuring a **smooth setup** without redundant troubleshooting. 🚀  
 
 ---
 
@@ -51,7 +61,7 @@ if ($envPath -notlike "*$pwshPath*") {
     [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$pwshPath", "Machine")
 }
 ```
-Restart and verify:  
+Restart the machine and verify PowerShell Core installation:  
 ```
 where.exe pwsh
 ```
