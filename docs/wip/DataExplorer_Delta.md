@@ -390,123 +390,56 @@ Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll" | Select-Obj
 
 Once the correct path is confirmed, re-run `Add-Type` with the verified DLL path.
 
-### 6. Authenticate with Azure  
-
-```powershell
-az login
-az account show
-$Token = az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
-```
-
-### 6.1 (Conditional) If az is not recognized, verify installation  
-
-```powershell
-where.exe az
-```
-
-### 6.2 (Conditional) If az is missing, reinstall using winget  
-
-```powershell
-winget install --id Microsoft.AzureCLI --source winget --accept-package-agreements --accept-source-agreements
-```
-
-### 6.3 (Conditional) If az is installed but not recognized, manually add it to PATH and restart the PowerShell terminal  
-
-```powershell
-$AzPath = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin"
-$envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-if ($envPath -notlike "*$AzPath*") {
-    [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$AzPath", "Machine")
-}
-```
-
-### 6.4 Restart the PowerShell terminal and verify again  
-
-```powershell
-where.exe az
-```
-
-### 6.5 (Conditional) If az is still not recognized, restart the machine  
-
-```powershell
-where.exe az
-```
-
-### 7. Run a Test Query  
-
-```powershell
-$Cluster = "https://<your-cluster-name>.eastus.kusto.windows.net"
-$Database = "<your-database-name>"
-$Query = "Tables | project TableName"
-
-$ConnectionString = "Data Source=$Cluster;Initial Catalog=$Database;Fed=True;Authorization=Bearer $Token"
-$KustoClient = New-Object Microsoft.Azure.Kusto.Data.KustoClient -ArgumentList $ConnectionString
-$QueryProvider = $KustoClient.GetQueryProvider()
-$QueryResults = $QueryProvider.ExecuteQuery($Query, $null, $null)
-
-$QueryResults.Tables[0].Rows | Format-Table
-```
-
-### 7.1 (Conditional) If the query fails, verify authentication and permissions  
-
-```powershell
-az account show
-az kusto database-principal-assignment list --cluster-name "<your-cluster-name>" --database-name "<your-database-name>" --query "[].{Principal:principalId, Role:role}" -o table
-```
-
-### 7.2 (Conditional) If required roles are missing, assign the Viewer role  
-
-```powershell
-az kusto database-principal-assignment create --cluster-name "<your-cluster-name>" --database-name "<your-database-name>" --principal-id "<YOUR_USER_OBJECT_ID>" --principal-type "User" --role "Viewer" --tenant-id "<YOUR_TENANT_ID>" --name "ADX-User-Viewer-Role"
-```
-
-### 8. Alternative: Use az rest Instead  
-
-```powershell
-az rest --method post `
-  --url "https://<your-cluster-name>.eastus.kusto.windows.net/v1/rest/query" `
-  --headers "Content-Type=application/json" `
-  --body "{ \"db\": \"<your-database-name>\", \"csl\": \"Tables | project TableName\" }"
-```
-
-### 8.1 (Conditional) If az rest fails, verify the access token  
-
-```powershell
-az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
-```
-
-This section ensures `nuget.exe` is properly installed, recognized, and functional, minimizing troubleshooting steps.
-
 ------------------------- -------------------------
 
 ### Special Pre-Requisite: Git Installation and Configuration  
 
-For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.
+For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.  
 
-#### 1️⃣ Verify if Git is Installed  
-Run the following command:  
+### 1. Verify if Git is Installed  
+
 ```powershell
 where.exe git
 ```
-If no output is returned, Git is not installed.
 
-#### 2️⃣ Install Git  
+### 1.1 (Conditional) If Git is not found, verify `PATH`  
+
+```powershell
+$env:Path -split ";"
+```
+
+If `C:\Program Files\Git\bin` is missing, proceed to installation.
+
+### 2. Install Git  
+
 Install Git using winget:  
+
 ```powershell
 winget install --id Git.Git --source winget --accept-package-agreements --accept-source-agreements
 ```
-Alternatively, download and install Git manually from [https://git-scm.com/downloads](https://git-scm.com/downloads), ensuring you enable:
-- ✅ "Add Git to PATH"
-- ✅ "Enable credential manager"  
 
-After installation, restart the terminal and verify:  
+Alternatively, download and install Git manually from [https://git-scm.com/downloads](https://git-scm.com/downloads), ensuring you enable:  
+- "Add Git to PATH"  
+- "Enable credential manager"  
+
+### 2.1 Restart the PowerShell terminal and verify  
+
 ```powershell
 git --version
 ```
+
 If Git is installed correctly, it will return the installed version.
 
-#### 3️⃣ Ensure Git is in PATH  
-If `git` is installed but not recognized, manually add it to the system PATH:
+### 2.2 (Conditional) If Git is still not recognized, verify installation  
+
+```powershell
+where.exe git
+```
+
+If no output is returned, proceed to the next step.
+
+### 3. Ensure Git is in PATH  
+
 ```powershell
 $GitPath = "C:\Program Files\Git\bin"
 $envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
@@ -514,46 +447,80 @@ if ($envPath -notlike "*$GitPath*") {
     [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$GitPath", "Machine")
 }
 ```
-Restart the terminal and verify:  
+
+### 3.1 Restart the PowerShell terminal and verify  
+
 ```powershell
 where.exe git
 ```
 
-#### 4️⃣ Ensure the DevOps Agent Can Access Git  
-If Git is installed under a different user, but the DevOps Agent runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
+### 3.2 (Conditional) If Git is still not recognized  
+
+Manually add Git to **System PATH**:  
+1. Open **System Properties** (`sysdm.cpl` in `Run` dialog)  
+2. Go to **Advanced** → **Environment Variables**  
+3. Under **System Variables**, locate **Path** and click **Edit**  
+4. Click **New**, add:  
+   ```
+   C:\Program Files\Git\bin
+   ```
+5. Click **OK** on all dialogs  
+6. Restart PowerShell and try:  
+
+```powershell
+where.exe git
+```
+
+### 3.3 (Conditional) If Git is still missing, restart the machine  
+
+```powershell
+shutdown /r /t 0
+```
+
+### 4. Ensure the DevOps Agent Can Access Git  
+
+If Git is installed under a different user, but the **DevOps Agent** runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
 
 Verify that the agent process can find `git.exe`:  
+
 ```powershell
 Get-Command git | Select-Object -ExpandProperty Source
 ```
-If this fails, restart the Azure DevOps Agent service and try again.
 
-#### 5️⃣ Configure Git as a Safe Directory  
-If you see an error like:
+If this fails, restart the **Azure DevOps Agent** service and try again.
+
+### 5. Configure Git as a Safe Directory  
+
+If you see an error like:  
 ```
 fatal: detected dubious ownership in repository at 'C:/agent/_work/1/s'
 ```
 Run the following command to mark the DevOps workspace as safe:  
+
 ```powershell
 git config --global --add safe.directory C:/agent/_work/1/s
 ```
 
-#### 6️⃣ Verify Git is Tracking the Repository  
-Run:
+### 6. Verify Git is Tracking the Repository  
+
 ```powershell
 cd C:\agent\_work\1\s
 git status
 ```
-- If it says "Not a git repository", initialize it:  
-  ```powershell
-  git init
-  git remote add origin https://dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta
-  git fetch
-  git checkout main
-  ```
 
-#### 7️⃣ Configure Git for DevOps Authentication  
-Ensure Git uses the System.AccessToken for authentication:
+### 6.1 (Conditional) If it says "Not a git repository", initialize it  
+
+```powershell
+git init
+git remote add origin https://dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta
+git fetch
+git checkout main
+```
+
+### 7. Configure Git for DevOps Authentication  
+
+Ensure Git uses the **System.AccessToken** for authentication:  
+
 ```powershell
 git config --global user.email "pipeline@devops.com"
 git config --global user.name "Azure DevOps Pipeline"
@@ -561,8 +528,10 @@ git config --global credential.helper store
 echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
 ```
 
-#### 8️⃣ Manually Push Missing Files  
+### 8. Manually Push Missing Files  
+
 If Git is now installed but the pipeline failed to commit `.kql` files, manually push them:  
+
 ```powershell
 cd C:\agent\_work\1\s
 git add -A
@@ -570,6 +539,22 @@ git commit -m "Manually adding missing .kql files"
 git push origin main
 ```
 
+### 8.1 (Conditional) If authentication fails  
+
+Ensure that the correct identity is being used:  
+
+```powershell
+git config --list --global | Select-String "user"
+```
+
+If needed, reconfigure credentials:  
+
+```powershell
+git credential reject https://dev.azure.com
+git credential approve https://user:$(System.AccessToken)@dev.azure.com
+```  
+
+This update ensures **Git installation, recognition, and authentication** while **removing redundancies** and **adding troubleshooting for missing paths and credentials.**
 ------------------------- -------------------------
 
 ### Special Pre-Requisite: Azure DevOps Repository Permissions  
