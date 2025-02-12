@@ -388,7 +388,7 @@ Once the correct path is confirmed, re-run `Add-Type` with the verified DLL path
 
 ------------------------- -------------------------
 
-## Special Pre-Requisite: Git Installation and System Configuration  
+## Special Pre-Requisite: Git  
 
 Git must be installed and configured before setting up the DevOps agent. This ensures that the pipeline machine can execute Git commands, but repository tracking will be configured later after the self-hosted agent is set up.
 
@@ -406,8 +406,6 @@ $env:Path -split ";"
 
 If `C:\Program Files\Git\bin` is missing, proceed with installation.
 
----
-
 ### 2. Install Git  
 
 Install Git using `winget`:  
@@ -420,8 +418,6 @@ Alternatively, download and install Git manually from [https://git-scm.com/downl
 - ✅ "Add Git to PATH"  
 - ✅ "Enable credential manager"  
 
----
-
 ### 3. Verify Installation  
 
 Restart the PowerShell terminal and check:  
@@ -431,8 +427,6 @@ git --version
 ```
 
 If Git is installed correctly, it will return the installed version.
-
----
 
 ### 4. Ensure Git is in `PATH`  
 
@@ -452,8 +446,6 @@ Restart the PowerShell terminal and verify:
 where.exe git
 ```
 
----
-
 ### 4.1 (Conditional) If Git is still not recognized  
 
 Manually add Git to the System PATH:
@@ -472,15 +464,11 @@ Manually add Git to the System PATH:
 where.exe git
 ```
 
----
-
 ### 4.2 (Conditional) If Git is still missing, restart the machine  
 
 ```powershell
 shutdown /r /t 0
 ```
-
----
 
 ### 5. Ensure the DevOps Agent Can Access Git  
 
