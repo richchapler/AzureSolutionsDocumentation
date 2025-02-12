@@ -94,7 +94,6 @@ where.exe az
 - If no output is returned, install Azure CLI.  
 
 ### Install or Update Azure CLI  
-
   
 ```powershell
 winget install --id Microsoft.AzureCLI --source winget --accept-package-agreements --accept-source-agreements
@@ -145,20 +144,56 @@ If `az` is still not recognized, restart the machine.
 
 ------------------------- -------------------------
 
-### 4️⃣ Verify Azure CLI Kusto Extension  
-Run:  
+## Special Pre-Requisite: Azure CLI Kusto Extension  
+
+Check if the Kusto extension is installed:  
+  
 ```powershell
 az extension list --output table
 ```
+  
 If `kusto` is not listed, install it:  
+
+  
 ```powershell
 az extension add --name kusto
 ```
-Verify installation:  
+  
+Restart the PowerShell terminal and verify installation:  
+  
 ```powershell
 az extension list --output table
 az kusto -h
 ```
+  
+If `kusto` is still not recognized, ensure Azure CLI is installed and working:  
+
+  
+```powershell
+where.exe az
+az version
+```
+  
+If Azure CLI is missing, reinstall it using `winget`. If installed but not recognized, manually add it to `PATH` and restart the PowerShell terminal:  
+
+  
+```powershell
+$AzPath = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin"
+$envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+if ($envPath -notlike "*$AzPath*") {
+    [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$AzPath", "Machine")
+}
+```
+  
+Restart the PowerShell terminal and verify again:  
+  
+```powershell
+where.exe az
+```
+  
+If `kusto` is still not recognized, restart the machine.  
+
+By explicitly calling this out as a **Special Pre-Requisite**, it ensures that users address this dependency **before** running any Azure Data Explorer-related commands.
 
 ------------------------- -------------------------
 
