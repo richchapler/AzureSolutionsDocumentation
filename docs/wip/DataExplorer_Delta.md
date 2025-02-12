@@ -392,37 +392,43 @@ Once the correct path is confirmed, re-run `Add-Type` with the verified DLL path
 
 ------------------------- -------------------------
 
-### Special Pre-Requisite: Git Installation and Configuration  
+## **Special Pre-Requisite: Git Installation and System Configuration**  
 
-For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.  
+Git must be installed and configured **before** setting up the DevOps agent. This ensures that the pipeline machine can execute Git commands, but **repository tracking will be configured later** after the self-hosted agent is set up.
 
-### 1. Verify if Git is Installed  
+### **1. Verify if Git is Installed**  
 
 ```powershell
 where.exe git
 ```
 
-### 1.1 (Conditional) If Git is not found, verify `PATH`  
+### **1.1 (Conditional) If Git is not found, verify `PATH`**  
 
 ```powershell
 $env:Path -split ";"
 ```
 
-If `C:\Program Files\Git\bin` is missing, proceed to installation.
+If `C:\Program Files\Git\bin` is missing, proceed with installation.
 
-### 2. Install Git  
+---
 
-Install Git using winget:  
+### **2. Install Git**  
+
+Install Git using `winget`:  
 
 ```powershell
 winget install --id Git.Git --source winget --accept-package-agreements --accept-source-agreements
 ```
 
 Alternatively, download and install Git manually from [https://git-scm.com/downloads](https://git-scm.com/downloads), ensuring you enable:  
-- "Add Git to PATH"  
-- "Enable credential manager"  
+- ✅ "Add Git to PATH"  
+- ✅ "Enable credential manager"  
 
-### 2.1 Restart the PowerShell terminal and verify  
+---
+
+### **3. Verify Installation**  
+
+Restart the PowerShell terminal and check:  
 
 ```powershell
 git --version
@@ -430,15 +436,11 @@ git --version
 
 If Git is installed correctly, it will return the installed version.
 
-### 2.2 (Conditional) If Git is still not recognized, verify installation  
+---
 
-```powershell
-where.exe git
-```
+### **4. Ensure Git is in `PATH`**  
 
-If no output is returned, proceed to the next step.
-
-### 3. Ensure Git is in PATH  
+If `git` is installed but not recognized, manually add it to the **system PATH**:
 
 ```powershell
 $GitPath = "C:\Program Files\Git\bin"
@@ -448,15 +450,18 @@ if ($envPath -notlike "*$GitPath*") {
 }
 ```
 
-### 3.1 Restart the PowerShell terminal and verify  
+Restart the PowerShell terminal and verify:
 
 ```powershell
 where.exe git
 ```
 
-### 3.2 (Conditional) If Git is still not recognized  
+---
 
-Manually add Git to **System PATH**:  
+### **4.1 (Conditional) If Git is still not recognized**  
+
+Manually add Git to the **System PATH**:
+
 1. Open **System Properties** (`sysdm.cpl` in `Run` dialog)  
 2. Go to **Advanced** → **Environment Variables**  
 3. Under **System Variables**, locate **Path** and click **Edit**  
@@ -465,19 +470,23 @@ Manually add Git to **System PATH**:
    C:\Program Files\Git\bin
    ```
 5. Click **OK** on all dialogs  
-6. Restart PowerShell and try:  
+6. Restart PowerShell and verify again:
 
 ```powershell
 where.exe git
 ```
 
-### 3.3 (Conditional) If Git is still missing, restart the machine  
+---
+
+### **4.2 (Conditional) If Git is still missing, restart the machine**  
 
 ```powershell
 shutdown /r /t 0
 ```
 
-### 4. Ensure the DevOps Agent Can Access Git  
+---
+
+### **5. Ensure the DevOps Agent Can Access Git**  
 
 If Git is installed under a different user, but the **DevOps Agent** runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
 
@@ -489,72 +498,6 @@ Get-Command git | Select-Object -ExpandProperty Source
 
 If this fails, restart the **Azure DevOps Agent** service and try again.
 
-### 5. Configure Git as a Safe Directory  
-
-If you see an error like:  
-```
-fatal: detected dubious ownership in repository at 'C:/agent/_work/1/s'
-```
-Run the following command to mark the DevOps workspace as safe:  
-
-```powershell
-git config --global --add safe.directory C:/agent/_work/1/s
-```
-
-### 6. Verify Git is Tracking the Repository  
-
-```powershell
-cd C:\agent\_work\1\s
-git status
-```
-
-### 6.1 (Conditional) If it says "Not a git repository", initialize it  
-
-```powershell
-git init
-git remote add origin https://dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta
-git fetch
-git checkout main
-```
-
-### 7. Configure Git for DevOps Authentication  
-
-Ensure Git uses the **System.AccessToken** for authentication:  
-
-```powershell
-git config --global user.email "pipeline@devops.com"
-git config --global user.name "Azure DevOps Pipeline"
-git config --global credential.helper store
-echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
-```
-
-### 8. Manually Push Missing Files  
-
-If Git is now installed but the pipeline failed to commit `.kql` files, manually push them:  
-
-```powershell
-cd C:\agent\_work\1\s
-git add -A
-git commit -m "Manually adding missing .kql files"
-git push origin main
-```
-
-### 8.1 (Conditional) If authentication fails  
-
-Ensure that the correct identity is being used:  
-
-```powershell
-git config --list --global | Select-String "user"
-```
-
-If needed, reconfigure credentials:  
-
-```powershell
-git credential reject https://dev.azure.com
-git credential approve https://user:$(System.AccessToken)@dev.azure.com
-```  
-
-This update ensures **Git installation, recognition, and authentication** while **removing redundancies** and **adding troubleshooting for missing paths and credentials.**
 ------------------------- -------------------------
 
 ### Special Pre-Requisite: Azure DevOps Repository Permissions  
@@ -680,12 +623,6 @@ steps:
 
 ------------------------- -------------------------
 
-### Next Steps  
-Once DevOps is set up, proceed with:  
-- [Self-Hosted Agent Setup](#special-pre-requisite-self-hosted-agent)  
-- [Pipeline Definition](#pipeline-definition)  
-- [Git Installation and Configuration](#special-pre-requisite-git-installation-and-configuration)  
-
 ## Special Pre-Requisite: Self-Hosted Agent  
 
 ### Create and Expand a Personal Access Token (PAT)  
@@ -729,6 +666,117 @@ Auth Type: (Press Enter)
 PAT: (Paste SelfHostedAgentToken)
 Pool: SelfHostedPool
 ```
+
+------------------------- -------------------------
+
+### **Special Pre-Requisite: Git Configuration for DevOps Agent**  
+
+Once the self-hosted agent is installed, Git must be accessible by the agent for pipeline operations, including tracking the repository and committing `.kql` files.
+
+---
+
+### **1. Ensure the DevOps Agent Can Access Git**  
+
+The DevOps agent runs as `NT AUTHORITY/NETWORK SERVICE`, which might not have access to Git.  
+
+#### **1.1 Verify Git is Recognized by the Agent**  
+Run the following command **on the agent machine** using the same user account that runs the DevOps agent:  
+```powershell
+Get-Command git | Select-Object -ExpandProperty Source
+```
+If this returns a valid Git path, Git is accessible by the agent.
+
+#### **1.2 (Conditional) If Git is Not Found**  
+Restart the DevOps Agent service and try again:  
+```powershell
+Restart-Service vstsagent* -Force
+Get-Command git | Select-Object -ExpandProperty Source
+```
+If Git is still not found, manually add it to the **System PATH**.
+
+---
+
+### **2. Configure Git as a Safe Directory**  
+
+If you encounter the following error during pipeline execution:  
+```
+fatal: detected dubious ownership in repository at 'C:/agent/_work/1/s'
+```
+Mark the directory as safe:  
+```powershell
+git config --global --add safe.directory C:/agent/_work/1/s
+```
+---
+
+### **3. Verify Git is Tracking the Repository**  
+
+Change to the expected DevOps workspace directory:  
+```powershell
+cd C:\agent\_work\1\s
+git status
+```
+#### **3.1 (Conditional) If "Not a Git Repository", Initialize It**  
+If the output states `"Not a git repository"`, initialize the repository and fetch the latest code:  
+```powershell
+git init
+git remote add origin https://dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta
+git fetch
+git checkout main
+```
+---
+
+### **4. Configure Git for DevOps Authentication**  
+
+Ensure Git uses **System.AccessToken** for authentication within the pipeline:  
+```powershell
+git config --global user.email "pipeline@devops.com"
+git config --global user.name "Azure DevOps Pipeline"
+git config --global credential.helper store
+echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
+```
+---
+
+### **5. Manually Push Missing Files**  
+
+If Git is installed but the pipeline failed to commit `.kql` files, manually push them:  
+```powershell
+cd C:\agent\_work\1\s
+git add -A
+git commit -m "Manually adding missing .kql files"
+git push origin main
+```
+---
+
+### **6. (Conditional) If Authentication Fails**  
+#### **6.1 Verify Git User Configuration**  
+```powershell
+git config --list --global | Select-String "user"
+```
+If the username/email is incorrect, reset credentials:  
+```powershell
+git credential reject https://dev.azure.com
+git credential approve https://user:$(System.AccessToken)@dev.azure.com
+```
+
+#### **6.2 (Conditional) If Permission Errors Occur**  
+Ensure that **System.AccessToken** is correctly assigned in the pipeline:  
+1. Open Azure DevOps → Pipelines  
+2. Edit the pipeline YAML  
+3. Ensure `persistCredentials` is enabled:  
+```yaml
+- checkout: self
+  persistCredentials: true
+```
+4. Save and re-run the pipeline.
+
+---
+
+This **Git Part 2** section ensures:
+- Git is recognized by the **DevOps Agent**
+- The repository is properly tracked
+- System.AccessToken is used for authentication  
+
+🚀 **Next Step:** Validate pipeline execution to confirm Git operations work.
 
 ------------------------- -------------------------
 
