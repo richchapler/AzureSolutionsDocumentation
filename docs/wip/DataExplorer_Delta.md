@@ -192,7 +192,6 @@ If `kusto` is still not recognized, restart the PowerShell terminal and check ag
 ## Special Pre-Requisite: Microsoft.Azure.Kusto.Data via NuGet  
 
 ### 1. Disable VPN (if applicable)  
-
 If using a VPN, turn it off before installation.  
 
 ### 2. Verify Network Connectivity  
@@ -202,16 +201,27 @@ Test-NetConnection -ComputerName api.nuget.org -Port 443
 Test-NetConnection -ComputerName www.nuget.org -Port 443
 ```
 
-If `Test-NetConnection` fails, update DNS:  
+### 2.1 (Conditional) Update DNS if Test-NetConnection fails  
 
 ```powershell
 netsh interface ip set dns "Wi-Fi" static 8.8.8.8
 ipconfig /flushdns
 ```
 
-Restart the network adapter and verify connectivity again.
+### 2.1.1 (Conditional) Restart the network adapter  
 
----
+```powershell
+Disable-NetAdapter -Name "Wi-Fi" -Confirm:$false
+Start-Sleep -Seconds 5
+Enable-NetAdapter -Name "Wi-Fi"
+```
+
+### 2.1.2 (Conditional) Verify connectivity again  
+
+```powershell
+Test-NetConnection -ComputerName api.nuget.org -Port 443
+Test-NetConnection -ComputerName www.nuget.org -Port 443
+```
 
 ### 3. Install NuGet CLI  
 
@@ -221,14 +231,13 @@ Restart the network adapter and verify connectivity again.
 New-Item -ItemType Directory -Path C:\KustoSDK -Force
 ```
 
-Verify that the directory was created:  
+#### 3.1.1 Verify that the directory was created  
 
 ```powershell
 Test-Path C:\KustoSDK
 ```
 
-- If `True`, proceed to **3.2**  
-- If `False`, manually create the directory and check file permissions  
+If `False`, manually create the directory and check permissions.
 
 #### 3.2 Download NuGet CLI  
 
@@ -236,26 +245,31 @@ Test-Path C:\KustoSDK
 Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile C:\KustoSDK\nuget.exe
 ```
 
-Verify that `nuget.exe` was downloaded:  
+#### 3.2.1 Verify that nuget.exe was downloaded  
 
 ```powershell
 Test-Path C:\KustoSDK\nuget.exe
 ```
 
-- If `True`, proceed to **3.3**  
-- If `False`, check:  
-  - Internet connectivity  
-  - File permissions for `C:\KustoSDK`  
-  - Security policies blocking `Invoke-WebRequest`  
+### 3.2.2 (Conditional) If False, troubleshoot  
 
-#### 3.3 Verify NuGet CLI Execution  
+Check internet connectivity:  
+
+```powershell
+Test-NetConnection api.nuget.org -Port 443
+```
+
+Check file permissions for `C:\KustoSDK`  
+
+Check security policies blocking `Invoke-WebRequest`
+
+### 3.3 Verify NuGet CLI Execution  
 
 ```powershell
 C:\KustoSDK\nuget.exe help
 ```
 
-- If the command works, proceed to **Step 4**  
-- If you get a `CommandNotFoundException`, add `C:\KustoSDK` to `PATH`  
+### 3.3.1 (Conditional) If nuget.exe is not recognized, add C:\KustoSDK to PATH  
 
 ```powershell
 $NuGetPath = "C:\KustoSDK"
@@ -265,15 +279,17 @@ if ($envPath -notlike "*$NuGetPath*") {
 }
 ```
 
-Restart the PowerShell terminal and verify:  
+### 3.3.2 Restart the PowerShell terminal and verify  
 
 ```powershell
 where.exe nuget
 ```
 
-If `nuget.exe` is still not recognized, restart the machine and try again.
+### 3.3.3 (Conditional) If nuget.exe is still not recognized, restart the machine and try again  
 
----
+```powershell
+where.exe nuget
+```
 
 ### 4. Install Required Packages  
 
@@ -284,16 +300,12 @@ C:\KustoSDK\nuget.exe install Newtonsoft.Json -OutputDirectory C:\KustoSDK
 C:\KustoSDK\nuget.exe install Microsoft.IdentityModel.Tokens -OutputDirectory C:\KustoSDK
 ```
 
----
-
 ### 5. Locate and Load the DLLs  
 
 ```powershell
 Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll"
 Add-Type -Path "C:\KustoSDK\Microsoft.Azure.Kusto.Data.13.0.0\lib\netstandard2.0\Kusto.Data.dll"
 ```
-
----
 
 ### 6. Authenticate with Azure  
 
@@ -303,19 +315,19 @@ az account show
 $Token = az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
 ```
 
-#### 6A. If `az` is not recognized, verify installation:  
+### 6.1 (Conditional) If az is not recognized, verify installation  
 
 ```powershell
 where.exe az
 ```
 
-- If `az` is missing, reinstall it using `winget`:  
+### 6.2 (Conditional) If az is missing, reinstall using winget  
 
 ```powershell
 winget install --id Microsoft.AzureCLI --source winget --accept-package-agreements --accept-source-agreements
 ```
 
-- If installed but not recognized, manually add it to `PATH` and restart the PowerShell terminal:  
+### 6.3 (Conditional) If az is installed but not recognized, manually add it to PATH and restart the PowerShell terminal  
 
 ```powershell
 $AzPath = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin"
@@ -325,15 +337,17 @@ if ($envPath -notlike "*$AzPath*") {
 }
 ```
 
-Restart the PowerShell terminal and verify again:  
+### 6.4 Restart the PowerShell terminal and verify again  
 
 ```powershell
 where.exe az
 ```
 
-If `az` is still not recognized, restart the machine.  
+### 6.5 (Conditional) If az is still not recognized, restart the machine  
 
----
+```powershell
+where.exe az
+```
 
 ### 7. Run a Test Query  
 
@@ -350,22 +364,20 @@ $QueryResults = $QueryProvider.ExecuteQuery($Query, $null, $null)
 $QueryResults.Tables[0].Rows | Format-Table
 ```
 
-#### 7A. If the query fails, verify authentication and permissions  
+### 7.1 (Conditional) If the query fails, verify authentication and permissions  
 
 ```powershell
 az account show
 az kusto database-principal-assignment list --cluster-name "<your-cluster-name>" --database-name "<your-database-name>" --query "[].{Principal:principalId, Role:role}" -o table
 ```
 
-If the required roles are missing, assign the `"Viewer"` role:  
+### 7.2 (Conditional) If required roles are missing, assign the Viewer role  
 
 ```powershell
 az kusto database-principal-assignment create --cluster-name "<your-cluster-name>" --database-name "<your-database-name>" --principal-id "<YOUR_USER_OBJECT_ID>" --principal-type "User" --role "Viewer" --tenant-id "<YOUR_TENANT_ID>" --name "ADX-User-Viewer-Role"
 ```
 
----
-
-### 8. Alternative: Use `az rest` Instead  
+### 8. Alternative: Use az rest Instead  
 
 ```powershell
 az rest --method post `
@@ -374,7 +386,7 @@ az rest --method post `
   --body "{ \"db\": \"<your-database-name>\", \"csl\": \"Tables | project TableName\" }"
 ```
 
-#### 8A. If the `az rest` command fails, verify the access token  
+### 8.1 (Conditional) If az rest fails, verify the access token  
 
 ```powershell
 az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
