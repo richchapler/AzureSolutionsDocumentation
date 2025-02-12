@@ -36,46 +36,67 @@ Each step builds upon the previous one, ensuring a smooth setup without redundan
 
 ## Special Pre-Requisite: PowerShell Core  
 
-If PowerShell Core (`pwsh`) is not installed or not available in `PATH`, install it.  
+PowerShell Core is required for executing scripts and ensuring compatibility with Azure CLI.  
 
-### Verify if PowerShell Core is Installed  
-```
+### Verify PowerShell Core Installation  
+
+  
+```powershell
 pwsh -v
 ```
-If the command is not recognized, proceed with installation.  
+  
+If the command is not recognized, PowerShell Core is not installed or not in `PATH`.  
 
 ### Install PowerShell Core  
-```
+  
+```powershell
 winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements
 ```
-Restart the machine to ensure `pwsh` is available in `PATH`.  
-
-### Verify Installation Path  
+  
+Restart the PowerShell terminal and verify:  
+  
+```powershell
+pwsh -v
 ```
+  
+If `pwsh` is not recognized, check if it was installed in the default location:  
+  
+```powershell
 Get-ChildItem "C:\Program Files\PowerShell"
 Test-Path "C:\Program Files\PowerShell\7\pwsh.exe"
 ```
-
+  
 ### Add PowerShell Core to `PATH` (If Needed)  
-```
+  
+```powershell
 $pwshPath = "C:\Program Files\PowerShell\7\"
 $envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 if ($envPath -notlike "*$pwshPath*") {
     [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$pwshPath", "Machine")
 }
 ```
-
-Restart the PowerShell terminal and verify installation:
-
+  
+Restart the PowerShell terminal and verify:  
+  
 ```powershell
 where.exe pwsh
 ```
+  
+If `pwsh` is still not recognized, restart the machine.  
 
-If pwsh is still not recognized, restart the machine and try again.
-
+### Update PowerShell Core  
+  
+```powershell
+winget upgrade --id Microsoft.PowerShell
 ```
-where.exe pwsh
+  
+Restart the PowerShell terminal and verify:  
+  
+```powershell
+pwsh -v
 ```
+  
+If the update does not apply, restart the machine.
 
 ------------------------- -------------------------
 
@@ -84,7 +105,6 @@ where.exe pwsh
 Azure CLI is required for pipeline execution, authentication, and querying Azure Data Explorer.  
 
 ### Verify if Azure CLI is Installed  
-
   
 ```powershell
 where.exe az
@@ -166,62 +186,6 @@ az kusto -h
 ```
   
 If `kusto` is still not recognized, restart the PowerShell terminal and check again. If the issue persists, restart the machine.
-
-------------------------- -------------------------
-
-### 5️⃣ Debugging Common Issues  
-| Issue | Solution |
-|------------------------- -------------------------------------------------- -------------------------------------------------- ---------------------------|------------------------- -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- --------------------------|
-| `az: command not found` | Ensure CLI is installed (`where.exe az`). If missing, install via `winget`. |
-| CLI installed but not recognized | Add `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin` to `PATH` and restart. |
-| `az upgrade` fails | Manually update using `winget upgrade --id Microsoft.AzureCLI`. |
-| Kusto extension missing | Install it using `az extension add --name kusto`. |
-
-------------------------- -------------------------
-
-## Special Pre-Requisite: PowerShell Core Installation & Updates  
-
-### 1️⃣ Verify PowerShell Core Version  
-Run:  
-```powershell
-$PSVersionTable.PSVersion
-```
-If the Major version is 5, you are using Windows PowerShell, and PowerShell Core (`pwsh`) is not installed.  
-
-### 2️⃣ Install PowerShell Core (If Missing)  
-Use `winget` to install PowerShell Core:  
-```powershell
-winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements
-```
-After installation, restart the machine and verify:  
-```powershell
-pwsh -v
-```
-
-### 3️⃣ Check for PowerShell Updates  
-If PowerShell Core is installed, update it:  
-```powershell
-winget upgrade --id Microsoft.PowerShell
-```
-Restart the machine after the update.
-
-------------------------- -------------------------
-
-## Special Pre-Requisite: Azure CLI Kusto Extension  
-
-### Verify if the Kusto Extension is Installed  
-```
-az extension list --output table
-```
-If `kusto` is not listed, install:  
-```
-az extension add --name kusto
-```
-Verify installation:  
-```
-az extension list --output table
-az kusto -h
-```
 
 ------------------------- -------------------------
 
