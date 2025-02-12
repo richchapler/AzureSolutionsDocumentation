@@ -313,6 +313,98 @@ git push origin main
 
 ---
 
+## **Special Pre-Requisite: Azure DevOps Initial Setup**  
+
+Before setting up the self-hosted agent and pipelines, Azure DevOps must be configured from scratch.
+
+### **1️⃣ Create an Azure DevOps Organization**  
+1. Navigate to [Azure DevOps](https://dev.azure.com/)  
+2. Click `"Create new organization"`  
+3. Sign in with your Microsoft account  
+4. Follow the prompts and name the organization (e.g., `"rchapler-devops"`)  
+5. Select a region close to your Azure resources  
+6. Click `"Continue"`  
+
+---
+
+### **2️⃣ Create a New DevOps Project**  
+1. Once inside the DevOps organization, click `"New project"`  
+2. Provide a name (e.g., `"DataExplorer_Delta"`)  
+3. Set **visibility** to `"Private"`  
+4. Click `"Create"`  
+
+---
+
+### **3️⃣ Create a Git Repository**  
+1. Inside the project, go to `"Repos"`  
+2. Click `"Initialize with a README"` (if not already created)  
+3. Click `"Clone"` → Copy the HTTPS URL  
+
+#### **Clone the Repository Locally**  
+```sh
+git clone https://dev.azure.com/rchapler-devops/DataExplorer_Delta/_git/DataExplorer_Delta
+cd DataExplorer_Delta
+```
+
+---
+
+### **4️⃣ Configure the Repository for Pipeline Execution**  
+1. **Add a `.gitignore` file** to exclude unnecessary files  
+2. **Create a new branch (optional)**  
+   ```sh
+   git checkout -b dev
+   git push -u origin dev
+   ```
+
+---
+
+### **5️⃣ Create a New Pipeline**  
+1. Navigate to `"Pipelines"`  
+2. Click `"New pipeline"`  
+3. Select `"Azure Repos Git"`  
+4. Choose the `"DataExplorer_Delta"` repository  
+5. Select `"Starter Pipeline"` (or `"Existing YAML file"` if available)  
+6. Replace the default YAML with:  
+
+```yaml
+trigger: none
+pool:
+  name: SelfHostedPool
+
+steps:
+- script: echo "Hello, DevOps!"
+  displayName: "Test Pipeline"
+```
+
+7. Click `"Save and Run"`  
+
+---
+
+### **6️⃣ Set Up DevOps Service Connections**  
+1. Navigate to `"Project Settings"` → `"Service Connections"`  
+2. Click `"New service connection"` → Select `"Azure Resource Manager"`  
+3. Choose `"Service principal (automatic)"`  
+4. Select the correct Azure **subscription**  
+5. Name the service connection (e.g., `"AzureServiceConnection"`)  
+6. Click `"Save"`  
+
+---
+
+### **7️⃣ Configure DevOps Repository Permissions**  
+1. Go to `"Project Settings"` → `"Repositories"`  
+2. Select `"DataExplorer_Delta"`  
+3. Under `"Security"`, locate `"DataExplorer_Delta Build Service (rchapler-devops)"`  
+4. Set `"Contribute"` and `"Create Branch"` to `"Allow"`  
+5. Click `"Save"`  
+
+---
+
+### **Next Steps**  
+Once DevOps is set up, proceed with:  
+- [**Self-Hosted Agent Setup**](#special-pre-requisite-self-hosted-agent)  
+- [**Pipeline Definition**](#pipeline-definition)  
+- [**Git Installation and Configuration**](#special-pre-requisite-git-installation-and-configuration)  
+
 ## Special Pre-Requisite: Self-Hosted Agent  
 
 ### Create and Expand a Personal Access Token (PAT)  
