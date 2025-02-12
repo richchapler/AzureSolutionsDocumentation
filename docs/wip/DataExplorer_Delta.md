@@ -3,7 +3,7 @@
 
 ## Prerequisites  
 
-### Basics:  
+### Basics
 - An Azure DevOps organization ("rchapler")  
 - A DevOps project ("DataExplorer_Delta")  
 - Azure CLI installed on the agent machine  
@@ -11,23 +11,26 @@
 - Azure Key Vault
 - Application Registration
 
-### **Special:**  
+### Special  
+
 The following **must be installed in order** to avoid compatibility issues and pipeline failures:  
 
 1. **PowerShell Core installed and available in `PATH`**  
    - Required for running scripts and ensuring compatibility with Azure CLI  
-2. **Azure CLI and PowerShell updates applied**  
-   - Ensures the latest features and fixes before installing dependencies  
-3. **Azure CLI Kusto extension installed**  
+2. **Azure CLI installed and updated**  
+   - Ensures the CLI is available for pipeline authentication and command execution  
+3. **PowerShell Core updated**  
+   - Prevents compatibility issues with Azure CLI and script execution  
+4. **Azure CLI Kusto extension installed**  
    - Needed for querying Azure Data Explorer (ADX)  
-4. **Microsoft.Azure.Kusto.Data installed via NuGet**  
+5. **Microsoft.Azure.Kusto.Data installed via NuGet**  
    - Required for Kusto client operations and authentication  
-5. **A self-hosted agent registered in Azure DevOps**  
+6. **A self-hosted agent registered in Azure DevOps**  
    - Required for running the pipeline on a dedicated machine  
-6. **A service connection with correct Azure permissions**  
+7. **A service connection with correct Azure permissions**  
    - Ensures the pipeline can access necessary Azure resources  
 
-Each step builds upon the previous one, ensuring a **smooth setup** without redundant troubleshooting. 🚀  
+Each step builds upon the previous one, ensuring a **smooth setup** without redundant troubleshooting.
 
 ---
 
@@ -68,16 +71,60 @@ where.exe pwsh
 
 ---
 
-## Special Pre-Requisite: Azure CLI and PowerShell Updates  
+## **Special Pre-Requisite: Azure CLI Installation & Updates**  
 
-### Check for Available Updates  
+### **1️⃣ Verify if Azure CLI is Installed**  
+Run the following command:  
+```powershell
+where.exe az
 ```
+- If the command returns a path (e.g., `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin\az.cmd`), Azure CLI is installed.  
+- If no output is returned, **Azure CLI is missing** and must be installed.  
+
+### **2️⃣ Install Azure CLI (If Missing)**  
+Use `winget` to install Azure CLI:  
+```powershell
+winget install --id Microsoft.AzureCLI --source winget --accept-package-agreements --accept-source-agreements
+```
+After installation, restart the terminal and verify installation:  
+```powershell
 az version
+```
+
+### **3️⃣ Check for Azure CLI Updates**  
+If Azure CLI is installed, update it:  
+```powershell
 az upgrade
+```
+Restart the terminal after the update.
+
+---
+
+## **Special Pre-Requisite: PowerShell Core Installation & Updates**  
+
+### **1️⃣ Verify PowerShell Core Version**  
+Run:  
+```powershell
 $PSVersionTable.PSVersion
+```
+If the **Major version is 5**, you are using **Windows PowerShell**, and **PowerShell Core (`pwsh`) is not installed**.  
+
+### **2️⃣ Install PowerShell Core (If Missing)**  
+Use `winget` to install PowerShell Core:  
+```powershell
+winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements
+```
+After installation, restart the machine and verify:  
+```powershell
+pwsh -v
+```
+
+### **3️⃣ Check for PowerShell Updates**  
+If PowerShell Core is installed, update it:  
+```powershell
 winget upgrade --id Microsoft.PowerShell
 ```
-Restart after updating.  
+Restart the machine after the update.
 
 ---
 
