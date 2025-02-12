@@ -261,7 +261,13 @@ Test-NetConnection api.nuget.org -Port 443
 
 Check file permissions for `C:\KustoSDK`  
 
-Check security policies blocking `Invoke-WebRequest`
+Check security policies blocking `Invoke-WebRequest`  
+
+If security policies are blocking execution, unblock the file:  
+
+```powershell
+Unblock-File -Path C:\KustoSDK\nuget.exe
+```
 
 ### 3.3 Verify NuGet CLI Execution  
 
@@ -285,10 +291,34 @@ if ($envPath -notlike "*$NuGetPath*") {
 where.exe nuget
 ```
 
-### 3.3.3 (Conditional) If nuget.exe is still not recognized, restart the machine and try again  
+### 3.3.3 (Conditional) If nuget.exe is still not recognized  
+
+Check if `nuget.exe` is found under `C:\KustoSDK`:  
+
+```powershell
+where.exe /R C:\KustoSDK nuget.exe
+```
+
+If `nuget.exe` exists but is not recognized, manually add it to the **System PATH**:  
+
+1. Open **System Properties** (`sysdm.cpl` in `Run` dialog)  
+2. Go to **Advanced** → **Environment Variables**  
+3. Under **System Variables**, locate **Path** and click **Edit**  
+4. Click **New**, add:  
+   ```
+   C:\KustoSDK
+   ```
+5. Click **OK** on all dialogs  
+6. Restart PowerShell and try:  
 
 ```powershell
 where.exe nuget
+```
+
+If `nuget.exe` is still not recognized, restart the machine and try again:  
+
+```powershell
+shutdown /r /t 0
 ```
 
 ### 4. Install Required Packages  
@@ -391,6 +421,8 @@ az rest --method post `
 ```powershell
 az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
 ```
+
+This section ensures `nuget.exe` is properly installed, recognized, and functional, minimizing troubleshooting steps.
 
 ------------------------- -------------------------
 
