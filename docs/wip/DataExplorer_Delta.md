@@ -13,24 +13,24 @@
 
 ### Special  
 
-The following **must be installed in order** to avoid compatibility issues and pipeline failures:  
+The following must be installed in order to avoid compatibility issues and pipeline failures:  
 
-1. **PowerShell Core installed and available in `PATH`**  
+1. PowerShell Core installed and available in `PATH`  
    - Required for running scripts and ensuring compatibility with Azure CLI  
-2. **Azure CLI installed and updated**  
+2. Azure CLI installed and updated  
    - Ensures the CLI is available for pipeline authentication and command execution  
-3. **PowerShell Core updated**  
+3. PowerShell Core updated  
    - Prevents compatibility issues with Azure CLI and script execution  
-4. **Azure CLI Kusto extension installed**  
+4. Azure CLI Kusto extension installed  
    - Needed for querying Azure Data Explorer (ADX)  
-5. **Microsoft.Azure.Kusto.Data installed via NuGet**  
+5. Microsoft.Azure.Kusto.Data installed via NuGet  
    - Required for Kusto client operations and authentication  
-6. **A self-hosted agent registered in Azure DevOps**  
+6. A self-hosted agent registered in Azure DevOps  
    - Required for running the pipeline on a dedicated machine  
-7. **A service connection with correct Azure permissions**  
+7. A service connection with correct Azure permissions  
    - Ensures the pipeline can access necessary Azure resources  
 
-Each step builds upon the previous one, ensuring a **smooth setup** without redundant troubleshooting.
+Each step builds upon the previous one, ensuring a smooth setup without redundant troubleshooting.
 
 -------------------------
 
@@ -64,35 +64,53 @@ if ($envPath -notlike "*$pwshPath*") {
     [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$pwshPath", "Machine")
 }
 ```
-Restart the machine and verify PowerShell Core installation:  
+
+Restart the PowerShell terminal and verify installation:
+
+```powershell
+where.exe pwsh
+```
+
+If pwsh is still not recognized, restart the machine and try again.
+
 ```
 where.exe pwsh
 ```
 
 -------------------------
 
-## **Special Pre-Requisite: Azure CLI Installation & Updates**  
+Here’s the updated section reflecting your preferences:  
 
-Azure CLI is required for **pipeline execution, authentication, and querying Azure Data Explorer**.  
+## Special Pre-Requisite: Azure CLI  
 
-### **1️⃣ Verify if Azure CLI is Installed**  
-Run the following command:  
+Azure CLI is required for pipeline execution, authentication, and querying Azure Data Explorer.  
+
+### Verify if Azure CLI is Installed  
+  
 ```powershell
 where.exe az
 ```
+  
 - If a path is returned (e.g., `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin\az.cmd`), Azure CLI is installed.  
-- If **no output is returned**, **Azure CLI is missing** and must be installed.  
+- If no output is returned, install Azure CLI.  
 
-### **2️⃣ Install Azure CLI (If Missing)**  
-Use `winget` to install Azure CLI:  
+### Install Azure CLI (If Missing)  
+
+  
 ```powershell
 winget install --id Microsoft.AzureCLI --source winget --accept-package-agreements --accept-source-agreements
 ```
-After installation, restart the terminal and verify:  
+  
+Restart the PowerShell terminal and verify:  
+
+  
 ```powershell
 where.exe az
 ```
+  
 If `az` is still not recognized, manually add Azure CLI to `PATH`:  
+
+  
 ```powershell
 $AzPath = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin"
 $envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
@@ -100,11 +118,19 @@ if ($envPath -notlike "*$AzPath*") {
     [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$AzPath", "Machine")
 }
 ```
-Restart the terminal and verify again.  
+  
+Restart the PowerShell terminal and verify:  
+
+  
+```powershell
+where.exe az
+```
+  
+If `az` is still not recognized, restart the machine.
 
 -------------------------
 
-### **3️⃣ Check for Azure CLI Updates**  
+### 3️⃣ Check for Azure CLI Updates  
 Once Azure CLI is installed, check for updates:  
 ```powershell
 az upgrade
@@ -117,12 +143,12 @@ Restart the terminal after updating.
 
 -------------------------
 
-### **4️⃣ Verify Azure CLI Kusto Extension**  
+### 4️⃣ Verify Azure CLI Kusto Extension  
 Run:  
 ```powershell
 az extension list --output table
 ```
-If `kusto` is **not listed**, install it:  
+If `kusto` is not listed, install it:  
 ```powershell
 az extension add --name kusto
 ```
@@ -134,8 +160,8 @@ az kusto -h
 
 -------------------------
 
-### **5️⃣ Debugging Common Issues**  
-| **Issue** | **Solution** |
+### 5️⃣ Debugging Common Issues  
+| Issue | Solution |
 |-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | `az: command not found` | Ensure CLI is installed (`where.exe az`). If missing, install via `winget`. |
 | CLI installed but not recognized | Add `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin` to `PATH` and restart. |
@@ -144,16 +170,16 @@ az kusto -h
 
 -------------------------
 
-## **Special Pre-Requisite: PowerShell Core Installation & Updates**  
+## Special Pre-Requisite: PowerShell Core Installation & Updates  
 
-### **1️⃣ Verify PowerShell Core Version**  
+### 1️⃣ Verify PowerShell Core Version  
 Run:  
 ```powershell
 $PSVersionTable.PSVersion
 ```
-If the **Major version is 5**, you are using **Windows PowerShell**, and **PowerShell Core (`pwsh`) is not installed**.  
+If the Major version is 5, you are using Windows PowerShell, and PowerShell Core (`pwsh`) is not installed.  
 
-### **2️⃣ Install PowerShell Core (If Missing)**  
+### 2️⃣ Install PowerShell Core (If Missing)  
 Use `winget` to install PowerShell Core:  
 ```powershell
 winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements
@@ -163,7 +189,7 @@ After installation, restart the machine and verify:
 pwsh -v
 ```
 
-### **3️⃣ Check for PowerShell Updates**  
+### 3️⃣ Check for PowerShell Updates  
 If PowerShell Core is installed, update it:  
 ```powershell
 winget upgrade --id Microsoft.PowerShell
@@ -258,23 +284,23 @@ az rest --method post `
 
 -------------------------
 
-### **Special Pre-Requisite: Git Installation and Configuration**  
+### Special Pre-Requisite: Git Installation and Configuration  
 
-For the pipeline to commit and push generated `.kql` files to the repository, **Git must be installed and properly configured** on the agent machine.
+For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.
 
 -------------------------
 
-#### **1️⃣ Verify if Git is Installed**  
+#### 1️⃣ Verify if Git is Installed  
 Run the following command:  
 ```powershell
 where.exe git
 ```
-If no output is returned, Git is **not installed**.
+If no output is returned, Git is not installed.
 
 -------------------------
 
-#### **2️⃣ Install Git**  
-Install Git using **winget**:  
+#### 2️⃣ Install Git  
+Install Git using winget:  
 ```powershell
 winget install --id Git.Git --source winget --accept-package-agreements --accept-source-agreements
 ```
@@ -282,7 +308,7 @@ Alternatively, download and install Git manually from [https://git-scm.com/downl
 - ✅ "Add Git to PATH"
 - ✅ "Enable credential manager"  
 
-After installation, **restart the terminal** and verify:  
+After installation, restart the terminal and verify:  
 ```powershell
 git --version
 ```
@@ -290,8 +316,8 @@ If Git is installed correctly, it will return the installed version.
 
 -------------------------
 
-#### **3️⃣ Ensure Git is in PATH**  
-If `git` is installed but not recognized, manually add it to the system **PATH**:
+#### 3️⃣ Ensure Git is in PATH  
+If `git` is installed but not recognized, manually add it to the system PATH:
 ```powershell
 $GitPath = "C:\Program Files\Git\bin"
 $envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
@@ -299,25 +325,25 @@ if ($envPath -notlike "*$GitPath*") {
     [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$GitPath", "Machine")
 }
 ```
-**Restart the terminal** and verify:  
+Restart the terminal and verify:  
 ```powershell
 where.exe git
 ```
 
 -------------------------
 
-#### **4️⃣ Ensure the DevOps Agent Can Access Git**  
-If Git is installed under a different user, but the **DevOps Agent** runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
+#### 4️⃣ Ensure the DevOps Agent Can Access Git  
+If Git is installed under a different user, but the DevOps Agent runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
 
-**Verify that the agent process can find `git.exe`**:  
+Verify that the agent process can find `git.exe`:  
 ```powershell
 Get-Command git | Select-Object -ExpandProperty Source
 ```
-If this fails, restart the **Azure DevOps Agent** service and try again.
+If this fails, restart the Azure DevOps Agent service and try again.
 
 -------------------------
 
-#### **5️⃣ Configure Git as a Safe Directory**  
+#### 5️⃣ Configure Git as a Safe Directory  
 If you see an error like:
 ```
 fatal: detected dubious ownership in repository at 'C:/agent/_work/1/s'
@@ -329,13 +355,13 @@ git config --global --add safe.directory C:/agent/_work/1/s
 
 -------------------------
 
-#### **6️⃣ Verify Git is Tracking the Repository**  
+#### 6️⃣ Verify Git is Tracking the Repository  
 Run:
 ```powershell
 cd C:\agent\_work\1\s
 git status
 ```
-- If it says **"Not a git repository"**, initialize it:  
+- If it says "Not a git repository", initialize it:  
   ```powershell
   git init
   git remote add origin https://dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta
@@ -345,8 +371,8 @@ git status
 
 -------------------------
 
-#### **7️⃣ Configure Git for DevOps Authentication**  
-Ensure Git uses the **System.AccessToken** for authentication:
+#### 7️⃣ Configure Git for DevOps Authentication  
+Ensure Git uses the System.AccessToken for authentication:
 ```powershell
 git config --global user.email "pipeline@devops.com"
 git config --global user.name "Azure DevOps Pipeline"
@@ -356,7 +382,7 @@ echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
 
 -------------------------
 
-#### **8️⃣ Manually Push Missing Files**  
+#### 8️⃣ Manually Push Missing Files  
 If Git is now installed but the pipeline failed to commit `.kql` files, manually push them:  
 ```powershell
 cd C:\agent\_work\1\s
@@ -367,13 +393,13 @@ git push origin main
 
 -------------------------
 
-### **When to Use This Section?**
-- If **Git is missing or not recognized** (`git --version` fails)
-- If **Git is installed but not in PATH**
-- If **DevOps Agent cannot access Git**
-- If **Pipelines fail to commit and push files**
-- If **"detected dubious ownership"** error appears
-- If **Pipeline changes do not appear in the repository**
+### When to Use This Section?
+- If Git is missing or not recognized (`git --version` fails)
+- If Git is installed but not in PATH
+- If DevOps Agent cannot access Git
+- If Pipelines fail to commit and push files
+- If "detected dubious ownership" error appears
+- If Pipeline changes do not appear in the repository
 
 -------------------------
 
@@ -382,19 +408,19 @@ git push origin main
 For the pipeline to commit and push generated `.kql` files back to the repository, ensure that the DevOps Build Service has the correct permissions.  
 
 #### 1️⃣ Verify Build Service Permissions  
-1. Navigate to **Azure DevOps** → **Project Settings** → **Repositories**  
-2. Select the repository **"DataExplorer_Delta"**  
-3. Go to the **Security** tab  
-4. Locate **"DataExplorer_Delta Build Service (rchapler)"**  
-5. Ensure the following permissions are **set to "Allow"**:  
+1. Navigate to Azure DevOps → Project Settings → Repositories  
+2. Select the repository "DataExplorer_Delta"  
+3. Go to the Security tab  
+4. Locate "DataExplorer_Delta Build Service (rchapler)"  
+5. Ensure the following permissions are set to "Allow":  
    - `Contribute`  
    - `Create branch`  
    - `Contribute to pull requests`  
    - `Bypass policies when pushing` (if necessary)  
 
 #### 2️⃣ Confirm and Apply Changes  
-- **If a "Save" button appears**, click it  
-- **If no "Save" button appears**, refresh the page to confirm that permissions were applied  
+- If a "Save" button appears, click it  
+- If no "Save" button appears, refresh the page to confirm that permissions were applied  
 
 #### 3️⃣ Validate with a Manual Push  
 After setting permissions, validate push access by running the following on the agent machine:  
@@ -414,11 +440,11 @@ git push origin main
 
 -------------------------
 
-## **Special Pre-Requisite: Azure DevOps Initial Setup**  
+## Special Pre-Requisite: Azure DevOps Initial Setup  
 
 Before setting up the self-hosted agent and pipelines, Azure DevOps must be configured from scratch.
 
-### **1️⃣ Create an Azure DevOps Organization**  
+### 1️⃣ Create an Azure DevOps Organization  
 1. Navigate to [Azure DevOps](https://dev.azure.com/)  
 2. Click `"Create new organization"`  
 3. Sign in with your Microsoft account  
@@ -428,20 +454,20 @@ Before setting up the self-hosted agent and pipelines, Azure DevOps must be conf
 
 -------------------------
 
-### **2️⃣ Create a New DevOps Project**  
+### 2️⃣ Create a New DevOps Project  
 1. Once inside the DevOps organization, click `"New project"`  
 2. Provide a name (e.g., `"DataExplorer_Delta"`)  
-3. Set **visibility** to `"Private"`  
+3. Set visibility to `"Private"`  
 4. Click `"Create"`  
 
 -------------------------
 
-### **3️⃣ Create a Git Repository**  
+### 3️⃣ Create a Git Repository  
 1. Inside the project, go to `"Repos"`  
 2. Click `"Initialize with a README"` (if not already created)  
 3. Click `"Clone"` → Copy the HTTPS URL  
 
-#### **Clone the Repository Locally**  
+#### Clone the Repository Locally  
 ```sh
 git clone https://dev.azure.com/rchapler-devops/DataExplorer_Delta/_git/DataExplorer_Delta
 cd DataExplorer_Delta
@@ -449,9 +475,9 @@ cd DataExplorer_Delta
 
 -------------------------
 
-### **4️⃣ Configure the Repository for Pipeline Execution**  
-1. **Add a `.gitignore` file** to exclude unnecessary files  
-2. **Create a new branch (optional)**  
+### 4️⃣ Configure the Repository for Pipeline Execution  
+1. Add a `.gitignore` file to exclude unnecessary files  
+2. Create a new branch (optional)  
    ```sh
    git checkout -b dev
    git push -u origin dev
@@ -459,7 +485,7 @@ cd DataExplorer_Delta
 
 -------------------------
 
-### **5️⃣ Create a New Pipeline**  
+### 5️⃣ Create a New Pipeline  
 1. Navigate to `"Pipelines"`  
 2. Click `"New pipeline"`  
 3. Select `"Azure Repos Git"`  
@@ -481,17 +507,17 @@ steps:
 
 -------------------------
 
-### **6️⃣ Set Up DevOps Service Connections**  
+### 6️⃣ Set Up DevOps Service Connections  
 1. Navigate to `"Project Settings"` → `"Service Connections"`  
 2. Click `"New service connection"` → Select `"Azure Resource Manager"`  
 3. Choose `"Service principal (automatic)"`  
-4. Select the correct Azure **subscription**  
+4. Select the correct Azure subscription  
 5. Name the service connection (e.g., `"AzureServiceConnection"`)  
 6. Click `"Save"`  
 
 -------------------------
 
-### **7️⃣ Configure DevOps Repository Permissions**  
+### 7️⃣ Configure DevOps Repository Permissions  
 1. Go to `"Project Settings"` → `"Repositories"`  
 2. Select `"DataExplorer_Delta"`  
 3. Under `"Security"`, locate `"DataExplorer_Delta Build Service (rchapler-devops)"`  
@@ -500,11 +526,11 @@ steps:
 
 -------------------------
 
-### **Next Steps**  
+### Next Steps  
 Once DevOps is set up, proceed with:  
-- [**Self-Hosted Agent Setup**](#special-pre-requisite-self-hosted-agent)  
-- [**Pipeline Definition**](#pipeline-definition)  
-- [**Git Installation and Configuration**](#special-pre-requisite-git-installation-and-configuration)  
+- [Self-Hosted Agent Setup](#special-pre-requisite-self-hosted-agent)  
+- [Pipeline Definition](#pipeline-definition)  
+- [Git Installation and Configuration](#special-pre-requisite-git-installation-and-configuration)  
 
 ## Special Pre-Requisite: Self-Hosted Agent  
 
@@ -582,7 +608,7 @@ Pool: SelfHostedPool
   - Key Vault Secrets User  
 - Click Save
 
-************************* THERE MAY BE A CHANGE TO KEYVAULT POLICY RE: "DISABLE PUBLIC ACCESS"... IF SO, WE'LL NEED TO CREATE A PRIVATE ENDPOINT
+* THERE MAY BE A CHANGE TO KEYVAULT POLICY RE: "DISABLE PUBLIC ACCESS"... IF SO, WE'LL NEED TO CREATE A PRIVATE ENDPOINT
 
 ### Create a Variable Group in Azure DevOps  
 - Go to Azure DevOps → Pipelines → Library  
