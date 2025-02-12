@@ -191,50 +191,153 @@ If `kusto` is still not recognized, restart the PowerShell terminal and check ag
 
 ## Special Pre-Requisite: Microsoft.Azure.Kusto.Data via NuGet  
 
-### 1. Disable VPN (If Applicable)  
+### 1. Disable VPN (if applicable)  
+
 If using a VPN, turn it off before installation.  
 
 ### 2. Verify Network Connectivity  
-```
+
+```powershell
 Test-NetConnection -ComputerName api.nuget.org -Port 443
 Test-NetConnection -ComputerName www.nuget.org -Port 443
 ```
-If `www.nuget.org` fails, update DNS:  
-```
+
+If `Test-NetConnection` fails, update DNS:  
+
+```powershell
 netsh interface ip set dns "Wi-Fi" static 8.8.8.8
 ipconfig /flushdns
 ```
-Restart the adapter and test again.  
+
+Restart the network adapter and verify connectivity again.
+
+---
 
 ### 3. Install NuGet CLI  
+
+#### 3.1 Ensure the Installation Directory Exists  
+
+```powershell
+New-Item -ItemType Directory -Path C:\KustoSDK -Force
 ```
+
+Verify that the directory was created:  
+
+```powershell
+Test-Path C:\KustoSDK
+```
+
+- If `True`, proceed to **3.2**  
+- If `False`, manually create the directory and check file permissions  
+
+#### 3.2 Download NuGet CLI  
+
+```powershell
 Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile C:\KustoSDK\nuget.exe
+```
+
+Verify that `nuget.exe` was downloaded:  
+
+```powershell
+Test-Path C:\KustoSDK\nuget.exe
+```
+
+- If `True`, proceed to **3.3**  
+- If `False`, check:  
+  - Internet connectivity  
+  - File permissions for `C:\KustoSDK`  
+  - Security policies blocking `Invoke-WebRequest`  
+
+#### 3.3 Verify NuGet CLI Execution  
+
+```powershell
 C:\KustoSDK\nuget.exe help
 ```
 
-### 4. Install Required Packages  
+- If the command works, proceed to **Step 4**  
+- If you get a `CommandNotFoundException`, add `C:\KustoSDK` to `PATH`  
+
+```powershell
+$NuGetPath = "C:\KustoSDK"
+$envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+if ($envPath -notlike "*$NuGetPath*") {
+    [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$NuGetPath", "Machine")
+}
 ```
+
+Restart the PowerShell terminal and verify:  
+
+```powershell
+where.exe nuget
+```
+
+If `nuget.exe` is still not recognized, restart the machine and try again.
+
+---
+
+### 4. Install Required Packages  
+
+```powershell
 C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Data -OutputDirectory C:\KustoSDK
 C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Ingest -OutputDirectory C:\KustoSDK
 C:\KustoSDK\nuget.exe install Newtonsoft.Json -OutputDirectory C:\KustoSDK
 C:\KustoSDK\nuget.exe install Microsoft.IdentityModel.Tokens -OutputDirectory C:\KustoSDK
 ```
 
+---
+
 ### 5. Locate and Load the DLLs  
-```
+
+```powershell
 Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll"
 Add-Type -Path "C:\KustoSDK\Microsoft.Azure.Kusto.Data.13.0.0\lib\netstandard2.0\Kusto.Data.dll"
 ```
 
+---
+
 ### 6. Authenticate with Azure  
-```
+
+```powershell
 az login
 az account show
 $Token = az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
 ```
 
-### 7. Run a Test Query  
+#### 6A. If `az` is not recognized, verify installation:  
+
+```powershell
+where.exe az
 ```
+
+- If `az` is missing, reinstall it using `winget`:  
+
+```powershell
+winget install --id Microsoft.AzureCLI --source winget --accept-package-agreements --accept-source-agreements
+```
+
+- If installed but not recognized, manually add it to `PATH` and restart the PowerShell terminal:  
+
+```powershell
+$AzPath = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin"
+$envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+if ($envPath -notlike "*$AzPath*") {
+    [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$AzPath", "Machine")
+}
+```
+
+Restart the PowerShell terminal and verify again:  
+
+```powershell
+where.exe az
+```
+
+If `az` is still not recognized, restart the machine.  
+
+---
+
+### 7. Run a Test Query  
+
+```powershell
 $Cluster = "https://<your-cluster-name>.eastus.kusto.windows.net"
 $Database = "<your-database-name>"
 $Query = "Tables | project TableName"
@@ -247,12 +350,34 @@ $QueryResults = $QueryProvider.ExecuteQuery($Query, $null, $null)
 $QueryResults.Tables[0].Rows | Format-Table
 ```
 
-### Alternative: Use `az rest` Instead  
+#### 7A. If the query fails, verify authentication and permissions  
+
+```powershell
+az account show
+az kusto database-principal-assignment list --cluster-name "<your-cluster-name>" --database-name "<your-database-name>" --query "[].{Principal:principalId, Role:role}" -o table
 ```
+
+If the required roles are missing, assign the `"Viewer"` role:  
+
+```powershell
+az kusto database-principal-assignment create --cluster-name "<your-cluster-name>" --database-name "<your-database-name>" --principal-id "<YOUR_USER_OBJECT_ID>" --principal-type "User" --role "Viewer" --tenant-id "<YOUR_TENANT_ID>" --name "ADX-User-Viewer-Role"
+```
+
+---
+
+### 8. Alternative: Use `az rest` Instead  
+
+```powershell
 az rest --method post `
   --url "https://<your-cluster-name>.eastus.kusto.windows.net/v1/rest/query" `
   --headers "Content-Type=application/json" `
   --body "{ \"db\": \"<your-database-name>\", \"csl\": \"Tables | project TableName\" }"
+```
+
+#### 8A. If the `az rest` command fails, verify the access token  
+
+```powershell
+az account get-access-token --resource "https://kusto.windows.net" --query accessToken -o tsv
 ```
 
 ------------------------- -------------------------
@@ -261,16 +386,12 @@ az rest --method post `
 
 For the pipeline to commit and push generated `.kql` files to the repository, Git must be installed and properly configured on the agent machine.
 
-------------------------- -------------------------
-
 #### 1️⃣ Verify if Git is Installed  
 Run the following command:  
 ```powershell
 where.exe git
 ```
 If no output is returned, Git is not installed.
-
-------------------------- -------------------------
 
 #### 2️⃣ Install Git  
 Install Git using winget:  
@@ -287,8 +408,6 @@ git --version
 ```
 If Git is installed correctly, it will return the installed version.
 
-------------------------- -------------------------
-
 #### 3️⃣ Ensure Git is in PATH  
 If `git` is installed but not recognized, manually add it to the system PATH:
 ```powershell
@@ -303,8 +422,6 @@ Restart the terminal and verify:
 where.exe git
 ```
 
-------------------------- -------------------------
-
 #### 4️⃣ Ensure the DevOps Agent Can Access Git  
 If Git is installed under a different user, but the DevOps Agent runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
 
@@ -313,8 +430,6 @@ Verify that the agent process can find `git.exe`:
 Get-Command git | Select-Object -ExpandProperty Source
 ```
 If this fails, restart the Azure DevOps Agent service and try again.
-
-------------------------- -------------------------
 
 #### 5️⃣ Configure Git as a Safe Directory  
 If you see an error like:
@@ -325,8 +440,6 @@ Run the following command to mark the DevOps workspace as safe:
 ```powershell
 git config --global --add safe.directory C:/agent/_work/1/s
 ```
-
-------------------------- -------------------------
 
 #### 6️⃣ Verify Git is Tracking the Repository  
 Run:
@@ -342,8 +455,6 @@ git status
   git checkout main
   ```
 
-------------------------- -------------------------
-
 #### 7️⃣ Configure Git for DevOps Authentication  
 Ensure Git uses the System.AccessToken for authentication:
 ```powershell
@@ -353,8 +464,6 @@ git config --global credential.helper store
 echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
 ```
 
-------------------------- -------------------------
-
 #### 8️⃣ Manually Push Missing Files  
 If Git is now installed but the pipeline failed to commit `.kql` files, manually push them:  
 ```powershell
@@ -363,16 +472,6 @@ git add -A
 git commit -m "Manually adding missing .kql files"
 git push origin main
 ```
-
-------------------------- -------------------------
-
-### When to Use This Section?
-- If Git is missing or not recognized (`git --version` fails)
-- If Git is installed but not in PATH
-- If DevOps Agent cannot access Git
-- If Pipelines fail to commit and push files
-- If "detected dubious ownership" error appears
-- If Pipeline changes do not appear in the repository
 
 ------------------------- -------------------------
 
