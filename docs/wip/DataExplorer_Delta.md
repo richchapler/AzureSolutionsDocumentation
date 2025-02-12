@@ -79,8 +79,6 @@ where.exe pwsh
 
 -------------------------
 
-Here’s the updated section reflecting your preferences:  
-
 ## Special Pre-Requisite: Azure CLI  
 
 Azure CLI is required for pipeline execution, authentication, and querying Azure Data Explorer.  
