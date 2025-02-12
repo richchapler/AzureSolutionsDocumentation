@@ -330,12 +330,65 @@ C:\KustoSDK\nuget.exe install Newtonsoft.Json -OutputDirectory C:\KustoSDK
 C:\KustoSDK\nuget.exe install Microsoft.IdentityModel.Tokens -OutputDirectory C:\KustoSDK
 ```
 
-### 5. Locate and Load the DLLs  
+### **5. Locate and Load the DLLs**  
+
+#### **5.1 Verify Installed Packages**  
+
+Check that the required packages were installed successfully:  
 
 ```powershell
-Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll"
-Add-Type -Path "C:\KustoSDK\Microsoft.Azure.Kusto.Data.13.0.0\lib\netstandard2.0\Kusto.Data.dll"
+Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "*.dll"
 ```
+
+#### **5.1.1 (Conditional) If `Kusto.Data.dll` is Missing, Reinstall Required Packages**  
+
+```powershell
+C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Data -OutputDirectory C:\KustoSDK
+C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Ingest -OutputDirectory C:\KustoSDK
+C:\KustoSDK\nuget.exe install Newtonsoft.Json -OutputDirectory C:\KustoSDK
+C:\KustoSDK\nuget.exe install Microsoft.IdentityModel.Tokens -OutputDirectory C:\KustoSDK
+```
+
+#### **5.2 Locate the Correct Path for `Kusto.Data.dll`**  
+
+```powershell
+Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll" | Select-Object FullName
+```
+
+If `Kusto.Data.dll` is missing, manually inspect `C:\KustoSDK` to ensure the expected folder structure exists.
+
+#### **5.3 Update the DLL Path If Needed**  
+
+```powershell
+$KustoDllPath = (Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll").FullName
+if ($KustoDllPath) {
+    Add-Type -Path $KustoDllPath
+} else {
+    Write-Host "ERROR: Kusto.Data.dll not found in C:\KustoSDK. Verify installation."
+    exit 1
+}
+```
+
+#### **5.3.1 (Conditional) If `Kusto.Data.dll` is Still Missing**  
+
+- Ensure NuGet successfully installed the libraries  
+- Check for connectivity issues with NuGet (`Test-NetConnection api.nuget.org -Port 443`)  
+- Verify `C:\KustoSDK` has the correct structure  
+
+If needed, force a reinstall of `Microsoft.Azure.Kusto.Data`:  
+
+```powershell
+Remove-Item -Recurse -Force C:\KustoSDK\Microsoft.Azure.Kusto.Data*
+C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Data -OutputDirectory C:\KustoSDK
+```
+
+Then, retry locating the DLL:  
+
+```powershell
+Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll" | Select-Object FullName
+```
+
+Once the correct path is confirmed, re-run `Add-Type` with the verified DLL path.
 
 ### 6. Authenticate with Azure  
 
