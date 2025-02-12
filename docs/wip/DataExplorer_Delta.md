@@ -13,24 +13,20 @@
 
 ### Special  
 
-The following must be installed in order to avoid compatibility issues and pipeline failures:  
-
-1. PowerShell Core installed and available in `PATH`  
-   - Required for running scripts and ensuring compatibility with Azure CLI  
-2. Azure CLI installed and updated  
-   - Ensures the CLI is available for pipeline authentication and command execution  
-3. PowerShell Core updated  
-   - Prevents compatibility issues with Azure CLI and script execution  
-4. Azure CLI Kusto extension installed  
-   - Needed for querying Azure Data Explorer (ADX)  
-5. Microsoft.Azure.Kusto.Data installed via NuGet  
-   - Required for Kusto client operations and authentication  
-6. A self-hosted agent registered in Azure DevOps  
-   - Required for running the pipeline on a dedicated machine  
-7. A service connection with correct Azure permissions  
-   - Ensures the pipeline can access necessary Azure resources  
-
-Each step builds upon the previous one, ensuring a smooth setup without redundant troubleshooting.
+1. PowerShell Core  
+   - Required for executing scripts and ensuring compatibility with Azure CLI  
+2. Azure CLI  
+   - Ensures availability for pipeline authentication and command execution  
+3. Azure CLI Kusto Extension  
+   - Required for querying Azure Data Explorer (ADX)  
+4. Microsoft.Azure.Kusto.Data  
+   - Installed via NuGet and required for Kusto client operations and authentication  
+5. Git  
+   - Needed for repository tracking and pipeline commits  
+6. Self-Hosted Agent  
+   - Registered in Azure DevOps and required for executing the pipeline on a dedicated machine  
+7. Service Connection  
+   - Configured in Azure DevOps with correct permissions to authenticate and access necessary Azure resources  
 
 ------------------------- -------------------------
 
@@ -299,16 +295,16 @@ Check if `nuget.exe` is found under `C:\KustoSDK`:
 where.exe /R C:\KustoSDK nuget.exe
 ```
 
-If `nuget.exe` exists but is not recognized, manually add it to the **System PATH**:  
+If `nuget.exe` exists but is not recognized, manually add it to the System PATH:  
 
-1. Open **System Properties** (`sysdm.cpl` in `Run` dialog)  
-2. Go to **Advanced** → **Environment Variables**  
-3. Under **System Variables**, locate **Path** and click **Edit**  
-4. Click **New**, add:  
+1. Open System Properties (`sysdm.cpl` in `Run` dialog)  
+2. Go to Advanced → Environment Variables  
+3. Under System Variables, locate Path and click Edit  
+4. Click New, add:  
    ```
    C:\KustoSDK
    ```
-5. Click **OK** on all dialogs  
+5. Click OK on all dialogs  
 6. Restart PowerShell and try:  
 
 ```powershell
@@ -330,9 +326,9 @@ C:\KustoSDK\nuget.exe install Newtonsoft.Json -OutputDirectory C:\KustoSDK
 C:\KustoSDK\nuget.exe install Microsoft.IdentityModel.Tokens -OutputDirectory C:\KustoSDK
 ```
 
-### **5. Locate and Load the DLLs**  
+### 5. Locate and Load the DLLs  
 
-#### **5.1 Verify Installed Packages**  
+#### 5.1 Verify Installed Packages  
 
 Check that the required packages were installed successfully:  
 
@@ -340,7 +336,7 @@ Check that the required packages were installed successfully:
 Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "*.dll"
 ```
 
-#### **5.1.1 (Conditional) If `Kusto.Data.dll` is Missing, Reinstall Required Packages**  
+#### 5.1.1 (Conditional) If `Kusto.Data.dll` is Missing, Reinstall Required Packages  
 
 ```powershell
 C:\KustoSDK\nuget.exe install Microsoft.Azure.Kusto.Data -OutputDirectory C:\KustoSDK
@@ -349,7 +345,7 @@ C:\KustoSDK\nuget.exe install Newtonsoft.Json -OutputDirectory C:\KustoSDK
 C:\KustoSDK\nuget.exe install Microsoft.IdentityModel.Tokens -OutputDirectory C:\KustoSDK
 ```
 
-#### **5.2 Locate the Correct Path for `Kusto.Data.dll`**  
+#### 5.2 Locate the Correct Path for `Kusto.Data.dll`  
 
 ```powershell
 Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll" | Select-Object FullName
@@ -357,7 +353,7 @@ Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll" | Select-Obj
 
 If `Kusto.Data.dll` is missing, manually inspect `C:\KustoSDK` to ensure the expected folder structure exists.
 
-#### **5.3 Update the DLL Path If Needed**  
+#### 5.3 Update the DLL Path If Needed  
 
 ```powershell
 $KustoDllPath = (Get-ChildItem -Path "C:\KustoSDK" -Recurse -Filter "Kusto.Data.dll").FullName
@@ -369,7 +365,7 @@ if ($KustoDllPath) {
 }
 ```
 
-#### **5.3.1 (Conditional) If `Kusto.Data.dll` is Still Missing**  
+#### 5.3.1 (Conditional) If `Kusto.Data.dll` is Still Missing  
 
 - Ensure NuGet successfully installed the libraries  
 - Check for connectivity issues with NuGet (`Test-NetConnection api.nuget.org -Port 443`)  
@@ -392,17 +388,17 @@ Once the correct path is confirmed, re-run `Add-Type` with the verified DLL path
 
 ------------------------- -------------------------
 
-## **Special Pre-Requisite: Git Installation and System Configuration**  
+## Special Pre-Requisite: Git Installation and System Configuration  
 
-Git must be installed and configured **before** setting up the DevOps agent. This ensures that the pipeline machine can execute Git commands, but **repository tracking will be configured later** after the self-hosted agent is set up.
+Git must be installed and configured before setting up the DevOps agent. This ensures that the pipeline machine can execute Git commands, but repository tracking will be configured later after the self-hosted agent is set up.
 
-### **1. Verify if Git is Installed**  
+### 1. Verify if Git is Installed  
 
 ```powershell
 where.exe git
 ```
 
-### **1.1 (Conditional) If Git is not found, verify `PATH`**  
+### 1.1 (Conditional) If Git is not found, verify `PATH`  
 
 ```powershell
 $env:Path -split ";"
@@ -412,7 +408,7 @@ If `C:\Program Files\Git\bin` is missing, proceed with installation.
 
 ---
 
-### **2. Install Git**  
+### 2. Install Git  
 
 Install Git using `winget`:  
 
@@ -426,7 +422,7 @@ Alternatively, download and install Git manually from [https://git-scm.com/downl
 
 ---
 
-### **3. Verify Installation**  
+### 3. Verify Installation  
 
 Restart the PowerShell terminal and check:  
 
@@ -438,9 +434,9 @@ If Git is installed correctly, it will return the installed version.
 
 ---
 
-### **4. Ensure Git is in `PATH`**  
+### 4. Ensure Git is in `PATH`  
 
-If `git` is installed but not recognized, manually add it to the **system PATH**:
+If `git` is installed but not recognized, manually add it to the system PATH:
 
 ```powershell
 $GitPath = "C:\Program Files\Git\bin"
@@ -458,18 +454,18 @@ where.exe git
 
 ---
 
-### **4.1 (Conditional) If Git is still not recognized**  
+### 4.1 (Conditional) If Git is still not recognized  
 
-Manually add Git to the **System PATH**:
+Manually add Git to the System PATH:
 
-1. Open **System Properties** (`sysdm.cpl` in `Run` dialog)  
-2. Go to **Advanced** → **Environment Variables**  
-3. Under **System Variables**, locate **Path** and click **Edit**  
-4. Click **New**, add:  
+1. Open System Properties (`sysdm.cpl` in `Run` dialog)  
+2. Go to Advanced → Environment Variables  
+3. Under System Variables, locate Path and click Edit  
+4. Click New, add:  
    ```
    C:\Program Files\Git\bin
    ```
-5. Click **OK** on all dialogs  
+5. Click OK on all dialogs  
 6. Restart PowerShell and verify again:
 
 ```powershell
@@ -478,7 +474,7 @@ where.exe git
 
 ---
 
-### **4.2 (Conditional) If Git is still missing, restart the machine**  
+### 4.2 (Conditional) If Git is still missing, restart the machine  
 
 ```powershell
 shutdown /r /t 0
@@ -486,9 +482,9 @@ shutdown /r /t 0
 
 ---
 
-### **5. Ensure the DevOps Agent Can Access Git**  
+### 5. Ensure the DevOps Agent Can Access Git  
 
-If Git is installed under a different user, but the **DevOps Agent** runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
+If Git is installed under a different user, but the DevOps Agent runs as `NT AUTHORITY/NETWORK SERVICE`, Git might not be accessible.  
 
 Verify that the agent process can find `git.exe`:  
 
@@ -496,7 +492,7 @@ Verify that the agent process can find `git.exe`:
 Get-Command git | Select-Object -ExpandProperty Source
 ```
 
-If this fails, restart the **Azure DevOps Agent** service and try again.
+If this fails, restart the Azure DevOps Agent service and try again.
 
 ------------------------- -------------------------
 
@@ -669,34 +665,34 @@ Pool: SelfHostedPool
 
 ------------------------- -------------------------
 
-### **Special Pre-Requisite: Git Configuration for DevOps Agent**  
+### Special Pre-Requisite: Git Configuration for DevOps Agent  
 
 Once the self-hosted agent is installed, Git must be accessible by the agent for pipeline operations, including tracking the repository and committing `.kql` files.
 
 ---
 
-### **1. Ensure the DevOps Agent Can Access Git**  
+### 1. Ensure the DevOps Agent Can Access Git  
 
 The DevOps agent runs as `NT AUTHORITY/NETWORK SERVICE`, which might not have access to Git.  
 
-#### **1.1 Verify Git is Recognized by the Agent**  
-Run the following command **on the agent machine** using the same user account that runs the DevOps agent:  
+#### 1.1 Verify Git is Recognized by the Agent  
+Run the following command on the agent machine using the same user account that runs the DevOps agent:  
 ```powershell
 Get-Command git | Select-Object -ExpandProperty Source
 ```
 If this returns a valid Git path, Git is accessible by the agent.
 
-#### **1.2 (Conditional) If Git is Not Found**  
+#### 1.2 (Conditional) If Git is Not Found  
 Restart the DevOps Agent service and try again:  
 ```powershell
 Restart-Service vstsagent* -Force
 Get-Command git | Select-Object -ExpandProperty Source
 ```
-If Git is still not found, manually add it to the **System PATH**.
+If Git is still not found, manually add it to the System PATH.
 
 ---
 
-### **2. Configure Git as a Safe Directory**  
+### 2. Configure Git as a Safe Directory  
 
 If you encounter the following error during pipeline execution:  
 ```
@@ -708,14 +704,14 @@ git config --global --add safe.directory C:/agent/_work/1/s
 ```
 ---
 
-### **3. Verify Git is Tracking the Repository**  
+### 3. Verify Git is Tracking the Repository  
 
 Change to the expected DevOps workspace directory:  
 ```powershell
 cd C:\agent\_work\1\s
 git status
 ```
-#### **3.1 (Conditional) If "Not a Git Repository", Initialize It**  
+#### 3.1 (Conditional) If "Not a Git Repository", Initialize It  
 If the output states `"Not a git repository"`, initialize the repository and fetch the latest code:  
 ```powershell
 git init
@@ -725,9 +721,9 @@ git checkout main
 ```
 ---
 
-### **4. Configure Git for DevOps Authentication**  
+### 4. Configure Git for DevOps Authentication  
 
-Ensure Git uses **System.AccessToken** for authentication within the pipeline:  
+Ensure Git uses System.AccessToken for authentication within the pipeline:  
 ```powershell
 git config --global user.email "pipeline@devops.com"
 git config --global user.name "Azure DevOps Pipeline"
@@ -736,7 +732,7 @@ echo "https://user:$(System.AccessToken)@dev.azure.com" | git credential approve
 ```
 ---
 
-### **5. Manually Push Missing Files**  
+### 5. Manually Push Missing Files  
 
 If Git is installed but the pipeline failed to commit `.kql` files, manually push them:  
 ```powershell
@@ -747,8 +743,8 @@ git push origin main
 ```
 ---
 
-### **6. (Conditional) If Authentication Fails**  
-#### **6.1 Verify Git User Configuration**  
+### 6. (Conditional) If Authentication Fails  
+#### 6.1 Verify Git User Configuration  
 ```powershell
 git config --list --global | Select-String "user"
 ```
@@ -758,8 +754,8 @@ git credential reject https://dev.azure.com
 git credential approve https://user:$(System.AccessToken)@dev.azure.com
 ```
 
-#### **6.2 (Conditional) If Permission Errors Occur**  
-Ensure that **System.AccessToken** is correctly assigned in the pipeline:  
+#### 6.2 (Conditional) If Permission Errors Occur  
+Ensure that System.AccessToken is correctly assigned in the pipeline:  
 1. Open Azure DevOps → Pipelines  
 2. Edit the pipeline YAML  
 3. Ensure `persistCredentials` is enabled:  
@@ -771,12 +767,12 @@ Ensure that **System.AccessToken** is correctly assigned in the pipeline:
 
 ---
 
-This **Git Part 2** section ensures:
-- Git is recognized by the **DevOps Agent**
+This Git Part 2 section ensures:
+- Git is recognized by the DevOps Agent
 - The repository is properly tracked
 - System.AccessToken is used for authentication  
 
-🚀 **Next Step:** Validate pipeline execution to confirm Git operations work.
+🚀 Next Step: Validate pipeline execution to confirm Git operations work.
 
 ------------------------- -------------------------
 
