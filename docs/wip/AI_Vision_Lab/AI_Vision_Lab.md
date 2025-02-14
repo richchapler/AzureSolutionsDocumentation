@@ -8,7 +8,8 @@
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
 - [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis) 
 
-## Exercise 1: Prepare Environment (skip if you won't do Pro-Code)
+## Exercise 1: Prepare Environment
+_Skip if you won't do Pro-Code exercises_
 
 ### Visual Studio Code
 
