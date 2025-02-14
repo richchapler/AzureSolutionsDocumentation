@@ -37,7 +37,7 @@ After installation, open Visual Studio Code and navigate to the "Extensions: Mar
 
 Search for, select and install `Python`, then restart Visual Studio Code.
 
----
+------------------------- -------------------------
 
 ### Python
 
@@ -59,7 +59,7 @@ Expected output (version may vary):
 Python 3.13.1
 ```
 
----
+------------------------- -------------------------
 
 #### Python Virtual Environment
 
@@ -88,7 +88,7 @@ venv\Scripts\Activate
 
 After running this command, note that your prompt changes to include prefix `(venv)`, showing that it is working inside the virtual environment.
 
----
+------------------------- -------------------------
 
 ### Jupyter
 
@@ -122,7 +122,7 @@ Select the "Recommended" interpreter.
 
 <img src="https://github.com/user-attachments/assets/4abe9278-ecf8-49bd-aa00-330e06fed88b" width="800" title="Snipped February 5, 2025" />
 
----
+------------------------- -------------------------
 
 ### Notebook
 
@@ -195,7 +195,7 @@ Execute the code cell.
 
 <img src="https://github.com/user-attachments/assets/f213b897-ff09-4b80-b235-64b22e8c60fd" width="800" title="Snipped February 5, 2025" />
 
----
+------------------------- -------------------------
 
 #### Dependencies  
 
@@ -235,7 +235,7 @@ Execute the code cell.
 
 <img src="https://github.com/user-attachments/assets/a33e70c2-dbeb-417e-ab9a-aed24e32d6d8" width="800" title="Snipped February 5, 2025" />
 
----
+------------------------- -------------------------
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
@@ -247,44 +247,50 @@ This exercise demonstrates how to use Azure AI Vision OCR to extract text from i
 
 ### Low Code  
 
-_Note: This documentation assumes that [AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) is ready for use_
+### Low-Code Approach: Testing OCR with Vision Studio
 
-Open [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and familiarize yourself with the interface and options.  
+This section demonstrates how to quickly test Optical Character Recognition (OCR) without writing any code. Using the Azure AI Vision Studio interface, you can easily extract text from images and inspect the results visually before integrating the service into your own applications.
 
-<img src="https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff" width="800" title="Snipped January 31, 2025" />  
+#### Overview
 
-This section covers:  
+- **Purpose:** Extract text—including both printed and handwritten content—from images.
+- **Key Benefits:**  
+  - **Quick Setup:** No coding required for initial experimentation.  
+  - **Interactive Exploration:** Visualize extracted text, confidence scores, and underlying JSON output.
+- **Supported Formats:** JPEG, PNG, BMP, GIF, TIFF (choose high-quality images for optimal OCR accuracy).
 
-- Optical Character Recognition (OCR) – Extract text from images, including handwriting and printed text  
-- Spatial Analysis – Detect people, movement, and zones in real-time video  
-- Face – Detect and analyze faces, including emotions and age estimation  
-- Image Analysis  
-  - Object Detection – Identify objects and return bounding boxes  
-  - Caption Images – Generate descriptions of images in natural language  
+#### Step-by-Step Instructions
 
-**Note: On hold while support works through Vision Studio UI issues**  
+1. **Access Vision Studio:**  
+   Open your web browser and navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/). Log in with your Azure credentials.  
+   ![Vision Studio Overview](https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff)
 
-<img src="https://github.com/user-attachments/assets/9a50e053-c04f-4fe3-846c-4dec2d6bbac0" width="800" title="Snipped January 31, 2025" />  
+2. **Navigate to OCR:**  
+   In the Vision Studio interface, select **Optical Character Recognition (OCR)** from the available options. Then, click on **Extract text from images**.  
+   ![Select OCR](https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77)
 
-Select Optical Character Recognition (OCR) and then click "Extract text from images".  
+3. **Perform OCR on an Image:**  
+   - Click the **"Try OCR"** button.  
+   - Upload your chosen image containing printed or handwritten text.  
+   - Click **"Analyze"** to start the OCR process.
 
-<img src="https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77" width="800" title="Snipped January 31, 2025" />  
+4. **Review the Results:**  
+   After the analysis completes, Vision Studio will display:  
+   - The **extracted text** from the image.  
+   - **Confidence scores** indicating the accuracy of the recognized text.  
+   - A detailed **JSON output** that includes information such as bounding boxes, text spans, and additional metadata (expand the JSON view to inspect all details).
 
-#### Extract text from an image  
+#### Troubleshooting Tips
 
-1. Click "Try OCR"  
-2. Upload an image containing printed or handwritten text  
-3. Click "Analyze"  
+- **UI Responsiveness:** If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
+- **Image Quality:** Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results.
+- **Support Note:** If you encounter persistent UI issues, consult the [Azure AI Vision troubleshooting guide](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) for further assistance.
 
-#### Review the results  
+#### Summary
 
-After processing, Vision Studio will display:  
+The low-code approach via Vision Studio provides an excellent way to quickly validate OCR capabilities. Once you're satisfied with the results, you can proceed to the Pro Code section to integrate these functionalities programmatically within your applications. Happy testing!
 
-- Extracted text  
-- Confidence scores  
-- JSON output (expand to view full response)  
-
----
+------------------------- -------------------------
 
 ### Pro Code  
 
@@ -364,7 +370,7 @@ _Note: JSON formatted and abbreviated for convenience_
 }
 ```
 
----
+------------------------- -------------------------
 
 ## Exercise 3: Spatial Analysis  
 
