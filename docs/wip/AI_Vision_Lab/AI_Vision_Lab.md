@@ -341,9 +341,9 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 <img src="https://github.com/user-attachments/assets/ba6405d5-9959-47c6-bf99-b86461672a45" width="800" title="Snipped February 14, 2025" />
 
-#### Video Retrieval and Summary
-
 On the "Spatial analysis" tab, click the "Video Retrieval and Summary" button.
+
+#### Video Retrieval and Summary
 
 <img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
 
