@@ -17,3 +17,7 @@ AI Search | [Multi-Source Index](AISearch_MultiSourceIndex.md) | SQL, Blob Stora
 AI Search | [PowerApp UI + Security](AISearch_PowerApp+Security.md) | AI Search, Power Apps, JSON
 Open AI | [Enriching Data via API](Data_Enrichment_OpenAI.md) | Synapse Pipeline, OpenAI, Data Explorer, API
 Open AI | [Estimating Cost](wip/OpenAI_EstimatingCost.md) | Azure Pricing Calculator
+
+## Work-in-Progress
+
+[AI Vision Lab](https://github.com/richchapler/AzureSolutionsDocumentation/blob/main/docs/wip/AI_Vision_Lab/AI_Vision_Lab.md)
