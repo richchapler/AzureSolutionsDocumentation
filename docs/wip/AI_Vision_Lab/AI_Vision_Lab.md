@@ -5,23 +5,8 @@
 ## Table of Contents  
 
 - [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
-  - [Visual Studio Code](#visual-studio-code)  
-  - [Python](#python)  
-    - [Python Virtual Environment](#python-virtual-environment)  
-  - [Jupyter](#jupyter)  
-  - [Notebook](#notebook)  
-    - [Environment Variables](#environment-variables)  
-    - [Dependencies](#dependencies)  
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
-  - [Low Code](#low-code-ocr)  
-    - [Extract text from an image](#extract-text-from-an-image)  
-    - [Review the results](#review-the-results)  
-  - [Pro Code](#pro-code-ocr)  
-    - [Analyze Image](#analyze-image)  
-- [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis)  
-  - [Low Code](#low-code-spatial-analysis)  
-  - [Pro Code](#pro-code-spatial-analysis)  
-    - [Analyze Image (Spatial Analysis)](#analyze-image-spatial-analysis)  
+- [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis) 
 
 ## Exercise 1: Prepare Environment (skip if you won't do Pro-Code)
 
