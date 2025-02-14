@@ -225,9 +225,7 @@ Execute the code cell.
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
-This exercise demonstrates how to use Azure AI Vision OCR to extract text from images using both:  
-- Low-Code: Use Vision Studio to analyze images with OCR  
-- Pro-Code: Use Jupyter Notebooks in Visual Studio Code for interactive coding  
+This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. 
 
 ### Low Code
 
@@ -348,7 +346,7 @@ _Note: JSON formatted and abbreviated for convenience_
 
 ## Exercise 3: Spatial Analysis  
 
-This section demonstrates how to use Azure AI Vision Spatial Analysis to detect people and movement in an image.
+This exercise demonstrates how to use Azure AI Vision Spatial Analysis to detect people and movement in an image.
 
 ### Low Code
 
