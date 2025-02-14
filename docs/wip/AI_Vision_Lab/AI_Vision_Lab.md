@@ -23,7 +23,7 @@
   - [Pro Code](#pro-code-spatial-analysis)  
     - [Analyze Image (Spatial Analysis)](#analyze-image-spatial-analysis)  
 
-## Exercise 1: Prepare Environment
+## Exercise 1: Prepare Environment (skip if you won't do Pro-Code)
 
 ### Visual Studio Code
 
@@ -243,15 +243,23 @@ This exercise demonstrates how to use Azure AI Vision OCR to extract text from i
 - Low-Code: Use Vision Studio to analyze images with OCR  
 - Pro-Code: Use Jupyter Notebooks in Visual Studio Code for interactive coding  
 
-### Low Code  
+### Low Code
 
-1. Access Vision Studio:  
-   Open your web browser and navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/). Log in with your Azure credentials.  
-   ![Vision Studio Overview](https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff)
+<img src="https://github.com/user-attachments/assets/06d9fa3d-cb49-4c62-bd7b-23df3585fb9f" width="800" title="Snipped February 14, 2025" />
 
-2. Navigate to OCR:  
-   In the Vision Studio interface, select Optical Character Recognition (OCR) from the available options. Then, click on Extract text from images.  
-   ![Select OCR](https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77)
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and login with your Azure credentials.
+
+<img src="https://github.com/user-attachments/assets/f008f817-51b8-4a7c-b230-19803782bde7" width="800" title="Snipped February 14, 2025" />
+
+On the "Optical character recognition" tab, click the "Extract text from images" button.
+
+<img src="https://github.com/user-attachments/assets/9d70618d-2d50-4ebc-81a8-55a9bb8be4bc" width="800" title="Snipped February 14, 2025" />
+
+Check "I acknowledge...", click "Browse for a file", and then "Open" a downloaded sample file
+<br>{e.g., https://ocr.space/Content/Images/receipt-ocr-original.jpg in c:\downloads}.
+
+<img src="https://github.com/user-attachments/assets/9b847284-14dd-4487-90ab-06079d53bd6b" width="800" title="Snipped February 14, 2025" />
+
 
 3. Perform OCR on an Image:  
    - Click the "Try OCR" button.  
