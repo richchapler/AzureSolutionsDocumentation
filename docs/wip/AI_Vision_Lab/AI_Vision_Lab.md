@@ -245,7 +245,7 @@ Complete the "Select an AzureResource" form and then click "Confirm".
 
 Iteratively review the samples to the right of the "Drag and drop a file..." box and choose a favorite.
 
-<img src="https://github.com/user-attachments/assets/e7f862b9-a288-452e-a844-968de54c2bb9" width="800" title="Snipped February 14, 2025" />
+<img src="https://github.com/user-attachments/assets/d50659f8-4762-4c5f-a6da-95505f2645be" width="800" title="Snipped February 14, 2025" />
 
 Review results on the "Detected attributes" and "JSON" tabs.
 
