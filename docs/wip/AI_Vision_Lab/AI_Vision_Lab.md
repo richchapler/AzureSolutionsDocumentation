@@ -229,8 +229,6 @@ This exercise demonstrates how to use Azure AI Vision OCR to extract text from i
 
 ### Low Code
 
-<img src="https://github.com/user-attachments/assets/06d9fa3d-cb49-4c62-bd7b-23df3585fb9f" width="800" title="Snipped February 14, 2025" />
-
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and login with your Azure credentials.
 
 <img src="https://github.com/user-attachments/assets/f008f817-51b8-4a7c-b230-19803782bde7" width="800" title="Snipped February 14, 2025" />
@@ -350,9 +348,14 @@ This exercise demonstrates how to use Azure AI Vision Spatial Analysis to detect
 
 ### Low Code
 
-1. **Access Vision Studio:**  
-   Open your web browser and navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/). Log in with your Azure credentials.  
-   ![Vision Studio Overview](https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff)
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and login with your Azure credentials.
+
+<img src="https://github.com/user-attachments/assets/ba6405d5-9959-47c6-bf99-b86461672a45" width="800" title="Snipped February 14, 2025" />
+
+
+
+
+
 
 2. **Navigate to Spatial Analysis:**  
    In the Vision Studio interface, select **Spatial Analysis** from the available options. Then, click on **Detect people and movement**.  
