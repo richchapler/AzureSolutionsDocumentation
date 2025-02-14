@@ -258,8 +258,9 @@ On the "Optical character recognition" tab, click the "Extract text from images"
 Check "I acknowledge...", click "Browse for a file", and then "Open" a downloaded sample file
 <br>{e.g., https://ocr.space/Content/Images/receipt-ocr-original.jpg in c:\downloads}.
 
-<img src="https://github.com/user-attachments/assets/9b847284-14dd-4487-90ab-06079d53bd6b" width="800" title="Snipped February 14, 2025" />
+<img src="https://github.com/user-attachments/assets/63af63d3-54a4-4069-95c6-50a9b3630791" width="800" title="Snipped February 14, 2025" />
 
+PENDING SUPPORT ISSUE RE: ENDLESS SPINNING WHEEL FOR "UPLOADING FILE..."
 
 3. Perform OCR on an Image:  
    - Click the "Try OCR" button.  
