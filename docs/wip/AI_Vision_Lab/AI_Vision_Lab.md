@@ -243,14 +243,9 @@ Check "I acknowledge...", click "Browse for a file" and then click "Please selec
 
 Complete the "Select an AzureResource" form and then click "Confirm".
 
-Click "Browse for a file" and then "Open" a downloaded sample file.
-<br>{e.g., https://ocr.space/Content/Images/receipt-ocr-original.jpg in c:\downloads}.
+Iteratively review the samples to the right of the "Drag and drop a file..." box and choose a favorite.
 
-<img src="https://github.com/user-attachments/assets/63af63d3-54a4-4069-95c6-50a9b3630791" width="800" title="Snipped February 14, 2025" />
-
-Your image file will upload and "Detected attributes" items will show bounding boxes, text spans, etc.
-
-<img src="https://github.com/user-attachments/assets/5152249c-23a9-47e0-b566-666a2506880b" width="800" title="Snipped February 14, 2025" />
+<img src="https://github.com/user-attachments/assets/e7f862b9-a288-452e-a844-968de54c2bb9" width="800" title="Snipped February 14, 2025" />
 
 Click the "Detected attributes" and "JSON" tabs to see results presented as plain text and as JSON.
 
@@ -258,7 +253,6 @@ Click the "Detected attributes" and "JSON" tabs to see results presented as plai
 
 - UI Responsiveness: If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser
 - Image Quality: Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results
-- Support Note: If you encounter persistent UI issues, consult [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) documentation
 
 -------------------------
 
@@ -356,13 +350,13 @@ On the "Spatial analysis" tab, click the "Video Retrieval and Summary" button.
 
 <img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
 
-Iteratively review videos by category: Media, Industrial and Retail
+Iteratively review the samples to the right of the "Drag and drop a file..." box and choose a favorite.
 
 <img src="https://github.com/user-attachments/assets/b8d86f2d-aa38-4122-b268-600d874b62ef" width="800" title="Snipped February 14, 2025" />
 
 
 
-
+LOREM IPSUM
 
 
 
@@ -371,6 +365,8 @@ Iteratively review videos by category: Media, Industrial and Retail
 
 - **UI Responsiveness:** If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
 - **Image/Video Quality:** Ensure the uploaded file is high resolution, as blurry or low-contrast visuals may lead to suboptimal analysis.
+
+-------------------------
 
 ## ProCode
 
