@@ -23,7 +23,7 @@ After installation, open Visual Studio Code and navigate to the "Extensions: Mar
 
 Search for, select and install `Python`, then restart Visual Studio Code.
 
--------------------------
+------------------------- -------------------------
 
 ### Python
 
@@ -45,7 +45,7 @@ Expected output (version may vary):
 Python 3.13.1
 ```
 
--------------------------
+------------------------- -------------------------
 
 #### Python Virtual Environment
 
@@ -74,7 +74,7 @@ venv\Scripts\Activate
 
 After running this command, note that your prompt changes to include prefix `(venv)`, showing that it is working inside the virtual environment.
 
--------------------------
+------------------------- -------------------------
 
 ### Jupyter
 
@@ -108,7 +108,7 @@ Select the "Recommended" interpreter.
 
 <img src="https://github.com/user-attachments/assets/4abe9278-ecf8-49bd-aa00-330e06fed88b" width="800" title="Snipped February 5, 2025" />
 
--------------------------
+------------------------- -------------------------
 
 ### Notebook
 
@@ -181,7 +181,7 @@ Execute the code cell.
 
 <img src="https://github.com/user-attachments/assets/f213b897-ff09-4b80-b235-64b22e8c60fd" width="800" title="Snipped February 5, 2025" />
 
--------------------------
+------------------------- -------------------------
 
 #### Dependencies  
 
@@ -221,7 +221,7 @@ Execute the code cell.
 
 <img src="https://github.com/user-attachments/assets/a33e70c2-dbeb-417e-ab9a-aed24e32d6d8" width="800" title="Snipped February 5, 2025" />
 
-------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
@@ -249,7 +249,7 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 Review results on the "Detected attributes" and "JSON" tabs.
 
--------------------------
+------------------------- -------------------------
 
 ### Pro Code  
 
@@ -329,7 +329,7 @@ _Note: JSON formatted and abbreviated for convenience_
 }
 ```
 
-------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 3: Spatial Analysis  
 
@@ -340,8 +340,6 @@ This exercise demonstrates how to use Azure AI Vision Spatial Analysis to detect
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and login with your Azure credentials.
 
 <img src="https://github.com/user-attachments/assets/ba6405d5-9959-47c6-bf99-b86461672a45" width="800" title="Snipped February 14, 2025" />
-
-On the "Spatial analysis" tab, click the "Video Retrieval and Summary" button.
 
 #### Video Retrieval and Summary
 
@@ -354,6 +352,22 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 Interact with resulting functionality {e.g., "Locate a frame in the video"}.
 
 -------------------------
+
+#### Count People in an Area
+
+<img src="https://github.com/user-attachments/assets/5f3d30bc-38a6-4608-94ec-edc4f4629e43" width="800" title="Snipped February 14, 2025" />
+
+⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
+
+LOREM IPSUM
+
+-------------------------
+
+#### Detect when People Cross a Line
+
+LOREM IPSUM
+
+------------------------- -------------------------
 
 ## ProCode
 
