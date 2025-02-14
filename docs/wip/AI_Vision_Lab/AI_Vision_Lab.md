@@ -249,11 +249,6 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 Review results on the "Detected attributes" and "JSON" tabs.
 
-#### Troubleshooting Tips
-
-- UI Responsiveness: If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser
-- Image Quality: Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results
-
 -------------------------
 
 ### Pro Code  
@@ -346,6 +341,8 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 <img src="https://github.com/user-attachments/assets/ba6405d5-9959-47c6-bf99-b86461672a45" width="800" title="Snipped February 14, 2025" />
 
+#### Video Retrieval and Summary
+
 On the "Spatial analysis" tab, click the "Video Retrieval and Summary" button.
 
 <img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
@@ -355,11 +352,6 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 <img src="https://github.com/user-attachments/assets/a8a9125e-7b11-4252-bfbe-da386c2c8a80" width="800" title="Snipped February 14, 2025" />
 
 Interact with resulting functionality {e.g., "Locate a frame in the video"}.
-
-#### Troubleshooting Tips
-
-- **UI Responsiveness:** If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
-- **Image/Video Quality:** Ensure the uploaded file is high resolution, as blurry or low-contrast visuals may lead to suboptimal analysis.
 
 -------------------------
 
