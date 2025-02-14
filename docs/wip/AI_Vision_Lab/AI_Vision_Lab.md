@@ -233,7 +233,9 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 <img src="https://github.com/user-attachments/assets/f008f817-51b8-4a7c-b230-19803782bde7" width="800" title="Snipped February 14, 2025" />
 
-On the "Optical character recognition" tab, click the "Extract text from images" button.
+Click on the "Optical character recognition" tab.
+
+#### Extract Text from Images
 
 <img src="https://github.com/user-attachments/assets/9d70618d-2d50-4ebc-81a8-55a9bb8be4bc" width="800" title="Snipped February 14, 2025" />
 
