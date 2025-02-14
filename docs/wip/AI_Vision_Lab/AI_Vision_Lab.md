@@ -352,40 +352,25 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 <img src="https://github.com/user-attachments/assets/ba6405d5-9959-47c6-bf99-b86461672a45" width="800" title="Snipped February 14, 2025" />
 
+On the "Spatial analysis" tab, click the "Video Retrieval and Summary" button.
+
+<img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
+
+Iteratively review videos by category: Media, Industrial and Retail
+
+<img src="https://github.com/user-attachments/assets/b8d86f2d-aa38-4122-b268-600d874b62ef" width="800" title="Snipped February 14, 2025" />
 
 
 
 
 
-2. **Navigate to Spatial Analysis:**  
-   In the Vision Studio interface, select **Spatial Analysis** from the available options. Then, click on **Detect people and movement**.  
-   ![Select Spatial Analysis](https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77)
 
-3. **Perform Spatial Analysis on an Image or Video:**  
-   - Click the **"Try Spatial Analysis"** button.  
-   - Upload an image or video containing people or motion.  
-   - Click **"Analyze"** to start the spatial analysis.
 
-4. **Review the Results:**  
-   After the analysis completes, Vision Studio will display:  
-   - **Detected people** with bounding boxes.  
-   - **Movement patterns** and zones of activity.  
-   - A detailed **JSON output** that includes information such as object tracking, confidence scores, and detected attributes.
 
 #### Troubleshooting Tips
 
 - **UI Responsiveness:** If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
 - **Image/Video Quality:** Ensure the uploaded file is high resolution, as blurry or low-contrast visuals may lead to suboptimal analysis.
-- **Support Note:** If you encounter persistent UI issues, consult the [Azure AI Vision troubleshooting guide](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) for further assistance.
-
-#### Summary
-
-The **Low-Code** approach via Vision Studio provides an excellent way to quickly validate Spatial Analysis capabilities. Once you're satisfied with the results, you can proceed to the **Pro-Code** section to integrate these functionalities programmatically within your applications.
-
-
-
-
-
 
 ## ProCode
 
