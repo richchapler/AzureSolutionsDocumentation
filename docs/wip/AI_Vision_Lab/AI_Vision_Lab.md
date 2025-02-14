@@ -23,7 +23,7 @@ After installation, open Visual Studio Code and navigate to the "Extensions: Mar
 
 Search for, select and install `Python`, then restart Visual Studio Code.
 
-------------------------- -------------------------
+-------------------------
 
 ### Python
 
@@ -45,7 +45,7 @@ Expected output (version may vary):
 Python 3.13.1
 ```
 
-------------------------- -------------------------
+-------------------------
 
 #### Python Virtual Environment
 
@@ -74,7 +74,7 @@ venv\Scripts\Activate
 
 After running this command, note that your prompt changes to include prefix `(venv)`, showing that it is working inside the virtual environment.
 
-------------------------- -------------------------
+-------------------------
 
 ### Jupyter
 
@@ -108,7 +108,7 @@ Select the "Recommended" interpreter.
 
 <img src="https://github.com/user-attachments/assets/4abe9278-ecf8-49bd-aa00-330e06fed88b" width="800" title="Snipped February 5, 2025" />
 
-------------------------- -------------------------
+-------------------------
 
 ### Notebook
 
@@ -181,7 +181,7 @@ Execute the code cell.
 
 <img src="https://github.com/user-attachments/assets/f213b897-ff09-4b80-b235-64b22e8c60fd" width="800" title="Snipped February 5, 2025" />
 
-------------------------- -------------------------
+-------------------------
 
 #### Dependencies  
 
@@ -264,7 +264,7 @@ Click the "Detected attributes" and "JSON" tabs to see results presented as plai
 - Image Quality: Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results
 - Support Note: If you encounter persistent UI issues, consult [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) documentation
 
-------------------------- -------------------------
+-------------------------
 
 ### Pro Code  
 
@@ -352,7 +352,39 @@ This section demonstrates how to use Azure AI Vision Spatial Analysis to detect 
 
 ### Low Code
 
-Lorem Ipsum
+1. **Access Vision Studio:**  
+   Open your web browser and navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/). Log in with your Azure credentials.  
+   ![Vision Studio Overview](https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff)
+
+2. **Navigate to Spatial Analysis:**  
+   In the Vision Studio interface, select **Spatial Analysis** from the available options. Then, click on **Detect people and movement**.  
+   ![Select Spatial Analysis](https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77)
+
+3. **Perform Spatial Analysis on an Image or Video:**  
+   - Click the **"Try Spatial Analysis"** button.  
+   - Upload an image or video containing people or motion.  
+   - Click **"Analyze"** to start the spatial analysis.
+
+4. **Review the Results:**  
+   After the analysis completes, Vision Studio will display:  
+   - **Detected people** with bounding boxes.  
+   - **Movement patterns** and zones of activity.  
+   - A detailed **JSON output** that includes information such as object tracking, confidence scores, and detected attributes.
+
+#### Troubleshooting Tips
+
+- **UI Responsiveness:** If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
+- **Image/Video Quality:** Ensure the uploaded file is high resolution, as blurry or low-contrast visuals may lead to suboptimal analysis.
+- **Support Note:** If you encounter persistent UI issues, consult the [Azure AI Vision troubleshooting guide](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) for further assistance.
+
+#### Summary
+
+The **Low-Code** approach via Vision Studio provides an excellent way to quickly validate Spatial Analysis capabilities. Once you're satisfied with the results, you can proceed to the **Pro-Code** section to integrate these functionalities programmatically within your applications.
+
+
+
+
+
 
 ## ProCode
 
