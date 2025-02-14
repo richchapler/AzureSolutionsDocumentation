@@ -352,14 +352,9 @@ On the "Spatial analysis" tab, click the "Video Retrieval and Summary" button.
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/b8d86f2d-aa38-4122-b268-600d874b62ef" width="800" title="Snipped February 14, 2025" />
+<img src="https://github.com/user-attachments/assets/a8a9125e-7b11-4252-bfbe-da386c2c8a80" width="800" title="Snipped February 14, 2025" />
 
-
-
-LOREM IPSUM
-
-
-
+Interact with resulting functionality {e.g., "Locate a frame in the video"}.
 
 #### Troubleshooting Tips
 
