@@ -243,7 +243,7 @@ Check "I acknowledge...", click "Browse for a file" and then click "Please selec
 
 Complete the "Select an AzureResource" form and then click "Confirm".
 
-Iteratively review the samples to the right of the "Drag and drop a file..." box and choose a favorite.
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 <img src="https://github.com/user-attachments/assets/d50659f8-4762-4c5f-a6da-95505f2645be" width="800" title="Snipped February 14, 2025" />
 
@@ -350,7 +350,7 @@ On the "Spatial analysis" tab, click the "Video Retrieval and Summary" button.
 
 <img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
 
-Iteratively review the samples to the right of the "Drag and drop a file..." box and choose a favorite.
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 <img src="https://github.com/user-attachments/assets/b8d86f2d-aa38-4122-b268-600d874b62ef" width="800" title="Snipped February 14, 2025" />
 
