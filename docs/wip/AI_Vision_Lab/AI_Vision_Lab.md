@@ -255,33 +255,28 @@ On the "Optical character recognition" tab, click the "Extract text from images"
 
 <img src="https://github.com/user-attachments/assets/9d70618d-2d50-4ebc-81a8-55a9bb8be4bc" width="800" title="Snipped February 14, 2025" />
 
-Check "I acknowledge...", click "Browse for a file", and then "Open" a downloaded sample file
+Check "I acknowledge...", click "Browse for a file" and then click "Please select a resource".
+
+<img src="https://github.com/user-attachments/assets/3da8778e-7b78-4ab7-9aa7-5b9e5fe15edc" width="800" title="Snipped February 14, 2025" />
+
+Complete the "Select an AzureResource" form and then click "Confirm".
+
+Click "Browse for a file" and then "Open" a downloaded sample file.
 <br>{e.g., https://ocr.space/Content/Images/receipt-ocr-original.jpg in c:\downloads}.
 
 <img src="https://github.com/user-attachments/assets/63af63d3-54a4-4069-95c6-50a9b3630791" width="800" title="Snipped February 14, 2025" />
 
-PENDING SUPPORT ISSUE RE: ENDLESS SPINNING WHEEL FOR "UPLOADING FILE..."
+Your image file will upload and "Detected attributes" items will show bounding boxes, text spans, etc.
 
-3. Perform OCR on an Image:  
-   - Click the "Try OCR" button.  
-   - Upload your chosen image containing printed or handwritten text.  
-   - Click "Analyze" to start the OCR process.
+<img src="https://github.com/user-attachments/assets/5152249c-23a9-47e0-b566-666a2506880b" width="800" title="Snipped February 14, 2025" />
 
-4. Review the Results:  
-   After the analysis completes, Vision Studio will display:  
-   - The extracted text from the image.  
-   - Confidence scores indicating the accuracy of the recognized text.  
-   - A detailed JSON output that includes information such as bounding boxes, text spans, and additional metadata (expand the JSON view to inspect all details).
+Click the "Detected attributes" and "JSON" tabs to see results presented as plain text and as JSON.
 
 #### Troubleshooting Tips
 
-- UI Responsiveness: If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
-- Image Quality: Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results.
-- Support Note: If you encounter persistent UI issues, consult the [Azure AI Vision troubleshooting guide](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) for further assistance.
-
-#### Summary
-
-The low-code approach via Vision Studio provides an excellent way to quickly validate OCR capabilities. Once you're satisfied with the results, you can proceed to the Pro Code section to integrate these functionalities programmatically within your applications. Happy testing!
+- UI Responsiveness: If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser
+- Image Quality: Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results
+- Support Note: If you encounter persistent UI issues, consult [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) documentation
 
 ------------------------- -------------------------
 
