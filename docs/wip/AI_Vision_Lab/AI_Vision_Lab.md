@@ -162,19 +162,19 @@ IMAGE_PATH = os.getenv("IMAGE_PATH")
 missing_messages = []
 
 if not API_KEY:
-    missing_messages.append("\n*** Error: Missing API_KEY ***\n"
+    missing_messages.append("\n* Error: Missing API_KEY *\n"
                             "1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service\n"
                             "2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'\n"
                             f"3. Paste the 'Key 1' value into {os.path.abspath(env_file).lower()} as API_KEY")
 
 if not ENDPOINT:
-    missing_messages.append("\n*** Error: Missing ENDPOINT ***\n"
+    missing_messages.append("\n* Error: Missing ENDPOINT *\n"
                             "1. Navigate to https://portal.azure.com/, search for 'AI Vision', and select your deployed service\n"
                             "2. In the left navigation, select 'Resource Management' >> 'Keys and Endpoint'\n"
                             f"3. Paste the 'Endpoint' value into {os.path.abspath(env_file).lower()} as ENDPOINT")
 
 if not IMAGE_PATH:
-    missing_messages.append("\n*** Error: Missing IMAGE_PATH ***\n"
+    missing_messages.append("\n* Error: Missing IMAGE_PATH *\n"
                             "1. Store a sample file {e.g., https://ocr.space/Content/Images/receipt-ocr-original.jpg} on your device {e.g, c:\\downloads\\receipt-ocr-original.jpg}\n"
                             f"2. Paste the local file path into {os.path.abspath(env_file).lower()} as IMAGE_PATH")
 
@@ -239,52 +239,36 @@ Execute the code cell.
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
-This exercise demonstrates how to use Azure AI Vision OCR to extract text from images. You will:  
-- Use Vision Studio to analyze images with OCR  
-- Use Jupyter Notebooks in Visual Studio Code for interactive coding  
-- Analyze images using Azure AI Vision OCR via API  
-- Retrieve text and confidence scores  
+This exercise demonstrates how to use Azure AI Vision OCR to extract text from images using both:  
+- Low-Code: Use Vision Studio to analyze images with OCR  
+- Pro-Code: Use Jupyter Notebooks in Visual Studio Code for interactive coding  
 
 ### Low Code  
 
-### Low-Code Approach: Testing OCR with Vision Studio
-
-This section demonstrates how to quickly test Optical Character Recognition (OCR) without writing any code. Using the Azure AI Vision Studio interface, you can easily extract text from images and inspect the results visually before integrating the service into your own applications.
-
-#### Overview
-
-- **Purpose:** Extract text—including both printed and handwritten content—from images.
-- **Key Benefits:**  
-  - **Quick Setup:** No coding required for initial experimentation.  
-  - **Interactive Exploration:** Visualize extracted text, confidence scores, and underlying JSON output.
-- **Supported Formats:** JPEG, PNG, BMP, GIF, TIFF (choose high-quality images for optimal OCR accuracy).
-
-#### Step-by-Step Instructions
-
-1. **Access Vision Studio:**  
+1. Access Vision Studio:  
    Open your web browser and navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/). Log in with your Azure credentials.  
    ![Vision Studio Overview](https://github.com/user-attachments/assets/46ec9526-8625-4103-912a-b23cb224c3ff)
 
-2. **Navigate to OCR:**  
-   In the Vision Studio interface, select **Optical Character Recognition (OCR)** from the available options. Then, click on **Extract text from images**.  
+2. Navigate to OCR:  
+   In the Vision Studio interface, select Optical Character Recognition (OCR) from the available options. Then, click on Extract text from images.  
    ![Select OCR](https://github.com/user-attachments/assets/fb90abc3-3c54-4f2c-a356-df292d1f3a77)
 
-3. **Perform OCR on an Image:**  
-   - Click the **"Try OCR"** button.  
+3. Perform OCR on an Image:  
+   - Click the "Try OCR" button.  
    - Upload your chosen image containing printed or handwritten text.  
-   - Click **"Analyze"** to start the OCR process.
+   - Click "Analyze" to start the OCR process.
 
-4. **Review the Results:**  
+4. Review the Results:  
    After the analysis completes, Vision Studio will display:  
-   - The **extracted text** from the image.  
-   - **Confidence scores** indicating the accuracy of the recognized text.  
-   - A detailed **JSON output** that includes information such as bounding boxes, text spans, and additional metadata (expand the JSON view to inspect all details).
+   - The extracted text from the image.  
+   - Confidence scores indicating the accuracy of the recognized text.  
+   - A detailed JSON output that includes information such as bounding boxes, text spans, and additional metadata (expand the JSON view to inspect all details).
 
 #### Troubleshooting Tips
 
-- **UI Responsiveness:** If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
-- **Image Quality:** Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results.
-- **Support Note:** If you encounter persistent UI issues, consult the [Azure AI Vision troubleshooting guide](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) for further assistance.
+- UI Responsiveness: If the interface appears unresponsive or the analysis does not start, try refreshing the browser or switching to a different browser.
+- Image Quality: Ensure the uploaded image is clear and high resolution, as blurry or low-contrast images may lead to suboptimal OCR results.
+- Support Note: If you encounter persistent UI issues, consult the [Azure AI Vision troubleshooting guide](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) for further assistance.
 
 #### Summary
 
