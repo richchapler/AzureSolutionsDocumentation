@@ -247,7 +247,7 @@ Iteratively review the samples to the right of the "Drag and drop a file..." box
 
 <img src="https://github.com/user-attachments/assets/e7f862b9-a288-452e-a844-968de54c2bb9" width="800" title="Snipped February 14, 2025" />
 
-Click the "Detected attributes" and "JSON" tabs to see results presented as plain text and as JSON.
+Review results on the "Detected attributes" and "JSON" tabs.
 
 #### Troubleshooting Tips
 
