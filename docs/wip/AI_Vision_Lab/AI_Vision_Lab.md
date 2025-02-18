@@ -441,27 +441,55 @@ Click on the "Face" tab.
 
 #### Detect Faces in an Image
 
-LOREM IPSUM
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Interact with resulting functionality {e.g., "BLAH"}.
 
 -------------------------
 
 #### Liveness Detection
 
-LOREM IPSUM
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Interact with resulting functionality {e.g., "BLAH"}.
 
 -------------------------
 
 #### Portrait Processing
 
-LOREM IPSUM
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Interact with resulting functionality {e.g., "BLAH"}.
 
 -------------------------
 
 #### Photo ID Matching
 
-LOREM IPSUM
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
 
--------------------------
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Interact with resulting functionality {e.g., "BLAH"}.
+
+
+
+
+
+
 
 
 
