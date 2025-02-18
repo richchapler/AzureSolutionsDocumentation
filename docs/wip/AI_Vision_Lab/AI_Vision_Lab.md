@@ -351,6 +351,8 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 Click on the "Spatial analysis" tab.
 
+-------------------------
+
 #### Video Retrieval and Summary
 
 <img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
@@ -498,15 +500,137 @@ Review results on the "Detected attributes" / "JSON" tabs and review the generat
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box and compare to the Camera Preview.
 
+------------------------- ------------------------- ------------------------- -------------------------
 
+## Exercise 5: Image Analysis
 
+This exercise demonstrates how to use Azure AI Vision Image Analysis to extract meaningful insights from images, including object detection, caption generation, and scene understanding.
 
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and login with your Azure credentials.
 
+<img src="https://github.com/user-attachments/assets/f80fe268-afa1-498a-a428-770f8690c05b" width="800" title="Snipped February 18, 2025" />
 
+Click on the "Image analysis" tab.
 
+-------------------------
 
+#### Recognize Products on Shelves
 
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
 
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Customize Models with Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Search Photos with Image Retrieval
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Add Dense Captions to Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Remove Backgrounds from Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Add Captions to Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Detect Common Objects in Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Extract Common Tags from Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Detect Sensitive Content in Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
+
+-------------------------
+
+#### Create Smart-Cropped Images
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
 
 
 
