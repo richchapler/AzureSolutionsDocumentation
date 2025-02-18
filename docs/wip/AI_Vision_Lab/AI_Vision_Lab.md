@@ -11,7 +11,7 @@
 - [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
 
 ## Resource Requirements
-- Cognitive Services
+- AI Services (in East US region)
 - Computer Vision
 
 ## Exercise 1: Prepare Environment
@@ -517,13 +517,31 @@ Click on the "Image analysis" tab.
 
 #### Recognize Products on Shelves
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+_Note (Feb 18, 2025): "In order to run this demo the resource must belong to these regions: East US, West Europe, West US 2"_
 
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
+<img src="https://github.com/user-attachments/assets/d6c18b07-86f3-4466-87fe-20ac5f7059dc" width="800" title="Snipped February 18, 2025" />
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+Iteratively try models:
 
-Review results on the "Detected attributes" / "JSON" tabs.
+- **Prebuilt product vs. gap model** – Detects products on shelves and identifies empty gaps for inventory tracking.  
+- **Sample custom model** – Demonstrates a custom-trained product recognition model for specific use cases.  
+- **Train your own model** – Allows users to train a model with their own dataset for tailored product detection.
+
+##### Prebuilt Product vs. Gap Model
+
+<img src="https://github.com/user-attachments/assets/1c722fed-a358-4232-942c-c30bf2ce30c8" width="800" title="Snipped February 18, 2025" />
+
+On the "Detected products" tab, note that only two values are surfaced: 1) product and 2) gap
+
+##### Sample Custom Model with Product Names
+
+<img src="https://github.com/user-attachments/assets/a210b12e-daf3-49fa-9601-02779df0b807" width="800" title="Snipped February 18, 2025" />
+
+On the "Detected products" tab, note various product names.
+
+##### Train your own Custom Model
+
+LOREM IPSUM
 
 -------------------------
 
@@ -534,6 +552,8 @@ Review results on the "Detected attributes" / "JSON" tabs.
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 <img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+
+On the "Detected products" tab, note that only two values are surfaced: 1) product and 2) gap
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
