@@ -601,31 +601,17 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### Detect Common Objects in Images
 
-
-
-
-
-
-
-
-
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
-
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
-
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
-
-Review results on the "Detected attributes" / "JSON" tabs.
+LOREM IPSUM
 
 -------------------------
 
 #### Extract Common Tags from Images
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/bd4656ac-989c-4f38-840f-5074db0b76bf" width="800" title="Snipped February 18, 2025" />
 
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
+Choose a model, choose a language, and then iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/b865ebbf-6596-40ba-990d-271057af81f8" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
