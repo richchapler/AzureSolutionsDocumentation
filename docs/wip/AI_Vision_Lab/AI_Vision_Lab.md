@@ -494,13 +494,10 @@ Review results on the "Detected attributes" / "JSON" tabs and review the generat
 
 #### Photo ID Matching
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/d8273d24-dd8f-4f8b-9585-dd4fc1ac4180" width="800" title="Snipped February 18, 2025" />
 
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
+Iteratively click the samples to the right of the "Drag and drop a file..." box and compare to the Camera Preview.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
-
-Interact with resulting functionality {e.g., "BLAH"}.
 
 
 
