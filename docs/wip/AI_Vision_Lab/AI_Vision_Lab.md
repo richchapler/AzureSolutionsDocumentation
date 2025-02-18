@@ -7,6 +7,11 @@
 - [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
 - [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis) 
+- [Exercise 4: Face](#exercise-4-face) 
+
+## Resource Requirements
+- Cognitive Services
+- Computer Vision
 
 ## Exercise 1: Prepare Environment
 _Complete this exercise only if you intend to complete Pro-Code sub-exercises_
@@ -439,15 +444,17 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 Click on the "Face" tab.
 
+-------------------------
+
 #### Detect Faces in an Image
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/d78b53a5-aca9-40aa-8589-c1c7d0baa362" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/37398c4e-58f7-4c77-897f-7ff073194845" width="800" title="Snipped February 18, 2025" />
 
-Interact with resulting functionality {e.g., "BLAH"}.
+Review results on the "Detected attributes" and "JSON" tabs.
 
 -------------------------
 
