@@ -425,5 +425,11 @@ if os.path.isfile(IMAGE_PATH):
     print(response.json())
 ```
 
-Execute the code cell.  
-```
+LOREM IPSUM
+
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Exercise 4: Face
+
+This exercise demonstrates how to use Azure AI Vision Face to detect and analyze human faces in images.
+
