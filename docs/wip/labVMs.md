@@ -112,6 +112,11 @@
 
 ✅ **This ensures instructors always have a VM ready to claim.**
 
+
+_NOTE: MAKE SURE THAT NSG >> NETWORK >> ALLOW FOR RDP 3389_
+
+
+
 ------
 
 ## **✅ Final Outcome**
