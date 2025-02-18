@@ -8,6 +8,7 @@
 - [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
 - [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis) 
 - [Exercise 4: Face](#exercise-4-face) 
+- [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
 
 ## Resource Requirements
 - Cognitive Services
