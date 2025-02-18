@@ -255,7 +255,7 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 <img src="https://github.com/user-attachments/assets/d50659f8-4762-4c5f-a6da-95505f2645be" width="800" title="Snipped February 14, 2025" />
 
-Review results on the "Detected attributes" and "JSON" tabs.
+Review results on the "Detected attributes" / "JSON" tabs.
 
 ------------------------- -------------------------
 
@@ -454,7 +454,7 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 <img src="https://github.com/user-attachments/assets/8074b06b-9b85-4235-8992-abbe7942ce04" width="800" title="Snipped February 18, 2025" />
 
-Review results on the "Detected attributes" and "JSON" tabs.
+Review results on the "Detected attributes" / "JSON" tabs.
 
 -------------------------
 
@@ -470,19 +470,25 @@ Click "Apply for access".
 
 <img src="https://github.com/user-attachments/assets/3b7d6f98-a599-411e-8db3-72b62d1bb017" width="800" title="Snipped February 18, 2025" />
 
-Sadly, approval is not instant... complete and submit the form and return when you have approved access.
+Complete and submit the form.
+
+<img src="https://github.com/user-attachments/assets/b0d52333-bcb5-4227-849c-eace366d3fa6" width="800" title="Snipped February 18, 2025" />
+
+The "Azure AI Gating Team" will email and promises to respond in ~10 business days.
+
+⚠️ WAITING FOR APPROVED ACCESS ⚠️
 
 -------------------------
 
 #### Portrait Processing
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/9f4ed2f0-dda8-4c93-af7c-37c190b14df5" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/ea5b5082-3af4-4b79-8635-14447d980f1b" width="800" title="Snipped February 18, 2025" />
 
-Interact with resulting functionality {e.g., "BLAH"}.
+Review results on the "Detected attributes" / "JSON" tabs and review the generated portrait.
 
 -------------------------
 
