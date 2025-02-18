@@ -364,13 +364,29 @@ Interact with resulting functionality {e.g., "Locate a frame in the video"}.
 
 ⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
 
-LOREM IPSUM
-
 -------------------------
 
 #### Detect when People Cross a Line
 
-LOREM IPSUM
+<img src="https://github.com/user-attachments/assets/22d02513-a10d-4c4e-83ca-ec1fda026628" width="800" title="Snipped February 18, 2025" />
+
+⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
+
+-------------------------
+
+#### Detect when People Enter / Exit a Zone
+
+<img src="https://github.com/user-attachments/assets/5288dc72-2cb5-4ad0-aabd-d5d249c9f424" width="800" title="Snipped February 18, 2025" />
+
+⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
+
+-------------------------
+
+#### Monitor Social Distancing
+
+<img src="https://github.com/user-attachments/assets/43add9f6-137c-4ca9-b374-f98d3c5232d1" width="800" title="Snipped February 18, 2025" />
+
+⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
 
 ------------------------- -------------------------
 
