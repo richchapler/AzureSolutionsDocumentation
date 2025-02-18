@@ -433,3 +433,38 @@ LOREM IPSUM
 
 This exercise demonstrates how to use Azure AI Vision Face to detect and analyze human faces in images.
 
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and login with your Azure credentials.
+
+<img src="https://github.com/user-attachments/assets/ced5f919-80b9-40ad-83dd-61da99015b68" width="800" title="Snipped February 18, 2025" />
+
+Click on the "Face" tab.
+
+#### Detect Faces in an Image
+
+LOREM IPSUM
+
+-------------------------
+
+#### Liveness Detection
+
+LOREM IPSUM
+
+-------------------------
+
+#### Portrait Processing
+
+LOREM IPSUM
+
+-------------------------
+
+#### Photo ID Matching
+
+LOREM IPSUM
+
+-------------------------
+
+
+
+
+
+
