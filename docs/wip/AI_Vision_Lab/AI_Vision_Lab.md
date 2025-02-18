@@ -9,9 +9,10 @@
 - [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis) 
 
 ## Exercise 1: Prepare Environment
-_Skip if you won't do Pro-Code exercises_
+_Complete this exercise only if you intend to complete Pro-Code sub-exercises_
 
 ### Visual Studio Code
+_Skip if you are using an Azure DevTestLab VM_
 
 Install [Visual Studio Code](https://code.visualstudio.com/download)
 
