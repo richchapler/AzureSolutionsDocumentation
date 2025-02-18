@@ -575,24 +575,25 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 -------------------------
 
-
-
-
-
-
-
-
 #### Remove Backgrounds from Images
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/4d58e8d8-53d9-437f-b026-e8ebfdbaea14" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/372865dc-7aa5-4b63-b091-07ac0d98f86b" width="800" title="Snipped February 18, 2025" />
 
-Review results on the "Detected attributes" / "JSON" tabs.
+Review results on the "Remove backgrounds from images" / "Foreground matting" tabs.
 
 -------------------------
+
+
+
+
+
+
+
+
 
 #### Add Captions to Images
 
