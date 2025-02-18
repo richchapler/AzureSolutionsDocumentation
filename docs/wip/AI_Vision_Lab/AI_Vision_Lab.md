@@ -452,7 +452,7 @@ Click on the "Face" tab.
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/37398c4e-58f7-4c77-897f-7ff073194845" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/8074b06b-9b85-4235-8992-abbe7942ce04" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Detected attributes" and "JSON" tabs.
 
