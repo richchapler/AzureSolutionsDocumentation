@@ -1,89 +1,123 @@
-You're right—since we **used a Shared Image Gallery (SIG)**, the **custom image step** was unnecessary. Instead, we directly **captured the VM (`aivision`) as an image version inside SIG**.  
+## **Azure DevTest Labs Instructor VM Setup – End-to-End Guide**
 
-Let’s **remove the custom image step** and refine the summary:
+### **1️⃣ Create and Configure Resource Groups & the Base VM in Azure (Not DevTest Labs)**
 
----
+- Create two resource groups:
+  - **`InstructorBase-RG`**: For the **Shared Image Gallery (SIG)** and **base template VMs**.
+  - **`InstructorVMs-RG`**: For **instructor-created VMs** deployed in DevTest Labs.
+- **Create a Windows 11 Enterprise VM (`aivision`)** in **`InstructorBase-RG`** directly in **Azure (not DevTest Labs)**.
+- **Ensure correct configurations**: Networking, storage, security settings.
+- **Connect via RDP**, configure system settings, install necessary software, and apply updates.
+- **Ensure everything is properly set up before capturing the image.**
 
-### **✅ Azure DevTest Labs Instructor VM Setup – End-to-End Summary**  
-This summarizes the **entire process** of creating a **reusable instructor VM** that can be easily deployed by instructors in Azure DevTest Labs.
+📌 **Note:** Before capturing the image, ensure that any lab-specific configurations (e.g., pre-installed software like Visual Studio Code, environment settings, or security policies) are applied. This ensures all future VMs provisioned from the image are ready for use without additional configuration.
 
----
+------
 
-## **1️⃣ Created and Configured the Base VM**
-- **Created a Windows 11 Enterprise VM (`aivision`)** in Azure DevTest Labs.  
-- **Connected via RDP** and customized settings, installed necessary software, and applied updates.  
-- **Confirmed the VM was fully configured** before capturing an image.
+### **2️⃣ Capture the VM as an Image in a Shared Image Gallery (SIG)**
 
----
+- **Use “Capture Image”** to create an image version in a **Shared Image Gallery (SIG)** within `InstructorBase-RG`.
+- **Select “Specialized”** (since Sysprep was skipped, and configurations should remain intact).
+- **Save the image in SIG (`vbdcomputegallery`)**, making it reusable for future deployments.
 
-## **2️⃣ Captured the VM as an Image in a Shared Image Gallery**
-- **Used the “Capture Image” option** to create an image version inside a **Shared Image Gallery (SIG)**.  
-- **Chose "Specialized"** (since we skipped Sysprep).  
-- **Saved the image directly in SIG (`vbdcomputegallery`)**, skipping the need for a separate custom image.  
+------
 
----
+### **3️⃣ Create an Image Definition in SIG**
 
-## **3️⃣ Created an Image Definition in SIG**
-- **Defined an Image Name: `aivision`** for better version control.  
-- **Set metadata fields:**
+- **Define an Image Name**: `aivision`.
+
+- Set Metadata Fields
+
+  :
+
   - **Publisher:** `rchapler`
   - **Offer:** `ai`
   - **SKU:** `win11-24h2-ent`
-  - **VM Gen:** `Gen 2`
+  - **VM Generation:** `Gen 2`
   - **OS Type:** `Windows`
   - **Security Type:** `Standard`
-- **Published the first version (`1.0.0`)** to make it available for deployment.
 
----
+- **Publish the first version (`1.0.0`)** to make it available for deployment.
 
-## **4️⃣ Configured Replication for Faster Deployment**
-- **Enabled replication in `West US` and `East US`** to reduce provisioning time.  
-- **Used `1` replica per region** to balance availability and cost.  
-- **Chose "Standard HDD LRS" storage** (could upgrade to SSD for faster performance).  
+------
 
----
+### **4️⃣ Configure Replication for Faster Deployment**
 
-## **5️⃣ Attached the Shared Image Gallery to DevTest Labs**
-- **Linked SIG (`vbdcomputegallery`) to DevTest Labs** under **Configuration and Policies**.  
-- **Confirmed the `aivision` image is available for VM creation inside DevTest Labs.**  
+- **Enable replication in `West US` and `East US`** to optimize VM creation time.
+- **Use `1` replica per region** for availability and cost balance.
+- **Select “Standard HDD LRS”** (upgrade to SSD for improved performance if needed).
 
----
+------
 
-## **6️⃣ Created VMs from the Shared Image in DevTest Labs**
-- **Went to "My Virtual Machines" → Clicked "Create" → Selected "Shared Image Gallery" as base.**  
-- **Chose `aivision` as the image source and deployed test VMs.**  
-- **Verified that each VM starts with the pre-configured environment.**  
+### **5️⃣ Create a DevTest Lab in Azure**
 
----
+1. **Go to the Azure Portal** → Search for **“Azure DevTest Labs”**.
+2. Click **"+ Create"**.
+3. Enter the following details:
+   - **Lab Name:** `InstructorLab`
+   - **Subscription & Resource Group:** Use `InstructorVMs-RG`.
+   - **Region:** Match your **Shared Image Gallery (SIG) region**.
+4. Click **Review + Create** → **Create**.
 
-## **7️⃣ Made VMs Claimable for Instructors (Optional)**
-- **Marked VMs as "Claimable" in DevTest Labs** so instructors can pick them up.  
-- **(Optional) Set Auto-Provisioning** to keep a certain number of claimable VMs always available.  
+✅ **This sets up a DevTest Lab for managing instructor VMs.**
 
----
+------
 
-## **8️⃣ Validated the Deployment Process**
-- **Tested VM creation from SIG inside DevTest Labs.**  
-- **Ensured instructors can easily deploy new VMs without modifying the base image.**  
-- **Confirmed future updates can be handled by publishing a new version (`1.1.0`, `2.0.0`, etc.).**  
+### **6️⃣ Attach Shared Image Gallery (SIG) to DevTest Labs**
 
----
+1. **Go to your DevTest Lab (`InstructorLab`).**
+2. Click **“Configuration and Policies”** in the left menu.
+3. Expand **“Virtual Machine Bases”** → Click **“Shared Image Galleries”**.
+4. Click **“Attach”** and select **`vbdcomputegallery`**.
+5. Click **OK**.
+
+✅ **Now, DevTest Labs can deploy VMs using the `aivision` image.**
+
+------
+
+### **7️⃣ Create an Instructor VM in DevTest Labs**
+
+1. **Go to “My Virtual Machines”** in DevTest Labs.
+2. Click **"+ Create"**.
+3. **Choose “Shared Image Gallery”** as the base.
+4. **Select `aivision 1.0.0`** as the image source.
+5. Configure VM settings:
+   - **VM Name**: `Instructor-VM-01`
+   - **Size**: `Standard D2s_v3`
+   - **Artifacts**: (Optional)
+6. **Click “Create”** and wait for the VM to be provisioned.
+
+✅ **This verifies that instructors can now create VMs from the shared image.**
+
+------
+
+### **8️⃣ Make VMs Claimable for Instructors (Optional)**
+
+1. **After creating the VM, go to “My Virtual Machines” in DevTest Labs.**
+2. Click on the newly created VM (`Instructor-VM-01`).
+3. Click **“Make Claimable”**.
+4. Confirm the action.
+
+✅ **Now, instructors only need to claim a VM instead of creating one from scratch.**
+
+------
+
+### **9️⃣ (Optional) Enable Auto-Provisioning**
+
+1. **Go to “Configuration and Policies” in DevTest Labs.**
+2. Find **“Auto-Provisioning”** settings.
+3. Set a rule like:
+   - **Keep at least 3 claimable VMs at all times.**
+   - If the number of claimable VMs drops below 3, **Azure automatically creates a new one from the SIG image**.
+
+✅ **This ensures instructors always have a VM ready to claim.**
+
+------
 
 ## **✅ Final Outcome**
-- **A standardized, pre-configured Windows 11 VM** (`aivision`) is now available via a **Shared Image Gallery**.
-- **Instructors can create VMs from this template inside DevTest Labs**.
-- **Claimable VMs can be provisioned** to simplify instructor access.
-- **Future updates are managed by publishing new image versions**, without affecting existing deployments.
 
----
+- **A standardized, pre-configured Windows 11 VM (`aivision`) is now available via DevTest Labs**.
+- **Instructors can create VMs from this image OR claim pre-created VMs**.
+- **Future updates can be handled by publishing new versions (`1.1.0`, `2.0.0`, etc.) in SIG**.
+- **Resource groups are now properly segmented for image management (`InstructorBase-RG`) and instructor VM deployments (`InstructorVMs-RG`).**
 
-## **🚀 Next Steps for Documentation**
-We should document:
-1. **Step-by-step guide for instructors** on how to deploy a VM from the Shared Image.  
-2. **How to make VMs claimable** (if needed).  
-3. **Instructions on updating the base image** and publishing new versions in SIG.  
-
----
-
-### **✅ This ensures a scalable, repeatable, and easy-to-maintain instructor environment in Azure DevTest Labs.**  
-Let me know if you want any further refinements before finalizing the documentation! 🚀
