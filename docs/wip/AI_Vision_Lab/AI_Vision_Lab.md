@@ -587,27 +587,27 @@ Review results on the "Remove backgrounds from images" / "Foreground matting" ta
 
 -------------------------
 
-
-
-
-
-
-
-
-
 #### Add Captions to Images
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/df89523d-e20b-4509-b3cb-091fff6f6405" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/2a1bdd9f-aff9-412d-bb28-6a15e40a7204" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
 -------------------------
 
 #### Detect Common Objects in Images
+
+
+
+
+
+
+
+
 
 <img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
 
