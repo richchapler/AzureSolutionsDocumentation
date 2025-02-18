@@ -460,13 +460,17 @@ Review results on the "Detected attributes" and "JSON" tabs.
 
 #### Liveness Detection
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/d8f00fd3-c59c-4182-9ae9-f082bba05d84" width="800" title="Snipped February 18, 2025" />
 
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
+Click "Face Liveness only" and then "Try Out".
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/029518de-efc6-49ed-86c6-63c813bd6894" width="800" title="Snipped February 18, 2025" />
 
-Interact with resulting functionality {e.g., "BLAH"}.
+Click "Apply for access".
+
+<img src="https://github.com/user-attachments/assets/3b7d6f98-a599-411e-8db3-72b62d1bb017" width="800" title="Snipped February 18, 2025" />
+
+Sadly, approval is not instant... complete and submit the form and return when you have approved access.
 
 -------------------------
 
