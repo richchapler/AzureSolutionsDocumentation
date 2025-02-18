@@ -619,11 +619,11 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### Detect Sensitive Content in Images
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/91b53833-7fa1-4c9d-8147-3d01487ab3e4" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/89aac916-f5e7-44e4-b653-ad4a26caa8fc" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
@@ -631,13 +631,13 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### Create Smart-Cropped Images
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/c76c1094-341d-4fa7-8d2b-dd74a94dcef6" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/89d14157-7a61-4af0-a36f-55980aa8485c" width="800" title="Snipped February 18, 2025" />
 
-Review results on the "Detected attributes" / "JSON" tabs.
+Review results on the "Cropped image" tab and adjust aspect ratio to taste.
 
 
 
