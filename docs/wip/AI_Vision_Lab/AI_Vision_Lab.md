@@ -563,27 +563,24 @@ Consider trying your own image.
 
 -------------------------
 
-
-
-
-
-
-
-
-
-
-
 #### Add Dense Captions to Images
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/1c4581fe-36dc-4501-821d-c05390591c18" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/fc0dd38d-1da9-4ae5-b457-88cb45ba8d02" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
 -------------------------
+
+
+
+
+
+
+
 
 #### Remove Backgrounds from Images
 
