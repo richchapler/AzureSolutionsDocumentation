@@ -26,9 +26,7 @@
 
 - **Define an Image Name**: `aivision`.
 
-- Set Metadata Fields
-
-  :
+- Set Metadata Fields:
 
   - **Publisher:** `rchapler`
   - **Offer:** `ai`
