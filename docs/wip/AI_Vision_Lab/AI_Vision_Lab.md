@@ -547,29 +547,31 @@ LOREM IPSUM
 
 #### Customize Models with Images
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
-
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
-
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
-
-On the "Detected products" tab, note that only two values are surfaced: 1) product and 2) gap
-
-Review results on the "Detected attributes" / "JSON" tabs.
+LOREM IPSUM
 
 -------------------------
 
 #### Search Photos with Image Retrieval
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/340088a0-c508-46a1-bb03-278d74c121f0" width="800" title="Snipped February 18, 2025" />
 
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
+Iteratively click the sample image sets, select a retrieval queries and click Search.
 
-<img src="https://github.com/user-attachments/assets/BLAH" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/687cc074-f25f-4c59-80fd-650c80d16312" width="800" title="Snipped February 18, 2025" />
 
-Review results on the "Detected attributes" / "JSON" tabs.
+Consider trying your own image.
 
 -------------------------
+
+
+
+
+
+
+
+
+
+
 
 #### Add Dense Captions to Images
 
