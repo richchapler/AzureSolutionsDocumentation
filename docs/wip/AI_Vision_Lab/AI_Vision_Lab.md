@@ -20,7 +20,7 @@ _Complete this exercise only if you intend to complete Pro-Code sub-exercises_
 Use a pre-configured virtual machine (if possible) or create an environment which includes:
 
 * Visual Studio Code
-* [Python](https://github.com/richchapler/AzureSolutionsDocumentation/blob/main/docs/artifacts/Python.md)
+* [Python](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html)
 * Python Virtual Environment
 * ...
 
