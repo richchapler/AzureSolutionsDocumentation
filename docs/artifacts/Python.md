@@ -1,27 +1,29 @@
 ## Python
 
-### Already Installed?
+### Already installed?
 
-1. Open PowerShell as an administrator and run the following command to check the installed version of Python:
+Open PowerShell as an administrator and run the following command to check the installed version of Python:
+```powershell
+python --version
+```
 
-   ```powershell
-   python --version
-   ```
+Expected output (version may vary):
+```
+Python 3.13.1
+```
 
-   - If the output displays a version, Python is installed
-   - If an error is returned or a different version is shown, proceed to install or update Python
+### If not already installed...
 
-### If not, install...
+Download and install the latest version from the [python.org](https://www.python.org/downloads)
 
-1. Download and install the latest version from the [official website](https://www.python.org/downloads)
+<img src="https://github.com/user-attachments/assets/1f103580-e5a3-46fc-82c7-2c91e700e75c" width="800" title="Snipped February 3, 2025" />
 
-   **Important:** Check the box to "Add Python 3.9 to PATH" during installation.
+_During installation, be sure to check the "Add ... to PATH" box_
 
-2. Execute the following PowerShell command to confirm Python has been added to `PATH`:
+Execute the following PowerShell command to confirm Python has been added to `PATH`:
+```powershell
+where.exe python
+```
 
-   ```powershell
-   where.exe python
-   ```
-
-   - If the output displays a path, Python is installed
-   - If an error is returned restart the PowerShell window (or machine), then verify again with `where.exe python`.
+- If the output displays a path, Python is installed
+- If an error is returned restart the PowerShell window (or machine), then re-verify
