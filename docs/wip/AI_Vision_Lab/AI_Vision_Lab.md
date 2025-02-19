@@ -23,38 +23,8 @@ Use a pre-configured virtual machine (if possible) or create an environment whic
 
 * [PowerShell (upgraded)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html)
-* [Python](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html)
-  * Python Virtual Environment
+* [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html)
 * ...
-
-------------------------- -------------------------
-
-#### Python Virtual Environment
-
-Open Visual Studio Code and click View > Terminal to open the PowerShell terminal.
-
-<img src="https://github.com/user-attachments/assets/e74ffba0-e515-42f9-b267-74631bef954f" width="800" title="Snipped February 3, 2025" />
-
-Execute the following command to create and then navigate to a project directory:
-
-```powershell
-mkdir "$HOME\Documents\AI-Vision-Lab"
-cd "$HOME\Documents\AI-Vision-Lab"
-```
-
-Execute the following command to create a virtual environment:
-
-```powershell
-python -m venv venv
-```
-
-Execute the following command to activate the virtual environment:
-
-```powershell
-venv\Scripts\Activate
-```
-
-After running this command, note that your prompt changes to include prefix `(venv)`, showing that it is working inside the virtual environment.
 
 ------------------------- -------------------------
 
