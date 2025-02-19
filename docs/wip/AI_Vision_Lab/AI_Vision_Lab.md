@@ -19,9 +19,9 @@ _Complete this exercise only if you intend to complete Pro-Code sub-exercises_
 
 Use a pre-configured virtual machine (if possible) or create an environment which includes:
 
-* Visual Studio Code
+* [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html)
 * [Python](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html)
-* Python Virtual Environment
+  * Python Virtual Environment
 * ...
 
 ### Visual Studio Code
