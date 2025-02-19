@@ -17,8 +17,14 @@
 ## Exercise 1: Prepare Environment
 _Complete this exercise only if you intend to complete Pro-Code sub-exercises_
 
+Use a pre-configured virtual machine (if possible) or create an environment which includes:
+
+* Visual Studio Code
+* [Python](https://github.com/richchapler/AzureSolutionsDocumentation/blob/main/docs/artifacts/Python.md)
+* Python Virtual Environment
+* ...
+
 ### Visual Studio Code
-_Skip if you are using an Azure DevTestLab VM_
 
 Install [Visual Studio Code](https://code.visualstudio.com/download)
 
@@ -29,28 +35,6 @@ After installation, open Visual Studio Code and navigate to the "Extensions: Mar
 <img src="https://github.com/user-attachments/assets/815273f0-a430-4e08-9056-d2fc91b4cec9" width="800" title="Snipped January 31, 2025" />
 
 Search for, select and install `Python`, then restart Visual Studio Code.
-
-------------------------- -------------------------
-
-### Python
-
-Install the latest version of [Python.org](https://www.python.org/downloads/)
-
-<img src="https://github.com/user-attachments/assets/1f103580-e5a3-46fc-82c7-2c91e700e75c" width="800" title="Snipped February 3, 2025" />
-
-_Note: Select "Add Python to PATH" before clicking "Install Now"_
-
-Open PowerShell and verify the installation:
-
-```powershell
-python --version
-```
-
-Expected output (version may vary):
-
-```
-Python 3.13.1
-```
 
 ------------------------- -------------------------
 
