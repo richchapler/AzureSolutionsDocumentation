@@ -9,26 +9,53 @@ python --version
 ```
 
 Expected output (version may vary):
+
 ```
 Python 3.13.1
 ```
 
 ## Not installed...
 
-Download and install the latest version from the [python.org](https://www.python.org/downloads)
+Execute the following PowerShell command to search for available Python versions:
 
-<img src="https://github.com/user-attachments/assets/1f103580-e5a3-46fc-82c7-2c91e700e75c" width="800" title="Snipped February 3, 2025" />
+```powershell
+winget search Python.Python
+```
 
-_During installation, be sure to check the "Add ... to PATH" box_
+Identify the latest available version from the results, then install it:
 
-Execute the following PowerShell command to confirm Python has been added to `PATH`:
+```powershell
+winget install --id Python.Python.<major_version> -e
+```
+
+*Replace `<major_version>` with the latest available major version number (e.g., `3.10`). Do not include minor or patch versions.*
+
+### Disable the Microsoft Store Alias for Python
+If Python is still not recognized, disable the Microsoft Store alias:
+
+1. Open **Settings** > **Apps** > **Installed Apps**
+2. Search for **App Execution Aliases**
+3. Locate **python.exe** and **python3.exe**, then disable them
+4. Restart your computer and check Python again:
+   
+   ```powershell
+   where.exe python
+   python --version
+   ```
+
+### Ensure Python is in PATH
+If Python still does not work, refresh the environment variables in the current PowerShell session:
+
+```powershell
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
+```
+
+Then, verify again:
 
 ```powershell
 where.exe python
+python --version
 ```
-
-- If the output displays a path, Python is installed
-- If an error is returned restart the PowerShell window (or machine), then re-verify
 
 ## (Optional) Set Up a Python Virtual Environment
 
@@ -58,7 +85,7 @@ cd "$HOME\Documents\VirtualEnvironment"
 Execute the following command to create a virtual environment:
 
 ```powershell
-& (where.exe python) -m venv venv
+& (where.exe python | Select-String "WindowsApps" -NotMatch | Select-Object -First 1) -m venv venv
 ```
 
 Execute the following command to activate the virtual environment:
