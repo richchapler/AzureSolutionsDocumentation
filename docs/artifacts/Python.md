@@ -1,6 +1,6 @@
-## Python
+# Python
 
-### Already installed?
+## Already installed?
 
 Open PowerShell as an administrator and run the following command to check the installed version of Python:
 ```powershell
@@ -12,7 +12,7 @@ Expected output (version may vary):
 Python 3.13.1
 ```
 
-### If not already installed...
+## If not already installed...
 
 Download and install the latest version from the [python.org](https://www.python.org/downloads)
 
