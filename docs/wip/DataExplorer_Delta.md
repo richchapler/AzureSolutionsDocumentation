@@ -1,18 +1,12 @@
 # Data Explorer Delta  
 
-...using DevOps Pipeline  
+...using Azure DevOps  
 
-## Prerequisites
+## Resource Requirements
 
-### Azure
+### On-Prem Machine
 
-- Data Explorer Clusters: Create two clusters—one for development (prefixdec-dev.westus.kusto.windows.net) and one for production (prefixdec-prd.westus.kusto.windows.net)—in a new resource group
-- Databases: Create a database (e.g., rc05dataexplorerdatabase) in each cluster
-- Key Vault: Create a Key Vault (prefixkv) to store required secrets (AZURE-TENANT-ID, AZURE-SUBSCRIPTION-ID, AZURE-CLIENT-ID, AZURE-CLIENT-SECRET)
-
-### Local or Virtual Machine
-
-These must be installed in order:
+Prepare an on-prem machine (local or virtual) and install the following items in order:
 
 1. [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html) - Required for executing scripts and ensuring compatibility with Azure CLI  
 2. **Azure CLI** - Ensures availability for pipeline authentication and command execution  
@@ -21,6 +15,20 @@ These must be installed in order:
 5. **Git** - Needed for repository tracking and pipeline commits  
 6. **Self-Hosted Agent** - Registered in Azure DevOps and required for executing the pipeline on a dedicated machine  
 7. **Service Connection** - Configured in Azure DevOps with correct permissions to authenticate and access necessary Azure resources
+
+### Azure
+
+- Data Explorer Clusters
+  - Development: `{prefix}dec-dev.westus.kusto.windows.net`
+  - Production: `{prefix}dec-prd.westus.kusto.windows.net`
+- Data Explorer Databases
+  - Development: `{prefix}ded-dev`
+  - Production: `{prefix}ded-prd`
+- Key Vault (shared): `{prefix}kv` with secrets:
+  - `AZURE-TENANT-ID`
+  - `AZURE-SUBSCRIPTION-ID`
+  - `AZURE-CLIENT-ID`
+  - `AZURE-CLIENT-SECRET`
 
 ------------------------- -------------------------
 
@@ -595,8 +603,6 @@ Enter whether to prevent service starting immediately after configuration is fin
   - Key Vault Secrets User  
 - Click Save
 
-**_NOTE: "HARDENED" KEYVAULT POLICY RE: "DISABLE PUBLIC ACCESS" REQUIRES PRIVATE ENDPOINT... TRYING TO WORK-AROUND THIS TEMPORARILY BY MANUALLY SETTING IT BACK TO PUBLIC EACH DAY_**
-
 ### Create a Variable Group in Azure DevOps  
 
 - Go to Azure DevOps → Pipelines → Library  
@@ -609,7 +615,7 @@ Enter whether to prevent service starting immediately after configuration is fin
 
 ![image](https://github.com/user-attachments/assets/ac3d697c-c4c3-4327-8f98-32855e19be25)
 
-## Pipeline: `DataExplorer_Delta.yml`
+## Pipeline: `DataExplorer_Capture.yml`
 
 ```yaml
 trigger: none
@@ -944,12 +950,12 @@ foreach ($Table in $Tables) {
 
 This section covers manual API testing using PowerShell and Azure CLI to verify that authentication and query execution are working correctly.
 
-#### 1️⃣ Retrieve a Fresh Access Token
+#### Retrieve a Fresh Access Token
 
 Before testing, obtain a fresh access token:
 
 ```powershell
-$Cluster = "https://rc05dataexplorercluster.westus.kusto.windows.net"
+$Cluster = "https://{prefix}dec.westus.kusto.windows.net"
 $Token = az account get-access-token --resource "$Cluster" --query accessToken -o tsv --only-show-errors
 Write-Host "Access Token Retrieved"
 ```
@@ -959,7 +965,7 @@ Write-Host "Access Token Retrieved"
 
 ------------------------- -------------------------
 
-#### 2️⃣ Manually Run the ADX Query
+#### Manually Run the ADX Query
 
 Using the token retrieved, execute an API request to run the `.show tables details` query:
 
@@ -993,13 +999,13 @@ try {
 
 ------------------------- -------------------------
 
-#### 3️⃣ Verify Role Assignments
+#### Verify Role Assignments
 
 Check the current permissions for the user or service principal running the query:
 
 ```sh
 az kusto database-principal-assignment list \
-    --cluster-name "rc05dataexplorercluster" \
+    --cluster-name "{prefix}dec-dev" \
     --database-name "rc05dataexplorerdatabase" \
     --query "[].{Principal:principalId, Role:role}" -o table
 ```
@@ -1008,7 +1014,7 @@ If the user is missing the required roles, assign the `"Viewer"` role:
 
 ```sh
 az kusto database-principal-assignment create \
-    --cluster-name "rc05dataexplorercluster" \
+    --cluster-name "{prefix}dec-dev" \
     --database-name "rc05dataexplorerdatabase" \
     --principal-id "<YOUR_USER_OBJECT_ID>" \
     --principal-type "User" \
@@ -1019,7 +1025,7 @@ az kusto database-principal-assignment create \
 
 ------------------------- -------------------------
 
-#### 4️⃣ Debugging Issues
+#### Debugging Issues
 
 ##### Token Issues
 
