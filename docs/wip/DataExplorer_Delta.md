@@ -4,85 +4,23 @@
 
 ## Prerequisites
 
+### Azure
+
+- Data Explorer Clusters: Create two clusters—one for development (prefixdec-dev.westus.kusto.windows.net) and one for production (prefixdec-prd.westus.kusto.windows.net)—in a new resource group
+- Databases: Create a database (e.g., rc05dataexplorerdatabase) in each cluster
+- Key Vault: Create a Key Vault (prefixkv) to store required secrets (AZURE-TENANT-ID, AZURE-SUBSCRIPTION-ID, AZURE-CLIENT-ID, AZURE-CLIENT-SECRET)
+
+### Local or Virtual Machine
+
 These must be installed in order:
 
-1. **PowerShell Core** - Required for executing scripts and ensuring compatibility with Azure CLI  
+1. [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html) - Required for executing scripts and ensuring compatibility with Azure CLI  
 2. **Azure CLI** - Ensures availability for pipeline authentication and command execution  
 3. **Kusto Extension** - Required for querying Azure Data Explorer (ADX)  
 4. **Microsoft.Azure.Kusto.Data** - Installed via NuGet and required for Kusto client operations and authentication  
 5. **Git** - Needed for repository tracking and pipeline commits  
 6. **Self-Hosted Agent** - Registered in Azure DevOps and required for executing the pipeline on a dedicated machine  
 7. **Service Connection** - Configured in Azure DevOps with correct permissions to authenticate and access necessary Azure resources
-
-------------------------- -------------------------
-
-## PowerShell Core
-
-PowerShell Core is required for executing scripts and ensuring compatibility with Azure CLI.  
-
-### Verify PowerShell Core Installation  
-
-Open PowerShell as an administrator and execute the following command:  
-
-
-```powershell
-pwsh -v
-```
-
-Error response means PowerShell Core is not installed or not in `PATH`.  
-
-### Install PowerShell Core
-
-Execute the following command to install PowerShell Core:  
-
-```powershell
-winget install --id Microsoft.PowerShell --source winget --accept-package-agreements --accept-source-agreements
-```
-
-Restart the PowerShell terminal and verify success:  
-
-```powershell
-pwsh -v
-```
-
-If `pwsh` is still not recognized, check if it was installed in the default location:  
-
-```powershell
-Get-ChildItem "C:\Program Files\PowerShell"
-Test-Path "C:\Program Files\PowerShell\7\pwsh.exe"
-```
-
-### Add PowerShell Core to `PATH`
-
-Execute the following command to add PowerShell Core to `PATH`:  
-
-```powershell
-$pwshPath = "C:\Program Files\PowerShell\7\"
-$envPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-if ($envPath -notlike "*$pwshPath*") { [System.Environment]::SetEnvironmentVariable("Path", "$envPath;$pwshPath", "Machine") }
-```
-
-Restart the PowerShell terminal and verify:  
-
-```powershell
-where.exe pwsh
-```
-
-If `pwsh` is still not recognized, restart the machine.  
-
-### Update PowerShell Core  
-
-```powershell
-winget upgrade --id Microsoft.PowerShell
-```
-
-Restart the PowerShell terminal and verify:  
-
-```powershell
-pwsh -v
-```
-
-If the update does not apply, restart the machine.
 
 ------------------------- -------------------------
 
