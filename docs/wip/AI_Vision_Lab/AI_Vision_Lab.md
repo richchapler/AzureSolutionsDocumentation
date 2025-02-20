@@ -19,9 +19,9 @@
 ## Exercise 1: Prepare Environment
 _Complete this exercise only if you intend to complete Pro-Code sub-exercises_
 
-Use a pre-configured virtual machine (if possible) or create an environment which includes:
+Use a pre-configured virtual machine (if possible) or create an environment which includes the latest versions of:
 
-* [PowerShell (upgraded)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
+* [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html)
 * [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html)
 * ...
