@@ -4,39 +4,44 @@
 
 ## Resource Requirements
 
-### On-Prem Machine
-
-Prepare an on-prem machine (local or virtual) and install the following items in order:
-
-1. [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html) - Required for executing scripts and ensuring compatibility with Azure CLI  
-2. **Azure CLI** - Ensures availability for pipeline authentication and command execution  
-3. **Kusto Extension** - Required for querying Azure Data Explorer (ADX)  
-4. **Microsoft.Azure.Kusto.Data** - Installed via NuGet and required for Kusto client operations and authentication  
-5. **Git** - Needed for repository tracking and pipeline commits  
-6. **Self-Hosted Agent** - Registered in Azure DevOps and required for executing the pipeline on a dedicated machine  
-7. **Service Connection** - Configured in Azure DevOps with correct permissions to authenticate and access necessary Azure resources
-
-_Note: Items without links are detailed below_
-
 ### Azure
 
+Instantiate the following resources in Azure:
+
+- Application Registration: `{prefix}ar`
 - Data Explorer Clusters
   - Development: `{prefix}dec-dev.westus.kusto.windows.net`
   - Production: `{prefix}dec-prd.westus.kusto.windows.net`
 - Data Explorer Databases
   - Development: `{prefix}ded-dev`
   - Production: `{prefix}ded-prd`
-- Key Vault (shared): `{prefix}kv` with secrets:
+- Key Vault (shared): `{prefix}kv` with the following secrets:
   - `AZURE-TENANT-ID`
   - `AZURE-SUBSCRIPTION-ID`
   - `AZURE-CLIENT-ID`
   - `AZURE-CLIENT-SECRET`
 
+_Note: Describing Azure resources first because at least Key Vault will be a necessary dependency_
+
+### On-Prem Machine
+
+Prepare an on-prem machine (physical or virtual) and install the following resources in order:
+
+1. [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html) - Required for executing scripts and ensuring compatibility with Azure CLI  
+2. **Azure CLI** - Ensures availability for pipeline authentication and command execution  
+3. **Kusto Extension** - Required for querying Data Explorer  
+4. **Microsoft.Azure.Kusto.Data** - Installed via NuGet and required for Kusto client operations and authentication  
+5. **Git** - Needed for repository tracking and pipeline commits  
+6. **Self-Hosted Agent** - Registered in Azure DevOps and required for executing the pipeline on a dedicated machine  
+7. **Service Connection** - Configured in Azure DevOps with correct permissions to authenticate and access necessary Azure resources
+
+_Note: Items without links are detailed in the sections below_
+
 ------------------------- -------------------------
 
 ## Azure CLI  
 
-Azure CLI is required for pipeline execution, authentication, and querying Azure Data Explorer.  
+Azure CLI is required for pipeline execution, authentication, and querying Data Explorer.  
 
 ### Verify Azure CLI Installation
 
@@ -579,43 +584,44 @@ Enter whether to prevent service starting immediately after configuration is fin
 ### Create a New Azure Service Connection  
 
 1. Go to "Azure DevOps" → "Project Settings" → "Service Connections".  
+
 2. Click "New service connection" → "Azure Resource Manager".  
+
 3. Select:  
    - "Identity Type" → `"App Registration (Automatic)"`  
    - "Scope Level" → `"Subscription"`  
-4. Set "Service Connection Name" (e.g., `AzureServiceConnection`).  
 
-------------------------- -------------------------
+4. Set "Service Connection Name" (e.g., `AzureServiceConnection`)
 
-## Key Vault, Secrets  
-
-- Navigate to "Secrets" → "Generate/Import"  
-- Add the following secrets using these exact names:  
-  - `AZURE-TENANT-ID` → Your Azure Tenant ID  
-  - `AZURE-SUBSCRIPTION-ID` → Your Azure Subscription ID  
-  - `AZURE-CLIENT-ID` → Your App Registration Client ID  
-  - `AZURE-CLIENT-SECRET` → Your App Registration Client Secret  
-- Click "Save"  
+This will create a new Application Registration for the Service Connection {e.g., `rchapler-DataExplorer_Delta-GUID}`... the generated name will match your configuration}
 
 ### Grant DevOps Access to Key Vault  
 
 - In Azure Portal, go to Key Vault → "Access control (IAM)"  
-- Assign the following roles to the Application Registration created for the Service Connection {e.g., rchapler-DataExplorer_Delta-GUID}:
+
+- Assign the following roles to the Application Registration created for the Service Connection:
+
   - Key Vault Reader
-  - Key Vault Secrets User  
+  - Key Vault Secrets User
+
 - Click Save
+
+  ----
 
 ### Create a Variable Group in Azure DevOps  
 
 - Go to Azure DevOps → Pipelines → Library  
 - Click "New Variable Group" and name it `Secrets`  
 - Enable "Link secrets from an Azure key vault as variables"  
-- Select the Azure subscription and the Key Vault (`myKeyVault`)  
+- Select the Azure subscription and the Key Vault {prefix}kv  
 - Click "Authorize" to allow Azure Pipelines to set the necessary permissions or manually apply them in the Azure portal  
-- Click "Add" and select the secrets from Key Vault  
-- Click "Save"  
+- Click "+ Add" and select the following Key Vault Secrets: 
+  - `AZURE-TENANT-ID`
+  - `AZURE-SUBSCRIPTION-ID`
+  - `AZURE-CLIENT-ID`
+  - `AZURE-CLIENT-SECRET` 
 
-![image](https://github.com/user-attachments/assets/ac3d697c-c4c3-4327-8f98-32855e19be25)
+- Click "Save"  
 
 ## Pipeline: `DataExplorer_Capture.yml`
 
@@ -628,13 +634,13 @@ pool:
 variables:
 - group: Secrets
 - name: Cluster
-  value: "rc05dataexplorercluste.westus.kusto.windows.net"
+  value: "{prefix}dec-dev.westus.kusto.windows.net"
 - name: Database
-  value: "rc05dataexplorerdatabase"
+  value: "{prefix}ded-dev"
 
 jobs:
 - job: RunPipeline
-  displayName: "Data Explorer Delta"
+  displayName: "Data Explorer Capture"
   steps:
     - checkout: self
       persistCredentials: true
@@ -780,7 +786,6 @@ jobs:
         targetType: "filePath"
         filePath: "$(Build.SourcesDirectory)/scripts/commit_kql.ps1"
         arguments: "-SourceDir '$(Build.SourcesDirectory)' -BranchName '$(Build.SourceBranchName)'"
-
 ```
 
 ### Script: `commit_kql.ps1`
@@ -1008,7 +1013,7 @@ Check the current permissions for the user or service principal running the quer
 ```sh
 az kusto database-principal-assignment list \
     --cluster-name "{prefix}dec-dev" \
-    --database-name "rc05dataexplorerdatabase" \
+    --database-name "{prefix}ded-dev" \
     --query "[].{Principal:principalId, Role:role}" -o table
 ```
 
@@ -1016,7 +1021,7 @@ If the user is missing the required roles, assign the `"Viewer"` role:
 
 ```sh
 az kusto database-principal-assignment create \
-    --cluster-name "{prefix}dec-dev" \
+    --cluster-name "{{prefix}}dec-dev" \
     --database-name "rc05dataexplorerdatabase" \
     --principal-id "<YOUR_USER_OBJECT_ID>" \
     --principal-type "User" \
