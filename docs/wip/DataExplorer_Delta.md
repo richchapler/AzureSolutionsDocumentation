@@ -1,5 +1,4 @@
-# Data Explorer Delta  
-
+# Data Explorer Delta
 ...using Azure DevOps  
 
 ## Resource Requirements
@@ -141,7 +140,6 @@ If `kusto` is still not recognized, restart the PowerShell terminal and check ag
  ...via NuGet  
 
 ### 1. Disable VPN (if applicable)  
-
 If using a VPN, turn it off before installation.  
 
 ### 2. Verify Network Connectivity  
@@ -250,19 +248,13 @@ where.exe /R C:\KustoSDK nuget.exe
 If `nuget.exe` exists but is not recognized, manually add it to the System PATH:  
 
 1. Open System Properties (`sysdm.cpl` in `Run` dialog)  
-
 2. Go to Advanced → Environment Variables  
-
 3. Under System Variables, locate Path and click Edit  
-
 4. Click New, add:  
-
    ```
    C:\KustoSDK
    ```
-
 5. Click OK on all dialogs  
-
 6. Restart PowerShell and try:  
 
 ```powershell
@@ -516,7 +508,6 @@ git push origin main
 ## Self-Hosted Agent  
 
 ### Create and Expand a Personal Access Token (PAT)  
-
 1. Go to User Settings >> [DevOps Tokens](https://dev.azure.com/rchapler/_usersSettings/tokens).  
 2. Click "New Token".  
 3. Set:  
@@ -526,11 +517,9 @@ git push origin main
 4. Click "Create" and copy the PAT.  
 
 ### Expand the PAT Permissions  
-
 - Enable `"Agent Pools (Read & Manage)"` and `"Project and Team (Read & Write)"`.  
 
 ### Create an Agent Pool and Assign Permissions  
-
 1. Go to Organization Settings >> [Agent Pools](https://dev.azure.com/rchapler/_settings/agentpools).  
 2. Click "Add Pool".  
 3. Set:  
@@ -549,19 +538,16 @@ Open PowerShell as an Administrator and execute the following command:
 ```powershell
 Test-Path C:\AzureDevOpsAgent
 ```
-
 Download and extract:  
 
 ```powershell
 Expand-Archive -Path "$HOME\Downloads\vsts-agent-win-x64-{version}.zip" -DestinationPath "C:\AzureDevOpsAgent"
 ```
-
 Run the configuration:  
 
 ```powershell
 C:\AzureDevOpsAgent\config.cmd
 ```
-
 In the resulting "Azure Pipelines" interface, enter the following values:  
 
 ```
@@ -581,8 +567,7 @@ Enter whether to prevent service starting immediately after configuration is fin
 
 ## Service Connection  
 
-### Create a New Azure Service Connection  
-
+### Create `Azure Service Connection`  
 1. Go to "Azure DevOps" → "Project Settings" → "Service Connections".  
 
 2. Click "New service connection" → "Azure Resource Manager".  
@@ -593,23 +578,29 @@ Enter whether to prevent service starting immediately after configuration is fin
 
 4. Set "Service Connection Name" (e.g., `AzureServiceConnection`)
 
-This will create a new Application Registration for the Service Connection {e.g., `rchapler-DataExplorer_Delta-GUID}`... the generated name will match your configuration}
+Completion of this step results in a new Application Registration for the Service Connection {e.g., `rchapler-DataExplorer_Delta-GUID}`... the generated name will match your configuration}
 
-### Grant DevOps Access to Key Vault  
+### Service Connection >> Key Vault: Grant Access
 
-- In Azure Portal, go to Key Vault → "Access control (IAM)"  
+In Azure Portal, go to Key Vault >> "Access control (IAM)"  
 
-- Assign the following roles to the Application Registration created for the Service Connection:
+Assign the following roles to the Service Connection, Application Registration:
+- Key Vault Reader
+- Key Vault Secrets User
 
-  - Key Vault Reader
-  - Key Vault Secrets User
+Click "Save".
 
-- Click Save
+### Service Connection >> Data Explorer: Add Permissions
 
-  ----
+Navigate to the Data Explorer Database, then "Overview" >> "Permissions"
+
+Click "+ Add" and then "Admin" in the resulting dropdown.
+
+In the "New Principals" popout, search for and select the Service Connection, Application Registration.
+
+------------------------- -------------------------
 
 ### Create a Variable Group in Azure DevOps  
-
 - Go to Azure DevOps → Pipelines → Library  
 - Click "New Variable Group" and name it `Secrets`  
 - Enable "Link secrets from an Azure key vault as variables"  
@@ -623,7 +614,27 @@ This will create a new Application Registration for the Service Connection {e.g.
 
 - Click "Save"  
 
-## Pipeline: `DataExplorer_Capture.yml`
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Pipelines
+- In your Azure DevOps project, navigate to Repos  
+- Select the desired repository (e.g., DataExplorer_Delta)  
+- Click the “+” button or “New” to create a new file  
+- Name the file DataExplorer_Capture.yml  
+- Paste the YAML content (below) into the file  
+- Commit the changes to your chosen branch  
+- Repeat for DataExplorer_Deploy.yml
+
+After creating or updating the YAML file in your repo, follow these steps to create a new pipeline:
+
+- In your Azure DevOps project, go to Pipelines  
+- Select New Pipeline  
+- Choose where your code is stored (e.g., Azure Repos Git)  
+- Select your repository (e.g., DataExplorer_Delta)  
+- Choose Existing Azure Pipelines YAML file and pick DataExplorer_Capture.yml  
+- Save the pipeline and execute it
+
+### Pipeline: `DataExplorer_Capture.yml`
 
 ```yaml
 trigger: none
@@ -788,6 +799,68 @@ jobs:
         arguments: "-SourceDir '$(Build.SourcesDirectory)' -BranchName '$(Build.SourceBranchName)'"
 ```
 
+------------------------- -------------------------
+
+### Pipeline: `DataExplorer_Deploy.yml
+⚠️WORK IN PROGRESS⚠️
+
+```yaml
+trigger: none
+
+pool:
+  name: SelfHostedPool
+
+variables:
+- group: Secrets
+- name: Cluster
+  value: "{prefix}dec-dev.westus.kusto.windows.net"
+- name: Database
+  value: "{prefix}ded-dev"
+
+jobs:
+- job: RunPipeline
+  displayName: "Data Explorer Deploy"
+  steps:
+    - checkout: self
+      persistCredentials: true
+
+    - task: AzureCLI@2
+      displayName: "Task: Authenticate"
+      name: GetToken
+      inputs:
+        azureSubscription: "AzureServiceConnection"
+        scriptType: "pscore"
+        scriptLocation: "inlineScript"
+        inlineScript: |
+          $TenantId = $env:AZURE_TENANT_ID
+          $SubscriptionId = $env:AZURE_SUBSCRIPTION_ID
+          $ClientId = $env:AZURE_CLIENT_ID
+          $ClientSecret = $env:AZURE_CLIENT_SECRET
+
+          Write-Host "Starting Azure login..."
+          az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId" --only-show-errors
+          az account set --subscription "$SubscriptionId" --only-show-errors
+
+          Write-Host "Retrieving Azure Data Explorer access token..."
+          $Token = az account get-access-token --resource "https://$(Cluster)" --query accessToken -o tsv --only-show-errors
+
+          if ([string]::IsNullOrEmpty($Token)) {
+              Write-Host "ERROR: Failed to retrieve access token."
+              exit 1
+          }
+
+          Write-Host "Access token retrieved successfully."
+          echo "##vso[task.setvariable variable=ADO_TOKEN]$Token"
+
+          $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
+          $Token | Out-File -FilePath $TokenPath -Encoding utf8
+          Write-Host "Token written to: $TokenPath"
+```
+
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Scripts
+
 ### Script: `commit_kql.ps1`
 
 ```powershell
@@ -852,103 +925,91 @@ Write-Host "Commit and push completed successfully."
 
 ```
 
+------------------------- -------------------------
+
 ### Script: `generate_kql.ps1`
 
 ```powershell
-# generate_kql.ps1
-Write-Host "Retrieving table list from ADX..."
-$TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
+param(
+    [Parameter(Mandatory=$false)]
+    [string]$SourceDir = $env:BUILD_SOURCESDIRECTORY,
 
-if (Test-Path $TokenPath) {
-    Write-Host "Reading token from file..."
-    $Token = (Get-Content -Path $TokenPath -Raw).Trim()
-} else {
-    Write-Host "ERROR: Token file not found at $TokenPath"
-    exit 1
-}
+    [Parameter(Mandatory=$false)]
+    [string]$BranchName = "main"
+)
 
-$Database = $env:Database
-$ListQuery = ".show tables details"
+# Change to the source directory.
+cd $SourceDir
 
-Write-Host "Querying ADX for table list..."
-$Body = @{
-    db  = $Database
-    csl = $ListQuery
-} | ConvertTo-Json -Compress
-
-$Headers = @{
-    "Authorization" = "Bearer $Token"
-    "Content-Type"  = "application/json"
-}
-
-try {
-    $Response = Invoke-RestMethod -Uri "https://$env:Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
-    $Tables = $Response.tables[0].rows
-} catch {
-    Write-Host "ERROR: Failed to retrieve table list. $_"
-    exit 1
-}
-
-if (-not $Tables -or $Tables.Count -eq 0) {
-    Write-Host "No tables found."
+# Locate the fixed "tables" folder.
+$oldTablesFolder = Join-Path $SourceDir "tables"
+if (-not (Test-Path $oldTablesFolder)) {
+    Write-Host "No 'tables' folder found. Skipping commit."
     exit 0
 }
 
-# Create a dated output folder for archival
-$Timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
-$OutputFolder = "$env:BUILD_SOURCESDIRECTORY/ADX_Tables_$Timestamp"
-if (!(Test-Path $OutputFolder)) {
-    New-Item -ItemType Directory -Path $OutputFolder | Out-Null
+Write-Host "Located 'tables' folder: $oldTablesFolder"
+
+# Define target folder structure: {cluster name}\{database name}
+$clusterName = $env:Cluster
+$databaseName = $env:Database
+
+# Optionally remove protocol if present
+if ($clusterName -like "https://*") {
+    $clusterName = $clusterName -replace "^https://", ""
+}
+$targetFolder = Join-Path $oldTablesFolder (Join-Path $clusterName $databaseName)
+if (-not (Test-Path $targetFolder)) {
+    New-Item -ItemType Directory -Path $targetFolder -Force | Out-Null
+}
+Write-Host "Target folder for KQL files: $targetFolder"
+
+# Move each .kql file from the root of the old tables folder to the target folder.
+Get-ChildItem -Path $oldTablesFolder -Filter "*.kql" | ForEach-Object {
+    $sourceFile = $_.FullName
+    $destinationFile = Join-Path $targetFolder $_.Name
+    Write-Host "Moving file $sourceFile to $destinationFile"
+    Move-Item -Path $sourceFile -Destination $destinationFile -Force
 }
 
-# Create a fixed folder for DevOps (always named "tables")
-$DevOpsFolder = "$env:BUILD_SOURCESDIRECTORY/tables"
-if (!(Test-Path $DevOpsFolder)) {
-    New-Item -ItemType Directory -Path $DevOpsFolder | Out-Null
+# Configure Git.
+git config --global user.email "pipeline@devops.com"
+git config --global user.name "Azure DevOps Pipeline"
+
+# Ensure Git ignores line-ending changes (CRLF vs LF)
+git config --global core.autocrlf false
+git config --global diff.renamelimit 0
+
+# If SYSTEM_ACCESSTOKEN is available, update the remote URL to include it.
+if ($env:SYSTEM_ACCESSTOKEN) {
+    Write-Host "SYSTEM_ACCESSTOKEN is available; updating remote URL..."
+    $repoUrl = "https://$env:SYSTEM_ACCESSTOKEN@dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta"
+    git remote set-url origin $repoUrl
+} else {
+    Write-Host "SYSTEM_ACCESSTOKEN not available. Ensure 'Allow scripts to access OAuth token' is enabled."
 }
 
-foreach ($Table in $Tables) {
-    $TableName = $Table[0]
-    Write-Host "Processing table: $TableName"
+# Pull the latest changes to avoid conflicts.
+git pull origin $BranchName --rebase
 
-    # Query for the schema using the second query
-    $SchemaQuery = ".show table $TableName cslschema"
-    $SchemaBody = @{
-        db  = $Database
-        csl = $SchemaQuery
-    } | ConvertTo-Json -Compress
+# Stage all .kql files from the target folder.
+git add "$targetFolder\*.kql"
 
-    try {
-        $SchemaResponse = Invoke-RestMethod -Uri "https://$env:Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $SchemaBody
-
-        # Extract only the schema definition from Rows[0][1]
-        if ($SchemaResponse.tables[0].rows.Count -gt 0) {
-            $SchemaString = $SchemaResponse.tables[0].rows[0][1]
-        } else {
-            Write-Host "ERROR: Schema not found for $TableName."
-            continue
-        }
-
-        # Build final KQL command
-        $FinalKql = ".create table $TableName ($SchemaString)"
-    } catch {
-        Write-Host "ERROR: Failed to retrieve schema for table $TableName. $_"
-        continue
-    }
-
-    # File paths
-    $FilePath = "$OutputFolder\$TableName.kql"
-    $DevOpsFilePath = "$DevOpsFolder\$TableName.kql"
-
-    # Overwrite existing .kql file instead of creating a new version
-    Write-Host "Writing KQL file for $TableName to $DevOpsFilePath"
-    Set-Content -Path $DevOpsFilePath -Value $FinalKql
-
-    # Also write the file to the dated output folder for archival
-    Write-Host "Archiving KQL file for $TableName at $FilePath"
-    Set-Content -Path $FilePath -Value $FinalKql
+# Check if there are actual changes before committing.
+git diff --cached --quiet
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "No changes detected. Skipping commit."
+    exit 0
 }
 
+# Commit the changes.
+$commitMessage = "Auto-commit: Updating KQL files in '$targetFolder'"
+git commit -m $commitMessage
+
+# Push the commit to the specified branch.
+git push origin HEAD:$BranchName
+
+Write-Host "Commit and push completed successfully."
 ```
 
 ## Appendix
@@ -958,26 +1019,21 @@ foreach ($Table in $Tables) {
 This section covers manual API testing using PowerShell and Azure CLI to verify that authentication and query execution are working correctly.
 
 #### Retrieve a Fresh Access Token
-
 Before testing, obtain a fresh access token:
-
 ```powershell
-$Cluster = "https://{prefix}dec.westus.kusto.windows.net"
+$Cluster = "https://{{prefix}}dec.westus.kusto.windows.net"
 $Token = az account get-access-token --resource "$Cluster" --query accessToken -o tsv --only-show-errors
 Write-Host "Access Token Retrieved"
 ```
-
 - Ensure that the correct cluster URL is used (`westus`).
 - This command should return a valid access token. If it fails, verify authentication settings.
 
 ------------------------- -------------------------
 
 #### Manually Run the ADX Query
-
 Using the token retrieved, execute an API request to run the `.show tables details` query:
-
 ```powershell
-$Database = "rc05dataexplorerdatabase"
+$Database = "{prefix}ded-dev"
 $Query = ".show tables details"
 
 $Body = @{
@@ -1000,29 +1056,24 @@ try {
     exit 1
 }
 ```
-
 - If successful, this will list all tables with details.
 - If 403 Forbidden occurs, ensure that the service principal or user identity has at least `"AllDatabasesAdmin"` or `"Viewer"` role.
 
 ------------------------- -------------------------
 
 #### Verify Role Assignments
-
 Check the current permissions for the user or service principal running the query:
-
 ```sh
 az kusto database-principal-assignment list \
     --cluster-name "{prefix}dec-dev" \
     --database-name "{prefix}ded-dev" \
     --query "[].{Principal:principalId, Role:role}" -o table
 ```
-
 If the user is missing the required roles, assign the `"Viewer"` role:
-
 ```sh
 az kusto database-principal-assignment create \
-    --cluster-name "{{prefix}}dec-dev" \
-    --database-name "rc05dataexplorerdatabase" \
+    --cluster-name "{prefix}dec-dev" \
+    --database-name "{prefix}ded-dev" \
     --principal-id "<YOUR_USER_OBJECT_ID>" \
     --principal-type "User" \
     --role "Viewer" \
@@ -1033,19 +1084,14 @@ az kusto database-principal-assignment create \
 ------------------------- -------------------------
 
 #### Debugging Issues
-
 ##### Token Issues
-
 - If the token is empty, confirm that authentication is working:
-
   ```sh
   az login
   az account show --query user.name -o tsv
   ```
-
 - If the token is expired, retrieve a fresh token and retry.
 
 ##### 403 Forbidden
-
 - Ensure that the correct identity is retrieving the token (`az account show`)
 - Verify the identity has necessary role permissions (`az kusto database-principal-assignment list`)
