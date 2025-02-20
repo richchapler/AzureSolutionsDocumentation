@@ -16,6 +16,8 @@ Prepare an on-prem machine (local or virtual) and install the following items in
 6. **Self-Hosted Agent** - Registered in Azure DevOps and required for executing the pipeline on a dedicated machine  
 7. **Service Connection** - Configured in Azure DevOps with correct permissions to authenticate and access necessary Azure resources
 
+_Note: Items without links are detailed below_
+
 ### Azure
 
 - Data Explorer Clusters
