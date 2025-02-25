@@ -733,35 +733,14 @@ jobs:
   displayName: "Data Explorer Deploy"
   steps:
     - checkout: self
-      persistCredentials: true
 
     - task: AzureCLI@2
-      displayName: "Task: Authenticate"
-      name: GetToken
+      displayName: "Task: Generate Token"
       inputs:
         azureSubscription: "AzureServiceConnection"
         scriptType: "pscore"
-        scriptLocation: "inlineScript"
-        inlineScript: |
-          $TenantId = $env:AZURE_TENANT_ID
-          $SubscriptionId = $env:AZURE_SUBSCRIPTION_ID
-          $ClientId = $env:AZURE_CLIENT_ID
-          $ClientSecret = $env:AZURE_CLIENT_SECRET
-
-          Write-Host "Starting Azure login..."
-          az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId" --only-show-errors
-          az account set --subscription "$SubscriptionId" --only-show-errors
-
-          Write-Host "Retrieving Azure Data Explorer access token..."
-          $Token = az account get-access-token --resource "https://$(Cluster)" --query accessToken -o tsv --only-show-errors
-
-          if ([string]::IsNullOrEmpty($Token)) {
-              Write-Host "ERROR: Failed to retrieve access token."
-              exit 1
-          }
-
-          Write-Host "Access token retrieved successfully."
-          echo "##vso[task.setvariable variable=ADO_TOKEN]$Token"
+        scriptLocation: "scriptPath"
+        scriptPath: "$(Build.SourcesDirectory)/scripts/generate_token.ps1"
 
     - task: PowerShell@2
       displayName: "Task: Verify Configuration"
@@ -769,14 +748,136 @@ jobs:
         targetType: "filePath"
         filePath: "$(Build.SourcesDirectory)/scripts/verify_configuration.ps1"
         arguments: >
-          -Cluster "$(Cluster)"
-          -Database "$(Database)"
-          -Token "$(ADO_TOKEN)"
+          -Cluster "$(Cluster)" -Database "$(Database)" -Token "$(ADO_TOKEN)"
 ```
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
 ## Scripts
+
+### Script: `generate_token.ps1`
+
+```powershell
+param(
+    [string]$TenantId = $env:AZURE_TENANT_ID,
+    [string]$SubscriptionId = $env:AZURE_SUBSCRIPTION_ID,
+    [string]$ClientId = $env:AZURE_CLIENT_ID,
+    [string]$ClientSecret = $env:AZURE_CLIENT_SECRET,
+    [string]$Cluster = $env:Cluster
+)
+
+Write-Host "Starting Azure login..."
+az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId" --only-show-errors
+az account set --subscription "$SubscriptionId" --only-show-errors
+
+Write-Host "Retrieving Azure Data Explorer access token..."
+$Token = az account get-access-token --resource "https://$Cluster" --query accessToken -o tsv --only-show-errors
+
+if ([string]::IsNullOrEmpty($Token)) {
+    Write-Host "ERROR: Failed to retrieve access token."
+    exit 1
+}
+
+Write-Host "Access token retrieved successfully."
+echo "##vso[task.setvariable variable=ADO_TOKEN]$Token"
+```
+
+------------------------- -------------------------
+
+### Script: `verify_configuration.ps1`
+
+```powershell
+param(
+    [Parameter(Mandatory = $true)]
+    [string]$Cluster,
+    [Parameter(Mandatory = $true)]
+    [string]$Database,
+    [Parameter(Mandatory = $true)]
+    [string]$Token
+)
+
+Write-Host "Starting configuration verification..."
+
+if ([string]::IsNullOrEmpty($Token)) {
+    Write-Host "ERROR: Token is empty."
+    exit 1
+}
+Write-Host "Token length: $($Token.Length)"
+
+$ClusterHost = $Cluster -replace '^https://',''
+Write-Host "Cluster Host: ${ClusterHost}"
+
+# DNS Resolution using nslookup
+Write-Host "Checking DNS Resolution with nslookup..."
+$DnsOutput = nslookup $ClusterHost
+Write-Host "nslookup output for ${ClusterHost}:`n$DnsOutput"
+if ($DnsOutput -match "Non-existent domain") {
+    Write-Host "DNS resolution failed for ${ClusterHost}, retrying..."
+    Start-Sleep -Seconds 5
+    $DnsOutput = nslookup $ClusterHost
+    Write-Host "Retry nslookup output:`n$DnsOutput"
+}
+if ($DnsOutput -match "Non-existent domain") {
+    Write-Host "ERROR: DNS resolution failed for ${ClusterHost} after retry."
+    exit 1
+}
+Write-Host "DNS resolution successful via nslookup."
+
+if (Get-Command Resolve-DnsName -ErrorAction SilentlyContinue) {
+    Write-Host "Checking DNS Resolution with Resolve-DnsName..."
+    try {
+        $Resolved = Resolve-DnsName -Name $ClusterHost -ErrorAction Stop
+        Write-Host "Resolve-DnsName output for ${ClusterHost}:`n$($Resolved | Out-String)"
+    } catch {
+        Write-Host "ERROR: Resolve-DnsName failed for ${ClusterHost}. $_"
+    }
+}
+
+# Network Connectivity Check using Test-NetConnection (3 attempts)
+Write-Host "Checking Network Connectivity..."
+$Success = $false
+for ($i = 1; $i -le 3; $i++) {
+    $NetCheck = Test-NetConnection -ComputerName $ClusterHost -Port 443
+    Write-Host "Test-NetConnection attempt $i for ${ClusterHost}:`n$($NetCheck | Out-String)"
+    if ($NetCheck.TcpTestSucceeded) {
+        Write-Host "Network connectivity to ${ClusterHost} on port 443: SUCCESS"
+        $Success = $true
+        break
+    } else {
+        Write-Host "WARNING: Network connectivity test failed on attempt $i. Retrying..."
+        Start-Sleep -Seconds 5
+    }
+}
+if (-not $Success) {
+    Write-Host "ERROR: Network connectivity to ${ClusterHost} on port 443 FAILED after 3 attempts."
+    exit 1
+}
+
+# ADX Query Permissions Check using the token
+Write-Host "Checking ADX Query Permissions..."
+$Query = ".show tables details"
+$Body = @"
+{
+    "db": "$Database",
+    "csl": "$Query"
+}
+"@
+$Headers = @{
+    "Authorization" = "Bearer $Token"
+    "Content-Type"  = "application/json"
+}
+try {
+    $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+    Write-Host "ADX Query Permissions: SUCCESS"
+} catch {
+    Write-Host "ERROR: ADX query test failed. $_"
+    exit 1
+}
+
+Write-Host "Configuration verification completed."
+```
+
+------------------------- -------------------------
 
 ### Script: `commit_kql.ps1`
 
@@ -943,101 +1044,6 @@ foreach ($Table in $Tables) {
     Write-Host "Archiving KQL file for $TableName at $FilePath"
     Set-Content -Path $FilePath -Value $FinalKql
 }
-```
-
-------------------------- -------------------------
-
-### Script: `verify_configuration.ps1`
-
-```powershell
-param(
-    [Parameter(Mandatory = $true)]
-    [string]$Cluster,
-    [Parameter(Mandatory = $true)]
-    [string]$Database,
-    [Parameter(Mandatory = $true)]
-    [string]$Token
-)
-
-Write-Host "Starting configuration verification..."
-
-if ([string]::IsNullOrEmpty($Token)) {
-    Write-Host "ERROR: Token is empty."
-    exit 1
-}
-Write-Host "Token length: $($Token.Length)"
-
-$ClusterHost = $Cluster -replace '^https://',''
-Write-Host "Cluster Host: ${ClusterHost}"
-
-# DNS Resolution using nslookup
-Write-Host "Checking DNS Resolution with nslookup..."
-$DnsOutput = nslookup $ClusterHost
-Write-Host "nslookup output for ${ClusterHost}:`n$DnsOutput"
-if ($DnsOutput -match "Non-existent domain") {
-    Write-Host "DNS resolution failed for ${ClusterHost}, retrying..."
-    Start-Sleep -Seconds 5
-    $DnsOutput = nslookup $ClusterHost
-    Write-Host "Retry nslookup output:`n$DnsOutput"
-}
-if ($DnsOutput -match "Non-existent domain") {
-    Write-Host "ERROR: DNS resolution failed for ${ClusterHost} after retry."
-    exit 1
-}
-Write-Host "DNS resolution successful via nslookup."
-
-if (Get-Command Resolve-DnsName -ErrorAction SilentlyContinue) {
-    Write-Host "Checking DNS Resolution with Resolve-DnsName..."
-    try {
-        $Resolved = Resolve-DnsName -Name $ClusterHost -ErrorAction Stop
-        Write-Host "Resolve-DnsName output for ${ClusterHost}:`n$($Resolved | Out-String)"
-    } catch {
-        Write-Host "ERROR: Resolve-DnsName failed for ${ClusterHost}. $_"
-    }
-}
-
-# Network Connectivity Check using Test-NetConnection (3 attempts)
-Write-Host "Checking Network Connectivity..."
-$Success = $false
-for ($i = 1; $i -le 3; $i++) {
-    $NetCheck = Test-NetConnection -ComputerName $ClusterHost -Port 443
-    Write-Host "Test-NetConnection attempt $i for ${ClusterHost}:`n$($NetCheck | Out-String)"
-    if ($NetCheck.TcpTestSucceeded) {
-        Write-Host "Network connectivity to ${ClusterHost} on port 443: SUCCESS"
-        $Success = $true
-        break
-    } else {
-        Write-Host "WARNING: Network connectivity test failed on attempt $i. Retrying..."
-        Start-Sleep -Seconds 5
-    }
-}
-if (-not $Success) {
-    Write-Host "ERROR: Network connectivity to ${ClusterHost} on port 443 FAILED after 3 attempts."
-    exit 1
-}
-
-# ADX Query Permissions Check using the token
-Write-Host "Checking ADX Query Permissions..."
-$Query = ".show tables details"
-$Body = @"
-{
-    "db": "$Database",
-    "csl": "$Query"
-}
-"@
-$Headers = @{
-    "Authorization" = "Bearer $Token"
-    "Content-Type"  = "application/json"
-}
-try {
-    $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
-    Write-Host "ADX Query Permissions: SUCCESS"
-} catch {
-    Write-Host "ERROR: ADX query test failed. $_"
-    exit 1
-}
-
-Write-Host "Configuration verification completed."
 ```
 
 ## Appendix
