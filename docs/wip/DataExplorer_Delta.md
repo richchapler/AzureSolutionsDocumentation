@@ -813,9 +813,9 @@ pool:
 variables:
 - group: Secrets
 - name: Cluster
-  value: "{prefix}dec-dev.westus.kusto.windows.net"
+  value: "prefixdec-dev.westus.kusto.windows.net"
 - name: Database
-  value: "{prefix}ded-dev"
+  value: "prefixded-dev"
 
 jobs:
 - job: RunPipeline
@@ -852,9 +852,15 @@ jobs:
           Write-Host "Access token retrieved successfully."
           echo "##vso[task.setvariable variable=ADO_TOKEN]$Token"
 
-          $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
-          $Token | Out-File -FilePath $TokenPath -Encoding utf8
-          Write-Host "Token written to: $TokenPath"
+    - task: PowerShell@2
+      displayName: "Task: Verify Configuration"
+      inputs:
+        targetType: "filePath"
+        filePath: "$(Build.SourcesDirectory)/scripts/verify_configuration.ps1"
+        arguments: >
+          -Cluster "$(Cluster)"
+          -Database "$(Database)"
+          -Token "$(ADO_TOKEN)"
 ```
 
 ------------------------- ------------------------- ------------------------- -------------------------
@@ -1010,6 +1016,101 @@ git commit -m $commitMessage
 git push origin HEAD:$BranchName
 
 Write-Host "Commit and push completed successfully."
+```
+
+------------------------- -------------------------
+
+### Script: `verify_configuration.ps1`
+
+```powershell
+param(
+    [Parameter(Mandatory = $true)]
+    [string]$Cluster,
+    [Parameter(Mandatory = $true)]
+    [string]$Database,
+    [Parameter(Mandatory = $true)]
+    [string]$Token
+)
+
+Write-Host "Starting configuration verification..."
+
+if ([string]::IsNullOrEmpty($Token)) {
+    Write-Host "ERROR: Token is empty."
+    exit 1
+}
+Write-Host "Token length: $($Token.Length)"
+
+$ClusterHost = $Cluster -replace '^https://',''
+Write-Host "Cluster Host: ${ClusterHost}"
+
+# DNS Resolution using nslookup
+Write-Host "Checking DNS Resolution with nslookup..."
+$DnsOutput = nslookup $ClusterHost
+Write-Host "nslookup output for ${ClusterHost}:`n$DnsOutput"
+if ($DnsOutput -match "Non-existent domain") {
+    Write-Host "DNS resolution failed for ${ClusterHost}, retrying..."
+    Start-Sleep -Seconds 5
+    $DnsOutput = nslookup $ClusterHost
+    Write-Host "Retry nslookup output:`n$DnsOutput"
+}
+if ($DnsOutput -match "Non-existent domain") {
+    Write-Host "ERROR: DNS resolution failed for ${ClusterHost} after retry."
+    exit 1
+}
+Write-Host "DNS resolution successful via nslookup."
+
+if (Get-Command Resolve-DnsName -ErrorAction SilentlyContinue) {
+    Write-Host "Checking DNS Resolution with Resolve-DnsName..."
+    try {
+        $Resolved = Resolve-DnsName -Name $ClusterHost -ErrorAction Stop
+        Write-Host "Resolve-DnsName output for ${ClusterHost}:`n$($Resolved | Out-String)"
+    } catch {
+        Write-Host "ERROR: Resolve-DnsName failed for ${ClusterHost}. $_"
+    }
+}
+
+# Network Connectivity Check using Test-NetConnection (3 attempts)
+Write-Host "Checking Network Connectivity..."
+$Success = $false
+for ($i = 1; $i -le 3; $i++) {
+    $NetCheck = Test-NetConnection -ComputerName $ClusterHost -Port 443
+    Write-Host "Test-NetConnection attempt $i for ${ClusterHost}:`n$($NetCheck | Out-String)"
+    if ($NetCheck.TcpTestSucceeded) {
+        Write-Host "Network connectivity to ${ClusterHost} on port 443: SUCCESS"
+        $Success = $true
+        break
+    } else {
+        Write-Host "WARNING: Network connectivity test failed on attempt $i. Retrying..."
+        Start-Sleep -Seconds 5
+    }
+}
+if (-not $Success) {
+    Write-Host "ERROR: Network connectivity to ${ClusterHost} on port 443 FAILED after 3 attempts."
+    exit 1
+}
+
+# ADX Query Permissions Check using the token
+Write-Host "Checking ADX Query Permissions..."
+$Query = ".show tables details"
+$Body = @"
+{
+    "db": "$Database",
+    "csl": "$Query"
+}
+"@
+$Headers = @{
+    "Authorization" = "Bearer $Token"
+    "Content-Type"  = "application/json"
+}
+try {
+    $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+    Write-Host "ADX Query Permissions: SUCCESS"
+} catch {
+    Write-Host "ERROR: ADX query test failed. $_"
+    exit 1
+}
+
+Write-Host "Configuration verification completed."
 ```
 
 ## Appendix
