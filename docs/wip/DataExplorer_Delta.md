@@ -857,72 +857,6 @@ Write-Host "Configuration verification completed."
 
 ------------------------- -------------------------
 
-### Script: `commit_kql.ps1`
-
-```powershell
-param(
-    [Parameter(Mandatory=$false)]
-    [string]$SourceDir = $env:BUILD_SOURCESDIRECTORY,
-
-    [Parameter(Mandatory=$false)]
-    [string]$BranchName = "main"
-)
-
-# Change to the source directory.
-cd $SourceDir
-
-# Locate the fixed "tables" folder.
-$devOpsFolder = Join-Path $SourceDir "tables"
-if (-not (Test-Path $devOpsFolder)) {
-    Write-Host "No 'tables' folder found. Skipping commit."
-    exit 0
-}
-
-Write-Host "Located 'tables' folder: $devOpsFolder"
-
-# Configure Git.
-git config --global user.email "pipeline@devops.com"
-git config --global user.name "Azure DevOps Pipeline"
-
-# Ensure Git ignores line-ending changes (CRLF vs LF)
-git config --global core.autocrlf false
-git config --global diff.renamelimit 0
-
-# If SYSTEM_ACCESSTOKEN is available, update the remote URL to include it.
-if ($env:SYSTEM_ACCESSTOKEN) {
-    Write-Host "SYSTEM_ACCESSTOKEN is available; updating remote URL..."
-    $repoUrl = "https://$env:SYSTEM_ACCESSTOKEN@dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta"
-    git remote set-url origin $repoUrl
-} else {
-    Write-Host "SYSTEM_ACCESSTOKEN not available. Ensure 'Allow scripts to access OAuth token' is enabled."
-}
-
-# Ensure we pull the latest changes to avoid conflicts
-git pull origin $BranchName --rebase
-
-# Stage all .kql files (overwrite existing)
-git add "$devOpsFolder\*.kql"
-
-# Check if there are actual changes before committing
-git diff --cached --quiet
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "No changes detected. Skipping commit."
-    exit 0
-}
-
-# Commit the changes.
-$commitMessage = "Auto-commit: Updating KQL files in 'tables' folder"
-git commit -m $commitMessage
-
-# Push the commit to the specified branch.
-git push origin HEAD:$BranchName
-
-Write-Host "Commit and push completed successfully."
-
-```
-
-------------------------- -------------------------
-
 ### Script: `generate_kql.ps1`
 
 ```powershell
@@ -1023,6 +957,124 @@ foreach ($Table in $Tables) {
     Set-Content -Path $FilePath -Value $FinalKql
 }
 ```
+
+------------------------- -------------------------
+
+### Script: `commit_kql.ps1`
+
+```powershell
+param(
+    [Parameter(Mandatory=$false)]
+    [string]$SourceDir = $env:BUILD_SOURCESDIRECTORY,
+
+    [Parameter(Mandatory=$false)]
+    [string]$BranchName = "main"
+)
+
+# Change to the source directory.
+cd $SourceDir
+
+# Locate the fixed "tables" folder.
+$devOpsFolder = Join-Path $SourceDir "tables"
+if (-not (Test-Path $devOpsFolder)) {
+    Write-Host "No 'tables' folder found. Skipping commit."
+    exit 0
+}
+
+Write-Host "Located 'tables' folder: $devOpsFolder"
+
+# Configure Git.
+git config --global user.email "pipeline@devops.com"
+git config --global user.name "Azure DevOps Pipeline"
+
+# Ensure Git ignores line-ending changes (CRLF vs LF)
+git config --global core.autocrlf false
+git config --global diff.renamelimit 0
+
+# If SYSTEM_ACCESSTOKEN is available, update the remote URL to include it.
+if ($env:SYSTEM_ACCESSTOKEN) {
+    Write-Host "SYSTEM_ACCESSTOKEN is available; updating remote URL..."
+    $repoUrl = "https://$env:SYSTEM_ACCESSTOKEN@dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta"
+    git remote set-url origin $repoUrl
+} else {
+    Write-Host "SYSTEM_ACCESSTOKEN not available. Ensure 'Allow scripts to access OAuth token' is enabled."
+}
+
+# Ensure we pull the latest changes to avoid conflicts
+git pull origin $BranchName --rebase
+
+# Stage all .kql files (overwrite existing)
+git add "$devOpsFolder\*.kql"
+
+# Check if there are actual changes before committing
+git diff --cached --quiet
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "No changes detected. Skipping commit."
+    exit 0
+}
+
+# Commit the changes.
+$commitMessage = "Auto-commit: Updating KQL files in 'tables' folder"
+git commit -m $commitMessage
+
+# Push the commit to the specified branch.
+git push origin HEAD:$BranchName
+
+Write-Host "Commit and push completed successfully."
+```
+
+------------------------- -------------------------
+
+### Script: `deploy_kql.ps1`
+
+```powershell
+param(
+    [Parameter(Mandatory = $true)] [string]$Cluster,
+    [Parameter(Mandatory = $true)] [string]$Token,
+    [Parameter(Mandatory = $true)] [string]$Database,
+    [string]$RootPath = "$env:BUILD_SOURCESDIRECTORY/tables"
+)
+
+if (-not (Test-Path $RootPath)) {
+    Write-Host "ERROR: KQL directory '$RootPath' does not exist."
+    exit 1
+}
+
+Write-Host "Deploying KQL files to cluster: $Cluster, database: $Database"
+
+$Headers = @{
+    "Authorization" = "Bearer $Token"
+    "Content-Type"  = "application/json"
+}
+
+$KqlFiles = Get-ChildItem -Path $RootPath -Recurse -Filter "*.kql"
+if ($KqlFiles.Count -eq 0) {
+    Write-Host "No KQL files found for deployment."
+    exit 0
+}
+
+foreach ($File in $KqlFiles) {
+    Write-Host "Processing file: $($File.FullName)"
+    $Query = Get-Content -Path $File.FullName -Raw
+
+    $Body = @{
+        db  = $Database
+        csl = $Query
+    } | ConvertTo-Json -Compress
+
+    try {
+        Invoke-RestMethod -Uri "https://$Cluster/v1/rest/mgmt" -Method Post -Headers $Headers -Body $Body
+        Write-Host "Successfully deployed: $($File.Name)"
+    } catch {
+        Write-Host "ERROR: Failed to deploy $($File.Name). $_"
+        exit 1
+    }
+}
+
+Write-Host "KQL deployment completed successfully."
+```
+
+------------------------- -------------------------
 
 ## Appendix
 
