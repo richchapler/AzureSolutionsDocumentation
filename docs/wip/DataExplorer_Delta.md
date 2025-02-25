@@ -657,32 +657,12 @@ jobs:
       persistCredentials: true
 
     - task: AzureCLI@2
-      displayName: "Task: Authenticate"
-      name: GetToken
+      displayName: "Task: Generate Token"
       inputs:
         azureSubscription: "AzureServiceConnection"
         scriptType: "pscore"
-        scriptLocation: "inlineScript"
-        inlineScript: |
-          $TenantId = $env:AZURE_TENANT_ID
-          $SubscriptionId = $env:AZURE_SUBSCRIPTION_ID
-          $ClientId = $env:AZURE_CLIENT_ID
-          $ClientSecret = $env:AZURE_CLIENT_SECRET
-
-          Write-Host "Starting Azure login..."
-          az login --service-principal --username "$ClientId" --password "$ClientSecret" --tenant "$TenantId" --only-show-errors
-          az account set --subscription "$SubscriptionId" --only-show-errors
-
-          Write-Host "Retrieving Azure Data Explorer access token..."
-          $Token = az account get-access-token --resource "https://$(Cluster)" --query accessToken -o tsv --only-show-errors
-
-          if ([string]::IsNullOrEmpty($Token)) {
-              Write-Host "ERROR: Failed to retrieve access token."
-              exit 1
-          }
-
-          Write-Host "Access token retrieved successfully."
-          echo "##vso[task.setvariable variable=ADO_TOKEN]$Token"
+        scriptLocation: "scriptPath"
+        scriptPath: "$(Build.SourcesDirectory)/scripts/generate_token.ps1"
 
     - task: PowerShell@2
       displayName: "Task: Verify Configuration"
@@ -690,9 +670,7 @@ jobs:
         targetType: "filePath"
         filePath: "$(Build.SourcesDirectory)/scripts/verify_configuration.ps1"
         arguments: >
-          -Cluster "$(Cluster)"
-          -Database "$(Database)"
-          -Token "$(ADO_TOKEN)"
+          -Cluster "$(Cluster)" -Database "$(Database)" -Token "$(ADO_TOKEN)"
 
     - task: PowerShell@2
       displayName: "Task: Generate KQL Files"
