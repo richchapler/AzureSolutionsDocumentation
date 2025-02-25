@@ -645,9 +645,9 @@ pool:
 variables:
 - group: Secrets
 - name: Cluster
-  value: "{prefix}dec-dev.westus.kusto.windows.net"
+  value: "prefixdec-dev.westus.kusto.windows.net"
 - name: Database
-  value: "{prefix}ded-dev"
+  value: "prefixded-dev"
 
 jobs:
 - job: RunPipeline
@@ -684,112 +684,23 @@ jobs:
           Write-Host "Access token retrieved successfully."
           echo "##vso[task.setvariable variable=ADO_TOKEN]$Token"
 
-          $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
-          $Token | Out-File -FilePath $TokenPath -Encoding utf8
-          Write-Host "Token written to: $TokenPath"
-
-    - task: AzureCLI@2
+    - task: PowerShell@2
       displayName: "Task: Verify Configuration"
       inputs:
-        azureSubscription: "AzureServiceConnection"
-        scriptType: "pscore"
-        scriptLocation: "inlineScript"
-        inlineScript: |
-          Write-Host "Starting configuration verification..."
-
-          $Database = "$(Database)"
-          $TokenPath = "$env:AGENT_TEMPDIRECTORY\ado_token.txt"
-
-          if (Test-Path $TokenPath) {
-              Write-Host "Reading token from file..."
-              $Token = (Get-Content -Path $TokenPath -Raw).Trim()
-          } else {
-              Write-Host "ERROR: Token file not found at $TokenPath"
-              exit 1
-          }
-
-          if ([string]::IsNullOrEmpty($Token)) {
-              Write-Host "ERROR: ADO_TOKEN is empty. Authentication might have failed."
-              exit 1
-          }
-
-          $ClusterHost = "$(Cluster)" -replace "^https://",""
-
-          Write-Host "Checking DNS Resolution..."
-          $DnsCheck = nslookup $ClusterHost
-
-          if ($DnsCheck -match "Non-existent domain") {
-              Write-Host "ERROR: DNS resolution failed for $ClusterHost, retrying..."
-              Start-Sleep -Seconds 5
-              $DnsCheck = nslookup $ClusterHost
-          }
-
-          if ($DnsCheck -match "Non-existent domain") {
-              Write-Host "ERROR: DNS resolution failed for $ClusterHost after retry."
-              exit 1
-          } else {
-              Write-Host "DNS resolution successful: $DnsCheck"
-          }
-
-          Write-Host "Checking Network Connectivity..."
-          $Retries = 3
-          $Success = $false
-
-          for ($i = 1; $i -le $Retries; $i++) {
-              $NetCheck = Test-NetConnection -ComputerName $ClusterHost -Port 443
-
-              if ($NetCheck.TcpTestSucceeded) {
-                  Write-Host "Network connectivity to $ClusterHost on port 443: SUCCESS"
-                  $Success = $true
-                  break
-              } else {
-                  Write-Host "WARNING: Network connectivity test failed. Retrying ($i/$Retries)..."
-                  Start-Sleep -Seconds 5
-              }
-          }
-
-          if (-not $Success) {
-              Write-Host "ERROR: Network connectivity to $ClusterHost on port 443 FAILED after retries."
-              exit 1
-          }
-
-          Write-Host "Checking Azure Authentication..."
-          $AuthCheck = az account show --query user.name -o tsv --only-show-errors
-          if ([string]::IsNullOrEmpty($AuthCheck)) {
-              Write-Host "ERROR: Authentication check failed."
-              exit 1
-          } else {
-              Write-Host "Authentication successful. Logged in as: $AuthCheck"
-          }
-
-          Write-Host "Checking ADX Query Permissions..."
-          $Query = ".show tables details"
-          $Body = @"
-          {
-              "db": "$Database",
-              "csl": "$Query"
-          }
-          "@
-
-          $Headers = @{}
-          $Headers["Authorization"] = "Bearer $Token"
-          $Headers["Content-Type"]  = "application/json"
-
-          try {
-              $Response = Invoke-RestMethod -Uri "https://$(Cluster)/v1/rest/query" -Method Post -Headers $Headers -Body $Body
-              Write-Host "ADX Query Permissions: SUCCESS"
-          } catch {
-              Write-Host "ERROR: ADX query test failed. $_"
-              exit 1
-          }
-
-          Write-Host "Configuration verification completed."
+        targetType: "filePath"
+        filePath: "$(Build.SourcesDirectory)/scripts/verify_configuration.ps1"
+        arguments: >
+          -Cluster "$(Cluster)"
+          -Database "$(Database)"
+          -Token "$(ADO_TOKEN)"
 
     - task: PowerShell@2
       displayName: "Task: Generate KQL Files"
       inputs:
         targetType: "filePath"
         filePath: "$(Build.SourcesDirectory)/scripts/generate_kql.ps1"
+        arguments: >
+          -Token "$(ADO_TOKEN)" -Cluster "$(Cluster)" -Database "$(Database)"
 
     - task: PowerShell@2
       displayName: "Task: Commit & Push .kql Files"
@@ -937,85 +848,101 @@ Write-Host "Commit and push completed successfully."
 
 ```powershell
 param(
-    [Parameter(Mandatory=$false)]
-    [string]$SourceDir = $env:BUILD_SOURCESDIRECTORY,
-
-    [Parameter(Mandatory=$false)]
-    [string]$BranchName = "main"
+    [Parameter(Mandatory = $true)]
+    [string]$Token,
+    [Parameter(Mandatory = $false)]
+    [string]$Database = $env:Database,
+    [Parameter(Mandatory = $false)]
+    [string]$Cluster = $env:Cluster
 )
 
-# Change to the source directory.
-cd $SourceDir
+Write-Host "Retrieving table list from ADX..."
 
-# Locate the fixed "tables" folder.
-$oldTablesFolder = Join-Path $SourceDir "tables"
-if (-not (Test-Path $oldTablesFolder)) {
-    Write-Host "No 'tables' folder found. Skipping commit."
+if ([string]::IsNullOrEmpty($Token)) {
+    Write-Host "ERROR: Token parameter is empty."
+    exit 1
+}
+
+$ListQuery = ".show tables details"
+
+Write-Host "Querying ADX for table list..."
+$Body = @{
+    db  = $Database
+    csl = $ListQuery
+} | ConvertTo-Json -Compress
+
+$Headers = @{
+    "Authorization" = "Bearer $Token"
+    "Content-Type"  = "application/json"
+}
+
+try {
+    $Response = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $Body
+    $Tables = $Response.tables[0].rows
+} catch {
+    Write-Host "ERROR: Failed to retrieve table list. $_"
+    exit 1
+}
+
+if (-not $Tables -or $Tables.Count -eq 0) {
+    Write-Host "No tables found."
     exit 0
 }
 
-Write-Host "Located 'tables' folder: $oldTablesFolder"
-
-# Define target folder structure: {cluster name}\{database name}
-$clusterName = $env:Cluster
-$databaseName = $env:Database
-
-# Optionally remove protocol if present
-if ($clusterName -like "https://*") {
-    $clusterName = $clusterName -replace "^https://", ""
-}
-$targetFolder = Join-Path $oldTablesFolder (Join-Path $clusterName $databaseName)
-if (-not (Test-Path $targetFolder)) {
-    New-Item -ItemType Directory -Path $targetFolder -Force | Out-Null
-}
-Write-Host "Target folder for KQL files: $targetFolder"
-
-# Move each .kql file from the root of the old tables folder to the target folder.
-Get-ChildItem -Path $oldTablesFolder -Filter "*.kql" | ForEach-Object {
-    $sourceFile = $_.FullName
-    $destinationFile = Join-Path $targetFolder $_.Name
-    Write-Host "Moving file $sourceFile to $destinationFile"
-    Move-Item -Path $sourceFile -Destination $destinationFile -Force
+# Create a dated output folder for archival
+$Timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
+$OutputFolder = Join-Path $env:BUILD_SOURCESDIRECTORY "ADX_Tables_$Timestamp"
+if (!(Test-Path $OutputFolder)) {
+    New-Item -ItemType Directory -Path $OutputFolder | Out-Null
 }
 
-# Configure Git.
-git config --global user.email "pipeline@devops.com"
-git config --global user.name "Azure DevOps Pipeline"
-
-# Ensure Git ignores line-ending changes (CRLF vs LF)
-git config --global core.autocrlf false
-git config --global diff.renamelimit 0
-
-# If SYSTEM_ACCESSTOKEN is available, update the remote URL to include it.
-if ($env:SYSTEM_ACCESSTOKEN) {
-    Write-Host "SYSTEM_ACCESSTOKEN is available; updating remote URL..."
-    $repoUrl = "https://$env:SYSTEM_ACCESSTOKEN@dev.azure.com/rchapler/DataExplorer_Delta/_git/DataExplorer_Delta"
-    git remote set-url origin $repoUrl
-} else {
-    Write-Host "SYSTEM_ACCESSTOKEN not available. Ensure 'Allow scripts to access OAuth token' is enabled."
+# Create a fixed folder for DevOps (always named "tables")
+$DevOpsFolder = Join-Path $env:BUILD_SOURCESDIRECTORY "tables"
+if (!(Test-Path $DevOpsFolder)) {
+    New-Item -ItemType Directory -Path $DevOpsFolder | Out-Null
 }
 
-# Pull the latest changes to avoid conflicts.
-git pull origin $BranchName --rebase
+foreach ($Table in $Tables) {
+    $TableName = $Table[0]
+    Write-Host "Processing table: $TableName"
 
-# Stage all .kql files from the target folder.
-git add "$targetFolder\*.kql"
+    # Query for the schema using the second query
+    $SchemaQuery = ".show table $TableName cslschema"
+    $SchemaBody = @{
+        db  = $Database
+        csl = $SchemaQuery
+    } | ConvertTo-Json -Compress
 
-# Check if there are actual changes before committing.
-git diff --cached --quiet
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "No changes detected. Skipping commit."
-    exit 0
+    try {
+        $SchemaResponse = Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $SchemaBody
+
+        # Extract only the schema definition from Rows[0][1]
+        if ($SchemaResponse.tables[0].rows.Count -gt 0) {
+            $SchemaString = $SchemaResponse.tables[0].rows[0][1]
+        } else {
+            Write-Host "ERROR: Schema not found for $TableName."
+            continue
+        }
+
+        # Build final KQL command
+        $FinalKql = ".create table $TableName ($SchemaString)"
+    } catch {
+        Write-Host "ERROR: Failed to retrieve schema for table $TableName. $_"
+        continue
+    }
+
+    # File paths
+    $FilePath = Join-Path $OutputFolder "$TableName.kql"
+    $DevOpsFilePath = Join-Path $DevOpsFolder "$TableName.kql"
+
+    # Overwrite existing .kql file instead of creating a new version
+    Write-Host "Writing KQL file for $TableName to $DevOpsFilePath"
+    Set-Content -Path $DevOpsFilePath -Value $FinalKql
+
+    # Also write the file to the dated output folder for archival
+    Write-Host "Archiving KQL file for $TableName at $FilePath"
+    Set-Content -Path $FilePath -Value $FinalKql
 }
-
-# Commit the changes.
-$commitMessage = "Auto-commit: Updating KQL files in '$targetFolder'"
-git commit -m $commitMessage
-
-# Push the commit to the specified branch.
-git push origin HEAD:$BranchName
-
-Write-Host "Commit and push completed successfully."
 ```
 
 ------------------------- -------------------------
