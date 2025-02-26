@@ -1050,11 +1050,11 @@ param(
 )
 
 if (-not (Test-Path $RootPath)) {
-    Write-Host "ERROR: KQL directory '$RootPath' does not exist."
+    Write-Error "KQL directory '$RootPath' does not exist." 
     exit 1
 }
 
-Write-Host "Deploying KQL files to cluster: $Cluster, database: $Database"
+Write-Host "Deploying KQL files to $Cluster, database: $Database"
 
 $Headers = @{
     "Authorization" = "Bearer $Token"
@@ -1062,40 +1062,47 @@ $Headers = @{
 }
 
 $KqlFiles = Get-ChildItem -Path $RootPath -Recurse -Filter "*.kql"
-if ($KqlFiles.Count -eq 0) {
+if (-not $KqlFiles) {
     Write-Host "No KQL files found for deployment."
     exit 0
 }
 
 foreach ($File in $KqlFiles) {
-    Write-Host "Processing file: $($File.FullName)"
-    # Explicitly cast the file content to a string to avoid extra metadata
+    Write-Host "Processing: $($File.FullName)"
     $Query = [string](Get-Content -Path $File.FullName -Raw)
+    
+    # Log the raw KQL query for troubleshooting
+    Write-Host "Raw KQL from file $($File.Name):"
+    Write-Host $Query
 
-    $BodyHash = @{
-        db  = $Database
-        csl = $Query
+    $TableName = [System.IO.Path]::GetFileNameWithoutExtension($File.Name)
+    
+    # Drop table command (ignore errors)
+    $DropBody = @{ db = $Database; csl = ".drop table ifexists $TableName" } | ConvertTo-Json -Compress
+    try { 
+        Invoke-RestMethod -Uri "https://$Cluster/v1/rest/mgmt" -Method Post -Headers $Headers -Body $DropBody -ErrorAction Stop 
+        Write-Host "Dropped table $TableName (if it existed)."
+    } catch {
+        Write-Host "Warning: Could not drop table $TableName (may not exist)."
     }
-    $Body = $BodyHash | ConvertTo-Json -Compress
-
-    Write-Host "Deploying KQL from file $($File.Name):"
-    Write-Host "JSON Payload: $Body"
+    
+    # Create table command using the KQL from file
+    $Body = @{ db = $Database; csl = $Query } | ConvertTo-Json -Compress
+    # Log the JSON payload as well
+    Write-Host "JSON Payload for $($File.Name): $Body"
     
     try {
         Invoke-RestMethod -Uri "https://$Cluster/v1/rest/mgmt" -Method Post -Headers $Headers -Body $Body -ErrorAction Stop
-        Write-Host "Successfully deployed: $($File.Name)"
+        Write-Host "Deployed: $($File.Name)"
     } catch {
-        Write-Host "ERROR: Failed to deploy $($File.Name)."
-        Write-Host "Exception Message: $($_.Exception.Message)"
-        if ($_.Exception.Response -and $_.Exception.Response.GetResponseStream()) {
+        Write-Error "Failed to deploy $($File.Name): $($_.Exception.Message)"
+        if ($_.Exception.Response) {
             $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
-            $responseBody = $reader.ReadToEnd()
-            Write-Host "Response Body: $responseBody"
+            Write-Error "Response: $($reader.ReadToEnd())"
         }
-        Write-Host "Please verify that the table does not already exist or check your permissions and command syntax."
         exit 1
     }
 }
 
-Write-Host "KQL deployment completed successfully."
+Write-Host "Deployment completed."
 ```
