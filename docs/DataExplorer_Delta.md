@@ -1050,7 +1050,7 @@ param(
 )
 
 if (-not (Test-Path $RootPath)) {
-    Write-Error "KQL directory '$RootPath' does not exist." 
+    Write-Error "KQL directory '$RootPath' does not exist."
     exit 1
 }
 
@@ -1069,26 +1069,16 @@ if (-not $KqlFiles) {
 
 foreach ($File in $KqlFiles) {
     Write-Host "Processing: $($File.FullName)"
-    $Query = [string](Get-Content -Path $File.FullName -Raw)
+    # Read and trim the file content to remove extra whitespace/newlines
+    $Query = ([string](Get-Content -Path $File.FullName -Raw)).Trim()
     
-    # Log the raw KQL query for troubleshooting
+    # Replace .create table with .create-or-alter table to update existing tables
+    $Query = $Query -replace "^\.create table", ".create-or-alter table"
+    
     Write-Host "Raw KQL from file $($File.Name):"
     Write-Host $Query
 
-    $TableName = [System.IO.Path]::GetFileNameWithoutExtension($File.Name)
-    
-    # Drop table command (ignore errors)
-    $DropBody = @{ db = $Database; csl = ".drop table ifexists $TableName" } | ConvertTo-Json -Compress
-    try { 
-        Invoke-RestMethod -Uri "https://$Cluster/v1/rest/mgmt" -Method Post -Headers $Headers -Body $DropBody -ErrorAction Stop 
-        Write-Host "Dropped table $TableName (if it existed)."
-    } catch {
-        Write-Host "Warning: Could not drop table $TableName (may not exist)."
-    }
-    
-    # Create table command using the KQL from file
     $Body = @{ db = $Database; csl = $Query } | ConvertTo-Json -Compress
-    # Log the JSON payload as well
     Write-Host "JSON Payload for $($File.Name): $Body"
     
     try {
