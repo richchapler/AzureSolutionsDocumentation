@@ -645,9 +645,9 @@ pool:
 variables:
 - group: Secrets
 - name: Cluster
-  value: "prefixdec-dev.westus.kusto.windows.net"
+  value: "{prefix}dec-dev.westus.kusto.windows.net"
 - name: Database
-  value: "prefixded-dev"
+  value: "{prefix}ded-dev"
 
 jobs:
 - job: RunPipeline
@@ -691,7 +691,6 @@ jobs:
 ------------------------- -------------------------
 
 ### Pipeline: `DataExplorer_Deploy.yml
-⚠️WORK IN PROGRESS⚠️
 
 ```yaml
 trigger: none
@@ -701,10 +700,14 @@ pool:
 
 variables:
 - group: Secrets
-- name: Cluster
-  value: "prefixdec-dev.westus.kusto.windows.net"
-- name: Database
-  value: "prefixded-dev"
+- name: DevCluster
+  value: "{prefix}dec-dev.westus.kusto.windows.net"
+- name: DevDatabase
+  value: "{prefix}ded-dev"
+- name: ProdCluster
+  value: "{prefix}dec-prd.westus.kusto.windows.net"
+- name: ProdDatabase
+  value: "{prefix}ded-prd"
 
 jobs:
 - job: RunPipeline
@@ -719,6 +722,12 @@ jobs:
         scriptType: "pscore"
         scriptLocation: "scriptPath"
         scriptPath: "$(Build.SourcesDirectory)/scripts/generate_token.ps1"
+      env:
+        AZURE_TENANT_ID: $(AZURE_TENANT_ID)
+        AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+        AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)
+        AZURE_CLIENT_SECRET: $(AZURE_CLIENT_SECRET)
+        Cluster: $(DevCluster)
 
     - task: PowerShell@2
       displayName: "Task: Verify Configuration"
@@ -726,7 +735,15 @@ jobs:
         targetType: "filePath"
         filePath: "$(Build.SourcesDirectory)/scripts/verify_configuration.ps1"
         arguments: >
-          -Cluster "$(Cluster)" -Database "$(Database)" -Token "$(ADO_TOKEN)"
+          -Cluster "$(DevCluster)" -Database "$(DevDatabase)" -Token "$(ADO_TOKEN)"
+
+    - task: PowerShell@2
+      displayName: "Task: Deploy KQL to Production"
+      inputs:
+        targetType: "filePath"
+        filePath: "$(Build.SourcesDirectory)/scripts/deploy_kql.ps1"
+        arguments: >
+          -Cluster "$(ProdCluster)" -Database "$(ProdDatabase)" -Token "$(ADO_TOKEN)"
 ```
 
 ------------------------- ------------------------- ------------------------- -------------------------
@@ -749,6 +766,7 @@ az login --service-principal --username "$ClientId" --password "$ClientSecret" -
 az account set --subscription "$SubscriptionId" --only-show-errors
 
 Write-Host "Retrieving Azure Data Explorer access token..."
+# Ensure the resource URL is valid by including the Cluster parameter (should not be empty)
 $Token = az account get-access-token --resource "https://$Cluster" --query accessToken -o tsv --only-show-errors
 
 if ([string]::IsNullOrEmpty($Token)) {
@@ -1055,18 +1073,30 @@ if ($KqlFiles.Count -eq 0) {
 
 foreach ($File in $KqlFiles) {
     Write-Host "Processing file: $($File.FullName)"
-    $Query = Get-Content -Path $File.FullName -Raw
+    # Explicitly cast the file content to a string to avoid extra metadata
+    $Query = [string](Get-Content -Path $File.FullName -Raw)
 
-    $Body = @{
+    $BodyHash = @{
         db  = $Database
         csl = $Query
-    } | ConvertTo-Json -Compress
+    }
+    $Body = $BodyHash | ConvertTo-Json -Compress
 
+    Write-Host "Deploying KQL from file $($File.Name):"
+    Write-Host "JSON Payload: $Body"
+    
     try {
-        Invoke-RestMethod -Uri "https://$Cluster/v1/rest/mgmt" -Method Post -Headers $Headers -Body $Body
+        Invoke-RestMethod -Uri "https://$Cluster/v1/rest/mgmt" -Method Post -Headers $Headers -Body $Body -ErrorAction Stop
         Write-Host "Successfully deployed: $($File.Name)"
     } catch {
-        Write-Host "ERROR: Failed to deploy $($File.Name). $_"
+        Write-Host "ERROR: Failed to deploy $($File.Name)."
+        Write-Host "Exception Message: $($_.Exception.Message)"
+        if ($_.Exception.Response -and $_.Exception.Response.GetResponseStream()) {
+            $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
+            $responseBody = $reader.ReadToEnd()
+            Write-Host "Response Body: $responseBody"
+        }
+        Write-Host "Please verify that the table does not already exist or check your permissions and command syntax."
         exit 1
     }
 }
@@ -1085,7 +1115,7 @@ This section covers manual API testing using PowerShell and Azure CLI to verify 
 #### Retrieve a Fresh Access Token
 Before testing, obtain a fresh access token:
 ```powershell
-$Cluster = "https://{{prefix}}dec.westus.kusto.windows.net"
+$Cluster = "https://{prefix}dec.westus.kusto.windows.net"
 $Token = az account get-access-token --resource "$Cluster" --query accessToken -o tsv --only-show-errors
 Write-Host "Access Token Retrieved"
 ```
