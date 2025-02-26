@@ -700,14 +700,10 @@ pool:
 
 variables:
 - group: Secrets
-- name: DevCluster
-  value: "{prefix}dec-dev.westus.kusto.windows.net"
-- name: DevDatabase
-  value: "{prefix}ded-dev"
-- name: ProdCluster
-  value: "{prefix}dec-prd.westus.kusto.windows.net"
-- name: ProdDatabase
-  value: "{prefix}ded-prd"
+- name: Cluster
+  value: "prefixdec-prd.westus.kusto.windows.net"
+- name: Database
+  value: "prefixded-prd"
 
 jobs:
 - job: RunPipeline
@@ -727,7 +723,7 @@ jobs:
         AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
         AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)
         AZURE_CLIENT_SECRET: $(AZURE_CLIENT_SECRET)
-        Cluster: $(DevCluster)
+        Cluster: $(Cluster)
 
     - task: PowerShell@2
       displayName: "Task: Verify Configuration"
@@ -735,7 +731,7 @@ jobs:
         targetType: "filePath"
         filePath: "$(Build.SourcesDirectory)/scripts/verify_configuration.ps1"
         arguments: >
-          -Cluster "$(DevCluster)" -Database "$(DevDatabase)" -Token "$(ADO_TOKEN)"
+          -Cluster "$(Cluster)" -Database "$(Database)" -Token "$(ADO_TOKEN)"
 
     - task: PowerShell@2
       displayName: "Task: Deploy KQL to Production"
@@ -743,7 +739,7 @@ jobs:
         targetType: "filePath"
         filePath: "$(Build.SourcesDirectory)/scripts/deploy_kql.ps1"
         arguments: >
-          -Cluster "$(ProdCluster)" -Database "$(ProdDatabase)" -Token "$(ADO_TOKEN)"
+          -Cluster "$(Cluster)" -Database "$(Database)" -Token "$(ADO_TOKEN)"
 ```
 
 ------------------------- ------------------------- ------------------------- -------------------------
