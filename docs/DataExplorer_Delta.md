@@ -1049,6 +1049,23 @@ param(
     [string]$RootPath = "$env:BUILD_SOURCESDIRECTORY/tables"
 )
 
+function Check-TableExists {
+    param(
+        [Parameter(Mandatory=$true)][string]$TableName,
+        [Parameter(Mandatory=$true)][string]$Database,
+        [Parameter(Mandatory=$true)][string]$Cluster,
+        [Parameter(Mandatory=$true)][hashtable]$Headers
+    )
+    $CheckBody = @{ db = $Database; csl = ".show table $TableName details" } | ConvertTo-Json -Compress
+    try {
+        # Using the query endpoint for reading (not the mgmt endpoint)
+        Invoke-RestMethod -Uri "https://$Cluster/v1/rest/query" -Method Post -Headers $Headers -Body $CheckBody -ErrorAction Stop | Out-Null
+        return $true
+    } catch {
+        return $false
+    }
+}
+
 if (-not (Test-Path $RootPath)) {
     Write-Error "KQL directory '$RootPath' does not exist."
     exit 1
@@ -1069,13 +1086,19 @@ if (-not $KqlFiles) {
 
 foreach ($File in $KqlFiles) {
     Write-Host "Processing: $($File.FullName)"
-    # Read and trim the file content to remove extra whitespace/newlines
     $Query = ([string](Get-Content -Path $File.FullName -Raw)).Trim()
+    $TableName = [System.IO.Path]::GetFileNameWithoutExtension($File.Name)
     
-    # Replace .create table with .create-or-alter table to update existing tables
-    $Query = $Query -replace "^\.create table", ".create-or-alter table"
-    
-    Write-Host "Raw KQL from file $($File.Name):"
+    Write-Host "Checking if table '$TableName' exists..."
+    if (Check-TableExists -TableName $TableName -Database $Database -Cluster $Cluster -Headers $Headers) {
+        Write-Host "Table '$TableName' exists. Converting command to .alter-merge table."
+        $Query = $Query -replace "^\.create table", ".alter-merge table"
+    } else {
+        Write-Host "Table '$TableName' does not exist. Using .create table."
+        # Optionally, you can also use: $Query = $Query -replace "^\.create table", ".create table ifnotexists"
+    }
+
+    Write-Host "Raw KQL for $($File.Name):"
     Write-Host $Query
 
     $Body = @{ db = $Database; csl = $Query } | ConvertTo-Json -Compress
