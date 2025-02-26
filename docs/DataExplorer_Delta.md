@@ -701,9 +701,9 @@ pool:
 variables:
 - group: Secrets
 - name: Cluster
-  value: "prefixdec-prd.westus.kusto.windows.net"
+  value: "{prefix}dec-prd.westus.kusto.windows.net"
 - name: Database
-  value: "prefixded-prd"
+  value: "{prefix}ded-prd"
 
 jobs:
 - job: RunPipeline
