@@ -57,39 +57,66 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 
 <img src="https://github.com/user-attachments/assets/20b04821-e1a5-408c-b5a1-8d06ba8e9275" width="500" title="Snipped February 27, 2025" />
 
-* Server Name – The name of the SQL Server instance  
-* Product – The edition and version of SQL Server  
-* Operating System – The OS hosting the SQL Server instance  
-* Platform – The underlying platform (e.g., Windows)  
-* Version – The specific build or patch level of SQL Server  
-* Language – The language setting for the server  
-* Memory – The amount of memory recognized or allocated by SQL Server  
-* Root Directory – The installation path for SQL Server binaries  
-* Collation – The default collation defining how text is sorted and compared  
-* Is XTP Supported – Indicates whether In-Memory OLTP (XTP) is supported  
-* Is HADR Enabled – Reflects whether high availability/disaster recovery (Always On) is enabled
+- **Server Name** – The name of the SQL Server instance  
+- **Product** – The edition and version of SQL Server  
+- **Operating System** – The OS hosting the SQL Server instance  
+- **Platform** – The underlying platform (e.g., Windows)  
+- **Version** – The specific build or patch level of SQL Server  
+- **Language** – The language setting for the server  
+- **Memory** – The amount of memory recognized or allocated by SQL Server  
+- **Root Directory** – The installation path for SQL Server binaries  
+- **Collation** – The default collation defining how text is sorted and compared  
+- **Is XTP Supported** – Indicates whether In-Memory OLTP (XTP) is supported  
+- **Is HADR Enabled** – Reflects whether high availability/disaster recovery (Always On) is enabled
 
 #### Memory
 
 <img src="https://github.com/user-attachments/assets/037448cf-cca6-4bc8-8d17-db6a0fbf590a" width="500" title="Snipped February 27, 2025" />
 
-* Minimum server memory (in MB) – The lowest amount of memory SQL Server will attempt to keep allocated  
-* Maximum server memory (in MB) – The highest amount of memory SQL Server can consume  
-* Index creation memory (in KB) – The memory allocated for index creation operations (if set to 0, SQL Server manages it automatically)  
-* Minimum memory per query (in KB) – The minimum memory each query can use during execution  
-* Configured values – Displays the memory settings that have been explicitly configured  
-* Running values – Displays the memory settings currently in effect on the running instance
+- **Server memory options (Minimum server memory in MB)** – The lowest amount of memory SQL Server will attempt to keep allocated  
+- **Server memory options (Maximum server memory in MB)** – The highest amount of memory SQL Server can consume  
+- **Other memory options (Index creation memory in KB)** – The memory allocated for index creation operations (if set to 0, SQL Server manages it automatically)  
+- **Other memory options (Minimum memory per query in KB)** – The minimum memory each query can use during execution  
+- **Configured values** – Displays the memory settings that have been explicitly configured  
+- **Running values** – Displays the memory settings currently in effect on the running instance  
 
 #### Processors
 
 <img src="https://github.com/user-attachments/assets/71623999-94a4-4c6f-948e-8fe9b28d46e2" width="500" title="Snipped February 27, 2025" />
 
-• Enable processors (Automatically set processor affinity mask for all processors) – Determines if SQL Server automatically manages CPU affinity for all available processors  
-• Automatically set I/O affinity mask for all processors – Determines if SQL Server automatically manages I/O affinity across all processors  
-• Processor / Processor Affinity / I/O Affinity – Allows manual configuration of which processors handle CPU and I/O tasks  
-• Maximum worker threads – Sets the upper limit of worker threads SQL Server can use  
-• Configured values – The settings explicitly defined in this dialog  
-• Running values – The current settings in effect on the running SQL Server instance
+- **Enable processors (Automatically set processor affinity mask for all processors)** – Determines if SQL Server automatically manages CPU affinity for all available processors  
+- **Automatically set I/O affinity mask for all processors** – Determines if SQL Server automatically manages I/O affinity across all processors  
+- **Processor / Processor Affinity / I/O Affinity** – Allows manual configuration of which processors handle CPU and I/O tasks  
+- **Maximum worker threads** – Sets the upper limit of worker threads SQL Server can use  
+- **Configured values** – The settings explicitly defined in this dialog  
+- **Running values** – The current settings in effect on the running SQL Server instance
+
+#### Security
+
+<img src="https://github.com/user-attachments/assets/dbd96ba9-ab50-433e-9c11-0e4c6a718281" width="500" title="Snipped February 27, 2025" />
+
+- **Server authentication (Windows Authentication mode)** – Restricts authentication to Windows accounts/groups only.  
+- **Server authentication (SQL Server and Windows Authentication mode)** – Allows both Windows logins and SQL Server logins to authenticate.  
+
+- **Login auditing (None)** – No login events are logged.  
+- **Login auditing (Failed logins only)** – Logs only failed login attempts.  
+- **Login auditing (Successful logins only)** – Logs only successful login attempts.  
+- **Login auditing (Both failed and successful logins)** – Logs all login attempts, both failed and successful.  
+
+- **Server proxy account (Enable server proxy account)** – Lets you specify a security context (account) for operations like SQL Agent job steps.  
+- **Server proxy account (Proxy account)** – The user or credential used as the proxy account.  
+- **Server proxy account (Password)** – The password associated with the proxy account.  
+
+- **Enable Common Criteria compliance** – Enables additional security features to meet Common Criteria standards.  
+- **Enable c2 audit tracing** – Activates a legacy auditing standard that logs all SQL Server events to a trace file.  
+- **Cross database ownership chaining** – Allows objects owned by the same user in different databases to reference each other without requiring extra permissions.
+
+
+
+
+
+
+
 
 
 
