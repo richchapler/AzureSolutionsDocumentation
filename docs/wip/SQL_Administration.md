@@ -1,4 +1,4 @@
-# SQL Server: Database Administration  
+# SQL: Administration  
 
 **Reference:**  
 • [SQL Server Educational Resources](https://learn.microsoft.com/en-us/sql/sql-server/educational-sql-resources)
