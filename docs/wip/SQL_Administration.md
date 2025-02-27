@@ -1,6 +1,6 @@
 # SQL: Fundamentals  
 
-## Recommended Resources
+## Resources
 
 * Azure Virtual Machine
   * Image: "Free SQL Server License: SQL Server 2022 Developer on Windows Server 2022"
@@ -14,7 +14,7 @@ This lab offers hands-on experience with core administrative tasks—covering se
 
 ---
 
-## Lab Objectives
+## Objectives
 
 - Fundamentals of Database Administration  
   - Master server installation, configuration, and routine maintenance.  
@@ -49,7 +49,7 @@ SELECT @@VERSION;
 
 <img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="500" title="Snipped February 27, 2025" />
 
-### Review Configuration
+### Server Properties
 
 Right-click the server node and select "Properties" from the resulting dropdown and review settings on resulting pages.
 
@@ -124,19 +124,59 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Configured values** – Displays the connection settings explicitly defined in this dialog  
 - **Running values** – Displays the connection settings currently in effect on the running SQL Server instance
 
+#### Database Settings
 
+<img src="https://github.com/user-attachments/assets/f95ac9d0-0cd8-4a3b-ab0e-732ec3aa0ec7" width="500" title="Snipped February 27, 2025" />
 
+- **Default index fill factor** – Determines the percentage of free space left in each index page when an index is created or rebuilt. A setting of 0 typically means 100% fill.  
+- **Backup and restore** – Specifies how SQL Server handles backup media requests (e.g., “Wait indefinitely” or “Try for x hours”).  
+- **Default backup media retention (in days)** – Defines how many days must pass before backup media can be overwritten.  
+- **Compress backup** – Enables default backup compression to reduce backup file size (at the cost of higher CPU usage).  
+- **Backup checksum** – Generates checksums during backup to help detect corruption.  
+- **Recovery interval (minutes)** – The approximate time SQL Server is allowed for crash recovery; 0 indicates automatic management.  
+- **Database default locations** – The default file paths where new data and log files will be stored.  
+- **Configured values** – Shows the explicitly defined settings in this dialog.  
+- **Running values** – Shows the settings currently in effect on the running SQL Server instance.
 
+#### Advanced
 
+<img src="https://github.com/user-attachments/assets/fcd9ebcd-f7b0-4b45-b6f0-2000fa1a2350" width="500" title="Snipped February 27, 2025" />
 
+- **Enable Contained Databases** – Toggles support for partially or fully contained databases that do not rely on instance-level settings  
+- **FILESTREAM Access Level** – Enables or disables FILESTREAM for storing unstructured data on the file system with T-SQL access  
+- **FILESTREAM Share Name** – Specifies the network share name for FILESTREAM data  
 
+- **Allow Triggers to Fire Others** – Determines whether a trigger can fire additional triggers  
+- **Boost SQL Server Priority** – Changes the Windows scheduling priority of SQL Server (not recommended in most scenarios)  
+- **Cost Threshold for Parallelism** – Sets the threshold for when SQL Server considers parallel query execution  
+- **Default Full-Text Language** – Specifies the default language for full-text indexing  
+- **Default Language** – Sets the default language for logins without an explicitly assigned language  
+- **Max Text Replication Size** – Defines the maximum size (in bytes) of text or image data that can be replicated  
+- **Optimize for Ad Hoc Workloads** – Reduces plan cache overhead for single-use (ad hoc) query plans  
+- **Locks** – Controls the total number of available locks (0 allows SQL Server to manage locks dynamically)  
+- **Max Degree of Parallelism** – Limits the number of processors used for parallel plan execution  
+- **Query Wait** – Specifies how long a query waits for memory resources before timing out  
+- **Network Packet Size** – The size of network packets (in bytes) for SQL Server communication  
+- **Remote Login Timeout** – The number of seconds to wait before timing out a remote login attempt  
+- **Scan for Startup Procs** – Determines whether SQL Server executes any stored procedures marked for startup upon service start  
+- **Two Digit Year Cutoff** – Defines the last year of the 100-year range for interpreting two-digit years  
 
+- **Configured values** – Shows the settings explicitly defined in this dialog  
+- **Running values** – Shows the settings currently in effect on the running SQL Server instance
 
+#### Advanced
 
+<img src="https://github.com/user-attachments/assets/49b06ffc-662d-40aa-95dd-10c4d9fcb7f6" width="500" title="Snipped February 27, 2025" />
 
-Exam Guidance:  
+- **Logins or roles** – Displays a list of server-level logins and roles that you can select to view or modify their server-level permissions  
+- **Permissions for [Selected Login or Role]** – Shows the set of server-level permissions (e.g., “Alter any database,” “View any definition,” etc.) that can be granted, denied, or granted with the ability to grant to others  
+- **Grant** – Assigns the permission to the selected login or role  
+- **With Grant** – Assigns the permission and also allows the selected login or role to grant it to others  
+- **Deny** – Explicitly disallows the permission, overriding any existing grants  
 
-- Questions often test your ability to navigate server properties and understand performance settings.
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Quiz: SQL Server (on-prem)
 
 ### 3. Database Creation (On-Premises)
 
