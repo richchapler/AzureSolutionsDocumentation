@@ -35,9 +35,9 @@ This lab offers hands-on experience with core administrative tasks—covering se
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## SQL Server (on-prem)
+## SQL Server
 
-Launch SQL Server Management Studio and connect to your SQL Server instance.  
+On your virtual machine, launch SQL Server Management Studio and connect to your SQL Server instance.  
 
 <img src="https://github.com/user-attachments/assets/f1238467-a0f9-4569-936b-79f19b1351ff" width="500" title="Snipped February 27, 2025" />
 
@@ -211,7 +211,8 @@ Expand and review folders in the Object Explorer.
 
 Contains any read-only, static snapshots of databases. Snapshots are often used for reporting or quickly reverting to a known point in time.
 
-##### User Databases (not depicted)
+##### User Databases
+_not depicted, will be named during creation_
 
 Each user database is listed by name. When you expand a specific database, you’ll see these primary subfolders:
 
@@ -257,39 +258,19 @@ Each user database is listed by name. When you expand a specific database, you�
 
 ##### Exercise: Create Database
 
-###### ...using the app interface
+In the SQL Server Management Studio, Object Explorer, right-click "Databases" and select "New Database" from the resulting menu.
 
-1. **Open SSMS and Connect**  
-   - Launch SQL Server Management Studio (SSMS).  
-   - Connect to the SQL Server instance where you want to create the database.
+<img src="https://github.com/user-attachments/assets/526e6c2a-38d5-4ccb-a8d9-9f0104f7e1cd" width="500" title="Snipped February 27, 2025" />
 
-2. **Create a New Database**  
-   - In the **Object Explorer**, right-click **Databases** and select **New Database…**.  
-   - In the **New Database** dialog, enter **TrainingDB** as the database name.  
-   - Click **OK** to create the database.
+Complete the "New Database" form and click "OK".
 
-3. **Verify Creation**  
-   - Expand **Databases** in Object Explorer to confirm that **TrainingDB** now appears in the list.
+<img src="https://github.com/user-attachments/assets/526e6c2a-38d5-4ccb-a8d9-9f0104f7e1cd" width="500" title="Snipped February 27, 2025" />
 
----
+Expand the new database in the Object Explorer and review.
 
-###### ...using the T-SQL
+#### Security
 
-1. **Open a New Query Window**  
-   - In SSMS, click **New Query** on the toolbar.
-
-2. **Run the CREATE DATABASE Command**  
-   ```sql
-   CREATE DATABASE TrainingDB;
-   GO
-   ```
-   - Press **F5** or click **Execute** to run the command.
-
-3. **Verify Creation**  
-   - In Object Explorer, right-click **Databases** and select **Refresh**.  
-   - Confirm that **TrainingDB** appears in the list of databases.
-
-
+<img src="https://github.com/user-attachments/assets/9b86a9e8-c54e-40f9-a6a4-12284a41dafe" width="500" title="Snipped February 27, 2025" />
 
 
 
@@ -322,10 +303,10 @@ This Object Explorer structure helps you navigate and manage different aspects o
 
 Using T-SQL:  
 
-- Create a new database named `TrainingDB`:
+- Create a new database named `trainingdb`:
 
   ```sql
-  CREATE DATABASE TrainingDB;
+  CREATE DATABASE trainingdb;
   GO
   ```
 
@@ -356,10 +337,10 @@ Creating a SQL Server Login:
 
 Mapping Login to a Database User:  
 
-- Switch to the `TrainingDB` database and create a user:
+- Switch to the `trainingdb` database and create a user:
 
   ```sql
-  USE TrainingDB;
+  USE trainingdb;
   GO
   CREATE USER TestUser FOR LOGIN TestUser;
   GO
@@ -395,11 +376,11 @@ Exam Guidance:
 
 Simulated Scenario:  
 
-- If TestUser is unable to query data from TrainingDB, review the error message and follow these steps:
+- If TestUser is unable to query data from trainingdb, review the error message and follow these steps:
 
 Troubleshooting Checklist:  
 
-- Confirm that TestUser exists in TrainingDB.  
+- Confirm that TestUser exists in trainingdb.  
 - Verify that TestUser is assigned to the appropriate role (e.g., `db_datareader`).  
 - Check SQL Server error logs and Windows Event Logs for any related diagnostic information.  
 - Enhanced Tip: Use the SQL Server Activity Monitor to check for blocking or performance issues.
@@ -464,10 +445,10 @@ Exam Guidance:
 
 Using T-SQL in SSMS:  
 
-- Create a new database named `AzureTrainingDB`:
+- Create a new database named `Azuretrainingdb`:
 
   ```sql
-  CREATE DATABASE AzureTrainingDB;
+  CREATE DATABASE Azuretrainingdb;
   GO
   ```
 
@@ -550,12 +531,12 @@ Exam Guidance:
 ### On-Premises SQL Server Exam-Style Questions
 
 Question 1:  
-You have just created a new SQL Server login named TestUser. Which of the following commands correctly maps this login to a database user in TrainingDB and assigns the user to the db_datareader role?
+You have just created a new SQL Server login named TestUser. Which of the following commands correctly maps this login to a database user in trainingdb and assigns the user to the db_datareader role?
 
 A.  
 
 ```sql
-USE TrainingDB;  
+USE trainingdb;  
 GO  
 CREATE USER TestUser FOR LOGIN TestUser;  
 GO  
@@ -574,7 +555,7 @@ GO
 C.  
 
 ```sql
-USE TrainingDB;  
+USE trainingdb;  
 GO  
 CREATE USER TestUser FOR LOGIN TestUser;  
 GO  
@@ -590,24 +571,24 @@ Enhanced Explanation: Option A explicitly creates the database user and assigns 
 ---
 
 Question 2:  
-Which T-SQL command creates a new database named TrainingDB on an on-premises SQL Server?
+Which T-SQL command creates a new database named trainingdb on an on-premises SQL Server?
 
-A. `CREATE DATABASE TrainingDB;`  
-B. `NEW DATABASE TrainingDB;`  
-C. `MAKE DATABASE TrainingDB;`  
-D. `ADD DATABASE TrainingDB;`
+A. `CREATE DATABASE trainingdb;`  
+B. `NEW DATABASE trainingdb;`  
+C. `MAKE DATABASE trainingdb;`  
+D. `ADD DATABASE trainingdb;`
 
 Answer: A  
-Explanation: The correct T-SQL command to create a new database is `CREATE DATABASE TrainingDB;`.
+Explanation: The correct T-SQL command to create a new database is `CREATE DATABASE trainingdb;`.
 
 ---
 
 Question 3:  
-A user is unable to query data from TrainingDB on your on-premises server. What is the first step you should take to troubleshoot this issue?
+A user is unable to query data from trainingdb on your on-premises server. What is the first step you should take to troubleshoot this issue?
 
 A. Verify that the SQL Server instance is running.  
 B. Check the SQL Server error logs.  
-C. Verify that the user is correctly mapped to TrainingDB and has the appropriate role.  
+C. Verify that the user is correctly mapped to trainingdb and has the appropriate role.  
 D. Restart the SQL Server service.
 
 Answer: C  
@@ -618,7 +599,7 @@ Explanation: The most direct troubleshooting step is to ensure the user is prope
 ### Azure SQL Exam-Style Questions
 
 Question 4:  
-You have created a contained database user in an Azure SQL Database named AzureTrainingDB. Which of the following commands creates a contained user with SQL authentication?
+You have created a contained database user in an Azure SQL Database named Azuretrainingdb. Which of the following commands creates a contained user with SQL authentication?
 
 A.  
 
