@@ -190,15 +190,13 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-<img src="https://github.com/user-attachments/assets/377b9aa6-0326-4e28-b563-1ff4c27bf713" width="500" title="Snipped February 27, 2025" />
-
 ### Object Explorer
 
 Expand and review folders in the Object Explorer.
 
 #### Databases
 
-<img src="https://github.com/user-attachments/assets/818b2f7e-a1a4-4e40-9282-90ad915e7889" width="500" title="Snipped February 27, 2025" />
+<img src="https://github.com/user-attachments/assets/818b2f7e-a1a4-4e40-9282-90ad915e7889" width="800" title="Snipped February 27, 2025" />
 
 ##### System Databases
 
@@ -258,7 +256,7 @@ Each user database is listed by name. When you expand a specific database, you�
 
 ##### Exercise: Create Database
 
-In the SQL Server Management Studio, Object Explorer, right-click "Databases" and select "New Database" from the resulting menu.
+In the Object Explorer, right-click "Databases" and select "New Database" from the resulting menu.
 
 <img src="https://github.com/user-attachments/assets/526e6c2a-38d5-4ccb-a8d9-9f0104f7e1cd" width="500" title="Snipped February 27, 2025" />
 
@@ -268,9 +266,85 @@ Complete the "New Database" form and click "OK".
 
 Expand the new database in the Object Explorer and review.
 
+------------------------- ------------------------- -------------------------
+
 #### Security
 
-<img src="https://github.com/user-attachments/assets/9b86a9e8-c54e-40f9-a6a4-12284a41dafe" width="500" title="Snipped February 27, 2025" />
+<img src="https://github.com/user-attachments/assets/f00e8fac-8d07-4ed2-80c7-023108e8d20b" width="800" title="Snipped February 27, 2025" />
+
+- **Logins**  
+  - Contains all server-level logins, including Windows logins/groups and SQL Server logins.  
+  - Each login can be mapped to one or more database users.
+
+- **Server Roles**  
+  - Lists fixed server roles (e.g., `sysadmin`, `serveradmin`, `securityadmin`) as well as any user-defined server roles.  
+  - Roles group logins together for simplified permission management at the server level.
+
+- **Credentials**  
+  - Holds credentials used to access external resources under a specific security context.  
+  - Often used for tasks like running SQL Server Agent jobs or accessing external files.
+
+- **Audits**  
+  - Configures audit objects that capture server- or database-level events.  
+  - Audits define where and how event logs are stored (e.g., file, security log, application log).
+
+- **Server Audit Specifications**  
+  - Specifies which events (e.g., login changes, schema modifications) are collected for a given audit.  
+  - Ties directly to the **Audits** object for storing captured data.
+
+- **Always Encrypted Keys**  
+  - **Column Master Keys** – Protect the keys used to encrypt sensitive columns.  
+  - **Column Encryption Keys** – The actual keys that encrypt data in Always Encrypted columns.
+
+- **Asymmetric Keys**  
+  - Public/private key pairs used for encryption or signing.  
+
+- **Certificates**  
+  - Digital certificates for encryption or authentication (e.g., SSL certificates, signing certificates).  
+
+- **Symmetric Keys**  
+  - Single-key encryption objects used for data encryption tasks within SQL Server.  
+
+------------------------- -------------------------
+
+##### Exercise: Add User and Grant Access
+
+In the Object Explorer, expand the "Security" folder, right-click "Logins" and select "New Login" from the resulting menu.
+
+<img src="https://github.com/user-attachments/assets/cc3a2a8c-8db7-4312-b5ec-02e3ed8bbefa" width="500" title="Snipped February 27, 2025" />
+
+Complete the "Login - New" form and click "OK".
+
+
+
+
+
+
+RESUME HERE!!!
+
+
+
+
+3. **Map the Login to TrainingDB (Database-Level User)**  
+   - Still in **Object Explorer**, expand **Databases**, then expand **TrainingDB**.  
+   - Expand **Security**, right-click **Users**, and select **New User…**  
+
+   *(Snipped February 27, 2025)*
+
+   - In the **User name** field, enter the same name (e.g., **TestUser**).  
+   - For **Login name**, select the login you just created from the dropdown.  
+   - Under **Default schema**, leave it as **dbo** (or specify another schema if desired).
+
+4. **Assign Read Permissions**  
+   - Click **Membership** in the left pane.  
+   - Check the box for **db_datareader** to grant read access.  
+   - Click **OK** to create the database user.
+
+5. **Verify the New User**  
+   - Expand **TrainingDB → Security → Users** to confirm the user appears in the list.  
+   - Optionally, connect as **TestUser** or run a query (e.g., `SELECT TOP 10 * FROM SomeTable;`) to verify read access.
+
+With these steps, you have created a new login at the server level, mapped it to a database user, and granted it **db_datareader** permissions in **TrainingDB**, all using the SSMS interface.
 
 
 
@@ -283,10 +357,6 @@ Expand the new database in the Object Explorer and review.
 
 
 
-
-
-
-- **Security** – Contains server-level security objects such as logins, server roles, credentials, and certificates. This is where you manage authentication and authorization for your SQL Server instance.
 - **Server Objects** – Includes items like backup devices, linked servers, endpoints, and triggers. It’s useful for configuring integrations and managing various server-level features.
 - **Replication** – Displays replication settings if configured, including publishers, distributors, and subscribers. This node is used to manage replication tasks.
 - **Management** – Provides access to tools and utilities like the SQL Server Agent, Activity Monitor, maintenance plans, and policy management. It's essential for monitoring server health and automating routine tasks.
@@ -298,96 +368,6 @@ This Object Explorer structure helps you navigate and manage different aspects o
 
 
 
-
-### 3. Database Creation (On-Premises)
-
-Using T-SQL:  
-
-- Create a new database named `trainingdb`:
-
-  ```sql
-  CREATE DATABASE trainingdb;
-  GO
-  ```
-
-- Refresh Object Explorer to confirm the new database.
-
-Using SSMS GUI (Optional):  
-
-- Right-click Databases, select New Database…, and follow the prompts.
-
-Enhanced Best Practice:  
-
-- Consider reviewing the file layout (data and log files) for performance tuning and recovery objectives.
-
-Exam Guidance:  
-
-- Know both methods; exam questions may ask which T-SQL command creates a new database.
-
-### 4. Creating and Managing Users (On-Premises)
-
-Creating a SQL Server Login:  
-
-- Execute the following to create a login:
-
-  ```sql
-  CREATE LOGIN TestUser WITH PASSWORD = 'YourPassword123';
-  GO
-  ```
-
-Mapping Login to a Database User:  
-
-- Switch to the `trainingdb` database and create a user:
-
-  ```sql
-  USE trainingdb;
-  GO
-  CREATE USER TestUser FOR LOGIN TestUser;
-  GO
-  ```
-
-- Assigning a Role:  
-
-  - Legacy Method (still common in exam scenarios):
-
-    ```sql
-    EXEC sp_addrolemember 'db_datareader', 'TestUser';
-    GO
-    ```
-
-  - Modern Alternative:  
-
-    ```sql
-    ALTER ROLE db_datareader ADD MEMBER TestUser;
-    GO
-    ```
-
-  - Enhanced Note: Although many exams reference `sp_addrolemember`, note that Microsoft recommends the `ALTER ROLE ... ADD MEMBER` syntax in newer versions of SQL Server.
-
-Verifying Permissions:  
-
-- Optionally, log in as TestUser and run a query (e.g., `SELECT TOP 10 * FROM SomeTable;`) to validate access.
-
-Exam Guidance:  
-
-- Understand the distinction between logins and users, and be prepared to map them correctly in exam questions.
-
-### 5. Basic Troubleshooting (On-Premises)
-
-Simulated Scenario:  
-
-- If TestUser is unable to query data from trainingdb, review the error message and follow these steps:
-
-Troubleshooting Checklist:  
-
-- Confirm that TestUser exists in trainingdb.  
-- Verify that TestUser is assigned to the appropriate role (e.g., `db_datareader`).  
-- Check SQL Server error logs and Windows Event Logs for any related diagnostic information.  
-- Enhanced Tip: Use the SQL Server Activity Monitor to check for blocking or performance issues.
-
-Exam Guidance:  
-
-- Exam questions may involve troubleshooting permission issues, so be comfortable with these steps.
 
 ---
 
