@@ -1,4 +1,4 @@
-# SQL: Administration  
+# SQL: Fundamentals  
 
 ## Recommended Resources
 
@@ -51,7 +51,9 @@ SELECT @@VERSION;
 
 ### Review Configuration
 
-Right-click the server node and select "Properties" from the resulting dropdown.
+Right-click the server node and select "Properties" from the resulting dropdown and review settings on resulting pages.
+
+#### General
 
 <img src="https://github.com/user-attachments/assets/20b04821-e1a5-408c-b5a1-8d06ba8e9275" width="500" title="Snipped February 27, 2025" />
 
@@ -67,12 +69,27 @@ Right-click the server node and select "Properties" from the resulting dropdown.
 * Is XTP Supported – Indicates whether In-Memory OLTP (XTP) is supported  
 * Is HADR Enabled – Reflects whether high availability/disaster recovery (Always On) is enabled
 
+#### Memory
 
+<img src="https://github.com/user-attachments/assets/037448cf-cca6-4bc8-8d17-db6a0fbf590a" width="500" title="Snipped February 27, 2025" />
 
+* Minimum server memory (in MB) – The lowest amount of memory SQL Server will attempt to keep allocated  
+* Maximum server memory (in MB) – The highest amount of memory SQL Server can consume  
+* Index creation memory (in KB) – The memory allocated for index creation operations (if set to 0, SQL Server manages it automatically)  
+* Minimum memory per query (in KB) – The minimum memory each query can use during execution  
+* Configured values – Displays the memory settings that have been explicitly configured  
+* Running values – Displays the memory settings currently in effect on the running instance
 
+#### Processors
 
+<img src="https://github.com/user-attachments/assets/71623999-94a4-4c6f-948e-8fe9b28d46e2" width="500" title="Snipped February 27, 2025" />
 
-
+• Enable processors (Automatically set processor affinity mask for all processors) – Determines if SQL Server automatically manages CPU affinity for all available processors  
+• Automatically set I/O affinity mask for all processors – Determines if SQL Server automatically manages I/O affinity across all processors  
+• Processor / Processor Affinity / I/O Affinity – Allows manual configuration of which processors handle CPU and I/O tasks  
+• Maximum worker threads – Sets the upper limit of worker threads SQL Server can use  
+• Configured values – The settings explicitly defined in this dialog  
+• Running values – The current settings in effect on the running SQL Server instance
 
 
 
