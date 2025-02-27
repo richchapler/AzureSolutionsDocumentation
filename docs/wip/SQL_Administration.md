@@ -12,7 +12,7 @@
 Overview:  
 This lab offers hands-on experience with core administrative tasks—covering server setup, maintenance, troubleshooting, database creation, and user/permission management. It is structured to support both on-premises SQL Server and Azure SQL environments, with exam-style questions to reinforce key concepts. Enhancements include updated guidance on modern T-SQL commands, detailed troubleshooting steps, and best practices for both environments.
 
----
+------------------------- -------------------------
 
 ## Objectives
 
@@ -33,7 +33,7 @@ This lab offers hands-on experience with core administrative tasks—covering se
   - On-Premises SQL Server: Detailed procedures, updated best practices, and troubleshooting guidelines for a traditional on-prem environment.  
   - Azure SQL: Essential tasks including setup via the Azure portal, firewall configurations, and diagnostic tools alongside SSMS.
 
----
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Lab: SQL Server (on-prem)
 
@@ -69,6 +69,8 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Is XTP Supported** – Indicates whether In-Memory OLTP (XTP) is supported  
 - **Is HADR Enabled** – Reflects whether high availability/disaster recovery (Always On) is enabled
 
+------------------------- -------------------------
+
 #### Memory
 
 <img src="https://github.com/user-attachments/assets/037448cf-cca6-4bc8-8d17-db6a0fbf590a" width="500" title="Snipped February 27, 2025" />
@@ -80,6 +82,8 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Configured values** – Displays the memory settings that have been explicitly configured  
 - **Running values** – Displays the memory settings currently in effect on the running instance  
 
+------------------------- -------------------------
+
 #### Processors
 
 <img src="https://github.com/user-attachments/assets/71623999-94a4-4c6f-948e-8fe9b28d46e2" width="500" title="Snipped February 27, 2025" />
@@ -90,6 +94,8 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Maximum worker threads** – Sets the upper limit of worker threads SQL Server can use  
 - **Configured values** – The settings explicitly defined in this dialog  
 - **Running values** – The current settings in effect on the running SQL Server instance
+
+------------------------- -------------------------
 
 #### Security
 
@@ -111,6 +117,8 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Enable c2 audit tracing** – Activates a legacy auditing standard that logs all SQL Server events to a trace file.  
 - **Cross database ownership chaining** – Allows objects owned by the same user in different databases to reference each other without requiring extra permissions.
 
+------------------------- -------------------------
+
 #### Connections
 
 <img src="https://github.com/user-attachments/assets/26573867-beac-4727-a4b0-61b5519bf7f4" width="500" title="Snipped February 27, 2025" />
@@ -123,6 +131,8 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Require distributed transactions for server-to-server communication** – Enforces distributed transaction support for queries that involve multiple servers  
 - **Configured values** – Displays the connection settings explicitly defined in this dialog  
 - **Running values** – Displays the connection settings currently in effect on the running SQL Server instance
+
+------------------------- -------------------------
 
 #### Database Settings
 
@@ -137,6 +147,8 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Database default locations** – The default file paths where new data and log files will be stored.  
 - **Configured values** – Shows the explicitly defined settings in this dialog.  
 - **Running values** – Shows the settings currently in effect on the running SQL Server instance.
+
+------------------------- -------------------------
 
 #### Advanced
 
@@ -164,7 +176,9 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Configured values** – Shows the settings explicitly defined in this dialog  
 - **Running values** – Shows the settings currently in effect on the running SQL Server instance
 
-#### Advanced
+------------------------- -------------------------
+
+#### Permissions
 
 <img src="https://github.com/user-attachments/assets/49b06ffc-662d-40aa-95dd-10c4d9fcb7f6" width="500" title="Snipped February 27, 2025" />
 
@@ -175,8 +189,6 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Deny** – Explicitly disallows the permission, overriding any existing grants  
 
 ------------------------- ------------------------- ------------------------- -------------------------
-
-## Quiz: SQL Server (on-prem)
 
 ### 3. Database Creation (On-Premises)
 
@@ -403,9 +415,9 @@ Exam Guidance:
 
 - Azure-specific issues (like firewall settings) are common exam topics, so be sure to cover these aspects.
 
----
+------------------------- ------------------------- ------------------------- -------------------------
 
-## Test Section
+## Quiz: SQL Server (on-prem)
 
 ### On-Premises SQL Server Exam-Style Questions
 
