@@ -47,7 +47,7 @@ Click "New Query" and execute the following T-SQL to verify connectivity and con
 SELECT @@VERSION;
 ```
 
-<img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="800" title="Snipped February 27, 2025" />
+<img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="500" title="Snipped February 27, 2025" />
 
 ### Review Configuration
 
@@ -111,8 +111,18 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Enable c2 audit tracing** – Activates a legacy auditing standard that logs all SQL Server events to a trace file.  
 - **Cross database ownership chaining** – Allows objects owned by the same user in different databases to reference each other without requiring extra permissions.
 
+#### Connections
 
+<img src="https://github.com/user-attachments/assets/26573867-beac-4727-a4b0-61b5519bf7f4" width="500" title="Snipped February 27, 2025" />
 
+- **Maximum number of concurrent connections (0 = unlimited)** – Sets the maximum number of simultaneous user connections to SQL Server  
+- **Use query governor to prevent long-running queries** – When enabled, imposes a time limit on query execution, rejecting queries that exceed the specified cost limit  
+- **Default connection options** – A list of optional behaviors (e.g., implicit transactions, ANSI settings) that are applied to every new connection  
+- **Allow remote connections to this server** – Determines whether the SQL Server instance can accept connections from remote clients  
+- **Remote query timeout (in seconds)** – The duration after which a remote query is canceled if it does not complete  
+- **Require distributed transactions for server-to-server communication** – Enforces distributed transaction support for queries that involve multiple servers  
+- **Configured values** – Displays the connection settings explicitly defined in this dialog  
+- **Running values** – Displays the connection settings currently in effect on the running SQL Server instance
 
 
 
