@@ -35,7 +35,7 @@ This lab offers hands-on experience with core administrative tasks—covering se
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Lab: SQL Server (on-prem)
+## SQL Server (on-prem)
 
 Launch SQL Server Management Studio and connect to your SQL Server instance.  
 
@@ -189,6 +189,25 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 - **Deny** – Explicitly disallows the permission, overriding any existing grants  
 
 ------------------------- ------------------------- ------------------------- -------------------------
+
+<img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="500" title="Snipped February 27, 2025" />
+
+### Object Explorer
+
+In the Object Explorer, expand "Blah"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### 3. Database Creation (On-Premises)
 
