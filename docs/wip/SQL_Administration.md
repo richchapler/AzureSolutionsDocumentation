@@ -200,14 +200,16 @@ Expand and review folders in the Object Explorer.
 
 <img src="https://github.com/user-attachments/assets/818b2f7e-a1a4-4e40-9282-90ad915e7889" width="500" title="Snipped February 27, 2025" />
 
-- **System Databases**  
+##### System Databases
+
 - **master** – Stores essential system information, including login accounts, system configuration settings, and metadata for all other databases.  
 - **model** – Acts as a template for all newly created databases; any objects or settings here are inherited by new databases.  
 - **msdb** – Used by SQL Server Agent for scheduling jobs, alerts, and operators; also stores backup and restore history.  
 - **tempdb** – A temporary workspace for operations such as sorting, query work tables, temporary tables, and more. It’s recreated fresh each time SQL Server restarts.
 
-- **Database Snapshots**  
-- Contains any read-only, static snapshots of databases. Snapshots are often used for reporting or quickly reverting to a known point in time.
+##### Database Snapshots
+
+Contains any read-only, static snapshots of databases. Snapshots are often used for reporting or quickly reverting to a known point in time.
 
 - **User Databases**  
 - Each user database is listed by name (e.g., **cnbtraining**, **cnbtrainingChap1**, etc.). When you expand a specific database, you’ll see these primary subfolders:
@@ -249,8 +251,6 @@ Expand and review folders in the Object Explorer.
 
   - **Database Snapshots** (per-database)  
     - If you’ve created a snapshot for a specific user database, it may appear here as well.
-
-Below is a simplified exercise demonstrating how to create a new SQL Server database using both the SSMS graphical interface and T-SQL commands.
 
 ------------------------- -------------------------
 
