@@ -35,19 +35,11 @@ This lab offers hands-on experience with core administrative tasks—covering se
 
 ---
 
-## Part 1: On-Premises SQL Server Lab
+## Lab: SQL Server (on-prem)
 
-### 1. Environment Setup (On-Premises)
+Launch SQL Server Management Studio and connect to your SQL Server instance.  
 
-**Pre-requisites:**  
-
-- Install the latest version of SQL Server and SQL Server Management Studio (SSMS).  
-- Ensure that you have the necessary permissions and network access to your SQL Server instance.  
-- **Tip:** Use Windows Authentication where appropriate and keep your SSMS updated to leverage new features and security improvements.
-
-**Initial Connection:**  
-
-- Launch SSMS and connect to your SQL Server instance.  
+<img src="https://github.com/user-attachments/assets/f1238467-a0f9-4569-936b-79f19b1351ff" width="500" title="Snipped February 27, 2025" />
 
 - Run the following query to verify connectivity and confirm the server version:  
 
