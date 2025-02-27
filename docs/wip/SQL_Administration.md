@@ -333,7 +333,54 @@ Click "OK".
 
 ------------------------- ------------------------- -------------------------
 
----
+#### Server Objects
+
+<img src="https://github.com/user-attachments/assets/83326ac6-9f04-45d5-bc4d-a309ba94eb2e" width="800" title="Snipped February 27, 2025" />
+
+- **Backup Devices**  
+  - Manually defined references to backup file locations (e.g., disk or tape). These let you manage backups more consistently by naming the device instead of specifying paths each time.
+
+- **Endpoints**  
+  - Configured network endpoints that enable specific types of communication (e.g., T-SQL, Service Broker, Database Mirroring). They define how SQL Server listens for or sends out data.
+
+- **Linked Servers**  
+  - References to external data sources (another SQL Server instance, Oracle, etc.). You can query remote databases as if they were local, using four-part naming conventions.
+
+- **Triggers**  
+  - Server-level DDL triggers that fire in response to events such as CREATE_LOGIN, DROP_DATABASE, or ALTER_SERVER_ROLE. Different from database triggers, these affect the entire server.
+
+- **Server Audit Specifications**  
+  - If server-level auditing is configured, this node lists which events or actions (e.g., login changes, role modifications) are captured and logged as part of the audit.
+
+------------------------- ------------------------- -------------------------
+
+#### Replication
+
+<img src="https://github.com/user-attachments/assets/8a4269a5-caf0-4321-8004-d3dc5eeb67df" width="800" title="Snipped February 27, 2025" />
+
+- **Local Publications**  
+  - Displays any publications defined on this server. A publication is a collection of database objects and data to be replicated to one or more subscribers.  
+  - You can right-click **Local Publications** to create a new publication (e.g., Snapshot, Transactional, or Merge replication).
+
+- **Local Subscriptions**  
+  - Shows any subscriptions that this server is receiving from another publisher.  
+  - A subscription tells the subscriber how and when to receive published data.
+
+- **Other Replication Objects** (as configured)  
+  - Depending on your setup, you may see additional nodes or references to distribution databases, remote publishers, or push/pull subscriptions.
+
+**Key Replication Concepts:**
+
+- **Publisher** – The source server and database that make data available for replication.  
+- **Subscriber** – The destination server and database that receive replicated data from the publisher.  
+- **Distributor** – A server or database that manages the flow of data and metadata between publishers and subscribers.
+
+------------------------- ------------------------- -------------------------
+
+RESUME HERE!!!!!
+
+
+
 
 ## Part 2: Azure SQL Lab
 
