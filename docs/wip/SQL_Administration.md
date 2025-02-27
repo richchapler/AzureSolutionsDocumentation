@@ -211,46 +211,47 @@ Expand and review folders in the Object Explorer.
 
 Contains any read-only, static snapshots of databases. Snapshots are often used for reporting or quickly reverting to a known point in time.
 
-- **User Databases**  
-- Each user database is listed by name (e.g., **cnbtraining**, **cnbtrainingChap1**, etc.). When you expand a specific database, you’ll see these primary subfolders:
+##### User Databases (not depicted)
 
-  - **Tables**  
-    - Holds all user-defined tables and system tables specific to this database.  
-    - Expanding this node reveals individual tables, plus folders for **System Tables** and sometimes **External Tables** (if configured).
+Each user database is listed by name. When you expand a specific database, you’ll see these primary subfolders:
 
-  - **Views**  
-    - Contains views defined in the database. Views are virtual tables that provide a custom, filtered, or aggregated representation of data from one or more tables.
+- **Tables**  
+  - Holds all user-defined tables and system tables specific to this database.  
+  - Expanding this node reveals individual tables, plus folders for **System Tables** and sometimes **External Tables** (if configured).
 
-  - **Synonyms**  
-    - Lists any synonyms created to provide alternate names for database objects (like tables, views, stored procedures in local or remote databases).
+- **Views**  
+  - Contains views defined in the database. Views are virtual tables that provide a custom, filtered, or aggregated representation of data from one or more tables.
 
-  - **Programmability**  
-    - **Stored Procedures** – Contains T-SQL or CLR stored procedures.  
-    - **Functions** – Houses scalar functions, table-valued functions, and system functions specific to the database.  
-    - **Database Triggers** – Displays DDL triggers at the database level (not the same as table triggers).  
-    - **Assemblies** (if any) – Shows CLR assemblies registered in the database.
+- **Synonyms**  
+  - Lists any synonyms created to provide alternate names for database objects (like tables, views, stored procedures in local or remote databases).
 
-  - **Service Broker** (if enabled)  
-    - Provides messaging and queuing features. You’ll see queues, message types, contracts, and more under this node.
+- **Programmability**  
+  - **Stored Procedures** – Contains T-SQL or CLR stored procedures.  
+  - **Functions** – Houses scalar functions, table-valued functions, and system functions specific to the database.  
+  - **Database Triggers** – Displays DDL triggers at the database level (not the same as table triggers).  
+  - **Assemblies** (if any) – Shows CLR assemblies registered in the database.
 
-  - **Storage**  
-    - **Full Text Catalogs** – Lists any catalogs for full-text search indexing.  
-    - **Partition Schemes** and **Partition Functions** – Used for partitioning large tables and indexes across multiple filegroups.
+- **Service Broker** (if enabled)  
+  - Provides messaging and queuing features. You’ll see queues, message types, contracts, and more under this node.
 
-  - **Security**  
-    - **Users** – Lists database-level users mapped from logins or containing user accounts (for contained databases).  
-    - **Roles** – Contains both fixed database roles (e.g., db_datareader, db_owner) and user-defined database roles.  
-    - **Schemas** – Defines logical containers for objects; used to group and manage objects under different namespaces.  
-    - **Asymmetric Keys**, **Certificates**, **Database Audit Specifications** (if configured) – For advanced security and encryption features.
+- **Storage**  
+  - **Full Text Catalogs** – Lists any catalogs for full-text search indexing.  
+  - **Partition Schemes** and **Partition Functions** – Used for partitioning large tables and indexes across multiple filegroups.
 
-  - **External Resources** (if applicable)  
-    - **External Tables**, **External Data Sources**, **External File Formats** – Appear if you’re using PolyBase or external data connections.
+- **Security**  
+  - **Users** – Lists database-level users mapped from logins or containing user accounts (for contained databases).  
+  - **Roles** – Contains both fixed database roles (e.g., db_datareader, db_owner) and user-defined database roles.  
+  - **Schemas** – Defines logical containers for objects; used to group and manage objects under different namespaces.  
+  - **Asymmetric Keys**, **Certificates**, **Database Audit Specifications** (if configured) – For advanced security and encryption features.
 
-  - **Graph** (if enabled)  
-    - If you have SQL Graph features in use, you’ll see **Graph Tables** or **Node/Edge Tables** here.
+- **External Resources** (if applicable)  
+  - **External Tables**, **External Data Sources**, **External File Formats** – Appear if you’re using PolyBase or external data connections.
 
-  - **Database Snapshots** (per-database)  
-    - If you’ve created a snapshot for a specific user database, it may appear here as well.
+- **Graph** (if enabled)  
+  - If you have SQL Graph features in use, you’ll see **Graph Tables** or **Node/Edge Tables** here.
+
+- **Database Snapshots** (per-database)  
+  - If you’ve created a snapshot for a specific user database, it may appear here as well.
 
 ------------------------- -------------------------
 
