@@ -190,11 +190,103 @@ Right-click the server node and select "Properties" from the resulting dropdown 
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-<img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="500" title="Snipped February 27, 2025" />
+<img src="https://github.com/user-attachments/assets/377b9aa6-0326-4e28-b563-1ff4c27bf713" width="500" title="Snipped February 27, 2025" />
 
 ### Object Explorer
 
-In the Object Explorer, expand "Blah"
+Expand and review folders in the Object Explorer.
+
+#### Databases
+
+<img src="https://github.com/user-attachments/assets/818b2f7e-a1a4-4e40-9282-90ad915e7889" width="500" title="Snipped February 27, 2025" />
+
+- **System Databases**  
+- **master** – Stores essential system information, including login accounts, system configuration settings, and metadata for all other databases.  
+- **model** – Acts as a template for all newly created databases; any objects or settings here are inherited by new databases.  
+- **msdb** – Used by SQL Server Agent for scheduling jobs, alerts, and operators; also stores backup and restore history.  
+- **tempdb** – A temporary workspace for operations such as sorting, query work tables, temporary tables, and more. It’s recreated fresh each time SQL Server restarts.
+
+- **Database Snapshots**  
+- Contains any read-only, static snapshots of databases. Snapshots are often used for reporting or quickly reverting to a known point in time.
+
+- **User Databases**  
+- Each user database is listed by name (e.g., **cnbtraining**, **cnbtrainingChap1**, etc.). When you expand a specific database, you’ll see these primary subfolders:
+
+  - **Tables**  
+    - Holds all user-defined tables and system tables specific to this database.  
+    - Expanding this node reveals individual tables, plus folders for **System Tables** and sometimes **External Tables** (if configured).
+
+  - **Views**  
+    - Contains views defined in the database. Views are virtual tables that provide a custom, filtered, or aggregated representation of data from one or more tables.
+
+  - **Synonyms**  
+    - Lists any synonyms created to provide alternate names for database objects (like tables, views, stored procedures in local or remote databases).
+
+  - **Programmability**  
+    - **Stored Procedures** – Contains T-SQL or CLR stored procedures.  
+    - **Functions** – Houses scalar functions, table-valued functions, and system functions specific to the database.  
+    - **Database Triggers** – Displays DDL triggers at the database level (not the same as table triggers).  
+    - **Assemblies** (if any) – Shows CLR assemblies registered in the database.
+
+  - **Service Broker** (if enabled)  
+    - Provides messaging and queuing features. You’ll see queues, message types, contracts, and more under this node.
+
+  - **Storage**  
+    - **Full Text Catalogs** – Lists any catalogs for full-text search indexing.  
+    - **Partition Schemes** and **Partition Functions** – Used for partitioning large tables and indexes across multiple filegroups.
+
+  - **Security**  
+    - **Users** – Lists database-level users mapped from logins or containing user accounts (for contained databases).  
+    - **Roles** – Contains both fixed database roles (e.g., db_datareader, db_owner) and user-defined database roles.  
+    - **Schemas** – Defines logical containers for objects; used to group and manage objects under different namespaces.  
+    - **Asymmetric Keys**, **Certificates**, **Database Audit Specifications** (if configured) – For advanced security and encryption features.
+
+  - **External Resources** (if applicable)  
+    - **External Tables**, **External Data Sources**, **External File Formats** – Appear if you’re using PolyBase or external data connections.
+
+  - **Graph** (if enabled)  
+    - If you have SQL Graph features in use, you’ll see **Graph Tables** or **Node/Edge Tables** here.
+
+  - **Database Snapshots** (per-database)  
+    - If you’ve created a snapshot for a specific user database, it may appear here as well.
+
+Below is a simplified exercise demonstrating how to create a new SQL Server database using both the SSMS graphical interface and T-SQL commands.
+
+------------------------- -------------------------
+
+##### Exercise: Create Database
+
+###### ...using the app interface
+
+1. **Open SSMS and Connect**  
+   - Launch SQL Server Management Studio (SSMS).  
+   - Connect to the SQL Server instance where you want to create the database.
+
+2. **Create a New Database**  
+   - In the **Object Explorer**, right-click **Databases** and select **New Database…**.  
+   - In the **New Database** dialog, enter **TrainingDB** as the database name.  
+   - Click **OK** to create the database.
+
+3. **Verify Creation**  
+   - Expand **Databases** in Object Explorer to confirm that **TrainingDB** now appears in the list.
+
+---
+
+###### ...using the T-SQL
+
+1. **Open a New Query Window**  
+   - In SSMS, click **New Query** on the toolbar.
+
+2. **Run the CREATE DATABASE Command**  
+   ```sql
+   CREATE DATABASE TrainingDB;
+   GO
+   ```
+   - Press **F5** or click **Execute** to run the command.
+
+3. **Verify Creation**  
+   - In Object Explorer, right-click **Databases** and select **Refresh**.  
+   - Confirm that **TrainingDB** appears in the list of databases.
 
 
 
@@ -202,6 +294,22 @@ In the Object Explorer, expand "Blah"
 
 
 
+
+
+
+
+
+
+
+
+
+
+- **Security** – Contains server-level security objects such as logins, server roles, credentials, and certificates. This is where you manage authentication and authorization for your SQL Server instance.
+- **Server Objects** – Includes items like backup devices, linked servers, endpoints, and triggers. It’s useful for configuring integrations and managing various server-level features.
+- **Replication** – Displays replication settings if configured, including publishers, distributors, and subscribers. This node is used to manage replication tasks.
+- **Management** – Provides access to tools and utilities like the SQL Server Agent, Activity Monitor, maintenance plans, and policy management. It's essential for monitoring server health and automating routine tasks.
+
+This Object Explorer structure helps you navigate and manage different aspects of your SQL Server environment efficiently. Let me know if you'd like to dive deeper into any specific section!
 
 
 
