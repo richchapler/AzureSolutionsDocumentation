@@ -9,29 +9,29 @@
   * Boot Diagnostics: Disable
 * Azure SQL
 
-**Overview:**  
+Overview:  
 This lab offers hands-on experience with core administrative tasks—covering server setup, maintenance, troubleshooting, database creation, and user/permission management. It is structured to support both on-premises SQL Server and Azure SQL environments, with exam-style questions to reinforce key concepts. Enhancements include updated guidance on modern T-SQL commands, detailed troubleshooting steps, and best practices for both environments.
 
 ---
 
 ## Lab Objectives
 
-- **Fundamentals of Database Administration**  
+- Fundamentals of Database Administration  
   - Master server installation, configuration, and routine maintenance.  
   - Learn to monitor and adjust performance settings, including memory, CPU, and error logs.
 
-- **Database Creation, Users & Permissions**  
+- Database Creation, Users & Permissions  
   - Create databases using T-SQL and the SSMS GUI.  
   - Understand the difference between logins and database users, and practice mapping logins to users with appropriate roles.  
   - Compare legacy commands (e.g., `sp_addrolemember`) with modern alternatives (e.g., `ALTER ROLE ... ADD MEMBER`)—noting compatibility and exam expectations.
 
-- **Exam Guidance & Best Practices**  
+- Exam Guidance & Best Practices  
   - Develop familiarity with exam-style scenarios such as user authentication, role membership, and troubleshooting access issues.  
   - Reinforce learning with exam-style questions that mirror real-world and exam scenarios.
 
-- **Dual Platform Coverage**  
-  - **On-Premises SQL Server:** Detailed procedures, updated best practices, and troubleshooting guidelines for a traditional on-prem environment.  
-  - **Azure SQL:** Essential tasks including setup via the Azure portal, firewall configurations, and diagnostic tools alongside SSMS.
+- Dual Platform Coverage  
+  - On-Premises SQL Server: Detailed procedures, updated best practices, and troubleshooting guidelines for a traditional on-prem environment.  
+  - Azure SQL: Essential tasks including setup via the Azure portal, firewall configurations, and diagnostic tools alongside SSMS.
 
 ---
 
@@ -41,32 +41,52 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
 
 <img src="https://github.com/user-attachments/assets/f1238467-a0f9-4569-936b-79f19b1351ff" width="500" title="Snipped February 27, 2025" />
 
-- Run the following query to verify connectivity and confirm the server version:  
+Click "New Query" and execute the following T-SQL to verify connectivity and confirm the server version:  
 
-  ```sql
-  SELECT @@VERSION;
-  ```
+```sql
+SELECT @@VERSION;
+```
 
-- **Enhanced Note:** Consider also verifying SQL Server services via SQL Server Configuration Manager.
+<img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="800" title="Snipped February 27, 2025" />
 
-### 2. Exploring On-Premises SQL Server Configuration
+### Review Configuration
 
-**Reviewing Server Properties:**  
+Right-click the server node and select "Properties" from the resulting dropdown.
 
-- In SSMS, right-click the server node and select **Properties**.  
-- Review key settings such as memory allocation, CPU usage, and check the error logs.  
-- **Enhanced Checklist:**  
-  - Verify that max memory settings are optimized for your workload.  
-  - Confirm the configuration of tempdb files.  
-  - Check SQL Server Agent and maintenance plan settings.
+<img src="https://github.com/user-attachments/assets/20b04821-e1a5-408c-b5a1-8d06ba8e9275" width="500" title="Snipped February 27, 2025" />
 
-**Exam Guidance:**  
+* Server Name – The name of the SQL Server instance  
+* Product – The edition and version of SQL Server  
+* Operating System – The OS hosting the SQL Server instance  
+* Platform – The underlying platform (e.g., Windows)  
+* Version – The specific build or patch level of SQL Server  
+* Language – The language setting for the server  
+* Memory – The amount of memory recognized or allocated by SQL Server  
+* Root Directory – The installation path for SQL Server binaries  
+* Collation – The default collation defining how text is sorted and compared  
+* Is XTP Supported – Indicates whether In-Memory OLTP (XTP) is supported  
+* Is HADR Enabled – Reflects whether high availability/disaster recovery (Always On) is enabled
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exam Guidance:  
 
 - Questions often test your ability to navigate server properties and understand performance settings.
 
 ### 3. Database Creation (On-Premises)
 
-**Using T-SQL:**  
+Using T-SQL:  
 
 - Create a new database named `TrainingDB`:
 
@@ -77,21 +97,21 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
 
 - Refresh Object Explorer to confirm the new database.
 
-**Using SSMS GUI (Optional):**  
+Using SSMS GUI (Optional):  
 
-- Right-click **Databases**, select **New Database…**, and follow the prompts.
+- Right-click Databases, select New Database…, and follow the prompts.
 
-**Enhanced Best Practice:**  
+Enhanced Best Practice:  
 
 - Consider reviewing the file layout (data and log files) for performance tuning and recovery objectives.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Know both methods; exam questions may ask which T-SQL command creates a new database.
 
 ### 4. Creating and Managing Users (On-Premises)
 
-**Creating a SQL Server Login:**  
+Creating a SQL Server Login:  
 
 - Execute the following to create a login:
 
@@ -100,7 +120,7 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
   GO
   ```
 
-**Mapping Login to a Database User:**  
+Mapping Login to a Database User:  
 
 - Switch to the `TrainingDB` database and create a user:
 
@@ -111,46 +131,46 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
   GO
   ```
 
-- **Assigning a Role:**  
+- Assigning a Role:  
 
-  - **Legacy Method (still common in exam scenarios):**
+  - Legacy Method (still common in exam scenarios):
 
     ```sql
     EXEC sp_addrolemember 'db_datareader', 'TestUser';
     GO
     ```
 
-  - **Modern Alternative:**  
+  - Modern Alternative:  
 
     ```sql
     ALTER ROLE db_datareader ADD MEMBER TestUser;
     GO
     ```
 
-  - **Enhanced Note:** Although many exams reference `sp_addrolemember`, note that Microsoft recommends the `ALTER ROLE ... ADD MEMBER` syntax in newer versions of SQL Server.
+  - Enhanced Note: Although many exams reference `sp_addrolemember`, note that Microsoft recommends the `ALTER ROLE ... ADD MEMBER` syntax in newer versions of SQL Server.
 
-**Verifying Permissions:**  
+Verifying Permissions:  
 
 - Optionally, log in as TestUser and run a query (e.g., `SELECT TOP 10 * FROM SomeTable;`) to validate access.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Understand the distinction between logins and users, and be prepared to map them correctly in exam questions.
 
 ### 5. Basic Troubleshooting (On-Premises)
 
-**Simulated Scenario:**  
+Simulated Scenario:  
 
 - If TestUser is unable to query data from TrainingDB, review the error message and follow these steps:
 
-**Troubleshooting Checklist:**  
+Troubleshooting Checklist:  
 
 - Confirm that TestUser exists in TrainingDB.  
 - Verify that TestUser is assigned to the appropriate role (e.g., `db_datareader`).  
 - Check SQL Server error logs and Windows Event Logs for any related diagnostic information.  
-- **Enhanced Tip:** Use the SQL Server Activity Monitor to check for blocking or performance issues.
+- Enhanced Tip: Use the SQL Server Activity Monitor to check for blocking or performance issues.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Exam questions may involve troubleshooting permission issues, so be comfortable with these steps.
 
@@ -160,12 +180,12 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
 
 ### 1. Environment Setup (Azure SQL)
 
-**Pre-requisites:**  
+Pre-requisites:  
 
 - Have an active Azure subscription and access to the [Azure Portal](https://portal.azure.com/).  
 - Ensure you have the latest version of SSMS or Azure Data Studio installed.
 
-**Initial Connection:**  
+Initial Connection:  
 
 - Connect via SSMS using your Azure SQL server details.  
 
@@ -175,40 +195,40 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
   SELECT @@VERSION;
   ```
 
-  - **Note:** The output will indicate that this is an Azure SQL Database instance.
+  - Note: The output will indicate that this is an Azure SQL Database instance.
 
-**Enhanced Considerations:**  
+Enhanced Considerations:  
 
 - Verify that your client IP is allowed through the Azure SQL firewall settings.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Recognize the connectivity differences and how version information is presented in Azure SQL.
 
 ### 2. Exploring Azure SQL Configuration
 
-**Reviewing Database Settings:**  
+Reviewing Database Settings:  
 
 - In the Azure portal, navigate to your Azure SQL Database and review:
   - Performance tier and DTU/vCore settings.
   - Firewall rules and virtual network configurations.
   - Auditing and threat detection settings.
 
-**Using SSMS:**  
+Using SSMS:  
 
 - You can also execute T-SQL commands to review configurations and monitor performance metrics.
 
-**Enhanced Note:**  
+Enhanced Note:  
 
 - Leverage the built-in diagnostic tools and performance insights available in the Azure portal for deeper analysis.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Understanding both the Azure portal and SSMS methods is key for troubleshooting and exam scenarios.
 
 ### 3. Database Creation (Azure SQL)
 
-**Using T-SQL in SSMS:**  
+Using T-SQL in SSMS:  
 
 - Create a new database named `AzureTrainingDB`:
 
@@ -217,30 +237,30 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
   GO
   ```
 
-**Using the Azure Portal (Optional):**  
+Using the Azure Portal (Optional):  
 
-- Select **Create a resource**, choose **SQL Database**, and follow the guided steps.
+- Select Create a resource, choose SQL Database, and follow the guided steps.
 
-**Enhanced Best Practice:**  
+Enhanced Best Practice:  
 
 - Configure backup and geo-replication settings based on your data protection requirements.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Be familiar with both creation methods; exam questions may include Azure-specific features.
 
 ### 4. Creating and Managing Users (Azure SQL)
 
-**Creating Contained Database Users:**  
+Creating Contained Database Users:  
 
-- **SQL-Authenticated User:**
+- SQL-Authenticated User:
 
   ```sql
   CREATE USER AzureUser WITH PASSWORD = 'YourAzurePassword123';
   GO
   ```
 
-- **Azure AD User:**  
+- Azure AD User:  
   (For environments integrated with Azure Active Directory)
 
   ```sql
@@ -248,7 +268,7 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
   GO
   ```
 
-**Assigning Roles:**  
+Assigning Roles:  
 
 - Add the user to a role using:
 
@@ -257,35 +277,35 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
   GO
   ```
 
-- **Modern Alternative (if supported):**
+- Modern Alternative (if supported):
 
   ```sql
   ALTER ROLE db_datareader ADD MEMBER AzureUser;
   GO
   ```
 
-**Enhanced Note:**  
+Enhanced Note:  
 
 - Azure SQL often uses contained database users, so ensure you understand the differences from on-premises user creation.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Examine the differences in authentication methods and role assignment for Azure SQL.
 
 ### 5. Basic Troubleshooting (Azure SQL)
 
-**Simulated Scenario:**  
+Simulated Scenario:  
 
 - If an Azure SQL user cannot access data, perform these checks:
 
-**Troubleshooting Checklist:**  
+Troubleshooting Checklist:  
 
 - Verify the user’s existence and role membership in the database.  
 - Confirm that the client IP address is allowed by the Azure SQL firewall rules.  
 - Use the Azure portal’s diagnostic tools to monitor and identify issues (e.g., Query Performance Insight).  
 - Review auditing logs for additional context on failed connections.
 
-**Exam Guidance:**  
+Exam Guidance:  
 
 - Azure-specific issues (like firewall settings) are common exam topics, so be sure to cover these aspects.
 
@@ -295,10 +315,10 @@ Launch SQL Server Management Studio and connect to your SQL Server instance.
 
 ### On-Premises SQL Server Exam-Style Questions
 
-**Question 1:**  
+Question 1:  
 You have just created a new SQL Server login named TestUser. Which of the following commands correctly maps this login to a database user in TrainingDB and assigns the user to the db_datareader role?
 
-**A.**  
+A.  
 
 ```sql
 USE TrainingDB;  
@@ -309,7 +329,7 @@ EXEC sp_addrolemember 'db_datareader', 'TestUser';
 GO
 ```
 
-**B.**  
+B.  
 
 ```sql
 CREATE USER TestUser FOR LOGIN TestUser;  
@@ -317,7 +337,7 @@ ALTER ROLE db_datareader ADD MEMBER TestUser;
 GO
 ```
 
-**C.**  
+C.  
 
 ```sql
 USE TrainingDB;  
@@ -328,97 +348,97 @@ GRANT SELECT TO TestUser;
 GO
 ```
 
-**D.** Both A and C are correct.
+D. Both A and C are correct.
 
-**Answer:** A  
-**Enhanced Explanation:** Option A explicitly creates the database user and assigns it to the `db_datareader` role using the legacy (but exam-recognized) stored procedure. Although Option B uses the modern `ALTER ROLE ... ADD MEMBER` syntax—which is valid on newer versions—exams often expect Option A.
+Answer: A  
+Enhanced Explanation: Option A explicitly creates the database user and assigns it to the `db_datareader` role using the legacy (but exam-recognized) stored procedure. Although Option B uses the modern `ALTER ROLE ... ADD MEMBER` syntax—which is valid on newer versions—exams often expect Option A.
 
 ---
 
-**Question 2:**  
+Question 2:  
 Which T-SQL command creates a new database named TrainingDB on an on-premises SQL Server?
 
-**A.** `CREATE DATABASE TrainingDB;`  
-**B.** `NEW DATABASE TrainingDB;`  
-**C.** `MAKE DATABASE TrainingDB;`  
-**D.** `ADD DATABASE TrainingDB;`
+A. `CREATE DATABASE TrainingDB;`  
+B. `NEW DATABASE TrainingDB;`  
+C. `MAKE DATABASE TrainingDB;`  
+D. `ADD DATABASE TrainingDB;`
 
-**Answer:** A  
-**Explanation:** The correct T-SQL command to create a new database is `CREATE DATABASE TrainingDB;`.
+Answer: A  
+Explanation: The correct T-SQL command to create a new database is `CREATE DATABASE TrainingDB;`.
 
 ---
 
-**Question 3:**  
+Question 3:  
 A user is unable to query data from TrainingDB on your on-premises server. What is the first step you should take to troubleshoot this issue?
 
-**A.** Verify that the SQL Server instance is running.  
-**B.** Check the SQL Server error logs.  
-**C.** Verify that the user is correctly mapped to TrainingDB and has the appropriate role.  
-**D.** Restart the SQL Server service.
+A. Verify that the SQL Server instance is running.  
+B. Check the SQL Server error logs.  
+C. Verify that the user is correctly mapped to TrainingDB and has the appropriate role.  
+D. Restart the SQL Server service.
 
-**Answer:** C  
-**Explanation:** The most direct troubleshooting step is to ensure the user is properly mapped to the database and has the necessary permissions.
+Answer: C  
+Explanation: The most direct troubleshooting step is to ensure the user is properly mapped to the database and has the necessary permissions.
 
 ---
 
 ### Azure SQL Exam-Style Questions
 
-**Question 4:**  
+Question 4:  
 You have created a contained database user in an Azure SQL Database named AzureTrainingDB. Which of the following commands creates a contained user with SQL authentication?
 
-**A.**  
+A.  
 
 ```sql
 CREATE USER AzureUser WITH PASSWORD = 'YourAzurePassword123';
 GO
 ```
 
-**B.**  
+B.  
 
 ```sql
 CREATE LOGIN AzureUser WITH PASSWORD = 'YourAzurePassword123';
 GO
 ```
 
-**C.**  
+C.  
 
 ```sql
 CREATE USER [user@domain.com] FROM EXTERNAL PROVIDER;
 GO
 ```
 
-**D.** Both A and C are correct.
+D. Both A and C are correct.
 
-**Answer:** A  
-**Explanation:** In Azure SQL, a contained database user is created directly in the database using `CREATE USER` with a password. Option C is used for Azure AD authentication.
+Answer: A  
+Explanation: In Azure SQL, a contained database user is created directly in the database using `CREATE USER` with a password. Option C is used for Azure AD authentication.
 
 ---
 
-**Question 5:**  
+Question 5:  
 Which method is commonly used to connect to an Azure SQL Database for administrative tasks?
 
-**A.** SQL Server Management Studio (SSMS)  
-**B.** Azure Data Studio  
-**C.** Azure Portal Query Editor  
-**D.** All of the above
+A. SQL Server Management Studio (SSMS)  
+B. Azure Data Studio  
+C. Azure Portal Query Editor  
+D. All of the above
 
-**Answer:** D  
-**Explanation:** All these methods can be used to connect to and manage an Azure SQL Database.
+Answer: D  
+Explanation: All these methods can be used to connect to and manage an Azure SQL Database.
 
 ---
 
-**Question 6:**  
+Question 6:  
 When troubleshooting access issues in an Azure SQL Database, what is one additional configuration to verify that is not typically an on-premises concern?
 
-**A.** Database user mapping  
-**B.** Role membership  
-**C.** Firewall rules in the Azure portal  
-**D.** SQL Server error logs
+A. Database user mapping  
+B. Role membership  
+C. Firewall rules in the Azure portal  
+D. SQL Server error logs
 
-**Answer:** C  
-**Explanation:** In Azure SQL, firewall rules set in the Azure portal can block access, making them an important troubleshooting aspect that is unique to cloud environments.
+Answer: C  
+Explanation: In Azure SQL, firewall rules set in the Azure portal can block access, making them an important troubleshooting aspect that is unique to cloud environments.
 
 ---
 
-**Reference:**  
+Reference:  
 • [SQL Server Educational Resources](https://learn.microsoft.com/en-us/sql/sql-server/educational-sql-resources)
