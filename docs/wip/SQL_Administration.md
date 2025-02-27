@@ -1,7 +1,12 @@
 # SQL: Administration  
 
-**Reference:**  
-• [SQL Server Educational Resources](https://learn.microsoft.com/en-us/sql/sql-server/educational-sql-resources)
+## Recommended Resources
+
+* Azure Virtual Machine
+  * Image: "Free SQL Server License: SQL Server 2022 Developer on Windows Server 2022"
+  * SKU: "Standard_D2s_v3..."
+  * Inbound Ports: RDP (3389) allowed
+  * Boot Diagnostics: Disable
 
 **Overview:**  
 This lab offers hands-on experience with core administrative tasks—covering server setup, maintenance, troubleshooting, database creation, and user/permission management. It is structured to support both on-premises SQL Server and Azure SQL environments, with exam-style questions to reinforce key concepts. Enhancements include updated guidance on modern T-SQL commands, detailed troubleshooting steps, and best practices for both environments.
@@ -422,20 +427,5 @@ When troubleshooting access issues in an Azure SQL Database, what is one additio
 
 ---
 
-## Next Steps
-
-1. **Walk Through the Lab:**  
-   - Set up your on-premises SQL Server and/or Azure SQL environment.  
-   - Execute each section’s instructions, noting any differences between the environments.
-
-2. **Practice Exam-Style Questions:**  
-   - Work through the test section to reinforce your understanding of key concepts.  
-   - Consider practicing both legacy and modern T-SQL command syntax where appropriate.
-
-3. **Explore Enhancements:**  
-   - Review the troubleshooting checklists and enhanced best practices.  
-   - Use diagnostic tools (e.g., SQL Server Activity Monitor, Azure Performance Insights) to deepen your understanding of performance and security management.
-
-This enhanced lab document aims to not only guide you through basic administration tasks but also prepare you for exam scenarios and real-world troubleshooting. As you work through the lab, keep these enhancements in mind and adjust based on your specific environment and requirements.
-
-Happy learning and best of luck with your lab walkthrough!
+**Reference:**  
+• [SQL Server Educational Resources](https://learn.microsoft.com/en-us/sql/sql-server/educational-sql-resources)
