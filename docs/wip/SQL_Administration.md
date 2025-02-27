@@ -307,67 +307,31 @@ Expand the new database in the Object Explorer and review.
 
 ------------------------- -------------------------
 
-##### Exercise: Add User and Grant Access
+##### Exercise: New User
 
-In the Object Explorer, expand the "Security" folder, right-click "Logins" and select "New Login" from the resulting menu.
+Create a new user in Windows.
 
-<img src="https://github.com/user-attachments/assets/cc3a2a8c-8db7-4312-b5ec-02e3ed8bbefa" width="500" title="Snipped February 27, 2025" />
+<img src="https://github.com/user-attachments/assets/4fa6a554-2db0-4510-9d97-0f989ac52452" width="300" title="Snipped February 27, 2025" />
+
+In the SQL Server Management Studio Object Explorer, expand the "Security" folder, right-click "Logins" and select "New Login" from the resulting menu.
+
+<img src="https://github.com/user-attachments/assets/6bf615a2-078e-4ab2-9fd4-a51c960b3c94" width="500" title="Snipped February 27, 2025" />
 
 Complete the "Login - New" form and click "OK".
 
+Navigate to "Databases" >> "trainingdb" >> "Security", right-click "Users" and select "New User" from the resulting menu.
 
+<img src="https://github.com/user-attachments/assets/77de7e87-906c-4f18-8bb9-28c18822a106" width="500" title="Snipped February 27, 2025" />
 
+Complete the "Database User - New" form.
 
+Navigate to "Membership" and check "db_datareader".
 
+<img src="https://github.com/user-attachments/assets/a2f718c8-dd0e-4eba-b110-4d3b39ec8cb8" width="500" title="Snipped February 27, 2025" />
 
-RESUME HERE!!!
+Click "OK".
 
-
-
-
-3. **Map the Login to TrainingDB (Database-Level User)**  
-   - Still in **Object Explorer**, expand **Databases**, then expand **TrainingDB**.  
-   - Expand **Security**, right-click **Users**, and select **New User…**  
-
-   *(Snipped February 27, 2025)*
-
-   - In the **User name** field, enter the same name (e.g., **TestUser**).  
-   - For **Login name**, select the login you just created from the dropdown.  
-   - Under **Default schema**, leave it as **dbo** (or specify another schema if desired).
-
-4. **Assign Read Permissions**  
-   - Click **Membership** in the left pane.  
-   - Check the box for **db_datareader** to grant read access.  
-   - Click **OK** to create the database user.
-
-5. **Verify the New User**  
-   - Expand **TrainingDB → Security → Users** to confirm the user appears in the list.  
-   - Optionally, connect as **TestUser** or run a query (e.g., `SELECT TOP 10 * FROM SomeTable;`) to verify read access.
-
-With these steps, you have created a new login at the server level, mapped it to a database user, and granted it **db_datareader** permissions in **TrainingDB**, all using the SSMS interface.
-
-
-
-
-
-
-
-
-
-
-
-
-- **Server Objects** – Includes items like backup devices, linked servers, endpoints, and triggers. It’s useful for configuring integrations and managing various server-level features.
-- **Replication** – Displays replication settings if configured, including publishers, distributors, and subscribers. This node is used to manage replication tasks.
-- **Management** – Provides access to tools and utilities like the SQL Server Agent, Activity Monitor, maintenance plans, and policy management. It's essential for monitoring server health and automating routine tasks.
-
-This Object Explorer structure helps you navigate and manage different aspects of your SQL Server environment efficiently. Let me know if you'd like to dive deeper into any specific section!
-
-
-
-
-
-
+------------------------- ------------------------- -------------------------
 
 ---
 
