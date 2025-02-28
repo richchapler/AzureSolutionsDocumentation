@@ -378,12 +378,9 @@ Click "OK".
 
 #### Always On High Availability
 
-Must be enabled via SQL Server Configuration Manager.
+_Note: Must be enabled via SQL Server Configuration Manager_
 
-<img src="https://github.com/user-attachments/assets/13f4498e-b395-42ec-9355-e52829a60508" width="400" title="Snipped February 28, 2025" />
-
-
-
+<img src="https://github.com/user-attachments/assets/bc4c7115-6706-4bd1-b6ba-27da0a00189c" width="800" title="Snipped February 28, 2025" />
 
 
 
