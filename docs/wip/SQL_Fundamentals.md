@@ -623,8 +623,6 @@ Navigate to the Azure Marketplace and instantiate a SQL Database.
 
 <img src="https://github.com/user-attachments/assets/fcca33f6-3804-41a0-b066-e5d60151e132" width="800" title="Snipped February 28, 2025" />
 
-On the "Create SQL Database" page, "Basics" tab:
-
 #### Project Details
 
 - **Subscription**  
@@ -681,6 +679,36 @@ On the "Create SQL Database" page, "Basics" tab:
 ------------------------- -------------------------
 
 ### Networking
+
+<img src="https://github.com/user-attachments/assets/7cd6cbef-4cd3-4565-a359-c6504c7c7ea4" width="800" title="Snipped February 28, 2025" />
+
+- **Connectivity method**  
+  - **Public endpoint:** Allows connections over the public internet, managed by Azure Firewall rules.  
+  - **Private endpoint:** Restricts traffic to a private IP address within your virtual network, enhancing security by avoiding public exposure.
+
+- **Connection policy**  
+  - **Default (recommended):** Balances efficiency and security by automatically routing connections through the best path (proxy or redirect).  
+  - **Proxy:** All client connections route through an Azure SQL Database gateway (proxy), which may introduce additional latency.  
+  - **Redirect:** Clients connect directly to the database after the initial handshake, improving performance by reducing gateway hops.
+
+- **Encrypted connections**  
+  - **Transport Layer Security (TLS):** Ensures data in transit is encrypted, helping protect against eavesdropping and man-in-the-middle attacks.  
+  - **Enforce TLS version:** May require a specific TLS version (e.g., TLS 1.2) for compliance or security best practices.
+
+------------------------- -------------------------
+
+### Security
+
+<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped February 28, 2025" />
+
+
+
+
+
+
+
+
+
 
 
 
