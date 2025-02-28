@@ -701,18 +701,6 @@ Navigate to the Azure Marketplace and instantiate a SQL Database.
 
 <img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped February 28, 2025" />
 
-
-
-
-
-
-
-
-
-
-
-
-
 LOREM IPSUM
 
 
@@ -723,62 +711,5 @@ LOREM IPSUM
 
 
 
-Azure SQL offers several deployment models to suit varying workload requirements, management preferences, and performance demands. Choose the right option for your needs.
-
-**Single Database**  
-- **Description:** A fully managed, isolated database ideal for modern cloud applications with predictable workloads.  
-- **Ideal For:** Applications needing dedicated resources.  
-- **Key Features:** High availability, automated backups, and simple scaling via DTU or vCore models.
-
-**Elastic Pool**  
-- **Description:** A collection of databases that share a pool of resources for variable, multi-tenant workloads.  
-- **Ideal For:** SaaS applications or environments with unpredictable usage.  
-- **Key Features:** Dynamic resource allocation and cost-efficiency through shared resources.
-
-**Managed Instance**  
-- **Description:** A fully managed SQL Server instance offering near 100% on-premises compatibility.  
-- **Ideal For:** Enterprises migrating existing SQL Server workloads with minimal changes.  
-- **Key Features:** Instance-level features like SQL Server Agent, cross-database queries, and linked servers with hybrid connectivity.
-
-**High-Performance Options**  
-Azure SQL provides specialized options for demanding workloads:  
-- **Hyperscale:** An architecture for very large databases requiring rapid scaling and high throughput.  
-  **Key Features:** Instantaneous scaling of storage/compute and a distributed storage architecture with read-scale-out capabilities.  
-- **vCore-Based Purchasing Model:** Offers transparent resource allocation with independent compute and storage scaling.  
-  **Key Features:** Service tiers such as General Purpose and Business Critical provide fine-tuned performance and greater control over hardware resources, with Business Critical delivering lower latency and enhanced I/O throughput for mission-critical applications.
-
-#### Service Tier Considerations
-
-For Single Database and Elastic Pools:  
-- **DTU-Based Tiers:** Options like Basic, Standard, and Premium balance cost with performance in a bundled model.  
-- **vCore-Based Tiers:**  
-  - **General Purpose:** Suited for most workloads with balanced compute and storage performance.  
-  - **Business Critical:** Designed for high I/O, low latency workloads, offering enhanced performance and built-in high availability with multiple replicas.
-
-For Managed Instance:  
-- **Service Tiers:** Similar options allow performance tuning—choosing General Purpose for balanced workloads or Business Critical for demanding, mission-critical applications with integrated high availability and automated backups.
-
-Selecting the right deployment model and service tier depends on your performance needs, workload characteristics, and budget—ensuring an optimized Azure SQL environment tailored to your application.
 
 
-
-
-
-
-
-
-
-
-
-**Choosing the Right Deployment Model:**
-
-- **Workload Characteristics:**  
-  If your workload is predictable and isolated, a **Single Database** might be the best choice. For multiple databases with variable usage, an **Elastic Pool** can provide cost savings and flexibility.
-  
-- **Compatibility Needs:**  
-  If you are migrating from an on-premises SQL Server and require instance-level features (like SQL Server Agent or cross-database queries), a **Managed Instance** is ideal.
-  
-- **Performance Requirements:**  
-  For extremely large or rapidly growing databases, consider **Hyperscale** for its ability to scale quickly. If you need granular control over resources and predictable performance, the **vCore-Based Model** offers options tailored to both general and business-critical workloads.
-
-By understanding these instantiation options, you can configure your Azure SQL environment to balance performance, scalability, and management overhead according to your specific application needs.
