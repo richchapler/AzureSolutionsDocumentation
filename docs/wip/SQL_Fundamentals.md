@@ -756,19 +756,65 @@ Navigate to the Azure Marketplace and create a "Single database" instance of SQL
   - **System default**: Azure automatically schedules patching and updates.  
   - **Custom**: Specify a preferred time range to reduce potential downtime during critical business hours.
 
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Consolidated Comparison
+
+Below are a series of concise matrices that break down each key category into individual properties for easy comparison. Each matrix lists the four deployment options—On-Premises SQL Server, Azure SQL Database (Single), Azure SQL Managed Instance, and SQL Server on Azure VM—with one property per row.
+
 ------------------------- -------------------------
 
-### SQL Server Management Studio >> Azure SQL
+### Hosting & OS Access
 
-In this section we'll focus on what is different from SSMS >> SQL On-Prem.
+| **Property** | **On-Premises SQL Server**  | **Azure SQL Database (Single)**         | **Azure SQL Managed Instance**         | **SQL Server on Azure VM**  |
+|--------------|-----------------------------|-----------------------------------------|----------------------------------------|-----------------------------|
+| **Hosting**  | Self-managed physical/virtual servers. | Fully managed PaaS.                     | Fully managed SQL instance.            | IaaS on Azure.              |
+| **OS Access**| Full OS access for customizations. | No OS access (managed by Azure).         | No OS access (instance-level only).    | Full OS access.             |
 
+------------------------- -------------------------
 
+### Backup, Patching & Automation
 
+| **Property**  | **On-Premises SQL Server**                   | **Azure SQL Database (Single)**          | **Azure SQL Managed Instance**         | **SQL Server on Azure VM**                |
+|---------------|----------------------------------------------|------------------------------------------|----------------------------------------|-------------------------------------------|
+| **Backups**   | Manually configured and run by DBAs.         | Automated backups with built‑in retention. | Automated backups via Azure.           | User-managed (or use Azure backup tools). |
+| **Patching**  | Manual application of updates/service packs. | Automated patching by Azure.              | Automated with scheduled maintenance.  | User-managed; can use automation tools.   |
+| **Automation**| SQL Agent & custom tools for scheduled tasks. | Limited (use Elastic Jobs or external tools). | SQL Agent available for job scheduling. | Full control via SQL Agent and OS schedulers. |
 
+------------------------- -------------------------
 
+### Performance & Scalability
 
+| **Property**         | **On-Premises SQL Server**                      | **Azure SQL Database (Single)**                          | **Azure SQL Managed Instance**         | **SQL Server on Azure VM**                     |
+|----------------------|-------------------------------------------------|----------------------------------------------------------|----------------------------------------|-----------------------------------------------|
+| **Resource Allocation** | Fixed to hardware; scaling requires new hardware.  | Configurable via performance tiers (DTU/vCore).           | Set by instance size; adjust manually.  | Based on VM size; resizing or clustering needed. |
+| **Autoscaling**      | No built-in autoscaling.                        | Serverless tier offers autoscaling; otherwise manual.     | No native autoscaling; manual scaling.   | No built-in autoscaling; requires manual adjustments. |
 
+------------------------- -------------------------
 
+### High Availability & Disaster Recovery
 
+| **Property**         | **On-Premises SQL Server**                   | **Azure SQL Database (Single)**                 | **Azure SQL Managed Instance**        | **SQL Server on Azure VM**                          |
+|----------------------|----------------------------------------------|------------------------------------------------|---------------------------------------|----------------------------------------------------|
+| **High Availability**| Custom HA solutions (clustering, AG) needed. | Built-in HA with 99.99% SLA.                      | Built-in HA with auto‑failover groups.  | User-configured HA (e.g. Always On, clustering).     |
+| **Disaster Recovery**| User‑configured DR (e.g. log shipping, backups).| Geo‑replication/Auto‑Failover Groups available.   | DR via auto‑failover groups across regions. | DR must be set up manually (replication, backups).    |
 
+------------------------- -------------------------
 
+### Cost Model & Licensing
+
+| **Property**       | **On-Premises SQL Server**                             | **Azure SQL Database (Single)**                         | **Azure SQL Managed Instance**                         | **SQL Server on Azure VM**                           |
+|--------------------|--------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|------------------------------------------------------|
+| **Cost Model**     | CapEx with fixed operational costs.                  | OpEx; pay‑as‑you‑go per database; license included.       | OpEx; instance‑based pricing (generally higher).         | OpEx; pay per VM, storage, and compute resources.     |
+| **Licensing**      | Separate SQL licenses (per core or CAL).               | License included; Azure Hybrid Benefit available.        | License included or BYOL; Azure Hybrid Benefit available. | Bundled license (or BYOL) with VM pricing.            |
+
+------------------------- -------------------------
+
+### Security & Compliance
+
+| **Property**          | **On-Premises SQL Server**                                | **Azure SQL Database (Single)**                         | **Azure SQL Managed Instance**                         | **SQL Server on Azure VM**                          |
+|-----------------------|-----------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|-----------------------------------------------------|
+| **Authentication**    | Windows & SQL authentication; AD integration.           | SQL & Azure AD (Microsoft Entra); no Windows auth.       | SQL & Azure AD; supports domain logins via VNet.        | Configurable; supports Windows (if domain joined) & SQL. |
+| **Encryption (TDE)**  | Optional; must be manually enabled.                     | Enabled by default; option for BYOK.                     | Enabled by default; option for BYOK.                    | Must be configured manually; TDE is available.         |
+| **Network Isolation** | Secured via on‑prem firewalls and internal networks.     | Secured by Azure SQL firewall; Private Link available.    | Native VNet isolation; no public endpoint.             | Managed via VM network settings (NSGs, firewalls).      |
+| **Compliance**        | User‑driven; requires custom configuration and audits.  | Covered by Microsoft’s cloud compliance (SOC, ISO, HIPAA). | Inherits Azure compliance certifications.             | Azure infra compliant; user must harden OS/SQL settings. |
