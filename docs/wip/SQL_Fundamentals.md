@@ -38,7 +38,7 @@ This lab offers hands-on experience with core administrative tasks—covering se
 
 On your virtual machine, launch SQL Server Management Studio and connect to your SQL Server instance.  
 
-<img src="https://github.com/user-attachments/assets/f1238467-a0f9-4569-936b-79f19b1351ff" width="500" title="Snipped February 27, 2025" />
+<img src="https://github.com/user-attachments/assets/f1238467-a0f9-4569-936b-79f19b1351ff" width="400" title="Snipped February 27, 2025" />
 
 Click "New Query" and execute the following T-SQL to verify connectivity and confirm the server version:  
 
@@ -46,7 +46,7 @@ Click "New Query" and execute the following T-SQL to verify connectivity and con
 SELECT @@VERSION;
 ```
 
-<img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="500" title="Snipped February 27, 2025" />
+<img src="https://github.com/user-attachments/assets/f0fbb736-ba1b-47dc-83d5-46e54e1a83cd" width="800" title="Snipped February 27, 2025" />
 
 ### Server Properties
 
