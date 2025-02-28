@@ -382,279 +382,236 @@ _Note: Must be enabled via SQL Server Configuration Manager_
 
 <img src="https://github.com/user-attachments/assets/bc4c7115-6706-4bd1-b6ba-27da0a00189c" width="800" title="Snipped February 28, 2025" />
 
+- **Availability Groups**  
+  - Lists the high availability groups configured on this SQL Server instance.  
+  - Each availability group is a logical container that manages one or more user databases, along with one or more replicas (primary and secondary).
 
+  - **Availability Group <GroupName>**  
+    - Represents an individual availability group. Under each group, you’ll typically see the following subfolders:
 
+    - **Availability Replicas**  
+      - Displays all replicas participating in the availability group: one primary replica (which handles read/write) and one or more secondary replicas (which can be read-only, backup targets, or standby for failover).  
+      - Each replica node shows its role (primary/secondary), connection mode (synchronous/asynchronous), and operational state.
 
+    - **Availability Databases**  
+      - Shows the user databases that are part of the availability group.  
+      - Each database node indicates whether it’s synchronized, synchronizing, or not synchronized, and whether it’s in a healthy state for failover.
 
+    - **Availability Group Listeners** (if configured)  
+      - Displays any configured listener for the group. The listener is a virtual network name and IP address that client applications can use to connect without needing to know which replica is currently primary.
 
+**Key Always On Concepts:**
 
+- **Primary Replica** – Hosts the read/write copy of the databases in the group.  
+- **Secondary Replicas** – Maintain copies of the databases and can be used for read-only queries or backups, depending on the configuration.  
+- **Failover** – The process by which the secondary replica can become the primary if the current primary becomes unavailable (automatic or manual, based on configuration).  
+- **Synchronization Mode** – Either **synchronous** (no data loss, typically for local high availability) or **asynchronous** (allows potential data loss, often used for remote disaster recovery).
 
+------------------------- ------------------------- -------------------------
 
+#### Management
 
+<img src="https://github.com/user-attachments/assets/538bdebf-4324-43fe-9b33-ecd9d7ab2f00" width="800" title="Snipped February 28, 2025" />
 
-## Part 2: Azure SQL Lab
+Below is a bullet-point list of the **Management** folder items in the **exact** order they appear in your shared image, with brief explanations for each:
 
-### 1. Environment Setup (Azure SQL)
+- **Policy Management**  
+  Lets you create and enforce policies to ensure SQL Server objects (e.g., databases, logins, configurations) comply with defined standards or best practices.
 
-Pre-requisites:  
+- **Data Collection**  
+  Gathers performance and usage metrics for later analysis, often used in conjunction with a Management Data Warehouse (MDW).
 
-- Have an active Azure subscription and access to the [Azure Portal](https://portal.azure.com/).  
-- Ensure you have the latest version of SSMS or Azure Data Studio installed.
+- **Resource Governor**  
+  Enables you to manage CPU and memory usage by defining resource pools and workload groups, ensuring critical workloads have the resources they need.
 
-Initial Connection:  
+- **Extended Events**  
+  A flexible, lightweight framework for capturing and analyzing SQL Server events. You can create sessions to collect detailed data for performance monitoring or troubleshooting.
 
-- Connect via SSMS using your Azure SQL server details.  
+- **Maintenance Plans**  
+  Offers a wizard-driven interface to automate routine tasks such as backups, index maintenance, and database integrity checks.
+  
+- **SQL Server Logs**  
+  Provides quick access to the SQL Server error log and related Windows Event Log entries, helping you diagnose and troubleshoot issues.
 
-- Execute:
+- **Database Mail**  
+  Allows SQL Server to send email alerts or notifications (e.g., job status updates). You can configure SMTP settings, profiles, and accounts here.
 
-  ```sql
-  SELECT @@VERSION;
-  ```
+- **Distributed Transaction Coordinator**  
+  Coordinates transactions that span multiple resource managers (e.g., multiple databases or external systems), ensuring consistency and atomicity across all involved resources.
 
-  - Note: The output will indicate that this is an Azure SQL Database instance.
+------------------------- ------------------------- -------------------------
 
-Enhanced Considerations:  
+#### Integration Services Catalogs
 
-- Verify that your client IP is allowed through the Azure SQL firewall settings.
+<img src="https://github.com/user-attachments/assets/e0438d4c-1618-45fd-8c2d-871ba7d3d25b" width="800" title="Snipped February 28, 2025" />
 
-Exam Guidance:  
+- **SSISDB Catalog**  
+  - A system database (SSISDB) that hosts deployed SSIS projects and packages.  
+  - Introduced with the Project Deployment Model (SQL Server 2012 and later) to streamline deployment and management of SSIS solutions.
 
-- Recognize the connectivity differences and how version information is presented in Azure SQL.
+- **Projects**  
+  - Logical containers within the SSIS catalog that hold one or more SSIS packages.  
+  - Each project typically corresponds to a Visual Studio solution or an SSIS project file you deploy to the server.
 
-### 2. Exploring Azure SQL Configuration
+- **Packages**  
+  - Individual SSIS workflows, each containing control flow and data flow tasks.  
+  - Stored inside the SSISDB catalog under their respective project.
 
-Reviewing Database Settings:  
+- **Environments**  
+  - A feature used to manage environment-specific parameters or connection strings (e.g., Dev, Test, Production).  
+  - Lets you dynamically change package configurations without altering package code.
 
-- In the Azure portal, navigate to your Azure SQL Database and review:
-  - Performance tier and DTU/vCore settings.
-  - Firewall rules and virtual network configurations.
-  - Auditing and threat detection settings.
+- **Configurations and Parameters**  
+  - Each SSIS project or package can have parameters that control runtime behavior.  
+  - You can bind these parameters to environment variables, simplifying deployments across multiple servers.
 
-Using SSMS:  
+- **Execution and Monitoring**  
+  - SSIS packages can be executed manually from the catalog or scheduled via SQL Server Agent jobs.  
+  - Logging, error messages, and performance statistics are stored in SSISDB for monitoring and troubleshooting.
 
-- You can also execute T-SQL commands to review configurations and monitor performance metrics.
+- **Security**  
+  - You can manage permissions at the project or package level, restricting who can deploy or execute SSIS packages.  
+  - SSISDB also supports encryption at rest and secure storage of sensitive data (e.g., connection passwords).
 
-Enhanced Note:  
+------------------------- ------------------------- -------------------------
 
-- Leverage the built-in diagnostic tools and performance insights available in the Azure portal for deeper analysis.
+#### SQL Server Agent
 
-Exam Guidance:  
+<img src="https://github.com/user-attachments/assets/bac9a298-7017-4063-875a-afe484652b6b" width="800" title="Snipped February 28, 2025" />
 
-- Understanding both the Azure portal and SSMS methods is key for troubleshooting and exam scenarios.
+- **Jobs**  
+  - Lists all scheduled tasks and scripts that SQL Server Agent will run at specified times or in response to events.  
+  - You can right-click **Jobs** to create, edit, or manage new jobs (e.g., database backups, maintenance tasks, custom T-SQL scripts).
 
-### 3. Database Creation (Azure SQL)
+- **Job Activity Monitor**  
+  Provides a real-time overview of SQL Server Agent job statuses (running, succeeded, failed, etc.), along with job history for quick troubleshooting and scheduling insights.
+  
+- **Alerts**  
+  - Enables you to configure automated responses to specific SQL Server events or performance conditions (e.g., a low disk space event).  
+  - Alerts can trigger emails, pages, or job executions.
 
-Using T-SQL in SSMS:  
+- **Operators**  
+  - Defines contact information (email addresses, pagers) for individuals or groups who should be notified about alerts or job statuses.  
+  - You can set up different operators for various teams (e.g., DBAs, network admins).
 
-- Create a new database named `Azuretrainingdb`:
+- **Proxies**  
+  - Allows you to specify alternate security credentials for running specific job steps (e.g., SSIS packages, OS-level commands) without granting the entire SQL Server Agent service elevated permissions.
 
-  ```sql
-  CREATE DATABASE Azuretrainingdb;
-  GO
-  ```
+- **Error Logs**  
+  - Displays messages recorded by SQL Server Agent (separate from the main SQL Server error logs).  
+  - Useful for diagnosing issues specifically related to Agent jobs, alerts, or other scheduled tasks.
 
-Using the Azure Portal (Optional):  
+------------------------- ------------------------- -------------------------
 
-- Select Create a resource, choose SQL Database, and follow the guided steps.
+#### XEvent Profiler
 
-Enhanced Best Practice:  
+<img src="https://github.com/user-attachments/assets/cd128892-a85d-4d6b-81db-188e3ac73e75" width="800" title="Snipped February 28, 2025" />
 
-- Configure backup and geo-replication settings based on your data protection requirements.
+- **XEvent Profiler**  
+  Provides a simplified interface for real-time monitoring of SQL Server activity using Extended Events. Under **XEvent Profiler**, you’ll typically see two default sessions:
 
-Exam Guidance:  
+  - **Standard**  
+    Captures a broad range of SQL Server events, including batch starts/completions, errors, and more—useful for general performance monitoring or troubleshooting.
 
-- Be familiar with both creation methods; exam questions may include Azure-specific features.
-
-### 4. Creating and Managing Users (Azure SQL)
-
-Creating Contained Database Users:  
-
-- SQL-Authenticated User:
-
-  ```sql
-  CREATE USER AzureUser WITH PASSWORD = 'YourAzurePassword123';
-  GO
-  ```
-
-- Azure AD User:  
-  (For environments integrated with Azure Active Directory)
-
-  ```sql
-  CREATE USER [user@domain.com] FROM EXTERNAL PROVIDER;
-  GO
-  ```
-
-Assigning Roles:  
-
-- Add the user to a role using:
-
-  ```sql
-  EXEC sp_addrolemember 'db_datareader', 'AzureUser';
-  GO
-  ```
-
-- Modern Alternative (if supported):
-
-  ```sql
-  ALTER ROLE db_datareader ADD MEMBER AzureUser;
-  GO
-  ```
-
-Enhanced Note:  
-
-- Azure SQL often uses contained database users, so ensure you understand the differences from on-premises user creation.
-
-Exam Guidance:  
-
-- Examine the differences in authentication methods and role assignment for Azure SQL.
-
-### 5. Basic Troubleshooting (Azure SQL)
-
-Simulated Scenario:  
-
-- If an Azure SQL user cannot access data, perform these checks:
-
-Troubleshooting Checklist:  
-
-- Verify the user’s existence and role membership in the database.  
-- Confirm that the client IP address is allowed by the Azure SQL firewall rules.  
-- Use the Azure portal’s diagnostic tools to monitor and identify issues (e.g., Query Performance Insight).  
-- Review auditing logs for additional context on failed connections.
-
-Exam Guidance:  
-
-- Azure-specific issues (like firewall settings) are common exam topics, so be sure to cover these aspects.
+  - **TSQL**  
+    Focuses on T-SQL statements, batches, and stored procedure calls—ideal for diagnosing query-related issues and understanding SQL execution patterns.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
 ## Quiz: SQL Server (on-prem)
 
-### On-Premises SQL Server Exam-Style Questions
+1. **Which T-SQL command creates a new database named SalesDB on an on-premises SQL Server?**  
+   A. `MAKE DATABASE SalesDB;`  
+   B. `NEW DATABASE SalesDB;`  
+   C. `CREATE DATABASE SalesDB;`  
+   D. `ADD DATABASE SalesDB;`
 
-Question 1:  
-You have just created a new SQL Server login named TestUser. Which of the following commands correctly maps this login to a database user in trainingdb and assigns the user to the db_datareader role?
+2. **You want to ensure your SQL Server instance does not exceed 8 GB of RAM usage. Which setting should you modify under Server Properties → Memory?**  
+   A. Minimum server memory (in MB)  
+   B. Maximum server memory (in MB)  
+   C. Index creation memory (in KB)  
+   D. Minimum memory per query (in KB)
 
-A.  
+3. **A newly created login can connect to the server, but cannot access a user database. Which of the following is the most likely cause?**  
+   A. The user’s password is expired.  
+   B. The login has not been mapped to a database user.  
+   C. The login is using Windows Authentication.  
+   D. The server is in single-user mode.
 
-```sql
-USE trainingdb;  
-GO  
-CREATE USER TestUser FOR LOGIN TestUser;  
-GO  
-EXEC sp_addrolemember 'db_datareader', 'TestUser';  
-GO
-```
+4. **Which T-SQL command is recommended in modern SQL Server versions for adding a database user to the db_datareader role?**  
+   A. `sp_addrolemember 'db_datareader', 'UserName';`  
+   B. `ALTER ROLE db_datareader ADD MEMBER UserName;`  
+   C. `EXEC sp_add_user_to_role 'UserName', 'db_datareader';`  
+   D. `EXEC sp_roleadd 'db_datareader', 'UserName';`
 
-B.  
+5. **You wish to reduce page splits when rebuilding an index by leaving extra free space on each page. Which setting should you adjust?**  
+   A. Default backup media retention (in days)  
+   B. Default index fill factor  
+   C. Max Degree of Parallelism (MAXDOP)  
+   D. Optimize for Ad Hoc Workloads
 
-```sql
-CREATE USER TestUser FOR LOGIN TestUser;  
-ALTER ROLE db_datareader ADD MEMBER TestUser;  
-GO
-```
+6. **In the Server Properties → Security page, switching from “Windows Authentication mode” to “SQL Server and Windows Authentication mode” does what?**  
+   A. Allows Windows logins only  
+   B. Disables all existing logins  
+   C. Enables mixed authentication, allowing both SQL and Windows logins  
+   D. Forces the server to use the ‘sa’ account exclusively
 
-C.  
+7. **You want to limit CPU usage by certain queries on a busy SQL Server instance. Which feature should you configure under the Management folder?**  
+   A. Data Collection  
+   B. Policy Management  
+   C. Resource Governor  
+   D. Maintenance Plans
 
-```sql
-USE trainingdb;  
-GO  
-CREATE USER TestUser FOR LOGIN TestUser;  
-GO  
-GRANT SELECT TO TestUser;  
-GO
-```
+8. **Which of the following best describes the ‘Collation’ setting in Server Properties → General?**  
+   A. Controls how data is encrypted at rest  
+   B. Defines how text is sorted and compared  
+   C. Determines the maximum database size  
+   D. Specifies the default network packet size
 
-D. Both A and C are correct.
+9. **You need to schedule a weekly backup job that runs every Sunday at 2:00 AM. Which SQL Server component do you use to set this up?**  
+   A. SQL Server Agent Jobs  
+   B. Replication (Local Publications)  
+   C. Database Snapshots  
+   D. Policy Management
 
-Answer: A  
-Enhanced Explanation: Option A explicitly creates the database user and assigns it to the `db_datareader` role using the legacy (but exam-recognized) stored procedure. Although Option B uses the modern `ALTER ROLE ... ADD MEMBER` syntax—which is valid on newer versions—exams often expect Option A.
+10. **Which statement about server-level roles in SQL Server is true?**  
+   A. They can be applied to individual tables only.  
+   B. They are defined within each user database.  
+   C. They group logins for managing permissions at the server scope.  
+   D. They are deprecated in the latest SQL Server versions.
 
----
+------------------------- -------------------------
 
-Question 2:  
-Which T-SQL command creates a new database named trainingdb on an on-premises SQL Server?
+### Answer Key
 
-A. `CREATE DATABASE trainingdb;`  
-B. `NEW DATABASE trainingdb;`  
-C. `MAKE DATABASE trainingdb;`  
-D. `ADD DATABASE trainingdb;`
+1. **Answer: C**  
+   Explanation: The correct T-SQL command to create a new database is `CREATE DATABASE SalesDB;`.
 
-Answer: A  
-Explanation: The correct T-SQL command to create a new database is `CREATE DATABASE trainingdb;`.
+2. **Answer: B**  
+   Explanation: “Maximum server memory (in MB)” limits how much RAM SQL Server can consume. Setting this to 8192 MB (8 GB) prevents SQL Server from exceeding that usage.
 
----
+3. **Answer: B**  
+   Explanation: A login must be mapped to a corresponding user in each database for which it needs access.
 
-Question 3:  
-A user is unable to query data from trainingdb on your on-premises server. What is the first step you should take to troubleshoot this issue?
+4. **Answer: B**  
+   Explanation: `ALTER ROLE db_datareader ADD MEMBER UserName;` is the modern command. `sp_addrolemember` still works but is considered legacy.
 
-A. Verify that the SQL Server instance is running.  
-B. Check the SQL Server error logs.  
-C. Verify that the user is correctly mapped to trainingdb and has the appropriate role.  
-D. Restart the SQL Server service.
+5. **Answer: B**  
+   Explanation: The **Default index fill factor** determines how much free space to leave on each page when creating or rebuilding an index.
 
-Answer: C  
-Explanation: The most direct troubleshooting step is to ensure the user is properly mapped to the database and has the necessary permissions.
+6. **Answer: C**  
+   Explanation: Changing from Windows Authentication mode to SQL Server and Windows Authentication mode (mixed mode) enables both SQL logins and Windows logins.
 
----
+7. **Answer: C**  
+   Explanation: **Resource Governor** allows you to define resource pools and workload groups to control CPU and memory usage for specific workloads.
 
-### Azure SQL Exam-Style Questions
+8. **Answer: B**  
+   Explanation: Collation determines how text data is sorted and compared, including case sensitivity and accent sensitivity.
 
-Question 4:  
-You have created a contained database user in an Azure SQL Database named Azuretrainingdb. Which of the following commands creates a contained user with SQL authentication?
+9. **Answer: A**  
+   Explanation: SQL Server Agent Jobs allow you to schedule recurring tasks such as backups, index maintenance, or custom T-SQL scripts.
 
-A.  
+10. **Answer: C**  
+   Explanation: Server-level roles (e.g., `sysadmin`, `serveradmin`) manage permissions at the server scope, not the database or table scope.
 
-```sql
-CREATE USER AzureUser WITH PASSWORD = 'YourAzurePassword123';
-GO
-```
-
-B.  
-
-```sql
-CREATE LOGIN AzureUser WITH PASSWORD = 'YourAzurePassword123';
-GO
-```
-
-C.  
-
-```sql
-CREATE USER [user@domain.com] FROM EXTERNAL PROVIDER;
-GO
-```
-
-D. Both A and C are correct.
-
-Answer: A  
-Explanation: In Azure SQL, a contained database user is created directly in the database using `CREATE USER` with a password. Option C is used for Azure AD authentication.
-
----
-
-Question 5:  
-Which method is commonly used to connect to an Azure SQL Database for administrative tasks?
-
-A. SQL Server Management Studio (SSMS)  
-B. Azure Data Studio  
-C. Azure Portal Query Editor  
-D. All of the above
-
-Answer: D  
-Explanation: All these methods can be used to connect to and manage an Azure SQL Database.
-
----
-
-Question 6:  
-When troubleshooting access issues in an Azure SQL Database, what is one additional configuration to verify that is not typically an on-premises concern?
-
-A. Database user mapping  
-B. Role membership  
-C. Firewall rules in the Azure portal  
-D. SQL Server error logs
-
-Answer: C  
-Explanation: In Azure SQL, firewall rules set in the Azure portal can block access, making them an important troubleshooting aspect that is unique to cloud environments.
-
----
-
-Reference:  
-• [SQL Server Educational Resources](https://learn.microsoft.com/en-us/sql/sql-server/educational-sql-resources)
+------------------------- ------------------------- ------------------------- -------------------------
