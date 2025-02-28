@@ -617,7 +617,24 @@ Below is a bullet-point list of the **Management** folder items in the **exact**
 
 ## Azure SQL
 
-Navigate to the Azure Marketplace and instantiate a SQL Database.
+Navigate to the Azure Marketplace and create a "Single database" instance of SQL.
+
+<img src="https://github.com/user-attachments/assets/84e8e6d7-d0ec-49db-ac5b-c2aee66698b5" width="800" title="Snipped February 28, 2025" />
+
+- **SQL Database**  
+  - A fully managed PaaS offering for modern cloud applications.  
+  - Ideal for single-database workloads, hyperscale scenarios, and minimal management overhead.  
+  - Provides built-in high availability, automatic backups, and simplified scaling.  
+
+- **SQL Managed Instance**  
+  - A near 100% compatible instance-level PaaS solution.  
+  - Retains many on-prem features (e.g., cross-database queries, SQL Agent) with lower management demands.  
+  - Great for lift-and-shift migrations needing instance-level functionality and broader T-SQL compatibility.  
+
+- **SQL Virtual Machines**  
+  - An IaaS solution where you run SQL Server on an Azure VM.  
+  - Grants full OS-level and SQL Server control, similar to on-prem deployments.  
+  - Ideal for complex customizations or legacy applications requiring direct access to the operating system.
 
 ### Basics
 
