@@ -741,7 +741,7 @@ Navigate to the Azure Marketplace and create a "Single database" instance of SQL
 
 ### Additional Settings
 
-  <img src="https://github.com/user-attachments/assets/4c1ad060-051b-4267-93fa-517ab987c358" width="800" title="Snipped February 28, 2025" />
+<img src="https://github.com/user-attachments/assets/4c1ad060-051b-4267-93fa-517ab987c358" width="800" title="Snipped February 28, 2025" />
 
 - **Use existing data**  
   - **None**: Creates an empty database with no pre-loaded schema or data.  
