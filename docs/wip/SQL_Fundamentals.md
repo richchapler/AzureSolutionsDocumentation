@@ -680,28 +680,70 @@ Navigate to the Azure Marketplace and instantiate a SQL Database.
 
 ### Networking
 
-<img src="https://github.com/user-attachments/assets/7cd6cbef-4cd3-4565-a359-c6504c7c7ea4" width="800" title="Snipped February 28, 2025" />
+<img src="https://github.com/user-attachments/assets/278c9a86-8bdf-4b4c-bb7f-f672a47300b2" width="800" title="Snipped February 28, 2025" />
 
 - **Connectivity method**  
-  - **Public endpoint:** Allows connections over the public internet, managed by Azure Firewall rules.  
-  - **Private endpoint:** Restricts traffic to a private IP address within your virtual network, enhancing security by avoiding public exposure.
+  - **Public endpoint:** Allows connections over the public internet, managed via firewall rules.  
+  - **Private endpoint:** Restricts traffic to a private IP address in your virtual network, avoiding public exposure.
+
+- **Firewall rules**  
+  - **Allow Azure services and resources to access this server:** Toggles whether Azure resources (e.g., Azure App Service) can connect without specifying IP addresses explicitly.  
+  - **Add client IP:** Automatically creates a firewall rule for your current public IP address, ensuring immediate access from your local machine.  
+  - **Yes/No toggle:** Determines whether to apply these firewall settings. “Yes” applies the above rules; “No” leaves them disabled or requires manual firewall configuration.
 
 - **Connection policy**  
-  - **Default (recommended):** Balances efficiency and security by automatically routing connections through the best path (proxy or redirect).  
-  - **Proxy:** All client connections route through an Azure SQL Database gateway (proxy), which may introduce additional latency.  
-  - **Redirect:** Clients connect directly to the database after the initial handshake, improving performance by reducing gateway hops.
+  - **Default (recommended):** Routes connections through the best path automatically (proxy or redirect) based on client location and performance considerations.  
+  - **Proxy:** All client connections pass through the Azure SQL Database gateway, which may add latency but can simplify firewall configurations.  
+  - **Redirect:** Clients connect directly to the database after an initial handshake with the gateway, reducing latency by bypassing the proxy for subsequent traffic.
 
 - **Encrypted connections**  
-  - **Transport Layer Security (TLS):** Ensures data in transit is encrypted, helping protect against eavesdropping and man-in-the-middle attacks.  
-  - **Enforce TLS version:** May require a specific TLS version (e.g., TLS 1.2) for compliance or security best practices.
+  - **Transport Layer Security (TLS):** Ensures data in transit is protected against interception.  
+  - **Enforce specific TLS version:** May be required for compliance or best-practice security.
 
 ------------------------- -------------------------
 
 ### Security
 
-<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped February 28, 2025" />
+<img src="https://github.com/user-attachments/assets/a6d3650f-c7ae-48ce-b928-246b6c249796" width="800" title="Snipped February 28, 2025" />
 
-LOREM IPSUM
+- **Microsoft Defender for SQL**  
+  - Provides advanced threat protection and vulnerability assessments for your database.  
+  - Can be enabled on a paid basis or via a free trial (if available).
+
+- **Ledger**  
+  - Enables tamper-evident storage, ensuring transactions are cryptographically verifiable and cannot be modified without detection.
+
+- **Server Identity**  
+  - Uses Azure-managed identities (system-assigned or user-assigned) to securely access other Azure resources without storing credentials.
+
+- **Transparent Data Encryption (TDE)**  
+  - Encrypts data at rest by default using an Azure-managed key.  
+  - Optionally configure a customer-managed key stored in Azure Key Vault for greater control.
+
+------------------------- -------------------------
+
+### Additional Settings
+
+<img src="https://github.com/user-attachments/assets/4c1ad060-051b-4267-93fa-517ab987c358" width="800" title="Snipped February 28, 2025" />
+
+- **Use existing data**  
+  - **None**: Creates an empty database with no pre-loaded schema or data.  
+  - **Backup**: Restores from an existing backup within the same subscription.  
+  - **Sample**: Deploys a Microsoft-provided sample database (e.g., AdventureWorks) to explore features or quickly test queries.
+
+- **Collation**  
+  - Determines how text data is sorted and compared.  
+  - You can accept the default collation (e.g., `SQL_Latin1_General_CP1_CI_AS`) or select a custom collation that matches your language and sorting requirements.
+
+- **Maintenance window**  
+  - **System default**: Azure automatically schedules patching and updates.  
+  - **Custom**: Specify a preferred time range to reduce potential downtime during critical business hours.
+
+------------------------- -------------------------
+
+### SQL Server Management Studio >> Azure SQL
+
+In this section we'll focus on what is different from SSMS >> SQL On-Prem.
 
 
 
