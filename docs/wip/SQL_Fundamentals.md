@@ -2,17 +2,6 @@
 
 This lab offers hands-on experience with core administrative tasks—covering server setup, maintenance, troubleshooting, database creation, and user/permission management. It is structured to support both on-premises SQL Server and Azure SQL environments, with exam-style questions to reinforce key concepts. Enhancements include updated guidance on modern T-SQL commands, detailed troubleshooting steps, and best practices for both environments.
 
-## Resources
-
-* Azure Virtual Machine
-  * Image: "Free SQL Server License: SQL Server 2022 Developer on Windows Server 2022"
-  * SKU: "Standard_D2s_v3..."
-  * Inbound Ports: RDP (3389) allowed
-  * Boot Diagnostics: Disable
-* Azure SQL
-
-------------------------- -------------------------
-
 ## Objectives
 
 - Fundamentals of Database Administration  
@@ -34,7 +23,17 @@ This lab offers hands-on experience with core administrative tasks—covering se
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## SQL Server
+## SQL Server (on-prem)
+
+### Virtual Machine
+
+Instantiate an Azure Virtual Machine (or equivalent):
+  * Image: "Free SQL Server License: SQL Server 2022 Developer on Windows Server 2022"
+  * SKU: "Standard_D2s_v3..."
+  * Inbound Ports: RDP (3389) allowed
+  * Boot Diagnostics: Disable
+
+### SQL Server Management Studio
 
 On your virtual machine, launch SQL Server Management Studio and connect to your SQL Server instance.  
 
@@ -518,7 +517,7 @@ Below is a bullet-point list of the **Management** folder items in the **exact**
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Quiz: SQL Server (on-prem)
+### Quiz: SQL Server (on-prem)
 
 1. **Which T-SQL command creates a new database named SalesDB on an on-premises SQL Server?**  
    A. `MAKE DATABASE SalesDB;`  
@@ -615,3 +614,143 @@ Below is a bullet-point list of the **Management** folder items in the **exact**
    Explanation: Server-level roles (e.g., `sysadmin`, `serveradmin`) manage permissions at the server scope, not the database or table scope.
 
 ------------------------- ------------------------- ------------------------- -------------------------
+
+## Azure SQL
+
+Navigate to the Azure Marketplace and instantiate a SQL Database.
+
+### Basics
+
+<img src="https://github.com/user-attachments/assets/fcca33f6-3804-41a0-b066-e5d60151e132" width="800" title="Snipped February 28, 2025" />
+
+On the "Create SQL Database" page, "Basics" tab:
+
+#### Project Details
+
+- **Subscription**  
+  Select the Azure subscription under which this SQL Database will be billed. If you have multiple subscriptions, ensure you pick the one appropriate for your project or organization.
+
+- **Resource Group**  
+  Choose an existing resource group or create a new one. Resource groups help you logically organize and manage Azure resources (e.g., databases, servers, VMs) that share a common lifecycle.
+
+#### Database Details
+
+- **Database Name**  
+  Enter a unique name for your Azure SQL Database. This is how the database will appear in the Azure Portal and in client connections.
+
+- **Server**  
+  Choose an existing logical Azure SQL server or create a new one. A logical server acts as a central point for managing databases, firewall rules, and logins.
+
+##### Server >> Create New
+
+<img src="https://github.com/user-attachments/assets/c29a410f-fd63-4656-a634-398187571bb0" width="800" title="Snipped February 28, 2025" />
+
+- **Server name** – A globally unique name for your new Azure SQL logical server (e.g., `myserver.database.windows.net`).  
+- **Location** – The Azure region where the server (and its databases) will physically reside.  
+- **Authentication method** – Choose how users will authenticate:  
+  - **Use only Microsoft Entra ID only authentication** – Restricts authentication to Microsoft Entra (Azure AD) identities.  
+  - **Use both SQL and Microsoft Entra ID authentication** – Allows logins using either SQL credentials or Microsoft Entra identities.  
+  - **Use only SQL authentication** – Permits only SQL logins and passwords for server access.  
+- **Set Microsoft Entra Admin** – (Optional) Assign a Microsoft Entra user or group as the server-level administrator, enabling them to manage the server and databases without requiring SQL authentication.
+
+##### Compute + Storage
+
+<img src="https://github.com/user-attachments/assets/26835cb8-8601-440d-bfcc-8a1b6e906421" width="800" title="Snipped February 28, 2025" />
+
+- **Service and compute tier**  
+  - Select a purchasing model (**vCore** or **DTU**) and a corresponding service tier (e.g., **General Purpose**, **Business Critical**, **Hyperscale**).  
+  - This choice determines overall performance, storage limits, and high availability or redundancy features.
+
+- **Compute tier**  
+  - **Provisioned**: Allocates the chosen compute resources (CPU/memory) continuously for predictable performance and costs.  
+  - **Serverless**: Dynamically scales compute based on workload demand and can pause during inactivity to reduce costs.
+
+- **Hardware configuration**  
+  - Choose the hardware generation (e.g., **Standard Series (Gen5)**) based on your workload’s requirements for availability, memory optimization, and performance.  
+
+- **Max Cores / Min Cores**  
+  - **Max Cores**: The upper limit of CPU cores your database can use.  
+  - **Min Cores**: The minimum CPU cores that remain allocated (relevant in serverless mode to ensure a baseline level of performance).
+
+- **Auto-pause delay**  
+  - The amount of idle time (in minutes) after which a serverless database automatically pauses, minimizing compute costs.
+
+- **Data max size (GB)**  
+  - The maximum storage allocated to the database. Operations fail if this limit is reached and cannot be automatically expanded.
+
+------------------------- -------------------------
+
+### Networking
+
+
+
+
+LOREM IPSUM
+
+
+
+
+
+
+
+
+
+Azure SQL offers several deployment models to suit varying workload requirements, management preferences, and performance demands. Choose the right option for your needs.
+
+**Single Database**  
+- **Description:** A fully managed, isolated database ideal for modern cloud applications with predictable workloads.  
+- **Ideal For:** Applications needing dedicated resources.  
+- **Key Features:** High availability, automated backups, and simple scaling via DTU or vCore models.
+
+**Elastic Pool**  
+- **Description:** A collection of databases that share a pool of resources for variable, multi-tenant workloads.  
+- **Ideal For:** SaaS applications or environments with unpredictable usage.  
+- **Key Features:** Dynamic resource allocation and cost-efficiency through shared resources.
+
+**Managed Instance**  
+- **Description:** A fully managed SQL Server instance offering near 100% on-premises compatibility.  
+- **Ideal For:** Enterprises migrating existing SQL Server workloads with minimal changes.  
+- **Key Features:** Instance-level features like SQL Server Agent, cross-database queries, and linked servers with hybrid connectivity.
+
+**High-Performance Options**  
+Azure SQL provides specialized options for demanding workloads:  
+- **Hyperscale:** An architecture for very large databases requiring rapid scaling and high throughput.  
+  **Key Features:** Instantaneous scaling of storage/compute and a distributed storage architecture with read-scale-out capabilities.  
+- **vCore-Based Purchasing Model:** Offers transparent resource allocation with independent compute and storage scaling.  
+  **Key Features:** Service tiers such as General Purpose and Business Critical provide fine-tuned performance and greater control over hardware resources, with Business Critical delivering lower latency and enhanced I/O throughput for mission-critical applications.
+
+#### Service Tier Considerations
+
+For Single Database and Elastic Pools:  
+- **DTU-Based Tiers:** Options like Basic, Standard, and Premium balance cost with performance in a bundled model.  
+- **vCore-Based Tiers:**  
+  - **General Purpose:** Suited for most workloads with balanced compute and storage performance.  
+  - **Business Critical:** Designed for high I/O, low latency workloads, offering enhanced performance and built-in high availability with multiple replicas.
+
+For Managed Instance:  
+- **Service Tiers:** Similar options allow performance tuning—choosing General Purpose for balanced workloads or Business Critical for demanding, mission-critical applications with integrated high availability and automated backups.
+
+Selecting the right deployment model and service tier depends on your performance needs, workload characteristics, and budget—ensuring an optimized Azure SQL environment tailored to your application.
+
+
+
+
+
+
+
+
+
+
+
+**Choosing the Right Deployment Model:**
+
+- **Workload Characteristics:**  
+  If your workload is predictable and isolated, a **Single Database** might be the best choice. For multiple databases with variable usage, an **Elastic Pool** can provide cost savings and flexibility.
+  
+- **Compatibility Needs:**  
+  If you are migrating from an on-premises SQL Server and require instance-level features (like SQL Server Agent or cross-database queries), a **Managed Instance** is ideal.
+  
+- **Performance Requirements:**  
+  For extremely large or rapidly growing databases, consider **Hyperscale** for its ability to scale quickly. If you need granular control over resources and predictable performance, the **vCore-Based Model** offers options tailored to both general and business-critical workloads.
+
+By understanding these instantiation options, you can configure your Azure SQL environment to balance performance, scalability, and management overhead according to your specific application needs.
