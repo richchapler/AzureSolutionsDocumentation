@@ -1,6 +1,6 @@
 # SQL: Fundamentals  
 
-This lab offers hands-on experience with core administrative tasks—covering server setup, maintenance, troubleshooting, database creation, and user/permission management. It is structured to support both on-premises SQL Server and Azure SQL environments, with exam-style questions to reinforce key concepts. Enhancements include updated guidance on modern T-SQL commands, detailed troubleshooting steps, and best practices for both environments.
+This curriculum offers hands-on experience with core administrative tasks—covering server setup, maintenance, troubleshooting, database creation, and user/permission management. It is structured to support both on-premises SQL Server and Azure SQL environments, with exam-style questions to reinforce key concepts. Enhancements include updated guidance on modern T-SQL commands, detailed troubleshooting steps, and best practices for both environments.
 
 ## Objectives
 
