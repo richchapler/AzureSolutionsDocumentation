@@ -581,7 +581,7 @@ Below is a bullet-point list of the **Management** folder items in the **exact**
 
 ------------------------- -------------------------
 
-### Answer Key
+#### Answer Key
 
 1. **Answer: C**  
    Explanation: The correct T-SQL command to create a new database is `CREATE DATABASE SalesDB;`.
@@ -823,7 +823,7 @@ Navigate to the Azure Marketplace and create a "Single database" instance of SQL
 ------------------------- -------------------------
 
 
-### Answer Key
+#### Answer Key
 
 1. **Answer: C**  
    Explanation: SQL Database is the fully managed, single‑database PaaS option.
