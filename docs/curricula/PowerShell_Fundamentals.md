@@ -22,27 +22,82 @@ Instantiate an Azure Virtual Machine (or equivalent):
   * Inbound Ports: RDP (3389) allowed
   * Boot Diagnostics: Disable
 
-### Windows PowerShell
+------------------------- -------------------------
 
-On your virtual machine, open Windows PowerShell.
+### PowerShell 7
 
-<img src="https://github.com/user-attachments/assets/18fbb0a3-06f6-45f5-b070-bf05f11353e1" width="800" title="Snipped March 3, 2025" />
+Navigate to https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows.
 
-- Module Installation:  
-  - Install the SqlServer module by running:
-    ```powershell
-    Install-Module -Name SqlServer -Scope CurrentUser
-    ```
-  - Import the module with:
-    ```powershell
-    Import-Module SqlServer
-    ```
+Scroll to "Installing the MSI package".
 
-- PowerShell Version:  
-  - Use Windows PowerShell 5.1 (or PowerShell Core 7+ on Windows) to ensure full compatibility with on‑premises SQL Server features such as the SQL Server provider (`SQLSERVER:\`).
+<img src="https://github.com/user-attachments/assets/697cea24-a25d-4cf0-becc-0100538daf9e" width="800" title="Snipped March 3, 2025" />
 
-- SQL Server Connectivity:  
-  - Ensure your workstation has network access to your on‑premises SQL Server instance. By default, Windows Integrated Authentication is used (or supply credentials if using SQL Authentication).
+Download and install the latest MSI version.
+
+<img src="https://github.com/user-attachments/assets/ec8bfb4c-b506-46a6-908c-fc091642d438" width="400" title="Snipped March 3, 2025" />
+
+Run "PowerShell 7 (x64)" as an administrator.
+
+<img src="https://github.com/user-attachments/assets/9afce18d-9b4c-4d7d-8994-7b591f7bb0ff" width="600" title="Snipped March 3, 2025" />
+
+------------------------- -------------------------
+
+
+
+
+
+
+
+
+---
+
+### 4. Install and Import the SqlServer Module
+
+Once you have PowerShell 7+ (or if you remain on Windows PowerShell 5.1), you can install the SqlServer module for SQL Server management tasks.
+
+1. Install the SqlServer Module:
+   ```powershell
+   Install-Module -Name SqlServer -Scope CurrentUser
+   ```
+2. Import the Module:
+   ```powershell
+   Import-Module SqlServer
+   ```
+
+With the SqlServer module imported, you can use cmdlets like `Invoke-Sqlcmd`, `Backup-SqlDatabase`, and the `SQLSERVER:\` provider path to manage your on-premises SQL Server.
+
+---
+
+### 5. Verify SQL Server Connectivity
+
+- Check Network Access:  
+  Ensure your VM can reach your on-premises SQL Server instance.  
+- Authentication Mode:  
+  By default, Windows Integrated Authentication is used. If you need SQL Authentication, provide credentials when running SQL commands.
+
+---
+
+That’s it! You’ve successfully installed winget without the Microsoft Store, upgraded to PowerShell 7+, and installed the SqlServer module for managing your SQL Server environment.
+
+
+
+
+
+
+
+
+
+
+---
+
+### SQL Server Connectivity
+
+- Ensure Connectivity:  
+  Verify that your workstation has network access to your on‑premises SQL Server instance. By default, Windows Integrated Authentication is used (or supply credentials if using SQL Authentication).
+
+---
+
+Using phrases like "execute the following PowerShell command" is clear and direct for instructions. Feel free to use that phrasing to guide users through each step.
 
 ### Key Topics and Exercises for On‑Premises Administration
 
