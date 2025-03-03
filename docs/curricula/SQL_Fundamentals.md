@@ -35,7 +35,7 @@ Instantiate an Azure Virtual Machine (or equivalent):
 
 ### SQL Server Management Studio
 
-On your virtual machine, launch SQL Server Management Studio and connect to your SQL Server instance.  
+On your virtual machine, open SQL Server Management Studio and connect to your SQL Server instance.  
 
 <img src="https://github.com/user-attachments/assets/f1238467-a0f9-4569-936b-79f19b1351ff" width="400" title="Snipped February 27, 2025" />
 
