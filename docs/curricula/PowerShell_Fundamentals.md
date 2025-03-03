@@ -36,15 +36,13 @@ Download and install the latest MSI version.
 
 <img src="https://github.com/user-attachments/assets/ec8bfb4c-b506-46a6-908c-fc091642d438" width="400" title="Snipped March 3, 2025" />
 
-Run "PowerShell 7 (x64)" as an administrator.
-
-<img src="https://github.com/user-attachments/assets/9afce18d-9b4c-4d7d-8994-7b591f7bb0ff" width="600" title="Snipped March 3, 2025" />
-
 ------------------------- -------------------------
 
-SqlServer Module
+### SqlServer Module
 
-<img src="https://github.com/user-attachments/assets/713bd418-cc94-40ed-8d22-4f7b66b4f624" width="600" title="Snipped March 3, 2025" />
+Run "PowerShell 7 (x64)" as an administrator.
+
+<img src="https://github.com/user-attachments/assets/3813766e-4379-4fa1-9da8-ceb98c5955b8" width="600" title="Snipped March 3, 2025" />
 
 Execute the following PowerShell command to install the SqlServer Module:
 
@@ -60,19 +58,34 @@ Import-Module SqlServer
 
 ------------------------- -------------------------
 
- SQL Server Connectivity
+### SQL Server Connectivity
 
-- Check Network Access:  
-  Ensure your VM can reach your on-premises SQL Server instance.  
-- Authentication Mode:  
-  By default, Windows Integrated Authentication is used. If you need SQL Authentication, provide credentials when running SQL commands.
+Execute the following PowerShell command to confirm network connectivity:
 
----
+You can use the `Test-NetConnection` cmdlet to test if your VM can reach the SQL Server instance on its default port (usually 1433):
 
-That’s it! You’ve successfully installed winget without the Microsoft Store, upgraded to PowerShell 7+, and installed the SqlServer module for managing your SQL Server environment.
+```powershell
+Test-NetConnection -ComputerName "YourSQLServerName" -Port 1433
+```
 
+This command tells you whether the SQL Server's port is accessible, indicating that your VM has network access to the SQL Server instance.
 
+### 2. Test SQL Authentication and Connectivity
 
+You can run a simple query using `Invoke-Sqlcmd` to verify that you can connect to SQL Server. By default, this will use Windows Integrated Authentication. For example:
+
+```powershell
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName\InstanceName" -Database master -Query "SELECT @@VERSION;"
+```
+
+If you need to use SQL Authentication instead, you can supply credentials like this:
+
+```powershell
+$cred = Get-Credential
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName\InstanceName" -Database master -Credential $cred -Query "SELECT @@VERSION;"
+```
+
+This approach helps confirm both network connectivity and that the chosen authentication method is working correctly.
 
 
 
