@@ -22,7 +22,11 @@ Instantiate an Azure Virtual Machine (or equivalent):
   * Inbound Ports: RDP (3389) allowed
   * Boot Diagnostics: Disable
 
-### PowerShell
+### Windows PowerShell
+
+On your virtual machine, open Windows PowerShell.
+
+<img src="https://github.com/user-attachments/assets/18fbb0a3-06f6-45f5-b070-bf05f11353e1" width="800" title="Snipped March 3, 2025" />
 
 - Module Installation:  
   - Install the SqlServer module by running:
