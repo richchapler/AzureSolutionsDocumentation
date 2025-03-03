@@ -4,11 +4,16 @@ This curriculum provides a structured introduction to using PowerShell (in both 
 
 ## Objectives 
 
-- Understand PowerShell Basics for SQL Server: Explain the benefits of using PowerShell for SQL Server administration and recognize differences between Windows PowerShell and PowerShell Core in a database context.  
-- Manage On-Premises SQL Server with PowerShell: Use PowerShell cmdlets and scripts to configure SQL Server instances, create databases, manage logins/users, and automate routine maintenance tasks (backups, checks).  
-- Automate Azure SQL Operations: Leverage Azure PowerShell modules to deploy and manage Azure SQL resources (servers and databases), handle cloud connectivity (firewall rules, authentication), and integrate on‑premises to cloud automation.  
-- Apply Best Practices: Follow scripting best practices for security, reliability, and efficiency in PowerShell when working with SQL Server.  
-- Prepare for Exams and Real‑world Scenarios: Tackle exam‑style questions and scenarios that test your knowledge of PowerShell for SQL, ensuring you can apply concepts in practice and in certification environments.
+- Understand PowerShell Basics for SQL Server
+  - Explain the benefits of using PowerShell for SQL Server administration and recognize differences between Windows PowerShell and PowerShell Core in a database context
+- Manage On-Premises SQL Server with PowerShell
+  - Use PowerShell cmdlets and scripts to configure SQL Server instances, create databases, manage logins/users, and automate routine maintenance tasks (backups, checks)
+- Automate Azure SQL Operations
+  - Leverage Azure PowerShell modules to deploy and manage Azure SQL resources (servers and databases), handle cloud connectivity (firewall rules, authentication), and integrate on‑premises to cloud automation 
+- Apply Best Practices
+  - Follow scripting best practices for security, reliability, and efficiency in PowerShell when working with SQL Server
+- Prepare for Exams and Real‑world Scenarios
+  - Tackle exam‑style questions and scenarios that test your knowledge of PowerShell for SQL, ensuring you can apply concepts in practice and in certification environments
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
@@ -60,9 +65,9 @@ Import-Module SqlServer
 
 ### SQL Server Connectivity
 
-Execute the following PowerShell command to confirm network connectivity:
+<img src="https://github.com/user-attachments/assets/b0c2be09-a50e-42f9-aaf0-62494f016a93" width="600" title="Snipped March 3, 2025" />
 
-You can use the `Test-NetConnection` cmdlet to test if your VM can reach the SQL Server instance on its default port (usually 1433):
+Execute the following PowerShell command to confirm network connectivity:
 
 ```powershell
 Test-NetConnection -ComputerName "YourSQLServerName" -Port 1433
@@ -70,7 +75,17 @@ Test-NetConnection -ComputerName "YourSQLServerName" -Port 1433
 
 This command tells you whether the SQL Server's port is accessible, indicating that your VM has network access to the SQL Server instance.
 
-### 2. Test SQL Authentication and Connectivity
+### SQL Server Authentication
+
+<img src="https://github.com/user-attachments/assets/blah" width="600" title="Snipped March 3, 2025" />
+
+
+
+
+
+
+
+
 
 You can run a simple query using `Invoke-Sqlcmd` to verify that you can connect to SQL Server. By default, this will use Windows Integrated Authentication. For example:
 
