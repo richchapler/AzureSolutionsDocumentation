@@ -42,33 +42,25 @@ Run "PowerShell 7 (x64)" as an administrator.
 
 ------------------------- -------------------------
 
+SqlServer Module
 
+<img src="https://github.com/user-attachments/assets/713bd418-cc94-40ed-8d22-4f7b66b4f624" width="600" title="Snipped March 3, 2025" />
 
+Execute the following PowerShell command to install the SqlServer Module:
 
+```powershell
+Install-Module -Name SqlServer -Scope CurrentUser
+```
 
+Execute the following PowerShell command to import the SqlServer Module:
 
+```powershell
+Import-Module SqlServer
+```
 
+------------------------- -------------------------
 
----
-
-### 4. Install and Import the SqlServer Module
-
-Once you have PowerShell 7+ (or if you remain on Windows PowerShell 5.1), you can install the SqlServer module for SQL Server management tasks.
-
-1. Install the SqlServer Module:
-   ```powershell
-   Install-Module -Name SqlServer -Scope CurrentUser
-   ```
-2. Import the Module:
-   ```powershell
-   Import-Module SqlServer
-   ```
-
-With the SqlServer module imported, you can use cmdlets like `Invoke-Sqlcmd`, `Backup-SqlDatabase`, and the `SQLSERVER:\` provider path to manage your on-premises SQL Server.
-
----
-
-### 5. Verify SQL Server Connectivity
+ SQL Server Connectivity
 
 - Check Network Access:  
   Ensure your VM can reach your on-premises SQL Server instance.  
