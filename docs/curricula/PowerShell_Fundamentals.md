@@ -1,10 +1,8 @@
-# PowerShell Fundamentals for SQL Server (On-Premises and Azure)
+# PowerShell: Fundamentals
 
-## Course Overview 
-PowerShell is a powerful scripting tool for automating and managing SQL Server environments both on-premises and in the cloud. This course provides a structured introduction to using PowerShell (in both Windows PowerShell 5.1 and cross-platform PowerShell Core 7+) for SQL Server administration. You will learn how to perform common tasks such as SQL Server setup, user and permission management, automating maintenance, and connecting to Azure SQL resources using dedicated PowerShell cmdlets and scripts. Throughout the course, we'll highlight differences between Windows PowerShell and PowerShell Core where applicable, provide hands-on exercises to practice each concept, and offer best practices and exam guidance to reinforce learning.
+This curriculum provides a structured introduction to using PowerShell (in both Windows PowerShell 5.1 and cross-platform PowerShell Core 7+) for SQL Server administration. You will learn how to perform common tasks such as SQL Server setup, user and permission management, automating maintenance, and connecting to Azure SQL resources using dedicated PowerShell cmdlets and scripts. Throughout the course, we'll highlight differences between Windows PowerShell and PowerShell Core where applicable, provide hands-on exercises to practice each concept, and offer best practices and exam guidance to reinforce learning.
 
 ## Objectives 
-By the end of this course, you will be able to: 
 
 - **Understand PowerShell Basics for SQL Server:** Explain the benefits of using PowerShell for SQL Server administration and recognize differences between Windows PowerShell and PowerShell Core in a database context.  
 - **Manage On-Premises SQL Server with PowerShell:** Use PowerShell cmdlets and scripts to configure SQL Server instances, create databases, manage logins/users, and automate routine maintenance tasks (backups, checks).  
