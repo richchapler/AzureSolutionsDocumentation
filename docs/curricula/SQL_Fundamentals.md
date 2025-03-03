@@ -758,6 +758,105 @@ Navigate to the Azure Marketplace and create a "Single database" instance of SQL
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
+### Quiz: Azure SQL
+
+1. **Which Azure SQL deployment option is a fully managed, single-database PaaS solution?**  
+   A. SQL Managed Instance  
+   B. SQL Virtual Machines  
+   C. SQL Database  
+   D. SQL Server on Azure VM
+
+2. **When creating an Azure SQL Database, what does the "Service and compute tier" selection determine?**  
+   A. The geographic region of your database  
+   B. Overall performance, storage limits, and HA features  
+   C. The network isolation method  
+   D. The pricing model (CapEx vs. OpEx)
+
+3. **What is the primary difference between the Provisioned and Serverless compute tiers in Azure SQL?**  
+   A. Provisioned provides full OS access, while Serverless does not.  
+   B. Provisioned allocates fixed resources, while Serverless dynamically scales and can pause during idle periods.  
+   C. Serverless offers more customization options than Provisioned.  
+   D. Serverless requires manual backup configuration.
+
+4. **Which of the following is NOT a valid connectivity method for Azure SQL Database?**  
+   A. Public endpoint  
+   B. Private endpoint  
+   C. VPN-only endpoint  
+   D. Both A and B are valid
+
+5. **How does Azure SQL Database ensure data in transit is secure?**  
+   A. By using only SQL authentication  
+   B. Through Transport Layer Security (TLS)  
+   C. By enabling Windows Authentication mode  
+   D. Through manual encryption by the DBA
+
+6. **What built-in feature provides high availability in Azure SQL Database?**  
+   A. SQL Server Agent jobs  
+   B. Always On Availability Groups manually configured  
+   C. Built‑in redundancy with a 99.99% SLA and optional Auto‑Failover Groups  
+   D. Custom clustering across multiple VMs
+
+7. **Which authentication method does Azure SQL Database support?**  
+   A. Windows Authentication only  
+   B. SQL Authentication and Azure AD (Microsoft Entra) authentication  
+   C. Only SQL Authentication  
+   D. Neither; it uses a proprietary method
+
+8. **What is one benefit of using Azure SQL Managed Instance compared to Azure SQL Database (Single)?**  
+   A. It provides full OS-level access for customizations.  
+   B. It supports instance‑level features like SQL Server Agent and cross‑database queries.  
+   C. It is a completely unmanaged environment.  
+   D. It is the only option that supports serverless autoscaling.
+
+9. **In Azure SQL, what does enabling Transparent Data Encryption (TDE) by default provide?**  
+   A. Automatic backups without any user configuration  
+   B. Encryption of data at rest using Azure-managed keys  
+   C. Increased performance by caching data in memory  
+   D. Manual control over encryption keys with no default setting
+
+10. **Which cost model applies to Azure SQL Database and Managed Instance?**  
+    A. Capital expenditure (CapEx)  
+    B. Operational expenditure (OpEx) with pay‑as‑you‑go pricing  
+    C. Upfront licensing only  
+    D. Free service with no charges
+
+------------------------- -------------------------
+
+
+### Answer Key
+
+1. **Answer: C**  
+   Explanation: SQL Database is the fully managed, single‑database PaaS option.
+
+2. **Answer: B**  
+   Explanation: The service and compute tier determines performance, storage limits, and high availability features.
+
+3. **Answer: B**  
+   Explanation: Provisioned offers fixed resources, whereas Serverless automatically scales compute and can pause during idle periods.
+
+4. **Answer: C**  
+   Explanation: Azure SQL supports Public and Private endpoints; there is no "VPN‑only" endpoint option.
+
+5. **Answer: B**  
+   Explanation: Azure SQL secures data in transit via TLS.
+
+6. **Answer: C**  
+   Explanation: Azure SQL Database includes built‑in redundancy and high availability with a 99.99% SLA and the option to use Auto‑Failover Groups.
+
+7. **Answer: B**  
+   Explanation: Azure SQL supports both SQL Authentication and Azure AD (Microsoft Entra) authentication.
+
+8. **Answer: B**  
+   Explanation: Managed Instance supports additional instance‑level features (e.g. SQL Server Agent, cross‑database queries) not available in Single Database.
+
+9. **Answer: B**  
+   Explanation: TDE is enabled by default in Azure SQL, encrypting data at rest with Azure‑managed keys (with an option for BYOK).
+
+10. **Answer: B**  
+    Explanation: Azure SQL options use an OpEx model with pay‑as‑you‑go pricing, with licensing typically included in the service cost.
+
+------------------------- ------------------------- ------------------------- -------------------------
+
 ## Consolidated Comparison
 
 Below are a series of concise matrices that break down each key category into individual properties for easy comparison. Each matrix lists the four deployment options—On-Premises SQL Server, Azure SQL Database (Single), Azure SQL Managed Instance, and SQL Server on Azure VM—with one property per row.
