@@ -94,18 +94,27 @@ Drag "Flat File Destination" from "SSIS Toolbox" >> "Other Destinations" onto th
 - Double-click to open the "Flat File Destination Editor"
 - Click "New" to create an "Flat File Connection Manager":
   - Flat File Format: `Delimited`
-- On the "Flat File Connection Manager Editor", browse to the "Downloads" folder and enter File Name `DemoProducts`
-  - Click "OK" and "OK" again
+- On the "Flat File Connection Manager Editor", browse to the "Downloads" folder, enter File Name `DemoProducts`, and then click "OK"
+- Click "Mappings" and confirm success
 
+Test the package by clicking "Start".
 
+#### Expected Output
 
-
-
-- Configure the connection manager and map the source columns to the destination columns
-
-5. Test the package  
-   - Run the package locally within Visual Studio to confirm data flows from the DemoProducts table to your chosen destination  
-   - Verify any transformations or mappings are working as expected
+```
+SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\Package.dtsx" starting.
+Information: 0x4004300A at Data Flow Task, SSIS.Pipeline: Validation phase is beginning.
+Information: 0x4004300A at Data Flow Task, SSIS.Pipeline: Validation phase is beginning.
+Information: 0x40043006 at Data Flow Task, SSIS.Pipeline: Prepare for Execute phase is beginning.
+Information: 0x40043007 at Data Flow Task, SSIS.Pipeline: Pre-Execute phase is beginning.
+Information: 0x402090DC at Data Flow Task, Flat File Destination [2]: The processing of file "C:\Users\rchapler\Downloads\DemoProducts.txt" has started.
+Information: 0x4004300C at Data Flow Task, SSIS.Pipeline: Execute phase is beginning.
+Information: 0x40043008 at Data Flow Task, SSIS.Pipeline: Post Execute phase is beginning.
+Information: 0x402090DD at Data Flow Task, Flat File Destination [2]: The processing of file "C:\Users\rchapler\Downloads\DemoProducts.txt" has ended.
+Information: 0x4004300B at Data Flow Task, SSIS.Pipeline: "Flat File Destination" wrote 3 rows.
+Information: 0x40043009 at Data Flow Task, SSIS.Pipeline: Cleanup phase is beginning.
+SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\Package.dtsx" finished: Success.
+```
 
 ------------------------- -------------------------
 
