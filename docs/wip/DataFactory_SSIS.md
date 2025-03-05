@@ -24,10 +24,11 @@ This walkthrough assumes you already have an Azure subscription and a VM (with W
 
 ------------------------- -------------------------
 
-### 1.2 SQL Server Data Tools (SSDT)
+### 1.2 Visual Studio
 
 - Download and install Visual Studio 2022 Community from [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/)
   - In the Visual Studio Installer, check to include the "Data storage and processing" workload
+
 - Launch Visual Studio 2022 and navigate to Extensions → Manage Extensions
   - Search for and download "SQL Server Integration Services Projects 2022"
   - Close Visual Studio and run "Microsoft.DataTools.IntegrationServices" from the "Downloads" folder
