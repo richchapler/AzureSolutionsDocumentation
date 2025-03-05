@@ -66,7 +66,7 @@ GO
 
 ------------------------- -------------------------
 
-1.4 SQL Server Integration Services
+### 1.4 SQL Server Integration Services
 
 Launch Visual Studio and click "Create a new project"  
 - On the "Create a new project" popup, search for and select "Integration Services Project" then click "Next"  
