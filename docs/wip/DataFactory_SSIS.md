@@ -116,26 +116,7 @@ Information: 0x40043009 at Data Flow Task, SSIS.Pipeline: Cleanup phase is begin
 SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\Package.dtsx" finished: Success.
 ```
 
-------------------------- -------------------------
-
-### 1.4 Final Preparations for the On‑Premises Demonstration
-
-- Validate the Environment:
-  - Ensure that the SSIS package runs successfully on your VM.
-  - Confirm that the VM’s firewall and network settings allow the package and Integration Runtime to communicate with Azure.
-  
-- Document Settings:
-  - Note down connection strings, file paths, and any configuration parameters used.
-  - Keep records of testing results and any error logs for troubleshooting during your demonstration.
-
-- Backup the Package:
-  - Save your SSIS project and back up the package for reuse in your Azure Data Factory pipeline demonstration.
-
----
-
-By completing these expanded steps, you set up an on‑premises environment that not only connects to Azure Data Factory via the Self‑Hosted Integration Runtime but also demonstrates a basic SSIS-based pipeline that moves and transforms data. This prepares you to show a full end-to-end integration scenario from on‑premises SSIS execution to cloud-based orchestration.
-
----
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Step 2: Create an Azure Data Factory Instance
 
