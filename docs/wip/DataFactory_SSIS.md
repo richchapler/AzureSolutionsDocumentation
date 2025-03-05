@@ -79,11 +79,20 @@ In the Data Flow Designer, "Package.dtsx" package should be opened by default
 Drag "OLE DB Source" from "SSIS Toolbox" >> "Other Sources" onto the canvas  
 - Double-click to open the "OLE DB Source Editor"
 - Click "New" to create an "OLE DB Connection Manager" pointed at "SSISDemoDB" on "localhost"
+  - Provider: `Native OLE DB\Microsoft OLE DB Driver for SQL Server`
+  - Server or file name: `.` or `localhost`
+  - Initial Catalog: `SSISDemoDB`
+- Click "Test Connection" to confirm success then click "OK"
+- Complete "OLE DB Source Editor" configuration:
+  - OLE DB Connection Manager: `LocalHost.SSISDemoDB`
+  - Data Access Mode: `Table or view`
+  - Name of the Table or the View: `[dbo].[DemoProducts]`
+- Click "Preview" to confirm success then click "OK"
 
-- 
-- - Create or select a connection manager pointing to SSISDemoDB  
-- Choose dbo.DemoProducts as the source table  
-- (Optional) Add a transformation component (for example, Derived Column)  
+
+
+
+
 - Add a destination component
 - Drag a Flat File Destination (or another OLE DB Destination) onto the canvas  
 - Configure the connection manager and map the source columns to the destination columns
