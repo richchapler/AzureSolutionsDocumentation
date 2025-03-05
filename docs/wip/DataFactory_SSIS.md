@@ -78,7 +78,7 @@ In the Data Flow Designer, "Package.dtsx" package should be opened by default
 
 Drag "OLE DB Source" from "SSIS Toolbox" >> "Other Sources" onto the canvas  
 - Double-click to open the "OLE DB Source Editor"
-- Click "New" to create an "OLE DB Connection Manager" pointed at "SSISDemoDB" on "localhost"
+- Click "New" to create an "OLE DB Connection Manager":
   - Provider: `Native OLE DB\Microsoft OLE DB Driver for SQL Server`
   - Server or file name: `.` or `localhost`
   - Initial Catalog: `SSISDemoDB`
@@ -89,12 +89,18 @@ Drag "OLE DB Source" from "SSIS Toolbox" >> "Other Sources" onto the canvas
   - Name of the Table or the View: `[dbo].[DemoProducts]`
 - Click "Preview" to confirm success then click "OK"
 
+Drag "Flat File Destination" from "SSIS Toolbox" >> "Other Destinations" onto the canvas  
+- Create a data path from "OLE DB Source" to "Flat File Destination"
+- Double-click to open the "Flat File Destination Editor"
+- Click "New" to create an "Flat File Connection Manager":
+  - Flat File Format: `Delimited`
+- On the "Flat File Connection Manager Editor", browse to the "Downloads" folder and enter File Name `DemoProducts`
+  - Click "OK" and "OK" again
 
 
 
 
-- Add a destination component
-- Drag a Flat File Destination (or another OLE DB Destination) onto the canvas  
+
 - Configure the connection manager and map the source columns to the destination columns
 
 5. Test the package  
