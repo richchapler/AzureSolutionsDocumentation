@@ -14,69 +14,83 @@ This walkthrough assumes you already have an Azure subscription and a VM (with W
 
 ### 1.1 Virtual Machine
 
-- Provision the Virtual Machine:
-  - Set up a Windows Server virtual machine
-  - Install SQL Server with the Integration Services feature enabled
+Provision the Virtual Machine:
+- Set up a Windows Server virtual machine
+- Install SQL Server with the Integration Services feature enabled
   
-- Network Configuration:
-  - Ensure the VM can communicate with Azure by allowing outbound connections
-  - Configure firewall settings to permit necessary traffic for the Integration Runtime
+Network Configuration:
+- Ensure the VM can communicate with Azure by allowing outbound connections
+- Configure firewall settings to permit necessary traffic for the Integration Runtime
 
 ------------------------- -------------------------
 
 ### 1.2 Visual Studio
 
-- Download and install Visual Studio 2022 Community from [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/)
-  - In the Visual Studio Installer, check to include the "Data storage and processing" workload
+Download and install Visual Studio 2022 Community from [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/)
+- In the Visual Studio Installer, check to include the "Data storage and processing" workload
 
-- Launch Visual Studio 2022 and navigate to Extensions → Manage Extensions
-  - Search for and download "SQL Server Integration Services Projects 2022"
-  - Close Visual Studio and run "Microsoft.DataTools.IntegrationServices" from the "Downloads" folder
+Launch Visual Studio and navigate to Extensions → Manage Extensions
+- Search for and download "SQL Server Integration Services Projects 2022"
+- Close Visual Studio and run "Microsoft.DataTools.IntegrationServices" from the "Downloads" folder
 
 ------------------------- -------------------------
 
-### 1.3 SQL Server Integration Services (SSIS) Project
+### 1.3 SQL Server Management Studio
 
-- Open Visual Studio with SSDT:
-  - Launch Visual Studio.
-  - Select "Create a new project".
-  - Choose "Integration Services Project" from the list of templates.
+Launch SQL Server Management Studio, connect to your local database, and then click "New Query".
 
-2. Set Up Your Project:
-   - Name your project (e.g., `SSISDemoPipeline`).
-   - Choose a suitable location and click "Create".
+Create demonstration tables and data by executing the following T-SQL:
 
-#### b. Develop the SSIS Package
+```sql
+CREATE DATABASE SSISDemoDB
+GO
 
-1. Add or Use the Default Package:
-   - In Solution Explorer, open the default package (usually named `Package.dtsx`) or add a new package if needed.
+USE SSISDemoDB
+GO
 
-2. Design the Control Flow:
-   - Drag a Data Flow Task:
-     - From the SSIS Toolbox, drag a Data Flow Task onto the Control Flow canvas.
-   - Configure Additional Tasks (Optional):
-     - Optionally, add tasks like Execute SQL Task or Script Task to perform preliminary operations (e.g., creating a staging table).
+CREATE TABLE dbo.DemoProducts (
+    ProductID INT IDENTITY(1,1) PRIMARY KEY,
+    ProductName VARCHAR(100) NOT NULL,
+    Quantity INT NOT NULL,
+    UnitPrice DECIMAL(10,2) NOT NULL
+)
+GO
 
-3. Build the Data Flow:
-   - Switch to the Data Flow Designer:
-     - Double-click the Data Flow Task to open the Data Flow designer.
-   - Add a Source Component:
-     - Drag a Flat File Source onto the canvas.
-     - Configure it to read from a sample CSV or text file.
-     - Define columns, delimiters, and data types as required.
-   - Add a Transformation (Optional):
-     - Drag a Derived Column or Data Conversion component to demonstrate transformation capabilities.
-     - Configure it to modify or convert incoming data.
-   - Add a Destination Component:
-     - Drag an OLE DB Destination (or SQL Server Destination) onto the Data Flow canvas.
-     - Set up a connection manager to connect to your sample SQL Server database.
-     - Map the source columns to the destination table columns.
-     
-4. Test the Package:
-   - Run the package locally within Visual Studio to ensure that data flows from the source to the destination as expected.
-   - Confirm that any transformations or data mappings are working correctly.
+INSERT INTO dbo.DemoProducts (ProductName, Quantity, UnitPrice)
+VALUES
+('Widget A', 100, 9.99),
+('Widget B', 50, 14.99),
+('Widget C', 25, 29.99)
+GO
+```
 
----
+------------------------- -------------------------
+
+1.4 SQL Server Integration Services
+
+Launch Visual Studio and click "Create a new project"  
+- On the "Create a new project" popup, search for and select "Integration Services Project" then click "Next"  
+- Name your project (for example, SSISDemoPipeline), confirm location, and click "Create"
+
+The "Package.dtsx" package should be opened by default
+- Drag a "Data Flow Task" onto the "Control Flow" canvas from the "SSIS Toolbox" 
+
+4. Build the data flow  
+   - Double-click the Data Flow Task to switch to the Data Flow designer  
+   - Add a source component
+     - Drag an OLE DB Source onto the canvas  
+     - Create or select a connection manager pointing to SSISDemoDB  
+     - Choose dbo.DemoProducts as the source table  
+   - (Optional) Add a transformation component (for example, Derived Column)  
+   - Add a destination component
+     - Drag a Flat File Destination (or another OLE DB Destination) onto the canvas  
+     - Configure the connection manager and map the source columns to the destination columns
+
+5. Test the package  
+   - Run the package locally within Visual Studio to confirm data flows from the DemoProducts table to your chosen destination  
+   - Verify any transformations or mappings are working as expected
+
+------------------------- -------------------------
 
 ### 1.4 Final Preparations for the On‑Premises Demonstration
 
