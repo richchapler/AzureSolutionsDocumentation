@@ -122,21 +122,17 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ## Azure
 
-### Create an Azure Data Factory Instance
+### Data Factory
 
-- Log in to the [Azure Portal](https://portal.azure.com)
-- Create a new Data Factory:
-  - Click "Create a resource" and search for "Data Factory"
-  - Select "Data Factory" and fill in the required details (name, subscription, resource group, region, etc.)
-  - Click "Review + create" and then "Create"
-- Wait until deployment is complete
+- Log in to the [Azure Portal](https://portal.azure.com) and create a new Data Factory
+- Navigate to Data Factory Studio >> Manage >> Integration Runtimes
+- Click "+ New" and on the resulting popout, ...
 
-------------------------- -------------------------
 
-### Configure the Self‑Hosted Integration Runtime in ADF
 
-- Navigate to your Data Factory instance
-- Click the "Manage" tab on the left-side panel
+
+
+
 - Under "Integration runtimes," click "New" and choose "Self‑hosted"
 - Provide a descriptive name and, optionally, a description
 - Click "Create" to generate the integration runtime and its registration key
