@@ -10,9 +10,9 @@ This walkthrough assumes you already have an Azure subscription and a VM (with W
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Step 1: On‑Premises Environment
+## On‑Prem
 
-### 1.1 Virtual Machine
+### Virtual Machine
 
 Provision the Virtual Machine:
 - Set up a Windows Server virtual machine
@@ -24,7 +24,7 @@ Network Configuration:
 
 ------------------------- -------------------------
 
-### 1.2 Visual Studio
+### Visual Studio
 
 Download and install Visual Studio 2022 Community from [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/)
 - In the Visual Studio Installer, check to include the "Data storage and processing" workload
@@ -35,7 +35,7 @@ Launch Visual Studio and navigate to Extensions → Manage Extensions
 
 ------------------------- -------------------------
 
-### 1.3 SQL Server Management Studio
+### SQL Server Management Studio
 
 Launch SQL Server Management Studio, connect to your local database, and then click "New Query".
 
@@ -66,7 +66,7 @@ GO
 
 ------------------------- -------------------------
 
-### 1.4 SQL Server Integration Services
+### SQL Server Integration Services
 
 Launch Visual Studio and click "Create a new project"  
 - On the "Create a new project" popup, search for and select "Integration Services Project" then click "Next"  
@@ -118,7 +118,7 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Step 2: Create an Azure Data Factory Instance
+## Azure
 
 1. Log in to the Azure Portal.
 2. Create a New Data Factory:
@@ -195,7 +195,7 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
    - Ensure the SSIS package and related configurations are correct.
    - Re-run connectivity tests from within ADF’s IR settings if needed.
 
----
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Conclusion
 
