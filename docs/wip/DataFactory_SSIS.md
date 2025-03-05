@@ -124,57 +124,98 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ### Data Factory
 
-- Log in to the [Azure Portal](https://portal.azure.com) and create a new Data Factory
-- Navigate to Data Factory Studio >> Manage >> Integration Runtimes
-- Click "+ New" and on the resulting popout, ...
+- Log in to the [Azure Portal](https://portal.azure.com) and create a new Data Factory  
+  - Click "Create a resource" and search for "Data Factory"  
+  - Fill in the required details (name, subscription, resource group, region, etc.) and click "Review + create" then "Create"  
+- Once deployed, open Data Factory Studio and navigate to the "Manage" tab, then select "Integration Runtimes"
+
+------------------------- ------------------------- -------------------------
+
+
+
+
+
+RESUME HERE!!!
 
 
 
 
 
 
-- Under "Integration runtimes," click "New" and choose "Self‑hosted"
-- Provide a descriptive name and, optionally, a description
-- Click "Create" to generate the integration runtime and its registration key
-  - Copy the registration key for installation on your on‑premises VM
+### Scenario 1: On-Prem SSIS
+_using a Self‑Hosted Integration Runtime_
+
+- In Data Factory Studio, click "+ New" under "Integration runtimes"  
+- Choose "Self‑hosted" and provide a descriptive name (and optionally, a description)  
+- Click "Create" to generate the integration runtime and its registration key  
+  - Copy the registration key for installation on your on‑premises VM  
 - Verify that the IR is listed (it may initially show as offline until the on‑premises installation is complete)
 
 ------------------------- -------------------------
 
-### Install the Self‑Hosted Integration Runtime on Your On‑Premises VM
+#### Install the Self‑Hosted Integration Runtime on Your On‑Premises VM
 
-- From the ADF Integration Runtime configuration screen, download the Self‑Hosted Integration Runtime installer
-- Run the installer on your VM
-  - When prompted, enter the registration key you saved earlier
-- Follow the installation prompts until completion
+- From the ADF IR configuration screen, download the Self‑Hosted Integration Runtime installer  
+- Run the installer on your VM  
+  - When prompted, enter the registration key you saved earlier  
+- Follow the installation prompts until completion  
 - Verify that the runtime service is running on your VM (it should appear as "Online" in ADF once connected)
 
 ------------------------- -------------------------
 
-### Verify Connectivity and Test Integration
+#### Verify Connectivity and Test Integration (Self‑Hosted)
 
-- In your Data Factory instance, navigate to the "Monitor" tab
-- Check that the Self‑Hosted Integration Runtime displays as "Online"
-- Use the test connectivity feature in ADF to ensure the IR can reach all required on‑premises data sources
+- In your Data Factory instance, navigate to the "Monitor" tab  
+- Confirm that the Self‑Hosted IR displays as "Online"  
+- Use the test connectivity feature to ensure the IR can reach all required on‑premises data sources  
   - If issues arise, review firewall settings and network configurations on your VM
 
 ------------------------- -------------------------
 
-### Create and Configure the Pipeline to Execute SSIS Packages
+#### Create and Configure the Pipeline to Execute SSIS Packages (Self‑Hosted)
 
-- In the ADF "Author" tab, create a new pipeline
-- Drag the "Execute SSIS Package" activity into your pipeline
+- In the ADF "Author" tab, create a new pipeline  
+- Drag the "Execute SSIS Package" activity into your pipeline  
   - Configure the activity with:
-    - Package location: Specify the path on your on‑premises SSIS server where your package is stored
-    - Connection details: Provide necessary parameters, such as the package path and runtime parameters
-- Assign the Self‑Hosted Integration Runtime to the activity
-- Save and publish your changes
+    - Package location: Specify the path on your on‑premises SSIS server where your package is stored  
+    - Connection details: Provide any necessary parameters (e.g., package path, runtime parameters)  
+- Assign the Self‑Hosted IR to the activity  
+- Save and publish your changes  
+- Trigger the pipeline and monitor execution in the "Monitor" tab
+
+------------------------- ------------------------- -------------------------
+
+### Scenario 2: Azure-hosted SSIS
+_using an Azure‑SSIS Integration Runtime_
+
+- In Data Factory Studio under "Manage" > "Integration Runtimes," click "+ New"  
+- Choose "Azure‑SSIS" as the runtime type  
+- Provide a descriptive name and configure the required settings:
+  - Select the appropriate Azure region  
+  - Choose the compute size and scale settings according to your workload  
+  - Optionally, configure the Advanced settings (such as integration with Azure SQL Database for the SSISDB catalog)  
+- Click "Create" to deploy the Azure‑SSIS Integration Runtime  
+- Once deployed, the Azure‑SSIS IR will run in the cloud, and you can deploy SSIS packages directly to it
 
 ------------------------- -------------------------
 
-### Publish, Trigger, and Monitor the Pipeline
+#### Deploy and Execute SSIS Packages (Azure‑SSIS)
 
-- Trigger the pipeline to execute your SSIS package
-- In the "Monitor" tab of ADF, track the pipeline run
-  - Review execution details, including any warnings or errors
-- If issues occur, consult both ADF logs and on‑premises SSIS/IR logs for troubleshooting
+- Deploy your SSIS packages to the SSIS catalog (SSISDB) hosted on your chosen Azure SQL Database or Managed Instance  
+- In your Data Factory "Author" tab, create a new pipeline  
+- Drag the "Execute SSIS Package" activity into your pipeline  
+  - Configure the activity by specifying:
+    - Package location: This is the SSISDB in your Azure SQL Database/Managed Instance  
+    - Connection details: Provide necessary parameters and credentials for accessing the SSIS catalog  
+- Assign the Azure‑SSIS Integration Runtime to the activity  
+- Save and publish your pipeline  
+- Trigger the pipeline and monitor the execution in the "Monitor" tab
+
+------------------------- -------------------------
+
+### Publish, Trigger, and Monitor the Pipeline (Common Steps)
+
+- Trigger the pipeline to execute your SSIS package  
+- In the "Monitor" tab of ADF, track the pipeline run  
+  - Review execution details, including any warnings or errors  
+- If issues occur, consult the logs from both ADF and the respective SSIS runtime (on‑premises or Azure‑SSIS) for troubleshooting
