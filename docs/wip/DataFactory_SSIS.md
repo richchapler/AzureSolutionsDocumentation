@@ -72,19 +72,21 @@ Launch Visual Studio and click "Create a new project"
 - On the "Create a new project" popup, search for and select "Integration Services Project" then click "Next"  
 - Name your project (for example, SSISDemoPipeline), confirm location, and click "Create"
 
-The "Package.dtsx" package should be opened by default
+In the Data Flow Designer, "Package.dtsx" package should be opened by default
 - Drag a "Data Flow Task" onto the "Control Flow" canvas from the "SSIS Toolbox" 
+- Double-click the Data Flow Task to switch to the Data Flow designer
 
-4. Build the data flow  
-   - Double-click the Data Flow Task to switch to the Data Flow designer  
-   - Add a source component
-     - Drag an OLE DB Source onto the canvas  
-     - Create or select a connection manager pointing to SSISDemoDB  
-     - Choose dbo.DemoProducts as the source table  
-   - (Optional) Add a transformation component (for example, Derived Column)  
-   - Add a destination component
-     - Drag a Flat File Destination (or another OLE DB Destination) onto the canvas  
-     - Configure the connection manager and map the source columns to the destination columns
+Drag "OLE DB Source" from "SSIS Toolbox" >> "Other Sources" onto the canvas  
+- Double-click to open the "OLE DB Source Editor"
+- Click "New" to create an "OLE DB Connection Manager" pointed at "SSISDemoDB" on "localhost"
+
+- 
+- - Create or select a connection manager pointing to SSISDemoDB  
+- Choose dbo.DemoProducts as the source table  
+- (Optional) Add a transformation component (for example, Derived Column)  
+- Add a destination component
+- Drag a Flat File Destination (or another OLE DB Destination) onto the canvas  
+- Configure the connection manager and map the source columns to the destination columns
 
 5. Test the package  
    - Run the package locally within Visual Studio to confirm data flows from the DemoProducts table to your chosen destination  
