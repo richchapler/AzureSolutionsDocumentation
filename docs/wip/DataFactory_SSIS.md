@@ -1,4 +1,4 @@
-# Data Factory >> SSIS
+# Data Factory + SSIS
 
 In this demonstration you will:
 - Create an ADF instance.
