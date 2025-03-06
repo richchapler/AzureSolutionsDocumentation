@@ -193,12 +193,11 @@ Complete the "Deployment settings" form, including:
 
 Click "Test Connection" and confirm success, then click "Continue". 
 
+Confirm "Advanced Settings" configuration and then click "Continue".
 
+Review "Summary" and then click "Create".
 
-LOREM
-
-- Click "Create" to deploy the Azure‑SSIS Integration Runtime  
-- Once deployed, confirm the IR is listed and its status is "Running"
+Wait for `Status` to change to "Running".
 
 ------------------------- -------------------------
 
