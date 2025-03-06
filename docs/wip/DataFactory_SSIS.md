@@ -123,7 +123,7 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 ## Azure
 
 Instantiate the following pre-requisite resources: 1) Data Factory and 2) SQL
-- Security between Data Factory and SSIS?
+- Be sure to "Allow Azure services and resources to access this server" on the SQL Server >> Networking >> Firewall configuration
 
 ### Integration Runtime
 
@@ -154,14 +154,12 @@ Complete the "Deployment settings" form, including:
     - Why you’d want it: If you have custom package deployment needs or want to manage packages outside of SSISDB
     - If you don’t enable it: Packages are deployed solely to SSISDB, which is sufficient for most scenarios
 
-Click Continue. 
+Click "Test Connection" and confirm success, then click "Continue". 
 
 
--  the runtime:  
-  - Provide a descriptive name (e.g., `AzureSSIS`)  
-  - Select the appropriate Azure region  
-  - Choose the compute size and scale settings that match your workload  
-  - Optionally, configure advanced settings (such as integration with an Azure SQL Database for the SSISDB catalog)  
+
+LOREM
+
 - Click "Create" to deploy the Azure‑SSIS Integration Runtime  
 - Once deployed, confirm the IR is listed and its status is "Running"
 
