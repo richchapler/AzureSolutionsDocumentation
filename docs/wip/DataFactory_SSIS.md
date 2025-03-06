@@ -125,11 +125,13 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 ### Pre-Requisite Resources
 
 #### Data Factory
-- Log in to the [Azure Portal](https://portal.azure.com)  
+- Login to the [Azure Portal](https://portal.azure.com)  
 - Click "Create a resource" and search for "Data Factory"  
 - Provide the required details (name, subscription, resource group, region, etc.)  
 - Click "Review + create," then "Create"  
 - After deployment completes, you can access Data Factory Studio to manage and author pipelines  
+
+------------------------- -------------------------
 
 #### System Assigned Managed Identity  
 - In the Azure Portal, navigate to your newly created Data Factory resource  
@@ -138,6 +140,8 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 - Click Save  
 - Once enabled, Data Factory has a managed identity in Azure AD that can be granted access to other Azure services, such as Azure SQL Database
 
+------------------------- -------------------------
+
 #### Azure SQL Server and Database  
 - In the Azure Portal, click "Create a resource" and search for "SQL Database" (or "SQL Server" if you prefer to create the server first)  
 - Provide a server name, admin credentials, and select the resource group and region  
@@ -145,16 +149,16 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 - Once created, go to Networking → Firewalls and virtual networks on your SQL Server resource  
   - Ensure Allow Azure services and resources to access this server is checked  
 
+------------------------- -------------------------
+
 #### Master Database Permissions  
 
-Open SQL Server Management Studio (SSMS) andconnect to the Azure SQL Server  
-3. Create a user for the Data Factory’s managed identity in the master database and assign dbmanager role:
+Open SQL Server Management Studio (SSMS) and connect to the Azure SQL Server
+- Execute the following T-SQL on the `master` database:
   ```sql
   CREATE USER [YourDataFactoryName] FROM EXTERNAL PROVIDER;
-  ALTER ROLE db_owner ADD MEMBER [YourDataFactoryName];
+  ALTER ROLE dbmanager ADD MEMBER [YourDataFactoryName];
   ```
-  *(Replace `[YourDataFactoryName]` with the actual display name or Object ID of the managed identity)*  
-4. If you already have a database in which the Data Factory needs permissions (like an existing SSISDB), create the same user there and grant db_owner or appropriate roles
 
 ------------------------- -------------------------
 
