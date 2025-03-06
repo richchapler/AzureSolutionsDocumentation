@@ -131,51 +131,33 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ------------------------- ------------------------- -------------------------
 
-
-
-
-
-RESUME HERE!!!
-
-
-
-
-
-
 ### Scenario 1: On-Prem SSIS
 _using a Self‑Hosted Integration Runtime_
 
-- In Data Factory Studio, click "+ New" under "Integration runtimes"  
-- Choose "Self‑hosted" and provide a descriptive name (and optionally, a description)  
-- Click "Create" to generate the integration runtime and its registration key  
-  - Copy the registration key for installation on your on‑premises VM  
-- Verify that the IR is listed (it may initially show as offline until the on‑premises installation is complete)
+#### Integrated Runtime
+
+In Data Factory Studio, click "+ New" under "Integration runtimes"  
+- On the "Integration runtime setup" popout, click "Azure, Self‑hosted" and then "Continue"
+- Under "Network environment", click "Self-Hosted" and then "Continue"
+- Enter a descriptive name {e.g., `shir` for self-hosted integration runtime} and then click "Create"
+- Click "Download and install integration runtime", click "Download" on the resulting page, check the latest version on the resulting "Choose the download..." popup, and then click "Download"
+  - Once download is complete, copy the file to and install Integration Runtime on the virtual machine
+  - Once installation is complete, copy / paste the registration key, confirm "Integration Runtime (Self-hosted) node has been registered successfully" on the machine
+  - On Data Factory, confirm Integration Runtime Status `Running` and click "Close"
 
 ------------------------- -------------------------
 
-#### Install the Self‑Hosted Integration Runtime on Your On‑Premises VM
+#### Pipeline
 
-- From the ADF IR configuration screen, download the Self‑Hosted Integration Runtime installer  
-- Run the installer on your VM  
-  - When prompted, enter the registration key you saved earlier  
-- Follow the installation prompts until completion  
-- Verify that the runtime service is running on your VM (it should appear as "Online" in ADF once connected)
+- Navigate to Data Factory >> "Author", click "+" >> "Pipeline" >> "Pipeline" on the resulting dropdowns
+- Search for Activity "Execute SSIS Package", drag onto the Pipeline canvas and the click to configure
+- Complete the form on the "Settings" tab:
+  - LOREM
+ 
 
-------------------------- -------------------------
 
-#### Verify Connectivity and Test Integration (Self‑Hosted)
 
-- In your Data Factory instance, navigate to the "Monitor" tab  
-- Confirm that the Self‑Hosted IR displays as "Online"  
-- Use the test connectivity feature to ensure the IR can reach all required on‑premises data sources  
-  - If issues arise, review firewall settings and network configurations on your VM
 
-------------------------- -------------------------
-
-#### Create and Configure the Pipeline to Execute SSIS Packages (Self‑Hosted)
-
-- In the ADF "Author" tab, create a new pipeline  
-- Drag the "Execute SSIS Package" activity into your pipeline  
   - Configure the activity with:
     - Package location: Specify the path on your on‑premises SSIS server where your package is stored  
     - Connection details: Provide any necessary parameters (e.g., package path, runtime parameters)  
