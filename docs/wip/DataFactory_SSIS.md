@@ -120,27 +120,45 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-Below is the updated Azure section based on the latest documentation and supported scenario. Currently, the Execute SSIS Package activity in Azure Data Factory only works with an Azure‑SSIS Integration Runtime. Self‑Hosted Integration Runtime isn’t supported for executing SSIS packages via ADF. Use the following working scenario:
-
-------------------------- ------------------------- ------------------------- -------------------------
-
 ## Azure
 
-### Data Factory
+Instantiate the following pre-requisite resources: 1) Data Factory and 2) SQL
+- Security between Data Factory and SSIS?
 
-- Log in to the [Azure Portal](https://portal.azure.com) and create a new Data Factory  
-  - Click "Create a resource" and search for "Data Factory"  
-  - Fill in the required details (name, subscription, resource group, region, etc.) and click "Review + create" then "Create"  
-- Once deployed, open Data Factory Studio and navigate to the "Manage" tab, then select "Integration Runtimes"
+### Integration Runtime
 
-------------------------- -------------------------
+Open Data Factory Studio and navigate to "Manage" >> "Integration Runtimes"
+- Click "+ New" under "Integration runtimes" and on the "Integration runtime setup" popout, choose "Azure‑SSIS" as the runtime type then click "Continue"  
+- Complete the "General settings" form, then click "Continue"
 
-### Azure‑SSIS Integration Runtime
+Complete the "Deployment settings" form, including:
+  - `Create SSIS catalog (SSISDB) hosted by Azure SQL Database server/Managed Instance`: CHECKED since we don't already have an existing SSISDB in Azure SQL
+    - What it does: Automatically creates (or configures) an SSISDB database to store and manage your SSIS packages
+    - Why you’d want it: If you don’t already have an SSISDB, checking this box ensures you have a centralized repository for deploying and executing packages in the cloud
+    - If you don’t check it: You must have an existing SSISDB in Azure SQL Database or Managed Instance and plan to manage it yourself
+  - `Catalog database server endpoint`: Select {Azure SQL Database Server}
+    - What it does: Identifies the Azure SQL Database server or Managed Instance where SSISDB will be hosted (for example, `mydbserver.database.windows.net`)
+  - `Use Microsoft Entra authentication...`: Use System Managed Identity for Data Factory
+    - What it does: Lets you authenticate to Azure SQL Database/Managed Instance using Azure AD credentials instead of SQL credentials
+    - Why you’d want it: Centralizes identity management and may improve security
+    - If you don’t enable it: You’ll have to use SQL authentication with the admin username/password
+  - `Use dual standby Azure‑SSIS Integration Runtime...`: UNCHECKED since this is only for demonstration
+    - What it does: Sets up a standby IR in a paired region for high availability/disaster recovery
+    - Why you’d want it: Ensures minimal downtime if there’s a regional outage
+    - If you don’t enable it: You’ll have a single IR instance without automatic failover
+  - `Catalog database service tier`: "S1" since this is only for demonstration
+    - What it does: Determines performance, cost, and resource limits (e.g., S1, S2, etc.)
+    - Why you’d want it: Higher tiers can handle more transactions and concurrency, but cost more. For testing or light workloads, S1 is typically sufficient
+  - `Create package stores...`: UNCHECKED since this is only for demonstration  
+    - What it does: Lets you configure additional storage locations (e.g., file system, Azure Files, SQL) to hold SSIS packages outside of SSISDB
+    - Why you’d want it: If you have custom package deployment needs or want to manage packages outside of SSISDB
+    - If you don’t enable it: Packages are deployed solely to SSISDB, which is sufficient for most scenarios
 
-- In Data Factory Studio, click "+ New" under "Integration runtimes"  
-- On the "Integration runtime setup" popout, choose "Azure‑SSIS" as the runtime type and click "Continue"  
-- Configure the runtime:  
-  - Provide a descriptive name (e.g., `AzureSSISIR`)  
+Click Continue. 
+
+
+-  the runtime:  
+  - Provide a descriptive name (e.g., `AzureSSIS`)  
   - Select the appropriate Azure region  
   - Choose the compute size and scale settings that match your workload  
   - Optionally, configure advanced settings (such as integration with an Azure SQL Database for the SSISDB catalog)  
