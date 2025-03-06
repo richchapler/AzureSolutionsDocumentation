@@ -120,6 +120,10 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
+Below is the updated Azure section based on the latest documentation and supported scenario. Currently, the Execute SSIS Package activity in Azure Data Factory only works with an Azure‑SSIS Integration Runtime. Self‑Hosted Integration Runtime isn’t supported for executing SSIS packages via ADF. Use the following working scenario:
+
+------------------------- ------------------------- ------------------------- -------------------------
+
 ## Azure
 
 ### Data Factory
@@ -129,75 +133,30 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
   - Fill in the required details (name, subscription, resource group, region, etc.) and click "Review + create" then "Create"  
 - Once deployed, open Data Factory Studio and navigate to the "Manage" tab, then select "Integration Runtimes"
 
-------------------------- ------------------------- -------------------------
-
-### Scenario 1: On-Prem SSIS
-_using a Self‑Hosted Integration Runtime_
-
-#### Integrated Runtime
-
-In Data Factory Studio, click "+ New" under "Integration runtimes"  
-- On the "Integration runtime setup" popout, click "Azure, Self‑hosted" and then "Continue"
-- Under "Network environment", click "Self-Hosted" and then "Continue"
-- Enter a descriptive name {e.g., `shir` for self-hosted integration runtime} and then click "Create"
-- Click "Download and install integration runtime", click "Download" on the resulting page, check the latest version on the resulting "Choose the download..." popup, and then click "Download"
-  - Once download is complete, copy the file to and install Integration Runtime on the virtual machine
-  - Once installation is complete, copy / paste the registration key, confirm "Integration Runtime (Self-hosted) node has been registered successfully" on the machine
-  - On Data Factory, confirm Integration Runtime Status `Running` and click "Close"
-
 ------------------------- -------------------------
 
-#### Pipeline
+### Azure‑SSIS Integration Runtime
 
-- Navigate to Data Factory >> "Author", click "+" >> "Pipeline" >> "Pipeline" on the resulting dropdowns
-- Search for Activity "Execute SSIS Package", drag onto the Pipeline canvas and the click to configure
-- Complete the form on the "Settings" tab:
-  - LOREM
- 
-
-
-
-
-  - Configure the activity with:
-    - Package location: Specify the path on your on‑premises SSIS server where your package is stored  
-    - Connection details: Provide any necessary parameters (e.g., package path, runtime parameters)  
-- Assign the Self‑Hosted IR to the activity  
-- Save and publish your changes  
-- Trigger the pipeline and monitor execution in the "Monitor" tab
-
-------------------------- ------------------------- -------------------------
-
-### Scenario 2: Azure-hosted SSIS
-_using an Azure‑SSIS Integration Runtime_
-
-- In Data Factory Studio under "Manage" > "Integration Runtimes," click "+ New"  
-- Choose "Azure‑SSIS" as the runtime type  
-- Provide a descriptive name and configure the required settings:
+- In Data Factory Studio, click "+ New" under "Integration runtimes"  
+- On the "Integration runtime setup" popout, choose "Azure‑SSIS" as the runtime type and click "Continue"  
+- Configure the runtime:  
+  - Provide a descriptive name (e.g., `AzureSSISIR`)  
   - Select the appropriate Azure region  
-  - Choose the compute size and scale settings according to your workload  
-  - Optionally, configure the Advanced settings (such as integration with Azure SQL Database for the SSISDB catalog)  
+  - Choose the compute size and scale settings that match your workload  
+  - Optionally, configure advanced settings (such as integration with an Azure SQL Database for the SSISDB catalog)  
 - Click "Create" to deploy the Azure‑SSIS Integration Runtime  
-- Once deployed, the Azure‑SSIS IR will run in the cloud, and you can deploy SSIS packages directly to it
+- Once deployed, confirm the IR is listed and its status is "Running"
 
 ------------------------- -------------------------
 
-#### Deploy and Execute SSIS Packages (Azure‑SSIS)
+### Deploy and Execute SSIS Packages with Azure‑SSIS IR
 
-- Deploy your SSIS packages to the SSIS catalog (SSISDB) hosted on your chosen Azure SQL Database or Managed Instance  
-- In your Data Factory "Author" tab, create a new pipeline  
-- Drag the "Execute SSIS Package" activity into your pipeline  
-  - Configure the activity by specifying:
-    - Package location: This is the SSISDB in your Azure SQL Database/Managed Instance  
-    - Connection details: Provide necessary parameters and credentials for accessing the SSIS catalog  
+- Deploy your SSIS packages to the SSIS catalog (SSISDB) hosted on an Azure SQL Database or a SQL Managed Instance  
+- In Data Factory Studio, navigate to the "Author" tab and create a new pipeline  
+- Drag the "Execute SSIS Package" activity onto the pipeline canvas  
+- Configure the activity with the following settings:  
+  - Package location: Select the SSIS package from your SSISDB catalog  
+  - Connection details: Provide necessary parameters, such as credentials and any runtime parameters  
 - Assign the Azure‑SSIS Integration Runtime to the activity  
 - Save and publish your pipeline  
-- Trigger the pipeline and monitor the execution in the "Monitor" tab
-
-------------------------- -------------------------
-
-### Publish, Trigger, and Monitor the Pipeline (Common Steps)
-
-- Trigger the pipeline to execute your SSIS package  
-- In the "Monitor" tab of ADF, track the pipeline run  
-  - Review execution details, including any warnings or errors  
-- If issues occur, consult the logs from both ADF and the respective SSIS runtime (on‑premises or Azure‑SSIS) for troubleshooting
+- Trigger the pipeline and monitor its execution via the "Monitor" tab
