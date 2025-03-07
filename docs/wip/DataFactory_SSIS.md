@@ -136,23 +136,58 @@ Next, we'll migrate these SSIS packages to the cloud by deploying them to an Azu
 
 In this section, we will migrate your on‑premises SSIS packages to a cloud‑hosted SSIS catalog (SSISDB) in Azure SQL Database, ensuring they are ready for execution in Azure Data Factory pipelines.
 
-### Migrating SSIS Packages to Azure SSISDB
+### Prepare
 
-Open the SSIS package in Visual Studio
+Open `SSISDemoPipeline` in Visual Studio
+- Right-click the project in Solution Explorer, then click "Properties"
+- On the "...Property Pages" popup, "Configuration Properties" >> "General" form, change "TargetServerVersion" to "SQL Server 2017" and then click "OK"
+- Click "Build" and then "Build Solution" in the toolbar.
 
-- Build the SSIS project in Visual Studio by right‑clicking the project in Solution Explorer and selecting Build
-- Locate the generated .ispac deployment file containing your SSIS packages
-- Launch the SSIS Deployment Wizard by double‑clicking the .ispac file or opening it from Visual Studio
-- Specify the target server by entering the Azure SQL Database server name that hosts your SSISDB (for example, mydbserver.database.windows.net)
-- Select the appropriate authentication method (SQL authentication or Azure AD authentication)
-- Choose Deploy to the SSIS Catalog as the deployment target and follow the wizard prompts to upload the .ispac file and create the necessary folders in SSISDB
-- Verify that your deployed packages appear in the SSISDB catalog by connecting to the Azure SQL server with SSMS or Azure Data Studio
+#### Expected Output
+
+```
+Build started at 12:25 PM...
+------ Build started: Project: SSISDemoPipeline (SQL Server 2017), Configuration: Development ------
+Build started: SQL Server Integration Services project: Incremental ...
+Starting project consistency check ...
+Project consistency check completed. The project is consistent.
+File 'C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\obj\Development\SSISDemoPipeline.dtproj' get updated.
+File 'C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\obj\Development\Project.params' get updated.
+File 'C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\obj\Development\Package.dtsx' get updated.
+Applied active configuration to 'Project.params'.
+Applied active configuration to 'Package.dtsx'.
+SSISDemoPipeline -> C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\bin\Development\SSISDemoPipeline.ispac
+Build complete -- 0 errors, 0 warnings
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+========== Build completed at 12:25 PM and took 01.315 seconds ==========
+```
+
+### Deploy
+
+Right-click your project (`SSISDemoPipeline`) in Solution Explorer and select "Deploy"
+- On the "Integration Services Deployment Wizard" popup, "Select Deployment Target" tab, click "SSIS in Data Factory" and then "Next >"
+- On the "Select Destination" tab, LOREM IPSUM
+
+
+
+
+
+
+
+
+
+
+
+- When the SSIS Deployment Wizard opens, enter your Azure SQL Database server name (for example, `mydbserver.database.windows.net`)
+- Select the appropriate authentication method (Azure AD authentication recommended)
+- Confirm "Deploy to the SSIS Catalog" and follow the wizard prompts to deploy your packages to the Azure‑hosted SSISDB
+- After deployment completes, verify packages appear in the SSISDB catalog by connecting to Azure SQL with SSMS or Azure Data Studio
 
 ### Post‑Migration Considerations
 
-- Update any connection managers or environment references in your SSIS packages to point to the correct Azure resources
-- Test the migrated packages directly using SSMS or via the Azure‑SSIS Integration Runtime to ensure they execute as expected
-- Document any configuration changes or issues encountered during migration for future reference
+- Update any connection managers or environment references if they must point to Azure-specific resources
+- Test the migrated packages directly using SSMS or via Azure‑SSIS Integration Runtime to ensure they run correctly
+- Document any configuration changes or issues encountered during migration
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
