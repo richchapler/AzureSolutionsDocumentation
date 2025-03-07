@@ -120,7 +120,7 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ------------------------- -------------------------
 
-## Section Wrap-Up
+### Section Wrap-Up
 
 In this section, we:
 - Set up our on‑prem environment by provisioning a Windows Server VM with SQL Server Integration Services
@@ -134,16 +134,11 @@ Next, we'll migrate these SSIS packages to the cloud by deploying them to an Azu
 
 ## Migration
 
-Before deploying and executing SSIS packages with Azure Data Factory, migrate your on‑premises SSIS packages to your cloud‑hosted SSIS catalog (SSISDB) in Azure SQL Database or SQL Managed Instance  
-This section outlines the steps to migrate your packages and ensure they are available for execution in the cloud
-
-### Preparing for Migration
-
-- Ensure your on‑premises SSIS packages have been built and tested in Visual Studio
-- Confirm that your Azure‑SSIS Integration Runtime is configured to use an existing or newly created SSISDB
-- Verify that any connection managers and environment references in your packages are updated to point to Azure resources if needed
+In this section, we will migrate your on‑premises SSIS packages to a cloud‑hosted SSIS catalog (SSISDB) in Azure SQL Database, ensuring they are ready for execution in Azure Data Factory pipelines.
 
 ### Migrating SSIS Packages to Azure SSISDB
+
+Open the SSIS package in Visual Studio
 
 - Build the SSIS project in Visual Studio by right‑clicking the project in Solution Explorer and selecting Build
 - Locate the generated .ispac deployment file containing your SSIS packages
