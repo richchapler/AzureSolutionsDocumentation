@@ -118,6 +118,47 @@ Information: 0x40043009 at Data Flow Task, SSIS.Pipeline: Cleanup phase is begin
 SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\Package.dtsx" finished: Success.
 ```
 
+------------------------- -------------------------
+
+## Section Wrap-Up
+
+In this section, we:
+- Set up our on‑prem environment by provisioning a Windows Server VM with SQL Server Integration Services
+- Configured Visual Studio with the required data tools
+- Created demonstration data using SSMS
+- Developed and tested an SSIS package locally, ensuring that all components work together as expected
+
+Next, we'll migrate these SSIS packages to the cloud by deploying them to an Azure‑hosted SSISDB and configuring Azure Data Factory to execute them via an Azure‑SSIS Integration Runtime.
+
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Migration
+
+Before deploying and executing SSIS packages with Azure Data Factory, migrate your on‑premises SSIS packages to your cloud‑hosted SSIS catalog (SSISDB) in Azure SQL Database or SQL Managed Instance  
+This section outlines the steps to migrate your packages and ensure they are available for execution in the cloud
+
+### Preparing for Migration
+
+- Ensure your on‑premises SSIS packages have been built and tested in Visual Studio
+- Confirm that your Azure‑SSIS Integration Runtime is configured to use an existing or newly created SSISDB
+- Verify that any connection managers and environment references in your packages are updated to point to Azure resources if needed
+
+### Migrating SSIS Packages to Azure SSISDB
+
+- Build the SSIS project in Visual Studio by right‑clicking the project in Solution Explorer and selecting Build
+- Locate the generated .ispac deployment file containing your SSIS packages
+- Launch the SSIS Deployment Wizard by double‑clicking the .ispac file or opening it from Visual Studio
+- Specify the target server by entering the Azure SQL Database server name that hosts your SSISDB (for example, mydbserver.database.windows.net)
+- Select the appropriate authentication method (SQL authentication or Azure AD authentication)
+- Choose Deploy to the SSIS Catalog as the deployment target and follow the wizard prompts to upload the .ispac file and create the necessary folders in SSISDB
+- Verify that your deployed packages appear in the SSISDB catalog by connecting to the Azure SQL server with SSMS or Azure Data Studio
+
+### Post‑Migration Considerations
+
+- Update any connection managers or environment references in your SSIS packages to point to the correct Azure resources
+- Test the migrated packages directly using SSMS or via the Azure‑SSIS Integration Runtime to ensure they execute as expected
+- Document any configuration changes or issues encountered during migration for future reference
+
 ------------------------- ------------------------- ------------------------- -------------------------
 
 ## Azure
