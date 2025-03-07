@@ -1,4 +1,4 @@
-# SQL >> Storage Account Connectivity: RBAC-Based OPENROWSET
+# SQL >> Storage Connectivity: RBAC-Based OPENROWSET
 
 This documentation walks you through the steps needed to enable Azure SQL to securely query files stored in an Azure Storage account using a managed identity and RBAC. This eliminates the need for SAS tokens and leverages Azure’s native role-based access control.
 
