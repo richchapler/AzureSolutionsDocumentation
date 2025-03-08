@@ -6,17 +6,14 @@
 
 ### Pre-Requisite Resources
 
-Provision a Virtual Machine:
-- Set up a Windows Server virtual machine
-- Install SQL Server with the Integration Services feature enabled
-  
-Network Configuration:
-- Ensure the VM can communicate with Azure by allowing outbound connections
-- Configure firewall settings to permit necessary traffic for the Integration Runtime
+- Virtual Machine
+  - SQL Server installed and Integration Services enabled
+  - Ensure the VM can communicate with Azure by allowing outbound connections
+  - Configure firewall settings to permit necessary traffic for the Integration Runtime
 
 ------------------------- -------------------------
 
-### Visual Studio
+### Install Visual Studio
 
 Download and install Visual Studio 2022 Community from [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/)
 - In the Visual Studio Installer, check to include the "Data storage and processing" workload
@@ -34,7 +31,7 @@ This ensures that your SSIS packages are compatible with Azure-SSIS Integration 
 
 ------------------------- -------------------------
 
-### SQL Server Management Studio
+### Prepare Sample Data
 
 Launch SQL Server Management Studio, connect to your local database, and then click "New Query".
 
@@ -65,7 +62,7 @@ GO
 
 ------------------------- -------------------------
 
-### SQL Server Integration Services
+### Create Integration Services Project
 
 Launch Visual Studio and click "Create a new project"  
 - On the "Create a new project" popup, search for and select "Integration Services Project" then click "Next"  
@@ -121,15 +118,89 @@ In this section, we:
 - Created demonstration data using SSMS
 - Developed and tested an SSIS package locally, ensuring that all components work together as expected
 
-Next, we'll migrate these SSIS packages to the cloud by deploying them to an Azure‑hosted SSISDB and configuring Azure Data Factory to execute them via an Azure‑SSIS Integration Runtime.
-
 ------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 2: Azure Data Factory
 
-(Keep this section as-is, no further edits recommended)
+- Login to the [Azure Portal](https://portal.azure.com)  
+- Click "Create a resource" and search for "Data Factory"  
+- Provide the required details (name, subscription, resource group, region, etc.)  
+- Click "Review + create," then "Create"  
+- After deployment completes, you can access Data Factory Studio to manage and author pipelines  
 
-- After creating Azure-SSIS Integration Runtime, verify it is in "Running" state before proceeding
+------------------------- -------------------------
+
+#### System Assigned Managed Identity  
+- In the Azure Portal, navigate to your newly created Data Factory resource  
+- In the left-hand menu, select Identity  
+- On the System assigned tab, toggle Status to On  
+- Click Save  
+- Once enabled, Data Factory has a managed identity in Azure AD that can be granted access to other Azure services, such as Azure SQL Database  
+
+------------------------- -------------------------
+
+#### Master Database Permissions  
+
+Open SQL Server Management Studio (SSMS) and connect to the Azure SQL Server  
+- Execute the following T-SQL on the `master` database:  
+
+```sql
+CREATE USER [YourDataFactoryName] FROM EXTERNAL PROVIDER;
+ALTER ROLE dbmanager ADD MEMBER [YourDataFactoryName];
+```
+
+------------------------- -------------------------
+
+### Integration Runtime
+
+Open Data Factory Studio and navigate to "Manage" >> "Integration Runtimes"
+- Click "+ New" under "Integration runtimes" and on the "Integration runtime setup" popout, choose "Azure‑SSIS" as the runtime type then click "Continue"  
+- Complete the "General settings" form, then click "Continue"
+
+Complete the "Deployment settings" form, including:
+- `Create SSIS catalog (SSISDB) hosted by Azure SQL Database server...`: CHECKED since we don't already have an existing SSISDB in Azure SQL
+  - What it does: Automatically creates (or configures) an SSISDB database to store and manage your SSIS packages
+  - Why you’d want it: If you don’t already have an SSISDB, checking this box ensures you have a centralized repository for deploying and executing packages in the cloud
+  - If you don’t check it: You must have an existing SSISDB in Azure SQL Database and plan to manage it yourself
+- `Catalog database server endpoint`: Select {Azure SQL Database Server}
+  - What it does: Identifies the Azure SQL Database server where SSISDB will be hosted (for example, `mydbserver.database.windows.net`)
+- `Use Microsoft Entra authentication...`: Use System Managed Identity for Data Factory
+  - What it does: Lets you authenticate to Azure SQL Database using Azure AD credentials instead of SQL credentials
+  - Why you’d want it: Centralizes identity management and may improve security
+  - If you don’t enable it: You’ll have to use SQL authentication with the admin username/password
+- `Use dual standby Azure‑SSIS Integration Runtime...`: UNCHECKED since this is only for demonstration
+  - What it does: Sets up a standby IR in a paired region for high availability/disaster recovery
+  - Why you’d want it: Ensures minimal downtime if there’s a regional outage
+  - If you don’t enable it: You’ll have a single IR instance without automatic failover
+- `Catalog database service tier`: "S1" since this is only for demonstration
+  - What it does: Determines performance, cost, and resource limits (e.g., S1, S2, etc.)
+  - Why you’d want it: Higher tiers can handle more transactions and concurrency, but cost more. For testing or light workloads, S1 is typically sufficient
+- `Create package stores...`: UNCHECKED since this is only for demonstration  
+  - What it does: Lets you configure additional storage locations (e.g., file system, Azure Files, SQL) to hold SSIS packages outside of SSISDB
+  - Why you’d want it: If you have custom package deployment needs or want to manage packages outside of SSISDB
+  - If you don’t enable it: Packages are deployed solely to SSISDB, which is sufficient for most scenarios
+
+Click "Test Connection" and confirm success, then click "Continue". 
+
+Confirm "Advanced Settings" configuration and then click "Continue".
+
+Review "Summary" and then click "Create".
+
+Wait for `Status` to change to "Running".
+
+------------------------- -------------------------
+
+### Deploy and Execute SSIS Packages with Azure‑SSIS IR
+
+- Deploy your SSIS packages to the SSIS catalog (SSISDB) hosted on an Azure SQL Database  
+- In Data Factory Studio, navigate to the "Author" tab and create a new pipeline  
+- Drag the "Execute SSIS Package" activity onto the pipeline canvas  
+- Configure the activity with the following settings:  
+  - Package location: Select the SSIS package from your SSISDB catalog  
+  - Connection details: Provide necessary parameters, such as credentials and any runtime parameters  
+- Assign the Azure‑SSIS Integration Runtime to the activity  
+- Save and publish your pipeline  
+- Trigger the pipeline and monitor its execution via the "Monitor" tab
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
@@ -169,8 +240,6 @@ After deployment completes, verify the packages appear in SSISDB by connecting t
 - Test migrated packages using SSMS or via the Azure‑SSIS Integration Runtime
 - Document any configuration changes or issues encountered during migration
 
-------------------------- ------------------------- ------------------------- -------------------------
-
-## Exercise 4: Test Pipeline
+### Test and Verify
 
 - Clearly verify successful completion in the "Monitor" tab, indicated by the pipeline status "Succeeded"
