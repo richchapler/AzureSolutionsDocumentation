@@ -146,7 +146,7 @@ ALTER ROLE dbmanager ADD MEMBER [{prefix}df];
 ### Integration Runtime
 
 Open Data Factory Studio and navigate to "Manage" >> "Integration Runtimes"
-- Click "+ New" under "Integration runtimes" and on the "Integration runtime setup" popout, choose "Azure‑SSIS" as the runtime type then click "Continue"  
+- Click "+ New" under "Integration runtimes" and on the "Integration runtime setup" popout, choose "Azure‑SSIS" as the runtime type then click "Continue"
 - Complete the "General settings" form, then click "Continue"
 
 Complete the "Deployment settings" form, including:
@@ -154,28 +154,14 @@ Complete the "Deployment settings" form, including:
   - What it does: Automatically creates (or configures) an SSISDB database to store and manage your SSIS packages
   - Why you’d want it: If you don’t already have an SSISDB, checking this box ensures you have a centralized repository for deploying and executing packages in the cloud
   - If you don’t check it: You must have an existing SSISDB in Azure SQL Database and plan to manage it yourself
-- `Catalog database server endpoint`: Select {Azure SQL Database Server}
-  - What it does: Identifies the Azure SQL Database server where SSISDB will be hosted (for example, `mydbserver.database.windows.net`)
- 
-
-------------------------- -------------------------
-------------------------- -------------------------
-------------------------- -------------------------
-
-
-
-should we use SQL Authentication????
-
-------------------------- -------------------------
-------------------------- -------------------------
-------------------------- -------------------------
-
-
-
-- `Use Microsoft Entra authentication...`: Use System Managed Identity for Data Factory
-  - What it does: Lets you authenticate to Azure SQL Database using Azure AD credentials instead of SQL credentials
-  - Why you’d want it: Centralizes identity management and may improve security
-  - If you don’t enable it: You’ll have to use SQL authentication with the admin username/password
+- `Catalog database server endpoint`: Select your Azure SQL Database Server endpoint (for example, `{prefix}ss.database.windows.net`)
+  - What it does: Identifies the Azure SQL Database server where SSISDB will be hosted
+- `Use Microsoft Entra authentication...`: UNCHECKED (since we'll use SQL authentication)
+  - If unchecked: You’ll authenticate with the SQL server using SQL Authentication credentials
+  - Why you'd want it: Simpler configuration for demonstration scenarios or environments without Azure AD setup
+  - If you enable it: Authentication would be managed through Azure AD instead
+- `Admin username`: Enter your SQL Authentication username for the Azure SQL Database server
+  - `Admin password`: Enter your SQL Authentication password
 - `Use dual standby Azure‑SSIS Integration Runtime...`: UNCHECKED since this is only for demonstration
   - What it does: Sets up a standby IR in a paired region for high availability/disaster recovery
   - Why you’d want it: Ensures minimal downtime if there’s a regional outage
@@ -188,7 +174,7 @@ should we use SQL Authentication????
   - Why you’d want it: If you have custom package deployment needs or want to manage packages outside of SSISDB
   - If you don’t enable it: Packages are deployed solely to SSISDB, which is sufficient for most scenarios
 
-Click "Test Connection" and confirm success, then click "Continue". 
+Click "Test Connection" and confirm success, then click "Continue".
 
 Confirm "Advanced Settings" configuration and then click "Continue".
 
