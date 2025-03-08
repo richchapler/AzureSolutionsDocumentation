@@ -4,7 +4,7 @@
 
 ## Exercise 1: Configure On‑Prem
 
-### Pre-Requisite Resources
+### Pre-Requisites
 
 - Virtual Machine
   - SQL Server installed and Integration Services enabled
@@ -122,31 +122,23 @@ In this section, we:
 
 ## Exercise 2: Azure Data Factory
 
-- Login to the [Azure Portal](https://portal.azure.com)  
-- Click "Create a resource" and search for "Data Factory"  
-- Provide the required details (name, subscription, resource group, region, etc.)  
-- Click "Review + create," then "Create"  
-- After deployment completes, you can access Data Factory Studio to manage and author pipelines  
+### Pre-Requisites
 
-------------------------- -------------------------
-
-#### System Assigned Managed Identity  
-- In the Azure Portal, navigate to your newly created Data Factory resource  
-- In the left-hand menu, select Identity  
-- On the System assigned tab, toggle Status to On  
-- Click Save  
-- Once enabled, Data Factory has a managed identity in Azure AD that can be granted access to other Azure services, such as Azure SQL Database  
+- Azure subscription with appropriate permissions {e.g., `contributor`}
+- Azure SQL Server
+  - System-Assigned Identity enabled
+  - Configured for both Entra and SQL Authentication
+- Azure Data Factory with System-Assigned Managed Identity
 
 ------------------------- -------------------------
 
 #### Master Database Permissions  
 
-Open SQL Server Management Studio (SSMS) and connect to the Azure SQL Server  
-- Execute the following T-SQL on the `master` database:  
+Open SQL Server Management Studio (SSMS), connect to the Azure SQL Server, a execute the following T-SQL on the `master` database:  
 
 ```sql
-CREATE USER [YourDataFactoryName] FROM EXTERNAL PROVIDER;
-ALTER ROLE dbmanager ADD MEMBER [YourDataFactoryName];
+CREATE USER [{prefix}df] FROM EXTERNAL PROVIDER;
+ALTER ROLE dbmanager ADD MEMBER [{prefix}df];
 ```
 
 ------------------------- -------------------------
@@ -236,7 +228,7 @@ After deployment completes, verify the packages appear in SSISDB by connecting t
 
 ### Post‑Migration Considerations
 
-- Update connection managers or environment references to use Azure resources
+- Update connection managers or environment references to use Azure s
 - Test migrated packages using SSMS or via the Azure‑SSIS Integration Runtime
 - Document any configuration changes or issues encountered during migration
 
