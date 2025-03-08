@@ -184,17 +184,38 @@ Wait for `Status` to change to "Running".
 
 ------------------------- -------------------------
 
-### Deploy and Execute SSIS Packages with Azure‑SSIS IR
+## Exercise 3: Deploy Packages
 
-- Deploy your SSIS packages to the SSIS catalog (SSISDB) hosted on an Azure SQL Database  
-- In Data Factory Studio, navigate to the "Author" tab and create a new pipeline  
-- Drag the "Execute SSIS Package" activity onto the pipeline canvas  
+Open Data Factory Studio, navigate to "Author" tab, and create a new pipeline.
+- Drag an "Execute SSIS Package" activity (from "General") onto the pipeline canvas  
 - Configure the activity with the following settings:  
+  - Azure-SSIS IR: Select the previously-created Integration Runtime
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+
   - Package location: Select the SSIS package from your SSISDB catalog  
   - Connection details: Provide necessary parameters, such as credentials and any runtime parameters  
 - Assign the Azure‑SSIS Integration Runtime to the activity  
 - Save and publish your pipeline  
 - Trigger the pipeline and monitor its execution via the "Monitor" tab
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
