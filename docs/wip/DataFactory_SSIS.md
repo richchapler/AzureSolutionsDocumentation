@@ -134,7 +134,7 @@ In this section, we:
 
 #### Master Database Permissions  
 
-Open SQL Server Management Studio (SSMS), connect to the Azure SQL Server, a execute the following T-SQL on the `master` database:  
+Open SQL Server Management Studio (SSMS), connect to the Azure SQL Server, and execute the following T-SQL on the `master` database:  
 
 ```sql
 CREATE USER [{prefix}df] FROM EXTERNAL PROVIDER;
@@ -156,6 +156,22 @@ Complete the "Deployment settings" form, including:
   - If you don’t check it: You must have an existing SSISDB in Azure SQL Database and plan to manage it yourself
 - `Catalog database server endpoint`: Select {Azure SQL Database Server}
   - What it does: Identifies the Azure SQL Database server where SSISDB will be hosted (for example, `mydbserver.database.windows.net`)
+ 
+
+------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
+
+
+
+should we use SQL Authentication????
+
+------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
+
+
+
 - `Use Microsoft Entra authentication...`: Use System Managed Identity for Data Factory
   - What it does: Lets you authenticate to Azure SQL Database using Azure AD credentials instead of SQL credentials
   - Why you’d want it: Centralizes identity management and may improve security
