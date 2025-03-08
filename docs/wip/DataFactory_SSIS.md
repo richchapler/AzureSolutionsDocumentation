@@ -1,16 +1,8 @@
 # Data Factory + SSIS
 
-In this demonstration you will:
-- Create an ADF instance.
-- Set up a Self‑Hosted Integration Runtime (IR) that runs on your VM.
-- Install and configure the IR on your on‑premises VM (hosting SSIS).
-- Create a pipeline in ADF that calls an SSIS package.
-
-This walkthrough assumes you already have an Azure subscription and a VM (with Windows and SQL Server/SSIS installed) that can communicate with Azure.
-
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Configure On‑Prem
+## Exercise 1: Configure On‑Prem
 
 ### Pre-Requisite Resources
 
@@ -32,6 +24,12 @@ Download and install Visual Studio 2022 Community from [Visual Studio Downloads]
 Launch Visual Studio and navigate to Extensions → Manage Extensions
 - Search for and download "SQL Server Integration Services Projects 2022"
 - Close Visual Studio and run "Microsoft.DataTools.IntegrationServices" from the "Downloads" folder
+
+Once installed, immediately configure your project compatibility settings to ensure Azure compatibility:
+- In Visual Studio, go to "Tools" → "Options"
+- Under "Business Intelligence Designers" → "Integration Services Designers," set the "TargetServerVersion" to "SQL Server 2017"
+
+This ensures that your SSIS packages are compatible with Azure-SSIS Integration Runtime, which specifically requires SQL Server 2017 compatibility.
 
 ------------------------- -------------------------
 
@@ -130,84 +128,11 @@ In this section, we:
 
 Next, we'll migrate these SSIS packages to the cloud by deploying them to an Azure‑hosted SSISDB and configuring Azure Data Factory to execute them via an Azure‑SSIS Integration Runtime.
 
-------------------------- ------------------------- ------------------------- -------------------------
 
-## Migrate to Azure
-
-In this section, we will migrate your on‑premises SSIS packages to a cloud‑hosted SSIS catalog (SSISDB) in Azure SQL Database, ensuring they are ready for execution in Azure Data Factory pipelines.
-
-------------------------- -------------------------
-
-### Pre-Requisite Resources
-
-- Azure SQL Server and Database, configured for SQL Server Authentication
-
-------------------------- -------------------------
-
-### Build Solution
-
-Open `SSISDemoPipeline` in Visual Studio
-- Right-click the project in Solution Explorer, then click "Properties"
-- On the "...Property Pages" popup, "Configuration Properties" >> "General" form, change "TargetServerVersion" to "SQL Server 2017" and then click "OK"
-- Click "Build" and then "Build Solution" in the toolbar.
-
-#### Expected Output
-
-```
-Build started at 12:25 PM...
------- Build started: Project: SSISDemoPipeline (SQL Server 2017), Configuration: Development ------
-Build started: SQL Server Integration Services project: Incremental ...
-Starting project consistency check ...
-Project consistency check completed. The project is consistent.
-File 'C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\obj\Development\SSISDemoPipeline.dtproj' get updated.
-File 'C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\obj\Development\Project.params' get updated.
-File 'C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\obj\Development\Package.dtsx' get updated.
-Applied active configuration to 'Project.params'.
-Applied active configuration to 'Package.dtsx'.
-SSISDemoPipeline -> C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\bin\Development\SSISDemoPipeline.ispac
-Build complete -- 0 errors, 0 warnings
-========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
-========== Build completed at 12:25 PM and took 01.315 seconds ==========
-```
-
-------------------------- -------------------------
-
-### Deploy
-
-Right-click your project (`SSISDemoPipeline`) in Solution Explorer and select "Deploy" to open the "Integration Services Deployment Wizard"
-- On the "Select Deployment Target" tab, click "SSIS in Data Factory" and then "Next >"
-- Complete the form on the "Select Destination" tab
-  - Server name: Enter your Azure SQL Database server name (`{prefix}sds.database.windows.net`)
-  - Authentication: Select "SQL Server Authentication"
-  - Login: Enter your SQL Server admin username (`<your_admin_user>@{prefix}sds`)
-  - Password: Enter the admin password you set when creating the Azure SQL Server
-  - Path: After successful authentication, click the "Browse..." button next to "Path" and select the `/SSISDB` catalog (automatically populated once connected)
-
-Click "Connect" after filling in these fields to validate and proceed with deployment.
-
-
-
-
-
-
-
-
-
-
-- When the SSIS Deployment Wizard opens, enter your Azure SQL Database server name (for example, `mydbserver.database.windows.net`)
-- Select the appropriate authentication method (Azure AD authentication recommended)
-- Confirm "Deploy to the SSIS Catalog" and follow the wizard prompts to deploy your packages to the Azure‑hosted SSISDB
-- After deployment completes, verify packages appear in the SSISDB catalog by connecting to Azure SQL with SSMS or Azure Data Studio
-
-### Post‑Migration Considerations
-
-- Update any connection managers or environment references if they must point to Azure-specific resources
-- Test the migrated packages directly using SSMS or via Azure‑SSIS Integration Runtime to ensure they run correctly
-- Document any configuration changes or issues encountered during migration
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Azure Data Factory
+## Exercise 2: Azure Data Factory
 
 - Login to the [Azure Portal](https://portal.azure.com)  
 - Click "Create a resource" and search for "Data Factory"  
@@ -244,14 +169,14 @@ Open Data Factory Studio and navigate to "Manage" >> "Integration Runtimes"
 - Complete the "General settings" form, then click "Continue"
 
 Complete the "Deployment settings" form, including:
-  - `Create SSIS catalog (SSISDB) hosted by Azure SQL Database server/Managed Instance`: CHECKED since we don't already have an existing SSISDB in Azure SQL
+  - `Create SSIS catalog (SSISDB) hosted by Azure SQL Database server...`: CHECKED since we don't already have an existing SSISDB in Azure SQL
     - What it does: Automatically creates (or configures) an SSISDB database to store and manage your SSIS packages
     - Why you’d want it: If you don’t already have an SSISDB, checking this box ensures you have a centralized repository for deploying and executing packages in the cloud
-    - If you don’t check it: You must have an existing SSISDB in Azure SQL Database or Managed Instance and plan to manage it yourself
+    - If you don’t check it: You must have an existing SSISDB in Azure SQL Database and plan to manage it yourself
   - `Catalog database server endpoint`: Select {Azure SQL Database Server}
-    - What it does: Identifies the Azure SQL Database server or Managed Instance where SSISDB will be hosted (for example, `mydbserver.database.windows.net`)
+    - What it does: Identifies the Azure SQL Database server where SSISDB will be hosted (for example, `mydbserver.database.windows.net`)
   - `Use Microsoft Entra authentication...`: Use System Managed Identity for Data Factory
-    - What it does: Lets you authenticate to Azure SQL Database/Managed Instance using Azure AD credentials instead of SQL credentials
+    - What it does: Lets you authenticate to Azure SQL Database using Azure AD credentials instead of SQL credentials
     - Why you’d want it: Centralizes identity management and may improve security
     - If you don’t enable it: You’ll have to use SQL authentication with the admin username/password
   - `Use dual standby Azure‑SSIS Integration Runtime...`: UNCHECKED since this is only for demonstration
@@ -278,7 +203,7 @@ Wait for `Status` to change to "Running".
 
 ### Deploy and Execute SSIS Packages with Azure‑SSIS IR
 
-- Deploy your SSIS packages to the SSIS catalog (SSISDB) hosted on an Azure SQL Database or a SQL Managed Instance  
+- Deploy your SSIS packages to the SSIS catalog (SSISDB) hosted on an Azure SQL Database  
 - In Data Factory Studio, navigate to the "Author" tab and create a new pipeline  
 - Drag the "Execute SSIS Package" activity onto the pipeline canvas  
 - Configure the activity with the following settings:  
@@ -287,3 +212,42 @@ Wait for `Status` to change to "Running".
 - Assign the Azure‑SSIS Integration Runtime to the activity  
 - Save and publish your pipeline  
 - Trigger the pipeline and monitor its execution via the "Monitor" tab
+
+
+
+
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Migrate to Azure
+
+In this section, we will migrate the SSIS packages you created and tested on‑premises to your Azure‑hosted SSIS catalog (SSISDB), making them available for use in Azure Data Factory pipelines.
+
+### Prepare Project for Azure Compatibility
+
+In Visual Studio, update the target server version for Azure compatibility:
+- Right-click the SSIS project in Solution Explorer, select "Properties"
+- Under "Configuration Properties" → "General", set "TargetServerVersion" to "SQL Server 2017"
+- Click "Build" → "Build Solution" to ensure compatibility and generate a deployment (.ispac) file
+
+#### Expected Output
+```
+Build started...
+Build complete -- 0 errors, 0 warnings
+...SSISDemoPipeline.ispac
+```
+
+### Deploy to Azure SSISDB
+
+In Visual Studio Solution Explorer:
+- Right-click your SSIS project and select "Deploy"
+- In the Integration Services Deployment Wizard, select deployment target "SSIS in Data Factory"
+- Enter your Azure SQL Database server name (`{prefix}ss.database.windows.net`)
+- Choose "SQL Server Authentication" and enter credentials
+- Follow prompts to complete deployment to SSIS catalog (SSISDB)
+
+Verify successful deployment by connecting to the Azure SQL server via SSMS or Azure Data Studio and confirming packages are visible under the Integration Services Catalogs folder.
+
+### Post‑Migration Considerations
+- Update connection managers or environment references to use Azure resources
+- Test packages directly via SSMS or Data Factory's Azure‑SSIS Integration Runtime
+- Document any changes or issues encountered during migration
