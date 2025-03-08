@@ -10,11 +10,11 @@ This walkthrough assumes you already have an Azure subscription and a VM (with W
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## On‑Prem
+## Configure On‑Prem
 
-### Virtual Machine
+### Pre-Requisite Resources
 
-Provision the Virtual Machine:
+Provision a Virtual Machine:
 - Set up a Windows Server virtual machine
 - Install SQL Server with the Integration Services feature enabled
   
@@ -132,11 +132,19 @@ Next, we'll migrate these SSIS packages to the cloud by deploying them to an Azu
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Migration
+## Migrate to Azure
 
 In this section, we will migrate your on‑premises SSIS packages to a cloud‑hosted SSIS catalog (SSISDB) in Azure SQL Database, ensuring they are ready for execution in Azure Data Factory pipelines.
 
-### Prepare
+------------------------- -------------------------
+
+### Pre-Requisite Resources
+
+- Azure SQL Server and Database, configured for SQL Server Authentication
+
+------------------------- -------------------------
+
+### Build Solution
 
 Open `SSISDemoPipeline` in Visual Studio
 - Right-click the project in Solution Explorer, then click "Properties"
@@ -162,12 +170,20 @@ Build complete -- 0 errors, 0 warnings
 ========== Build completed at 12:25 PM and took 01.315 seconds ==========
 ```
 
+------------------------- -------------------------
+
 ### Deploy
 
-Right-click your project (`SSISDemoPipeline`) in Solution Explorer and select "Deploy"
-- On the "Integration Services Deployment Wizard" popup, "Select Deployment Target" tab, click "SSIS in Data Factory" and then "Next >"
-- On the "Select Destination" tab, LOREM IPSUM
+Right-click your project (`SSISDemoPipeline`) in Solution Explorer and select "Deploy" to open the "Integration Services Deployment Wizard"
+- On the "Select Deployment Target" tab, click "SSIS in Data Factory" and then "Next >"
+- Complete the form on the "Select Destination" tab
+  - Server name: Enter your Azure SQL Database server name (`{prefix}sds.database.windows.net`)
+  - Authentication: Select "SQL Server Authentication"
+  - Login: Enter your SQL Server admin username (`<your_admin_user>@{prefix}sds`)
+  - Password: Enter the admin password you set when creating the Azure SQL Server
+  - Path: After successful authentication, click the "Browse..." button next to "Path" and select the `/SSISDB` catalog (automatically populated once connected)
 
+Click "Connect" after filling in these fields to validate and proceed with deployment.
 
 
 
@@ -191,11 +207,8 @@ Right-click your project (`SSISDemoPipeline`) in Solution Explorer and select "D
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Azure
+## Azure Data Factory
 
-### Pre-Requisite Resources
-
-#### Data Factory
 - Login to the [Azure Portal](https://portal.azure.com)  
 - Click "Create a resource" and search for "Data Factory"  
 - Provide the required details (name, subscription, resource group, region, etc.)  
@@ -210,15 +223,6 @@ Right-click your project (`SSISDemoPipeline`) in Solution Explorer and select "D
 - On the System assigned tab, toggle Status to On  
 - Click Save  
 - Once enabled, Data Factory has a managed identity in Azure AD that can be granted access to other Azure services, such as Azure SQL Database
-
-------------------------- -------------------------
-
-#### Azure SQL Server and Database  
-- In the Azure Portal, click "Create a resource" and search for "SQL Database" (or "SQL Server" if you prefer to create the server first)  
-- Provide a server name, admin credentials, and select the resource group and region  
-- For demonstration purposes, choose a low-tier database (for example, S1)  
-- Once created, go to Networking → Firewalls and virtual networks on your SQL Server resource  
-  - Ensure Allow Azure services and resources to access this server is checked  
 
 ------------------------- -------------------------
 
