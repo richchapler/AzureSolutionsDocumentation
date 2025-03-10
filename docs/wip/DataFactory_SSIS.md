@@ -196,11 +196,14 @@ Wait for `Status` to change to "Running".
 - Open SQL Server Management Studio and connect to the Azure SQL Server
 - Verify that the deployed packages appear under `Integration Services Catalogs → SSISDB`
 
-
 ------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 4: Create Pipeline
 
+- Navigate to Azure Data Factory Studio >> "Author" and create a new pipeline
+- Drag an "Execute SSIS Package" activity onto the pipeline canvas and configure:
+
+
 
 ------------------------- ------------------------- ------------------------- -------------------------
 ------------------------- ------------------------- ------------------------- -------------------------
@@ -208,18 +211,15 @@ Wait for `Status` to change to "Running".
 ------------------------- ------------------------- ------------------------- -------------------------
 ------------------------- ------------------------- ------------------------- -------------------------
 ------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
 
-Now, you'll configure Azure Data Factory to execute your deployed SSIS packages:
 
-- Open Azure Data Factory Studio, navigate to the "Author" tab, and create a new pipeline.
-- Drag an "Execute SSIS Package" activity onto the pipeline canvas.
-- Configure the activity:
-  - **Integration Runtime:** Select your Azure-SSIS Integration Runtime.
-  - **Package location:** Select the newly deployed SSIS package from your Azure SSISDB.
-  - Configure any necessary runtime parameters and connection details.
-- Click "Debug" to test the pipeline execution.
+
+
+
+  - Integration Runtime: Select your Azure-SSIS Integration Runtime
+  - Package location: Select the newly deployed SSIS package from your Azure SSISDB
+  - Configure any necessary runtime parameters and connection details
+- Click "Debug" to test the pipeline execution
 
 ### Monitor and Verify
 
