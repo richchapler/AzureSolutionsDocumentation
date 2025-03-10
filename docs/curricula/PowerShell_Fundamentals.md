@@ -145,11 +145,10 @@ This command suppresses errors when attempting to list a non-existent directory.
 It is important to capture and manage output for logging and later analysis.
 
 ```powershell
-# This command retrieves a list of running services, selects the Name and Status properties, and exports the information to a CSV file.
-Get-Service | Select-Object Name, Status | Export-Csv -Path "C:\Temp\ServiceStatus.csv" -NoTypeInformation
+$output = Get-Process
+$output | Out-File "C:\Temp\ProcessOutput.txt"
 ```
-
-Exports the names and statuses of running services to "C:\Temp\ServiceStatus.csv".
+Captures the output of `Get-Process` into a variable and writes it to a file for review.
 
 -------------------------
 
