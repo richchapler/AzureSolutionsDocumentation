@@ -191,10 +191,28 @@ Wait for `Status` to change to "Running".
 - Back on the "Select Destination" form, click "Next >"
 - Review selections, then click "Deploy", monitor progress, and then click "Close"
 
+------------------------- -------------------------
+
 ### Verify Deployment
 
-- Open SQL Server Management Studio and connect to the Azure SQL Server
-- Verify that the deployed packages appear under `Integration Services Catalogs → SSISDB`
+- Open SQL Server Management Studio and connect to the Azure SQL Server  
+- Expand `Integration Services Catalogs → SSISDB` and confirm that your project and packages appear  
+- Run the following queries to verify deployment:  
+
+  - Check available folders:  
+    ```sql
+    SELECT name FROM SSISDB.catalog.folders
+    ```  
+  - Check available projects:  
+    ```sql
+    SELECT name FROM SSISDB.catalog.projects
+    ```  
+  - Check available packages:  
+    ```sql
+    SELECT name FROM SSISDB.catalog.packages
+    ```  
+
+- If the expected values do not appear, confirm that the deployment process completed successfully  
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
