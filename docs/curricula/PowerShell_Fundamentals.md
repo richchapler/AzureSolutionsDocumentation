@@ -317,7 +317,7 @@ Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $
 
 ------------------------- -------------------------
 
-### Hands‑On Exercise #1 – Automated Setup and Configuration
+### Hands‑On Exercise: Automated Setup and Configuration
 
 In this exercise, you will verify that SQL Server is running, create a new database named TrainingDB, and create a SQL login named TrainingUser that is mapped to TrainingDB with read permissions
 
@@ -349,60 +349,101 @@ Use SQL Server Management Studio to confirm user creation and permissions.
 
 ------------------------- -------------------------
 
-### Hands‑On Exercise #2
+### Quiz: Windows PowerShell (on‑prem)
 
-Create a database named "TrainingDB," add a SQL login named `TrainingUser`, map it to "TrainingDB," and assign read permissions. Verify by listing databases.
-
-#### 3. Automating Maintenance Tasks
-
-- Database Backup Example:  
-  ```powershell
-  Backup-SqlDatabase -ServerInstance "YOURSERVER\DEFAULT" -Database "TrainingDB" -BackupFile "C:\Backup\TrainingDB.bak"
-  ```
-- Scheduling Scripts:  
-  Explain how you would schedule the backup script using SQL Server Agent or Windows Task Scheduler for nightly execution.
-
-Hands‑On Exercise 3:  
-Backup "TrainingDB" to a file and verify the backup file. Optionally, describe the process for scheduling the script.
-
-#### 4. PowerShell Core Considerations for On‑Premises
-
-- Ensure the SqlServer module is up‑to‑date when using PowerShell Core.  
-- On non‑Windows systems, SQL Authentication is recommended.
-
-------------------------- -------------------------
-
-### Quiz: Test Your Knowledge – On‑Premises
-
-1. On‑Prem Environment: Which cmdlet is used to run a T‑SQL query on a local SQL Server instance?  
+1. Which cmdlet is used to run a T‑SQL query on a SQL Server instance?  
    A. `Get-SqlQuery`  
    B. `Invoke-Sqlcmd`  
    C. `Run-SqlQuery`  
    D. `Start-Sqlcmd`
 
-2. SQL Provider Navigation: What is the provider path added by the SqlServer module for on‑premises SQL Server?  
+2. What is the provider path added by the SqlServer module for on‑premises SQL Server?  
    A. `SQLSERVER:\`  
    B. `SQL:\`  
    C. `DBSERVER:\`  
    D. `SQLDB:\`
 
-3. Creating a Database: Which command creates a new database in your on‑prem SQL Server?  
+3. Which T‑SQL statement creates a new database named TrainingDB on SQL Server?  
    A. `CREATE DATABASE TrainingDB;`  
    B. `NEW DATABASE TrainingDB;`  
    C. `MAKE DATABASE TrainingDB;`  
    D. `ADD DATABASE TrainingDB;`
 
-4. User Mapping: After creating a SQL login, what must you do to allow that login to access a specific database?  
-   A. Nothing; logins automatically have access.  
-   B. Create a corresponding database user and map the login.  
-   C. Restart the SQL Server.  
-   D. Change the authentication mode.
+4. After creating a SQL login, what must you do to allow that login to access a specific database?  
+   A. Nothing; logins automatically have access  
+   B. Create a corresponding database user and map the login  
+   C. Restart the SQL Server  
+   D. Change the authentication mode
 
-5. Automated Backups: Which tool is best used to automate database backups across multiple SQL Server instances on‑premises?  
-   A. SQL Server Management Studio (SSMS) only  
-   B. A PowerShell script using `Backup-SqlDatabase` scheduled via SQL Server Agent or Task Scheduler  
-   C. Manual backup through the GUI  
-   D. Windows PowerShell ISE without scheduling
+5. Which parameter should be included with `Invoke-Sqlcmd` to bypass SSL certificate validation issues?  
+   A. `-TrustServerCertificate`  
+   B. `-IgnoreCertificateErrors`  
+   C. `-BypassSSL`  
+   D. `-SkipCertValidation`
+
+6. Which cmdlet is used to verify that the SQL Server service is running?  
+   A. `Get-Service`  
+   B. `Test-Service`  
+   C. `Check-Service`  
+   D. `Show-Service`
+
+7. When testing remote commands locally to avoid WinRM issues, which computer name should you use?  
+   A. `localhost`  
+   B. `127.0.0.1`  
+   C. Your machine’s fully qualified domain name  
+   D. The domain name
+
+8. Which cmdlet is commonly used to capture the output of a command and write it to a file?  
+   A. `Out-File`  
+   B. `Write-Output`  
+   C. `Export-Csv`  
+   D. `Set-Content`
+
+9. What is the recommended method for securely obtaining user credentials in PowerShell?  
+   A. `Get-Credential`  
+   B. `Read-Host`  
+   C. `Import-Credential`  
+   D. `Secure-Credential`
+
+10. What is the primary purpose of using a pipeline (`|`) in PowerShell?  
+    A. To execute multiple commands concurrently  
+    B. To pass the output of one cmdlet as input to another  
+    C. To connect to remote systems  
+    D. To format the output automatically
+
+-------------------------
+
+#### Answer Key
+
+1. **Answer:** B  
+   **Explanation:** The `Invoke-Sqlcmd` cmdlet is used to run T‑SQL queries on a SQL Server instance.
+
+2. **Answer:** A  
+   **Explanation:** The SqlServer module adds the `SQLSERVER:\` provider path for on‑premises SQL Server.
+
+3. **Answer:** A  
+   **Explanation:** `CREATE DATABASE TrainingDB;` is the correct T‑SQL statement for creating a new database.
+
+4. **Answer:** B  
+   **Explanation:** After creating a SQL login, you must create a corresponding database user and map the login to allow access.
+
+5. **Answer:** A  
+   **Explanation:** The `-TrustServerCertificate` parameter instructs Invoke‑Sqlcmd to bypass SSL certificate validation.
+
+6. **Answer:** A  
+   **Explanation:** The `Get-Service` cmdlet is used to check the status of Windows services, including SQL Server.
+
+7. **Answer:** A  
+   **Explanation:** Using "localhost" avoids WinRM configuration issues when testing remote commands locally.
+
+8. **Answer:** A  
+   **Explanation:** The `Out-File` cmdlet captures output and writes it to a file.
+
+9. **Answer:** A  
+   **Explanation:** The `Get-Credential` cmdlet securely prompts for and obtains user credentials.
+
+10. **Answer:** B  
+    **Explanation:** Pipelines pass the output of one cmdlet as input to another, streamlining data processing.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
