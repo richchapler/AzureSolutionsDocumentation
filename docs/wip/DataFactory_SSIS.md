@@ -231,24 +231,16 @@ ALTER ROLE ssis_admin ADD MEMBER [{prefix}df];
 
 - Navigate to Azure Data Factory Studio >> "Author" and create a new pipeline
 - Drag an "Execute SSIS Package" activity onto the pipeline canvas and configure:
+  - Azure-SSIS IR: `Azure-SSIS`
+  - Windows authentication: UNCHECKED
+  - Package location: `SSISDB`
+  - Folder: `SSISDemoPipeline`
+  - Project: `SSISDemoPipeline`
+  - Package: `Package.dtsx`
+  - Environment: BLANK
+  - Logging Level: `Basic`
 
-
-
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-
-
-
-
-
-  - Integration Runtime: Select your Azure-SSIS Integration Runtime
-  - Package location: Select the newly deployed SSIS package from your Azure SSISDB
-  - Configure any necessary runtime parameters and connection details
-- Click "Debug" to test the pipeline execution
+Click "Debug" to test the pipeline execution.
 
 ### Monitor and Verify
 
