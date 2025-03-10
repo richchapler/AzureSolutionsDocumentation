@@ -55,15 +55,18 @@ Lists all items (files and folders) in the "C:\Windows" directory and all its su
 
 ### Basic Scripting Concepts
 
+Here's an updated version with distinct examples for "Writing Scripts" and "Capturing Script Output":
+
 #### Writing Scripts
 Scripts allow you to automate tasks by combining multiple cmdlets and logic.
 
 ```powershell
-# This script retrieves running processes and writes the output to a text file.
-$processes = Get-Process
-$processes | Out-File -FilePath "C:\Temp\processes.txt"
+# This script retrieves the current date and writes it to a text file.
+$currentDate = Get-Date
+$currentDate | Out-File -FilePath "C:\Temp\CurrentDate.txt"
 ```
-The script captures the output of `Get-Process` into a variable and then writes that output to a file.
+
+Writes the current date and time to "C:\Temp\CurrentDate.txt".
 
 -------------------------
 
@@ -98,12 +101,14 @@ This command prompts you for a username and password, storing them in the `$cred
 -------------------------
 
 #### Using Credentials in Commands
-You can pass credentials to cmdlets that require authentication.
+You can pass credentials to cmdlets that require authentication. To avoid remote WinRM configuration issues during testing, use "localhost" as the computer name.
 
 ```powershell
-Invoke-Command -ComputerName "Server01" -Credential $cred -ScriptBlock { Get-Service }
+$cred = Get-Credential
+Invoke-Command -ComputerName "localhost" -Credential $cred -ScriptBlock { Get-Service }
 ```
-Executes the `Get-Service` command on a remote computer using the credentials stored in `$cred`.
+
+Executes the `Get-Service` command on the local machine using the credentials stored in `$cred`. For remote connections, ensure that WinRM is properly configured (for example, using HTTPS transport or adding the destination machine to the TrustedHosts list) to avoid authentication errors.
 
 -------------------------
 
@@ -140,10 +145,11 @@ This command suppresses errors when attempting to list a non-existent directory.
 It is important to capture and manage output for logging and later analysis.
 
 ```powershell
-$output = Get-Process
-$output | Out-File "C:\Temp\ProcessOutput.txt"
+# This command retrieves a list of running services, selects the Name and Status properties, and exports the information to a CSV file.
+Get-Service | Select-Object Name, Status | Export-Csv -Path "C:\Temp\ServiceStatus.csv" -NoTypeInformation
 ```
-Captures the output of `Get-Process` and writes it to a file for review.
+
+Exports the names and statuses of running services to "C:\Temp\ServiceStatus.csv".
 
 -------------------------
 
