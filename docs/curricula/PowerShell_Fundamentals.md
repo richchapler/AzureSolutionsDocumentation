@@ -30,7 +30,7 @@ Example:
 ```powershell
 Get-Process
 ```
-*Description:* Retrieves a list of all running processes. "Get" indicates the action of retrieving, and "Process" is the object being retrieved.
+Retrieves a list of all running processes. "Get" indicates the action of retrieving, and "Process" is the object being retrieved.
 
 -------------------------
 
@@ -41,7 +41,7 @@ Example:
 ```powershell
 Get-Process | Where-Object { $_.CPU -gt 100 }
 ```
-*Description:* Retrieves all running processes and pipes the output to `Where-Object` to filter out only those processes that are using more than 100 units of CPU.
+Retrieves all running processes and pipes the output to `Where-Object` to filter out only those processes that are using more than 100 units of CPU.
 
 -------------------------
 
@@ -52,7 +52,7 @@ Example:
 ```powershell
 Get-ChildItem -Path "C:\Windows" -Recurse
 ```
-*Description:* Lists all items (files and folders) in the "C:\Windows" directory and all its subdirectories. The `-Recurse` parameter tells the cmdlet to include all nested items.
+Lists all items (files and folders) in the "C:\Windows" directory and all its subdirectories. The `-Recurse` parameter tells the cmdlet to include all nested items.
 
 -------------------------
 
@@ -67,7 +67,7 @@ Example:
 $processes = Get-Process
 $processes | Out-File -FilePath "C:\Temp\processes.txt"
 ```
-*Description:* The script captures the output of `Get-Process` into a variable and then writes that output to a file.
+The script captures the output of `Get-Process` into a variable and then writes that output to a file.
 
 -------------------------
 
@@ -86,7 +86,7 @@ function Get-HighCPUProcesses {
 # Call the function with a custom threshold:
 Get-HighCPUProcesses -MinCPU 100
 ```
-*Description:* This function retrieves processes with CPU usage above a specified threshold, making the code modular and reusable.
+This function retrieves processes with CPU usage above a specified threshold, making the code modular and reusable.
 
 -------------------------
 
@@ -99,7 +99,7 @@ Example:
 ```powershell
 $cred = Get-Credential
 ```
-*Description:* This command prompts you for a username and password, storing them in the `$cred` variable without hard-coding sensitive information.
+This command prompts you for a username and password, storing them in the `$cred` variable without hard-coding sensitive information.
 
 -------------------------
 
@@ -110,7 +110,7 @@ Example:
 ```powershell
 Invoke-Command -ComputerName "Server01" -Credential $cred -ScriptBlock { Get-Service }
 ```
-*Description:* Executes the `Get-Service` command on a remote computer using the credentials stored in `$cred`.
+Executes the `Get-Service` command on a remote computer using the credentials stored in `$cred`.
 
 -------------------------
 
@@ -128,7 +128,7 @@ catch {
     Write-Error "An error occurred: $_"
 }
 ```
-*Description:* This script attempts to read a non-existent file and, upon failure, catches the error and outputs a custom error message.
+This script attempts to read a non-existent file and, upon failure, catches the error and outputs a custom error message.
 
 -------------------------
 
@@ -139,7 +139,7 @@ Example:
 ```powershell
 Get-ChildItem -Path "C:\InvalidPath" -ErrorAction SilentlyContinue
 ```
-*Description:* This command suppresses errors when attempting to list a non-existent directory.
+This command suppresses errors when attempting to list a non-existent directory.
 
 -------------------------
 
@@ -153,7 +153,7 @@ Example:
 $output = Get-Process
 $output | Out-File "C:\Temp\ProcessOutput.txt"
 ```
-*Description:* Captures the output of `Get-Process` and writes it to a file for review.
+Captures the output of `Get-Process` and writes it to a file for review.
 
 -------------------------
 
@@ -166,7 +166,7 @@ Start-Transcript -Path "C:\Temp\ScriptLog.txt"
 # Execute various commands...
 Stop-Transcript
 ```
-*Description:* Starts and stops a transcript, saving the entire session output to a log file.
+Starts and stops a transcript, saving the entire session output to a log file.
 
 -------------------------
 
@@ -186,7 +186,7 @@ Example:
 $dataPath = $env:DATA_PATH  # Use an environment variable for file paths
 Get-ChildItem -Path $dataPath
 ```
-*Description:* This approach makes your script adaptable, so you don't have to hard-code paths for different environments.
+This approach makes your script adaptable, so you don't have to hard-code paths for different environments.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
