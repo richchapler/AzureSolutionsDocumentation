@@ -26,7 +26,6 @@ Before you start using PowerShell for SQL Server administration, it's essential 
 #### Cmdlet Naming Convention
 PowerShell cmdlets follow a consistent Verb-Noun naming pattern, which helps you understand what action is performed and on what object.
 
-Example:
 ```powershell
 Get-Process
 ```
@@ -37,7 +36,6 @@ Retrieves a list of all running processes. "Get" indicates the action of retriev
 #### Pipelines
 Pipelines allow you to pass the output of one cmdlet directly into another, making it easy to filter and process data.
 
-Example:
 ```powershell
 Get-Process | Where-Object { $_.CPU -gt 100 }
 ```
@@ -48,7 +46,6 @@ Retrieves all running processes and pipes the output to `Where-Object` to filter
 #### Parameters and Aliases
 Cmdlets accept parameters that modify their behavior, and many cmdlets have aliases—shorter or alternative names for convenience.
 
-Example:
 ```powershell
 Get-ChildItem -Path "C:\Windows" -Recurse
 ```
@@ -61,7 +58,6 @@ Lists all items (files and folders) in the "C:\Windows" directory and all its su
 #### Writing Scripts
 Scripts allow you to automate tasks by combining multiple cmdlets and logic.
 
-Example:
 ```powershell
 # This script retrieves running processes and writes the output to a text file.
 $processes = Get-Process
@@ -74,7 +70,6 @@ The script captures the output of `Get-Process` into a variable and then writes 
 #### Using Functions
 Functions help organize your code into reusable blocks.
 
-Example:
 ```powershell
 function Get-HighCPUProcesses {
     param(
@@ -95,7 +90,6 @@ This function retrieves processes with CPU usage above a specified threshold, ma
 #### Securely Handling Credentials
 PowerShell provides the `Get-Credential` cmdlet to securely prompt for user credentials.
 
-Example:
 ```powershell
 $cred = Get-Credential
 ```
@@ -106,7 +100,6 @@ This command prompts you for a username and password, storing them in the `$cred
 #### Using Credentials in Commands
 You can pass credentials to cmdlets that require authentication.
 
-Example:
 ```powershell
 Invoke-Command -ComputerName "Server01" -Credential $cred -ScriptBlock { Get-Service }
 ```
@@ -119,7 +112,6 @@ Executes the `Get-Service` command on a remote computer using the credentials st
 #### Using Try/Catch Blocks
 Error handling in PowerShell is achieved using Try/Catch blocks.
 
-Example:
 ```powershell
 try {
     Get-Content "C:\NonExistentFile.txt"
@@ -135,7 +127,6 @@ This script attempts to read a non-existent file and, upon failure, catches the 
 #### Controlling Error Behavior
 You can control how errors are handled using the `-ErrorAction` parameter.
 
-Example:
 ```powershell
 Get-ChildItem -Path "C:\InvalidPath" -ErrorAction SilentlyContinue
 ```
@@ -148,7 +139,6 @@ This command suppresses errors when attempting to list a non-existent directory.
 #### Capturing Script Output
 It is important to capture and manage output for logging and later analysis.
 
-Example:
 ```powershell
 $output = Get-Process
 $output | Out-File "C:\Temp\ProcessOutput.txt"
@@ -160,7 +150,6 @@ Captures the output of `Get-Process` and writes it to a file for review.
 #### Transcript Logging
 Transcript logging records all commands and output during a session.
 
-Example:
 ```powershell
 Start-Transcript -Path "C:\Temp\ScriptLog.txt"
 # Execute various commands...
@@ -181,7 +170,6 @@ Starts and stops a transcript, saving the entire session output to a log file.
 #### Script Portability
 Design your scripts to run in different environments by using parameters and environment variables.
 
-Example:
 ```powershell
 $dataPath = $env:DATA_PATH  # Use an environment variable for file paths
 Get-ChildItem -Path $dataPath
