@@ -51,7 +51,7 @@ Get-ChildItem -Path "C:\Windows" -Recurse
 ```
 Lists all items (files and folders) in the "C:\Windows" directory and all its subdirectories. The `-Recurse` parameter tells the cmdlet to include all nested items.
 
--------------------------
+------------------------- -------------------------
 
 ### Basic Scripting Concepts
 
@@ -86,7 +86,7 @@ Get-HighCPUProcesses -MinCPU 100
 ```
 This function retrieves processes with CPU usage above a specified threshold, making the code modular and reusable.
 
--------------------------
+------------------------- -------------------------
 
 ### Credential Management
 
@@ -110,7 +110,7 @@ Invoke-Command -ComputerName "localhost" -Credential $cred -ScriptBlock { Get-Se
 
 Executes the `Get-Service` command on the local machine using the credentials stored in `$cred`. For remote connections, ensure that WinRM is properly configured (for example, using HTTPS transport or adding the destination machine to the TrustedHosts list) to avoid authentication errors.
 
--------------------------
+------------------------- -------------------------
 
 ### Error Handling and Debugging
 
@@ -137,7 +137,7 @@ Get-ChildItem -Path "C:\InvalidPath" -ErrorAction SilentlyContinue
 ```
 This command suppresses errors when attempting to list a non-existent directory.
 
--------------------------
+------------------------- -------------------------
 
 ### Logging and Output Management
 
@@ -162,7 +162,7 @@ Stop-Transcript
 ```
 Starts and stops a transcript, saving the entire session output to a log file.
 
--------------------------
+------------------------- -------------------------
 
 ### Platform Considerations
 
