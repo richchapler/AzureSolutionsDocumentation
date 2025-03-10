@@ -338,6 +338,10 @@ Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database TrainingDB -Query "
 ```
 
 -------------------------
+-------------------------
+-------------------------
+-------------------------
+-------------------------
 
 ### Hands‑On Exercise #2
 
