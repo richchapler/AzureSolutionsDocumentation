@@ -317,7 +317,7 @@ Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $
 
 ------------------------- -------------------------
 
-### Hands‑On Exercise #1 – Automate Setup and Configuration
+### Hands‑On Exercise #1 – Automated Setup and Configuration
 
 In this exercise, you will verify that SQL Server is running, create a new database named TrainingDB, and create a SQL login named TrainingUser that is mapped to TrainingDB with read permissions
 
@@ -333,20 +333,21 @@ Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerC
 
 Use SQL Server Management Studio to confirm database creation.
 
--------------------------
--------------------------
--------------------------
--------------------------
--------------------------
-
-
-Step 3: Create a SQL login named TrainingUser and map it to TrainingDB with read permissions  
+Step 3: Create login `traininguser`  
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Query "CREATE LOGIN TrainingUser WITH PASSWORD = 'Str0ngPass!';"
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database TrainingDB -Query "CREATE USER TrainingUser FOR LOGIN TrainingUser; EXEC sp_addrolemember 'db_datareader', 'TrainingUser';"
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "CREATE LOGIN traininguser WITH PASSWORD = 'Str0ngPass!';"
 ```
 
--------------------------
+Use SQL Server Management Studio to confirm login creation.
+
+Step 4: Map login `traininguser` database `trainingdb` with read permissions  
+```powershell
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database trainingdb -TrustServerCertificate:$true -Query "CREATE USER traininguser FOR LOGIN traininguser; EXEC sp_addrolemember 'db_datareader', 'traininguser';"
+```
+
+Use SQL Server Management Studio to confirm user creation and permissions.
+
+------------------------- -------------------------
 
 ### Hands‑On Exercise #2
 
@@ -403,9 +404,9 @@ Backup "TrainingDB" to a file and verify the backup file. Optionally, describe t
    C. Manual backup through the GUI  
    D. Windows PowerShell ISE without scheduling
 
----
+------------------------- ------------------------- ------------------------- -------------------------
 
-## Section 2: Azure PowerShell (Managing Azure SQL)
+## Azure PowerShell
 
 This section focuses on using the Azure PowerShell (Az) modules to deploy and manage Azure SQL resources, including servers and databases.
 
