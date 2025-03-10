@@ -191,7 +191,7 @@ Instantiate an Azure Virtual Machine (or equivalent):
   * Inbound Ports: RDP (3389) allowed
   * Boot Diagnostics: Disable
 
-------------------------- -------------------------
+-------------------------
 
 ### PowerShell 7
 
@@ -207,9 +207,11 @@ Download and install the latest MSI version.
 
 ------------------------- -------------------------
 
-### SqlServer Module
+### SQL Server
 
-Run "PowerShell 7 (x64)" as an administrator and execute the following PowerShell command to install the SqlServer Module:
+#### SqlServer Module
+
+Execute the following PowerShell command to install the SqlServer Module:
 
 ```powershell
 Install-Module -Name SqlServer -Scope CurrentUser
@@ -223,11 +225,9 @@ Import-Module SqlServer
 
 <img src="https://github.com/user-attachments/assets/3813766e-4379-4fa1-9da8-ceb98c5955b8" width="600" title="Snipped March 3, 2025" />
 
-------------------------- -------------------------
+-------------------------
 
-### SQL Server Connectivity
-
-<img src="https://github.com/user-attachments/assets/b0c2be09-a50e-42f9-aaf0-62494f016a93" width="600" title="Snipped March 3, 2025" />
+#### SQL Server Connectivity
 
 Execute the following PowerShell command to confirm network connectivity:
 
@@ -237,49 +237,42 @@ Test-NetConnection -ComputerName "YourSQLServerName" -Port 1433
 
 This command tells you whether the SQL Server's port is accessible, indicating that your VM has network access to the SQL Server instance.
 
-### SQL Server Authentication
+<img src="https://github.com/user-attachments/assets/b0c2be09-a50e-42f9-aaf0-62494f016a93" width="600" title="Snipped March 3, 2025" />
 
-<img src="https://github.com/user-attachments/assets/blah" width="600" title="Snipped March 3, 2025" />
+-------------------------
 
+#### SQL Server Authentication
 
+To verify your connection to SQL Server and test the authentication method, you can run a simple T-SQL query using the `Invoke-Sqlcmd` cmdlet.
 
+##### Windows Integrated Authentication
 
-
-
-
-
-
-You can run a simple query using `Invoke-Sqlcmd` to verify that you can connect to SQL Server. By default, this will use Windows Integrated Authentication. For example:
+By default, this command uses Windows Integrated Authentication.
 
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName\InstanceName" -Database master -Query "SELECT @@VERSION;"
+Invoke-Sqlcmd -ServerInstance "cnbtraining" -Database master -TrustServerCertificate:$true -Query "SELECT @@VERSION;"
 ```
 
-If you need to use SQL Authentication instead, you can supply credentials like this:
+-------------------------
+-------------------------
+-------------------------
+-------------------------
+-------------------------
+-------------------------
+
+##### SQL Authentication
+
+If SQL Authentication is required, first obtain credentials with `Get-Credential` and then supply them to the cmdlet:
 
 ```powershell
 $cred = Get-Credential
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName\InstanceName" -Database master -Credential $cred -Query "SELECT @@VERSION;"
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $cred -Query "SELECT @@VERSION;"
 ```
 
-This approach helps confirm both network connectivity and that the chosen authentication method is working correctly.
+This process confirms that your SQL Server is reachable and that the chosen authentication method (either Windows Integrated or SQL Authentication) is working correctly.
 
+-------------------------
 
-
-
-
-
-
----
-
-### SQL Server Connectivity
-
-- Ensure Connectivity:  
-  Verify that your workstation has network access to your on‑premises SQL Server instance. By default, Windows Integrated Authentication is used (or supply credentials if using SQL Authentication).
-
----
-
-Using phrases like "execute the following PowerShell command" is clear and direct for instructions. Feel free to use that phrasing to guide users through each step.
 
 ### Key Topics and Exercises for On‑Premises Administration
 
