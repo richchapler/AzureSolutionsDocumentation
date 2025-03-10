@@ -310,7 +310,7 @@ If SQL Authentication is required, first obtain credentials with `Get-Credential
 
 ```powershell
 $cred = Get-Credential
-Invoke-Sqlcmd -ServerInstance "cnbtraining" -Database master -Credential $cred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $cred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
 ```
 
 <img src="https://github.com/user-attachments/assets/3785690f-768f-4784-86db-a5607c6f951d" width="600" title="Snipped March 10, 2025" />
@@ -326,21 +326,26 @@ Step 1: Verify that SQL Server is running
 Get-Service -Name MSSQLSERVER
 ```
 
-Step 2: Create a new database named TrainingDB  
+Step 2: Create a new database named `trainingdb` 
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database master -Query "CREATE DATABASE TrainingDB;"
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "CREATE DATABASE trainingdb;"
 ```
+
+Use SQL Server Management Studio to confirm database creation.
+
+-------------------------
+-------------------------
+-------------------------
+-------------------------
+-------------------------
+
 
 Step 3: Create a SQL login named TrainingUser and map it to TrainingDB with read permissions  
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database master -Query "CREATE LOGIN TrainingUser WITH PASSWORD = 'Str0ngPass!';"
-Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database TrainingDB -Query "CREATE USER TrainingUser FOR LOGIN TrainingUser; EXEC sp_addrolemember 'db_datareader', 'TrainingUser';"
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Query "CREATE LOGIN TrainingUser WITH PASSWORD = 'Str0ngPass!';"
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database TrainingDB -Query "CREATE USER TrainingUser FOR LOGIN TrainingUser; EXEC sp_addrolemember 'db_datareader', 'TrainingUser';"
 ```
 
--------------------------
--------------------------
--------------------------
--------------------------
 -------------------------
 
 ### Hands‑On Exercise #2
