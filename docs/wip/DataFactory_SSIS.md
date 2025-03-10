@@ -174,9 +174,9 @@ Wait for `Status` to change to "Running".
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Exercise 3: Migrate and Deploy Packages
+## Exercise 3: Deploy Package
 
-Deploy your SSIS packages directly to Azure:
+### Deploy Packages
 
 - In Visual Studio, Solution Explorer, right-click the `SSISDemoPipeline` project and click "Deploy"
 - On the resulting "Integration Services Deployment Wizard" interface, navigate to "Select Deployment Target"
@@ -191,24 +191,25 @@ Deploy your SSIS packages directly to Azure:
 - Back on the "Select Destination" form, click "Next >"
 - Review selections, then click "Deploy", monitor progress, and then click "Close"
 
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-------------------------- ------------------------- ------------------------- -------------------------
-
-
-
-
 ### Verify Deployment
 
-- Open SQL Server Management Studio (SSMS) or Azure Data Studio.
-- Connect to your Azure SQL Database server.
-- Verify that the deployed packages appear under `Integration Services Catalogs → SSISDB`.
+- Open SQL Server Management Studio and connect to the Azure SQL Server
+- Verify that the deployed packages appear under `Integration Services Catalogs → SSISDB`
 
-### Configure and Execute Pipeline in Azure Data Factory
+
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Exercise 4: Create Pipeline
+
+
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 Now, you'll configure Azure Data Factory to execute your deployed SSIS packages:
 
