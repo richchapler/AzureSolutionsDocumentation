@@ -17,6 +17,142 @@ This curriculum provides a structured introduction to using PowerShell (in both 
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
+## General Concepts
+
+Before you start using PowerShell for SQL Server administration, it's essential to understand the core concepts of PowerShell scripting. This section covers syntax, scripting best practices, credential management, error handling, logging, and considerations for script portability between local environments and Azure Cloud Shell.
+
+### PowerShell Syntax and Command Structure
+
+- **Cmdlet Naming Convention:**
+  - **Example 1:** `Get-Process`  
+    *Description:* Retrieves a list of all running processes. The verb “Get” indicates retrieval, and “Process” is the noun representing the object.
+  - **Example 2:** `Set-Item -Path "C:\Temp\File.txt" -Value "Hello, World!"`  
+    *Description:* Sets the content of the specified file to "Hello, World!". Here, “Set” is the verb, and “Item” is the noun.
+  - **Example 3:** `Invoke-Sqlcmd -ServerInstance "SQLSERVER01\Instance" -Database master -Query "SELECT @@VERSION;"`  
+    *Description:* Executes a T-SQL query against a SQL Server instance. “Invoke” implies execution.
+
+- **Pipelines:**
+  - **Example 1:**  
+    ```powershell
+    Get-Process | Where-Object { $_.CPU -gt 100 }
+    ```  
+    *Description:* Retrieves all running processes and pipes the results to `Where-Object`, which filters the processes to display only those with a CPU usage greater than 100.
+  - **Example 2:**  
+    ```powershell
+    Get-ChildItem -Path "C:\Logs" | Select-Object Name, Length
+    ```  
+    *Description:* Lists all items in the "C:\Logs" directory and then pipes the output to `Select-Object` to display only the Name and Length properties.
+
+- **Parameters and Aliases:**
+  - **Example 1:**  
+    ```powershell
+    Get-ChildItem -Path "C:\Windows" -Recurse
+    ```  
+    *Description:* Lists all files and directories under "C:\Windows" recursively using the `-Recurse` parameter.
+  - **Example 2:**  
+    ```powershell
+    ls "C:\Windows" | Sort-Object Length -Descending
+    ```  
+    *Description:* Uses the alias `ls` (for `Get-ChildItem`) to list the items in "C:\Windows" and then sorts them by file size (Length) in descending order.
+
+### Basic Scripting Concepts
+
+- **Writing Scripts:**
+  - **Example:**  
+    ```powershell
+    # This script retrieves running processes and writes the output to a file.
+    $processes = Get-Process
+    $processes | Out-File -FilePath "C:\Temp\processes.txt"
+    ```  
+    *Description:* This script demonstrates capturing command output in a variable and then saving that output to a text file.
+  
+- **Using Functions:**
+  - **Example:**  
+    ```powershell
+    function Get-HighCPUProcesses {
+        param(
+            [int]$MinCPU = 50
+        )
+        Get-Process | Where-Object { $_.CPU -gt $MinCPU }
+    }
+    # Call the function with a custom threshold:
+    Get-HighCPUProcesses -MinCPU 100
+    ```  
+    *Description:* Defines a function to retrieve processes with CPU usage above a specified threshold, promoting code reuse and modularity.
+
+### Credential Management
+
+- **Securely Handling Credentials:**
+  - **Example:**  
+    ```powershell
+    $cred = Get-Credential
+    ```  
+    *Description:* Prompts the user to securely enter their username and password, storing the credentials in the `$cred` variable.
+  
+- **Using Credentials in Commands:**
+  - **Example:**  
+    ```powershell
+    Invoke-Sqlcmd -ServerInstance "SQLSERVER01\Instance" -Database master -Credential $cred -Query "SELECT @@VERSION;"
+    ```  
+    *Description:* Executes a SQL query using the secure credentials stored in `$cred`.
+
+### Error Handling and Debugging
+
+- **Using Try/Catch Blocks:**
+  - **Example:**  
+    ```powershell
+    try {
+        # Attempt to read a non-existent file.
+        Get-Content "C:\NonExistentFile.txt"
+    }
+    catch {
+        Write-Error "An error occurred: $_"
+    }
+    ```  
+    *Description:* This script attempts to read a file that does not exist and gracefully handles the error by displaying a custom message.
+  
+- **Controlling Error Behavior:**
+  - **Example:**  
+    ```powershell
+    Get-ChildItem -Path "C:\InvalidPath" -ErrorAction SilentlyContinue
+    ```  
+    *Description:* Uses the `-ErrorAction` parameter to suppress errors when the specified path is invalid.
+
+### Logging and Output Management
+
+- **Capturing Script Output:**
+  - **Example:**  
+    ```powershell
+    $output = Get-Process
+    $output | Out-File "C:\Temp\ProcessOutput.txt"
+    ```  
+    *Description:* Captures the output of `Get-Process` into a variable and then writes it to a file.
+  
+- **Transcript Logging:**
+  - **Example:**  
+    ```powershell
+    Start-Transcript -Path "C:\Temp\ScriptLog.txt"
+    # Execute script commands...
+    Stop-Transcript
+    ```  
+    *Description:* Begins transcript logging to capture all command outputs, then stops logging at the end of the script.
+
+### Platform Considerations
+
+- **Local vs. Azure Cloud Shell:**
+  - **Note:**  
+    When running PowerShell locally (on-premises or on your own Azure VM), you manage module installation and updates. In Azure Cloud Shell, the necessary Az modules are pre-installed and the environment is managed by Azure.
+- **Script Portability:**
+  - **Example Consideration:**  
+    Use parameters and environment variables to manage differences between environments. For instance:
+    ```powershell
+    $dataPath = $env:DATA_PATH  # Use an environment variable for file paths
+    Get-ChildItem -Path $dataPath
+    ```
+    *Description:* This approach allows your script to run seamlessly across different environments without hard-coding paths.
+
+------------------------- ------------------------- ------------------------- -------------------------
+
 ## Windows PowerShell (on-prem)
 
 ### Virtual Machine
