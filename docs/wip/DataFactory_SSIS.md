@@ -183,7 +183,13 @@ Deploy your SSIS packages directly to Azure:
   - Click deployment target "SSIS in Data Factory" and click "Next"
 - Complete the "Select Destination" form:
   - Server name: `{prefix}ss.database.windows.net`
-  - Authe
+  - Authentication: `SQL Server Authentication` (along with Login and Password)
+- Click "Connect" and then the resulting "Browse" button
+  - On the resulting "Browse for Folder or Project", select the `SSISDB` folder
+  - Click "New folder" and on the resulting "Create New Folder" enter Name `SSISDemoPipeline`
+  - Click to select the `SSISDemoPipeline` and then click "OK"
+- Back on the "Select Destination" form, click "Next >"
+- Review selections, then click "Deploy", monitor progress, and then click "Close"
 
 ------------------------- ------------------------- ------------------------- -------------------------
 ------------------------- ------------------------- ------------------------- -------------------------
@@ -195,11 +201,6 @@ Deploy your SSIS packages directly to Azure:
 
 
 
-
-
-  - Choose "SQL Server Authentication," provide your credentials, then click "Connect."
-  - Click "Browse..." to select the deployment path within the SSISDB catalog, confirm, then click "Next."
-  - Follow prompts to complete the deployment process.
 
 ### Verify Deployment
 
