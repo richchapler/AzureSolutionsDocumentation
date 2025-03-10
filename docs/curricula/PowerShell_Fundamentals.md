@@ -167,10 +167,8 @@ Starts and stops a transcript, saving the entire session output to a log file.
 ### Platform Considerations
 
 #### Local vs. Azure Cloud Shell
-- **Local Environment:**  
-  When running PowerShell on your local machine or on-premises (or on your own Azure VM), you are responsible for installing and updating modules.
-- **Azure Cloud Shell:**  
-  In Azure Cloud Shell, the Az modules are pre-installed and managed by Azure. This means you don't need to worry about manual module installation or version upgrades.
+- Local Environment: When running PowerShell on your local machine or on-premises (or on your own Azure VM), you are responsible for installing and updating modules.
+- Azure Cloud Shell: In Azure Cloud Shell, the Az modules are pre-installed and managed by Azure. This means you don't need to worry about manual module installation or version upgrades.
   
 #### Script Portability
 Design your scripts to run in different environments by using parameters and environment variables.
@@ -211,22 +209,23 @@ Download and install the latest MSI version.
 
 ### SqlServer Module
 
-Run "PowerShell 7 (x64)" as an administrator.
-
-<img src="https://github.com/user-attachments/assets/3813766e-4379-4fa1-9da8-ceb98c5955b8" width="600" title="Snipped March 3, 2025" />
-
-Execute the following PowerShell command to install the SqlServer Module:
+Run "PowerShell 7 (x64)" as an administrator and execute the following PowerShell command to install the SqlServer Module:
 
 ```powershell
 Install-Module -Name SqlServer -Scope CurrentUser
 ```
 
-Execute the following PowerShell command to import the SqlServer Module:
+<img src="https://github.com/user-attachments/assets/3813766e-4379-4fa1-9da8-ceb98c5955b8" width="600" title="Snipped March 3, 2025" />
+
+Then, execute the following PowerShell command to import the SqlServer Module and load the module into your current session (making its cmdlets immediately available):
 
 ```powershell
 Import-Module SqlServer
 ```
 
+------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
 ------------------------- -------------------------
 
 ### SQL Server Connectivity
@@ -349,7 +348,7 @@ Backup "TrainingDB" to a file and verify the backup file. Optionally, describe t
 - Ensure the SqlServer module is up‑to‑date when using PowerShell Core.  
 - On non‑Windows systems, SQL Authentication is recommended.
 
----
+------------------------- -------------------------
 
 ### Quiz: Test Your Knowledge – On‑Premises
 
