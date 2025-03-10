@@ -215,17 +215,14 @@ Run "PowerShell 7 (x64)" as an administrator and execute the following PowerShel
 Install-Module -Name SqlServer -Scope CurrentUser
 ```
 
-<img src="https://github.com/user-attachments/assets/3813766e-4379-4fa1-9da8-ceb98c5955b8" width="600" title="Snipped March 3, 2025" />
-
 Then, execute the following PowerShell command to import the SqlServer Module and load the module into your current session (making its cmdlets immediately available):
 
 ```powershell
 Import-Module SqlServer
 ```
 
-------------------------- -------------------------
-------------------------- -------------------------
-------------------------- -------------------------
+<img src="https://github.com/user-attachments/assets/3813766e-4379-4fa1-9da8-ceb98c5955b8" width="600" title="Snipped March 3, 2025" />
+
 ------------------------- -------------------------
 
 ### SQL Server Connectivity
