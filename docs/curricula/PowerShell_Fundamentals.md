@@ -21,135 +21,172 @@ This curriculum provides a structured introduction to using PowerShell (in both 
 
 Before you start using PowerShell for SQL Server administration, it's essential to understand the core concepts of PowerShell scripting. This section covers syntax, scripting best practices, credential management, error handling, logging, and considerations for script portability between local environments and Azure Cloud Shell.
 
-### PowerShell Syntax and Command Structure
+### Syntax and Command Structure
 
-- **Cmdlet Naming Convention:**
-  - **Example 1:** `Get-Process`  
-    *Description:* Retrieves a list of all running processes. The verb “Get” indicates retrieval, and “Process” is the noun representing the object.
-  - **Example 2:** `Set-Item -Path "C:\Temp\File.txt" -Value "Hello, World!"`  
-    *Description:* Sets the content of the specified file to "Hello, World!". Here, “Set” is the verb, and “Item” is the noun.
-  - **Example 3:** `Invoke-Sqlcmd -ServerInstance "SQLSERVER01\Instance" -Database master -Query "SELECT @@VERSION;"`  
-    *Description:* Executes a T-SQL query against a SQL Server instance. “Invoke” implies execution.
+#### Cmdlet Naming Convention
+PowerShell cmdlets follow a consistent Verb-Noun naming pattern, which helps you understand what action is performed and on what object.
 
-- **Pipelines:**
-  - **Example 1:**  
-    ```powershell
-    Get-Process | Where-Object { $_.CPU -gt 100 }
-    ```  
-    *Description:* Retrieves all running processes and pipes the results to `Where-Object`, which filters the processes to display only those with a CPU usage greater than 100.
-  - **Example 2:**  
-    ```powershell
-    Get-ChildItem -Path "C:\Logs" | Select-Object Name, Length
-    ```  
-    *Description:* Lists all items in the "C:\Logs" directory and then pipes the output to `Select-Object` to display only the Name and Length properties.
+Example:
+```powershell
+Get-Process
+```
+*Description:* Retrieves a list of all running processes. "Get" indicates the action of retrieving, and "Process" is the object being retrieved.
 
-- **Parameters and Aliases:**
-  - **Example 1:**  
-    ```powershell
-    Get-ChildItem -Path "C:\Windows" -Recurse
-    ```  
-    *Description:* Lists all files and directories under "C:\Windows" recursively using the `-Recurse` parameter.
-  - **Example 2:**  
-    ```powershell
-    ls "C:\Windows" | Sort-Object Length -Descending
-    ```  
-    *Description:* Uses the alias `ls` (for `Get-ChildItem`) to list the items in "C:\Windows" and then sorts them by file size (Length) in descending order.
+-------------------------
+
+#### Pipelines
+Pipelines allow you to pass the output of one cmdlet directly into another, making it easy to filter and process data.
+
+Example:
+```powershell
+Get-Process | Where-Object { $_.CPU -gt 100 }
+```
+*Description:* Retrieves all running processes and pipes the output to `Where-Object` to filter out only those processes that are using more than 100 units of CPU.
+
+-------------------------
+
+#### Parameters and Aliases
+Cmdlets accept parameters that modify their behavior, and many cmdlets have aliases—shorter or alternative names for convenience.
+
+Example:
+```powershell
+Get-ChildItem -Path "C:\Windows" -Recurse
+```
+*Description:* Lists all items (files and folders) in the "C:\Windows" directory and all its subdirectories. The `-Recurse` parameter tells the cmdlet to include all nested items.
+
+-------------------------
 
 ### Basic Scripting Concepts
 
-- **Writing Scripts:**
-  - **Example:**  
-    ```powershell
-    # This script retrieves running processes and writes the output to a file.
-    $processes = Get-Process
-    $processes | Out-File -FilePath "C:\Temp\processes.txt"
-    ```  
-    *Description:* This script demonstrates capturing command output in a variable and then saving that output to a text file.
-  
-- **Using Functions:**
-  - **Example:**  
-    ```powershell
-    function Get-HighCPUProcesses {
-        param(
-            [int]$MinCPU = 50
-        )
-        Get-Process | Where-Object { $_.CPU -gt $MinCPU }
-    }
-    # Call the function with a custom threshold:
-    Get-HighCPUProcesses -MinCPU 100
-    ```  
-    *Description:* Defines a function to retrieve processes with CPU usage above a specified threshold, promoting code reuse and modularity.
+#### Writing Scripts
+Scripts allow you to automate tasks by combining multiple cmdlets and logic.
+
+Example:
+```powershell
+# This script retrieves running processes and writes the output to a text file.
+$processes = Get-Process
+$processes | Out-File -FilePath "C:\Temp\processes.txt"
+```
+*Description:* The script captures the output of `Get-Process` into a variable and then writes that output to a file.
+
+-------------------------
+
+#### Using Functions
+Functions help organize your code into reusable blocks.
+
+Example:
+```powershell
+function Get-HighCPUProcesses {
+    param(
+        [int]$MinCPU = 50
+    )
+    Get-Process | Where-Object { $_.CPU -gt $MinCPU }
+}
+
+# Call the function with a custom threshold:
+Get-HighCPUProcesses -MinCPU 100
+```
+*Description:* This function retrieves processes with CPU usage above a specified threshold, making the code modular and reusable.
+
+-------------------------
 
 ### Credential Management
 
-- **Securely Handling Credentials:**
-  - **Example:**  
-    ```powershell
-    $cred = Get-Credential
-    ```  
-    *Description:* Prompts the user to securely enter their username and password, storing the credentials in the `$cred` variable.
-  
-- **Using Credentials in Commands:**
-  - **Example:**  
-    ```powershell
-    Invoke-Sqlcmd -ServerInstance "SQLSERVER01\Instance" -Database master -Credential $cred -Query "SELECT @@VERSION;"
-    ```  
-    *Description:* Executes a SQL query using the secure credentials stored in `$cred`.
+#### Securely Handling Credentials
+PowerShell provides the `Get-Credential` cmdlet to securely prompt for user credentials.
+
+Example:
+```powershell
+$cred = Get-Credential
+```
+*Description:* This command prompts you for a username and password, storing them in the `$cred` variable without hard-coding sensitive information.
+
+-------------------------
+
+#### Using Credentials in Commands
+You can pass credentials to cmdlets that require authentication.
+
+Example:
+```powershell
+Invoke-Command -ComputerName "Server01" -Credential $cred -ScriptBlock { Get-Service }
+```
+*Description:* Executes the `Get-Service` command on a remote computer using the credentials stored in `$cred`.
+
+-------------------------
 
 ### Error Handling and Debugging
 
-- **Using Try/Catch Blocks:**
-  - **Example:**  
-    ```powershell
-    try {
-        # Attempt to read a non-existent file.
-        Get-Content "C:\NonExistentFile.txt"
-    }
-    catch {
-        Write-Error "An error occurred: $_"
-    }
-    ```  
-    *Description:* This script attempts to read a file that does not exist and gracefully handles the error by displaying a custom message.
-  
-- **Controlling Error Behavior:**
-  - **Example:**  
-    ```powershell
-    Get-ChildItem -Path "C:\InvalidPath" -ErrorAction SilentlyContinue
-    ```  
-    *Description:* Uses the `-ErrorAction` parameter to suppress errors when the specified path is invalid.
+#### Using Try/Catch Blocks
+Error handling in PowerShell is achieved using Try/Catch blocks.
+
+Example:
+```powershell
+try {
+    Get-Content "C:\NonExistentFile.txt"
+}
+catch {
+    Write-Error "An error occurred: $_"
+}
+```
+*Description:* This script attempts to read a non-existent file and, upon failure, catches the error and outputs a custom error message.
+
+-------------------------
+
+#### Controlling Error Behavior
+You can control how errors are handled using the `-ErrorAction` parameter.
+
+Example:
+```powershell
+Get-ChildItem -Path "C:\InvalidPath" -ErrorAction SilentlyContinue
+```
+*Description:* This command suppresses errors when attempting to list a non-existent directory.
+
+-------------------------
 
 ### Logging and Output Management
 
-- **Capturing Script Output:**
-  - **Example:**  
-    ```powershell
-    $output = Get-Process
-    $output | Out-File "C:\Temp\ProcessOutput.txt"
-    ```  
-    *Description:* Captures the output of `Get-Process` into a variable and then writes it to a file.
-  
-- **Transcript Logging:**
-  - **Example:**  
-    ```powershell
-    Start-Transcript -Path "C:\Temp\ScriptLog.txt"
-    # Execute script commands...
-    Stop-Transcript
-    ```  
-    *Description:* Begins transcript logging to capture all command outputs, then stops logging at the end of the script.
+#### Capturing Script Output
+It is important to capture and manage output for logging and later analysis.
+
+Example:
+```powershell
+$output = Get-Process
+$output | Out-File "C:\Temp\ProcessOutput.txt"
+```
+*Description:* Captures the output of `Get-Process` and writes it to a file for review.
+
+-------------------------
+
+#### Transcript Logging
+Transcript logging records all commands and output during a session.
+
+Example:
+```powershell
+Start-Transcript -Path "C:\Temp\ScriptLog.txt"
+# Execute various commands...
+Stop-Transcript
+```
+*Description:* Starts and stops a transcript, saving the entire session output to a log file.
+
+-------------------------
 
 ### Platform Considerations
 
-- **Local vs. Azure Cloud Shell:**
-  - **Note:**  
-    When running PowerShell locally (on-premises or on your own Azure VM), you manage module installation and updates. In Azure Cloud Shell, the necessary Az modules are pre-installed and the environment is managed by Azure.
-- **Script Portability:**
-  - **Example Consideration:**  
-    Use parameters and environment variables to manage differences between environments. For instance:
-    ```powershell
-    $dataPath = $env:DATA_PATH  # Use an environment variable for file paths
-    Get-ChildItem -Path $dataPath
-    ```
-    *Description:* This approach allows your script to run seamlessly across different environments without hard-coding paths.
+#### Local vs. Azure Cloud Shell
+- **Local Environment:**  
+  When running PowerShell on your local machine or on-premises (or on your own Azure VM), you are responsible for installing and updating modules.
+- **Azure Cloud Shell:**  
+  In Azure Cloud Shell, the Az modules are pre-installed and managed by Azure. This means you don't need to worry about manual module installation or version upgrades.
+  
+#### Script Portability
+Design your scripts to run in different environments by using parameters and environment variables.
+
+Example:
+```powershell
+$dataPath = $env:DATA_PATH  # Use an environment variable for file paths
+Get-ChildItem -Path $dataPath
+```
+*Description:* This approach makes your script adaptable, so you don't have to hard-code paths for different environments.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
