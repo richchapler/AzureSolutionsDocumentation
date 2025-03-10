@@ -315,54 +315,32 @@ Invoke-Sqlcmd -ServerInstance "cnbtraining" -Database master -Credential $cred -
 
 <img src="https://github.com/user-attachments/assets/3785690f-768f-4784-86db-a5607c6f951d" width="600" title="Snipped March 10, 2025" />
 
+------------------------- -------------------------
+
+### Hands‑On Exercise #1 – Automate Setup and Configuration
+
+In this exercise, you will verify that SQL Server is running, create a new database named TrainingDB, and create a SQL login named TrainingUser that is mapped to TrainingDB with read permissions
+
+Step 1: Verify that SQL Server is running  
+```powershell
+Get-Service -Name MSSQLSERVER
+```
+
+Step 2: Create a new database named TrainingDB  
+```powershell
+Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database master -Query "CREATE DATABASE TrainingDB;"
+```
+
+Step 3: Create a SQL login named TrainingUser and map it to TrainingDB with read permissions  
+```powershell
+Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database master -Query "CREATE LOGIN TrainingUser WITH PASSWORD = 'Str0ngPass!';"
+Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database TrainingDB -Query "CREATE USER TrainingUser FOR LOGIN TrainingUser; EXEC sp_addrolemember 'db_datareader', 'TrainingUser';"
+```
+
 -------------------------
 
+### Hands‑On Exercise #2
 
-### Key Topics and Exercises for On‑Premises Administration
-
-#### 1. Connecting to SQL Server and Exploring with PowerShell
-
-- SQL Server PowerShell Provider:  
-  Navigate the SQL Server hierarchy:
-  ```powershell
-  Set-Location SQLSERVER:\SQL\YOURSERVER\DEFAULT
-  Get-ChildItem Databases
-  ```
-- Running Queries with Invoke‑Sqlcmd:  
-  Execute a T‑SQL query:
-  ```powershell
-  Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database master -Query "SELECT name, create_date FROM sys.databases;"
-  ```
-
-Hands‑On Exercise 1:  
-1. Open PowerShell on your Windows machine.  
-2. Import the SqlServer module and navigate to your SQL instance using the SQL provider.  
-3. List the databases and retrieve details for a specific database (e.g., `tempdb`).  
-4. Return to your normal file system.
-
-#### 2. Automating SQL Server Setup and Configuration
-
-- Verifying SQL Server Services:  
-  Check service status:
-  ```powershell
-  Get-Service -Name MSSQLSERVER
-  ```
-- Creating a New Database:  
-  ```powershell
-  Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database master -Query "CREATE DATABASE TrainingDB;"
-  ```
-- Creating a SQL Login and Mapping to a Database User:  
-  ```powershell
-  Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database master -Query "
-    CREATE LOGIN TrainingUser WITH PASSWORD = 'Str0ngPass!';
-  "
-  Invoke-Sqlcmd -ServerInstance "YOURSERVER\DEFAULT" -Database TrainingDB -Query "
-    CREATE USER TrainingUser FOR LOGIN TrainingUser;
-    EXEC sp_addrolemember 'db_datareader', 'TrainingUser';
-  "
-  ```
-
-Hands‑On Exercise 2:  
 Create a database named "TrainingDB," add a SQL login named `TrainingUser`, map it to "TrainingDB," and assign read permissions. Verify by listing databases.
 
 #### 3. Automating Maintenance Tasks
