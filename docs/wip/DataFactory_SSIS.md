@@ -108,19 +108,9 @@ Information: 0x40043006 at Data Flow Task, SSIS.Pipeline: Prepare for Execute ph
 SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\Package.dtsx" finished: Success.
 ```
 
-------------------------- -------------------------
-
-### Section Wrap-Up
-
-In this section, we:
-- Set up our on‑prem environment by provisioning a Windows Server VM with SQL Server Integration Services
-- Configured Visual Studio with the required data tools
-- Created demonstration data using SSMS
-- Developed and tested an SSIS package locally, ensuring that all components work together as expected
-
 ------------------------- ------------------------- ------------------------- -------------------------
 
-## Exercise 2: Azure Data Factory
+## Exercise 2: Configure Azure
 
 ### Pre-Requisites
 
@@ -182,14 +172,19 @@ Review "Summary" and then click "Create".
 
 Wait for `Status` to change to "Running".
 
-------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
-## Exercise 3: Deploy Packages
+## Exercise 3: Migrate and Deploy Packages
 
-Open Data Factory Studio, navigate to "Author" tab, and create a new pipeline.
-- Drag an "Execute SSIS Package" activity (from "General") onto the pipeline canvas  
-- Configure the activity with the following settings:  
-  - Azure-SSIS IR: Select the previously-created Integration Runtime
+Deploy your SSIS packages directly to Azure:
+
+- In Visual Studio, Solution Explorer, right-click the `SSISDemoPipeline` project and click "Deploy"
+- On the resulting "Integration Services Deployment Wizard" interface, navigate to "Select Deployment Target"
+  - Click deployment target "SSIS in Data Factory" and click "Next"
+- Complete the "Select Destination" form:
+  - Server name: `{prefix}ss.database.windows.net`
+  - Authe
+
 ------------------------- ------------------------- ------------------------- -------------------------
 ------------------------- ------------------------- ------------------------- -------------------------
 ------------------------- ------------------------- ------------------------- -------------------------
@@ -198,63 +193,39 @@ Open Data Factory Studio, navigate to "Author" tab, and create a new pipeline.
 ------------------------- ------------------------- ------------------------- -------------------------
 ------------------------- ------------------------- ------------------------- -------------------------
 
-  - Package location: Select the SSIS package from your SSISDB catalog  
-  - Connection details: Provide necessary parameters, such as credentials and any runtime parameters  
-- Assign the Azure‑SSIS Integration Runtime to the activity  
-- Save and publish your pipeline  
-- Trigger the pipeline and monitor its execution via the "Monitor" tab
 
 
 
 
+  - Choose "SQL Server Authentication," provide your credentials, then click "Connect."
+  - Click "Browse..." to select the deployment path within the SSISDB catalog, confirm, then click "Next."
+  - Follow prompts to complete the deployment process.
 
+### Verify Deployment
 
+- Open SQL Server Management Studio (SSMS) or Azure Data Studio.
+- Connect to your Azure SQL Database server.
+- Verify that the deployed packages appear under `Integration Services Catalogs → SSISDB`.
 
+### Configure and Execute Pipeline in Azure Data Factory
 
+Now, you'll configure Azure Data Factory to execute your deployed SSIS packages:
 
+- Open Azure Data Factory Studio, navigate to the "Author" tab, and create a new pipeline.
+- Drag an "Execute SSIS Package" activity onto the pipeline canvas.
+- Configure the activity:
+  - **Integration Runtime:** Select your Azure-SSIS Integration Runtime.
+  - **Package location:** Select the newly deployed SSIS package from your Azure SSISDB.
+  - Configure any necessary runtime parameters and connection details.
+- Click "Debug" to test the pipeline execution.
 
+### Monitor and Verify
 
+- Navigate to the "Monitor" tab in Data Factory Studio.
+- Confirm the successful execution of your pipeline, indicated by a status of "Succeeded."
 
+### Post-Deployment Considerations
 
+- Update connection managers or environment references in your SSIS packages to point explicitly to Azure resources.
+- Document any configuration changes or issues encountered during the migration and deployment process.
 
-------------------------- ------------------------- ------------------------- -------------------------
-
-## Exercise 3: Migrate to Azure
-
-Important: Before migrating, complete Exercise 2: Azure Data Factory to ensure Azure-SSIS IR and SSISDB availability.
-
-### Prepare Project for Azure Compatibility
-
-In Visual Studio, update the target server version:
-- Right-click your SSIS project in Solution Explorer, select "Properties"
-- Under "Configuration Properties" → "General", set "TargetServerVersion" to "SQL Server 2017"
-- Click "OK" to apply settings
-- Click "Build" → "Build Solution" to generate the deployment (.ispac) file
-
-#### Expected Output
-```
-Build started...
-Build complete -- 0 errors, 0 warnings
-```
-
-### Deploy to Azure SSISDB
-
-In Visual Studio Solution Explorer:
-- Right-click your project and select "Deploy"
-- In the Integration Services Deployment Wizard, select deployment target "SSIS in Data Factory"
-- Enter your Azure SQL Database server name (`{prefix}ss.database.windows.net`)
-- Choose "SQL Server Authentication" and provide credentials
-- When selecting deployment path, click "Browse..." and confirm the correct folder path within SSISDB catalog is selected
-- Follow prompts to complete deployment
-
-After deployment completes, verify the packages appear in SSISDB by connecting to Azure SQL with SSMS or Azure Data Studio.
-
-### Post‑Migration Considerations
-
-- Update connection managers or environment references to use Azure s
-- Test migrated packages using SSMS or via the Azure‑SSIS Integration Runtime
-- Document any configuration changes or issues encountered during migration
-
-### Test and Verify
-
-- Clearly verify successful completion in the "Monitor" tab, indicated by the pipeline status "Succeeded"
