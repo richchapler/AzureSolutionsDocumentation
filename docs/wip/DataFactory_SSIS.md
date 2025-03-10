@@ -122,7 +122,7 @@ SSIS package "C:\Users\rchapler\source\repos\SSISDemoPipeline\SSISDemoPipeline\P
 
 ------------------------- -------------------------
 
-#### Master Database Permissions  
+### `master` Database Permissions  
 
 Open SQL Server Management Studio (SSMS), connect to the Azure SQL Server, and execute the following T-SQL on the `master` database:  
 
@@ -171,6 +171,17 @@ Confirm "Advanced Settings" configuration and then click "Continue".
 Review "Summary" and then click "Create".
 
 Wait for `Status` to change to "Running".
+
+------------------------- -------------------------
+
+### `SSISDB` Database Permissions  
+
+Open SQL Server Management Studio (SSMS), connect to the Azure SQL Server, and execute the following T-SQL on the `SSISDB` database:  
+
+```sql
+CREATE USER [{prefix}df] FROM EXTERNAL PROVIDER;
+ALTER ROLE dbmanager ADD MEMBER [{prefix}df];
+```
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
