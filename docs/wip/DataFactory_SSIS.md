@@ -180,7 +180,7 @@ Open SQL Server Management Studio (SSMS), connect to the Azure SQL Server, and e
 
 ```sql
 CREATE USER [{prefix}df] FROM EXTERNAL PROVIDER;
-ALTER ROLE dbmanager ADD MEMBER [{prefix}df];
+ALTER ROLE ssis_admin ADD MEMBER [{prefix}df];
 ```
 
 ------------------------- ------------------------- ------------------------- -------------------------
