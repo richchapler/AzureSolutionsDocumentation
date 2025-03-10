@@ -209,6 +209,55 @@ Download and install the latest MSI version.
 
 ### SQL Server
 
+#### Configuration
+
+Below is an example of a "SQL Server Configuration" section that covers both Windows and SQL Server Authentication settings, including enabling the sa account and setting its password. You can integrate this section into the Windows PowerShell (on‑prem) part of your curriculum.
+
+---
+
+### Configuration
+
+This section covers how to configure your SQL Server instance on the VM to support both Windows and SQL Server Authentication. It also includes steps to enable the sa account and set a secure password.
+
+#### Configuring Authentication Mode
+
+1. Verify Mixed Mode Authentication is Enabled:  
+   Mixed Mode Authentication allows both Windows and SQL Server Authentication.  
+   - In SQL Server Management Studio (SSMS), right‑click the server in Object Explorer, select Properties, and navigate to the Security page.  
+   - Under Server authentication, ensure that SQL Server and Windows Authentication mode is selected.  
+   - If you change this setting, restart SQL Server for the changes to take effect.
+
+2. Using PowerShell to Verify (Optional):  
+   Although you typically configure authentication via SSMS, you can run a query to check the authentication mode if needed:
+   ```powershell
+   Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Query "EXEC xp_instance_regread N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode';"
+   ```
+   The value of 2 indicates Windows Authentication mode and 1 indicates Mixed Mode; a combination (e.g., 2+1=3) may be used to indicate mixed mode in some versions. Refer to Microsoft documentation for your SQL Server version for specifics.
+
+#### Enabling and Configuring the sa Account
+
+1. Enable the sa Account:  
+   To enable the sa account (if it's disabled), execute the following T-SQL command in SSMS or via PowerShell using Windows Integrated Authentication:
+   ```sql
+   ALTER LOGIN [sa] ENABLE;
+   ```
+   This command enables the sa login if it is currently disabled.
+
+2. Set or Change the sa Password:  
+   For security, set a strong password for the sa account:
+   ```sql
+   ALTER LOGIN [sa] WITH PASSWORD = 'YourNewStrongPassword';
+   ```
+   Replace `'YourNewStrongPassword'` with a password that meets your organization's security policies.
+
+3. Testing the Configuration Using PowerShell:  
+   You can test the new settings using `Invoke-Sqlcmd`. For example, after enabling and updating the sa account, verify connectivity using SQL Authentication:
+   ```powershell
+   $saCred = Get-Credential -UserName "sa" -Message "Enter the new sa password"
+   Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $saCred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
+   ```
+   This command confirms that the sa account is enabled, that the new password works, and that the SQL Server instance is reachable using SQL Authentication.
+
 #### SqlServer Module
 
 Execute the following PowerShell command to install the SqlServer Module:
@@ -250,15 +299,10 @@ To verify your connection to SQL Server and test the authentication method, you 
 By default, this command uses Windows Integrated Authentication.
 
 ```powershell
-Invoke-Sqlcmd -ServerInstance "cnbtraining" -Database master -TrustServerCertificate:$true -Query "SELECT @@VERSION;"
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "SELECT @@VERSION;"
 ```
 
--------------------------
--------------------------
--------------------------
--------------------------
--------------------------
--------------------------
+<img src="https://github.com/user-attachments/assets/272191e7-441f-4f39-b7d2-b16b8368b970" width="600" title="Snipped March 10, 2025" />
 
 ##### SQL Authentication
 
@@ -266,10 +310,10 @@ If SQL Authentication is required, first obtain credentials with `Get-Credential
 
 ```powershell
 $cred = Get-Credential
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $cred -Query "SELECT @@VERSION;"
+Invoke-Sqlcmd -ServerInstance "cnbtraining" -Database master -Credential $cred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
 ```
 
-This process confirms that your SQL Server is reachable and that the chosen authentication method (either Windows Integrated or SQL Authentication) is working correctly.
+<img src="https://github.com/user-attachments/assets/3785690f-768f-4784-86db-a5607c6f951d" width="600" title="Snipped March 10, 2025" />
 
 -------------------------
 
