@@ -319,7 +319,7 @@ Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $
 
 ### Hands‑On Exercise: Automated Setup and Configuration
 
-In this exercise, you will verify that SQL Server is running, create a new database named TrainingDB, and create a SQL login named TrainingUser that is mapped to TrainingDB with read permissions
+In this exercise, you will verify that SQL Server is running, create a new database named trainingdb, and create a SQL login named traininguser that is mapped to trainingdb with read permissions
 
 Step 1: Verify that SQL Server is running  
 ```powershell
@@ -363,11 +363,11 @@ Use SQL Server Management Studio to confirm user creation and permissions.
    C. `DBSERVER:\`  
    D. `SQLDB:\`
 
-3. Which T‑SQL statement creates a new database named TrainingDB on SQL Server?  
-   A. `CREATE DATABASE TrainingDB;`  
-   B. `NEW DATABASE TrainingDB;`  
-   C. `MAKE DATABASE TrainingDB;`  
-   D. `ADD DATABASE TrainingDB;`
+3. Which T‑SQL statement creates a new database named trainingdb on SQL Server?  
+   A. `CREATE DATABASE trainingdb;`  
+   B. `NEW DATABASE trainingdb;`  
+   C. `MAKE DATABASE trainingdb;`  
+   D. `ADD DATABASE trainingdb;`
 
 4. After creating a SQL login, what must you do to allow that login to access a specific database?  
    A. Nothing; logins automatically have access  
@@ -415,35 +415,35 @@ Use SQL Server Management Studio to confirm user creation and permissions.
 
 #### Answer Key
 
-1. **Answer:** B  
-   **Explanation:** The `Invoke-Sqlcmd` cmdlet is used to run T‑SQL queries on a SQL Server instance.
+1. Answer: B  
+   Explanation: The `Invoke-Sqlcmd` cmdlet is used to run T‑SQL queries on a SQL Server instance.
 
-2. **Answer:** A  
-   **Explanation:** The SqlServer module adds the `SQLSERVER:\` provider path for on‑premises SQL Server.
+2. Answer: A  
+   Explanation: The SqlServer module adds the `SQLSERVER:\` provider path for on‑premises SQL Server.
 
-3. **Answer:** A  
-   **Explanation:** `CREATE DATABASE TrainingDB;` is the correct T‑SQL statement for creating a new database.
+3. Answer: A  
+   Explanation: `CREATE DATABASE trainingdb;` is the correct T‑SQL statement for creating a new database.
 
-4. **Answer:** B  
-   **Explanation:** After creating a SQL login, you must create a corresponding database user and map the login to allow access.
+4. Answer: B  
+   Explanation: After creating a SQL login, you must create a corresponding database user and map the login to allow access.
 
-5. **Answer:** A  
-   **Explanation:** The `-TrustServerCertificate` parameter instructs Invoke‑Sqlcmd to bypass SSL certificate validation.
+5. Answer: A  
+   Explanation: The `-TrustServerCertificate` parameter instructs Invoke‑Sqlcmd to bypass SSL certificate validation.
 
-6. **Answer:** A  
-   **Explanation:** The `Get-Service` cmdlet is used to check the status of Windows services, including SQL Server.
+6. Answer: A  
+   Explanation: The `Get-Service` cmdlet is used to check the status of Windows services, including SQL Server.
 
-7. **Answer:** A  
-   **Explanation:** Using "localhost" avoids WinRM configuration issues when testing remote commands locally.
+7. Answer: A  
+   Explanation: Using "localhost" avoids WinRM configuration issues when testing remote commands locally.
 
-8. **Answer:** A  
-   **Explanation:** The `Out-File` cmdlet captures output and writes it to a file.
+8. Answer: A  
+   Explanation: The `Out-File` cmdlet captures output and writes it to a file.
 
-9. **Answer:** A  
-   **Explanation:** The `Get-Credential` cmdlet securely prompts for and obtains user credentials.
+9. Answer: A  
+   Explanation: The `Get-Credential` cmdlet securely prompts for and obtains user credentials.
 
-10. **Answer:** B  
-    **Explanation:** Pipelines pass the output of one cmdlet as input to another, streamlining data processing.
+10. Answer: B  
+    Explanation: Pipelines pass the output of one cmdlet as input to another, streamlining data processing.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
