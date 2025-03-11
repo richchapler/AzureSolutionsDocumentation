@@ -507,7 +507,7 @@ This process confirms that you are connected to the correct subscription and hav
 
 -------------------------
 
-### Create a Resource Group
+### Create Resource Group
 
 Execute the following PowerShell command to create a resource group named `prefixrg` in the West US region:
 
@@ -528,7 +528,7 @@ Confirm successful Resource Group creation in the Azure Portal.
 
 -------------------------
 
-### Provision an Azure SQL Server
+### Provision SQL Server
 
 Execute the following command to switch to the correct subscription (replace `"<SubscriptionId>"` with your actual subscription ID):
 
@@ -581,13 +581,13 @@ Confirm successful SQL Server creation in the Azure Portal.
 
 ### Configure Firewall
 
-Execute the following command to configure a firewall rule that allows your local machine's IP to connect to the Azure SQL server. Replace `"X.X.X.X"` with your public IP address:
+Execute the following command to configure a firewall rule that allows Azure services to access the Azure SQL server. Setting both the StartIpAddress and EndIpAddress to "0.0.0.0" creates a special rule that permits Azure-to-Azure traffic:
 
 ```powershell
-New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
+New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowAzureServices" -StartIpAddress "0.0.0.0" -EndIpAddress "0.0.0.0"
 ```
 
-This command ensures that your client can access the server.
+This command ensures that Azure services and resources can access the server without needing to specify individual IP addresses.
 
 -------------------------
 
