@@ -524,6 +524,8 @@ Tags              :
 ResourceId        : /subscriptions/<SubscriptionId>/resourceGroups/prefixrg
 ```
 
+Confirm successful Resource Group creation in the Azure Portal.
+
 -------------------------
 
 ### Provision an Azure SQL Server
@@ -572,6 +574,8 @@ PrimaryUserAssignedIdentityId :
 KeyId                         : 
 FederatedClientId             : 
 ```
+
+Confirm successful SQL Server creation in the Azure Portal.
 
 -------------------------
 
