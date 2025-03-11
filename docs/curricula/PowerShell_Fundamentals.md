@@ -579,26 +579,39 @@ Confirm successful SQL Server creation in the Azure Portal.
 
 -------------------------
 
-### Configuring Firewall Rules  
-Configure a firewall rule to allow your local machine's IP to connect to the Azure SQL server:
+### Configure Firewall
+
+Execute the following command to configure a firewall rule that allows your local machine's IP to connect to the Azure SQL server. Replace `"X.X.X.X"` with your public IP address:
+
 ```powershell
 New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
 ```
-Replace "X.X.X.X" with your public IP address. This ensures that your client can access the server.
 
-- Creating a Database  
-Create a new Azure SQL Database on the server:
+This command ensures that your client can access the server.
+
+-------------------------
+
+### Create Database
+
+Execute the following command to create a new Azure SQL Database on the server. This command provisions a new database named `"prefixsd"` using the Basic pricing tier:
+
 ```powershell
 New-AzSqlDatabase -ResourceGroupName "prefixrg" -ServerName "prefixss" -DatabaseName "prefixsd" -Edition "Basic"
 ```
-This command provisions a new database named "prefixsd" using the Basic pricing tier.
 
-- Verifying Connectivity (Optional)  
-Although Azure Cloud Shell typically provides a managed environment, you can verify connectivity by running a simple T-SQL query. For example, using `Invoke-Sqlcmd` (ensure that your server’s connection settings allow SQL queries):
+This creates the database in your specified resource group and server.
+
+-------------------------
+
+### Verify Connectivity
+
+Execute the following command to verify connectivity by running a simple T-SQL query against your newly created Azure SQL Database. This confirms that the database is reachable:
+
 ```powershell
 Invoke-Sqlcmd -ServerInstance "prefixss.database.windows.net" -Database "prefixsd" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
 ```
-This confirms that your Azure SQL database is reachable.
+
+Review the output to ensure that the database is accessible and functioning as expected.
 
 ------------------------- -------------------------
 
