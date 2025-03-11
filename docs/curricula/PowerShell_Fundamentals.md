@@ -482,7 +482,7 @@ Select-AzSubscription -SubscriptionName "Your Subscription Name"
 Alternatively, if you prefer using the subscription ID, execute:
 
 ```powershell
-Select-AzSubscription -SubscriptionId "your-subscription-id"
+Select-AzSubscription -SubscriptionId "<SubscriptionId>"
 ```
 
 After switching, execute the following command again to confirm that your context reflects the correct subscription:
@@ -509,13 +509,11 @@ This process confirms that you are connected to the correct subscription and hav
 
 ### Create a Resource Group
 
-Execute the following PowerShell command to create a resource group:
+Execute the following PowerShell command to create a resource group named `prefixrg` in the West US region:
 
 ```powershell
 New-AzResourceGroup -Name "prefixrg" -Location "westus"
 ```
-
-This command creates a resource group named `prefixrg` in the West US region.
 
 #### Expected Output
 ```
@@ -528,33 +526,73 @@ ResourceId        : /subscriptions/<SubscriptionId>/resourceGroups/prefixrg
 
 -------------------------
 
-### Provision an Azure SQL Server  
+### Provision an Azure SQL Server
 
-Provision a new Azure SQL server by prompting for an admin credential:
+Execute the following command to switch to the correct subscription (replace `"<SubscriptionId>"` with your actual subscription ID):
+
 ```powershell
-$sqlAdminCred = Get-Credential -UserName "sqladminuser" -Message "Enter a strong password for the new Azure SQL server admin"
-New-AzSqlServer -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -Location "WestEurope" -SqlAdministratorCredentials $sqlAdminCred
+Select-AzSubscription -SubscriptionId "<SubscriptionId>"
 ```
-This command creates an Azure SQL server with a unique name. Replace "youruniquesqlserver" with a globally unique server name.
 
-- Configuring Firewall Rules  
+Then, execute the following command to capture the active context:
+
+```powershell
+$context = Get-AzContext
+```
+
+Execute the following command to prompt for the SQL administrator credentials (replace `"prefixssadmin"` as needed):
+
+```powershell
+$sqlAdminCred = Get-Credential -UserName "prefixssadmin" -Message "Enter a strong password for the new Azure SQL server admin"
+```
+
+Finally, execute the following command to provision the Azure SQL server using the resource group `"prefixrg"`, server name `"prefixss"`, and location `"westus"`. This command uses the context captured earlier:
+
+```powershell
+New-AzSqlServer -ResourceGroupName "prefixrg" -ServerName "prefixss" -Location "westus" -SqlAdministratorCredentials $sqlAdminCred -DefaultProfile $context
+```
+
+#### Expected Output
+```
+ResourceGroupName             : prefixrg
+ServerName                    : prefixss
+Location                      : westus
+SqlAdministratorLogin         : prefixssadmin
+SqlAdministratorPassword      : 
+ServerVersion                 : 12.0
+Tags                          : 
+Identity                      : 
+FullyQualifiedDomainName      : prefixss.database.windows.net
+ResourceId                    : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss
+MinimalTlsVersion             : 1.2
+PublicNetworkAccess           : Enabled
+RestrictOutboundNetworkAccess : Disabled
+Administrators                : 
+PrimaryUserAssignedIdentityId : 
+KeyId                         : 
+FederatedClientId             : 
+```
+
+-------------------------
+
+### Configuring Firewall Rules  
 Configure a firewall rule to allow your local machine's IP to connect to the Azure SQL server:
 ```powershell
-New-AzSqlServerFirewallRule -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
+New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
 ```
 Replace "X.X.X.X" with your public IP address. This ensures that your client can access the server.
 
 - Creating a Database  
 Create a new Azure SQL Database on the server:
 ```powershell
-New-AzSqlDatabase -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -DatabaseName "LabDB" -Edition "Basic"
+New-AzSqlDatabase -ResourceGroupName "prefixrg" -ServerName "prefixss" -DatabaseName "prefixsd" -Edition "Basic"
 ```
-This command provisions a new database named "LabDB" using the Basic pricing tier.
+This command provisions a new database named "prefixsd" using the Basic pricing tier.
 
 - Verifying Connectivity (Optional)  
 Although Azure Cloud Shell typically provides a managed environment, you can verify connectivity by running a simple T-SQL query. For example, using `Invoke-Sqlcmd` (ensure that your server’s connection settings allow SQL queries):
 ```powershell
-Invoke-Sqlcmd -ServerInstance "youruniquesqlserver.database.windows.net" -Database "LabDB" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
+Invoke-Sqlcmd -ServerInstance "prefixss.database.windows.net" -Database "prefixsd" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
 ```
 This confirms that your Azure SQL database is reachable.
 
@@ -562,32 +600,32 @@ This confirms that your Azure SQL database is reachable.
 
 ### Hands‑On Exercise: Deploy and Configure an Azure SQL Database
 
-In this exercise you will create a resource group, provision an Azure SQL server, configure a firewall rule, and create a new database named "LabDB." Finally, you'll verify connectivity by running a simple query.
+In this exercise you will create a resource group, provision an Azure SQL server, configure a firewall rule, and create a new database named "prefixsd." Finally, you'll verify connectivity by running a simple query.
 
 Step 1: Create a resource group
 ```powershell
-New-AzResourceGroup -Name "PSQL-Lab-RG" -Location "WestEurope"
+New-AzResourceGroup -Name "prefixrg" -Location "westus"
 ```
 
 Step 2: Provision an Azure SQL server and set the admin credentials
 ```powershell
-$sqlAdminCred = Get-Credential -UserName "sqladminuser" -Message "Enter a strong password for the new Azure SQL server admin"
-New-AzSqlServer -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -Location "WestEurope" -SqlAdministratorCredentials $sqlAdminCred
+$sqlAdminCred = Get-Credential -UserName "prefixssadmin" -Message "Enter a strong password for the new Azure SQL server admin"
+New-AzSqlServer -ResourceGroupName "prefixrg" -ServerName "prefixss" -Location "westus" -SqlAdministratorCredentials $sqlAdminCred
 ```
 
 Step 3: Configure a firewall rule to allow your IP address (replace X.X.X.X with your public IP)
 ```powershell
-New-AzSqlServerFirewallRule -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
+New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
 ```
 
-Step 4: Create a new database named LabDB
+Step 4: Create a new database named prefixsd
 ```powershell
-New-AzSqlDatabase -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -DatabaseName "LabDB" -Edition "Basic"
+New-AzSqlDatabase -ResourceGroupName "prefixrg" -ServerName "prefixss" -DatabaseName "prefixsd" -Edition "Basic"
 ```
 
 Step 5: Verify connectivity by running a simple query (optional)
 ```powershell
-Invoke-Sqlcmd -ServerInstance "youruniquesqlserver.database.windows.net" -Database "LabDB" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
+Invoke-Sqlcmd -ServerInstance "prefixss.database.windows.net" -Database "prefixsd" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
 ```
 
 ------------------------- -------------------------
