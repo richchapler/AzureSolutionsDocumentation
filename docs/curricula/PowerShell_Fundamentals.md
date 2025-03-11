@@ -491,19 +491,19 @@ After switching, execute the following command again to confirm that your contex
 Get-AzContext
 ```
 
-To verify that your account has the necessary permissions (typically Contributor or Owner) on the subscription, execute:
+To verify that your account has the necessary permissions (typically Contributor or Owner) to create resource groups and manage Azure resources, execute the following command:
 
 ```powershell
-Get-AzRoleAssignment -Scope "/subscriptions/<SubscriptionID>"
+Get-AzRoleAssignment -Scope "/subscriptions/<SubscriptionID>" | Where-Object { $_.RoleDefinitionName -in @("Contributor", "Owner") } | Select-Object -Unique DisplayName, RoleDefinitionName, ObjectId
 ```
 
-If you receive an error such as "Cannot find principal using the specified options," verify that your sign-in name is correct by executing:
+Review the output to ensure that your account appears with a role of either Contributor or Owner. If you receive an error such as "Cannot find principal using the specified options," verify that your account details are correct by executing:
 
 ```powershell
 Get-AzADUser -UserPrincipalName "YourEmailAddress"
 ```
 
-Review the output of `Get-AzRoleAssignment` to ensure that your account holds a role that permits creating resource groups and other resources.
+This process confirms that you are connected to the correct subscription and have the appropriate permissions to create resource groups and manage Azure resources.
 
 -------------------------
 
@@ -517,7 +517,14 @@ New-AzResourceGroup -Name "prefixrg" -Location "westus"
 
 This command creates a resource group named `prefixrg` in the West US region.
 
-<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped March 11, 2025" />
+#### Expected Output
+```
+ResourceGroupName : prefixrg
+Location          : westus
+ProvisioningState : Succeeded
+Tags              : 
+ResourceId        : /subscriptions/<SubscriptionId>/resourceGroups/prefixrg
+```
 
 -------------------------
 
