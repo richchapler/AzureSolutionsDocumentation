@@ -461,39 +461,49 @@ Click the "Cloud Shell" icon in the upper-right of the Azure Portal interface.
 
 ### Verify Permissions
 
-Verify your current Azure context and subscription details by executing:
+Execute the following PowerShell command to display your current Azure context and confirm which subscription is active:
 
 ```powershell
 Get-AzContext
 ```
 
-This command displays the active subscription and account information. If you're connected to the wrong subscription, list all available subscriptions using:
+If you are connected to the wrong subscription, execute the following command to list all subscriptions associated with your account:
 
 ```powershell
 Get-AzSubscription
 ```
 
-Then, switch to the correct subscription by specifying its name or ID:
+Execute the following command to switch to the correct subscription by specifying its name:
 
 ```powershell
 Select-AzSubscription -SubscriptionName "Your Subscription Name"
 ```
 
-or
+Alternatively, if you prefer using the subscription ID, execute:
 
 ```powershell
 Select-AzSubscription -SubscriptionId "your-subscription-id"
 ```
 
-After changing the subscription, run `Get-AzContext` again to confirm your active subscription.
-
-To verify that your account has the necessary permissions (typically Contributor or Owner) on the subscription, run:
+After switching, execute the following command again to confirm that your context reflects the correct subscription:
 
 ```powershell
-Get-AzRoleAssignment -Scope "/subscriptions/<SubscriptionID>" -SignInName "<YourEmailAddress>"
+Get-AzContext
 ```
 
-Review the output to ensure your account holds a role that permits creating resource groups and other resources.
+To verify that your account has the necessary permissions (typically Contributor or Owner) on the subscription, execute:
+
+```powershell
+Get-AzRoleAssignment -Scope "/subscriptions/<SubscriptionID>"
+```
+
+If you receive an error such as "Cannot find principal using the specified options," verify that your sign-in name is correct by executing:
+
+```powershell
+Get-AzADUser -UserPrincipalName "YourEmailAddress"
+```
+
+Review the output of `Get-AzRoleAssignment` to ensure that your account holds a role that permits creating resource groups and other resources.
 
 -------------------------
 
