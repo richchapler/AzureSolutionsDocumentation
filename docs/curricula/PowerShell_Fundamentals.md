@@ -461,32 +461,39 @@ Click the "Cloud Shell" icon in the upper-right of the Azure Portal interface.
 
 ### Verify Permissions
 
-Before creating resources like resource groups, it’s important to ensure that the account you're using has sufficient permissions at the subscription level. The account must typically have at least the Contributor role (or a higher role, such as Owner) to create resource groups.
+Verify your current Azure context and subscription details by executing:
 
-The credentials being used are those provided when you run the `Connect-AzAccount` cmdlet. These credentials determine what actions you can perform on the subscription.
-
-You can verify your subscription permissions using the following PowerShell commands:
-
-Step 1: Check your current Azure context and subscription details  
 ```powershell
 Get-AzContext
 ```
-This command displays the currently active subscription and account information.
 
-Step 2: List all subscriptions associated with your account  
+This command displays the active subscription and account information. If you're connected to the wrong subscription, list all available subscriptions using:
+
 ```powershell
 Get-AzSubscription
 ```
-Review the output to confirm you are targeting the correct subscription.
 
-Step 3: Check your role assignments for the active subscription  
-Replace `<SubscriptionID>` with your actual subscription ID and `<YourEmailAddress>` with your login email.  
+Then, switch to the correct subscription by specifying its name or ID:
+
+```powershell
+Select-AzSubscription -SubscriptionName "Your Subscription Name"
+```
+
+or
+
+```powershell
+Select-AzSubscription -SubscriptionId "your-subscription-id"
+```
+
+After changing the subscription, run `Get-AzContext` again to confirm your active subscription.
+
+To verify that your account has the necessary permissions (typically Contributor or Owner) on the subscription, run:
+
 ```powershell
 Get-AzRoleAssignment -Scope "/subscriptions/<SubscriptionID>" -SignInName "<YourEmailAddress>"
 ```
-This command shows all roles assigned to your account within the specified subscription. Look for the Contributor or Owner role in the results.
 
-If your account does not have the required role, contact your subscription administrator to request the necessary permissions.
+Review the output to ensure your account holds a role that permits creating resource groups and other resources.
 
 -------------------------
 
