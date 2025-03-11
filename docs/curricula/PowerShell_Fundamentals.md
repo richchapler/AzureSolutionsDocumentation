@@ -587,7 +587,14 @@ Execute the following command to configure a firewall rule that allows Azure ser
 New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowAzureServices" -StartIpAddress "0.0.0.0" -EndIpAddress "0.0.0.0"
 ```
 
-This command ensures that Azure services and resources can access the server without needing to specify individual IP addresses.
+#### Expected Output
+```
+ResourceGroupName : prefixrg
+ServerName        : prefixss
+StartIpAddress    : 0.0.0.0
+EndIpAddress      : 0.0.0.0
+FirewallRuleName  : AllowAzureServices
+```
 
 -------------------------
 
@@ -599,7 +606,59 @@ Execute the following command to create a new Azure SQL Database on the server. 
 New-AzSqlDatabase -ResourceGroupName "prefixrg" -ServerName "prefixss" -DatabaseName "prefixsd" -Edition "Basic"
 ```
 
-This creates the database in your specified resource group and server.
+#### Expected Output
+```
+ResourceGroupName                : prefixrg
+ServerName                       : prefixss
+DatabaseName                     : prefixsd
+Location                         : westus
+DatabaseId                       : 130278e5-f56c-45ac-b177-5ff601b210f9
+Edition                          : Basic
+CollationName                    : SQL_Latin1_General_CP1_CI_AS
+CatalogCollation                 : 
+MaxSizeBytes                     : 2147483648
+Status                           : Online
+CreationDate                     : 3/11/2025 5:30:50 PM
+CurrentServiceObjectiveId        : 00000000-0000-0000-0000-000000000000
+CurrentServiceObjectiveName      : Basic
+RequestedServiceObjectiveName    : Basic
+RequestedServiceObjectiveId      : 
+ElasticPoolName                  : 
+EarliestRestoreDate              : 
+Tags                             : 
+ResourceId                       : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss/databases/prefixs
+                                   d
+CreateMode                       : 
+ReadScale                        : Disabled
+ZoneRedundant                    : False
+Capacity                         : 5
+Family                           : 
+SkuName                          : Basic
+LicenseType                      : 
+AutoPauseDelayInMinutes          : 
+MinimumCapacity                  : 
+ReadReplicaCount                 : 
+HighAvailabilityReplicaCount     : 
+CurrentBackupStorageRedundancy   : Geo
+RequestedBackupStorageRedundancy : Geo
+SecondaryType                    : 
+MaintenanceConfigurationId       : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default
+EnableLedger                     : False
+PreferredEnclaveType             : 
+PausedDate                       : 
+ResumedDate                      : 
+Identity                         : 
+EncryptionProtector              : 
+Keys                             : 
+FederatedClientId                : 
+EncryptionProtectorAutoRotation  : 
+UseFreeLimit                     : 
+FreeLimitExhaustionBehavior      : 
+ManualCutover                    : 
+PerformCutover                   : 
+```
+
+Confirm successful SQL Database creation in the Azure Portal.
 
 -------------------------
 
