@@ -455,7 +455,38 @@ This section focuses on using Azure PowerShell modules to deploy and manage Azur
 
 Click the "Cloud Shell" icon in the upper-right of the Azure Portal interface.
 
-<img src="https://github.com/user-attachments/assets/2a19d4bb-83ce-4c9e-b7a4-ad2d3bc02d08" width="800" title="Snipped March 3, 2025" />
+<img src="https://github.com/user-attachments/assets/2a19d4bb-83ce-4c9e-b7a4-ad2d3bc02d08" width="800" title="Snipped March 11, 2025" />
+
+-------------------------
+
+### Verify Permissions
+
+Before creating resources like resource groups, it’s important to ensure that the account you're using has sufficient permissions at the subscription level. The account must typically have at least the Contributor role (or a higher role, such as Owner) to create resource groups.
+
+The credentials being used are those provided when you run the `Connect-AzAccount` cmdlet. These credentials determine what actions you can perform on the subscription.
+
+You can verify your subscription permissions using the following PowerShell commands:
+
+Step 1: Check your current Azure context and subscription details  
+```powershell
+Get-AzContext
+```
+This command displays the currently active subscription and account information.
+
+Step 2: List all subscriptions associated with your account  
+```powershell
+Get-AzSubscription
+```
+Review the output to confirm you are targeting the correct subscription.
+
+Step 3: Check your role assignments for the active subscription  
+Replace `<SubscriptionID>` with your actual subscription ID and `<YourEmailAddress>` with your login email.  
+```powershell
+Get-AzRoleAssignment -Scope "/subscriptions/<SubscriptionID>" -SignInName "<YourEmailAddress>"
+```
+This command shows all roles assigned to your account within the specified subscription. Look for the Contributor or Owner role in the results.
+
+If your account does not have the required role, contact your subscription administrator to request the necessary permissions.
 
 -------------------------
 
@@ -469,7 +500,7 @@ New-AzResourceGroup -Name "prefixrg" -Location "westus"
 
 This command creates a resource group named `prefixrg` in the West US region.
 
-<img src="https://github.com/user-attachments/assets/b0c2be09-a50e-42f9-aaf0-62494f016a93" width="600" title="Snipped March 3, 2025" />
+<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped March 11, 2025" />
 
 -------------------------
 
