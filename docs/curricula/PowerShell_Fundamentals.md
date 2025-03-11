@@ -232,7 +232,7 @@ This section covers how to configure your SQL Server instance on the VM to suppo
 2. Using PowerShell to Verify (Optional):  
    Although you typically configure authentication via SSMS, you can run a query to check the authentication mode if needed:
    ```powershell
-   Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Query "EXEC xp_instance_regread N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode';"
+   Invoke-Sqlcmd -ServerInstance "{prefix}ss" -Database master -Query "EXEC xp_instance_regread N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer', N'LoginMode';"
    ```
    The value of 2 indicates Windows Authentication mode and 1 indicates Mixed Mode; a combination (e.g., 2+1=3) may be used to indicate mixed mode in some versions. Refer to Microsoft documentation for your SQL Server version for specifics.
 
@@ -248,15 +248,14 @@ This section covers how to configure your SQL Server instance on the VM to suppo
 2. Set or Change the sa Password:  
    For security, set a strong password for the sa account:
    ```sql
-   ALTER LOGIN [sa] WITH PASSWORD = '{password}';
+   ALTER LOGIN [sa] WITH PASSWORD = '{prefix}sspassword';
    ```
-   Replace `'YourNewStrongPassword'` with a password that meets your organization's security policies.
 
 3. Testing the Configuration Using PowerShell:  
    You can test the new settings using `Invoke-Sqlcmd`. For example, after enabling and updating the sa account, verify connectivity using SQL Authentication:
    ```powershell
    $saCred = Get-Credential -UserName "sa" -Message "Enter the new sa password"
-   Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $saCred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
+   Invoke-Sqlcmd -ServerInstance "{prefix}ss" -Database master -Credential $saCred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
    ```
    This command confirms that the sa account is enabled, that the new password works, and that the SQL Server instance is reachable using SQL Authentication.
 
@@ -283,7 +282,7 @@ Import-Module SqlServer
 Execute the following PowerShell command to confirm network connectivity:
 
 ```powershell
-Test-NetConnection -ComputerName "YourSQLServerName" -Port 1433
+Test-NetConnection -ComputerName "{prefix}ss" -Port 1433
 ```
 
 This command tells you whether the SQL Server's port is accessible, indicating that your VM has network access to the SQL Server instance.
@@ -301,7 +300,7 @@ To verify your connection to SQL Server and test the authentication method, you 
 By default, this command uses Windows Integrated Authentication.
 
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "SELECT @@VERSION;"
+Invoke-Sqlcmd -ServerInstance "{prefix}ss" -Database master -TrustServerCertificate:$true -Query "SELECT @@VERSION;"
 ```
 
 <img src="https://github.com/user-attachments/assets/272191e7-441f-4f39-b7d2-b16b8368b970" width="600" title="Snipped March 10, 2025" />
@@ -312,7 +311,7 @@ If SQL Authentication is required, first obtain credentials with `Get-Credential
 
 ```powershell
 $cred = Get-Credential
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -Credential $cred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
+Invoke-Sqlcmd -ServerInstance "{prefix}ss" -Database master -Credential $cred -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
 ```
 
 <img src="https://github.com/user-attachments/assets/3785690f-768f-4784-86db-a5607c6f951d" width="600" title="Snipped March 10, 2025" />
@@ -330,21 +329,21 @@ Get-Service -Name MSSQLSERVER
 
 Step 2: Create a new database named `trainingdb` 
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "CREATE DATABASE trainingdb;"
+Invoke-Sqlcmd -ServerInstance "{prefix}ss" -Database master -TrustServerCertificate:$true -Query "CREATE DATABASE trainingdb;"
 ```
 
 Use SQL Server Management Studio to confirm database creation.
 
 Step 3: Create login `traininguser`  
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "CREATE LOGIN traininguser WITH PASSWORD = '{password}';"
+Invoke-Sqlcmd -ServerInstance "{prefix}ss" -Database master -TrustServerCertificate:$true -Query "CREATE LOGIN traininguser WITH PASSWORD = '{prefix}sspassword';"
 ```
 
 Use SQL Server Management Studio to confirm login creation.
 
 Step 4: Map login `traininguser` database `trainingdb` with read permissions  
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database trainingdb -TrustServerCertificate:$true -Query "CREATE USER traininguser FOR LOGIN traininguser; EXEC sp_addrolemember 'db_datareader', 'traininguser';"
+Invoke-Sqlcmd -ServerInstance "{prefix}ss" -Database trainingdb -TrustServerCertificate:$true -Query "CREATE USER traininguser FOR LOGIN traininguser; EXEC sp_addrolemember 'db_datareader', 'traininguser';"
 ```
 
 Use SQL Server Management Studio to confirm user creation and permissions.
@@ -476,7 +475,7 @@ Get-AzSubscription
 Execute the following command to switch to the correct subscription by specifying its name:
 
 ```powershell
-Select-AzSubscription -SubscriptionName "Your Subscription Name"
+Select-AzSubscription -SubscriptionName "<SubscriptionName>"
 ```
 
 Alternatively, if you prefer using the subscription ID, execute:
@@ -509,19 +508,19 @@ This process confirms that you are connected to the correct subscription and hav
 
 ### Create Resource Group
 
-Execute the following PowerShell command to create a resource group named `prefixrg` in the West US region:
+Execute the following PowerShell command to create a resource group named `{prefix}rg` in the West US region:
 
 ```powershell
-New-AzResourceGroup -Name "prefixrg" -Location "westus"
+New-AzResourceGroup -Name "{prefix}rg" -Location "westus"
 ```
 
 #### Expected Output
 ```
-ResourceGroupName : prefixrg
+ResourceGroupName : {prefix}rg
 Location          : westus
 ProvisioningState : Succeeded
 Tags              : 
-ResourceId        : /subscriptions/<SubscriptionId>/resourceGroups/prefixrg
+ResourceId        : /subscriptions/<SubscriptionId>/resourceGroups/{prefix}rg
 ```
 
 Confirm successful Resource Group creation in the Azure Portal.
@@ -542,30 +541,30 @@ Then, execute the following command to capture the active context:
 $context = Get-AzContext
 ```
 
-Execute the following command to prompt for the SQL administrator credentials (replace `"prefixssadmin"` as needed):
+Execute the following command to prompt for the SQL administrator credentials (replace `"{prefix}ssadmin"` as needed):
 
 ```powershell
-$sqlAdminCred = Get-Credential -UserName "prefixssadmin" -Message "Enter a strong password for the new Azure SQL server admin"
+$sqlAdminCred = Get-Credential -UserName "{prefix}ssadmin" -Message "Enter a strong password for the new Azure SQL server admin"
 ```
 
-Finally, execute the following command to provision the Azure SQL server using the resource group `"prefixrg"`, server name `"prefixss"`, and location `"westus"`. This command uses the context captured earlier:
+Finally, execute the following command to provision the Azure SQL server using the resource group `"{prefix}rg"`, server name `"{prefix}ss"`, and location `"westus"`. This command uses the context captured earlier:
 
 ```powershell
-New-AzSqlServer -ResourceGroupName "prefixrg" -ServerName "prefixss" -Location "westus" -SqlAdministratorCredentials $sqlAdminCred -DefaultProfile $context
+New-AzSqlServer -ResourceGroupName "{prefix}rg" -ServerName "{prefix}ss" -Location "westus" -SqlAdministratorCredentials $sqlAdminCred -DefaultProfile $context
 ```
 
 #### Expected Output
 ```
-ResourceGroupName             : prefixrg
-ServerName                    : prefixss
+ResourceGroupName             : {prefix}rg
+ServerName                    : {prefix}ss
 Location                      : westus
-SqlAdministratorLogin         : prefixssadmin
+SqlAdministratorLogin         : {prefix}ssadmin
 SqlAdministratorPassword      : 
 ServerVersion                 : 12.0
 Tags                          : 
 Identity                      : 
-FullyQualifiedDomainName      : prefixss.database.windows.net
-ResourceId                    : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss
+FullyQualifiedDomainName      : {prefix}ss.database.windows.net
+ResourceId                    : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}rg/providers/Microsoft.Sql/servers/{prefix}ss
 MinimalTlsVersion             : 1.2
 PublicNetworkAccess           : Enabled
 RestrictOutboundNetworkAccess : Disabled
@@ -584,13 +583,13 @@ Confirm successful SQL Server creation in the Azure Portal.
 Execute the following command to configure a firewall rule that allows Azure services to access the Azure SQL server. Setting both the StartIpAddress and EndIpAddress to "0.0.0.0" creates a special rule that permits Azure-to-Azure traffic:
 
 ```powershell
-New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowAzureServices" -StartIpAddress "0.0.0.0" -EndIpAddress "0.0.0.0"
+New-AzSqlServerFirewallRule -ResourceGroupName "{prefix}rg" -ServerName "{prefix}ss" -FirewallRuleName "AllowAzureServices" -StartIpAddress "0.0.0.0" -EndIpAddress "0.0.0.0"
 ```
 
 #### Expected Output
 ```
-ResourceGroupName : prefixrg
-ServerName        : prefixss
+ResourceGroupName : {prefix}rg
+ServerName        : {prefix}ss
 StartIpAddress    : 0.0.0.0
 EndIpAddress      : 0.0.0.0
 FirewallRuleName  : AllowAzureServices
@@ -600,17 +599,17 @@ FirewallRuleName  : AllowAzureServices
 
 ### Create Database
 
-Execute the following command to create a new Azure SQL Database on the server. This command provisions a new database named `"prefixsd"` using the Basic pricing tier:
+Execute the following command to create a new Azure SQL Database on the server. This command provisions a new database named `"{prefix}sd"` using the Basic pricing tier:
 
 ```powershell
-New-AzSqlDatabase -ResourceGroupName "prefixrg" -ServerName "prefixss" -DatabaseName "prefixsd" -Edition "Basic"
+New-AzSqlDatabase -ResourceGroupName "{prefix}rg" -ServerName "{prefix}ss" -DatabaseName "{prefix}sd" -Edition "Basic"
 ```
 
 #### Expected Output
 ```
-ResourceGroupName                : prefixrg
-ServerName                       : prefixss
-DatabaseName                     : prefixsd
+ResourceGroupName                : {prefix}rg
+ServerName                       : {prefix}ss
+DatabaseName                     : {prefix}sd
 Location                         : westus
 DatabaseId                       : 130278e5-f56c-45ac-b177-5ff601b210f9
 Edition                          : Basic
@@ -626,7 +625,7 @@ RequestedServiceObjectiveId      :
 ElasticPoolName                  : 
 EarliestRestoreDate              : 
 Tags                             : 
-ResourceId                       : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss/databases/prefixs
+ResourceId                       : /subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}rg/providers/Microsoft.Sql/servers/{prefix}ss/databases/{prefix}s
                                    d
 CreateMode                       : 
 ReadScale                        : Disabled
@@ -659,50 +658,6 @@ PerformCutover                   :
 ```
 
 Confirm successful SQL Database creation in the Azure Portal.
-
--------------------------
-
-### Verify Connectivity
-
-Execute the following command to verify connectivity by running a simple T-SQL query against your newly created Azure SQL Database. This confirms that the database is reachable:
-
-```powershell
-Invoke-Sqlcmd -ServerInstance "prefixss.database.windows.net" -Database "prefixsd" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
-```
-
-Review the output to ensure that the database is accessible and functioning as expected.
-
-------------------------- -------------------------
-
-### Hands‑On Exercise: Deploy and Configure an Azure SQL Database
-
-In this exercise you will create a resource group, provision an Azure SQL server, configure a firewall rule, and create a new database named "prefixsd." Finally, you'll verify connectivity by running a simple query.
-
-Step 1: Create a resource group
-```powershell
-New-AzResourceGroup -Name "prefixrg" -Location "westus"
-```
-
-Step 2: Provision an Azure SQL server and set the admin credentials
-```powershell
-$sqlAdminCred = Get-Credential -UserName "prefixssadmin" -Message "Enter a strong password for the new Azure SQL server admin"
-New-AzSqlServer -ResourceGroupName "prefixrg" -ServerName "prefixss" -Location "westus" -SqlAdministratorCredentials $sqlAdminCred
-```
-
-Step 3: Configure a firewall rule to allow your IP address (replace X.X.X.X with your public IP)
-```powershell
-New-AzSqlServerFirewallRule -ResourceGroupName "prefixrg" -ServerName "prefixss" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
-```
-
-Step 4: Create a new database named prefixsd
-```powershell
-New-AzSqlDatabase -ResourceGroupName "prefixrg" -ServerName "prefixss" -DatabaseName "prefixsd" -Edition "Basic"
-```
-
-Step 5: Verify connectivity by running a simple query (optional)
-```powershell
-Invoke-Sqlcmd -ServerInstance "prefixss.database.windows.net" -Database "prefixsd" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
-```
 
 ------------------------- -------------------------
 
