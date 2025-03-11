@@ -246,7 +246,7 @@ This section covers how to configure your SQL Server instance on the VM to suppo
 2. Set or Change the sa Password:  
    For security, set a strong password for the sa account:
    ```sql
-   ALTER LOGIN [sa] WITH PASSWORD = 'YourNewStrongPassword';
+   ALTER LOGIN [sa] WITH PASSWORD = '{password}';
    ```
    Replace `'YourNewStrongPassword'` with a password that meets your organization's security policies.
 
@@ -335,7 +335,7 @@ Use SQL Server Management Studio to confirm database creation.
 
 Step 3: Create login `traininguser`  
 ```powershell
-Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "CREATE LOGIN traininguser WITH PASSWORD = 'Str0ngPass!';"
+Invoke-Sqlcmd -ServerInstance "YourSQLServerName" -Database master -TrustServerCertificate:$true -Query "CREATE LOGIN traininguser WITH PASSWORD = '{password}';"
 ```
 
 Use SQL Server Management Studio to confirm login creation.
