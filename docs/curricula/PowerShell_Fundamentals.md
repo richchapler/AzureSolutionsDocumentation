@@ -364,10 +364,10 @@ Use SQL Server Management Studio to confirm user creation and permissions.
    D. `SQLDB:\`
 
 3. Which T‑SQL statement creates a new database named trainingdb on SQL Server?  
-   A. `CREATE DATABASE trainingdb;`  
-   B. `NEW DATABASE trainingdb;`  
-   C. `MAKE DATABASE trainingdb;`  
-   D. `ADD DATABASE trainingdb;`
+   A. `NEW DATABASE trainingdb;`  
+   B. `MAKE DATABASE trainingdb;`  
+   C. `ADD DATABASE trainingdb;`  
+   D. `CREATE DATABASE trainingdb;`
 
 4. After creating a SQL login, what must you do to allow that login to access a specific database?  
    A. Nothing; logins automatically have access  
@@ -376,10 +376,10 @@ Use SQL Server Management Studio to confirm user creation and permissions.
    D. Change the authentication mode
 
 5. Which parameter should be included with `Invoke-Sqlcmd` to bypass SSL certificate validation issues?  
-   A. `-TrustServerCertificate`  
-   B. `-IgnoreCertificateErrors`  
+   A. `-IgnoreCertificateErrors`  
+   B. `-SkipCertValidation`  
    C. `-BypassSSL`  
-   D. `-SkipCertValidation`
+   D. `-TrustServerCertificate`
 
 6. Which cmdlet is used to verify that the SQL Server service is running?  
    A. `Get-Service`  
@@ -388,10 +388,10 @@ Use SQL Server Management Studio to confirm user creation and permissions.
    D. `Show-Service`
 
 7. When testing remote commands locally to avoid WinRM issues, which computer name should you use?  
-   A. `localhost`  
-   B. `127.0.0.1`  
-   C. Your machine’s fully qualified domain name  
-   D. The domain name
+   A. Your machine’s fully qualified domain name  
+   B. The domain name  
+   C. `localhost`  
+   D. `127.0.0.1`
 
 8. Which cmdlet is commonly used to capture the output of a command and write it to a file?  
    A. `Out-File`  
@@ -400,144 +400,153 @@ Use SQL Server Management Studio to confirm user creation and permissions.
    D. `Set-Content`
 
 9. What is the recommended method for securely obtaining user credentials in PowerShell?  
-   A. `Get-Credential`  
-   B. `Read-Host`  
-   C. `Import-Credential`  
-   D. `Secure-Credential`
+   A. `Read-Host`  
+   B. `Import-Credential`  
+   C. `Secure-Credential`  
+   D. `Get-Credential`
 
 10. What is the primary purpose of using a pipeline (`|`) in PowerShell?  
     A. To execute multiple commands concurrently  
-    B. To pass the output of one cmdlet as input to another  
-    C. To connect to remote systems  
-    D. To format the output automatically
+    B. To format the output automatically  
+    C. To pass the output of one cmdlet as input to another  
+    D. To connect to remote systems
 
 -------------------------
 
 #### Answer Key
 
 1. Answer: B  
-   Explanation: The `Invoke-Sqlcmd` cmdlet is used to run T‑SQL queries on a SQL Server instance.
+   Explanation: The `Invoke-Sqlcmd` cmdlet is specifically designed to execute T‑SQL queries on a SQL Server instance, whereas the other options are not valid cmdlets for this purpose.
 
 2. Answer: A  
-   Explanation: The SqlServer module adds the `SQLSERVER:\` provider path for on‑premises SQL Server.
+   Explanation: The SqlServer module adds the provider path `SQLSERVER:\` for on‑premises SQL Server, making it easy to navigate SQL Server objects.
 
-3. Answer: A  
-   Explanation: `CREATE DATABASE trainingdb;` is the correct T‑SQL statement for creating a new database.
+3. Answer: D  
+   Explanation: `CREATE DATABASE trainingdb;` is the correct T‑SQL statement to create a new database named trainingdb, following the standard SQL syntax.
 
 4. Answer: B  
-   Explanation: After creating a SQL login, you must create a corresponding database user and map the login to allow access.
+   Explanation: After creating a SQL login, you must create a corresponding database user and map the login to the database to allow access.
 
-5. Answer: A  
-   Explanation: The `-TrustServerCertificate` parameter instructs Invoke‑Sqlcmd to bypass SSL certificate validation.
+5. Answer: D  
+   Explanation: The `-TrustServerCertificate` parameter instructs `Invoke-Sqlcmd` to bypass SSL certificate validation issues, which is necessary when the server’s certificate is not trusted.
 
 6. Answer: A  
-   Explanation: The `Get-Service` cmdlet is used to check the status of Windows services, including SQL Server.
+   Explanation: The `Get-Service` cmdlet is used to check the status of Windows services, including the SQL Server service.
 
-7. Answer: A  
-   Explanation: Using "localhost" avoids WinRM configuration issues when testing remote commands locally.
+7. Answer: C  
+   Explanation: Using `localhost` when testing remote commands locally helps avoid WinRM configuration issues.
 
 8. Answer: A  
-   Explanation: The `Out-File` cmdlet captures output and writes it to a file.
+   Explanation: The `Out-File` cmdlet is commonly used to capture command output and write it to a file for review.
 
-9. Answer: A  
-   Explanation: The `Get-Credential` cmdlet securely prompts for and obtains user credentials.
+9. Answer: D  
+   Explanation: The `Get-Credential` cmdlet is the recommended method for securely obtaining user credentials in PowerShell.
 
-10. Answer: B  
-    Explanation: Pipelines pass the output of one cmdlet as input to another, streamlining data processing.
+10. Answer: C  
+    Explanation: The primary purpose of a pipeline (`|`) in PowerShell is to pass the output of one cmdlet as input to another, enabling streamlined data processing.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
 ## Azure PowerShell
 
-This section focuses on using the Azure PowerShell (Az) modules to deploy and manage Azure SQL resources, including servers and databases.
+This section focuses on using the Azure PowerShell (Az) modules to deploy and manage Azure SQL resources. You'll work in an environment such as Azure Cloud Shell (where the Az modules are pre‑installed) or on your local machine (if you choose to install the Az module manually). In this section, you'll learn how to create and configure resource groups, Azure SQL servers, firewall rules, and databases, and verify connectivity using PowerShell.
 
 ### Environment Setup for Azure Tasks
 
-- Module Installation:  
-  - Install the Az module:
-    ```powershell
-    Install-Module -Name Az -Scope CurrentUser
-    ```
-  - Import the module:
-    ```powershell
-    Import-Module Az
-    ```
+When working in Azure Cloud Shell, the Az modules are already available and you are automatically authenticated. If you're working on your local machine, follow these steps:
 
-- Authentication:  
-  - Log in to Azure:
-    ```powershell
-    Connect-AzAccount
-    ```
-  - If needed, select your subscription:
-    ```powershell
-    Select-AzSubscription -SubscriptionName "Your Subscription Name"
-    ```
+1. Install the Az module (if not already installed):
+   ```powershell
+   Install-Module -Name Az -Scope CurrentUser
+   ```
+2. Import the Az module:
+   ```powershell
+   Import-Module Az
+   ```
+3. Log in to your Azure account:
+   ```powershell
+   Connect-AzAccount
+   ```
+4. (Optional) Select the appropriate subscription:
+   ```powershell
+   Select-AzSubscription -SubscriptionName "Your Subscription Name"
+   ```
 
-- Cloud Shell Option:  
-  - Alternatively, use Azure Cloud Shell (available in the Azure Portal) which comes pre‑installed with the Az modules and is already authenticated.
+### Key Topics and Examples for Azure SQL
 
-### Key Topics and Exercises for Azure Administration
+#### Creating an Azure SQL Server and Database
 
-#### 1. Creating an Azure SQL Server and Database
+Azure PowerShell provides cmdlets to manage the entire lifecycle of Azure SQL resources. Below are some examples:
 
-- Resource Group Creation:  
+- Creating a Resource Group  
+  Create a resource group to organize your resources:
   ```powershell
   New-AzResourceGroup -Name "PSQL-Lab-RG" -Location "WestEurope"
   ```
-- Provisioning the Azure SQL Server:  
+  This command creates a resource group named "PSQL-Lab-RG" in the West Europe region.
+
+- Provisioning an Azure SQL Server  
+  Provision a new Azure SQL server by prompting for an admin credential:
   ```powershell
   $sqlAdminCred = Get-Credential -UserName "sqladminuser" -Message "Enter a strong password for the new Azure SQL server admin"
   New-AzSqlServer -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -Location "WestEurope" -SqlAdministratorCredentials $sqlAdminCred
   ```
-- Configuring Firewall Rules:  
-  Allow your IP:
+  This command creates an Azure SQL server with a unique name. Replace "youruniquesqlserver" with a globally unique server name.
+
+- Configuring Firewall Rules  
+  Configure a firewall rule to allow your local machine's IP to connect to the Azure SQL server:
   ```powershell
   New-AzSqlServerFirewallRule -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
   ```
-- Creating a Database:  
+  Replace "X.X.X.X" with your public IP address. This ensures that your client can access the server.
+
+- Creating a Database  
+  Create a new Azure SQL Database on the server:
   ```powershell
   New-AzSqlDatabase -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -DatabaseName "LabDB" -Edition "Basic"
   ```
+  This command provisions a new database named "LabDB" using the Basic pricing tier.
 
-Hands‑On Exercise 4:  
-1. Run `Connect-AzAccount` to log in.  
-2. Create a resource group, then provision an Azure SQL Server using unique naming and admin credentials.  
-3. Configure the firewall to allow your connection.  
-4. Create a database named "LabDB" and test connectivity using `Invoke-Sqlcmd`.
-
-#### 2. Azure SQL User Management and Security
-
-- Contained Database Users:  
-  Create a contained user in an Azure SQL Database:
+- Verifying Connectivity (Optional)  
+  Although Azure Cloud Shell typically provides a managed environment, you can verify connectivity by running a simple T-SQL query. For example, using `Invoke-Sqlcmd` (ensure that your server’s connection settings allow SQL queries):
   ```powershell
-  Invoke-Sqlcmd -ServerInstance "youruniquesqlserver.database.windows.net" -Database "LabDB" -Username "sqladminuser" -Password "<YourPassword>" -Query "
-    CREATE USER reportingUser WITH PASSWORD = 'User@1234';
-    ALTER ROLE db_datareader ADD MEMBER reportingUser;
-  "
+  Invoke-Sqlcmd -ServerInstance "youruniquesqlserver.database.windows.net" -Database "LabDB" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
   ```
-- Azure AD Administration (Optional):  
-  Set an Azure AD admin for the server:
-  ```powershell
-  Set-AzSqlServerActiveDirectoryAdministrator -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -DisplayName "YourADAdmin" -ObjectId "<AzureAD_ObjectID>"
-  ```
+  This confirms that your Azure SQL database is reachable.
 
-#### 3. Automating Azure SQL Maintenance
+### Hands‑On Exercise: Deploy and Configure an Azure SQL Database
 
-- Scaling the Database:  
-  Scale up or down using:
-  ```powershell
-  Set-AzSqlDatabase -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -DatabaseName "LabDB" -Edition "Standard" -ServiceObjectiveName "S1"
-  ```
-  Scale down later by switching to a lower tier (e.g., Basic).
-- Azure Automation Runbooks:  
-  Outline how to schedule recurring tasks (like scaling adjustments or maintenance scripts) using Azure Automation Runbooks that run PowerShell scripts.
+In this exercise you will create a resource group, provision an Azure SQL server, configure a firewall rule, and create a new database named "LabDB." Finally, you'll verify connectivity by running a simple query.
 
-Hands‑On Exercise 5:  
-Implement or describe a scenario where you scale the "LabDB" database up during business hours and down at night. Discuss how you would schedule these tasks (via Azure Automation Runbooks or Task Scheduler) and monitor performance.
+Step 1: Create a resource group
+```powershell
+New-AzResourceGroup -Name "PSQL-Lab-RG" -Location "WestEurope"
+```
 
----
+Step 2: Provision an Azure SQL server and set the admin credentials
+```powershell
+$sqlAdminCred = Get-Credential -UserName "sqladminuser" -Message "Enter a strong password for the new Azure SQL server admin"
+New-AzSqlServer -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -Location "WestEurope" -SqlAdministratorCredentials $sqlAdminCred
+```
 
-### Quiz: Test Your Knowledge – Azure
+Step 3: Configure a firewall rule to allow your IP address (replace X.X.X.X with your public IP)
+```powershell
+New-AzSqlServerFirewallRule -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -FirewallRuleName "AllowMyIP" -StartIpAddress "X.X.X.X" -EndIpAddress "X.X.X.X"
+```
+
+Step 4: Create a new database named LabDB
+```powershell
+New-AzSqlDatabase -ResourceGroupName "PSQL-Lab-RG" -ServerName "youruniquesqlserver" -DatabaseName "LabDB" -Edition "Basic"
+```
+
+Step 5: Verify connectivity by running a simple query (optional)
+```powershell
+Invoke-Sqlcmd -ServerInstance "youruniquesqlserver.database.windows.net" -Database "LabDB" -Query "SELECT @@VERSION;" -TrustServerCertificate:$true
+```
+
+------------------------- -------------------------
+
+### Quiz: Azure PowerShell
 
 1. Azure Environment Setup: Which cmdlet logs you in to your Azure account?  
    A. `Connect-AzAccount`  
@@ -545,60 +554,90 @@ Implement or describe a scenario where you scale the "LabDB" database up during 
    C. `Connect-Azure`  
    D. `Authenticate-Az`
 
-2. Resource Provisioning: Which of the following is required before creating an Azure SQL Server?  
-   A. Installing SQL Server on an Azure VM  
-   B. Creating a Resource Group  
-   C. Setting up a VPN  
-   D. Configuring Windows Authentication
+2. Resource Provisioning: Which command creates a new resource group in Azure?  
+   A. `New-AzResourceGroup`  
+   B. `New-AzureResourceGroup`  
+   C. `Create-AzResourceGroup`  
+   D. `Set-AzResourceGroup`
 
-3. Firewall Configuration: To allow your local machine to connect to an Azure SQL Server, which parameter is essential in creating a firewall rule?  
-   A. Database name  
-   B. StartIpAddress and EndIpAddress  
-   C. Resource Group name only  
-   D. Azure AD object ID
+3. Azure SQL Server Provisioning: Which parameter is required when creating a new Azure SQL server using PowerShell?  
+   A. `-SqlAdministratorCredentials`  
+   B. `-AdminPassword`  
+   C. `-ServerAdmin`  
+   D. `-Credential`
 
-4. Database Creation: Which cmdlet is used to create a new Azure SQL Database?  
+4. Firewall Configuration: Which cmdlet is used to configure firewall rules for an Azure SQL Server?  
+   A. `New-AzSqlServerFirewallRule`  
+   B. `Set-AzSqlFirewallRule`  
+   C. `Configure-AzSqlFirewall`  
+   D. `Add-AzSqlServerFirewallRule`
+
+5. Database Creation: Which cmdlet is used to create a new Azure SQL Database?  
    A. `New-AzSqlDatabase`  
    B. `New-AzureSqlDatabase`  
    C. `Create-AzSqlDB`  
    D. `New-SqlDatabase`
 
-5. User Management in Azure SQL: How are contained database users created in Azure SQL?  
-   A. Using `New-AzSqlUser`  
-   B. Via T‑SQL executed with `Invoke-Sqlcmd`  
-   C. Through the Azure Portal only  
-   D. With the `Create-AzUser` cmdlet
+6. In Azure Cloud Shell, which module is pre-installed for managing Azure resources?  
+   A. `Az`  
+   B. `SqlServer`  
+   C. `AzureRM`  
+   D. `MSOnline`
 
-6. Scaling the Database: Which command scales an Azure SQL Database to a higher performance tier?  
-   A. `Set-AzSqlDatabase`  
-   B. `Scale-AzSqlDatabase`  
-   C. `Update-AzSqlDatabase`  
-   D. `Invoke-AzSqlScale`
+7. When connecting to an Azure SQL Database using PowerShell, what is the correct format for the server name?  
+   A. `yourserver.database.windows.net`  
+   B. `yourserver.cloud.windows.net`  
+   C. `yourserver.sql.azure.com`  
+   D. `yourserver.windows.net`
 
-7. Automation: What Azure feature can you use to schedule recurring PowerShell scripts to manage Azure SQL resources?  
-   A. Azure Automation Runbook  
-   B. Azure Logic Apps  
-   C. Azure Functions  
-   D. SQL Server Agent
+8. Which cmdlet can be used to execute a T-SQL query against an Azure SQL Database?  
+   A. `Invoke-Sqlcmd`  
+   B. `Test-AzSqlConnection`  
+   C. `Get-AzSqlDatabase`  
+   D. `Invoke-AzSqlQuery`
 
----
+9. Which of the following is a key benefit of using Azure Cloud Shell for managing Azure SQL resources?  
+   A. The Az modules are pre-installed and maintained by Azure  
+   B. It provides direct access to the Windows registry  
+   C. It allows installation of custom modules without restrictions  
+   D. It supports only Windows PowerShell 5.1
 
-## Best Practices for PowerShell and SQL Server
+10. Which approach is recommended for automating recurring maintenance tasks for Azure SQL resources?  
+    A. Azure Automation Runbooks  
+    B. SQL Server Agent  
+    C. Manual execution via SSMS  
+    D. Windows Task Scheduler on a local machine
 
-- Use Least Privilege: Run sessions with only the necessary permissions.  
-- Secure Credentials: Avoid hard‑coding credentials; use `Get-Credential` or secure vaults.  
-- Error Handling and Logging: Implement Try/Catch blocks and log outcomes.  
-- Idempotence: Ensure scripts can be safely re‑run.  
-- Keep Modules Updated: Regularly update the SqlServer and Az modules.  
-- Documentation and Source Control: Comment your scripts and use version control.
+-------------------------
 
----
+### Answer Key
 
-## Exam Guidance
+1. Answer: A  
+   Explanation: The `Connect-AzAccount` cmdlet is used to log in to your Azure account, providing authentication to access Azure resources.
 
-- Know Key Cmdlets:  
-  - On‑prem: `Invoke-Sqlcmd`, `Backup-SqlDatabase`, `Restore-SqlDatabase`, navigating `SQLSERVER:\`  
-  - Azure: `New-AzSqlServer`, `New-AzSqlDatabase`, `Set-AzSqlDatabase`, `New-AzSqlServerFirewallRule`
-- Understand Environment Differences: Recognize the differences between on‑prem and cloud administration, and between Windows PowerShell and PowerShell Core.
-- Practice Scenarios: Simulate tasks such as user management, backups, scaling, and monitoring using the provided exercises.
-- Automation Benefits: Know why automating these tasks with PowerShell is more efficient than manual GUI operations.
+2. Answer: A  
+   Explanation: The `New-AzResourceGroup` cmdlet creates a new resource group, which is used to organize Azure resources such as Azure SQL servers and databases.
+
+3. Answer: A  
+   Explanation: When provisioning an Azure SQL server, the `-SqlAdministratorCredentials` parameter is required to specify the server admin’s credentials.
+
+4. Answer: A  
+   Explanation: The `New-AzSqlServerFirewallRule` cmdlet is used to create firewall rules for an Azure SQL server, allowing you to control network access.
+
+5. Answer: A  
+   Explanation: The `New-AzSqlDatabase` cmdlet is the correct command to create a new Azure SQL Database.
+
+6. Answer: A  
+   Explanation: In Azure Cloud Shell, the Az modules are pre-installed and maintained by Azure, so you do not need to manually install them.
+
+7. Answer: A  
+   Explanation: Azure SQL Database uses the fully qualified domain name format `yourserver.database.windows.net` for its server name.
+
+8. Answer: A  
+   Explanation: The `Invoke-Sqlcmd` cmdlet is used to execute T-SQL queries against an Azure SQL Database, allowing you to verify connectivity and execute commands.
+
+9. Answer: A  
+   Explanation: A key benefit of Azure Cloud Shell is that the Az modules are pre-installed and maintained, reducing setup time and ensuring you have the latest functionality.
+
+10. Answer: A  
+    Explanation: Azure Automation Runbooks are recommended for scheduling recurring maintenance tasks for Azure SQL resources, as they provide a managed, scalable solution for automation in the cloud.
