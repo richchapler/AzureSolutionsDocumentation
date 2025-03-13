@@ -69,25 +69,52 @@ Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio C
 
 -------------------------
 
-**Step 2: Load Environment Variables**
+**Step 1.5: Create the .env File (if needed)**
 
-**+ Markdown Cell**
+Click **+ Markdown** and paste the following annotation into the resulting cell:
 
 Paste the following annotation into a new Markdown cell:
 
 ```markdown
-## Load Environment Variables
-This cell loads your API credentials and image path from the `.env` file. Make sure your `.env` file contains the following variables:
-- API_KEY
-- ENDPOINT
-- IMAGE_PATH
+## Create the .env File
+If you haven't already created a `.env` file, this cell will create one and prompt you to update it with your API credentials and image path.
 ```
 
-Render the Markdown cell.
+Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
 **+ Code Cell**
 
-Next, create a new Code cell and paste the following code:
+Then, create a new Code cell and paste the following code:
+
+```python
+import os
+
+env_file = ".env"
+
+if not os.path.isfile(env_file):
+    with open(env_file, "w") as f:
+        f.write("API_KEY=\nENDPOINT=\nIMAGE_PATH=\n")
+    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
+else:
+    print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
+```
+
+Run the cell. This will create the `.env` file if it doesn't exist, prompting you to fill in the required values.
+
+-------------------------
+
+**Step 2: Load Environment Variables**
+
+Click **+ Markdown** and paste the following annotation into the resulting cell:
+
+```markdown
+## Load Environment Variables
+This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file
+```
+
+Render the Markdown cell by clicking the checkmark in the upper-right controls.
+
+Click **+ Code** and paste the following code into the new cell:
 
 ```python
 import os
