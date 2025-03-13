@@ -360,7 +360,7 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 Click on the "Image analysis" tab.
 
--------------------------
+------------------------- -------------------------
 
 ### 5.1 Recognize Products on Shelves
 
@@ -375,19 +375,158 @@ Iteratively try models:
 - **Sample custom model** – Demonstrates a custom-trained product recognition model for specific use cases.
 - **Train your own model** – Allows users to train a model with their own dataset for tailored product detection.
 
-#### 5.1.2 Prebuilt Product vs. Gap Model
+#### 5.1.1.1 Prebuilt Product vs. Gap Model
 
 <img src="https://github.com/user-attachments/assets/1c722fed-a358-4232-942c-c30bf2ce30c8" width="800" title="Snipped February 18, 2025" />
 
 On the "Detected products" tab, note that only two values are surfaced: 1) product and 2) gap
 
-#### 5.1.3 Sample Custom Model with Product Names
+#### 5.1.1.2 Sample Custom Model with Product Names
 
 <img src="https://github.com/user-attachments/assets/a210b12e-daf3-49fa-9601-02779df0b807" width="800" title="Snipped February 18, 2025" />
 
 On the "Detected products" tab, note various product names.
 
+#### 5.1.2 Pro Code
+
+**Step 1: Ensure Your Notebook is Open**
+
+Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio Code:
+
+1. In Visual Studio Code, click **File** > **New File**.
+2. Search for and select **Jupyter Notebook**.
+3. Save the file as `ocr.ipynb`.
+
 -------------------------
+
+**Step 2: Create the .env File (if needed)**
+
+Click **+ Markdown** and paste the following annotation into the resulting cell:
+
+```markdown
+## `.env` File
+Create (if necessary) and prompt for update with API credentials and image path.
+```
+
+Render the Markdown cell by clicking the checkmark in the upper-right controls.
+
+Then click **+ Code** and paste the following code into the new cell:
+
+```python
+import os
+
+env_file = ".env"
+
+if not os.path.isfile(env_file):
+    with open(env_file, "w") as f:
+        f.write("API_KEY=\nENDPOINT=\nIMAGE_PATH=\n")
+    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
+else:
+    print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
+```
+
+Run the cell; expected output:
+
+```
+.env file created at c:\Users\{user}\.env. Please update it with your API credentials and image path.
+```
+
+-------------------------
+
+**Step 3: Populate `.env` File**
+
+Open the `.env` file with your preferred text editor and update it with actual values; for example:
+
+```text
+API_KEY={Computer Vision KEY}
+ENDPOINT=https://prefixcv.cognitiveservices.azure.com/
+IMAGE_PATH=C:\temp\image.jpg
+```
+
+*Note: Consider downloading images from the Vision Studio, OCR examples.*
+
+Save the file after updating.
+
+-------------------------
+
+**Step 4: Load Environment Variables**
+
+Click **+ Markdown** and paste the following annotation into the resulting cell:
+
+```markdown
+## Load Environment Variables
+This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file.
+```
+
+Render the Markdown cell by clicking the checkmark in the upper-right controls.
+
+Then click **+ Code** and paste the following code into the new cell:
+
+```python
+import os
+from dotenv import load_dotenv
+
+env_file = ".env"
+load_dotenv(env_file)
+
+API_KEY = os.getenv("API_KEY")
+ENDPOINT = os.getenv("ENDPOINT")
+IMAGE_PATH = os.getenv("IMAGE_PATH")
+
+# Optionally, print the variables to verify they are loaded (API_KEY is redacted)
+print("API_KEY:", "*" * len(API_KEY) if API_KEY else "None")
+print("ENDPOINT:", ENDPOINT)
+print("IMAGE_PATH:", IMAGE_PATH)
+```
+
+Run the cell to ensure that API_KEY, ENDPOINT, and IMAGE_PATH are correctly loaded.
+
+-------------------------
+
+**Step 5: Recognize Products on Shelves (Pro Code)**
+
+Click **+ Markdown** and paste the following annotation into the resulting cell:
+
+```markdown
+## Recognize Products on Shelves (Pro Code)
+Use Azure AI Vision's object detection (and optionally custom models) to identify products on shelves and detect empty gaps.
+```
+
+Render the Markdown cell by clicking the checkmark in the upper-right controls.
+
+Then click **+ Code** and paste the following code into the new cell:
+
+```python
+import os
+import requests
+
+def recognize_products_on_shelves(image_path):
+    with open(image_path, "rb") as image_file:
+        image_data = image_file.read()
+
+    headers = {
+        "Ocp-Apim-Subscription-Key": API_KEY,
+        "Content-Type": "application/octet-stream"
+    }
+
+    # For general product detection, use "objects".
+    # For specialized "product vs gap" scenarios, you may need a custom model or specialized feature.
+    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=objects"
+
+    response = requests.post(url, headers=headers, data=image_data)
+    return response
+
+if IMAGE_PATH and os.path.isfile(IMAGE_PATH):
+    response = recognize_products_on_shelves(IMAGE_PATH)
+    print(response.json())
+else:
+    print("IMAGE_PATH is not defined or the file does not exist. Please check your .env file.")
+```
+
+Run the cell to send your image (as specified by IMAGE_PATH in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the bounding boxes and labels for the detected products.  
+*Optional: If you have a custom model, append `&modelVersion=<YourModelName>` to the URL as needed. Refer to the [Azure AI Vision documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/) for further details.*
+
+------------------------- -------------------------
 
 ### 5.2 Search Photos with Image Retrieval
 
