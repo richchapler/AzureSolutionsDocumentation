@@ -155,20 +155,16 @@ Run the cell to ensure that `API_KEY`, `ENDPOINT`, and `IMAGE_PATH` are correctl
 
 -------------------------
 
-Step 3: Add the OCR Annotation
+Step 5: OCR Code
 
 Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
-## Exercise 2: Optical Character Recognition (OCR) 
-Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF)
+## Step 5: OCR Code
+The following code sends the image (as specified by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint to perform OCR
 ```
 
-Render the Markdown cell.
-
--------------------------
-
-Step 4: Add the OCR Code
+Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
 Click + Code and paste the following code into the new cell:
 
@@ -196,47 +192,42 @@ else:
     print("IMAGE_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
 
-Run the cell to send your image (as specified by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON for OCR results.
+-------------------------
 
-------------------------- -------------------------
-
-#### Expected Response
+#### Expected Result
 _Note: JSON formatted and abbreviated for convenience_
 
 ```json
 {
   "readResult": {
     "stringIndexType": "TextElements",
-    "content": "Walmart\nSave money. Live better.\n( 330 ) 339 - 3991\nMANAGER DIANA EARNEST\n231 BLUEBELL DR SW\nNEW PHILADELPHIA OH 44663\nST# 02115 OP# 009044 TE# 44 TR# 01301\n...\nSUBTOTAL 93.62\nTAX 1 6.750% 4.59\nTOTAL 98.21\nVISA TEND 98.21\n...\n07/28/17\n02:39:48\nCHANGE DUE 0.00\n# ITEMS SOLD 25\n...",
+    "content": "NATIONAL IDENTITY CARD\nBIOMETRICS\nNAME: John Doe\nSEX: Male\nHAIR: Brown\nHEIGHT: 5'10\"\nWEIGHT: 165\nBORN: 13 Dec 1981\nDRIVERS LICENSE: XXT55340H59\n1003A2- 107624-( *- 102) 440u 28878976-(tf. 7 -- i9#3.c)",
     "pages": [
       {
-        "height": 1373.0,
-        "width": 554.0,
-        "angle": 0.0,
+        "height": 3528.0,
+        "width": 5300.0,
+        "angle": 0.1194,
         "pageNumber": 1,
         "words": [
-          {"content": "Walmart", "boundingBox": [...], "confidence": 0.996, "span": {"offset": 0, "length": 7}},
-          {"content": "Save", "boundingBox": [...], "confidence": 0.994, "span": {"offset": 8, "length": 4}},
-          ...
-          {"content": "TOTAL", "boundingBox": [...], "confidence": 0.998, "span": {"offset": 1023, "length": 5}},
-          {"content": "98.21", "boundingBox": [...], "confidence": 0.994, "span": {"offset": 1029, "length": 5}}
-        ],
-        "spans": [{"offset": 0, "length": 1421}],
-        "lines": [
-          {"content": "Walmart", "boundingBox": [...], "spans": [{"offset": 0, "length": 7}]},
-          {"content": "Save money. Live better.", "boundingBox": [...], "spans": [{"offset": 8, "length": 24}]},
-          ...
-          {"content": "TOTAL", "boundingBox": [...], "spans": [{"offset": 1023, "length": 5}]},
-          {"content": "98.21", "boundingBox": [...], "spans": [{"offset": 1029, "length": 5}]}
-        ]
-      }
-    ],
-    "styles": [],
-    "modelVersion": "2022-04-30"
-  },
-  "modelVersion": "2023-02-01-preview",
-  "metadata": {"width": 554, "height": 1373}
-}
+          {
+            "content": "NATIONAL",
+            "boundingBox": [
+              1456.0,
+              909.0,
+              1932.0,
+              906.0,
+              1930.0,
+              1010.0,
+              1453.0,
+              1012.0
+            ],
+            "confidence": 0.995,
+            "span": {
+              "offset": 0,
+              "length": 8
+            }
+          },
+...
 ```
 
 ------------------------- ------------------------- ------------------------- -------------------------
