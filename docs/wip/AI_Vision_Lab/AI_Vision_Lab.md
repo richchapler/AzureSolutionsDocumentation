@@ -59,32 +59,30 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ### Pro Code
 
-**Step 1: Ensure Your Notebook is Open**
+Step 1: Ensure Your Notebook is Open
 
 Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio Code:
 
-1. In Visual Studio Code, click **File** > **New File**.
-2. Search for and select **Jupyter Notebook**.
+1. In Visual Studio Code, click File > New File.
+2. Search for and select Jupyter Notebook.
 3. Save the file as `ocr.ipynb`.
 
 -------------------------
 
-**Step 1.5: Create the .env File (if needed)**
+Step 2: Create the .env File (if needed)
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click + Markdown and paste the following annotation into the resulting cell:
 
 Paste the following annotation into a new Markdown cell:
 
 ```markdown
-## Create the .env File
-If you haven't already created a `.env` file, this cell will create one and prompt you to update it with your API credentials and image path.
+## `.env` File
+Create (if necessary) and prompt for update with API credentials and image path.
 ```
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-**+ Code Cell**
-
-Then, create a new Code cell and paste the following code:
+Click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -99,13 +97,33 @@ else:
     print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
 ```
 
-Run the cell. This will create the `.env` file if it doesn't exist, prompting you to fill in the required values.
+Run the cell; expected output:
+
+```
+.env file created at c:\Users\{user}\.env. Please update it with your API credentials and image path.
+```
 
 -------------------------
 
-**Step 2: Load Environment Variables**
+Step 3: Populate `.env` File
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Navigate to the folder and open the `.env` file with a preferred text editor. Update it with actual values; example:
+
+```text
+API_KEY={Computer Vision KEY}
+ENDPOINT=https://prefixcv.cognitiveservices.azure.com/
+IMAGE_PATH=C:\temp\image.jpg
+```
+
+_Note: Consider downloading images from the Vision Studio, OCR examples_
+
+Save the file after updating.
+
+-------------------------
+
+Step 4: Load Environment Variables
+
+Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
@@ -114,7 +132,7 @@ This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click **+ Code** and paste the following code into the new cell:
+Click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -137,9 +155,9 @@ Run the cell to ensure that `API_KEY`, `ENDPOINT`, and `IMAGE_PATH` are correctl
 
 -------------------------
 
-**Step 3: Add the OCR Annotation**
+Step 3: Add the OCR Annotation
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Exercise 2: Optical Character Recognition (OCR) 
@@ -150,9 +168,9 @@ Render the Markdown cell.
 
 -------------------------
 
-**Step 4: Add the OCR Code**
+Step 4: Add the OCR Code
 
-Click **+ Code** and paste the following code into the new cell:
+Click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -408,9 +426,9 @@ _Note (Feb 18, 2025): "In order to run this demo the resource must belong to the
 
 Iteratively try models:
 
-- **Prebuilt product vs. gap model** – Detects products on shelves and identifies empty gaps for inventory tracking.  
-- **Sample custom model** – Demonstrates a custom-trained product recognition model for specific use cases.  
-- **Train your own model** – Allows users to train a model with their own dataset for tailored product detection.
+- Prebuilt product vs. gap model – Detects products on shelves and identifies empty gaps for inventory tracking.  
+- Sample custom model – Demonstrates a custom-trained product recognition model for specific use cases.  
+- Train your own model – Allows users to train a model with their own dataset for tailored product detection.
 
 ##### Prebuilt Product vs. Gap Model
 
@@ -428,14 +446,14 @@ On the "Detected products" tab, note various product names.
 
 ##### Pro Code
 
-**Click "+ Markdown"** in your Jupyter Notebook and paste the following annotation:
+Click "+ Markdown" in your Jupyter Notebook and paste the following annotation:
 
 ```markdown
 ## Recognize Products on Shelves (Pro Code)
 Use Azure AI Vision's object detection (and optionally custom models) to identify products on shelves and detect empty gaps.
 ```
 
-After rendering the markdown, **click "+ Code"** and paste the following snippet:
+After rendering the markdown, click "+ Code" and paste the following snippet:
 
 ```python
 import os
@@ -462,9 +480,9 @@ if os.path.isfile(IMAGE_PATH):
     print(response.json())
 ```
 
-1. **Run** the code cell to send your image (defined by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint.
-2. **Review** the returned JSON to inspect the bounding boxes and labels for the detected products.
-3. **Optional**: If you have a custom model, append `&modelVersion=<YourModelName>` to the URL as needed. Refer to the [Azure AI Vision documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/) for further details.
+1. Run the code cell to send your image (defined by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint.
+2. Review the returned JSON to inspect the bounding boxes and labels for the detected products.
+3. Optional: If you have a custom model, append `&modelVersion=<YourModelName>` to the URL as needed. Refer to the [Azure AI Vision documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/) for further details.
 
 -------------------------
 
