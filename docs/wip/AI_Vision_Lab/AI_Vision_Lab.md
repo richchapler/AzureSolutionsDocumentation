@@ -17,9 +17,9 @@
 ------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 1: Prepare Environment
-_Complete this exercise only if you intend to complete Pro-Code sub-exercises_
+_Complete this exercise only if you intend to complete Pro-Code exercises_
 
-Use a pre-configured virtual machine (if possible) or create an environment which includes the latest versions of:
+Start with a pre-configured virtual machine and add the following artifacts:
 
 * [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html)
@@ -458,11 +458,13 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 Click on the "Image analysis" tab.
 
--------------------------
+------------------------- -------------------------
 
 #### Recognize Products on Shelves
 
 _Note (Feb 18, 2025): "In order to run this demo the resource must belong to these regions: East US, West Europe, West US 2"_
+
+##### Low Code
 
 <img src="https://github.com/user-attachments/assets/d6c18b07-86f3-4466-87fe-20ac5f7059dc" width="800" title="Snipped February 18, 2025" />
 
@@ -484,9 +486,47 @@ On the "Detected products" tab, note that only two values are surfaced: 1) produ
 
 On the "Detected products" tab, note various product names.
 
-##### Train your own Custom Model
+-------------------------
 
-LOREM IPSUM
+##### Pro Code
+
+**Click "+ Markdown"** in your Jupyter Notebook and paste the following annotation:
+
+```markdown
+## Recognize Products on Shelves (Pro Code)
+Use Azure AI Vision's object detection (and optionally custom models) to identify products on shelves and detect empty gaps.
+```
+
+After rendering the markdown, **click "+ Code"** and paste the following snippet:
+
+```python
+import os
+import requests
+
+def recognize_products_on_shelves(image_path):
+    with open(image_path, "rb") as image_file:
+        image_data = image_file.read()
+
+    headers = {
+        "Ocp-Apim-Subscription-Key": API_KEY,
+        "Content-Type": "application/octet-stream"
+    }
+
+    # For general product detection, use "objects".
+    # For specialized "product vs gap" scenarios, you may need a custom model or specialized feature.
+    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=objects"
+
+    response = requests.post(url, headers=headers, data=image_data)
+    return response
+
+if os.path.isfile(IMAGE_PATH):
+    response = recognize_products_on_shelves(IMAGE_PATH)
+    print(response.json())
+```
+
+1. **Run** the code cell to send your image (defined by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint.
+2. **Review** the returned JSON to inspect the bounding boxes and labels for the detected products.
+3. **Optional**: If you have a custom model, append `&modelVersion=<YourModelName>` to the URL as needed. Refer to the [Azure AI Vision documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/) for further details.
 
 -------------------------
 
