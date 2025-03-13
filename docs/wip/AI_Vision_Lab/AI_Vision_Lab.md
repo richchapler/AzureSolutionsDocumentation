@@ -112,7 +112,7 @@ Navigate to the folder and open the `.env` file with a preferred text editor. Up
 ```text
 API_KEY={Computer Vision KEY}
 ENDPOINT=https://prefixcv.cognitiveservices.azure.com/
-IMAGE_PATH=C:\temp\image.jpg
+IMAGEPATH_OCR=C:\temp\ocr.jpg
 ```
 
 _Note: Consider downloading images from the Vision Studio, OCR examples_
@@ -127,7 +127,7 @@ Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
-This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file
+This cell loads API_KEY, ENDPOINT, and IMAGEPATH_OCR from the `.env` file
 ```
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
@@ -143,7 +143,7 @@ load_dotenv(env_file)
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
-IMAGE_PATH = os.getenv("IMAGE_PATH")
+IMAGE_PATH = os.getenv("IMAGEPATH_OCR")
 
 # Optionally, print the variables to verify they are loaded
 print("API_KEY:", API_KEY)
@@ -151,17 +151,17 @@ print("ENDPOINT:", ENDPOINT)
 print("IMAGE_PATH:", IMAGE_PATH)
 ```
 
-Run the cell to ensure that `API_KEY`, `ENDPOINT`, and `IMAGE_PATH` are correctly loaded.
+Run the cell to ensure that `API_KEY`, `ENDPOINT`, and `IMAGEPATH_OCR` are correctly loaded.
 
 -------------------------
 
-Step 5: OCR Code
+Step 5: Optical Character Recognition
 
 Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Step 5: OCR Code
-The following code sends the image (as specified by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint to perform OCR
+The following code sends the image to Azure AI Vision and performs Optical Character Recognition
 ```
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
