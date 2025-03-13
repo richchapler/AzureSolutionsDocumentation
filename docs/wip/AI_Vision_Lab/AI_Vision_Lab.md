@@ -71,7 +71,23 @@ Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio C
 
 **Step 2: Load Environment Variables**
 
-Create and execute a new code cell at the beginning of your notebook to load your environment variables from your `.env` file:
+**+ Markdown Cell**
+
+Paste the following annotation into a new Markdown cell:
+
+```markdown
+## Load Environment Variables
+This cell loads your API credentials and image path from the `.env` file. Make sure your `.env` file contains the following variables:
+- API_KEY
+- ENDPOINT
+- IMAGE_PATH
+```
+
+Render the Markdown cell.
+
+**+ Code Cell**
+
+Next, create a new Code cell and paste the following code:
 
 ```python
 import os
@@ -90,9 +106,11 @@ print("ENDPOINT:", ENDPOINT)
 print("IMAGE_PATH:", IMAGE_PATH)
 ```
 
+Run the cell to ensure that `API_KEY`, `ENDPOINT`, and `IMAGE_PATH` are correctly loaded.
+
 -------------------------
 
-**Step 3: Add Pro Code Annotation**
+**Step 3: Add the OCR Annotation**
 
 Click **+ Markdown** and paste the following annotation into the resulting cell:
 
@@ -101,7 +119,7 @@ Click **+ Markdown** and paste the following annotation into the resulting cell:
 Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF)
 ```
 
-Click the checkmark in the upper-right corner of the cell to "Stop Editing Cell" and render the markdown.
+Render the Markdown cell.
 
 -------------------------
 
@@ -133,11 +151,9 @@ else:
     print("IMAGE_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
 
--------------------------
+Run the cell to send your image (as specified by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON for OCR results.
 
-**Step 5: Execute the Code Cell**
-
-Run the cell to send your image (as specified by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint and review the returned JSON.
+------------------------- -------------------------
 
 #### Expected Response
 _Note: JSON formatted and abbreviated for convenience_
