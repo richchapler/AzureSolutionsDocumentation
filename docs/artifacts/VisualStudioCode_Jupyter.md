@@ -6,47 +6,38 @@ This guide walks you through installing Jupyter via pip, adding and configuring 
 
 ## 1. Install Jupyter
 
-Before working with Jupyter notebooks in Visual Studio Code, you need to install Jupyter using pip.
+1. Open **Visual Studio Code** and then the integrated terminal by navigating to **View > Terminal**
 
-1. Open **Visual Studio Code**.
-2. Open the integrated terminal by navigating to **View > Terminal**.
-
-   <img src="https://github.com/user-attachments/assets/b86a2382-9dea-4dd4-81f9-41a191da00a3" width="800" title="Terminal Opened in VS Code" />
-
-3. In the terminal, run the following command:
+2. Execute the following command to install Jupyter:
 
    ```powershell
    pip install jupyter
    ```
 
-4. Wait for the installation to complete.
+   <img src="https://github.com/user-attachments/assets/b86a2382-9dea-4dd4-81f9-41a191da00a3" width="800" title="Snipped: March 13, 2025" />
 
----
+-------------------------
 
 ## 2. Install the Jupyter Extension
 
-To enhance your Jupyter notebook experience in Visual Studio Code, install the official Jupyter extension.
+1. Navigate to the **Extensions** view in Visual Studio Code
+2. In the search bar, type **Jupyter**
+3. Select the **Jupyter** extension from the list and click Install
 
-1. Navigate to the **Extensions** view in Visual Studio Code.
-2. In the search bar, type **Jupyter**.
-3. Select the **Jupyter** extension from the list.
-
-   <img src="https://github.com/user-attachments/assets/3ac8dc62-cc5a-4264-992f-a809c0524c55" width="800" title="Search for Jupyter Extension" />
-
-4. Click **Install**.
-
-   <img src="https://github.com/user-attachments/assets/d618a771-041c-40a2-a351-6c63cc51d0bc" width="800" title="Install Jupyter Extension" />
-
----
+   <img src="https://github.com/user-attachments/assets/3ac8dc62-cc5a-4264-992f-a809c0524c55" width="800" title="Snipped: March 13, 2025" />
+   
+-------------------------
 
 ## 3. Create a New Jupyter Notebook
 
 After installing Jupyter and its extension, verify that you can create and work with notebooks.
 
+   <img src="https://github.com/user-attachments/assets/2e33974c-bb49-4d80-a267-b151dbcd086d" width="800" title="Snipped: March 13, 2025" />
+
 1. In Visual Studio Code, click **File** > **New File**.
 2. When prompted, search for and select **Jupyter Notebook**.
 
-   <img src="https://github.com/user-attachments/assets/066afd03-d3ff-435e-a651-ae6a28a57bc3" width="800" title="Create New Jupyter Notebook" />
+   <img src="https://github.com/user-attachments/assets/066afd03-d3ff-435e-a651-ae6a28a57bc3" width="800" title="Snipped: March 13, 2025" />
 
 A new notebook file (typically with the extension `.ipynb`) will open, allowing you to start writing and executing cells.
 
