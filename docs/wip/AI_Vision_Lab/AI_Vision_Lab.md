@@ -25,7 +25,7 @@ Start with a pre-configured virtual machine and add the following artifacts:
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
 * [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html)
 
-------------------------- -------------------------
+------------------------- ------------------------- -------------------------
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
@@ -57,18 +57,57 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ------------------------- -------------------------
 
-### Pro Code  
+### Pro Code
 
-Click "+ Markdown" and paste the following annotation into the resulting cell:
+**Step 1: Ensure Your Notebook is Open**
+
+Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio Code:
+
+1. In Visual Studio Code, click **File** > **New File**.
+2. Search for and select **Jupyter Notebook**.
+3. Save the file as `ocr.ipynb`.
+
+-------------------------
+
+**Step 2: Load Environment Variables**
+
+Create and execute a new code cell at the beginning of your notebook to load your environment variables from your `.env` file:
+
+```python
+import os
+from dotenv import load_dotenv
+
+env_file = ".env"
+load_dotenv(env_file)
+
+API_KEY = os.getenv("API_KEY")
+ENDPOINT = os.getenv("ENDPOINT")
+IMAGE_PATH = os.getenv("IMAGE_PATH")
+
+# Optionally, print the variables to verify they are loaded
+print("API_KEY:", API_KEY)
+print("ENDPOINT:", ENDPOINT)
+print("IMAGE_PATH:", IMAGE_PATH)
+```
+
+-------------------------
+
+**Step 3: Add Pro Code Annotation**
+
+Click **+ Markdown** and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Exercise 2: Optical Character Recognition (OCR) 
 Use Optical Character Recognition (OCR) on an image file (supported formats: JPEG, PNG, BMP, GIF, TIFF)
-```  
+```
 
-Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.
+Click the checkmark in the upper-right corner of the cell to "Stop Editing Cell" and render the markdown.
 
-Click "+ Code" and paste the following code into the resulting cell:
+-------------------------
+
+**Step 4: Add the OCR Code**
+
+Click **+ Code** and paste the following code into the new cell:
 
 ```python
 import os
@@ -87,14 +126,18 @@ def perform_ocr(image_path):
     response = requests.post(url, headers=headers, data=image_data)
     return response
 
-if os.path.isfile(IMAGE_PATH):
+if IMAGE_PATH and os.path.isfile(IMAGE_PATH):
     response = perform_ocr(IMAGE_PATH)
     print(response.json())
+else:
+    print("IMAGE_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
 
-Execute the code cell.
+-------------------------
 
-<img src="https://github.com/user-attachments/assets/80f09c5c-1042-42f6-a9cb-6e196afde291" width="800" title="Snipped February 5, 2025" />
+**Step 5: Execute the Code Cell**
+
+Run the cell to send your image (as specified by `IMAGE_PATH` in your `.env` file) to the Azure AI Vision endpoint and review the returned JSON.
 
 #### Expected Response
 _Note: JSON formatted and abbreviated for convenience_
