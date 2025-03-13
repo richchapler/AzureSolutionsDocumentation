@@ -1,7 +1,3 @@
-Below is a complete updated version of your document with numbered headers starting at Exercise 1. Every section from your original version is included. Please review it carefully to ensure nothing is lost:
-
----
-
 # Lab: AI Vision
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
