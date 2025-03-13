@@ -160,7 +160,7 @@ Step 5: Optical Character Recognition
 Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
-## Step 5: OCR Code
+## Optical Character Recognition
 The following code sends the image to Azure AI Vision and performs Optical Character Recognition
 ```
 
