@@ -1,4 +1,4 @@
-# Visual Studio Code Jupyter Setup
+# Jupyter (in Visual Studio Code)
 
 This guide walks you through installing Jupyter via pip, adding and configuring the Jupyter extension in Visual Studio Code, and verifying that everything is set up correctly for working with Jupyter notebooks.
 
