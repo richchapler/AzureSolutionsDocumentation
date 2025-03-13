@@ -29,7 +29,7 @@ Start with a pre-configured virtual machine and add the following artifacts:
 
 ------------------------- -------------------------
 
-### Notebook
+### Create Notebook
 
 In Visual Studio Code, click "File" >> "New File", then search for and select "Jupyter Notebook". Save the file as `ocr.ipynb`.  
 
