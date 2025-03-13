@@ -71,7 +71,7 @@ Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio C
 
 Step 2: Create the .env File (if needed)
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 Paste the following annotation into a new Markdown cell:
 
@@ -82,7 +82,7 @@ Create (if necessary) and prompt for update with API credentials and image path.
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click + Code and paste the following code into the new cell:
+Click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -123,7 +123,7 @@ Save the file after updating.
 
 Step 4: Load Environment Variables
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
@@ -132,7 +132,7 @@ This cell loads API_KEY, ENDPOINT, and IMAGEPATH_OCR from the `.env` file
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click + Code and paste the following code into the new cell:
+Click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -157,7 +157,7 @@ Run the cell to ensure that `API_KEY`, `ENDPOINT`, and `IMAGEPATH_OCR` are corre
 
 Step 5: Optical Character Recognition
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Optical Character Recognition
@@ -166,7 +166,7 @@ The following code sends the image to Azure AI Vision and performs Optical Chara
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click + Code and paste the following code into the new cell:
+Click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -292,7 +292,7 @@ Interact with resulting functionality {e.g., "Locate a frame in the video"}.
 
 ## ProCode
 
-Click "+ Markdown" and paste the following annotation into the resulting cell:  
+Click ""+ Markdown"" and paste the following annotation into the resulting cell:  
 
 ```markdown
 ## Exercise 3: Spatial Analysis
@@ -301,7 +301,7 @@ Use Spatial Analysis to detect people and movement in an image.
 
 Click the checkmark in the upper-right of the cell to "Stop Editing Cell" and render the markdown.  
 
-Click "+ Code" and paste the following code into the resulting cell:  
+Click ""+ Code"" and paste the following code into the resulting cell:  
 
 ```python
 import os
@@ -437,14 +437,14 @@ On the "Detected products" tab, note various product names.
 
 ##### Pro Code
 
-Click "+ Markdown" in your Jupyter Notebook and paste the following annotation:
+Click ""+ Markdown"" in your Jupyter Notebook and paste the following annotation:
 
 ```markdown
 ## Recognize Products on Shelves (Pro Code)
 Use Azure AI Vision's object detection (and optionally custom models) to identify products on shelves and detect empty gaps.
 ```
 
-After rendering the markdown, click "+ Code" and paste the following snippet:
+After rendering the markdown, click ""+ Code"" and paste the following snippet:
 
 ```python
 import os
