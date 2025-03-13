@@ -25,10 +25,10 @@ winget search Python.Python
 Identify the latest available version from the results, then install it:
 
 ```powershell
-winget install --id Python.Python.<major_version> -e
+winget install --id Python.Python.<major_version> --source winget -e
 ```
 
-*Replace `<major_version>` with the latest available major version number (e.g., `3.10`). Do not include minor or patch versions.*
+*Replace `<major_version>` with the latest available major version number (e.g., `3.13`). Do not include minor or patch versions.*
 
 ### Disable the Microsoft Store Alias for Python
 If Python is still not recognized, disable the Microsoft Store alias:
