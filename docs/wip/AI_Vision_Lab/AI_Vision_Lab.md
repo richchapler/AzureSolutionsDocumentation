@@ -59,19 +59,17 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ### 2.1.2 Pro Code
 
-#### Step 1: Ensure Your Notebook is Open
+#### Step 1: Notebook
 
-Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio Code:
+In Visual Studio Code, click File > New File, then search for and select Jupyter Notebook.
 
-1. In Visual Studio Code, click File > New File.
-2. Search for and select Jupyter Notebook.
-3. Save the file as `ai_vision.ipynb`.
+Save the new file as `ai_vision.ipynb`.
 
 -------------------------
 
-#### Step 2: Create the .env File (if needed)
+#### Step 2: `.env` File
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## `.env` File
@@ -80,7 +78,7 @@ Create (if necessary) and prompt for update with API credentials and image path.
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click + Code and paste the following code into the new cell:
+Click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -121,7 +119,7 @@ Save the file after updating.
 
 #### Step 4: Load Environment Variables
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
@@ -130,7 +128,7 @@ This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file.
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click + Code and paste the following code into the new cell:
+Click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -155,7 +153,7 @@ Run the cell to ensure that API_KEY, ENDPOINT, and IMAGE_PATH are correctly load
 
 #### Step 5: Optical Character Recognition
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Optical Character Recognition
@@ -164,7 +162,7 @@ The following code sends the image (as specified by IMAGE_PATH in your `.env` fi
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click + Code and paste the following code into the new cell:
+Click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -369,7 +367,7 @@ Save the file after updating.
 
 Step 4: Load Environment Variables
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
@@ -378,7 +376,7 @@ This cell loads API_KEY, ENDPOINT, and IMAGEPATH_PRODUCTS from the `.env` file.
 
 Render the Markdown cell.
 
-Then click + Code and paste the following code into the new cell:
+Then click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -403,7 +401,7 @@ Run the cell to ensure that API_KEY, ENDPOINT, and IMAGEPATH_PRODUCTS are correc
 
 Step 5: Recognize Products on Shelves (Pro Code)
 
-Click + Markdown and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Recognize Products on Shelves (Pro Code)
@@ -412,7 +410,7 @@ Use Azure AI Vision's object detection (and optionally custom models) to identif
 
 Render the Markdown cell.
 
-Then click + Code and paste the following code into the new cell:
+Then click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
