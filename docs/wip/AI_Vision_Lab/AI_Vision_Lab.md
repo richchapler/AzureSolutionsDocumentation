@@ -31,7 +31,7 @@ Start with a pre-configured virtual machine and add the following artifacts:
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
-This exercise demonstrates how to use Azure AI Vision OCR to extract text from images.
+This exercise demonstrates how to use Azure AI Vision, Optical Character Recognition (OCR) to extract text from images.
 
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Optical character recognition" tab.
 
@@ -225,7 +225,7 @@ _Note: JSON formatted and abbreviated_
 
 ## Exercise 3: Spatial Analysis  
 
-This exercise demonstrates how to use Azure AI Vision Spatial Analysis to detect people and movement in an image.
+This exercise demonstrates how to use Azure AI Vision, Spatial Analysis to detect people and movement in an image.
 
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Spatial analysis" tab.
 
@@ -309,15 +309,11 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box 
 
 ## Exercise 5: Image Analysis
 
-This exercise demonstrates how to use Azure AI Vision Image Analysis to extract meaningful insights from images, including object detection, caption generation, and scene understanding.
+This exercise demonstrates how to use Azure AI Vision, Image Analysis to extract meaningful insights from images, including object detection, caption generation, and scene understanding.
 
-Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Image analysis" tab.
 
 <img src="https://github.com/user-attachments/assets/5c5b68c7-6f82-43a1-b4fe-93cd3b648d14" width="800" title="Snipped March 14, 2025" />
-
-Click on the "Image analysis" tab.
-
-------------------------- ------------------------- -------------------------
 
 ### 5.1 Search Photos with Image Retrieval
 
