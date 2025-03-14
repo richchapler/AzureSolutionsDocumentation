@@ -33,7 +33,7 @@ Start with a pre-configured virtual machine and add the following artifacts:
 
 This exercise demonstrates how to use Azure AI Vision OCR to extract text from images.
 
-Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials and then click on the "Optical character recognition" tab.
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Optical character recognition" tab.
 
 <img src="https://github.com/user-attachments/assets/f008f817-51b8-4a7c-b230-19803782bde7" width="800" title="Snipped February 14, 2025" />
 
