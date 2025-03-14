@@ -104,7 +104,7 @@ Navigate to the folder and open the `.env` file with your preferred text editor.
 
 ```text
 API_KEY={Computer Vision KEY}
-ENDPOINT=https://prefixcv.cognitiveservices.azure.com/
+ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
 IMAGEPATH_OCR=C:\temp\ocr.jpg
 ```
 
