@@ -232,7 +232,7 @@ This exercise demonstrates how to use Azure AI Vision Spatial Analysis to detect
 
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
 
-<img src="https://github.com/user-attachments/assets/ba6405d5-9959-47c6-bf99-b86461672a45" width="800" title="Snipped February 14, 2025" />
+<img src="https://github.com/user-attachments/assets/8be99f3d-8a1c-46fc-9013-6d70be7db5c0" width="800" title="Snipped March 14, 2025" />
 
 Click on the "Spatial analysis" tab.
 
