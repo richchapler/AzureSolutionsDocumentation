@@ -11,7 +11,9 @@
 - [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
 
 ## Resource Requirements
-- AI Services (in East US region)
+In "East US" region (or other region that supports AI Vision resources), instantiate:
+
+- AI Services 
 - Computer Vision
 
 ------------------------- ------------------------- -------------------------
@@ -349,14 +351,10 @@ Consider trying your own image.
 
 Return to the `ai_vision.ipynb` notebook.
 
--------------------------
-
-Step 2: Create the .env File (if needed)
-
 Open the `.env` file with your preferred text editor and append:
 
 ```text
-IMAGEPATH_PRODUCTS=C:\temp\product_image.jpg
+IMAGEPATH_SEARCH=C:\temp\search.jpg
 ```
 
 *Note: Consider downloading images from the Vision Studio, Image Analysis examples.*
@@ -365,18 +363,18 @@ Save the file after updating.
 
 -------------------------
 
-Step 4: Load Environment Variables
+**Step 4: Load Environment Variables**
 
-Click "+ Markdown" and paste the following annotation into the resulting cell:
+Click **+ Markdown** and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
-This cell loads API_KEY, ENDPOINT, and IMAGEPATH_PRODUCTS from the `.env` file.
+This cell loads API_KEY, ENDPOINT, and IMAGEPATH_SEARCH from the `.env` file.
 ```
 
 Render the Markdown cell.
 
-Then click "+ Code" and paste the following code into the new cell:
+Then click **+ Code** and paste the following code into the new cell:
 
 ```python
 import os
@@ -387,36 +385,36 @@ load_dotenv(env_file)
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
-IMAGEPATH_PRODUCTS = os.getenv("IMAGEPATH_PRODUCTS")
+IMAGEPATH_SEARCH = os.getenv("IMAGEPATH_SEARCH")
 
 # Optionally, print the variables to verify they are loaded (API_KEY is redacted)
 print("API_KEY:", "*" * len(API_KEY) if API_KEY else "None")
 print("ENDPOINT:", ENDPOINT)
-print("IMAGEPATH_PRODUCTS:", IMAGEPATH_PRODUCTS)
+print("IMAGEPATH_SEARCH:", IMAGEPATH_SEARCH)
 ```
 
-Run the cell to ensure that API_KEY, ENDPOINT, and IMAGEPATH_PRODUCTS are correctly loaded.
+Run the cell to ensure that API_KEY, ENDPOINT, and IMAGEPATH_SEARCH are correctly loaded.
 
 -------------------------
 
-Step 5: Recognize Products on Shelves (Pro Code)
+**Step 5: Search Photos with Image Retrieval (Pro Code)**
 
-Click "+ Markdown" and paste the following annotation into the resulting cell:
+Click **+ Markdown** and paste the following annotation into the resulting cell:
 
 ```markdown
-## Recognize Products on Shelves (Pro Code)
-Use Azure AI Vision's object detection (and optionally custom models) to identify products on shelves and detect empty gaps.
+## Search Photos with Image Retrieval (Pro Code)
+Use Azure AI Vision's image analysis to extract descriptive tags from an image, which can then be used to search for similar photos.
 ```
 
 Render the Markdown cell.
 
-Then click "+ Code" and paste the following code into the new cell:
+Then click **+ Code** and paste the following code into the new cell:
 
 ```python
 import os
 import requests
 
-def recognize_products_on_shelves(image_path):
+def search_photos_with_image_retrieval(image_path):
     with open(image_path, "rb") as image_file:
         image_data = image_file.read()
 
@@ -425,23 +423,21 @@ def recognize_products_on_shelves(image_path):
         "Content-Type": "application/octet-stream"
     }
 
-    # For general product detection, use "objects".
-    # For specialized "product vs gap" scenarios, you may need a custom model or specialized feature.
-    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=objects"
-
+    # Use the "tags" feature to extract descriptive keywords for image retrieval.
+    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=tags"
+    
     response = requests.post(url, headers=headers, data=image_data)
     return response
 
-if IMAGEPATH_PRODUCTS and os.path.isfile(IMAGEPATH_PRODUCTS):
-    response = recognize_products_on_shelves(IMAGEPATH_PRODUCTS)
+if IMAGEPATH_SEARCH and os.path.isfile(IMAGEPATH_SEARCH):
+    response = search_photos_with_image_retrieval(IMAGEPATH_SEARCH)
     print(response.json())
 else:
-    print("IMAGEPATH_PRODUCTS is not defined or the file does not exist. Please check your .env file.")
+    print("IMAGEPATH_SEARCH is not defined or the file does not exist. Please check your .env file.")
 ```
 
-Run the cell to send your product image (as specified by IMAGEPATH_PRODUCTS in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the bounding boxes and labels for the detected products.  
-*Optional: If you have a custom model, append `&modelVersion=<YourModelName>` to the URL as needed. Refer to the [Azure AI Vision documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/) for further details.*
-
+Run the cell to send your search image (as specified by IMAGEPATH_SEARCH in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the tags that describe the image.  
+*Optional: Use the extracted tags to perform further image retrieval operations as needed.*
 
 ------------------------- ------------------------- -------------------------
 
