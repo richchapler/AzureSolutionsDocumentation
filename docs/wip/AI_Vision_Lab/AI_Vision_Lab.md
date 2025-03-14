@@ -25,13 +25,13 @@ Start with a pre-configured virtual machine and add the following artifacts:
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
 * [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html) with the [dotenv module](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python_DotEnvModule.html)
 
-------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
 This exercise demonstrates how to use Azure AI Vision OCR to extract text from images.
 
-### 2.1 Low Code
+### 2.1 Extract Text from Images
 
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
 
@@ -39,7 +39,7 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 Click on the "Optical character recognition" tab.
 
-#### 2.1.1 Extract Text from Images
+#### 2.1.1 Low Code
 
 <img src="https://github.com/user-attachments/assets/9d70618d-2d50-4ebc-81a8-55a9bb8be4bc" width="800" title="Snipped February 14, 2025" />
 
@@ -52,21 +52,21 @@ Click on the "Optical character recognition" tab.
 
 ------------------------- -------------------------
 
-### 2.2 Pro Code
+### 2.1.2 Pro Code
 
 #### Step 1: Ensure Your Notebook is Open
 
 Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio Code:
 
-1. In Visual Studio Code, click **File** > **New File**.
-2. Search for and select **Jupyter Notebook**.
-3. Save the file as `ocr.ipynb`.
+1. In Visual Studio Code, click File > New File.
+2. Search for and select Jupyter Notebook.
+3. Save the file as `ai_vision.ipynb`.
 
 -------------------------
 
 #### Step 2: Create the .env File (if needed)
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## `.env` File
@@ -75,7 +75,7 @@ Create (if necessary) and prompt for update with API credentials and image path.
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click **+ Code** and paste the following code into the new cell:
+Click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -116,7 +116,7 @@ Save the file after updating.
 
 #### Step 4: Load Environment Variables
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
@@ -125,7 +125,7 @@ This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file.
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click **+ Code** and paste the following code into the new cell:
+Click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -150,7 +150,7 @@ Run the cell to ensure that API_KEY, ENDPOINT, and IMAGE_PATH are correctly load
 
 #### Step 5: Optical Character Recognition
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Optical Character Recognition
@@ -159,7 +159,7 @@ The following code sends the image (as specified by IMAGE_PATH in your `.env` fi
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click **+ Code** and paste the following code into the new cell:
+Click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -222,13 +222,13 @@ _Note: JSON formatted and abbreviated for convenience_
 }
 ```
 
-------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 3: Spatial Analysis  
 
 This exercise demonstrates how to use Azure AI Vision Spatial Analysis to detect people and movement in an image.
 
-### 3.1 Low Code
+### 3.1 Video Retrieval and Summary
 
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
 
@@ -238,7 +238,7 @@ Click on the "Spatial analysis" tab.
 
 -------------------------
 
-#### 3.1.1 Video Retrieval and Summary
+#### 3.1.1 Low Code
 
 <img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
 
@@ -248,45 +248,13 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 Interact with resulting functionality (e.g., "Locate a frame in the video").
 
--------------------------
-
-#### 3.1.2 Count People in an Area
-
-<img src="https://github.com/user-attachments/assets/5f3d30bc-38a6-4608-94ec-edc4f4629e43" width="800" title="Snipped February 14, 2025" />
-
-⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
-
--------------------------
-
-#### 3.1.3 Detect when People Cross a Line
-
-<img src="https://github.com/user-attachments/assets/22d02513-a10d-4c4e-83ca-ec1fda026628" width="800" title="Snipped February 18, 2025" />
-
-⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
-
--------------------------
-
-#### 3.1.4 Detect when People Enter / Exit a Zone
-
-<img src="https://github.com/user-attachments/assets/5288dc72-2cb5-4ad0-aabd-d5d249c9f424" width="800" title="Snipped February 18, 2025" />
-
-⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
-
--------------------------
-
-#### 3.1.5 Monitor Social Distancing
-
-<img src="https://github.com/user-attachments/assets/43add9f6-137c-4ca9-b374-f98d3c5232d1" width="800" title="Snipped February 18, 2025" />
-
-⚠️ ERRORING OUT... PENDING WITH SUPPORT ⚠️
-
-------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 4: Face
 
 This exercise demonstrates how to use Azure AI Vision Face to detect and analyze human faces in images.
 
-### 4.1 Low Code
+### 4.1 Detect Faces in an Image
 
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
 
@@ -296,7 +264,7 @@ Click on the "Face" tab.
 
 -------------------------
 
-#### 4.1.1 Detect Faces in an Image
+#### 4.1.1 Low Code
 
 <img src="https://github.com/user-attachments/assets/d78b53a5-aca9-40aa-8589-c1c7d0baa362" width="800" title="Snipped February 18, 2025" />
 
@@ -308,7 +276,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 -------------------------
 
-#### 4.1.2 Liveness Detection
+#### 4.2 Liveness Detection
 
 <img src="https://github.com/user-attachments/assets/d8f00fd3-c59c-4182-9ae9-f082bba05d84" width="800" title="Snipped February 18, 2025" />
 
@@ -326,11 +294,9 @@ Complete and submit the form.
 
 The "Azure AI Gating Team" will email and promise to respond in ~10 business days.
 
-⚠️ WAITING FOR APPROVED ACCESS ⚠️
-
 -------------------------
 
-#### 4.1.3 Portrait Processing
+#### 4.3 Portrait Processing
 
 <img src="https://github.com/user-attachments/assets/9f4ed2f0-dd8f-4c93-af7c-37c190b14df5" width="800" title="Snipped February 18, 2025" />
 
@@ -342,13 +308,13 @@ Review results on the "Detected attributes" / "JSON" tabs and review the generat
 
 -------------------------
 
-#### 4.1.4 Photo ID Matching
+#### 4.4 Photo ID Matching
 
 <img src="https://github.com/user-attachments/assets/d8273d24-dd8f-4f8b-9585-dd4fc1ac4180" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box and compare to the Camera Preview.
 
-------------------------- ------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 5: Image Analysis
 
@@ -360,107 +326,54 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 Click on the "Image analysis" tab.
 
-------------------------- -------------------------
+------------------------- ------------------------- -------------------------
 
-### 5.1 Recognize Products on Shelves
-
-_Note (Feb 18, 2025): "In order to run this demo the resource must belong to these regions: East US, West Europe, West US 2"_
+### 5.1 Search Photos with Image Retrieval
 
 #### 5.1.1 Low Code
 
-<img src="https://github.com/user-attachments/assets/d6c18b07-86f3-4466-87fe-20ac5f7059dc" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/340088a0-c508-46a1-bb03-278d74c121f0" width="800" title="Snipped February 18, 2025" />
 
-Iteratively try models:
-- **Prebuilt product vs. gap model** – Detects products on shelves and identifies empty gaps for inventory tracking.
-- **Sample custom model** – Demonstrates a custom-trained product recognition model for specific use cases.
-- **Train your own model** – Allows users to train a model with their own dataset for tailored product detection.
+Iteratively click the sample image sets, select a retrieval query and click Search.
 
-#### 5.1.1.1 Prebuilt Product vs. Gap Model
+<img src="https://github.com/user-attachments/assets/687cc074-f25f-4c59-80fd-650c80d16312" width="800" title="Snipped February 18, 2025" />
 
-<img src="https://github.com/user-attachments/assets/1c722fed-a358-4232-942c-c30bf2ce30c8" width="800" title="Snipped February 18, 2025" />
+Consider trying your own image.
 
-On the "Detected products" tab, note that only two values are surfaced: 1) product and 2) gap
-
-#### 5.1.1.2 Sample Custom Model with Product Names
-
-<img src="https://github.com/user-attachments/assets/a210b12e-daf3-49fa-9601-02779df0b807" width="800" title="Snipped February 18, 2025" />
-
-On the "Detected products" tab, note various product names.
+------------------------- -------------------------
 
 #### 5.1.2 Pro Code
 
-**Step 1: Ensure Your Notebook is Open**
-
-Before proceeding, make sure you have a Jupyter Notebook open in Visual Studio Code:
-
-1. In Visual Studio Code, click **File** > **New File**.
-2. Search for and select **Jupyter Notebook**.
-3. Save the file as `ocr.ipynb`.
+Return to the `ai_vision.ipynb` notebook.
 
 -------------------------
 
-**Step 2: Create the .env File (if needed)**
+Step 2: Create the .env File (if needed)
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
-
-```markdown
-## `.env` File
-Create (if necessary) and prompt for update with API credentials and image path.
-```
-
-Render the Markdown cell by clicking the checkmark in the upper-right controls.
-
-Then click **+ Code** and paste the following code into the new cell:
-
-```python
-import os
-
-env_file = ".env"
-
-if not os.path.isfile(env_file):
-    with open(env_file, "w") as f:
-        f.write("API_KEY=\nENDPOINT=\nIMAGE_PATH=\n")
-    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
-else:
-    print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
-```
-
-Run the cell; expected output:
-
-```
-.env file created at c:\Users\{user}\.env. Please update it with your API credentials and image path.
-```
-
--------------------------
-
-**Step 3: Populate `.env` File**
-
-Open the `.env` file with your preferred text editor and update it with actual values; for example:
+Open the `.env` file with your preferred text editor and append:
 
 ```text
-API_KEY={Computer Vision KEY}
-ENDPOINT=https://prefixcv.cognitiveservices.azure.com/
-IMAGE_PATH=C:\temp\image.jpg
+IMAGEPATH_PRODUCTS=C:\temp\product_image.jpg
 ```
 
-*Note: Consider downloading images from the Vision Studio, OCR examples.*
+*Note: Consider downloading images from the Vision Studio, Image Analysis examples.*
 
 Save the file after updating.
 
 -------------------------
 
-**Step 4: Load Environment Variables**
+Step 4: Load Environment Variables
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
-This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file.
+This cell loads API_KEY, ENDPOINT, and IMAGEPATH_PRODUCTS from the `.env` file.
 ```
 
-Render the Markdown cell by clicking the checkmark in the upper-right controls.
+Render the Markdown cell.
 
-Then click **+ Code** and paste the following code into the new cell:
+Then click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -471,30 +384,30 @@ load_dotenv(env_file)
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
-IMAGE_PATH = os.getenv("IMAGE_PATH")
+IMAGEPATH_PRODUCTS = os.getenv("IMAGEPATH_PRODUCTS")
 
 # Optionally, print the variables to verify they are loaded (API_KEY is redacted)
 print("API_KEY:", "*" * len(API_KEY) if API_KEY else "None")
 print("ENDPOINT:", ENDPOINT)
-print("IMAGE_PATH:", IMAGE_PATH)
+print("IMAGEPATH_PRODUCTS:", IMAGEPATH_PRODUCTS)
 ```
 
-Run the cell to ensure that API_KEY, ENDPOINT, and IMAGE_PATH are correctly loaded.
+Run the cell to ensure that API_KEY, ENDPOINT, and IMAGEPATH_PRODUCTS are correctly loaded.
 
 -------------------------
 
-**Step 5: Recognize Products on Shelves (Pro Code)**
+Step 5: Recognize Products on Shelves (Pro Code)
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click + Markdown and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Recognize Products on Shelves (Pro Code)
 Use Azure AI Vision's object detection (and optionally custom models) to identify products on shelves and detect empty gaps.
 ```
 
-Render the Markdown cell by clicking the checkmark in the upper-right controls.
+Render the Markdown cell.
 
-Then click **+ Code** and paste the following code into the new cell:
+Then click + Code and paste the following code into the new cell:
 
 ```python
 import os
@@ -516,31 +429,20 @@ def recognize_products_on_shelves(image_path):
     response = requests.post(url, headers=headers, data=image_data)
     return response
 
-if IMAGE_PATH and os.path.isfile(IMAGE_PATH):
-    response = recognize_products_on_shelves(IMAGE_PATH)
+if IMAGEPATH_PRODUCTS and os.path.isfile(IMAGEPATH_PRODUCTS):
+    response = recognize_products_on_shelves(IMAGEPATH_PRODUCTS)
     print(response.json())
 else:
-    print("IMAGE_PATH is not defined or the file does not exist. Please check your .env file.")
+    print("IMAGEPATH_PRODUCTS is not defined or the file does not exist. Please check your .env file.")
 ```
 
-Run the cell to send your image (as specified by IMAGE_PATH in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the bounding boxes and labels for the detected products.  
+Run the cell to send your product image (as specified by IMAGEPATH_PRODUCTS in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the bounding boxes and labels for the detected products.  
 *Optional: If you have a custom model, append `&modelVersion=<YourModelName>` to the URL as needed. Refer to the [Azure AI Vision documentation](https://learn.microsoft.com/azure/cognitive-services/computer-vision/) for further details.*
 
-------------------------- -------------------------
 
-### 5.2 Search Photos with Image Retrieval
+------------------------- ------------------------- -------------------------
 
-<img src="https://github.com/user-attachments/assets/340088a0-c508-46a1-bb03-278d74c121f0" width="800" title="Snipped February 18, 2025" />
-
-Iteratively click the sample image sets, select a retrieval query and click Search.
-
-<img src="https://github.com/user-attachments/assets/687cc074-f25f-4c59-80fd-650c80d16312" width="800" title="Snipped February 18, 2025" />
-
-Consider trying your own image.
-
--------------------------
-
-### 5.3 Add Dense Captions to Images
+### 5.2 Add Dense Captions to Images
 
 <img src="https://github.com/user-attachments/assets/1c4581fe-36dc-4501-821d-c05390591c18" width="800" title="Snipped February 18, 2025" />
 
@@ -550,21 +452,9 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
--------------------------
+------------------------- ------------------------- -------------------------
 
-### 5.4 Remove Backgrounds from Images
-
-<img src="https://github.com/user-attachments/assets/4d58e8d8-53d9-437f-b026-e8ebfdbaea14" width="800" title="Snipped February 18, 2025" />
-
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
-
-<img src="https://github.com/user-attachments/assets/372865dc-7aa5-4b63-b091-07ac0d98f86b" width="800" title="Snipped February 18, 2025" />
-
-Review results on the "Remove backgrounds from images" / "Foreground matting" tabs.
-
--------------------------
-
-### 5.5 Add Captions to Images
+### 5.3 Add Captions to Images
 
 <img src="https://github.com/user-attachments/assets/df89523d-e20b-4509-b3cb-091fff6f6405" width="800" title="Snipped February 18, 2025" />
 
@@ -574,15 +464,15 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
--------------------------
+------------------------- ------------------------- -------------------------
 
-### 5.6 Detect Common Objects in Images
+### 5.4 Detect Common Objects in Images
 
-LOREM IPSUM
+Not documented...
 
--------------------------
+------------------------- ------------------------- -------------------------
 
-### 5.7 Extract Common Tags from Images
+### 5.5 Extract Common Tags from Images
 
 <img src="https://github.com/user-attachments/assets/bd4656ac-989c-4f38-840f-5074db0b76bf" width="800" title="Snipped February 18, 2025" />
 
@@ -592,21 +482,9 @@ Choose a model, choose a language, and then iteratively click the samples to the
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
--------------------------
+------------------------- ------------------------- -------------------------
 
-### 5.8 Detect Sensitive Content in Images
-
-<img src="https://github.com/user-attachments/assets/91b53833-7fa1-4c9d-8147-3d01487ab3e4" width="800" title="Snipped February 18, 2025" />
-
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
-
-<img src="https://github.com/user-attachments/assets/89aac916-f5e7-44e4-b653-ad4a26caa8fc" width="800" title="Snipped February 18, 2025" />
-
-Review results on the "Detected attributes" / "JSON" tabs.
-
--------------------------
-
-### 5.9 Create Smart-Cropped Images
+### 5.6 Create Smart-Cropped Images
 
 <img src="https://github.com/user-attachments/assets/c76c1094-341d-4fa7-8d2b-dd74a94dcef6" width="800" title="Snipped February 18, 2025" />
 
