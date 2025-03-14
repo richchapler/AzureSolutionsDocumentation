@@ -252,17 +252,13 @@ Interact with resulting functionality (e.g., "Locate a frame in the video").
 
 ## Exercise 4: Face
 
-This exercise demonstrates how to use Azure AI Vision Face to detect and analyze human faces in images.
+This exercise demonstrates how to use Azure AI Vision, Face to detect and analyze human faces in images.
 
-### 4.1 Detect Faces in an Image
-
-Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials, then click on the "Face" tab.
 
 <img src="https://github.com/user-attachments/assets/ced5f919-80b9-40ad-83dd-61da99015b68" width="800" title="Snipped February 18, 2025" />
 
-Click on the "Face" tab.
-
--------------------------
+### 4.1 Detect Faces in an Image
 
 #### 4.1.1 Low Code
 
@@ -322,7 +318,7 @@ This exercise demonstrates how to use Azure AI Vision Image Analysis to extract 
 
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
 
-<img src="https://github.com/user-attachments/assets/f80fe268-afa1-498a-a428-770f8690c05b" width="800" title="Snipped February 18, 2025" />
+<img src="https://github.com/user-attachments/assets/5c5b68c7-6f82-43a1-b4fe-93cd3b648d14" width="800" title="Snipped March 14, 2025" />
 
 Click on the "Image analysis" tab.
 
