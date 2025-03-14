@@ -33,13 +33,12 @@ Start with a pre-configured virtual machine and add the following artifacts:
 
 This exercise demonstrates how to use Azure AI Vision OCR to extract text from images.
 
-### 2.1 Extract Text from Images
-
-Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials and then click on the "Optical character recognition" tab.
 
 <img src="https://github.com/user-attachments/assets/f008f817-51b8-4a7c-b230-19803782bde7" width="800" title="Snipped February 14, 2025" />
 
-Click on the "Optical character recognition" tab.
+
+### 2.1 Extract Text from Images
 
 #### 2.1.1 Low Code
 
@@ -228,15 +227,11 @@ _Note: JSON formatted and abbreviated_
 
 This exercise demonstrates how to use Azure AI Vision Spatial Analysis to detect people and movement in an image.
 
-### 3.1 Video Retrieval and Summary
-
-Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials.
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Spatial analysis" tab.
 
 <img src="https://github.com/user-attachments/assets/8be99f3d-8a1c-46fc-9013-6d70be7db5c0" width="800" title="Snipped March 14, 2025" />
 
-Click on the "Spatial analysis" tab.
-
--------------------------
+### 3.1 Video Retrieval and Summary
 
 #### 3.1.1 Low Code
 
@@ -254,7 +249,7 @@ Interact with resulting functionality (e.g., "Locate a frame in the video").
 
 This exercise demonstrates how to use Azure AI Vision, Face to detect and analyze human faces in images.
 
-Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/) and log in with your Azure credentials, then click on the "Face" tab.
+Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Face" tab.
 
 <img src="https://github.com/user-attachments/assets/ced5f919-80b9-40ad-83dd-61da99015b68" width="800" title="Snipped February 18, 2025" />
 
