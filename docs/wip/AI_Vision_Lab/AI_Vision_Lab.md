@@ -166,23 +166,27 @@ import os
 import requests
 
 def perform_ocr(image_path):
-    with open(image_path, "rb") as image_file:
-        image_data = image_file.read()
-
+    with open(image_path, "rb") as f:
+        image_data = f.read()
+    url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=read"
     headers = {
         "Ocp-Apim-Subscription-Key": API_KEY,
         "Content-Type": "application/octet-stream"
     }
+    try:
+        response = requests.post(url, headers=headers, data=image_data)
+        response.raise_for_status()
+        return response
+    except requests.exceptions.RequestException as e:
+        print("OCR error:", e)
+        return None
 
-    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=read"
-    response = requests.post(url, headers=headers, data=image_data)
-    return response
-
-if IMAGE_PATH and os.path.isfile(IMAGE_PATH):
-    response = perform_ocr(IMAGE_PATH)
-    print(response.json())
+if IMAGEPATH_OCR and os.path.isfile(IMAGEPATH_OCR):
+    res = perform_ocr(IMAGEPATH_OCR)
+    if res:
+        print(res.json())
 else:
-    print("IMAGE_PATH is not defined or the file does not exist. Please check your .env file.")
+    print("IMAGEPATH_OCR is not defined or the file does not exist.")
 ```
 
 Execute cell to send your image to the Azure AI Vision endpoint, and review the returned JSON for OCR results.
@@ -190,7 +194,7 @@ Execute cell to send your image to the Azure AI Vision endpoint, and review the 
 ------------------------- -------------------------
 
 #### Expected Result  
-_Note: JSON formatted and abbreviated for convenience_
+_Note: JSON formatted and abbreviated_
 
 ```json
 {
