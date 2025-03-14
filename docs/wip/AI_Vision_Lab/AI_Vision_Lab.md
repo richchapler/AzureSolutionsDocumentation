@@ -80,7 +80,7 @@ Create (if necessary) and prompt for update with API credentials and image path.
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click "+ Code" and paste the following code into the new cell:
+Click ""+ Code"" and paste the following code into the new cell:
 
 ```python
 import os
@@ -95,7 +95,7 @@ else:
     print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
 ```
 
-Run the cell; expected output:
+Execute cell; expected output:
 
 ```
 .env file created at c:\Users\{user}\.env. Please update it with your API credentials and image path.
@@ -110,10 +110,10 @@ Navigate to the folder and open the `.env` file with your preferred text editor.
 ```text
 API_KEY={Computer Vision KEY}
 ENDPOINT=https://prefixcv.cognitiveservices.azure.com/
-IMAGE_PATH=C:\temp\image.jpg
+IMAGEPATH_OCR=C:\temp\ocr.jpg
 ```
 
-*Note: Consider downloading images from the Vision Studio, OCR examples.*
+*Note: Consider downloading sample images from Vision Studio*
 
 Save the file after updating.
 
@@ -125,12 +125,12 @@ Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Load Environment Variables
-This cell loads API_KEY, ENDPOINT, and IMAGE_PATH from the `.env` file.
+This cell loads environment variables from the `.env` file.
 ```
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click "+ Code" and paste the following code into the new cell:
+Click ""+ Code"" and paste the following code into the new cell:
 
 ```python
 import os
@@ -141,15 +141,10 @@ load_dotenv(env_file)
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
-IMAGE_PATH = os.getenv("IMAGE_PATH")
-
-# Optionally, print the variables to verify they are loaded
-print("API_KEY:", "*" * len(API_KEY) if API_KEY else "None")
-print("ENDPOINT:", ENDPOINT)
-print("IMAGE_PATH:", IMAGE_PATH)
+IMAGEPATH_OCR = os.getenv("IMAGEPATH_OCR")
 ```
 
-Run the cell to ensure that API_KEY, ENDPOINT, and IMAGE_PATH are correctly loaded.
+Execute cell to ensure that variables are correctly loaded.
 
 -------------------------
 
@@ -158,13 +153,13 @@ Run the cell to ensure that API_KEY, ENDPOINT, and IMAGE_PATH are correctly load
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
-## Optical Character Recognition
-The following code sends the image (as specified by IMAGE_PATH in your `.env` file) to the Azure AI Vision endpoint to perform OCR.
+## Optical Character Recognition (OCR)
+Extract Text from Images
 ```
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click "+ Code" and paste the following code into the new cell:
+Click ""+ Code"" and paste the following code into the new cell:
 
 ```python
 import os
@@ -190,7 +185,7 @@ else:
     print("IMAGE_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
 
-Run the cell to send your image to the Azure AI Vision endpoint, and review the returned JSON for OCR results.
+Execute cell to send your image to the Azure AI Vision endpoint, and review the returned JSON for OCR results.
 
 ------------------------- -------------------------
 
@@ -349,7 +344,7 @@ Consider trying your own image.
 
 #### 5.1.2 Pro Code
 
-Return to the `ai_vision.ipynb` notebook.
+Step 1: Environment Variables
 
 Open the `.env` file with your preferred text editor and append:
 
@@ -357,49 +352,23 @@ Open the `.env` file with your preferred text editor and append:
 IMAGEPATH_SEARCH=C:\temp\search.jpg
 ```
 
-*Note: Consider downloading images from the Vision Studio, Image Analysis examples.*
+*Note: Consider downloading sample images from Vision Studio*
 
 Save the file after updating.
 
--------------------------
-
-**Step 4: Load Environment Variables**
-
-Click **+ Markdown** and paste the following annotation into the resulting cell:
-
-```markdown
-## Load Environment Variables
-This cell loads API_KEY, ENDPOINT, and IMAGEPATH_SEARCH from the `.env` file.
-```
-
-Render the Markdown cell.
-
-Then click **+ Code** and paste the following code into the new cell:
+Return to the `ai_vision.ipynb` notebook, "Load Environment Variables" code cell and append:
 
 ```python
-import os
-from dotenv import load_dotenv
-
-env_file = ".env"
-load_dotenv(env_file)
-
-API_KEY = os.getenv("API_KEY")
-ENDPOINT = os.getenv("ENDPOINT")
 IMAGEPATH_SEARCH = os.getenv("IMAGEPATH_SEARCH")
-
-# Optionally, print the variables to verify they are loaded (API_KEY is redacted)
-print("API_KEY:", "*" * len(API_KEY) if API_KEY else "None")
-print("ENDPOINT:", ENDPOINT)
-print("IMAGEPATH_SEARCH:", IMAGEPATH_SEARCH)
 ```
 
-Run the cell to ensure that API_KEY, ENDPOINT, and IMAGEPATH_SEARCH are correctly loaded.
+Execute cell to ensure that variables are correctly loaded.
 
 -------------------------
 
-**Step 5: Search Photos with Image Retrieval (Pro Code)**
+Step 5: Search Photos with Image Retrieval (Pro Code)
 
-Click **+ Markdown** and paste the following annotation into the resulting cell:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
 ## Search Photos with Image Retrieval (Pro Code)
@@ -408,7 +377,7 @@ Use Azure AI Vision's image analysis to extract descriptive tags from an image, 
 
 Render the Markdown cell.
 
-Then click **+ Code** and paste the following code into the new cell:
+Then click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -436,7 +405,7 @@ else:
     print("IMAGEPATH_SEARCH is not defined or the file does not exist. Please check your .env file.")
 ```
 
-Run the cell to send your search image (as specified by IMAGEPATH_SEARCH in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the tags that describe the image.  
+Execute cell to send your search image (as specified by IMAGEPATH_SEARCH in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the tags that describe the image.  
 *Optional: Use the extracted tags to perform further image retrieval operations as needed.*
 
 ------------------------- ------------------------- -------------------------
