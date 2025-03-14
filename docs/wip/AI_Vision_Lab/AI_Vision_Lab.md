@@ -43,12 +43,17 @@ Click on the "Optical character recognition" tab.
 
 <img src="https://github.com/user-attachments/assets/9d70618d-2d50-4ebc-81a8-55a9bb8be4bc" width="800" title="Snipped February 14, 2025" />
 
-- Check "I acknowledge...", click "Browse for a file" and then click "Please select a resource".
-  <img src="https://github.com/user-attachments/assets/3da8778e-7b78-4ab7-9aa7-5b9e5fe15edc" width="800" title="Snipped February 14, 2025" />
-- Complete the "Select an AzureResource" form and then click "Confirm".
-- Iteratively click the samples to the right of the "Drag and drop a file..." box.
-  <img src="https://github.com/user-attachments/assets/d50659f8-4762-4c5f-a6da-95505f2645be" width="800" title="Snipped February 14, 2025" />
-- Review results on the "Detected attributes" / "JSON" tabs.
+Check "I acknowledge...", click "Browse for a file" and then click "Please select a resource".
+
+<img src="https://github.com/user-attachments/assets/3da8778e-7b78-4ab7-9aa7-5b9e5fe15edc" width="800" title="Snipped February 14, 2025" />
+
+Complete the "Select an AzureResource" form and then click "Confirm".
+
+Iteratively click the samples to the right of the "Drag and drop a file..." box.
+
+<img src="https://github.com/user-attachments/assets/d50659f8-4762-4c5f-a6da-95505f2645be" width="800" title="Snipped February 14, 2025" />
+
+Review results on the "Detected attributes" / "JSON" tabs.
 
 ------------------------- -------------------------
 
