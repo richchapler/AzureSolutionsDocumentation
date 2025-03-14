@@ -101,10 +101,6 @@ Execute cell; expected output:
 .env file created at c:\Users\{user}\.env. Please update it with your API credentials and image path.
 ```
 
--------------------------
-
-#### Step 3: Populate `.env` File
-
 Navigate to the folder and open the `.env` file with your preferred text editor. Update it with actual values; for example:
 
 ```text
@@ -119,7 +115,7 @@ Save the file after updating.
 
 -------------------------
 
-#### Step 4: Load Environment Variables
+#### Step 3: Load Environment Variables
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -148,7 +144,7 @@ Execute cell to ensure that variables are correctly loaded.
 
 -------------------------
 
-#### Step 5: Pro Code
+#### Step 4: Pro Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -189,7 +185,7 @@ else:
     print("IMAGEPATH_OCR is not defined or the file does not exist.")
 ```
 
-Execute cell to send your image to the Azure AI Vision endpoint, and review the returned JSON for OCR results.
+Execute cell and review the returned JSON result.
 
 ------------------------- -------------------------
 
@@ -348,7 +344,7 @@ Consider trying your own image.
 
 #### 5.1.2 Pro Code
 
-Step 1: Environment Variables
+##### Step 1: Environment Variables
 
 Open the `.env` file with your preferred text editor and append:
 
@@ -370,7 +366,7 @@ Execute cell to ensure that variables are correctly loaded.
 
 -------------------------
 
-Step 2: Pro Code
+##### Step 2: Pro Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -379,9 +375,7 @@ Click "+ Markdown" and paste the following annotation into the resulting cell:
 Search Photos with Image Retrieval
 ```
 
-Render the Markdown cell.
-
-Then click "+ Code" and paste the following code into the new cell:
+Render the Markdown cell then click "+ Code" and paste the following code into the new cell:
 
 ```python
 import os
@@ -409,8 +403,98 @@ else:
     print("IMAGEPATH_SEARCH is not defined or the file does not exist. Please check your .env file.")
 ```
 
-Execute cell to send your search image (as specified by IMAGEPATH_SEARCH in your `.env` file) to the Azure AI Vision endpoint, and review the returned JSON to inspect the tags that describe the image.  
-*Optional: Use the extracted tags to perform further image retrieval operations as needed.*
+Execute cell and review the returned JSON result.
+
+------------------------- -------------------------
+
+###### Expected Result  
+_Note: JSON formatted and abbreviated_
+
+```json
+{
+  "modelVersion": "2023-02-01-preview",
+  "metadata": {
+    "width": 398,
+    "height": 340
+  },
+  "tagsResult": {
+    "values": [
+      {
+        "name": "outdoor",
+        "confidence": 0.9897938966751099
+      },
+      {
+        "name": "tractor",
+        "confidence": 0.986690878868103
+      },
+      {
+        "name": "agriculture",
+        "confidence": 0.9778040051460266
+      },
+      {
+        "name": "farm",
+        "confidence": 0.9688516855239868
+      },
+      {
+        "name": "cash crop",
+        "confidence": 0.9292412996292114
+      },
+      {
+        "name": "agricultural machinery",
+        "confidence": 0.9211045503616333
+      },
+      {
+        "name": "plantation",
+        "confidence": 0.9173258543014526
+      },
+      {
+        "name": "crop",
+        "confidence": 0.9134097099304199
+      },
+      {
+        "name": "farmworker",
+        "confidence": 0.8990883231163025
+      },
+      {
+        "name": "soil",
+        "confidence": 0.8958316445350647
+      },
+      {
+        "name": "plant",
+        "confidence": 0.8954752683639526
+      },
+      {
+        "name": "plough",
+        "confidence": 0.8804078102111816
+      },
+      {
+        "name": "farmer",
+        "confidence": 0.8800090551376343
+      },
+      {
+        "name": "grass",
+        "confidence": 0.8694881200790405
+      },
+      {
+        "name": "mountain",
+        "confidence": 0.8089953660964966
+      },
+      {
+        "name": "ground",
+        "confidence": 0.7287822365760803
+      },
+      {
+        "name": "field",
+        "confidence": 0.6489622592926025
+      },
+      {
+        "name": "farm machine",
+        "confidence": 0.5761915445327759
+      }
+    ]
+  }
+}
+```
 
 ------------------------- ------------------------- -------------------------
 
