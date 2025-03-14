@@ -148,7 +148,7 @@ Execute cell to ensure that variables are correctly loaded.
 
 -------------------------
 
-#### Step 5: Optical Character Recognition
+#### Step 5: Pro Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -370,13 +370,13 @@ Execute cell to ensure that variables are correctly loaded.
 
 -------------------------
 
-Step 5: Search Photos with Image Retrieval (Pro Code)
+Step 2: Pro Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
-## Search Photos with Image Retrieval (Pro Code)
-Use Azure AI Vision's image analysis to extract descriptive tags from an image, which can then be used to search for similar photos.
+##  Image Analysis
+Search Photos with Image Retrieval
 ```
 
 Render the Markdown cell.
