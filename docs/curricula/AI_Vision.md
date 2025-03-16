@@ -595,6 +595,8 @@ _Note: JSON formatted and abbreviated_
 
 ### 5.3 Add Captions to Images
 
+#### 5.3.1 Low Code
+
 <img src="https://github.com/user-attachments/assets/df89523d-e20b-4509-b3cb-091fff6f6405" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
@@ -602,6 +604,74 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 <img src="https://github.com/user-attachments/assets/2a1bdd9f-aff9-412d-bb28-6a15e40a7204" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Detected attributes" / "JSON" tabs.
+
+------------------------- -------------------------
+
+#### 5.3.2 Pro Code
+
+##### Step 1: Update Environment Variables
+
+1. Edit your `.env` file  
+   Add a new line for the caption image path:
+   
+   ```text
+   IMAGEPATH_CAPTIONS=C:\temp\caption.jpg
+   ```
+
+2. Update your "Load Environment Variables" cell  
+   Append the following code:
+   
+   ```python
+   IMAGEPATH_CAPTIONS = os.getenv("IMAGEPATH_CAPTIONS")
+   ```
+
+##### Step 2: Pro Code
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+
+```markdown
+## Add Captions to Images
+Extract captions from an image using Azure AI Vision.
+```
+
+Add a Code cell with the following code:
+
+```python
+import os
+import requests
+
+def get_image_captions(image_path):
+   # Open the image file in binary mode
+   with open(image_path, "rb") as f:
+       image_data = f.read()
+   # Construct the API URL using the ENDPOINT and the captions feature
+   url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=captions"
+   headers = {
+       "Ocp-Apim-Subscription-Key": API_KEY,
+       "Content-Type": "application/octet-stream"
+   }
+   # Make the POST request to the API
+   response = requests.post(url, headers=headers, data=image_data)
+   return response
+
+# Check if the IMAGEPATH_CAPTIONS is defined and the file exists.
+if IMAGEPATH_CAPTIONS and os.path.isfile(IMAGEPATH_CAPTIONS):
+   response = get_image_captions(IMAGEPATH_CAPTIONS)
+   print(response.json())
+else:
+   print("IMAGEPATH_CAPTIONS is not defined or the file does not exist. Please check your .env file.")
+```
+   
+Execute cell and review the returned JSON result.
+
+-------------------------
+
+###### Expected Result  
+_Note: JSON formatted and abbreviated_
+
+```json
+LOREM
+```
 
 ------------------------- ------------------------- -------------------------
 
@@ -613,6 +683,8 @@ Not documented...
 
 ### 5.5 Extract Common Tags from Images
 
+#### 5.5.1 Low Code
+
 <img src="https://github.com/user-attachments/assets/bd4656ac-989c-4f38-840f-5074db0b76bf" width="800" title="Snipped February 18, 2025" />
 
 Choose a model, choose a language, and then iteratively click the samples to the right of the "Drag and drop a file..." box.
@@ -621,9 +693,80 @@ Choose a model, choose a language, and then iteratively click the samples to the
 
 Review results on the "Detected attributes" / "JSON" tabs.
 
+------------------------- -------------------------
+
+#### 5.5.2 Pro Code
+
+##### Step 1: Update Environment Variables
+
+Edit your `.env` file  
+   Add a new line for the tags image path:
+
+```text
+IMAGEPATH_TAGS=C:\temp\tags.jpg
+```
+
+Update your "Load Environment Variables" cell  
+   Append the following code to load the new variable:
+
+```python
+IMAGEPATH_TAGS = os.getenv("IMAGEPATH_TAGS")
+```
+
+##### Step 2: Pro Code
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+
+```markdown
+## Extract Common Tags from Images
+Extract descriptive tags from an image using Azure AI Vision.
+```
+
+Add a Code cell with the following code:
+
+```python
+import os
+import requests
+
+def extract_image_tags(image_path):
+   # Open the image file in binary mode
+   with open(image_path, "rb") as f:
+       image_data = f.read()
+   
+   # Construct the API URL using the ENDPOINT and the tags feature
+   url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=tags"
+   headers = {
+       "Ocp-Apim-Subscription-Key": API_KEY,
+       "Content-Type": "application/octet-stream"
+   }
+   # Make the POST request to the API
+   response = requests.post(url, headers=headers, data=image_data)
+   return response
+
+# Check if the IMAGEPATH_TAGS is defined and the file exists.
+if IMAGEPATH_TAGS and os.path.isfile(IMAGEPATH_TAGS):
+   response = extract_image_tags(IMAGEPATH_TAGS)
+   print(response.json())
+else:
+   print("IMAGEPATH_TAGS is not defined or the file does not exist. Please check your .env file.")
+```
+   
+Execute cell and review the returned JSON result.
+
+-------------------------
+
+###### Expected Result  
+_Note: JSON formatted and abbreviated_
+
+```json
+LOREM
+```
+
 ------------------------- ------------------------- -------------------------
 
 ### 5.6 Create Smart-Cropped Images
+
+#### 5.6.1 Low Code
 
 <img src="https://github.com/user-attachments/assets/c76c1094-341d-4fa7-8d2b-dd74a94dcef6" width="800" title="Snipped February 18, 2025" />
 
@@ -632,3 +775,78 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 <img src="https://github.com/user-attachments/assets/89d14157-7a61-4af0-a36f-55980aa8485c" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Cropped image" tab and adjust aspect ratio to taste.
+
+------------------------- -------------------------
+
+#### 5.6.2 Pro Code
+
+##### Step 1: Update Environment Variables
+
+Edit your `.env` file  
+   Add a new line for the image to be smart-cropped:
+
+```text
+IMAGEPATH_CROP=C:\temp\crop.jpg
+```
+
+Update your "Load Environment Variables" cell  
+   Append the following code to load the new variable:
+
+```python
+IMAGEPATH_CROP = os.getenv("IMAGEPATH_CROP")
+```
+
+##### Step 2: Pro Code
+
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+
+```markdown
+## Create Smart-Cropped Images
+Generate a smart-cropped thumbnail from an image using Azure AI Vision.
+```
+
+2. Add a Code cell with the following code:
+
+```python
+import os
+import requests
+from PIL import Image
+from io import BytesIO
+
+def generate_smart_crop(image_path, width=400, height=400):
+   # Open the image file in binary mode
+   with open(image_path, "rb") as image_file:
+       image_data = image_file.read()
+   
+   # Construct the API URL with the smart cropping parameters
+   url = f"{ENDPOINT.rstrip('/')}/computervision/v3.2/generateThumbnail?width={width}&height={height}&smartCropping=true"
+   headers = {
+       "Ocp-Apim-Subscription-Key": API_KEY,
+       "Content-Type": "application/octet-stream"
+   }
+   
+   # Make the POST request to generate a smart-cropped image
+   response = requests.post(url, headers=headers, data=image_data)
+   response.raise_for_status()  # Ensure the request succeeded
+   return response
+
+# Check if the IMAGEPATH_CROP is defined and the file exists.
+if IMAGEPATH_CROP and os.path.isfile(IMAGEPATH_CROP):
+   response = generate_smart_crop(IMAGEPATH_CROP, width=400, height=400)
+   # The response contains the binary image data of the cropped image.
+   cropped_image = Image.open(BytesIO(response.content))
+   cropped_image.show()  # This opens the cropped image in your default image viewer.
+else:
+   print("IMAGEPATH_CROP is not defined or the file does not exist. Please check your .env file.")
+```
+   
+Execute cell and review the returned JSON result.
+
+-------------------------
+
+###### Expected Result  
+_Note: JSON formatted and abbreviated_
+
+```json
+LOREM
+```
