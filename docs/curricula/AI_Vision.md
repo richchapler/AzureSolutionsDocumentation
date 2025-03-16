@@ -351,7 +351,7 @@ IMAGEPATH_SEARCH = os.getenv("IMAGEPATH_SEARCH")
 
 Execute cell to ensure that variables are correctly loaded.
 
--------------------------
+------------------------- -------------------------
 
 ##### Step 2: Pro Code
 
@@ -392,7 +392,7 @@ else:
 
 Execute cell and review the returned JSON result.
 
-------------------------- -------------------------
+-------------------------
 
 ###### Expected Result  
 _Note: JSON formatted and abbreviated_
@@ -487,6 +487,8 @@ _Note: JSON formatted and abbreviated_
 
 ### 5.2 Add Dense Captions to Images
 
+#### 5.2.1 Low Code
+
 <img src="https://github.com/user-attachments/assets/1c4581fe-36dc-4501-821d-c05390591c18" width="800" title="Snipped February 18, 2025" />
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box.
@@ -494,6 +496,103 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 <img src="https://github.com/user-attachments/assets/fc0dd38d-1da9-4ae5-b457-88cb45ba8d02" width="800" title="Snipped February 18, 2025" />
 
 Review results on the "Detected attributes" / "JSON" tabs.
+
+------------------------- -------------------------
+
+#### 5.2.2 Pro Code
+
+Below is an example Pro Code section for Exercise 5.2 – Add Dense Captions to Images – modeled after the 5.1 Pro Code. You can copy and paste these steps and code cells into your Jupyter Notebook.
+
+---
+
+##### Step 1: Update Environment Variables
+
+Open your `.env` file with your preferred text editor and append the following line:
+
+```text
+IMAGEPATH_DENSECAPS=C:\temp\densecaps.jpg
+```
+
+Then, update your "Load Environment Variables" cell in `ai_vision.ipynb` by appending:
+
+```python
+IMAGEPATH_DENSECAPS = os.getenv("IMAGEPATH_DENSECAPS")
+```
+
+Execute the cell to ensure that the new variable is correctly loaded.
+
+-------------------------
+
+##### Step 2: Pro Code for Dense Captioning
+
+1. **Add a Markdown cell** with the following annotation:
+
+   ```markdown
+   ## Dense Captioning
+   Extract Dense Captions from Images
+   ```
+
+2. **Add a Code cell** with the following code:
+
+   ```python
+   import os
+   import requests
+
+   def get_dense_captions(image_path):
+       # Read the image file in binary mode
+       with open(image_path, "rb") as image_file:
+           image_data = image_file.read()
+       
+       # Define the request headers including your API key and content type
+       headers = {
+           "Ocp-Apim-Subscription-Key": API_KEY,
+           "Content-Type": "application/octet-stream"
+       }
+       
+       # Use the "denseCaptions" feature to extract detailed captions from the image.
+       url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=denseCaptions"
+       
+       response = requests.post(url, headers=headers, data=image_data)
+       return response
+
+   # Check if the IMAGEPATH_DENSECAPS is defined and the file exists.
+   if IMAGEPATH_DENSECAPS and os.path.isfile(IMAGEPATH_DENSECAPS):
+       response = get_dense_captions(IMAGEPATH_DENSECAPS)
+       print(response.json())
+   else:
+       print("IMAGEPATH_DENSECAPS is not defined or the file does not exist. Please check your .env file.")
+   ```
+
+3. **Execute the cell** and review the returned JSON result in the output. The expected output will be a JSON object containing the dense caption data.
+
+-------------------------
+
+###### Expected Result
+
+The output will be a JSON object similar to the following (formatted and abbreviated for clarity):
+
+```json
+{
+  "denseCaptions": {
+    "captions": [
+      {
+        "text": "A tractor working in a field of crops",
+        "confidence": 0.92,
+        "boundingBox": [ ... ]
+      },
+      {
+        "text": "A close-up view of agricultural machinery",
+        "confidence": 0.89,
+        "boundingBox": [ ... ]
+      }
+    ]
+  },
+  "metadata": {
+    "width": 800,
+    "height": 600
+  }
+}
+```
 
 ------------------------- ------------------------- -------------------------
 
