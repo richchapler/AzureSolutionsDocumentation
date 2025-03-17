@@ -661,63 +661,63 @@ Confirm successful SQL Database creation in the Azure Portal.
 
 ------------------------- -------------------------
 
-### Quiz: Azure PowerShell (Managing Azure SQL)
+### Quiz: Azure PowerShell
 
-1. Azure Environment Setup: Which cmdlet logs you in to your Azure account?  
-   A. `Connect-AzAccount`  
-   B. `Login-AzAccount`  
-   C. `Connect-Azure`  
-   D. `Authenticate-Az`
+1. **Azure Environment Setup:** Which cmdlet logs you in to your Azure account?  
+   A. `Login-AzAccount`  
+   B. `Connect-AzAccount`  
+   C. `Authenticate-Az`  
+   D. `Connect-Azure`
 
-2. Resource Provisioning: Which command creates a new resource group in Azure?  
-   A. `New-AzResourceGroup`  
-   B. `New-AzureResourceGroup`  
-   C. `Create-AzResourceGroup`  
-   D. `Set-AzResourceGroup`
+2. **Resource Provisioning:** Which command creates a new resource group in Azure?  
+   A. `Create-AzResourceGroup`  
+   B. `Set-AzResourceGroup`  
+   C. `New-AzureResourceGroup`  
+   D. `New-AzResourceGroup`
 
-3. Azure SQL Server Provisioning: Which parameter is required when creating a new Azure SQL server using PowerShell?  
-   A. `-SqlAdministratorCredentials`  
+3. **SQL Server Provisioning:** Which parameter is required when creating a new Azure SQL server using PowerShell?  
+   A. `-Credential`  
    B. `-AdminPassword`  
-   C. `-ServerAdmin`  
-   D. `-Credential`
+   C. `-SqlAdministratorCredentials`  
+   D. `-ServerAdmin`
 
-4. Firewall Configuration: Which cmdlet is used to configure firewall rules for an Azure SQL server?  
+4. **Firewall Configuration:** Which cmdlet is used to configure firewall rules for an Azure SQL server?  
    A. `New-AzSqlServerFirewallRule`  
-   B. `Set-AzSqlFirewallRule`  
-   C. `Configure-AzSqlFirewall`  
-   D. `Add-AzSqlServerFirewallRule`
+   B. `Add-AzSqlServerFirewallRule`  
+   C. `Set-AzSqlFirewallRule`  
+   D. `Configure-AzSqlFirewall`
 
-5. Database Creation: Which cmdlet is used to create a new Azure SQL Database?  
-   A. `New-AzSqlDatabase`  
+5. **Database Creation:** Which cmdlet is used to create a new Azure SQL Database?  
+   A. `Create-AzSqlDB`  
    B. `New-AzureSqlDatabase`  
-   C. `Create-AzSqlDB`  
+   C. `New-AzSqlDatabase`  
    D. `New-SqlDatabase`
 
-6. In Azure Cloud Shell, which module is pre‑installed for managing Azure resources?  
-   A. `Az`  
-   B. `SqlServer`  
-   C. `AzureRM`  
-   D. `MSOnline`
+6. **Cloud Shell Modules:** In Azure Cloud Shell, which module is pre‑installed for managing Azure resources?  
+   A. `AzureRM`  
+   B. `MSOnline`  
+   C. `SqlServer`  
+   D. `Az`
 
-7. When connecting to an Azure SQL Database using PowerShell, what is the correct format for the server name?  
-   A. `yourserver.database.windows.net`  
-   B. `yourserver.cloud.windows.net`  
-   C. `yourserver.sql.azure.com`  
-   D. `yourserver.windows.net`
+7. **Server Name Format:** When connecting to an Azure SQL Database using PowerShell, what is the correct format for the server name?  
+   A. `yourserver.windows.net`  
+   B. `yourserver.database.windows.net`  
+   C. `yourserver.cloud.windows.net`  
+   D. `yourserver.sql.azure.com`
 
-8. Which cmdlet can be used to execute a T‑SQL query against an Azure SQL Database?  
-   A. `Invoke-Sqlcmd`  
-   B. `Test-AzSqlConnection`  
-   C. `Get-AzSqlDatabase`  
-   D. `Invoke-AzSqlQuery`
+8. **Executing T‑SQL Queries:** Which cmdlet can be used to execute a T‑SQL query against an Azure SQL Database?  
+   A. `Test-AzSqlConnection`  
+   B. `Get-AzSqlDatabase`  
+   C. `Invoke-AzSqlQuery`  
+   D. `Invoke-Sqlcmd`
 
-9. Which of the following is a key benefit of using Azure Cloud Shell for managing Azure SQL resources?  
-   A. The Az modules are pre‑installed and maintained by Azure  
-   B. It provides direct access to the Windows registry  
-   C. It allows installation of custom modules without restrictions  
+9. **Cloud Shell Benefit:** Which of the following is a key benefit of using Azure Cloud Shell for managing Azure SQL resources?  
+   A. It provides direct access to the Windows registry  
+   B. It allows installation of custom modules without restrictions  
+   C. The Az modules are pre‑installed and maintained by Azure  
    D. It supports only Windows PowerShell 5.1
 
-10. Which approach is recommended for automating recurring maintenance tasks for Azure SQL resources?  
+10. **Automation Approach:** Which approach is recommended for automating recurring maintenance tasks for Azure SQL resources?  
     A. Azure Automation Runbooks  
     B. SQL Server Agent  
     C. Manual execution via SSMS  
@@ -725,34 +725,34 @@ Confirm successful SQL Database creation in the Azure Portal.
 
 -------------------------
 
-### Answer Key
+## Answer Key
 
-1. **Answer: A**  
-   Explanation: The `Connect-AzAccount` cmdlet is used to log in to your Azure account, providing the necessary authentication for managing Azure resources.
+1. **Answer: B**  
+   *Explanation:* The `Connect-AzAccount` cmdlet is the standard method to authenticate to Azure. Other options are not valid for this purpose.
 
-2. **Answer: A**  
-   Explanation: The `New-AzResourceGroup` cmdlet is the correct command to create a new resource group in Azure, which organizes related resources.
+2. **Answer: D**  
+   *Explanation:* The `New-AzResourceGroup` cmdlet creates a new resource group in Azure. The other choices do not correspond to the correct command for resource group creation.
 
-3. **Answer: A**  
-   Explanation: When provisioning an Azure SQL server, the `-SqlAdministratorCredentials` parameter is required to specify the admin credentials for the server.
+3. **Answer: C**  
+   *Explanation:* When provisioning an Azure SQL server, the `-SqlAdministratorCredentials` parameter is required to specify the administrator credentials. The alternative parameters do not provide the complete necessary information.
 
 4. **Answer: A**  
-   Explanation: The `New-AzSqlServerFirewallRule` cmdlet is used to create firewall rules for an Azure SQL server, allowing you to control which IP addresses can access the server.
+   *Explanation:* The `New-AzSqlServerFirewallRule` cmdlet is used to create and configure firewall rules, enabling control over which IP addresses can access the Azure SQL server.
 
-5. **Answer: A**  
-   Explanation: The `New-AzSqlDatabase` cmdlet is used to create a new Azure SQL Database on a given server.
+5. **Answer: C**  
+   *Explanation:* The `New-AzSqlDatabase` cmdlet provisions a new Azure SQL Database. The other options either use incorrect naming conventions or refer to non‑existent cmdlets.
 
-6. **Answer: A**  
-   Explanation: In Azure Cloud Shell, the Az modules are pre‑installed and managed by Azure, removing the need for manual installation.
+6. **Answer: D**  
+   *Explanation:* In Azure Cloud Shell, the Az module is pre‑installed and maintained by Azure, making it the correct choice for managing Azure resources.
 
-7. **Answer: A**  
-   Explanation: Azure SQL Database uses the fully qualified domain name format `yourserver.database.windows.net` for its server name.
+7. **Answer: B**  
+   *Explanation:* Azure SQL Database server names follow the fully qualified domain name format `yourserver.database.windows.net`. Other formats do not meet the standard.
 
-8. **Answer: A**  
-   Explanation: The `Invoke-Sqlcmd` cmdlet can be used to execute T‑SQL queries against an Azure SQL Database, verifying connectivity and running commands.
+8. **Answer: D**  
+   *Explanation:* The `Invoke-Sqlcmd` cmdlet is used to run T‑SQL queries against an Azure SQL Database, ensuring connectivity and command execution.
 
-9. **Answer: A**  
-   Explanation: A key benefit of using Azure Cloud Shell is that the Az modules are pre‑installed and maintained by Azure, which reduces setup time and ensures you have the latest functionality.
+9. **Answer: C**  
+   *Explanation:* One of the major benefits of Azure Cloud Shell is that the Az modules are pre‑installed and kept up-to-date by Azure, reducing setup time and maintenance.
 
 10. **Answer: A**  
-    Explanation: Azure Automation Runbooks are recommended for automating recurring maintenance tasks for Azure SQL resources because they provide a managed, scalable solution for automation in the cloud.
+    *Explanation:* Azure Automation Runbooks are recommended for automating recurring maintenance tasks as they offer a scalable, cloud‑based solution for ongoing operations.
