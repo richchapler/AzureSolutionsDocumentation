@@ -118,43 +118,28 @@ Prevents SQL Server memory from being paged out to disk, ensuring that critical 
 
 These step-by-step instructions allow you to demonstrate how adjusting the Maximum Server Memory setting affects query performance and overall memory usage on an On-Prem SQL Server.
 
-Open SQL Server Management Studio (SSMS) and connect to your SQL Server instance
-
+Open SQL Server Management Studio (SSMS) and connect to your SQL Server instance:
 - Launch SSMS
 - In the Connect to Server dialog, enter your server name and authentication details, then click "Connect"
 
-------
-
-Navigate to Server Properties → Memory
-
+Navigate to Server Properties → Memory:
 - In Object Explorer, right-click the server node (the top-level instance)
 - Select "Properties" from the context menu
 - In the Server Properties dialog, click on the "Memory" tab to view memory settings
 
-------
-
-Record the current Maximum Server Memory setting
-
-- Note the current value for "Maximum server memory (in MB)" (default: 2147483647)
+Record the current Maximum Server Memory setting:
+- Note the current value for "Maximum server memory (in MB)"
 - This value represents the upper limit that SQL Server can use for memory allocation
 
-------
-
-Create a new database to work in (do not use master)
-
+Create a new database:
 - Execute the following T‑SQL commands:
-
   ```sql
   CREATE DATABASE trainingdb;
   USE trainingdb;
   ```
 
-------
-
-Create a large table and generate sample data
-
+Create a large table and generate sample data:
 - Create a new table using a set-based approach to generate sample data quickly. For example:
-
   ```sql
   IF OBJECT_ID('dbo.LargeTestTable') IS NOT NULL
       DROP TABLE dbo.LargeTestTable;
@@ -175,86 +160,75 @@ Create a large table and generate sample data
   ```
 
 - Verify that the table is populated by running:
-
   ```sql
   SELECT COUNT(*) FROM dbo.LargeTestTable;
   ```
 
-------
-
-Lower the Maximum Server Memory
-
+Lower the Maximum Server Memory:
 - In SSMS, navigate to Server Properties → Memory
-- Change “Maximum server memory” to a lower value (for example, 64MB)
+- Change “Maximum server memory” to 512MB
 - Click "OK" to apply the change
-- (Optional: Restart the SQL Server service if required by your configuration)
 
-------
+_Note: Restart the SQL Server service if required_
 
-Run a memory‑intensive query
-
+Run a memory‑intensive query:
 - Open a new query window in SSMS
-
 - Execute a query that stresses memory. For example:
-
   ```sql
   SET STATISTICS TIME ON;
   SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
   SET STATISTICS TIME OFF;
   ```
-
 - Record the execution time displayed in the Messages tab
 
-------
-
-Increase the Maximum Server Memory
-
+Increase the Maximum Server Memory:
 - Return to the Server Properties → Memory dialog
-- Change “Maximum server memory” to a higher value (for example, revert to the original value or use a value significantly higher than 512 MB)
+- Change “Maximum server memory” to default 2147483647
 - Click "OK" to apply the change
-- (Optional: Restart the SQL Server service if required)
 
-------
+_Note: Restart the SQL Server service if required_
 
-1. Run the same memory‑intensive query again
+Re-run the same memory‑intensive query:
+- Open a new query window or clear the previous results
+- Execute the identical query with SET STATISTICS TIME ON:
+  ```sql
+  SET STATISTICS TIME ON;
+  SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
+  SET STATISTICS TIME OFF;
+  ```
+- Record the new execution time from the Messages tab
 
-   - Open a new query window or clear the previous results
-
-   - Execute the identical query with SET STATISTICS TIME ON:
-
-     ```sql
-     SET STATISTICS TIME ON;
-     SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
-     SET STATISTICS TIME OFF;
-     ```
-
-   - Record the new execution time from the Messages tab
-
-------
-
-1. Compare the execution times
+Compare the execution times:
    - Analyze the differences between the execution times from the low-memory and high-memory settings
    - Observe if the query runs faster with higher memory allocation, indicating reduced memory pressure and improved performance
 
-------
+-------------------------
 
-1. Optionally, check for memory pressure messages
+#### Recap
 
-   - Open a new query window in SSMS
+When SQL Server is installed by default, it’s set to use as much memory as it can because it’s designed to run on dedicated servers. However, on a VM with 8GB of memory, you need to leave enough memory for the operating system and any other applications. Here are some points and guidelines:
 
-   - Execute the following query to monitor memory usage:
+- **Default Setting:**  
+  By default, SQL Server’s "max server memory" is set very high (2,147,483,647 MB) to allow it to use as much available memory as possible on a dedicated machine. This isn’t ideal for a VM where the OS also needs memory.
 
-     ```sql
-     SELECT * FROM sys.dm_os_performance_counters WHERE counter_name LIKE '%memory%';
-     ```
+- **Rule of Thumb:**  
+  A common approach is to reserve about 20–25% of total memory for the OS and other background processes. On an 8GB VM, that might mean allocating around 6GB for SQL Server (i.e. 75% of 8GB).
 
-   - Alternatively, review the SQL Server error log via SSMS (expand the Management folder → SQL Server Logs) to see if there are any messages related to memory pressure
+- **Calculations:**  
+  - **Total Memory:** 8GB  
+  - **Reserved for OS and other services:** ~2GB (this can vary based on what else is running)  
+  - **Memory for SQL Server:** 8GB − 2GB = 6GB  
+  This 6GB is a starting point; you may adjust based on your workload.
 
-   - Note any differences that correlate with the changes in Maximum Server Memory settings
+- **Absolute Minimum:**  
+  While SQL Server can run on very low memory (1GB or even less for small, light workloads), settings as low as 32MB are far below what is necessary for even minimal functionality. For production or even testing environments, at least 1–2GB is usually needed, though more is recommended for better performance.
 
-------
+- **Practical Steps:**  
+  1. **Monitor your current usage:** Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
+  2. **Gradual adjustment:** Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
+  3. **Test different settings:** In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
 
-These instructions provide a complete, step-by-step guide for creating a database, generating sample data using a set-based approach, adjusting the Maximum Server Memory setting, running a memory‑intensive query, and comparing performance outcomes.
+By using these guidelines and calculations, you can determine a good memory allocation for SQL Server on your 8GB VM, ensuring the OS remains responsive while SQL Server has enough resources to perform efficiently.
 
 ------------------------- -------------------------
 
