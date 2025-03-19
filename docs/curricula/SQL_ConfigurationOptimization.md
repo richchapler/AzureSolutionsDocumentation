@@ -126,7 +126,7 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
 
 ##### Prepare Sample Data
 
-- Click "New Query" and execute:
+- Create a new database:
     ```sql
     CREATE DATABASE trainingdb;
     USE trainingdb;
@@ -143,13 +143,13 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
         DataValue VARCHAR(100)
     );
     
-    ;WITH Tally AS (
+    WITH X AS (
         SELECT TOP (500000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
         FROM sys.all_objects a CROSS JOIN sys.all_objects b
     )
     INSERT INTO dbo.LargeTestTable (DataValue)
     SELECT REPLICATE('X', 100)
-    FROM Tally;
+    FROM X;
     ```
 
 - Verify that the table is populated by running:
@@ -166,8 +166,8 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
 
 ##### Stress Memory
 
-- Open a new query window in SQL Server Management Studio
-- Execute a query that stresses memory. For example:
+- Execute the following T-SQL:
+
     ```sql
     SET STATISTICS TIME ON;
     SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
@@ -184,8 +184,8 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
 
 ##### Re-Stress Memory
 
-- Open a new query window or clear the previous results
-- Execute the identical query with SET STATISTICS TIME ON:
+- Execute the following T-SQL:
+
     ```sql
     SET STATISTICS TIME ON;
     SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
@@ -207,17 +207,21 @@ When SQL Server is installed by default, it’s set to use as much memory as it 
 - **Rule of Thumb**: A common approach is to reserve about 20–25% of total memory for the OS and other background processes. On an 8GB VM, that might mean allocating around 6GB for SQL Server (i.e. 75% of 8GB).
 
 - **Calculations**:  
- - Total Memory: 8GB  
- - Reserved for OS and other services: ~2GB (this can vary based on what else is running)  
- - Memory for SQL Server: 8GB − 2GB = 6GB  
- This 6GB is a starting point; you may adjust based on your workload.
+
+    - Total Memory: 8GB  
+    - Reserved for OS and other services: ~2GB (this can vary based on what else is running)  
+    - Memory for SQL Server: 8GB − 2GB = 6GB  
+        This 6GB is a starting point; you may adjust based on your workload.
 
 - **Absolute Minimum**: While SQL Server can run on very low memory (1GB or even less for small, light workloads), settings as low as 32MB are far below what is necessary for even minimal functionality. For production or even testing environments, at least 1–2GB is usually needed, though more is recommended for better performance.
 
 - Practical Steps:  
- 1. **Monitor your current usage**: Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
- 2. **Gradual adjustment**: Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
- 3. **Test different settings**: In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
+
+    - **Monitor your current usage**: Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
+
+    - **Gradual adjustment**: Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
+
+    - **Test different settings**: In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
 
 By using these guidelines and calculations, you can determine a good memory allocation for SQL Server on your 8GB VM, ensuring the OS remains responsive while SQL Server has enough resources to perform efficiently.
 
@@ -225,7 +229,7 @@ By using these guidelines and calculations, you can determine a good memory allo
 
 #### Quiz
 
-1. A DBA notices that the plan cache is bloated with single-use query plans, causing memory pressure. Which setting should be enabled to reduce excessive memory consumption by these ad hoc queries?  
+1. A database administrator notices that the plan cache is bloated with single-use query plans, causing memory pressure. Which setting should be enabled to reduce excessive memory consumption by these ad hoc queries?  
     A. Maximum server memory  
     B. Minimum server memory  
     C. Optimize for ad hoc workloads  
@@ -302,7 +306,7 @@ In Azure SQL Database, **it's not possible to directly configure memory settings
 
 #### Quiz
 
-1. A DBA is analyzing an Azure SQL Database workload and notices that certain queries are performing poorly. Which feature primarily determines how much memory is allocated to the database without manual intervention?  
+1. A database administrator is analyzing an Azure SQL Database workload and notices that certain queries are performing poorly. Which feature primarily determines how much memory is allocated to the database without manual intervention?  
     A. Manual configuration  
     B. Service tier selection  
     C. Resource Governor  
@@ -412,7 +416,7 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
 
 ##### Review Settings
 
-- Execute the following T-SQL commands and confirm values in the `run_value` column:
+- Confirm setting values in the `run_value` column:
 
   ```sql
   EXEC sp_configure 'show advanced options';
@@ -429,7 +433,7 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
 
 ##### Minimize Settings
 
-- Execute the following T-SQL commands to force serial execution:
+- Force serial execution:
 
   ```sql
   EXEC sp_configure 'show advanced options', 1;
@@ -439,7 +443,7 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
   RECONFIGURE;
   ```
 
-###### Run Query
+###### Estimate Execution Plan
 
 - Paste the following T-SQL command and click "Display Estimated Execution Plan":
 
@@ -453,7 +457,7 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
 
 ##### Maximize Settings
 
-- Execute the following T-SQL commands to allow parallel execution:
+- Allow parallel execution:
 
   ```sql
   EXEC sp_configure 'show advanced options', 1;
@@ -466,9 +470,9 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
   RECONFIGURE;
   ```
 
-###### Run Query
+###### Estimate Execution Plan
 
-- Execute the following T‑SQL command to set MAXDOP to 1:
+- Paste the following T-SQL command and click "Display Estimated Execution Plan":
 
   ```sql
   SELECT COUNT_BIG(*)
@@ -484,22 +488,22 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
 #### Quiz
 
 1. A complex analytical query on an on-prem SQL Server is not utilizing parallelism even though its estimated cost is high. Which configuration setting adjustment is most likely to encourage parallel execution?  
-- A. Increase MAXDOP  
-- B. Lower the cost threshold for parallelism  
-- C. Adjust processor affinity  
-- D. Increase maximum server memory
+    A. Increase MAXDOP  
+    B. Lower the cost threshold for parallelism  
+    C. Adjust processor affinity  
+    D. Increase maximum server memory
 
-2. A DBA wants to ensure that a resource-intensive batch job does not monopolize CPU resources on an on-prem SQL Server, affecting critical queries. Which configuration tool should be used to limit CPU usage for specific workloads?  
-- A. Adjust MAXDOP  
-- B. Use Resource Governor to set CPU limits  
-- C. Configure processor affinity  
-- D. Increase the cost threshold for parallelism
+2. A database administrator wants to ensure that a resource-intensive batch job does not monopolize CPU resources on an on-prem SQL Server, affecting critical queries. Which configuration tool should be used to limit CPU usage for specific workloads?  
+    A. Adjust MAXDOP  
+    B. Use Resource Governor to set CPU limits  
+    C. Configure processor affinity  
+    D. Increase the cost threshold for parallelism
 
 3. An on-prem SQL Server experiences sporadic CPU spikes due to ad-hoc queries, which affects scheduled analytical workloads. Which strategy is most effective in stabilizing CPU usage?  
-- A. Lower the cost threshold for parallelism  
-- B. Increase MAXDOP  
-- C. Use Resource Governor to prioritize scheduled queries over ad-hoc queries  
-- D. Configure processor affinity for critical workloads
+    A. Lower the cost threshold for parallelism  
+    B. Increase MAXDOP  
+    C. Use Resource Governor to prioritize scheduled queries over ad-hoc queries  
+    D. Configure processor affinity for critical workloads
 
 -------------------------
 
@@ -523,7 +527,6 @@ Prioritizing scheduled queries with Resource Governor helps stabilize CPU usage 
 ##### Service Tier Selection for CPU
 
 In Azure SQL Database (PaaS), the selected service tier (DTU/vCore model) directly determines the available CPU resources. Upgrading to a higher tier increases the number of vCores or DTUs, thereby enhancing CPU performance.
-Steps to find:
 
 - Open the Azure portal and navigate to your Azure SQL Database resource.
 - Click on "Configure" under Compute + Storage.
@@ -532,7 +535,6 @@ Steps to find:
 ##### Monitoring CPU Usage in Azure
 
 Monitoring CPU performance in Azure SQL Database helps identify workload bottlenecks and validates the adequacy of the chosen service tier.
-Steps to find:
 
 - In the Azure portal, navigate to the "Metrics" or "Query Performance Insight" section of your Azure SQL Database.
 - Select CPU-related metrics (such as CPU percentage) to observe usage trends during query execution.
@@ -540,7 +542,6 @@ Steps to find:
 ##### Scaling Up for Improved CPU Performance
 
 Scaling up the service tier in Azure SQL Database automatically increases CPU resources, which can reduce query execution time for CPU-intensive operations.
-Steps to find:
 
 - In the Azure portal, open your Azure SQL Database resource and click on "Configure" under Compute + Storage.
 - Choose a higher service tier and save your changes.
@@ -549,7 +550,6 @@ Steps to find:
 ##### Query Optimization for CPU Efficiency
 
 While direct CPU settings cannot be manually configured in Azure SQL Database (PaaS), refining query design can reduce CPU usage and improve performance.
-Steps to find:
 
 - In the Azure portal or SQL Server Management Studio, run a CPU-intensive query and record its duration using Query Performance Insight.
 - Review the query execution plan to identify inefficiencies.
@@ -559,18 +559,133 @@ Steps to find:
 
 #### Exercise
 
-- Create a Basic‑tier Azure SQL Database and run a CPU‑intensive query (for example, one with multiple joins and aggregates)
-- Record the query duration using Query Performance Insight
-- Scale the database to a higher tier (e.g., S2 or S3) and run the query again
-- Compare the performance to see how increased CPU resources (vCores) reduce query time
-- Optionally, refine the query design (for example, by creating an index) and observe the combined effect with a higher CPU tier
+Follow these step-by-step instructions using the Query Editor in the Azure Portal to demonstrate how scaling an Azure SQL Database can improve performance for CPU‑intensive queries. Note that while Azure SQL Database manages memory automatically, scaling up increases both CPU resources and available memory.
+
+##### Connect
+
+- In the Azure portal, navigate to your existing SQL Database resource.
+- Click on **Query Editor (preview)** from the left-hand menu.
+- Log in using your database credentials.
+
+##### Prepare Sample Data
+
+- Create and populate table:
+
+  ```sql
+  IF OBJECT_ID('dbo.CPU_Test', 'U') IS NOT NULL
+      DROP TABLE dbo.CPU_Test;
+  
+  CREATE TABLE dbo.CPU_Test
+  (
+      ID INT IDENTITY(1,1) PRIMARY KEY,
+      DataValue VARCHAR(100)
+  );
+  
+  WITH X AS (
+      SELECT TOP (25000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+      FROM sys.all_objects a CROSS JOIN sys.all_objects b
+  )
+  INSERT INTO dbo.CPU_Test (DataValue)
+  SELECT REPLICATE('X', 100)
+  FROM X;
+  ```
+
+- Verify success:
+
+  ```sql
+  SELECT COUNT(*) FROM dbo.CPU_Test;
+  ```
+
+##### Review Settings
+
+- **Check Service Tier and Edition**
+   This query displays the current service tier and edition for your database:
+
+  ```sql
+  SELECT 
+      DATABASEPROPERTYEX(DB_NAME(), 'Edition') AS Edition,
+      DATABASEPROPERTYEX(DB_NAME(), 'ServiceObjective') AS ServiceObjective;
+  ```
+
+  These values tell you the selected tier (for example, Standard S0, S2, or S3) and provide an indication of the CPU and memory resources available based on your chosen tier.
+
+- **Review System Information**
+   Although Azure SQL Database is a managed service and doesn’t expose detailed hardware specs, you can get approximate resource details by running:
+
+  ```sql
+  SELECT * FROM sys.dm_os_sys_info;
+  ```
+
+  Note values:
+
+  - **cpu_ticks**: Cumulative CPU ticks since SQL Server started
+  - **ms_ticks**: Cumulative time in milliseconds since SQL Server started
+  - **cpu_count**: Number of logical CPUs available
+  - **hyperthread_ratio**: Ratio indicating the hyper-threading multiplier
+
+  These bullets provide a concise overview of each key column, which helps in understanding what information is available from **sys.dm_os_sys_info**.
+
+##### Execute Query
+
+```sql
+SELECT COUNT_BIG(*)
+FROM dbo.CPU_Test t1 JOIN dbo.CPU_Test t2 ON t1.ID <> t2.ID
+WHERE t1.ID % 2 = 0 AND t2.ID % 3 = 0;
+```
+
+Note time elapsed.
+
+##### Scale Database
+
+Navigate to SQL >> Settings >> Compute + Storage and adjust settings:
+
+1. **Max vCores**
+   - Defines the upper limit of CPU resources that your database can use
+   - During periods of high workload, the database can scale up to this maximum, potentially reducing query times and improving overall performance
+   - Increasing max vCores is beneficial if you anticipate or experience spikes in CPU demand
+2. **Min vCores**
+   - Defines the baseline amount of CPU resources that are always allocated to your database
+   - A higher min vCores ensures more consistent performance because you avoid waiting for the service to “warm up” or scale out when queries arrive
+   - However, a higher min vCores also increases the baseline cost, as you pay for these allocated resources even when your database is idle
+
+###### Deciding How to Adjust Min and Max vCores
+
+- **Performance Sensitivity**: If you have critical workloads that need consistently fast response times, you might raise the **min vCores** so the database doesn’t have to ramp up from near zero.
+- **Cost Optimization**: If cost is a major concern and your workload is intermittent, you can keep **min vCores** lower, allowing the database to scale down during idle times, but expect some performance delay when the load first ramps up.
+- **Handling Peak Loads**: If you occasionally run CPU‑intensive queries (such as cross joins or large aggregations), raising the **max vCores** ensures your database can scale up to handle those spikes without throttling.
+
+###### Practical Steps
+
+1. **Monitor Current Usage**
+   - Use **Azure Metrics** or **Query Performance Insight** to see your current CPU usage patterns
+   - Identify whether you’re regularly hitting your max vCores or if performance suffers during spikes
+2. **Adjust Gradually**
+   - Increase **max vCores** by one tier at a time and observe query performance improvements
+   - If you have frequent workloads that need consistent performance, raise **min vCores** to avoid scale‑up delays
+3. **Test Your Workload**
+   - Run your most demanding queries (like the cross join examples) to see if performance meets expectations
+   - If queries still take too long or you see throttling, consider further increasing **max vCores** or raising **min vCores**
+
+By fine‑tuning **min vCores** and **max vCores** within the Serverless model, you can strike the right balance between cost savings and performance for your specific workload.
+
+##### Execute Query
+
+Navigate to Query Editor and re-execute:
+
+```sql
+SELECT COUNT_BIG(*)
+FROM dbo.CPU_Test t1 JOIN dbo.CPU_Test t2 ON t1.ID <> t2.ID
+WHERE t1.ID % 2 = 0 AND t2.ID % 3 = 0;
+```
+
+Compare time elapsed with previous run.
 
 ------------------------- -------------------------
 
 #### Quiz
 
-1. A DBA is reviewing an Azure SQL Database workload. Which factor primarily determines the CPU resources available for query processing in Azure SQL Database?  
-A. Manual configuration by the DBA  
+1. A database administrator is reviewing an Azure SQL Database workload. Which factor primarily determines the CPU resources available for query processing in Azure SQL Database?  
+A. Manual configuration by the database administrator  
 B. The selected service tier (vCores or DTUs)  
 C. Resource Governor settings  
 D. SQL Server Agent scheduling
@@ -604,7 +719,7 @@ Refining query design along with selecting the appropriate service tier is the r
 
 ## Storage
 
-### on-prem
+### On-Prem
 
 #### Discussion
 
@@ -668,7 +783,7 @@ with two data files
 
 #### Quiz
 
-1. A DBA is troubleshooting I/O performance on an on-prem SQL Server and discovers that data and log files are stored on the same disk. Which configuration change is most likely to reduce I/O contention?  
+1. A database administrator is troubleshooting I/O performance on an on-prem SQL Server and discovers that data and log files are stored on the same disk. Which configuration change is most likely to reduce I/O contention?  
 - A. Consolidate file groups  
 - B. Place data files and log files on separate high-performance disks  
 - C. Increase RAID striping across all disks  
@@ -697,7 +812,7 @@ Placing data files and log files on separate high-performance disks reduces I/O 
 Using storage pools and striping distributes the I/O load evenly across multiple disks.
 
 3. Answer: A  
-The Files page in SQL Server Management Studio shows file distribution, allowing the DBA to verify that files are optimally placed.
+The Files page in SQL Server Management Studio shows file distribution, allowing the database administrator to verify that files are optimally placed.
 
 ------------------------- ------------------------- -------------------------
 
