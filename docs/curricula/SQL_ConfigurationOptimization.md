@@ -227,25 +227,25 @@ Compare the execution times:
 
 When SQL Server is installed by default, it’s set to use as much memory as it can because it’s designed to run on dedicated servers. However, on a VM with 8GB of memory, you need to leave enough memory for the operating system and any other applications. Here are some points and guidelines:
 
-- **Default Setting:**  
+- Default Setting:  
   By default, SQL Server’s "max server memory" is set very high (2,147,483,647 MB) to allow it to use as much available memory as possible on a dedicated machine. This isn’t ideal for a VM where the OS also needs memory.
 
-- **Rule of Thumb:**  
+- Rule of Thumb:  
   A common approach is to reserve about 20–25% of total memory for the OS and other background processes. On an 8GB VM, that might mean allocating around 6GB for SQL Server (i.e. 75% of 8GB).
 
-- **Calculations:**  
-  - **Total Memory:** 8GB  
-  - **Reserved for OS and other services:** ~2GB (this can vary based on what else is running)  
-  - **Memory for SQL Server:** 8GB − 2GB = 6GB  
+- Calculations:  
+  - Total Memory: 8GB  
+  - Reserved for OS and other services: ~2GB (this can vary based on what else is running)  
+  - Memory for SQL Server: 8GB − 2GB = 6GB  
     This 6GB is a starting point; you may adjust based on your workload.
 
-- **Absolute Minimum:**  
+- Absolute Minimum:  
   While SQL Server can run on very low memory (1GB or even less for small, light workloads), settings as low as 32MB are far below what is necessary for even minimal functionality. For production or even testing environments, at least 1–2GB is usually needed, though more is recommended for better performance.
 
-- **Practical Steps:**  
-  1. **Monitor your current usage:** Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
-  2. **Gradual adjustment:** Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
-  3. **Test different settings:** In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
+- Practical Steps:  
+  1. Monitor your current usage: Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
+  2. Gradual adjustment: Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
+  3. Test different settings: In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
 
 By using these guidelines and calculations, you can determine a good memory allocation for SQL Server on your 8GB VM, ensuring the OS remains responsive while SQL Server has enough resources to perform efficiently.
 
@@ -332,18 +332,15 @@ Azure SQL Database automatically manages memory allocation based on the selected
 
 These step-by-step instructions allow you to demonstrate how memory allocation in Azure SQL Database impacts query performance and how Azure manages these settings.
 
-1. **Create a Basic-tier Azure SQL Database**
+##### Pre-Requisites
 
-- Log in to the Azure portal and create a new Azure SQL Database at the Basic tier.
-- Ensure the database is fully provisioned before proceeding.
+- Azure SQL Server and Database
 
-------
+##### Generate a Large Dataset
 
-2. **Generate a Large Dataset**
+Connect to your Azure SQL Database using Azure Data Studio or SQL Server Management Studio (SSMS).
 
-- Connect to your Azure SQL Database using Azure Data Studio or SQL Server Management Studio (SSMS).
-- Execute the following to create and populate a large test table:
-
+Execute the following to create and populate a large test table:
 ```sql
 CREATE TABLE dbo.LargeMemoryTable (
     ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -352,27 +349,26 @@ CREATE TABLE dbo.LargeMemoryTable (
 
 INSERT INTO dbo.LargeMemoryTable (DataValue)
 SELECT REPLICATE(N'AzureSQL', 100)
-FROM (SELECT TOP 100000 ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+FROM (SELECT TOP 500000 ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
       FROM sys.all_objects a CROSS JOIN sys.all_objects b) AS Tally;
 ```
 
-------
+##### Run Initial Performance Test
 
-2. **Run Initial Performance Test**
-
-- Execute a memory-intensive query to test database performance:
-
+Execute a memory-intensive query to test database performance:
 ```sql
 SET STATISTICS TIME ON;
 SELECT * FROM dbo.LargeMemoryTable ORDER BY DataValue;
 SET STATISTICS TIME OFF;
 ```
 
-- Use Azure's Query Performance Insight to record execution time, CPU, and DTU usage.
+Navigate to your Azure SQL Database resource in the Azure portal:
 
-------
+Select "Query Performance Insight" from the left menu
 
-3. **Scale Up the Service Tier**
+Record execution time, CPU percentage, and DTU usage from the displayed metrics for this query
+
+3. Scale Up the Service Tier
 
 - Navigate to your Azure SQL Database resource in the Azure portal.
 - Under "Compute + Storage," click "Configure."
@@ -381,7 +377,7 @@ SET STATISTICS TIME OFF;
 
 ------
 
-3. **Run Post-Scaling Performance Test**
+3. Run Post-Scaling Performance Test
 
 - Execute the same memory-intensive query again:
 
@@ -395,7 +391,7 @@ SET STATISTICS TIME OFF;
 
 ------
 
-4. **Analyze Results Using Query Performance Insight**
+4. Analyze Results Using Query Performance Insight
 
 - In the Azure portal, navigate to your Azure SQL Database resource.
 - Open the "Query Performance Insight" tool.
@@ -404,7 +400,7 @@ SET STATISTICS TIME OFF;
 
 ------
 
-5. **Conclude and Document Observations**
+5. Conclude and Document Observations
 
 - Summarize how Azure's automatic memory management impacts your workload.
 - Discuss observations about query performance differences and how Azure's automated memory management adjusts to your workload needs.
@@ -418,9 +414,9 @@ Here's a concise recap section for Memory optimization in Azure, following your 
 
 Azure SQL Database automatically manages memory allocation based on the service tier you select. Unlike On-Prem environments, you don't directly configure memory settings in Azure. Instead, optimizing memory in Azure involves:
 
-- **Choosing the Appropriate Service Tier** Selecting a higher service tier (Standard or Premium) directly increases available memory, improving query performance, especially for memory-intensive operations.
-- **Monitoring Performance with Azure Tools** Query Performance Insight allows you to monitor query duration, CPU usage, and DTU/vCore utilization, helping identify if your current memory allocation is sufficient for your workload.
-- **Scaling Dynamically** Azure provides flexibility to scale resources quickly. Increasing your database’s service tier improves memory availability automatically, enhancing overall performance without manual memory tuning.
+- Choosing the Appropriate Service Tier Selecting a higher service tier (Standard or Premium) directly increases available memory, improving query performance, especially for memory-intensive operations.
+- Monitoring Performance with Azure Tools Query Performance Insight allows you to monitor query duration, CPU usage, and DTU/vCore utilization, helping identify if your current memory allocation is sufficient for your workload.
+- Scaling Dynamically Azure provides flexibility to scale resources quickly. Increasing your database’s service tier improves memory availability automatically, enhancing overall performance without manual memory tuning.
 
 This exercise demonstrated how Azure's automatic memory management adjusts to your workload, improving efficiency and performance simply by scaling the service tier.
 
