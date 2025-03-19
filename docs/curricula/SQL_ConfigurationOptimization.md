@@ -127,35 +127,38 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
 ##### Prepare Sample Data
 
 - Create a new database:
-    ```sql
-    CREATE DATABASE trainingdb;
-    USE trainingdb;
-    ```
+
+  ```sql
+  CREATE DATABASE trainingdb;
+  USE trainingdb;
+  ```
 
 - Create a new table using a set-based approach to generate sample data quickly:
-    ```sql
-    IF OBJECT_ID('dbo.LargeTestTable') IS NOT NULL
-        DROP TABLE dbo.LargeTestTable;
-    
-    CREATE TABLE dbo.LargeTestTable
-    (
-        ID INT IDENTITY(1,1) PRIMARY KEY,
-        DataValue VARCHAR(100)
-    );
-    
-    WITH X AS (
-        SELECT TOP (500000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
-        FROM sys.all_objects a CROSS JOIN sys.all_objects b
-    )
-    INSERT INTO dbo.LargeTestTable (DataValue)
-    SELECT REPLICATE('X', 100)
-    FROM X;
-    ```
+
+  ```sql
+  IF OBJECT_ID('dbo.LargeTestTable') IS NOT NULL
+      DROP TABLE dbo.LargeTestTable;
+  
+  CREATE TABLE dbo.LargeTestTable
+  (
+      ID INT IDENTITY(1,1) PRIMARY KEY,
+      DataValue VARCHAR(100)
+  );
+  
+  WITH X AS (
+      SELECT TOP (500000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+      FROM sys.all_objects a CROSS JOIN sys.all_objects b
+  )
+  INSERT INTO dbo.LargeTestTable (DataValue)
+  SELECT REPLICATE('X', 100)
+  FROM X;
+  ```
 
 - Verify that the table is populated by running:
-    ```sql
-    SELECT COUNT(*) FROM dbo.LargeTestTable;
-    ```
+
+  ```sql
+  SELECT COUNT(*) FROM dbo.LargeTestTable;
+  ```
 
 ##### Lower Memory Setting
 
@@ -168,11 +171,12 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
 
 - Execute the following T-SQL:
 
-    ```sql
-    SET STATISTICS TIME ON;
-    SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
-    SET STATISTICS TIME OFF;
-    ```
+  ```sql
+  SET STATISTICS TIME ON;
+  SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
+  SET STATISTICS TIME OFF;
+  ```
+
 - Record the execution time displayed in the Messages tab
 
 ##### Increase Memory Setting
@@ -186,14 +190,16 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
 
 - Execute the following T-SQL:
 
-    ```sql
-    SET STATISTICS TIME ON;
-    SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
-    SET STATISTICS TIME OFF;
-    ```
+  ```sql
+  SET STATISTICS TIME ON;
+  SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
+  SET STATISTICS TIME OFF;
+  ```
+
 - Record the new execution time from the Messages tab
 
 ##### Compare Execution Times
+
 - Observe whether the query runs faster with higher memory allocation, indicating reduced memory pressure and improved performance
 
 -------------------------
@@ -208,20 +214,20 @@ When SQL Server is installed by default, it’s set to use as much memory as it 
 
 - **Calculations**:  
 
-    - Total Memory: 8GB  
-    - Reserved for OS and other services: ~2GB (this can vary based on what else is running)  
-    - Memory for SQL Server: 8GB − 2GB = 6GB  
-        This 6GB is a starting point; you may adjust based on your workload.
+  - Total Memory: 8GB  
+  - Reserved for OS and other services: ~2GB (this can vary based on what else is running)  
+  - Memory for SQL Server: 8GB − 2GB = 6GB  
+    This 6GB is a starting point; you may adjust based on your workload.
 
 - **Absolute Minimum**: While SQL Server can run on very low memory (1GB or even less for small, light workloads), settings as low as 32MB are far below what is necessary for even minimal functionality. For production or even testing environments, at least 1–2GB is usually needed, though more is recommended for better performance.
 
 - Practical Steps:  
 
-    - **Monitor your current usage**: Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
+  - **Monitor your current usage**: Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
 
-    - **Gradual adjustment**: Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
+  - **Gradual adjustment**: Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
 
-    - **Test different settings**: In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
+  - **Test different settings**: In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
 
 By using these guidelines and calculations, you can determine a good memory allocation for SQL Server on your 8GB VM, ensuring the OS remains responsive while SQL Server has enough resources to perform efficiently.
 
@@ -230,35 +236,35 @@ By using these guidelines and calculations, you can determine a good memory allo
 #### Quiz
 
 1. A database administrator notices that the plan cache is bloated with single-use query plans, causing memory pressure. Which setting should be enabled to reduce excessive memory consumption by these ad hoc queries?  
-    A. Maximum server memory  
-    B. Minimum server memory  
-    C. Optimize for ad hoc workloads  
-    D. Buffer pool extension
+   A. Maximum server memory  
+   B. Minimum server memory  
+   C. Optimize for ad hoc workloads  
+   D. Buffer pool extension
 
 2. In order to ensure that SQL Server does not starve the operating system and other applications of memory, which configuration setting is most critical?  
-    A. Minimum memory per query  
-    B. Maximum server memory  
-    C. Index creation memory  
-    D. Resource Governor
+   A. Minimum memory per query  
+   B. Maximum server memory  
+   C. Index creation memory  
+   D. Resource Governor
 
 3. To guarantee that complex queries receive sufficient memory during execution even under peak loads, which memory setting directly governs the baseline memory allocation per query?  
-    A. Optimize for ad hoc workloads  
-    B. Maximum server memory  
-    C. Minimum memory per query  
-    D. Buffer pool extension
+   A. Optimize for ad hoc workloads  
+   B. Maximum server memory  
+   C. Minimum memory per query  
+   D. Buffer pool extension
 
 -------------------------
 
 ##### Answers
 
 1. Answer: C  
-    The "Optimize for ad hoc workloads" setting reduces the memory footprint of single-use query plans, helping to keep the plan cache lean and alleviate memory pressure.
+   The "Optimize for ad hoc workloads" setting reduces the memory footprint of single-use query plans, helping to keep the plan cache lean and alleviate memory pressure.
 
 2. Answer: B  
-    The "Maximum server memory" setting is critical as it limits the amount of memory SQL Server can consume, ensuring the operating system and other applications retain sufficient resources.
+   The "Maximum server memory" setting is critical as it limits the amount of memory SQL Server can consume, ensuring the operating system and other applications retain sufficient resources.
 
 3. Answer: C  
-    "Minimum memory per query" determines the minimum memory allocated to each query, ensuring that complex queries have enough resources even during high workload periods.
+   "Minimum memory per query" determines the minimum memory allocated to each query, ensuring that complex queries have enough resources even during high workload periods.
 
 ------------------------- ------------------------- -------------------------
 
@@ -307,24 +313,24 @@ In Azure SQL Database, **it's not possible to directly configure memory settings
 #### Quiz
 
 1. A database administrator is analyzing an Azure SQL Database workload and notices that certain queries are performing poorly. Which feature primarily determines how much memory is allocated to the database without manual intervention?  
-    A. Manual configuration  
-    B. Service tier selection  
-    C. Resource Governor  
-    D. Index creation memory
+   A. Manual configuration  
+   B. Service tier selection  
+   C. Resource Governor  
+   D. Index creation memory
 2. After scaling up an Azure SQL Database to a higher service tier, what is the expected effect on memory allocation?  
-    A. Memory allocation remains unchanged  
-    B. Memory allocation increases  
-    C. Memory allocation decreases  
-    D. Memory allocation requires manual adjustment
+   A. Memory allocation remains unchanged  
+   B. Memory allocation increases  
+   C. Memory allocation decreases  
+   D. Memory allocation requires manual adjustment
 
 -------------------------
 
 ##### Answers
 
 1. Answer: B  
-    Service tier selection automatically governs the memory allocation in Azure SQL Database.
+   Service tier selection automatically governs the memory allocation in Azure SQL Database.
 2. Answer: B  
-    Scaling up to a higher service tier increases the available memory, which can improve query performance.
+   Scaling up to a higher service tier increases the available memory, which can improve query performance.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
@@ -355,9 +361,10 @@ Allows you to define resource pools and workload groups to limit and allocate CP
 Monitoring CPU performance is key to understanding workload demands and identifying bottlenecks. It helps you decide when to adjust CPU-related configurations or scale hardware resources.
 
 - In SQL Server Management Studio, execute dynamic management view queries such as:
-    ```sql
-    SELECT * FROM sys.dm_os_performance_counters WHERE counter_name LIKE '%CPU%';
-    ```
+
+  ```sql
+  SELECT * FROM sys.dm_os_performance_counters WHERE counter_name LIKE '%CPU%';
+  ```
 
 - Alternatively, use Performance Monitor (PerfMon) on the server to track CPU metrics during query execution.
 
@@ -423,7 +430,7 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
   EXEC sp_configure 'max degree of parallelism';
   EXEC sp_configure 'cost threshold for parallelism';
   ```
-  
+
   - **show advanced options**:
     - Possible values: 0 (disabled) or 1 (enabled)
   - **max degree of parallelism**:
@@ -479,7 +486,7 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
   FROM dbo.LargeCPUTable t1 CROSS JOIN dbo.LargeCPUTable t2
   WHERE t1.ID % 2 = 0 AND t2.ID % 3 = 0;
   ```
-  
+
 - Observe that the Execution Plan includes "Parallelism"
 
 
@@ -488,35 +495,35 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
 #### Quiz
 
 1. A complex analytical query on an on-prem SQL Server is not utilizing parallelism even though its estimated cost is high. Which configuration setting adjustment is most likely to encourage parallel execution?  
-    A. Increase MAXDOP  
-    B. Lower the cost threshold for parallelism  
-    C. Adjust processor affinity  
-    D. Increase maximum server memory
+   A. Increase MAXDOP  
+   B. Lower the cost threshold for parallelism  
+   C. Adjust processor affinity  
+   D. Increase maximum server memory
 
 2. A database administrator wants to ensure that a resource-intensive batch job does not monopolize CPU resources on an on-prem SQL Server, affecting critical queries. Which configuration tool should be used to limit CPU usage for specific workloads?  
-    A. Adjust MAXDOP  
-    B. Use Resource Governor to set CPU limits  
-    C. Configure processor affinity  
-    D. Increase the cost threshold for parallelism
+   A. Adjust MAXDOP  
+   B. Use Resource Governor to set CPU limits  
+   C. Configure processor affinity  
+   D. Increase the cost threshold for parallelism
 
 3. An on-prem SQL Server experiences sporadic CPU spikes due to ad-hoc queries, which affects scheduled analytical workloads. Which strategy is most effective in stabilizing CPU usage?  
-    A. Lower the cost threshold for parallelism  
-    B. Increase MAXDOP  
-    C. Use Resource Governor to prioritize scheduled queries over ad-hoc queries  
-    D. Configure processor affinity for critical workloads
+   A. Lower the cost threshold for parallelism  
+   B. Increase MAXDOP  
+   C. Use Resource Governor to prioritize scheduled queries over ad-hoc queries  
+   D. Configure processor affinity for critical workloads
 
 -------------------------
 
 ##### Answers
 
 1. Answer: B  
-Lowering the cost threshold for parallelism allows more queries to qualify for parallel execution, which can improve performance for complex analytical queries.
+   Lowering the cost threshold for parallelism allows more queries to qualify for parallel execution, which can improve performance for complex analytical queries.
 
 2. Answer: B  
-Using Resource Governor to set CPU limits prevents a single batch job from consuming excessive CPU, ensuring that other critical queries maintain performance.
+   Using Resource Governor to set CPU limits prevents a single batch job from consuming excessive CPU, ensuring that other critical queries maintain performance.
 
 3. Answer: C  
-Prioritizing scheduled queries with Resource Governor helps stabilize CPU usage by limiting the impact of sporadic ad-hoc queries.
+   Prioritizing scheduled queries with Resource Governor helps stabilize CPU usage by limiting the impact of sporadic ad-hoc queries.
 
 ------------------------- ------------------------- -------------------------
 
@@ -599,7 +606,7 @@ Follow these step-by-step instructions using the Query Editor in the Azure Porta
 ##### Review Settings
 
 - **Check Service Tier and Edition**
-   This query displays the current service tier and edition for your database:
+  This query displays the current service tier and edition for your database:
 
   ```sql
   SELECT 
@@ -610,7 +617,7 @@ Follow these step-by-step instructions using the Query Editor in the Azure Porta
   These values tell you the selected tier (for example, Standard S0, S2, or S3) and provide an indication of the CPU and memory resources available based on your chosen tier.
 
 - **Review System Information**
-   Although Azure SQL Database is a managed service and doesn’t expose detailed hardware specs, you can get approximate resource details by running:
+  Although Azure SQL Database is a managed service and doesn’t expose detailed hardware specs, you can get approximate resource details by running:
 
   ```sql
   SELECT * FROM sys.dm_os_sys_info;
@@ -685,35 +692,35 @@ Compare time elapsed with previous run.
 #### Quiz
 
 1. A database administrator is reviewing an Azure SQL Database workload. Which factor primarily determines the CPU resources available for query processing in Azure SQL Database?  
-A. Manual configuration by the database administrator  
-B. The selected service tier (vCores or DTUs)  
-C. Resource Governor settings  
-D. SQL Server Agent scheduling
+   A. Manual configuration by the database administrator  
+   B. The selected service tier (vCores or DTUs)  
+   C. Resource Governor settings  
+   D. SQL Server Agent scheduling
 
 2. When an Azure SQL Database is scaled up to a higher service tier, what is the expected impact on CPU performance?  
-A. CPU resources remain unchanged  
-B. CPU resources decrease  
-C. CPU resources increase  
-D. CPU resources must be manually adjusted
+   A. CPU resources remain unchanged  
+   B. CPU resources decrease  
+   C. CPU resources increase  
+   D. CPU resources must be manually adjusted
 
 3. To optimize CPU performance in Azure SQL Database, which strategy is most effective?  
-A. Configuring processor affinity  
-B. Refining query design while choosing an appropriate service tier  
-C. Enabling Resource Governor  
-D. Increasing the number of data files
+   A. Configuring processor affinity  
+   B. Refining query design while choosing an appropriate service tier  
+   C. Enabling Resource Governor  
+   D. Increasing the number of data files
 
 -------------------------
 
 ##### Answers
 
 1. Answer: B  
-The selected service tier determines the number of vCores or DTUs, which directly governs the CPU resources available in Azure SQL Database.
+   The selected service tier determines the number of vCores or DTUs, which directly governs the CPU resources available in Azure SQL Database.
 
 2. Answer: C  
-Scaling up to a higher service tier increases the available CPU resources, thereby improving query performance.
+   Scaling up to a higher service tier increases the available CPU resources, thereby improving query performance.
 
 3. Answer: B  
-Refining query design along with selecting the appropriate service tier is the recommended strategy to optimize CPU performance in Azure SQL Database.
+   Refining query design along with selecting the appropriate service tier is the recommended strategy to optimize CPU performance in Azure SQL Database.
 
 ------------------------- ------------------------- ------------------------- -------------------------
 
@@ -754,65 +761,150 @@ Steps to find:
 
 #### Exercise
 
-- Create two virtual disks (for example, D: and E:) on your local machine or VM
+Follow these step-by-step instructions to demonstrate how distributing data files across multiple disks affects I/O throughput and query performance on an on-prem SQL Server.
 
-- In SQL Server Management Studio, create a database named 
+##### Add Disks
 
-```
-TestDB_SingleFile
-```
+- In Azure Portal, navigate to your virtual machine >> Settings >> Disks
+  - Click "+ Create and attach a new disk" twice {e.g., `SQLDisk1` and `SQLDisk2`}, then click "Apply"
+  - Restart VM and then connect
 
-with a single data file and log file on a single disk (e.g., C:)
+- On the VM, open `diskmgmt.msc`... when prompted, initial new disks with partition style "GPT..."
 
-- Run a loop to insert 500,000 rows into a test table and record the execution time
+  - The disks will now show as `"Unallocated"`... right-click unallocated space and select "New Simple Volume" from the resulting menu
 
-- Create a second database named 
+  - Step through the "New Simple Volume Wizard" for each
 
-```
-TestDB_MultiFile
-```
+- Open File Explorer and verify that the new drives are visible and ready to use
 
-with two data files
+##### Create Databases
 
-- Place one data file on D: and the other on E:, with the log file on one of the disks
-- Run the same insert loop and record the execution time
+- Open SQL Server Management Studio, connect to your SQL Server instance, then execute:
 
-- Compare the performance to see how distributing data files across disks can improve I/O throughput
+  ```sql
+  CREATE DATABASE TestDB_SingleFile
+  ON PRIMARY (
+      NAME = TestDB_SingleFile_Data,
+      FILENAME = 'C:\SQLData\TestDB_SingleFile_Data.mdf'
+  )
+  LOG ON (
+      NAME = TestDB_SingleFile_Log,
+      FILENAME = 'C:\SQLData\TestDB_SingleFile_Log.ldf'
+  );
+  
+  CREATE DATABASE TestDB_MultiFile
+  ON PRIMARY (
+      NAME = TestDB_MultiFile_Data1,
+      FILENAME = 'D:\SQLData\TestDB_MultiFile_Data1.mdf'
+  ),
+  FILEGROUP FG2 (
+      NAME = TestDB_MultiFile_Data2,
+      FILENAME = 'E:\SQLData\TestDB_MultiFile_Data2.ndf'
+  )
+  LOG ON (
+      NAME = TestDB_MultiFile_Log,
+      FILENAME = 'D:\SQLData\TestDB_MultiFile_Log.ldf'
+  );
+  ```
 
-------------------------- -------------------------
+##### Populate Test Tables
+
+- In each database, execute the following to create and populate tables:
+
+  ```sql
+  USE TestDB_SingleFile;
+  
+  IF OBJECT_ID('dbo.IOTestTable') IS NOT NULL DROP TABLE dbo.IOTestTable;
+  
+  CREATE TABLE dbo.IOTestTable (
+      ID INT IDENTITY(1,1) PRIMARY KEY,
+      DataValue VARCHAR(100)
+  );
+  
+  WITH X AS (
+      SELECT TOP (500000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+      FROM sys.all_objects a CROSS JOIN sys.all_objects b
+  )
+  INSERT INTO dbo.IOTestTable (DataValue)
+  SELECT REPLICATE('X', 100)
+  FROM X;
+  
+  USE TestDB_MultiFile;
+  
+  IF OBJECT_ID('dbo.IOTestTable') IS NOT NULL DROP TABLE dbo.IOTestTable;
+  
+  CREATE TABLE dbo.IOTestTable (
+      ID INT IDENTITY(1,1) PRIMARY KEY,
+      DataValue VARCHAR(100)
+  ) ON FG2;
+  
+  WITH X AS (
+      SELECT TOP (500000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+      FROM sys.all_objects a CROSS JOIN sys.all_objects b
+  )
+  INSERT INTO dbo.IOTestTable (DataValue)
+  SELECT REPLICATE('X', 100)
+  FROM X;
+  ```
+
+##### Stress Storage
+
+- Execute the following query separately on both databases, noting execution times from the Messages tab:
+
+  ```sql
+  SET STATISTICS TIME ON;
+  SELECT COUNT(*) FROM dbo.IOTestTable WHERE DataValue LIKE '%XXX%';
+  SET STATISTICS TIME OFF;
+  ```
+
+##### Compare Results
+
+- Observe and compare query execution times between the single-file and multi-file databases, noting improvements due to reduced I/O contention from distributing files across disks
 
 #### Quiz
 
 1. A database administrator is troubleshooting I/O performance on an on-prem SQL Server and discovers that data and log files are stored on the same disk. Which configuration change is most likely to reduce I/O contention?  
-- A. Consolidate file groups  
-- B. Place data files and log files on separate high-performance disks  
-- C. Increase RAID striping across all disks  
-- D. Decrease file growth increments
+
+​	A. Consolidate file groups  
+
+​	B. Place data files and log files on separate high-performance disks  
+
+​	C. Increase RAID striping across all disks  
+
+​	D. Decrease file growth increments
 
 2. Which strategy is most effective in distributing the database I/O load across multiple disks in an on-prem environment?  
-- A. Using a single large file for all database operations  
-- B. Using storage pools and striping  
-- C. Implementing dynamic data masking  
-- D. Caching query results in memory
+
+​	A. Using a single large file for all database operations  
+
+​	B. Using storage pools and striping  
+
+​	C. Implementing dynamic data masking  
+
+​	D. Caching query results in memory
 
 3. To verify that file distribution is optimized in an on-prem SQL Server, which tool within SQL Server Management Studio would be most appropriate?  
-- A. The Files page under database properties in Object Explorer  
-- B. Query Performance Insight  
-- C. SQL Server Agent  
-- D. Resource Governor
+
+​	A. The Files page under database properties in Object Explorer  
+
+​	B. Query Performance Insight  
+
+​	C. SQL Server Agent  
+
+​	D. Resource Governor
 
 -------------------------
 
 ##### Answers
 
 1. Answer: B  
-Placing data files and log files on separate high-performance disks reduces I/O contention and improves performance.
+   Placing data files and log files on separate high-performance disks reduces I/O contention and improves performance.
 
 2. Answer: B  
-Using storage pools and striping distributes the I/O load evenly across multiple disks.
+   Using storage pools and striping distributes the I/O load evenly across multiple disks.
 
 3. Answer: A  
-The Files page in SQL Server Management Studio shows file distribution, allowing the database administrator to verify that files are optimally placed.
+   The Files page in SQL Server Management Studio shows file distribution, allowing the database administrator to verify that files are optimally placed.
 
 ------------------------- ------------------------- -------------------------
 
@@ -861,32 +953,44 @@ Steps to find:
 #### Quiz
 
 1. In an Azure SQL Database environment, which feature automatically manages storage performance?  
-- A. Performance tiers (DTU/vCore)  
-- B. Resource Governor  
-- C. Manual filegroup configuration  
-- D. SQL Server Agent
+
+​	A. Performance tiers (DTU/vCore)  
+
+​	B. Resource Governor  
+
+​	C. Manual filegroup configuration  
+
+​	D. SQL Server Agent
 
 2. Which built‑in feature of Azure SQL Database helps ensure storage efficiency through high availability and automatic backups?  
-- A. Manual RAID configuration  
-- B. Automatic high availability and backups  
-- C. Custom disk partitioning  
-- D. Resource Governor
+
+​	A. Manual RAID configuration  
+
+​	B. Automatic high availability and backups  
+
+​	C. Custom disk partitioning  
+
+​	D. Resource Governor
 
 3. When scaling an Azure SQL Database to a higher tier, which action is most likely to improve storage performance?  
-- A. Enabling Resource Governor  
-- B. Configuring additional filegroups  
-- C. Increasing the service tier  
-- D. Manually redistributing data files
+
+​	A. Enabling Resource Governor  
+
+​	B. Configuring additional filegroups  
+
+​	C. Increasing the service tier  
+
+​	D. Manually redistributing data files
 
 -------------------------
 
 ##### Answers
 
 1. Answer: A  
-Performance tiers (DTU/vCore) automatically manage storage performance in Azure SQL Database, eliminating the need for manual filegroup configuration.
+   Performance tiers (DTU/vCore) automatically manage storage performance in Azure SQL Database, eliminating the need for manual filegroup configuration.
 
 2. Answer: B  
-Automatic high availability and backups are built into Azure SQL Database, ensuring storage efficiency without manual intervention.
+   Automatic high availability and backups are built into Azure SQL Database, ensuring storage efficiency without manual intervention.
 
 3. Answer: C  
-Increasing the service tier boosts resource allocation, which improves storage performance in Azure SQL Database.
+   Increasing the service tier boosts resource allocation, which improves storage performance in Azure SQL Database.
