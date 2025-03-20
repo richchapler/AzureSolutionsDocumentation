@@ -202,26 +202,26 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
 
 When SQL Server is installed by default, it’s set to use as much memory as it can because it’s designed to run on dedicated servers. However, on a VM with 8GB of memory, you need to leave enough memory for the operating system and any other applications. Here are some points and guidelines:
 
-- **Default Setting**: By default, SQL Server’s "max server memory" is set very high (2,147,483,647 MB) to allow it to use as much available memory as possible on a dedicated machine. This isn’t ideal for a VM where the OS also needs memory.
+- Default Setting: By default, SQL Server’s "max server memory" is set very high (2,147,483,647 MB) to allow it to use as much available memory as possible on a dedicated machine. This isn’t ideal for a VM where the OS also needs memory.
 
-- **Rule of Thumb**: A common approach is to reserve about 20–25% of total memory for the OS and other background processes. On an 8GB VM, that might mean allocating around 6GB for SQL Server (i.e. 75% of 8GB).
+- Rule of Thumb: A common approach is to reserve about 20–25% of total memory for the OS and other background processes. On an 8GB VM, that might mean allocating around 6GB for SQL Server (i.e. 75% of 8GB).
 
-- **Calculations**:  
+- Calculations:  
 
     - Total Memory: 8GB  
     - Reserved for OS and other services: ~2GB (this can vary based on what else is running)  
     - Memory for SQL Server: 8GB − 2GB = 6GB  
         This 6GB is a starting point; you may adjust based on your workload.
 
-- **Absolute Minimum**: While SQL Server can run on very low memory (1GB or even less for small, light workloads), settings as low as 32MB are far below what is necessary for even minimal functionality. For production or even testing environments, at least 1–2GB is usually needed, though more is recommended for better performance.
+- Absolute Minimum: While SQL Server can run on very low memory (1GB or even less for small, light workloads), settings as low as 32MB are far below what is necessary for even minimal functionality. For production or even testing environments, at least 1–2GB is usually needed, though more is recommended for better performance.
 
 - Practical Steps:  
 
-    - **Monitor your current usage**: Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
+    - Monitor your current usage: Use Performance Monitor or DMVs (like `sys.dm_os_memory_clerks`) to see how much memory SQL Server is actually using.  
 
-    - **Gradual adjustment**: Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
+    - Gradual adjustment: Instead of drastically lowering the memory, adjust it incrementally while observing performance and stability.  
 
-    - **Test different settings**: In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
+    - Test different settings: In your case, you might try setting "Maximum server memory" to 6GB and see how the system behaves compared to higher or lower settings.
 
 By using these guidelines and calculations, you can determine a good memory allocation for SQL Server on your 8GB VM, ensuring the OS remains responsive while SQL Server has enough resources to perform efficiently.
 
@@ -300,7 +300,7 @@ Azure SQL Database automatically manages memory allocation based on the selected
 
 #### No Exercise
 
-In Azure SQL Database, **it's not possible to directly configure memory settings** like you can on-prem (e.g., "Maximum Server Memory"). Azure manages memory **automatically** based on the chosen **service tier** and **compute resources** (vCores/DTUs).
+In Azure SQL Database, it's not possible to directly configure memory settings like you can on-prem (e.g., "Maximum Server Memory"). Azure manages memory automatically based on the chosen service tier and compute resources (vCores/DTUs).
 
 ------------------------- -------------------------
 
@@ -424,11 +424,11 @@ To ensure you can fully explore parallel query execution, memory usage, and stor
   EXEC sp_configure 'cost threshold for parallelism';
   ```
   
-  - **show advanced options**:
+  - show advanced options:
     - Possible values: 0 (disabled) or 1 (enabled)
-  - **max degree of parallelism**:
+  - max degree of parallelism:
     - Possible values: 0 (use all available CPUs) or any positive integer (typically 1 up to the number of logical processors, with an upper bound of 32767)
-  - **cost threshold for parallelism**:
+  - cost threshold for parallelism:
     - Possible values: Any integer from 0 up to 32767 (default is 5)
 
 ##### Minimize Settings
@@ -564,7 +564,7 @@ Follow these step-by-step instructions using the Query Editor in the Azure Porta
 ##### Connect
 
 - In the Azure portal, navigate to your existing SQL Database resource.
-- Click on **Query Editor (preview)** from the left-hand menu.
+- Click on Query Editor (preview) from the left-hand menu.
 - Log in using your database credentials.
 
 ##### Prepare Sample Data
@@ -598,7 +598,7 @@ Follow these step-by-step instructions using the Query Editor in the Azure Porta
 
 ##### Review Settings
 
-- **Check Service Tier and Edition**
+- Check Service Tier and Edition
    This query displays the current service tier and edition for your database:
 
   ```sql
@@ -609,7 +609,7 @@ Follow these step-by-step instructions using the Query Editor in the Azure Porta
 
   These values tell you the selected tier (for example, Standard S0, S2, or S3) and provide an indication of the CPU and memory resources available based on your chosen tier.
 
-- **Review System Information**
+- Review System Information
    Although Azure SQL Database is a managed service and doesn’t expose detailed hardware specs, you can get approximate resource details by running:
 
   ```sql
@@ -618,14 +618,14 @@ Follow these step-by-step instructions using the Query Editor in the Azure Porta
 
   Note values:
 
-  - **cpu_ticks**: Cumulative CPU ticks since SQL Server started
-  - **ms_ticks**: Cumulative time in milliseconds since SQL Server started
-  - **cpu_count**: Number of logical CPUs available
-  - **hyperthread_ratio**: Ratio indicating the hyper-threading multiplier
+  - cpu_ticks: Cumulative CPU ticks since SQL Server started
+  - ms_ticks: Cumulative time in milliseconds since SQL Server started
+  - cpu_count: Number of logical CPUs available
+  - hyperthread_ratio: Ratio indicating the hyper-threading multiplier
 
-  These bullets provide a concise overview of each key column, which helps in understanding what information is available from **sys.dm_os_sys_info**.
+  These bullets provide a concise overview of each key column, which helps in understanding what information is available from sys.dm_os_sys_info.
 
-##### Execute Query
+##### Baseline Performance
 
 ```sql
 SELECT COUNT_BIG(*)
@@ -639,38 +639,36 @@ Note time elapsed.
 
 Navigate to SQL >> Settings >> Compute + Storage and adjust settings:
 
-1. **Max vCores**
+1. Max vCores
    - Defines the upper limit of CPU resources that your database can use
    - During periods of high workload, the database can scale up to this maximum, potentially reducing query times and improving overall performance
    - Increasing max vCores is beneficial if you anticipate or experience spikes in CPU demand
-2. **Min vCores**
+2. Min vCores
    - Defines the baseline amount of CPU resources that are always allocated to your database
    - A higher min vCores ensures more consistent performance because you avoid waiting for the service to “warm up” or scale out when queries arrive
    - However, a higher min vCores also increases the baseline cost, as you pay for these allocated resources even when your database is idle
 
 ###### Deciding How to Adjust Min and Max vCores
 
-- **Performance Sensitivity**: If you have critical workloads that need consistently fast response times, you might raise the **min vCores** so the database doesn’t have to ramp up from near zero.
-- **Cost Optimization**: If cost is a major concern and your workload is intermittent, you can keep **min vCores** lower, allowing the database to scale down during idle times, but expect some performance delay when the load first ramps up.
-- **Handling Peak Loads**: If you occasionally run CPU‑intensive queries (such as cross joins or large aggregations), raising the **max vCores** ensures your database can scale up to handle those spikes without throttling.
+- Performance Sensitivity: If you have critical workloads that need consistently fast response times, you might raise the min vCores so the database doesn’t have to ramp up from near zero.
+- Cost Optimization: If cost is a major concern and your workload is intermittent, you can keep min vCores lower, allowing the database to scale down during idle times, but expect some performance delay when the load first ramps up.
+- Handling Peak Loads: If you occasionally run CPU‑intensive queries (such as cross joins or large aggregations), raising the max vCores ensures your database can scale up to handle those spikes without throttling.
 
 ###### Practical Steps
 
-1. **Monitor Current Usage**
-   - Use **Azure Metrics** or **Query Performance Insight** to see your current CPU usage patterns
+1. Monitor Current Usage
+   - Use Azure Metrics or Query Performance Insight to see your current CPU usage patterns
    - Identify whether you’re regularly hitting your max vCores or if performance suffers during spikes
-2. **Adjust Gradually**
-   - Increase **max vCores** by one tier at a time and observe query performance improvements
-   - If you have frequent workloads that need consistent performance, raise **min vCores** to avoid scale‑up delays
-3. **Test Your Workload**
+2. Adjust Gradually
+   - Increase max vCores by one tier at a time and observe query performance improvements
+   - If you have frequent workloads that need consistent performance, raise min vCores to avoid scale‑up delays
+3. Test Your Workload
    - Run your most demanding queries (like the cross join examples) to see if performance meets expectations
-   - If queries still take too long or you see throttling, consider further increasing **max vCores** or raising **min vCores**
+   - If queries still take too long or you see throttling, consider further increasing max vCores or raising min vCores
 
-By fine‑tuning **min vCores** and **max vCores** within the Serverless model, you can strike the right balance between cost savings and performance for your specific workload.
+By fine‑tuning min vCores and max vCores within the Serverless model, you can strike the right balance between cost savings and performance for your specific workload.
 
-##### Execute Query
-
-Navigate to Query Editor and re-execute:
+##### Compare Performance
 
 ```sql
 SELECT COUNT_BIG(*)
@@ -754,7 +752,7 @@ Steps to find:
 
 #### Exercise
 
-Here's the enhanced **Exercise** section, now properly demonstrating the difference between **single-file** and **multi-file** databases by running the stress test on both.
+Here's the enhanced Exercise section, now properly demonstrating the difference between single-file and multi-file databases by running the stress test on both.
 
 ------
 
@@ -956,13 +954,13 @@ Compare execution times and plans.
 
 ##### Recap
 
-| **Metric**               | **TestDB_SingleFile**       | **TestDB_MultiFile**       |
+| Metric               | TestDB_SingleFile       | TestDB_MultiFile       |
 | ------------------------ | --------------------------- | -------------------------- |
-| **Execution Plan**       | Fewer parallelism operators | More parallelism operators |
-| **Logical Reads**        | Higher                      | Lower                      |
-| **Physical Reads**       | Higher                      | Lower                      |
-| **Disk Contention**      | Higher                      | Lower                      |
-| **Query Execution Time** | Longer                      | Shorter                    |
+| Execution Plan       | Fewer parallelism operators | More parallelism operators |
+| Logical Reads        | Higher                      | Lower                      |
+| Physical Reads       | Higher                      | Lower                      |
+| Disk Contention      | Higher                      | Lower                      |
+| Query Execution Time | Longer                      | Shorter                    |
 
 ------------------------- -------------------------
 
@@ -1048,10 +1046,99 @@ Steps to find:
 
 #### Exercise
 
-- In the Azure portal, create a Basic‑tier Azure SQL Database.
-- Run a load test by inserting a large volume of data into a test table and record response times or DTU usage.
-- Scale up the database to a Standard or Premium tier.
-- Rerun the load test and compare performance metrics to observe how the service tier automatically manages storage performance.
+Follow these step-by-step instructions to demonstrate how scaling an Azure SQL Database affects storage performance by comparing query execution times before and after scaling.
+
+##### Connect
+
+- In the Azure portal, navigate to your existing SQL Database resource.
+- Click on Query Editor (preview) from the left-hand menu.
+- Log in using your database credentials.
+
+##### Prepare Sample Data
+
+```sql
+IF OBJECT_ID('dbo.IOTestTable') IS NOT NULL DROP TABLE dbo.IOTestTable;
+
+CREATE TABLE dbo.IOTestTable (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    DataValue VARCHAR(100)
+);
+
+WITH X AS (
+    SELECT TOP (5000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+    FROM sys.all_objects a CROSS JOIN sys.all_objects b
+)
+INSERT INTO dbo.IOTestTable (DataValue)
+SELECT REPLICATE('X', 100)
+FROM X;
+```
+
+------
+
+##### Baseline Performance
+
+```sql
+SELECT COUNT_BIG(*), AVG(CAST(LEN(t1.DataValue) + LEN(t2.DataValue) AS BIGINT))
+FROM dbo.IOTestTable AS t1 CROSS JOIN dbo.IOTestTable AS t2
+WHERE LEFT(t1.DataValue, 3) = LEFT(t2.DataValue, 3) AND RIGHT(t1.DataValue, 3) = RIGHT(t2.DataValue, 3);
+```
+
+Note time elapsed.
+
+------
+
+##### Scale Database
+
+Navigate to SQL Database → Settings → Compute + Storage in the Azure portal and adjust the storage tier for your serverless General Purpose Azure SQL Database.
+
+------
+
+##### Understanding Storage Scaling in Azure SQL Database
+
+1. Storage Size
+   - Defines the total amount of storage allocated to the database.
+   - Increasing storage can improve performance by reducing contention for space and I/O operations.
+   - More storage allows larger workloads and prevents slowdowns caused by running out of available space.
+2. IOPS (Input/Output Operations per Second)
+   - Increases automatically as storage size grows.
+   - Higher IOPS means faster query performance for read/write-heavy workloads.
+   - Scaling up reduces latency for transactions that involve frequent disk access.
+
+------
+
+##### Choosing the Right Storage Settings
+
+- Performance Sensitivity → If queries involve large data reads/writes, increasing storage size helps improve disk I/O speed.
+- Cost Optimization → If storage costs are a concern, scale only when metrics show high I/O latency or slow response times due to disk contention.
+- Handling Growth → If database size is near its limit, increase storage before hitting capacity to avoid performance degradation.
+
+------
+
+##### Scaling Steps
+
+1. Monitor Storage Usage
+   - In the Azure portal, go to Metrics → Storage Consumption to check current storage usage.
+   - Review IOPS and Log Write Performance to see if storage is causing bottlenecks.
+2. Increase Storage Capacity
+   - Under Compute + Storage, increase the allocated storage size.
+   - Storage scaling in General Purpose (serverless) mode is online and does not require downtime.
+3. Test Query Performance
+   - After scaling, re-run the stress query and compare execution times.
+   - Check if DTU consumption and IOPS have improved, indicating better disk performance.
+
+------
+
+##### Compare Performance
+
+```sql
+SELECT COUNT_BIG(*), AVG(CAST(LEN(t1.DataValue) + LEN(t2.DataValue) AS BIGINT))
+FROM dbo.IOTestTable AS t1 
+CROSS JOIN dbo.IOTestTable AS t2
+WHERE LEFT(t1.DataValue, 3) = LEFT(t2.DataValue, 3) 
+  AND RIGHT(t1.DataValue, 3) = RIGHT(t2.DataValue, 3);
+```
+
+Compare time elapsed with previous run.
 
 ------------------------- -------------------------
 
@@ -1060,31 +1147,22 @@ Steps to find:
 1. In an Azure SQL Database environment, which feature automatically manages storage performance?  
 
 ​	A. Performance tiers (DTU/vCore)  
-
 ​	B. Resource Governor  
-
 ​	C. Manual filegroup configuration  
-
 ​	D. SQL Server Agent
 
 2. Which built‑in feature of Azure SQL Database helps ensure storage efficiency through high availability and automatic backups?  
 
 ​	A. Manual RAID configuration  
-
 ​	B. Automatic high availability and backups  
-
 ​	C. Custom disk partitioning  
-
 ​	D. Resource Governor
 
-3. When scaling an Azure SQL Database to a higher tier, which action is most likely to improve storage performance?  
+3. Which action is most likely to improve storage performance in an Azure SQL Database (General Purpose serverless)?
 
-​	A. Enabling Resource Governor  
-
-​	B. Configuring additional filegroups  
-
-​	C. Increasing the service tier  
-
+​	A. Enabling Resource Governor
+​	B. Configuring additional filegroups
+​	C. Increasing Data Max Size
 ​	D. Manually redistributing data files
 
 -------------------------
@@ -1098,4 +1176,4 @@ Performance tiers (DTU/vCore) automatically manage storage performance in Azure 
 Automatic high availability and backups are built into Azure SQL Database, ensuring storage efficiency without manual intervention.
 
 3. Answer: C  
-Increasing the service tier boosts resource allocation, which improves storage performance in Azure SQL Database.
+Increasing Data Max Size improves storage performance by increasing IOPS (Input/Output Operations per Second) and log throughput, which directly impacts database read/write performance in General Purpose (serverless).
