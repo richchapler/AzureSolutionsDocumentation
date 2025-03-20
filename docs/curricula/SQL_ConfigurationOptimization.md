@@ -19,8 +19,6 @@ This curriculum provides hands‑on experience with optimizing SQL Server config
 
 ### On-Prem
 
-#### Discussion
-
 ##### Maximum Server Memory
 
 Controls the upper limit of memory that SQL Server can use. This setting is critical because it prevents SQL Server from consuming so much memory that the operating system and other applications become starved. Adjusting it helps ensure optimal performance and stability.
@@ -43,6 +41,8 @@ Specifies the amount of memory allocated for index creation operations. This set
 - Open SQL Server Management Studio and execute the following T‑SQL command:
 
   ```sql
+  EXEC sp_configure 'show advanced options', 1;
+  RECONFIGURE;
   EXEC sp_configure 'index creation memory';
   ```
 
@@ -100,13 +100,19 @@ Allows you to allocate and limit memory usage for specific workloads. This ensur
 - Right-click Resource Governor and select Properties to view the current resource pools.
 - Alternatively, run T‑SQL commands (e.g., CREATE RESOURCE POOL or ALTER RESOURCE POOL) to view and configure memory limits.
 
-##### Lock Pages in Memory
+##### Lock Pages in Memory (Windows Policy Setting)
 
-Prevents SQL Server memory from being paged out to disk, ensuring that critical data remains in RAM. This OS-level setting is important for performance, especially on servers with heavy workloads, but it requires administrator rights and a restart of the SQL Server service to take effect.
+"Lock Pages in Memory" prevents SQL Server memory from being paged out to disk, ensuring that critical data remains in physical RAM. This setting is configured via Windows Local Security Policy—not through SQL Server Management Studio or SQL Server Configuration Manager.
 
-- Open SQL Server Configuration Manager.
-- Right-click the SQL Server service, select Properties, and then go to the Advanced tab.
-- Locate the "Lock pages in memory" setting and verify if it is enabled.
+1. Grant the Privilege:
+   - Open the Local Security Policy tool by running `secpol.msc`.
+   - Navigate to Local Policies > User Rights Assignment.
+   - Locate the policy Lock pages in memory.
+   - Add the SQL Server service account (the account under which SQL Server runs) to this policy.
+2. Restart the SQL Server Service:
+   - After granting the privilege, restart the SQL Server service so the change takes effect.
+3. Verification:
+   - Monitor memory usage to ensure that SQL Server memory is not being paged out to disk.
 
 ------------------------- -------------------------
 
@@ -332,8 +338,6 @@ In Azure SQL Database, it's not possible to directly configure memory settings l
 
 ### On-Prem
 
-#### Discussion
-
 ##### Processor Affinity and MAXDOP
 
 Controls how SQL Server utilizes CPU cores by specifying which processors are used for query execution and limiting the number of processors used in parallel processing. Proper configuration can improve query response times and prevent inefficient CPU usage.
@@ -521,8 +525,6 @@ Prioritizing scheduled queries with Resource Governor helps stabilize CPU usage 
 ------------------------- ------------------------- -------------------------
 
 ### Azure
-
-#### Discussion
 
 ##### Service Tier Selection for CPU
 
@@ -719,8 +721,6 @@ Refining query design along with selecting the appropriate service tier is the r
 
 ### On-Prem
 
-#### Discussion
-
 ##### File Groups
 
 File groups help organize database files into logical units so that data can be spread across multiple physical disks. This can balance the I/O load and improve overall performance.
@@ -749,12 +749,6 @@ Steps to find:
 - Review and confirm the file paths in the database properties after creation.
 
 ------------------------- -------------------------
-
-#### Exercise
-
-Here's the enhanced Exercise section, now properly demonstrating the difference between single-file and multi-file databases by running the stress test on both.
-
-------
 
 #### Exercise
 
@@ -861,6 +855,12 @@ Note execution time and plan.
 
 ##### Multi-File
 
+Below is an updated version of the Multi-File section for on‑prem storage. In this revision, the table is created on the primary filegroup (located on drive E:), while the nonclustered index is created on the secondary filegroup (FG2 on drive I:). This better demonstrates the intended distribution of I/O across both disks:
+
+------
+
+##### Multi‑File
+
 ###### Create Database
 
 ```sql
@@ -892,18 +892,11 @@ USE trainingdb_multifile;
 
 IF OBJECT_ID('dbo.IOTestTable') IS NOT NULL DROP TABLE dbo.IOTestTable;
 
+-- Create the table on the PRIMARY filegroup (drive E:)
 CREATE TABLE dbo.IOTestTable (
     ID INT IDENTITY(1,1) PRIMARY KEY,
     DataValue VARCHAR(100)
-) ON FG2;
-
-WITH X AS (
-    SELECT TOP (5000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
-    FROM sys.all_objects a CROSS JOIN sys.all_objects b
-)
-INSERT INTO dbo.IOTestTable (DataValue)
-SELECT REPLICATE('X', 100)
-FROM X;
+) ON [PRIMARY];
 ```
 
 ###### Optimize Settings
@@ -925,7 +918,7 @@ RECONFIGURE;
 -- Ensure the file path exists before running this command
 ALTER SERVER CONFIGURATION SET BUFFER POOL EXTENSION ON (FILENAME = 'E:\SQLData\BPE.bpe', SIZE = 2GB);
 
--- Spread indexes across multiple filegroups to optimize disk I/O distribution
+-- Create a nonclustered index on FG2 (drive I:) to distribute I/O across both disks
 IF NOT EXISTS (
     SELECT * FROM sys.indexes WHERE name = 'IX_IOTestTable_DataValue' 
     AND object_id = OBJECT_ID('dbo.IOTestTable')
@@ -1013,8 +1006,6 @@ The Files page in SQL Server Management Studio shows file distribution, allowing
 
 ### Azure
 
-#### Discussion
-
 ##### Performance Tiers
 
 Determines the overall performance of an Azure SQL Database, including storage throughput. The chosen tier (DTU or vCore model) automatically allocates resources based on workload demands.
@@ -1093,7 +1084,7 @@ Navigate to SQL Database → Settings → Compute + Storage in the Azure portal 
 
 ------
 
-##### Understanding Storage Scaling in Azure SQL Database
+###### Understanding Storage Scaling in Azure SQL Database
 
 1. Storage Size
    - Defines the total amount of storage allocated to the database.
@@ -1106,7 +1097,7 @@ Navigate to SQL Database → Settings → Compute + Storage in the Azure portal 
 
 ------
 
-##### Choosing the Right Storage Settings
+###### Choosing the Right Storage Settings
 
 - Performance Sensitivity → If queries involve large data reads/writes, increasing storage size helps improve disk I/O speed.
 - Cost Optimization → If storage costs are a concern, scale only when metrics show high I/O latency or slow response times due to disk contention.
@@ -1114,7 +1105,7 @@ Navigate to SQL Database → Settings → Compute + Storage in the Azure portal 
 
 ------
 
-##### Scaling Steps
+###### Scaling Steps
 
 1. Monitor Storage Usage
    - In the Azure portal, go to Metrics → Storage Consumption to check current storage usage.
