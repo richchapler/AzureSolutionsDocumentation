@@ -42,7 +42,7 @@ Managed Instance Link is a new feature introduced with SQL Server 2022 that leve
 - Phased migrations to the cloud
 - Disaster recovery with near real‑time data availability
 
-------
+-------------------------
 
 ### Option #2: Always On Availability Groups
 
@@ -72,7 +72,7 @@ Always On Availability Groups (AG) provide an enterprise‑grade high availabili
 - Scenarios where on‑prem AGs already exist and extending to Azure is desired.
 - Minimal downtime cloud migrations with a robust failover mechanism.
 
-------
+-------------------------
 
 ### Option #3: Transactional Replication
 
@@ -102,7 +102,7 @@ Transactional Replication is a long‑standing SQL Server feature that enables c
 - Scenarios where only a subset of data is needed in Azure.
 - Situations that demand near real‑time data movement without the overhead of full database synchronization.
 
-------
+-------------------------
 
 ### Option #4: SQL Data Sync
 
@@ -132,7 +132,7 @@ SQL Data Sync is an Azure SQL Database feature that uses a hub‑and‑spoke mod
 - Scenarios where occasional connectivity exists and multi‑directional data flow is needed.
 - Branch office environments or distributed setups where data synchronization is the primary requirement.
 
-------
+-------------------------
 
 ### Option #5: ETL Tools (SSIS / Azure Data Factory)
 
@@ -163,20 +163,180 @@ While not purely a native SQL replication feature, ETL tools such as SQL Server 
 - Scenarios where data transformation is needed along with replication.
 - Incremental data loads where near real‑time performance is acceptable with slight latency.
 
-------
+-------------------------
 
 ### Recommendations & Considerations
 
 - **For a straightforward, near real‑time read‑only replica:**
-   If you are running SQL Server 2022 on‑prem and have an Azure SQL Managed Instance available, **Managed Instance Link** is the simplest and most integrated solution.
+  If you are running SQL Server 2022 on‑prem and have an Azure SQL Managed Instance available, **Managed Instance Link** is the simplest and most integrated solution.
+
 - **For enterprise-grade high availability and disaster recovery:**
-   Consider **Always On Availability Groups (Distributed AG)** if you need robust HA/DR capabilities and already use Availability Groups on‑prem.
+  Consider **Always On Availability Groups (Distributed AG)** if you need robust HA/DR capabilities and already use Availability Groups on‑prem.
+
 - **For granular, selective data replication:**
-   **Transactional Replication** is ideal if you need to replicate only a subset of your data to Azure, offering fine‑grained control over what gets replicated.
+  **Transactional Replication** is ideal if you need to replicate only a subset of your data to Azure, offering fine‑grained control over what gets replicated.
+
 - **For distributed scenarios with smaller data sets:**
-   **SQL Data Sync** offers an easy-to-use solution, especially if you require bi‑directional data flow across multiple endpoints in Azure SQL Database.
+  **SQL Data Sync** offers an easy-to-use solution, especially if you require bi‑directional data flow across multiple endpoints in Azure SQL Database.
+
 - **For scenarios involving data transformation or analytics:**
-   ETL tools such as **SSIS** or **Azure Data Factory** can be leveraged to capture on‑prem changes and load them into Azure, though these are more focused on data processing than native HA/DR replication.
+  ETL tools such as **SSIS** or **Azure Data Factory** can be leveraged to capture on‑prem changes and load them into Azure, though these are more focused on data processing than native HA/DR replication.
+
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Deep-Dive: Managed Instance Link
 
+### Provision Virtual Machine
+
+Sign in to the [Azure Portal](https://portal.azure.com) using your Azure credentials
+
+#### Create a New Virtual Machine  
+
+- Navigate to "Virtual Machines" and click "Create"  
+- Select a resource group or create a new one for organizational purposes  
+- Choose a Windows Server image (for example, Windows Server 2019 or 2022)  
+- Select a VM size that meets the performance and licensing requirements for SQL Server  
+- Configure networking by choosing an appropriate virtual network and subnet (a public IP is optional based on your connectivity needs)  
+- Set administrative credentials (note that SQL Server authentication will be used later for Managed Instance Link)  
+- Review your settings and click "Create" to provision the VM
+
+#### Connect to the Azure VM via Remote Desktop  
+
+Once the VM is running, use Remote Desktop Protocol (RDP) to connect and begin the SQL Server installation
+
+#### Install SQL Server 2022  
+
+- If SQL Server is not already installed, download the SQL Server 2022 installer from the Microsoft website  
+- Run the installer on the VM and follow the installation wizard to set up a new SQL Server instance  
+- During installation, select mixed‑mode authentication to enable SQL Server authentication  
+- After installation, configure Windows Firewall to open port 1433 (the default SQL Server port)  
+- Open SQL Server Management Studio (SSMS) and connect to your new SQL Server instance to verify that it is running
+
+-------------------------
+
+### Provision the Azure SQL Managed Instance
+
+#### Create a New SQL Managed Instance  
+
+- In the Azure Portal, search for "SQL Managed Instance" and select "Create"  
+- Provide a name for the Managed Instance, choose an existing or create a new resource group, and select the appropriate region  
+- Choose the compute and storage configurations that match your expected workload  
+- Under networking, ensure that the Managed Instance is deployed in a virtual network configured to allow communication with your Azure VM  
+- Set the administrative login credentials for the Managed Instance  
+- Review your settings and click "Create" to start provisioning (provisioning may take some time)
+
+#### Confirm Provisioning Completion  
+
+Monitor the status in the Azure Portal and wait until the Managed Instance is fully provisioned before proceeding
+
+-------------------------
+
+### Ensure Connectivity Between the Azure VM and Managed Instance
+
+#### Verify Virtual Network Settings  
+
+Confirm that both the Azure VM and the Managed Instance reside in virtual networks (or subnets) that allow communication; this may involve ensuring they are in the same virtual network or configuring appropriate peering
+
+#### Configure Firewall Rules  
+
+If necessary, adjust network security group (NSG) rules or Managed Instance firewall settings to permit inbound connections on the SQL Server port (usually 1433)
+
+#### Test Connectivity  
+
+From the Azure VM, open SSMS and attempt to connect to the Managed Instance using its fully qualified domain name (FQDN) and the SQL Server authentication credentials configured earlier; a successful connection confirms that the network is correctly set up
+
+-------------------------
+
+### Configure Managed Instance Link on the On‑Prem SQL Server
+
+#### Open SSMS on the Azure VM  
+
+Launch SSMS on the Azure VM and connect to the on‑prem SQL Server instance
+
+#### Select the Database to Replicate  
+
+Identify the database that will be replicated (or create it if needed). For this demonstration, a custom sample database will be created later
+
+#### Launch the Managed Instance Link Configuration  
+
+- Right‑click the target database and choose the option to configure Managed Instance Link  
+- The configuration wizard will appear  
+- Enter the endpoint of the Azure SQL Managed Instance (as shown in the Azure Portal)  
+- Provide the SQL authentication credentials for the Managed Instance  
+- Specify which objects (schemas, tables) you want to replicate—for this demonstration, choose the custom sample database objects that will be created
+
+#### Confirm the Configuration  
+
+After reviewing the settings, confirm and apply the configuration. The system will initiate an initial snapshot of the selected data, and the Managed Instance Link status should update accordingly in SSMS
+
+-------------------------
+
+### Set Up a Custom Sample Database on the On‑Prem SQL Server
+
+#### Create a New Database  
+
+In SSMS, execute a T‑SQL command or use the GUI to create a new database (for example, "SampleDB")
+
+#### Create Sample Tables and Schema  
+
+Create a simple schema that might include tables such as Customers and Orders. For example:
+
+```sql
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Email NVARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT FOREIGN KEY REFERENCES Customers(CustomerID),
+    OrderDate DATETIME,
+    Amount DECIMAL(10,2)
+);
+```
+
+#### Populate the Sample Database  
+
+Insert a few rows into the tables to simulate transactional data:
+
+```sql
+INSERT INTO Customers (CustomerID, FirstName, LastName, Email)
+VALUES (1, 'John', 'Doe', 'john.doe@example.com');
+
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, Amount)
+VALUES (101, 1, GETDATE(), 150.00);
+```
+
+These sample records will serve as the initial data that the Managed Instance Link will replicate to the Azure SQL Managed Instance
+
+-------------------------
+
+### Test the Data Replication
+
+#### Perform Data Changes on the On‑Prem SQL Server  
+
+In SSMS on the Azure VM, execute operations (inserts, updates, deletes) on the SampleDB tables. For example:
+
+```sql
+UPDATE Customers SET Email = 'john.updated@example.com' WHERE CustomerID = 1;
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, Amount) VALUES (102, 1, GETDATE(), 200.00);
+DELETE FROM Orders WHERE OrderID = 101;
+```
+
+#### Monitor Replication Status  
+
+- Check the Managed Instance Link status within SSMS to ensure that the changes are being captured and sent  
+- Look for any errors or latency issues in the replication log or the status dashboard
+
+#### Verify Data on the Azure SQL Managed Instance  
+
+Connect to the Managed Instance using SSMS and query the SampleDB. For example:
+
+```sql
+SELECT * FROM Customers;
+SELECT * FROM Orders;
+```
+
+Confirm that the data reflects the changes made on the on‑prem server
