@@ -1,4 +1,4 @@
-# PostgreSQL: Parent Process Identification
+# PostgreSQL: Parent-Child PID
 
 ## Introduction
 
@@ -47,7 +47,7 @@
 In the Azure Portal, open Cloud Shell, ensure you are in PowerShell mode, and then run the following command:
 
 ```powershell
-psql "host=<serverName>.postgres.database.azure.com port=5432 dbname=postgres user=<<admin_username>> sslmode=require"
+psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require"
 ```
 
 #### Create Database
@@ -72,7 +72,7 @@ Expected output:
 -------------------+----------------+----------+------------+------------+-----------------------------------
  azure_maintenance | azuresu        | UTF8     | en_US.utf8 | en_US.utf8 | 
  azure_sys         | azuresu        | UTF8     | en_US.utf8 | en_US.utf8 | 
- demo_db           | <username_admin>       | UTF8     | en_US.utf8 | en_US.utf8 | 
+ demo_db           | rchapler       | UTF8     | en_US.utf8 | en_US.utf8 | 
  postgres          | azure_pg_admin | UTF8     | en_US.utf8 | en_US.utf8 | 
  template0         | azure_pg_admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/azure_pg_admin                +
                    |                |          |            |            | azure_pg_admin=CTc/azure_pg_admin
@@ -101,7 +101,7 @@ Expected output:
             List of relations
  Schema |    Name     | Type  |  Owner   
 --------+-------------+-------+----------
- public | sample_data | table | <username_admin>
+ public | sample_data | table | rchapler
 (1 row)
 ```
 
@@ -135,7 +135,7 @@ Expected output:
 
 
 
-## "What PostgreSQL does..."
+## "PostgreSQL does less than we want..."
 
 > "PostgreSQL implements a 'process per user' client/server model. In this model, every client process connects to exactly one backend process. As we do not know ahead of time how many connections will be made, we have to use a 'supervisor process' that spawns a new backend process every time a connection is requested. This supervisor process is called postmaster and listens at a specified TCP/IP port for incoming connections. Whenever it detects a request for a connection, it spawns a new backend process."
 
@@ -161,172 +161,136 @@ Expected output:
 
 ### Demonstration
 
-The steps below generate multiple active processes and highlights what PostgreSQL does include.
+In the Azure Portal, open Cloud Shell, ensure you are in PowerShell mode, and then run the following command:
 
-- At the `postgres=>` prompt, run the following command:
+```powershell
+psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require"
+```
 
-  ```sql
-  CREATE OR REPLACE FUNCTION simulate_long_query()
-  RETURNS VOID AS $$
-  BEGIN
-      PERFORM pg_sleep(30);
-      INSERT INTO sample_data (description) VALUES ('Long query complete at ' || NOW());
-  END;
-  $$ LANGUAGE plpgsql;
-  ```
+At the `postgres=>` prompt, run the following command:
 
-- Validate that the function was created successfully by running:
+```sql
+CREATE OR REPLACE FUNCTION simulate_long_query()
+RETURNS VOID AS $$
+BEGIN
+    PERFORM pg_sleep(30);
+    INSERT INTO sample_data (description) VALUES ('Long query complete at ' || NOW());
+END;
+$$ LANGUAGE plpgsql;
+```
 
-  ```sql
-  \df simulate_long_query
-  ```
+Validate that the function was created successfully by running:
 
-- Expected output:
+```sql
+\df simulate_long_query
+```
 
-  ```text
-                                List of functions
-   Schema |        Name         | Result data type | Argument data types | Type 
-  --------+---------------------+------------------+---------------------+------
-   public | simulate_long_query | void             |                     | func
-  (1 row)
-  ```
+Expected output:
 
+```text
+                              List of functions
+ Schema |        Name         | Result data type | Argument data types | Type 
+--------+---------------------+------------------+---------------------+------
+ public | simulate_long_query | void             |                     | func
+(1 row)
+```
 
+Restart the Cloud Shell session, then run the following PowerShell script to: 1) launch multiple background jobs to run the function concurrently and then 2) validate the active sessions in PostgreSQL:
 
-- Restart the Cloud Shell: To ensure a clean environment, restart your Cloud Shell session.
+```powershell
+# Set the PGPASSWORD environment variable to avoid password prompts in each background job.
+$env:PGPASSWORD = "P@55word!"
 
-- Run the following PowerShell script to: 1) launch multiple background jobs to run the function concurrently and then 2) validate the active sessions in PostgreSQL:
+# Launch 3 background jobs that execute simulate_long_query() concurrently.
+for ($i = 1; $i -le 3; $i++) {
+    Start-Job -ScriptBlock {
+        psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT simulate_long_query();"
+    }
+}
 
-  ```powershell
-  # Set the PGPASSWORD environment variable to avoid password prompts in each background job.
-  $env:PGPASSWORD = "<password>"
-  
-  # Launch 3 background jobs that execute simulate_long_query() concurrently.
-  for ($i = 1; $i -le 3; $i++) {
-      Start-Job -ScriptBlock {
-          psql "host=<serverName>.postgres.database.azure.com port=5432 dbname=postgres user=<username_admin> sslmode=require" -c "SELECT simulate_long_query();"
-      }
-  }
-  
-  # Wait for 5 seconds to allow the background jobs to start.
-  Start-Sleep -Seconds 5
-  
-  # Validate active sessions by querying pg_stat_activity.
-  # This command connects via psql and retrieves sessions running simulate_long_query(),
-  # excluding the current session.
-  psql "host=<serverName>.postgres.database.azure.com port=5432 dbname=postgres user=<username_admin> sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE query LIKE '%simulate_long_query()%' AND pid <> pg_backend_pid();"
-  ```
+# Wait for 5 seconds to allow the background jobs to start.
+Start-Sleep -Seconds 5
 
-  Expected output:
-   You should see several active entries with details similar to:
+# Validate active sessions by querying pg_stat_activity.
+# This command connects via psql and retrieves sessions running simulate_long_query(),
+# excluding the current session.
+psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE query LIKE '%simulate_long_query()%' AND pid <> pg_backend_pid();"
+```
 
-  ```text
-    pid  | usename  | application_name |  client_addr  |         backend_start         | state  |             query             
-  -------+----------+------------------+---------------+-------------------------------+--------+-------------------------------
-   12331 | <username_admin> | psql             | 13.64.187.107 | 2025-03-22 15:49:08.472339+00 | active | SELECT simulate_long_query();
-   12330 | <username_admin> | psql             | 13.64.187.107 | 2025-03-22 15:49:08.365667+00 | active | SELECT simulate_long_query();
-   12329 | <username_admin> | psql             | 13.64.187.107 | 2025-03-22 15:49:08.309973+00 | active | SELECT simulate_long_query();
-  (3 rows)
-  ```
+Expected output: You should see several active entries with details similar to:
 
-  These entries confirm that multiple processes (with their PIDs) are active, generated by running the function in parallel.
+```text
+  pid  | usename  | application_name |  client_addr  |         backend_start         | state  |             query             
+-------+----------+------------------+---------------+-------------------------------+--------+-------------------------------
+ 12331 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.472339+00 | active | SELECT simulate_long_query();
+ 12330 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.365667+00 | active | SELECT simulate_long_query();
+ 12329 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.309973+00 | active | SELECT simulate_long_query();
+(3 rows)
+```
 
-  
-
-## "How we might do more..."
+These entries confirm that multiple processes (with their PIDs) are active, generated by running the function in parallel.
 
 
 
-**RESUME HERE...**
+## "How Postgres could do more..."
+
+Since PostgreSQL does not natively expose a parent PID, we must fabricate a parent-child relationship using custom annotations.  In this section, we demonstrate how to tag sessions with a fabricated Parent ID via the application name, allowing you to group related processes and selectively terminate them for process management.
+
+### Demonstration
+
+Restart the Cloud Shell session, then run the following PowerShell script to: 1) launch multiple sessions with two different fabricated Parent IDs, 2) validate the active sessions, and then 3) enable selective termination of a single group.
+
+```powershell
+# Set the PGPASSWORD environment variable to avoid password prompts in each background job.
+$env:PGPASSWORD = "P@55word!"  # Replace with your actual password
+
+# Launch 2 background jobs for Group 1 with fake Parent ID 'FakeParent:1001'
+for ($i = 1; $i -le 2; $i++) {
+    Start-Job -ScriptBlock {
+        psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();"
+    }
+}
+
+# Launch 2 background jobs for Group 2 with fake Parent ID 'FakeParent:2002'
+for ($i = 1; $i -le 2; $i++) {
+    Start-Job -ScriptBlock {
+        psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();"
+    }
+}
+
+# Wait for 5 seconds to allow all background jobs to start.
+Start-Sleep -Seconds 5
+
+# Validate active sessions by querying pg_stat_activity.
+psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE application_name LIKE 'FakeParent:%';"
+```
+
+Expected output:
+
+```text
+  pid  | usename  | application_name | client_addr  |         backend_start         | state  |                                  query                                  
+-------+----------+------------------+--------------+-------------------------------+--------+-------------------------------------------------------------------------
+ 43829 | rchapler | FakeParent:2002  | 13.86.153.81 | 2025-03-22 20:22:09.03268+00  | active | SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();
+ 43828 | rchapler | FakeParent:2002  | 13.86.153.81 | 2025-03-22 20:22:08.842759+00 | active | SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();
+ 43827 | rchapler | FakeParent:1001  | 13.86.153.81 | 2025-03-22 20:22:08.759848+00 | active | SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();
+ 43826 | rchapler | FakeParent:1001  | 13.86.153.81 | 2025-03-22 20:22:08.521403+00 | active | SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();
+(4 rows)
+```
 
 
 
-*Since PostgreSQL does not natively expose a parent PID for each backend process—even though the operating system maintains such a relationship (with the postmaster as the common parent)—we must simulate a parent-child relationship using custom annotations. Note that the only related column available in SQL is **leader_pid** in pg_stat_activity, which applies only to parallel query workers and cannot be used as a generic parent PID.*
+To selectively terminate a group {i.e., terminate all active sessions tagged with `FakeParent:1001`}:
 
-*In this section, we demonstrate how to tag sessions with a “fake” parent ID via the application name, allowing you to group related processes and selectively terminate them for process management.*
+```powershell
+psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE application_name = 'FakeParent:1001';"
+```
 
-### Annotate Sessions with a Fake Parent ID
+Expected output:
 
-- *In a new psql session, set a custom application name that will serve as your fake parent ID:*
-
-  ```sql
-  SET application_name = 'FakeParent:1001';
-  ```
-
-- *Then, invoke your function in the same session:*
-
-  ```sql
-  SELECT simulate_long_query();
-  ```
-
-- *This tags the session with the fake parent identifier “FakeParent:1001”.*
-   *Note: This annotation can be set interactively or embedded in the connection string if supported by your client.*
-
-------
-
-### Launch Multiple Annotated Sessions Using PowerShell Background Jobs*
-
-- *Use PowerShell background jobs to launch multiple sessions that automatically tag themselves with the fake parent ID and then execute the function. Run the following PowerShell script in Cloud Shell (in PowerShell mode).*
-   ***Note:** Replace `<serverName>` and `<username_admin>` with your actual server name and admin username (use the fully qualified format if required, e.g., `rchapler@ubspfs`).*
-
-  ```powershell
-  for ($i = 1; $i -le 3; $i++) {
-      Start-Job -ScriptBlock {
-          psql "host=<serverName>.postgres.database.azure.com port=5432 dbname=postgres user=<username_admin> sslmode=require" -c "SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();"
-      }
-  }
-  ```
-
-- *Wait for a few seconds to allow the background jobs to start:*
-
-  ```powershell
-  Start-Sleep -Seconds 5
-  ```
-
-- *Validate that the sessions are tagged by running:*
-
-  ```powershell
-  psql "host=<serverName>.postgres.database.azure.com port=5432 dbname=postgres user=<username_admin> sslmode=require" -c "SELECT pid, usename, application_name, backend_start, state, query FROM pg_stat_activity WHERE application_name = 'FakeParent:1001';"
-  ```
-
-- ***Expected output:***
-
-  *You should see several active entries where the `application_name` column shows `FakeParent:1001`, for example:*
-
-  ```text
-      pid  | usename  | application_name  |      backend_start       | state  |           query            
-  ---------+----------+-------------------+--------------------------+--------+----------------------------
-     12345 | rchapler | FakeParent:1001   | 2025-03-22 15:05:00+00    | active | SELECT simulate_long_query();
-     12346 | rchapler | FakeParent:1001   | 2025-03-22 15:05:05+00    | active | SELECT simulate_long_query();
-  ```
-
-------
-
-### Terminate Specific Child Processes*
-
-- *Once sessions are annotated with your fake parent ID, you can selectively terminate them. For example, to kill all sessions associated with* 
-
-  ```
-  FakeParent:1001
-  ```
-
-  *, run the following command in a psql session:*
-
-  ```sql
-  SELECT pg_terminate_backend(pid)
-  FROM pg_stat_activity
-  WHERE application_name = 'FakeParent:1001';
-  ```
-
-- ***Expected outcome:***
-   *The query will terminate all sessions tagged with `FakeParent:1001`. Re-run the validation query from Step 3.2 to confirm that the annotated sessions have been terminated while any untagged sessions remain active.*
-
-------
-
-***Documentation Note:***
-
-- *This section provides a custom workaround to simulate a parent-child relationship because PostgreSQL does not expose a generic parent PID in its SQL views.*
-- *It highlights that while the operating system maintains a parent-child hierarchy (with the postmaster as the common parent), the SQL interface (including pg_stat_activity) only displays independent backend PIDs and a specialized leader_pid for parallel queries.*
-- *Users who require process grouping for targeted termination must implement custom annotations—here demonstrated via the application name—to achieve this functionality.*
-
-*These enhancements reflect our learning from the exercise and provide a practical method to manage child processes in PostgreSQL.*
+```text
+ pg_terminate_backend 
+----------------------
+ t
+ t
+(2 rows)
+```
