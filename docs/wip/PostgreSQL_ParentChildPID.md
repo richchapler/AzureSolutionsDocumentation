@@ -1,271 +1,216 @@
 # PostgreSQL: Parent-Child PID
 
-## 1. Provision an Azure PostgreSQL Instance
+## Introduction
 
-### Step 1.1: Create a PostgreSQL Flexible Server on Azure
+In response to your request, we have researched the parent-child PID relationships in PostgreSQL, specifically in the context of parallel job execution and stored procedures. You asked whether it is possible to identify a parent process that fires off child processes (PIDs) in PostgreSQL, with the aim of better managing and cleaning up blocking or hanging threads.
 
-- **Log into the Azure Portal:**
-   Visit [portal.azure.com](https://portal.azure.com/) and sign in.
-- Create a Resource:
-  - Click **“Create a resource”**.
-  - Search for **“Azure Database for PostgreSQL Flexible Server”** and select it.
-- Configure Server Settings:
-  - **Subscription & Resource Group:** Choose an existing resource group or create a new one.
-  - **Server Name:** Enter a unique server name.
-  - **Region:** Select the region closest to your users.
-  - **Workload/Compute:** Choose an appropriate compute size and storage configuration based on your demo needs.
-  - **Administrator Credentials:** Set an admin username and a strong password.
-- Networking & Security:
-  - For demo purposes, you can select “Public access” and add your client IP address to the firewall rules.
-- **Review and Create:**
-   Verify your settings and click **“Create”** to provision the server.
+Below, we detail our research and demonstration efforts. We investigated whether the PostgreSQL system exposes a parent PID for each connection and explored ways to surface this information for troubleshooting purposes. Our findings demonstrate that while PostgreSQL does spawn backend processes from a single postmaster (parent process), the individual child PIDs do not have an exposed "parent PID" field in the standard SQL views (such as `pg_stat_activity`). This limitation is due to PostgreSQL's architecture, where the operating system manages the process hierarchy and only the postmaster’s PID is common to all backends.
 
-### Step 1.2: Configure Connection Security
+In this document, we explain why the parent-child PID relationship is not directly surfaceable through SQL, describe our simulation of concurrent process activity, and outline the steps taken to validate active processes in a controlled environment.
 
-- Firewall Rules:
-  - In the PostgreSQL server’s settings, navigate to **“Networking”**.
-  - Ensure your IP (or a range of IPs you plan to use) is added to the allowed list.
-- **SSL Requirement:**
-   Note that Azure PostgreSQL may require SSL connections. Make sure your client or application is configured accordingly.
+## 1. Prepare Resources
 
-------
+### Step 1.1: Create PostgreSQL Flexible Server
 
-## 2. Connect to Your PostgreSQL Instance
+- Log into [portal.azure.com](https://portal.azure.com/) and sign in
 
-### Step 2.1: Retrieve Connection Information
+- Create a PostgreSQL Flexible Server
 
-- In your PostgreSQL server dashboard on Azure, locate the **“Connection strings”** section.
-- Note the host name, port (default 5432), admin username, and database name (default is often **postgres**).
+  - Click “Create a resource”
 
-### Step 2.2: Connect Using a Client
+  - Search for “Azure Database for PostgreSQL Flexible Server” and select it
 
-- Using psql:
+    
 
-  Open a terminal and run:
+### Step 1.2: Confirm Connectivity
 
-  ```bash
-  psql "host=<your_server_name>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username>@<your_server_name> sslmode=require"
+#### Configure Firewall
+
+- Navigate to the new PostgreSQL Flexible Server >> Settings >> Networking
+- Check "Allow public access from any Azure services within Azure to this server"
+
+#### Test Connectivity
+
+- In the Azure Portal, open Cloud Shell, ensure you are in PowerShell mode, and then run the following commands:
+
+  ```powershell
+  $client = New-Object System.Net.Sockets.TcpClient
+  $client.Connect("<servername>.postgres.database.azure.com", 5432)
+  $client.Connected
+  $client.Close()
   ```
 
-- Using pgAdmin:
+- Verify that the output returns True
 
-  - Open pgAdmin and create a new server connection using the retrieved details.
-  - Ensure the connection is set to use SSL.
+  
 
-------
+### Step 1.3: Create Objects
 
-## 3. Set Up Sample Data and Simulate Process Activity
+In the Azure Portal, open Cloud Shell, ensure you are in PowerShell mode, and then run the following command:
 
-For this demo, we will create sample functions and tables that simulate long-running or parallel queries. These will later help in generating entries in the system view `pg_stat_activity` that you can query to identify “parent” and “child” sessions.
+```powershell
+psql "host=<serverName>.postgres.database.azure.com port=5432 dbname=postgres user=<<admin_username>> sslmode=require"
+```
 
-### Step 3.1: Create a Demo Database and Table
+#### Create Database
 
-- Create a New Database:
+At the `postgres=>` prompt, run the following command:
 
-   (Optional, if you want to isolate your demo)
+```sql
+CREATE DATABASE demo_db;
+```
 
-  ```sql
-  CREATE DATABASE demo_db;
-  \connect demo_db
-  ```
+List databases to validate creation:
 
-- Create a Sample Table:
+```
+\l
+```
 
-  ```sql
-  CREATE TABLE sample_data (
-      id SERIAL PRIMARY KEY,
-      description TEXT,
-      created_at TIMESTAMPTZ DEFAULT NOW()
-  );
-  ```
+Expected output:
 
-- Insert Sample Data:
+```text
+                                              List of databases
+       Name        |     Owner      | Encoding |  Collate   |   Ctype    |         Access privileges         
+-------------------+----------------+----------+------------+------------+-----------------------------------
+ azure_maintenance | azuresu        | UTF8     | en_US.utf8 | en_US.utf8 | 
+ azure_sys         | azuresu        | UTF8     | en_US.utf8 | en_US.utf8 | 
+ demo_db           | rchapler       | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres          | azure_pg_admin | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0         | azure_pg_admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/azure_pg_admin                +
+                   |                |          |            |            | azure_pg_admin=CTc/azure_pg_admin
+ template1         | azure_pg_admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/azure_pg_admin                +
+                   |                |          |            |            | azure_pg_admin=CTc/azure_pg_admin
+(6 rows)
+```
 
-  ```sql
-  INSERT INTO sample_data (description)
-  VALUES ('Demo entry 1'), ('Demo entry 2'), ('Demo entry 3');
-  ```
+#### Create Table
 
-### Step 3.2: Create a Sample Stored Procedure to Simulate a Long-Running Query
+At the `postgres=>` prompt, run the following command:
 
-- Create a Function with pg_sleep:
+```sql
+CREATE TABLE sample_data ( id SERIAL PRIMARY KEY, description TEXT, created_at TIMESTAMPTZ DEFAULT NOW() );
+```
 
-  This simulates a process that holds a connection for a period.
+List tables to validate creation:
+
+```
+\dt
+```
+
+Expected output:
+
+```text
+            List of relations
+ Schema |    Name     | Type  |  Owner   
+--------+-------------+-------+----------
+ public | sample_data | table | rchapler
+(1 row)
+```
+
+#### Insert Data
+
+At the `postgres=>` prompt, run the following command:
+
+```sql
+INSERT INTO sample_data (description)
+VALUES ('Demo entry 1'), ('Demo entry 2'), ('Demo entry 3');
+```
+
+Validate data insertion by querying the table:
+
+```sql
+SELECT * FROM sample_data;
+```
+
+Expected output:
+
+```text
+ id |    description    |          created_at           
+----+-------------------+-------------------------------
+  1 | Demo entry 1      | 2025-03-22 10:00:00+00
+  2 | Demo entry 2      | 2025-03-22 10:00:01+00
+  3 | Demo entry 3      | 2025-03-22 10:00:02+00
+(3 rows)
+```
+
+*Note: The timestamps in `created_at` will vary based on the actual insertion time.*
+
+
+
+-------------------------
+
+## 2. Simulate Activity
+
+### Step 2.1: Create Function
+
+- At the `postgres=>` prompt, run the following command:
 
   ```sql
   CREATE OR REPLACE FUNCTION simulate_long_query()
   RETURNS VOID AS $$
   BEGIN
-      -- Simulate work by sleeping for 30 seconds
       PERFORM pg_sleep(30);
-      -- Optionally, do some DML work
       INSERT INTO sample_data (description) VALUES ('Long query complete at ' || NOW());
   END;
   $$ LANGUAGE plpgsql;
   ```
 
-- Invoke the Function in Parallel:
-
-  Open multiple sessions (or use background jobs) to execute this function concurrently. For example, in psql:
+- Validate that the function was created successfully by running:
 
   ```sql
-  SELECT simulate_long_query();
+  \df simulate_long_query
   ```
 
-  Open another terminal window and run the same query. This will help generate multiple active sessions.
+- Expected output:
 
-### Step 3.3: Query pg_stat_activity for Process Details
-
-- In a new session, run:
-
-  ```sql
-  SELECT pid, usename, application_name, client_addr, backend_start, state, query
-  FROM pg_stat_activity;
+  ```text
+                                List of functions
+   Schema |        Name         | Result data type | Argument data types | Type 
+  --------+---------------------+------------------+---------------------+------
+   public | simulate_long_query | void             |                     | func
+  (1 row)
   ```
 
-- **Note:**
-   While PostgreSQL doesn’t always show explicit “parent” and “child” PIDs like an operating system process tree, you can use this view to identify long-running sessions, and—if you structure your application appropriately—you might simulate relationships (e.g., by tagging sessions with an application name or using session variables).
+
 
 ------
 
-## 4. Build a Practice Application to Demonstrate PID Identification
+### Step 2.2: Invoke Function and Validate Active Process Activity
 
-We will create a simple Python Flask application that connects to your Azure PostgreSQL instance, queries `pg_stat_activity`, and displays session details.
+- **Restart the Cloud Shell:** To ensure a clean environment, restart your Cloud Shell session.
 
-### Step 4.1: Set Up Your Python Environment
+- Run the following PowerShell script to: 1) launch multiple background jobs to run the function concurrently and then 2) validate the active sessions in PostgreSQL:
 
-- Install Dependencies:
-
-  Ensure you have Python 3 installed, then install Flask and psycopg2:
-
-  ```bash
-  pip install Flask psycopg2-binary
+  ```powershell
+  # Set the PGPASSWORD environment variable to avoid password prompts in each background job.
+  $env:PGPASSWORD = "P@55word!"
+  
+  # Launch 3 background jobs that execute simulate_long_query() concurrently.
+  for ($i = 1; $i -le 3; $i++) {
+      Start-Job -ScriptBlock {
+          psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT simulate_long_query();"
+      }
+  }
+  
+  # Wait for 5 seconds to allow the background jobs to start.
+  Start-Sleep -Seconds 5
+  
+  # Validate active sessions by querying pg_stat_activity.
+  # This command connects via psql and retrieves sessions running simulate_long_query(),
+  # excluding the current session.
+  psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE query LIKE '%simulate_long_query()%' AND pid <> pg_backend_pid();"
   ```
 
-### Step 4.2: Write a Sample Flask Application
+  **Expected output:**
+   You should see several active entries with details similar to:
 
-- Create an Application File (e.g., `app.py`):
-
-  ```python
-  from flask import Flask, render_template_string
-  import psycopg2
-  import os
-  
-  app = Flask(__name__)
-  
-  # Update these with your Azure PostgreSQL connection details
-  DB_HOST = "<your_server_name>.postgres.database.azure.com"
-  DB_NAME = "demo_db"
-  DB_USER = "<admin_username>@<your_server_name>"
-  DB_PASSWORD = os.environ.get("DB_PASSWORD", "your_password")
-  DB_PORT = 5432
-  
-  def get_db_connection():
-      conn = psycopg2.connect(
-          host=DB_HOST,
-          database=DB_NAME,
-          user=DB_USER,
-          password=DB_PASSWORD,
-          port=DB_PORT,
-          sslmode="require"
-      )
-      return conn
-  
-  @app.route('/')
-  def index():
-      conn = get_db_connection()
-      cur = conn.cursor()
-      cur.execute("""
-          SELECT pid, usename, application_name, client_addr, backend_start, state, query
-          FROM pg_stat_activity
-          ORDER BY backend_start DESC;
-      """)
-      sessions = cur.fetchall()
-      cur.close()
-      conn.close()
-      
-      # Simple HTML template to display the sessions
-      html = """
-      <!DOCTYPE html>
-      <html>
-      <head>
-          <title>PostgreSQL Sessions</title>
-          <style>
-              table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
-          </style>
-      </head>
-      <body>
-          <h1>Active PostgreSQL Sessions</h1>
-          <table>
-              <tr>
-                  <th>PID</th>
-                  <th>User</th>
-                  <th>Application</th>
-                  <th>Client Address</th>
-                  <th>Start Time</th>
-                  <th>State</th>
-                  <th>Query</th>
-              </tr>
-              {% for row in sessions %}
-              <tr>
-                  <td>{{ row[0] }}</td>
-                  <td>{{ row[1] }}</td>
-                  <td>{{ row[2] }}</td>
-                  <td>{{ row[3] }}</td>
-                  <td>{{ row[4] }}</td>
-                  <td>{{ row[5] }}</td>
-                  <td>{{ row[6] }}</td>
-              </tr>
-              {% endfor %}
-          </table>
-      </body>
-      </html>
-      """
-      return render_template_string(html, sessions=sessions)
-  
-  if __name__ == '__main__':
-      app.run(debug=True, host='0.0.0.0', port=5000)
+  ```text
+    pid  | usename  | application_name |  client_addr  |         backend_start         | state  |             query             
+  -------+----------+------------------+---------------+-------------------------------+--------+-------------------------------
+   12331 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.472339+00 | active | SELECT simulate_long_query();
+   12330 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.365667+00 | active | SELECT simulate_long_query();
+   12329 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.309973+00 | active | SELECT simulate_long_query();
+  (3 rows)
   ```
 
-- Run the Application:
-
-  ```bash
-  python app.py
-  ```
-
-  Open a web browser and navigate to 
-
-  ```
-  http://localhost:5000
-  ```
-
-   to view active PostgreSQL sessions.
-
-### Step 4.3: Extend the Application (Optional)
-
-- **Tag Sessions:**
-   You might consider modifying your stored procedures to set an `application_name` so that you can visually group or identify sessions that belong together.
-- **Simulate Parent–Child Relationships:**
-   While PostgreSQL’s process model isn’t inherently hierarchical at the SQL level, you can simulate a parent process by having one session spawn sub-tasks (for example, via background jobs) and then log a common identifier in a custom table. Your application can then join this custom data with `pg_stat_activity` to “visualize” relationships.
-
-------
-
-## 5. Testing and Demo
-
-- **Simulate Load:**
-   Run multiple instances of the `simulate_long_query()` function from different sessions to generate several entries in `pg_stat_activity`.
-- **Observe in the Application:**
-   Refresh your Flask app page to see the active sessions.
-- **Discuss Findings:**
-   Use the displayed session information (PID, start time, query text) to explain how you would identify problematic processes and correlate them with your simulated parent–child activity (via custom tagging or additional logging).
-
-------
-
-## 6. Next Steps
-
-- **Enhance Safety Checks:**
-   Before implementing any PID cleanup or process termination, add robust checks and ensure the actions are only performed in non-production environments.
-- **Integrate with Monitoring Tools:**
-   Consider integrating the solution with Azure Monitor or a similar tool for real-time alerts.
-- **Iterate Based on Feedback:**
-   After your demo, collect feedback from your team to refine the data extraction, visualization, and any automated remediation steps.
+  These entries confirm that multiple processes (with their PIDs) are active, generated by running the function in parallel.
