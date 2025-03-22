@@ -1,4 +1,4 @@
-# PostgreSQL: "Parent" Process Identification
+# PostgreSQL: Parent Process Identification
 
 ## Prepare Resources
 
