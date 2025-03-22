@@ -1,14 +1,4 @@
-# PostgreSQL: Parent-Child PID
-
-## Introduction
-
-*In response to your request, we have thoroughly investigated parent-child PID relationships in PostgreSQL, particularly in the context of parallel job execution and stored procedures. You asked whether it is possible to identify a parent process that spawns child processes (PIDs) in PostgreSQL, with the goal of better managing and cleaning up blocking or hanging threads.*
-
-*Our research shows that PostgreSQL operates using a "process per user" client/server model, where every client connection results in a separate backend process. At the operating system level—especially on Linux—these backend processes are spawned by a common supervisor process known as the postmaster. However, while the OS maintains this parent-child hierarchy, PostgreSQL’s SQL interface (for example, via `pg_stat_activity`) exposes only the individual backend PIDs. Even the `leader_pid` column, which is present in parallel query contexts, is limited to grouping parallel workers and does not provide a generic parent PID for all connections.*
-
-*In this document, we explain why the parent-child PID relationship is not directly surfaceable through SQL, detail our simulation of concurrent process activity, and outline the steps taken to validate active processes in a controlled environment. We also propose a custom workaround using session annotations to simulate a parent-child relationship for more effective process management.*
-
-
+# PostgreSQL: "Parent" Process Identification
 
 ## Prepare Resources
 
