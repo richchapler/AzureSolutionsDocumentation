@@ -8,8 +8,9 @@
 
 - Create a PostgreSQL Flexible Server
   - Click “Create a resource”
-
+  
   - Search for “Azure Database for PostgreSQL Flexible Server” and select it
+  
 
 ### Confirm Connectivity
 
@@ -37,7 +38,7 @@
 In the Azure Portal, open Cloud Shell, ensure you are in PowerShell mode, and then run the following command:
 
 ```powershell
-psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require"
+psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require"
 ```
 
 #### Create Database
@@ -91,7 +92,7 @@ Expected output:
             List of relations
  Schema |    Name     | Type  |  Owner   
 --------+-------------+-------+----------
- public | sample_data | table | rchapler
+ public | sample_data | table | <admin_username>
 (1 row)
 ```
 
@@ -154,7 +155,7 @@ Expected output:
 In the Azure Portal, open Cloud Shell, ensure you are in PowerShell mode, and then run the following command:
 
 ```powershell
-psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require"
+psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require"
 ```
 
 At the `postgres=>` prompt, run the following command:
@@ -170,7 +171,6 @@ $$ LANGUAGE plpgsql;
 ```
 
 Validate that the function was created successfully by running:
-
 ```sql
 \df simulate_long_query
 ```
@@ -189,12 +189,12 @@ Restart the Cloud Shell session, then run the following PowerShell script to: 1)
 
 ```powershell
 # Set the PGPASSWORD environment variable to avoid password prompts in each background job.
-$env:PGPASSWORD = "P@55word!"
+$env:PGPASSWORD = "<admin_password>"
 
 # Launch 3 background jobs that execute simulate_long_query() concurrently.
 for ($i = 1; $i -le 3; $i++) {
     Start-Job -ScriptBlock {
-        psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT simulate_long_query();"
+        psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require" -c "SELECT simulate_long_query();"
     }
 }
 
@@ -204,7 +204,7 @@ Start-Sleep -Seconds 5
 # Validate active sessions by querying pg_stat_activity.
 # This command connects via psql and retrieves sessions running simulate_long_query(),
 # excluding the current session.
-psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE query LIKE '%simulate_long_query()%' AND pid <> pg_backend_pid();"
+psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE query LIKE '%simulate_long_query()%' AND pid <> pg_backend_pid();"
 ```
 
 Expected output: You should see several active entries with details similar to:
@@ -212,9 +212,9 @@ Expected output: You should see several active entries with details similar to:
 ```text
   pid  | usename  | application_name |  client_addr  |         backend_start         | state  |             query             
 -------+----------+------------------+---------------+-------------------------------+--------+-------------------------------
- 12331 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.472339+00 | active | SELECT simulate_long_query();
- 12330 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.365667+00 | active | SELECT simulate_long_query();
- 12329 | rchapler | psql             | 13.64.187.107 | 2025-03-22 15:49:08.309973+00 | active | SELECT simulate_long_query();
+ 12331 | <admin_username> | psql             | 13.64.187.107 | 2025-03-22 15:49:08.472339+00 | active | SELECT simulate_long_query();
+ 12330 | <admin_username> | psql             | 13.64.187.107 | 2025-03-22 15:49:08.365667+00 | active | SELECT simulate_long_query();
+ 12329 | <admin_username> | psql             | 13.64.187.107 | 2025-03-22 15:49:08.309973+00 | active | SELECT simulate_long_query();
 (3 rows)
 ```
 
@@ -232,19 +232,19 @@ Restart the Cloud Shell session, then run the following PowerShell script to: 1)
 
 ```powershell
 # Set the PGPASSWORD environment variable to avoid password prompts in each background job.
-$env:PGPASSWORD = "P@55word!"  # Replace with your actual password
+$env:PGPASSWORD = "<admin_password>"  # Replace with your actual password
 
 # Launch 2 background jobs for Group 1 with fake Parent ID 'FakeParent:1001'
 for ($i = 1; $i -le 2; $i++) {
     Start-Job -ScriptBlock {
-        psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();"
+        psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require" -c "SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();"
     }
 }
 
 # Launch 2 background jobs for Group 2 with fake Parent ID 'FakeParent:2002'
 for ($i = 1; $i -le 2; $i++) {
     Start-Job -ScriptBlock {
-        psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();"
+        psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require" -c "SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();"
     }
 }
 
@@ -252,7 +252,7 @@ for ($i = 1; $i -le 2; $i++) {
 Start-Sleep -Seconds 5
 
 # Validate active sessions by querying pg_stat_activity.
-psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE application_name LIKE 'FakeParent:%';"
+psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require" -c "SELECT pid, usename, application_name, client_addr, backend_start, state, query FROM pg_stat_activity WHERE application_name LIKE 'FakeParent:%';"
 ```
 
 Expected output:
