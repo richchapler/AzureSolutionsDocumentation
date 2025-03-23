@@ -62,7 +62,7 @@ Expected output:
 -------------------+----------------+----------+------------+------------+-----------------------------------
  azure_maintenance | azuresu        | UTF8     | en_US.utf8 | en_US.utf8 | 
  azure_sys         | azuresu        | UTF8     | en_US.utf8 | en_US.utf8 | 
- demo_db           | rchapler       | UTF8     | en_US.utf8 | en_US.utf8 | 
+ demo_db           | <admin_username>       | UTF8     | en_US.utf8 | en_US.utf8 | 
  postgres          | azure_pg_admin | UTF8     | en_US.utf8 | en_US.utf8 | 
  template0         | azure_pg_admin | UTF8     | en_US.utf8 | en_US.utf8 | =c/azure_pg_admin                +
                    |                |          |            |            | azure_pg_admin=CTc/azure_pg_admin
@@ -260,10 +260,10 @@ Expected output:
 ```text
   pid  | usename  | application_name | client_addr  |         backend_start         | state  |                                  query                                  
 -------+----------+------------------+--------------+-------------------------------+--------+-------------------------------------------------------------------------
- 43829 | rchapler | FakeParent:2002  | 13.86.153.81 | 2025-03-22 20:22:09.03268+00  | active | SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();
- 43828 | rchapler | FakeParent:2002  | 13.86.153.81 | 2025-03-22 20:22:08.842759+00 | active | SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();
- 43827 | rchapler | FakeParent:1001  | 13.86.153.81 | 2025-03-22 20:22:08.759848+00 | active | SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();
- 43826 | rchapler | FakeParent:1001  | 13.86.153.81 | 2025-03-22 20:22:08.521403+00 | active | SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();
+ 43829 | <admin_username> | FakeParent:2002  | 13.86.153.81 | 2025-03-22 20:22:09.03268+00  | active | SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();
+ 43828 | <admin_username> | FakeParent:2002  | 13.86.153.81 | 2025-03-22 20:22:08.842759+00 | active | SET application_name = 'FakeParent:2002'; SELECT simulate_long_query();
+ 43827 | <admin_username> | FakeParent:1001  | 13.86.153.81 | 2025-03-22 20:22:08.759848+00 | active | SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();
+ 43826 | <admin_username> | FakeParent:1001  | 13.86.153.81 | 2025-03-22 20:22:08.521403+00 | active | SET application_name = 'FakeParent:1001'; SELECT simulate_long_query();
 (4 rows)
 ```
 
@@ -272,7 +272,7 @@ Expected output:
 To selectively terminate a group {i.e., terminate all active sessions tagged with `FakeParent:1001`}:
 
 ```powershell
-psql "host=ubspfs.postgres.database.azure.com port=5432 dbname=postgres user=rchapler sslmode=require" -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE application_name = 'FakeParent:1001';"
+psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<admin_username> sslmode=require" -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE application_name = 'FakeParent:1001';"
 ```
 
 Expected output:
