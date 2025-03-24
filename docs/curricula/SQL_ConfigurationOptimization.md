@@ -1486,8 +1486,6 @@ SELECT REPLICATE('X', 100)
 FROM X;
 ```
 
-------
-
 ##### Baseline Performance
 
 ```sql
@@ -1498,13 +1496,9 @@ WHERE LEFT(t1.DataValue, 3) = LEFT(t2.DataValue, 3) AND RIGHT(t1.DataValue, 3) =
 
 Note time elapsed.
 
-------
-
 ##### Scale Database
 
 Navigate to SQL Database → Settings → Compute + Storage in the Azure portal and adjust the storage tier for your serverless General Purpose Azure SQL Database.
-
-------
 
 ###### Understanding Storage Scaling in Azure SQL Database
 
@@ -1517,15 +1511,11 @@ Navigate to SQL Database → Settings → Compute + Storage in the Azure portal 
    - Higher IOPS means faster query performance for read/write-heavy workloads.
    - Scaling up reduces latency for transactions that involve frequent disk access.
 
-------
-
 ###### Choosing the Right Storage Settings
 
 - Performance Sensitivity → If queries involve large data reads/writes, increasing storage size helps improve disk I/O speed.
 - Cost Optimization → If storage costs are a concern, scale only when metrics show high I/O latency or slow response times due to disk contention.
 - Handling Growth → If database size is near its limit, increase storage before hitting capacity to avoid performance degradation.
-
-------
 
 ###### Scaling Steps
 
@@ -1538,8 +1528,6 @@ Navigate to SQL Database → Settings → Compute + Storage in the Azure portal 
 3. Test Query Performance
    - After scaling, re-run the stress query and compare execution times.
    - Check if DTU consumption and IOPS have improved, indicating better disk performance.
-
-------
 
 ##### Compare Performance
 
