@@ -19,20 +19,25 @@ This curriculum provides hands‑on experience with optimizing SQL Server config
 
 ### On-Prem
 
-##### Maximum Server Memory
+Below is a merged section for "Server Memory Settings" that covers both Maximum and Minimum Server Memory along with some basic guidance on setting these values:
 
-Controls the upper limit of memory that SQL Server can use. This setting is critical because it prevents SQL Server from consuming so much memory that the operating system and other applications become starved. Adjusting it helps ensure optimal performance and stability.
+------
 
-- Open SQL Server Management Studio and connect to your SQL Server instance.
-- Right-click the server in Object Explorer and select Properties.
-- Go to the Memory page and locate "Maximum server memory."
+##### Server Memory
 
-##### Minimum Server Memory
+SQL Server dynamically manages memory between its own processes and the operating system, but you can control its behavior by configuring two key settings:
 
-Ensures SQL Server reserves a baseline amount of memory. This setting helps maintain a consistent performance foundation and prevents sudden drops in available memory for query processing.
+- Maximum Server Memory:
+   This setting controls the upper limit of memory SQL Server can use. It’s critical for preventing SQL Server from consuming so much memory that the operating system and other applications are starved of resources.
+- Minimum Server Memory:
+   This setting ensures SQL Server reserves a baseline amount of memory. It helps maintain consistent performance by guaranteeing that a certain amount of memory remains allocated even during periods of low activity.
 
-- In SQL Server Management Studio, open Server Properties for your SQL Server instance.
-- Navigate to the Memory page and find the "Minimum server memory" setting.
+Steps to Adjust:
+
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Right-click the server in Object Explorer and select "Properties"
+- Navigate to the Memory page
+- Locate and adjust the values for both "Maximum server memory" and "Minimum server memory"
 
 ##### Index Creation Memory
 
@@ -47,18 +52,6 @@ Specifies the amount of memory allocated for index creation operations. This set
   ```
 
 - Review the current value in the results.
-
-##### Minimum Memory per Query
-
-Determines the minimum amount of memory allocated to each query during execution. This ensures that complex queries have sufficient memory to run efficiently, thereby preventing performance degradation due to memory constraints.
-
-- Open SQL Server Management Studio and execute:
-
-  ```sql
-  EXEC sp_configure 'minimum memory per query';
-  ```
-
-- Review the returned configuration value.
 
 ##### Buffer Pool Extension
 
@@ -120,87 +113,106 @@ Allows you to allocate and limit memory usage for specific workloads. This ensur
 
 Follow these step-by-step instructions to demonstrate how adjusting the Maximum Server Memory setting affects query performance and overall memory usage on an on-prem SQL Server.
 
-##### Connect 
+##### Prepare Sample Data
 
 - Open SQL Server Management Studio and connect to your SQL Server instance
 
-##### Review Settings
-
-- In Object Explorer, right-click the server node and select "Properties" from the resulting menu
-- In the Server Properties dialog, click on the "Memory" tab
-- Note the current value for "Maximum server memory (in MB)" (default: 2147483647)
-
-##### Prepare Sample Data
-
 - Create a new database:
-    ```sql
-    CREATE DATABASE trainingdb;
-    USE trainingdb;
-    ```
+
+  ```sql
+  CREATE DATABASE trainingdb;
+  USE trainingdb;
+  ```
 
 - Create a new table using a set-based approach to generate sample data quickly:
-    ```sql
-    IF OBJECT_ID('dbo.LargeTestTable') IS NOT NULL
-        DROP TABLE dbo.LargeTestTable;
-    
-    CREATE TABLE dbo.LargeTestTable
-    (
-        ID INT IDENTITY(1,1) PRIMARY KEY,
-        DataValue VARCHAR(100)
-    );
-    
-    WITH X AS (
-        SELECT TOP (500000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
-        FROM sys.all_objects a CROSS JOIN sys.all_objects b
-    )
-    INSERT INTO dbo.LargeTestTable (DataValue)
-    SELECT REPLICATE('X', 100)
-    FROM X;
-    ```
+
+  ```sql
+  IF OBJECT_ID('dbo.LargeTestTable') IS NOT NULL
+      DROP TABLE dbo.LargeTestTable;
+  
+  CREATE TABLE dbo.LargeTestTable
+  (
+      ID INT IDENTITY(1,1) PRIMARY KEY,
+      DataValue VARCHAR(100)
+  );
+  
+  WITH X AS (
+      SELECT TOP (500000) ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS n
+      FROM sys.all_objects a CROSS JOIN sys.all_objects b
+  )
+  INSERT INTO dbo.LargeTestTable (DataValue)
+  SELECT REPLICATE('X', 100)
+  FROM X;
+  ```
 
 - Verify that the table is populated by running:
-    ```sql
-    SELECT COUNT(*) FROM dbo.LargeTestTable;
-    ```
 
-##### Lower Memory Setting
+  ```sql
+  SELECT COUNT(*) FROM dbo.LargeTestTable;
+  ```
 
-- In SQL Server Management Studio, navigate to Server Properties → Memory
-- Change “Maximum server memory” to 512MB
-- Click "OK" to apply the change
-- Restart the SQL Server service
+##### Decrease Maximum Server Memory
+
+- Execute the following T‑SQL commands to set Maximum Server Memory to 512 MB:
+
+  ```sql
+  EXEC sp_configure 'show advanced options', 1;
+  RECONFIGURE;
+  EXEC sp_configure 'max server memory', 512;
+  RECONFIGURE;
+  ```
+
+  _Note: SQL Server service restart not required_
 
 ##### Stress Memory
 
-- Execute the following T-SQL:
+- Click "Include Actual Execution Plan" and execute the following T-SQL:
 
-    ```sql
-    SET STATISTICS TIME ON;
-    SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
-    SET STATISTICS TIME OFF;
-    ```
-- Record the execution time displayed in the Messages tab
+  ```sql
+  SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
+  ```
 
-##### Increase Memory Setting
+- Note execution time and review execution plan
 
-- Return to the Server Properties → Memory dialog
-- Change “Maximum server memory” to default 2147483647
-- Click "OK" to apply the change
-- Restart the SQL Server service
+
+##### Increase Maximum Server Memory
+
+- Execute the following T‑SQL commands to set Maximum Server Memory to 2,147,483,647 MB:
+
+  ```sql
+  EXEC sp_configure 'show advanced options', 1;
+  RECONFIGURE;
+  EXEC sp_configure 'max server memory', 2147483647;
+  RECONFIGURE;
+  ```
+
+  _Note: SQL Server service restart not required_
 
 ##### Re-Stress Memory
 
-- Execute the following T-SQL:
+- Execute the following T‑SQL:
 
-    ```sql
-    SET STATISTICS TIME ON;
-    SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
-    SET STATISTICS TIME OFF;
-    ```
-- Record the new execution time from the Messages tab
+  ```sql
+  SELECT * FROM dbo.LargeTestTable ORDER BY DataValue;
+  ```
 
-##### Compare Execution Times
-- Observe whether the query runs faster with higher memory allocation, indicating reduced memory pressure and improved performance
+- Compare execution time and execution plan
+
+###### Review Statistics
+
+- Execute the following T‑SQL:
+
+  ```sql
+  SELECT TOP 1 qt.query_sql_text, r.max_query_max_used_memory, r.last_execution_time
+  FROM sys.query_store_query_text AS qt
+  JOIN sys.query_store_query AS q ON qt.query_text_id = q.query_text_id
+  JOIN sys.query_store_plan AS p ON q.query_id = p.query_id
+  JOIN sys.query_store_runtime_stats AS r ON p.plan_id = r.plan_id
+  WHERE qt.query_sql_text LIKE '%SELECT * FROM dbo.LargeTestTable ORDER BY DataValue%'
+  ORDER BY r.last_execution_time DESC;
+  ```
+
+  _Note: System tables used in the query above (and more) are detailed in the Appendix_
 
 -------------------------
 
@@ -1161,10 +1173,83 @@ Compare time elapsed with previous run.
 ##### Answers
 
 1. Answer: A  
-Performance tiers (DTU/vCore) automatically manage storage performance in Azure SQL Database, eliminating the need for manual filegroup configuration.
+    Performance tiers (DTU/vCore) automatically manage storage performance in Azure SQL Database, eliminating the need for manual filegroup configuration.
 
 2. Answer: B  
-Automatic high availability and backups are built into Azure SQL Database, ensuring storage efficiency without manual intervention.
+    Automatic high availability and backups are built into Azure SQL Database, ensuring storage efficiency without manual intervention.
 
 3. Answer: C  
-Increasing Data Max Size improves storage performance by increasing IOPS (Input/Output Operations per Second) and log throughput, which directly impacts database read/write performance in General Purpose (serverless).
+    Increasing Data Max Size improves storage performance by increasing IOPS (Input/Output Operations per Second) and log throughput, which directly impacts database read/write performance in General Purpose (serverless).
+
+
+------------------------- ------------------------- ------------------------- -------------------------
+
+## Appendix
+
+### sys.query_store_query
+
+| Column                      | Description                                                  | Related to Memory Optimization |
+| --------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| query_id                    | Unique identifier for the query in Query Store               |                                |
+| query_text_id               | References the query text stored in sys.query_store_query_text |                                |
+| query_hash                  | Hash value for the query text                                |                                |
+| query_plan_hash             | Hash value for the query plan                                |                                |
+| last_execution_time         | Timestamp of the most recent execution of this query         |                                |
+| query_parameterization_type | Indicates how the query was parameterized (e.g., forced parameterization) |                                |
+| is_internal_query           | Indicates if the query is an internal SQL Server query       |                                |
+| object_id                   | References the object (e.g., a stored procedure) if applicable |                                |
+
+### sys.query_store_query_text
+
+| Column               | Description                                                  | Related to Memory Optimization |
+| -------------------- | ------------------------------------------------------------ | ------------------------------ |
+| query_text_id        | Unique identifier for the text row in Query Store            |                                |
+| query_sql_text       | Actual text of the query                                     |                                |
+| is_internal_query    | Indicates if the query text belongs to an internal SQL Server query |                                |
+| statement_sql_handle | Identifies the statement text within SQL Server              |                                |
+
+### sys.query_store_plan
+
+| Column                            | Description                                                  | Related to Memory Optimization |
+| --------------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| plan_id                           | Unique identifier for the plan in Query Store                |                                |
+| query_id                          | References the query in sys.query_store_query                |                                |
+| engine_version                    | Indicates the version of the SQL Server engine               |                                |
+| last_execution_time               | Timestamp of the most recent execution for this plan         |                                |
+| plan_handle                       | Handle for the query plan                                    |                                |
+| query_plan_hash                   | Hash value for the query plan                                |                                |
+| query_plan                        | XML representation of the execution plan                     |                                |
+| forcing_status                    | Indicates if plan forcing is enabled, disabled, or not applicable |                                |
+| forcing_policy                    | Additional detail on the plan forcing policy (if used)       |                                |
+| is_optimized_plan_forcing_enabled | Shows whether plan forcing is optimized for this plan        |                                |
+| compatibility_level               | Database compatibility level at the time the plan was compiled |                                |
+
+### sys.query_store_runtime_stats
+
+| Column                      | Description                                                  | Related to Memory Optimization |
+| --------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| runtime_stats_id            | Unique identifier for this row of runtime stats              |                                |
+| plan_id                     | References sys.query_store_plan                              |                                |
+| interval_id                 | References sys.query_store_interval, which groups runtime stats by time intervals |                                |
+| execution_type              | Numeric code indicating the execution type (e.g., regular, forced plan, etc.) |                                |
+| execution_type_desc         | Descriptive text for execution_type                          |                                |
+| count_executions            | Number of times the plan was executed in the given interval  |                                |
+| sum_duration                | Total duration (in microseconds) of all executions of this plan in the interval |                                |
+| sum_cpu_time                | Total CPU time (in microseconds) used by all executions in the interval |                                |
+| sum_physical_io_reads       | Total physical I/O reads for all executions                  |                                |
+| sum_logical_io_reads        | Total logical I/O reads for all executions                   |                                |
+| sum_clr_time                | Total CLR time used by all executions                        |                                |
+| sum_dop                     | Sum of degrees of parallelism across all executions          |                                |
+| sum_row_count               | Total rows processed across all executions                   |                                |
+| sum_warnings                | Total count of warnings across all executions                |                                |
+| sum_tempdb_allocations      | Total number of tempdb allocations made by this query plan in the interval |                                |
+| sum_tempdb_current          | Current tempdb usage for this plan at the time stats were collected |                                |
+| sum_memory_grant_usage      | Total memory grant usage across all executions               | X                              |
+| sum_degree_of_parallelism   | Sum of actual parallel threads used across all executions    |                                |
+| avg_query_max_used_memory   | Average maximum memory (in KB) used by each execution        | X                              |
+| min_query_max_used_memory   | Minimum of the maximum memory (in KB) used by any single execution | X                              |
+| max_query_max_used_memory   | Maximum of the maximum memory (in KB) used by any single execution | X                              |
+| last_query_max_used_memory  | Maximum memory (in KB) used by the most recent execution in this interval | X                              |
+| stdev_query_max_used_memory | Standard deviation of the maximum memory usage across all executions | X                              |
+| first_execution_time        | Time of the earliest execution in this interval              |                                |
+| last_execution_time         | Time of the most recent execution in this interval           |                                |
