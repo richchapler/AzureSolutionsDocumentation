@@ -21,7 +21,7 @@ This curriculum provides hands‑on experience with optimizing SQL Server config
 
 Below is a merged section for "Server Memory Settings" that covers both Maximum and Minimum Server Memory along with some basic guidance on setting these values:
 
-------
+#### Configurations
 
 ##### Server Memory
 
@@ -32,38 +32,115 @@ SQL Server dynamically manages memory between its own processes and the operatin
 - Minimum Server Memory:
    This setting ensures SQL Server reserves a baseline amount of memory. It helps maintain consistent performance by guaranteeing that a certain amount of memory remains allocated even during periods of low activity.
 
-Steps to Adjust:
+###### SQL Server Management Studio
 
 - Open SQL Server Management Studio and connect to your SQL Server instance
-- Right-click the server in Object Explorer and select "Properties"
-- Navigate to the Memory page
+- Right-click the server in Object Explorer, select "Properties", and navigate to the "Memory" page
 - Locate and adjust the values for both "Maximum server memory" and "Minimum server memory"
+
+###### Server-Level
+
+Configure using the following T‑SQL:
+
+```sql
+-- Set Maximum Server Memory to 6GB (6144 MB)
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+EXEC sp_configure 'max server memory', 6144;
+RECONFIGURE;
+
+-- Set Minimum Server Memory to 1GB (1024 MB)
+EXEC sp_configure 'min server memory', 1024;
+RECONFIGURE;
+```
+
+##### Query-Level
+
+Instead of changing server-level settings, you can control the memory allocation for a specific query using query hints available in SQL Server 2019 and later. Two useful hints are:
+
+- MIN_MEMORY_GRANT_PERCENT: Specifies the minimum percentage of the computed memory grant to use
+- MAX_MEMORY_GRANT_PERCENT: Specifies the maximum percentage of the computed memory grant to use
+
+For example, to force a query to use only 10% of its computed memory grant, you can use:
+
+```sql
+SELECT * FROM dbo.LargeTestTable 
+OPTION (MIN_MEMORY_GRANT_PERCENT = 10, MAX_MEMORY_GRANT_PERCENT = 10);
+```
+
+This query hint limits the memory grant for that specific query to a fixed percentage (10% in this example) of the computed memory grant. Adjust the percentage as needed based on your testing and workload requirements.
+
+-------------------------
 
 ##### Index Creation Memory
 
-Specifies the amount of memory allocated for index creation operations. This setting can affect the speed of index rebuilds and creations; if set too low, index operations may run slower due to insufficient memory.
+Specifies the amount of memory allocated for index creation operations. If set too low, index rebuilds and creations may run slower due to insufficient memory.
 
-- Open SQL Server Management Studio and execute the following T‑SQL command:
+###### SQL Server Management Studio
 
-  ```sql
-  EXEC sp_configure 'show advanced options', 1;
-  RECONFIGURE;
-  EXEC sp_configure 'index creation memory';
-  ```
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Right-click the server in Object Explorer, select "Properties", and navigate to the "Memory" page
+- Locate and adjust the value for "Index creation memory (in KB, 0 = dynamic memory)"
 
-- Review the current value in the results.
+###### Server-Level
+
+Configure using the following T‑SQL:
+
+```sql
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+EXEC sp_configure 'index creation memory', 2048; -- in KB
+RECONFIGURE;
+```
+
+###### Query-Level
+
+There is no query-level alternative for this setting; it applies globally at the server level.
+
+-------------------------
+
+##### Minimum Memory per Query
+
+Changes not recommended because:
+
+1. It's misleadingly named: Despite its name, the `minimum memory per query` setting doesn't guarantee a fixed memory grant per query. Instead, it sets the *minimum* size of a memory grant request that the system will consider. Most queries request more than this, so the setting is rarely a limiting factor.
+   
+2. It’s rarely adjusted: The default value (1024 KB) is almost always appropriate. It's very uncommon to need to raise or lower this unless you're doing deep internals tuning or working in a highly constrained environment.
+   
+3. Changing it can harm performance: Raising it too high can cause small queries to be over-allocated memory unnecessarily. Lowering it too much may cause under-allocation, leading to tempdb spills and performance hits.
+   
+4. It doesn't apply to all workloads: Many modern memory grant behaviors (especially in SQL Server 2019+) are influenced more by query plan operators, hints, and adaptive memory mechanisms than by this static threshold.
+
+-------------------------
 
 ##### Buffer Pool Extension
 
-Allows the use of fast storage (usually SSDs) as an extension of the buffer pool. This can improve performance in memory-constrained environments by reducing disk I/O, although it is not a substitute for having adequate physical memory.
+Allows SQL Server to use fast storage (typically SSDs) as an extension of the buffer pool. This helps improve read performance in memory-constrained environments by offloading less-frequently used pages to disk. However, it is not a replacement for adequate physical memory and is supported only in certain SQL Server editions (e.g., Enterprise and Developer).
 
-- Open SQL Server Management Studio and execute:
+###### SQL Server Management Studio
 
-  ```sql
-  EXEC sp_configure 'buffer pool extension enabled';
-  ```
+Buffer Pool Extension cannot be set with SQL Server Management Studio.
 
-- Check the configuration value; note that enabling or disabling this setting requires T‑SQL commands.
+###### Server-Level
+
+Configure using the following T‑SQL:
+
+```sql
+-- Enable buffer pool extension and define file path and size
+ALTER SERVER CONFIGURATION
+SET BUFFER POOL EXTENSION ON
+(FILENAME = 'C:\Temp\BPECache.bpe', SIZE = 4 GB);
+
+-- Disable buffer pool extension
+ALTER SERVER CONFIGURATION
+SET BUFFER POOL EXTENSION OFF;
+```
+
+###### Query-Level
+
+Buffer Pool Extension is a server-level feature and cannot be controlled or overridden at the query level.
+
+-------------------------
 
 ##### In‑Memory OLTP Memory Settings
 
@@ -72,6 +149,8 @@ Relate to memory‑optimized tables and indexes. Optimizing these settings can d
 - Open the database properties in SQL Server Management Studio.
 - Navigate to the Files page and check for the presence of a Memory‑Optimized Filegroup.
 - Optionally, query `sys.database_files` to review file settings for memory‑optimized objects.
+
+-------------------------
 
 ##### Optimize for Ad Hoc Workloads
 
@@ -85,6 +164,8 @@ Configures SQL Server to cache only plan stubs for single-use queries, thereby r
 
 - Review the current configuration; use sp_configure with RECONFIGURE to change the setting if necessary.
 
+-------------------------
+
 ##### Resource Governor (Memory Configuration)
 
 Allows you to allocate and limit memory usage for specific workloads. This ensures that high-priority tasks receive enough memory while preventing less critical workloads from consuming excessive resources.
@@ -92,6 +173,8 @@ Allows you to allocate and limit memory usage for specific workloads. This ensur
 - Open SQL Server Management Studio and expand the Management folder in Object Explorer.
 - Right-click Resource Governor and select Properties to view the current resource pools.
 - Alternatively, run T‑SQL commands (e.g., CREATE RESOURCE POOL or ALTER RESOURCE POOL) to view and configure memory limits.
+
+-------------------------
 
 ##### Lock Pages in Memory (Windows Policy Setting)
 
