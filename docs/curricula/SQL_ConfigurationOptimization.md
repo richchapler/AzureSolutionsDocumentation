@@ -19,7 +19,7 @@ This curriculum provides hands‑on experience with optimizing SQL Server config
 
 ### On-Prem
 
-#### Configurations
+#### Configuration Settings
 
 -------------------------
 
@@ -152,7 +152,7 @@ Not possible — this setting must be configured at the server level.
 
 ###### Server-Level
 
-Use the following T‑SQL to check or configure the setting:
+Use the following T‑SQL to configure the setting:
 
 ```sql
 -- View current setting
@@ -176,7 +176,7 @@ Not possible — this setting must be configured at the server level.
 
 ##### Resource Governor
 
-_Note: This section applies only to Enterprise edition_
+> Note: This section applies only to Enterprise edition
 
 Resource Governor allows you to control how SQL Server allocates memory to specific workloads by defining resource pools and workload groups. This helps ensure that high-priority workloads receive guaranteed resources, while limiting memory consumption from less critical or unpredictable sessions.
 
@@ -193,7 +193,7 @@ Resource Governor allows you to control how SQL Server allocates memory to speci
 
 ###### Server-Level
 
-To create or modify resource pools and workload groups via T‑SQL:
+Configure using the following T‑SQL:
 
 ```sql
 -- Create a new resource pool with memory limits
@@ -224,10 +224,6 @@ ALTER RESOURCE GOVERNOR RECONFIGURE;
 ###### Query-Level
 
 Not possible — this setting must be configured at the server level.
-
--------------------------
-
-Here’s the updated and structured version of the Lock Pages in Memory section, consistent with your documentation style:
 
 ------
 
@@ -278,7 +274,7 @@ Not possible — memory locking is a system-level privilege and cannot be contro
 
 #### Exercise
 
-Follow these step-by-step instructions to demonstrate how adjusting the Maximum Server Memory setting affects query performance and overall memory usage on an on-prem SQL Server.
+Follow these step-by-step instructions to demonstrate how adjusting the Maximum Server Memory setting affects query performance and memory usage on an on-prem SQL Server.
 
 ##### Prepare Sample Data
 
@@ -329,7 +325,7 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
   RECONFIGURE;
   ```
 
-  _Note: SQL Server service restart not required_
+  >  Note: SQL Server service restart not required
 
 ##### Stress Memory
 
@@ -379,7 +375,7 @@ Follow these step-by-step instructions to demonstrate how adjusting the Maximum 
   ORDER BY r.last_execution_time DESC;
   ```
 
-  _Note: System tables used in the query above (and more) are detailed in the Appendix_
+  > Note: System tables used in the query above (and more) are detailed in the Appendix
 
 -------------------------
 
@@ -449,41 +445,64 @@ By using these guidelines and calculations, you can determine a good memory allo
 
 ### Azure
 
+#### Configuration Settings
+
+Azure SQL Database is a fully managed platform-as-a-service (PaaS) offering. As such, server-level and query-level memory configurations are not supported. You cannot modify memory-related settings using `sp_configure`, apply Resource Governor policies, or use memory grant hints. All memory management is handled internally by the Azure platform, and tuning is done by adjusting the service tier.
+
+-------------------------
+
 ##### Service Tier Selection
 
-Determines the memory allocation by automatically managing resources based on the selected performance tier. Higher tiers provide more memory, which can improve query performance.
+Determines memory allocation by automatically managing resources based on the selected performance tier. Higher tiers provide more memory, which can improve query performance.
 
-- Open the Azure portal and navigate to your Azure SQL Database resource.
-- Select "Configure" under Compute + Storage.
-- Review the current service tier and its vCore/DTU allocation, which indirectly reflects the memory available.
+###### Azure Portal
+
+- Open the Azure Portal and navigate to your Azure SQL Database resource  
+- Select "Configure" under Compute + Storage  
+- Review the current service tier (vCore or DTU), which determines available memory, CPU, and I/O resources
+
+-------------------------
 
 ##### Monitoring Memory with Query Performance Insight
 
-Provides insights into query performance and memory usage. Monitoring these metrics helps determine if the current service tier is sufficient for your workload.
+Query Performance Insight provides visibility into query behavior. While direct memory metrics are not exposed, query duration and CPU time can help infer memory limitations.
 
-- In the Azure portal, open your Azure SQL Database resource.
-- Click on "Query Performance Insight."
-- Review the memory usage metrics and observe how memory allocation affects query duration.
+###### Azure Portal
+
+- Navigate to your Azure SQL Database resource  
+- Select "Query Performance Insight"  
+- Review top queries, execution count, CPU usage, and durations  
+- Identify patterns that suggest memory-related performance constraints
+
+-------------------------
 
 ##### Scaling Up for Increased Memory Allocation
 
-Scaling up the service tier increases CPU, memory, and I/O resources. This is an automated process that reallocates memory based on the new tier.
+The primary way to increase memory capacity is by scaling the database to a higher performance tier.
 
-- In the Azure portal, open your Azure SQL Database resource.
-- Click on "Configure" under Compute + Storage.
-- Increase the pricing tier to a higher level and save your changes.
-- Monitor performance improvements using Query Performance Insight.
+###### Azure Portal
+
+- Navigate to your Azure SQL Database resource  
+- Select "Configure" under Compute + Storage  
+- Choose a higher tier (e.g., more vCores or DTUs)  
+- Save the configuration to apply the change  
+- Monitor the performance impact using Query Performance Insight
+
+-------------------------
 
 ##### Automatic Memory Management
 
-Azure SQL Database automatically manages memory allocation based on the selected service tier and workload. No manual configuration is available, which simplifies administration.
+Azure SQL Database automatically manages memory based on service tier and workload patterns. There is no manual tuning or configuration required.
 
-- In the Azure portal, navigate to the "Overview" or "Metrics" section of your Azure SQL Database.
-- Review the current performance metrics to understand how memory is being utilized under the selected tier.
+###### Azure Portal
+
+- Navigate to the "Overview" or "Metrics" blade for your Azure SQL Database  
+- Review indicators such as DTU usage, CPU percentage, and IO metrics  
+- Use these to evaluate memory-related behavior indirectly under your current tier
 
 ------------------------- -------------------------
 
-#### No Exercise
+#### Exercise
 
 In Azure SQL Database, it's not possible to directly configure memory settings like you can on-prem (e.g., "Maximum Server Memory"). Azure manages memory automatically based on the chosen service tier and compute resources (vCores/DTUs).
 
@@ -517,40 +536,184 @@ In Azure SQL Database, it's not possible to directly configure memory settings l
 
 ### On-Prem
 
-##### Processor Affinity and MAXDOP
+#### Configuration Settings
 
-Controls how SQL Server utilizes CPU cores by specifying which processors are used for query execution and limiting the number of processors used in parallel processing. Proper configuration can improve query response times and prevent inefficient CPU usage.
+-------------------------
 
-- Open SQL Server Management Studio and connect to your SQL Server instance.
-- Right-click the server in Object Explorer, select Properties, and go to the "Processors" page.
-- Review the "Automatically set processor affinity mask" and "Maximum degree of parallelism" (MAXDOP) settings.
+##### Maximum Degree of Parallelism (MAXDOP)
 
-##### Resource Governor for CPU
+MAXDOP controls the number of processors SQL Server uses to execute a single query in parallel. Tuning this setting can improve performance and reduce contention—especially in OLTP environments or systems with many concurrent queries.
 
-Allows you to define resource pools and workload groups to limit and allocate CPU usage among different sessions or workloads. This helps ensure that critical tasks receive sufficient CPU resources while preventing less critical tasks from over-consuming CPU.
+###### SQL Server Management Studio
 
-- Open SQL Server Management Studio and expand the "Management" folder in Object Explorer.
-- Right-click "Resource Governor" and select Properties to view the current configuration.
-- Alternatively, execute T‑SQL commands (CREATE RESOURCE POOL, ALTER RESOURCE POOL) to view or modify CPU limits.
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Right-click the server in Object Explorer, select "Properties", and navigate to the "Advanced" page
+- Adjust the setting based on your server’s workload characteristics:
+  - Set MAXDOP = 1 for OLTP workloads to reduce contention and prevent parallel plan overhead
+  - Set MAXDOP = 0 to allow SQL Server to use all available CPUs for large analytical queries (default behavior)
+  - For mixed workloads, consider values like 2, 4, or 8 depending on the number of logical processors and concurrency needs
+  - As a general rule:
+    - Use 1 for highly concurrent transactional systems
+    - Use (number of cores per NUMA node) or ≤ 8 for most general-purpose workloads
+    - Avoid setting MAXDOP to a value higher than the number of available logical processors
+    - For large servers with many cores, also consider combining this with the Cost Threshold for Parallelism setting to control which queries are eligible for parallel execution.
 
-##### Monitoring CPU Usage
+###### Server-Level
 
-Monitoring CPU performance is key to understanding workload demands and identifying bottlenecks. It helps you decide when to adjust CPU-related configurations or scale hardware resources.
+Configure using the following T‑SQL:
 
-- In SQL Server Management Studio, execute dynamic management view queries such as:
-    ```sql
-    SELECT * FROM sys.dm_os_performance_counters WHERE counter_name LIKE '%CPU%';
-    ```
+```sql
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+EXEC sp_configure 'max degree of parallelism', 4;
+RECONFIGURE;
+```
 
-- Alternatively, use Performance Monitor (PerfMon) on the server to track CPU metrics during query execution.
+###### Query-Level
+
+Override MAXDOP on a per-query basis using the `OPTION (MAXDOP n)` query hint:
+
+```sql
+SELECT * FROM dbo.LargeCPUTable OPTION (MAXDOP 1);  -- run this query on a single CPU
+```
+
+This is helpful when:
+
+- You want to avoid parallelism overhead for simple queries
+- You’re running heavy batch queries that would otherwise consume excessive resources
+- You want to isolate workloads in mixed environments
+
+-------------------------
 
 ##### Cost Threshold for Parallelism
 
-Determines the threshold at which SQL Server considers a query for parallel execution. Lowering this value can force more queries to run in parallel, while a higher value limits parallelism to only expensive queries.
+Controls the minimum estimated query cost (in arbitrary units) that SQL Server uses to decide whether a query should be executed using parallelism. A lower value may allow even simple queries to run in parallel, increasing CPU usage. A higher value restricts parallelism to only more expensive queries, reducing CPU pressure on busy systems.
 
-- Open SQL Server Management Studio and connect to your SQL Server instance.
-- Right-click the server, select Properties, and go to the "Advanced" page.
-- Locate the "Cost Threshold for Parallelism" setting to review or adjust its value.
+> This setting works in conjunction with Maximum Degree of Parallelism (MAXDOP) to control parallel query behavior.
+
+###### SQL Server Management Studio
+
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Right-click the server in Object Explorer, select "Properties", and navigate to the "Advanced" page
+- Locate "Cost Threshold for Parallelism" under the Parallelism section
+- Adjust the setting based on your server’s workload characteristics:
+  - Default: `5` (often too low for most production workloads)
+  - Common values: `25`, `50`, or higher to restrict parallelism to truly expensive queries
+
+###### Server-Level
+
+Use the following T‑SQL to adjust the setting programmatically:
+
+```sql
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+EXEC sp_configure 'cost threshold for parallelism', 50;  -- example: raise from default 5 to 50
+RECONFIGURE;
+```
+
+###### Query-Level
+
+Not possible — this setting must be configured at the server level.
+
+-------------------------
+
+##### Processor Affinity
+
+Processor Affinity determines which specific CPUs SQL Server is allowed to use. By default, SQL Server dynamically schedules tasks across all available CPUs, which is optimal in most scenarios. Manual processor affinity settings are advanced and typically used only in constrained or highly specialized environments.
+
+###### SQL Server Management Studio
+
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Right-click the server in Object Explorer, select "Properties", and navigate to the "Processors" page
+- Adjust the setting based on your server’s workload characteristics:
+    - Automatically set processor affinity mask for all processors
+      - Checked by default — allows SQL Server to dynamically schedule across all available CPUs
+      - Leave this checked unless you need to isolate SQL Server to specific cores (e.g., for licensing or performance reasons)
+      - Uncheck to manually assign processor affinity in the table below
+    - Automatically set I/O affinity mask for all processors
+      - Typically left checked — controls which CPUs handle disk I/O operations
+      - Change only in advanced tuning scenarios
+    - Processor Affinity (table below)
+      - When the "Automatically set" box is unchecked, you can manually assign which CPUs SQL Server can use
+      - Select specific processors by checking boxes in the Processor Affinity column
+      - Avoid assigning too few cores or splitting across NUMA nodes unless you have a specific, tested reason
+      - Never leave all boxes unchecked — SQL Server will fail to start without any processor assigned
+    - Maximum worker threads
+      - Leave at `0` to let SQL Server manage threading automatically
+      - Override only for specialized tuning (e.g., known under-subscription of CPU resources)
+
+###### Server-Level
+
+Processor affinity can be configured using T‑SQL, but only for process affinity — not I/O affinity.
+
+```sql
+-- Assign CPUs 0 through 3 for SQL Server processing
+ALTER SERVER CONFIGURATION SET PROCESS AFFINITY CPU = 0, 1, 2, 3;
+
+-- To reset to automatic processor affinity
+ALTER SERVER CONFIGURATION SET PROCESS AFFINITY CPU = AUTO;
+```
+
+> Note: SQL Server does not support setting I/O affinity using T‑SQL. To configure I/O affinity, use SQL Server Management Studio under the Processors page.
+
+> Caution: Misconfiguring processor affinity may reduce CPU availability for SQL Server or cause uneven scheduling. Always test changes in a non-production environment.
+
+###### Query-Level
+
+Not possible — this setting must be configured at the server level.
+
+-------------------------
+
+##### Resource Governor
+
+> Note: This section applies only to Enterprise edition
+
+Resource Governor allows you to control how SQL Server allocates CPU to specific workloads by defining resource pools and workload groups. This helps ensure that high-priority workloads receive guaranteed processor access, while limiting CPU consumption from less critical or unpredictable sessions.
+
+###### SQL Server Management Studio
+
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Expand "Management" in Object Explorer, right-click "Resource Governor", and select "Properties"
+- In the "Resource Governor Properties" dialog:
+  - Check "Enable Resource Governor"
+  - Resource pools: Configure the `Minimum CPU %` and `Maximum CPU %` for each pool; these define the guaranteed and capped percentage of overall CPU resources assigned to that pool
+  - Workload groups...: Optionally adjust other workload characteristics for sessions tied to that pool
+  - External resource pools: Apply only to R, Python, or other external scripts run via SQL Server Machine Learning Services; they do not affect regular T-SQL workloads
+  - Click "OK" to save changes and then right-click Resource Governor and select "Reconfigure" to apply the new settings
+
+###### Server-Level
+
+Configure using the following T‑SQL:
+
+```sql
+-- Create a new resource pool with CPU limits
+CREATE RESOURCE POOL PoolReporting
+WITH (
+    MIN_CPU_PERCENT = 10,
+    MAX_CPU_PERCENT = 30
+);
+
+-- Create a workload group that uses this pool
+CREATE WORKLOAD GROUP GroupReporting
+USING PoolReporting;
+
+-- Apply configuration
+ALTER RESOURCE GOVERNOR RECONFIGURE;
+```
+
+To modify an existing resource pool:
+
+```sql
+ALTER RESOURCE POOL PoolReporting
+WITH (
+    MAX_CPU_PERCENT = 40
+);
+ALTER RESOURCE GOVERNOR RECONFIGURE;
+```
+
+###### Query-Level
+
+Not possible — this setting must be configured at the server level.
 
 ------------------------- -------------------------
 
@@ -705,36 +868,65 @@ Prioritizing scheduled queries with Resource Governor helps stabilize CPU usage 
 
 ### Azure
 
-##### Service Tier Selection for CPU
+Here is your Azure CPU section rewritten to match the formatting, tone, and structure of the Azure Memory section:
 
-In Azure SQL Database (PaaS), the selected service tier (DTU/vCore model) directly determines the available CPU resources. Upgrading to a higher tier increases the number of vCores or DTUs, thereby enhancing CPU performance.
+------
 
-- Open the Azure portal and navigate to your Azure SQL Database resource.
-- Click on "Configure" under Compute + Storage.
-- Review the current service tier and its associated CPU (vCore/DTU) allocation.
+### Azure
 
-##### Monitoring CPU Usage in Azure
+#### Configuration Settings
 
-Monitoring CPU performance in Azure SQL Database helps identify workload bottlenecks and validates the adequacy of the chosen service tier.
+Azure SQL Database is a fully managed platform-as-a-service (PaaS) offering. As such, server-level and query-level CPU configurations are not supported. You cannot modify CPU-related settings using `sp_configure`, set processor affinity, or apply Resource Governor policies. All CPU allocation is handled internally by the Azure platform and scales automatically based on the selected service tier.
 
-- In the Azure portal, navigate to the "Metrics" or "Query Performance Insight" section of your Azure SQL Database.
-- Select CPU-related metrics (such as CPU percentage) to observe usage trends during query execution.
+------
+
+##### Service Tier Selection
+
+CPU resources are provisioned according to the selected performance tier (DTU or vCore model). Higher tiers allocate more vCores, improving throughput for CPU-intensive workloads.
+
+###### Azure Portal
+
+- Open the Azure Portal and navigate to your Azure SQL Database resource
+- Select "Configure" under Compute + Storage
+- Review the current service tier and its associated vCore or DTU allocation
+
+------
+
+##### Monitoring CPU Usage
+
+Monitoring CPU usage helps identify under-provisioned workloads and validate whether the selected tier provides sufficient compute resources.
+
+###### Azure Portal
+
+- Navigate to your Azure SQL Database resource
+- Open the "Metrics" blade or Query Performance Insight
+- Select CPU Percentage or other relevant metrics to observe trends over time
+- Analyze high-CPU queries in Query Performance Insight to correlate usage with specific workloads
+
+------
 
 ##### Scaling Up for Improved CPU Performance
 
-Scaling up the service tier in Azure SQL Database automatically increases CPU resources, which can reduce query execution time for CPU-intensive operations.
+The primary way to increase CPU resources is by scaling the database to a higher service tier.
 
-- In the Azure portal, open your Azure SQL Database resource and click on "Configure" under Compute + Storage.
-- Choose a higher service tier and save your changes.
-- Monitor performance improvements via Query Performance Insight or the Metrics section.
+###### Azure Portal
 
-##### Query Optimization for CPU Efficiency
+- Navigate to your Azure SQL Database resource
+- Select "Configure" under Compute + Storage
+- Choose a higher tier (e.g., more vCores or DTUs)
+- Apply the change and monitor performance improvements using Metrics or Query Performance Insight
 
-While direct CPU settings cannot be manually configured in Azure SQL Database (PaaS), refining query design can reduce CPU usage and improve performance.
+------
 
-- In the Azure portal or SQL Server Management Studio, run a CPU-intensive query and record its duration using Query Performance Insight.
-- Review the query execution plan to identify inefficiencies.
-- Optimize the query (for example, by adding an appropriate index or rewriting complex joins) and re-run the query to compare performance improvements.
+##### Query Optimization
+
+Although CPU settings cannot be manually adjusted, CPU usage can be reduced through proper query tuning and indexing strategies.
+
+###### Azure Portal
+
+- Use Query Performance Insight to identify high-CPU queries
+- Review execution plans and identify missing indexes, expensive operations, or inefficient joins
+- Optimize the query and re-measure performance using execution duration and CPU usage metrics
 
 ------------------------- -------------------------
 
@@ -900,32 +1092,72 @@ Refining query design along with selecting the appropriate service tier is the r
 
 ### On-Prem
 
-##### File Groups
+#### Configuration Settings
 
-File groups help organize database files into logical units so that data can be spread across multiple physical disks. This can balance the I/O load and improve overall performance.
-Steps to find:
+-------------------------
 
-- Open SQL Server Management Studio and connect to your SQL Server instance.
-- Expand Databases, right-click a specific database, and select Properties.
-- Click on the Files page to view the list of file groups and their associated files.
+##### Filegroups
+
+Filegroups are logical groupings of database files that allow data to be spread across multiple physical disks. This can improve I/O performance, simplify maintenance, and isolate workloads. While the default filegroup is typically sufficient, custom filegroups provide greater flexibility for performance tuning and file placement strategies.
+
+###### SQL Server Management Studio
+
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Expand Databases, right-click a specific database, and select "Properties"
+- Navigate to the "Files" page to view the list of filegroups and associated files
+- To add or modify filegroups:
+  - Go to the "Filegroups" page (visible when editing database properties)
+  - Define a new filegroup and associate one or more data files with it via the "Files" page
+
+###### Server-Level
+
+Not applicable — filegroups are defined at the database level, not at the server level.
+
+###### Query-Level
+
+Not possible — filegroup configuration cannot be controlled at the query level.
+
+-------------------------
 
 ##### Storage Pools and Striping
 
-Storage pools and striping combine multiple disks into a single logical volume, allowing data to be distributed evenly across disks. This enhances I/O throughput by reducing bottlenecks on any single disk.
-Steps to find:
+Storage striping improves I/O throughput by distributing database files across multiple physical disks. This reduces contention and enhances performance in high-read/write scenarios. On Windows, this can be implemented using storage spaces or RAID configurations.
 
-- In a demo environment, simulate storage pools by creating multiple virtual disks (using different drive letters) in your operating system.
-- When creating a new database in SQL Server Management Studio, assign different data files to these separate disks.
-- Verify file distribution by reviewing the file paths in the New Database dialog or under the Files page in database properties.
+###### SQL Server Management Studio
+
+- Open SSMS and begin creating a new database
+- In the "New Database" dialog, navigate to the "Files" page
+- Add multiple data files and assign each one to a different drive or volume (e.g., D:, E:, F:)
+- After creation, view the file distribution under Database Properties > Files
+
+###### Server-Level
+
+Not applicable — striping is implemented through the operating system or storage hardware, not SQL Server configuration.
+
+###### Query-Level
+
+Not possible — striping behavior is transparent to query execution and cannot be adjusted at the query level.
+
+-------------------------
 
 ##### Manual File Placement
 
-Manual file placement involves intentionally placing data files and log files on separate physical disks to minimize I/O contention. This strategy ensures that the high-write operations of the log file do not interfere with data file I/O.
-Steps to find:
+Manual file placement is the practice of assigning data files and transaction log files to different physical disks to reduce I/O contention. Separating write-heavy log operations from data access improves concurrency and durability.
 
-- In SQL Server Management Studio, during the creation of a new database, click the Options or Files tab.
-- Specify different file paths for data files (e.g., on one disk) and the log file (on a separate disk).
-- Review and confirm the file paths in the database properties after creation.
+###### SQL Server Management Studio
+
+- During new database creation in SSMS, click on the "Files" or "Options" tab
+- Modify the file path for the data file (typically .mdf) to one physical drive
+- Assign the log file (typically .ldf) to a different drive
+- After creation, review these paths under Database Properties > Files
+
+###### Server-Level
+
+Not applicable — file placement is handled per database and must be configured individually.
+
+###### Query-Level
+
+Not possible — file placement is not accessible or changeable from within query execution.
 
 ------------------------- -------------------------
 
