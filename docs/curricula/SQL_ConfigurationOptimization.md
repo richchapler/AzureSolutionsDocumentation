@@ -19,9 +19,9 @@ This curriculum provides hands‑on experience with optimizing SQL Server config
 
 ### On-Prem
 
-Below is a merged section for "Server Memory Settings" that covers both Maximum and Minimum Server Memory along with some basic guidance on setting these values:
-
 #### Configurations
+
+-------------------------
 
 ##### Server Memory
 
@@ -95,7 +95,7 @@ RECONFIGURE;
 
 ###### Query-Level
 
-There is no query-level alternative for this setting; it applies globally at the server level.
+Not possible — this setting must be configured at the server level.
 
 -------------------------
 
@@ -119,7 +119,7 @@ Allows SQL Server to use fast storage (typically SSDs) as an extension of the bu
 
 ###### SQL Server Management Studio
 
-Buffer Pool Extension cannot be set with SQL Server Management Studio.
+Not possible — this setting must be configured at the server level.
 
 ###### Server-Level
 
@@ -138,57 +138,141 @@ SET BUFFER POOL EXTENSION OFF;
 
 ###### Query-Level
 
-Buffer Pool Extension is a server-level feature and cannot be controlled or overridden at the query level.
+Not possible — this setting must be configured at the server level.
 
--------------------------
-
-##### In‑Memory OLTP Memory Settings
-
-Relate to memory‑optimized tables and indexes. Optimizing these settings can dramatically improve transaction processing and overall performance for workloads that utilize in‑memory OLTP.
-
-- Open the database properties in SQL Server Management Studio.
-- Navigate to the Files page and check for the presence of a Memory‑Optimized Filegroup.
-- Optionally, query `sys.database_files` to review file settings for memory‑optimized objects.
-
--------------------------
+------
 
 ##### Optimize for Ad Hoc Workloads
 
-Configures SQL Server to cache only plan stubs for single-use queries, thereby reducing memory usage in the plan cache. This setting can free up memory for more frequently executed queries, improving overall performance.
+This setting controls whether SQL Server caches full execution plans for single-use queries. When enabled, only a small plan stub is stored for queries executed once, reducing memory usage in the plan cache. If the same query is executed again, a full plan is compiled and cached. This helps reduce memory pressure from ad hoc or dynamic workloads.
 
-- Open SQL Server Management Studio and run the following T‑SQL command:
+###### SQL Server Management Studio
 
-  ```sql
-  EXEC sp_configure 'optimize for ad hoc workloads';
-  ```
+Not possible — this setting must be configured at the server level.
 
-- Review the current configuration; use sp_configure with RECONFIGURE to change the setting if necessary.
+###### Server-Level
+
+Use the following T‑SQL to check or configure the setting:
+
+```sql
+-- View current setting
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+EXEC sp_configure 'optimize for ad hoc workloads';
+
+-- Enable the setting
+EXEC sp_configure 'optimize for ad hoc workloads', 1;
+RECONFIGURE;
+```
+
+- `0` = Disabled
+- `1` = Enabled (recommended for systems with many unique ad hoc queries)
+
+###### Query-Level
+
+Not possible — this setting must be configured at the server level.
+
+------
+
+##### Resource Governor
+
+_Note: This section applies only to Enterprise edition_
+
+Resource Governor allows you to control how SQL Server allocates memory to specific workloads by defining resource pools and workload groups. This helps ensure that high-priority workloads receive guaranteed resources, while limiting memory consumption from less critical or unpredictable sessions.
+
+###### SQL Server Management Studio
+
+- Open SQL Server Management Studio and connect to your SQL Server instance
+- Expand "Management" in Object Explorer, right-click "Resource Governor", and select "Properties"
+- In the "Resource Governor Properties: dialog:
+  - Check "Enable Resource Governor"
+  - "Resource pools": Configure the `Minimum memory %` and `Maximum memory %` for each pool; these define the guaranteed and capped percentage of overall SQL Server memory assigned to that pool
+  - "Workload groups...": Optionally set `Memory Grant %` and other workload characteristics for sessions tied to that pool
+  - "External resource pools": Apply only to R, Python, or other external scripts run via SQL Server Machine Learning Services; they do not affect regular T-SQL workloads
+  - Click "OK" to save changes and then right-click Resource Governor and select "Reconfigure" to apply the new settings
+
+###### Server-Level
+
+To create or modify resource pools and workload groups via T‑SQL:
+
+```sql
+-- Create a new resource pool with memory limits
+CREATE RESOURCE POOL PoolReporting
+WITH (
+    MIN_MEMORY_PERCENT = 10,
+    MAX_MEMORY_PERCENT = 30
+);
+
+-- Create a workload group that uses this pool
+CREATE WORKLOAD GROUP GroupReporting
+USING PoolReporting;
+
+-- Apply configuration
+ALTER RESOURCE GOVERNOR RECONFIGURE;
+```
+
+To modify an existing resource pool:
+
+```sql
+ALTER RESOURCE POOL PoolReporting
+WITH (
+    MAX_MEMORY_PERCENT = 40
+);
+ALTER RESOURCE GOVERNOR RECONFIGURE;
+```
+
+###### Query-Level
+
+Not possible — this setting must be configured at the server level.
 
 -------------------------
 
-##### Resource Governor (Memory Configuration)
+Here’s the updated and structured version of the Lock Pages in Memory section, consistent with your documentation style:
 
-Allows you to allocate and limit memory usage for specific workloads. This ensures that high-priority tasks receive enough memory while preventing less critical workloads from consuming excessive resources.
-
-- Open SQL Server Management Studio and expand the Management folder in Object Explorer.
-- Right-click Resource Governor and select Properties to view the current resource pools.
-- Alternatively, run T‑SQL commands (e.g., CREATE RESOURCE POOL or ALTER RESOURCE POOL) to view and configure memory limits.
-
--------------------------
+------
 
 ##### Lock Pages in Memory (Windows Policy Setting)
 
-"Lock Pages in Memory" prevents SQL Server memory from being paged out to disk, ensuring that critical data remains in physical RAM. This setting is configured via Windows Local Security Policy—not through SQL Server Management Studio or SQL Server Configuration Manager.
+The Lock Pages in Memory privilege prevents SQL Server memory from being paged out to disk by the operating system, helping maintain consistent performance under memory pressure. This is especially beneficial for systems with high memory utilization or predictable memory workloads.
 
-1. Grant the Privilege:
-   - Open the Local Security Policy tool by running `secpol.msc`.
-   - Navigate to Local Policies > User Rights Assignment.
-   - Locate the policy Lock pages in memory.
-   - Add the SQL Server service account (the account under which SQL Server runs) to this policy.
-2. Restart the SQL Server Service:
-   - After granting the privilege, restart the SQL Server service so the change takes effect.
-3. Verification:
-   - Monitor memory usage to ensure that SQL Server memory is not being paged out to disk.
+> Note: This setting is configured at the Windows OS level and not through SQL Server Management Studio or T‑SQL.
+
+###### Operating System Configuration
+
+1. Grant the Privilege
+
+   - Open the Local Security Policy console (`secpol.msc`)
+   - Navigate to: `Local Policies` → `User Rights Assignment`
+   - Locate Lock pages in memory
+   - Add the SQL Server service account to the policy
+
+2. Restart the SQL Server Service
+
+   - Changes take effect only after restarting the SQL Server service
+
+3. Verification
+
+   - Use Windows Resource Monitor or sys.dm_os_process_memory to confirm that paging is minimized and SQL Server memory is retained in physical RAM:
+
+     ```sql
+     SELECT sql_memory_model_desc
+     FROM sys.dm_os_sys_info;
+     ```
+
+     - If the setting is active, `sql_memory_model_desc` will return: `LOCK_PAGES`
+     - If not, it will return: `CONVENTIONAL` or `LARGE_PAGES` (if that feature is used)
+
+###### SQL Server Management Studio
+
+Not possible — this is a Windows security setting and cannot be configured within SQL Server Management Studio.
+
+###### Server-Level
+
+Not possible — this setting cannot be changed via SQL Server commands or configuration.
+
+###### Query-Level
+
+Not possible — memory locking is a system-level privilege and cannot be controlled or scoped to individual queries.
 
 ------------------------- -------------------------
 
