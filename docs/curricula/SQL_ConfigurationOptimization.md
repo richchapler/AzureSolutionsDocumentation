@@ -1189,7 +1189,7 @@ Compare time elapsed with previous run.
 ### sys.query_store_query
 
 | Column                      | Description                                                  | Related to Memory Optimization |
-| --------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| :--- | :--- | :--- |
 | query_id                    | Unique identifier for the query in Query Store               |                                |
 | query_text_id               | References the query text stored in sys.query_store_query_text |                                |
 | query_hash                  | Hash value for the query text                                |                                |
@@ -1202,7 +1202,7 @@ Compare time elapsed with previous run.
 ### sys.query_store_query_text
 
 | Column               | Description                                                  | Related to Memory Optimization |
-| -------------------- | ------------------------------------------------------------ | ------------------------------ |
+| :--- | :--- | :--- |
 | query_text_id        | Unique identifier for the text row in Query Store            |                                |
 | query_sql_text       | Actual text of the query                                     |                                |
 | is_internal_query    | Indicates if the query text belongs to an internal SQL Server query |                                |
@@ -1211,7 +1211,7 @@ Compare time elapsed with previous run.
 ### sys.query_store_plan
 
 | Column                            | Description                                                  | Related to Memory Optimization |
-| --------------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| :--- | :--- | :--- |
 | plan_id                           | Unique identifier for the plan in Query Store                |                                |
 | query_id                          | References the query in sys.query_store_query                |                                |
 | engine_version                    | Indicates the version of the SQL Server engine               |                                |
@@ -1227,7 +1227,7 @@ Compare time elapsed with previous run.
 ### sys.query_store_runtime_stats
 
 | Column                      | Description                                                  | Related to Memory Optimization |
-| --------------------------- | ------------------------------------------------------------ | ------------------------------ |
+| :--- | :--- | :--- |
 | runtime_stats_id            | Unique identifier for this row of runtime stats              |                                |
 | plan_id                     | References sys.query_store_plan                              |                                |
 | interval_id                 | References sys.query_store_interval, which groups runtime stats by time intervals |                                |
