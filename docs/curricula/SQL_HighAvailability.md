@@ -92,22 +92,103 @@ The database administration team at a mid-sized organization must ensure data av
   
 - Outcome: Continuous assurance that the high availability setup is functioning optimally and that issues are addressed promptly
 
-  
-
 ------------------------- -------------------------
 
 #### Exercise
 
-The following step-by-step instructions detail setup of a basic Always On Availability Group.
+##### Prepare Failover Cluster
 
-##### Prepare SQL Server Instances
+###### Enable Failover Clustering 
+
+Open PowerShell as Administrator
+
+* Right‑click the PowerShell icon and select Run as administrator
+  
+* Install the Failover Clustering feature and management tools
+
+   ```powershell
+   Install-WindowsFeature Failover-Clustering -IncludeManagementTools
+   ```
+   - If prompted to reboot, allow the server to restart
+
+* Verify installation
+   ```powershell
+   Get-WindowsFeature Failover-Clustering
+   ```
+   - Look for Install State: Installed
+
+-------------------------
+
+###### Validate Cluster Configuration
+
+Run cluster validation tests (pre‑cluster‑creation)
+```powershell
+Test-Cluster -Node <ServerName> -Include "List System Information","Validate Software Update Levels","Validate Active Directory Configuration","Validate Network Configuration","Validate Storage Spaces Configuration" -Verbose
+```
+- You can customize which tests to run (or simply run all tests by omitting `-Include`)
+
+Review the validation results
+- The console output will indicate any warnings or errors
+- A report file path is usually provided (e.g., `C:\Users\<User>\AppData\Local\Temp\...htm`)
+- In a single‑node, workgroup scenario, expect warnings about quorum (no witness) and Active Directory (not domain‑joined). This is normal for a lab environment
+
+-------------------------
+
+###### Create a Single‑Node Cluster
+
+Create the cluster:
+```powershell
+New-Cluster -Name <ClusterName> -Node <ServerName> -StaticAddress <IP_Address>
+```
+- Example:
+  ```powershell
+  New-Cluster -Name MySingleNodeCluster -Node WIN-C1BD8M7BFSP -StaticAddress 172.30.221.134
+  ```
+- This command:
+  - Creates a new cluster named MySingleNodeCluster
+  - Uses WIN-C1BD8M7BFSP as the sole node
+  - Assigns a static IP 172.30.221.134 to the cluster’s network name resource
+
+Check that the cluster was created:
+```powershell
+Get-Cluster
+```
+- It should list the newly created cluster and its properties
+
+(Optional) Run post‑creation validation tests:
+```powershell
+Test-Cluster -Verbose
+```
+- Again, warnings about a missing witness or non‑domain environment are expected for a single‑node cluster in a workgroup
+
+-------------------------
+
+###### Verify in the Failover Cluster Manager
+
+Open Failover Cluster Manager: 
+- Press Windows + R, type `cluadmin.msc`, and press Enter
+
+Connect to your cluster:  
+- In the left pane, right‑click Failover Cluster Manager and select Connect to Cluster…  
+- Enter your cluster’s name or IP (e.g., MySingleNodeCluster or 172.30.221.134)
+- Click OK
+- The new cluster should appear in the left pane
+
+Check cluster status:  
+- Expand your cluster name
+- Ensure the core resources (Network Name, IP Address) are online
+- You can also run Validate Configuration from the Actions pane if you want a GUI‑based validation report
+
+------------------------- -------------------------
+
+##### Prepare SQL Server
 
 > Note: This section assumes you have a Windows Server machine with no existing SQL Server instances
 
 ###### Primary Instance
 
 - Run the SQL Server 2022 installer
-- On the "SQL Server Installation Center", select "Installation" and then click "New SQL Server stand-alone installation or add features to an existing installation"
+- On the "SQL Server Installation Center", select "Installation" and then click "New SQL Server stand-alone installation..."
 - Complete the "SQL Server 2022 Setup" wizard 
   - "Edition": Enter product key and check "I have a SQL Server license only"
   - "License Terms": Accept license terms
@@ -128,132 +209,80 @@ The following step-by-step instructions detail setup of a basic Always On Availa
 
 - Repeat the process for `SQL_SECONDARY`
 
-
-
-
 -------------------------
 
-##### Enable Always On
+###### Always On
 
 - Open SQL Server Configuration Manager and then select "SQL Server Services"
 
-- Right-click `SQL Server (MSSQLSERVER)` and select "Properties" from the resulting menu
+- Right-click on `SQL Server (SQL_PRIMARY)` and select "Properties" from the resulting menu
 
 - Click the "Always On Availability Groups" tab and then check "Enable Always On Availability Groups"
 
-- Click "OK" and then restart `SQL Server (MSSQLSERVER)`
+- Click "OK" and then restart `SQL Server (SQL_PRIMARY)`
 
-  
-
--------------------------
-
-##### Enable Failover Clustering
-
-- Open Server Manager, click "Manage" in the upper-right, then select "Add Roles and Features"
-
-- On the "Add Roles and Features Wizard" popup
-  - "Before you begin": Click "Next"
-  - "Select installation type": Select "Role-based or feature-based installation" and then click "Next"
-  - "Select destination server": Confirm selection of "Select a server...", choose the server in the "Server Pool" list and then "Next"
-  - "Select server roles": Click "Next"
-  - "Select features": Check "Failover Clustering"
-    - On the resulting "Add features that are required for Failover Clustering?" popup, click "Add Features"
-    - Click "Next"
-  - "Confirmation": Check "Restart the destination server automatically if required" and then click "Install"
-
+* Repeat the process for `SQL Server (SQL_SECONDARY)`
 
 
 -------------------------
-
-##### Validate Configuration
-
-- Open Server Manager, click "Tools" in the upper-right, then select "Failover Cluster Manager"
-
-- In the "Actions" pane, click "Validate Configuration" and complete the "Validate a Configuration Wizard"
-
-  - "Before you begin": Click "Next"
-  - "Select Servers or a Cluster":  Enter server name, click "Add", and then click "Next"
-  - "Testing Options":  Click "Run all tests..." and then click "Next"
-
-  * "Confirmation": Review and then click "Next"
-
-  * "Validating": Confirm that all tests pass without error
-
-  * "Summary": Click "View Report" and review results
-
-
-
--------------------------
-
-##### Create Single-Node Cluster
-
-- Open Failover Cluster Manager
-
-- In the "Actions" pane, click "Create Cluster" and complete the "Create Cluster Wizard"
-  - "Before you begin": Click "Next"
-  - "Select Servers": Enter server name, click "Add", and then click "Next"
-  - "Access Point...": Enter Cluster Name `MySingleNodeCluster` and then click "Next"
-  - "Confirmation": Review and then click "Next"
-  - "Creating New Cluster" and "Summary": Wait for successful completion and then click "Finish"
-  
-- Verify cluster  
-  - Confirm that the newly created cluster appears in the "Clusters" list
-  
-  - Click on the cluster link and confirm status "Online"
-
-
-
-
--------------------------
-
-##### Prepare Databases
 
 ###### `PrimaryReplica` Database
 
-- Open SQL Server Management Studio and connect to your SQL Server instance
+Create a "Temp" directory on the C drive if one does not exist.
 
-- Execute the following T‑SQL to create a sample database named `PrimaryReplica`  
+Open SQL Server Management Studio and connect to the `SQL_PRIMARY` instance
+
+- Execute the following T‑SQL to create a sample database named `PrimaryReplica`
+
   ```sql
   CREATE DATABASE PrimaryReplica ON (NAME = PrimaryReplica_Data, FILENAME = 'C:\Temp\PrimaryReplica.mdf')
   ```
 
-- Execute the following T‑SQL to verify the database was created and is online  
-  
+- Execute the following T‑SQL to verify the database was created and is online
+
   ```sql
-  SELECT name FROM sys.databases WHERE name = 'PrimaryReplicaDB';
+  SELECT name FROM sys.databases WHERE name = 'PrimaryReplica'
   ```
-  
+
 - Execute the following T‑SQL to ensure the database is in full recovery mode
-  
-  ```sql
-  ALTER DATABASE PrimaryReplica SET RECOVERY FULL;
-  ```
-
-
-###### `SecondaryReplica` Database
-
-* Execute the following T‑SQL to backup the `PrimaryReplica` database 
 
   ```sql
-  BACKUP DATABASE PrimaryReplica TO DISK = 'C:\Temp\PrimaryReplica.bak' WITH INIT;
+  ALTER DATABASE PrimaryReplica SET RECOVERY FULL
   ```
 
-* Simulate a secondary replica on the same machine by restoring the backup under a new name using new file paths
+* Execute the following T‑SQL to backup the `PrimaryReplica` database
 
     ```sql
-    RESTORE DATABASE SecondaryReplica FROM DISK = 'C:\Temp\PrimaryReplica.bak' WITH NORECOVERY,
-    MOVE 'PrimaryReplica_Data' TO 'C:\Temp\SecondaryReplica_Data.mdf',
-    MOVE 'PrimaryReplica_Log' TO 'C:\Temp\SecondaryReplica_Log.ldf';
+    BACKUP DATABASE PrimaryReplica TO DISK = 'C:\Temp\PrimaryReplica.bak' WITH INIT
     ```
-
-
 
 -------------------------
 
-##### Configure the Always On Availability Group
+###### `SecondaryReplica` Database
 
-- Open SQL Server Management Studio and connect to your SQL Server instance
+Connect to the `SQL_SECONDARY` instance
 
+- Execute the following T‑SQL to restore the backup as a new database named `SecondaryReplica` using new file paths
+
+  ```sql
+  RESTORE DATABASE SecondaryReplica FROM DISK = 'C:\Temp\PrimaryReplica.bak' WITH NORECOVERY,
+  MOVE 'PrimaryReplica_Data' TO 'C:\Temp\SecondaryReplica_Data.mdf',
+  MOVE 'PrimaryReplica_Log' TO 'C:\Temp\SecondaryReplica_Log.ldf'
+  ```
+
+* Execute the following T‑SQL to verify database state
+
+    ```sql
+    SELECT name, state_desc FROM sys.databases WHERE name = 'SecondaryReplica'
+    ```
+
+    The state should show as "RESTORING". This is the expected condition for a database that is being prepared for an Always On availability group, as it must remain in "RESTORING" mode to continuously receive log backups for synchronization.
+
+-------------------------
+
+###### Configure the Always On Availability Group
+
+- Open SQL Server Management Studio and connect to the `SQL_PRIMARY` instance
 - "Object Explorer": Right-click "Always On High Availability" and then "New Availability Group Wizard" in the resulting menu
 
 - Complete the "New Availability Group" wizard:
@@ -327,7 +356,7 @@ The following step-by-step instructions detail setup of a basic Always On Availa
 
 -------------------------
 
-### Test Failover
+##### Test Failover
 
 - ##### Initiate a Manual Failover:
 
