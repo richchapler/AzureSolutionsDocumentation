@@ -80,20 +80,72 @@ The database administration team at a mid-sized organization must ensure data av
 ##### Monitoring Considerations
 
 - Importance of Monitoring: Early detection of issues such as replication delays or server failures is crucial.
+
 - Tools and Techniques:
   - Dynamic Management Views (DMVs): Use DMVs to query system health and performance statistics
   - Performance Dashboards: Visual tools that display real-time metrics on replication status, CPU usage, and memory consumption
+  
 - What to Monitor
   - Replication latency between primary and secondary replicas
   - Server resource usage to detect potential bottlenecks
   - Error logs for any signs of communication failures or synchronization issues
+  
 - Outcome: Continuous assurance that the high availability setup is functioning optimally and that issues are addressed promptly
+
+  
 
 ------------------------- -------------------------
 
 #### Exercise
 
 The following step-by-step instructions detail setup of a basic Always On Availability Group.
+
+##### Prepare SQL Server Instances
+
+> Note: This section assumes you have a Windows Server machine with no existing SQL Server instances
+
+###### Primary Instance
+
+- Run the SQL Server 2022 installer
+- On the "SQL Server Installation Center", select "Installation" and then click "New SQL Server stand-alone installation or add features to an existing installation"
+- Complete the "SQL Server 2022 Setup" wizard 
+  - "Edition": Enter product key and check "I have a SQL Server license only"
+  - "License Terms": Accept license terms
+  - "Global Rules": Automatically skipped
+  - "Microsoft Update": Check "Use Microsoft Update to check for updates..."
+  - "Product Updates": Automatically skipped
+  - "Install Setup Files": Automatically skipped
+  - "Install Rules": Address errors (if applicable)
+  - "Azure Extension for SQL Server": Uncheck "Azure Extension for SQL Server"
+  - "Feature Selection": Check "Database Engine Services"
+  - "Instance Configuration": Select "Named instance" and enter `SQL_PRIMARY`
+  - "Server Configuration": No changes required
+  - "Database Engine Configuration": Click "Add Current User"
+  - "Ready to Install": Review settings then click "Install"
+  - "Installation Progress" and "Complete": Ensure successful installation
+
+###### Secondary Instance
+
+- Repeat the process for `SQL_SECONDARY`
+
+
+
+
+-------------------------
+
+##### Enable Always On
+
+- Open SQL Server Configuration Manager and then select "SQL Server Services"
+
+- Right-click `SQL Server (MSSQLSERVER)` and select "Properties" from the resulting menu
+
+- Click the "Always On Availability Groups" tab and then check "Enable Always On Availability Groups"
+
+- Click "OK" and then restart `SQL Server (MSSQLSERVER)`
+
+  
+
+-------------------------
 
 ##### Enable Failover Clustering
 
@@ -109,111 +161,158 @@ The following step-by-step instructions detail setup of a basic Always On Availa
     - Click "Next"
   - "Confirmation": Check "Restart the destination server automatically if required" and then click "Install"
 
-- Verify installation
-  - Open Server Manager, click "Tools" in the upper-right, then select "Failover Cluster Manager"
 
-    - If "Failover Cluster Manager" opens without error, the feature is installed successfully
-
-    
 
 -------------------------
 
-##### Validate VM for Clustering
+##### Validate Configuration
 
-* Open Server Manager, click "Manage" in the upper-right, then select "Add Roles and Features"
+- Open Server Manager, click "Tools" in the upper-right, then select "Failover Cluster Manager"
 
-  - Click "Tools" in the upper-right corner
+- In the "Actions" pane, click "Validate Configuration" and complete the "Validate a Configuration Wizard"
 
-  - Select "Failover Cluster Manager" from the dropdown menu
+  - "Before you begin": Click "Next"
+  - "Select Servers or a Cluster":  Enter server name, click "Add", and then click "Next"
+  - "Testing Options":  Click "Run all tests..." and then click "Next"
 
-* In "Failover Cluster Manager," click "Validate Configuration" under "Actions"
+  * "Confirmation": Review and then click "Next"
 
-* When prompted, enter the local VM name
+  * "Validating": Confirm that all tests pass without error
 
-* Choose "Run all tests" (or select specific tests as needed)
+  * "Summary": Click "View Report" and review results
 
-* Confirm that all tests pass without errors
 
-  
 
 -------------------------
 
 ##### Create Single-Node Cluster
 
-- Open "Failover Cluster Manager"
-  - In Server Manager, click "Tools" in the upper-right, then select "Failover Cluster Manager"
-- "Validate Configuration":  
-  - In the left pane of Failover Cluster Manager, click "Validate Configuration" under "Actions"  
-  - When prompted, enter the local VM name  
-  - Choose "Run all tests" or select the specific tests you want to run  
-  - Confirm that all tests pass without errors
-- "Create Cluster":  
-  - After validation, click "Create Cluster" under "Actions"  
-  - Enter the local VM name again when asked for the server to include  
-  - Provide a cluster name (e.g., "MySingleNodeCluster")  
-  - Deselect any unnecessary storage if prompted  
-  - Click "Next" and then "Finish" to complete the wizard
-- Verify the Cluster:  
-  - Check that the newly created cluster appears under "Failover Cluster Manager"  
-  - Ensure the single node is listed as "Up" and that network settings are properly configured
+- Open Failover Cluster Manager
+
+- In the "Actions" pane, click "Create Cluster" and complete the "Create Cluster Wizard"
+  - "Before you begin": Click "Next"
+  - "Select Servers": Enter server name, click "Add", and then click "Next"
+  - "Access Point...": Enter Cluster Name `MySingleNodeCluster` and then click "Next"
+  - "Confirmation": Review and then click "Next"
+  - "Creating New Cluster" and "Summary": Wait for successful completion and then click "Finish"
+  
+- Verify cluster  
+  - Confirm that the newly created cluster appears in the "Clusters" list
+  
+  - Click on the cluster link and confirm status "Online"
+
+
+
 
 -------------------------
 
-##### Create and Prepare the Sample Database
+##### Prepare Databases
 
-- Create the Database on the Primary Server:
+###### `PrimaryReplica` Database
 
-  - Open SQL Server Management Studio (SSMS) and connect to the primary SQL Server instance
+- Open SQL Server Management Studio and connect to your SQL Server instance
 
-  - Execute T‑SQL to create a sample database named PrimaryReplicaDB
+- Execute the following T‑SQL to create a sample database named `PrimaryReplica`  
+  ```sql
+  CREATE DATABASE PrimaryReplica ON (NAME = PrimaryReplica_Data, FILENAME = 'C:\Temp\PrimaryReplica.mdf')
+  ```
+
+- Execute the following T‑SQL to verify the database was created and is online  
+  
+  ```sql
+  SELECT name FROM sys.databases WHERE name = 'PrimaryReplicaDB';
+  ```
+  
+- Execute the following T‑SQL to ensure the database is in full recovery mode
+  
+  ```sql
+  ALTER DATABASE PrimaryReplica SET RECOVERY FULL;
+  ```
+
+
+###### `SecondaryReplica` Database
+
+* Execute the following T‑SQL to backup the `PrimaryReplica` database 
+
+  ```sql
+  BACKUP DATABASE PrimaryReplica TO DISK = 'C:\Temp\PrimaryReplica.bak' WITH INIT;
+  ```
+
+* Simulate a secondary replica on the same machine by restoring the backup under a new name using new file paths
 
     ```sql
-    CREATE DATABASE PrimaryReplicaDB
-    ON (NAME = PrimaryReplicaDB_Data, FILENAME = 'C:\SQLData\PrimaryReplicaDB.mdf'),
-       (NAME = PrimaryReplicaDB_Log, FILENAME = 'C:\SQLData\PrimaryReplicaDB.ldf');
+    RESTORE DATABASE SecondaryReplica FROM DISK = 'C:\Temp\PrimaryReplica.bak' WITH NORECOVERY,
+    MOVE 'PrimaryReplica_Data' TO 'C:\Temp\SecondaryReplica_Data.mdf',
+    MOVE 'PrimaryReplica_Log' TO 'C:\Temp\SecondaryReplica_Log.ldf';
     ```
 
-  - Verify creation using:
 
-    ```sql
-    SELECT name FROM sys.databases WHERE name = 'PrimaryReplicaDB';
-    ```
-
-- Back Up the Database:
-
-  - On the primary server, run:
-
-    ```sql
-    BACKUP DATABASE PrimaryReplicaDB TO DISK = 'C:\Backup\PrimaryReplicaDB.bak' WITH INIT;
-    ```
-
-- Restore the Database on the Secondary Server:
-
-  - Connect to the secondary SQL Server instance (part of the cluster)
-
-  - Restore the backup using the NORECOVERY option:
-
-    ```sql
-    RESTORE DATABASE PrimaryReplicaDB FROM DISK = 'C:\Backup\PrimaryReplicaDB.bak' WITH NORECOVERY;
-    ```
 
 -------------------------
 
 ##### Configure the Always On Availability Group
 
-- Launch the New Availability Group Wizard in SSMS on the Primary Server
+- Open SQL Server Management Studio and connect to your SQL Server instance
 
-  - Name the Availability Group (e.g., "AG_PrimaryReplica")
-  - Select PrimaryReplicaDB as the database to include (ensure it’s in full recovery mode and backed up on both nodes)
-  - Add replicas by specifying the primary (current server) and the secondary (the other cluster node)
-  - Configure the replicas to use synchronous-commit mode for minimal data loss
-  - Enable automatic failover if desired
-  - Optionally, set up an Availability Group Listener for simplified client connectivity
-  - Complete the wizard by reviewing the configuration and applying the changes
+- "Object Explorer": Right-click "Always On High Availability" and then "New Availability Group Wizard" in the resulting menu
 
-- Verify the Configuration:
+- Complete the "New Availability Group" wizard:
 
-  - In SSMS, query the availability group status using:
+  - "Introduction": Skip
+
+  - "Specify Options"
+
+    - Enter "Availability group name" `PrimaryReplica` 
+
+    - Choose "Cluster type"
+
+      - Windows Server Failover Cluster (recommended): Default value... for health checks and failovers  
+      - EXTERNAL: For third-party cluster managers (e.g., Pacemaker on Linux)... useful if WSFC isn’t feasible  
+
+      - NONE: Creates a read-scale, cluster-less Availability Group... no automatic failover, suitable for offloading reads to secondaries
+
+
+      * "Database Level Health Detection": `unchecked`  
+    
+          - Checks the health of each database individually  
+    
+          - Allows more granular failover if one database becomes unhealthy  
+    
+          - Useful if multiple databases are in the same group
+
+
+      * "Per Database DTC Support": `unchecked`
+    
+          - Manages distributed transactions on a per-database basis  
+    
+          - Enable only if your applications rely on DTC across multiple databases
+
+
+      * "Contained": `unchecked`
+    
+          - Stores users/logins inside the database  
+    
+          - Easier to move the database to another instance without re-creating logins
+
+
+      * "Select Databases": Choose the `PrimaryReplica` database (ensure it is in full recovery mode and has been backed up)
+
+  - Select Replicas  
+
+    - Add the primary replica (the current server hosting `PrimaryReplica`)  
+    - Add the secondary replica (the simulated `SecondaryReplica` on the same VM)  
+    - Use synchronous-commit mode to ensure minimal data loss  
+    - Enable automatic failover if desired  
+    - Optionally configure an Availability Group Listener for simpler client connections
+
+  - Review and Complete  
+
+    - Review your configuration settings  
+    - Click "Next" and then "Finish" to create the Availability Group
+
+  - Verify the Configuration  
+
+    - In SSMS, run the following T‑SQL to check the status of the Availability Group:
 
     ```sql
     SELECT ag.name, ags.primary_replica, ags.secondary_replicas, ags.is_failover_ready
@@ -221,7 +320,10 @@ The following step-by-step instructions detail setup of a basic Always On Availa
     JOIN sys.availability_groups AS ag ON ags.group_id = ag.group_id;
     ```
 
-  - Confirm that the primary and secondary replicas are synchronized
+    - Confirm that both the primary and secondary replicas are synchronized and ready for failover
+
+
+
 
 -------------------------
 
