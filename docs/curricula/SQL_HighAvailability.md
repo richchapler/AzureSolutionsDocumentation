@@ -96,193 +96,219 @@ The database administration team at a mid-sized organization must ensure data av
 
 #### Exercise
 
-##### Prepare Failover Cluster
+##### Pre-Requisites
 
-###### Enable Failover Clustering 
+* Windows Server named `SERVER_PRIMARY` with SQL Server, SQL Server Management Studio, and PowerShell 7.x.
+* Windows Server named `SERVER_SECONDARY` with SQL Server, SQL Server Management Studio, and PowerShell 7.x.
 
-Open PowerShell as Administrator
 
-* Right‑click the PowerShell icon and select Run as administrator
-  
-* Install the Failover Clustering feature and management tools
-
-   ```powershell
-   Install-WindowsFeature Failover-Clustering -IncludeManagementTools
-   ```
-   - If prompted to reboot, allow the server to restart
-
-* Verify installation
-   ```powershell
-   Get-WindowsFeature Failover-Clustering
-   ```
-   - Look for Install State: Installed
 
 -------------------------
 
-###### Validate Cluster Configuration
+##### Windows Server
 
-Run cluster validation tests (pre‑cluster‑creation)
-```powershell
-Test-Cluster -Node <ServerName> -Include "List System Information","Validate Software Update Levels","Validate Active Directory Configuration","Validate Network Configuration","Validate Storage Spaces Configuration" -Verbose
-```
-- You can customize which tests to run (or simply run all tests by omitting `-Include`)
+###### Failover Clustering
 
-Review the validation results
-- The console output will indicate any warnings or errors
-- A report file path is usually provided (e.g., `C:\Users\<User>\AppData\Local\Temp\...htm`)
-- In a single‑node, workgroup scenario, expect warnings about quorum (no witness) and Active Directory (not domain‑joined). This is normal for a lab environment
+Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
 
--------------------------
+- Run the following PowerShell script to install the Failover Clustering feature and management tools:
 
-###### Create a Single‑Node Cluster
-
-Create the cluster:
-```powershell
-New-Cluster -Name <ClusterName> -Node <ServerName> -StaticAddress <IP_Address>
-```
-- Example:
   ```powershell
-  New-Cluster -Name MySingleNodeCluster -Node WIN-C1BD8M7BFSP -StaticAddress 172.30.221.134
+  Install-WindowsFeature Failover-Clustering -IncludeManagementTools
   ```
-- This command:
-  - Creates a new cluster named MySingleNodeCluster
-  - Uses WIN-C1BD8M7BFSP as the sole node
-  - Assigns a static IP 172.30.221.134 to the cluster’s network name resource
 
-Check that the cluster was created:
-```powershell
-Get-Cluster
-```
-- It should list the newly created cluster and its properties
+  Expected Result:
 
-(Optional) Run post‑creation validation tests:
-```powershell
-Test-Cluster -Verbose
-```
-- Again, warnings about a missing witness or non‑domain environment are expected for a single‑node cluster in a workgroup
+  ```text
+  Success Restart Needed Exit Code      Feature Result
+  ------- -------------- ---------      --------------
+  True    No             Success        {Failover Clustering, Remote Server Admini...
+  ```
+
+  
+
+- Run the following PowerShell script to verify the installation on each server:
+
+  ```powershell
+  Get-WindowsFeature Failover-Clustering
+  ```
+
+  Expected Result:
+
+  ```text
+  Display Name                                            Name                       Install State
+  ------------                                            ----                       -------------
+  [X] Failover Clustering                                 Failover-Clustering            Installed
+  ```
+
+
 
 -------------------------
 
-###### Verify in the Failover Cluster Manager
+###### Cluster
 
-Open Failover Cluster Manager: 
-- Press Windows + R, type `cluadmin.msc`, and press Enter
+Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
 
-Connect to your cluster:  
-- In the left pane, right‑click Failover Cluster Manager and select Connect to Cluster…  
-- Enter your cluster’s name or IP (e.g., MySingleNodeCluster or 172.30.221.134)
-- Click OK
-- The new cluster should appear in the left pane
+- Run the following PowerShell script to run cluster validation tests before creating the cluster on both servers:
 
-Check cluster status:  
-- Expand your cluster name
-- Ensure the core resources (Network Name, IP Address) are online
-- You can also run Validate Configuration from the Actions pane if you want a GUI‑based validation report
+  ```powershell
+  Test-Cluster -Node localhost -Verbose
+  ```
+
+- On `SERVER_PRIMARY`, run the following PowerShell script to create a new cluster:
+
+    ```powershell
+    # Get the first interface with a default gateway and an IPv4 address
+    $ipConfig = Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -and $_.IPv4Address } | Select-Object -First 1
+    
+    if (-not $ipConfig) {
+        Write-Error "No network interface with a default gateway was found."
+        return
+    }
+    
+    # Extract the IPv4 address (as a string) from the first available entry
+    $primaryIP = $ipConfig.IPv4Address[0].IPAddress
+    # Split into octets and build the subnet (assuming a /24 subnet)
+    $subnetParts = $primaryIP.Split('.')
+    $subnet = "$($subnetParts[0]).$($subnetParts[1]).$($subnetParts[2])"
+    
+    # Define a starting host number (adjust if needed) and find the first available IP on that subnet
+    $firstHost = (2..254) | Where-Object { -not (Test-Connection -Count 1 -Quiet -Destination "$subnet.$_") } | Select-Object -First 1
+    if (-not $firstHost) {
+        Write-Error "No available IP address found in the subnet $subnet.0/24."
+        return
+    }
+    
+    $IP = "$subnet.$firstHost"
+    Write-Output "Using available IP: $IP"
+    
+    # Create the cluster using the identified available IP
+    New-Cluster -Name "myCluster" -Node localhost -StaticAddress $IP
+    
+    ```
+
+
+
+* Open Failover Cluster Manager on `SERVER_PRIMARY`, connect to your cluster, and confirm cluster status = "Online"
+
+* On `SERVER_PRIMARY`, run the following PowerShell script to get the IP address for use in the next step:
+
+  ```powershell
+  ipconfig
+  ```
+
+
+
+-------------------------
+
+###### Cluster Node
+
+- On `SERVER_SECONDARY`, run the following PowerShell script to test connectivity between servers:
+
+  ```powershell
+  Test-Connection -Count 2 -ComputerName "<SERVER_PRIMARY_IPADDRESS>"
+  ```
+
+  Expected result:
+
+  ```text
+     Destination: 172.30.209.74
+  
+  Ping Source           Address                   Latency BufferSize Status
+                                                     (ms)        (B)
+  ---- ------           -------                   ------- ---------- ------
+     1 WIN-JH6VAICNUJH  172.30.209.74                   1         32 Success
+     2 WIN-JH6VAICNUJH  172.30.209.74                   1         32 Success
+  ```
+
+- On `SERVER_SECONDARY`, run the following PowerShell script to test connectivity between servers:
+
+  ```powershell
+  Get-Service -Name ClusSvc
+  ```
+
+  Expected result:
+
+  ```text
+  Status   Name               DisplayName
+  ------   ----               -----------
+  Stopped  ClusSvc            Cluster Service
+  ```
+
+  > Note: If Status = "Stopped", then blah
+
+  
+
+- On `SERVER_SECONDARY`, run the following PowerShell script to add a node to the cluster:
+
+    ```powershell
+    Add-ClusterNode -Name "myCluster"
+    ```
+
+- Verify that SERVER_SECONDARY has joined the cluster by running (on either server):
+
+  ```powershell
+  Get-ClusterNode
+  ```
+
+
 
 ------------------------- -------------------------
 
-##### Prepare SQL Server
-
-> Note: This section assumes you have a Windows Server machine with no existing SQL Server instances
-
-###### Primary Instance
-
-- Run the SQL Server 2022 installer
-- On the "SQL Server Installation Center", select "Installation" and then click "New SQL Server stand-alone installation..."
-- Complete the "SQL Server 2022 Setup" wizard 
-  - "Edition": Enter product key and check "I have a SQL Server license only"
-  - "License Terms": Accept license terms
-  - "Global Rules": Automatically skipped
-  - "Microsoft Update": Check "Use Microsoft Update to check for updates..."
-  - "Product Updates": Automatically skipped
-  - "Install Setup Files": Automatically skipped
-  - "Install Rules": Address errors (if applicable)
-  - "Azure Extension for SQL Server": Uncheck "Azure Extension for SQL Server"
-  - "Feature Selection": Check "Database Engine Services"
-  - "Instance Configuration": Select "Named instance" and enter `SQL_PRIMARY`
-  - "Server Configuration": No changes required
-  - "Database Engine Configuration": Click "Add Current User"
-  - "Ready to Install": Review settings then click "Install"
-  - "Installation Progress" and "Complete": Ensure successful installation
-
-###### Secondary Instance
-
-- Repeat the process for `SQL_SECONDARY`
-
--------------------------
+##### SQL Server
 
 ###### Always On
 
-- Open SQL Server Configuration Manager and then select "SQL Server Services"
+- On `SERVER_PRIMARY`, open SQL Server Configuration Manager and then select "SQL Server Services"
+  - Right-click on `SQL Server (MSSQLSERVER)` and select "Properties" from the resulting menu
 
-- Right-click on `SQL Server (SQL_PRIMARY)` and select "Properties" from the resulting menu
+  - Click the "Always On Availability Groups" tab and then check "Enable Always On Availability Groups"
 
-- Click the "Always On Availability Groups" tab and then check "Enable Always On Availability Groups"
-
-- Click "OK" and then restart `SQL Server (SQL_PRIMARY)`
-
-* Repeat the process for `SQL Server (SQL_SECONDARY)`
+  - Click "OK" and then restart `SQL Server (MSSQLSERVER)`
 
 
--------------------------
+* Repeat the process for `SERVER_SECONDARY`
 
-###### `PrimaryReplica` Database
-
-Create a "Temp" directory on the C drive if one does not exist.
-
-Open SQL Server Management Studio and connect to the `SQL_PRIMARY` instance
-
-- Execute the following T‑SQL to create a sample database named `PrimaryReplica`
-
-  ```sql
-  CREATE DATABASE PrimaryReplica ON (NAME = PrimaryReplica_Data, FILENAME = 'C:\Temp\PrimaryReplica.mdf')
-  ```
-
-- Execute the following T‑SQL to verify the database was created and is online
-
-  ```sql
-  SELECT name FROM sys.databases WHERE name = 'PrimaryReplica'
-  ```
-
-- Execute the following T‑SQL to ensure the database is in full recovery mode
-
-  ```sql
-  ALTER DATABASE PrimaryReplica SET RECOVERY FULL
-  ```
-
-* Execute the following T‑SQL to backup the `PrimaryReplica` database
-
-    ```sql
-    BACKUP DATABASE PrimaryReplica TO DISK = 'C:\Temp\PrimaryReplica.bak' WITH INIT
-    ```
 
 -------------------------
 
-###### `SecondaryReplica` Database
+###### Prepare Databases
 
-Connect to the `SQL_SECONDARY` instance
+* Create "c:\Temp" directories on both Windows Servers
 
-- Execute the following T‑SQL to restore the backup as a new database named `SecondaryReplica` using new file paths
+* On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the database engine
 
-  ```sql
-  RESTORE DATABASE SecondaryReplica FROM DISK = 'C:\Temp\PrimaryReplica.bak' WITH NORECOVERY,
-  MOVE 'PrimaryReplica_Data' TO 'C:\Temp\SecondaryReplica_Data.mdf',
-  MOVE 'PrimaryReplica_Log' TO 'C:\Temp\SecondaryReplica_Log.ldf'
-  ```
-
-* Execute the following T‑SQL to verify database state
+  - Execute the following T‑SQL to create a database:
 
     ```sql
-    SELECT name, state_desc FROM sys.databases WHERE name = 'SecondaryReplica'
+    CREATE DATABASE myDatabase ON (NAME = myDatabase_Data, FILENAME = 'C:\Temp\myDatabase.mdf')
     ```
+  
+  
+    - Execute the following T‑SQL to verify the database was created and is online:
+  
+      ```sql
+      SELECT name FROM sys.databases WHERE name = 'myDatabase'
+      ```
+  
+  
+    - Execute the following T‑SQL to ensure the database is in full recovery mode
+  
+      ```sql
+      ALTER DATABASE myDatabase SET RECOVERY FULL
+      ```
+  
+  
 
-    The state should show as "RESTORING". This is the expected condition for a database that is being prepared for an Always On availability group, as it must remain in "RESTORING" mode to continuously receive log backups for synchronization.
 
 -------------------------
 
 ###### Configure the Always On Availability Group
 
-- Open SQL Server Management Studio and connect to the `SQL_PRIMARY` instance
+> Note: Server requirements: 1) SQL Authentication `sa` enabled, 2) Windows Firewall + Inbound Rule `SQL Server TCP 1433`
+
+- On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the database engine
+
 - "Object Explorer": Right-click "Always On High Availability" and then "New Availability Group Wizard" in the resulting menu
 
 - Complete the "New Availability Group" wizard:
@@ -291,66 +317,147 @@ Connect to the `SQL_SECONDARY` instance
 
   - "Specify Options"
 
-    - Enter "Availability group name" `PrimaryReplica` 
+    - Enter "Availability group name" `myAvailabilityGroup` 
 
-    - Choose "Cluster type"
+    - Choose "Cluster type": `Windows Server Failover Cluster`
 
-      - Windows Server Failover Cluster (recommended): Default value... for health checks and failovers  
-      - EXTERNAL: For third-party cluster managers (e.g., Pacemaker on Linux)... useful if WSFC isn’t feasible  
-
-      - NONE: Creates a read-scale, cluster-less Availability Group... no automatic failover, suitable for offloading reads to secondaries
-
-
-      * "Database Level Health Detection": `unchecked`  
+      - Default value... for health checks and failovers  
     
-          - Checks the health of each database individually  
+      - Other options:
+        - EXTERNAL: For third-party cluster managers (e.g., Pacemaker on Linux)... useful if WSFC isn’t feasible  
     
-          - Allows more granular failover if one database becomes unhealthy  
+        - NONE: Creates a read-scale, cluster-less Availability Group... no automatic failover, suitable for offloading reads to secondaries
     
-          - Useful if multiple databases are in the same group
-
-
-      * "Per Database DTC Support": `unchecked`
+    - "Database Level Health Detection": `unchecked`  
     
-          - Manages distributed transactions on a per-database basis  
+      * Checks the health of each database individually  
     
-          - Enable only if your applications rely on DTC across multiple databases
-
-
-      * "Contained": `unchecked`
+      * Allows more granular failover if one database becomes unhealthy  
     
-          - Stores users/logins inside the database  
+      * Useful if multiple databases are in the same group
     
-          - Easier to move the database to another instance without re-creating logins
+    
+    * "Per Database DTC Support": `unchecked`
+    
+      * Manages distributed transactions on a per-database basis  
+    
+      * Enable only if your applications rely on DTC across multiple databases
+    
+    
+    * "Contained": `unchecked`
+    
+      * Stores users/logins inside the database  
+    
+      * Easier to move the database to another instance without re-creating logins
+    
+  
+  
+    * "Select Databases": Check the `myDatabase` database (and confirms "Meets prerequisites")
+  
+  
+  
+    * "Select Replicas": Click "Add Replica" and complete "Connect to Server" form for `SERVER_SECONDARY`
+      * "Replicas" tab >> "Availability Replicas" matrix: No changes required
+        * Automatic Failover: `Disabled`
+  
 
 
-      * "Select Databases": Choose the `PrimaryReplica` database (ensure it is in full recovery mode and has been backed up)
+* Enabled
+  
+          * Enables the cluster to automatically switch the primary role to a secondary replica without manual intervention when a failure is detected, which minimizes downtime
+          * Requires synchronous commit mode to ensure data consistency, and it may add slight latency as the system waits for confirmation from the secondary
+    
+        * Disabled (default)
+        
+          * Requires manual intervention to initiate the failover, offering more control over the process and potentially avoiding unintended failovers during transient issues
+          * May lead to increased downtime if the primary fails and manual actions are delayed, but can be beneficial in environments where failover decisions need careful review before execution
+        
+      * Availability Mode: `Asynchronous-commit mode`
+      
+        * Synchronous-commit mode
+        
+          * Ensures that transactions on the primary server wait for confirmation from the secondary replica before committing, which minimizes the risk of data loss during a failover
+          * However, it may introduce additional latency as the primary waits for network round-trips, which can impact performance in high-latency environments
+        
+        * Asynchronous-commit mode (default)
+        
+          * Allows the primary server to commit transactions immediately without waiting for the secondary to confirm, which improves performance by reducing latency
+          * This mode comes with a risk of data loss if the primary fails before the secondary has received and applied the latest changes
+      
+      * Readable Secondary: `No`
+      
+        * No (default)
+        
+          * Keeps all read/write operations on the primary, ensuring that all data is accessed from the most current, committed source
+          * May be preferred in scenarios where strict consistency is required or when the workload does not justify offloading read operations to a secondary replica
+        * Yes
+        
+          * Allows the secondary replica to accept read-only workloads, offloading query processing from the primary and potentially improving overall system scalability and performance
+          * Useful for reporting and analytics, as it can help balance workload and reduce the load on the primary server
+        
+        * Read-intent only
+        
+          * Only client connections that explicitly specify an intent to read (using `ApplicationIntent=ReadOnly` in the connection string) are allowed on the secondary replica
+          * Helps prevent unintentional read connections on the secondary while still leveraging its resources for appropriate workloads
 
-  - Select Replicas  
+  * "Select Data Synchronization": `Automatic Seeding`
 
-    - Add the primary replica (the current server hosting `PrimaryReplica`)  
-    - Add the secondary replica (the simulated `SecondaryReplica` on the same VM)  
-    - Use synchronous-commit mode to ensure minimal data loss  
-    - Enable automatic failover if desired  
-    - Optionally configure an Availability Group Listener for simpler client connections
 
-  - Review and Complete  
+    * Automatic Seeding
+      - Automatically creates the database on each secondary replica, then streams the data directly from the primary replica
+      - Simplifies the setup process because you do not have to manually perform backups and restores on the secondaries
+      - May be limited by your network bandwidth or other environmental constraints, especially for very large databases
+    * Full Database and Log Backup
+      - Wizard takes a full backup and log backup of each database on the primary and restores them to the secondaries
+      - Requires a valid file path (e.g., a shared folder) that all replicas can access
+      - Ensures that each secondary database is properly prepared in NORECOVERY mode, after which the wizard finalizes the join to the availability group
+    * Join Only
+      - Assumes you have already manually backed up and restored the databases to the secondary replicas in NORECOVERY mode
+      - The wizard merely joins those restored databases to the availability group, rather than creating or restoring them automatically
+      - Useful when you have complex restore requirements, large databases, or prefer to handle the backup/restore process yourself
+    * Skip Initial Data Synchronization
+      - Creates the availability group without performing any data movement or backup/restore steps
+      - You must handle all backup/restore operations and manually join each secondary database to the availability group later
+      - Often chosen for highly customized workflows or environments where you need to control every step of the data synchronization process manually
 
-    - Review your configuration settings  
-    - Click "Next" and then "Finish" to create the Availability Group
+  * "Validation": Confirm "Success" results
 
-  - Verify the Configuration  
+  * "Summary": Review and then click "Finish"
 
-    - In SSMS, run the following T‑SQL to check the status of the Availability Group:
+  * "Results": Monitor progress and confirm success
 
-    ```sql
-    SELECT ag.name, ags.primary_replica, ags.secondary_replicas, ags.is_failover_ready
-    FROM sys.dm_hadr_availability_group_states AS ags
-    JOIN sys.availability_groups AS ag ON ags.group_id = ag.group_id;
-    ```
+  
 
-    - Confirm that both the primary and secondary replicas are synchronized and ready for failover
+-------------------------
 
+###### Verify Configuration  
+
+- On `SERVER_PRIMARY`, execute the following T‑SQL to verify configuration and status:
+
+  ```sql
+  SELECT 
+      ag.name AS AGName,
+      ar.replica_server_name AS ReplicaName,
+      rs.role_desc AS ReplicaRole,
+      rs.operational_state_desc AS OperationalState,
+      rs.connected_state_desc AS ConnectedState,
+      rs.synchronization_health AS SyncState
+  FROM sys.availability_groups AS ag
+  JOIN sys.availability_replicas AS ar 
+      ON ag.group_id = ar.group_id
+  JOIN sys.dm_hadr_availability_replica_states AS rs 
+      ON ar.replica_id = rs.replica_id;
+  ```
+
+  The numeric values in the `SyncState` column correspond to specific synchronization states:
+
+  - `0` = NOT SYNCHRONIZING: Replica isn't synchronizing data.
+  - `1` = SYNCHRONIZING: Replica is in the process of synchronizing.
+  - `2` = SYNCHRONIZED: Replica is synchronized (healthy, fully synchronized with the primary).
+  - `3` = REVERTING: Replica reverting state (rarely encountered).
+  - `4` = INITIALIZING: Replica is initializing data synchronization.
+
+- On `SERVER_SECONDARY`, execute the following T‑SQL to LOREM IPSUM
 
 
 
@@ -358,28 +465,53 @@ Connect to the `SQL_SECONDARY` instance
 
 ##### Test Failover
 
-- ##### Initiate a Manual Failover:
+###### Initiate Failover
 
-  - On the primary server, run:
+- On the secondary replica, execute the following T-SQL command to initiate a manual failover:
 
-    ```sql
-    ALTER AVAILABILITY GROUP [AG_PrimaryReplica] FAILOVER;
-    ```
+  ```sql
+  ALTER AVAILABILITY GROUP [myAvailabilityGroup] FAILOVER;
+  ```
 
-- Confirm Failover:
+###### Confirm Failover
 
-  - On the secondary server, verify it now acts as the primary replica using the DMV query from the previous section
-  - If a Listener was configured, check that client connections remain uninterrupted
+- On the former secondary replica, confirm it is now acting as the primary replica by executing the verification query provided previously:
 
-##### Implement Security Considerations
+  ```sql
+  SELECT
+      ag.name AS AGName,
+      ar.replica_server_name AS ReplicaName,
+      rs.role_desc AS ReplicaRole,
+      rs.operational_state_desc AS OperationalState,
+      rs.connected_state_desc AS ConnectedState,
+      rs.synchronization_state_desc AS SyncState
+  FROM sys.availability_groups AS ag
+  JOIN sys.availability_replicas AS ar
+      ON ag.group_id = ar.group_id
+  JOIN sys.dm_hadr_availability_replica_states AS rs
+      ON ar.replica_id = rs.replica_id;
+  ```
+
+- If an availability group listener is configured, verify client connections continue uninterrupted
+
+
+
+-------------------------
+
+##### Security
 
 - Encryption and Access Controls:
   - Ensure communication endpoints use SSL/TLS for encryption
   - Verify that access is restricted to authorized administrators only
+
 - Policy Review:
   - Check that the configuration meets organizational or regulatory security standards
+  
+    
 
-##### Set Up Monitoring
+-------------------------
+
+##### Monitoring
 
 - Using DMVs and Dashboards:
 
@@ -390,6 +522,7 @@ Connect to the `SQL_SECONDARY` instance
     ```
 
   - Use SSMS performance dashboards to view real-time metrics on CPU usage, memory, and replication latency
+
 
 - Log Monitoring:
 
