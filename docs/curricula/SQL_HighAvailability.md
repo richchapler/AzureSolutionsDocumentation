@@ -110,8 +110,11 @@ The database administration team at a mid-sized organization must ensure data av
 
   * SQL Server
     * Configured for mixed authentication (since the demo environment won't be domain-joined)
+    * Master Key (`CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<strongPassword>'`)
+    * Certificate (`CREATE CERTIFICATE Hadr_cert WITH SUBJECT = 'AG endpoint certificate'`)
+    * Backup Certificate (`BACKUP CERTIFICATE Hadr_cert TO FILE = 'C:\Temp\Hadr_cert.cer' WITH PRIVATE KEY ( FILE = 'C:\Temp\Hadr_cert.pvk', ENCRYPTION BY PASSWORD = '<strongPassword>')`)
     * SQL Server Agent started (`Start-Service -Name SQLSERVERAGENT`)
-    * SQL Server Management Studio
+  * SQL Server Management Studio
 
 
 
@@ -229,7 +232,62 @@ Perform the following steps on both servers:
 
 * Repeat the process for `SERVER_SECONDARY`
 
-  
+
+
+-------------------------
+
+###### Certificate-Based Endpoint Authentication
+
+* Create a master key on `SERVER_PRIMARY` and `SERVER_SECONDARY`
+
+    ```sql
+    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'P@55word!'
+    ```
+
+* Create a certificate for the endpoint on `SERVER_PRIMARY` and `SERVER_SECONDARY`
+
+    ```sql
+    CREATE CERTIFICATE Hadr_cert WITH SUBJECT = 'HADR Endpoint Certificate'
+    ```
+
+* Backup the certificate on `SERVER_PRIMARY`
+
+    ```sql
+    BACKUP CERTIFICATE Hadr_cert TO FILE = 'C:\Temp\Hadr_cert.cer'
+    WITH PRIVATE KEY (
+        FILE = 'C:\Temp\Hadr_cert_privatekey.pvk',
+        ENCRYPTION BY PASSWORD = 'P@55word!'
+    )
+    ```
+
+* Copy `Hadr_cert.cer`, `Hadr_cert.pvk`, and `Hadr_cert_privatekey.pvk` to c:\Temp on `SERVER_SECONDARY`
+
+* Restore the certificate on `SERVER_SECONDARY`
+
+    ```sql
+    CREATE CERTIFICATE Hadr_cert FROM FILE = 'C:\Temp\Hadr_cert.cer'
+    WITH PRIVATE KEY (
+        FILE = 'C:\Temp\Hadr_cert_privatekey.pvk',
+        DECRYPTION BY PASSWORD = 'P@55word!'
+    )
+    ```
+
+* Recreate the HADR endpoint on `SERVER_PRIMARY` and `SERVER_SECONDARY`
+
+    ```sql
+    DROP ENDPOINT Hadr_endpoint;
+    GO
+    CREATE ENDPOINT Hadr_endpoint  
+        STATE = STARTED  
+        AS TCP (LISTENER_PORT = 5022)  
+        FOR DATA_MIRRORING (
+            ROLE = ALL, 
+            AUTHENTICATION = CERTIFICATE Hadr_cert, 
+            ENCRYPTION = REQUIRED ALGORITHM AES
+        )
+    ```
+
+
 
 
 -------------------------
@@ -248,14 +306,14 @@ Perform the following steps on both servers:
 
 
     - Verify the database was created and is online:
-
+    
       ```sql
       SELECT name FROM sys.databases WHERE name = 'myDatabase'
       ```
 
 
     - Ensure the database is in full recovery mode
-
+    
       ```sql
       ALTER DATABASE myDatabase SET RECOVERY FULL
       ```
@@ -287,7 +345,7 @@ Perform the following steps on both servers:
 
 ###### Always On Availability Group
 
-- On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the database engine
+On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the database engine:
 
 - "Object Explorer": Right-click "Always On High Availability" and then "New Availability Group Wizard" in the resulting menu
 
@@ -330,43 +388,68 @@ Perform the following steps on both servers:
     
       * Easier to move the database to another instance without re-creating logins
     
-  
-  
-    * "Select Databases": Check the `myDatabase` database (and confirms "Meets prerequisites")
-  
-  * "Select Replicas": Click "Add Replica" and complete "Connect to Server" form for `SERVER_SECONDARY`
-      * "Replicas" tab >> "Availability Replicas" matrix:
-        * Automatic Failover: `Disabled` (default)
-  
-          * Enabled: The cluster automatically fails over to a secondary replica if the primary becomes unavailable. Requires synchronous commit mode and adds slight latency.
-          * Disabled: Failover must be performed manually. Provides more control and avoids unintentional failover, but may increase downtime during failures.
-  
-  
-        * Availability Mode: `Asynchronous-commit mode` (default)
-  
-          * Synchronous-commit: Transactions wait for the secondary to confirm before committing, minimizing data loss but adding latency.
-  
-          * Asynchronous-commit: Transactions commit immediately without waiting for the secondary, improving performance but risking data loss during failover.
-  
-        * Readable Secondary: `No` (default)
-  
-          * No: All read/write activity stays on the primary, ensuring strict consistency and simplifying configuration.
-          * Yes / Read-intent only: Secondary can handle read-only queries to reduce load on the primary — with optional enforcement using `ApplicationIntent=ReadOnly`.
-        * "Select Data Synchronization": `Join only`
-  
-             * Automatic Seeding: Streams the database directly from primary to secondary. Easiest option but may silently fail in lab setups without DNS, proper permissions, or shared services.
-             * Full Database and Log Backup: Wizard handles backup and restore using a shared location. Reliable, but requires a common file path accessible by all replicas.
-  
-             * Join Only: Use when you've already manually restored the database with `NORECOVERY`. The wizard just joins it to the availability group — ideal for custom or large database setups.
-  
-             * Skip Initial Data Synchronization: Creates the AG without any data movement. You’re fully responsible for preparing and joining each secondary manually.
-  
-  * "Validation": Confirm "Success" results
-  
-  * "Summary": Review and then click "Finish"
-  
-  * "Results": Monitor progress and confirm success
-  
+
+
+* "Select Databases": Check the `myDatabase` database (and confirms "Meets prerequisites")
+
+* "Select Replicas": Click "Add Replica" and complete "Connect to Server" form for `SERVER_SECONDARY`
+     * "Replicas" tab >> "Availability Replicas" matrix:
+       * Automatic Failover: `Disabled` (default)
+
+         * Enabled: The cluster automatically fails over to a secondary replica if the primary becomes unavailable. Requires synchronous commit mode and adds slight latency.
+         * Disabled: Failover must be performed manually. Provides more control and avoids unintentional failover, but may increase downtime during failures.
+       
+       
+       * Availability Mode: `Asynchronous-commit mode` (default)
+       
+           * Synchronous-commit: Transactions wait for the secondary to confirm before committing, minimizing data loss but adding latency.
+       
+           * Asynchronous-commit: Transactions commit immediately without waiting for the secondary, improving performance but risking data loss during failover.
+       
+       
+       
+       * Readable Secondary: `No` (default)
+       
+           * No: All read/write activity stays on the primary, ensuring strict consistency and simplifying configuration.
+           * Yes / Read-intent only: Secondary can handle read-only queries to reduce load on the primary — with optional enforcement using `ApplicationIntent=ReadOnly`.
+
+* "Select Data Synchronization": `Join only`
+
+
+        * Automatic Seeding: Streams the database directly from primary to secondary. Easiest option but may silently fail in lab setups without DNS, proper permissions, or shared services.
+        * Full Database and Log Backup: Wizard handles backup and restore using a shared location. Reliable, but requires a common file path accessible by all replicas.
+
+         * Join Only: Use when you've already manually restored the database with `NORECOVERY`. The wizard just joins it to the availability group — ideal for custom or large database setups.
+            
+         * Skip Initial Data Synchronization: Creates the AG without any data movement. You’re fully responsible for preparing and joining each secondary manually.
+
+     * "Validation": Confirm "Success" results
+       
+     * "Summary": Review and then click "Finish"
+       
+     * "Results": Monitor progress and confirm success
+
+
+
+
+- After creating the availability group and adding replicas, recreate the endpoints on both `SERVER_PRIMARY` and `SERVER_SECONDARY`. This step ensures consistent endpoint configuration across both replicas, especially if endpoints were created implicitly or are misaligned.
+
+  ```sql
+  DROP ENDPOINT Hadr_endpoint;
+  GO
+  CREATE ENDPOINT Hadr_endpoint  
+      STATE = STARTED  
+      AS TCP (LISTENER_PORT = 5022)  
+      FOR DATA_MIRRORING (ROLE = ALL, AUTHENTICATION = WINDOWS NEGOTIATE, ENCRYPTION = REQUIRED ALGORITHM AES);
+  ```
+
+- After adding the secondary replica, ensure its seeding mode is set to `AUTOMATIC` (required for automatic seeding):
+
+  ```sql
+  ALTER AVAILABILITY GROUP myAvailabilityGroup 
+  MODIFY REPLICA ON 'SERVER_SECONDARY' 
+  WITH (SEEDING_MODE = AUTOMATIC);
+  ```
 
 
 
