@@ -99,15 +99,12 @@ The database administration team at a mid-sized organization must ensure data av
 ##### Pre-Requisites
 
 * Two servers (`SERVER_PRIMARY` and `SERVER_SECONDARY`), each with:
-
   * Windows Server
     * PowerShell 7.x
     * Firewall + Inbound Rules:
       * SQL Server TCP 1433
       * SQL Server Availability Group Endpoint 5022
-
     * (Optional) Static entries in `C:\Windows\System32\drivers\etc\hosts` if DNS name resolution is unavailable
-
   * SQL Server
     * Configured for mixed authentication (since the demo environment won't be domain-joined)
     * Master Key (`CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<strongPassword>'`)
