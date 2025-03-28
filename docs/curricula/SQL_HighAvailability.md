@@ -98,8 +98,21 @@ The database administration team at a mid-sized organization must ensure data av
 
 ##### Pre-Requisites
 
-* Windows Server named `SERVER_PRIMARY` with SQL Server, SQL Server Management Studio, and PowerShell 7.x.
-* Windows Server named `SERVER_SECONDARY` with SQL Server, SQL Server Management Studio, and PowerShell 7.x.
+* Two servers (`SERVER_PRIMARY` and `SERVER_SECONDARY`), each with:
+
+  * Windows Server
+    * PowerShell 7.x
+    * Firewall + Inbound Rules:
+      * SQL Server TCP 1433
+      * SQL Server Availability Group Endpoint 5022
+
+    * (Optional) Static entries in `C:\Windows\System32\drivers\etc\hosts` if DNS name resolution is unavailable
+
+  * SQL Server
+    * Configured for mixed authentication (since the demo environment won't be domain-joined)
+    * SQL Server Agent started (`Start-Service -Name SQLSERVERAGENT`)
+    * SQL Server Management Studio
+
 
 
 
@@ -109,33 +122,31 @@ The database administration team at a mid-sized organization must ensure data av
 
 ###### Failover Clustering
 
-Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
+Perform the following steps on both servers:
 
-- Run the following PowerShell script to install the Failover Clustering feature and management tools:
+- Install Failover Clustering feature and management tools
 
   ```powershell
   Install-WindowsFeature Failover-Clustering -IncludeManagementTools
   ```
 
-  Expected Result:
+  Expected Result
 
-  ```text
+  ```plaintext
   Success Restart Needed Exit Code      Feature Result
   ------- -------------- ---------      --------------
   True    No             Success        {Failover Clustering, Remote Server Admini...
   ```
 
-  
-
-- Run the following PowerShell script to verify the installation on each server:
+- Verify installation
 
   ```powershell
   Get-WindowsFeature Failover-Clustering
   ```
 
-  Expected Result:
+  Expected Result
 
-  ```text
+  ```plaintext
   Display Name                                            Name                       Install State
   ------------                                            ----                       -------------
   [X] Failover Clustering                                 Failover-Clustering            Installed
@@ -145,17 +156,17 @@ Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
 
 -------------------------
 
-###### Cluster
+###### Cluster and Node
 
-Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
+Perform the following steps on both servers:
 
-- Run the following PowerShell script to run cluster validation tests before creating the cluster on both servers:
+- Validate prerequisites before creating the cluster on both servers
 
   ```powershell
   Test-Cluster -Node localhost -Verbose
   ```
 
-- On `SERVER_PRIMARY`, run the following PowerShell script to create a new cluster:
+- Create a new cluster on `SERVER_PRIMARY`
 
     ```powershell
     # Get the first interface with a default gateway and an IPv4 address
@@ -184,62 +195,11 @@ Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
     
     # Create the cluster using the identified available IP
     New-Cluster -Name "myCluster" -Node localhost -StaticAddress $IP
-    
     ```
-
-
 
 * Open Failover Cluster Manager on `SERVER_PRIMARY`, connect to your cluster, and confirm cluster status = "Online"
 
-* On `SERVER_PRIMARY`, run the following PowerShell script to get the IP address for use in the next step:
-
-  ```powershell
-  ipconfig
-  ```
-
-
-
--------------------------
-
-###### Cluster Node
-
-- On `SERVER_SECONDARY`, run the following PowerShell script to test connectivity between servers:
-
-  ```powershell
-  Test-Connection -Count 2 -ComputerName "<SERVER_PRIMARY_IPADDRESS>"
-  ```
-
-  Expected result:
-
-  ```text
-     Destination: 172.30.209.74
-  
-  Ping Source           Address                   Latency BufferSize Status
-                                                     (ms)        (B)
-  ---- ------           -------                   ------- ---------- ------
-     1 WIN-JH6VAICNUJH  172.30.209.74                   1         32 Success
-     2 WIN-JH6VAICNUJH  172.30.209.74                   1         32 Success
-  ```
-
-- On `SERVER_SECONDARY`, run the following PowerShell script to test connectivity between servers:
-
-  ```powershell
-  Get-Service -Name ClusSvc
-  ```
-
-  Expected result:
-
-  ```text
-  Status   Name               DisplayName
-  ------   ----               -----------
-  Stopped  ClusSvc            Cluster Service
-  ```
-
-  > Note: If Status = "Stopped", then blah
-
-  
-
-- On `SERVER_SECONDARY`, run the following PowerShell script to add a node to the cluster:
+- Add a node to the cluster:
 
     ```powershell
     Add-ClusterNode -Name "myCluster"
@@ -269,6 +229,8 @@ Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
 
 * Repeat the process for `SERVER_SECONDARY`
 
+  
+
 
 -------------------------
 
@@ -278,34 +240,52 @@ Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
 
 * On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the database engine
 
-  - Execute the following T‑SQL to create a database:
+  - Create a database:
 
     ```sql
     CREATE DATABASE myDatabase ON (NAME = myDatabase_Data, FILENAME = 'C:\Temp\myDatabase.mdf')
     ```
-  
-  
-    - Execute the following T‑SQL to verify the database was created and is online:
-  
+
+
+    - Verify the database was created and is online:
+
       ```sql
       SELECT name FROM sys.databases WHERE name = 'myDatabase'
       ```
-  
-  
-    - Execute the following T‑SQL to ensure the database is in full recovery mode
-  
+
+
+    - Ensure the database is in full recovery mode
+
       ```sql
       ALTER DATABASE myDatabase SET RECOVERY FULL
       ```
-  
-  
+
+  * Backup the database
+
+      ```sql
+      BACKUP DATABASE myDatabase TO DISK = 'C:\Temp\myDatabase.bak' WITH INIT
+      BACKUP LOG myDatabase TO DISK = 'C:\Temp\myDatabase_log.bak' WITH INIT;
+      ```
+
+* On `SERVER_SECONDARY`
+
+  * Copy `myDatabase.bak` and `myDatabase_log.bak` to c:\Temp
+
+  * Restore the backup
+
+    ```sql
+    RESTORE DATABASE myDatabase FROM DISK = 'C:\Temp\myDatabase.bak' WITH NORECOVERY,
+        MOVE 'myDatabase_Data' TO 'C:\Temp\myDatabase.mdf',
+        MOVE 'myDatabase_Log' TO 'C:\Temp\myDatabase.ldf';
+    
+    RESTORE LOG myDatabase FROM DISK = 'C:\Temp\myDatabase_log.bak' WITH NORECOVERY;
+    ```
+
 
 
 -------------------------
 
-###### Configure the Always On Availability Group
-
-> Note: Server requirements: 1) SQL Authentication `sa` enabled, 2) Windows Firewall + Inbound Rule `SQL Server TCP 1433`
+###### Always On Availability Group
 
 - On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the database engine
 
@@ -354,79 +334,41 @@ Perform these steps on both SERVER_PRIMARY and SERVER_SECONDARY:
   
     * "Select Databases": Check the `myDatabase` database (and confirms "Meets prerequisites")
   
+  * "Select Replicas": Click "Add Replica" and complete "Connect to Server" form for `SERVER_SECONDARY`
+      * "Replicas" tab >> "Availability Replicas" matrix:
+        * Automatic Failover: `Disabled` (default)
+  
+          * Enabled: The cluster automatically fails over to a secondary replica if the primary becomes unavailable. Requires synchronous commit mode and adds slight latency.
+          * Disabled: Failover must be performed manually. Provides more control and avoids unintentional failover, but may increase downtime during failures.
   
   
-    * "Select Replicas": Click "Add Replica" and complete "Connect to Server" form for `SERVER_SECONDARY`
-      * "Replicas" tab >> "Availability Replicas" matrix: No changes required
-        * Automatic Failover: `Disabled`
+        * Availability Mode: `Asynchronous-commit mode` (default)
   
-
-
-* Enabled
+          * Synchronous-commit: Transactions wait for the secondary to confirm before committing, minimizing data loss but adding latency.
   
-          * Enables the cluster to automatically switch the primary role to a secondary replica without manual intervention when a failure is detected, which minimizes downtime
-          * Requires synchronous commit mode to ensure data consistency, and it may add slight latency as the system waits for confirmation from the secondary
-    
-        * Disabled (default)
-        
-          * Requires manual intervention to initiate the failover, offering more control over the process and potentially avoiding unintended failovers during transient issues
-          * May lead to increased downtime if the primary fails and manual actions are delayed, but can be beneficial in environments where failover decisions need careful review before execution
-        
-      * Availability Mode: `Asynchronous-commit mode`
-      
-        * Synchronous-commit mode
-        
-          * Ensures that transactions on the primary server wait for confirmation from the secondary replica before committing, which minimizes the risk of data loss during a failover
-          * However, it may introduce additional latency as the primary waits for network round-trips, which can impact performance in high-latency environments
-        
-        * Asynchronous-commit mode (default)
-        
-          * Allows the primary server to commit transactions immediately without waiting for the secondary to confirm, which improves performance by reducing latency
-          * This mode comes with a risk of data loss if the primary fails before the secondary has received and applied the latest changes
-      
-      * Readable Secondary: `No`
-      
-        * No (default)
-        
-          * Keeps all read/write operations on the primary, ensuring that all data is accessed from the most current, committed source
-          * May be preferred in scenarios where strict consistency is required or when the workload does not justify offloading read operations to a secondary replica
-        * Yes
-        
-          * Allows the secondary replica to accept read-only workloads, offloading query processing from the primary and potentially improving overall system scalability and performance
-          * Useful for reporting and analytics, as it can help balance workload and reduce the load on the primary server
-        
-        * Read-intent only
-        
-          * Only client connections that explicitly specify an intent to read (using `ApplicationIntent=ReadOnly` in the connection string) are allowed on the secondary replica
-          * Helps prevent unintentional read connections on the secondary while still leveraging its resources for appropriate workloads
-
-  * "Select Data Synchronization": `Automatic Seeding`
-
-
-    * Automatic Seeding
-      - Automatically creates the database on each secondary replica, then streams the data directly from the primary replica
-      - Simplifies the setup process because you do not have to manually perform backups and restores on the secondaries
-      - May be limited by your network bandwidth or other environmental constraints, especially for very large databases
-    * Full Database and Log Backup
-      - Wizard takes a full backup and log backup of each database on the primary and restores them to the secondaries
-      - Requires a valid file path (e.g., a shared folder) that all replicas can access
-      - Ensures that each secondary database is properly prepared in NORECOVERY mode, after which the wizard finalizes the join to the availability group
-    * Join Only
-      - Assumes you have already manually backed up and restored the databases to the secondary replicas in NORECOVERY mode
-      - The wizard merely joins those restored databases to the availability group, rather than creating or restoring them automatically
-      - Useful when you have complex restore requirements, large databases, or prefer to handle the backup/restore process yourself
-    * Skip Initial Data Synchronization
-      - Creates the availability group without performing any data movement or backup/restore steps
-      - You must handle all backup/restore operations and manually join each secondary database to the availability group later
-      - Often chosen for highly customized workflows or environments where you need to control every step of the data synchronization process manually
-
+          * Asynchronous-commit: Transactions commit immediately without waiting for the secondary, improving performance but risking data loss during failover.
+  
+        * Readable Secondary: `No` (default)
+  
+          * No: All read/write activity stays on the primary, ensuring strict consistency and simplifying configuration.
+          * Yes / Read-intent only: Secondary can handle read-only queries to reduce load on the primary — with optional enforcement using `ApplicationIntent=ReadOnly`.
+        * "Select Data Synchronization": `Join only`
+  
+             * Automatic Seeding: Streams the database directly from primary to secondary. Easiest option but may silently fail in lab setups without DNS, proper permissions, or shared services.
+             * Full Database and Log Backup: Wizard handles backup and restore using a shared location. Reliable, but requires a common file path accessible by all replicas.
+  
+             * Join Only: Use when you've already manually restored the database with `NORECOVERY`. The wizard just joins it to the availability group — ideal for custom or large database setups.
+  
+             * Skip Initial Data Synchronization: Creates the AG without any data movement. You’re fully responsible for preparing and joining each secondary manually.
+  
   * "Validation": Confirm "Success" results
-
-  * "Summary": Review and then click "Finish"
-
-  * "Results": Monitor progress and confirm success
-
   
+  * "Summary": Review and then click "Finish"
+  
+  * "Results": Monitor progress and confirm success
+  
+
+
 
 -------------------------
 
