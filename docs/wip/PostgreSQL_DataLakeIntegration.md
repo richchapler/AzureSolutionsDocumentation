@@ -343,7 +343,7 @@ If you prefer running these commands from Azure Cloud Shell using PowerShell (in
 * **Run the psql Command:**  
   In Cloud Shell, execute a command similar to the following (replace placeholders with your actual details):
   ```powershell
-  & psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<username> password='your_password' sslmode=require"
+  & psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<username> password='<password>' sslmode=require"
   ```
   > **Note:** If your password or username includes special characters, you may need to URL encode them or use environment variables.
 
