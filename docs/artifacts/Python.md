@@ -1,6 +1,6 @@
 # Python
 
-This guide walks you through ensuring pip is installed (and updated) and setting up a Python virtual environment.
+This guide assumes you're using Windows and walks you through ensuring pip is installed (and updated) and setting up a Python virtual environment.
 
 First, verify that Python is installed. Open your terminal and run:
 
@@ -36,7 +36,7 @@ Run the installer with Python:
 python get-pip.py
 ```
 
-After installation, verify pip is available:
+After installation, verify that pip is available:
 
 ```powershell
 pip --version
@@ -48,7 +48,7 @@ If you see a warning that pip’s scripts are installed in a directory not on yo
 WARNING: The scripts pip.exe, pip3.13.exe and pip3.exe are installed in 'C:\Users\admin\...\Scripts' which is not on PATH.
 ```
 
-), update pip and add pip to your PATH:
+), update pip and add pip to your PATH.
 
 Update pip by running:
 
