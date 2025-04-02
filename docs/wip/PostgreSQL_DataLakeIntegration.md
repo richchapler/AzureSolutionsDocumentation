@@ -328,11 +328,7 @@ If you prefer running these commands from Azure Cloud Shell using PowerShell (in
   ```
 * **Query Blobs Using Managed Identity**: To list blobs from your container, run:
   ```sql
-  SELECT * FROM azure_storage.blob_list(
-    '{prefix}dl'::text,
-    'data'::text,
-    ''::text
-  );
+  SELECT * FROM azure_storage.blob_list( '{prefix}dl'::text, 'data'::text, ''::text );
   ```
 
 ------------------------- -------------------------
