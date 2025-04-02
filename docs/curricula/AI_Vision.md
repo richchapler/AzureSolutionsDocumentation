@@ -252,17 +252,22 @@ Interact with resulting functionality (e.g., "Locate a frame in the video").
 
 With Azure AI Vision Spatial Analysis retiring on 30 March 2025, this exercise introduces you to Azure AI Video Indexer—a robust solution that offers richer video analysis capabilities. You will learn how to analyze videos both via the web portal and programmatically using the Video Indexer API.
 
----
+#### 3.5.1 Low Code
 
-### 3.5.1 Video Analysis Using the Web Portal
+Navigate to [Azure AI Video Indexer](https://www.videoindexer.ai/account/login) and log in.
 
-#### 3.5.1.1 Low Code
+<img src="https://github.com/user-attachments/assets/a1ad5532-6daa-43e4-8ab8-fcf7d4bd123b" width="800" title="Snipped April, 2025" />
 
-1. **Access the Portal:**  
-   Navigate to the [Azure AI Video Indexer Portal](https://videoindexer.ai/), and log in with your Azure credentials.
+Complete the "Use of facial identification and recognition" form and then click "Accept".
 
-2. **Upload a Video:**  
-   Click on the **Upload Video** button. Select and upload a sample video file from your system. (A video upload is ideal to explore the full capabilities.)
+> Note: This popup is expected when you first access Azure's facial identification and celebrity recognition features. Azure requires users to fill out the request form and agree to the legal and compliance terms before enabling these limited access services. Once your use case is verified and access is granted, you should not see this prompt again on subsequent logins.
+
+Click on "Upload" and on the resulting "Upload and index" popup, click "Browse for files"
+
+<img src="https://github.com/user-attachments/assets/7c6bf86f-7fab-4315-85e6-0f783c35ec7f" width="800" title="Snipped April, 2025" />
+
+> Note: Consider downloading a video from a "free-to-use" site like the [NASA Image and Video Library](https://images.nasa.gov/)
+
 
 3. **Review Analysis Results:**  
    Once the video is processed, use the portal interface to explore the video insights. Key features include:  
