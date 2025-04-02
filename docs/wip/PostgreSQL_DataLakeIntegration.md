@@ -336,3 +336,10 @@ If you prefer running these commands from Azure Cloud Shell using PowerShell (in
     ''::text
   );
   ```
+
+### Reference
+
+> [Import and export data using Azure Storage in Azure Database for PostgreSQL flexible server
+](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-storage-extension)]
+
+> [Import and export data using azure_storage extension in Azure Database for PostgreSQL flexible server](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-use-pg-azure-storage)
