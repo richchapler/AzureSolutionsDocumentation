@@ -1,4 +1,4 @@
-# PostgreSQL: Data Lake Integration
+# PostgreSQL
 
 ## Prepare Resources
 
@@ -25,39 +25,39 @@
 #### Monitoring and Diagnostics
 
 * **Create a Log Analytics Workspace**  
-  - In the Azure Portal, click **Create a resource** and search for **Log Analytics workspace**.  
-  - Click **Create** and fill in the required details such as Workspace name, Subscription, Resource Group, and Region.  
-  - Click **Review + create**, then **Create** to instantiate your new Log Analytics workspace.
+  * In the Azure Portal, click **Create a resource** and search for **Log Analytics workspace**.  
+  * Click **Create** and fill in the required details such as Workspace name, Subscription, Resource Group, and Region.  
+  * Click **Review + create**, then **Create** to instantiate your new Log Analytics workspace.
 
 * **Note the Workspace Details**  
-  - Once created, note the Workspace ID and primary key; you'll use these details when configuring diagnostic settings.
+  * Once created, note the Workspace ID and primary key; you'll use these details when configuring diagnostic settings.
 
 * **Access Diagnostic Settings**  
-  - In the Azure Portal, navigate to your Azure Database for PostgreSQL Flexible Server instance.  
-  - In the left-hand menu under **Monitoring**, click on **Diagnostic settings**.
+  * In the Azure Portal, navigate to your Azure Database for PostgreSQL Flexible Server instance.  
+  * In the left-hand menu under **Monitoring**, click on **Diagnostic settings**.
 
 * **Enable Diagnostics**  
-  - Click **+ Add diagnostic setting**.  
-  - Give the setting a name (e.g., "PostgreSQLDiagnostics").
+  * Click **+ Add diagnostic setting**.  
+  * Give the setting a name (e.g., "PostgreSQLDiagnostics").
 
 * **Select Log Categories**  
-  - Choose the log categories you want to capture (for example, **PostgreSQLLogs**, **QueryStoreRuntimeStatistics**, and **QueryStoreWaitStatistics**).  
-  - These logs provide detailed insights into connection issues and overall server performance.
+  * Choose the log categories you want to capture (for example, **PostgreSQLLogs**, **QueryStoreRuntimeStatistics**, and **QueryStoreWaitStatistics**).  
+  * These logs provide detailed insights into connection issues and overall server performance.
 
 * **Choose a Destination**  
-  - Select one or more destinations for your logs:
-    - **Log Analytics Workspace**  
-      - Select the workspace you just created to enable powerful query and visualization options.
-    - **Storage Account** – For archival and manual review.
-    - **Event Hub** – For integration with external monitoring solutions.
+  * Select one or more destinations for your logs:
+    * **Log Analytics Workspace**  
+      * Select the workspace you just created to enable powerful query and visualization options.
+    * **Storage Account** – For archival and manual review.
+    * **Event Hub** – For integration with external monitoring solutions.
 
 * **Save and Apply**  
-  - Click **Save** to enable diagnostics.  
-  - Once enabled, logs will start flowing to your chosen destination(s). Use these logs to troubleshoot issues such as the internal connection error reported by the azure_storage extension.
+  * Click **Save** to enable diagnostics.  
+  * Once enabled, logs will start flowing to your chosen destination(s). Use these logs to troubleshoot issues such as the internal connection error reported by the azure_storage extension.
 
 * **Review the Logs**  
-  - Use the tools provided by your destination (for example, the Log Analytics query explorer) to review the logs.  
-  - You can use KQL queries—such as filtering for "azure_storage" errors—to gather more details about any issues.
+  * Use the tools provided by your destination (for example, the Log Analytics query explorer) to review the logs.  
+  * You can use KQL queries—such as filtering for "azure_storage" errors—to gather more details about any issues.
 
 ------------------------- -------------------------
 
@@ -104,7 +104,7 @@
 
 * **Obtain Connection Details**  
   In the Azure portal, go to your new server’s overview and note the **fully qualified domain name (FQDN)** (e.g., `yourserver.postgres.database.azure.com`), the port (typically **5432**), and your admin username.  
-  **Important:** Use the username format `yourusername@yourserver`.
+  **Important**: Use the username format `yourusername@yourserver`.
 
 * **Open pgAdmin 4 and Create a New Server Registration**  
   In pgAdmin, right-click on **Servers** in the Browser panel and select **Create > Server...**.
@@ -119,17 +119,21 @@
 
 ------------------------- -------------------------
 
+Here's a proposed rewrite for the Azure Data Lake Storage section that aligns with managed identity-only access:
+
+---
+
 ### Azure Data Lake Storage
 
 * **Create an Azure Storage Account with ADLS Gen2 Enabled**  
   * In the [Azure Portal](https://portal.azure.com), click **Create a resource** and choose **Storage account**.  
-  * Fill in the required details (Subscription, Resource Group, and Storage Account Name).  
+  * Fill in the required details (Subscription, Resource Group, and Storage Account Name — e.g., use `{prefix}dl` as your sample storage account name).
   * In the **Advanced** tab, enable **Hierarchical namespace**. This converts your storage account into an Azure Data Lake Storage Gen2 account.  
   * Review and create the storage account.
 
 * **Create a Container for Your Data**  
   * Navigate to your new storage account and open the **Containers** section.  
-  * Click **+ Container** to create a new container. Name it appropriately (e.g., `datalake`).  
+  * Click **+ Container** to create a new container. Name it appropriately (e.g., `data`).  
   * Set the public access level according to your security needs (for example, a private container with controlled credentials).
 
 * **Upload or Organize Your Data Files**  
@@ -137,7 +141,8 @@
   * Organize your files into folders as needed.
 
 * **Access Configuration**  
-  * Ensure you have the necessary credentials to allow access from PostgreSQL. Typically, this means keeping your Storage Account Key or a Shared Access Signature (SAS) available.  
+  * Since access will be managed through the PostgreSQL server’s system-assigned managed identity, you do not need to use Storage Account Keys or SAS tokens.  
+  * Ensure that the appropriate RBAC role (e.g., Storage Blob Data Reader) is assigned to your PostgreSQL server’s managed identity.  
   * Configure any firewall or virtual network rules on the storage account to control access securely.
 
 ------------------------- -------------------------
@@ -169,215 +174,165 @@
 
 ------------------------- -------------------------
 
-#### Shared Access Signature
+### Managed Identity
 
-* **Log in to the Azure Portal**  
-  Open the [Azure Portal](https://portal.azure.com) and navigate to your Azure Storage account that is configured with ADLS Gen2.
+Configure your PostgreSQL server to use its system-assigned managed identity for accessing Azure Storage.
 
-* **Access the Shared Access Signature (SAS) Settings**  
-  In the storage account's menu, under **Settings**, click on **Shared access signature**.
+#### Enable Managed Identity
 
-* **Configure the SAS Options**  
-  * **Allowed Services:** Select the services you need (typically **Blob** for ADLS).  
-  * **Allowed Resource Types:** Choose the resource types you require (e.g., **Service**, **Container**, **Object**).  
-  * **Allowed Permissions:** Enable the necessary permissions (for example, **Read** to list blobs and retrieve file content).  
-  * **Start and Expiry Date/Time:** Specify the start time (usually the current time) and set an expiry time that fits your use case.  
-  * **Allowed Protocols:** Choose **HTTPS only** for secure access.
+* Open your PostgreSQL server in the Azure Portal.
+* Under **Settings**, select **Identity**.
+* Turn on **System assigned** managed identity and click **Save**.  
+  > Note: Enabling managed identity will restart your server.
 
-* **Generate the SAS Token**  
-  Click **Generate SAS and connection string**.  
-  The portal will display your SAS token. Copy the token (or the token portion after the `?`), as you'll need it for your queries in PostgreSQL.
+#### Assign Permissions
 
-* **Use the SAS Token in Your Queries**  
-  In your PostgreSQL queries that use the **azure_storage** extension, replace the `<your_account_key>` placeholder with your SAS token if you prefer using SAS-based authentication. For example:
+* Open your storage account (e.g., `{prefix}dl`) in the Azure Portal.
+* Navigate to **Access Control (IAM)**.
+* Click **+ Add > Add role assignment**.
+* Choose the **Storage Blob Data Reader** role (or **Contributor** if write access is required).
+* Under **Assign access to**, select **Managed identity**.
+* In **Select members**, search for your PostgreSQL server’s managed identity (by server name) and add it.
+* Click **Save**.  
+  > Permissions propagation may take a few minutes.
+
+#### Register the Storage Account
+
+* Connect to your PostgreSQL database using psql or pgAdmin.
+* Run the following SQL command to register the storage account using managed identity:
+  ```sql
+  SELECT azure_storage.account_add(
+      azure_storage.account_options_managed_identity('{prefix}dl', 'blob')
+  );
+  ```
+  This registers your storage account for access via the managed identity.
+
+* (Optional) Grant your PostgreSQL user access if needed:
+  ```sql
+  SELECT azure_storage.account_user_add('{prefix}dl', 'your_username');
+  ```
+  Replace `'your_username'` with your PostgreSQL user name.
+
+#### Test the Connection
+
+* Verify the setup by listing blobs in your container:
   ```sql
   SELECT *
   FROM azure_storage.blob_list(
-    'usbdl',               -- Your storage account name
-    'data',                -- Your container name
-    '<your_SAS_token>'     -- Your SAS token (without the leading '?')
+    '{prefix}dl'::text,  -- Your storage account name
+    'data'::text,   -- Your container name
+    ''::text        -- No additional credentials required
   );
   ```
+  This query should list the blobs in your container using the managed identity's permissions.
 
 ------------------------- -------------------------
+------------------------- -------------------------
 
-## Using pgadmin4
+## Data Lake Integration
 
-* **Create the Extension**  
+### ...using pgadmin4
+
+* **Create the Extension**
+
   In your PostgreSQL database, run:
   ```sql
   CREATE EXTENSION azure_storage;
   ```
 
-* **Confirm the Extension is Installed**  
+* **Confirm the Extension is Installed**
+
   Verify the extension by running:
   ```sql
   SELECT * FROM pg_available_extensions WHERE name = 'azure_storage';
   ```
+  
   You should see output indicating that **azure_storage** is installed with its version and description.
 
-* **Test Connectivity**  
+* **Test Connectivity**
+
   Run the following query to ensure the extension can communicate with the storage endpoint:
   ```sql
   SELECT azure_storage.version();
   ```
+  
   This should return the version information (e.g., "Azure Storage 1.5.0 gitref: m43.3"), confirming basic connectivity.
 
 * **List Available Functions**  
   To view all functions provided by the extension, run:
+
   ```sql
   SELECT n.nspname as schema, p.proname
   FROM pg_proc p
   JOIN pg_namespace n ON p.pronamespace = n.oid
   WHERE n.nspname = 'azure_storage';
   ```
+  
   This will list all functions available under the `azure_storage` schema (such as `blob_list`, `blob_get`, etc.).
 
-* **List Blobs in a Container (Using Access Key)**  
-  Use the provided function to list blobs in your Azure Data Lake Storage container. Replace the placeholders with your actual values (using explicit casts to ensure the proper types):
+* **List Blobs in a Container**  
+  Run the following query to list all blobs in your Azure Data Lake Storage container using managed identity. Replace `'{prefix}dl'` with your storage account name and `'data'` with your container name:
+
   ```sql
   SELECT *
   FROM azure_storage.blob_list(
-    'usbdl'::text,              -- Your storage account name
-    'data'::text,               -- Your container name
-    '<your_access_key>'::text    -- Your storage account access key
+    '{prefix}dl'::text,  -- Your storage account name
+    'data'::text,   -- Your container name
+    ''::text        -- Managed identity requires no key
   );
   ```
-  This query returns a list of blobs in the specified container.
+  
+  This query returns all blobs present in the specified container.
 
 * **Retrieve Blob Content**  
-  To retrieve the content of a specific blob (for example, a CSV file), run:
+  To fetch the content of a specific blob (for example, a CSV file), run the following query. Replace `'{prefix}dl'` with your storage account name, `'data'` with your container name, and adjust the file path as needed:
+  
   ```sql
   SELECT azure_storage.blob_get(
-    'usbdl'::text,                  -- Your storage account name
-    'data'::text,                   -- Your container name
-    'path/to/mydata.csv'::text,     -- The path to your file within the container
-    '<your_SAS_token>'::text         -- Your SAS token (or storage account key)
+    '{prefix}dl'::text,                  -- Your storage account name
+    'data'::text,                        -- Your container name
+    'path/to/mydata.csv'::text,          -- File path within the container
+    ''::text                             -- No credential needed with managed identity
   ) AS file_content;
   ```
-  This query returns the content of the specified file, which you can then process as needed.
 
-* **Integrate the Data**  
-  Once you have the blob content, consider loading it into a temporary table or processing it directly within PostgreSQL for further analysis.
+  This query retrieves the content of the specified file using managed identity.
 
 ------------------------- -------------------------
 
-## Using Managed Identity Instead of Access Keys
-
-To avoid using access keys, you can configure your PostgreSQL server to use its system-assigned managed identity with Azure Storage.
-
-### 1. Enable System-Assigned Managed Identity for Your PostgreSQL Server
-
-* **Open Your PostgreSQL Server in the Azure Portal:**  
-  Navigate to your Azure Database for PostgreSQL Flexible Server instance.
-
-* **Enable Managed Identity:**  
-  - In the left-hand menu, click on **Identity** under the **Settings** section.  
-  - Turn on the **System assigned** managed identity and click **Save**.  
-  > Enabling the managed identity will restart your server.
-
-### 2. Grant the Managed Identity Permissions on Your Storage Account
-
-* **Open Your Storage Account in the Azure Portal:**  
-  Navigate to your storage account (e.g., `usbdl`).
-
-* **Assign RBAC Role:**  
-  - Go to the **Access Control (IAM)** section.  
-  - Click **+ Add** > **Add role assignment**.
-  - Select the **Storage Blob Data Reader** role (or **Contributor** if you also need write access).
-  - Under **Assign access to**, choose **Managed identity**.
-  - In **Select members**, search for your PostgreSQL server’s managed identity (by server name) and add it.
-  - Click **Save**.  
-  > It may take a few minutes for permissions to propagate.
-
-### 3. Add the Storage Account Reference Using Managed Identity
-
-* **Open psql or pgAdmin:**  
-  Connect to your PostgreSQL database.
-
-* **Register the Storage Account for Managed Identity Access:**  
-  Run the following SQL command to add a reference using the managed identity:
-  ```sql
-  SELECT azure_storage.account_add(
-      azure_storage.account_options_managed_identity('usbdl', 'blob')
-  );
-  ```
-  This command registers your storage account to be accessed using the system-assigned managed identity.
-
-* **Grant Access to Your User (if necessary):**  
-  If needed, grant your user permission to use the storage account reference:
-  ```sql
-  SELECT azure_storage.account_user_add('usbdl', 'your_username');
-  ```
-  Replace `'your_username'` with your PostgreSQL user name.
-
-### 4. Test the Managed Identity Connection
-
-Now, list blobs using managed identity (note: you do not pass an access key or SAS token):
-```sql
-SELECT *
-FROM azure_storage.blob_list(
-  'usbdl'::text,  -- Your storage account name
-  'data'::text,   -- Your container name
-  ''::text        -- Empty prefix (no key needed with managed identity)
-);
-```
-
-This query should now list blobs using the permissions granted via the managed identity.
-
-------------------------- -------------------------
-
-## Using Azure Cloud Shell with PowerShell
+### ...using PowerShell
 
 If you prefer running these commands from Azure Cloud Shell using PowerShell (instead of pgAdmin4), follow these steps:
 
-### 1. Open Azure Cloud Shell in PowerShell Mode
+* **Access Cloud Shell**:  
+  * Log in to the [Azure Portal](https://portal.azure.com).  
+  * Click the Cloud Shell icon in the top navigation bar.  
+  * Choose **PowerShell** as your shell environment.
 
-* **Access Cloud Shell:**  
-  - Log in to the [Azure Portal](https://portal.azure.com).  
-  - Click the Cloud Shell icon in the top navigation bar.  
-  - Choose **PowerShell** as your shell environment.
-
-### 2. Connect to Your PostgreSQL Database Using psql
-
-* **Run the psql Command:**  
-  In Cloud Shell, execute a command similar to the following (replace placeholders with your actual details):
+* **Run the psql Command**: In Cloud Shell, execute a command similar to the following (replace placeholders with your actual details):
   ```powershell
-  & psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<username> password='<password>' sslmode=require"
+  psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<username> password='<password>' sslmode=require"
   ```
-  > **Note:** If your password or username includes special characters, you may need to URL encode them or use environment variables.
+  > **Note**: If your password or username includes special characters, you may need to URL encode them or use environment variables.
 
-### 3. Execute Azure Storage Commands from psql
-
-* **Test the azure_storage Extension:**  
+* **Test the azure_storage Extension**:  
   Once connected, run:
   ```sql
   SELECT azure_storage.version();
   ```
   This confirms the extension is working.
 
-* **Use Managed Identity Commands:**  
-  To register your storage account with managed identity, run:
+* **Use Managed Identity Commands**: To register your storage account with managed identity, run:
   ```sql
   SELECT azure_storage.account_add(
-      azure_storage.account_options_managed_identity('usbdl', 'blob')
+      azure_storage.account_options_managed_identity('{prefix}dl', 'blob')
   );
   ```
-* **Query Blobs Using Managed Identity:**  
-  To list blobs from your container:
+* **Query Blobs Using Managed Identity**: To list blobs from your container, run:
   ```sql
-  SELECT *
-  FROM azure_storage.blob_list(
-    'usbdl'::text,
+  SELECT * FROM azure_storage.blob_list(
+    '{prefix}dl'::text,
     'data'::text,
     ''::text
   );
   ```
-  This command should list blobs using the managed identity without needing an access key.
-
-### 4. Review and Troubleshoot
-
-* **Use psql's Interactive Commands:**  
-  In the Cloud Shell psql session, you can run any of your queries interactively.  
-* **Leverage Cloud Shell Logging:**  
-  Since Cloud Shell runs in a managed environment, any output or error messages will be visible in the terminal, aiding in troubleshooting.
