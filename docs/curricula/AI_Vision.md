@@ -16,7 +16,7 @@ In "East US" region (or other region that supports AI Vision resources), instant
 - AI Services 
 - Computer Vision
 
-------------------------- ------------------------- -------------------------
+------------------------- -------------------------
 
 ## Exercise 1: Prepare Environment
 _Complete this exercise only if you intend to complete Pro-Code exercises_
@@ -27,7 +27,8 @@ Start with a pre-configured virtual machine and add the following artifacts:
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
 * [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html) with the [dotenv module](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python_DotEnvModule.html)
 
-------------------------- ------------------------- ------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
 
 ## Exercise 2: Optical Character Recognition (OCR)  
 
@@ -221,9 +222,10 @@ _Note: JSON formatted and abbreviated_
 }
 ```
 
-------------------------- ------------------------- ------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
 
-## Exercise 3: Spatial Analysis  
+## Exercise 3: Spatial Analysis (DEPRECATION PENDING)
 
 This exercise demonstrates how to use Azure AI Vision, Spatial Analysis to detect people and movement in an image.
 
@@ -243,7 +245,177 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box.
 
 Interact with resulting functionality (e.g., "Locate a frame in the video").
 
-------------------------- ------------------------- ------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
+
+## Exercise 3.5: Video Indexer
+
+With Azure AI Vision Spatial Analysis retiring on 30 March 2025, this exercise introduces you to Azure AI Video Indexer—a robust solution that offers richer video analysis capabilities. You will learn how to analyze videos both via the web portal and programmatically using the Video Indexer API.
+
+---
+
+### 3.5.1 Video Analysis Using the Web Portal
+
+#### 3.5.1.1 Low Code
+
+1. **Access the Portal:**  
+   Navigate to the [Azure AI Video Indexer Portal](https://videoindexer.ai/), and log in with your Azure credentials.
+
+2. **Upload a Video:**  
+   Click on the **Upload Video** button. Select and upload a sample video file from your system. (A video upload is ideal to explore the full capabilities.)
+
+3. **Review Analysis Results:**  
+   Once the video is processed, use the portal interface to explore the video insights. Key features include:  
+   - **Transcription:** Automatic generation of captions and transcript.
+   - **Key Frames:** Identification of key moments in the video.
+   - **Sentiment and Visual Insights:** Analysis of emotions, objects, and actions.
+   - **Metadata:** Detailed information about video duration, resolution, and more.
+
+4. **Explore and Compare:**  
+   Take note of how these features compare with those available in Spatial Analysis. The enhanced capabilities of Video Indexer provide deeper insight into the video content.
+
+> **Note:** Experiment with different sample videos to become familiar with the variety of insights offered by Video Indexer.
+
+---
+
+### 3.5.2 Video Analysis Using the Video Indexer API
+
+#### 3.5.2.1 Pro Code
+
+This section demonstrates how to integrate with the Video Indexer API to analyze a video programmatically using Python. Follow the steps below:
+
+---
+
+#### **Step 1: Update Environment Variables**
+
+Open your `.env` file (located in your project folder) and add the following lines:
+
+```text
+VIDEO_PATH=C:\temp\sample_video.mp4
+VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
+VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
+VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
+```
+
+---
+
+#### **Step 2: Load Video Indexer API Credentials**
+
+In your `ai_vision.ipynb` notebook, update the environment variable loading section by appending:
+
+```python
+VIDEO_PATH = os.getenv("VIDEO_PATH")
+VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
+VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
+VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
+```
+
+Execute the cell to verify the variables are correctly loaded.
+
+---
+
+#### **Step 3: Video Indexer API Pro Code**
+
+Add a new code cell with the following content:
+
+```python
+import os
+import requests
+import json
+
+def get_video_indexer_access_token():
+    """
+    Obtain an access token from Video Indexer API.
+    """
+    location = VIDEO_INDEXER_LOCATION
+    account_id = VIDEO_INDEXER_ACCOUNT_ID
+    api_key = VIDEO_INDEXER_API_KEY
+    url = f"https://api.videoindexer.ai/Auth/{location}/Accounts/{account_id}/AccessToken?allowEdit=true"
+    headers = {
+        "Ocp-Apim-Subscription-Key": api_key
+    }
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    # The returned token is a plain string (wrapped in quotes)
+    return response.text.strip('"')
+
+def upload_video_to_indexer(access_token, video_path):
+    """
+    Upload a video to Video Indexer and return the video ID.
+    """
+    location = VIDEO_INDEXER_LOCATION
+    account_id = VIDEO_INDEXER_ACCOUNT_ID
+    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos?accessToken={access_token}&name=SampleVideo&privacy=Private"
+    
+    with open(video_path, "rb") as video_file:
+        video_data = video_file.read()
+    
+    files = {
+        'file': ('sample_video.mp4', video_data, 'video/mp4')
+    }
+    
+    response = requests.post(url, files=files)
+    response.raise_for_status()
+    video_id = response.json().get("id")
+    return video_id
+
+def get_video_index(access_token, video_id):
+    """
+    Retrieve analysis results for the uploaded video.
+    """
+    location = VIDEO_INDEXER_LOCATION
+    account_id = VIDEO_INDEXER_ACCOUNT_ID
+    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos/{video_id}/Index?accessToken={access_token}"
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()
+
+# Main process: Validate VIDEO_PATH and perform video analysis
+if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
+    try:
+        print("Requesting Video Indexer access token...")
+        token = get_video_indexer_access_token()
+        print("Uploading video...")
+        video_id = upload_video_to_indexer(token, VIDEO_PATH)
+        print("Video uploaded successfully. Video ID:", video_id)
+        print("Retrieving video index...")
+        video_index = get_video_index(token, video_id)
+        print(json.dumps(video_index, indent=2))
+    except Exception as e:
+        print("An error occurred:", e)
+else:
+    print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
+```
+
+---
+
+#### **Step 4: Execute and Review the Output**
+
+- Run the code cell. The output JSON should include details such as video metadata, transcription results, key frames, sentiment analysis, and other insights.
+
+- **Expected JSON Structure Sample:**
+
+  ```json
+  {
+    "videos": [
+      {
+        "id": "sample_video_id",
+        "name": "SampleVideo",
+        "insights": {
+          "transcript": [ ... ],
+          "sentiments": [ ... ],
+          "keyFrames": [ ... ],
+          // Additional insights...
+        }
+      }
+    ]
+  }
+  ```
+
+> **Important:** Ensure that your Video Indexer API key, location, and account ID are correctly configured in your `.env` file before running this pro-code exercise.
+
+------------------------- -------------------------
+------------------------- -------------------------
 
 ## Exercise 4: Face
 
@@ -305,7 +477,8 @@ Review results on the "Detected attributes" / "JSON" tabs and review the generat
 
 Iteratively click the samples to the right of the "Drag and drop a file..." box and compare to the Camera Preview.
 
-------------------------- ------------------------- ------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
 
 ## Exercise 5: Image Analysis
 
