@@ -61,29 +61,31 @@
 
 ------------------------- -------------------------
 
-#### Enable `azure_storage` Extension
+### Enable Extensions
 
-* **Log in to the Azure Portal**  
-  Go to [https://portal.azure.com](https://portal.azure.com) and sign in with your credentials.
+Before connecting to your PostgreSQL server, configure the required extensions in one place.
 
-* **Navigate to Your Server**  
-  Open your Azure Database for PostgreSQL Flexible Server instance from the dashboard or resource list.
+**Configure Shared Preload Libraries:**  
+- Log in to the [Azure Portal](https://portal.azure.com) and navigate to your Azure Database for PostgreSQL Flexible Server instance.
+- In the left-hand menu under **Settings**, click **Server Parameters**.
+- Locate the `shared_preload_libraries` parameter and add `azure_storage` to the comma-separated list (if it isn’t already present).
+- Click **Save** and restart the server when prompted, as changes to shared_preload_libraries are static.
 
-* **Access Server Parameters**  
-  In the left-hand menu, locate and click on **Server Parameters** under the **Settings** section.
+**Enable the azure_storage Extension:**  
+- While still in **Server Parameters**, search for the parameter named `azure.extensions.allowlist`.
+- Click the parameter value to edit it and add `azure_storage` to the existing list.
+- Click **Save** to apply the update.
+- If required, restart the server so the changes take effect.
 
-* **Locate the Allow List Parameter**  
-  Search for the parameter named `azure.extensions.allowlist`. This parameter controls which extensions are allowed.
-
-* **Edit the Parameter**  
-  Click on the parameter value to edit it.  
-  Check `azure_storage` to add it to the existing list.
-
-* **Save Your Changes**  
-  Click **Save** to apply the update.
-
-* **Restart the Server (if required)**  
-  Some parameter changes might require a server restart. If prompted or if the changes don't take effect, restart your server using the Azure Portal.
+**Verify the Extension:**  
+- Connect to your PostgreSQL server using your preferred client (e.g., pgAdmin or psql) and run:
+  ```sql
+  CREATE EXTENSION azure_storage;
+  ```
+- Confirm the installation with:
+  ```sql
+  SELECT * FROM pg_available_extensions WHERE name = 'azure_storage';
+  ```
 
 ------------------------- -------------------------
 
