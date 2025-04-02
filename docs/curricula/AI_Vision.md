@@ -302,8 +302,8 @@ Click on "Watch now >" in the email or directly on the video in the "Azure AI Vi
 <img src="https://github.com/user-attachments/assets/0f9a2967-e44d-44b1-9ebb-1469d817fb30" width="800" title="Snipped April, 2025" />
 
 Review information about the video:
-* Video playback area – shows “Space 32015-orig” playing with an image of the International Space Station  
-* Insights panel – includes several data points:  
+* Video Playback Area – shows “Space 32015-orig” playing with an image of the International Space Station  
+* Insights Panel – includes several data points:  
   * Person – shows “1 person”  
   * Topic – shows “1 topic”  
   * Keywords – shows “3 keywords”  
@@ -311,32 +311,20 @@ Review information about the video:
   * Named entity – shows “1 named entity”
   * Scenes - shows "9 scenes" and a thumbnail strip
 
-
-
-
-
-------------------------- -------------------------
-------------------------- -------------------------
 ------------------------- -------------------------
 
+#### 3.5.2 Pro Code
 
-3. **Review Analysis Results:**  
-   Once the video is processed, use the portal interface to explore the video insights. Key features include:  
-   - **Transcription:** Automatic generation of captions and transcript.
-   - **Key Frames:** Identification of key moments in the video.
-   - **Sentiment and Visual Insights:** Analysis of emotions, objects, and actions.
-   - **Metadata:** Detailed information about video duration, resolution, and more.
 
-4. **Explore and Compare:**  
-   Take note of how these features compare with those available in Spatial Analysis. The enhanced capabilities of Video Indexer provide deeper insight into the video content.
 
-> **Note:** Experiment with different sample videos to become familiar with the variety of insights offered by Video Indexer.
 
----
 
-### 3.5.2 Video Analysis Using the Video Indexer API
 
-#### 3.5.2.1 Pro Code
+
+
+
+
+
 
 This section demonstrates how to integrate with the Video Indexer API to analyze a video programmatically using Python. Follow the steps below:
 
