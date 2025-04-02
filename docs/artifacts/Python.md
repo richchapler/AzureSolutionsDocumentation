@@ -1,6 +1,6 @@
 # Python
 
-This guide walks you through verifying your Python installation using winget, listing available Python versions, installing/upgrading Python, disabling the Microsoft Store alias, and setting up a Python virtual environment.
+This guide walks you through verifying your Python installation using winget, listing available Python versions, installing/upgrading Python, disabling the Microsoft Store alias, setting up a Python virtual environment, and ensuring pip is installed.
 
 ---
 
@@ -46,6 +46,48 @@ Before installing or upgrading, you can see which major versions are available f
    ```
    - This command will list patch-level updates (for example, from 3.14.0 to 3.14.1).  
    - **Note:** Upgrades here update patch versions. When a new major version is released, it will typically use a new package ID (e.g., `Python.Python.3.15`).
+
+### 2.2 Install pip (if not already installed)
+
+Pip is the package manager for Python and is essential for installing additional packages. Although pip is bundled with recent Python installations, you may need to install it separately if it's missing.
+
+1. **Check if pip is installed:**  
+   Open PowerShell and run:
+   ```powershell
+   pip --version
+   ```
+   If you receive an error like:
+   ```
+   pip: The term 'pip' is not recognized as a name of a cmdlet, function, script file, or executable program.
+   ```
+   then pip is either not installed or not added to your PATH.
+
+2. **Download get-pip.py:**  
+   Execute the following command in PowerShell:
+   ```powershell
+   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+   ```
+
+3. **Install pip using Python:**  
+   Run the installer with:
+   ```powershell
+   python get-pip.py
+   ```
+   *Note:* The Python extension in Visual Studio Code enhances your development experience but does not include the Python interpreter. If you see an error like:
+   ```
+   Python was not found; run without arguments to install from the Microsoft Store...
+   ```
+   this means Python isn’t installed or recognized in your system’s PATH. Please install Python using winget or from the [official Python website](https://www.python.org/downloads/), as detailed in Section 3.
+
+4. **Verify the pip installation:**  
+   Run:
+   ```powershell
+   pip --version
+   ```
+   You should now see output similar to:
+   ```
+   pip 23.x.y from C:\PythonXX\lib\site-packages\pip (python 3.X)
+   ```
 
 ---
 
