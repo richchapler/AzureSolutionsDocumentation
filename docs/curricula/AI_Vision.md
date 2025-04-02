@@ -260,13 +260,34 @@ Navigate to [Azure AI Video Indexer](https://www.videoindexer.ai/account/login) 
 
 Complete the "Use of facial identification and recognition" form and then click "Accept".
 
-> Note: This popup is expected when you first access Azure's facial identification and celebrity recognition features. Azure requires users to fill out the request form and agree to the legal and compliance terms before enabling these limited access services. Once your use case is verified and access is granted, you should not see this prompt again on subsequent logins.
+> This popup is expected when you first access Azure's facial identification and celebrity recognition features. Azure requires users to fill out the request form and agree to the legal and compliance terms before enabling these limited access services. Once your use case is verified and access is granted, you should not see this prompt again on subsequent logins.
 
+<br><br>
 Click on "Upload" and on the resulting "Upload and index" popup, click "Browse for files"
 
 <img src="https://github.com/user-attachments/assets/7c6bf86f-7fab-4315-85e6-0f783c35ec7f" width="800" title="Snipped April, 2025" />
 
-> Note: Consider downloading a video from a "free-to-use" site like the [NASA Image and Video Library](https://images.nasa.gov/)
+> Consider using a sample video from a "free-to-use" site like the [NASA Image and Video Library](https://images.nasa.gov/)
+
+<br><br>
+Select a video file and click "Open".
+
+<img src="https://github.com/user-attachments/assets/22d5bd38-0ea3-4043-9b90-d24f2507aed3" width="800" title="Snipped April, 2025" />
+
+Complete the "Upload and index" popup form:
+* File name – A display name for the uploaded video. You can keep the default name or change it to something more descriptive.
+* Add files – An option to include additional video files if you want to upload more than one at a time.
+* Privacy – Determines who can access the video and its insights. Options typically include private (only you can see it) or public (anyone with the link can view it).
+* Streaming quality – Lets you select how the video is encoded for playback. Options might include single bitrate or adaptive bitrate, which adjusts to varying network conditions.
+* Video source language – Specifies the main spoken language in the video. This setting helps with accurate transcription and speech analysis.
+* Manage language model or speech models – Allows you to choose custom language or speech models if you have trained any, or you can use the default settings.
+* Advanced settings – Contains additional configuration options like indexing presets or brand detection. These options are usually hidden by default unless you need to fine-tune the analysis.
+
+Click "Review + upload".
+
+------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
 
 
 3. **Review Analysis Results:**  
