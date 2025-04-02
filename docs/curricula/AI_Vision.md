@@ -262,14 +262,12 @@ Complete the "Use of facial identification and recognition" form and then click 
 
 > This popup is expected when you first access Azure's facial identification and celebrity recognition features. Azure requires users to fill out the request form and agree to the legal and compliance terms before enabling these limited access services. Once your use case is verified and access is granted, you should not see this prompt again on subsequent logins.
 
-<br><br>
 Click on "Upload" and on the resulting "Upload and index" popup, click "Browse for files"
 
 <img src="https://github.com/user-attachments/assets/7c6bf86f-7fab-4315-85e6-0f783c35ec7f" width="800" title="Snipped April, 2025" />
 
 > Consider using a sample video from a "free-to-use" site like the [NASA Image and Video Library](https://images.nasa.gov/)
 
-<br><br>
 Select a video file and click "Open".
 
 <img src="https://github.com/user-attachments/assets/22d5bd38-0ea3-4043-9b90-d24f2507aed3" width="800" title="Snipped April, 2025" />
@@ -284,6 +282,20 @@ Complete the "Upload and index" popup form:
 * Advanced settings – Contains additional configuration options like indexing presets or brand detection. These options are usually hidden by default unless you need to fine-tune the analysis.
 
 Click "Review + upload".
+
+<img src="https://github.com/user-attachments/assets/fc4d71d4-8eb5-453d-a82f-2886dfe77f04" width="800" title="Snipped April, 2025" />
+
+Complete the resulting "Upload and index" form, and then click "Upload + index".
+
+<img src="https://github.com/user-attachments/assets/d1e567f6-3ddf-455c-8d93-a506a484c1b4" width="800" title="Snipped April, 2025" />
+
+Monitor progress.
+
+<img src="https://github.com/user-attachments/assets/64caa1b7-07f5-4595-8bf2-36f7539f62fc" width="800" title="Snipped April, 2025" />
+
+Once video processing is complete, you will receive notification email.
+
+<img src="https://github.com/user-attachments/assets/b0f23583-3882-402b-a78c-6cf7d960f00b" width="800" title="Snipped April, 2025" />
 
 ------------------------- -------------------------
 ------------------------- -------------------------
