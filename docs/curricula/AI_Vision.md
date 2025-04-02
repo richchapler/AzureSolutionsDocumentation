@@ -297,6 +297,24 @@ Once video processing is complete, you will receive notification email.
 
 <img src="https://github.com/user-attachments/assets/b0f23583-3882-402b-a78c-6cf7d960f00b" width="800" title="Snipped April, 2025" />
 
+Click on "Watch now >" in the email or directly on the video in the "Azure AI Video Indexer" interface.
+
+<img src="https://github.com/user-attachments/assets/0f9a2967-e44d-44b1-9ebb-1469d817fb30" width="800" title="Snipped April, 2025" />
+
+Review information about the video:
+* Video playback area – shows “Space 32015-orig” playing with an image of the International Space Station  
+* Insights panel – includes several data points:  
+  * Person – shows “1 person”  
+  * Topic – shows “1 topic”  
+  * Keywords – shows “3 keywords”  
+  * Labels – shows “7 labels”  
+  * Named entity – shows “1 named entity”
+  * Scenes - shows "9 scenes" and a thumbnail strip
+
+
+
+
+
 ------------------------- -------------------------
 ------------------------- -------------------------
 ------------------------- -------------------------
