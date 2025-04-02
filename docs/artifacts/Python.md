@@ -1,197 +1,87 @@
 # Python
 
-This guide walks you through verifying your Python installation using winget, listing available Python versions, installing/upgrading Python, disabling the Microsoft Store alias, setting up a Python virtual environment, and ensuring pip is installed.
+This guide walks you through ensuring pip is installed (and updated) and setting up a Python virtual environment.
 
----
+First, verify that Python is installed. Open your terminal and run:
 
-## 1. Check Available Python Versions
-
-Before installing or upgrading, you can see which major versions are available from winget:
-
-1. Open **PowerShell** as an administrator.
-2. Run:
-   ```powershell
-   winget search Python.Python
-   ```
-3. Review the results. You might see entries like:
-   ```
-   Name           Id                      Version   Source
-   ---------------------------------------------------------
-   Python 3.13    Python.Python.3.13      3.13.1    winget
-   Python 3.14    Python.Python.3.14      3.14.0    winget
-   ```
-4. Determine the latest major version from the list (for example, if **Python 3.14** is listed, that's the most current major version).
-
----
-
-## 2. Verify Python Installation
-
-### 2.1 Check the Installed Version via Winget
-
-1. Once you've determined the appropriate major version (for example, 3.14), run:
-   ```powershell
-   winget list --id Python.Python.3.14
-   ```
-   - If Python is installed, you’ll see output similar to:
-     ```
-     Failed when searching source: msstore
-     Name         Id                     Version Source
-     ---------------------------------------------------------
-     Python 3.14  Python.Python.3.14     3.14.0   winget
-     ```
-   - The **Version** column shows your currently installed version.
-2. To check if an upgrade is available within the same major version, run:
-   ```powershell
-   winget upgrade --id Python.Python.3.14
-   ```
-   - This command will list patch-level updates (for example, from 3.14.0 to 3.14.1).  
-   - **Note:** Upgrades here update patch versions. When a new major version is released, it will typically use a new package ID (e.g., `Python.Python.3.15`).
-
-### 2.2 Install pip (if not already installed)
-
-Pip is the package manager for Python and is essential for installing additional packages. Although pip is bundled with recent Python installations, you may need to install it separately if it's missing.
-
-1. **Check if pip is installed:**  
-   Open PowerShell and run:
-   ```powershell
-   pip --version
-   ```
-   If you receive an error like:
-   ```
-   pip: The term 'pip' is not recognized as a name of a cmdlet, function, script file, or executable program.
-   ```
-   then pip is either not installed or not added to your PATH.
-
-2. **Download get-pip.py:**  
-   Execute the following command in PowerShell:
-   ```powershell
-   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-   ```
-
-3. **Install pip using Python:**  
-   Run the installer with:
-   ```powershell
-   python get-pip.py
-   ```
-   *Note:* The Python extension in Visual Studio Code enhances your development experience but does not include the Python interpreter. If you see an error like:
-   ```
-   Python was not found; run without arguments to install from the Microsoft Store...
-   ```
-   this means Python isn’t installed or recognized in your system’s PATH. Please install Python using winget or from the [official Python website](https://www.python.org/downloads/), as detailed in Section 3.
-
-4. **Verify the pip installation:**  
-   Run:
-   ```powershell
-   pip --version
-   ```
-   You should now see output similar to:
-   ```
-   pip 23.x.y from C:\PythonXX\lib\site-packages\pip (python 3.X)
-   ```
-
----
-
-## 3. Install or Upgrade Python
-
-1. **Search for Available Python Versions** (if you haven’t done so already):
-   ```powershell
-   winget search Python.Python
-   ```
-   Identify the latest **major version** (for example, `3.14`).
-
-2. **Install or Upgrade**  
-   For example, to install or upgrade to Python 3.14, run:
-   ```powershell
-   winget install --id Python.Python.3.14 --source winget -e
-   ```
-   - Replace `3.14` with the major version you wish to install.
-   - After installation, close and reopen PowerShell.
-
-3. **Verify Installation**  
-   Run:
-   ```powershell
-   python --version
-   ```
-   Confirm it shows the expected version (e.g., `Python 3.14.x`).
-
----
-
-## 4. Disable the Microsoft Store Alias for Python
-
-If running `python --version` returns a prompt to install Python from the Microsoft Store or if:
 ```powershell
-where.exe python
+python --version
 ```
-shows a path like:
+
+If Python is not installed, simply run:
+
+```powershell
+python
 ```
-C:\Users\<User>\AppData\Local\Microsoft\WindowsApps\python.exe
+
+This will trigger the Microsoft Store installation (if that’s acceptable for your use case).
+
+Next, check if pip is installed by running:
+
+```powershell
+pip --version
 ```
-then the Microsoft Store alias is overriding your installed version.
 
-### 4.1 Finding App Execution Aliases in Windows 11
+If pip is not recognized, follow these steps:
 
-1. **Open Settings:**  
-   Click **Start** > **Settings** (or press **Win + I**).
+Download the installer:
 
-2. **Go to Apps:**  
-   In the left navigation, select **Apps**.
+```powershell
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+```
 
-3. **Open Advanced App Settings:**  
-   On the main Apps page, click **Advanced app settings**.
+Run the installer with Python:
 
-4. **Select App Execution Aliases:**  
-   You should see toggles for **python.exe** and **python3.exe**.
+```powershell
+python get-pip.py
+```
 
-5. **Disable Python Aliases:**  
-   Toggle both **python.exe** and **python3.exe** to **Off**.
+After installation, verify pip is available:
 
-6. **Restart Your Computer:**  
-   Restart to ensure changes take effect.
+```powershell
+pip --version
+```
 
-7. **Verify:**  
-   Open a new PowerShell window and run:
-   ```powershell
-   where.exe python
-   python --version
-   ```
-   You should now see the path to your installed Python (e.g.,  
-   `C:\Users\<User>\AppData\Local\Programs\Python\Python3.14\python.exe`) and the correct version.
+If you see a warning that pip’s scripts are installed in a directory not on your PATH (for example, a message like:
 
-### 4.2 If You Cannot Find App Execution Aliases
+```
+WARNING: The scripts pip.exe, pip3.13.exe and pip3.exe are installed in 'C:\Users\admin\...\Scripts' which is not on PATH.
+```
 
-- **Use the Settings Search:** Type **App execution aliases** in the Settings search bar.
-- **Check Your Windows Version:** Go to **Settings** > **System** > **About** to verify your build.
-- **Consult Microsoft Documentation:** If the option isn’t available, your system may manage aliases via Group Policy or registry settings.
+), update pip and add pip to your PATH:
 
----
+Update pip by running:
 
-## 5. Set Up a Python Virtual Environment
+```powershell
+python -m pip install --upgrade pip
+```
 
-Virtual environments help manage project-specific dependencies.
+Add pip to your PATH using PowerShell (adjust the directory as needed):
 
-### 5.1 Check if a Virtual Environment Is Active
+```powershell
+$PipPath = "C:\Users\admin\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\LocalCache\local-packages\Python313\Scripts"
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$PipPath", [EnvironmentVariableTarget]::User)
+```
 
-1. Open **PowerShell**.
-2. Run:
-   ```powershell
-   if ($env:VIRTUAL_ENV) { "Virtual environment is active: $env:VIRTUAL_ENV" } else { "No virtual environment detected" }
-   ```
-   - If the output reads `"No virtual environment detected"`, then no virtual environment is active.
+Then restart your PowerShell session for the changes to take effect.
 
-### 5.2 Create and Activate a Virtual Environment
+To set up a Python virtual environment, create a project directory:
 
-1. **Create a Project Directory:**
-   ```powershell
-   mkdir "$HOME\Documents\VirtualEnvironment"
-   cd "$HOME\Documents\VirtualEnvironment"
-   ```
-2. **Create the Virtual Environment:**  
-   Use the following command to create a virtual environment named `venv` (which filters out any alias paths):
-   ```powershell
-   & (where.exe python | Select-String "WindowsApps" -NotMatch | Select-Object -First 1) -m venv venv
-   ```
-3. **Activate the Virtual Environment:**
-   ```powershell
-   .\venv\Scripts\Activate
-   ```
-   When activated, your prompt will show `(venv)`, indicating the virtual environment is active.
+```powershell
+mkdir "$HOME\Documents\VirtualEnvironment"
+cd "$HOME\Documents\VirtualEnvironment"
+```
+
+Create the virtual environment:
+
+```powershell
+python -m venv venv
+```
+
+Activate the virtual environment:
+
+```powershell
+.\venv\Scripts\Activate
+```
+
+Your prompt should now display `(venv)`, indicating the environment is active.
