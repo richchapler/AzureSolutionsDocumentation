@@ -31,7 +31,9 @@ Open Visual Studio Code and create a new Jupyter Notebook by selecting File > Ne
 
 ### `.env` File
 
-Next, create a file named `.env` in `c:\Temp`. To create and initialize the file from within your notebook, add a Markdown cell with the following annotation:
+Create and initialize the `.env` file from within your notebook.
+
+Add a Markdown cell with the following annotation:
 
 ```markdown
 ## `.env` File  
