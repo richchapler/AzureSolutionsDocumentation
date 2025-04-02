@@ -311,7 +311,7 @@ If you prefer running these commands from Azure Cloud Shell using PowerShell (in
 
 * **Run the psql Command**: In Cloud Shell, execute a command similar to the following (replace placeholders with your actual details):
   ```powershell
-  psql "host=<servername>.postgres.database.azure.com port=5432 dbname=postgres user=<username> password='<password>' sslmode=require"
+  psql "host={prefix}pg.postgres.database.azure.com port=5432 dbname=postgres user=<username> password='<password>' sslmode=require"
   ```
   > **Note**: If your password or username includes special characters, you may need to URL encode them or use environment variables.
 
@@ -324,9 +324,7 @@ If you prefer running these commands from Azure Cloud Shell using PowerShell (in
 
 * **Use Managed Identity Commands**: To register your storage account with managed identity, run:
   ```sql
-  SELECT azure_storage.account_add(
-      azure_storage.account_options_managed_identity('{prefix}dl', 'blob')
-  );
+  SELECT azure_storage.account_add( azure_storage.account_options_managed_identity('{prefix}dl', 'blob') );
   ```
 * **Query Blobs Using Managed Identity**: To list blobs from your container, run:
   ```sql
@@ -336,6 +334,8 @@ If you prefer running these commands from Azure Cloud Shell using PowerShell (in
     ''::text
   );
   ```
+
+------------------------- -------------------------
 
 ### Reference
 
