@@ -27,11 +27,11 @@ Start with a pre-configured virtual machine and add the following artifacts:
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
 * [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html) with the [dotenv module](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python_DotEnvModule.html)
 
-Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in your dedicated project folder (for example, "AI_Vision_Project").
+Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in `c:\Temp`.
 
 ### `.env` File
 
-Next, create a file named `.env` in the same project folder. To create and initialize the file from within your notebook, add a Markdown cell with the following annotation:
+Next, create a file named `.env` in `c:\Temp`. To create and initialize the file from within your notebook, add a Markdown cell with the following annotation:
 
 ```markdown
 ## `.env` File  
