@@ -1,5 +1,41 @@
 # Jupyter
 
+## Install pip (if not already installed)
+
+1. **Check if pip is installed:**  
+   Open PowerShell and run:
+   ```powershell
+   pip --version
+   ```
+   If you see an error like:
+   ```
+   pip: The term 'pip' is not recognized as a name of a cmdlet, function, script file, or executable program.
+   ```
+   then pip is not installed or not added to your PATH.
+
+2. **Download get-pip.py:**  
+   Use the following command to download the pip installer:
+   ```powershell
+   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+   ```
+
+3. **Run the installer:**  
+   Execute the script with Python:
+   ```powershell
+   python get-pip.py
+   ```
+   *Note: If the `python` command is not recognized, ensure Python is installed and added to your system's PATH.*
+
+4. **Verify the installation:**  
+   After installation, check the pip version again:
+   ```powershell
+   pip --version
+   ```
+   You should now see output similar to:
+   ```
+   pip 23.x.y from C:\PythonXX\lib\site-packages\pip (python 3.X)
+   ```
+
 ## Installed?
 
 Open PowerShell as an administrator and execute the following command to check if Jupyter is installed:
