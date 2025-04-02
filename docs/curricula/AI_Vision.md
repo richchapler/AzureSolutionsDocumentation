@@ -4,21 +4,21 @@
 
 ## Table of Contents  
 
-- [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
-- [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
-- [Exercise 3: Spatial Analysis](#exercise-3-spatial-analysis)  
-- [Exercise 4: Face](#exercise-4-face)  
-- [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
+* [Exercise 1: Prepare Environment](#exercise-1-prepare-environment)  
+* [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
+* [Exercise 3: Video Indexer](#exercise-3-video-indexer)  
+* [Exercise 4: Face](#exercise-4-face)  
+* [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
 
 ## Resource Requirements
 In "East US" region (or other region that supports AI Vision resources), instantiate:
 
-- AI Services 
-- Computer Vision
+* AI Services 
+* Computer Vision
 
 ------------------------- -------------------------
 
-## Exercise 1: Prepare Environment
+## Exercise 1: Development Environment  
 _Complete this exercise only if you intend to complete Pro-Code exercises_
 
 Start with a pre-configured virtual machine and add the following artifacts:
@@ -26,6 +26,71 @@ Start with a pre-configured virtual machine and add the following artifacts:
 * [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
 * [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html) with the [dotenv module](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python_DotEnvModule.html)
+
+Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in your dedicated project folder (for example, "AI_Vision_Project").
+
+### `.env` File
+
+Next, create a file named `.env` in the same project folder. To create and initialize the file from within your notebook, add a Markdown cell with the following annotation:
+
+```markdown
+## `.env` File  
+Create (if necessary) and prompt for update with API credentials and image path.
+```
+
+Then add a Code cell and paste the following code:
+
+```python
+import os
+
+env_file = ".env"
+
+if not os.path.isfile(env_file):
+    with open(env_file, "w") as f:
+        f.write("API_KEY=\nENDPOINT=\nIMAGE_PATH=\n")
+    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
+else:
+    print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
+```
+
+Execute the cell. The output should indicate whether the `.env` file was created or already exists.
+
+Then open the `.env` file in your project folder using your preferred text editor and update it with actual values. For example:
+
+```text
+API_KEY={Computer Vision KEY}
+ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
+IMAGEPATH_OCR=C:\temp\ocr.jpg
+```
+
+If you plan to use Video Indexer features as well, append the following lines to the same `.env` file:
+
+```text
+VIDEO_PATH=C:\temp\sample_video.mp4
+VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
+VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
+VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
+```
+
+Finally, in your `ai_vision.ipynb` notebook add a cell to load these environment variables using the dotenv module:
+
+```python
+import os
+from dotenv import load_dotenv
+
+env_file = ".env"
+load_dotenv(env_file)
+
+API_KEY = os.getenv("API_KEY")
+ENDPOINT = os.getenv("ENDPOINT")
+IMAGEPATH_OCR = os.getenv("IMAGEPATH_OCR")
+VIDEO_PATH = os.getenv("VIDEO_PATH")
+VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
+VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
+VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
+```
+
+Execute the cell to ensure that all variables are loaded correctly.
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -61,90 +126,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ### 2.1.2 Pro Code
 
-#### Step 1: Notebook
-
-In Visual Studio Code, click File > New File, then search for and select Jupyter Notebook.
-
-Save the new file as `ai_vision.ipynb`.
-
--------------------------
-
-#### Step 2: `.env` File
-
-Click "+ Markdown" and paste the following annotation into the resulting cell:
-
-```markdown
-## `.env` File
-Create (if necessary) and prompt for update with API credentials and image path.
-```
-
-Render the Markdown cell by clicking the checkmark in the upper-right controls.
-
-Click ""+ Code"" and paste the following code into the new cell:
-
-```python
-import os
-
-env_file = ".env"
-
-if not os.path.isfile(env_file):
-    with open(env_file, "w") as f:
-        f.write("API_KEY=\nENDPOINT=\nIMAGE_PATH=\n")
-    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
-else:
-    print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
-```
-
-Execute cell; expected output:
-
-```
-.env file created at c:\Users\{user}\.env. Please update it with your API credentials and image path.
-```
-
-Navigate to the folder and open the `.env` file with your preferred text editor. Update it with actual values; for example:
-
-```text
-API_KEY={Computer Vision KEY}
-ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
-IMAGEPATH_OCR=C:\temp\ocr.jpg
-```
-
-*Note: Consider downloading sample images from Vision Studio*
-
-Save the file after updating.
-
--------------------------
-
-#### Step 3: Load Environment Variables
-
-Click "+ Markdown" and paste the following annotation into the resulting cell:
-
-```markdown
-## Load Environment Variables
-This cell loads environment variables from the `.env` file.
-```
-
-Render the Markdown cell by clicking the checkmark in the upper-right controls.
-
-Click ""+ Code"" and paste the following code into the new cell:
-
-```python
-import os
-from dotenv import load_dotenv
-
-env_file = ".env"
-load_dotenv(env_file)
-
-API_KEY = os.getenv("API_KEY")
-ENDPOINT = os.getenv("ENDPOINT")
-IMAGEPATH_OCR = os.getenv("IMAGEPATH_OCR")
-```
-
-Execute cell to ensure that variables are correctly loaded.
-
--------------------------
-
-#### Step 4: Pro Code
+Open the `ai_vision.ipynb` notebook (which you created in Exercise #1).
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -225,30 +207,7 @@ _Note: JSON formatted and abbreviated_
 ------------------------- -------------------------
 ------------------------- -------------------------
 
-## Exercise 3: Spatial Analysis (DEPRECATION PENDING)
-
-This exercise demonstrates how to use Azure AI Vision, Spatial Analysis to detect people and movement in an image.
-
-Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Spatial analysis" tab.
-
-<img src="https://github.com/user-attachments/assets/8be99f3d-8a1c-46fc-9013-6d70be7db5c0" width="800" title="Snipped March 14, 2025" />
-
-### 3.1 Video Retrieval and Summary
-
-#### 3.1.1 Low Code
-
-<img src="https://github.com/user-attachments/assets/3fd31e11-15ea-4b81-a1be-7c208b566c2b" width="800" title="Snipped February 14, 2025" />
-
-Iteratively click the samples to the right of the "Drag and drop a file..." box.
-
-<img src="https://github.com/user-attachments/assets/a8a9125e-7b11-4252-bfbe-da386c2c8a80" width="800" title="Snipped February 14, 2025" />
-
-Interact with resulting functionality (e.g., "Locate a frame in the video").
-
-------------------------- -------------------------
-------------------------- -------------------------
-
-## Exercise 3.5: Video Indexer
+## Exercise 3: Video Indexer
 
 With Azure AI Vision Spatial Analysis retiring on 30 March 2025, this exercise introduces you to Azure AI Video Indexer—a robust solution that offers richer video analysis capabilities. You will learn how to analyze videos both via the web portal and programmatically using the Video Indexer API.
 
