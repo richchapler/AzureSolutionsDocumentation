@@ -126,15 +126,21 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### Update Environment Variables
 
-Add the following lines to your `.env` file:
-
+Append the following line to your `.env` file:
 ```text
 IMAGEPATH_OCR=C:\myProject\ocr.jpg
 ```
 
-Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
+```python
+IMAGEPATH_OCR = os.getenv("IMAGEPATH_OCR")
+```
+
+Re-run the "Load Environment Variables" code and restart the kernel.
 
 -------------------------
+
+#### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -282,14 +288,16 @@ Review information about the video:
 
 #### 3.2 Pro Code
 
-
-
-
-
 #### Update Environment Variables
 
-Add the following lines to your `.env` file:
 
+
+
+
+
+
+
+Append the following lines to your `.env` file:
 ```text
 VIDEO_PATH=C:\myProject\sample_video.mp4
 VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
@@ -297,9 +305,17 @@ VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific 
 VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
 ```
 
-Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
+```python
+VIDEO_PATH = os.getenv("VIDEO_PATH")
+VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
+VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
+VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
+```
 
-#### **Step 2: Load Video Indexer API Credentials**
+Re-run the "Load Environment Variables" code and restart the kernel.
+
+#### **Load Video Indexer API Credentials**
 
 In your `ai_vision.ipynb` notebook, update the environment variable loading section by appending:
 
@@ -311,8 +327,6 @@ VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 ```
 
 Execute the cell to verify the variables are correctly loaded.
-
----
 
 #### **Step 3: Video Indexer API Pro Code**
 
@@ -386,8 +400,6 @@ if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
 else:
     print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
-
----
 
 #### **Step 4: Execute and Review the Output**
 
@@ -506,19 +518,19 @@ Consider trying your own image.
 
 #### Update Environment Variables
 
-Add the following lines to your `.env` file:
-
+Append the following lines to your `.env` file:
 ```text
 IMAGEPATH_SEARCH=C:\myProject\search.jpg
 ```
 
-Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
+```python
+IMAGEPATH_SEARCH = os.getenv("IMAGEPATH_SEARCH")
+```
 
-*Note: Consider downloading sample images from Vision Studio*
+Re-run the "Load Environment Variables" code and restart the kernel.
 
-------------------------- -------------------------
-
-##### Step 2: Pro Code
+##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -668,25 +680,19 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### Update Environment Variables
 
-Add the following lines to your `.env` file:
-
+Append the following line to your `.env` file:
 ```text
 IMAGEPATH_DENSECAPS=C:\myProject\densecaps.jpg
 ```
 
-Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
-
-Then, update your "Load Environment Variables" cell in `ai_vision.ipynb` by appending:
-
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
 ```python
 IMAGEPATH_DENSECAPS = os.getenv("IMAGEPATH_DENSECAPS")
 ```
 
-Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
+Re-run the "Load Environment Variables" code and restart the kernel.
 
--------------------------
-
-##### Step 2: Pro Code
+##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -776,23 +782,21 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### 5.3.2 Pro Code
 
-##### Step 1: Update Environment Variables
+##### Update Environment Variables
 
-1. Edit your `.env` file  
-   Add a new line for the caption image path:
-   
-   ```text
-   IMAGEPATH_CAPTIONS=C:\myProject\caption.jpg
-   ```
+Append the following line to your `.env` file:   
+```text
+IMAGEPATH_CAPTIONS=C:\myProject\caption.jpg
+```
 
-2. Update your "Load Environment Variables" cell  
-   Append the following code:
-   
-   ```python
-   IMAGEPATH_CAPTIONS = os.getenv("IMAGEPATH_CAPTIONS")
-   ```
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:   
+```python
+IMAGEPATH_CAPTIONS = os.getenv("IMAGEPATH_CAPTIONS")
+```
 
-##### Step 2: Pro Code
+Re-run the "Load Environment Variables" code and restart the kernel.
+
+##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -864,24 +868,23 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### 5.5.2 Pro Code
 
-##### Step 1: Update Environment Variables
+##### Update Environment Variables
 
-Edit your `.env` file  
-   Add a new line for the tags image path:
+Append the following line to your `.env` file:
 
 ```text
 IMAGEPATH_TAGS=C:\myProject\tags.jpg
 ```
 
-Update your "Load Environment Variables" cell  
-   Append the following code to load the new variable:
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
 
 ```python
 IMAGEPATH_TAGS = os.getenv("IMAGEPATH_TAGS")
 ```
 
-##### Step 2: Pro Code
+Re-run the "Load Environment Variables" code and restart the kernel.
 
+##### Add Demonstration Code
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
 ```markdown
@@ -947,23 +950,21 @@ Review results on the "Cropped image" tab and adjust aspect ratio to taste.
 
 #### 5.6.2 Pro Code
 
-##### Step 1: Update Environment Variables
+##### Update Environment Variables
 
-Edit your `.env` file  
-   Add a new line for the image to be smart-cropped:
-
+Append the following line to your `.env` file:
 ```text
 IMAGEPATH_CROP=C:\myProject\crop.jpg
 ```
 
-Update your "Load Environment Variables" cell  
-   Append the following code to load the new variable:
-
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
 ```python
 IMAGEPATH_CROP = os.getenv("IMAGEPATH_CROP")
 ```
 
-##### Step 2: Pro Code
+Re-run the "Load Environment Variables" code and restart the kernel.
+
+##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -1008,12 +1009,3 @@ else:
 ```
    
 Execute cell and review the returned JSON result.
-
--------------------------
-
-###### Expected Result  
-_Note: JSON formatted and abbreviated_
-
-```json
-LOREM
-```
