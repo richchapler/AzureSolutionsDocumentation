@@ -38,19 +38,17 @@ Open Visual Studio Code and create a new Jupyter Notebook by selecting File > Ne
 
 -------------------------
 
-### `.env` File
+### Environment Variables
 
 Create and initialize the `.env` file from within your notebook.
 
 Add a Markdown cell with the following annotation:
-
 ```markdown
-## `.env` File  
+## Create `.env` File  
 Create (if necessary) and prompt for update with API credentials and image path.
 ```
 
 Then add a Code cell and paste the following code:
-
 ```python
 import os
 env_file = ".env"
@@ -64,14 +62,21 @@ else:
 
 Execute the cell. The output should indicate whether the `.env` file was created or already exists.
 
-Open the `.env` file in your project folder and update it with actual values. For example:
-
+Open the `.env` file and update it with actual values. For example:
 ```text
 API_KEY={Computer Vision KEY}
 ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
 ```
 
-Finally, in your `ai_vision.ipynb` notebook add a cell to load these environment variables using the dotenv module:
+-------------------------
+
+Add a Markdown cell with the following annotation:
+```markdown
+## Load Environment Variables  
+This cell loads the configuration settings from your `.env` file, ensuring that your API credentials and file paths are available for subsequent code cells.
+```
+
+Add a cell to load these environment variables using the dotenv module:
 
 ```python
 import os
@@ -84,7 +89,7 @@ API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
 ```
 
-Execute the cell to ensure that all variables are loaded correctly.
+Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -96,7 +101,6 @@ This exercise demonstrates how to use Azure AI Vision, Optical Character Recogni
 Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com/), log in with your Azure credentials, and then click on the "Optical character recognition" tab.
 
 <img src="https://github.com/user-attachments/assets/f008f817-51b8-4a7c-b230-19803782bde7" width="800" title="Snipped February 14, 2025" />
-
 
 ### 2.1 Extract Text from Images
 
@@ -120,7 +124,17 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ### 2.1.2 Pro Code
 
-Open the `ai_vision.ipynb` notebook (which you created in Exercise #1).
+#### Update Environment Variables
+
+Add the following lines to your `.env` file:
+
+```text
+IMAGEPATH_OCR=C:\myProject\ocr.jpg
+```
+
+Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
+
+-------------------------
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
 
@@ -205,7 +219,7 @@ _Note: JSON formatted and abbreviated_
 
 With Azure AI Vision Spatial Analysis retiring on 30 March 2025, this exercise introduces you to Azure AI Video Indexer—a robust solution that offers richer video analysis capabilities. You will learn how to analyze videos both via the web portal and programmatically using the Video Indexer API.
 
-#### 3.5.1 Low Code
+#### 3.1 Low Code
 
 Navigate to [Azure AI Video Indexer](https://www.videoindexer.ai/account/login) and log in.
 
@@ -266,26 +280,15 @@ Review information about the video:
 
 ------------------------- -------------------------
 
-#### 3.5.2 Pro Code
+#### 3.2 Pro Code
 
 
 
 
 
+#### Update Environment Variables
 
-
-
-
-
-
-
-This section demonstrates how to integrate with the Video Indexer API to analyze a video programmatically using Python. Follow the steps below:
-
----
-
-#### **Step 1: Update Environment Variables**
-
-Open your `.env` file (located in your project folder) and add the following lines:
+Add the following lines to your `.env` file:
 
 ```text
 VIDEO_PATH=C:\myProject\sample_video.mp4
@@ -294,7 +297,7 @@ VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific 
 VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
 ```
 
----
+Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
 
 #### **Step 2: Load Video Indexer API Credentials**
 
@@ -501,25 +504,17 @@ Consider trying your own image.
 
 #### 5.1.2 Pro Code
 
-##### Step 1: Environment Variables
+#### Update Environment Variables
 
-Open the `.env` file with your preferred text editor and append:
+Add the following lines to your `.env` file:
 
 ```text
 IMAGEPATH_SEARCH=C:\myProject\search.jpg
 ```
 
+Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
+
 *Note: Consider downloading sample images from Vision Studio*
-
-Save the file after updating.
-
-Return to the `ai_vision.ipynb` notebook, "Load Environment Variables" code cell and append:
-
-```python
-IMAGEPATH_SEARCH = os.getenv("IMAGEPATH_SEARCH")
-```
-
-Execute the cell and restart the Python kernel to ensure that the new variable is correctly loaded.
 
 ------------------------- -------------------------
 
@@ -671,13 +666,15 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 #### 5.2.2 Pro Code
 
-##### Step 1: Update Environment Variables
+#### Update Environment Variables
 
-Open your `.env` file with your preferred text editor and append the following line:
+Add the following lines to your `.env` file:
 
 ```text
 IMAGEPATH_DENSECAPS=C:\myProject\densecaps.jpg
 ```
+
+Open the `ai_vision.ipynb` notebook (which you created in Exercise #1), re-run the "Load Environment Variables" cell, and restart the kernel to load the new variable.
 
 Then, update your "Load Environment Variables" cell in `ai_vision.ipynb` by appending:
 
@@ -685,7 +682,7 @@ Then, update your "Load Environment Variables" cell in `ai_vision.ipynb` by appe
 IMAGEPATH_DENSECAPS = os.getenv("IMAGEPATH_DENSECAPS")
 ```
 
-Execute the cell and restart the Python kernel to ensure that the new variable is correctly loaded.
+Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
 
 -------------------------
 
