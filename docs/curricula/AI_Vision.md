@@ -10,8 +10,6 @@
 * [Exercise 4: Face](#exercise-4-face)  
 * [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
 
-
-
 ------------------------- -------------------------
 
 ## Exercise 1: Prepare Resources  
@@ -66,7 +64,7 @@ else:
 
 Execute the cell. The output should indicate whether the `.env` file was created or already exists.
 
-Then open the `.env` file in your project folder using your preferred text editor and update it with actual values. For example:
+Open the `.env` file in your project folder and update it with actual values. For example:
 
 ```text
 API_KEY={Computer Vision KEY}
