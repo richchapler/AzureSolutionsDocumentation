@@ -6,9 +6,9 @@
 
 * [Exercise 1: Prepare Resources](#exercise-1-prepare-resources)  
 * [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
-* [Exercise 3: Video Indexer](#exercise-3-video-indexer)  
-* [Exercise 4: Face](#exercise-4-face)  
-* [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
+* [Exercise 3: Face](#exercise-3-face)  
+* [Exercise 4: Image Analysis](#exercise-4-image-analysis) 
+* [Exercise 5: Video Indexer](#exercise-5-video-indexer)  
 
 ------------------------- -------------------------
 
