@@ -161,7 +161,7 @@ Append the following code to the "Load Environment Variables" code in the `ai_vi
 IMAGEPATH_OCR = os.getenv("IMAGEPATH_OCR")
 ```
 
-Re-run the "Load Environment Variables" code and restart the kernel.
+Re-execute "Load Environment Variables" code and restart the kernel.
 
 -------------------------
 
@@ -343,7 +343,7 @@ Append the following code to the "Load Environment Variables" code in the `ai_vi
 IMAGEPATH_SEARCH = os.getenv("IMAGEPATH_SEARCH")
 ```
 
-Re-run the "Load Environment Variables" code and restart the kernel.
+Re-execute "Load Environment Variables" code and restart the kernel.
 
 ##### Add Demonstration Code
 
@@ -503,7 +503,7 @@ Append the following code to the "Load Environment Variables" code in the `ai_vi
 IMAGEPATH_DENSECAPS = os.getenv("IMAGEPATH_DENSECAPS")
 ```
 
-Re-run the "Load Environment Variables" code and restart the kernel.
+Re-execute "Load Environment Variables" code and restart the kernel.
 
 ##### Add Demonstration Code
 
@@ -605,7 +605,7 @@ Append the following code to the "Load Environment Variables" code in the `ai_vi
 IMAGEPATH_CAPTIONS = os.getenv("IMAGEPATH_CAPTIONS")
 ```
 
-Re-run the "Load Environment Variables" code and restart the kernel.
+Re-execute "Load Environment Variables" code and restart the kernel.
 
 ##### Add Demonstration Code
 
@@ -689,7 +689,7 @@ Append the following code to the "Load Environment Variables" code in the `ai_vi
 IMAGEPATH_TAGS = os.getenv("IMAGEPATH_TAGS")
 ```
 
-Re-run the "Load Environment Variables" code and restart the kernel.
+Re-execute "Load Environment Variables" code and restart the kernel.
 
 ##### Add Demonstration Code
 Click "+ Markdown" and paste the following annotation into the resulting cell:
@@ -767,7 +767,7 @@ Append the following code to the "Load Environment Variables" code in the `ai_vi
 IMAGEPATH_CROP = os.getenv("IMAGEPATH_CROP")
 ```
 
-Re-run the "Load Environment Variables" code and restart the kernel.
+Re-execute "Load Environment Variables" code and restart the kernel.
 
 ##### Add Demonstration Code
 
@@ -895,7 +895,7 @@ Append the following code to the "Load Environment Variables" code in the `ai_vi
 VIDEO_PATH = os.getenv("VIDEO_PATH")
 ```
 
-Re-run the "Load Environment Variables" code and restart the kernel.
+Re-execute "Load Environment Variables" code and restart the kernel.
 
 #### Add Demonstration Code
 
@@ -1001,16 +1001,6 @@ if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
 else:
     print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
-
-
-
-
-
-
-
-
-
-
 
 #### Execute and Review the Output
 
