@@ -10,17 +10,22 @@
 * [Exercise 4: Face](#exercise-4-face)  
 * [Exercise 5: Image Analysis](#exercise-5-image-analysis) 
 
-## Resource Requirements
+
+
+------------------------- -------------------------
+
+## Exercise 1: Prepare Resources  
+_Complete this exercise only if you intend to complete Pro-Code exercises_
+
+### Azure
 In "East US" region (or other region that supports AI Vision resources), instantiate:
 
 * AI Services 
 * Computer Vision
 
-------------------------- -------------------------
+-------------------------
 
-## Exercise 1: Development Environment  
-_Complete this exercise only if you intend to complete Pro-Code exercises_
-
+### Development Environment
 Start with a pre-configured virtual machine and add the following artifacts:
 
 * [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
