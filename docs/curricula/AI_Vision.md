@@ -109,7 +109,7 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 ### 2.1 Extract Text from Images
 
-#### 2.1.1 Low Code
+#### Code
 
 <img src="https://github.com/user-attachments/assets/9d70618d-2d50-4ebc-81a8-55a9bb8be4bc" width="800" title="Snipped February 14, 2025" />
 
@@ -127,7 +127,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ------------------------- -------------------------
 
-### 2.1.2 Pro Code
+### Pro Code
 
 #### Update Environment Variables
 
@@ -226,198 +226,7 @@ _Note: JSON formatted and abbreviated_
 ------------------------- -------------------------
 ------------------------- -------------------------
 
-## Exercise 3: Video Indexer
-
-With Azure AI Vision Spatial Analysis retiring on 30 March 2025, this exercise introduces you to Azure AI Video Indexer—a robust solution that offers richer video analysis capabilities. You will learn how to analyze videos both via the web portal and programmatically using the Video Indexer API.
-
-#### 3.1 Low Code
-
-Navigate to [Azure AI Video Indexer](https://www.videoindexer.ai/account/login) and log in.
-
-<img src="https://github.com/user-attachments/assets/a1ad5532-6daa-43e4-8ab8-fcf7d4bd123b" width="800" title="Snipped April, 2025" />
-
-Complete the "Use of facial identification and recognition" form and then click "Accept".
-
-> This popup is expected when you first access Azure's facial identification and celebrity recognition features. Azure requires users to fill out the request form and agree to the legal and compliance terms before enabling these limited access services. Once your use case is verified and access is granted, you should not see this prompt again on subsequent logins.
-
-Click on "Upload" and on the resulting "Upload and index" popup, click "Browse for files"
-
-<img src="https://github.com/user-attachments/assets/7c6bf86f-7fab-4315-85e6-0f783c35ec7f" width="800" title="Snipped April, 2025" />
-
-> Consider using a sample video from a "free-to-use" site like the [NASA Image and Video Library](https://images.nasa.gov/)
-
-Select a video file and click "Open".
-
-<img src="https://github.com/user-attachments/assets/22d5bd38-0ea3-4043-9b90-d24f2507aed3" width="800" title="Snipped April, 2025" />
-
-Complete the "Upload and index" popup form:
-* File name – A display name for the uploaded video. You can keep the default name or change it to something more descriptive.
-* Add files – An option to include additional video files if you want to upload more than one at a time.
-* Privacy – Determines who can access the video and its insights. Options typically include private (only you can see it) or public (anyone with the link can view it).
-* Streaming quality – Lets you select how the video is encoded for playback. Options might include single bitrate or adaptive bitrate, which adjusts to varying network conditions.
-* Video source language – Specifies the main spoken language in the video. This setting helps with accurate transcription and speech analysis.
-* Manage language model or speech models – Allows you to choose custom language or speech models if you have trained any, or you can use the default settings.
-* Advanced settings – Contains additional configuration options like indexing presets or brand detection. These options are usually hidden by default unless you need to fine-tune the analysis.
-
-Click "Review + upload".
-
-<img src="https://github.com/user-attachments/assets/fc4d71d4-8eb5-453d-a82f-2886dfe77f04" width="800" title="Snipped April, 2025" />
-
-Complete the resulting "Upload and index" form, and then click "Upload + index".
-
-<img src="https://github.com/user-attachments/assets/d1e567f6-3ddf-455c-8d93-a506a484c1b4" width="800" title="Snipped April, 2025" />
-
-Monitor progress.
-
-<img src="https://github.com/user-attachments/assets/64caa1b7-07f5-4595-8bf2-36f7539f62fc" width="800" title="Snipped April, 2025" />
-
-Once video processing is complete, you will receive notification email.
-
-<img src="https://github.com/user-attachments/assets/b0f23583-3882-402b-a78c-6cf7d960f00b" width="800" title="Snipped April, 2025" />
-
-Click on "Watch now >" in the email or directly on the video in the "Azure AI Video Indexer" interface.
-
-<img src="https://github.com/user-attachments/assets/0f9a2967-e44d-44b1-9ebb-1469d817fb30" width="800" title="Snipped April, 2025" />
-
-Review information about the video:
-* Video Playback Area – shows “Space 32015-orig” playing with an image of the International Space Station  
-* Insights Panel – includes several data points:  
-  * Person – shows “1 person”  
-  * Topic – shows “1 topic”  
-  * Keywords – shows “3 keywords”  
-  * Labels – shows “7 labels”  
-  * Named entity – shows “1 named entity”
-  * Scenes - shows "9 scenes" and a thumbnail strip
-
-------------------------- -------------------------
-
-#### 3.2 Pro Code
-
-#### Update Environment Variables
-
-Append the following lines to your `.env` file:
-```text
-VIDEO_PATH=C:\myProject\Space-247365~orig.mp4
-VIDEO_INDEXER_API_KEY=your_VIDEO_INDEXER_API_KEY
-VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
-VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
-```
-COMPUTER_VISION_API_KEY={Computer Vision KEY}
-COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
-
-
-Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
-```python
-VIDEO_PATH = os.getenv("VIDEO_PATH")
-VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
-VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
-VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
-```
-
-Re-run the "Load Environment Variables" code and restart the kernel.
-
-#### Add Demonstration Code
-
-Add a new code cell with the following content:
-
-```python
-import os
-import requests
-import json
-
-def get_video_indexer_access_token():
-    """
-    Obtain an access token from Video Indexer API.
-    """
-    location = VIDEO_INDEXER_LOCATION
-    account_id = VIDEO_INDEXER_ACCOUNT_ID
-    COMPUTER_VISION_API_KEY = VIDEO_INDEXER_API_KEY
-    url = f"https://api.videoindexer.ai/Auth/{location}/Accounts/{account_id}/AccessToken?allowEdit=true"
-    headers = {
-        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY
-    }
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    # The returned token is a plain string (wrapped in quotes)
-    return response.text.strip('"')
-
-def upload_video_to_indexer(access_token, video_path):
-    """
-    Upload a video to Video Indexer and return the video ID.
-    """
-    location = VIDEO_INDEXER_LOCATION
-    account_id = VIDEO_INDEXER_ACCOUNT_ID
-    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos?accessToken={access_token}&name=SampleVideo&privacy=Private"
-    
-    with open(video_path, "rb") as video_file:
-        video_data = video_file.read()
-    
-    files = {
-        'file': ('sample_video.mp4', video_data, 'video/mp4')
-    }
-    
-    response = requests.post(url, files=files)
-    response.raise_for_status()
-    video_id = response.json().get("id")
-    return video_id
-
-def get_video_index(access_token, video_id):
-    """
-    Retrieve analysis results for the uploaded video.
-    """
-    location = VIDEO_INDEXER_LOCATION
-    account_id = VIDEO_INDEXER_ACCOUNT_ID
-    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos/{video_id}/Index?accessToken={access_token}"
-    response = requests.get(url)
-    response.raise_for_status()
-    return response.json()
-
-# Main process: Validate VIDEO_PATH and perform video analysis
-if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
-    try:
-        print("Requesting Video Indexer access token...")
-        token = get_video_indexer_access_token()
-        print("Uploading video...")
-        video_id = upload_video_to_indexer(token, VIDEO_PATH)
-        print("Video uploaded successfully. Video ID:", video_id)
-        print("Retrieving video index...")
-        video_index = get_video_index(token, video_id)
-        print(json.dumps(video_index, indent=2))
-    except Exception as e:
-        print("An error occurred:", e)
-else:
-    print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
-```
-
-#### Step 4: Execute and Review the Output
-
-- Run the code cell. The output JSON should include details such as video metadata, transcription results, key frames, sentiment analysis, and other insights.
-
-- Expected JSON Structure Sample:
-
-  ```json
-  {
-    "videos": [
-      {
-        "id": "sample_video_id",
-        "name": "SampleVideo",
-        "insights": {
-          "transcript": [ ... ],
-          "sentiments": [ ... ],
-          "keyFrames": [ ... ],
-          // Additional insights...
-        }
-      }
-    ]
-  }
-  ```
-
-> Important: Ensure that your Video Indexer API key, location, and account ID are correctly configured in your `.env` file before running this pro-code exercise.
-
-------------------------- -------------------------
-------------------------- -------------------------
-
-## Exercise 4: Face
+## Exercise 3: Face
 
 This exercise demonstrates how to use Azure AI Vision, Face to detect and analyze human faces in images.
 
@@ -425,9 +234,9 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 <img src="https://github.com/user-attachments/assets/ced5f919-80b9-40ad-83dd-61da99015b68" width="800" title="Snipped February 18, 2025" />
 
-### 4.1 Detect Faces in an Image
+### Detect Faces in an Image
 
-#### 4.1.1 Low Code
+#### Low Code
 
 <img src="https://github.com/user-attachments/assets/d78b53a5-aca9-40aa-8589-c1c7d0baa362" width="800" title="Snipped February 18, 2025" />
 
@@ -439,7 +248,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 -------------------------
 
-#### 4.2 Liveness Detection
+#### Liveness Detection
 
 <img src="https://github.com/user-attachments/assets/d8f00fd3-c59c-4182-9ae9-f082bba05d84" width="800" title="Snipped February 18, 2025" />
 
@@ -459,7 +268,7 @@ The "Azure AI Gating Team" will email and promise to respond in ~10 business day
 
 -------------------------
 
-#### 4.3 Portrait Processing
+#### Portrait Processing
 
 <img src="https://github.com/user-attachments/assets/9f4ed2f0-dd8f-4c93-af7c-37c190b14df5" width="800" title="Snipped February 18, 2025" />
 
@@ -471,7 +280,7 @@ Review results on the "Detected attributes" / "JSON" tabs and review the generat
 
 -------------------------
 
-#### 4.4 Photo ID Matching
+#### Photo ID Matching
 
 <img src="https://github.com/user-attachments/assets/d8273d24-dd8f-4f8b-9585-dd4fc1ac4180" width="800" title="Snipped February 18, 2025" />
 
@@ -480,7 +289,7 @@ Iteratively click the samples to the right of the "Drag and drop a file..." box 
 ------------------------- -------------------------
 ------------------------- -------------------------
 
-## Exercise 5: Image Analysis
+## Exercise 4: Image Analysis
 
 This exercise demonstrates how to use Azure AI Vision, Image Analysis to extract meaningful insights from images, including object detection, caption generation, and scene understanding.
 
@@ -488,9 +297,9 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 <img src="https://github.com/user-attachments/assets/5c5b68c7-6f82-43a1-b4fe-93cd3b648d14" width="800" title="Snipped March 14, 2025" />
 
-### 5.1 Search Photos with Image Retrieval
+### Search Photos with Image Retrieval
 
-#### 5.1.1 Low Code
+#### Low Code
 
 <img src="https://github.com/user-attachments/assets/340088a0-c508-46a1-bb03-278d74c121f0" width="800" title="Snipped February 18, 2025" />
 
@@ -502,7 +311,7 @@ Consider trying your own image.
 
 ------------------------- -------------------------
 
-#### 5.1.2 Pro Code
+#### Pro Code
 
 #### Update Environment Variables
 
@@ -650,9 +459,9 @@ _Note: JSON formatted and abbreviated_
 
 ------------------------- ------------------------- -------------------------
 
-### 5.2 Add Dense Captions to Images
+### Add Dense Captions to Images
 
-#### 5.2.1 Low Code
+#### Low Code
 
 <img src="https://github.com/user-attachments/assets/1c4581fe-36dc-4501-821d-c05390591c18" width="800" title="Snipped February 18, 2025" />
 
@@ -664,7 +473,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ------------------------- -------------------------
 
-#### 5.2.2 Pro Code
+#### Pro Code
 
 #### Update Environment Variables
 
@@ -754,9 +563,9 @@ _Note: JSON formatted and abbreviated_
 
 ------------------------- ------------------------- -------------------------
 
-### 5.3 Add Captions to Images
+### Add Captions to Images
 
-#### 5.3.1 Low Code
+#### Low Code
 
 <img src="https://github.com/user-attachments/assets/df89523d-e20b-4509-b3cb-091fff6f6405" width="800" title="Snipped February 18, 2025" />
 
@@ -768,7 +577,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ------------------------- -------------------------
 
-#### 5.3.2 Pro Code
+#### Pro Code
 
 ##### Update Environment Variables
 
@@ -834,15 +643,15 @@ LOREM
 
 ------------------------- ------------------------- -------------------------
 
-### 5.4 Detect Common Objects in Images
+### Detect Common Objects in Images
 
 Not documented...
 
 ------------------------- ------------------------- -------------------------
 
-### 5.5 Extract Common Tags from Images
+### Extract Common Tags from Images
 
-#### 5.5.1 Low Code
+#### Low Code
 
 <img src="https://github.com/user-attachments/assets/bd4656ac-989c-4f38-840f-5074db0b76bf" width="800" title="Snipped February 18, 2025" />
 
@@ -854,7 +663,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 
 ------------------------- -------------------------
 
-#### 5.5.2 Pro Code
+#### Pro Code
 
 ##### Update Environment Variables
 
@@ -922,9 +731,9 @@ LOREM
 
 ------------------------- ------------------------- -------------------------
 
-### 5.6 Create Smart-Cropped Images
+### Create Smart-Cropped Images
 
-#### 5.6.1 Low Code
+#### Low Code
 
 <img src="https://github.com/user-attachments/assets/c76c1094-341d-4fa7-8d2b-dd74a94dcef6" width="800" title="Snipped February 18, 2025" />
 
@@ -936,7 +745,7 @@ Review results on the "Cropped image" tab and adjust aspect ratio to taste.
 
 ------------------------- -------------------------
 
-#### 5.6.2 Pro Code
+#### Pro Code
 
 ##### Update Environment Variables
 
@@ -997,3 +806,194 @@ else:
 ```
    
 Execute cell and review the returned JSON result.
+
+------------------------- -------------------------
+------------------------- -------------------------
+
+## Exercise 5: Video Indexer
+
+With Azure AI Vision Spatial Analysis retiring on 30 March 2025, this exercise introduces you to Azure AI Video Indexer—a robust solution that offers richer video analysis capabilities. You will learn how to analyze videos both via the web portal and programmatically using the Video Indexer API.
+
+#### Low Code
+
+Navigate to [Azure AI Video Indexer](https://www.videoindexer.ai/account/login) and log in.
+
+<img src="https://github.com/user-attachments/assets/a1ad5532-6daa-43e4-8ab8-fcf7d4bd123b" width="800" title="Snipped April, 2025" />
+
+Complete the "Use of facial identification and recognition" form and then click "Accept".
+
+> This popup is expected when you first access Azure's facial identification and celebrity recognition features. Azure requires users to fill out the request form and agree to the legal and compliance terms before enabling these limited access services. Once your use case is verified and access is granted, you should not see this prompt again on subsequent logins.
+
+Click on "Upload" and on the resulting "Upload and index" popup, click "Browse for files"
+
+<img src="https://github.com/user-attachments/assets/7c6bf86f-7fab-4315-85e6-0f783c35ec7f" width="800" title="Snipped April, 2025" />
+
+> Consider using a sample video from a "free-to-use" site like the [NASA Image and Video Library](https://images.nasa.gov/)
+
+Select a video file and click "Open".
+
+<img src="https://github.com/user-attachments/assets/22d5bd38-0ea3-4043-9b90-d24f2507aed3" width="800" title="Snipped April, 2025" />
+
+Complete the "Upload and index" popup form:
+* File name – A display name for the uploaded video. You can keep the default name or change it to something more descriptive.
+* Add files – An option to include additional video files if you want to upload more than one at a time.
+* Privacy – Determines who can access the video and its insights. Options typically include private (only you can see it) or public (anyone with the link can view it).
+* Streaming quality – Lets you select how the video is encoded for playback. Options might include single bitrate or adaptive bitrate, which adjusts to varying network conditions.
+* Video source language – Specifies the main spoken language in the video. This setting helps with accurate transcription and speech analysis.
+* Manage language model or speech models – Allows you to choose custom language or speech models if you have trained any, or you can use the default settings.
+* Advanced settings – Contains additional configuration options like indexing presets or brand detection. These options are usually hidden by default unless you need to fine-tune the analysis.
+
+Click "Review + upload".
+
+<img src="https://github.com/user-attachments/assets/fc4d71d4-8eb5-453d-a82f-2886dfe77f04" width="800" title="Snipped April, 2025" />
+
+Complete the resulting "Upload and index" form, and then click "Upload + index".
+
+<img src="https://github.com/user-attachments/assets/d1e567f6-3ddf-455c-8d93-a506a484c1b4" width="800" title="Snipped April, 2025" />
+
+Monitor progress.
+
+<img src="https://github.com/user-attachments/assets/64caa1b7-07f5-4595-8bf2-36f7539f62fc" width="800" title="Snipped April, 2025" />
+
+Once video processing is complete, you will receive notification email.
+
+<img src="https://github.com/user-attachments/assets/b0f23583-3882-402b-a78c-6cf7d960f00b" width="800" title="Snipped April, 2025" />
+
+Click on "Watch now >" in the email or directly on the video in the "Azure AI Video Indexer" interface.
+
+<img src="https://github.com/user-attachments/assets/0f9a2967-e44d-44b1-9ebb-1469d817fb30" width="800" title="Snipped April, 2025" />
+
+Review information about the video:
+* Video Playback Area – shows “Space 32015-orig” playing with an image of the International Space Station  
+* Insights Panel – includes several data points:  
+  * Person – shows “1 person”  
+  * Topic – shows “1 topic”  
+  * Keywords – shows “3 keywords”  
+  * Labels – shows “7 labels”  
+  * Named entity – shows “1 named entity”
+  * Scenes - shows "9 scenes" and a thumbnail strip
+
+------------------------- -------------------------
+
+#### Pro Code
+
+#### Update Environment Variables
+
+Append the following lines to your `.env` file:
+```text
+VIDEO_PATH=C:\myProject\Space-247365~orig.mp4
+VIDEO_INDEXER_API_KEY=your_VIDEO_INDEXER_API_KEY
+VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
+VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
+```
+COMPUTER_VISION_API_KEY={Computer Vision KEY}
+COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
+
+
+Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
+```python
+VIDEO_PATH = os.getenv("VIDEO_PATH")
+VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
+VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
+VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
+```
+
+Re-run the "Load Environment Variables" code and restart the kernel.
+
+#### Add Demonstration Code
+
+Add a new code cell with the following content:
+
+```python
+import os
+import requests
+import json
+
+def get_video_indexer_access_token():
+    """
+    Obtain an access token from Video Indexer API.
+    """
+    location = VIDEO_INDEXER_LOCATION
+    account_id = VIDEO_INDEXER_ACCOUNT_ID
+    COMPUTER_VISION_API_KEY = VIDEO_INDEXER_API_KEY
+    url = f"https://api.videoindexer.ai/Auth/{location}/Accounts/{account_id}/AccessToken?allowEdit=true"
+    headers = {
+        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY
+    }
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    # The returned token is a plain string (wrapped in quotes)
+    return response.text.strip('"')
+
+def upload_video_to_indexer(access_token, video_path):
+    """
+    Upload a video to Video Indexer and return the video ID.
+    """
+    location = VIDEO_INDEXER_LOCATION
+    account_id = VIDEO_INDEXER_ACCOUNT_ID
+    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos?accessToken={access_token}&name=SampleVideo&privacy=Private"
+    
+    with open(video_path, "rb") as video_file:
+        video_data = video_file.read()
+    
+    files = {
+        'file': ('sample_video.mp4', video_data, 'video/mp4')
+    }
+    
+    response = requests.post(url, files=files)
+    response.raise_for_status()
+    video_id = response.json().get("id")
+    return video_id
+
+def get_video_index(access_token, video_id):
+    """
+    Retrieve analysis results for the uploaded video.
+    """
+    location = VIDEO_INDEXER_LOCATION
+    account_id = VIDEO_INDEXER_ACCOUNT_ID
+    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos/{video_id}/Index?accessToken={access_token}"
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()
+
+# Main process: Validate VIDEO_PATH and perform video analysis
+if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
+    try:
+        print("Requesting Video Indexer access token...")
+        token = get_video_indexer_access_token()
+        print("Uploading video...")
+        video_id = upload_video_to_indexer(token, VIDEO_PATH)
+        print("Video uploaded successfully. Video ID:", video_id)
+        print("Retrieving video index...")
+        video_index = get_video_index(token, video_id)
+        print(json.dumps(video_index, indent=2))
+    except Exception as e:
+        print("An error occurred:", e)
+else:
+    print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
+```
+
+#### Execute and Review the Output
+
+- Run the code cell. The output JSON should include details such as video metadata, transcription results, key frames, sentiment analysis, and other insights.
+
+- Expected JSON Structure Sample:
+
+  ```json
+  {
+    "videos": [
+      {
+        "id": "sample_video_id",
+        "name": "SampleVideo",
+        "insights": {
+          "transcript": [ ... ],
+          "sentiments": [ ... ],
+          "keyFrames": [ ... ],
+          // Additional insights...
+        }
+      }
+    ]
+  }
+  ```
+
+> Important: Ensure that your Video Indexer API key, location, and account ID are correctly configured in your `.env` file before running this pro-code exercise.
