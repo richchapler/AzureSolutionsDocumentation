@@ -27,7 +27,13 @@ Start with a pre-configured virtual machine and add the following artifacts:
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
 * [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html) with the [dotenv module](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python_DotEnvModule.html)
 
+-------------------------
+
+### `ai_vision.ipynb` Notebook
+
 Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in `c:\Temp`.
+
+-------------------------
 
 ### `.env` File
 
@@ -49,7 +55,7 @@ env_file = ".env"
 
 if not os.path.isfile(env_file):
     with open(env_file, "w") as f:
-        f.write("API_KEY=\nENDPOINT=\nIMAGE_PATH=\n")
+        f.write("API_KEY=\nENDPOINT=")
     print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
 else:
     print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
@@ -62,16 +68,6 @@ Then open the `.env` file in your project folder using your preferred text edito
 ```text
 API_KEY={Computer Vision KEY}
 ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
-IMAGEPATH_OCR=C:\temp\ocr.jpg
-```
-
-If you plan to use Video Indexer features as well, append the following lines to the same `.env` file:
-
-```text
-VIDEO_PATH=C:\temp\sample_video.mp4
-VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
-VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
-VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
 ```
 
 Finally, in your `ai_vision.ipynb` notebook add a cell to load these environment variables using the dotenv module:
@@ -85,11 +81,6 @@ load_dotenv(env_file)
 
 API_KEY = os.getenv("API_KEY")
 ENDPOINT = os.getenv("ENDPOINT")
-IMAGEPATH_OCR = os.getenv("IMAGEPATH_OCR")
-VIDEO_PATH = os.getenv("VIDEO_PATH")
-VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
-VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
-VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 ```
 
 Execute the cell to ensure that all variables are loaded correctly.
