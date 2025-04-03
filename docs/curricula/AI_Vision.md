@@ -19,7 +19,7 @@ _Complete this exercise only if you intend to complete Pro-Code exercises_
 In "East US" region (or other region that supports AI Vision resources), instantiate:
 
 * AI Services
-* AI Video Indexer with dependencies:
+* AI Video Indexer with system-assigned managed identity and dependencies:
   * Open AI
   * Storage Account (general purpose v1)
 * Computer Vision
@@ -66,12 +66,10 @@ Execute the cell. The output should indicate whether the `.env` file was created
 
 Open the `.env` file and append the following lines:
 ```text
-COMPUTER_VISION_API_KEY={Computer Vision Key}
+COMPUTER_VISION_API_KEY={Computer Vision, KEY 1}
 COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
-
-VIDEO_INDEXER_API_KEY={Video Indexer Key}
-VIDEO_INDEXER_LOCATION=your_location
-VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
+VIDEO_INDEXER_LOCATION={Video Indexer, Location}
+VIDEO_INDEXER_ACCOUNT_ID={Video Indexer, Account ID}
 ```
 
 -------------------------
@@ -82,8 +80,7 @@ Add a Markdown cell with the following annotation:
 This cell loads the configuration settings from your `.env` file, ensuring that your API credentials and file paths are available for subsequent code cells.
 ```
 
-Add a cell to load these environment variables using the dotenv module:
-
+Add a Code cell to load these environment variables using the dotenv module:
 ```python
 import os
 from dotenv import load_dotenv
@@ -93,9 +90,8 @@ load_dotenv(env_file)
 
 COMPUTER_VISION_API_KEY = os.getenv("COMPUTER_VISION_API_KEY")
 COMPUTER_VISION_ENDPOINT = os.getenv("COMPUTER_VISION_ENDPOINT")
-VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
-VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
-VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
+VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
+VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 ```
 
 Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
