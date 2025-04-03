@@ -68,8 +68,8 @@ Open the `.env` file and append the following lines:
 ```text
 COMPUTER_VISION_API_KEY={Computer Vision, KEY 1}
 COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
-VIDEO_INDEXER_LOCATION={Video Indexer, Location}
 VIDEO_INDEXER_ACCOUNT_ID={Video Indexer, Account ID}
+VIDEO_INDEXER_LOCATION={Video Indexer, Location}
 ```
 
 -------------------------
@@ -90,8 +90,8 @@ load_dotenv(env_file)
 
 COMPUTER_VISION_API_KEY = os.getenv("COMPUTER_VISION_API_KEY")
 COMPUTER_VISION_ENDPOINT = os.getenv("COMPUTER_VISION_ENDPOINT")
-VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
 VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
+VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
 ```
 
 Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
