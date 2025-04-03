@@ -18,7 +18,8 @@ _Complete this exercise only if you intend to complete Pro-Code exercises_
 ### Azure
 In "East US" region (or other region that supports AI Vision resources), instantiate:
 
-* AI Services 
+* AI Services
+* AI Video Indexer
 * Computer Vision
 
 -------------------------
@@ -290,16 +291,9 @@ Review information about the video:
 
 #### Update Environment Variables
 
-
-
-
-
-
-
-
 Append the following lines to your `.env` file:
 ```text
-VIDEO_PATH=C:\myProject\sample_video.mp4
+VIDEO_PATH=C:\myProject\Space-247365~orig.mp4
 VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
 VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
 VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
@@ -315,20 +309,7 @@ VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 
 Re-run the "Load Environment Variables" code and restart the kernel.
 
-#### **Load Video Indexer API Credentials**
-
-In your `ai_vision.ipynb` notebook, update the environment variable loading section by appending:
-
-```python
-VIDEO_PATH = os.getenv("VIDEO_PATH")
-VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
-VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
-VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
-```
-
-Execute the cell to verify the variables are correctly loaded.
-
-#### **Step 3: Video Indexer API Pro Code**
+#### Add Demonstration Code
 
 Add a new code cell with the following content:
 
@@ -401,11 +382,11 @@ else:
     print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
 
-#### **Step 4: Execute and Review the Output**
+#### Step 4: Execute and Review the Output
 
 - Run the code cell. The output JSON should include details such as video metadata, transcription results, key frames, sentiment analysis, and other insights.
 
-- **Expected JSON Structure Sample:**
+- Expected JSON Structure Sample:
 
   ```json
   {
@@ -424,7 +405,7 @@ else:
   }
   ```
 
-> **Important:** Ensure that your Video Indexer API key, location, and account ID are correctly configured in your `.env` file before running this pro-code exercise.
+> Important: Ensure that your Video Indexer API key, location, and account ID are correctly configured in your `.env` file before running this pro-code exercise.
 
 ------------------------- -------------------------
 ------------------------- -------------------------
