@@ -36,6 +36,18 @@ Prepare a machine with the following artifacts:
 
 -------------------------
 
+#### Azure Identity Module
+
+Open Visual Studio Code, navigate to View >> Terminal, then execute the following command:
+
+```powershell
+pip install azure-identity
+```
+
+Once installed, you'll be able to import `DefaultAzureCredential` in your code to obtain access tokens via your application registration credentials (rather than using keys).
+
+-------------------------
+
 #### Python Notebook
 
 Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in `c:\myProject`.
