@@ -891,6 +891,8 @@ Click "+ Code" and paste the following Python into the resulting cell:
 import os
 from dotenv import load_dotenv
 import requests
+import json
+import time
 
 load_dotenv(".env")
 
@@ -899,15 +901,32 @@ VIDEO_INDEXER_SAMPLEPATH = os.getenv("VIDEO_INDEXER_SAMPLEPATH")
 VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
 VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 
-url = f"https://api.videoindexer.ai/{VIDEO_INDEXER_LOCATION}/Accounts/{VIDEO_INDEXER_ACCOUNT_ID}/Videos?accessToken={VIDEO_INDEXER_TOKEN}&name=SampleVideo&privacy=Private"
+video_name = os.path.splitext(os.path.basename(VIDEO_INDEXER_SAMPLEPATH))[0]
 
+list_url = f"https://api.videoindexer.ai/{VIDEO_INDEXER_LOCATION}/Accounts/{VIDEO_INDEXER_ACCOUNT_ID}/Videos?accessToken={VIDEO_INDEXER_TOKEN}"
+list_response = requests.get(list_url)
+list_response.raise_for_status()
+videos_list = list_response.json()
+
+for video in videos_list.get("videos", []):
+    if video.get("name") == video_name:
+        vid_id = video.get("id")
+        delete_url = f"https://api.videoindexer.ai/{VIDEO_INDEXER_LOCATION}/Accounts/{VIDEO_INDEXER_ACCOUNT_ID}/Videos/{vid_id}?accessToken={VIDEO_INDEXER_TOKEN}"
+        delete_response = requests.delete(delete_url)
+        if delete_response.status_code == 204:
+            print(f"Deleted video with id {vid_id}")
+        else:
+            print(f"Failed to delete video with id {vid_id}: {delete_response.text}")
+
+time.sleep(10)
+
+upload_url = f"https://api.videoindexer.ai/{VIDEO_INDEXER_LOCATION}/Accounts/{VIDEO_INDEXER_ACCOUNT_ID}/Videos?accessToken={VIDEO_INDEXER_TOKEN}&name={video_name}&privacy=Private"
 with open(VIDEO_INDEXER_SAMPLEPATH, "rb") as video_file:
     video_data = video_file.read()
+files = {'file': (os.path.basename(VIDEO_INDEXER_SAMPLEPATH), video_data, 'video/mp4')}
 
-files = {'file': ('sample_video.mp4', video_data, 'video/mp4')}
-
-response = requests.post(url, files=files)
-response.raise_for_status()
+upload_response = requests.post(upload_url, files=files)
+upload_response.raise_for_status()
 print(json.dumps(upload_response.json(), indent=2))
 ```
 
