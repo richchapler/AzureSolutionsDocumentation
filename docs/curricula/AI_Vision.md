@@ -19,7 +19,9 @@ _Complete this exercise only if you intend to complete Pro-Code exercises_
 In "East US" region (or other region that supports AI Vision resources), instantiate:
 
 * AI Services
-* AI Video Indexer
+* AI Video Indexer with dependencies:
+  * Open AI
+  * Storage Account (general purpose v1)
 * Computer Vision
 
 -------------------------
