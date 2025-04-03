@@ -31,7 +31,7 @@ Start with a pre-configured virtual machine and add the following artifacts:
 
 ### `ai_vision.ipynb` Notebook
 
-Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in `c:\Temp`.
+Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in `c:\myProject`.
 
 -------------------------
 
@@ -287,7 +287,7 @@ This section demonstrates how to integrate with the Video Indexer API to analyze
 Open your `.env` file (located in your project folder) and add the following lines:
 
 ```text
-VIDEO_PATH=C:\temp\sample_video.mp4
+VIDEO_PATH=C:\myProject\sample_video.mp4
 VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
 VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
 VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
@@ -505,7 +505,7 @@ Consider trying your own image.
 Open the `.env` file with your preferred text editor and append:
 
 ```text
-IMAGEPATH_SEARCH=C:\temp\search.jpg
+IMAGEPATH_SEARCH=C:\myProject\search.jpg
 ```
 
 *Note: Consider downloading sample images from Vision Studio*
@@ -675,7 +675,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
 Open your `.env` file with your preferred text editor and append the following line:
 
 ```text
-IMAGEPATH_DENSECAPS=C:\temp\densecaps.jpg
+IMAGEPATH_DENSECAPS=C:\myProject\densecaps.jpg
 ```
 
 Then, update your "Load Environment Variables" cell in `ai_vision.ipynb` by appending:
@@ -784,7 +784,7 @@ Review results on the "Detected attributes" / "JSON" tabs.
    Add a new line for the caption image path:
    
    ```text
-   IMAGEPATH_CAPTIONS=C:\temp\caption.jpg
+   IMAGEPATH_CAPTIONS=C:\myProject\caption.jpg
    ```
 
 2. Update your "Load Environment Variables" cell  
@@ -872,7 +872,7 @@ Edit your `.env` file
    Add a new line for the tags image path:
 
 ```text
-IMAGEPATH_TAGS=C:\temp\tags.jpg
+IMAGEPATH_TAGS=C:\myProject\tags.jpg
 ```
 
 Update your "Load Environment Variables" cell  
@@ -955,7 +955,7 @@ Edit your `.env` file
    Add a new line for the image to be smart-cropped:
 
 ```text
-IMAGEPATH_CROP=C:\temp\crop.jpg
+IMAGEPATH_CROP=C:\myProject\crop.jpg
 ```
 
 Update your "Load Environment Variables" cell  
