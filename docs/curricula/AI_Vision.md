@@ -35,13 +35,13 @@ Prepare a machine with the following artifacts:
 
 -------------------------
 
-### Python Notebook
+#### Python Notebook
 
 Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in `c:\myProject`.
 
 -------------------------
 
-### Environment Variables
+#### Environment Variables
 
 Create and initialize the `.env` file from within your notebook.
 
