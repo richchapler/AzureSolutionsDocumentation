@@ -85,9 +85,7 @@ Add a Code cell to load these environment variables using the dotenv module:
 import os
 from dotenv import load_dotenv
 
-env_file = ".env"
-load_dotenv(env_file)
-
+load_dotenv(".env")
 COMPUTER_VISION_API_KEY = os.getenv("COMPUTER_VISION_API_KEY")
 COMPUTER_VISION_ENDPOINT = os.getenv("COMPUTER_VISION_ENDPOINT")
 VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
