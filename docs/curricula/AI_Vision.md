@@ -27,7 +27,7 @@ In "East US" region (or other region that supports AI Vision resources), instant
 -------------------------
 
 ### Development Environment
-Start with a pre-configured virtual machine and add the following artifacts:
+Prepare a machine with the following artifacts:
 
 * [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
 * [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
