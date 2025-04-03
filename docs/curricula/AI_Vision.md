@@ -79,16 +79,15 @@ Execute the cell. The output should indicate whether the `.env` file was created
 
 Open the `.env` file and append the following lines:
 ```text
-AZURE_TENANT_ID={Directory (tenant) ID}
-AZURE_CLIENT_ID={Application (client) ID}
-AZURE_CLIENT_SECRET={Client Secret, Value}
-
 COMPUTER_VISION_API_KEY={Computer Vision, KEY 1}
 COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
 
 VIDEO_INDEXER_ACCOUNT_ID={Video Indexer, Account ID}
 VIDEO_INDEXER_LOCATION={Video Indexer, Location}
+VIDEO_INDEXER_TOKEN={Video Indexer, Access Token}
 ```
+
+> Note: VIDEO_INDEXER_TOKEN
 
 -------------------------
 
@@ -103,15 +102,14 @@ Add a Code cell to load these environment variables using the dotenv module:
 import os
 from dotenv import load_dotenv
 
-load_dotenv(".env")
+env_file = ".env"
+load_dotenv(env_file)
 
-AZURE_TENANT_ID = os.getenv("AZURE_TENANT_ID")
-AZURE_CLIENT_ID = os.getenv("AZURE_CLIENT_ID")
-AZURE_CLIENT_SECRET = os.getenv("AZURE_CLIENT_SECRET")
 COMPUTER_VISION_API_KEY = os.getenv("COMPUTER_VISION_API_KEY")
 COMPUTER_VISION_ENDPOINT = os.getenv("COMPUTER_VISION_ENDPOINT")
 VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
+VIDEO_INDEXER_TOKEN = os.getenv("VIDEO_INDEXER_TOKEN")
 ```
 
 Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
@@ -644,15 +642,6 @@ else:
    
 Execute cell and review the returned JSON result.
 
--------------------------
-
-###### Expected Result  
-_Note: JSON formatted and abbreviated_
-
-```json
-LOREM
-```
-
 ------------------------- ------------------------- -------------------------
 
 ### Detect Common Objects in Images
@@ -727,15 +716,6 @@ else:
 ```
    
 Execute cell and review the returned JSON result.
-
--------------------------
-
-###### Expected Result  
-_Note: JSON formatted and abbreviated_
-
-```json
-LOREM
-```
 
 ------------------------- ------------------------- -------------------------
 
@@ -887,12 +867,12 @@ Review information about the video:
 
 Append the following line to your `.env` file:
 ```text
-VIDEO_PATH=C:\myProject\Space-247365~orig.mp4
+VIDEO_INDEXER_SAMPLEPATH=C:\myProject\{filename}
 ```
 
 Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
 ```python
-VIDEO_PATH = os.getenv("VIDEO_PATH")
+VIDEO_INDEXER_SAMPLEPATH = os.getenv("VIDEO_INDEXER_SAMPLEPATH")
 ```
 
 Re-execute "Load Environment Variables" code and restart the kernel.
@@ -904,125 +884,69 @@ Click "+ Markdown" and paste the following annotation into the resulting cell:
 ## Video Indexer  
 ```
 
+-------------------------
+
 Click "+ Code" and paste the following Python into the resulting cell:
 ```python
-# Get Access Token (Managed Identity)
-# This code obtains an access token from the Video Indexer API using application registration credentials.
-# Ensure that your .env file contains AZURE_TENANT_ID, AZURE_CLIENT_ID, and AZURE_CLIENT_SECRET.
+import os
+from dotenv import load_dotenv
+import requests
 
-from azure.identity import DefaultAzureCredential
+load_dotenv(".env")
 
-def get_video_indexer_access_token():
-    """
-    Obtain an access token from Video Indexer API using application registration credentials.
-    """
-    credential = DefaultAzureCredential()
-    token = credential.get_token("https://api.videoindexer.ai/.default").token
-    return token
+VIDEO_INDEXER_TOKEN = os.getenv("VIDEO_INDEXER_TOKEN")
+VIDEO_INDEXER_SAMPLEPATH = os.getenv("VIDEO_INDEXER_SAMPLEPATH")
+VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
+VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 
-# Example usage:
-token = get_video_indexer_access_token()
-print(token)
+url = f"https://api.videoindexer.ai/{VIDEO_INDEXER_LOCATION}/Accounts/{VIDEO_INDEXER_ACCOUNT_ID}/Videos?accessToken={VIDEO_INDEXER_TOKEN}&name=SampleVideo&privacy=Private"
+
+with open(VIDEO_INDEXER_SAMPLEPATH, "rb") as video_file:
+    video_data = video_file.read()
+
+files = {'file': ('sample_video.mp4', video_data, 'video/mp4')}
+
+response = requests.post(url, files=files)
+response.raise_for_status()
+print(json.dumps(upload_response.json(), indent=2))
 ```
 
+> Note: If you are using the same video file, you may need to change the name in the URL to avoid a "duplicate" error
 
+##### Expected Result
 
-
-
-
-
-
-
-
-
-
-**Code Cell 2 – Upload Video:**  
-```python
-def upload_video_to_indexer(access_token, video_path):
-    """
-    Upload a video to Video Indexer and return the video ID.
-    """
-    location = VIDEO_INDEXER_LOCATION
-    account_id = VIDEO_INDEXER_ACCOUNT_ID
-    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos?accessToken={access_token}&name=SampleVideo&privacy=Private"
-    
-    with open(video_path, "rb") as video_file:
-        video_data = video_file.read()
-    
-    files = {
-        'file': ('sample_video.mp4', video_data, 'video/mp4')
-    }
-    
-    response = requests.post(url, files=files)
-    response.raise_for_status()
-    video_id = response.json().get("id")
-    return video_id
-
-# Example usage:
-# video_id = upload_video_to_indexer(token, VIDEO_PATH)
-# print(video_id)
+```json
+{
+  "accountId": "d66d7d20-aaf9-46c5-9d98-a63819219511",
+  "id": "srcpxbz9z8",
+  "partition": null,
+  "externalId": null,
+  "metadata": null,
+  "name": "Space-247365~orig",
+  "description": null,
+  "created": "2025-04-03T19:36:34.8566667+00:00",
+  "lastModified": "2025-04-03T19:36:34.8566667+00:00",
+  "lastIndexed": "2025-04-03T19:36:34.8566667+00:00",
+  "privacyMode": "Private",
+  "userName": "Rich Chapler",
+  "isOwned": true,
+  "isBase": true,
+  "hasSourceVideoFile": true,
+  "state": "Uploaded",
+  "moderationState": "OK",
+  "reviewState": "None",
+  "isSearchable": true,
+  "processingProgress": "1%",
+  "durationInSeconds": 0,
+  "thumbnailVideoId": "srcpxbz9z8",
+  "thumbnailId": "00000000-0000-0000-0000-000000000000",
+  "searchMatches": [],
+  "indexingPreset": "Default",
+  "streamingPreset": "Default",
+  "sourceLanguage": "en-US",
+  "sourceLanguages": [
+    "en-US"
+  ],
+  "personModelId": "00000000-0000-0000-0000-000000000000"
+}
 ```
-
-**Code Cell 3 – Retrieve Video Index:**  
-```python
-def get_video_index(access_token, video_id):
-    """
-    Retrieve analysis results for the uploaded video.
-    """
-    location = VIDEO_INDEXER_LOCATION
-    account_id = VIDEO_INDEXER_ACCOUNT_ID
-    url = f"https://api.videoindexer.ai/{location}/Accounts/{account_id}/Videos/{video_id}/Index?accessToken={access_token}"
-    response = requests.get(url)
-    response.raise_for_status()
-    return response.json()
-
-# Example usage:
-# video_index = get_video_index(token, video_id)
-# print(video_index)
-```
-
-**Code Cell 4 – Main Process:**  
-```python
-import json
-
-# Main process: Validate VIDEO_PATH and perform video analysis
-if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
-    try:
-        print("Requesting Video Indexer access token...")
-        token = get_video_indexer_access_token()
-        print("Uploading video...")
-        video_id = upload_video_to_indexer(token, VIDEO_PATH)
-        print("Video uploaded successfully. Video ID:", video_id)
-        print("Retrieving video index...")
-        video_index = get_video_index(token, video_id)
-        print(json.dumps(video_index, indent=2))
-    except Exception as e:
-        print("An error occurred:", e)
-else:
-    print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
-```
-
-#### Execute and Review the Output
-
-- Run the code cell. The output JSON should include details such as video metadata, transcription results, key frames, sentiment analysis, and other insights.
-
-- Expected JSON Structure Sample:
-
-  ```json
-  {
-    "videos": [
-      {
-        "id": "sample_video_id",
-        "name": "SampleVideo",
-        "insights": {
-          "transcript": [ ... ],
-          "sentiments": [ ... ],
-          "keyFrames": [ ... ],
-          // Additional insights...
-        }
-      }
-    ]
-  }
-  ```
-
-> Important: Ensure that your Video Indexer API key, location, and account ID are correctly configured in your `.env` file before running this pro-code exercise.
