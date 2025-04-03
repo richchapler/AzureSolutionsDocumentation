@@ -19,10 +19,11 @@ _Complete this exercise only if you intend to complete Pro-Code exercises_
 In "East US" region (or other region that supports AI Vision resources), instantiate:
 
 * AI Services
+* Application Registration (with Client Secret)
 * Computer Vision
+* Open AI
+* Storage Account (general purpose v1)
 * Video Indexer with system-assigned managed identity and dependencies:
-  * Open AI
-  * Storage Account (general purpose v1)
 
 -------------------------
 
@@ -66,8 +67,13 @@ Execute the cell. The output should indicate whether the `.env` file was created
 
 Open the `.env` file and append the following lines:
 ```text
+AZURE_TENANT_ID={your_tenant_id}
+AZURE_CLIENT_ID={your_application_client_id}
+AZURE_CLIENT_SECRET={your_client_secret}
+
 COMPUTER_VISION_API_KEY={Computer Vision, KEY 1}
 COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
+
 VIDEO_INDEXER_ACCOUNT_ID={Video Indexer, Account ID}
 VIDEO_INDEXER_LOCATION={Video Indexer, Location}
 ```
@@ -146,7 +152,6 @@ Re-run the "Load Environment Variables" code and restart the kernel.
 #### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
-
 ```markdown
 ## Extract Text from Images
 Optical Character Recognition (OCR)
@@ -155,7 +160,6 @@ Optical Character Recognition (OCR)
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
 Click ""+ Code"" and paste the following code into the new cell:
-
 ```python
 import os
 import requests
@@ -328,14 +332,12 @@ Re-run the "Load Environment Variables" code and restart the kernel.
 ##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
-
 ```markdown
 ## Search Photos with Image Retrieval
 Image Analysis
 ```
 
 Render the Markdown cell then click "+ Code" and paste the following code into the new cell:
-
 ```python
 import os
 import requests
@@ -490,14 +492,12 @@ Re-run the "Load Environment Variables" code and restart the kernel.
 ##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
-
 ```markdown
 ## Add Dense Captions to Images
 Image Analysis
 ```
 
 Render the Markdown cell then click "+ Code" and paste the following code into the new cell:
-
 ```python
 import os
 import requests
@@ -594,14 +594,12 @@ Re-run the "Load Environment Variables" code and restart the kernel.
 ##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
-
 ```markdown
 ## Add Captions to Images
 Extract captions from an image using Azure AI Vision.
 ```
 
 Add a Code cell with the following code:
-
 ```python
 import os
 import requests
@@ -666,13 +664,11 @@ Review results on the "Detected attributes" / "JSON" tabs.
 ##### Update Environment Variables
 
 Append the following line to your `.env` file:
-
 ```text
 IMAGEPATH_TAGS=C:\myProject\tags.jpg
 ```
 
 Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
-
 ```python
 IMAGEPATH_TAGS = os.getenv("IMAGEPATH_TAGS")
 ```
@@ -681,14 +677,12 @@ Re-run the "Load Environment Variables" code and restart the kernel.
 
 ##### Add Demonstration Code
 Click "+ Markdown" and paste the following annotation into the resulting cell:
-
 ```markdown
 ## Extract Common Tags from Images
-Extract descriptive tags from an image using Azure AI Vision.
+Image Analysis
 ```
 
 Add a Code cell with the following code:
-
 ```python
 import os
 import requests
@@ -762,14 +756,12 @@ Re-run the "Load Environment Variables" code and restart the kernel.
 ##### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
-
 ```markdown
 ## Create Smart-Cropped Images
-Generate a smart-cropped thumbnail from an image using Azure AI Vision.
+Image Analysis
 ```
 
-2. Add a Code cell with the following code:
-
+Add a Code cell with the following code:
 ```python
 import os
 import requests
@@ -891,29 +883,49 @@ Re-run the "Load Environment Variables" code and restart the kernel.
 
 #### Add Demonstration Code
 
-Add a new code cell with the following content:
+Click "+ Markdown" and paste the following annotation into the resulting cell:
+```markdown
+## Video Indexer  
+```
 
+Click "+ Code" and paste the following Python into the resulting cell:
+
+
+
+
+
+
+
+**Code Cell 1 – Get Access Token:**  
 ```python
 import os
 import requests
-import json
 
 def get_video_indexer_access_token():
     """
-    Obtain an access token from Video Indexer API.
+    Obtain an access token from Video Indexer API using the legacy API key method.
+    (For managed identity, see the revised version using DefaultAzureCredential.)
     """
     location = VIDEO_INDEXER_LOCATION
     account_id = VIDEO_INDEXER_ACCOUNT_ID
-    COMPUTER_VISION_API_KEY = VIDEO_INDEXER_API_KEY
+    # Using VIDEO_INDEXER_API_KEY in legacy mode (replace with managed identity code if needed)
+    key = os.getenv("VIDEO_INDEXER_API_KEY")
     url = f"https://api.videoindexer.ai/Auth/{location}/Accounts/{account_id}/AccessToken?allowEdit=true"
     headers = {
-        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY
+        "Ocp-Apim-Subscription-Key": key
     }
     response = requests.get(url, headers=headers)
     response.raise_for_status()
     # The returned token is a plain string (wrapped in quotes)
     return response.text.strip('"')
 
+# Example usage:
+# token = get_video_indexer_access_token()
+# print(token)
+```
+
+**Code Cell 2 – Upload Video:**  
+```python
 def upload_video_to_indexer(access_token, video_path):
     """
     Upload a video to Video Indexer and return the video ID.
@@ -934,6 +946,13 @@ def upload_video_to_indexer(access_token, video_path):
     video_id = response.json().get("id")
     return video_id
 
+# Example usage:
+# video_id = upload_video_to_indexer(token, VIDEO_PATH)
+# print(video_id)
+```
+
+**Code Cell 3 – Retrieve Video Index:**  
+```python
 def get_video_index(access_token, video_id):
     """
     Retrieve analysis results for the uploaded video.
@@ -944,6 +963,15 @@ def get_video_index(access_token, video_id):
     response = requests.get(url)
     response.raise_for_status()
     return response.json()
+
+# Example usage:
+# video_index = get_video_index(token, video_id)
+# print(video_index)
+```
+
+**Code Cell 4 – Main Process:**  
+```python
+import json
 
 # Main process: Validate VIDEO_PATH and perform video analysis
 if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
@@ -961,6 +989,16 @@ if VIDEO_PATH and os.path.isfile(VIDEO_PATH):
 else:
     print("VIDEO_PATH is not defined or the file does not exist. Please check your .env file.")
 ```
+
+
+
+
+
+
+
+
+
+
 
 #### Execute and Review the Output
 
