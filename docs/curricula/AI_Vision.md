@@ -893,40 +893,36 @@ Click "+ Markdown" and paste the following annotation into the resulting cell:
 ```
 
 Click "+ Code" and paste the following Python into the resulting cell:
-
-
-
-
-
-
-
-**Code Cell 1 – Get Access Token:**  
 ```python
-import os
-import requests
+# Get Access Token (Managed Identity)
+# This code obtains an access token from the Video Indexer API using application registration credentials.
+# Ensure that your .env file contains AZURE_TENANT_ID, AZURE_CLIENT_ID, and AZURE_CLIENT_SECRET.
+
+from azure.identity import DefaultAzureCredential
 
 def get_video_indexer_access_token():
     """
-    Obtain an access token from Video Indexer API using the legacy API key method.
-    (For managed identity, see the revised version using DefaultAzureCredential.)
+    Obtain an access token from Video Indexer API using application registration credentials.
     """
-    location = VIDEO_INDEXER_LOCATION
-    account_id = VIDEO_INDEXER_ACCOUNT_ID
-    # Using VIDEO_INDEXER_API_KEY in legacy mode (replace with managed identity code if needed)
-    key = os.getenv("VIDEO_INDEXER_API_KEY")
-    url = f"https://api.videoindexer.ai/Auth/{location}/Accounts/{account_id}/AccessToken?allowEdit=true"
-    headers = {
-        "Ocp-Apim-Subscription-Key": key
-    }
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    # The returned token is a plain string (wrapped in quotes)
-    return response.text.strip('"')
+    credential = DefaultAzureCredential()
+    token = credential.get_token("https://api.videoindexer.ai/.default").token
+    return token
 
 # Example usage:
-# token = get_video_indexer_access_token()
-# print(token)
+token = get_video_indexer_access_token()
+print(token)
 ```
+
+
+
+
+
+
+
+
+
+
+
 
 **Code Cell 2 – Upload Video:**  
 ```python
