@@ -67,9 +67,9 @@ Execute the cell. The output should indicate whether the `.env` file was created
 
 Open the `.env` file and append the following lines:
 ```text
-AZURE_TENANT_ID={your_tenant_id}
-AZURE_CLIENT_ID={your_application_client_id}
-AZURE_CLIENT_SECRET={your_client_secret}
+AZURE_TENANT_ID={Directory (tenant) ID}
+AZURE_CLIENT_ID={Application (client) ID}
+AZURE_CLIENT_SECRET={Client Secret, Value}
 
 COMPUTER_VISION_API_KEY={Computer Vision, KEY 1}
 COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
