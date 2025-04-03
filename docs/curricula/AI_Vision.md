@@ -877,23 +877,14 @@ Review information about the video:
 
 #### Update Environment Variables
 
-Append the following lines to your `.env` file:
+Append the following line to your `.env` file:
 ```text
 VIDEO_PATH=C:\myProject\Space-247365~orig.mp4
-VIDEO_INDEXER_API_KEY=your_VIDEO_INDEXER_API_KEY
-VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
-VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
 ```
-COMPUTER_VISION_API_KEY={Computer Vision KEY}
-COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
-
 
 Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
 ```python
 VIDEO_PATH = os.getenv("VIDEO_PATH")
-VIDEO_INDEXER_API_KEY = os.getenv("VIDEO_INDEXER_API_KEY")
-VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
-VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
 ```
 
 Re-run the "Load Environment Variables" code and restart the kernel.
