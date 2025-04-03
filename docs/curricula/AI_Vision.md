@@ -55,15 +55,13 @@ Then add a Code cell and paste the following code:
 
 ```python
 import os
-
 env_file = ".env"
-
 if not os.path.isfile(env_file):
     with open(env_file, "w") as f:
         f.write("API_KEY=\nENDPOINT=")
-    print(f".env file created at {os.path.abspath(env_file)}. Please update it with your API credentials and image path.")
+    print(f".env file created at {os.path.abspath(env_file)}")
 else:
-    print(f".env file found at {os.path.abspath(env_file)}. Please verify its contents.")
+    print(f".env file found at {os.path.abspath(env_file)}")
 ```
 
 Execute the cell. The output should indicate whether the `.env` file was created or already exists.
