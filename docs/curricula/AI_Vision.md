@@ -35,7 +35,7 @@ Start with a pre-configured virtual machine and add the following artifacts:
 
 -------------------------
 
-### `ai_vision.ipynb` Notebook
+### Python Notebook
 
 Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_vision.ipynb` in `c:\myProject`.
 
