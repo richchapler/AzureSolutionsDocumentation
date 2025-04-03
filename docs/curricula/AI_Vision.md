@@ -56,8 +56,7 @@ Then add a Code cell and paste the following code:
 import os
 env_file = ".env"
 if not os.path.isfile(env_file):
-    with open(env_file, "w") as f:
-        f.write("API_KEY=\nENDPOINT=")
+    open(env_file, "w").close()
     print(f".env file created at {os.path.abspath(env_file)}")
 else:
     print(f".env file found at {os.path.abspath(env_file)}")
@@ -65,10 +64,14 @@ else:
 
 Execute the cell. The output should indicate whether the `.env` file was created or already exists.
 
-Open the `.env` file and update it with actual values. For example:
+Open the `.env` file and append the following lines:
 ```text
-API_KEY={Computer Vision KEY}
-ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
+COMPUTER_VISION_API_KEY={Computer Vision Key}
+COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
+
+VIDEO_INDEXER_API_KEY={Video Indexer Key}
+VIDEO_INDEXER_LOCATION=your_location
+VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
 ```
 
 -------------------------
@@ -88,8 +91,11 @@ from dotenv import load_dotenv
 env_file = ".env"
 load_dotenv(env_file)
 
-API_KEY = os.getenv("API_KEY")
-ENDPOINT = os.getenv("ENDPOINT")
+COMPUTER_VISION_API_KEY = os.getenv("COMPUTER_VISION_API_KEY")
+COMPUTER_VISION_ENDPOINT = os.getenv("COMPUTER_VISION_ENDPOINT")
+VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
+VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
+VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
 ```
 
 Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
@@ -163,9 +169,9 @@ import requests
 def perform_ocr(image_path):
     with open(image_path, "rb") as f:
         image_data = f.read()
-    url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=read"
+    url = f"{COMPUTER_VISION_ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=read"
     headers = {
-        "Ocp-Apim-Subscription-Key": API_KEY,
+        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
         "Content-Type": "application/octet-stream"
     }
     try:
@@ -296,10 +302,13 @@ Review information about the video:
 Append the following lines to your `.env` file:
 ```text
 VIDEO_PATH=C:\myProject\Space-247365~orig.mp4
-VIDEO_INDEXER_API_KEY=your_video_indexer_api_key
+VIDEO_INDEXER_API_KEY=your_VIDEO_INDEXER_API_KEY
 VIDEO_INDEXER_LOCATION=your_location    # For example, "trial" or your specific region.
 VIDEO_INDEXER_ACCOUNT_ID=your_video_indexer_account_id
 ```
+COMPUTER_VISION_API_KEY={Computer Vision KEY}
+COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
+
 
 Append the following code to the "Load Environment Variables" code in the `ai_vision.ipynb` notebook:
 ```python
@@ -326,10 +335,10 @@ def get_video_indexer_access_token():
     """
     location = VIDEO_INDEXER_LOCATION
     account_id = VIDEO_INDEXER_ACCOUNT_ID
-    api_key = VIDEO_INDEXER_API_KEY
+    COMPUTER_VISION_API_KEY = VIDEO_INDEXER_API_KEY
     url = f"https://api.videoindexer.ai/Auth/{location}/Accounts/{account_id}/AccessToken?allowEdit=true"
     headers = {
-        "Ocp-Apim-Subscription-Key": api_key
+        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY
     }
     response = requests.get(url, headers=headers)
     response.raise_for_status()
@@ -533,12 +542,12 @@ def search_photos_with_image_retrieval(image_path):
         image_data = image_file.read()
 
     headers = {
-        "Ocp-Apim-Subscription-Key": API_KEY,
+        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
         "Content-Type": "application/octet-stream"
     }
 
     # Use the "tags" feature to extract descriptive keywords for image retrieval.
-    url = f"{ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=tags"
+    url = f"{COMPUTER_VISION_ENDPOINT}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=tags"
     
     response = requests.post(url, headers=headers, data=image_data)
     return response
@@ -697,12 +706,12 @@ def get_dense_captions(image_path):
    
    # Define the request headers including your API key and content type
    headers = {
-       "Ocp-Apim-Subscription-Key": API_KEY,
+       "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
        "Content-Type": "application/octet-stream"
    }
    
    # Use the "denseCaptions" feature to extract detailed captions from the image.
-   url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=denseCaptions"
+   url = f"{COMPUTER_VISION_ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=denseCaptions"
    
    response = requests.post(url, headers=headers, data=image_data)
    return response
@@ -798,10 +807,10 @@ def get_image_captions(image_path):
    # Open the image file in binary mode
    with open(image_path, "rb") as f:
        image_data = f.read()
-   # Construct the API URL using the ENDPOINT and the captions feature
-   url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=captions"
+   # Construct the API URL using the COMPUTER_VISION_ENDPOINT and the captions feature
+   url = f"{COMPUTER_VISION_ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=captions"
    headers = {
-       "Ocp-Apim-Subscription-Key": API_KEY,
+       "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
        "Content-Type": "application/octet-stream"
    }
    # Make the POST request to the API
@@ -886,10 +895,10 @@ def extract_image_tags(image_path):
    with open(image_path, "rb") as f:
        image_data = f.read()
    
-   # Construct the API URL using the ENDPOINT and the tags feature
-   url = f"{ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=tags"
+   # Construct the API URL using the COMPUTER_VISION_ENDPOINT and the tags feature
+   url = f"{COMPUTER_VISION_ENDPOINT.rstrip('/')}/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=tags"
    headers = {
-       "Ocp-Apim-Subscription-Key": API_KEY,
+       "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
        "Content-Type": "application/octet-stream"
    }
    # Make the POST request to the API
@@ -970,9 +979,9 @@ def generate_smart_crop(image_path, width=400, height=400):
        image_data = image_file.read()
    
    # Construct the API URL with the smart cropping parameters
-   url = f"{ENDPOINT.rstrip('/')}/computervision/v3.2/generateThumbnail?width={width}&height={height}&smartCropping=true"
+   url = f"{COMPUTER_VISION_ENDPOINT.rstrip('/')}/computervision/v3.2/generateThumbnail?width={width}&height={height}&smartCropping=true"
    headers = {
-       "Ocp-Apim-Subscription-Key": API_KEY,
+       "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
        "Content-Type": "application/octet-stream"
    }
    
