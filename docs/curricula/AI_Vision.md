@@ -2,13 +2,31 @@
 
 <img src="https://github.com/user-attachments/assets/2158f09e-207e-4b86-b45d-5d381090f8d2" width="1000" />
 
-## Table of Contents  
+## Introduction
 
-* [Exercise 1: Prepare Resources](#exercise-1-prepare-resources)  
-* [Exercise 2: Optical Character Recognition (OCR)](#exercise-2-optical-character-recognition-ocr)  
-* [Exercise 3: Face](#exercise-3-face)  
-* [Exercise 4: Image Analysis](#exercise-4-image-analysis) 
-* [Exercise 5: Video Indexer](#exercise-5-video-indexer)  
+Azure AI Vision is a cloud-based service from Microsoft that leverages advanced algorithms to analyze images and extract valuable information. It encompasses a range of capabilities—from Optical Character Recognition (OCR) and face detection to comprehensive image analysis and video indexing—all designed to solve real-world problems quickly and effectively.
+
+## Sections
+
+### Prepare Resources  
+* Set up the necessary Azure services  
+* Configure your environment to securely manage API credentials using environment variables
+
+### Optical Character Recognition (OCR)  
+* Learn how to extract text from images  
+* Analyze and interpret the JSON output to understand how text is detected and structured
+
+### Face Detection and Analysis  
+* Detect and analyze human faces in images, including advanced topics like liveness detection and portrait processing  
+* Understand the nuances of facial recognition to support real-world identity verification scenarios
+
+### Image Analysis  
+* Explore the extraction of meaningful metadata from images through techniques like tagging, caption generation, and smart cropping  
+* Discover how to enhance user experiences by leveraging detailed insights into image content
+
+### Video Indexer  
+* Utilize Azure AI Video Indexer to analyze video content, extract metadata, and generate insights from multimedia data  
+* Understand how to manage video uploads, process indexing, and interpret results for comprehensive video analytics
 
 ------------------------- -------------------------
 
@@ -23,7 +41,7 @@ In "East US" region (or other region that supports AI Vision resources), instant
 * Computer Vision
 * Open AI
 * Storage Account (general purpose v1)
-* Video Indexer with system-assigned managed identity and dependencies:
+* Video Indexer
 
 -------------------------
 
@@ -56,7 +74,7 @@ Open Visual Studio Code and create a new Jupyter Notebook by selecting File > Ne
 
 #### Environment Variables
 
-Create and initialize the `.env` file from within your notebook.
+Create and initialize the `.env` file from within your notebook:
 
 Add a Markdown cell with the following annotation:
 ```markdown
@@ -86,10 +104,6 @@ VIDEO_INDEXER_ACCOUNT_ID={Video Indexer, Account ID}
 VIDEO_INDEXER_LOCATION={Video Indexer, Location}
 VIDEO_INDEXER_TOKEN={Video Indexer, Access Token}
 ```
-
-> Note: VIDEO_INDEXER_TOKEN
-
--------------------------
 
 Add a Markdown cell with the following annotation:
 ```markdown
@@ -125,9 +139,9 @@ Navigate to [Azure AI | Vision Studio](https://portal.vision.cognitive.azure.com
 
 <img src="https://github.com/user-attachments/assets/f008f817-51b8-4a7c-b230-19803782bde7" width="800" title="Snipped February 14, 2025" />
 
-### 2.1 Extract Text from Images
+### Extract Text from Images
 
-#### Code
+#### Low Code
 
 <img src="https://github.com/user-attachments/assets/9d70618d-2d50-4ebc-81a8-55a9bb8be4bc" width="800" title="Snipped February 14, 2025" />
 
@@ -206,7 +220,7 @@ Execute cell and review the returned JSON result.
 
 ------------------------- -------------------------
 
-#### Expected Result  
+##### Expected Result  
 _Note: JSON formatted and abbreviated_
 
 ```json
