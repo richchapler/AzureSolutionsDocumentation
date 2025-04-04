@@ -440,193 +440,192 @@ This will ensure the new secondary replica is automatically seeded if needed.
 
 ------------------------- -------------------------
 ------------------------- -------------------------
-------------------------- -------------------------
 
 ### Quiz
 
 1. What is the primary goal of a high availability configuration in SQL Server?  
-   A) Reducing licensing costs  
-   B) Ensuring continuous operations and minimal downtime  
-   C) Minimizing storage requirements  
-   D) Enhancing data compression
+   A) Minimizing storage requirements  
+   B) Enhancing data compression  
+   C) Ensuring continuous operations and minimal downtime  
+   D) Reducing licensing costs  
 
-1. Which statement best describes the primary replica in a high availability setup?  
-   A) A replica dedicated to read-only queries  
-   B) The active server that handles all read/write operations  
-   C) A backup server that remains inactive until needed  
-   D) A server used exclusively for log backups
+2. Which statement best describes the primary replica in a high availability setup?  
+   A) A backup server that remains inactive until needed  
+   B) A server used exclusively for log backups  
+   C) The active server that handles all read/write operations  
+   D) A replica dedicated to read-only queries  
 
-1. What distinguishes synchronous replication from asynchronous replication?  
-   A) Synchronous replication is only used for backups  
+3. What distinguishes synchronous replication from asynchronous replication?  
+   A) Asynchronous replication guarantees zero latency  
    B) Synchronous replication waits for confirmation from the secondary before committing  
-   C) Asynchronous replication guarantees zero latency  
-   D) Asynchronous replication uses encryption by default
+   C) Synchronous replication is only used for backups  
+   D) Asynchronous replication uses encryption by default  
 
-1. What is a key benefit of synchronous replication?  
-   A) Eliminates all latency  
-   B) Ensures near-perfect data consistency with minimal risk of data loss  
-   C) Increases write performance dramatically  
-   D) Requires less network bandwidth
+4. What is a key benefit of synchronous replication?  
+   A) Increases write performance dramatically  
+   B) Requires less network bandwidth  
+   C) Ensures near-perfect data consistency with minimal risk of data loss  
+   D) Eliminates all latency  
 
-1. What is one tradeoff of using synchronous replication?  
-   A) Higher risk of data loss  
-   B) Slight latency because the primary waits for the secondary’s confirmation  
-   C) Inconsistent data across replicas  
-   D) Incompatibility with Windows Server environments
+5. What is one tradeoff of using synchronous replication?  
+   A) Inconsistent data across replicas  
+   B) Higher risk of data loss  
+   C) Slight latency because the primary waits for the secondary’s confirmation  
+   D) Incompatibility with Windows Server environments  
 
-1. During the setup process, why is establishing connectivity between servers crucial?  
+6. During the setup process, why is establishing connectivity between servers crucial?  
    A) It speeds up disk defragmentation  
-   B) It ensures reliable data exchange and replication  
-   C) It allows for automatic antivirus updates  
-   D) It enables remote desktop functionality
+   B) It allows for automatic antivirus updates  
+   C) It enables remote desktop functionality  
+   D) It ensures reliable data exchange and replication  
 
-1. Which of the following is an essential security measure in a high availability configuration?  
-   A) Leaving firewall ports open for convenience  
-   B) Implementing strict access controls and using encryption for data in transit  
-   C) Disabling auditing to improve performance  
-   D) Allowing unrestricted access between all network nodes
+7. Which of the following is an essential security measure in a high availability configuration?  
+   A) Allowing unrestricted access between all network nodes  
+   B) Disabling auditing to improve performance  
+   C) Implementing strict access controls and using encryption for data in transit  
+   D) Leaving firewall ports open for convenience  
 
-1. How do Dynamic Management Views (DMVs) assist in monitoring high availability?  
-   A) They provide real-time insights into system health and performance metrics  
-   B) They automate the backup process  
-   C) They handle load balancing between servers  
-   D) They configure network settings automatically
+8. How do Dynamic Management Views (DMVs) assist in monitoring high availability?  
+   A) They handle load balancing between servers  
+   B) They configure network settings automatically  
+   C) They automate the backup process  
+   D) They provide real-time insights into system health and performance metrics  
 
-1. Which Windows Server feature must be installed to support failover clustering?  
-   A) Active Directory Domain Services  
-   B) Failover Clustering feature and management tools  
-   C) Internet Information Services  
-   D) Remote Desktop Services
+9. Which Windows Server feature must be installed to support failover clustering?  
+   A) Internet Information Services  
+   B) Remote Desktop Services  
+   C) Failover Clustering feature and management tools  
+   D) Active Directory Domain Services  
 
-1. Which PowerShell command is used to validate the prerequisites for a cluster before creation?  
-    A) Test-NetConnection  
-    B) Test-Cluster  
-    C) New-Cluster  
-    D) Get-Cluster
+10. Which PowerShell command is used to validate the prerequisites for a cluster before creation?  
+    A) New-Cluster  
+    B) Get-Cluster  
+    C) Test-Cluster  
+    D) Test-NetConnection  
 
-1. Why might you configure static entries in the hosts file during a high availability lab exercise?  
-    A) To accelerate internet browsing  
-    B) To ensure reliable name resolution when DNS is unavailable  
-    C) To bypass firewall restrictions  
-    D) To enhance data encryption
+11. Why might you configure static entries in the hosts file during a high availability lab exercise?  
+    A) To bypass firewall restrictions  
+    B) To enhance data encryption  
+    C) To ensure reliable name resolution when DNS is unavailable  
+    D) To accelerate internet browsing  
 
-1. What is the purpose of having SQL Server Agent running in the high availability exercise?  
-    A) To manage SQL Server services  
-    B) To schedule and automate maintenance and monitoring tasks  
-    C) To facilitate real-time data replication  
-    D) To serve as the primary data backup mechanism
+12. What is the purpose of having SQL Server Agent running in the high availability exercise?  
+    A) To serve as the primary data backup mechanism  
+    B) To manage SQL Server services  
+    C) To schedule and automate maintenance and monitoring tasks  
+    D) To facilitate real-time data replication  
 
-1. What primary function does the "Always On Availability Groups" feature serve?  
-    A) Encrypting database backups automatically  
-    B) Providing automated high availability and disaster recovery  
-    C) Improving query performance through caching  
-    D) Compressing data to save storage space
+13. What primary function does the "Always On Availability Groups" feature serve?  
+    A) Improving query performance through caching  
+    B) Compressing data to save storage space  
+    C) Encrypting database backups automatically  
+    D) Providing automated high availability and disaster recovery  
 
-1. Why is certificate‑based endpoint authentication important in a high availability setup?  
-    A) It authenticates users for the primary database  
-    B) It secures the communication between primary and secondary replicas  
-    C) It encrypts data at rest on the server  
-    D) It monitors SQL query performance
+14. Why is certificate‑based endpoint authentication important in a high availability setup?  
+    A) It encrypts data at rest on the server  
+    B) It monitors SQL query performance  
+    C) It authenticates users for the primary database  
+    D) It secures the communication between primary and secondary replicas  
 
-1. Which T‑SQL command is used to create a new database as part of the exercise?  
-    A) CREATE DATABASE  
+15. Which T‑SQL command is used to create a new database as part of the exercise?  
+    A) ADD DATABASE  
     B) NEW DATABASE  
-    C) INIT DATABASE  
-    D) ADD DATABASE
+    C) CREATE DATABASE  
+    D) INIT DATABASE  
 
-1. Before performing backups in the lab, the database should be set to which recovery mode?  
-    A) Simple recovery mode  
-    B) Bulk-logged recovery mode  
+16. Before performing backups in the lab, the database should be set to which recovery mode?  
+    A) Minimal recovery mode  
+    B) Simple recovery mode  
     C) Full recovery mode  
-    D) Minimal recovery mode
+    D) Bulk-logged recovery mode  
 
-1. When manually restoring a database for an Always On Availability Group, which seeding mode is most appropriate?  
-    A) Automatic seeding  
-    B) Full backup seeding  
+17. When manually restoring a database for an Always On Availability Group, which seeding mode is most appropriate?  
+    A) Full backup seeding  
+    B) Automatic seeding  
     C) Join Only  
-    D) Skip Initial Data Synchronization
+    D) Skip Initial Data Synchronization  
 
-1. What is the purpose of testing failover in a high availability configuration?  
-    A) To measure the speed of the primary server  
-    B) To verify that the failover mechanism is correctly configured and functional  
-    C) To assess network bandwidth utilization  
-    D) To validate the backup schedule
+18. What is the purpose of testing failover in a high availability configuration?  
+    A) To assess network bandwidth utilization  
+    B) To validate the backup schedule  
+    C) To measure the speed of the primary server  
+    D) To verify that the failover mechanism is correctly configured and functional  
 
-1. Which method is recommended for checking the synchronization status of availability replicas?  
-    A) Running a disk defragmentation check  
+19. Which method is recommended for checking the synchronization status of availability replicas?  
+    A) Rebooting the secondary server  
     B) Executing a T‑SQL query on sys.dm_hadr_availability_replica_states  
-    C) Rebooting the secondary server  
-    D) Updating SQL Server to the latest version
+    C) Running a disk defragmentation check  
+    D) Updating SQL Server to the latest version  
 
-1. Why is continuous monitoring critical in a high availability environment?  
-    A) It forces constant configuration changes  
-    B) It detects replication delays, resource bottlenecks, and failures in real time  
-    C) It adds unnecessary complexity to the system  
-    D) It disables automatic updates for security reasons
+20. Why is continuous monitoring critical in a high availability environment?  
+    A) It adds unnecessary complexity to the system  
+    B) It forces constant configuration changes  
+    C) It disables automatic updates for security reasons  
+    D) It detects replication delays, resource bottlenecks, and failures in real time  
 
----
+------------------------- -------------------------
 
 #### Answers
 
-1. B – Ensuring continuous operations and minimal downtime  
+1. **C** – Ensuring continuous operations and minimal downtime  
    *High availability aims to keep the system operational 24/7 and prevent data loss.*
 
-1. B – The active server that handles all read/write operations  
-   *The primary replica is responsible for all active transactions and serves as the central node in the configuration.*
+2. **C** – The active server that handles all read/write operations  
+   *The primary replica is responsible for processing transactions and ensuring service continuity.*
 
-1. B – Synchronous replication waits for confirmation from the secondary before committing  
-   *This ensures data consistency but may introduce slight latency.*
+3. **B** – Synchronous replication waits for confirmation from the secondary before committing  
+   *This process guarantees data consistency, albeit with a potential slight delay.*
 
-1. B – Ensures near-perfect data consistency with minimal risk of data loss  
-   *Synchronous replication minimizes data loss by confirming that secondary replicas have received data before committing.*
+4. **C** – Ensures near-perfect data consistency with minimal risk of data loss  
+   *By confirming writes on the secondary, synchronous replication minimizes potential data loss.*
 
-1. B – Slight latency because the primary waits for the secondary’s confirmation  
-   *This waiting period can introduce delays compared to asynchronous replication.*
+5. **C** – Slight latency because the primary waits for the secondary’s confirmation  
+   *The added wait time during transaction commits can lead to minor delays in performance.*
 
-1. B – It ensures reliable data exchange and replication  
-   *Proper connectivity is essential for continuous communication between the primary and secondary servers.*
+6. **D** – It ensures reliable data exchange and replication  
+   *Proper connectivity is fundamental for continuous communication between nodes.*
 
-1. B – Implementing strict access controls and using encryption for data in transit  
-   *These measures protect the integrity and security of the data being replicated.*
+7. **C** – Implementing strict access controls and using encryption for data in transit  
+   *Securing data channels is critical to protect sensitive information in transit.*
 
-1. A – They provide real-time insights into system health and performance metrics  
-   *DMVs are used to monitor performance, replication status, and overall health of the high availability setup.*
+8. **D** – They provide real-time insights into system health and performance metrics  
+   *DMVs are essential for monitoring system status and diagnosing issues promptly.*
 
-1. B – Failover Clustering feature and management tools  
-   *This feature is required to create and manage clusters for high availability scenarios.*
+9. **C** – Failover Clustering feature and management tools  
+   *These tools are necessary to build and manage clusters that underpin high availability solutions.*
 
-1. B – Test-Cluster  
-    *Test-Cluster is used to validate the network, node configuration, and overall prerequisites before creating a cluster.*
+10. **C** – Test-Cluster  
+    *This command verifies that the environment meets all prerequisites for a successful cluster setup.*
 
-1. B – To ensure reliable name resolution when DNS is unavailable  
-    *Static hosts file entries provide a fallback for name resolution between servers.*
+11. **C** – To ensure reliable name resolution when DNS is unavailable  
+    *Static hosts file entries act as a fallback for name resolution in lab environments.*
 
-1. B – To schedule and automate maintenance and monitoring tasks  
-    *SQL Server Agent is essential for automating backups, alerts, and various maintenance tasks.*
+12. **C** – To schedule and automate maintenance and monitoring tasks  
+    *SQL Server Agent helps automate key tasks, reducing manual overhead in HA setups.*
 
-1. B – Providing automated high availability and disaster recovery  
-    *Always On Availability Groups are designed to ensure minimal downtime and provide failover capabilities.*
+13. **D** – Providing automated high availability and disaster recovery  
+    *Always On Availability Groups enable seamless failover and data replication for continuous operations.*
 
-1. B – It secures the communication between primary and secondary replicas  
-    *Certificate-based authentication is critical for establishing a secure channel for data mirroring.*
+14. **D** – It secures the communication between primary and secondary replicas  
+    *Certificate‑based authentication creates a trusted, encrypted channel between servers.*
 
-1. A – CREATE DATABASE  
-    *The standard T‑SQL command to create a new database is CREATE DATABASE.*
+15. **C** – CREATE DATABASE  
+    *The CREATE DATABASE command is standard for initializing a new SQL Server database.*
 
-1. C – Full recovery mode  
-    *Full recovery mode is necessary to ensure that all transactions are fully logged, which is essential for recovery and backup integrity.*
+16. **C** – Full recovery mode  
+    *Full recovery mode is essential for maintaining comprehensive transaction logs needed for backup and recovery.*
 
-1. C – Join Only  
-    *When the database is manually restored, the Join Only option allows it to be added to the availability group without re-seeding.*
+17. **C** – Join Only  
+    *The Join Only option integrates a manually restored database into the availability group without re-seeding.*
 
-1. B – To verify that the failover mechanism is correctly configured and functional  
-    *Testing failover confirms that the high availability setup works as expected in a live failover scenario.*
+18. **D** – To verify that the failover mechanism is correctly configured and functional  
+    *Testing failover confirms that the high availability setup will operate as expected during an outage.*
 
-1. B – Executing a T‑SQL query on sys.dm_hadr_availability_replica_states  
-    *This DMV provides detailed information on the synchronization and health status of each replica.*
+19. **B** – Executing a T‑SQL query on sys.dm_hadr_availability_replica_states  
+    *This query provides detailed insights into the synchronization and health of each replica.*
 
-1. B – It detects replication delays, resource bottlenecks, and failures in real time  
-    *Continuous monitoring is crucial to promptly identify and resolve issues, ensuring ongoing high availability.*
+20. **D** – It detects replication delays, resource bottlenecks, and failures in real time  
+    *Continuous monitoring is critical for proactively identifying and resolving issues in a HA environment.*
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -748,183 +747,183 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
 1. What is the primary mechanism for ensuring high availability in Azure SQL Database?  
    A) On‑prem clustering techniques  
    B) Custom T‑SQL scripts for replication  
-   C) Built‑in replication and failover groups  
-   D) Manual replication between servers
+   C) Manual replication between servers  
+   D) Built‑in replication and failover groups  
 
-1. What benefit do failover groups provide in Azure SQL Database?  
-   A) They require manual intervention during outages  
-   B) They reduce the overall storage cost  
-   C) They automatically manage regional failover  
-   D) They are used solely for backup scheduling
+2. What benefit do failover groups provide in Azure SQL Database?  
+   A) They automatically manage regional failover  
+   B) They require manual intervention during outages  
+   C) They are used solely for backup scheduling  
+   D) They reduce the overall storage cost  
 
-1. How does Azure SQL Database simplify high availability compared to on‑premises solutions?  
+3. How does Azure SQL Database simplify high availability compared to on‑premises solutions?  
    A) By integrating replication, failover, and monitoring into the service  
-   B) By eliminating the need for any backup processes  
-   C) By requiring manual configuration of clustering  
-   D) By using on‑premises DMVs for status checks
+   B) By requiring manual configuration of clustering  
+   C) By eliminating the need for any backup processes  
+   D) By using on‑premises DMVs for status checks  
 
-1. Which aspect of the service tier (DTU/vCore) directly affects high availability performance?  
+4. Which aspect of the service tier (DTU/vCore) directly affects high availability performance?  
    A) The geographic region of the data center  
-   B) Database size only  
-   C) The color of the user interface  
-   D) The level of performance impacting replication speed and failover time
+   B) The level of performance impacting replication speed and failover time  
+   C) Database size only  
+   D) The color of the user interface  
 
-1. When configuring a failover group in the Azure Portal, what is the role of the secondary server?  
-   A) It serves as a standby that automatically takes over in the event of an outage  
-   B) It acts as a development server only  
-   C) It is used solely for running maintenance tasks  
-   D) It provides additional storage for backups
+5. When configuring a failover group in the Azure Portal, what is the role of the secondary server?  
+   A) It is used solely for running maintenance tasks  
+   B) It provides additional storage for backups  
+   C) It serves as a standby that automatically takes over in the event of an outage  
+   D) It acts as a development server only  
 
-1. Which tool is recommended for monitoring high availability in Azure SQL Database?  
+6. Which tool is recommended for monitoring high availability in Azure SQL Database?  
    A) Windows Event Viewer  
-   B) On‑premises DMVs  
+   B) Azure Monitor and Query Performance Insight  
    C) SQL Server Agent  
-   D) Azure Monitor and Query Performance Insight
+   D) On‑premises DMVs  
 
-1. Which security best practice is recommended for Azure SQL Database HA setups?  
+7. Which security best practice is recommended for Azure SQL Database HA setups?  
    A) Using default credentials for simplicity  
-   B) Allowing unrestricted access for rapid deployment  
-   C) Disabling firewall rules to improve performance  
-   D) Configuring firewall and VNet rules, and enabling auditing
+   B) Disabling firewall rules to improve performance  
+   C) Allowing unrestricted access for rapid deployment  
+   D) Configuring firewall and VNet rules, and enabling auditing  
 
-1. What does “automatic failover” mean in the context of Azure SQL Database?  
-   A) It is only enabled during off-peak hours  
+8. What does “automatic failover” mean in the context of Azure SQL Database?  
+   A) It requires a scheduled restart of the primary server  
    B) The secondary server automatically takes over if the primary becomes unavailable  
    C) The secondary server only becomes active after manual approval  
-   D) It requires a scheduled restart of the primary server
+   D) It is only enabled during off-peak hours  
 
-1. How does service tier selection (DTU vs vCore) impact high availability?  
+9. How does service tier selection (DTU vs vCore) impact high availability?  
    A) It controls the geographic location of the secondary server  
    B) It only changes the database pricing  
    C) It has no effect on high availability  
-   D) It determines performance levels that can affect replication and failover times
+   D) It determines performance levels that can affect replication and failover times  
 
-1. Which step is essential when configuring high availability for Azure SQL Database through the portal?  
-    A) Installing on‑premises clustering software  
+10. Which step is essential when configuring high availability for Azure SQL Database through the portal?  
+    A) Creating a failover group that links the primary and secondary servers  
     B) Writing complex PowerShell scripts  
-    C) Creating a failover group that links the primary and secondary servers  
-    D) Manually syncing databases via T‑SQL
+    C) Installing on‑premises clustering software  
+    D) Manually syncing databases via T‑SQL  
 
-1. What does “built‑in high availability” imply in Azure SQL Database?  
-    A) It is achieved through third‑party add‑ons  
-    B) It only applies to premium service tiers  
-    C) HA features must be configured manually  
-    D) High availability is integrated and managed by Azure with minimal setup
+11. What does “built‑in high availability” imply in Azure SQL Database?  
+    A) HA features must be configured manually  
+    B) It is achieved through third‑party add‑ons  
+    C) High availability is integrated and managed by Azure with minimal setup  
+    D) It only applies to premium service tiers  
 
-1. What is a primary advantage of using the Azure Portal for HA configuration?  
-    A) It lacks monitoring capabilities  
+12. What is a primary advantage of using the Azure Portal for HA configuration?  
+    A) It provides a guided and simplified configuration process  
     B) It mirrors on‑premises clustering exactly  
-    C) It provides a guided and simplified configuration process  
-    D) It requires extensive manual scripting
+    C) It requires extensive manual scripting  
+    D) It lacks monitoring capabilities  
 
-1. In Azure SQL Database, who manages the replication and failover processes?  
-    A) The Azure service automatically  
-    B) The database administrator manually  
-    C) A third‑party vendor  
-    D) On‑premises management tools
+13. In Azure SQL Database, who manages the replication and failover processes?  
+    A) The database administrator manually  
+    B) The Azure service automatically  
+    C) On‑premises management tools  
+    D) A third‑party vendor  
 
-1. How is minimal downtime achieved in Azure SQL Database high availability?  
+14. How is minimal downtime achieved in Azure SQL Database high availability?  
     A) Through daily scheduled maintenance windows  
     B) By disabling security features temporarily  
     C) Through automatic replication and the failover group mechanism  
-    D) By requiring frequent manual intervention
+    D) By requiring frequent manual intervention  
 
-1. What is the significance of configuring firewall rules in an Azure HA setup?  
+15. What is the significance of configuring firewall rules in an Azure HA setup?  
     A) They are optional and not recommended  
-    B) They are managed entirely by the operating system  
-    C) They slow down the connection to the database  
-    D) They ensure only authorized IP addresses can access the database
+    B) They slow down the connection to the database  
+    C) They ensure only authorized IP addresses can access the database  
+    D) They are managed entirely by the operating system  
 
-1. Which configuration step is simpler in Azure compared to on‑premises?  
+16. Which configuration step is simpler in Azure compared to on‑premises?  
     A) Manually running T‑SQL scripts for replication  
     B) Configuring certificate‑based endpoint authentication  
-    C) Setting up failover groups via the Azure Portal  
-    D) Installing a Windows Server Failover Cluster
+    C) Installing a Windows Server Failover Cluster  
+    D) Setting up failover groups via the Azure Portal  
 
-1. How does Azure secure its high availability infrastructure?  
+17. How does Azure secure its high availability infrastructure?  
     A) By leaving all ports open for maximum connectivity  
     B) By requiring customers to build their own security layers  
     C) By disabling automated backups  
-    D) By integrating security features such as firewall settings, VNets, and auditing
+    D) By integrating security features such as firewall settings, VNets, and auditing  
 
-1. Which tool would you use to set alerts for HA issues in Azure SQL Database?  
-    A) DMVs from on‑prem installations  
+18. Which tool would you use to set alerts for HA issues in Azure SQL Database?  
+    A) Azure Monitor  
     B) Windows PowerShell only  
     C) SQL Server Management Studio exclusively  
-    D) Azure Monitor
+    D) DMVs from on‑prem installations  
 
-1. What is the purpose of a failover group in Azure SQL Database?  
-    A) To enable read-only replicas for development  
-    B) To manually copy databases between servers  
-    C) To reduce database size  
-    D) To automatically manage failover between the primary and secondary databases
+19. What is the purpose of a failover group in Azure SQL Database?  
+    A) To reduce database size  
+    B) To enable read-only replicas for development  
+    C) To automatically manage failover between the primary and secondary databases  
+    D) To manually copy databases between servers  
 
-1. Which statement best describes the overall high availability strategy in Azure SQL Database?  
-    A) It is a streamlined, built‑in solution that automates replication, failover, and monitoring  
-    B) It exactly replicates on‑premises clustering methods  
+20. Which statement best describes the overall high availability strategy in Azure SQL Database?  
+    A) It exactly replicates on‑premises clustering methods  
+    B) It is a streamlined, built‑in solution that automates replication, failover, and monitoring  
     C) It is a complex, manually configured solution  
-    D) It only supports low‑availability configurations
+    D) It only supports low‑availability configurations  
 
 ------------------------- -------------------------
 
 #### Answers
 
-1. C – Built‑in replication and failover groups  
-   *Azure SQL Database uses built‑in replication and managed failover groups to ensure high availability without manual clustering.*
+1. **D** – Built‑in replication and failover groups  
+   *Azure SQL Database leverages built‑in replication and managed failover groups to ensure high availability without manual clustering.*
 
-1. C – They automatically manage regional failover  
-   *Failover groups in Azure automatically manage regional failover, minimizing downtime during outages.*
+2. **A** – They automatically manage regional failover  
+   *Failover groups in Azure enable automatic regional failover, reducing downtime during outages.*
 
-1. A – By integrating replication, failover, and monitoring into the service  
-   *Azure SQL Database simplifies HA by embedding these features directly into the service, reducing manual configuration.*
+3. **A** – By integrating replication, failover, and monitoring into the service  
+   *The service consolidates these functions, simplifying high availability compared to on‑premises solutions.*
 
-1. D – The level of performance impacting replication speed and failover time  
-   *Service tier performance directly affects replication and failover times, which are critical for high availability.*
+4. **B** – The level of performance impacting replication speed and failover time  
+   *Service tier performance directly influences the speed and reliability of replication and failover processes.*
 
-1. A – It serves as a standby that automatically takes over in the event of an outage  
-   *The secondary server in a failover group is maintained as a standby that takes over automatically if the primary fails.*
+5. **C** – It serves as a standby that automatically takes over in the event of an outage  
+   *The secondary server is maintained as a ready backup to assume the primary role when needed.*
 
-1. D – Azure Monitor and Query Performance Insight  
-   *These tools are designed to track performance metrics and alerts for high availability in Azure SQL Database.*
+6. **B** – Azure Monitor and Query Performance Insight  
+   *These tools provide comprehensive monitoring and alerting for high availability metrics.*
 
-1. D – Configuring firewall and VNet rules, and enabling auditing  
-   *Implementing these security measures is essential to protect your database and ensure only authorized access.*
+7. **D** – Configuring firewall and VNet rules, and enabling auditing  
+   *Proper security measures help ensure that only authorized access occurs in a high availability setup.*
 
-1. B – The secondary server automatically takes over if the primary becomes unavailable  
-   *Automatic failover means that the secondary server is ready to assume the primary role without manual intervention.*
+8. **B** – The secondary server automatically takes over if the primary becomes unavailable  
+   *Automatic failover minimizes downtime by transferring operations seamlessly to the secondary server.*
 
-1. D – It determines performance levels that can affect replication and failover times  
-   *Choosing the appropriate service tier impacts the speed and reliability of replication and failover processes.*
+9. **D** – It determines performance levels that can affect replication and failover times  
+   *Choosing the right service tier is crucial as it directly impacts replication speed and the overall failover process.*
 
-1. C – Creating a failover group that links the primary and secondary servers  
-    *This is the critical step in setting up HA in Azure, as it connects your servers for automatic failover.*
+10. **A** – Creating a failover group that links the primary and secondary servers  
+    *This step is fundamental to configuring automated high availability in Azure SQL Database.*
 
-1. D – High availability is integrated and managed by Azure with minimal setup  
-    *Azure’s HA features are built into the platform, reducing the need for manual configuration.*
+11. **C** – High availability is integrated and managed by Azure with minimal setup  
+    *Azure’s built‑in HA features eliminate much of the manual configuration required on‑premises.*
 
-1. C – It provides a guided and simplified configuration process  
-    *The Azure Portal offers an intuitive interface that simplifies the setup of high availability.*
+12. **A** – It provides a guided and simplified configuration process  
+    *The Azure Portal streamlines HA setup, making it accessible and user-friendly.*
 
-1. A – The Azure service automatically  
-    *Azure manages replication and failover processes automatically, reducing administrative overhead.*
+13. **B** – The Azure service automatically  
+    *Azure manages the replication and failover processes, reducing the administrative burden.*
 
-1. C – Through automatic replication and the failover group mechanism  
-    *This integrated approach minimizes downtime by ensuring a seamless switch to the standby server.*
+14. **C** – Through automatic replication and the failover group mechanism  
+    *This integration minimizes downtime by ensuring that replication and failover occur without manual intervention.*
 
-1. D – They ensure only authorized IP addresses can access the database  
-    *Proper firewall configuration is essential to restrict access and enhance security in an HA setup.*
+15. **C** – They ensure only authorized IP addresses can access the database  
+    *Proper firewall configuration is critical for protecting the database from unauthorized access.*
 
-1. C – Setting up failover groups via the Azure Portal  
-    *This step is much simpler in Azure compared to on‑premises clustering or manual configurations.*
+16. **D** – Setting up failover groups via the Azure Portal  
+    *This approach is significantly simpler in Azure compared to traditional on‑premises clustering methods.*
 
-1. D – By integrating security features such as firewall settings, VNets, and auditing  
-    *Azure’s infrastructure includes robust, built‑in security measures that protect the high availability environment.*
+17. **D** – By integrating security features such as firewall settings, VNets, and auditing  
+    *Azure secures its HA infrastructure through a comprehensive suite of built‑in security features.*
 
-1. D – Azure Monitor  
-    *Azure Monitor is the recommended tool to set alerts and track performance for HA issues.*
+18. **A** – Azure Monitor  
+    *Azure Monitor is the recommended tool for setting alerts and tracking high availability issues.*
 
-1. D – To automatically manage failover between the primary and secondary databases  
-    *Failover groups are designed to ensure automatic management of failover in case of an outage.*
+19. **C** – To automatically manage failover between the primary and secondary databases  
+    *Failover groups ensure that failover happens seamlessly and automatically when needed.*
 
-1. A – It is a streamlined, built‑in solution that automates replication, failover, and monitoring  
-    *This answer best describes Azure’s overall strategy, which simplifies high availability through automation.*
+20. **B** – It is a streamlined, built‑in solution that automates replication, failover, and monitoring  
+    *Azure SQL Database’s HA strategy integrates these components to provide a robust, automated solution.*
