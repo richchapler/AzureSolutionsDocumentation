@@ -637,9 +637,7 @@ Azure SQL Database and Managed Instance come with **built‑in high availability
 Instead of manually configuring clusters, replication, and certificate‑based endpoints, Azure provides automated failover, built‑in replication, and a simplified failover group mechanism.
 This means **less manual configuration** and a **lower operational overhead** while still meeting the key High Availability requirements.
 
-### Fundamentals
-
-Even though Azure SQL provides **built‑in redundancy within a region** (for example, by **automatically maintaining multiple copies of your data within that same region**), failover is still relevant for specific scenarios:
+Azure SQL already provides **built‑in redundancy within a region** by **automatically maintaining multiple copies of your data within that same region**, but failover is still relevant for specific scenarios:
 
 * **Region‑Level Outages**: If an entire Azure region becomes unavailable (e.g., due to a major power or network disruption), local redundancy won’t protect you. A secondary server in a different region, configured through active geo‑replication or failover groups, ensures you can fail over to a completely different location.
 
