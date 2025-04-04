@@ -633,33 +633,21 @@ This will ensure the new secondary replica is automatically seeded if needed.
 
 ## Azure
 
-Azure SQL Database and Managed Instance come with built‑in high availability features. Instead of manually configuring clusters, replication, and certificate‑based endpoints, Azure provides automated failover, built‑in replication, and a simplified failover group mechanism. This means less manual configuration and a lower operational overhead while still meeting the key High Availability requirements.
+Azure SQL Database and Managed Instance come with **built‑in high availability features**.
+Instead of manually configuring clusters, replication, and certificate‑based endpoints, Azure provides automated failover, built‑in replication, and a simplified failover group mechanism.
+This means **less manual configuration** and a **lower operational overhead** while still meeting the key High Availability requirements.
 
 ### Fundamentals
 
-Even though Azure SQL Database provides built‑in redundancy within a region (for example, by automatically maintaining multiple copies of your data within that same region), failover is still relevant for scenarios where:
+Even though Azure SQL provides **built‑in redundancy within a region** (for example, by **automatically maintaining multiple copies of your data within that same region**), failover is still relevant for specific scenarios:
 
-* Region‑Level Outages: If an entire Azure region becomes unavailable (e.g., due to a major power or network disruption), local redundancy won’t protect you. A secondary server in a different region, configured through active geo‑replication or failover groups, ensures you can fail over to a completely different location.
-* Disaster Recovery (DR) Requirements: Many organizations need cross‑region replication to meet compliance or RTO/RPO objectives. Setting up a failover group or active geo‑replication to another region lets you restore operations quickly if the primary region fails.
-* Read Scale‑Out: Even if you’re not worried about regional failures, a failover group or geo‑replication can provide a readable secondary in another region. This offloads read workloads from your primary server and reduces latency for users in other geographical locations.
+* **Region‑Level Outages**: If an entire Azure region becomes unavailable (e.g., due to a major power or network disruption), local redundancy won’t protect you. A secondary server in a different region, configured through active geo‑replication or failover groups, ensures you can fail over to a completely different location.
 
-So while Azure’s built‑in redundancy does protect you against many common hardware or availability‑zone failures within a single region, configuring a secondary in a different region and enabling a failover plan is still the recommended best practice for comprehensive disaster recovery and minimal downtime.
+* **Disaster Recovery**: Many organizations need cross‑region replication to meet compliance or RTO/RPO objectives. Setting up a failover group or active geo‑replication to another region lets you restore operations quickly if the primary region fails.
 
-Geo‑redundant backups and high availability serve two different, complementary purposes:
+* **Read Scale‑Out**: Even if you’re not worried about regional failures, a failover group or geo‑replication can provide a readable secondary in another region. This **offloads read workloads from your primary server** and **reduces latency** for users in other geographical locations.
 
-Geo‑redundant backups (via the backup storage redundancy setting) protect you at the backup level. If your primary region goes down, you can restore your database from these backups in another region. However:
-
-You must manually restore the database, which can mean a longer Recovery Time Objective (RTO) (i.e., more downtime).
-
-You might lose data that was committed after the last backup (so your Recovery Point Objective (RPO) may be higher).
-
-High availability (via failover groups or active geo‑replication) provides an actively synchronized secondary database in another region. If the primary region fails, you can fail over quickly to the secondary with minimal downtime and data loss. This approach typically:
-
-Allows near real‑time replication, so your RPO is close to zero.
-
-Enables automatic or manual failover, so you can resume operations quickly (low RTO).
-
-In short, geo‑redundant backups alone help you recover from a catastrophic event but at the cost of potentially more downtime and data loss, since you’d have to restore from backups. High availability (failover groups) ensures a live secondary that can take over with minimal disruption. Most mission‑critical workloads use both: they set up a high availability solution for immediate failover and also rely on geo‑redundant backups for an extra layer of disaster recovery.
+* **"Backup"**: High availability (via failover groups or active geo‑replication) provides an **actively synchronized secondary database in another region**. If the primary region fails, you can fail over quickly to the secondary with minimal downtime and data loss. This approach typically:
 
 ------------------------- -------------------------
 
