@@ -601,7 +601,7 @@ This will ensure the new secondary replica is automatically seeded if needed.
     *Static hosts file entries act as a fallback for name resolution in lab environments.*
 
 12. **C** – To schedule and automate maintenance and monitoring tasks  
-    *SQL Server Agent helps automate key tasks, reducing manual overhead in HA setups.*
+    *SQL Server Agent helps automate key tasks, reducing manual overhead in High Availability setups.*
 
 13. **D** – Providing automated high availability and disaster recovery  
     *Always On Availability Groups enable seamless failover and data replication for continuous operations.*
@@ -625,7 +625,7 @@ This will ensure the new secondary replica is automatically seeded if needed.
     *This query provides detailed insights into the synchronization and health of each replica.*
 
 20. **D** – It detects replication delays, resource bottlenecks, and failures in real time  
-    *Continuous monitoring is critical for proactively identifying and resolving issues in a HA environment.*
+    *Continuous monitoring is critical for proactively identifying and resolving issues in a High Availability environment.*
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -633,7 +633,7 @@ This will ensure the new secondary replica is automatically seeded if needed.
 
 ## Azure
 
-Azure SQL Database and Managed Instance come with built‑in high availability features. Instead of manually configuring clusters, replication, and certificate‑based endpoints, Azure provides automated failover, built‑in replication, and a simplified failover group mechanism. This means less manual configuration and a lower operational overhead while still meeting the key HA requirements.
+Azure SQL Database and Managed Instance come with built‑in high availability features. Instead of manually configuring clusters, replication, and certificate‑based endpoints, Azure provides automated failover, built‑in replication, and a simplified failover group mechanism. This means less manual configuration and a lower operational overhead while still meeting the key High Availability requirements.
 
 ### Fundamentals
 
@@ -780,7 +780,7 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
    C) SQL Server Agent  
    D) On‑premises DMVs  
 
-7. Which security best practice is recommended for Azure SQL Database HA setups?  
+7. Which security best practice is recommended for Azure SQL Database High Availability setups?  
    A) Using default credentials for simplicity  
    B) Disabling firewall rules to improve performance  
    C) Allowing unrestricted access for rapid deployment  
@@ -805,12 +805,12 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
     D) Manually syncing databases via T‑SQL  
 
 11. What does “built‑in high availability” imply in Azure SQL Database?  
-    A) HA features must be configured manually  
+    A) High Availability features must be configured manually  
     B) It is achieved through third‑party add‑ons  
     C) High availability is integrated and managed by Azure with minimal setup  
     D) It only applies to premium service tiers  
 
-12. What is a primary advantage of using the Azure Portal for HA configuration?  
+12. What is a primary advantage of using the Azure Portal for High Availability configuration?  
     A) It provides a guided and simplified configuration process  
     B) It mirrors on‑premises clustering exactly  
     C) It requires extensive manual scripting  
@@ -828,7 +828,7 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
     C) Through automatic replication and the failover group mechanism  
     D) By requiring frequent manual intervention  
 
-15. What is the significance of configuring firewall rules in an Azure HA setup?  
+15. What is the significance of configuring firewall rules in an Azure High Availability setup?  
     A) They are optional and not recommended  
     B) They slow down the connection to the database  
     C) They ensure only authorized IP addresses can access the database  
@@ -846,7 +846,7 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
     C) By disabling automated backups  
     D) By integrating security features such as firewall settings, VNets, and auditing  
 
-18. Which tool would you use to set alerts for HA issues in Azure SQL Database?  
+18. Which tool would you use to set alerts for High Availability issues in Azure SQL Database?  
     A) Azure Monitor  
     B) Windows PowerShell only  
     C) SQL Server Management Studio exclusively  
@@ -899,10 +899,10 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
     *This step is fundamental to configuring automated high availability in Azure SQL Database.*
 
 11. **C** – High availability is integrated and managed by Azure with minimal setup  
-    *Azure’s built‑in HA features eliminate much of the manual configuration required on‑premises.*
+    *Azure’s built‑in High Availability features eliminate much of the manual configuration required on‑premises.*
 
 12. **A** – It provides a guided and simplified configuration process  
-    *The Azure Portal streamlines HA setup, making it accessible and user-friendly.*
+    *The Azure Portal streamlines High Availability setup, making it accessible and user-friendly.*
 
 13. **B** – The Azure service automatically  
     *Azure manages the replication and failover processes, reducing the administrative burden.*
@@ -917,7 +917,7 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
     *This approach is significantly simpler in Azure compared to traditional on‑premises clustering methods.*
 
 17. **D** – By integrating security features such as firewall settings, VNets, and auditing  
-    *Azure secures its HA infrastructure through a comprehensive suite of built‑in security features.*
+    *Azure secures its High Availability infrastructure through a comprehensive suite of built‑in security features.*
 
 18. **A** – Azure Monitor  
     *Azure Monitor is the recommended tool for setting alerts and tracking high availability issues.*
@@ -926,4 +926,4 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
     *Failover groups ensure that failover happens seamlessly and automatically when needed.*
 
 20. **B** – It is a streamlined, built‑in solution that automates replication, failover, and monitoring  
-    *Azure SQL Database’s HA strategy integrates these components to provide a robust, automated solution.*
+    *Azure SQL Database’s High Availability strategy integrates these components to provide a robust, automated solution.*
