@@ -710,34 +710,19 @@ In short, geo‑redundant backups alone help you recover from a catastrophic eve
        
        * Back on the "Failover group" page, you should now see "1 databases selected" under "Database within the group"... if so, click "Create" and monitor deployment
 
+##### Verify High Availability
+   * After the failover group is created, use the Azure Portal to view the status and health of the failover group
+   * Optionally, connect via SSMS to simulate a failover scenario by forcing a manual failover through the portal (if testing is supported)
+   * Check that the secondary server takes over with minimal disruption
 
+##### Implement Security Measures
+   * Review and adjust firewall rules to limit access to only authorized IP addresses
+   * Configure Virtual Network rules if necessary
+   * Enable auditing and threat detection to monitor access and any suspicious activities
 
-
-
-
-
-
-
-
-
-
-1. Verify High Availability:
-   * After the failover group is created, use the Azure Portal to view the status and health of the failover group.
-   * Optionally, connect via SSMS to simulate a failover scenario by forcing a manual failover through the portal (if testing is supported).
-   * Check that the secondary server takes over with minimal disruption.
-
-1. Implement Security Measures:
-   * Review and adjust firewall rules to limit access to only authorized IP addresses.
-   * Configure Virtual Network rules if necessary.
-   * Enable auditing and threat detection to monitor access and any suspicious activities.
-
-1. Set Up Monitoring:
-   * Open Azure Monitor and add metrics relevant to your SQL Database—such as failover events, DTU/vCore consumption, and replication latency.
-   * Configure alerts to notify you of potential issues that could affect high availability.
-
-1. Document & Review:
-   * Capture screenshots or export reports from Azure Monitor.
-   * Document the configuration steps and any test results. This documentation will be useful for both internal review and customer meetings.
+##### Set Up Monitoring
+   * Open Azure Monitor and add metrics relevant to your SQL Database—such as failover events, DTU/vCore consumption, and replication latency
+   * Configure alerts to notify you of potential issues that could affect high availability
 
 ------------------------- -------------------------
 ------------------------- -------------------------
