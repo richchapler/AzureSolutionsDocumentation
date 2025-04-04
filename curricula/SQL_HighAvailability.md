@@ -485,11 +485,11 @@ This will ensure the new secondary replica is automatically seeded if needed.
    C) Implementing strict access controls and using encryption for data in transit  
    D) Leaving firewall ports open for convenience  
 
-8. How do Dynamic Management Views (DMVs) assist in monitoring high availability?  
-   A) They handle load balancing between servers  
-   B) They configure network settings automatically  
-   C) They automate the backup process  
-   D) They provide real-time insights into system health and performance metrics  
+8. Which statement best describes the role of the secondary replica in a high availability configuration?  
+   A) It continuously synchronizes data with the primary and takes over operations during a failover event  
+   B) It actively processes both read and write transactions during normal operations  
+   C) It is solely used for storing backups and log files  
+   D) It remains completely offline until manually activated  
 
 9. Which Windows Server feature must be installed to support failover clustering?  
    A) Internet Information Services  
@@ -588,8 +588,8 @@ This will ensure the new secondary replica is automatically seeded if needed.
 7. **C** – Implementing strict access controls and using encryption for data in transit  
    *Securing data channels is critical to protect sensitive information in transit.*
 
-8. **D** – They provide real-time insights into system health and performance metrics  
-   *DMVs are essential for monitoring system status and diagnosing issues promptly.*
+8. **A** – The secondary replica continuously synchronizes with the primary and is poised to assume operations during a failover, ensuring minimal downtime  
+   *Maintaining constant synchronization allows the secondary replica to seamlessly take over when needed, minimizing service interruptions.*
 
 9. **C** – Failover Clustering feature and management tools  
    *These tools are necessary to build and manage clusters that underpin high availability solutions.*
