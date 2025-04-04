@@ -674,27 +674,23 @@ Azure SQL already provides **built‑in redundancy within a region** by **automa
 
             > **If you DO select this option**:
             >
-            > **Standby Replica Creation**: Azure will automatically create a read-only replica of your primary database on the secondary server. This replica will be kept in sync with the primary using active geo‑replication.
+            > * **Standby Replica Creation**: Azure will automatically create a read-only replica of your primary database on the secondary server. This replica will be kept in sync with the primary using active geo‑replication.
             >
-            > **Role in Failover**: This standby replica is what takes over (or becomes the new primary) when you perform a failover. It ensures that your database remains available with minimal downtime and data loss.
+            > * **Role in Failover**: This standby replica is what takes over (or becomes the new primary) when you perform a failover. It ensures that your database remains available with minimal downtime and data loss.
             >
-            > **Read-Only Workloads**: In addition to being the failover target, the standby replica can serve read-only queries via a dedicated listener endpoint if you choose. This offloads read workloads from the primary.
+            > * **Read-Only Workloads**: In addition to being the failover target, the standby replica can serve read-only queries via a dedicated listener endpoint if you choose. This offloads read workloads from the primary.
             >
-            > **No Pre-existing Replica Needed**: If you already have a replica configured (for example, if you set up active geo‑replication manually), you might not need to use this option. But if not, “Create standby replica” automates that step for you.
+            > * **No Pre-existing Replica Needed**: If you already have a replica configured (for example, if you set up active geo‑replication manually), you might not need to use this option. But if not, “Create standby replica” automates that step for you.
 
             > **If you DO NOT select this option**:
             >
-            > **No automatic replication is initiated**: The failover group will be created without automatically creating or linking a secondary copy of your database.
+            > * **No automatic replication is initiated**: The failover group will be created without automatically creating or linking a secondary copy of your database.
             >
-            > **Existing Replication is Required**: If you already have an active geo‑replication relationship set up manually, the failover group might use that existing standby. Otherwise, your database remains only on the primary server until you manually configure replication.
+            > * **Existing Replication is Required**: If you already have an active geo‑replication relationship set up manually, the failover group might use that existing standby. Otherwise, your database remains only on the primary server until you manually configure replication.
             >
-            > **Potential Impact on Failover**: Without a standby replica, a failover event won’t have a ready secondary to switch to, meaning you’d have to set up replication later or risk downtime.
+            > * **Potential Impact on Failover**: Without a standby replica, a failover event won’t have a ready secondary to switch to, meaning you’d have to set up replication later or risk downtime.
 
-            > **In short, if you don’t check this option, you’re opting out of the automated creation of a standby replica—so ensure you either already have one in place or plan to add it manually for proper high availability.**
-
-           * Click "Select" to finalize the "Databases" form
-       
-       * Back on the "Failover group" page, you should now see "1 databases selected" under "Database within the group"... if so, click "Create" and monitor deployment
+        In short, if you don’t check this option, you’re opting out of the automated creation of a standby replica—so ensure you either already have one in place or plan to add it manually for proper high availability.
 
 ##### Verify High Availability
    * After the failover group is created, use the Azure Portal to view the status and health of the failover group
