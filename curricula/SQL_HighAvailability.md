@@ -4,10 +4,10 @@
 
 The database administration team at a mid-sized organization must ensure data availability. Key Requirements:
 
-* Continuous Operations: Support 24/7 database availability
-* Data Integrity: Prevent data loss caused by disruptions
-* Security: Data must be secure at all times
-* Proactive Monitoring: Provide for quick issue detection
+* **Continuous Operations**: Support 24/7 database availability
+* **Data Integrity**: Prevent data loss caused by disruptions
+* **Security**: Data must be secure at all times
+* **Proactive Monitoring**: Provide for quick issue detection
 
 ------------------------- ------------------------- -------------------------
 
@@ -16,87 +16,61 @@ The database administration team at a mid-sized organization must ensure data av
 ### Fundamentals
 
 #### Concept
-* Ensure a database is always available to users
-* Set up multiple copies on different servers, possibly in separate geographic locations
-* Allow a secondary server to take over quickly if the primary fails
-* Provide a seamless user experience with minimal disruption
+* Ensure a database is **always available** to users
+* Set up **multiple copies** on different servers, possibly in **separate geographic locations**
+* Allow a secondary server to **take over quickly if the primary fails**
+* Provide a **seamless user experience** with **minimal disruption**
 
 #### Components
-* Primary Replica: The active database handling all read/write operations
-* Secondary Replica(s): Up-to-date copies that can serve as failover targets
-
-#### Benefits
-* Minimal downtime during failures
-* Reduced risk of data loss through continuous data synchronization
-
-------------------------- -------------------------
+* **Primary Replica**: The active database handling all read/write operations
+* **Secondary Replica(s)**: Up-to-date copies that can serve as failover targets
 
 #### Setup and Configuration
 
 * Preparation
-  * Set up at least two servers that can communicate with each other
-  * Install and configure the necessary SQL Server features for high availability
+  * Set up **at least two servers** that can communicate with each other
+  * Install and **configure the necessary SQL Server features** for high availability
+  
 * Step-by-Step Process
-  * Designate a Primary: Choose one server to handle all primary transactions
-  * Configure Secondaries: Set up additional servers to receive data updates from the primary
-  * Establish Connectivity: Ensure network and security settings allow the servers to exchange data
-* Outcome
-  * A working environment where the primary server’s data is continuously replicated to secondary servers
-* Why It Matters
-  * Establishes the foundation for continuous operations and lays the groundwork for advanced features later
+  * **Designate a Primary**: Choose one server to handle all primary transactions
+  * **Configure Secondaries**: Set up additional servers to receive data updates from the primary
+  * **Establish Connectivity**: Ensure network and security settings allow the servers to exchange data
 
-------------------------- -------------------------
+#### Replication Types
 
-#### Synchronous vs. Asynchronous
+* **Synchronous** Replication: Data is copied to the secondary server **at the same time it is written to the primary**
+  * Advantages: **Near-perfect data consistency** and **minimal risk of data loss** in the event of a failure
+  * Tradeoffs: May introduce slight **latency**, as the primary waits for confirmation from the secondary
+  
+* **Asynchronous** Replication: Data is sent to the secondary server with a delay
+  * Advantages: **Lower latency** on the primary server since it doesn't wait for secondary confirmation
+  * Tradeoffs: A small **risk of data loss** if a failure occurs before the secondary catches up
 
-* Synchronous Replication
-  * Definition: Data is copied to the secondary server at the same time it is written to the primary
-  * Advantages:
-    * Near-perfect data consistency
-    * Minimal risk of data loss in the event of a failure
-  * Tradeoffs:
-    * May introduce slight latency, as the primary waits for confirmation from the secondary
-* Asynchronous Replication
-  * Definition: Data is sent to the secondary server with a delay
-  * Advantages
-    * Lower latency on the primary server since it doesn't wait for secondary confirmation
-  * Tradeoffs
-    * A small risk of data loss if a failure occurs before the secondary catches up
-* Choosing the Right Method
-  * Depends on the organization’s need for data consistency versus system performance
-
-------------------------- -------------------------
+  Choosing the right method will hinge on the organization’s need for **data consistency versus system performance**
 
 #### Security Considerations
 
 * Data Protection
-  * Encryption: Use encryption to secure data as it travels between the primary and secondary servers
-  * Access Controls: Configure strict permissions so that only authorized users can access and manage the databases
+  * **Encryption**: Use encryption to secure data **as it travels** between the primary and secondary servers
+  * **Access** Controls: Configure strict permissions so that only authorized users can access and manage the databases
+  
 * Compliance and Auditing
-  * Ensure that the configuration meets any regulatory or organizational policies
-  * Set up auditing to monitor any access or changes to the configuration
+  * Ensure that the configuration meets any **regulatory or organizational policies**
+  * Set up auditing to **monitor any access or changes to the configuration**
+  
 * Best Practices
-  * Regularly update security patches and review access permissions
-  * Use secure communication protocols to safeguard data integrity
-
-------------------------- -------------------------
+  * Regularly **update security patches** and **review access permissions**
+  * Use **secure communication protocols** to safeguard data integrity
 
 #### Monitoring Considerations
 
-* Importance of Monitoring: Early detection of issues such as replication delays or server failures is crucial.
-
-* Tools and Techniques:
-  * Dynamic Management Views (DMVs): Use DMVs to query system health and performance statistics
-  * Performance Dashboards: Visual tools that display real-time metrics on replication status, CPU usage, and memory consumption
+* Importance of Monitoring: **Early detection** of issues such as replication delays or server failures is crucial
 
 * What to Monitor
-  * Replication latency between primary and secondary replicas
-  * Server resource usage to detect potential bottlenecks
-  * Error logs for any signs of communication failures or synchronization issues
+  * Replication **latency** between primary and secondary replicas
+  * Server resource usage to detect potential **bottlenecks**
+  * Error logs for any signs of **communication failures** or **synchronization issues**
 
-* Outcome: Continuous assurance that the high availability setup is functioning optimally and that issues are addressed promptly
-
-------------------------- -------------------------
 ------------------------- -------------------------
 ------------------------- -------------------------
 
@@ -118,13 +92,14 @@ Two machines (`SERVER_PRIMARY` and `SERVER_SECONDARY`), each with:
     * SQL Server Management Studio
 
 ------------------------- -------------------------
-------------------------- -------------------------
 
 #### Windows Server
 
 ##### Failover Clustering
 
-Install Failover Clustering feature and management tools on `SERVER_PRIMARY` and `SERVER_SECONDARY`
+Windows Failover Clustering is **a built‐in Windows feature that lets multiple servers act as one**, automatically shifting the workload to a standby server when the primary fails.
+
+Install the Windows Failover Clustering feature and management tools on `SERVER_PRIMARY` and `SERVER_SECONDARY`
 
 ```powershell
 Install-WindowsFeature Failover-Clustering -IncludeManagementTools
@@ -139,6 +114,8 @@ Get-WindowsFeature Failover-Clustering
 ------------------------- -------------------------
 
 ##### Cluster
+
+A Windows cluster is **a group of interconnected servers that operate as one system**, automatically shifting workloads to a backup node when a failure occurs to keep your services running without interruption.
 
 Validate prerequisites before creating the cluster on `SERVER_PRIMARY` and `SERVER_SECONDARY`
 
@@ -183,6 +160,8 @@ Open Failover Cluster Manager on `SERVER_PRIMARY`, connect to your cluster, and 
 
 ##### Node
 
+A node is **an individual server within a Windows cluster** that actively hosts applications and automatically takes over workloads from a failing peer to ensure continuous service availability.
+
 Add node to cluster on `SERVER_SECONDARY`
 ```powershell
 Add-ClusterNode -Name "myCluster"
@@ -201,6 +180,8 @@ Get-ClusterNode
 
 ##### Always On
 
+Always On is SQL Server’s built‑in high availability feature that synchronizes databases across multiple replicas and enables rapid failover to keep your system running when failures occur.
+
 On `SERVER_PRIMARY`, open SQL Server Configuration Manager and then select "SQL Server Services"
   * Right-click on `SQL Server (MSSQLSERVER)` and select "Properties" from the resulting menu
   * Click the "Always On Availability Groups" tab and then check "Enable Always On Availability Groups"
@@ -210,22 +191,29 @@ Repeat the process for `SERVER_SECONDARY`
 
 ------------------------- -------------------------
 
-##### Certificate-Based Endpoint Authentication
+##### Authentication
+
+Windows Authentication is the primary security mechanism for SQL Server endpoints—leveraging **domain credentials** for robust verification.
+
+Certificate-Based Endpoint Authentication serves as a fallback, using digital certificates to encrypt and validate communications when AD isn't up to par.
+
+###### Master Key
+
+A master key is a critical encryption key in SQL Server that **secures other keys and certificates**, forming the backbone of your database’s security in high availability setups.
 
 Create a master key on `SERVER_PRIMARY` and `SERVER_SECONDARY`
-
 ```sql
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'P@55word!'
 ```
 
-Create a certificate for the endpoint on `SERVER_PRIMARY` and `SERVER_SECONDARY`
+###### Certificate-Based Endpoint Authentication
 
+Create a certificate for the endpoint on `SERVER_PRIMARY` and `SERVER_SECONDARY`
 ```sql
-CREATE CERTIFICATE Hadr_cert WITH SUBJECT = 'HADR Endpoint Certificate'
+CREATE CERTIFICATE Hadr_cert WITH SUBJECT = 'High Availability Disaster Recovery Endpoint Certificate'
 ```
 
 Backup the certificate on `SERVER_PRIMARY`
-
 ```sql
 BACKUP CERTIFICATE Hadr_cert TO FILE = 'C:\Temp\Hadr_cert.cer'
 WITH PRIVATE KEY (
@@ -237,7 +225,6 @@ WITH PRIVATE KEY (
 Copy `Hadr_cert.cer`, `Hadr_cert.pvk`, and `Hadr_cert_privatekey.pvk` to c:\Temp on `SERVER_SECONDARY`
 
 Restore the certificate on `SERVER_SECONDARY`
-
 ```sql
 CREATE CERTIFICATE Hadr_cert FROM FILE = 'C:\Temp\Hadr_cert.cer'
 WITH PRIVATE KEY (
@@ -246,8 +233,7 @@ WITH PRIVATE KEY (
 )
 ```
 
-Recreate the HADR endpoint on `SERVER_PRIMARY` and `SERVER_SECONDARY`
-
+Recreate the High Availability Disaster Recovery endpoint on `SERVER_PRIMARY` and `SERVER_SECONDARY`
 ```sql
 DROP ENDPOINT Hadr_endpoint;
 GO
@@ -263,7 +249,7 @@ CREATE ENDPOINT Hadr_endpoint
 
 ------------------------- -------------------------
 
-##### Prepare Databases
+##### Databases
 
 Create "c:\Temp" directories on both Windows Servers
 
@@ -303,6 +289,8 @@ RESTORE LOG myDatabase FROM DISK = 'C:\Temp\myDatabase_log.bak' WITH NORECOVERY;
 
 ##### Always On Availability Group
 
+Always On Availability Group is a SQL Server feature that groups databases for automatic replication and seamless failover, ensuring continuous availability during server outages.
+
 On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the database engine:
 
 * "Object Explorer": Right-click "Always On High Availability" and then "New Availability Group Wizard" in the resulting menu
@@ -328,9 +316,11 @@ On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the databa
       * Checks the health of each database individually  
       * Allows more granular failover if one database becomes unhealthy  
       * Useful if multiple databases are in the same group
+  
     * "Per Database DTC Support": `unchecked`
       * Manages distributed transactions on a per-database basis  
       * Enable only if your applications rely on DTC across multiple databases
+  
     * "Contained": `unchecked`
       * Stores users/logins inside the database  
       * Easier to move the database to another instance without re-creating logins
@@ -349,27 +339,27 @@ On `SERVER_PRIMARY`, open SQL Server Management Studio and connect to the databa
            * No: All read/write activity stays on the primary, ensuring strict consistency and simplifying configuration.
            * Yes / Read-intent only: Secondary can handle read-only queries to reduce load on the primary — with optional enforcement using `ApplicationIntent=ReadOnly`.
 
-"Select Data Synchronization": `Join only`
+* "Select Data Synchronization": `Join only`
 
-* Automatic Seeding: Streams the database directly from primary to secondary. Easiest option but may silently fail in lab setups without DNS, proper permissions, or shared services.
-* Full Database and Log Backup: Wizard handles backup and restore using a shared location. Reliable, but requires a common file path accessible by all replicas.
-* Join Only: Use when you've already manually restored the database with `NORECOVERY`. The wizard just joins it to the availability group — ideal for custom or large database setups.
-* Skip Initial Data Synchronization: Creates the AG without any data movement. You’re fully responsible for preparing and joining each secondary manually.
+  * **Automatic Seeding**: Streams the database directly from primary to secondary. Easiest option but may silently fail in lab setups without DNS, proper permissions, or shared services.
+  * **Full Database and Log Backup**: Wizard handles backup and restore using a shared location. Reliable, but requires a common file path accessible by all replicas.
+  * **Join Only**: Use when you've already manually restored the database with `NORECOVERY`. The wizard just joins it to the availability group — ideal for custom or large database setups.
+  * **Skip Initial Data Synchronization**: Creates the AG without any data movement. You’re fully responsible for preparing and joining each secondary manually.
 
-     * "Validation": Confirm "Success" results
-     * "Summary": Review and then click "Finish"
-     * "Results": Monitor progress and confirm success
+       * "Validation": Confirm "Success" results
+       * "Summary": Review and then click "Finish"
+       * "Results": Monitor progress and confirm success
 
-* After creating the availability group and adding replicas, recreate the endpoints on both `SERVER_PRIMARY` and `SERVER_SECONDARY`. This step ensures consistent endpoint configuration across both replicas, especially if endpoints were created implicitly or are misaligned.
+After creating the availability group and adding replicas, recreate the endpoints on both `SERVER_PRIMARY` and `SERVER_SECONDARY`. This step ensures consistent endpoint configuration across both replicas, especially if endpoints were created implicitly or are misaligned.
 
-  ```sql
-  DROP ENDPOINT Hadr_endpoint;
-  GO
-  CREATE ENDPOINT Hadr_endpoint  
-      STATE = STARTED  
-      AS TCP (LISTENER_PORT = 5022)  
-      FOR DATA_MIRRORING (ROLE = ALL, AUTHENTICATION = WINDOWS NEGOTIATE, ENCRYPTION = REQUIRED ALGORITHM AES);
-  ```
+```sql
+DROP ENDPOINT Hadr_endpoint;
+GO
+CREATE ENDPOINT Hadr_endpoint  
+    STATE = STARTED  
+    AS TCP (LISTENER_PORT = 5022)  
+    FOR DATA_MIRRORING (ROLE = ALL, AUTHENTICATION = WINDOWS NEGOTIATE, ENCRYPTION = REQUIRED ALGORITHM AES);
+```
 
 After adding the secondary replica, ensure its seeding mode is set to `AUTOMATIC` (required for automatic seeding):
 
@@ -387,17 +377,15 @@ Verify Configuration: On `SERVER_PRIMARY`, execute the following T‑SQL:
 
 ```sql
 SELECT 
-  ag.name AS AGName,
-  ar.replica_server_name AS ReplicaName,
-  rs.role_desc AS ReplicaRole,
-  rs.operational_state_desc AS OperationalState,
-  rs.connected_state_desc AS ConnectedState,
-  rs.synchronization_health AS SyncState
+    ag.name AS AGName,
+    ar.replica_server_name AS ReplicaName,
+    rs.role_desc AS ReplicaRole,
+    rs.operational_state_desc AS OperationalState,
+    rs.connected_state_desc AS ConnectedState,
+    rs.synchronization_health AS SyncState
 FROM sys.availability_groups AS ag
-JOIN sys.availability_replicas AS ar 
-  ON ag.group_id = ar.group_id
-JOIN sys.dm_hadr_availability_replica_states AS rs 
-  ON ar.replica_id = rs.replica_id;
+    JOIN sys.availability_replicas AS ar ON ag.group_id = ar.group_id
+    JOIN sys.dm_hadr_availability_replica_states AS rs ON ar.replica_id = rs.replica_id;
 ```
 
 The numeric values in the `SyncState` column correspond to specific synchronization states:
@@ -407,26 +395,6 @@ The numeric values in the `SyncState` column correspond to specific synchronizat
 * `2` = SYNCHRONIZED: Replica is synchronized (healthy, fully synchronized with the primary)
 * `3` = REVERTING: Replica reverting state (rarely encountered)
 * `4` = INITIALIZING: Replica is initializing data synchronization
-
-------------------------- -------------------------
-
-Verify Synchronization: On `SERVER_PRIMARY`, execute the following T‑SQL:
-
- ```sql
- SELECT 
-     ag.name AS AGName,
-     ar.replica_server_name AS ReplicaName,
-     drs.database_id AS DatabaseID,
-     drs.synchronization_state_desc AS SyncState,
-     drs.synchronization_health_desc AS SyncHealth
- FROM sys.availability_groups AS ag
- JOIN sys.availability_replicas AS ar 
-     ON ag.group_id = ar.group_id
- JOIN sys.dm_hadr_database_replica_states AS drs
-     ON ar.replica_id = drs.replica_id;
- ```
-
-   This will give you the synchronization status of each database in the availability group. If the status is `NOT SYNCHRONIZING`, that’s the root of the issue.
 
 ------------------------- -------------------------
 
