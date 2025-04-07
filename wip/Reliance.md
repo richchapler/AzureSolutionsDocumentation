@@ -2,25 +2,25 @@
 
 ## Query-Specific Changes
 
-| Recommendation                             | Expected Impact   | Notes                                                          |
-|--------------------------------------------|-------------------|----------------------------------------------------------------|
-| Materialized/Indexed Views                 | Extra Large       | Precomputes heavy joins/aggregations for repeated use          |
-| Eliminate Non-SARGable Operations in Joins | Large             | Avoids full table scans by enabling index seeks                |
-| Optimize Subqueries with CTEs              | Medium            | Clarifies logic and may allow better query plan optimization     |
-| Review Join Types and Their Order          | Medium            | Reduces intermediate row counts by filtering data earlier       |
-| Use WITH (NOLOCK)                          | Small to Medium   | Reduces blocking; use cautiously due to potential dirty reads     |
-| Minimize On-the-Fly Data Conversions/String Ops | Small         | Reduces per-row CPU overhead by precomputing conversions           |
+| Recommendation                                | Expected Impact   | Notes                                                          |
+| :---- | :---- | :---- |
+| Materialized/Indexed Views                    | Extra Large       | Precomputes heavy joins/aggregations for repeated use          |
+| Eliminate Non-SARGable Operations in Joins    | Large             | Avoids full table scans by enabling index seeks                |
+| Optimize Subqueries with CTEs                 | Medium            | Clarifies logic and may allow better query plan optimization     |
+| Review Join Types and Their Order             | Medium            | Reduces intermediate row counts by filtering data earlier       |
+| Use WITH (NOLOCK)                             | Small to Medium   | Reduces blocking; use cautiously due to potential dirty reads     |
+| Minimize On-the-Fly Data Conversions/String Ops | Small             | Reduces per-row CPU overhead by precomputing conversions          |
 
 ## General Changes
 
-| Recommendation                                      | Expected Impact   | Notes                                                          |
-|-----------------------------------------------------|-------------------|----------------------------------------------------------------|
-| Optimize Data Distribution and Partitioning         | Large             | Minimizes data movement; enables partition elimination          |
-| Adopt Incremental (Differential) Loading            | Large             | Loads only changes instead of full reloads; reduces ETL cost      |
-| Leverage Result Set Caching                         | Large             | Serves repeated queries from cache to cut execution time         |
-| Maintain Clustered Columnstore Indexes/Statistics   | Large             | Ensures efficient scans via healthy indexes and accurate stats     |
-| Rewrite Expressions for SARGability                 | Medium            | Enables index/segment elimination by avoiding per-row functions     |
-| Implement Advanced Monitoring/Diagnostics           | Small             | Essential for tuning; helps detect issues and validate improvements |
+| Recommendation                                       | Expected Impact   | Notes                                                          |
+| :---- | :---- | :---- |
+| Optimize Data Distribution and Partitioning          | Large             | Minimizes data movement; enables partition elimination          |
+| Adopt Incremental (Differential) Loading             | Large             | Loads only changes instead of full reloads; reduces ETL cost      |
+| Leverage Result Set Caching                          | Large             | Serves repeated queries from cache to cut execution time         |
+| Maintain Clustered Columnstore Indexes/Statistics    | Large             | Ensures efficient scans via healthy indexes and accurate stats     |
+| Rewrite Expressions for SARGability                  | Medium            | Enables index/segment elimination by avoiding per-row functions     |
+| Implement Advanced Monitoring/Diagnostics            | Small             | Essential for tuning; helps detect issues and validate improvements |
 
 ---
 
