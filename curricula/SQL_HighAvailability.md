@@ -892,5 +892,5 @@ Azure SQL already provides **built‑in redundancy within a region** by **automa
 19. **C** – To automatically manage failover between the primary and secondary databases  
     *Failover groups ensure that failover happens seamlessly and automatically when needed.*
 
-20. **B** – It is a streamlined, built‑in solution that automates replication, failover, and monitoring  
-    *Azure SQL Database’s High Availability strategy integrates these components to provide a robust, automated solution.*
+1. A – It is a streamlined, built‑in solution that automates replication, failover, and monitoring  
+    *This answer best describes Azure’s overall strategy, which simplifies high availability through automation.*
