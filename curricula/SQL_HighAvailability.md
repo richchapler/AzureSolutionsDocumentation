@@ -2,14 +2,14 @@
 
 ## Use Case
 
-The database administration team at a mid-sized organization must ensure data availability. Key Requirements:
+The database administration team at a mid-sized organization must ensure data availability. Key requirements:
 
 * **Continuous Operations**: Support 24/7 database availability
 * **Data Integrity**: Prevent data loss caused by disruptions
 * **Security**: Data must be secure at all times
 * **Proactive Monitoring**: Provide for quick issue detection
 
-------------------------- ------------------------- -------------------------
+------------------------- -------------------------
 
 ## On‑Prem
 
