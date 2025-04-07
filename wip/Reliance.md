@@ -1,6 +1,6 @@
 # Summary
 
-### Query-Specific Changes
+## Query-Specific Changes
 | Recommendation                                      | Expected Impact  | Notes                                                          |
 |-----------------------------------------------------|------------------|----------------------------------------------------------------|
 | **Materialized/Indexed Views**                      | **Extra Large**  | Precomputes heavy joins/aggregations for repeated use          |
@@ -10,7 +10,7 @@
 | **Use WITH (NOLOCK)**                               | **Small to Medium** | Reduces blocking; use cautiously due to potential dirty reads  |
 | **Minimize On-the-Fly Data Conversions/String Ops**  | **Small**        | Reduces per-row CPU overhead by precomputing conversions          |
 
-### General Changes
+## General Changes
 | Recommendation                                      | Expected Impact  | Notes                                                          |
 |-----------------------------------------------------|------------------|----------------------------------------------------------------|
 | **Optimize Data Distribution and Partitioning**   | **Large**        | Minimizes data movement; enables partition elimination          |
