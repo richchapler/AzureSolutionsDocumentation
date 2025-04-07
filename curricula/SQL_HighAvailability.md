@@ -369,74 +369,124 @@ MODIFY REPLICA ON 'SERVER_SECONDARY'
 WITH (SEEDING_MODE = AUTOMATIC);
 ```
 
-------------------------- -------------------------------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
 
-##### Troubleshooting  
+### Troubleshooting
 
-Verify Configuration: On `SERVER_PRIMARY`, execute the following T‑SQL:
+Consider the following framework a starting point for troubleshooting; there will undoubtedly be items not yet included, but these are the most common:
 
-```sql
-SELECT 
-    ag.name AS AGName,
-    ar.replica_server_name AS ReplicaName,
-    rs.role_desc AS ReplicaRole,
-    rs.operational_state_desc AS OperationalState,
-    rs.connected_state_desc AS ConnectedState,
-    rs.synchronization_health AS SyncState
-FROM sys.availability_groups AS ag
-    JOIN sys.availability_replicas AS ar ON ag.group_id = ar.group_id
-    JOIN sys.dm_hadr_availability_replica_states AS rs ON ar.replica_id = rs.replica_id;
-```
+#### What's Happening?
+Start by identifying symptoms using logs, dashboards, monitoring tools, and user reports:
 
-The numeric values in the `SyncState` column correspond to specific synchronization states:
-
-* `0` = NOT SYNCHRONIZING: Replica isn't synchronizing data
-* `1` = SYNCHRONIZING: Replica is in the process of synchronizing
-* `2` = SYNCHRONIZED: Replica is synchronized (healthy, fully synchronized with the primary)
-* `3` = REVERTING: Replica reverting state (rarely encountered)
-* `4` = INITIALIZING: Replica is initializing data synchronization
+* **Error messages**: connection timeout, “database unavailable”, login failures  
+* **Application impact**: data appears stale, ETL or replication jobs stalled  
+* **Dashboard indicators**: "Not Synchronizing", "Restoring", "Disconnected"  
+* **Failover attempts**: stuck in transition, replica not joining, config incomplete  
+* **General behaviors**: primary unreachable, failover not triggering, listener not resolving  
 
 ------------------------- -------------------------
 
-Test Failover: If the secondary replica is stuck in the "SYNCHRONIZING" state for a prolonged period, you can perform a forced manual failover:
+#### SQL Server Issues?
 
-```sql
-ALTER AVAILABILITY GROUP [myAvailabilityGroup] FORCE_FAILOVER_ALLOW_DATA_LOSS
-```
+SQL Server problems are often the root of synchronization or connectivity failures in an availability group. Check each of the following areas:
 
-This command forces the secondary replica to take over as the primary. Data loss may occur if the secondary replica is not fully synchronized with the primary, particularly if it's stuck in the SYNCHRONIZING state and unable to complete synchronization.
+##### *SQL Server service not started or unresponsive*
+* Confirm that the SQL Server service is running on both primary and secondary nodes  
+* Use SQL Server Configuration Manager or `Get-Service` in PowerShell to check service status  
+* If the service fails to start, review the Windows Event Log for startup errors  
+* Validate that the correct instance name is used when connecting  
 
-If the databases are still synchronizing and you want to avoid data loss, perform a planned manual failover after the databases are fully synchronized. Once synchronization completes, you can execute the failover safely.
+##### *Database stuck in `Restoring` state*
+* Indicates that the secondary database hasn’t fully joined the availability group  
+* Check that the database was restored using `WITH NORECOVERY`  
+* Validate that the database is in FULL recovery mode  
+* Verify recent log backups were restored prior to the join  
+* If using automatic seeding, confirm seeding mode is set correctly and no errors are present in error logs  
 
-   ```sql
-   ALTER AVAILABILITY GROUP [myAvailabilityGroup] FAILOVER;
-   ```
+##### *AG status shows "Not Synchronizing"*
+* Run this query to check replica health and synchronization state:
 
-Verify the Role Change: Run the following query on the new primary (which was the former secondary) to verify that it is now the primary replica:
+    ```sql
+    SELECT
+        ag.name AS AGName,
+        ar.replica_server_name AS ReplicaName,
+        rs.role_desc AS ReplicaRole,
+        rs.operational_state_desc AS OperationalState,
+        rs.connected_state_desc AS ConnectedState,
+        rs.synchronization_health AS SyncState
+    FROM sys.availability_groups AS ag
+        JOIN sys.availability_replicas AS ar ON ag.group_id = ar.group_id
+        JOIN sys.dm_hadr_availability_replica_states AS rs ON ar.replica_id = rs.replica_id;
+    ```
 
-```sql
-SELECT ag.name AS AGName,
-    ar.replica_server_name AS ReplicaName,
-    rs.role_desc AS ReplicaRole,
-    rs.operational_state_desc AS OperationalState,
-    rs.connected_state_desc AS ConnectedState,
-    rs.synchronization_health AS SyncState
-FROM sys.availability_groups AS ag
-    JOIN sys.availability_replicas AS ar ON ag.group_id = ar.group_id
-    JOIN sys.dm_hadr_availability_replica_states AS rs ON ar.replica_id = rs.replica_id;
-```
+* `SyncState` values:  
+  * `0` = NOT SYNCHRONIZING  
+  * `1` = SYNCHRONIZING  
+  * `2` = SYNCHRONIZED  
+  * `3` = REVERTING  
+  * `4` = INITIALIZING  
+
+* Common causes of "Not Synchronizing":  
+  * Network or endpoint connectivity issues  
+  * Secondary node not joined correctly  
+  * Database not in FULL recovery mode  
+  * Automatic seeding misconfigured  
+
+##### *Causes: log backup missing, endpoint unreachable, high network latency*
+* Missing log backups can prevent secondaries from catching up  
+* Use `sys.fn_hadr_backup_is_preferred_replica` to confirm correct log backup target  
+* Endpoint failures (e.g., invalid certs, misconfigured ports) can break synchronization  
+* Run network tests (ping, port scans) to confirm connectivity between nodes  
+* Check for unusual latency or packet loss — this can degrade performance in synchronous mode  
 
 ------------------------- -------------------------
 
-Resynchronize the Secondary Replica: Now that the failover is complete, we need to make sure that the new secondary replica is synchronized properly. You can try running the following command to start synchronization:
+#### Windows Server Failover Cluster?
 
-```sql
-ALTER AVAILABILITY GROUP [myAvailabilityGroup]
-    MODIFY REPLICA ON 'PRIMARY'
-    WITH (SEEDING_MODE = AUTOMATIC);
-```
+Issues at the cluster level can interrupt failover operations or cause replicas to drop out of synchronization. Validate each of the following:
 
-This will ensure the new secondary replica is automatically seeded if needed.
+##### *Cluster service not running on one or more nodes*
+* Open Failover Cluster Manager and check node status  
+* Run `Get-ClusterNode` in PowerShell to verify each node is `Up`  
+* If stopped, attempt to restart the Cluster Service and check for underlying issues (event logs, permissions, services dependencies)  
+
+##### *Node unavailable due to reboot, NIC failure, or network isolation*
+* Confirm all nodes are online and can ping each other  
+* Review NIC settings and verify the cluster network is marked for "Cluster and Client" communication  
+* Check if a recent reboot or patch cycle impacted availability  
+
+##### *Quorum not met or misconfigured*
+* If quorum is lost, the cluster will go offline or enter degraded mode  
+* Validate quorum configuration in Failover Cluster Manager  
+* Use `Get-ClusterQuorum` to confirm current mode and witness status  
+* Review cluster logs for events related to node voting or witness failure  
+
+##### *Listener DNS not resolving or IP not reachable*
+* Use `nslookup` to verify the listener name resolves correctly on all nodes and client machines  
+* Confirm the listener IP address is not in conflict and is present in the cluster resource list  
+* Ensure all subnets used by the cluster have been properly added to the cluster configuration  
+
+------------------------- -------------------------
+
+#### Listener / Connectivity?
+
+Connectivity issues are often external to SQL Server but critical to the success of failover and client redirection. Investigate the following:
+
+##### *Listener name not resolving in DNS*
+* Validate DNS record exists for the listener name and maps to the correct IP  
+* Flush and re-register DNS on affected servers or clients using `ipconfig /flushdns` and `registerdns`  
+* Confirm there's no name resolution conflict with another object (e.g., a stale A record or CNAME collision)  
+
+##### *IP unreachable due to firewall, subnet config, or route issues*
+* Check that firewall rules allow inbound traffic on TCP 1433 and any listener IPs  
+* Validate subnets are routable across nodes, especially if using `MultiSubnetFailover`  
+* Ensure no recent changes to NSGs, routing tables, or firewall appliances are blocking traffic  
+
+##### *Application uses incorrect connection string or missing `MultiSubnetFailover`*
+* Confirm connection strings in applications and scripts are correct  
+* For multi-subnet configurations, the connection string should include `MultiSubnetFailover=True`  
+* Missing this option may cause long timeouts during failover scenarios  
 
 ------------------------- -------------------------
 ------------------------- -------------------------
