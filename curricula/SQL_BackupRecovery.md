@@ -41,13 +41,13 @@ Below is the complete, updated version of the **On‑Prem >> Fundamentals** sect
 
 A robust backup plan starts with understanding the criticality of your data and how frequently it changes. Key elements include:
 
-- **Frequency:**  
+* **Frequency:**  
   Decide how often to perform each type of backup. Full backups, which are larger, are scheduled less frequently, while differential and transaction log backups are run more often. The frequency should align with business needs and ensure that any potential data loss falls within your predetermined Recovery Point Objective (RPO).
 
-- **Storage Locations:**  
+* **Storage Locations:**  
   Choose between on‑site storage for rapid recovery and off‑site or cloud‑based storage for disaster recovery. Secure, redundant storage solutions—ideally with encryption—minimize the risk of data loss due to localized failures.
 
-- **Automation:**  
+* **Automation:**  
   Implement automated scheduling and monitoring for backup operations. Automation minimizes human error by consistently executing backup jobs and provides real‑time alerts if issues arise, ensuring backups complete successfully and are available when needed.
 
 #### Restore
@@ -56,42 +56,48 @@ A robust backup plan starts with understanding the criticality of your data and 
 
 Restoring a database reverses the backup process and consists of these steps:
 
-- **Full Backup Restoration:**  
+* **Full Backup Restoration:**  
   Begin by restoring the most recent full backup to reestablish the complete baseline.
 
-- **Differential Backup Application:**  
+* **Differential Backup Application:**  
   If available, apply the latest differential backup to incorporate changes made since the full backup.
 
-- **Transaction Log Restoration:**  
+* **Transaction Log Restoration:**  
   Finally, restore transaction log backups sequentially to replay individual transactions. For point‑in‑time recovery, halt the restoration at the designated moment to revert to a known good state.
 
 Regular testing of these procedures is essential to ensure rapid and reliable recovery in an actual failure scenario.
+
+------------------------- -------------------------
 
 ##### Best Practices
 
 Effective restoration is as critical as the backup process. Best practices include:
 
-- **Validation:**  
+* **Validation:**  
   Regularly test restore procedures using representative sample data to confirm that backups are complete and usable. These exercises help uncover potential issues before an actual recovery is needed.
 
-- **Documentation:**  
+* **Documentation:**  
   Maintain detailed records of backup jobs—including time stamps, storage locations, and restore outcomes—to aid troubleshooting and ensure compliance with regulatory standards.
 
-- **Maintenance:**  
+* **Maintenance:**  
   Continuously monitor backup file integrity and manage storage resources by performing periodic checks for file corruption, rotating backup media as necessary, and updating procedures to accommodate changing data volumes.
+
+------------------------- -------------------------
 
 #### Key Considerations
 
 A successful backup and recovery strategy depends on:
 
-- **Data Integrity:**  
+* **Data Integrity:**  
   Ensuring that each backup builds correctly on the previous one so that the restore process maintains a consistent database state.
 
-- **Thorough Documentation and Testing:**  
+* **Thorough Documentation and Testing:**  
   Keeping detailed records and regularly simulating restore procedures to verify that recovery will be seamless in the event of an actual failure.
 
-- **Automation and Monitoring:**  
+* **Automation and Monitoring:**  
   Using automated scheduling and proactive monitoring to minimize human error and quickly detect any issues in the backup process.
+
+------------------------- -------------------------
 
 #### Key Metrics
 
@@ -101,47 +107,101 @@ A successful backup and recovery strategy depends on:
 * **Recovery Point Objective (RPO):**  
   RPO indicates the maximum amount of data (expressed in time) that an organization can afford to lose. It is calculated based on the frequency of backup operations and the rate of data change. For instance, if transaction logs are backed up every 15 minutes, the RPO would be approximately 15 minutes.
 
+------------------------- -------------------------
+
 #### Advanced Concepts
 
-Enhance your backup strategy with these advanced measures:
+* **Backup Optimization**  
+  * **Description:** Combine compression and encryption to optimize storage and secure backup data  
+  * **Benefits:**  
+    * Compression reduces file size and speeds up transfers  
+    * Encryption protects data at rest  
+  * **Considerations:**  
+    * Compression may increase CPU usage during backup  
+    * Encryption requires careful key management  
 
-**Backup Optimization:**  
-- **Compression:**  
-  Reduces the size of backup files, saving storage space and speeding up data transfers.
-- **Encryption:**  
-  Secures backup files to ensure sensitive data remains protected even if the storage media are compromised.
+* **Verification and Maintenance**  
+  * **Description:** Regularly verify backup integrity and perform maintenance to keep storage healthy  
+  * **Benefits:**  
+    * RESTORE VERIFYONLY confirms backup readability  
+    * WITH CHECKSUM detects I/O or hardware errors at backup time  
+  * **Considerations:**  
+    * Verification adds time to the backup window  
+    * Maintenance tasks must be scheduled to avoid conflicts  
 
-**Verification and Maintenance:**  
-- **Integrity Checks:**  
-  Regularly verify backup validity (for example, using methods like RESTORE VERIFYONLY).
-- **Routine Maintenance:**  
-  Schedule regular cleanups of old backups to manage storage efficiently.
+* **Disaster Recovery Planning**  
+  * **Description:** Combine off‑site or cloud backups with proactive monitoring for comprehensive DR readiness  
+  * **Benefits:**  
+    * Off‑site or cloud storage protects against site‑wide failures  
+    * Automated alerts ensure prompt response to backup issues  
+  * **Considerations:**  
+    * Off‑site transfers can incur additional bandwidth costs  
+    * Monitoring requires proper configuration and tuning  
 
-**Disaster Recovery Planning:**  
-- **Off‑Site and Cloud Backups:**  
-  Combine local backups with geo‑redundant or cloud‑based storage to protect against site‑wide disasters.
-- **Automated Monitoring:**  
-  Employ tools to alert administrators to backup failures or anomalies, ensuring prompt remediation.
+* **Log Shipping**  
+  * **Description:** Automate transaction‑log backups on the primary, copy them to a secondary, and restore on a schedule  
+  * **Benefits:**  
+    * Provides a warm standby without requiring clustering or shared storage  
+    * Simple to implement and monitor via SQL Server Agent jobs  
+  * **Considerations:**  
+    * Failover is manual—applications must reconnect to the secondary  
+    * Secondary database remains in a restoring state unless using STANDBY mode  
+
+* **Corruption Recovery**  
+  * **Description:** Use DBCC CHECKDB to detect corruption and built‑in repair options to recover a damaged database  
+  * **Benefits:**  
+    * Built‑in mechanism to detect and correct corruption  
+    * Can recover a database even when backups are not fully current  
+  * **Considerations:**  
+    * Repair options that allow data loss can discard corrupted data  
+    * Requires single‑user mode and downtime during repair operations
+
+------------------------- -------------------------
 
 #### Security Considerations
 
 * **Backup File Security:**  
-  - **Encryption:** Always encrypt backup files to safeguard sensitive data.  
-  - **Access Controls:** Limit access to backup storage locations to authorized personnel only.
+  * **Encryption at Rest:** Always encrypt backups using keys stored in a secure vault (HSM or Key Vault)  
+  * **Encryption in Transit:** Enforce TLS/SSL for any network transfers of backup files  
+  * **Immutable Storage:** Use write‑once, read‑many (WORM) or immutable storage policies for critical backups  
 
-* **Compliance Requirements:**  
-  - **Audit Trails:** Maintain logs of all backup and restore operations.  
-  - **Retention Policies:** Ensure backup retention schedules align with industry and regulatory standards.
+* **Access Controls & Auditing:**  
+  * **Role‑Based Access:** Separate backup and restore privileges among different teams  
+  * **Audit Trails:** Log and monitor all file‑access operations on backup storage  
+  * **Alerting:** Configure alerts for unauthorized access or deletion attempts  
 
-#### Monitoring Considerations
+* **Key Management:**  
+  * **Centralized Key Vault:** Store and manage encryption keys in a secure, centralized location  
+  * **Key Rotation:** Rotate encryption keys on a regular schedule to reduce risk  
+
+* **Network Security:**  
+  * **Isolated Backup Network:** Restrict backup traffic to a dedicated network segment or VPN  
+  * **Firewall Rules:** Limit storage account or file‑share access to approved IP ranges  
+
+* **Compliance & Retention:**  
+  * **Retention Policies:** Align backup retention schedules with industry and regulatory requirements, and implement retention locks where supported  
+  * **Integrity Verification:** Maintain and periodically verify cryptographic hashes of backup files to detect silent corruption
+
+------------------------- -------------------------
+
+### Monitoring Considerations
 
 * **Automated Monitoring:**  
-  - **Alerts:** Configure tools (such as SQL Server Agent jobs) to notify administrators of backup failures.  
-  - **Dashboard Views:** Use monitoring dashboards and DMVs to track backup status and job histories.
+  * **Alerts:** Configure tools (such as SQL Server Agent jobs) to notify administrators of backup failures  
+  * **Dashboard Views:** Use monitoring dashboards and DMVs to track backup status and job histories  
+
+* **Job Failure Notifications:**  
+  * **Description:** Use Database Mail and SQL Server Agent operators to send email/SMS alerts when a backup job fails  
+  * **Benefits:**  
+    * Immediate awareness of backup issues  
+    * Faster response to prevent gaps in protection  
+  * **Considerations:**  
+    * Requires configuring Database Mail and operator permissions  
+    * Ensure mail profiles are secured and tested  
 
 * **Regular Reviews:**  
-  - **Health Checks:** Periodically review backup logs and assess storage capacity.  
-  - **Testing:** Schedule routine restore tests to confirm backup reliability and readiness.
+  * **Health Checks:** Periodically review backup logs and assess storage capacity  
+  * **Testing:** Schedule routine restore tests to confirm backup reliability and readiness
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -150,8 +210,8 @@ Enhance your backup strategy with these advanced measures:
 
 #### Prepare Environment
 
-One machine with SQL Server and the following items installed:
-  * [SQL Server Management Studio](https://learn.microsoft.com/en-us/ssms/download-sql-server-management-studio-ssms)
+One machine with SQL Server and the following items installed:  
+  * [SQL Server Management Studio](https://learn.microsoft.com/en-us/ssms/download-sql-server-management-studio-ssms)  
   * [AdventureWorks](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms)
 
 ------------------------- -------------------------
@@ -164,11 +224,11 @@ One machine with SQL Server and the following items installed:
 * **Set Recovery Model**  
   Set or confirm that the database is using the Full Recovery Model. The recovery model dictates how transactions are logged, how the transaction log is maintained, and ultimately, how much data you could lose in the event of a failure.
 
-  * **Transaction Logging:** In the Full Recovery Model, every transaction is fully logged. This detailed logging allows you to perform transaction log backups, which are critical for point‑in‑time recovery. Without a proper recovery model, you might be unable to recover all the transactions that occurred between backups.
-  * **Data Protection:** With full logging, you ensure that every data change is recorded. This means that if a failure occurs, you can restore the database to the exact moment before the failure, minimizing data loss.
+  * **Transaction Logging:** In the Full Recovery Model, every transaction is fully logged. This detailed logging allows you to perform transaction log backups, which are critical for point‑in‑time recovery. Without a proper recovery model, you might be unable to recover all the transactions that occurred between backups.  
+  * **Data Protection:** With full logging, you ensure that every data change is recorded. This means that if a failure occurs, you can restore the database to the exact moment before the failure, minimizing data loss.  
   * **Recovery Objectives:** The recovery model directly impacts your Recovery Point Objective (RPO) — a key metric that defines how much data loss is acceptable. A Full Recovery Model supports a low RPO because you can recover the most recent transactions.
 
-  Execute the following T-SQL:
+  Execute the following T‑SQL:
   ```sql
   USE master;
   GO
@@ -178,21 +238,21 @@ One machine with SQL Server and the following items installed:
 
 ------------------------- -------------------------
 
-#### Full Backup
+#### Backup Database
+
+##### Full Backup
 
 Performing a full backup creates a complete snapshot of the entire `AdventureWorks2022` database at a specific moment. This backup serves as the baseline for your backup chain.
 
-  * **Baseline for Recovery:** The full backup is the foundational component in any backup strategy. When you restore your database, **you always start with the most recent full backup**. Without it, you wouldn’t have a complete reference of your database’s state.
-  * **Establishing a Recovery Point:** The full backup defines a clear recovery point. If a failure occurs, you will rely on this backup (and subsequent backups) to bring your database back to a known, consistent state.
+  * **Baseline for Recovery:** The full backup is the foundational component in any backup strategy. When you restore your database, **you always start with the most recent full backup**. Without it, you wouldn’t have a complete reference of your database’s state.  
+  * **Establishing a Recovery Point:** The full backup defines a clear recovery point. If a failure occurs, you will rely on this backup (and subsequent backups) to bring your database back to a known, consistent state.  
   * **Efficiency in Subsequent Backups:** Once the full backup is in place, subsequent differential backups can capture only the changes made since that full backup, reducing the amount of data that must be stored and later restored.
 
-  Execute the following T-SQL:
-```sql
-BACKUP DATABASE AdventureWorks2022 
-TO DISK = 'C:\Temp\AdventureWorks_full.bak' 
-WITH INIT;
-GO
-```
+  Execute the following T‑SQL:
+  ```sql
+  BACKUP DATABASE AdventureWorks2022 TO DISK = 'C:\Temp\AdventureWorks_full.bak' WITH INIT;
+  GO
+  ```
 
 Example Output:
 ```text
@@ -203,87 +263,306 @@ BACKUP DATABASE successfully processed 25378 pages in 0.439 seconds (451.621 MB/
 Completion time: 2025-04-07T14:40:13.1775263-07:00
 ```
 
-------------------------- -------------------------
-
-#### Verify Backup
+###### Verify Backup
 
 After executing the full backup, check that the backup file (`AdventureWorks_full.bak`) was created in the designated folder. This verification is important to ensure that your backup process is working correctly and that you have a reliable starting point for recovery.
 
+Execute the following T‑SQL to verify the backup file:
+```sql
+RESTORE VERIFYONLY FROM DISK = 'C:\Temp\AdventureWorks_full.bak';
+```
 
+------------------------- -------------------------
 
+##### Differential Backup
 
+###### Change Data
 
+Execute the following T‑SQL to create a new table and insert data.
+```sql
+USE AdventureWorks2022;
+GO
 
+CREATE TABLE dbo.TestData ( ID INT IDENTITY(1,1) PRIMARY KEY, Description NVARCHAR(100) );
+GO
 
+INSERT INTO dbo.TestData (Description) VALUES ('Test record 1'), ('Test record 2');
+GO
+```
 
+Simulating data changes illustrates the purpose of a differential backup — it captures only the modifications made since the last full backup. Students will see that a differential backup file is typically smaller and faster to create.
 
+###### Perform Backup
 
+Execute the following T‑SQL:
+```sql
+BACKUP DATABASE AdventureWorks2022 TO DISK = 'C:\Temp\AdventureWorks_diff.bak' WITH DIFFERENTIAL, INIT;
+GO
+```
 
+Example Output:
+```text
+Processed 296 pages for database 'AdventureWorks2022', file 'AdventureWorks2022' on file 1.
+Processed 2 pages for database 'AdventureWorks2022', file 'AdventureWorks2022_log' on file 1.
+BACKUP DATABASE WITH DIFFERENTIAL successfully processed 298 pages in 0.049 seconds (47.433 MB/sec).
+
+Completion time: 2025-04-08T05:58:38.1381296-07:00
+```
+
+###### Verify Backup
+
+After executing the differential backup, check that the backup file (`AdventureWorks_diff.bak`) was created in the designated folder. Observe:
+
+* **File Size:** Compare the size of the differential and full backup files  
+* **Backup Duration:** Differential backups usually complete faster than full backups since they contain only recent changes
+
+Execute the following T‑SQL to verify the differential backup:
+```sql
+RESTORE VERIFYONLY FROM DISK = 'C:\Temp\AdventureWorks_diff.bak';
+```
+
+------------------------- -------------------------
+
+##### Transaction Log Backup
+
+Execute the following T‑SQL:
+```sql
+BACKUP LOG AdventureWorks2022 TO DISK = 'C:\Temp\AdventureWorks_tlog.bak' WITH INIT;
+GO
+```
+
+Example Output:
+```text
+Processed 18 pages for database 'AdventureWorks2022', file 'AdventureWorks2022_log' on file 1.
+BACKUP LOG successfully processed 18 pages in 0.015 seconds (9.114 MB/sec).
+
+Completion time: 2025-04-08T06:05:16.9254135-07:00
+```
+
+###### Verify Backup
+
+After executing the transaction log backup, check that the backup file (`AdventureWorks_tlog.bak`) was created in the designated folder. Observe:
+
+* **File Size:** The log backup file should be relatively small since it captures only the transactions that occurred since the previous log backup  
+* **Backup Duration:** Transaction log backups typically complete very quickly, reflecting the limited amount of data captured
+
+Execute the following T‑SQL to verify the log backup:
+```sql
+RESTORE VERIFYONLY FROM DISK = 'C:\Temp\AdventureWorks_tlog.bak';
+GO
+```
+
+------------------------- -------------------------
+
+###### Backup History
+
+After executing your backups, query the msdb backup history to confirm when and how your backups ran:
+
+```sql
+SELECT 
+  bs.database_name,
+  bs.type,
+  bs.backup_start_date,
+  bm.physical_device_name
+FROM msdb.dbo.backupset bs
+JOIN msdb.dbo.backupmediafamily bm
+  ON bs.media_set_id = bm.media_set_id
+WHERE bs.database_name = 'AdventureWorks2022'
+ORDER BY bs.backup_start_date;
+GO
+```
+
+------------------------- -------------------------
+
+#### Restore Database
+
+Before restoring, simulate a failure by dropping the AdventureWorks2022 database. This will mimic an unexpected outage or data loss scenario.
+```sql
+USE master;
+GO
+DROP DATABASE AdventureWorks2022;
+GO
+```
+
+> **Note:** Dropping the database is for demonstration purposes only. In a real-world scenario, you would perform a restore without deleting production data.
+
+------------------------- -------------------------
+
+##### Full Restore
+
+Execute the following T-SQL to restore the full backup, which provides the complete baseline of the database.
+```sql
+RESTORE DATABASE AdventureWorks2022 FROM DISK = 'C:\Temp\AdventureWorks_full.bak' WITH RECOVERY;
+GO
+```
+
+Example Output:
+```text
+Processed 25376 pages for database 'AdventureWorks2022', file 'AdventureWorks2022' on file 1.
+Processed 2 pages for database 'AdventureWorks2022', file 'AdventureWorks2022_log' on file 1.
+RESTORE DATABASE successfully processed 25378 pages in 0.270 seconds (734.302 MB/sec).
+
+Completion time: 2025-04-08T06:20:18.1914188-07:00
+```
+
+------------------------- -------------------------
+
+##### Differential Restore
+
+**Scenario:**  
+Imagine you take a full backup every Sunday night and then run a differential backup each subsequent night (Monday through Saturday). By Friday, the Friday differential contains all changes since Sunday’s full backup. When you need to restore on Friday, you don’t have to apply six separate log backups—just the full backup and the latest differential.
+
+**Restore the Full Backup (Weekly Baseline)**  
+```sql
+RESTORE DATABASE AdventureWorks2022 FROM DISK = 'C:\Temp\AdventureWorks_full.bak' WITH NORECOVERY;
+GO
+```
+
+This reestablishes your Sunday night baseline without bringing the database online, so you can apply the differential next.
+
+**Restore the Friday Differential (Daily Catch‑Up) and Bring Online**  
+```sql
+RESTORE DATABASE AdventureWorks2022 FROM DISK = 'C:\Temp\AdventureWorks_diff.bak' WITH RECOVERY;
+GO
+```
+
+**Why This Strategy Works:**  
+* **Efficiency:** You avoid replaying multiple transaction logs—just one differential backup captures all interim changes  
+* **Reduced Downtime:** Fewer restore steps mean faster recovery, helping you meet your Recovery Time Objective (RTO)  
+* **Simplicity:** A weekly full plus daily differential schedule balances storage use and recovery speed, aligning with most operational needs
+
+------------------------- -------------------------
+
+##### Transaction Log Restore
+
+**Scenario:**  
+You run hourly transaction log backups to capture every change. Suppose at 3:45 PM someone accidentally deletes critical rows from `Sales.SalesOrderDetail`. To recover up to 3:44 PM, you’ll replay the log backup taken just before the mistake.
+
+**Restore the Full Backup (Weekly Baseline)**  
+```sql
+RESTORE DATABASE AdventureWorks2022 FROM DISK = 'C:\Temp\AdventureWorks_full.bak' WITH NORECOVERY;
+GO
+```
+
+This reestablishes your baseline without bringing the database online, so you can apply subsequent backups.
+
+**Restore the Differential Backup (Daily Catch‑Up)**  
+```sql
+RESTORE DATABASE AdventureWorks2022 FROM DISK = 'C:\Temp\AdventureWorks_diff.bak' WITH NORECOVERY;
+GO
+```
+
+Applies all changes since the full backup, getting you up to yesterday’s end‑of‑day state.
+
+**Restore the Transaction Log Backup (Point‑in‑Time Recovery)**  
+```sql
+RESTORE LOG AdventureWorks2022 FROM DISK = 'C:\Temp\AdventureWorks_tlog.bak' WITH STOPAT = '2025-04-08T15:44:00', RECOVERY;
+GO
+```
+
+The `STOPAT` option replays transactions up to 3:44 PM, just before the unwanted delete, and `RECOVERY` brings the database online.
+
+**Why This Strategy Works:**  
+* **Precision:** Transaction log backups record every transaction, enabling you to restore to an exact point in time and minimize data loss  
+* **Efficiency:** Log backups are small and quick to apply, reducing the time required compared to larger full or differential restores  
+* **Flexibility:** Combining full, differential, and log backups provides a layered approach—balancing storage use with the ability to perform both broad and granular recoveries
 
 ------------------------- -------------------------
 ------------------------- -------------------------
 
 ## Quiz
 
-1. What is the primary purpose of a full backup in SQL Server?  
-   A) To capture only changes since the last backup  
-   B) To provide a complete copy of the database at a point in time  
-   C) To reduce the size of subsequent backups  
-   D) To encrypt data at rest  
+1. You run weekly full backups and nightly differential backups. On Wednesday morning, which sequence restores the database in two steps?  
+   A) Restore full backup WITH RECOVERY; then restore differential backup WITH RECOVERY  
+   B) Restore full backup WITH NORECOVERY; then restore differential backup WITH RECOVERY  
+   C) Restore full backup WITH NORECOVERY; then restore differential backup WITH NORECOVERY  
+   D) Restore full backup WITH RECOVERY; then restore differential backup WITH NORECOVERY  
 
-2. Which backup type is best suited for ad‑hoc backups without disturbing the backup sequence?  
-   A) Differential Backup  
-   B) Transaction Log Backup  
-   C) COPY_ONLY Backup  
-   D) Full Backup  
+2. To detect I/O or hardware errors during the backup process, which BACKUP option should you include?  
+   A) WITH CHECKSUM  
+   B) WITH COMPRESSION  
+   C) WITH FORMAT  
+   D) WITH STATS  
 
-3. What does a differential backup capture?  
-   A) All transactions since the last log backup  
-   B) All changes made since the last full backup  
-   C) Only system database changes  
-   D) The entire database regardless of changes  
-
-4. Which backup method enables point‑in‑time recovery?  
-   A) Full Backup alone  
-   B) Differential Backup alone  
+3. Which backup type should you schedule every 15 minutes to minimize data loss and control log growth?  
+   A) Full Backup  
+   B) Differential Backup  
    C) Transaction Log Backup  
    D) COPY_ONLY Backup  
 
-5. In a restore sequence, why is the NORECOVERY option used?  
-   A) To finalize the restore immediately  
-   B) To allow additional backups to be applied  
-   C) To encrypt the restored database  
-   D) To verify the integrity of the backup file  
+4. Which restore command syntax applies a full and differential backup together in one step?  
+   A) RESTORE DATABASE ... FROM DISK='full.bak', DISK='diff.bak' WITH RECOVERY  
+   B) RESTORE DATABASE ... FROM DISK='full.bak' WITH NORECOVERY; RESTORE DATABASE ... FROM DISK='diff.bak' WITH RECOVERY  
+   C) RESTORE DATABASE ... FROM DISK='diff.bak' WITH RECOVERY  
+   D) RESTORE DATABASE ... FROM DISK='full.bak' WITH RECOVERY; RESTORE DATABASE ... FROM DISK='diff.bak' WITH NORECOVERY  
 
-6. Which recovery model must be set to use transaction log backups effectively?  
-   A) Simple Recovery Model  
-   B) Full Recovery Model  
-   C) Bulk‑Logged Recovery Model  
-   D) Minimal Recovery Model  
+5. Which restore option leaves the database read‑only while allowing additional log restores?  
+   A) WITH NORECOVERY  
+   B) WITH RECOVERY  
+   C) WITH REPLACE  
+   D) WITH STANDBY  
 
-7. What is the benefit of backup compression?  
-   A) Increased backup file size  
-   B) Reduced storage requirements and faster transfer  
-   C) Enhanced database performance during backups  
-   D) Automatic encryption of backup files  
+6. To receive an email when a backup job fails, which components must be configured?  
+   A) Database Mail, an Operator, and an Alert  
+   B) Agent proxy, Credential, and Job step  
+   C) Maintenance Plan, Profile, and Schedule  
+   D) Extended Event, Operator, and Response  
 
-8. Why is it important to test restore procedures regularly?  
-   A) To decrease the frequency of backups  
-   B) To verify backup integrity and ensure quick recovery during a failure  
-   C) To avoid using differential backups  
-   D) To ensure the full recovery model is enabled  
+7. Which disaster recovery method provides a warm standby without requiring clustering?  
+   A) Always On Availability Groups  
+   B) Log Shipping  
+   C) Database Mirroring  
+   D) Snapshot Replication  
 
-9. Which command is used to verify that a backup file is readable and valid?  
-   A) RESTORE DATABASE  
-   B) BACKUP VERIFY  
-   C) RESTORE VERIFYONLY  
-   D) CHECK BACKUP  
+8. Which DBCC CHECKDB option should be used only as a last resort when no valid backups exist?  
+   A) REPAIR_REBUILD  
+   B) REPAIR_FAST  
+   C) REPAIR_ALLOW_DATA_LOSS  
+   D) REPAIR_MASTER  
 
-10. What is a critical security measure for backup files?  
-    A) Leaving them unencrypted for faster access  
-    B) Storing them on the same server as the primary database  
-    C) Encrypting backup files and restricting access  
-    D) Using only full backups and skipping differential backups  
+9. Which query returns the history of all backups for a database?  
+   A) SELECT * FROM sys.dm_db_backupset  
+   B) SELECT * FROM msdb.dbo.backupset  
+   C) EXEC sp_help_backuphistory  
+   D) DBCC SHOWBACKUPHISTORY  
+
+10. Which security practice ensures backup files cannot be modified or deleted?  
+    A) Role‑based access control  
+    B) Immutable storage policies (WORM)  
+    C) File system encryption  
+    D) Network isolation  
+
+#### Answers
+
+1. **B** – Restore the full backup with NORECOVERY, then apply the differential with RECOVERY  
+   *This two‑step approach applies only the necessary backups and brings the database online quickly.*
+
+2. **A** – WITH CHECKSUM  
+   *Including CHECKSUM in the BACKUP command catches I/O or hardware errors at backup time.*
+
+3. **C** – Transaction Log Backup  
+   *Frequent log backups minimize data loss and truncate the log, preventing uncontrolled growth.*
+
+4. **A** – RESTORE DATABASE … FROM DISK='full.bak', DISK='diff.bak' WITH RECOVERY  
+   *Specifying both backup files in one command simplifies the restore process and reduces downtime.*
+
+5. **D** – WITH STANDBY  
+   *STANDBY leaves the database in read‑only mode while still allowing further log restores.*
+
+6. **A** – Database Mail, an Operator, and an Alert  
+   *These components work together to send notifications when a backup job fails.*
+
+7. **B** – Log Shipping  
+   *Log Shipping provides a warm standby by automating log backup, copy, and restore without clustering.*
+
+8. **C** – REPAIR_ALLOW_DATA_LOSS  
+   *This DBCC CHECKDB option may discard corrupted data and should only be used if no backups are available.*
+
+9. **B** – SELECT * FROM msdb.dbo.backupset  
+   *The backupset table in msdb contains detailed metadata for all database backups.*
+
+10. **B** – Immutable storage policies (WORM)  
+    *Write‑once, read‑many storage prevents deletion or modification of backup files, even by administrators.*
 
 ------------------------- -------------------------
 ------------------------- -------------------------
