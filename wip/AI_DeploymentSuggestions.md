@@ -1,4 +1,4 @@
-# AI Bot, Production Deployment... notes and suggestions
+# AI Bot: Deployment Suggestions
 
 ## Use Case
 
