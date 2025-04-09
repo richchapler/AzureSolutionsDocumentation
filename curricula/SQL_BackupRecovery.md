@@ -13,10 +13,6 @@ The database administration team at a mid‑sized organization must ensure that 
 ------------------------- -------------------------
 ------------------------- -------------------------
 
-Below is the complete, updated version of the **On‑Prem >> Fundamentals** section with our suggested changes and consistent formatting:
-
----
-
 ## On‑Prem
 
 ### Fundamentals
@@ -102,10 +98,10 @@ A successful backup and recovery strategy depends on:
 #### Key Metrics
 
 * **Recovery Time Objective (RTO):**  
-  RTO represents the maximum acceptable downtime following a disruption. It is determined by measuring the time from failure detection, through the recovery process, until full restoration. This metric helps guide investments in technology and process improvements to minimize downtime.
+  RTO represents the **maximum acceptable downtime following a disruption**. It is determined by measuring the time from failure detection, through the recovery process, until full restoration. This metric helps guide investments in technology and process improvements to minimize downtime.
 
 * **Recovery Point Objective (RPO):**  
-  RPO indicates the maximum amount of data (expressed in time) that an organization can afford to lose. It is calculated based on the frequency of backup operations and the rate of data change. For instance, if transaction logs are backed up every 15 minutes, the RPO would be approximately 15 minutes.
+  RPO indicates **the maximum amount of data (expressed in time) that an organization can afford to lose**. It is calculated based on the frequency of backup operations and the rate of data change. For instance, if transaction logs are backed up every 15 minutes, the RPO would be approximately 15 minutes.
 
 ------------------------- -------------------------
 
@@ -184,7 +180,7 @@ A successful backup and recovery strategy depends on:
 
 ------------------------- -------------------------
 
-### Monitoring Considerations
+#### Monitoring Considerations
 
 * **Automated Monitoring:**  
   * **Alerts:** Configure tools (such as SQL Server Agent jobs) to notify administrators of backup failures  
@@ -470,7 +466,7 @@ The `STOPAT` option replays transactions up to 3:44 PM, just before the unwant
 ------------------------- -------------------------
 ------------------------- -------------------------
 
-## Quiz
+### Quiz
 
 1. You run weekly full backups and nightly differential backups. On Wednesday morning, which sequence restores the database in two steps?  
    A) Restore full backup WITH RECOVERY; then restore differential backup WITH RECOVERY  
@@ -570,32 +566,159 @@ The `STOPAT` option replays transactions up to 3:44 PM, just before the unwant
 
 ## Azure
 
-While on‑premises backup strategies require manual configuration, Azure SQL Database and Managed Instance come with built‑in backup capabilities that simplify these tasks.
+While on-premises backup strategies require manual configuration, Azure SQL Database and Managed Instance come with built-in backup capabilities that simplify these tasks. This section highlights the differences and considerations unique to Azure-based platforms without repeating core on-prem concepts.
 
 ### Fundamentals
 
-* Automated Backups:  
-  * Azure automatically creates full, differential, and log backups without user intervention.
-  * Backups are stored in geo‑redundant storage, ensuring high durability.
+* **Automated Backups**:
+  * Azure automatically performs full backups weekly, differential backups every 12 hours, and transaction log backups every 5-10 minutes
+  * All backups are stored in geo-redundant storage (GRS) by default, providing high durability and regional failover capability
 
-* Restoration Options:  
-  * Point‑in‑Time Restore: Quickly restore a database to a specific moment.
-  * Long‑Term Retention: Maintain backups for compliance and archival purposes.
+* **Restoration Options**:
+  * **Point-in-Time Restore (PITR)**: Restore a database to any point within the retention period
+  * **Long-Term Retention (LTR)**: Archive weekly full backups for up to 10 years, useful for audit/compliance scenarios
+  * **Geo-Restore**: Restore the latest backup to a different region, even if the original region is inaccessible
 
+* **Backup Visibility and Limitations**:
+  * Users cannot directly access or download Azure SQL Database backup files
+  * Backup configuration is managed through the Azure Portal, CLI, PowerShell, or ARM templates
+
+#### Platform Differences
+
+##### Azure SQL Database
+* **Backups are fully managed**: PITR is available within the configured retention window (default: 7 days, configurable up to 35)
+* **Geo-redundant backups**: Enabled by default. Can be restored to any Azure region
+* **LTR (Long-Term Retention)**: Enables weekly full backups to be retained for years in separate blob containers
+* **No access to .bak files**: All restores must be initiated via platform interfaces
+
+##### Azure SQL Managed Instance (MI)
+* **Supports traditional backups**: You can use `BACKUP` and `RESTORE` T-SQL commands to/from Azure Blob Storage
+* **Automated backups**: Follows same PITR and LTR models as Azure SQL Database
+* **Full native restore compatibility**: Enables restores from existing .bak files migrated from on-prem
+
+##### Summary
+
+| Feature                        | Azure SQL Database           | Azure SQL Managed Instance       | SQL Server On-Premises         |
+|-------------------------------|------------------------------|----------------------------------|-------------------------------|
+| Manual BACKUP/RESTORE         | No                           | Yes                              | Yes                           |
+| PITR Support                  | Yes (7-35 days)              | Yes                              | No (must restore from logs)   |
+| LTR Support                   | Yes                          | Yes                              | Manual/archive-based          |
+| Geo-Restore                   | Yes                          | Yes                              | No                            |
+| Backup File Access            | No                           | Yes (via Azure Blob)             | Yes                           |
+| Custom Backup Strategy        | No (platform-managed)        | Yes                              | Yes                           |
+| Backup Automation             | Platform-managed             | Platform-managed or manual       | Must be configured manually   |
+| Restore Granularity           | Point-in-time                | Point-in-time and custom         | Fully customizable            |
+
+------------------------- -------------------------
 ------------------------- -------------------------
 
 ### Exercise
 
-#### Using the Azure Portal
+#### Prepare Environment
 
-1. Navigate to the Azure SQL Server that hosts your database.
-2. Configure Backup Retention Policies:  
-   * Set the desired retention period for full, differential, and log backups.
-3. Initiate a Restore:  
-   * From the Azure Portal, choose a database and select “Restore” to initiate a point‑in‑time restore.
-4. Validate the Restored Database:  
-   * Use the query editor to ensure that the data is consistent and recent.
+Azure subscription with SQL Server and sample data
 
+------------------------- -------------------------
+
+#### Available Backups
+
+Open the Azure Portal and navigate to SQL Server >> **Data Management** >> **Backups**, then select the **Available Backups** tab.
+
+This tab lists each SQL Database on the server and displays metadata about backups that Azure has automatically created and manages. These backups support **Point-in-Time Restore (PITR)** and, if configured, **Long-Term Retention (LTR)**—you do not configure or initiate the backups yourself.
+
+The table includes the following columns:
+
+- **Database**: Name of the database
+- **Point-in-Time Restore (PITR)**: The earliest timestamp you can restore to, based on the current PITR retention window and Azure’s internal backup schedule
+- **Available LTR backups**: Number of full backups available under an LTR policy. If this shows `None`, no LTR policy is currently applied or no backups have aged into the retention window yet
+- **Last LTR backup time**: Timestamp of the most recent long-term backup, if one exists
+- **Restore**: Launches the restore experience where you can choose to restore from PITR or LTR, depending on availability
+
+These backups are generated by Azure on a defined schedule:
+- **Full backups** occur weekly
+- **Differential backups** occur every 12 hours
+- **Transaction log backups** occur every 5–10 minutes
+
+This automated backup sequence enables fast, granular restore capabilities without requiring manual setup. It also feeds into any LTR retention policies you configure for compliance or archival needs.
+
+------------------------- -------------------------
+
+#### Retention Policies
+
+Open the Azure Portal and navigate to SQL Server >> **Data Management** >> **Backups**, then select the **Retention Policies** tab.
+
+This tab allows you to configure and manage how long Azure retains backups for each SQL Database—both for **short-term Point-in-Time Restore (PITR)** and **Long-Term Retention (LTR)** scenarios. The table reflects current retention settings per database.
+
+You’ll see the following columns:
+
+- **Database**: Name of the database (e.g., `cnbss`).
+- **PITR**: The short-term restore retention window, currently set to 7 days. This determines how far back you can perform a point-in-time restore (range: 1–35 days).
+- **Diff. backup frequency**: Shows how often Azure takes differential backups (12 hours). This is managed by the platform and cannot be changed.
+- **Weekly / Monthly / Yearly LTR**: These indicate whether LTR policies are configured to retain full backups on a recurring basis. A value of `--` means no policy is active.
+- **Pricing tier**: The selected service tier for the database, which may affect available retention options.
+
+Above the grid, you’ll find buttons to manage policies:
+- **Configure policies**: Opens a panel to set weekly, monthly, and yearly retention schedules for LTR.
+- **Remove LTR settings**: Clears any active long-term retention configuration.
+
+Use this tab to explicitly control your backup retention strategy—whether keeping backups just for recovery within a few days, or retaining weekly/monthly/yearly backups for years to meet audit, compliance, or archival requirements.
+
+------------------------- -------------------------
+
+#### Point-in-Time Restore (PITR)
+
+This exercise demonstrates how to restore an Azure SQL Database to a previous state using Azure’s built-in PITR capability. You'll make a deliberate change, then restore to a point in time just before that change occurred.
+
+**Steps:**
+
+1. **Connect to your Azure SQL Database** (e.g., using SSMS or Azure Data Studio).
+2. **Make a test change**:
+   - Create a table:  
+     ```sql
+     CREATE TABLE dbo.PITR_Test (Id INT PRIMARY KEY, Name NVARCHAR(100));
+     ```
+   - Insert a row:  
+     ```sql
+     INSERT INTO dbo.PITR_Test VALUES (1, 'This row should disappear after restore');
+     ```
+3. **Wait 10–15 minutes** to ensure a transaction log backup is taken (these occur every 5–10 minutes).
+4. **In the Azure Portal**, go to SQL Server >> **Data Management** >> **Backups**, and select the **Available Backups** tab.
+5. Find your database and click **Restore** in the **Action** column.
+6. In the restore dialog:
+   - Choose **Point-in-Time Restore**
+   - Set the **timestamp** to a few minutes *before* you executed the test insert
+   - Provide a new name for the restored database (e.g., `YourDBName_PITR`)
+   - Review and submit the restore operation
+7. Wait for the new database to be provisioned and accessible (this may take a few minutes).
+8. Connect to the newly restored database and verify:
+   - The `dbo.PITR_Test` table does not exist
+   - Or, if the table exists, the test row is missing
+
+This confirms that the PITR operation successfully returned the database to a pre-change state, using the platform-managed backup and log chain.
+
+
+
+
+
+
+
+
+---
+
+#### Part 3: Configure and Validate Long-Term Retention (LTR)
+
+1. Go to **“Long-term retention”** in the same “Backups” blade.
+2. Configure an LTR policy (e.g., retain one weekly backup for 1 year).
+3. Wait 24+ hours (or use an existing LTR-enabled database).
+4. Check for available LTR backups in the portal.
+5. Initiate a restore from one of the available LTR snapshots into a new database (e.g., `TestDB_LTR`).
+
+**Checkpoint**:  
+Confirm:
+- You can see eligible LTR backups.
+- You were able to restore a database from LTR successfully.
+
+------------------------- -------------------------
 ------------------------- -------------------------
 
 ### Quiz
