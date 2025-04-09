@@ -22,13 +22,9 @@ Azure AI Speech is a cloud-based service from Microsoft that leverages advanced 
 _Complete this exercise only if you intend to complete Pro-Code exercises_
 
 ### Azure
-In "East US" region (or other region that supports AI Speech resources), instantiate:
+Instantiate:
 
 * AI Services
-* Application Registration (with Client Secret)
-* Speech
-* Open AI
-* Storage Account (general purpose v1)
 
 -------------------------
 
@@ -116,25 +112,107 @@ VIDEO_INDEXER_TOKEN = os.getenv("VIDEO_INDEXER_TOKEN")
 Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
 
 ------------------------- -------------------------
-------------------------- -------------------------
-
-Navigate to [Azure AI | Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
 ## Exercise 2: Speech Capabilities by Scenario
-
-------------------------- -------------------------
 
 ### Captioning with Speech to Text
 
 #### Low Code
 
-<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped April, 2025" />
+Navigate to [Azure AI | Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
-Iteratively click the sample image sets, select a retrieval query and click Search.
+<img src="https://github.com/user-attachments/assets/caddfe5c-fef1-4fc1-8f52-269be78bd298" width="800" title="Snipped April, 2025" />
 
-<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped April, 2025" />
+Click "Captioning with speech to text".
 
-Consider trying your own image.
+<img src="https://github.com/user-attachments/assets/c97cc6fc-7228-4230-b6a6-84f558cc0e64" width="800" title="Snipped April, 2025" />
+
+Navigate to the "Try it out" tab >> "Sample videos" tab, click "Real-time captioning", and then scroll down on the page.
+
+<img src="https://github.com/user-attachments/assets/6893638c-0621-4e8a-85df-cc147223f01c" width="800" title="Snipped April, 2025" />
+
+Click the Play button the video and observe captioning. Note the (read-only) captioning settings:
+
+The captioning settings shown on the **Speech Studio > Captioning > Real-time captioning** page are detailed on the right side of the interface and include the following parameters:
+
+#### Captioning Settings
+
+- **Recognition event**: `--realTime`  
+  Enables real-time mode, which returns stable partial results as audio is processed live.
+
+- **Stable partial result threshold**: `--threshold 3`  
+  Default value is 3. This determines how many recognized words must be repeated before the result is considered stable enough to show. Higher values increase stability but delay appearance.
+
+- **Maximum caption length (character)**: `--maxLineLength 60`  
+  Sets the character limit per line for each caption. Default is 60.
+
+- **Maximum number of caption lines**: `--lines 2`  
+  Controls how many lines of text can appear simultaneously in the caption block.
+
+- **Profanity masking**: `--profanity mask`  
+  Masks any profane words detected during transcription using asterisks or similar characters.
+
+- **Phrase list**: `--phrases "neural TTS;Cognitive Services"`  
+  Custom phrase list to improve recognition of domain-specific terms or phrases. Items are semicolon-separated.
+
+> **Example #1: Live Event Broadcasting {e.g., sports event}**  
+> For high-energy, fast-paced content where low latency matters.
+> - `--realTime`: stream captions as the speaker talks  
+> - `--threshold 2`: fast response, lower stability  
+> - `--maxLineLength 50`: fits cleanly on screen overlays  
+> - `--lines 2`: prevents crowding the display  
+> - `--profanity mask`: keeps output appropriate for public viewing  
+> - Phrase list: team names, campus locations, event-specific terms
+
+---
+
+### **2. Corporate or Compliance Meetings**  
+Simulates real-world business environments where clarity and professionalism are key.
+
+- `--realTime`: supports live note-taking  
+- `--threshold 3`: balances speed and stability  
+- `--maxLineLength 60`: improves readability in transcripts  
+- `--lines 2`: clean format for screen share overlays  
+- `--profanity mask`: appropriate for formal settings  
+- Phrase list: project names, department acronyms, business terms
+
+---
+
+### **3. Classroom or Webinar (Accessibility Focus)**  
+Helps support learning environments with better readability and accuracy.
+
+- `--realTime`: enables live following of lectures  
+- `--threshold 4`: prioritizes accuracy, reduces caption flicker  
+- `--maxLineLength 60`: allows complete sentences  
+- `--lines 3`: gives room for full thoughts in captions  
+- `--profanity raw`: keeps educational integrity  
+- Phrase list: lecture terms, instructor names, course-specific vocab
+
+---
+
+Let me know if you want these embedded into the lab structure or tied to sample audio files for testing.
+
+
+
+
+
+
+
+
+
+
+Scroll up on the page, and then click "Offline captioning"
+
+<img src="https://github.com/user-attachments/assets/0ffd50b4-5164-4d09-aaeb-912a8ed6d035" width="800" title="Snipped April, 2025" />
+
+Click the Play button the video and observe captioning.
+
+
+
+
+
+
+
 
 #### Pro Code
 
