@@ -26,10 +26,9 @@ In "East US" region (or other region that supports AI Speech resources), instant
 
 * AI Services
 * Application Registration (with Client Secret)
-* Computer Speech
+* Speech
 * Open AI
 * Storage Account (general purpose v1)
-* Video Indexer
 
 -------------------------
 
@@ -128,6 +127,14 @@ Navigate to [Azure AI | Speech Studio](https://speech.microsoft.com/portal), and
 ### Captioning with Speech to Text
 
 #### Low Code
+
+<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped April, 2025" />
+
+Iteratively click the sample image sets, select a retrieval query and click Search.
+
+<img src="https://github.com/user-attachments/assets/blah" width="800" title="Snipped April, 2025" />
+
+Consider trying your own image.
 
 #### Pro Code
 

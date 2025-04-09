@@ -22,6 +22,10 @@ Customer is implementing an "AI Bot" solution that should:
  
 * **Bot Security**: Primary pre-deployment objective... secure bot usage to individuals
 
+* System assigned for most resources
+*	User Assigned Identity for bot app service so we don't need an SPN/App Registration
+* User Assigned Identity for container apps to setup their RBAC before they're deployed
+
 ## Scalability 
 
 | **Type** | **SKU** | **Estimated Scale** | **Ready?** | **Recommendation** |
@@ -49,6 +53,10 @@ Customer is implementing an "AI Bot" solution that should:
 ## Monitoring
 
 > TO-DO: Adam Ray will activate Log Analytics for each resource
+
+* Nothing in place for dashboards or alerts
+*	Diagnostic Settings deployed automatically to Azure Resources using Azure Policy
+*	No application insights setup at this time, but it's on my to do list
 
 | **Type** | **Categories** | **Documentation** |
 | :--- | :--- | :--- |
@@ -93,6 +101,9 @@ Customer is implementing an "AI Bot" solution that should:
 7.	MIssing JWT token (this would indicate the message didnt originate from teams / related to detecting spam or unexpected sources of ingress)
 
 ### Cost Management
+
+*	Nothing fine grained
+*	We have a cost dashboard for subscriptions that is on my task list to get setup for all subscriptions at International
 
 * **Cost Tracking:** 
  - Implement monitoring to track usage and costs at the individual user level.

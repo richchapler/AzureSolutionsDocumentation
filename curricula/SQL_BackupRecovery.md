@@ -10,8 +10,6 @@ The database administration team at a mid‑sized organization must ensure that 
 * Operational Continuity: Ensuring that data can be recovered quickly during planned maintenance or unexpected outages
 
 ------------------------- -------------------------
-------------------------- -------------------------
-------------------------- -------------------------
 
 ## On‑Prem
 
