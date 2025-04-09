@@ -19,97 +19,11 @@ Azure AI Speech is a cloud-based service from Microsoft that leverages advanced 
 ------------------------- -------------------------
 
 ## Exercise 1: Prepare Resources  
-_Complete this exercise only if you intend to complete Pro-Code exercises_
 
 ### Azure
-Instantiate:
+Instantiate Azure AI Services
 
-* AI Services
-
--------------------------
-
-### Development Environment
-Prepare a machine with the following artifacts:
-
-* [PowerShell](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/PowerShell.html)
-* [Visual Studio Code](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode.html) with [Jupyter](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/VisualStudioCode_Jupyter.html)
-* [Python (including Virtual Environment)](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python.html) with the [dotenv module](https://richchapler.github.io/AzureSolutionsDocumentation/artifacts/Python_DotEnvModule.html)
-
--------------------------
-
-#### Azure Identity Module
-
-Open Visual Studio Code, navigate to View >> Terminal, then execute the following command:
-
-```powershell
-pip install azure-identity
-```
-
-Once installed, you'll be able to import `DefaultAzureCredential` in your code to obtain access tokens via your application registration credentials (rather than using keys).
-
--------------------------
-
-#### Python Notebook
-
-Open Visual Studio Code and create a new Jupyter Notebook by selecting File > New File, then searching for and selecting Jupyter Notebook. Save the new file as `ai_speech.ipynb` in `c:\myProject`.
-
--------------------------
-
-#### Environment Variables
-
-Create and initialize the `.env` file from within your notebook:
-
-Add a Markdown cell with the following annotation:
-```markdown
-## Create `.env` File  
-Create (if necessary) and prompt for update with API credentials and image path.
-```
-
-Then add a Code cell and paste the following code:
-```python
-import os
-env_file = ".env"
-if not os.path.isfile(env_file):
-    open(env_file, "w").close()
-    print(f".env file created at {os.path.abspath(env_file)}")
-else:
-    print(f".env file found at {os.path.abspath(env_file)}")
-```
-
-Execute the cell. The output should indicate whether the `.env` file was created or already exists.
-
-Open the `.env` file and append the following lines:
-```text
-COMPUTER_VISION_API_KEY={Computer Speech, KEY 1}
-COMPUTER_VISION_ENDPOINT=https://{prefix}cv.cognitiveservices.azure.com/
-
-VIDEO_INDEXER_ACCOUNT_ID={Video Indexer, Account ID}
-VIDEO_INDEXER_LOCATION={Video Indexer, Location}
-VIDEO_INDEXER_TOKEN={Video Indexer, Access Token}
-```
-
-Add a Markdown cell with the following annotation:
-```markdown
-## Load Environment Variables  
-This cell loads the configuration settings from your `.env` file, ensuring that your API credentials and file paths are available for subsequent code cells.
-```
-
-Add a Code cell to load these environment variables using the dotenv module:
-```python
-import os
-from dotenv import load_dotenv
-
-env_file = ".env"
-load_dotenv(env_file)
-
-COMPUTER_VISION_API_KEY = os.getenv("COMPUTER_VISION_API_KEY")
-COMPUTER_VISION_ENDPOINT = os.getenv("COMPUTER_VISION_ENDPOINT")
-VIDEO_INDEXER_ACCOUNT_ID = os.getenv("VIDEO_INDEXER_ACCOUNT_ID")
-VIDEO_INDEXER_LOCATION = os.getenv("VIDEO_INDEXER_LOCATION")
-VIDEO_INDEXER_TOKEN = os.getenv("VIDEO_INDEXER_TOKEN")
-```
-
-Execute the cell and restart the kernel to ensure that the new variable is correctly loaded.
+LOREM IPSUM
 
 ------------------------- -------------------------
 
@@ -131,11 +45,11 @@ Navigate to the "Try it out" tab >> "Sample videos" tab, click "Real-time captio
 
 <img src="https://github.com/user-attachments/assets/6893638c-0621-4e8a-85df-cc147223f01c" width="800" title="Snipped April, 2025" />
 
-Click the Play button the video and observe captioning. Note the (read-only) captioning settings:
+Click the Play button the video and observe captioning.
+
+##### Captioning Settings
 
 The captioning settings shown on the **Speech Studio > Captioning > Real-time captioning** page are detailed on the right side of the interface and include the following parameters:
-
-#### Captioning Settings
 
 - **Recognition event**: `--realTime`  
   Enables real-time mode, which returns stable partial results as audio is processed live.
@@ -155,8 +69,8 @@ The captioning settings shown on the **Speech Studio > Captioning > Real-time ca
 - **Phrase list**: `--phrases "neural TTS;Cognitive Services"`  
   Custom phrase list to improve recognition of domain-specific terms or phrases. Items are semicolon-separated.
 
-> **Example #1: Live Event Broadcasting {e.g., sports event}**  
-> For high-energy, fast-paced content where low latency matters.
+###### Example #1: Live Event Broadcasting 
+> For high-energy, fast-paced content where low latency matters {e.g., sports event}.
 > - `--realTime`: stream captions as the speaker talks  
 > - `--threshold 2`: fast response, lower stability  
 > - `--maxLineLength 50`: fits cleanly on screen overlays  
@@ -164,42 +78,25 @@ The captioning settings shown on the **Speech Studio > Captioning > Real-time ca
 > - `--profanity mask`: keeps output appropriate for public viewing  
 > - Phrase list: team names, campus locations, event-specific terms
 
----
+###### Example #2: Corporate Meeting 
+> Simulates real-world business environments where clarity and professionalism are key.
+> - `--realTime`: supports live note-taking  
+> - `--threshold 3`: balances speed and stability  
+> - `--maxLineLength 60`: improves readability in transcripts  
+> - `--lines 2`: clean format for screen share overlays  
+> - `--profanity mask`: appropriate for formal settings  
+> - Phrase list: project names, department acronyms, business terms
 
-### **2. Corporate or Compliance Meetings**  
-Simulates real-world business environments where clarity and professionalism are key.
+###### Example #3: Classroom (accessibility focus)
+> Helps support learning environments with better readability and accuracy.
+> - `--realTime`: enables live following of lectures  
+> - `--threshold 4`: prioritizes accuracy, reduces caption flicker  
+> - `--maxLineLength 60`: allows complete sentences  
+> - `--lines 3`: gives room for full thoughts in captions  
+> - `--profanity raw`: keeps educational integrity  
+> - Phrase list: lecture terms, instructor names, course-specific vocab
 
-- `--realTime`: supports live note-taking  
-- `--threshold 3`: balances speed and stability  
-- `--maxLineLength 60`: improves readability in transcripts  
-- `--lines 2`: clean format for screen share overlays  
-- `--profanity mask`: appropriate for formal settings  
-- Phrase list: project names, department acronyms, business terms
-
----
-
-### **3. Classroom or Webinar (Accessibility Focus)**  
-Helps support learning environments with better readability and accuracy.
-
-- `--realTime`: enables live following of lectures  
-- `--threshold 4`: prioritizes accuracy, reduces caption flicker  
-- `--maxLineLength 60`: allows complete sentences  
-- `--lines 3`: gives room for full thoughts in captions  
-- `--profanity raw`: keeps educational integrity  
-- Phrase list: lecture terms, instructor names, course-specific vocab
-
----
-
-Let me know if you want these embedded into the lab structure or tied to sample audio files for testing.
-
-
-
-
-
-
-
-
-
+#### Offline Captioning
 
 Scroll up on the page, and then click "Offline captioning"
 
@@ -207,25 +104,44 @@ Scroll up on the page, and then click "Offline captioning"
 
 Click the Play button the video and observe captioning.
 
+##### **Real-Time vs. Offline Captioning**
 
+Offline captioning differs from real-time captioning in **timing, processing, and result stability**.
 
+| Aspect | Real-Time Captioning | Offline Captioning |
+|--------|----------------------|---------------------|
+| **Timing** | Captions are generated and displayed live as the person speaks | Captions are generated after the full audio/video is available |
+| **Result Type** | Partial results shown, may change mid-sentence | Final, stable transcript is used |
+| **Use Case** | Live broadcasts, streams, webinars | Pre-recorded videos, films, audio before release |
+| **Editing** | Limited (real-time only) | Can adjust caption formatting, timing, and content before publishing |
+| **Stability** | May revise words after initial appearance | No revisions — output is final |
 
-
-
-
+------------------------- -------------------------
 
 #### Pro Code
+
+
+------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
+RESUME HERE
+------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
+
 
 #### Update Environment Variables
 
 Append the following line to your `.env` file:
+
 ```text
-LOREM=C:\myProject\ipsum.jpg
+OFFLINE_AUDIO=C:\myProject\offline_audio.wav
 ```
 
 Append the following code to the "Load Environment Variables" code in the `ai_speech.ipynb` notebook:
+
 ```python
-LOREM = os.getenv("LOREM")
+OFFLINE_AUDIO = os.getenv("OFFLINE_AUDIO")
 ```
 
 Re-execute "Load Environment Variables" code and restart the kernel.
@@ -235,27 +151,74 @@ Re-execute "Load Environment Variables" code and restart the kernel.
 #### Add Demonstration Code
 
 Click "+ Markdown" and paste the following annotation into the resulting cell:
+
 ```markdown
-## Lorem
-Ipsum
+## Offline Captioning  
+Generate final captions for pre-recorded audio content using recognized results.
 ```
 
 Render the Markdown cell by clicking the checkmark in the upper-right controls.
 
-Click ""+ Code"" and paste the following code into the new cell:
+Click "+ Code" and paste the following code into the new cell:
+
 ```python
-...
+import os
+import requests
+
+def generate_offline_captions(audio_path):
+    if not audio_path or not os.path.isfile(audio_path):
+        print("Audio file not found.")
+        return
+
+    with open(audio_path, "rb") as audio_file:
+        audio_data = audio_file.read()
+
+    endpoint = f"{COMPUTER_VISION_ENDPOINT.rstrip('/')}/speechtotext/v3.0/transcriptions"
+    headers = {
+        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
+        "Content-Type": "audio/wav"
+    }
+
+    params = {
+        "profanity": "mask",
+        "display": "true",
+        "language": "en-US"
+    }
+
+    response = requests.post(endpoint, headers=headers, params=params, data=audio_data)
+
+    if response.status_code == 202:
+        print("Transcription request accepted.")
+        print(response.headers.get("Location"))
+    else:
+        print("Transcription failed:", response.status_code, response.text)
+
+if OFFLINE_AUDIO:
+    generate_offline_captions(OFFLINE_AUDIO)
+else:
+    print("OFFLINE_AUDIO not defined.")
 ```
 
-Execute cell and review the returned JSON result.
+Execute the cell and monitor the returned URL to track transcription progress and retrieve results when ready.
 
-------------------------- -------------------------
+-------------------------
 
 ##### Expected Result  
 _Note: JSON formatted and abbreviated_
 
 ```json
-...
+{
+  "status": "Succeeded",
+  "combinedRecognizedPhrases": [
+    {
+      "display": "Welcome to our pre-recorded session on Azure AI Speech.",
+      "lexical": "welcome to our pre recorded session on azure ai speech",
+      "itn": "welcome to our pre-recorded session on azure ai speech"
+    },
+    ...
+  ],
+  "recognizedPhrases": [ ... ]
+}
 ```
 
 ------------------------- -------------------------
