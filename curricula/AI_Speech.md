@@ -1,6 +1,6 @@
 # Lab: AI Speech
 
-<img src="https://github.com/user-attachments/assets/lorem" width="1000" />
+<img src="https://github.com/user-attachments/assets/c8ac15ea-d2f8-48a2-9810-4342cdef2a93" width="1000" />
 
 ## Introduction
 
