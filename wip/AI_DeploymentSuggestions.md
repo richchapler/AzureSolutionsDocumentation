@@ -17,8 +17,8 @@ Customer is implementing an "AI Bot" solution that should:
 ## Security
 
 ### Endpoints  
-All services connect via private endpoints.
-- RECOMMENDATION: Verify that each service also sits behind a VPN or internal firewall to enforce network segmentation  
+All resources connect via private endpoints.
+- RECOMMENDATION: Verify that each resources also sits behind a VPN or internal firewall to enforce network segmentation  
 - QUESTION: Will there be a hard block on external AI solutions (e.g., ChatGPT, Copilot)?
 
 ### Firewall 
@@ -38,11 +38,24 @@ Authentication is handled by Entra ID.
 - RECOMMENDATION: Explore integrating Privileged Identity Management to ease and secure the existing Role-based Access Control framework
 
 ### Access  
-Usage must be secured to only specific, authorized users.
+Usage must be secured to only specific, authorized users and identities.
+- RECOMMENDATION: Restrict invocation of Prompt Flow container apps to the Bot App Service’s identity via RBAC and access policies
 - RECOMMENDATION: Conduct thorough security reviews for the bot service to confirm that only authorized individuals gain access
 - RECOMMENDATION: Consider enforcing further controls, such as strict IP whitelisting or advanced firewall rules
 
-### Access & Segmentation 
+### Access Chain  
+A clear mapping of which identities access which resources is needed to enforce least‑privilege across the entire prompt flow
+
+- RECOMMENDATION: Document the full access chain—e.g.  
+  - User (via Teams) → Bot App Service identity  
+  - Bot App Service identity → Prompt Flow container app identity  
+  - Prompt Flow container app identity → OpenAI (AI Services) and Azure Search identities  
+  - AI/Search identities → Storage (if used for context or logs)  
+- RECOMMENDATION: For each hop in the chain, enforce RBAC so that only the upstream identity can invoke the downstream resource (no direct user access to AI Services or Search)  
+- RECOMMENDATION: Apply network restrictions (NSGs, private endpoints) to complement RBAC and prevent any unauthorized lateral access  
+- QUESTION: Can the customer provide a detailed resource dependency diagram to validate and enforce these least‑privilege controls?
+
+### Access Segmentation 
 Clarity is needed on potential isolation and segmentation requirements beyond the current Role-based Access Control configuration.
 - QUESTION: Are there specific isolation or segmentation requirements for different components (e.g., the bot service versus API endpoints) that exceed our current Role-based Access Control setup?  
 - QUESTION: How will the customer validate that the current setup (private endpoints, VPN/internal firewall, and managed identities) meets their security expectations?
@@ -65,6 +78,7 @@ Critical components are configured for light workloads.
   | App Service Web App | **Unknown** | – | ❓ | Ensure the web app is provisioned on a **Standard or Premium tier** (aligned with the P0v3 plan) for production |
   | Application Gateway | WAF v2 | Enterprise-grade – designed to handle tens of thousands of requests per minute, with autoscaling available to adjust capacity dynamically | ✅ | N/A – Already production-ready |
   | Bot Service | **F0 (Free Tier)** | Free tier is very limited – generally suited for development/testing; roughly estimated at 10–20 concurrent requests before hitting limits in production | ❓ | Upgrade to the **S1 (Standard) tier** for Azure Bot Service to accommodate production demand |
+  | Container Apps (Prompt Flow)      | Consumption-based (vCPU/memory) or Dedicated D1 | Each instance can handle ~20–50 concurrent prompt executions; scales to N instances based on load | ❓          | Define SKU and instance count based on expected prompt volume; enable KEDA autoscaling on CPU, memory, or queue length to match demand |
   | Search Service | **Standard** | With a single replica, usually can handle hundreds of queries per second; additional replicas/partitions can boost capacity further | ✅ | N/A – Already production-ready (with additional scaling options available) |
   | Storage Account | ZRS, StorageV2 (Geo-redundant, V2) | Enterprise-grade throughput – supports thousands of IOPS and concurrent transactions; performance is subject to account limits and network conditions | ✅ | N/A – Already production-ready |
 
@@ -76,9 +90,11 @@ Some resources support autoscaling, though full utilization across the solution 
 - QUESTION: What specific autoscaling policies will be implemented and how will their effectiveness be validated?
 
 ### Landing Zone
-The planned landing zone configuration is not fully defined and requires further clarification.
-- QUESTION: What is the planned landing zone configuration (for example, single region with multi-zone versus multi-region deployment) and how will it impact resource selection and scaling strategies? 
-- QUESTION: Are there specific network or geographic redundancy requirements that must be incorporated?
+The landing zone is structured as multiple resource groups within a single subscription, but the grouping and regional strategy are not yet defined
+
+- QUESTION: How are resource groups organized (for example, by environment, workload, or function), and how will that structure impact resource selection and scaling strategies  
+- QUESTION: What is the planned region and availability‑zone configuration (for example, single region with multi‑zone versus multi‑region deployment)  
+- QUESTION: Are there specific network or geographic redundancy requirements that must be incorporated within this single‑subscription design?
 
 ### Performance Thresholds
 Key performance triggers and cost strategies for scaling remain to be defined.
@@ -91,10 +107,11 @@ Key performance triggers and cost strategies for scaling remain to be defined.
 
 ## Monitoring
 
-### Resources  
-Current resource setup is unclear... Diagnostic Settings are deployed via Azure Policy, but there is not a known, central instance of Application Insights or Log Analytics.
-- RECOMMENDATION: Deploy centralized logging and log analytics (for example, using Application Insights) to capture real-time performance metrics  
-- QUESTION: What is the customer's timeline and strategy for deploying Application Insights and establishing proactive monitoring dashboards?
+### Monitoring Resources  
+A centralized Log Analytics workspace is already in place (diagnostic settings auto‑deployed via Azure Policy). Application Insights is not yet set up but will be provisioned via Terraform.
+- RECOMMENDATION: Deploy a single Application Insights instance (per environment) via Terraform to collect telemetry from App Service, Bot Service, and Prompt Flow container apps  
+- RECOMMENDATION: Validate that all resources—including container apps and the Bot App Service—have their diagnostic settings correctly pointing to the central Log Analytics workspace  
+- QUESTION: What naming conventions and tagging standards should we apply to the Application Insights resources?
 
 ### Logs, Metrics & Alerts
 Current metric capture is unclear.
@@ -112,6 +129,7 @@ Current metric capture is unclear.
 | App Service Plan | AppServiceHTTPLogs<br>AppServiceAppLogs<br>AppServiceAuditLogs<br>AppServiceConsoleLogs<br>AppServiceFileAuditLogs<br>AppServicePlatformLogs<br>AppServiceAntivirusScanAuditLogs<br>AppServiceIPSecAuditLogs<br>AppServiceAuthenticationLogs (Preview) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-web-sites-logs) |
 | Application Gateway | ApplicationGatewayAccessLog<br>ApplicationGatewayFirewallLog<br>ApplicationGatewayPerformanceLog | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-network-applicationgateways-logs#:~:text=AzureDiagnostics) |
 | Bot Service | BotRequest (requests from channels to the bot and vice versa) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-botservice-botservices-logs#:~:text=ABSBotRequests) |
+| Container Apps (Prompt Flow)   | ContainerAppConsoleLogs<br>ContainerAppSystemLogs             | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-app-managedenvironments-logs) |
 | Search Service | OperationLogs | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-search-searchservices-logs#:~:text=Operation%20Logs%20AzureDiagnostics) |
 | Storage Account | StorageRead, StorageWrite, StorageDelete<br>(for Blob, File, Queue, Table services) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-storage-storageaccounts-blobservices-logs#:~:text=StorageBlobLogs) |
 
@@ -151,16 +169,17 @@ Current metric capture is unclear.
 
 ## Cost Management
 
-### Monitoring
-No cost management reporting / strategy exists beyond use of standard Azure Portal Cost Management.
-- RECOMMENDATION: Implement centralized, multi-subscription cost management to track usage and costs at the individual user and resource levels  
-- RECOMMENDATION: Develop a centralized cost dashboard that aggregates cost data across all subscriptions for detailed visibility  
+### Monitoring  
+Current cost management efforts emply Azure Portal, Cost Management tools.
+
+- RECOMMENDATION: Implement centralized cost management to track usage and costs at the individual user and resource levels  
 - QUESTION: What mechanisms will be used to integrate detailed cost tracking with overall operational monitoring?
 
 ### Budget Forecasting  
-No proactive strategy for forecasting expenses **based on scaling** is defined.
-- RECOMMENDATION: Use the collected cost data to accurately forecast expenses as the user base expands  
-- RECOMMENDATION: Establish a process for reviewing spending trends and adjusting resource allocation based on usage  
+No proactive strategy is currently defined for forecasting expenses in line with **scaling demands**.
+
+- RECOMMENDATION: Use collected cost data to accurately forecast expenses as the user base expands  
+- RECOMMENDATION: Establish a recurring process for reviewing spending trends and adjusting resource allocation based on real-world usage  
 - QUESTION: How will the customer integrate budget forecasting into scaling and resource planning decisions?
 
 <!-- ------------------------- ------------------------- -->
@@ -173,12 +192,14 @@ The current solution has been validated at pilot loads (~10 users) but must unde
 - RECOMMENDATION: Execute targeted tests to confirm input handling and basic throughput at low load  
 - QUESTION: Have all individual components been thoroughly tested at baseline loads
 
-#### Integrated End-to-End Testing  
+#### Integrated End-to-End Testing 
+- RECOMMENDATION: Use Azure Load Testing to simulate distributed user activity and validate end-to-end system performance under realistic, production-like conditions
 - RECOMMENDATION: Simulate full user journeys (from login through chat interactions to file uploads) to confirm complete system functionality  
 - RECOMMENDATION: Conduct tests that cover interactions across multiple resources and services  
 - QUESTION: What is the customer’s approach for integrated, end-to-end testing as the system scales to 2,000 users?
 
-#### Stress, Spike, and Soak Testing  
+#### Stress, Spike, and Soak Testing
+- RECOMMENDATION: Use Chaos Studio to inject faults and simulate extreme failure scenarios (stress, spike, and soak tests) to evaluate system resilience, degradation, and recovery
 - RECOMMENDATION: Perform stress tests to identify system breaking points under maximum load and evaluate degradation and recovery  
 - RECOMMENDATION: Execute spike tests to assess system resilience during sudden traffic surges and monitor auto-scaling responses  
 - RECOMMENDATION: Conduct soak tests to monitor for issues such as resource exhaustion, memory leaks, or cumulative errors over extended periods  
@@ -194,6 +215,12 @@ The current solution has been validated at pilot loads (~10 users) but must unde
 
 ## Post-Deployment
 
-* **User Interface**: Future iterations will explore enhancements such as visualizing parts of uploaded PDFs and embedding response form (perhaps using adaptive cards to improve UI interactions)
- 
-* **Containers**: Localize processing with Azure Containers
+After the initial launch, focus on:
+
+- **User Interface Enhancements**: Plan future iterations to incorporate visualizations of uploaded PDF content and embed response forms (for example, using adaptive cards) to improve user experience
+
+- **Operational Maintenance**: Define a clear plan for ongoing system maintenance, including regular performance reviews, incident management, and patch updates
+
+- **CI/CD Integration**: Implement continuous integration and deployment pipelines to ensure smooth updates and rapid recovery from any issues
+
+- **Ongoing Monitoring & Feedback**: Establish processes for continuous monitoring of system performance, reliability, and cost metrics
