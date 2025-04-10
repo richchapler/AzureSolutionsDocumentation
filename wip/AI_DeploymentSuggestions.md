@@ -17,9 +17,10 @@ Customer is implementing an "AI Bot" solution that should:
 ## Security
 
 ### Endpoints  
-All resources connect via private endpoints.
-- RECOMMENDATION: Verify that each resources also sits behind a VPN or internal firewall to enforce network segmentation  
-- QUESTION: Will there be a hard block on external AI solutions (e.g., ChatGPT, Copilot)?
+All resources connect via private endpoints within their respective subscriptions—including Application Gateway and API Management, which live in separate subscriptions peered via VWan.
+- RECOMMENDATION: Validate that private endpoint DNS resolution and connectivity work correctly across subscriptions over the VWan peering  
+- RECOMMENDATION: Ensure Network Security Groups and route tables are consistently applied in each subscription to enforce segmentation  
+- QUESTION: How are private DNS zones and peering configurations managed to guarantee secure, reliable access between the peered subscriptions?
 
 ### Firewall 
 We need to learn more about network access controls beyond the current setup.
@@ -83,42 +84,43 @@ Critical components are configured for light workloads.
   | Storage Account | ZRS, StorageV2 (Geo-redundant, V2) | Enterprise-grade throughput – supports thousands of IOPS and concurrent transactions; performance is subject to account limits and network conditions | ✅ | N/A – Already production-ready |
 
 - RECOMMENDATION: Configure container apps and app services for both horizontal scaling (adding more instances) and vertical scaling (increasing CPU/memory)
+- RECOMMENDATION: For API Management and Application Gateway rows, validate that their scaling and SKU choices account for any cross‑subscription latency or peering constraints
+- QUESTION: Are there any subscription‑specific policies or limits (quota, network egress) we need to consider for those peered resources?
 
-### Auto-Scaling
-Some resources support autoscaling, though full utilization across the solution is not yet confirmed.
-- RECOMMENDATION: Enable autoscaling on all resources that support it to manage traffic spikes and dynamic workloads  
-- QUESTION: What specific autoscaling policies will be implemented and how will their effectiveness be validated?
+### Auto-Scaling  
+Some resources support autoscaling, though full utilization across the solution is not yet confirmed; note that API Management and Application Gateway autoscaling occur in separate subscriptions peered via VWan.
+- RECOMMENDATION: Validate that autoscaling configurations for API Management and Application Gateway in their respective subscriptions align with production requirements and mirror policies in the primary subscription  
+- QUESTION: How will autoscaling events and metrics from these peered subscriptions be aggregated and monitored in the central Log Analytics workspace?  
+- QUESTION: Are there any subscription‑level quotas or policy differences that could impact autoscaling behavior for those peered resources?
 
-### Landing Zone
-The landing zone is structured as multiple resource groups within a single subscription, but the grouping and regional strategy are not yet defined
+### Landing Zone  
+Most workloads are in one subscription (split across resource groups), but Application Gateway and API Management reside in separate subscriptions peered via VWan.
+- QUESTION: How are resource groups and subscriptions organized (for example, which components live in which subscription and resource group), and how will that structure impact resource selection and scaling strategies? 
+- QUESTION: What is the planned region and availability‑zone configuration (for example, single region with multi‑zone versus multi‑region deployment) across all subscriptions?
+- QUESTION: Are there specific network or geographic redundancy or peering requirements that must be incorporated given the multi‑subscription VWan architecture?
 
-- QUESTION: How are resource groups organized (for example, by environment, workload, or function), and how will that structure impact resource selection and scaling strategies  
-- QUESTION: What is the planned region and availability‑zone configuration (for example, single region with multi‑zone versus multi‑region deployment)  
-- QUESTION: Are there specific network or geographic redundancy requirements that must be incorporated within this single‑subscription design?
-
-### Performance Thresholds
-Key performance triggers and cost strategies for scaling remain to be defined.
-- RECOMMENDATION: Define performance metrics {e.g., response times, concurrent connection limits, error thresholds} that will trigger scaling adjustments  
-- RECOMMENDATION: Develop a cost management plan to forecast and monitor the financial impact of scaling  
-- QUESTION: Are there predetermined performance thresholds that will mandate SKU upgrades or autoscaling adjustments?
-- QUESTION: How will the customer manage and forecast the financial impact as traffic increases?
+### Performance Thresholds  
+Key performance triggers and cost strategies for scaling remain to be defined; ensure cross‑subscription components (API Management, Application Gateway) are included.
+- RECOMMENDATION: Define performance metrics for each critical component—including peered services like API Management and Application Gateway (for example, response times, concurrent connection limits, error thresholds)  
+- RECOMMENDATION: Develop a cost management plan that factors in network egress and VWan peering charges between subscriptions  
+- QUESTION: How will performance data from peered subscriptions be aggregated in the central workspace and used to trigger scaling actions?  
+- QUESTION: Should cost forecasts include inter‑subscription data transfer and peering costs when projecting expenses?
 
 <!-- ------------------------- ------------------------- -->
 
 ## Monitoring
 
-### Monitoring Resources  
-A centralized Log Analytics workspace is already in place (diagnostic settings auto‑deployed via Azure Policy). Application Insights is not yet set up but will be provisioned via Terraform.
-- RECOMMENDATION: Deploy a single Application Insights instance (per environment) via Terraform to collect telemetry from App Service, Bot Service, and Prompt Flow container apps  
-- RECOMMENDATION: Validate that all resources—including container apps and the Bot App Service—have their diagnostic settings correctly pointing to the central Log Analytics workspace  
-- QUESTION: What naming conventions and tagging standards should we apply to the Application Insights resources?
+### Resources  
+A centralized Log Analytics workspace exists in the primary subscription (diagnostic settings auto‑deployed via Azure Policy), but Application Gateway and API Management reside in separate subscriptions.
+- RECOMMENDATION: Validate that diagnostic settings for Application Gateway and API Management subscriptions point to the central Log Analytics workspace  
+- RECOMMENDATION: Confirm that those subscriptions have the necessary role assignments or policy exemptions to send logs across subscription boundaries  
+- QUESTION: Are there any additional permissions, private link configurations, or DNS considerations required for cross‑subscription log ingestion?
 
-### Logs, Metrics & Alerts
-Current metric capture is unclear.
-- RECOMMENDATION: Prepare pre-deployment, **baseline** metrics ("green state") for critical components  
-- RECOMMENDATION: Identify key performance indicators (e.g., response times, error rates, throughput) to form the basis for monitoring  
-- RECOMMENDATION: Configure automated alerts to quickly identify and remediate deviations from the established baseline  
-- RECOMMENDATION: nsure that alerts are integrated with existing operational procedures to enable prompt response to issues  
+### Logs, Metrics & Alerts  
+Logs and metrics are captured centrally, but cross‑subscription resources (API Management, Application Gateway) must be included.
+- RECOMMENDATION: Ensure diagnostic settings in the API Management and Application Gateway subscriptions forward logs and metrics to the central Log Analytics workspace  
+- RECOMMENDATION: Create Azure Monitor alert rules that span subscriptions, incorporating metrics and logs from both the primary and peered subscriptions  
+- QUESTION: Which team will own the configuration and ongoing maintenance of these cross‑subscription alert rules and dashboards?
 
 #### Log Categories by Resource Type
 
@@ -169,11 +171,11 @@ Current metric capture is unclear.
 
 ## Cost Management
 
-### Monitoring  
-Current cost management efforts emply Azure Portal, Cost Management tools.
-
-- RECOMMENDATION: Implement centralized cost management to track usage and costs at the individual user and resource levels  
-- QUESTION: What mechanisms will be used to integrate detailed cost tracking with overall operational monitoring?
+### Cost Management → Monitoring  
+Cost tracking currently focuses on the primary subscription; peered subscriptions (hosting Application Gateway and API Management) are not yet included.
+- RECOMMENDATION: Expand the centralized cost dashboard to ingest and display costs from the peered subscriptions alongside the primary subscription  
+- RECOMMENDATION: Apply consistent tagging across all subscriptions (including the Application Gateway and API Management resource groups) to enable unified cost reporting  
+- QUESTION: Will the peered subscriptions be consolidated under the same billing scope, and how should budgets and alerts be configured to cover cross‑subscription expenses?
 
 ### Budget Forecasting  
 No proactive strategy is currently defined for forecasting expenses in line with **scaling demands**.
@@ -198,12 +200,17 @@ The current solution has been validated at pilot loads (~10 users) but must unde
 - RECOMMENDATION: Conduct tests that cover interactions across multiple resources and services  
 - QUESTION: What is the customer’s approach for integrated, end-to-end testing as the system scales to 2,000 users?
 
-#### Stress, Spike, and Soak Testing
-- RECOMMENDATION: Use Chaos Studio to inject faults and simulate extreme failure scenarios (stress, spike, and soak tests) to evaluate system resilience, degradation, and recovery
-- RECOMMENDATION: Perform stress tests to identify system breaking points under maximum load and evaluate degradation and recovery  
-- RECOMMENDATION: Execute spike tests to assess system resilience during sudden traffic surges and monitor auto-scaling responses  
-- RECOMMENDATION: Conduct soak tests to monitor for issues such as resource exhaustion, memory leaks, or cumulative errors over extended periods  
-- QUESTION: Are there predefined performance thresholds that will trigger alerts or remedial actions during these tests?
+#### Stress Testing  
+- RECOMMENDATION: Use Chaos Studio to inject sustained, high‑load scenarios against all components (including cross‑subscription services) to identify breaking points and observe degradation/recovery  
+- QUESTION: What sustained load levels (e.g., concurrent sessions) should define our stress tests, and what failure/recovery criteria will we monitor?
+
+#### Spike Testing  
+- RECOMMENDATION: Use Chaos Studio or Azure Load Testing to simulate sudden traffic surges and measure auto‑scaling response times and error rates across both primary and peered subscriptions  
+- QUESTION: What spike patterns (magnitude and duration) should we test to validate resilience under burst traffic?
+
+#### Soak Testing  
+- RECOMMENDATION: Run long‑duration tests at or near peak load (e.g., 2,000 users for several hours) to detect resource exhaustion, memory leaks, and cumulative errors across all subscriptions  
+- QUESTION: How long should soak tests run, and what resource‑health metrics will signal the need for remediation?
 
 #### Performance Monitoring  
 - RECOMMENDATION: Activate centralized logging and log analytics to capture performance metrics during stress tests  
