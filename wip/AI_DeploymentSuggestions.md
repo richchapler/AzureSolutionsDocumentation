@@ -12,21 +12,51 @@ Customer is implementing an "AI Bot" solution that should:
 
 * **Scale for Broad User Adoption**: Transition from development / testing stage (supporting ~10 users), to a robust production environment capable of seamlessly serving approximately 2,000 users
 
+<!-- ------------------------- ------------------------- -->
+
 ## Security
 
-> TO-DO: Chad Hage will explore this topic further
+### Endpoints  
+All services connect via private endpoints.
+- RECOMMENDATION: Verify that each service also sits behind a VPN or internal firewall to enforce network segmentation  
+- QUESTION: Will there be a hard block on external AI solutions (e.g., ChatGPT, Copilot)?
 
-* **Network Security**: All services connect via **private endpoints** to ensure that no sensitive data or prompts leave the enterprise network 
- 
-* **Authentication**: Entra ID (Azure AD) is used for all authentication
- 
-* **Bot Security**: Primary pre-deployment objective... secure bot usage to individuals
+### Firewall 
+We need to learn more about network access controls beyond the current setup.
+- QUESTION: Is a hard firewall block against external AI solutions (e.g., ChatGPT, Copilot) necessary, or is guidance on using the internal solution sufficient?  
+- QUESTION: How does the customer plan to handle access from outside the private network—should all services remain strictly behind a VPN/internal firewall?
 
-* System assigned for most resources
-*	User Assigned Identity for bot app service so we don't need an SPN/App Registration
-* User Assigned Identity for container apps to setup their RBAC before they're deployed
+### Identities  
+All resources use managed identities (system- or user-assigned).
+- RECOMMENDATION: Ensure robust, isolated Role-based Access Control policies are configured for all resources 
+- RECOMMENDATION: Leverage system-assigned identities for standard components while using user-assigned identities for services requiring tighter control {e.g., the bot app and container apps}
+- QUESTION: Does the customer have interest in integrating additional measures like Privileged Identity Management to further secure and simplify the management of elevated access?
 
-## Scalability 
+### Authentication  
+Authentication is handled by Entra ID.
+- RECOMMENDATION: Incorporate multi-factor authentication to add another layer of protection 
+- RECOMMENDATION: Explore integrating Privileged Identity Management to ease and secure the existing Role-based Access Control framework
+
+### Access  
+Usage must be secured to only specific, authorized users.
+- RECOMMENDATION: Conduct thorough security reviews for the bot service to confirm that only authorized individuals gain access
+- RECOMMENDATION: Consider enforcing further controls, such as strict IP whitelisting or advanced firewall rules
+
+### Access & Segmentation 
+Clarity is needed on potential isolation and segmentation requirements beyond the current Role-based Access Control configuration.
+- QUESTION: Are there specific isolation or segmentation requirements for different components (e.g., the bot service versus API endpoints) that exceed our current Role-based Access Control setup?  
+- QUESTION: How will the customer validate that the current setup (private endpoints, VPN/internal firewall, and managed identities) meets their security expectations?
+
+<!-- ------------------------- ------------------------- -->
+
+## Scalability
+The current solution supports development and testing (with ~10 users) and must scale to support ~2,000 users.
+
+### Resource Configuration
+Critical components are configured for light workloads.
+
+- RECOMMENDATION: Adjust SKU selections as needed (see Resource Inventory section below) 
+- RECOMMENDATION: Configure container apps and app services for both horizontal scaling (adding more instances) and vertical scaling (increasing CPU/memory)
 
 | **Type** | **SKU** | **Estimated Scale** | **Ready?** | **Recommendation** |
 | :--- | :--- | :--- | :--- | :--- |
@@ -39,24 +69,40 @@ Customer is implementing an "AI Bot" solution that should:
 | Search Service | **Standard** | With a single replica, usually can handle hundreds of queries per second; additional replicas/partitions can boost capacity further | ✅ | N/A – Already production-ready (with additional scaling options available) |
 | Storage Account | ZRS, StorageV2 (Geo-redundant, V2) | Enterprise-grade throughput – supports thousands of IOPS and concurrent transactions; performance is subject to account limits and network conditions | ✅ | N/A – Already production-ready |
 
-### Additional Recommendations
+### Auto-Scaling
+Some resources support autoscaling, though full utilization across the solution is not yet confirmed.
+- RECOMMENDATION: Enable autoscaling on all resources that support it to manage traffic spikes and dynamic workloads  
+- QUESTION: What specific autoscaling policies will be implemented and how will their effectiveness be validated?
 
-* **Compute Resources**: Verify that container apps and app services are configured for both horizontal (adding more instances) and vertical (increasing CPU/memory) scaling
-* **Autoscaling**: Enable autoscaling features on resources that support it (such as API Management and container apps) to handle traffic spikes
-* **Load Testing**: Schedule comprehensive load tests to simulate peak traffic conditions
-* **Centralized Monitoring**: Activate log analytics and set up centralized logging to capture performance metrics and detect bottlenecks early
+### Landing Zone
+The planned landing zone configuration is not fully defined and requires further clarification.
+- QUESTION: What is the planned landing zone configuration (for example, single region with multi-zone versus multi-region deployment) and how will it impact resource selection and scaling strategies? 
+- QUESTION: Are there specific network or geographic redundancy requirements that must be incorporated?
 
-### Final Thoughts 
-* Real-world capacity will vary based on the workload, application configuration, and dynamic scaling rules
-* Be prepared to adjust resource allocation as actual usage data comes in, **optimizing performance continuously**
+### Performance Thresholds
+Key performance triggers and cost strategies for scaling remain to be defined.
+- RECOMMENDATION: Define performance metrics {e.g., response times, concurrent connection limits, error thresholds} that will trigger scaling adjustments  
+- RECOMMENDATION: Develop a cost management plan to forecast and monitor the financial impact of scaling  
+- QUESTION: Are there predetermined performance thresholds that will mandate SKU upgrades or autoscaling adjustments?
+- QUESTION: How will the customer manage and forecast the financial impact as traffic increases?
+
+<!-- ------------------------- ------------------------- -->
 
 ## Monitoring
 
-> TO-DO: Adam Ray will activate Log Analytics for each resource
+### Resources  
+Current resource setup is unclear... Diagnostic Settings are deployed via Azure Policy, but there is not a known, central instance of Application Insights or Log Analytics.
+- RECOMMENDATION: Deploy centralized logging and log analytics (for example, using Application Insights) to capture real-time performance metrics  
+- QUESTION: What is the customer's timeline and strategy for deploying Application Insights and establishing proactive monitoring dashboards?
 
-* Nothing in place for dashboards or alerts
-*	Diagnostic Settings deployed automatically to Azure Resources using Azure Policy
-*	No application insights setup at this time, but it's on my to do list
+### Logs, Metrics & Alerts
+Current metric capture is unclear.
+- RECOMMENDATION: Prepare pre-deployment, **baseline** metrics ("green state") for critical components  
+- RECOMMENDATION: Identify key performance indicators (e.g., response times, error rates, throughput) to form the basis for monitoring  
+- RECOMMENDATION: Configure automated alerts to quickly identify and remediate deviations from the established baseline  
+- RECOMMENDATION: nsure that alerts are integrated with existing operational procedures to enable prompt response to issues  
+
+#### Log Categories by Resource Type
 
 | **Type** | **Categories** | **Documentation** |
 | :--- | :--- | :--- |
@@ -68,7 +114,7 @@ Customer is implementing an "AI Bot" solution that should:
 | Search Service | OperationLogs | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-search-searchservices-logs#:~:text=Operation%20Logs%20AzureDiagnostics) |
 | Storage Account | StorageRead, StorageWrite, StorageDelete<br>(for Blob, File, Queue, Table services) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-storage-storageaccounts-blobservices-logs#:~:text=StorageBlobLogs) |
 
-### Sample Log Queries
+#### Sample Log Queries (KPI Candidates)
 
 > Need to review these with Adam Ray on the next call
 
@@ -88,7 +134,7 @@ Customer is implementing an "AI Bot" solution that should:
 2.	How often are users being rate limited? (if at all? are rate limits originating from common sources or resulting from common query scenarios)
 3.	How often (if ever) do queries hit the container app from sources other than the bot? (Should be never, but would like to make sure that’s the case) 
 
-### Sample Alerts
+#### Sample Alerts
 
 > Need to review these with Adam Ray on the next call
 
@@ -100,115 +146,50 @@ Customer is implementing an "AI Bot" solution that should:
 6.	CPU/Memory threshold (80% unless MS disagrees)
 7.	MIssing JWT token (this would indicate the message didnt originate from teams / related to detecting spam or unexpected sources of ingress)
 
-### Cost Management
+<!-- ------------------------- ------------------------- -->
 
-*	Nothing fine grained
-*	We have a cost dashboard for subscriptions that is on my task list to get setup for all subscriptions at International
+## Cost Management
 
-* **Cost Tracking:** 
- - Implement monitoring to track usage and costs at the individual user level.
-* **Budget Forecasting:** 
- - Use the collected data to forecast expenses accurately as the user base expands.
+### Monitoring
+No cost management reporting / strategy exists beyond use of standard Azure Portal Cost Management.
+- RECOMMENDATION: Implement centralized, multi-subscription cost management to track usage and costs at the individual user and resource levels  
+- RECOMMENDATION: Develop a centralized cost dashboard that aggregates cost data across all subscriptions for detailed visibility  
+- QUESTION: What mechanisms will be used to integrate detailed cost tracking with overall operational monitoring?
 
-## Load Testing
+### Budget Forecasting  
+No proactive strategy for forecasting expenses **based on scaling** is defined.
+- RECOMMENDATION: Use the collected cost data to accurately forecast expenses as the user base expands  
+- RECOMMENDATION: Establish a process for reviewing spending trends and adjusting resource allocation based on usage  
+- QUESTION: How will the customer integrate budget forecasting into scaling and resource planning decisions?
 
-### Phase 1: Unit and Component-Level Validation
+<!-- ------------------------- ------------------------- -->
 
-Focus on establishing that each key resource functions correctly under baseline loads. These tests isolate individual components so you know that each behaves as expected before combining them.
+## Stress Testing  
+The current solution has been validated at pilot loads (~10 users) but must undergo comprehensive stress testing to simulate production-level conditions (~2,000 users).
 
-#### Web App (Hosting the AI Chat Bot)
-* **Objective:** Validate that the App Service hosting the chat bot can handle baseline operations.
-* **Tests:**
-  * **Input Handling:** Verify that messages from Teams are processed correctly.
-  * **Basic Throughput:** Simulate a modest number of requests (e.g., 50–200 concurrent users) to ensure the web app responds within acceptable latency.
-* **Outcome:** Confirms that input validation and core functionality are stable at low load.
+#### Component-Level Testing  
+- RECOMMENDATION: Validate that each key resource (e.g., web app, container apps, API endpoints) functions correctly under baseline loads  
+- RECOMMENDATION: Execute targeted tests to confirm input handling and basic throughput at low load  
+- QUESTION: Have all individual components been thoroughly tested at baseline loads
 
-#### Application Gateway
-* **Objective:** Confirm that the gateway routes HTTP/S traffic accurately and enforces WAF rules.
-* **Tests:**
-  * **Routing Validation:** Generate synthetic requests matching common access patterns.
-  * **Security Checks:** Ensure that the WAF properly blocks known malicious patterns.
-* **Outcome:** Verifies that the gateway can process baseline traffic and protect the backend without high latency.
+#### Integrated End-to-End Testing  
+- RECOMMENDATION: Simulate full user journeys (from login through chat interactions to file uploads) to confirm complete system functionality  
+- RECOMMENDATION: Conduct tests that cover interactions across multiple resources and services  
+- QUESTION: What is the customer’s approach for integrated, end-to-end testing as the system scales to 2,000 users?
 
-#### API Management
-* **Objective:** Validate that API calls (from bot or other services) are handled correctly.
-* **Tests:**
-  * **Simple API Calls:** Simulate moderate API traffic with realistic payloads.
-  * **Error Propagation:** Ensure that any failures are properly handled or throttled.
-* **Outcome:** Confirms that API Management can relay and process requests from underlying services reliably.
+#### Stress, Spike, and Soak Testing  
+- RECOMMENDATION: Perform stress tests to identify system breaking points under maximum load and evaluate degradation and recovery  
+- RECOMMENDATION: Execute spike tests to assess system resilience during sudden traffic surges and monitor auto-scaling responses  
+- RECOMMENDATION: Conduct soak tests to monitor for issues such as resource exhaustion, memory leaks, or cumulative errors over extended periods  
+- QUESTION: Are there predefined performance thresholds that will trigger alerts or remedial actions during these tests?
 
-#### Bot Service
-* **Objective:** Check that the bot service correctly processes chat interactions.
-* **Tests:**
-  * **Message Handling:** Simulate low-load chat interactions (basic text exchanges).
-  * **Error Logging:** Verify that errors are logged, and unhandled exceptions trigger appropriate fallback mechanisms.
-* **Outcome:** Ensures that the Bot Service operates reliably under controlled conditions.
+#### Performance Monitoring  
+- RECOMMENDATION: Activate centralized logging and log analytics to capture performance metrics during stress tests  
+- RECOMMENDATION: Establish clear baseline metrics (a "green state") for critical components to quickly detect deviations  
+- RECOMMENDATION: Leverage performance data to identify and address bottlenecks early in the testing process  
+- QUESTION: Which performance metrics will be used to validate stress test results and guide scaling decisions?
 
-#### AI Services
-* **Objective:** Ensure that the AI processing layer responds within acceptable latency under low load.
-* **Tests:**
-  * **Basic Query Testing:** Send a set of typical prompts and record average response times.
-  * **Error and Throttling:** Verify that the service handles occasional network issues gracefully.
-* **Outcome:** Validates that AI processing is performant and its error handling mechanisms are in place.
-
-#### Search Service
-* **Objective:** Confirm that indexing and search operations function correctly.
-* **Tests:**
-  * **Simulated Searches:** Run queries against the index and verify response accuracy and latency.
-  * **Indexing Latency:** Check that new content (e.g., from file uploads) appears in search results within acceptable time frames.
-* **Outcome:** Ensures that search is responsive and indexing is up-to-date.
-
-#### Storage Account
-* **Objective:** Ensure that file uploads, downloads, and transactions perform reliably.
-* **Tests:**
-  * **I/O Simulation:** Perform concurrent file uploads/downloads at a low load.
-  * **Transaction Monitoring:** Check for any errors or unexpected latencies.
-* **Outcome:** Verifies that the storage system can handle typical file operations and logs metrics accurately.
-
-### Phase 2: Component-Level Load Testing
-
-Gradually increase the load on each resource in isolation, targeting the level expected in production and ensuring auto-scaling rules engage.
-
-* **Ramp-Up Testing:**  
-  For each resource (Web App, API Management, Bot Service, etc.), begin at a lower load and incrementally simulate larger numbers of concurrent requests up to and above 2,000 users (per resource component).  
-  * **Metrics to Monitor:** Response times, error counts, CPU/memory usage, auto-scaling events.
-* **Individual Resource Benchmarks:**  
-  Each test will yield performance benchmarks that confirm the resource’s ability to handle load. For example:
-  * **Web App:** Should maintain <500ms response times at peak load.
-  * **Bot Service:** Should manage thousands of parallel chat sessions with minimal errors.
-  * **Cognitive Services:** Should handle high query frequency without triggering severe throttling.
-
-### Phase 3: Integrated End-to-End Testing
-
-Run comprehensive tests that simulate the full user journey, verifying that all components interact smoothly under load.
-
-* **Scenario Simulations:**  
-  Create end-to-end scenarios where a user:
-  1. Logs into Teams and starts a chat with the bot.
-  2. Interacts with the bot (sending a prompt, receiving a response).
-  3. Uploads a file, which is processed and indexed by Azure Search.
-  4. Receives a follow-up response leveraging AI services.
-* **Distributed Load:**  
-  Simulate the entire process with a distributed load test tool (e.g., Azure Load Testing). Start with a smaller batch (e.g., 200 users), monitor performance, then gradually increase to 2,000 concurrent users.
-* **Monitoring:**  
-  Use Azure Monitor and Log Analytics dashboards to track metrics across all services, ensuring that integrated operations (e.g., API call chains) maintain low latency.
-  
-**Outcome:**  
-When the integrated test shows consistent performance across the entire workflow with acceptable response times and robust auto-scaling behaviors, you have strong evidence that your entire architecture can support production-level traffic.
-
-### Phase 4: Stress, Spike, and Soak Testing
-
-Finally, test the resilience of the system by pushing it beyond the expected load and maintaining the load over an extended time period.
-
-* **Stress Testing:**  
-  Increase the load further to identify the breaking points. Observe how the system degrades and recovers.
-* **Spike Testing:**  
-  Simulate sudden surges in traffic to see how quickly the system adapts. Check for increased error rates or delayed auto-scaling responses.
-* **Soak Testing:**  
-  Run sustained tests at peak load (2,000 users or slightly higher) for several hours to identify any issues with resource exhaustion, memory leaks, or cumulative errors.
-  
-**Outcome:**  
-The system should handle stress gracefully, recover from spikes, and remain stable over prolonged periods, giving you confidence in its long-term reliability.
+<!-- ------------------------- ------------------------- -->
 
 ## Post-Deployment
 
