@@ -56,18 +56,19 @@ The current solution supports development and testing (with ~10 users) and must 
 Critical components are configured for light workloads.
 
 - RECOMMENDATION: Adjust SKU selections as needed (see Resource Inventory section below) 
-- RECOMMENDATION: Configure container apps and app services for both horizontal scaling (adding more instances) and vertical scaling (increasing CPU/memory)
 
-| **Type** | **SKU** | **Estimated Scale** | **Ready?** | **Recommendation** |
-| :--- | :--- | :--- | :--- | :--- |
-| AI Services | **S0 – AI Services** | Typically supports roughly 20–50 concurrent calls; suitable for light-to-moderate workloads, though heavier loads may require upgrades or sharding | ❓ | Upgrade to **S1 – AI Services** (not available in all regions) |
-| API Management | Premium – stv2 | Built for high throughput – can typically support thousands of requests per second subject to backend configuration and tuning | ✅ | N/A – Already production-ready |
-| App Service Plan | P0v3 (Premium) | A baseline instance may support approximately 250–500 concurrent connections; scale-out options are available for higher loads | ✅ | N/A – Already production-ready |
-| App Service Web App | **Unknown** | – | ❓ | Ensure the web app is provisioned on a **Standard or Premium tier** (aligned with the P0v3 plan) for production |
-| Application Gateway | WAF v2 | Enterprise-grade – designed to handle tens of thousands of requests per minute, with autoscaling available to adjust capacity dynamically | ✅ | N/A – Already production-ready |
-| Bot Service | **F0 (Free Tier)** | Free tier is very limited – generally suited for development/testing; roughly estimated at 10–20 concurrent requests before hitting limits in production | ❓ | Upgrade to the **S1 (Standard) tier** for Azure Bot Service to accommodate production demand |
-| Search Service | **Standard** | With a single replica, usually can handle hundreds of queries per second; additional replicas/partitions can boost capacity further | ✅ | N/A – Already production-ready (with additional scaling options available) |
-| Storage Account | ZRS, StorageV2 (Geo-redundant, V2) | Enterprise-grade throughput – supports thousands of IOPS and concurrent transactions; performance is subject to account limits and network conditions | ✅ | N/A – Already production-ready |
+  | **Type** | **SKU** | **Estimated Scale** | **Ready?** | **Recommendation** |
+  | :--- | :--- | :--- | :--- | :--- |
+  | AI Services | **S0 – AI Services** | Typically supports roughly 20–50 concurrent calls; suitable for light-to-moderate workloads, though heavier loads may require upgrades or sharding | ❓ | Upgrade to **S1 – AI Services** (not available in all regions) |
+  | API Management | Premium – stv2 | Built for high throughput – can typically support thousands of requests per second subject to backend configuration and tuning | ✅ | N/A – Already production-ready |
+  | App Service Plan | P0v3 (Premium) | A baseline instance may support approximately 250–500 concurrent connections; scale-out options are available for higher loads | ✅ | N/A – Already production-ready |
+  | App Service Web App | **Unknown** | – | ❓ | Ensure the web app is provisioned on a **Standard or Premium tier** (aligned with the P0v3 plan) for production |
+  | Application Gateway | WAF v2 | Enterprise-grade – designed to handle tens of thousands of requests per minute, with autoscaling available to adjust capacity dynamically | ✅ | N/A – Already production-ready |
+  | Bot Service | **F0 (Free Tier)** | Free tier is very limited – generally suited for development/testing; roughly estimated at 10–20 concurrent requests before hitting limits in production | ❓ | Upgrade to the **S1 (Standard) tier** for Azure Bot Service to accommodate production demand |
+  | Search Service | **Standard** | With a single replica, usually can handle hundreds of queries per second; additional replicas/partitions can boost capacity further | ✅ | N/A – Already production-ready (with additional scaling options available) |
+  | Storage Account | ZRS, StorageV2 (Geo-redundant, V2) | Enterprise-grade throughput – supports thousands of IOPS and concurrent transactions; performance is subject to account limits and network conditions | ✅ | N/A – Already production-ready |
+
+- RECOMMENDATION: Configure container apps and app services for both horizontal scaling (adding more instances) and vertical scaling (increasing CPU/memory)
 
 ### Auto-Scaling
 Some resources support autoscaling, though full utilization across the solution is not yet confirmed.
