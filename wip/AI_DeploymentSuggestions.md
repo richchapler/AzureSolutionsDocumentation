@@ -231,3 +231,48 @@ After the initial launch, focus on:
 - **CI/CD Integration**: Implement continuous integration and deployment pipelines to ensure smooth updates and rapid recovery from any issues
 
 - **Ongoing Monitoring & Feedback**: Establish processes for continuous monitoring of system performance, reliability, and cost metrics
+
+------------------------- -------------------------
+------------------------- -------------------------
+------------------------- -------------------------
+
+## Probably "Overkill"...
+The following topics were suggested after a "deep research" review:
+
+### Security
+- Add explicit mention of **DDoS Protection Standard** at the network level to cover Layer 3/4 attacks
+- Clarify **encryption at rest and in transit** is enforced across services (AI data, chat logs, files)
+- Mention use of **Azure Key Vault** for any future secrets or certificates (if needed for bot registration or integrations)
+- Explicitly describe the **Teams-to-Bot traffic path**, including Application Gateway’s public IP and its protection (e.g., IP filtering, WAF rules)
+- Ensure all **private DNS zone** configurations are defined (centralized or per-subscription) for private endpoint resolution
+- Consolidate repeated **PIM (Privileged Identity Management)** references into a single, focused recommendation
+
+### Scalability
+- Add recommendation to **define region and availability zone strategy** (e.g., single-region/multi-zone vs. multi-region)
+- Add a callout to **add replicas/partitions for Azure Search** to meet SLA and support higher QPS
+- Include note to **validate service-level quotas and subscription limits** for scaling (e.g., vCPU limits, OpenAI throughput)
+- Define rough estimates for **expected peak throughput/concurrent sessions** to inform SKU choices
+- Reference potential **sharding or load balancing** for AI/Search if request volume is very high
+
+### Monitoring
+- Explicitly state that **Application Insights SDK** should be enabled in App Service, Bot Service, and Prompt Flow container apps
+- Add recommendation to **set log retention periods** explicitly and review storage/cost tradeoffs
+- Suggest **limiting Log Analytics access via RBAC** and possibly integrate with **Microsoft Sentinel** for security monitoring
+- Recommend **testing alert rules and diagnostics post-deployment** to validate coverage
+
+### Cost Management
+- Add recommendation to **set up cost alerts** (e.g., if usage exceeds budget)
+- Suggest evaluating **reserved instances or savings plans** after usage patterns stabilize
+- Reconfirm all subscriptions are **under the same billing scope** for unified tracking
+
+### Stress Testing
+- Rename subsection “Stress Testing” to **“Sustained Load Testing”** to avoid redundancy with section title
+- Add recommendation to **test in a production-parity environment** to avoid polluting production data
+- Suggest defining **clear performance pass/fail thresholds** before testing (e.g., response time targets)
+- Ensure test datasets (e.g., for Search, AI) **match production data volume and complexity**
+
+### Post-Deployment
+- Add **Disaster Recovery/Failover strategy** section (even if it's “not in scope for launch”)
+- Recommend **periodic security assessments or pen tests** after go-live
+- Add note about **user training or internal documentation** for bot usage
+- Clarify ownership of **maintenance, CI/CD, and monitoring responsibilities**
