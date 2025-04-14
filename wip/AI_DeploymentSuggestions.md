@@ -71,7 +71,7 @@ Critical components are configured (in general) for development / test workloads
 
 - **RECOMMENDATION**: Adjust selections as needed (see Resource Inventory section below) 
 
-  | **Type** | **Tier** | **Estimated Scale** | **Ready?** | ****RECOMMENDATION**** |
+  | **Type** | **Tier** | **Estimated Scale** | **Ready?** | **Recommendation** |
   | :--- | :--- | :--- | :--- | :--- |
   | AI Services (OpenAI) | **GPT 4o "standard" deployment model** | Standard deployments support light-to-moderate workloads; provisioned capacity may be needed at higher loads | ❓ | Consider moving to a provisioned (dedicated capacity) model if load testing warrants it |
   | API Management | Premium – stv2 | Built for high throughput – can typically support thousands of requests per second | ✅ | Already production-ready; verify that scaling and SKU choices account for any cross‑subscription latency or peering constraints |
