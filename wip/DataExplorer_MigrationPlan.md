@@ -4,15 +4,15 @@
 ## Resource Inventory
 This is an early-stage draft that will evolve as we move through tasks in the following sections.
 
-| Resource Type | Security Configuration |
-| :--- | :--- |
-| Data Explorer | Unknown |
-| Function Apps | Unknown |
-| Synapse | Unknown |
-| Storage Accounts | Unknown |
-| Logic Apps | Unknown |
-| Service Bus? | Unknown |
-| Managed Identities? | Unknown |
+| Resource Type         | Infrastructure | Security | Data |
+| :-------------------- | :------------- | :------- | :--- |
+| Data Explorer         | TBD            | TBD      | TBD  |
+| Function Apps         | TBD            | TBD      | TBD  |
+| Logic Apps            | TBD            | TBD      | TBD  |
+| Managed Identities?   | TBD            | TBD      | TBD  |
+| Service Bus?          | TBD            | TBD      | TBD  |
+| Storage Accounts      | TBD            | TBD      | TBD  |
+| Synapse               | TBD            | TBD      | TBD  |
 
 <!-- ------------------------- ------------------------- -->
 
@@ -66,9 +66,9 @@ Ensure all migrated resources comply with corporate security and governance stan
 
 ### Requirements
 - **Security Engineer Expertise**  
-  Someone with in-depth knowledge of Azure private endpoints and Role-Based Access Control (RBAC) to design and validate secure configurations
+  Someone with in-depth knowledge of Azure private endpoints and Role-Based Access Control to design and validate secure configurations
 - **Azure AD Administrator Support**  
-  Access to an administrator or team who can manage identity-related tasks, including setting up Managed Identities and ensuring proper RBAC assignments
+  Access to an administrator or team who can manage identity-related tasks, including setting up Managed Identities and ensuring proper Role-Based Access Control assignments
 - **IT Compliance & Security Collaboration**  
   Alignment with internal governance, risk, and compliance groups to confirm all newly deployed resources meet corporate and regulatory security standards
 
