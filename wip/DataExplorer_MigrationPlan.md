@@ -1,14 +1,8 @@
 # Data Explorer: Migration Plan
 ...migration of infrastructure and data from one subscription to another
 
-<!-- ------------------------- ------------------------- -->
-
-## Infrastructure
-
-### Objective
-Leverage Infrastructure-as-Code (via Terraform) to migrate existing resources from Azure Subscription 1 to Subscription 2 adhering to new corporate security and governance standards.
-
-### Resources
+## Resource Inventory
+This is an early-stage draft that will evolve as we move through tasks in the following sections.
 
 | Resource Type | Security Configuration |
 | :--- | :--- |
@@ -20,76 +14,86 @@ Leverage Infrastructure-as-Code (via Terraform) to migrate existing resources fr
 | Service Bus? | Unknown |
 | Managed Identities? | Unknown |
 
-### To-Do's
-- Inventory current, Subscription1 resources (including top-level items like storage accounts, as well as second-level items like containers)
-- Detail inventory with information about security, network, etc.
-- Develop, document, and test deployment scripts based on current infrastructure
-  - Ensure alignment with new landing zone requirements
-  - Verify compliance with new subscription security policies
-- Execute deployment in classic DevOps stages {i.e., dev-test-prod}
+<!-- ------------------------- ------------------------- -->
+
+## Infrastructure
+
+### Objective
+Leverage DevOps / Infrastructure-as-Code to migrate existing resources from the Source to Target Subscription adhering to new corporate security and governance standards.
+
+### Tasks
+- **Inventory Source Subscription Resources**
+  - Identify all relevant Azure components (top-level resources like Storage Accounts, plus second-level items such as containers)
+  - Gather key metadata (security configurations, network settings, and dependencies)
+- **Develop and Document Deployment Scripts**
+  - Create deployment scripts that reflect current infrastructure
+  - Align scripts to new landing zone requirements and subscription security policies
+  - Test and validate code to confirm functional parity with existing environment
+- **Execute DevOps-Based Deployment**
+  - Implement a staged approach (Development → Test → Production) leveraging Terraform
+  - Monitor and adjust deployments to ensure alignment with governance and compliance standards
 
 ### Requirements
-- Expertise: Identify available human resources that can support Terraform, security, network, etc.
-- Documentation: Discover and share internal documentation for the new landing zone, etc.
-- Access: Ensure access to both subscriptions (or resources with necessary access)
+- **Expertise**  
+  Identify resources with the necessary skills in Terraform, security, and networking
+- **Documentation**  
+  Gather and share internal references on the new landing zone, security standards, and governance policies
+- **Access**  
+  Confirm appropriate permissions for both Source and Target Subscriptions to enable seamless configuration and deployment
 
 <!-- ------------------------- ------------------------- -->
 
 ## Security
 
 ### Objective
-Ensure all migrated resources comply with new subscription security policies, emphasizing private endpoints and appropriate Role-Based Access Control.
+Ensure all migrated resources comply with corporate security and governance standards, prioritizing private connectivity, identity-based authentication, and appropriate Role-Based Access Control
 
-### Key Activities
-- Assess and document existing security configurations in Subscription 1.
-- Configure private endpoints in Subscription 2 for ADX, Storage Accounts, and other required services.
-- Transition from using access keys to Managed Identities wherever applicable.
-- Define and implement RBAC according to data analytics and sharing requirements.
-- Conduct security compliance validation with IT security team.
+### Tasks
+- **Inventory Security Configurations**
+  - Document existing network security (public/private endpoints, firewall rules) in Source Subscription
+  - Record current authentication methods (use of access keys, Managed Identities)
+  - Review current Role-Based Access Control assignments and permissions
+- **Design Target Subscription Security Architecture**
+  - Define private endpoint and network integration requirements (private link, VNet integration) for resources like Data Explorer, Storage Accounts, Synapse, and Logic Apps
+  - Establish authentication standards emphasizing Managed Identities and removing access key usage
+- **Implement Security Controls in Target Subscription**
+  - Configure private endpoints per new landing zone guidelines
+  - Deploy Managed Identities, eliminating use of access keys
+  - Assign Role-Based Access Control roles tailored to analytics and data-sharing workflows
+- **Validate and Document Security Compliance**
+  - Coordinate validation with IT security and compliance teams
+  - Document security configurations and confirm alignment with corporate security policies
 
-### Resources Needed
-- Security engineer familiar with Azure private endpoints and RBAC
-- Azure AD administrator support
-- Collaboration with IT compliance and security teams
-
-### Timeline
-- Security assessment and planning: 1 week
-- Private endpoints and identity management setup: 1 week
-- RBAC configuration and validation: 1 week
+### Requirements
+- **Security Engineer Expertise**  
+  Someone with in-depth knowledge of Azure private endpoints and Role-Based Access Control (RBAC) to design and validate secure configurations
+- **Azure AD Administrator Support**  
+  Access to an administrator or team who can manage identity-related tasks, including setting up Managed Identities and ensuring proper RBAC assignments
+- **IT Compliance & Security Collaboration**  
+  Alignment with internal governance, risk, and compliance groups to confirm all newly deployed resources meet corporate and regulatory security standards
 
 <!-- ------------------------- ------------------------- -->
 
 ## Data
 
 ### Objective
-Migrate all critical data from ADX clusters in Subscription 1 to the new Subscription 2 environment without data loss or disruption to analytics operations.
+Migrate all critical data from ADX clusters in Source Subscription to Target Subscription without data loss or disruption to analytics operations
 
-### Key Activities
-- Conduct thorough data inventory including volume, structure, and dependencies.
-- Determine the most suitable data migration tool/method (e.g., Azure Data Factory, direct ADX-to-ADX ingestion, etc.).
-- Plan and execute data migration in phases to minimize operational impact.
-- Validate data integrity post-migration through comprehensive testing.
-- Document migration process and any issues encountered for audit purposes.
+### Tasks
+- **Inventory and Planning**
+  - Identify data volume, structure, and dependencies within ADX
+  - Determine migration approach (e.g., Azure Data Factory, direct ADX-to-ADX ingestion)
+  - Outline phased data migration strategy to minimize operational impact
+- **Execution**
+  - Perform data migration according to defined phases
+  - Monitor process for errors and performance bottlenecks
+  - Coordinate with analytics teams to ensure continuity
+- **Validation and Documentation**
+  - Verify data integrity and completeness post-migration
+  - Record migration steps, issues encountered, and resolutions for audit purposes
 
-### Resources Needed
-- Data migration specialist
-- Support from analytics team to ensure data usability post-migration
-
-### Timeline
-- Data inventory and method selection: 1 week
-- Phased data migration execution: 1–2 weeks
-- Data validation and documentation: 1 week
-
-## Overall Project Timeline
-
-- **Initial Planning and Resource Inventory**: 1–2 weeks
-- **Infrastructure-as-Code Preparation and Deployment**: 3–4 weeks
-- **Security Configuration and Validation**: 3 weeks
-- **Data Migration and Validation**: 3–4 weeks
-
-### Total Estimated Duration: 8–10 Weeks
-
-### Next Steps
-- Complete inventory of current resources and their dependencies.
-- Schedule initial meeting with Terraform and security experts to review technical details and address initial gaps.
-- Initiate resource allocation and kick-off technical execution phase.
+### Requirements
+- **Data Migration Specialist**  
+  A resource with technical expertise in Azure Data Explorer and migration tools (e.g., Azure Data Factory) to effectively plan and execute the data transfer
+- **Analytics Team Support**  
+  Involvement from analytics staff to verify data integrity, confirm usability post-migration, and assist with any domain-specific requirements
