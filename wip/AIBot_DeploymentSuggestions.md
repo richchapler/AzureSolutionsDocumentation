@@ -215,37 +215,79 @@ No proactive strategy is currently defined for forecasting expenses in line with
 
 <!-- ------------------------- ------------------------- -->
 
-## Stress Testing  
+## Load Testing
+
 The current solution has been validated at pilot loads (~10 users) but must undergo comprehensive stress testing to simulate production-level conditions (~2,000 users).
 
-#### Component-Level Testing  
-- **RECOMMENDATION**: Validate that each key resource (e.g., web app, container apps, API endpoints) functions correctly under baseline loads  
-- **RECOMMENDATION**: Execute targeted tests to confirm input handling and basic throughput at low load  
-- **QUESTION**: Have all individual components been thoroughly tested at baseline loads
+- **QUESTION:** Are there any specific traffic patterns or workloads expected for the AI Bot (e.g., bursty usage, high concurrency, file uploads)?
+- **QUESTION:** Are there latency/throughput targets or SLAs already defined (e.g., max 2‑second response time)?
+- **QUESTION:** What’s the target concurrency (e.g., 200 concurrent users)? And what’s the expected RPS (requests per second)?
+- **QUESTION:** Are there environments we can safely run stress and soak tests against?
+- **QUESTION:** Are all application dependencies (e.g., Azure OpenAI, storage, search) ready for load testing?
+- **QUESTION:** Do we have budgetary or time constraints that affect how long or how often we can run tests?
 
-#### Integrated End-to-End Testing 
-- **RECOMMENDATION**: Use Azure Load Testing to simulate distributed user activity and validate end-to-end system performance under realistic, production-like conditions
-- **RECOMMENDATION**: Simulate full user journeys (from login through chat interactions to file uploads) to confirm complete system functionality  
-- **RECOMMENDATION**: Conduct tests that cover interactions across multiple resources and services  
-- **QUESTION**: What is the customer’s approach for integrated, end-to-end testing as the system scales to 2,000 users?
+### Load Testing Tool Options
 
-#### Stress Testing  
-- **RECOMMENDATION**: Use Chaos Studio to inject sustained, high‑load scenarios against all components (including cross‑subscription services) to identify breaking points and observe degradation/recovery  
-- **QUESTION**: What sustained load levels (e.g., concurrent sessions) should define our stress tests, and what failure/recovery criteria will we monitor?
 
-#### Spike Testing  
-- **RECOMMENDATION**: Use Chaos Studio or Azure Load Testing to simulate sudden traffic surges and measure auto‑scaling response times and error rates across both primary and peered subscriptions  
-- **QUESTION**: What spike patterns (magnitude and duration) should we test to validate resilience under burst traffic?
+| Tool                     | Pros                                                                                                                                                                                                                                                                                         | Cons                                                                                                                                                                   | Ideal Use Cases                                                                                                                                                                                   |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Azure Load Testing**   | - Fully managed and natively integrated with Azure services and monitoring.<br>- Simplifies setup with visual test editors and seamless integration with Azure Monitor.<br>- Lower operational overhead, with centralized logging and alerting out‑of‑the‑box.                                | - May have higher costs for extended or very high‑load tests.<br>- Custom scripting may be more limited compared to open‑source solutions.                               | - Team has familiarity with JMeter or existing JMeter scripts.<br>- Quick integration in Azure DevOps pipelines using the Azure Load Testing extension.<br>- Scenarios requiring tight coupling with Azure Monitor and centralized logging. |
+| **K6**                   | - Highly flexible and scriptable, allowing detailed user journey simulations and custom spike patterns.<br>- Open‑source with strong community support; can be run in containers.<br>- Easily incorporated into Azure DevOps pipelines via self‑hosted agents or Docker tasks. | - Requires management of the test execution environment, including scaling for large tests.<br>- More development effort to set up centralized reporting and integrate with Azure Monitor. | - Complex test scenarios that demand custom scripting and fine‑grained control.<br>- Situations where cost control and custom environment setups (e.g., running tests in existing containers) are prioritized.               |
 
-#### Soak Testing  
-- **RECOMMENDATION**: Run long‑duration tests at or near peak load (e.g., 2,000 users for several hours) to detect resource exhaustion, memory leaks, and cumulative errors across all subscriptions  
-- **QUESTION**: How long should soak tests run, and what resource‑health metrics will signal the need for remediation?
+### Load Testing types
 
-#### Performance Monitoring  
-- **RECOMMENDATION**: Activate centralized logging and log analytics to capture performance metrics during stress tests  
-- **RECOMMENDATION**: Establish clear baseline metrics (a "green state") for critical components to quickly detect deviations  
-- **RECOMMENDATION**: Leverage performance data to identify and address bottlenecks early in the testing process  
-- **QUESTION**: Which performance metrics will be used to validate stress test results and guide scaling decisions?
+| Test Type              | Purpose                                                                     | Recommended Now?      | Notes                                                                                          |
+|------------------------|-----------------------------------------------------------------------------|-----------------------|------------------------------------------------------------------------------------------------|
+| Component-Level        | Validate individual services or APIs under expected load                     | Yes                   | Low-cost, fast to run. Helps catch regressions early in isolated components.                  |
+| End-to-End (E2E)       | Simulate real user journeys across the full system                          | Yes                   | Critical for validating performance SLAs (e.g., ≤5s) under realistic usage.                   |
+| Stress Testing         | Push system beyond expected limits to identify bottlenecks/failure points   | Yes (Periodically)    | Useful after baseline/E2E stability. Can be run ad hoc or pre-release.                       |
+| Spike Testing          | Simulate sudden surge in traffic to test auto-scaling and recovery          | Maybe Later           | Important but lower priority initially; do after stress testing is stable.                    |
+| Soak Testing           | Run extended tests to detect slow memory leaks or performance degradation   | Maybe Later           | Valuable before production go-live. Schedule during off-peak hours.                           |
+
+### Component-Level Testing
+
+- **OBJECTIVE:** Validate that individual resources (web app, container apps, API endpoints) function correctly under baseline (low‑load) conditions. Can be used as smoke test after production deployments.
+- **RECOMMENDATIONS:**  
+  - **Baseline Validation:** Create isolated tests that send representative requests to each component to confirm proper input handling, error management, and throughput under low concurrency.  
+  - **Monitoring:** Use Application Insights and Log Analytics to record latency, response codes, and resource usage. Define baseline metrics (“green state”) for key performance indicators such as average response time and error rates.  
+
+### End-to-End Testing
+
+- **OBJECTIVE:** Simulate distributed, realistic user journeys to validate the complete system from login to chat interactions and file uploads.
+- **RECOMMENDATIONS:**  
+  - **User Journey Simulation:** Develop end-to-end test scenarios that mimic full user sessions including authentication, sending chat requests, handling file uploads, and response processing.  
+  - **Cross-Component Interactions:** Ensure tests cover interactions between the App Service, Container Apps, and any external dependencies (e.g., Azure Cognitive Search or OpenAI API).  
+
+### Stress Testing
+
+- **OBJECTIVE:** Identify breaking points and monitor performance degradation/recovery under sustained high load.
+- **RECOMMENDATIONS:**  
+  - **Sustained Load Scenarios:** Use either tool to inject load that significantly exceeds baseline usage (e.g., ramp up to high levels of concurrent sessions) to monitor system behavior, error rates, recovery times, and rollback of autoscaling.  
+  - **Metrics & Alerting:** Monitor metrics such as CPU, memory utilization, error rates, queue lengths, and response times. Define explicit failure criteria (e.g., >5% of requests exceeding 5 seconds, excessive 5xx errors).  
+
+### Spike Testing
+
+- **OBJECTIVE:** Validate resilience under sudden, unexpected traffic surges.
+- **RECOMMENDATIONS:**  
+  - **Surge Scenarios:** Configure tests to simulate abrupt increases in concurrent sessions (spike patterns) for short durations. For example, simulate a sudden jump to 500–1,000 concurrent sessions over a short span (e.g., 1–2 minutes).  
+  - **Autoscaling Response:** Measure how quickly autoscaling rules are triggered, the time taken to add or remove resources, and the error rate during the surge.
+
+- **QUESTION:** What spike patterns (magnitude and duration) should we test to validate resilience under burst traffic?
+
+### Soak Testing
+
+- **OBJECTIVE:** Evaluate system stability, detect memory leaks, resource exhaustion, and cumulative errors over extended periods.
+- **RECOMMENDATIONS:**  
+  - **Test Duration:** Run soak tests at or near peak load conditions for extended periods (recommend 4–8 hours) to mimic prolonged real‑world usage.
+- **Resource‑Health Metrics:** Track long‑term metrics such as memory and CPU trends, number of container/app restarts, log anomalies, and gradual degradation of throughput or response times.  
+
+### Performance Monitoring
+
+- **OBJECTIVE:** Establish a comprehensive monitoring strategy for validating stress test results and guiding scaling decisions.
+- **RECOMMENDATIONS:**  
+  - **Centralized Logging:** Aggregate logs and metrics in a central Log Analytics workspace. Ensure App Service, Container Apps, and any API endpoints send logs and performance metrics.  
+  - **Key Metrics:** Use response time percentiles (P95, P99), throughput, CPU and memory utilization, instance count, and error rates as primary performance indicators.  
+  - **Integration:** Set up automated alerts (via Azure Monitor or Application Insights) for deviations from defined baselines.  
 
 <!-- ------------------------- ------------------------- -->
 
