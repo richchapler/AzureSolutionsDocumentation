@@ -457,7 +457,6 @@ The following topics were suggested after a "deep research" review:
 - Reconfirm all subscriptions are **under the same billing scope** for unified tracking
 
 ### Stress Testing
-- Rename subsection “Stress Testing” to **“Sustained Load Testing”** to avoid redundancy with section title
 - Add **recommendation** to **test in a production-parity environment** to avoid polluting production data
 - Suggest defining **clear performance pass/fail thresholds** before testing (e.g., response time targets)
 - Ensure test datasets (e.g., for Search, AI) **match production data volume and complexity**
