@@ -184,6 +184,6 @@ Migrate all critical data from Azure Data Explorer clusters in the source subscr
   - Document all migration steps, issues encountered, and resolutions for compliance and future reference.  
   - Hand off the final environment to operational teams and define processes for ongoing data refreshes.
 
-### Requirements
+#### Requirements
 - **Data Migration Specialist**: Involve a resource with technical expertise in Azure Data Explorer and migration tools (such as Azure Data Factory) to effectively plan and execute the data transfer.  
 - **Analytics Team Support**: Engage analytics staff to verify data integrity, confirm usability post-migration, and assist with any domain-specific requirements.
