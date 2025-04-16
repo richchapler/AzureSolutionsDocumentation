@@ -113,32 +113,153 @@ Key performance triggers and cost strategies for scaling remain to be defined; e
 
 ## Monitoring
 
-### Resources  
-A centralized Log Analytics workspace exists in the primary subscription (diagnostic settings auto‑deployed via Azure Policy), but Application Gateway and API Management reside in separate subscriptions.
-- **RECOMMENDATION**: Validate that diagnostic settings for Application Gateway and API Management subscriptions point to the central Log Analytics workspace  
-- **RECOMMENDATION**: Confirm that those subscriptions have the necessary role assignments or policy exemptions to send logs across subscription boundaries  
-- **QUESTION**: Are there any additional permissions, private link configurations, or DNS considerations required for cross‑subscription log ingestion?
+### Resources 
+A centralized Log Analytics workspace exists in the primary subscription (diagnostic settings auto deployed via Azure Policy), but Application Gateway and API Management reside in separate subscriptions.
+- **RECOMMENDATION**: Validate that diagnostic settings for Application Gateway and API Management subscriptions point to the central Log Analytics workspace 
+- **RECOMMENDATION**: Confirm that those subscriptions have the necessary role assignments or policy exemptions to send logs across subscription boundaries 
+- **QUESTION**: Are there any additional permissions, private link configurations, or DNS considerations required for cross subscription log ingestion?
 
-### Logs, Metrics & Alerts  
-Logs and metrics are captured centrally, but cross‑subscription resources (API Management, Application Gateway) must be included.
-- **RECOMMENDATION**: Ensure diagnostic settings in the API Management and Application Gateway subscriptions forward logs and metrics to the central Log Analytics workspace  
-- **RECOMMENDATION**: Create Azure Monitor alert rules that span subscriptions, incorporating metrics and logs from both the primary and peered subscriptions  
-- **QUESTION**: Which team will own the configuration and ongoing maintenance of these cross‑subscription alert rules and dashboards?
-
-#### Log Categories by Resource Type
-
-| **Type** | **Categories** | **Documentation** |
-| :--- | :--- | :--- |
-| AI Services | Audit<br>AzureOpenAIRequestUsage<br>RequestResponse<br>Trace | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-cognitiveservices-accounts-logs) |
-| API Management | DeveloperPortalAuditLogs<br>GatewayLogs<br>WebSocketConnectionLogs<br>(Plus: GatewayLlmLogs for AI usage) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-apimanagement-service-logs#:~:text=Portal%20usage%20APIMDevPortalAuditDiagnosticLog) |
-| App Service Plan | AppServiceHTTPLogs<br>AppServiceAppLogs<br>AppServiceAuditLogs<br>AppServiceConsoleLogs<br>AppServiceFileAuditLogs<br>AppServicePlatformLogs<br>AppServiceAntivirusScanAuditLogs<br>AppServiceIPSecAuditLogs<br>AppServiceAuthenticationLogs (Preview) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-web-sites-logs) |
-| Application Gateway | ApplicationGatewayAccessLog<br>ApplicationGatewayFirewallLog<br>ApplicationGatewayPerformanceLog | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-network-applicationgateways-logs#:~:text=AzureDiagnostics) |
-| Bot Service | BotRequest (requests from channels to the bot and vice versa) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-botservice-botservices-logs#:~:text=ABSBotRequests) |
-| Container Apps (Prompt Flow)   | ContainerAppConsoleLogs<br>ContainerAppSystemLogs             | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-app-managedenvironments-logs) |
-| Search Service | OperationLogs | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-search-searchservices-logs#:~:text=Operation%20Logs%20AzureDiagnostics) |
-| Storage Account | StorageRead, StorageWrite, StorageDelete<br>(for Blob, File, Queue, Table services) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-storage-storageaccounts-blobservices-logs#:~:text=StorageBlobLogs) |
+### Logs, Metrics & Alerts 
+Logs and metrics are captured centrally, but cross subscription resources (API Management, Application Gateway) must be included.
+- **RECOMMENDATION**: Ensure diagnostic settings in the API Management and Application Gateway subscriptions forward logs and metrics to the central Log Analytics workspace 
+- **RECOMMENDATION**: Create Azure Monitor alert rules that span subscriptions, incorporating metrics and logs from both the primary and peered subscriptions 
+- **QUESTION**: Which team will own the configuration and ongoing maintenance of these cross subscription alert rules and dashboards?
 
 <!-- ------------------------- ------------------------- -->
+
+#### Tables / Categories by Resource Type
+
+| **Type** | **Table** | **Categories** | **Documentation** |
+| :--- | :--- | :--- | :--- |
+| **AI Services (Open AI)** | AzureDiagnostics | Audit<br>AzureOpenAIRequestUsage<br>RequestResponse<br>Trace | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft cognitiveservices accounts logs) |
+| **API Management** | AzureDiagnostics | DeveloperPortalAuditLogs<br>GatewayLogs<br>WebSocketConnectionLogs<br>GatewayLlmLogs | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft apimanagement service logs) |
+| **App Service (Web App)** | AppServiceHTTPLogs<br>AppServiceAppLogs<br>… | **Not Applicable** | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft web sites logs) |
+| **Application Gateway** | AzureDiagnostics | ApplicationGatewayAccessLog<br>ApplicationGatewayFirewallLog<br>ApplicationGatewayPerformanceLog | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft network applicationgateways logs) |
+| **Bot Service** | WebAppConsoleLogs?* | BotRequests | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft botservice botservices logs) |
+| **Container Apps** | ContainerAppConsoleLogs<br>ContainerAppSystemLogs | **Not Applicable** | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft app managedenvironments logs) |
+| **Search Service** | AzureDiagnostics | OperationLogs | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft search searchservices logs) |
+| **Storage Account** | AzureDiagnostics | StorageRead<br>StorageWrite<br>StorageDelete | [🔗](https://learn.microsoft.com/azure/azure monitor/reference/supported logs/microsoft storage storageaccounts blobservices logs) |
+
+<!-- ------------------------- ------------------------- -->
+
+#### Exercise: "Catch All" Log
+
+Here’s a **simple, three part exercise** to validate diagnostics for both your OpenAI resource and your Web App, then run a combined query.
+
+## Part 1: OpenAI
+
+1. **Confirm Diagnostic Settings** 
+ ```bash
+ az monitor diagnostic-settings list \
+ --resource "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.CognitiveServices/accounts/prefixoa" \
+ --query "[].logs[].category" -o tsv
+ ``` 
+ You should see: 
+ ```
+ Audit
+ AzureOpenAIRequestUsage
+ RequestResponse
+ Trace
+ ```
+
+2. **Force an Error** 
+ Save this as **openai-error.ps1** (replace `your-valid-api-key`):
+ ```powershell
+ $endpoint = "https://prefixoa.openai.azure.com/openai/deployments/gpt-foobar/completions?api-version=2022-12-01"
+ $headers = @{
+ "api-key" = "your-valid-api-key"
+ "Content-Type" = "application/json"
+ }
+ $body = @{ prompt = "hi"; max_tokens = 1 } | ConvertTo-Json
+
+ try {
+ Invoke-WebRequest -Uri $endpoint -Method Post -Headers $headers -Body $body -ErrorAction Stop
+ }
+ catch {
+ Write-Host "Got expected OpenAI error:" $_.Exception.Response.StatusCode.value__
+ }
+ ```
+ ```powershell
+ # run it:
+ .\openai-error.ps1
+ ```
+
+3. **Show the Error in Log Analytics** 
+ ```kql
+ AzureDiagnostics
+ | where Resource contains "prefixoa"
+ | where Category == "RequestResponse"
+ | extend p = parse_json(properties_s)
+ | where toint(p.statusCode) >= 400
+ | project TimeGenerated, OperationName, p.statusCode, p.error.code, p.error.message
+ | order by TimeGenerated desc
+ ```
+
+## Part 2: Web App
+
+1. **Confirm Diagnostic Settings** 
+ ```bash
+ az monitor diagnostic-settings list \
+ --resource "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.Web/sites/prefixwa-gagqhndmemfeanex" \
+ --query "[].logs[].category" -o tsv
+ ``` 
+ You should see at least: 
+ ```
+ AppServiceHTTPLogs
+ ```
+
+2. **Force a 404** 
+ ```bash
+ curl -I --fail --max-time 5 \
+ https://prefixwa-gagqhndmemfeanex.westus-01.azurewebsites.net/this-path-does-not-exist
+ ```
+
+3. **Show the Error in Log Analytics** 
+ ```kql
+ AzureDiagnostics
+ | where Resource == "prefixwa-gagqhndmemfeanex"
+ | where Category == "AppServiceHTTPLogs"
+ | extend p = parse_json(properties_s)
+ | where tostring(p.statusCode) == "404"
+ | project TimeGenerated, p.method, p.uri, p.statusCode
+ | order by TimeGenerated desc
+ ```
+
+## Part 3: Combined “All Errors” Query
+
+Once you’ve validated both streams, run this single KQL to see them side by side:
+
+```kql
+AzureDiagnostics
+| project TimeGenerated, ResourceId = tolower(ResourceId), Source = "OpenAI"
+| union (
+    AppServiceHTTPLogs
+    | where Result != "Success"
+    | project TimeGenerated, ResourceId = tolower(_ResourceId), Source = "WebApp"
+)
+| sort by TimeGenerated desc
+```
+
+- **AzureDiagnostics** rows (all OpenAI 4xx+ errors) get `Source="OpenAI"`.  
+- **AppServiceHTTPLogs** rows (all non 200 Web App hits) get `Source="WebApp"`.  
+- Results are merged and ordered by timestamp for a unified error timeline.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### Required Logs
 
@@ -146,8 +267,7 @@ Logs and metrics are captured centrally, but cross‑subscription resources (API
 
 - Intent: "Catch-all" monitoring of unexpected errors across all resources
 
-
-
+Making rchapler a Contributor so I don't get ListKeys Audit
 
 
 
@@ -167,34 +287,34 @@ Category values:
 
 
 
-
 ##### General Application Error Tracking
-1.	App Insights alerting on unhandled exception
-2.	What are the most common exceptions and what is the source?
-3.	Does the bot app service / orchestration container app restart unexpectedly (# of restarts over the last X days, separate counts for bot / orchestrator)
+1.  App Insights alerting on unhandled exception
+2.  What are the most common exceptions and what is the source?
+3.  Does the bot app service / orchestration container app restart unexpectedly (# of restarts over the last X days, separate counts for bot / orchestrator)
 
 ##### Performance
-1.	What is the average message response time from bot to user?
-2.	Which specific operations are introducing the most latency (is this possible? can we differentiate between different aspects like file uploads, querying the LLM, general network latency response times, etc? If so, how complex is this to log?)
-3.	How often do users experience timeouts when asking a **question** (when timeouts occur, is there some common pattern? i.e. file attached, common source, etc)
-4.	What % of messages are augmented with retrieval and what % need no additional context? (this would give great insight on how the bot's being used and how to prioritize service/features. We probably need to come up with a time span upon which to base this query)
+1.  What is the average message response time from bot to user?
+2.  Which specific operations are introducing the most latency (is this possible? can we differentiate between different aspects like file uploads, querying the LLM, general network latency response times, etc? If so, how complex is this to log?)
+3.  How often do users experience timeouts when asking a **question** (when timeouts occur, is there some common pattern? i.e. file attached, common source, etc)
+4.  What % of messages are augmented with retrieval and what % need no additional context? (this would give great insight on how the bot's being used and how to prioritize service/features. We probably need to come up with a time span upon which to base this query)
 
 ##### Security
-1.	What % of bot queries come from unauthorized sources? (Find common times of day / sources)
-2.	How often are users being rate limited? (if at all? are rate limits originating from common sources or resulting from common query scenarios)
-3.	How often (if ever) do queries hit the container app from sources other than the bot? (Should be never, but would like to make sure that’s the case) 
+1.  What % of bot queries come from unauthorized sources? (Find common times of day / sources)
+2.  How often are users being rate limited? (if at all? are rate limits originating from common sources or resulting from common query scenarios)
+3.  How often (if ever) do queries hit the container app from sources other than the bot? (Should be never, but would like to make sure that’s the case) 
 
 #### Sample Alerts
 
 > Need to review these with Adam Ray on the next call
 
-1.	Unhandled Exceptions (any and all hits from the App Insights exceptions table)
-2.	HTTP 5xx responses (5xx hits from AppServiceHTTPLogs)
-3.	Container Restarts / App Service Restarts (What's the best source for these logs?)
-4.	Latency / response time thresholds (I'm thinking 2-3 seconds for initial response, does MS have recommended threshholds? )
-5.	Abrupt increase in message count / spikes. (ideally this would indicate spam or misuse, but maybe this is being overly protective? would this be valuable info to alert on? )
-6.	CPU/Memory threshold (80% unless MS disagrees)
-7.	MIssing JWT token (this would indicate the message didnt originate from teams / related to detecting spam or unexpected sources of ingress)
+1.  Unhandled Exceptions (any and all hits from the App Insights exceptions table)
+2.  HTTP 5xx responses (5xx hits from AppServiceHTTPLogs)
+3.  Container Restarts / App Service Restarts (What's the best source for these logs?)
+4.  Latency / response time thresholds (I'm thinking 2-3 seconds for initial response, does MS have recommended threshholds? )
+5.  Abrupt increase in message count / spikes. (ideally this would indicate spam or misuse, but maybe this is being overly protective? would this be valuable info to alert on? )
+6.  CPU/Memory threshold (80% unless MS disagrees)
+7.  MIssing JWT token (this would indicate the message didnt originate from teams / related to detecting spam or unexpected sources of ingress)
+
 
 <!-- ------------------------- ------------------------- -->
 
