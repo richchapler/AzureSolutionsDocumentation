@@ -32,19 +32,22 @@
 
 #### Prepare
 
-- **Inventory**: Inventory existing, source subscription resources  
+- **Inventory**
+  - Inventory existing, source subscription resources  
   - Capture key metadata including security configurations, network settings, dependencies, etc.
 
-- **Subscription Mapping**: Map each resource to the appropriate target subscription based on its function and governance guidelines, in accordance with the CAF Azure Foundations recommendations (sections 2.3 and 4):
-  - **Platform Identity**: Centralizes directory and identity management services
-  - **Platform Management**: Houses management tools such as monitoring, logging, and reporting
-  - **Platform Connectivity**: Hosts networking, VPN, and connectivity services
-  - **Production**: For live, business-critical systems
-  - **Development**: For building and iterating new features
-  - **Test**: For validating deployments and conducting pilot runs
-  - **Pre-Production**: For staging and final validation before production rollout
+- **Subscription Mapping**
+  - Map each resource to the appropriate target subscription based on its function and governance guidelines, in accordance with the CAF Azure Foundations recommendations (sections 2.3 and 4):
+    - **Platform Identity**: Centralizes directory and identity management services
+    - **Platform Management**: Houses management tools such as monitoring, logging, and reporting
+    - **Platform Connectivity**: Hosts networking, VPN, and connectivity services
+    - **Production**: For live, business-critical systems
+    - **Development**: For building and iterating new features
+    - **Test**: For validating deployments and conducting pilot runs
+    - **Pre-Production**: For staging and final validation before production rollout
 
-- **Risk Assessment**: Evaluate legacy configurations and mission-critical workloads for potential migration issues  
+- **Risk Assessment**
+  - Evaluate legacy configurations and mission-critical workloads for potential migration issues  
   - Document likely risks {e.g., insufficient permissions, outdated network rules}
   - Develop initial mitigation strategies and contingency plans
 
@@ -100,8 +103,10 @@
 ### Tasks
 
 #### Prepare
-- **Inventory**: Inventory existing security configurations (such as endpoints, firewall rules, and Role-Based Access Control assignments) in the source subscription.  
-  - Identify and document any use of access keys or legacy authentication methods.
+
+- **Inventory**
+  - Inventory existing security configurations {e.g., private endpoints, firewall rules, Role-Based Access Control assignments, etc.}  
+  - Identify and document any use of access keys or legacy authentication methods
 - **Risk Assessment**  
   - Identify potential security gaps or vulnerabilities (for example, public endpoints or shared keys).  
   - Document likely risk scenarios, categorizing them by impact and likelihood.  
@@ -146,8 +151,7 @@ Migrate all critical data from Azure Data Explorer clusters in the source subscr
 ### Tasks
 
 #### Prepare
-- **Inventory**  
-  - Document current data volumes, structures, and dependencies within Azure Data Explorer.  
+- **Inventory**: Document current data volumes, structures, and dependencies within Azure Data Explorer.  
   - Identify any required data transformations or specific formats for the target subscription.  
   - Outline a preliminary migration approach (for example, using Azure Data Factory or direct Data Explorer ingestion).
 - **Risk Assessment**  
