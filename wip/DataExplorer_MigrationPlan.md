@@ -62,9 +62,11 @@
   - **Prepare for Terraform**-based scripting {e.g., note custom or manual configuration requirements}
   - **Submit documentation for review** by the Architecture Review Board and the Operations Review Board (as per "Internal..." documentation: “The application team prepares the Application Design Document and submits it to (ARB) and routes to ‘C-NAV-CLOUD-ENABLEMENT’”)
 
-- **Disaster Recovery**: Document business continuity plans (including network topology, resource dependencies, authentication methods, region pairing, backup schedules, failover procedures and supporting diagrams and metadata for automated monitoring)
+- **Disaster Recovery**
+  - Document business continuity plans (including network topology, resource dependencies, authentication methods, region pairing, backup schedules, failover procedures and supporting diagrams and metadata for automated monitoring)
 
-- **Change Control**: Ensure that all changes to the infrastructure design or deployment are managed through a formal change control process
+- **Change Control**
+  - Ensure that all changes to the infrastructure design or deployment are managed through a formal change control process
   - Submit proposed modifications via a ServiceNow change request and secure sign-off from the Architecture Review Board and the Operations Review Board before implementation
   - Maintain a documented audit trail of all approved changes and design adjustments for ongoing compliance and operational reference
 
@@ -96,7 +98,7 @@
 
 ## Security
 
-### Objective
+### Objectives
 
 - Ensure migrated resources comply with corporate security and governance standards, with a focus on private connectivity, identity-based authentication, and appropriate Role-Based Access Control
 
@@ -108,26 +110,26 @@
   - Inventory existing security configurations {e.g., private endpoints, firewall rules, Role-Based Access Control assignments, etc.}  
   - Identify and document any use of access keys or legacy authentication methods
 - **Risk Assessment**  
-  - Identify potential security gaps or vulnerabilities (for example, public endpoints or shared keys).  
-  - Document likely risk scenarios, categorizing them by impact and likelihood.  
-  - Develop initial mitigation strategies and assign responsibilities for resolution.
+  - Identify potential security gaps or vulnerabilities  
+  - Document likely risk scenarios, categorizing them by impact and likelihood 
+  - Develop initial mitigation strategies and assign responsibilities for resolution
 
 #### Assess
 - **Security Architecture Review**
-  - Define required private endpoint strategies (private link, virtual network integration) for resources like Data Explorer, Storage Accounts, Synapse, etc.
-  - Collaborate with internal security teams to refine authentication standards (such as Managed Identities versus access keys).
-  - Determine the governance or compliance frameworks (ISO, NIST, or company-specific) that must be applied in the target subscription.
+  - Define required private endpoint strategies
+  - Collaborate with internal security teams to refine authentication standards (such as Managed Identities versus access keys)
+  - Determine the governance or compliance frameworks (ISO, NIST, or company-specific) that must be applied in the target subscription
 
 - **Governance and Change Control**
-  - Ensure that all changes to security configurations and policies are managed through a formal change control process.
-  - Submit proposed security modifications via a ServiceNow change request and secure sign-off from IT compliance and security review boards before implementation.
-  - Maintain an audit trail of all approved changes for ongoing compliance and monitoring.
+  - Ensure that all changes to security configurations and policies are managed through a formal change control process
+  - Submit proposed security modifications via a ServiceNow change request and secure sign-off from IT compliance and security review boards before implementation
+  - Maintain an audit trail of all approved changes for ongoing compliance and monitoring
 
 #### Deploy
 - **Implement Security Controls**  
-  - Configure private endpoints and update network rules as defined in the architecture review.  
-  - Enforce the use of Managed Identities and eliminate direct access key usage.  
-  - Assign or update Role-Based Access Control roles in line with the needs of analytics and data sharing.
+  - Configure private endpoints and update network rules as defined in the architecture review
+  - Enforce the use of Managed Identities and eliminate direct access key usage
+  - Assign or update Role-Based Access Control roles in line with the needs of analytics and data sharing
 
 #### Release
 - **Security Validation and Documentation**  
