@@ -7,15 +7,16 @@
 
 ## Resource Inventory  
 
-| Type | Source Subscription | Target Subscription | Infrastructure | Security | Data |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Data Explorer | | | | | |
-| Function Apps | | | | | |
-| Logic Apps | | | | | |
-| Managed Identities? | | | | | |
-| Service Bus? | | | | | |
-| Storage Accounts | | | | | |
-| Synapse | | | | | |
+| Type | Infrastructure | Security | Data |
+| :--- | :--- | :--- | :--- |
+| **Data Explorer**<br>Name: ???<br>Source: Navistar Spoke Development<br>Target: ??? | Compute: Standard_E8ads_v5 | * Public<br>* Identity On<br>* RBAC | <u>Databases</u><br>* Telematics:44T<br>* Sandbox:23.7G<br>* Analytics:143.2M |
+| **Function App**<br>Name: func-cvabase-dev-eastus-001<br>Source: Navistar Spoke Development<br>Target: ???<br>Role: data manipulation<br>Future: convert to Data Explorer logic? |  | * Keys? | Not Applicable? |
+| **Logic Apps**<br>Name: logic-cvabase-dev-eastus-001 |  |  |  |
+| **Service Bus**<br>Name: ???<br>Role: incoming data |  |  | "packets are small"<br>"only include URL" |
+| **Storage Accounts**<br>Names: stcvabasedeveastus001...006<br>Future: merge into one? | multiple instances |  |  |
+| **Synapse (2)**<br>Names: synw-cvabase-dev-eastus-001...002 | multiple instances |  |  |
+
+> Do we need to inventory network configurations as well?
 
 <!-- ------------------------- ------------------------- -->
 
