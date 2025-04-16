@@ -138,22 +138,48 @@ Logs and metrics are captured centrally, but cross‑subscription resources (API
 | Search Service | OperationLogs | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-search-searchservices-logs#:~:text=Operation%20Logs%20AzureDiagnostics) |
 | Storage Account | StorageRead, StorageWrite, StorageDelete<br>(for Blob, File, Queue, Table services) | [🔗](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-logs/microsoft-storage-storageaccounts-blobservices-logs#:~:text=StorageBlobLogs) |
 
-#### Sample Log Queries (KPI Candidates)
+<!-- ------------------------- ------------------------- -->
 
-> Need to review these with Adam Ray on the next call
+#### Required Logs
 
-#### General Application Error Tracking
+##### "Unhandled Exceptions"
+
+- Intent: "Catch-all" monitoring of unexpected errors across all resources
+
+
+
+
+
+
+
+Category values:
+
+• **Audit** – This category logs administrative, security, and configuration events. It’s generally used for tracking changes or policy actions rather than reporting service exceptions.
+• **AzureOpenAIRequestUsage** – This records usage metrics (like token consumption) and is not focused on errors or exceptions.
+• **RequestResponse** – This category logs full HTTP transactions, including the status codes returned. If an API call fails—such as receiving a 401, 404, or 500 error—it will show up here. It’s your best candidate for finding exceptions or error responses from the OpenAI service.
+• **Trace** – This provides detailed diagnostic information and can include error messages and stack traces when the system logs an unexpected event. It’s also useful for troubleshooting issues, as it may capture more granular exception details.
+
+
+
+
+
+
+
+
+
+
+##### General Application Error Tracking
 1.	App Insights alerting on unhandled exception
 2.	What are the most common exceptions and what is the source?
 3.	Does the bot app service / orchestration container app restart unexpectedly (# of restarts over the last X days, separate counts for bot / orchestrator)
 
-#### Performance
+##### Performance
 1.	What is the average message response time from bot to user?
 2.	Which specific operations are introducing the most latency (is this possible? can we differentiate between different aspects like file uploads, querying the LLM, general network latency response times, etc? If so, how complex is this to log?)
 3.	How often do users experience timeouts when asking a **question** (when timeouts occur, is there some common pattern? i.e. file attached, common source, etc)
 4.	What % of messages are augmented with retrieval and what % need no additional context? (this would give great insight on how the bot's being used and how to prioritize service/features. We probably need to come up with a time span upon which to base this query)
 
-#### Security
+##### Security
 1.	What % of bot queries come from unauthorized sources? (Find common times of day / sources)
 2.	How often are users being rate limited? (if at all? are rate limits originating from common sources or resulting from common query scenarios)
 3.	How often (if ever) do queries hit the container app from sources other than the bot? (Should be never, but would like to make sure that’s the case) 
