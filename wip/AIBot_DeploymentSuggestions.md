@@ -172,53 +172,83 @@ We will do this first for OpenAI, then for the Web App, and then produce a combi
 #### OpenAI
 
 ##### Confirm Diagnostic Settings
- ```bash
- az monitor diagnostic-settings list \
- --resource "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.CognitiveServices/accounts/prefixoa" \
- --query "[].logs[].category" -o tsv
- ``` 
- You should see: 
- ```
- Audit
- AzureOpenAIRequestUsage
- RequestResponse
- Trace
- ```
 
-2. **Force an Error** 
- Save this as **openai-error.ps1** (replace `your-valid-api-key`):
- ```powershell
- $endpoint = "https://prefixoa.openai.azure.com/openai/deployments/gpt-foobar/completions?api-version=2022-12-01"
- $headers = @{
- "api-key" = "your-valid-api-key"
- "Content-Type" = "application/json"
- }
- $body = @{ prompt = "hi"; max_tokens = 1 } | ConvertTo-Json
+Open Azure Portal >> Cloud Shell and switch to PowerShell.
 
- try {
- Invoke-WebRequest -Uri $endpoint -Method Post -Headers $headers -Body $body -ErrorAction Stop
- }
- catch {
- Write-Host "Got expected OpenAI error:" $_.Exception.Response.StatusCode.value__
- }
- ```
- ```powershell
- # run it:
- .\openai-error.ps1
- ```
+Set identifier values for OpenAI and Log Analytics:
+```powershell
+$resourceId  = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefix/providers/Microsoft.CognitiveServices/accounts/prefixoa"
+$workspaceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefix/providers/Microsoft.OperationalInsights/workspaces/prefixlaw"
+```
 
-3. **Show the Error in Log Analytics** 
- ```kql
- AzureDiagnostics
- | where Resource contains "prefixoa"
- | where Category == "RequestResponse"
- | extend p = parse_json(properties_s)
- | where toint(p.statusCode) >= 400
- | project TimeGenerated, OperationName, p.statusCode, p.error.code, p.error.message
- | order by TimeGenerated desc
- ```
+Check whether Diagnostic Setting has been added on OpenAI:
+```powershell
+Get-AzDiagnosticSetting -ResourceId $resourceId
+```
 
-#### Part 2: Web App
+If nothing is returned, add Diagnostic Setting:
+```
+New-AzDiagnosticSetting -Name "prefixoads" -ResourceId $resourceId -WorkspaceId $workspaceId `
+  -Log @(
+    @{ Category = "Audit";                   Enabled = $true },
+    @{ Category = "AzureOpenAIRequestUsage"; Enabled = $true },
+    @{ Category = "RequestResponse";         Enabled = $true },
+    @{ Category = "Trace";                   Enabled = $true }
+  ) | Out-Null
+```
+
+Use the portal to confirm that the Diagnostic Setting was correctly created.
+
+##### Force Error
+
+Open Azure Portal >> Cloud Shell and switch to PowerShell.
+
+Define an intentionally-misnamed endpoint:
+```powershell
+$endpoint = "https://prefixoa.openai.azure.com/openai/deployments/gpt-foobar/completions?api-version=2022-12-01"
+```
+
+Set an HTTP header that contains the OpenAI, "KEY 1" value:
+```powershell
+$headers = @{ "api-key" = "CzJfQ9wZg2VcYQyKoGWGrvS33JfpVXsg2noHdlLiwOf3EWxfs9zzJQQJ99BDACYeBjFXJ3w3AAABACOG5gHK"; "Content-Type" = "application/json" }
+```
+
+Create a tiny payload:
+```powershell
+$body = @{ prompt = "hi"; max_tokens = 1 } | ConvertTo-Json
+```
+
+Invoke the call and capture the expected failure:
+```powershell
+try { Invoke-WebRequest -Uri $endpoint -Method Post -Headers $headers -Body $body -ErrorAction Stop }
+catch { $_.Exception.Response.StatusCode.value__ }
+```
+
+The expected output: `404` is typically logged to Log Analytics within minutes.
+
+##### Review Logs
+
+Open Azure Portal >> Log Analytics >> Logs and switch to "KQL Mode".
+
+Run the following KQL:
+```kql
+AzureDiagnostics
+| project TimeGenerated, ResourceId = tolower(ResourceId), OperationName
+| where ResourceId contains "prefixoa"
+| order by TimeGenerated desc
+```
+
+Validate results.
+
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
+#### Web App
 
 1. **Confirm Diagnostic Settings** 
  ```bash
