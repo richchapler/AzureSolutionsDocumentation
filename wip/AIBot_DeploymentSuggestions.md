@@ -177,8 +177,8 @@ Open Azure Portal >> Cloud Shell and switch to PowerShell.
 
 Set identifier values for OpenAI and Log Analytics:
 ```powershell
-$resourceId  = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefix/providers/Microsoft.CognitiveServices/accounts/prefixoa"
-$workspaceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefix/providers/Microsoft.OperationalInsights/workspaces/prefixlaw"
+$resourceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.CognitiveServices/accounts/{prefix}oa"
+$workspaceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.OperationalInsights/workspaces/{prefix}law"
 ```
 
 Check whether Diagnostic Setting has been added on OpenAI:
@@ -188,13 +188,13 @@ Get-AzDiagnosticSetting -ResourceId $resourceId
 
 If nothing is returned, add Diagnostic Setting:
 ```
-New-AzDiagnosticSetting -Name "prefixoads" -ResourceId $resourceId -WorkspaceId $workspaceId `
-  -Log @(
-    @{ Category = "Audit";                   Enabled = $true },
-    @{ Category = "AzureOpenAIRequestUsage"; Enabled = $true },
-    @{ Category = "RequestResponse";         Enabled = $true },
-    @{ Category = "Trace";                   Enabled = $true }
-  ) | Out-Null
+New-AzDiagnosticSetting -Name "{prefix}oads" -ResourceId $resourceId -WorkspaceId $workspaceId `
+ -Log @(
+ @{ Category = "Audit"; Enabled = $true },
+ @{ Category = "AzureOpenAIRequestUsage"; Enabled = $true },
+ @{ Category = "RequestResponse"; Enabled = $true },
+ @{ Category = "Trace"; Enabled = $true }
+ ) | Out-Null
 ```
 
 Use the portal to confirm that the Diagnostic Setting was correctly created.
@@ -205,7 +205,7 @@ Open Azure Portal >> Cloud Shell and switch to PowerShell.
 
 Define an intentionally-misnamed endpoint:
 ```powershell
-$endpoint = "https://prefixoa.openai.azure.com/openai/deployments/gpt-foobar/completions?api-version=2022-12-01"
+$endpoint = "https://{prefix}oa.openai.azure.com/openai/deployments/gpt-foobar/completions?api-version=2022-12-01"
 ```
 
 Set an HTTP header that contains the OpenAI, "KEY 1" value:
@@ -233,12 +233,68 @@ Open Azure Portal >> Log Analytics >> Logs and switch to "KQL Mode".
 Run the following KQL:
 ```kql
 AzureDiagnostics
-| project TimeGenerated, ResourceId = tolower(ResourceId), OperationName
-| where ResourceId contains "prefixoa"
+| project TimeGenerated, ResourceId = tolower(ResourceId)
+| where ResourceId contains "{prefix}oa"
 | order by TimeGenerated desc
 ```
 
-Validate results.
+Validate results. Try running just `AzureDiagnostics` to see the variety of columns that are available.
+
+<!-- ------------------------- ------------------------- -->
+
+#### Web App
+
+##### Confirm Diagnostic Settings
+
+Set identifier values for the Web App and Log Analytics workspace:
+```powershell
+$resourceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.Web/sites/{prefix}wa"
+$workspaceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.OperationalInsights/workspaces/{prefix}law"
+```
+
+Check whether Diagnostic Setting has been added on Web App:
+```powershell
+Get-AzDiagnosticSetting -ResourceId $resourceId
+```
+
+If nothing is returned, add Diagnostic Setting:
+```powershell
+New-AzDiagnosticSetting -Name "{prefix}wads" -ResourceId $resourceId -WorkspaceId $workspaceId -Log @(@{Category="AppServiceHTTPLogs";Enabled=$true}) | Out-Null
+```
+
+Use the portal to confirm that the Diagnostic Setting was correctly created.
+
+##### Force Error 
+
+Open Azure Portal >> Cloud Shell and switch to PowerShell.
+
+Define a URL that you know does not exist on the Web App:
+```powershell
+$endpoint = "https://{prefix}wa-gagqhndmemfeanex.westus-01.azurewebsites.net/this-path-does-not-exist"
+```
+
+Trigger the request and surface the status code:
+```powershell
+try { Invoke-WebRequest -Uri $endpoint -Method Head -TimeoutSec 5 -UseBasicParsing -ErrorAction Stop } catch { $_.Exception.Response.StatusCode.value__ }
+```
+
+The expected output `404` is typically logged to Log Analytics within minutes.
+
+##### Review Logs 
+
+Open Azure Portal » Log Analytics » Logs and switch to “KQL Mode”.
+
+Run the following KQL:
+```kql
+AppServiceHTTPLogs
+| project TimeGenerated, ResourceId = tolower(_ResourceId)
+| where ResourceId contains "{prefix}wa"
+| order by TimeGenerated desc
+```
+
+> Note: We use the AppServiceHTTPLogs table because Web Apps do not log to AzureDiagnostics
+
+Validate results. Try running just `AppServiceHTTPLogs` to see the variety of columns that are available.
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -247,36 +303,9 @@ Validate results.
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
 
-#### Web App
-
-1. **Confirm Diagnostic Settings** 
- ```bash
- az monitor diagnostic-settings list \
- --resource "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.Web/sites/prefixwa-gagqhndmemfeanex" \
- --query "[].logs[].category" -o tsv
- ``` 
- You should see at least: 
- ```
- AppServiceHTTPLogs
- ```
-
-2. **Force a 404** 
- ```bash
- curl -I --fail --max-time 5 \
- https://prefixwa-gagqhndmemfeanex.westus-01.azurewebsites.net/this-path-does-not-exist
- ```
-
-3. **Show the Error in Log Analytics** 
- ```kql
- AzureDiagnostics
- | where Resource == "prefixwa-gagqhndmemfeanex"
- | where Category == "AppServiceHTTPLogs"
- | extend p = parse_json(properties_s)
- | where tostring(p.statusCode) == "404"
- | project TimeGenerated, p.method, p.uri, p.statusCode
- | order by TimeGenerated desc
- ```
 
 #### Part 3: Combined “All Errors” Query
 
