@@ -376,45 +376,212 @@ The database administration team at a mid‑sized organization must ensure that 
 
 ### Exercise
 
-##### Prepare Environment
+> This exercise assumes a machine with:
+> * SQL Server (hybrid Windows Authentication and SQL Authentication)
+> * SQL Server Management Studio
 
-Set up a **SQL Server** instance with the following:
-  - ****SQL Server** Management Studio (SSMS)**
-  - **AdventureWorks*- sample database (for testing various security configurations)
+#### Prepare Resources
 
-##### Configure Security
+Open SQL Server Configuration Manager >> SQL Server Services and confirm that the SQL Server (MSSQLSERVER) service is running.
 
-- **Step 1: Enable Auditing*-  
-  Execute the following T‑SQL to begin auditing:
-  ```sql
-  CREATE SERVER AUDIT SQLSecurityAudit
-    TO FILE (FILEPATH = 'C:\AuditLogs\', MAXSIZE = 10 MB);
-  ALTER SERVER AUDIT SQLSecurityAudit WITH (STATE = ON);
-  GO
-  ```
+Launch SQL Server Management Studio, connect to localhost, and then click "New Query".  
 
-- **Step 2: Implement Encryption*-  
-  Configure Transparent Data Encryption on the AdventureWorks database:
-  ```sql
-  USE master;
-  GO
-  CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'YourStrongPassword!';
-  GO
-  CREATE CERTIFICATE TDECert WITH SUBJECT = 'TDE Certificate';
-  GO
-  ALTER DATABASE AdventureWorks SET ENCRYPTION ON;
-  GO
-  ```
+Create a demonstration database:
+```sql
+CREATE DATABASE SecurityDemo;
+```
 
-- **Step 3: Set Up Role‑Based Access*-  
-  Create a custom role and assign it to a test user:
-  ```sql
-  CREATE ROLE SecurityOperator;
-  GRANT VIEW SERVER STATE TO SecurityOperator;
-  GO
-  EXEC sp_addrolemember 'SecurityOperator', 'YourUserName';
-  GO
-  ```
+Switch to the demonstration database:
+```sql
+USE SecurityDemo;
+```
+
+#### [Row-level security](https://learn.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16)
+...enforces fine‑grained access control by limiting which rows in a table a given user can see or modify, restricting data at the row level based on the caller’s identity or context rather than granting or denying access to the entire table.
+
+##### How?  
+- Uses an **inline table‑valued function** that returns a result set of allowed rows
+- Binds that function to a security policy  
+- Then, SQL Server automatically:
+  - Applies the predicate logic to SELECT, UPDATE, and DELETE operations (**filter predicates**) 
+  - Enforces it on INSERT, UPDATE, and DELETE operations (**block predicates**)
+
+##### Why functions?  
+- **Modularity**: encapsulate filter logic in one place
+- **Performance**: can be inlined by the query optimizer, minimizing overhead
+- **Flexibility**: create multiple predicates without altering the security policy definition
+
+##### Let's get started!
+
+Create sample table:
+```sql
+CREATE TABLE dbo.EmployeeData ( Id INT IDENTITY PRIMARY KEY, Name NVARCHAR(100), OwnerLogin SYSNAME );
+```
+
+Insert seed data:
+```sql
+INSERT INTO dbo.EmployeeData (Name, OwnerLogin) VALUES ('Alice', 'user1'),('Bob',   'user2');
+```
+
+Create logins:
+```sql
+CREATE LOGIN user1 WITH PASSWORD = 'Complex!Pass1';
+CREATE LOGIN user2 WITH PASSWORD = 'Complex!Pass2';
+```
+
+Create users:
+```sql
+CREATE USER user1 FOR LOGIN user1;
+CREATE USER user2 FOR LOGIN user2;
+```
+
+Grant `SELECT` permissions:
+```sql
+GRANT SELECT ON dbo.EmployeeData TO user1;
+GRANT SELECT ON dbo.EmployeeData TO user2;
+```
+
+Create function:
+```sql
+CREATE FUNCTION dbo.fn_securitypredicate(@OwnerLogin SYSNAME) 
+RETURNS TABLE
+WITH SCHEMABINDING AS
+  RETURN SELECT 1 AS fn_result
+  WHERE @OwnerLogin = USER_NAME();
+```
+
+Create security policy:
+```sql
+CREATE SECURITY POLICY dbo.EmployeeFilter
+  ADD FILTER PREDICATE dbo.fn_securitypredicate(OwnerLogin) ON dbo.EmployeeData
+  WITH (STATE = ON);
+```
+
+Verify enforcement for `user1`:
+```sql
+EXECUTE AS USER = 'user1';
+SELECT * FROM dbo.EmployeeData;
+REVERT;
+```
+
+Expected output: Alice's row
+
+Verify enforcement for `user2`:
+```sql
+EXECUTE AS USER = 'user2';
+SELECT * FROM dbo.EmployeeData;
+REVERT;
+```
+
+Expected output: Bob's row
+
+<!-- ------------------------- ------------------------- -->
+
+#### [Sensitivity Classification](https://learn.microsoft.com/en-us/sql/t-sql/statements/add-sensitivity-classification-transact-sql?view=sql-server-ver16)
+...marks columns with metadata indicating their sensitivity so that reporting, masking, encryption, and compliance tools can identify and protect high‑risk data
+
+##### How?  
+- Uses the **sys.sp_add_sensitivity_classification** stored procedure or **ALTER TABLE … ADD SENSITIVITY CLASSIFICATION** DDL to assign a label, information type, and rank to each column  
+- Persists classification metadata in the **sys.sensitivity_classifications** catalog view  
+- Then SQL Server and connected services automatically:  
+  - Surface labels in the SSMS Data Classification pane and the Azure portal “Data discovery & classification” UI  
+  - Drive Microsoft Purview compliance reports and policy enforcement  
+  - Provide recommendations for dynamic data masking and encryption based on labeled columns
+
+
+
+
+
+##### Let's get started!
+
+
+
+
+1. Apply Sensitivity Classification  
+   1. Create the sample table and data  
+      ```sql
+      CREATE TABLE dbo.Customers
+      (
+          Id INT IDENTITY PRIMARY KEY,
+          Email NVARCHAR(256),
+          CreditCardNumber NVARCHAR(50)
+      );
+      INSERT INTO dbo.Customers (Email, CreditCardNumber)
+      VALUES
+          ('alice@example.com','4111-1111-1111-1111'),
+          ('bob@example.com','5500-0000-0000-0004');
+      ```
+   2. Add sensitivity labels  
+      ```sql
+      EXEC sys.sp_add_sensitivity_classification
+          @schema_name           = N'dbo',
+          @table_name            = N'Customers',
+          @column_name           = N'Email',
+          @label_name            = N'Confidential',
+          @information_type_name = N'Contact Information',
+          @rank                  = N'High';
+
+      EXEC sys.sp_add_sensitivity_classification
+          @schema_name           = N'dbo',
+          @table_name            = N'Customers',
+          @column_name           = N'CreditCardNumber',
+          @label_name            = N'Highly Confidential',
+          @information_type_name = N'Financial',
+          @rank                  = N'Critical';
+      ```
+   3. Review classifications  
+      ```sql
+      SELECT * FROM sys.sensitivity_classifications;
+      ```
+
+2. Configure Dynamic Data Masking  
+   1. Add masking rules  
+      ```sql
+      ALTER TABLE dbo.Customers
+      ALTER COLUMN Email
+      ADD MASKED WITH (FUNCTION = 'partial(1,"****@****",1)');
+
+      ALTER TABLE dbo.Customers
+      ALTER COLUMN CreditCardNumber
+      ADD MASKED WITH (FUNCTION = 'default()');
+      ```
+   2. Create a masked‑only user and grant select  
+      ```sql
+      CREATE LOGIN dmLogin WITH PASSWORD = 'MaskUser!23';
+      CREATE USER dmUser FOR LOGIN dmLogin;
+      GRANT SELECT ON dbo.Customers TO dmUser;
+      ```
+   3. Verify masking  
+      ```sql
+      EXECUTE AS USER = 'dmUser';
+      SELECT Email, CreditCardNumber FROM dbo.Customers;
+      REVERT;
+      ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- ------------------------- ------------------------- -->
 
