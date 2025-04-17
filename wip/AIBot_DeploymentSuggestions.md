@@ -242,9 +242,9 @@ Validate results. Try running just `AzureDiagnostics` to see the variety of colu
 
 <!-- ------------------------- ------------------------- -->
 
-#### Web App
+#### Web App
 
-##### Confirm Diagnostic Settings
+##### Confirm Diagnostic Settings
 
 Set identifier values for the Web App and Log Analytics workspace:
 ```powershell
@@ -264,7 +264,7 @@ New-AzDiagnosticSetting -Name "{prefix}wads" -ResourceId $resourceId -WorkspaceI
 
 Use the portal to confirm that the Diagnostic Setting was correctly created.
 
-##### Force Error 
+##### Force Error 
 
 Open Azure Portal >> Cloud Shell and switch to PowerShell.
 
