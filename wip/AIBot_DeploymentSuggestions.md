@@ -197,8 +197,8 @@ Open Azure Portal >> Cloud Shell and switch to PowerShell.
 
 Set identifier values for OpenAI and Log Analytics:
 ```powershell
-$resourceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.CognitiveServices/accounts/{prefix}oa"
-$workspaceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.OperationalInsights/workspaces/{prefix}law"
+$resourceId = "/subscriptions/{subscriptionId}/resourceGroups/{prefix}/providers/Microsoft.CognitiveServices/accounts/{prefix}oa"
+$workspaceId = "/subscriptions/{subscriptionId}/resourceGroups/{prefix}/providers/Microsoft.OperationalInsights/workspaces/{prefix}law"
 ```
 
 Check whether Diagnostic Setting has been added on OpenAI:
@@ -230,7 +230,7 @@ $endpoint = "https://{prefix}oa.openai.azure.com/openai/deployments/gpt-foobar/c
 
 Set an HTTP header that contains the OpenAI, "KEY 1" value:
 ```powershell
-$headers = @{ "api-key" = "CzJfQ9wZg2VcYQyKoGWGrvS33JfpVXsg2noHdlLiwOf3EWxfs9zzJQQJ99BDACYeBjFXJ3w3AAABACOG5gHK"; "Content-Type" = "application/json" }
+$headers = @{ "api-key" = "{OpenAI_KEY1}"; "Content-Type" = "application/json" }
 ```
 
 Create a tiny payload:
@@ -268,8 +268,8 @@ Validate results. Try running just `AzureDiagnostics` to see the variety of colu
 
 Set identifier values for the Web App and Log Analytics workspace:
 ```powershell
-$resourceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.Web/sites/{prefix}wa"
-$workspaceId = "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/{prefix}/providers/Microsoft.OperationalInsights/workspaces/{prefix}law"
+$resourceId = "/subscriptions/{subscriptionId}/resourceGroups/{prefix}/providers/Microsoft.Web/sites/{prefix}wa"
+$workspaceId = "/subscriptions/{subscriptionId}/resourceGroups/{prefix}/providers/Microsoft.OperationalInsights/workspaces/{prefix}law"
 ```
 
 Check whether Diagnostic Setting has been added on Web App:
@@ -326,12 +326,12 @@ Run the following KQL:
 ```kql
 AzureDiagnostics
 | project TimeGenerated, ResourceId = tolower(ResourceId)
-| where ResourceId contains "prefixoa"
+| where ResourceId contains "{prefix}oa"
 | take 3
 | union (
     AppServiceHTTPLogs
     | project TimeGenerated, ResourceId = tolower(_ResourceId)
-    | where ResourceId contains "prefixwa"
+    | where ResourceId contains "{prefix}wa"
     | take 3
 )
 | order by TimeGenerated desc
@@ -358,14 +358,14 @@ The current solution has been validated at pilot loads (~10 users) but must unde
 
 
 | Tool | Pros | Cons | Ideal Use Cases |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :--- | :--- | :--- | :--- |
 | **Azure Load Testing** | - Fully managed and natively integrated with Azure services and monitoring.<br>- Simplifies setup with visual test editors and seamless integration with Azure Monitor.<br>- Lower operational overhead, with centralized logging and alerting out‑of‑the‑box. | - May have higher costs for extended or very high‑load tests.<br>- Custom scripting may be more limited compared to open‑source solutions. | - Team has familiarity with JMeter or existing JMeter scripts.<br>- Quick integration in Azure DevOps pipelines using the Azure Load Testing extension.<br>- Scenarios requiring tight coupling with Azure Monitor and centralized logging. |
 | **K6** | - Highly flexible and scriptable, allowing detailed user journey simulations and custom spike patterns.<br>- Open‑source with strong community support; can be run in containers.<br>- Easily incorporated into Azure DevOps pipelines via self‑hosted agents or Docker tasks. | - Requires management of the test execution environment, including scaling for large tests.<br>- More development effort to set up centralized reporting and integrate with Azure Monitor. | - Complex test scenarios that demand custom scripting and fine‑grained control.<br>- Situations where cost control and custom environment setups (e.g., running tests in existing containers) are prioritized. |
 
 ### Load Testing types
 
 | Test Type | Purpose | Recommended Now? | Notes |
-|------------------------|-----------------------------------------------------------------------------|-----------------------|------------------------------------------------------------------------------------------------|
+| :--- | :--- | :--- | :--- |
 | Component-Level | Validate individual services or APIs under expected load | Yes | Low-cost, fast to run. Helps catch regressions early in isolated components. |
 | End-to-End (E2E) | Simulate real user journeys across the full system | Yes | Critical for validating performance SLAs (e.g., ≤5s) under realistic usage. |
 | Stress Testing | Push system beyond expected limits to identify bottlenecks/failure points | Yes (Periodically) | Useful after baseline/E2E stability. Can be run ad hoc or pre-release. |
@@ -430,47 +430,3 @@ After the initial launch, focus on:
 - **CI/CD Integration**: Implement continuous integration and deployment pipelines to ensure smooth updates and rapid recovery from any issues
 
 - **Ongoing Monitoring & Feedback**: Establish processes for continuous monitoring of system performance, reliability, and cost metrics
-
-------------------------- -------------------------
-------------------------- -------------------------
-------------------------- -------------------------
-
-## Probably "Overkill"...
-The following topics were suggested after a "deep research" review:
-
-### Security
-- Add explicit mention of **DDoS Protection Standard** at the network level to cover Layer 3/4 attacks
-- Clarify **encryption at rest and in transit** is enforced across services (AI data, chat logs, files)
-- Mention use of **Azure Key Vault** for any future secrets or certificates (if needed for bot registration or integrations)
-- Explicitly describe the **Teams-to-Bot traffic path**, including Application Gateway’s public IP and its protection (e.g., IP filtering, WAF rules)
-- Ensure all **private DNS zone** configurations are defined (centralized or per-subscription) for private endpoint resolution
-- Consolidate repeated **PIM (Privileged Identity Management)** references into a single, focused **recommendation**
-
-### Scalability
-- Add **recommendation** to **define region and availability zone strategy** (e.g., single-region/multi-zone vs. multi-region)
-- Add a callout to **add replicas/partitions for Azure Search** to meet SLA and support higher QPS
-- Include note to **validate service-level quotas and subscription limits** for scaling (e.g., vCPU limits, OpenAI throughput)
-- Define rough estimates for **expected peak throughput/concurrent sessions** to inform SKU choices
-- Reference potential **sharding or load balancing** for AI/Search if request volume is very high
-
-### Monitoring
-- Explicitly state that **Application Insights SDK** should be enabled in App Service, Bot Service, and Prompt Flow container apps
-- Add **recommendation** to **set log retention periods** explicitly and review storage/cost tradeoffs
-- Suggest **limiting Log Analytics access via RBAC** and possibly integrate with **Microsoft Sentinel** for security monitoring
-- Recommend **testing alert rules and diagnostics post-deployment** to validate coverage
-
-### Cost Management
-- Add **recommendation** to **set up cost alerts** (e.g., if usage exceeds budget)
-- Suggest evaluating **reserved instances or savings plans** after usage patterns stabilize
-- Reconfirm all subscriptions are **under the same billing scope** for unified tracking
-
-### Stress Testing
-- Add **recommendation** to **test in a production-parity environment** to avoid polluting production data
-- Suggest defining **clear performance pass/fail thresholds** before testing (e.g., response time targets)
-- Ensure test datasets (e.g., for Search, AI) **match production data volume and complexity**
-
-### Post-Deployment
-- Add **Disaster Recovery/Failover strategy** section (even if it's “not in scope for launch”)
-- Recommend **periodic security assessments or pen tests** after go-live
-- Add note about **user training or internal documentation** for bot usage
-- Clarify ownership of **maintenance, CI/CD, and monitoring responsibilities**
