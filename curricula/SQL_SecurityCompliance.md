@@ -420,7 +420,7 @@ Create sample table:
 CREATE TABLE dbo.EmployeeData ( Id INT IDENTITY PRIMARY KEY, Name NVARCHAR(100), OwnerLogin SYSNAME );
 ```
 
-Insert seed data:
+Insert sample data:
 ```sql
 INSERT INTO dbo.EmployeeData (Name, OwnerLogin) VALUES ('Alice', 'user1'),('Bob',   'user2');
 ```
@@ -508,6 +508,21 @@ Expected output: Bob's row
 
 ##### Let's get started!
 
+Create sample table:
+
+```sql
+CREATE TABLE dbo.Customers ( Id INT IDENTITY PRIMARY KEY, Email NVARCHAR(256), CreditCardNumber NVARCHAR(50) );
+```
+
+Insert sample data:
+
+```sql
+INSERT INTO dbo.Customers (Email, CreditCardNumber)
+VALUES
+    ('alice@example.com','4111-1111-1111-1111'),
+    ('bob@example.com','5500-0000-0000-0004');
+```
+
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -516,71 +531,58 @@ Expected output: Bob's row
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
-1. Apply Sensitivity Classification  
-   1. Create the sample table and data  
-      ```sql
-      CREATE TABLE dbo.Customers
-      (
-          Id INT IDENTITY PRIMARY KEY,
-          Email NVARCHAR(256),
-          CreditCardNumber NVARCHAR(50)
-      );
-      INSERT INTO dbo.Customers (Email, CreditCardNumber)
-      VALUES
-          ('alice@example.com','4111-1111-1111-1111'),
-          ('bob@example.com','5500-0000-0000-0004');
-      ```
-   2. Add sensitivity labels via DDL  
-      ```sql
-      ALTER TABLE dbo.Customers
-      ALTER COLUMN Email
-      ADD SENSITIVITY CLASSIFICATION
-      (
-          LABEL = 'Confidential',
-          INFORMATION_TYPE = 'Contact Information',
-          RANK = 'High'
-      );
 
-      ALTER TABLE dbo.Customers
-      ALTER COLUMN CreditCardNumber
-      ADD SENSITIVITY CLASSIFICATION
-      (
-          LABEL = 'Highly Confidential',
-          INFORMATION_TYPE = 'Financial',
-          RANK = 'Critical'
-      );
-      ```
-   3. Review classifications  
-      ```sql
-      SELECT * 
-      FROM sys.sensitivity_classifications
-      WHERE object_name = 'Customers';
-      ```
+1. Add sensitivity labels via DDL  
+```sql
+ALTER TABLE dbo.Customers
+ALTER COLUMN Email
+ADD SENSITIVITY CLASSIFICATION
+(
+LABEL = 'Confidential',
+INFORMATION_TYPE = 'Contact Information',
+RANK = 'High'
+);
 
-2. Configure Dynamic Data Masking  
-   1. Add masking rules  
-      ```sql
-      ALTER TABLE dbo.Customers
-      ALTER COLUMN Email
-      ADD MASKED WITH (FUNCTION = 'partial(1,"****@****",1)');
+ALTER TABLE dbo.Customers
+ALTER COLUMN CreditCardNumber
+ADD SENSITIVITY CLASSIFICATION
+(
+LABEL = 'Highly Confidential',
+INFORMATION_TYPE = 'Financial',
+RANK = 'Critical'
+);
+```
+2. Review classifications  
+```sql
+SELECT * 
+FROM sys.sensitivity_classifications
+WHERE object_name = 'Customers';
+```
 
-      ALTER TABLE dbo.Customers
-      ALTER COLUMN CreditCardNumber
-      ADD MASKED WITH (FUNCTION = 'default()');
-      ```
-   2. Create a masked‑only user and grant select  
-      ```sql
-      CREATE LOGIN dmLogin WITH PASSWORD = 'MaskUser!23';
-      CREATE USER dmUser FOR LOGIN dmLogin;
-      GRANT SELECT ON dbo.Customers TO dmUser;
-      ```
-   3. Verify masking  
-      ```sql
-      EXECUTE AS USER = 'dmUser';
-      SELECT Email, CreditCardNumber 
-      FROM dbo.Customers;
-      REVERT;
-      ```
+1. Configure Dynamic Data Masking  
+2. Add masking rules  
+```sql
+ALTER TABLE dbo.Customers
+ALTER COLUMN Email
+ADD MASKED WITH (FUNCTION = 'partial(1,"****@****",1)');
+
+ALTER TABLE dbo.Customers
+ALTER COLUMN CreditCardNumber
+ADD MASKED WITH (FUNCTION = 'default()');
+```
+3. Create a masked‑only user and grant select  
+```sql
+CREATE LOGIN dmLogin WITH PASSWORD = 'MaskUser!23';
+CREATE USER dmUser FOR LOGIN dmLogin;
+GRANT SELECT ON dbo.Customers TO dmUser;
+```
+4. Verify masking  
+```sql
+EXECUTE AS USER = 'dmUser';
+SELECT Email, CreditCardNumber 
+FROM dbo.Customers;
+REVERT;
+```
 
 
 
