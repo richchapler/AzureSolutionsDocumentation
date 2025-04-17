@@ -411,6 +411,8 @@ USE SecurityDemo;
 - **Performance**: can be inlined by the query optimizer, minimizing overhead
 - **Flexibility**: create multiple predicates without altering the security policy definition
 
+<!-- ------------------------- ------------------------- -->
+
 ##### Let's get started!
 
 Create sample table:
@@ -481,21 +483,38 @@ Expected output: Bob's row
 ...marks columns with metadata indicating their sensitivity so that reporting, masking, encryption, and compliance tools can identify and protect high‑risk data
 
 ##### How?  
-- Uses the **sys.sp_add_sensitivity_classification** stored procedure or **ALTER TABLE … ADD SENSITIVITY CLASSIFICATION** DDL to assign a label, information type, and rank to each column  
-- Persists classification metadata in the **sys.sensitivity_classifications** catalog view  
-- Then SQL Server and connected services automatically:  
-  - Surface labels in the SSMS Data Classification pane and the Azure portal “Data discovery & classification” UI  
-  - Drive Microsoft Purview compliance reports and policy enforcement  
-  - Provide recommendations for dynamic data masking and encryption based on labeled columns
+- Assigns each column a sensitivity label, information type, and classification level  
+- Persists classification details in the system catalog for consistent retrieval and reporting  
+- Triggers automated workflows that:  
+  - surface labels in management interfaces  
+  - generate compliance reports and enforce labeling policies  
+  - provide guidance on masking and encryption based on classifications
 
+##### Assignment Methods
 
+- **Data Definition Language (DDL) Syntax**
+  <br>Example: `ALTER TABLE … ADD SENSITIVITY CLASSIFICATION`
+  - Metadata is embedded **directly in the table definition**  
+  - Aligns with schema‑as‑code workflows and version‑controlled deployment scripts  
+  - Changes appear alongside other schema updates in code reviews and history  
 
+- **System Stored Procedure**
+  <br>Example: `sys.sp_add_sensitivity_classification` 
+  - Labels multiple tables or columns in bulk through a single script  
+  - Applies classifications **without altering existing table definition**s  
+  - Can be scheduled or automated to keep labels up to date regularly
 
+<!-- ------------------------- ------------------------- -->
 
 ##### Let's get started!
 
-
-
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
 
 1. Apply Sensitivity Classification  
    1. Create the sample table and data  
@@ -511,27 +530,31 @@ Expected output: Bob's row
           ('alice@example.com','4111-1111-1111-1111'),
           ('bob@example.com','5500-0000-0000-0004');
       ```
-   2. Add sensitivity labels  
+   2. Add sensitivity labels via DDL  
       ```sql
-      EXEC sys.sp_add_sensitivity_classification
-          @schema_name           = N'dbo',
-          @table_name            = N'Customers',
-          @column_name           = N'Email',
-          @label_name            = N'Confidential',
-          @information_type_name = N'Contact Information',
-          @rank                  = N'High';
+      ALTER TABLE dbo.Customers
+      ALTER COLUMN Email
+      ADD SENSITIVITY CLASSIFICATION
+      (
+          LABEL = 'Confidential',
+          INFORMATION_TYPE = 'Contact Information',
+          RANK = 'High'
+      );
 
-      EXEC sys.sp_add_sensitivity_classification
-          @schema_name           = N'dbo',
-          @table_name            = N'Customers',
-          @column_name           = N'CreditCardNumber',
-          @label_name            = N'Highly Confidential',
-          @information_type_name = N'Financial',
-          @rank                  = N'Critical';
+      ALTER TABLE dbo.Customers
+      ALTER COLUMN CreditCardNumber
+      ADD SENSITIVITY CLASSIFICATION
+      (
+          LABEL = 'Highly Confidential',
+          INFORMATION_TYPE = 'Financial',
+          RANK = 'Critical'
+      );
       ```
    3. Review classifications  
       ```sql
-      SELECT * FROM sys.sensitivity_classifications;
+      SELECT * 
+      FROM sys.sensitivity_classifications
+      WHERE object_name = 'Customers';
       ```
 
 2. Configure Dynamic Data Masking  
@@ -554,11 +577,10 @@ Expected output: Bob's row
    3. Verify masking  
       ```sql
       EXECUTE AS USER = 'dmUser';
-      SELECT Email, CreditCardNumber FROM dbo.Customers;
+      SELECT Email, CreditCardNumber 
+      FROM dbo.Customers;
       REVERT;
       ```
-
-
 
 
 
