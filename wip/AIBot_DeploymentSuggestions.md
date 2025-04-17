@@ -115,10 +115,20 @@ Key performance triggers and cost strategies for scaling remain to be defined; e
 
 ### What we know...
 
-There is a centralized Log Analytics workspace and Diagnostic Settings are auto-deployed via Azure Policy.
+**Log Analytics**: Centralized Log Analytics workspace and Diagnostic Settings auto-deployed via Azure Policy
 
 - **QUESTION**: What subscription is the centralized Log Analytics in and do all stakeholders have access?
 - **QUESTION**: Do Diagnostic Settings for all resources point to the central Log Analytics workspace?
+
+**Cost Management**: Exclusively per-subscription use of Azure Portal > Cost Management + Billing interface
+
+- **RECOMMENDATION**: Prepare solution for centralized cost management across subscriptions 
+- **RECOMMENDATION**: Confirm consistent tagging across all subscriptions {e.g., `CostCenter`} 
+
+**Budget Forecasting**: No proactive strategy for forecasting expenses
+
+- **RECOMMENDATION**: Prepare solution for centralized budget forecasting across subscriptions 
+- **RECOMMENDATION**: Establish recurring process for reviewing spending trends and adjusting resource allocation based on real-world usage 
 
 #### Requirements
 
@@ -139,6 +149,16 @@ The following reporting requirements were shared:
 1. What % of bot queries come from unauthorized sources? (Find common times of day / sources)
 2. How often are users being rate limited? (if at all? are rate limits originating from common sources or resulting from common query scenarios)
 3. How often (if ever) do queries hit the container app from sources other than the bot? (Should be never, but would like to make sure that’s the case)
+
+##### Alerts
+
+1. Unhandled Exceptions (any and all hits from the App Insights exceptions table)
+2. HTTP 5xx responses (5xx hits from AppServiceHTTPLogs)
+3. Container Restarts / App Service Restarts (What's the best source for these logs?)
+4. Latency / response time thresholds (I'm thinking 2-3 seconds for initial response, does MS have recommended threshholds? )
+5. Abrupt increase in message count / spikes. (ideally this would indicate spam or misuse, but maybe this is being overly protective? would this be valuable info to alert on? )
+6. CPU/Memory threshold (80% unless MS disagrees)
+7. MIssing JWT token (this would indicate the message didnt originate from teams / related to detecting spam or unexpected sources of ingress)
 
 <!-- ------------------------- ------------------------- -->
 
@@ -297,109 +317,29 @@ AppServiceHTTPLogs
 Validate results. Try running just `AppServiceHTTPLogs` to see the variety of columns that are available.
 
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
 
+#### Combined “All Errors” Query
 
-#### Part 3: Combined “All Errors” Query
+Open Azure Portal » Log Analytics » Logs and switch to “KQL Mode”.
 
-Once you’ve validated both streams, run this single KQL to see them side by side:
-
+Run the following KQL:
 ```kql
 AzureDiagnostics
-| project TimeGenerated, ResourceId = tolower(ResourceId), Source = "OpenAI"
+| project TimeGenerated, ResourceId = tolower(ResourceId)
+| where ResourceId contains "prefixoa"
+| take 3
 | union (
- AppServiceHTTPLogs
- | where Result != "Success"
- | project TimeGenerated, ResourceId = tolower(_ResourceId), Source = "WebApp"
+    AppServiceHTTPLogs
+    | project TimeGenerated, ResourceId = tolower(_ResourceId)
+    | where ResourceId contains "prefixwa"
+    | take 3
 )
-| sort by TimeGenerated desc
+| order by TimeGenerated desc
 ```
 
-- **AzureDiagnostics** rows (all OpenAI 4xx+ errors) get `Source="OpenAI"`. 
-- **AppServiceHTTPLogs** rows (all non 200 Web App hits) get `Source="WebApp"`. 
-- Results are merged and ordered by timestamp for a unified error timeline.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### Required Logs
-
-##### "Unhandled Exceptions"
-
-- Intent: "Catch-all" monitoring of unexpected errors across all resources
-
-Making rchapler a Contributor so I don't get ListKeys Audit
-
-
-
-
-Category values:
-
-• **Audit** – This category logs administrative, security, and configuration events. It’s generally used for tracking changes or policy actions rather than reporting service exceptions.
-• **AzureOpenAIRequestUsage** – This records usage metrics (like token consumption) and is not focused on errors or exceptions.
-• **RequestResponse** – This category logs full HTTP transactions, including the status codes returned. If an API call fails—such as receiving a 401, 404, or 500 error—it will show up here. It’s your best candidate for finding exceptions or error responses from the OpenAI service.
-• **Trace** – This provides detailed diagnostic information and can include error messages and stack traces when the system logs an unexpected event. It’s also useful for troubleshooting issues, as it may capture more granular exception details.
-
-
-
-
-
-
-
-
-
-
-
-#### Sample Alerts
-
-> Need to review these with Adam Ray on the next call
-
-1. Unhandled Exceptions (any and all hits from the App Insights exceptions table)
-2. HTTP 5xx responses (5xx hits from AppServiceHTTPLogs)
-3. Container Restarts / App Service Restarts (What's the best source for these logs?)
-4. Latency / response time thresholds (I'm thinking 2-3 seconds for initial response, does MS have recommended threshholds? )
-5. Abrupt increase in message count / spikes. (ideally this would indicate spam or misuse, but maybe this is being overly protective? would this be valuable info to alert on? )
-6. CPU/Memory threshold (80% unless MS disagrees)
-7. MIssing JWT token (this would indicate the message didnt originate from teams / related to detecting spam or unexpected sources of ingress)
-
-
-<!-- ------------------------- ------------------------- -->
-
-## Cost Management
-
-### Cost Management → Monitoring 
-Cost tracking currently focuses on the primary subscription; peered subscriptions (hosting Application Gateway and API Management) are not yet included.
-- **RECOMMENDATION**: Expand the centralized cost dashboard to ingest and display costs from the peered subscriptions alongside the primary subscription 
-- **RECOMMENDATION**: Apply consistent tagging across all subscriptions (including the Application Gateway and API Management resource groups) to enable unified cost reporting 
-- **QUESTION**: Will the peered subscriptions be consolidated under the same billing scope, and how should budgets and alerts be configured to cover cross‑subscription expenses?
-
-### Budget Forecasting 
-No proactive strategy is currently defined for forecasting expenses in line with **scaling demands**.
-
-- **RECOMMENDATION**: Use collected cost data to accurately forecast expenses as the user base expands 
-- **RECOMMENDATION**: Establish a recurring process for reviewing spending trends and adjusting resource allocation based on real-world usage 
-- **QUESTION**: How will the customer integrate budget forecasting into scaling and resource planning decisions?
+> <u>Notes</u>
+> * `take 3` to limit union'd results for presentation
+> * `project` columns are severely limited for presentation... a mapping exercise will be required to map columns across log tables
 
 <!-- ------------------------- ------------------------- -->
 
