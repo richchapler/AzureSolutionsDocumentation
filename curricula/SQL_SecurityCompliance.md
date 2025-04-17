@@ -274,6 +274,104 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
+### Quiz
+
+1. Which statement best distinguishes authentication from authorization?  
+    A) Authentication grants permissions; authorization verifies identity  
+    B) Authentication verifies identity; authorization grants permissions  
+    C) Authentication and authorization are the same process  
+    D) Authentication encrypts data; authorization masks data  
+
+2. What is the primary benefit of row‑level security?  
+    A) It encrypts individual columns within a table  
+    B) It masks sensitive data at query time  
+    C) It filters rows so users see only the data they are allowed to view  
+    D) It audits user activity on a per‑row basis  
+
+3. Which statement best describes the role of Transparent Data Encryption?  
+    A) It masks data for unauthorized users  
+    B) It encrypts data at rest to protect physical files and backups  
+    C) It enforces multi‑factor authentication  
+    D) It classifies sensitive data for reporting  
+
+4. Which concept is unique to Always Encrypted compared with other encryption methods?  
+    A) It encrypts network traffic between client and server  
+    B) It provides disk‑level encryption managed by the operating system  
+    C) It encrypts data on the client so the database engine only sees ciphertext  
+    D) It rotates encryption keys automatically without user intervention  
+
+5. What is the conceptual purpose of dynamic data masking?  
+    A) To obscure sensitive values at query time for unauthorized users  
+    B) To encrypt data in transit  
+    C) To classify columns by sensitivity level  
+    D) To enforce firewall rules on client connections  
+
+6. What does sensitivity classification enable?  
+    A) Real‑time anomaly detection on queries  
+    B) Tagging of data with metadata to drive protection and reporting  
+    C) Automatic purging of old data based on labels  
+    D) Encryption of backups using Azure Key Vault  
+
+7. Which statement best describes network isolation?  
+    A) It encrypts data at rest  
+    B) It audits user activity across networks  
+    C) It classifies network traffic by sensitivity  
+    D) It restricts client connectivity using firewalls, endpoints, and VPNs  
+
+8. What is the primary purpose of auditing in SQL environments?  
+    A) To record security‑relevant events for accountability and compliance  
+    B) To automatically remediate misconfigurations  
+    C) To mask data for unauthorized users  
+    D) To enforce row‑level security policies  
+
+9. How does anomaly detection support threat detection?  
+    A) It enforces encryption at rest  
+    B) It schedules periodic vulnerability scans  
+    C) It applies sensitivity labels automatically  
+    D) It identifies unusual patterns or behaviors that may indicate a threat  
+
+10. Which best describes the difference between continuous monitoring and scheduled reviews?  
+    A) Continuous monitoring uses manual audits; scheduled reviews use automated tools  
+    B) Continuous monitoring collects real‑time metrics and alerts; scheduled reviews conduct periodic manual inspections  
+    C) Continuous monitoring rotates encryption keys; scheduled reviews purge old data  
+    D) Continuous monitoring encrypts data in transit; scheduled reviews classify sensitive data  
+
+<!-- ------------------------- ------------------------- -->
+
+#### Answers
+
+1. **B** – Authentication verifies identity; authorization grants permissions  
+   *Authentication confirms who you are, while authorization determines what you can do once identified.*
+
+2. **C** – It filters rows so users see only the data they are allowed to view  
+   *Row‑level security applies predicates so each user sees only their permitted subset of data.*
+
+3. **B** – It encrypts data at rest to protect physical files and backups  
+   *Transparent Data Encryption secures data on disk and in backups without changing application code.*
+
+4. **C** – It encrypts data on the client so the database engine only sees ciphertext  
+   *Always Encrypted ensures sensitive values are encrypted before reaching the server, preventing administrators from viewing plaintext.*
+
+5. **A** – To obscure sensitive values at query time for unauthorized users  
+   *Dynamic Data Masking replaces actual data with masked output in query results for users lacking unmasking privileges.*
+
+6. **B** – Tagging of data with metadata to drive protection and reporting  
+   *Sensitivity classification labels columns or tables, enabling governance tools and reports to identify high‑risk data.*
+
+7. **D** – It restricts client connectivity using firewalls, endpoints, and VPNs  
+   *Network isolation limits access at the network layer, ensuring only approved paths and addresses can reach the database.*
+
+8. **A** – To record security‑relevant events for accountability and compliance  
+   *Auditing captures actions like logins, schema changes, and policy modifications for later review and evidence.*
+
+9. **D** – It identifies unusual patterns or behaviors that may indicate a threat  
+   *Anomaly detection spots deviations from normal activity—such as repeated failures or odd queries—that warrant investigation.*
+
+10. **B** – Continuous monitoring collects real‑time metrics and alerts; scheduled reviews conduct periodic manual inspections  
+   *Continuous monitoring provides ongoing visibility through metrics and alerts, while scheduled reviews involve deliberate, regular audits of logs and configurations.*
+
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+
 ## On‑Prem
 
 ### Exercise
@@ -318,7 +416,7 @@ Set up a **SQL Server** instance with the following:
   GO
   ```
 
-------------------------- -------------------------
+<!-- ------------------------- ------------------------- -->
 
 ### Quiz
 
@@ -358,7 +456,7 @@ Set up a **SQL Server** instance with the following:
    C) Always Encrypted  
    D) Transparent Data Encryption
 
-------------------------- -------------------------
+<!-- ------------------------- ------------------------- -->
 
 #### Answers
 
@@ -369,7 +467,7 @@ Set up a **SQL Server** instance with the following:
 5. **B*- – **SQL Server** Audit logs security‑related events  
 6. **A*- – Using VPNs, IP whitelisting, and firewalls helps limit network access
 
-------------------------- -------------------------
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Azure
 
@@ -381,7 +479,7 @@ Set up a **SQL Server** instance with the following:
 - **Step 4**: Review and apply network isolation settings using service or private endpoints  
 - **Step 5**: Use Azure Policy to assign compliance initiatives and run remediation tasks to ensure all deployments meet required standards
 
-------------------------- -------------------------
+<!-- ------------------------- ------------------------- -->
 
 ### Quiz
 
@@ -409,7 +507,7 @@ Set up a **SQL Server** instance with the following:
    C) Entra ID Authentication  
    D) Certificate Authentication
 
-------------------------- -------------------------
+<!-- ------------------------- ------------------------- -->
 
 #### Answers
 
