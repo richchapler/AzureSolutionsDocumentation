@@ -477,7 +477,7 @@ REVERT;
 
 Expected output: Bob's row
 
-<!-- ------------------------- ------------------------- -->
+------------------------- -------------------------
 
 #### [Sensitivity Classification](https://learn.microsoft.com/en-us/sql/t-sql/statements/add-sensitivity-classification-transact-sql?view=sql-server-ver16)
 ...marks columns with metadata indicating their sensitivity so that reporting, masking, encryption, and compliance tools can identify and protect high‑risk data
