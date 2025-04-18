@@ -4,10 +4,10 @@
 
 The database administration team at a mid‑sized organization must ensure that critical data is protected against corruption, accidental deletion, or system failures. Key requirements:
 
-* Data Protection: Guarding against data loss with reliable backup strategies
-* Rapid Recovery: Minimizing downtime and data loss by restoring data efficiently
-* Compliance & Security: Meeting regulatory and internal standards by securing backup files and validating restore procedures
-* Operational Continuity: Ensuring that data can be recovered quickly during planned maintenance or unexpected outages
+* Data Protection: **Guarding against data loss** with reliable backup strategies
+* Rapid Recovery: **Minimizing downtime and data loss** by restoring data efficiently
+* Compliance and Security: **Meeting regulatory and internal standards** by securing backup files and validating restore procedures
+* Operational Continuity: **Ensuring that data can be recovered quickly** during planned maintenance or unexpected outages
 
 ------------------------- -------------------------
 
@@ -19,58 +19,59 @@ The database administration team at a mid‑sized organization must ensure that 
 
 ##### Types
 
-* **Full Backup**: A full backup is a complete snapshot of the entire database at a specific moment—a “photo” of your database. This backup serves as the foundational baseline for all subsequent backup activities.
+* **Full**: capture a  **complete snapshot** of the entire database **at a specific moment**; this backup serves as the **foundational baseline for all subsequent backup activities**
 
-* **Differential Backup**: Differential backups capture only the changes made since the last full backup. They act like incremental snapshots that record what’s different from the baseline. Over time, they provide a cumulative record of modifications while reducing the amount of data to be backed up compared to a full backup.
+* **Differential**: capture **only the changes made since the last full backup**, provide **a cumulative record of modifications**, and **reduce the amount of data** that needs to be backed up
 
-* **Transaction Log Backup**: For databases using a full or bulk‑logged recovery model, transaction log backups record every transaction that occurs after the last backup. This continuous log enables administrators to capture near real‑time changes and supports point‑in‑time recovery.
+* **Transaction Logs**: record **every transaction that occurs after the last backup**; this continuous log enables administrators to capture **near real‑time** changes and supports **point‑in‑time recovery**
 
-* **Ad Hoc (COPY_ONLY) Backups**: COPY_ONLY backups provide an independent snapshot without disturbing the regular backup sequence. They’re ideal for ad‑hoc scenarios—such as before major changes or testing—ensuring that your scheduled backup strategy remains intact.
-  > Note: In Always‑On Availability Groups use COPY_ONLY when backing up a secondary replica to avoid breaking the primary replica’s log chain
+* **Ad Hoc**: provide **an independent snapshot without disturbing the regular backup sequence**; ideal for ad‑hoc scenarios {e.g., before major changes or testing}
 
-* **Tail‑Log Backup**: Captures the active portion of the transaction log (the “tail”) that hasn’t yet been backed up. Use this immediately before a restore operation to ensure no committed transactions are lost.
+* **"Tail‑Log"**: Captures the **active portion of the transaction log** (the “tail”) that hasn’t yet been backed up; use this immediately before a restore operation to ensure no committed transactions are lost
 
 ##### Designing a Backup Plan
 
 A robust backup plan starts with understanding the criticality of your data and how frequently it changes. Key elements include:
 
-* **Frequency**: Decide how often to perform each type of backup. Full backups, which are larger, are scheduled less frequently, while differential and transaction log backups are run more often. The frequency should align with business needs and ensure that any potential data loss falls within your predetermined Recovery Point Objective (RPO).
+* **Frequency**: Decide how often to perform each type of backup
+  * Full backups, which are larger, are scheduled less frequently
+  * Differential and transaction log backups are run more often
+  * ...should align with business needs and ensure that any potential data loss falls within your predetermined Recovery Point Objective
 
-* **Storage Locations**: Choose between on‑site storage for rapid recovery and off‑site or cloud‑based storage for disaster recovery. Secure, redundant storage solutions—ideally with encryption—minimize the risk of data loss due to localized failures  
-  note for Azure VM backups select the appropriate Azure Storage redundancy options  
-  * locally‑redundant storage (LRS) for three copies in one region  
-  * zone‑redundant storage (ZRS) for copies across availability zones in one region  
-  * geo‑redundant storage (GRS) to replicate to a secondary region  
-  * read‑access geo‑redundant storage (RA‑GRS) to enable read access in the secondary region  
+* **Storage Locations**: Choose between on‑site storage for rapid recovery and off‑site (or cloud‑based storage)
+  * Secure, redundant storage solutions (ideally with encryption) **minimize the risk of data loss due to localized failures**
 
-* **Automation**: Implement automated scheduling and monitoring for backup operations. Automation minimizes human error by consistently executing backup jobs and provides real‑time alerts if issues arise, ensuring backups complete successfully and are available when needed.
+* **Automation**: Implement automated scheduling and monitoring for backup operations 
+  * Automation minimizes human error by consistently executing backup jobs and provides real‑time alerts if issues arise, ensuring backups complete successfully and are available when needed
 
 #### Restore
 
-##### Restore and Recovery Procedures
+##### Recovery Procedures
 
 Restoring a database reverses the backup process and consists of these steps:
 
-* **Full Backup Restoration:** Restore the most recent full backup **WITH NORECOVERY** to keep the database offline and allow additional backups to be applied
+* **Full**: Restore the most recent full backup WITH NORECOVERY to keep the database offline and allow additional backups to be applied
  
-* **Differential Backup Application:** Apply the latest differential backup **WITH NORECOVERY** to continue stacking changes without bringing the database online
+* **Differential**: Apply the latest differential backup WITH NORECOVERY to continue stacking changes without bringing the database online
 
-* **Transaction Log Restoration:** Restore each transaction log backup **WITH NORECOVERY**, then for the final log use **WITH RECOVERY** (or **WITH STOPAT = 'timestamp', RECOVERY** for point‑in‑time) to bring the database online
+* **Transaction Log**: Restore each transaction log backup WITH NORECOVERY, then for the final log use WITH RECOVERY (or WITH STOPAT = 'timestamp', RECOVERY for point‑in‑time) to bring the database online
  
-* **Tail‑Log Restore (Optional):** Backup and restore the tail of the log **WITH NORECOVERY** immediately before the final recovery to capture any remaining transactions
+* **"Tail‑Log"**: Backup and restore the tail of the log WITH NORECOVERY immediately before the final recovery to capture any remaining transactions
 
-> **Example: Mid‑Week Point‑in‑Time Recovery**  
-> Suppose you run:  
-> * Weekly full backups on Sunday  
-> * Differential backups nightly at 01:00  
-> * Transaction‑log backups every 5 minutes  
->  
-> If the database fails on **Wednesday at 10:00**, your restore sequence is:  
-> 1. **Restore Sunday’s full backup** WITH NORECOVERY  
-> 2. **Restore Wednesday’s differential backup** (taken at 01:00) WITH NORECOVERY  
-> 3. **Restore transaction‑log backups** from 01:00 up to 10:00 WITH STOPAT='2025-04-08T10:00:00' AND NORECOVERY  
-> 4. *(Optional)* Perform a **tail‑log backup** and restore it WITH NORECOVERY to capture any final transactions  
-> 5. **Bring the database online** WITH RECOVERY
+-------------------------
+
+##### Example: Mid‑Week Point‑in‑Time Recovery 
+Suppose you run:  
+* Weekly full backups on Sunday  
+* Differential backups nightly at 01:00  
+* Transaction‑log backups every 5 minutes  
+ 
+If the database fails on **Wednesday at 10:00**, your restore sequence is:  
+1. **Restore Sunday’s full backup** WITH NORECOVERY  
+2. **Restore Wednesday’s differential backup** (taken at 01:00) WITH NORECOVERY  
+3. **Restore transaction‑log backups** from 01:00 up to 10:00 WITH STOPAT='2025-04-08T10:00:00' AND NORECOVERY  
+4. *(Optional)* Perform a **tail‑log backup** and restore it WITH NORECOVERY to capture any final transactions  
+5. **Bring the database online** WITH RECOVERY
 
 ------------------------- -------------------------
 
