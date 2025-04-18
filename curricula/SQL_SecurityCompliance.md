@@ -39,7 +39,7 @@ The database administration team at a mid‑sized organization must ensure that 
     - Assign that login to the appropriate **SQL Server** role
     - Upshot: Active Directory manages membership 
 - **Row Level Security**: restrict access to table rows based on the executing user’s context  
-  - **SQL Server**: create an inline table‑valued function and enforce it via CREATE SECURITY POLICY … ADD FILTER PREDICATE to apply row‑level filters  
+  - **SQL Server**: create an inline table‑valued function and enforce it via CREATE SECURITY POLICY ... ADD FILTER PREDICATE to apply row‑level filters  
   - **Azure SQL**: use the same T‑SQL security policy approach, leveraging Entra ID principals or SESSION_CONTEXT to drive the filter logic
 
 <!-- ------------------------- ------------------------- -->
@@ -88,7 +88,7 @@ The database administration team at a mid‑sized organization must ensure that 
 - **At Rest**: data stored on disk or in backups
 
   - **Transparent Data Encryption**: encrypts the entire database on disk  
-    - **SQL Server**: create a database master key and certificate, then run ALTER DATABASE … SET ENCRYPTION ON  
+    - **SQL Server**: create a database master key and certificate, then run ALTER DATABASE ... SET ENCRYPTION ON  
     - **Azure SQL**: enabled by default; manage keys via Azure Key Vault or use service‑managed keys in the Azure portal
 
   - **Column‑Level Encryption**: encrypts specific sensitive columns  
@@ -111,6 +111,10 @@ The database administration team at a mid‑sized organization must ensure that 
     - **SQL Server**: configure column master keys and column encryption keys using **SQL Server** Management Studio or PowerShell; enable client‑side encryption by specifying Column Encryption Setting=Enabled in the connection string  
     - **Azure SQL**: integrate with Azure Key Vault for key management; enable Always Encrypted through the Azure portal or PowerShell and set Column Encryption Setting=Enabled in the connection string
 
+    - **Encryption types**  
+      - **Deterministic**: same plaintext always produces the same ciphertext, which lets you do equality joins and filters  
+      - **Randomized**: produces different ciphertexts for the same plaintext, giving stronger protection but no support for searching or joining
+
 - **Storage Encryption**: apply encryption at the storage layer to protect database files and backups at rest  
   - **SQL Server**: use BitLocker to encrypt volumes hosting database files and ensure backup targets reside on encrypted media  
   - **Azure SQL**: rely on Azure Storage Service Encryption, which automatically encrypts database files and backups using Microsoft‑managed or customer‑managed keys in Azure Key Vault  
@@ -118,7 +122,7 @@ The database administration team at a mid‑sized organization must ensure that 
 <!-- ------------------------- ------------------------- -->
 
 ### Key Management  
-…secure and rotate cryptographic keys that underpin encryption  
+...secure and rotate cryptographic keys that underpin encryption  
 
 - **Key Management**: manage keys for database encryption features  
   - **SQL Server**: store keys in a database master key protected by a certificate or hardware security module via Extensible Key Management; rotate keys using ALTER MASTER KEY and certificate commands  
@@ -134,7 +138,7 @@ The database administration team at a mid‑sized organization must ensure that 
   - **Azure SQL**: run “Data discovery & classification” scans in the Azure portal or call sys.sp_add_sensitivity_classification via T‑SQL; view and manage labels in the portal or via sys.sensitivity_classifications  
 
 - **Dynamic Data Masking**: define masking rules to obscure sensitive column data **at query time**  
-  - **SQL Server**: use ALTER TABLE … ALTER COLUMN … ADD MASKED WITH (FUNCTION = 'default()' or custom functions); manage masks in SSMS under Security > Dynamic Data Masking  
+  - **SQL Server**: use ALTER TABLE ... ALTER COLUMN ... ADD MASKED WITH (FUNCTION = 'default()' or custom functions); manage masks in SSMS under Security > Dynamic Data Masking  
   - **Azure SQL**: configure masks in the Azure portal “Dynamic Data Masking” blade or via the same T‑SQL ADD MASKED statements; supports default, email, and partial masks  
 
 - **Microsoft Purview**: catalog and govern data assets with automated scanning and classification  
@@ -148,7 +152,7 @@ The database administration team at a mid‑sized organization must ensure that 
 <!-- ------------------------- ------------------------- -->
 
 ### Lifecycle Management  
-…manage data retention, purging, and archival for compliance  
+...manage data retention, purging, and archival for compliance  
 
 - **Retention Policies**: implement temporal tables or partition switching to expire data after a set period  
   - **SQL Server**: configure system‑versioned temporal tables with HISTORY_RETENTION_PERIOD or use partition switching to archive old data  
@@ -165,7 +169,7 @@ The database administration team at a mid‑sized organization must ensure that 
 <!-- ------------------------- ------------------------- -->
 
 ### Auditing  
-…record security‑relevant events for accountability  
+...record security‑relevant events for accountability  
 
 - **Auditing**: configure audit logs to capture actions such as schema changes, logins, and security policy modifications  
   - **SQL Server**: create a Server Audit and Server Audit Specification, target FILE or Windows Application log, then enable both  
@@ -178,7 +182,22 @@ The database administration team at a mid‑sized organization must ensure that 
 
 - **Monitoring**: collect and review logs and metrics to understand normal activity  
   - **SQL Server**: query dynamic management views (for example, sys.dm_exec_sessions and sys.dm_os_wait_stats) to track server and session activity  
-  - **Azure SQL**: use Azure Monitor (Log Analytics) to collect logs, metrics, and configure alerts
+  - **Azure SQL**: use Azure Monitor (Log Analytics) to collect logs and metrics  
+    - configure **alert logic threshold** to Dynamic for usage metrics :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1}  
+    - set **Threshold Sensitivity** to Low to only trigger on significant, sustained deviations :contentReference[oaicite:2]{index=2}&#8203;:contentReference[oaicite:3]{index=3}  
+
+<!-- ------------------------- ------------------------- -->
+
+### Vulnerability Assessment  
+...automated security scanning to identify misconfigurations, missing patches, and insecure settings  
+
+- **Vulnerability Assessment**: built‑in scans that detect security issues and insecure configurations  
+  - **SQL Server**: run the built‑in vulnerability assessment in SQL Server Management Studio or via T‑SQL, review results in the GUI  
+  - **Azure SQL**: enable as part of Advanced Data Security on the server or database (portal or PowerShell) and view findings under the Vulnerability Assessment blade :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1}
+
+- **Remediation**: actionable guidance and exportable scripts to fix detected issues  
+  - **SQL Server**: generate exportable reports (Excel or PDF) and apply recommended fixes manually or via T‑SQL  
+  - **Azure SQL**: download remediation scripts from the portal and automate remediation with Azure PowerShell or Azure CLI  
 
 <!-- ------------------------- ------------------------- -->
 
@@ -427,8 +446,8 @@ INSERT INTO dbo.EmployeeData (Name, OwnerLogin) VALUES ('Alice', 'user1'),('Bob'
 
 Create logins:
 ```sql
-CREATE LOGIN user1 WITH PASSWORD = 'Complex!Pass1';
-CREATE LOGIN user2 WITH PASSWORD = 'Complex!Pass2';
+CREATE LOGIN user1 WITH PASSWORD = '<password>';
+CREATE LOGIN user2 WITH PASSWORD = '<password>';
 ```
 
 Create users:
@@ -602,7 +621,7 @@ ADD MASKED WITH (FUNCTION = 'partial(0,"XXXX-XXXX-XXXX-",4)');
 
 Create a login and user with SELECT permission only:
 ```sql
-CREATE LOGIN dmLogin WITH PASSWORD = 'MaskUser!23';
+CREATE LOGIN dmLogin WITH PASSWORD = '<password>';
 CREATE USER dmUser FOR LOGIN dmLogin;
 GRANT SELECT ON dbo.Customers TO dmUser;
 ```
