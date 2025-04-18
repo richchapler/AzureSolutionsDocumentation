@@ -554,10 +554,11 @@ FROM sys.sensitivity_classifications sc
 	JOIN sys.schemas s ON o.schema_id = s.schema_id
 ```  
 
-View labels in the Data Classification interface:
+Launch SQL Server Management Studio, right‑click the `SecurityDemo` database, then click Tasks → Data Discovery and Classification → Classify Data.
 
-* SQL Server Management Studio: right‑click the database, then Tasks → Data Discovery and Classification → Classify Data
-* Select the `Customers` table, click "Load Columns" and verify the new labels on `CreditCardNumber` and `Email`
+<img src="./SQL_SecurityCompliance/SSMS_DataClassification.png" width="800" title="Snipped April, 2025" />
+
+Select the `Customers` table, click "Load Columns" and verify the new labels on `CreditCardNumber` and `Email`.
 
 ##### Final Thought
 Classification by itself does not change data or enforce anything; it is simply metadata that can be used to:
@@ -574,29 +575,14 @@ Classification by itself does not change data or enforce anything; it is simply 
 
 ------------------------- -------------------------
 
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-
-#### [Dynamic Data Masking](https://learn.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16)  
+#### [Dynamic Data Masking](https://learn.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking)  
 ...obscures sensitive column values in query results for users who are not authorized to view the underlying data
 
 ##### How?  
-- Adds masking rules to sensitive columns using `ALTER TABLE ... ADD MASKED`  
+- Adds masking rules to sensitive columns  
 - Applies masking automatically at query time without modifying actual data  
-- Enforced at the engine level and visible only to users without UNMASK permission
-
-##### Supported Masking Functions
-- `default()` – full masking based on data type  
-- `partial(prefix, padding, suffix)` – retains partial content, masks the rest  
-- `email()` – masks name and domain, leaves structure  
-- `random(start, end)` – for numeric ranges
-
----
+- Enforced at the engine level and 
+- Masked data visible only to users with UNMASK permission
 
 ##### Let's get started!
 
