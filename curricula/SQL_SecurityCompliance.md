@@ -776,29 +776,29 @@ SubscriptionName  SubscriptionId Account Environment
 
 ##### Create Resource Group  
 ```powershell
-New-AzResourceGroup -Name prefixrg -Location westus
+New-AzResourceGroup -Name {prefix}rg -Location westus
 ```
 
 Expected output:
 ```plaintext
-ResourceGroupName : prefixrg
+ResourceGroupName : {prefix}rg
 Location          : westus
 ProvisioningState : Succeeded
 Tags              : 
-ResourceId        : /subscriptions/<subscriptionid>/resourceGroups/prefixrg
+ResourceId        : /subscriptions/<subscriptionid>/resourceGroups/{prefix}rg
 ```
 
 ##### Create Log Analytics Workspace 
 ```powershell
-New-AzOperationalInsightsWorkspace -ResourceGroupName prefixrg -Name prefixla -Location westus -Sku PerGB2018
+New-AzOperationalInsightsWorkspace -ResourceGroupName {prefix}rg -Name {prefix}la -Location westus -Sku PerGB2018
 ```
 
 Expected output:
 ```plaintext
-Name                                : prefixla
-ResourceId                          : /subscriptions/<subscriptionid>/resourceGroups/prefixrg/providers/Microsoft.OperationalInsights/workspaces/pref
+Name                                : {prefix}la
+ResourceId                          : /subscriptions/<subscriptionid>/resourceGroups/{prefix}rg/providers/Microsoft.OperationalInsights/workspaces/pref
                                       ixla
-ResourceGroupName                   : prefixrg
+ResourceGroupName                   : {prefix}rg
 Location                            : westus
 Tags                                : {}
 Sku                                 : PerGB2018
@@ -821,21 +821,21 @@ DefaultDataCollectionRuleResourceId :
 ##### Create SQL Server 
 ```powershell
 $cred = Get-Credential -Message "Enter SQL admin credentials" -UserName "sqladmin"
-New-AzSqlServer -ResourceGroupName prefixrg -ServerName prefixss -Location westus -SqlAdministratorCredentials $cred
+New-AzSqlServer -ResourceGroupName {prefix}rg -ServerName {prefix}ss -Location westus -SqlAdministratorCredentials $cred
 ```
 
 Expected output:
 ```plaintext
-ResourceGroupName             : prefixrg
-ServerName                    : prefixss
+ResourceGroupName             : {prefix}rg
+ServerName                    : {prefix}ss
 Location                      : westus
 SqlAdministratorLogin         : sqladmin
 SqlAdministratorPassword      : 
 ServerVersion                 : 12.0
 Tags                          : 
 Identity                      : 
-FullyQualifiedDomainName      : prefixss.database.windows.net
-ResourceId                    : /subscriptions/<subscriptionid>/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss
+FullyQualifiedDomainName      : {prefix}ss.database.windows.net
+ResourceId                    : /subscriptions/<subscriptionid>/resourceGroups/{prefix}rg/providers/Microsoft.Sql/servers/{prefix}ss
 MinimalTlsVersion             : 1.2
 PublicNetworkAccess           : Enabled
 RestrictOutboundNetworkAccess : Disabled
@@ -847,14 +847,14 @@ FederatedClientId             :
 
 ##### Create Sample Database 
 ```powershell
-New-AzSqlDatabase -ResourceGroupName prefixrg -ServerName prefixss -DatabaseName prefixsd -RequestedServiceObjectiveName "S0"
+New-AzSqlDatabase -ResourceGroupName {prefix}rg -ServerName {prefix}ss -DatabaseName {prefix}sd -RequestedServiceObjectiveName "S0"
 ```
 
 Expected output:
 ```plaintext
-ResourceGroupName                : prefixrg
-ServerName                       : prefixss
-DatabaseName                     : prefixsd
+ResourceGroupName                : {prefix}rg
+ServerName                       : {prefix}ss
+DatabaseName                     : {prefix}sd
 Location                         : westus
 DatabaseId                       : 419724c7-5e04-43d0-a197-d408967ec1c6
 Edition                          : Standard
@@ -870,7 +870,7 @@ RequestedServiceObjectiveId      :
 ElasticPoolName                  : 
 EarliestRestoreDate              : 
 Tags                             : 
-ResourceId                       : /subscriptions/<subscriptionid>/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss/databases/prefixs
+ResourceId                       : /subscriptions/<subscriptionid>/resourceGroups/{prefix}rg/providers/Microsoft.Sql/servers/{prefix}ss/databases/{prefix}s
                                    d
 CreateMode                       : 
 ReadScale                        : Disabled
@@ -904,13 +904,13 @@ PerformCutover                   :
 
 ##### Create Firewall Rule
 ```powershell
-New-AzSqlServerFirewallRule -ResourceGroupName prefixrg -ServerName prefixss -FirewallRuleName AllowMyIP -StartIpAddress <ipaddress> -EndIpAddress <ipaddress>
+New-AzSqlServerFirewallRule -ResourceGroupName {prefix}rg -ServerName {prefix}ss -FirewallRuleName AllowMyIP -StartIpAddress <ipaddress> -EndIpAddress <ipaddress>
 ```
 
 Expected output:
 ```plaintext
-ResourceGroupName : prefixrg
-ServerName        : prefixss
+ResourceGroupName : {prefix}rg
+ServerName        : {prefix}ss
 StartIpAddress    : <ipaddress>
 EndIpAddress      : <ipaddress>
 FirewallRuleName  : AllowMyIP
@@ -918,13 +918,13 @@ FirewallRuleName  : AllowMyIP
 
 ##### Set Administrator
 ```powershell
-Set-AzSqlServerActiveDirectoryAdministrator -ResourceGroupName prefixrg -ServerName prefixss -DisplayName "<myuser_principalname>" -ObjectId "<myuser_objectid>"
+Set-AzSqlServerActiveDirectoryAdministrator -ResourceGroupName {prefix}rg -ServerName {prefix}ss -DisplayName "<myuser_principalname>" -ObjectId "<myuser_objectid>"
 ```
 
 Expected output:
 ```plaintext
-ResourceGroupName           : prefixrg
-ServerName                  : prefixss
+ResourceGroupName           : {prefix}rg
+ServerName                  : {prefix}ss
 DisplayName                 : <myuser_principalname>
 ObjectId                    : <myuser_objectid>
 IsAzureADOnlyAuthentication : 
@@ -932,7 +932,7 @@ IsAzureADOnlyAuthentication :
 
 ##### Enable Advanced Threat Protection
 ```powershell
-Update-AzSqlServerAdvancedThreatProtectionSetting -ResourceGroupName "prefixrg" -ServerName "prefixss"
+Update-AzSqlServerAdvancedThreatProtectionSetting -ResourceGroupName "{prefix}rg" -ServerName "{prefix}ss"
 ```
 
 Expected output:
