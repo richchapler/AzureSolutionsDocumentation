@@ -477,6 +477,9 @@ REVERT;
 
 Expected output: Bob's row
 
+##### Final Thought  
+Row‑level security is a powerful way to enforce access boundaries directly within the database engine, ensuring that users see only the data they are meant to see—even when querying the same table. By combining simple user mappings with a reusable predicate function, policies can be implemented cleanly and maintained consistently without modifying application code or duplicating data across tables.
+
 ------------------------- -------------------------
 
 #### Exercise #2: [Sensitivity Classification](https://learn.microsoft.com/en-us/sql/t-sql/statements/add-sensitivity-classification-transact-sql?view=sql-server-ver16)
@@ -571,8 +574,35 @@ Classification by itself does not change data or enforce anything; it is simply 
 
 ------------------------- -------------------------
 
-#### Dynamic Data Masking  
-2. Add masking rules  
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
+
+#### [Dynamic Data Masking](https://learn.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16)  
+...obscures sensitive column values in query results for users who are not authorized to view the underlying data
+
+##### How?  
+- Adds masking rules to sensitive columns using `ALTER TABLE ... ADD MASKED`  
+- Applies masking automatically at query time without modifying actual data  
+- Enforced at the engine level and visible only to users without UNMASK permission
+
+##### Supported Masking Functions
+- `default()` – full masking based on data type  
+- `partial(prefix, padding, suffix)` – retains partial content, masks the rest  
+- `email()` – masks name and domain, leaves structure  
+- `random(start, end)` – for numeric ranges
+
+---
+
+##### Let's get started!
+
+Apply masking to previously classified columns:
+
+Add masking rules:
 ```sql
 ALTER TABLE dbo.Customers
 ALTER COLUMN Email
@@ -582,19 +612,36 @@ ALTER TABLE dbo.Customers
 ALTER COLUMN CreditCardNumber
 ADD MASKED WITH (FUNCTION = 'default()');
 ```
-3. Create a masked‑only user and grant select  
+
+Create a login and user with SELECT permission only:
 ```sql
 CREATE LOGIN dmLogin WITH PASSWORD = 'MaskUser!23';
 CREATE USER dmUser FOR LOGIN dmLogin;
 GRANT SELECT ON dbo.Customers TO dmUser;
 ```
-4. Verify masking  
+
+Test masking behavior:
 ```sql
 EXECUTE AS USER = 'dmUser';
-SELECT Email, CreditCardNumber 
-FROM dbo.Customers;
+SELECT Email, CreditCardNumber FROM dbo.Customers;
 REVERT;
 ```
+
+Expected output:
+```plaintext
+Email             | CreditCardNumber
+------------------|---------------------
+a****@****m       | XXXX-XXXX-XXXX-XXXX
+b****@****m       | XXXX-XXXX-XXXX-XXXX
+```
+
+---
+
+##### Final Thought  
+Masking does not protect data from privileged users—it’s a display‑level control. To ensure masking is effective:  
+- Avoid granting the **UNMASK** permission to application users  
+- Combine masking with classification, auditing, and role‑based access control  
+- Use it to protect casual exposure in shared environments, dashboards, and support tools
 
 
 
