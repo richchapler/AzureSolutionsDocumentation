@@ -376,11 +376,11 @@ The database administration team at a mid‑sized organization must ensure that 
 
 ### Exercises
 
-> This exercise assumes a machine with:
-> * SQL Server (hybrid Windows Authentication and SQL Authentication)
-> * SQL Server Management Studio
-
 #### Prepare Resources
+
+This exercise assumes a machine with:
+* SQL Server (hybrid Windows Authentication and SQL Authentication)
+* SQL Server Management Studio
 
 Open SQL Server Configuration Manager >> SQL Server Services and confirm that the SQL Server (MSSQLSERVER) service is running.
 
@@ -586,17 +586,18 @@ Classification by itself does not change data or enforce anything; it is simply 
 
 ##### Let's get started!
 
-Apply masking to previously classified columns:
-
-Add masking rules:
+Mask `Email` column:
 ```sql
 ALTER TABLE dbo.Customers
 ALTER COLUMN Email
 ADD MASKED WITH (FUNCTION = 'partial(1,"****@****",1)');
+```
 
+Mask `CreditCardNumber` column:
+```sql
 ALTER TABLE dbo.Customers
 ALTER COLUMN CreditCardNumber
-ADD MASKED WITH (FUNCTION = 'default()');
+ADD MASKED WITH (FUNCTION = 'partial(0,"XXXX-XXXX-XXXX-",4)');
 ```
 
 Create a login and user with SELECT permission only:
@@ -617,91 +618,114 @@ Expected output:
 ```plaintext
 Email             | CreditCardNumber
 ------------------|---------------------
-a****@****m       | XXXX-XXXX-XXXX-XXXX
-b****@****m       | XXXX-XXXX-XXXX-XXXX
+a****@****m       | XXXX-XXXX-XXXX-1111
+b****@****m       | XXXX-XXXX-XXXX-0004
 ```
 
----
+##### Final Thought
 
-##### Final Thought  
 Masking does not protect data from privileged users—it’s a display‑level control. To ensure masking is effective:  
 - Avoid granting the **UNMASK** permission to application users  
 - Combine masking with classification, auditing, and role‑based access control  
 - Use it to protect casual exposure in shared environments, dashboards, and support tools
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ------------------------- ------------------------- -->
+------------------------- -------------------------
 
 ### Quiz
 
-1. What is the primary purpose of Transparent Data Encryption (TDE) in **SQL Server**?  
-   A) To speed up data retrieval  
-   B) To encrypt data at rest  
-   C) To simplify backup processes  
-   D) To enable point‑in‑time recovery  
+1. What must be created to enforce row‑level security on a table?  
+   A) A security policy bound to a table‑valued function  
+   B) A view that filters users by role  
+   C) A CHECK constraint on the user name  
+   D) A stored procedure with SELECT filters  
 
-2. Which authentication method integrates with the operating system for secure access?  
-   A) Mixed Mode  
-   B) SQL Authentication  
-   C) Windows Authentication  
-   D) Certificate Authentication  
+2. In the RLS exercise, which function controlled row access?  
+   A) SUSER_SNAME()  
+   B) ORIGINAL_LOGIN()  
+   C) USER_NAME()  
+   D) SYSTEM_USER()  
 
-3. What additional measure encrypts data on the client side before transmission to the server?  
-   A) Column‑Level Encryption  
-   B) Always Encrypted  
-   C) TDE  
-   D) TLS/SSL  
+3. What behavior does sensitivity classification provide by itself?  
+   A) Obscures data in query results  
+   B) Tags columns with encryption keys  
+   C) Blocks updates to classified tables  
+   D) Adds metadata for reporting and governance  
 
-4. How do sensitivity labels and dynamic data masking assist in compliance?  
-   A) They automate patching  
-   B) They classify and partially obscure sensitive data  
-   C) They encrypt backup files  
-   D) They restrict network access  
+4. Which catalog view lists all sensitivity classifications in the current database?  
+   A) sys.columns  
+   B) sys.sensitivity_classifications  
+   C) sys.dm_exec_classifications  
+   D) sys.objects  
 
-5. Which **SQL Server** feature is used to log security‑related events?  
-   A) Database Mail  
-   B) **SQL Server** Audit  
-   C) **SQL Server** Agent  
-   D) Dynamic Management Views (DMVs)
+5. What is a key advantage of using the DDL `ADD SENSITIVITY CLASSIFICATION`?  
+   A) Updates values based on user role  
+   B) Grants SELECT permissions to classified users  
+   C) Embeds metadata directly in the table definition  
+   D) Disables access to unclassified columns  
 
-6. What network-level security measure should be implemented on-prem?  
-   A) VPN and firewall configurations  
-   B) Dynamic data masking  
-   C) Always Encrypted  
-   D) Transparent Data Encryption
+6. Which permission allows a user to bypass masking and see original data?  
+   A) SELECT  
+   B) INSERT  
+   C) EXECUTE  
+   D) UNMASK  
+
+7. What does dynamic data masking do during query execution?  
+   A) Obscures values in the result set for users without UNMASK  
+   B) Encrypts result set data at rest  
+   C) Prevents DML operations on masked columns  
+   D) Logs masked queries to the audit trail  
+
+8. Why was the separate login `dmLogin` used in the masking exercise?  
+   A) To demonstrate masked results for a non‑privileged user  
+   B) To simulate an administrative user  
+   C) To configure backup encryption policies  
+   D) To validate role membership for encryption keys  
+
+9. What protection does Transparent Data Encryption (TDE) provide?  
+   A) Hides query output from unauthorized users  
+   B) Secures connections with TLS  
+   C) Encrypts database files and backups at rest  
+   D) Enforces row‑level security filters  
+
+10. How is masking different from encryption?  
+   A) Masking is applied only to query output  
+   B) Masking modifies data on disk  
+   C) Masking removes rows from result sets  
+   D) Masking changes data types during transformation  
 
 <!-- ------------------------- ------------------------- -->
 
 #### Answers
 
-1. **B*- – TDE encrypts data at rest to protect physical storage  
-2. **C*- – Windows Authentication leverages domain credentials for secure access  
-3. **B*- – Always Encrypted ensures encryption occurs on the client side  
-4. **B*- – Sensitivity labels classify data and dynamic data masking obscures sensitive data  
-5. **B*- – **SQL Server** Audit logs security‑related events  
-6. **A*- – Using VPNs, IP whitelisting, and firewalls helps limit network access
+1. **A** – A security policy bound to a table‑valued function  
+   *Row‑level security requires a predicate function in a security policy to enforce per‑row visibility.*
+
+2. **C** – USER_NAME() returns the database user name in the current execution context  
+   *USER_NAME() is used inside the predicate function to match the executing user to the OwnerLogin column, ensuring rows are filtered correctly.*
+
+3. **D** – Adds metadata for reporting and governance about sensitive columns  
+   *Sensitivity classification attaches labels to columns, enabling tools and reports to identify and protect high‑risk data.*
+
+4. **B** – sys.sensitivity_classifications holds classification metadata  
+   *This catalog view stores labels, information types, and ranks for each classified column.*
+
+5. **C** – Embeds metadata directly in the table definition for transparency and version control  
+   *DDL‑based classification ensures classification statements are part of schema scripts and appear in version history.*
+
+6. **D** – UNMASK permission allows bypassing dynamic masks to view actual data  
+   *Granting UNMASK enables authorized users to see full, unmasked column values while others see masked output.*
+
+7. **A** – Obscures values in the result set for users without UNMASK  
+   *Dynamic data masking automatically replaces sensitive values in query output for users lacking the UNMASK permission.*
+
+8. **A** – To demonstrate masked results for a non‑privileged user  
+   *Creating a separate login showed how dynamic data masking affects results for typical users without elevated permissions.*
+
+9. **C** – Encrypts database files and backups at rest to protect data‑at‑rest  
+   *Transparent Data Encryption secures physical database files and backup sets, preventing offline data exposure.*
+
+10. **A** – Masking affects only query output; encryption secures stored and transmitted data  
+   *Masking controls what appears in result sets, whereas encryption protects data both at rest and in transit.*
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
@@ -709,45 +733,291 @@ Masking does not protect data from privileged users—it’s a display‑level c
 
 ### Exercise
 
-- **Step 1**: Log in to the Azure Portal and navigate to your **SQL Server** instance  
-- **Step 2**: Enable Advanced Threat Protection from the Security settings  
-- **Step 3**: Configure auditing for your **Azure SQL** Database via the portal (e.g., directing logs to Azure Storage or Log Analytics)  
-- **Step 4**: Review and apply network isolation settings using service or private endpoints  
-- **Step 5**: Use Azure Policy to assign compliance initiatives and run remediation tasks to ensure all deployments meet required standards
+**Objective**: Build a hardened Azure SQL environment showcasing network isolation, Entra ID integration, threat protection, and centralized auditing using Azure PowerShell  
+
+<!-- ------------------------- ------------------------- -->
+
+#### Let’s get started!
+
+Open Azure Portal >> Cloud Shell and switch to PowerShell.
+
+##### Select Subscription
+```powershell
+Select-AzSubscription -SubscriptionId "<subscriptionid>"
+```
+
+Expected output:
+```plaintext
+Tenant: <tenantid>
+
+SubscriptionName  SubscriptionId Account Environment
+---------------- -------------- ------- -----------
+<subscriptionname> <subscriptionid> <account> AzureCloud
+```
+
+##### Create Resource Group  
+```powershell
+New-AzResourceGroup -Name prefixrg -Location westus
+```
+
+Expected output:
+```plaintext
+ResourceGroupName : prefixrg
+Location          : westus
+ProvisioningState : Succeeded
+Tags              : 
+ResourceId        : /subscriptions/<subscriptionid>/resourceGroups/prefixrg
+```
+
+##### Create Log Analytics Workspace 
+```powershell
+New-AzOperationalInsightsWorkspace -ResourceGroupName prefixrg -Name prefixla -Location westus -Sku PerGB2018
+```
+
+Expected output:
+```plaintext
+Name                                : prefixla
+ResourceId                          : /subscriptions/<subscriptionid>/resourceGroups/prefixrg/providers/Microsoft.OperationalInsights/workspaces/pref
+                                      ixla
+ResourceGroupName                   : prefixrg
+Location                            : westus
+Tags                                : {}
+Sku                                 : PerGB2018
+CapacityReservationLevel            : 
+LastSkuUpdate                       : 04/18/2025 16:13:48
+retentionInDays                     : 30
+CustomerId                          : <customerid>
+ProvisioningState                   : Succeeded
+PublicNetworkAccessForIngestion     : Enabled
+PublicNetworkAccessForQuery         : Enabled
+PrivateLinkScopedResources          : 
+WorkspaceCapping                    : Microsoft.Azure.Management.OperationalInsights.Models.WorkspaceCapping
+CreatedDate                         : 04/18/2025 16:13:48
+ModifiedDate                        : 04/18/2025 16:13:52
+ForceCmkForQuery                    : 
+WorkspaceFeatures                   : Microsoft.Azure.Commands.OperationalInsights.Models.PSWorkspaceFeatures
+DefaultDataCollectionRuleResourceId : 
+```
+
+##### Create SQL Server 
+```powershell
+$cred = Get-Credential -Message "Enter SQL admin credentials" -UserName "sqladmin"
+New-AzSqlServer -ResourceGroupName prefixrg -ServerName prefixss -Location westus -SqlAdministratorCredentials $cred
+```
+
+Expected output:
+```plaintext
+ResourceGroupName             : prefixrg
+ServerName                    : prefixss
+Location                      : westus
+SqlAdministratorLogin         : sqladmin
+SqlAdministratorPassword      : 
+ServerVersion                 : 12.0
+Tags                          : 
+Identity                      : 
+FullyQualifiedDomainName      : prefixss.database.windows.net
+ResourceId                    : /subscriptions/<subscriptionid>/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss
+MinimalTlsVersion             : 1.2
+PublicNetworkAccess           : Enabled
+RestrictOutboundNetworkAccess : Disabled
+Administrators                : 
+PrimaryUserAssignedIdentityId : 
+KeyId                         : 
+FederatedClientId             : 
+```
+
+##### Create Sample Database 
+```powershell
+New-AzSqlDatabase -ResourceGroupName prefixrg -ServerName prefixss -DatabaseName prefixsd -RequestedServiceObjectiveName "S0"
+```
+
+Expected output:
+```plaintext
+ResourceGroupName                : prefixrg
+ServerName                       : prefixss
+DatabaseName                     : prefixsd
+Location                         : westus
+DatabaseId                       : 419724c7-5e04-43d0-a197-d408967ec1c6
+Edition                          : Standard
+CollationName                    : SQL_Latin1_General_CP1_CI_AS
+CatalogCollation                 : 
+MaxSizeBytes                     : 268435456000
+Status                           : Online
+CreationDate                     : 4/18/2025 4:19:42 PM
+CurrentServiceObjectiveId        : 00000000-0000-0000-0000-000000000000
+CurrentServiceObjectiveName      : S0
+RequestedServiceObjectiveName    : S0
+RequestedServiceObjectiveId      : 
+ElasticPoolName                  : 
+EarliestRestoreDate              : 
+Tags                             : 
+ResourceId                       : /subscriptions/<subscriptionid>/resourceGroups/prefixrg/providers/Microsoft.Sql/servers/prefixss/databases/prefixs
+                                   d
+CreateMode                       : 
+ReadScale                        : Disabled
+ZoneRedundant                    : False
+Capacity                         : 10
+Family                           : 
+SkuName                          : Standard
+LicenseType                      : 
+AutoPauseDelayInMinutes          : 
+MinimumCapacity                  : 
+ReadReplicaCount                 : 
+HighAvailabilityReplicaCount     : 
+CurrentBackupStorageRedundancy   : Geo
+RequestedBackupStorageRedundancy : Geo
+SecondaryType                    : 
+MaintenanceConfigurationId       : /subscriptions/<subscriptionid>/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_Default
+EnableLedger                     : False
+PreferredEnclaveType             : 
+PausedDate                       : 
+ResumedDate                      : 
+Identity                         : 
+EncryptionProtector              : 
+Keys                             : 
+FederatedClientId                : 
+EncryptionProtectorAutoRotation  : 
+UseFreeLimit                     : 
+FreeLimitExhaustionBehavior      : 
+ManualCutover                    : 
+PerformCutover                   :
+```
+
+##### Create Firewall Rule
+```powershell
+New-AzSqlServerFirewallRule -ResourceGroupName prefixrg -ServerName prefixss -FirewallRuleName AllowMyIP -StartIpAddress <ipaddress> -EndIpAddress <ipaddress>
+```
+
+Expected output:
+```plaintext
+ResourceGroupName : prefixrg
+ServerName        : prefixss
+StartIpAddress    : <ipaddress>
+EndIpAddress      : <ipaddress>
+FirewallRuleName  : AllowMyIP
+```
+
+##### Set Administrator
+```powershell
+Set-AzSqlServerActiveDirectoryAdministrator -ResourceGroupName prefixrg -ServerName prefixss -DisplayName "<myuser_principalname>" -ObjectId "<myuser_objectid>"
+```
+
+Expected output:
+```plaintext
+ResourceGroupName           : prefixrg
+ServerName                  : prefixss
+DisplayName                 : <myuser_principalname>
+ObjectId                    : <myuser_objectid>
+IsAzureADOnlyAuthentication : 
+```
+
+##### Enable Advanced Threat Protection
+```powershell
+Update-AzSqlServerAdvancedThreatProtectionSetting -ResourceGroupName "prefixrg" -ServerName "prefixss"
+```
+
+Expected output:
+```plaintext
+cmdlet Update-AzSqlServerAdvancedThreatProtectionSetting at command pipeline position 1
+Supply values for the following parameters:
+(Type !? for Help.)
+Enable: yes
+```
 
 <!-- ------------------------- ------------------------- -->
 
 ### Quiz
 
-1. Which **Azure SQL** Database feature helps automatically detect potential security threats?  
-   A) Automated Backups  
-   B) Advanced Threat Protection  
-   C) Log Shipping  
-   D) Dynamic Data Masking  
+1. What is the role of a firewall rule in Azure SQL Server?  
+   A) It encrypts client connections  
+   B) It assigns public IPs to databases  
+   C) It restricts network access to specific IP ranges  
+   D) It disables internal logging  
 
-2. What advantage does **Azure SQL** Managed Instance offer for security?  
-   A) No need for patching  
-   B) A hybrid approach with both managed and traditional security controls  
-   C) Full direct access to hardware  
-   D) Limited auditing capabilities  
+2. What is the purpose of creating a Log Analytics workspace in this lab?  
+   A) To host SQL databases  
+   B) To serve as the private DNS zone  
+   C) To store and centralize audit logs  
+   D) To run SQL queries across regions  
 
-3. For **SQL Server** on Azure VMs, which statement is true regarding security?  
-   A) They automatically apply all security settings  
-   B) They allow full control over security configurations  
-   C) They have no built‑in security features  
-   D) They cannot integrate third‑party security tools  
+3. Which Azure identity feature was used to assign a centralized administrator to the SQL Server?  
+   A) SQL Server login  
+   B) Azure RBAC  
+   C) Entra ID administrator  
+   D) Managed Identity  
 
-4. Which authentication method centralizes identity management for Azure environments?  
-   A) SQL Authentication  
-   B) Windows Authentication  
-   C) Entra ID Authentication  
-   D) Certificate Authentication
+4. What happens when `Update-AzSqlServerAdvancedThreatProtectionSetting` is executed in the lab?  
+   A) TDE is enabled on all databases  
+   B) A vulnerability assessment is triggered  
+   C) Threat detection is enabled on the SQL Server  
+   D) Connection strings are regenerated  
+
+5. What must be supplied when creating the Azure SQL Server using PowerShell?  
+   A) A Log Analytics Workspace ID  
+   B) A network security group  
+   C) Administrator credentials  
+   D) A SQL script file  
+
+6. Why is `Get-Credential` used before creating the SQL Server?  
+   A) To retrieve a private key for the workspace  
+   B) To generate an MFA token  
+   C) To securely prompt for and store the SQL admin login  
+   D) To validate the server name  
+
+7. Which Azure SQL feature restricts public access while allowing internal VNet traffic only?  
+   A) Server firewall rules  
+   B) Private Endpoint  
+   C) Defender for SQL  
+   D) Geo-replication  
+
+8. What does the `RequestedServiceObjectiveName "S0"` parameter do during database creation?  
+   A) Sets encryption level to Standard  
+   B) Applies masking to system views  
+   C) Defines performance tier for compute and storage  
+   D) Enables support for failover groups  
+
+9. What cmdlet replaces the deprecated `Set-AzSqlServerThreatDetectionPolicy`?  
+   A) Enable-AzSqlThreatProtection  
+   B) Update-AzSqlServerAdvancedThreatProtectionSetting  
+   C) Set-AzSqlServerSecurityAlert  
+   D) Add-AzThreatDetectionBinding  
+
+10. Why is selecting the correct subscription at the beginning of the lab important?  
+   A) It speeds up provisioning time  
+   B) It applies a resource lock to the group  
+   C) It ensures resources are created in an accessible, authorized context  
+   D) It links all resources to a managed disk  
 
 <!-- ------------------------- ------------------------- -->
 
-#### Answers
+### Answers
 
-1. **B*- – Advanced Threat Protection helps identify and remediate security threats automatically  
-2. **B*- – **Azure SQL** Managed Instance combines managed security with traditional features for greater control  
-3. **B*- – **SQL Server** on Azure VMs allows full control over security configurations  
-4. **C*- – Entra ID Authentication provides centralized identity management and integrated conditional access
+1. **C** – It restricts network access to specific IP ranges  
+   *Firewall rules control which IPs are allowed to reach the Azure SQL endpoint.*
+
+2. **C** – To store and centralize audit logs  
+   *The Log Analytics workspace is used to collect and store diagnostic logs.*
+
+3. **C** – Entra ID administrator  
+   *This identity is assigned at the server level to allow Azure AD-based login.*
+
+4. **C** – Threat detection is enabled on the SQL Server  
+   *This cmdlet turns on Microsoft Defender for SQL at the server level.*
+
+5. **C** – Administrator credentials  
+   *Admin login and password are required when provisioning a SQL server.*
+
+6. **C** – To securely prompt for and store the SQL admin login  
+   *Get-Credential collects and passes login info securely to the cmdlet.*
+
+7. **B** – Private Endpoint  
+   *Private Endpoints remove public IP exposure and route traffic through the VNet.*
+
+8. **C** – Defines performance tier for compute and storage  
+   *S0 specifies a standard tier with specific DTU and storage limits.*
+
+9. **B** – Update-AzSqlServerAdvancedThreatProtectionSetting  
+   *This cmdlet replaced the older threat detection policy command.*
+
+10. **C** – It ensures resources are created in an accessible, authorized context  
+   *Without switching to the correct subscription, permissions and visibility may block deployment.*
