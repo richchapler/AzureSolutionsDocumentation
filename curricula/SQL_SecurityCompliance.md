@@ -34,7 +34,7 @@ The database administration team at a mid‑sized organization must ensure that 
 ...controls what an identity can do
 
 - **Role-Based**: A role is a **named group of permissions**
-  - ****SQL Server****: Has built‑in roles such as data **reader**, data **writer**, and database **owner*-  
+  - ****SQL Server****: Has built‑in roles such as data **reader**, data **writer**, and database **owner** 
   - **Windows**: Create a SQL Login corresponding to a Windows user or group
     - Assign that login to the appropriate **SQL Server** role
     - Upshot: Active Directory manages membership 
@@ -183,8 +183,8 @@ The database administration team at a mid‑sized organization must ensure that 
 - **Monitoring**: collect and review logs and metrics to understand normal activity  
   - **SQL Server**: query dynamic management views (for example, sys.dm_exec_sessions and sys.dm_os_wait_stats) to track server and session activity  
   - **Azure SQL**: use Azure Monitor (Log Analytics) to collect logs and metrics  
-    - configure **alert logic threshold** to Dynamic for usage metrics :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1}  
-    - set **Threshold Sensitivity** to Low to only trigger on significant, sustained deviations :contentReference[oaicite:2]{index=2}&#8203;:contentReference[oaicite:3]{index=3}  
+    - configure **alert logic threshold** to Dynamic for usage metrics
+    - set **Threshold Sensitivity** to Low to only trigger on significant, sustained deviations
 
 <!-- ------------------------- ------------------------- -->
 
@@ -193,7 +193,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 - **Vulnerability Assessment**: built‑in scans that detect security issues and insecure configurations  
   - **SQL Server**: run the built‑in vulnerability assessment in SQL Server Management Studio or via T‑SQL, review results in the GUI  
-  - **Azure SQL**: enable as part of Advanced Data Security on the server or database (portal or PowerShell) and view findings under the Vulnerability Assessment blade :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1}
+  - **Azure SQL**: enable as part of Advanced Data Security on the server or database (portal or PowerShell) and view findings under the Vulnerability Assessment blade
 
 - **Remediation**: actionable guidance and exportable scripts to fix detected issues  
   - **SQL Server**: generate exportable reports (Excel or PDF) and apply recommended fixes manually or via T‑SQL  
