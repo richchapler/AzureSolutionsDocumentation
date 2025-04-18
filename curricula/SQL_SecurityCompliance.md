@@ -374,7 +374,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 ## On‑Prem
 
-### Exercise
+### Exercises
 
 > This exercise assumes a machine with:
 > * SQL Server (hybrid Windows Authentication and SQL Authentication)
@@ -396,7 +396,7 @@ Switch to the demonstration database:
 USE SecurityDemo;
 ```
 
-#### [Row-level security](https://learn.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16)
+#### Exercise #1: [Row-Level Security](https://learn.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16)
 ...enforces fine‑grained access control by limiting which rows in a table a given user can see or modify, restricting data at the row level based on the caller’s identity or context rather than granting or denying access to the entire table.
 
 ##### How?  
@@ -479,7 +479,7 @@ Expected output: Bob's row
 
 ------------------------- -------------------------
 
-#### [Sensitivity Classification](https://learn.microsoft.com/en-us/sql/t-sql/statements/add-sensitivity-classification-transact-sql?view=sql-server-ver16)
+#### Exercise #2: [Sensitivity Classification](https://learn.microsoft.com/en-us/sql/t-sql/statements/add-sensitivity-classification-transact-sql?view=sql-server-ver16)
 ...marks columns with metadata indicating their sensitivity so that reporting, masking, encryption, and compliance tools can identify and protect high‑risk data
 
 ##### How?  
@@ -493,7 +493,7 @@ Expected output: Bob's row
 ##### Assignment Methods
 
 - **Data Definition Language (DDL) Syntax**
-  <br>Example: `ALTER TABLE … ADD SENSITIVITY CLASSIFICATION`
+  <br>Example: `ADD SENSITIVITY CLASSIFICATION`
   - Metadata is embedded **directly in the table definition**  
   - Aligns with schema‑as‑code workflows and version‑controlled deployment scripts  
   - Changes appear alongside other schema updates in code reviews and history  
@@ -509,57 +509,69 @@ Expected output: Bob's row
 ##### Let's get started!
 
 Create sample table:
-
 ```sql
 CREATE TABLE dbo.Customers ( Id INT IDENTITY PRIMARY KEY, Email NVARCHAR(256), CreditCardNumber NVARCHAR(50) );
 ```
 
 Insert sample data:
-
 ```sql
 INSERT INTO dbo.Customers (Email, CreditCardNumber)
-VALUES
-    ('alice@example.com','4111-1111-1111-1111'),
-    ('bob@example.com','5500-0000-0000-0004');
+VALUES ('alice@example.com','4111-1111-1111-1111'), ('bob@example.com','5500-0000-0000-0004');
 ```
 
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
+Classify `Email` column; special notes:
+- Only one classification can be added to a single object; adding a classification to an object that is already classified overwrites the existing classification
+- LABEL: human-readable, arbitrary value<br>
+- INFORMATION_TYPE: human-readable, arbitrary value<br>
+- RANK: pre-defined values include 1) NONE, 2) LOW, 3) MEDIUM, 4) HIGH, and 5) CRITICAL  
 
-
-1. Add sensitivity labels via DDL  
 ```sql
-ALTER TABLE dbo.Customers
-ALTER COLUMN Email
-ADD SENSITIVITY CLASSIFICATION
-(
-LABEL = 'Confidential',
-INFORMATION_TYPE = 'Contact Information',
-RANK = 'High'
-);
-
-ALTER TABLE dbo.Customers
-ALTER COLUMN CreditCardNumber
-ADD SENSITIVITY CLASSIFICATION
-(
-LABEL = 'Highly Confidential',
-INFORMATION_TYPE = 'Financial',
-RANK = 'Critical'
-);
+ADD SENSITIVITY CLASSIFICATION TO dbo.Customers.Email
+WITH ( LABEL = 'Confidential', INFORMATION_TYPE = 'Contact Information', RANK = HIGH );
 ```
-2. Review classifications  
+
+Classify `CreditCardNumber` column:  
 ```sql
-SELECT * 
-FROM sys.sensitivity_classifications
-WHERE object_name = 'Customers';
+ADD SENSITIVITY CLASSIFICATION TO dbo.Customers.CreditCardNumber
+WITH ( LABEL = 'Highly Confidential', INFORMATION_TYPE = 'Financial', RANK = CRITICAL );
 ```
 
-1. Configure Dynamic Data Masking  
+Confirm classification metadata:
+```sql
+SELECT 
+    s.name AS SchemaName,
+    o.name AS TableName,
+    c.name AS ColumnName,
+    sc.label AS Label,
+    sc.information_type AS InformationType,
+    sc.rank_desc AS Rank
+FROM sys.sensitivity_classifications sc
+	JOIN sys.objects o ON sc.major_id = o.object_id
+	JOIN sys.columns c ON sc.major_id = c.object_id AND sc.minor_id = c.column_id
+	JOIN sys.schemas s ON o.schema_id = s.schema_id
+```  
+
+View labels in the Data Classification interface:
+
+* SQL Server Management Studio: right‑click the database, then Tasks → Data Discovery and Classification → Classify Data
+* Select the `Customers` table, click "Load Columns" and verify the new labels on `CreditCardNumber` and `Email`
+
+##### Final Thought
+Classification by itself does not change data or enforce anything; it is simply metadata that can be used to:
+- **Recommend masking** for sensitive columns using Data Classification UI  
+- **Flag high‑ranked columns for encryption** (Always Encrypted or column‑level)  
+- **Prioritize audit coverage** for labeled data using SQL Server Audit  
+- Filter or post‑process audit logs to focus on classified columns  
+- **Generate compliance reports** showing classification coverage  
+- Track classification status as part of governance or risk assessments  
+- **Integrate with Microsoft Purview** to centralize sensitivity metadata  
+- Use classifications to **guide retention, purging, or archival rules**  
+- **Inform downstream systems** (BI, ETL, analytics) about data sensitivity  
+- Support manual or automated review of label assignments over time
+
+------------------------- -------------------------
+
+#### Dynamic Data Masking  
 2. Add masking rules  
 ```sql
 ALTER TABLE dbo.Customers
