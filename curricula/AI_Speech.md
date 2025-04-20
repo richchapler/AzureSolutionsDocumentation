@@ -17,6 +17,7 @@ Azure AI Speech is a cloud-based service from Microsoft that leverages advanced 
 * Analyze and interpret the JSON output to understand how text is detected and structured
 
 ------------------------- -------------------------
+------------------------- -------------------------
 
 ## Exercise 1: Prepare Resources  
 
@@ -25,6 +26,7 @@ Instantiate Azure AI Services
 
 LOREM IPSUM
 
+------------------------- -------------------------
 ------------------------- -------------------------
 
 ## Exercise 2: Speech Capabilities by Scenario
@@ -35,21 +37,21 @@ LOREM IPSUM
 
 Navigate to [Azure AI | Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
-<img src="https://github.com/user-attachments/assets/caddfe5c-fef1-4fc1-8f52-269be78bd298" width="800" title="Snipped April, 2025" />
+<img src=".\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
 
 Click "Captioning with speech to text".
 
-<img src="https://github.com/user-attachments/assets/c97cc6fc-7228-4230-b6a6-84f558cc0e64" width="800" title="Snipped April, 2025" />
+<img src=".\images\AI_Speech\SpeechStudio_TryItOut_RealTimeCaptioning.png" width="800" title="Snipped April, 2025" />
 
-Navigate to the "Try it out" tab >> "Sample videos" tab, click "Real-time captioning", and then scroll down on the page.
+On the "Try it out" >> "Sample videos" tabs, click "Real-time captioning", and then scroll down on the page.
 
-<img src="https://github.com/user-attachments/assets/6893638c-0621-4e8a-85df-cc147223f01c" width="800" title="Snipped April, 2025" />
+<img src=".\images\AI_Speech\SpeechStudio_RealTimeCaptioning.png" width="800" title="Snipped April, 2025" />
 
 Click the Play button the video and observe captioning.
 
 ##### Captioning Settings
 
-The captioning settings shown on the **Speech Studio > Captioning > Real-time captioning** page are detailed on the right side of the interface and include the following parameters:
+The captioning settings shown on Speech Studio > Captioning > **Real-time captioning with "stable partial results"** are detailed on the right side of the interface and include the following parameters:
 
 - **Recognition event**: `--realTime`  
   Enables real-time mode, which returns stable partial results as audio is processed live.
@@ -100,7 +102,7 @@ The captioning settings shown on the **Speech Studio > Captioning > Real-time ca
 
 Scroll up on the page, and then click "Offline captioning"
 
-<img src="https://github.com/user-attachments/assets/0ffd50b4-5164-4d09-aaeb-912a8ed6d035" width="800" title="Snipped April, 2025" />
+<img src=".\images\AI_Speech\SpeechStudio_OfflineCaptioning.png" width="800" title="Snipped April, 2025" />
 
 Click the Play button the video and observe captioning.
 
@@ -120,106 +122,7 @@ Offline captioning differs from real-time captioning in **timing, processing, an
 
 #### Pro Code
 
-
-------------------------- -------------------------
-------------------------- -------------------------
-------------------------- -------------------------
-RESUME HERE
-------------------------- -------------------------
-------------------------- -------------------------
-------------------------- -------------------------
-
-
-#### Update Environment Variables
-
-Append the following line to your `.env` file:
-
-```text
-OFFLINE_AUDIO=C:\myProject\offline_audio.wav
-```
-
-Append the following code to the "Load Environment Variables" code in the `ai_speech.ipynb` notebook:
-
-```python
-OFFLINE_AUDIO = os.getenv("OFFLINE_AUDIO")
-```
-
-Re-execute "Load Environment Variables" code and restart the kernel.
-
--------------------------
-
-#### Add Demonstration Code
-
-Click "+ Markdown" and paste the following annotation into the resulting cell:
-
-```markdown
-## Offline Captioning  
-Generate final captions for pre-recorded audio content using recognized results.
-```
-
-Render the Markdown cell by clicking the checkmark in the upper-right controls.
-
-Click "+ Code" and paste the following code into the new cell:
-
-```python
-import os
-import requests
-
-def generate_offline_captions(audio_path):
-    if not audio_path or not os.path.isfile(audio_path):
-        print("Audio file not found.")
-        return
-
-    with open(audio_path, "rb") as audio_file:
-        audio_data = audio_file.read()
-
-    endpoint = f"{COMPUTER_VISION_ENDPOINT.rstrip('/')}/speechtotext/v3.0/transcriptions"
-    headers = {
-        "Ocp-Apim-Subscription-Key": COMPUTER_VISION_API_KEY,
-        "Content-Type": "audio/wav"
-    }
-
-    params = {
-        "profanity": "mask",
-        "display": "true",
-        "language": "en-US"
-    }
-
-    response = requests.post(endpoint, headers=headers, params=params, data=audio_data)
-
-    if response.status_code == 202:
-        print("Transcription request accepted.")
-        print(response.headers.get("Location"))
-    else:
-        print("Transcription failed:", response.status_code, response.text)
-
-if OFFLINE_AUDIO:
-    generate_offline_captions(OFFLINE_AUDIO)
-else:
-    print("OFFLINE_AUDIO not defined.")
-```
-
-Execute the cell and monitor the returned URL to track transcription progress and retrieve results when ready.
-
--------------------------
-
-##### Expected Result  
-_Note: JSON formatted and abbreviated_
-
-```json
-{
-  "status": "Succeeded",
-  "combinedRecognizedPhrases": [
-    {
-      "display": "Welcome to our pre-recorded session on Azure AI Speech.",
-      "lexical": "welcome to our pre recorded session on azure ai speech",
-      "itn": "welcome to our pre-recorded session on azure ai speech"
-    },
-    ...
-  ],
-  "recognizedPhrases": [ ... ]
-}
-```
+LOREM IPSUM
 
 ------------------------- -------------------------
 
@@ -227,11 +130,15 @@ _Note: JSON formatted and abbreviated_
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
+
 ------------------------- -------------------------
 
 ### Live Chat Avatar
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
 
 ------------------------- -------------------------
 
@@ -239,11 +146,15 @@ _Note: JSON formatted and abbreviated_
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
+
 ------------------------- -------------------------
 
 ### Video Translation
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -254,11 +165,15 @@ _Note: JSON formatted and abbreviated_
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
+
 ------------------------- -------------------------
 
 ### Whisper Model in Azure OpenAI Service
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
 
 ------------------------- -------------------------
 
@@ -266,11 +181,14 @@ _Note: JSON formatted and abbreviated_
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
 ------------------------- -------------------------
 
 ### Custom Speech
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
 
 ------------------------- -------------------------
 
@@ -278,11 +196,15 @@ _Note: JSON formatted and abbreviated_
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
+
 ------------------------- -------------------------
 
 ### Speech Translation
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -293,11 +215,15 @@ _Note: JSON formatted and abbreviated_
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
+
 ------------------------- -------------------------
 
 ### Custom Voice
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
 
 ------------------------- -------------------------
 
@@ -305,17 +231,23 @@ _Note: JSON formatted and abbreviated_
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
+
 ------------------------- -------------------------
 
 ### Audio Content Creation
 #### Low Code
 #### Pro Code
 
+LOREM IPSUM
+
 ------------------------- -------------------------
 
 ### Text to Speech Avatar
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
 
 ------------------------- -------------------------
 ------------------------- -------------------------
@@ -325,3 +257,5 @@ _Note: JSON formatted and abbreviated_
 ### Custom Keyword
 #### Low Code
 #### Pro Code
+
+LOREM IPSUM
