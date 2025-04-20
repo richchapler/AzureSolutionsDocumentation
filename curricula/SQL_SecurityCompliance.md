@@ -575,7 +575,7 @@ FROM sys.sensitivity_classifications sc
 
 Launch SQL Server Management Studio, right‑click the `SecurityDemo` database, then click Tasks → Data Discovery and Classification → Classify Data.
 
-<img src="./SQL_SecurityCompliance/SSMS_DataClassification.png" width="800" title="Snipped April, 2025" />
+<img src="./images/SQL_SecurityCompliance/SSMS_DataClassification.png" width="800" title="Snipped April, 2025" />
 
 Select the `Customers` table, click "Load Columns" and verify the new labels on `CreditCardNumber` and `Email`.
 

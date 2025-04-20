@@ -77,7 +77,7 @@ If the database fails on **Wednesday at 10:00**, your restore sequence is:
 
 ##### Best Practices
 
-Effective restoration is as critical as the backup process. Best practices include:
+**Effective restoration is as critical as the backup process**. Best practices include:
 
 * **Validation**: Regularly test restore procedures using representative sample data.  
   *Example:* Quarterly restore of last week’s full backup plus the latest differential into a sandbox server to verify end‑to‑end recovery.
@@ -90,23 +90,16 @@ Effective restoration is as critical as the backup process. Best practices inclu
 
 ------------------------- -------------------------
 
-#### Key Considerations
-
-A successful backup and recovery strategy depends on:
-
-* **Data Integrity**: Ensuring that each backup builds correctly on the previous one so that the restore process maintains a consistent database state
-
-* **Thorough Documentation and Testing**: Keeping detailed records and regularly simulating restore procedures to verify that recovery will be seamless in the event of an actual failure
-
-* **Automation and Monitoring**: Using automated scheduling and proactive monitoring to minimize human error and quickly detect any issues in the backup process
-
-------------------------- -------------------------
-
 #### Key Metrics
 
-* **Recovery Time Objective (RTO)**: The **maximum acceptable downtime following a disruption**. It is determined by measuring the time from failure detection, through the recovery process, until full restoration. This metric helps guide investments in technology and process improvements to minimize downtime.
+* **Recovery Time Objective (RTO)**: The **maximum acceptable downtime following a disruption**
+  * Determined by measuring the time from failure detection, through the recovery process, until full restoration
+  * Helps guide investments in technology and process improvements to minimize downtime
 
-* **Recovery Point Objective (RPO)**: The **maximum amount of data (expressed in time) that an organization can afford to lose**. It is calculated based on the frequency of backup operations and the rate of data change. For instance, if transaction logs are backed up every 15 minutes, the RPO would be approximately 15 minutes.
+* **Recovery Point Objective (RPO)**: The **maximum amount of data that an organization can afford to lose**
+  * Expressed in time (e.g., "willing to lose 15 minutes of data")
+  * Calculated based on the frequency of backup operations and the rate of data change
+  * For instance, if transaction logs are backed up every 15 minutes, the RPO would be approximately 15 minutes
 
 ------------------------- -------------------------
 
