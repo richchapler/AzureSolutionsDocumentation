@@ -72,7 +72,7 @@ The captioning settings shown on Speech Studio > Captioning > **Real-time captio
   Custom phrase list to improve recognition of domain-specific terms or phrases. Items are semicolon-separated.
 
 ###### Example #1: Live Event Broadcasting 
-> For high-energy, fast-paced content where low latency matters {e.g., sports event}.
+> For high-energy, fast-paced content where low latency matters (e.g., sports event).
 > - `--realTime`: stream captions as the speaker talks  
 > - `--threshold 2`: fast response, lower stability  
 > - `--maxLineLength 50`: fits cleanly on screen overlays  
@@ -104,7 +104,7 @@ Scroll up on the page, and then click "Offline captioning"
 
 <img src=".\images\AI_Speech\SpeechStudio_OfflineCaptioning.png" width="800" title="Snipped April, 2025" />
 
-Click the Play button the video and observe captioning.
+Click the Play button and observe captioning.
 
 ##### **Real-Time vs. Offline Captioning**
 
@@ -138,15 +138,21 @@ Click "Post Call Transcription and Analytics".
 
 <img src=".\images\AI_Speech\SpeechStudio_TryItOut_Transcription.png" width="800" title="Snipped April, 2025" />
 
-On the "Try it out" >> "Try with samples" tabs, click "Apply for a loan", and then scroll down on the page.
+On the "Try it out" >> "Try with samples" tabs, click "Apply for a loan", and then scroll down on the page. Default selection is the "Analyze sentences" tab.
 
-RESUME HERE!
+<img src=".\images\AI_Speech\SpeechStudio_AnalyzeSentences.png" width="800" title="Snipped April, 2025" />
 
+Review sample content:
 
+- **Audio Player**: A simple media bar with play/pause controls and a visible duration (e.g., 03:02s)
+- **Transcript Content**: Simulated dialogue from a customer support call demonstrates live transcription, redaction, and sentiment tagging.
+  - **Sentiment**: Each transcript line is tagged on the left with an evaluation of sentiment (e.g., Positive, Neutral, etc.)  
+  - **Speakers**: Transcript lines are grouped and labeled by speaker (e.g., Speaker1, Speaker2) with timestamps
+  - **PII Masking**: Sensitive information (e.g., names) is redacted and replaced with asterisks (e.g., ****), with labels like "Name" underneath 
+- **Hide PII Toggle**: A switch in the upper right of the transcript section allows turning PII masking on or off
+- **Call Summary Tab**: A second tab, "Call summary", is visible but not selected, likely for higher-level insights
 
-
-
-
+Try other Scenario Cards (e.g., "Signing up for Insurance").
 
 #### Pro Code
 
