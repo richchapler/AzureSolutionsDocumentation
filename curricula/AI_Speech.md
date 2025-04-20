@@ -35,13 +35,13 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI | Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
 <img src=".\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
 
 Click "Captioning with speech to text".
 
-<img src=".\images\AI_Speech\SpeechStudio_TryItOut_RealTimeCaptioning.png" width="800" title="Snipped April, 2025" />
+<img src=".\images\AI_Speech\SpeechStudio_TryItOut_Captioning.png" width="800" title="Snipped April, 2025" />
 
 On the "Try it out" >> "Sample videos" tabs, click "Real-time captioning", and then scroll down on the page.
 
@@ -127,7 +127,27 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Post Call Transcription and Analytics
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src=".\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+
+Click "Post Call Transcription and Analytics".
+
+<img src=".\images\AI_Speech\SpeechStudio_TryItOut_Transcription.png" width="800" title="Snipped April, 2025" />
+
+On the "Try it out" >> "Try with samples" tabs, click "Apply for a loan", and then scroll down on the page.
+
+RESUME HERE!
+
+
+
+
+
+
+
 #### Pro Code
 
 LOREM IPSUM
