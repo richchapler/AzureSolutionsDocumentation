@@ -2,7 +2,7 @@
 
 ## Use Case
 
-The database team at a mid‑sized company is under pressure... **data volumes are growing fast**, **users are complaining about slow queries**, and **critical reports are missing their deadlines**. Leadership wants answers and assigns a mission: uncover what’s slowing things **DO**wn, tune performance across the system, and make sure it **DO**esn’t happen again.
+The database team at a mid‑sized company is under pressure... **data volumes are growing fast**, **users are complaining about slow queries**, and **critical reports are missing their deadlines**. Leadership wants answers and assigns a mission: uncover what's slowing things down, tune performance across the system, and make sure it does not happen again.
 
 The database team talks about the mission and settles on the following goals:
 
@@ -16,12 +16,16 @@ The database team talks about the mission and settles on the following goals:
 
 ## Fundamentals
 
-### Query Tuning
+1. **Execution Plans**: read estimated and actual plans to understand how SQL Server breaks down your queries  
+2. **Live Query Statistics**: monitor queries as they run to catch slow or blocked operations in real time  
+3. **Logic Optimization**: rewrite queries for set‑based processing, eliminate unnecessary work, and leverage indexes  
+4. **Query‑Level Hints**: use hints to guide the optimizer when you need more control  
+5. **Query Store**: collect and compare execution plans over time to prevent regressions
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
-#### "Execution Plan"
+### "Execution Plan"
 ...reveals how the SQL engine interprets and executes a query, enabling developers and database professionals to identify bottlenecks and improve performance  
 
 - **Estimated Execution Plan**: displays how SQL Server plans to run a query before it is executed; helps spot inefficient join orders, missing indexes, or inaccurate estimates without actually modifying data  
@@ -30,86 +34,69 @@ The database team talks about the mission and settles on the following goals:
 - **Execution Plan Operators**: provides insight into the individual steps of a query, such as Nested Loops, Hash Match, and Sort; recognizing these can help you understand why a query might be slow  
 - **Plan Comparison**: allows you to compare execution plans **before and after changes** and helps confirm that: 1) a performance issue is fixed or 2) spot regressions after a change  
 
-##### Try it out...
+**Use this when...** you need to pinpoint inefficient operators, missing indexes, or estimate inaccuracies **before and after changes**
+
+**Try it out...**
 <img src=".\images\SQL_PerformanceOptimization\ActualExecutionPlan.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
-#### "Live Query Statistics"
-...gives a live, visual view of query progress while it’s running  
+### "Live Query Statistics"
+...gives a live, visual view of query progress while it's running  
 
 - **Real-Time Insight**: shows operator-level progress and row counts during query execution  
 - **Early Detection**: helps identify where a query is stalled, blocked, or slower than expected  
 - **Best For**: troubleshooting long-running or interactive queries in development and test environments
 
-##### Try it out...
+**Use this when...** you need to spot stalls, blocking, or unexpectedly slow operators **in real time**
+
+**Try it out...**
 <img src=".\images\SQL_PerformanceOptimization\LiveQueryStatistics.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
-#### Query Store Usage  
-...lets you track, compare, and manage query performance over time  
-
-- **Captures Execution History**: stores actual execution plans, query text, and performance statistics  
-- **Detects Regressions**: identifies when a new plan performs worse than a previous one  
-- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions  
-- **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions  
-- **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server  
-
-##### Try it out...
-
-Execute the following T-SQL to activate:
-```sql
-ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE, MAX_STORAGE_SIZE_MB = 100, INTERVAL_LENGTH_MINUTES = 30)
-```
-
-<img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Logic Optimization
+### Logic Optimization
 ...involves modifying the structure of a query to improve performance without changing the result
 
 -------------------------
 
-##### Set‑Based Processing
+#### Set‑Based Processing
 Work on all rows at once instead of one at a time.
 
-###### **DON'T**: Aggregate per filter item
+**DON'T**: Aggregate per filter item
 ```sql
 SELECT COUNT(*) FROM Sales.SalesOrderHeader WHERE CustomerID = 1;
 SELECT COUNT(*) FROM Sales.SalesOrderHeader WHERE CustomerID = 2;
 ```  
 
-###### **DO**: Aggregate in one pass
+**DO**: Aggregate in one pass
 ```sql
 SELECT CustomerID, COUNT(*) FROM Sales.SalesOrderHeader GROUP BY CustomerID;
 ```
 
 -------------------------
 
-##### Eliminate Unnecessary Function Use  
+#### Eliminate Unnecessary Function Use  
 Remove unnecessary functions from WHERE or JOIN so indexes can be used.
 
-###### **DON'T**: Wrap column in a function  
+**DON'T**: Wrap column in a function  
 ```sql
 SELECT SalesOrderID FROM Sales.SalesOrderHeader WHERE YEAR(OrderDate) = 2021;
 ```
 
-###### **DO**: Filter by date directly  
+**DO**: Filter by date directly  
 ```sql
 SELECT SalesOrderID FROM Sales.SalesOrderHeader WHERE OrderDate = '2021-01-01';
 ```
 
 -------------------------
 
-##### Bake Filters into Joins  
+#### Bake Filters into Joins  
 Apply filters in the JOIN clause so less data is processed.
 
-###### **DON'T**: Filter after joining all rows  
+**DON'T**: Filter after joining all rows  
 ```sql
 SELECT h.SalesOrderID
 FROM Sales.SalesOrderHeader AS h  
@@ -117,7 +104,7 @@ FROM Sales.SalesOrderHeader AS h
 WHERE c.Country = 'USA';
 ```
 
-###### **DO**: Filter as you join  
+**DO**: Filter as you join  
 ```sql
 SELECT h.SalesOrderID
 FROM Sales.SalesOrderHeader AS h  
@@ -126,17 +113,17 @@ FROM Sales.SalesOrderHeader AS h
 
 -------------------------
 
-##### Flatten Sub-Queries  
+#### Flatten Sub-Queries  
 Replace nested queries with joins so everything runs in one pass.
 
-###### **DON'T**: Run the subquery per row  
+**DON'T**: Run the subquery per row  
 ```sql
 SELECT o.SalesOrderID,
    (SELECT SUM(OrderQty) FROM Sales.SalesOrderDetail WHERE SalesOrderID = o.SalesOrderID) AS TotalQty  
 FROM Sales.SalesOrderHeader AS o;
 ```
 
-###### **DO**: Aggregate with a join and GROUP BY  
+**DO**: Aggregate with a join and GROUP BY  
 ```sql
 SELECT o.SalesOrderID, SUM(d.OrderQty) AS TotalQty
 FROM Sales.SalesOrderHeader AS o  
@@ -146,33 +133,33 @@ GROUP BY o.SalesOrderID;
 
 -------------------------
 
-##### Reduce Column Retrieval  
+#### Reduce Column Retrieval  
 Select only the columns you need to reduce network traffic.
 
-###### **DON'T**: Fetch every Column  
+**DON'T**: Fetch every Column  
 ```sql
 SELECT * FROM Sales.SalesOrderDetail;
 ```
 
-###### **DO**: Retrieve Specific fields  
+**DO**: Retrieve Specific fields  
 ```sql
 SELECT SalesOrderID, OrderQty FROM Sales.SalesOrderDetail;
 ```
 
 -------------------------
 
-#####  "Sargable" Conditions
+####  "Sargable" Conditions
 > Note: "Sargable" is shorthand for Search ARGument ABLE.<Br>It describes predicates that the SQL engine can turn into an index seek or range scan instead of a full table scan.
 
 Write predicates so indexes can be used (no functions on columns).
 
-###### **DON'T**: Apply a function to the column  
+**DON'T**: Apply a function to the column  
 ```sql
 SELECT SalesOrderID FROM Sales.SalesOrderHeader  
 WHERE YEAR(OrderDate) = 2021;
 ```
 
-###### **DO**: Use a date range that can leverage an index  
+**DO**: Use a date range that can leverage an index  
 ```sql
 SELECT SalesOrderID FROM Sales.SalesOrderHeader  
 WHERE OrderDate >= '2021-01-01' AND OrderDate < '2022-01-01';
@@ -180,26 +167,26 @@ WHERE OrderDate >= '2021-01-01' AND OrderDate < '2022-01-01';
 
 -------------------------
 
-##### Simplify Predicates  
+#### Simplify Predicates  
 Combine filters into a single IN list instead of OR chains.
 
-###### **DON'T**: Use OR for each value  
+**DON'T**: Use OR for each value  
 ```sql
 SELECT SalesOrderID FROM Sales.SalesOrderHeader  
 WHERE Status = 'Shipped' OR Status = 'Processing';
 ```
 
-###### **DO**: Use IN() for multiple values  
+**DO**: Use IN() for multiple values  
 ```sql
 SELECT SalesOrderID FROM Sales.SalesOrderHeader WHERE Status IN ('Shipped','Processing');
 ```
 
 -------------------------
 
-##### Eliminate Redundant Joins  
+#### Eliminate Redundant Joins  
 Drop any table joins that do not affect your result.
 
-###### **DON'T**: Add unused table joins  
+**DON'T**: Add unused table joins  
 ```sql
 SELECT o.SalesOrderID  
 FROM Sales.SalesOrderHeader AS o  
@@ -207,7 +194,7 @@ FROM Sales.SalesOrderHeader AS o
    JOIN Production.Product AS p ON p.ProductID = d.ProductID;
 ```
 
-###### **DO**: Join only the tables you need  
+**DO**: Join only the tables you need  
 ```sql
 SELECT o.SalesOrderID 
 FROM Sales.SalesOrderHeader AS o  
@@ -216,17 +203,17 @@ FROM Sales.SalesOrderHeader AS o
 
 -------------------------
 
-##### Use UNION ALL 
+#### Use UNION ALL 
 Choose UNION ALL when you do not need to remove duplicates to avoid extra work.
 
-###### **DON'T**: Impose a duplicate check  
+**DON'T**: Impose a duplicate check  
 ```sql
 SELECT CustomerID FROM Sales.SalesOrderHeader WHERE OrderDate < '2020-01-01'  
 UNION  
 SELECT CustomerID FROM Sales.SalesOrderHeader WHERE OrderDate >= '2020-01-01';
 ```
 
-###### **DO**: Concatenate results directly  
+**DO**: Concatenate results directly  
 ```sql
 SELECT CustomerID FROM Sales.SalesOrderHeader WHERE OrderDate < '2020-01-01'  
 UNION ALL 
@@ -235,44 +222,12 @@ SELECT CustomerID FROM Sales.SalesOrderHeader WHERE OrderDate >= '2020-01-01';
 
 -------------------------
 
-##### Optimize for Unknown  
-Use `OPTIMIZE FOR UNKNOWN` to build an average plan and prevent inefficiencies from parameter sniffing.
-
-###### **DON'T**: rely on the sniffed plan for extreme thresholds  
-```sql
-SELECT SalesOrderID, OrderQty FROM Sales.SalesOrderDetail WHERE OrderQty >= 1;
-```  
-###### **DO**: use `OPTIMIZE FOR UNKNOWN` to build an average plan  
-```sql
-SELECT SalesOrderID, OrderQty FROM Sales.SalesOrderDetail WHERE OrderQty >= 1
-OPTION(OPTIMIZE FOR UNKNOWN);
-```  
-
--------------------------
-
-##### Recompile Plan
-Recompile plans when filters vary.
-
-###### **DON'T**: rely on the default plan (no recompile hint) 
-```sql
-DECLARE @status tinyint = 3
-SELECT SalesOrderID FROM Sales.SalesOrderHeader WHERE (@status IS NULL OR Status = @status)
-```  
-###### **DO**: force a fresh plan each execution  
-```sql
-DECLARE @status tinyint = 3
-SELECT SalesOrderID FROM Sales.SalesOrderHeader WHERE (@status IS NULL OR Status = @status)
-OPTION(RECOMPILE)
-```  
-
--------------------------
-
-##### Proactive Monitoring  
+#### Proactive Monitoring  
 Catch plan regressions before users notice. 
 
-###### **DON'T**: wait for user complaints  
+**DON'T**: wait for user complaints  
  
-###### **DO**: query Query Store for slowest queries  
+**DO**: query Query Store for slowest queries  
 ```sql
 SELECT TOP 1 q.query_id, rs.avg_duration
 FROM sys.query_store_runtime_stats AS rs
@@ -283,7 +238,7 @@ ORDER BY rs.avg_duration DESC;
 
 <!-- ------------------------- ------------------------- -->
 
-##### Forced Parameterization
+#### Forced Parameterization
 ...is a database‑level setting that tells SQL Server to replace literal values in your ad hoc queries with parameters at compile time so they can share execution plans.
 
 By default, SQL Server uses **Simple Parameterization** only for very basic literals and leaves most ad hoc queries unparameterized.
@@ -292,7 +247,7 @@ When you set the database to **Forced Parameterization** every literal that can 
 
 This increases plan reuse and reduces plan cache bloat at the cost of occasionally generating less‑optimal plans.
 
-###### Before
+**Before**
 
 ```sql
 -- each literal produces its own plan  
@@ -305,7 +260,7 @@ SELECT *
  WHERE OrderDate = '2021-02-01';
 ```  
 
-###### After
+**After**
 
 ```sql
 ALTER DATABASE [YourDatabase] SET PARAMETERIZATION = FORCED;
@@ -327,7 +282,7 @@ EXEC sp_executesql
 
 -------------------------
 
-##### Optimize for Adhoc Workloads
+#### Optimize for Adhoc Workloads
 
 **By default, SQL Server caches the complete execution plan on the first run of any query, even if it never repeats.**
 
@@ -343,7 +298,164 @@ EXEC sp_configure 'optimize for adhoc workloads', 1;
 RECONFIGURE;
 ```  
 
+-------------------------
+
+### Query-Level Hints
+Use hints to override the optimizer when its default plan doesn’t meet your performance needs.
+
+#### `OPTION (FORCE ORDER)`
+
+**By default, SQL Server's optimizer evaluates and reorders joins to find the lowest‑cost plan, which may differ from the sequence you wrote.**
+
+When you apply **FORCE ORDER** via `OPTION(FORCE ORDER)`, SQL Server **uses the specified join** sequence exactly, preventing any automatic reordering.
+
+This guarantees **predictable join behavior** in cases where the optimizer's choice performs poorly, at the cost of bypassing potential cost‑based improvements
+
+**Use this when…** you know a specific join sequence runs faster than the optimizer’s choice
+
+```sql
+SELECT o.SalesOrderID, c.CustomerName
+FROM Sales.SalesOrderHeader AS o
+INNER JOIN Sales.Customer AS c
+  ON o.CustomerID = c.CustomerID
+OPTION (FORCE ORDER);
+```
+
+-------------------------
+
+#### `OPTION (LOOP JOIN)`
+
+**By default, SQL Server’s optimizer chooses between nested loops, hash, or merge joins based on estimated cost and data statistics.**
+
+When you apply **LOOP JOIN** via `OPTION(LOOP JOIN)`, SQL Server **forces a nested loops join** between the specified tables, ignoring its normal algorithm selection.
+
+This delivers predictable performance when the outer input is small or highly selective, at the cost of bypassing the optimizer’s potentially better choice for larger or differently distributed data.
+
+```sql
+SELECT o.SalesOrderID, c.CustomerName
+FROM Sales.SalesOrderHeader AS o
+   INNER JOIN Sales.Customer AS c ON o.CustomerID = c.CustomerID
+WHERE o.OrderDate >= '2021-01-01'
+OPTION (LOOP JOIN);
+```
+
+**Algorithm Comparison**
+
+| Algorithm | Use this when... | Characteristics |
+| :--- | :--- | :--- |
+| `LOOP JOIN`   | one input is small or highly selective; outer‑driven lookups                                | low startup cost; efficient for small result sets; can degrade on large inputs          |
+| `HASH JOIN`   | both inputs are large and unsorted; no useful indexes                                       | builds in‑memory hash table on smaller input; good for equi‑joins; higher memory use    |
+| `MERGE JOIN`  | both inputs are sorted on the join keys (via index or ORDER BY)                             | streams through both inputs in order; low memory overhead; requires pre‑sorting if needed |
+
+-------------------------
+
+#### `OPTION (MAXDOP)`
+
+**By default, SQL Server uses the configured MAXDOP at the instance or database level to determine how many processors a query can use.**
+
+When you apply **MAXDOP** via `OPTION (MAXDOP n)`, SQL Server limits that query to at most *n* parallel threads, regardless of the global setting.
+
+This lets you fine‑tune parallelism for specific workloads—reducing contention for lightweight queries or increasing throughput for heavy queries—at the cost of deviating from the general parallelism policy.
+
+```sql
+SELECT ProductID, SUM(OrderQty) AS TotalQty
+FROM Sales.SalesOrderDetail
+WHERE OrderDate >= '2021-01-01'
+GROUP BY ProductID
+OPTION (MAXDOP 1);
+```
+
+-------------------------
+
+#### `OPTION (OPTIMIZE FOR UNKNOWN)`
+
+**By default, SQL Server compiles a plan based on the first parameter value, which can lead to suboptimal performance for other values.**
+
+When you append **OPTION (OPTIMIZE FOR UNKNOWN)** to your query, SQL Server ignores the first parameter value and builds a generic plan that balances performance across all inputs.
+
+**Use this when…** you need a single stable plan for widely varying parameter values and can accept a compromise on optimality for any one value.
+
+```sql
+SELECT SalesOrderID, OrderQty
+  FROM Sales.SalesOrderDetail
+ WHERE OrderQty >= 1
+ OPTION (OPTIMIZE FOR UNKNOWN);
+
+-------------------------
+
+#### `OPTION (RECOMPILE)`
+
+**By default, SQL Server caches a single plan based on the first parameter value, which can perform poorly when parameter values vary widely.**
+
+When you append `OPTION (RECOMPILE)` to your query, SQL Server builds a new execution plan every time, ensuring optimal plans per parameter but incurring extra CPU for each compilation.
+
+**Use this when…** you need to adjust parallel execution for a specific query to **balance CPU utilization and query performance**
+
+```sql
+DECLARE @status tinyint = 3
+SELECT SalesOrderID
+  FROM Sales.SalesOrderHeader
+ WHERE (@status IS NULL OR Status = @status)
+ OPTION (RECOMPILE)
+```
+
+-------------------------
+
+#### `WITH (FORCESEEK)`
+
+**By default, the optimizer chooses between scans and seeks based on cost estimates and data distribution.**
+
+When you add `WITH (FORCESEEK(IndexName))` to your table reference, SQL Server forces an index seek on that index.
+
+This delivers precise row retrieval for highly selective filters at the cost of bypassing the optimizer’s scan choice when it might be more efficient.
+
+**Use this when…** you have a highly selective filter and **need to guarantee an index seek** rather than a scan
+
+```sql
+SELECT SalesOrderID, OrderQty
+  FROM Sales.SalesOrderDetail WITH (FORCESEEK (IX_SalesOrderDetail_SalesOrderID))
+ WHERE SalesOrderID = 43659;
+```
+
+-------------------------
+
+#### `WITH (NOLOCK)`
+
+**By default, SQL Server reads under the session’s isolation level (READ COMMITTED), acquiring shared locks to prevent reading uncommitted data.**
+
+When you add **NOLOCK** via `WITH (NOLOCK)`, SQL Server reads rows without shared locks, effectively using READ UNCOMMITTED for that table and allowing dirty reads.
+
+This improves concurrency and reduces blocking for heavy read workloads at the cost of potentially reading uncommitted or inconsistent data.
+
+**Use this when…** you need maximum concurrency for read queries and **can tolerate reading uncommitted data to avoid blocking**
+
+```sql
+SELECT SalesOrderID, OrderDate, TotalDue
+FROM Sales.SalesOrderHeader WITH (NOLOCK)
+WHERE OrderDate >= '2021-01-01';
+```
+
 <!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
+### Query Store Usage  
+...lets you track, compare, and manage query performance over time  
+
+- **Captures Execution History**: stores actual execution plans, query text, and performance statistics  
+- **Detects Regressions**: identifies when a new plan performs worse than a previous one  
+- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions  
+- **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions  
+- **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server  
+
+**Try it out...**
+
+Execute the following T-SQL to activate:
+```sql
+ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE, MAX_STORAGE_SIZE_MB = 100, INTERVAL_LENGTH_MINUTES = 30)
+```
+
+<img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
+
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -353,19 +465,7 @@ RECONFIGURE;
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
-#### Query Hints and Plan Directives  
-...allow you to manually influence the optimizer when automatic choices **DON'T** yield optimal performance  
-
-- **FORCE ORDER**: enforce the join order defined in your query when the optimizer’s reordering causes poor performance  
-- **JOIN HINTS (LOOP, HASH, MERGE)**: specify a particular join algorithm for a query when you know one operator outperforms another for your data shape  
-- **MAXDOP hint**: override the server or database MAXDOP setting for a single query to fine‑tune parallelism  
-- **OPTION (RECOMPILE)**: force plan recompilation each execution to avoid parameter sniffing but at the cost of CPU for compilation  
-- **APPLY hints (e.g. FORCESEEK)**: direct index usage or seek operations when the optimizer persistently chooses scans  
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Automatic Tuning  
+### Automatic Tuning  
 ...automates some performance tuning decisions based on collected telemetry  
 
 - **Automatic Plan Correction**: reverts to a previously good plan if a new one degrades performance  
@@ -526,7 +626,7 @@ RECONFIGURE;
 #### Memory and Plan Cache Behavior  
 ...affects overall performance by controlling how SQL Server allocates memory and reuses query plans  
 
-- **Plan Cache Bloat**: caused by many unique, single-use queries; wastes memory and slows **DO**wn lookup  
+- **Plan Cache Bloat**: caused by many unique, single-use queries; wastes memory and slows down lookup  
 - **Memory Grants**: each query requests memory before executing—overestimation can delay others, underestimation leads to spills to disk  
 - **Single-Use Plan Detection**: use `sys.dm_exec_cached_plans` to find bloated caches  
 - **Spill Warnings**: visible in execution plans when sorts or hashes exceed memory and write to TempDB  
@@ -548,7 +648,7 @@ RECONFIGURE;
 <!-- ------------------------- ------------------------- -->
 
 #### Resource Governance  
-...ensures that one workload **DO**esn’t overwhelm others by controlling CPU, memory, and I/O allocations  
+...ensures that one workload does not overwhelm others by controlling CPU, memory, and I/O allocations  
 
 - **Resource Governor (on-premises only)**: create workload groups and assign limits based on user, query type, or application role  
 - **Azure Tiers**: in Azure SQL, pick vCore or DTU tiers based on workload shape (transactional, analytical, mixed)  
@@ -640,7 +740,7 @@ RECONFIGURE;
 
 - **sys.dm_os_wait_stats**: view cumulative wait times by wait type to identify the most costly waits  
 - **Key Wait Types**: recognize common waits like `PAGEIOLATCH_*` (I/O), `CXPACKET` (parallelism), and `LCK_M_*` (locking)  
-- **Wait Time Break**DO**wn**: correlate wait stats with workload patterns and time‑of‑day to target tuning efforts  
+- **Wait Time Breakdown**: correlate wait stats with workload patterns and time‑of‑day to target tuning efforts  
 - **Filtering and Baselines**: ignore known benign waits (e.g. `SQLTRACE_BUFFER_FLUSH`) and compare against historical baselines  
 - **Actionable Insights**: use waits to decide if you need more memory, faster storage, index changes, or isolation‑level adjustments  
 
@@ -714,7 +814,7 @@ RECONFIGURE;
 #### Performance Insight and Metrics  
 ...provides visual dashboards for identifying trends, bottlenecks, and misconfigured resources  
 
-- **Query Performance Insight (Azure SQL)**: breaks **DO**wn top resource-consuming queries by CPU, duration, or execution count  
+- **Query Performance Insight (Azure SQL)**: breaks down top resource-consuming queries by CPU, duration, or execution count  
 - **Elastic Pool Metrics**: monitor utilization across pooled databases to spot over-provisioning or unexpected spikes  
 - **Server-Level Insights**: includes tempdb contention, long wait times, or high I/O via Azure metrics or Extended Events  
 - **Historical Resource Metrics (`sys.resource_stats`)**: captures five‑minute snapshots of CPU, storage, and I/O usage; query this view to analyze usage over periods like “last week” for capacity planning and trend analysis  
@@ -897,7 +997,7 @@ USE SecurityDemo;
 
 <!-- ------------------------- ------------------------- -->
 
-##### Let’s get started!
+##### Let's get started!
 
 Enable I/O and time statistics:  
 ```sql
@@ -973,7 +1073,7 @@ By leveraging missing‑index DMVs, you can pinpoint exactly which columns and i
 
 <!-- ------------------------- ------------------------- -->
 
-##### Let’s get started!
+##### Let's get started!
 
 1. **Check current fragmentation**  
    ```sql
@@ -1046,7 +1146,7 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
 - Uses `sys.dm_exec_cached_plans` joined with `sys.dm_exec_sql_text` to identify single‑use (“adhoc”) plans filling the cache  
 - Applies the `OPTIMIZE_FOR_AD_HOC_WORKLOADS` setting at the database scope to convert full plans into lightweight stubs on first execution  
 
-##### Let’s get started!
+##### Let's get started!
 
 1. **Check current memory grants**  
    ```sql
@@ -1217,14 +1317,14 @@ By combining memory‑grant and plan‑cache insights with the `OPTIMIZE_FOR_AD_
 ### Exercises
 
 #### Exercise #1: [Automatic Tuning in Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/automatic-tuning-overview)  
-...leverages Azure’s built‑in tuning engine to apply and monitor index and plan corrections without manual intervention  
+...leverages Azure's built‑in tuning engine to apply and monitor index and plan corrections without manual intervention  
 
 ##### How?  
 - Enables automatic plan correction and automatic index create/drop on your database  
 - Generates tuning recommendations based on Query Store telemetry  
 - Applies, monitors, or rolls back changes via the Azure portal or T‑SQL  
 
-##### Let’s get started!  
+##### Let's get started!  
 1. **Enable automatic tuning**  
    ```sql
    ALTER DATABASE CURRENT  
@@ -1268,9 +1368,9 @@ Automatic Tuning in Azure SQL can offload routine index and plan corrections, le
 
 ##### How?  
 - Uses Query Store data to visualize CPU, duration, and execution count trends  
-- Breaks **DO**wn individual query performance and correlates plan changes  
+- Breaks down individual query performance and correlates plan changes  
 
-##### Let’s get started!  
+##### Let's get started!  
 1. **Open Query Performance Insight**  
    - In the Azure portal, navigate to your Azure SQL database  
    - Select **Query Performance Insight** under **Intelligent Performance**  
