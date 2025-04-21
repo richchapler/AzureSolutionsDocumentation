@@ -301,7 +301,8 @@ RECONFIGURE;
 ### Query-Level Hints
 Use hints to override the optimizer when its default plan doesn’t meet your performance needs.
 
-### Join
+#### Join
+Join hints override the optimizer’s default join strategy or join order when its cost‑based choice is not ideal.
 
 | Hint | Impact |
 | :--- | :--- |
@@ -310,7 +311,8 @@ Use hints to override the optimizer when its default plan doesn’t meet your pe
 | `OPTION (MERGE JOIN)` | Forces a merge join; streams sorted inputs with low memory overhead |
 | `OPTION (FORCE ORDER)` | Preserves the join order you wrote; useful when optimizer’s order is suboptimal |
 
-### Index
+#### Index
+Index hints override the optimizer’s default index selection to force or avoid specific indexes when its cost‑based choice leads to inefficient access paths
 
 | Hint | Impact |
 | :--- | :--- |
@@ -318,21 +320,24 @@ Use hints to override the optimizer when its default plan doesn’t meet your pe
 | `WITH (FORCESCAN)` | Forces a full scan of the clustered or specified index |
 | `WITH (INDEX(index_list))` | Restricts optimizer to only the specified index(es) |
 
-### Parallelism
+#### Parallelism
+Parallelism hints override SQL Server’s default degree of parallelism when you need to balance CPU utilization and query responsiveness for specific workloads
 
 | Hint | Impact |
 | :--- | :--- |
 | `OPTION (MAXDOP n)` | Limits degree‑of‑parallelism for the query, balancing CPU utilization and throughput |
 | `OPTION (FAST n)` | Optimizes plan to return the first *n* rows quickly, useful for interactive or paginated queries |
 
-### Plan Stability
+#### Plan Stability
+Plan stability hints override SQL Server’s plan generation and reuse policies when you require consistent or optimal execution plans across varying parameter values
 
 | Hint | Impact |
 | :--- | :--- |
 | `OPTION (OPTIMIZE FOR UNKNOWN)` | Builds a generic plan ignoring the first parameter, balancing cost across inputs |
 | `OPTION (RECOMPILE)` | Discards cached plan and compiles a fresh plan each execution, avoiding sniffing |
 
-### Plan‑Cache
+#### Plan‑Cache
+Plan‑cache hints override SQL Server’s plan caching behavior to control plan retention and reduce cache bloat when eviction or pollution hurts performance
 
 | Hint | Impact |
 | :--- | :--- |
@@ -340,7 +345,8 @@ Use hints to override the optimizer when its default plan doesn’t meet your pe
 | `OPTION (KEEP PLAN)` | Prevents eviction under memory pressure, ensuring quick reuse |
 | `OPTION (KEEPFIXED PLAN)` | Pins plan across stats/index changes or upgrades |
 
-### Concurrency
+#### Concurrency
+Concurrency hints override SQL Server’s default locking behavior to minimize blocking or deadlocks when high contention degrades throughput
 
 | Hint | Impact |
 | :--- | :--- |
