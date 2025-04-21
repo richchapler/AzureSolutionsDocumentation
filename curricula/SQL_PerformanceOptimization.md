@@ -16,8 +16,8 @@ The database team talks about the mission and settles on the following goals:
 
 ## Fundamentals
 
-1. **Execution Plans**: read estimated and actual plans to understand how SQL Server breaks down your queries 
-2. **Live Query Statistics**: monitor queries as they run to catch slow or blocked operations in real time 
+1. **"Execution Plan"**: read estimated and actual plans to understand how SQL Server breaks down your queries 
+2. **"Live Query Statistics"**: monitor queries as they run to catch slow or blocked operations in real time 
 3. **Logic Optimization**: rewrite queries for set‑based processing, eliminate unnecessary work, and leverage indexes 
 4. **Query‑Level Hints**: use hints to guide the optimizer when you need more control 
 5. **Query Store**: collect and compare execution plans over time to prevent regressions
@@ -36,7 +36,6 @@ The database team talks about the mission and settles on the following goals:
 
 **Use this when...** you need to pinpoint inefficient operators, missing indexes, or estimate inaccuracies **before and after changes**
 
-**Try it out...**
 <img src=".\images\SQL_PerformanceOptimization\ActualExecutionPlan.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
@@ -51,7 +50,6 @@ The database team talks about the mission and settles on the following goals:
 
 **Use this when...** you need to spot stalls, blocking, or unexpectedly slow operators **in real time**
 
-**Try it out...**
 <img src=".\images\SQL_PerformanceOptimization\LiveQueryStatistics.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
@@ -307,7 +305,7 @@ Use hints to override the optimizer when its default plan doesn’t meet your pe
 
 #### Join Hints 
 | Hint | Performance Impact |
-|--------------------------|-------------------------------------------------------------------------------------|
+| :--- | :--- |
 | `OPTION (LOOP JOIN)` | Forces a nested‑loops join; efficient for small, highly selective inputs |
 | `OPTION (HASH JOIN)` | Forces a hash join; optimal for large, unsorted equi‑joins |
 | `OPTION (MERGE JOIN)` | Forces a merge join; streams sorted inputs with low memory overhead |
@@ -315,51 +313,49 @@ Use hints to override the optimizer when its default plan doesn’t meet your pe
 
 #### Index Hints 
 | Hint | Performance Impact |
-|-----------------------------------|------------------------------------------------------------------|
+| :--- | :--- |
 | `WITH (FORCESEEK(IndexName))` | Forces an index seek on the specified index for selective filters |
 | `WITH (FORCESCAN)` | Forces a full scan of the clustered or specified index |
 | `WITH (INDEX(index_list))` | Restricts optimizer to only the specified index(es) |
 
 #### Parallelism Hints 
 | Hint | Performance Impact |
-|---------------------------|-----------------------------------------------------------------------------------------------|
+| :--- | :--- |
 | `OPTION (MAXDOP n)` | Limits degree‑of‑parallelism for the query, balancing CPU utilization and throughput |
 | `OPTION (FAST n)` | Optimizes plan to return the first *n* rows quickly, useful for interactive or paginated queries |
 
 #### Plan Stability Hints 
 | Hint | Performance Impact |
-|-------------------------------------|---------------------------------------------------------------------------------------|
+| :--- | :--- |
 | `OPTION (OPTIMIZE FOR UNKNOWN)` | Builds a generic plan ignoring the first parameter, balancing cost across inputs |
 | `OPTION (RECOMPILE)` | Discards cached plan and compiles a fresh plan each execution, avoiding sniffing |
 
 #### Plan‑Cache Hints 
 | Hint | Performance Impact |
-|---------------------------------------------|----------------------------------------------------------------------------|
+| :--- | :--- |
 | `OPTION (OPTIMIZE FOR AD HOC WORKLOADS)` | Caches only a stub on first run of ad hoc queries, reducing cache bloat |
 | `OPTION (KEEP PLAN)` | Prevents eviction under memory pressure, ensuring quick reuse |
 | `OPTION (KEEPFIXED PLAN)` | Pins plan across stats/index changes or upgrades |
 
-#### Concurrency Hints 
+#### Concurrencys 
 | Hint | Performance Impact |
-|---------------------------|--------------------------------------------------------------------------------|
+| :--- | :--- |
 | `WITH (NOLOCK)` | Reads without shared locks (READ UNCOMMITTED), reducing blocking |
 | `WITH (READPAST)` | Skips locked rows to avoid blocking on heavily contended tables |
 | `WITH (UPDLOCK)` | Acquires update locks on read to prevent deadlocks when planning updates |
 | `WITH (ROWLOCK)` | Forces row‑level locks only, avoiding broader lock escalation |
 
----
-
-### Other Hints (Non‑Performance‑Centric)
+#### Other Hints (Non‑Performance‑Centric)
 
 | Hint | Category | Non-Performance Impact |
-|------------------------------|------------------|---------------------------------------------------------------------------------|
-| `OPTION (QUERYTRACEON x)` | Diagnostic hint | Enables an undocumented trace flag for advanced troubleshooting |
-| `WITH (HOLDLOCK)` | Concurrency hint | Holds shared locks until transaction end, ensuring consistency at cost of blocking |
-| `WITH (XLOCK)` | Concurrency hint | Applies exclusive locks for read/write, preventing other access |
-| `WITH (TABLOCK)` | Concurrency hint | Locks entire table, blocking other operations |
-| `WITH (TABLOCKX)` | Concurrency hint | Exclusive table lock, used for bulk operations |
-| `WITH (PAGLOCK)` | Concurrency hint | Applies page‑level locks, rarely used for general performance tuning |
-| `WITH (READCOMMITTEDLOCK)` | Concurrency hint | Forces shared locks under READ COMMITTED; matches default behavior |
+| :--- | :--- | :--- |
+| `OPTION (QUERYTRACEON x)` | Diagnostic | Enables an undocumented trace flag for advanced troubleshooting |
+| `WITH (HOLDLOCK)` | Concurrency | Holds shared locks until transaction end, ensuring consistency at cost of blocking |
+| `WITH (XLOCK)` | Concurrency | Applies exclusive locks for read/write, preventing other access |
+| `WITH (TABLOCK)` | Concurrency | Locks entire table, blocking other operations |
+| `WITH (TABLOCKX)` | Concurrency | Exclusive table lock, used for bulk operations |
+| `WITH (PAGLOCK)` | Concurrency | Applies page‑level locks, rarely used for general performance tuning |
+| `WITH (READCOMMITTEDLOCK)` | Concurrency | Forces shared locks under READ COMMITTED; matches default behavior |
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -372,8 +368,6 @@ Use hints to override the optimizer when its default plan doesn’t meet your pe
 - **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions 
 - **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions 
 - **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server 
-
-**Try it out...**
 
 Execute the following T-SQL to activate:
 ```sql
