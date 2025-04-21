@@ -113,8 +113,6 @@ Key performance triggers and cost strategies for scaling remain to be defined; e
 
 ## Monitoring
 
-### What we know...
-
 **Log Analytics**: Centralized Log Analytics workspace and Diagnostic Settings auto-deployed via Azure Policy
 
 - **QUESTION**: What subscription is the centralized Log Analytics in and do all stakeholders have access?
@@ -130,27 +128,27 @@ Key performance triggers and cost strategies for scaling remain to be defined; e
 - **RECOMMENDATION**: Prepare solution for centralized budget forecasting across subscriptions 
 - **RECOMMENDATION**: Establish recurring process for reviewing spending trends and adjusting resource allocation based on real-world usage 
 
-#### Requirements
+### Requirements
 
 The following reporting requirements were shared:
 
-##### General Application Error Tracking
+#### General Application Error Tracking
 1. App Insights alerting on unhandled exception
 2. What are the most common exceptions and what is the source?
 3. Does the bot app service / orchestration container app restart unexpectedly (# of restarts over the last X days, separate counts for bot / orchestrator)
 
-##### Performance
+#### Performance
 1. What is the average message response time from bot to user?
 2. Which specific operations are introducing the most latency (is this possible? can we differentiate between different aspects like file uploads, querying the LLM, general network latency response times, etc? If so, how complex is this to log?)
 3. How often do users experience timeouts when asking a **question** (when timeouts occur, is there some common pattern? i.e. file attached, common source, etc)
 4. What % of messages are augmented with retrieval and what % need no additional context? (this would give great insight on how the bot's being used and how to prioritize service/features. We probably need to come up with a time span upon which to base this query)
 
-##### Security
+#### Security
 1. What % of bot queries come from unauthorized sources? (Find common times of day / sources)
 2. How often are users being rate limited? (if at all? are rate limits originating from common sources or resulting from common query scenarios)
 3. How often (if ever) do queries hit the container app from sources other than the bot? (Should be never, but would like to make sure that’s the case)
 
-##### Alerts
+#### Alerts
 
 1. Unhandled Exceptions (any and all hits from the App Insights exceptions table)
 2. HTTP 5xx responses (5xx hits from AppServiceHTTPLogs)
@@ -162,9 +160,9 @@ The following reporting requirements were shared:
 
 <!-- ------------------------- ------------------------- -->
 
-### What we've learned...
+### Exercise: "Catch All" Log
 
-#### Tables and Categories by Resource Type
+Knowing the log tables and categories is just the start...
 
 | **Resource Type** | **Table** | **Categories** |
 | :--- | :--- | :--- |
@@ -177,10 +175,6 @@ The following reporting requirements were shared:
 | **Search Service** | AzureDiagnostics | OperationLogs |
 | **Storage Account** | AzureDiagnostics | StorageRead<br>StorageWrite<br>StorageDelete |
 
-<!-- ------------------------- ------------------------- -->
-
-### Exercise: "Catch All" Log
-
 Creation of necessary reporting will take many iterations. The exercise below demonstrates a repeatable process:
 
 * Confirm Diagnostic Settings
@@ -188,6 +182,8 @@ Creation of necessary reporting will take many iterations. The exercise below de
 * Review Logs
 
 We will do this first for OpenAI, then for the Web App, and then produce a combined report.
+
+<!-- ------------------------- ------------------------- -->
 
 #### OpenAI
 
