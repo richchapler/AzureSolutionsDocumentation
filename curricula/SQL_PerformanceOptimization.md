@@ -301,61 +301,53 @@ RECONFIGURE;
 ### Query-Level Hints
 Use hints to override the optimizer when its default plan doesn’t meet your performance needs.
 
-### Performance‑Centric Hints
+### Join
 
-#### Join Hints 
-| Hint | Performance Impact |
+| Hint | Impact |
 | :--- | :--- |
 | `OPTION (LOOP JOIN)` | Forces a nested‑loops join; efficient for small, highly selective inputs |
 | `OPTION (HASH JOIN)` | Forces a hash join; optimal for large, unsorted equi‑joins |
 | `OPTION (MERGE JOIN)` | Forces a merge join; streams sorted inputs with low memory overhead |
 | `OPTION (FORCE ORDER)` | Preserves the join order you wrote; useful when optimizer’s order is suboptimal |
 
-#### Index Hints 
-| Hint | Performance Impact |
+### Index
+
+| Hint | Impact |
 | :--- | :--- |
 | `WITH (FORCESEEK(IndexName))` | Forces an index seek on the specified index for selective filters |
 | `WITH (FORCESCAN)` | Forces a full scan of the clustered or specified index |
 | `WITH (INDEX(index_list))` | Restricts optimizer to only the specified index(es) |
 
-#### Parallelism Hints 
-| Hint | Performance Impact |
+### Parallelism
+
+| Hint | Impact |
 | :--- | :--- |
 | `OPTION (MAXDOP n)` | Limits degree‑of‑parallelism for the query, balancing CPU utilization and throughput |
 | `OPTION (FAST n)` | Optimizes plan to return the first *n* rows quickly, useful for interactive or paginated queries |
 
-#### Plan Stability Hints 
-| Hint | Performance Impact |
+### Plan Stability
+
+| Hint | Impact |
 | :--- | :--- |
 | `OPTION (OPTIMIZE FOR UNKNOWN)` | Builds a generic plan ignoring the first parameter, balancing cost across inputs |
 | `OPTION (RECOMPILE)` | Discards cached plan and compiles a fresh plan each execution, avoiding sniffing |
 
-#### Plan‑Cache Hints 
-| Hint | Performance Impact |
+### Plan‑Cache
+
+| Hint | Impact |
 | :--- | :--- |
 | `OPTION (OPTIMIZE FOR AD HOC WORKLOADS)` | Caches only a stub on first run of ad hoc queries, reducing cache bloat |
 | `OPTION (KEEP PLAN)` | Prevents eviction under memory pressure, ensuring quick reuse |
 | `OPTION (KEEPFIXED PLAN)` | Pins plan across stats/index changes or upgrades |
 
-#### Concurrencys 
-| Hint | Performance Impact |
+### Concurrency
+
+| Hint | Impact |
 | :--- | :--- |
 | `WITH (NOLOCK)` | Reads without shared locks (READ UNCOMMITTED), reducing blocking |
 | `WITH (READPAST)` | Skips locked rows to avoid blocking on heavily contended tables |
 | `WITH (UPDLOCK)` | Acquires update locks on read to prevent deadlocks when planning updates |
 | `WITH (ROWLOCK)` | Forces row‑level locks only, avoiding broader lock escalation |
-
-#### Other Hints (Non‑Performance‑Centric)
-
-| Hint | Category | Non-Performance Impact |
-| :--- | :--- | :--- |
-| `OPTION (QUERYTRACEON x)` | Diagnostic | Enables an undocumented trace flag for advanced troubleshooting |
-| `WITH (HOLDLOCK)` | Concurrency | Holds shared locks until transaction end, ensuring consistency at cost of blocking |
-| `WITH (XLOCK)` | Concurrency | Applies exclusive locks for read/write, preventing other access |
-| `WITH (TABLOCK)` | Concurrency | Locks entire table, blocking other operations |
-| `WITH (TABLOCKX)` | Concurrency | Exclusive table lock, used for bulk operations |
-| `WITH (PAGLOCK)` | Concurrency | Applies page‑level locks, rarely used for general performance tuning |
-| `WITH (READCOMMITTEDLOCK)` | Concurrency | Forces shared locks under READ COMMITTED; matches default behavior |
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
