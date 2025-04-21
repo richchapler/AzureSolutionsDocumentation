@@ -15,9 +15,6 @@ The database team talks about the mission and settles on the following goals:
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Fundamentals
-In this course, we will first discuss the following fundamentals:
-
-<!-- ------------------------- ------------------------- -->
 
 ### Query and Plan Optimization
 
