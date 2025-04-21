@@ -115,22 +115,17 @@ Key performance triggers and cost strategies for scaling remain to be defined; e
 
 **Log Analytics**: Centralized Log Analytics workspace and Diagnostic Settings auto-deployed via Azure Policy
 
-- **QUESTION**: What subscription is the centralized Log Analytics in and do all stakeholders have access?
-- **QUESTION**: Do Diagnostic Settings for all resources point to the central Log Analytics workspace?
-
 **Cost Management**: Exclusively per-subscription use of Azure Portal > Cost Management + Billing interface
-
 - **RECOMMENDATION**: Prepare solution for centralized cost management across subscriptions 
 - **RECOMMENDATION**: Confirm consistent tagging across all subscriptions {e.g., `CostCenter`} 
 
 **Budget Forecasting**: No proactive strategy for forecasting expenses
-
 - **RECOMMENDATION**: Prepare solution for centralized budget forecasting across subscriptions 
 - **RECOMMENDATION**: Establish recurring process for reviewing spending trends and adjusting resource allocation based on real-world usage 
 
 ### Requirements
 
-The following reporting requirements were shared:
+The following reporting requirements were shared and might be explored in future work sessions:
 
 #### General Application Error Tracking
 1. App Insights alerting on unhandled exception
@@ -149,7 +144,6 @@ The following reporting requirements were shared:
 3. How often (if ever) do queries hit the container app from sources other than the bot? (Should be never, but would like to make sure that’s the case)
 
 #### Alerts
-
 1. Unhandled Exceptions (any and all hits from the App Insights exceptions table)
 2. HTTP 5xx responses (5xx hits from AppServiceHTTPLogs)
 3. Container Restarts / App Service Restarts (What's the best source for these logs?)
@@ -161,8 +155,7 @@ The following reporting requirements were shared:
 <!-- ------------------------- ------------------------- -->
 
 ### Exercise: "Catch All" Log
-
-Knowing the log tables and categories is just the start...
+This exercise is designed to demonstrate the variability and limitations of Log Analytics, Diagnostic Settings, and captured data (columns).  Knowing the log tables and categories is just the start...
 
 | **Resource Type** | **Table** | **Categories** |
 | :--- | :--- | :--- |
