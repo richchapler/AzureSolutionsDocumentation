@@ -55,6 +55,72 @@ The database team talks about the mission and settles on the following goals:
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
+### Database Configuration  
+Configure database‑level settings to control plan caching and literal parameterization.
+
+#### Forced Parameterization
+...is a database‑level setting that tells SQL Server to replace literal values in your ad hoc queries with parameters at compile time so they can share execution plans.
+
+By default, SQL Server uses **Simple Parameterization** only for very basic literals and leaves most ad hoc queries unparameterized.
+
+When you set the database to **Forced Parameterization** every literal that can be safely parameterized is turned into a parameter.
+
+This increases plan reuse and reduces plan cache bloat at the cost of occasionally generating less‑optimal plans.
+
+**Before**
+
+```sql
+-- each literal produces its own plan 
+SELECT * 
+ FROM Sales.SalesOrderHeader 
+ WHERE OrderDate = '2021-01-01';
+
+SELECT * 
+ FROM Sales.SalesOrderHeader 
+ WHERE OrderDate = '2021-02-01';
+``` 
+
+**After**
+
+```sql
+ALTER DATABASE [YourDatabase] SET PARAMETERIZATION = FORCED;
+GO;
+
+-- SQL Server automatically rewrites to a parameterized form 
+EXEC sp_executesql 
+ N'SELECT * FROM Sales.SalesOrderHeader WHERE OrderDate = @date', 
+ N'@date date', 
+ @date = '2021-01-01';
+
+EXEC sp_executesql 
+ N'SELECT * FROM Sales.SalesOrderHeader WHERE OrderDate = @date', 
+ N'@date date', 
+ @date = '2021-02-01';
+``` 
+
+**Now both executions share a single cached plan instead of two separate ones.**
+
+-------------------------
+
+#### Optimize for Adhoc Workloads
+
+**By default, SQL Server caches the complete execution plan on the first run of any query, even if it never repeats.**
+
+When you enable **Optimize for Adhoc Workloads**, SQL Server saves just a stub initially and promotes it to a full plan only upon a subsequent execution.
+
+This **reduces plan cache bloat** and **conserves memory** at the cost of delaying full plan caching until the query is reused.
+
+```sql
+EXEC sp_configure 'show advanced options', 1; 
+RECONFIGURE;
+
+EXEC sp_configure 'optimize for adhoc workloads', 1; 
+RECONFIGURE;
+``` 
+
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
 ### Logic Optimization
 ...involves modifying the structure of a query to improve performance without changing the result
 
@@ -235,68 +301,6 @@ ORDER BY rs.avg_duration DESC;
 ```
 
 <!-- ------------------------- ------------------------- -->
-
-#### Forced Parameterization
-...is a database‑level setting that tells SQL Server to replace literal values in your ad hoc queries with parameters at compile time so they can share execution plans.
-
-By default, SQL Server uses **Simple Parameterization** only for very basic literals and leaves most ad hoc queries unparameterized.
-
-When you set the database to **Forced Parameterization** every literal that can be safely parameterized is turned into a parameter.
-
-This increases plan reuse and reduces plan cache bloat at the cost of occasionally generating less‑optimal plans.
-
-**Before**
-
-```sql
--- each literal produces its own plan 
-SELECT * 
- FROM Sales.SalesOrderHeader 
- WHERE OrderDate = '2021-01-01';
-
-SELECT * 
- FROM Sales.SalesOrderHeader 
- WHERE OrderDate = '2021-02-01';
-``` 
-
-**After**
-
-```sql
-ALTER DATABASE [YourDatabase] SET PARAMETERIZATION = FORCED;
-GO;
-
--- SQL Server automatically rewrites to a parameterized form 
-EXEC sp_executesql 
- N'SELECT * FROM Sales.SalesOrderHeader WHERE OrderDate = @date', 
- N'@date date', 
- @date = '2021-01-01';
-
-EXEC sp_executesql 
- N'SELECT * FROM Sales.SalesOrderHeader WHERE OrderDate = @date', 
- N'@date date', 
- @date = '2021-02-01';
-``` 
-
-**Now both executions share a single cached plan instead of two separate ones.**
-
--------------------------
-
-#### Optimize for Adhoc Workloads
-
-**By default, SQL Server caches the complete execution plan on the first run of any query, even if it never repeats.**
-
-When you enable **Optimize for Adhoc Workloads**, SQL Server saves just a stub initially and promotes it to a full plan only upon a subsequent execution.
-
-This **reduces plan cache bloat** and **conserves memory** at the cost of delaying full plan caching until the query is reused.
-
-```sql
-EXEC sp_configure 'show advanced options', 1; 
-RECONFIGURE;
-
-EXEC sp_configure 'optimize for adhoc workloads', 1; 
-RECONFIGURE;
-``` 
-
--------------------------
 
 ### Query-Level Hints
 Use hints to override the optimizer when its default plan doesn’t meet your performance needs.
