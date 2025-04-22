@@ -124,7 +124,7 @@ ORDER BY wait_time_ms DESC;
 
 - **Memory Grants**: queries request a specific amount of workspace memory before running; insufficient grants can queue or throttle execution 
 - **Spill Indicators**: in actual execution plans, look for warnings on Sort or Hash operators that spill to TempDB when they exceed granted memory 
-- **DMVs for Insight**: query `sys.dm_exec_query_memory_grants` to see requested, granted, and ideal grant sizes, plus wait times 
+- **Dynamic Management Viewss for Insight**: query `sys.dm_exec_query_memory_grants` to see requested, granted, and ideal grant sizes, plus wait times 
 - **Tuning Strategies**: reduce memory demands by filtering earlier, rewriting heavy operators, updating statistics for better estimates, or increasing server memory 
 - **Azure SQL Notes**: memory grant behavior is tied to your service tier; monitor grants via Query Store or `sys.resource_stats` and scale up/off as needed 
 
@@ -191,7 +191,7 @@ Spread data across storage for better I/O and recovery flexibility.
 - **Multiple Data Files**: configure 1 data file per logical CPU (up to 8) to avoid page latch contention 
 - **Equal Size and Growth**: ensure all TempDB files are the same size with the same autogrowth settings 
 - **Location and I/O**: place TempDB on fast storage; isolate it from user databases if possible 
-- **Monitoring**: track TempDB usage with DMVs like `sys.dm_db_file_space_usage` and `sys.dm_db_session_space_usage` 
+- **Monitoring**: track TempDB usage with Dynamic Management Viewss like `sys.dm_db_file_space_usage` and `sys.dm_db_session_space_usage` 
 - **Workload Impact**: high concurrency environments (e.g., heavy reporting or temp tables) suffer most from poor TempDB setup 
 
 <!-- ------------------------- ------------------------- ------------------------- -->
@@ -710,7 +710,7 @@ Configure and maintain indexes to reduce I/O, support index seeks, and improve e
 | **Nonclustered Indexes** | Accelerate filters, joins, and lookups | Increase write cost and plan complexity if overused | Allow targeted access to frequently queried columns |
 | **Filtered Indexes** | Improve query speed for common filtered subsets | Only useful for predictable filters | Reduce index size and maintenance for highly selective filters |
 | **Covering Indexes** | Avoid lookups by including all required columns | Consume more space and increase index size | Let SQL Server satisfy queries using only the index |
-| **Missing Index DMVs** | Suggest indexes based on actual query patterns | May overlap or miss multi-column interactions | Help surface opportunities from real workload activity |
+| **Missing Index Dynamic Management Viewss** | Suggest indexes based on actual query patterns | May overlap or miss multi-column interactions | Help surface opportunities from real workload activity |
 | **Fragmentation Management** | Rebuild/reorganize improves scan and seek performance | Maintenance overhead; needs automation | Prevents inefficient I/O and high CPU from fragmented access paths |
 | **Fill Factor** | Reduces page splits on insert-heavy tables | Uses more space; may slightly slow reads | Helps balance update speed and read efficiency |
 
@@ -873,7 +873,7 @@ Leverage **built‑in automation to apply performance corrections without manual
  C) READ_UNCOMMITTED 
  D) SNAPSHOT 
 
-1. Which DMV shows cumulative wait times by wait type for diagnosing bottlenecks 
+1. Which Dynamic Management Views shows cumulative wait times by wait type for diagnosing bottlenecks 
  A) sys.dm_exec_requests 
  B) sys.dm_os_wait_stats 
  C) sys.dm_exec_query_stats 
@@ -971,17 +971,17 @@ WHERE mid.object_id = OBJECT_ID('Sales.SalesOrderDetail');
 This query analyzes which predicates and columns your workload touches and then surfaces index "candidates" as rows in the result.
 <br>**Each row maps directly to an index you could create**, with details in columns:
 
-- **inequality_columns** tells you which column(s) to put in the nonclustered‑index key  
-- **equality_columns** would list any exact‑match columns (NULL here since none)  
-- **included_columns** shows which columns to add as INCLUDES  
-- **user_seeks** / **avg_total_user_cost** quantify how often and how costly queries are without that index   
+- **inequality_columns** tells you which column(s) to put in the nonclustered‑index key 
+- **equality_columns** would list any exact‑match columns (NULL here since none) 
+- **included_columns** shows which columns to add as INCLUDES 
+- **user_seeks** / **avg_total_user_cost** quantify how often and how costly queries are without that index 
 
-In your example, the first row suggests:  
+In your example, the first row suggests: 
 ```sql
 CREATE NONCLUSTERED INDEX IX_SalesOrderDetail_UnitPrice
-  ON Sales.SalesOrderDetail(UnitPrice)        -- from inequality_columns
-  INCLUDE (OrderQty, ProductID);              -- from included_columns
-```  
+ ON Sales.SalesOrderDetail(UnitPrice) -- from inequality_columns
+ INCLUDE (OrderQty, ProductID); -- from included_columns
+``` 
 
 ...because queries frequently filter on UnitPrice and then return OrderQty and ProductID.
 <br>Once created, that index will turn scans into seeks and reduce the avg_total_user_cost reported by the Dynamic Management Views.
@@ -994,21 +994,21 @@ Create the recommended nonclustered index:
 Expected result:
 ```plaintext
 SQL Server parse and compile time: 
-   CPU time = 0 ms, elapsed time = 0 ms.
+ CPU time = 0 ms, elapsed time = 0 ms.
 
  SQL Server Execution Times:
-   CPU time = 0 ms,  elapsed time = 0 ms.
+ CPU time = 0 ms, elapsed time = 0 ms.
 SQL Server parse and compile time: 
-   CPU time = 0 ms, elapsed time = 8 ms.
+ CPU time = 0 ms, elapsed time = 8 ms.
 Table 'SalesOrderDetail'. Scan count 7, logical reads 1237, physical reads 0, page server reads 0, read-ahead reads 1237, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
 
  SQL Server Execution Times:
-   CPU time = 140 ms,  elapsed time = 376 ms.
+ CPU time = 140 ms, elapsed time = 376 ms.
 SQL Server parse and compile time: 
-   CPU time = 0 ms, elapsed time = 0 ms.
+ CPU time = 0 ms, elapsed time = 0 ms.
 
  SQL Server Execution Times:
-   CPU time = 0 ms,  elapsed time = 0 ms.
+ CPU time = 0 ms, elapsed time = 0 ms.
 
 Completion time: 2025-04-22T12:43:44.1098059-07:00
 ```
@@ -1033,56 +1033,62 @@ By leveraging missing‑index Dynamic Management Views, you can pinpoint exactly
 
 <!-- ------------------------- ------------------------- -->
 
-Check current fragmentation
+Check current fragmentation:
 ```sql
 USE AdventureWorks2022; 
 SELECT OBJECT_NAME(ips.object_id) AS TableName, i.name AS IndexName, ips.index_type_desc, ips.avg_fragmentation_in_percent
 FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, 'LIMITED') AS ips
-   JOIN sys.indexes AS i ON ips.object_id = i.object_id AND ips.index_id = i.index_id
+ JOIN sys.indexes AS i ON ips.object_id = i.object_id AND ips.index_id = i.index_id
 WHERE ips.database_id = DB_ID() AND ips.avg_fragmentation_in_percent > 5;
 ```
 
-This query identifies indexes with fragmentation above 5 percent.
+This query identifies indexes with fragmentation above 5%.
 
 <img src=".\images\SQL_PerformanceOptimization\IndexFragmentation.png" width="800" title="Snipped April, 2025" />
 
-2. **Review usage stats** 
- ```sql
- SELECT 
- OBJECT_NAME(ius.object_id) AS TableName, 
- i.name AS IndexName, 
- ius.user_seeks, 
- ius.user_scans, 
- ius.user_updates 
- FROM sys.dm_db_index_usage_stats AS ius 
- JOIN sys.indexes AS i 
- ON ius.object_id = i.object_id 
- AND ius.index_id = i.index_id 
- WHERE database_id = DB_ID()
- AND OBJECTPROPERTY(ius.object_id, 'IsUserTable') = 1;
- ``` 
- *Focus maintenance on indexes with both reads and writes*
+Review usage statistics:
+```sql
+SELECT OBJECT_NAME(ius.object_id) AS TableName, i.name AS IndexName, ius.user_seeks, ius.user_scans, ius.user_updates
+FROM sys.dm_db_index_usage_stats AS ius
+	JOIN sys.indexes AS i ON ius.object_id = i.object_id AND ius.index_id = i.index_id
+WHERE database_id = DB_ID() AND OBJECTPROPERTY(ius.object_id, 'IsUserTable') = 1;
+``` 
+This query shows how often each index on your user tables in the current database has been used. 
 
-3. **Reorganize lightly fragmented indexes (5–30 %)** 
- ```sql
- ALTER INDEX ALL 
- ON Sales.SalesOrderDetail 
- REORGANIZE;
- ``` 
+Use these metrics to identify hot indexes (high seeks/scans) and cold or unused indexes (low or zero counts) so you can focus maintenance or consider dropping unused ones.
 
-4. **Rebuild heavily fragmented indexes (> 30 %) with FILLFACTOR** 
- ```sql
- ALTER INDEX ALL 
- ON Sales.SalesOrderDetail 
- REBUILD 
- WITH (FILLFACTOR = 90, ONLINE = ON);
- ``` 
+Reorganize lightly fragmented indexes:
+```sql
+ALTER INDEX ALL ON Sales.SalesOrderDetail 
+REORGANIZE;
+``` 
 
-5. **Verify fragmentation is reduced** 
- ```sql
- -- Rerun the initial DM_PHYSICAL_STATS query 
- ``` 
- *Confirm avg_fragmentation_in_percent falls into the acceptable range (< 5 %)* 
+Rebuild heavily fragmented indexes: 
+```sql
+ALTER INDEX ALL ON Sales.SalesOrderDetail 
+REBUILD WITH (FILLFACTOR = 90, ONLINE = ON);
+``` 
+
+| Action | Locking Behavior | Duration and Impact | Fill Factor | Recommended When |
+| :--- | :--- | :--- | :--- | :--- |
+| `REORGANIZE` | acquires low‑level page locks, works online | shorter operation, minimal blocking, defragments in place | uses existing fill factor | fragmentation 5–30 percent |
+| `REBUILD` | acquires schema‑modification lock, rebuilds index structure | longer operation, blocks (unless ONLINE = ON), reorder pages fully | you specify new fill factor | fragmentation above 30 percent 
+
+Fill factor is an index‐level setting that specifies the percentage of each leaf-level page to fill with data when an index is created or rebuilt. 
+- A fill factor of 90 means SQL Server leaves 10 percent of each page empty for future growth, reducing page splits on inserts and updates 
+- Lowering fill factor can improve write performance at the cost of increased storage and potentially lower read density 
+
+Verify that fragmentation has been reduced
+```sql
+SELECT OBJECT_NAME(ips.object_id) AS TableName, i.name AS IndexName, ips.index_type_desc, ips.avg_fragmentation_in_percent
+FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, 'LIMITED') AS ips
+ JOIN sys.indexes AS i ON ips.object_id = i.object_id AND ips.index_id = i.index_id
+WHERE OBJECT_NAME(ips.object_id)='SalesOrderDetail';
+```
+
+• `LIMITED` scans only a subset of pages per index for a fast, lightweight estimate
+• `SAMPLED` examines a sample of pages for a balance of speed and accuracy
+• `DETAILED` reads every page for the most accurate result but can be slow and resource‑intensive
 
 ##### Final Thought 
 Regular index maintenance—using the right operation and fill factor—keeps your indexes healthy, minimizes I/O, and avoids unexpected performance drops. By combining physical stats with usage data, you focus effort where it delivers the greatest benefit.
@@ -1097,7 +1103,7 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  C) `sys.dm_db_index_physical_stats` 
  D) `sys.dm_db_index_usage_stats` 
 
-2. In the missing‑index DMV output, which field shows columns that should be included to cover the query? 
+2. In the missing‑index Dynamic Management View output, which field shows columns that should be included to cover the query? 
  A) `equality_columns` 
  B) `inequality_columns` 
  C) `included_columns` 
@@ -1115,7 +1121,7 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  C) a Hash Match becomes a Nested Loops 
  D) a Merge Join becomes a Hash Join 
 
-5. Which DMV helps you measure the percentage of page fragmentation for each index? 
+5. Which Dynamic Management Views helps you measure the percentage of page fragmentation for each index? 
  A) `sys.dm_db_index_usage_stats` 
  B) `sys.dm_db_index_physical_stats` 
  C) `sys.dm_exec_query_memory_grants` 
@@ -1127,7 +1133,7 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  C) 30 percent 
  D) 50 percent 
 
-7. Which DMV reveals how often an index is used for seeks, scans, and updates? 
+7. Which Dynamic Management Views reveals how often an index is used for seeks, scans, and updates? 
  A) `sys.dm_db_missing_index_group_stats` 
  B) `sys.dm_db_index_physical_stats` 
  C) `sys.dm_db_index_usage_stats` 
@@ -1139,24 +1145,12 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  C) `DBCC INDEXDEFRAG` 
  D) `DBCC SHRINKFILE` 
 
-9. Which DMV shows queries that requested more memory than they were granted? 
- A) `sys.dm_exec_query_stats` 
- B) `sys.dm_exec_query_memory_grants` 
- C) `sys.dm_os_wait_stats` 
- D) `sys.dm_exec_cached_plans` 
-
-10. Which database‑scoped configuration converts single‑use plans into lightweight stubs to reduce plan‑cache bloat? 
- A) `LEGACY_CARDINALITY_ESTIMATION` 
- B) `QUERY_OPTIMIZER_HOTFIXES` 
- C) `OPTIMIZE_FOR_AD_HOC_WORKLOADS` 
- D) `OPTIMIZE_FOR_SEQUENTIAL_KEY` 
-
 <!-- ------------------------- ------------------------- -->
 
 #### Answers
 
 1. **B** – `sys.dm_db_missing_index_details` 
- *This DMV lists the columns your queries filter on for missing‑index recommendations* 
+ *This Dynamic Management Views lists the columns your queries filter on for missing‑index recommendations* 
 
 2. **C** – `included_columns` 
  *It specifies which non‑key columns to include so the index covers the query* 
@@ -1174,24 +1168,24 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  *Indexes over 30 percent fragmented are best rebuilt to restore page order* 
 
 7. **C** – `sys.dm_db_index_usage_stats` 
- *This DMV shows user_seeks, user_scans, and user_updates for each index* 
+ *This Dynamic Management Views shows user_seeks, user_scans, and user_updates for each index* 
 
 8. **B** – `ALTER INDEX ALL ON ... REORGANIZE` 
  *REORGANIZE defragments pages in place without rebuilding the entire index* 
 
-9. **B** – `sys.dm_exec_query_memory_grants` 
- *It shows requested vs. granted memory and any wait times for memory grants* 
-
-10. **C** – `OPTIMIZE_FOR_AD_HOC_WORKLOADS` 
- *This setting stores only a stub on first execution, converting to a full plan only upon reuse*
-
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Azure
 
 ### Exercises
 
-#### Exercise #1: [Automatic Tuning in Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/automatic-tuning-overview) 
+#### Exercise #1: Automatic Tuning 
 ...leverages Azure's built‑in tuning engine to apply and monitor index and plan corrections without manual intervention 
 
 ##### How? 
@@ -1238,7 +1232,7 @@ Automatic Tuning in Azure SQL can offload routine index and plan corrections, le
 
 <!-- ------------------------- ------------------------- -->
 
-#### Exercise #2: [Query Performance Insight](https://learn.microsoft.com/azure/azure-sql/database/query-performance-insight-overview) 
+#### Exercise #2: Query Performance Insight 
 ...provides a built‑in dashboard showing top resource‑consuming queries over time and helps prioritize tuning efforts 
 
 ##### How? 
@@ -1267,7 +1261,7 @@ Automatic Tuning in Azure SQL can offload routine index and plan corrections, le
  - Confirm a drop in CPU or duration for the tuned query 
 
 ##### Final Thought 
-Query Performance Insight empowers you to focus on your real‑world workload, surfacing the queries that matter most and giving you actionable insights without manual DMV queries. 
+Query Performance Insight empowers you to focus on your real‑world workload, surfacing the queries that matter most and giving you actionable insights without manual Dynamic Management Views queries. 
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
