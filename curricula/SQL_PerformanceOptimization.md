@@ -38,7 +38,7 @@ The database team talks about the mission and settles on the following goals:
 - **Actual Execution Plan**: includes details **collected during query execution**, such as actual row counts and time spent on each operation; essential for finding real-world performance problems and mismatches between estimated and actual costs 
 - **Plan Comparison**: allows you to compare execution plans **before and after changes** and helps confirm that: 1) a performance issue is fixed or 2) spot regressions after a change 
 
-**Use this when...** you need to pinpoint inefficient operators, missing indexes, or estimate inaccuracies **before and after changes**
+**Use When...** you need to pinpoint inefficient operators, missing indexes, or estimate inaccuracies **before and after changes**
 
 <img src=".\images\SQL_PerformanceOptimization\ActualExecutionPlan.png" width="800" title="Snipped April, 2025" />
 
@@ -51,9 +51,87 @@ The database team talks about the mission and settles on the following goals:
 - **Early Detection**: helps identify where a query is stalled, blocked, or slower than expected 
 - **Best For**: troubleshooting long-running or interactive queries in development and test environments
 
-**Use this when...** you need to spot stalls, blocking, or unexpectedly slow operators **in real time**
+**Use When...** you need to spot stalls, blocking, or unexpectedly slow operators **in real time**
 
 <img src=".\images\SQL_PerformanceOptimization\LiveQueryStatistics.png" width="800" title="Snipped April, 2025" />
+
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
+### Server-Level Configuration
+Configure server-wide settings that influence how queries are compiled, parallelized, cached, and executed across all databases. These options help control memory use, CPU load, and plan cache efficiency at the instance level.
+
+| Setting | Pros (Performance/Stability) | Cons (Overhead/Tradeoff) | Why it Matters |
+| :--- | :--- | :--- | :--- |
+| `max degree of parallelism` | Reduces CPU contention from overly parallel queries (performance/stability) | Slower performance for large queries that benefit from full CPU use (performance) | Prevents one query from monopolizing CPU; improves throughput consistency |
+| `cost threshold for parallelism` | Avoids parallelism for inexpensive queries (performance/efficiency) | May delay parallelism for moderately complex queries (performance) | Keeps CPU reserved for heavy queries that truly benefit from parallel plans |
+| `optimize for adhoc workloads` | Reduces memory pressure from single-use query plans (performance/memory) | Slight delay for full plan reuse (performance) | Helps conserve plan cache in environments with many one-off queries |
+
+<!-- ------------------------- ------------------------- -->
+
+#### `max degree of parallelism`
+
+When you lower the **max degree of parallelism (MAXDOP)**, SQL Server limits how many CPUs a single query can use, which helps reduce contention and CPU spikes on busy OLTP systems.  
+
+This **prevents excessive parallelism** and helps ensure more consistent throughput, especially in workloads with many concurrent queries.
+
+**Use When**... you want to reduce CPU pressure caused by parallel query bursts or uneven concurrency
+**Default Value**: `0` (use all available processors)
+SQL Server allows a query to use all available processors for parallel execution unless restricted by MAXDOP.
+**Suggested Value**: `4` to `8` for OLTP workloads; higher for data warehouse or reporting servers.
+
+```sql
+EXEC show advanced options', 1;
+RECONFIGURE;
+
+EXEC max degree of parallelism', 4;
+RECONFIGURE;
+```
+
+<!-- ------------------------- ------------------------- -->
+
+#### `cost threshold for parallelism`
+
+In most systems, this threshold is too low—causing even small queries to go parallel unnecessarily. Raising the value forces SQL Server to reserve parallelism for truly expensive queries.
+
+This **reduces CPU pressure** and helps avoid over-parallelizing lightweight workloads.
+
+**Use When**... you want to prevent short, low-cost queries from unnecessarily triggering parallel plans
+**Default Value**: `5` (triggers parallelism on even modest queries)
+SQL Server begins considering parallel plans when a query’s estimated cost exceeds this threshold.
+**Suggested Value**: `20` to `50` in most production environments
+
+```sql
+EXEC show advanced options', 1;
+RECONFIGURE;
+
+EXEC cost threshold for parallelism', 25;
+RECONFIGURE;
+```
+
+> ℹ️ **Tip:** `max degree of parallelism` and `cost threshold for parallelism` are often tuned together.  
+> Use MAXDOP to limit how many CPUs a query can use, and Cost Threshold to decide when parallelism kicks in.
+
+<!-- ------------------------- ------------------------- -->
+
+#### `optimize for adhoc workloads`
+
+When you enable **Optimize for Adhoc Workloads**, SQL Server saves just a stub initially and promotes it to a full plan only upon a subsequent execution.
+
+This **reduces plan cache bloat** and **conserves memory** at the cost of delaying full plan caching until the query is reused.
+
+**Use When**... you want to reduce plan cache bloat from rarely reused or one-time queries
+**Default Value**: `OFF` (full plan cached on first execution)
+SQL Server saves the full plan for every query—even those never reused—unless this setting is enabled.
+**Suggested Value**: `ON` for workloads with high ad hoc query volume
+
+```sql
+EXEC show advanced options', 1; 
+RECONFIGURE;
+
+EXEC optimize for adhoc workloads', 1; 
+RECONFIGURE;
+```
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -61,57 +139,65 @@ The database team talks about the mission and settles on the following goals:
 ### Database-Level Configuration
 Configure database‑level settings to control plan caching and literal parameterization.
 
-| Setting | Impact | Why it Matters |
-| :--- | :--- | :--- |
-| `COMPATIBILITY_LEVEL` | ✅ Unlocks new optimizer features and CE improvements<br>⚠️ Can introduce plan changes—test first | Determines entire optimizer behavior; moving up can yield big gains (or regressions) |
-| `QUERY_STORE` | ✅ Captures history, detects regressions, lets you pin good plans<br>⚠️ Minor capture overhead | Provides the data and tools to understand, compare, and stabilize real workload plans |
-| `PARAMETERIZATION = FORCED` | ✅ Increases plan reuse, reduces cache bloat<br>⚠️ May produce less‑optimal plans in edge cases | Converts literals to parameters automatically, cutting down on single‑use plans |
-| `sp_configure 'optimize for adhoc workloads'` | ✅ Cuts ad‑hoc plan cache bloat, conserves memory<br>⚠️ Delays full plan caching until reuse | Stubs initial plans for ad‑hoc queries, freeing memory for more frequently used workloads |
-| `AUTO_CREATE_STATISTICS` | ✅ Improves cardinality estimates for ad‑hoc predicates<br>⚠️ Overhead on very write‑heavy tables | Ensures basic stats exist so the optimizer can make informed row‑count estimates |
-| `AUTO_UPDATE_STATISTICS_ASYNC` | ✅ Prevents queries from waiting on stat updates<br>⚠️ Queries may run with slightly stale stats | Lets long‑running queries proceed while stats are refreshed asynchronously |
-| `LEGACY_CARDINALITY_ESTIMATION`| ✅ Avoids new‑estimator regressions after upgrades<br>⚠️ Misses modern CE improvements | Locks in the older estimator to preserve known‑good plans when upgrading compatibility |
-
-<!-- ------------------------- ------------------------- -->
-
-#### `COMPATIBILITY_LEVEL`  
-…controls which version of the SQL Server optimizer and database engine behaviors your database uses.  
-
-Setting the **compatibility level** to a higher value unlocks new optimizer features, CE improvements, and T‑SQL enhancements. However, jumps in compatibility level can introduce plan regressions, so it’s best to test carefully when moving up.  
-
-```sql
--- Raise compatibility level to SQL Server 2019 behavior
-ALTER DATABASE [YourDatabase]  
-  SET COMPATIBILITY_LEVEL = 150;
-GO
-
--- Check current compatibility level
-SELECT name, compatibility_level  
-FROM sys.databases  
-WHERE name = 'YourDatabase';
-``` 
+| Setting | Pros (Performance/Stability) | Cons (Overhead/Tradeoff) | Why it Matters |
+| :--- | :--- | :--- | :--- |
+| `QUERY_STORE` | Enables plan analysis, regression detection, and stabilization (stability) | Slight storage and capture overhead (overhead) | Provides data to detect and fix performance regressions over time |
+| `COMPATIBILITY_LEVEL` | Unlocks modern optimizer behavior and better estimations (performance) | Can introduce plan regressions—requires validation (stability) | Controls optimizer model; newer levels often produce better plans |
+| `PARAMETERIZATION = FORCED` | Reduces ad hoc plan cache bloat and improves reuse (performance) | May prevent optimal plan choices for certain parameter values (flexibility) | Helps normalize ad hoc query shapes for better plan reuse |
+| `AUTO_CREATE_STATISTICS` | Improves plan quality with better cardinality estimates (performance) | Slight I/O and CPU impact during stats creation (overhead) | Ensures optimizer has basic stats for good selectivity predictions |
+| `AUTO_UPDATE_STATISTICS_ASYNC` | Allows queries to run without blocking on stats refresh (performance/concurrency) | Risk of slightly stale stats during update window (accuracy) | Helps avoid blocking on stats updates in reporting workloads |
+| `LEGACY_CARDINALITY_ESTIMATION` | Prevents regressions when upgrading older workloads (stability) | Misses improvements in newer estimation logic (performance/flexibility) | Useful safeguard during or after compatibility level upgrades |
 
 <!-- ------------------------- ------------------------- -->
 
 #### `QUERY_STORE` 
-...lets you track, compare, and manage query performance over time 
+...stores past query plans and performance to help you troubleshoot and improve slow queries
 
-- **Captures Execution History**: stores actual execution plans, query text, and performance statistics 
-- **Detects Regressions**: identifies when a new plan performs worse than a previous one 
-- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions 
-- **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions 
-- **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server 
+- **Captures Execution History**: stores actual execution plans, query text, and performance statistics  
+- **Detects Regressions**: identifies when a new plan performs worse than a previous one  
+- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions  
+- **Configuration Settings**: tune key Query Store parameters—operation mode, storage limit, data flush rate—to keep performance history available  
+
+<!-- ------------------------- -->
+
+**Use When**... you need to spot regressions, analyze plan changes, or lock in stable plans for critical queries.
+**Default Value**: `OFF` (enabled by default in Azure SQL)  
+**Suggested Value**: `ON` with `READ_WRITE` mode and configured size limits 
 
 Execute the following T-SQL to activate:
 ```sql
-ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE, MAX_STORAGE_SIZE_MB = 100, INTERVAL_LENGTH_MINUTES = 30)
+-- Turn Query Store ON in read-write mode
+ALTER DATABASE [YourDatabase] SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE);
+-- Check if Query Store is enabled
+SELECT actual_state_desc FROM sys.database_query_store_options WHERE database_id = DB_ID();
 ```
 
 <img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
 
+#### `COMPATIBILITY_LEVEL` 
+...controls which version of the SQL Server engine your database uses, including how queries are optimized
+
+Setting the **compatibility level** to a higher value unlocks new optimizer features, CE improvements, and T‑SQL enhancements. However, jumps in compatibility level can introduce plan regressions, so it’s best to test carefully when moving up. 
+
+<!-- ------------------------- -->
+
+**Use When**... you want to unlock modern optimizer behavior while ensuring plan stability by testing regressions before upgrading.
+**Default Value**: Varies by SQL Server version (e.g. `150` for SQL Server 2019)  
+**Suggested Value**: Use the latest supported level (`150` or higher), but test for regressions before upgrading 
+
+```sql
+-- Set compatibility level to SQL Server 2019 behavior
+ALTER DATABASE [YourDatabase] SET COMPATIBILITY_LEVEL = 150;
+-- Check current compatibility level
+SELECT compatibility_level FROM sys.databases WHERE name = 'YourDatabase';
+``` 
+
+<!-- ------------------------- ------------------------- -->
+
 #### `PARAMETERIZATION = FORCED`
-...is a database‑level setting that tells SQL Server to replace literal values in your ad hoc queries with parameters at compile time so they can share execution plans.
+...automatically turns query literals into parameters so SQL Server can reuse plans and save memory
 
 By default, SQL Server uses **Simple Parameterization** only for very basic literals and leaves most ad hoc queries unparameterized.
 
@@ -119,108 +205,79 @@ When you set the database to **Forced Parameterization** every literal that can 
 
 This increases plan reuse and reduces plan cache bloat at the cost of occasionally generating less‑optimal plans.
 
-**Before**
+<!-- ------------------------- -->
+
+**Use When**... you want to reduce single-use ad hoc plans and increase plan reuse across similar queries with different literal values.
+**Default Value**: `SIMPLE` (automatic only for basic queries)  
+**Suggested Value**: `FORCED` in workloads with lots of ad hoc queries 
 
 ```sql
--- each literal produces its own plan 
-SELECT * 
- FROM Sales.SalesOrderHeader 
- WHERE OrderDate = '2021-01-01';
-
-SELECT * 
- FROM Sales.SalesOrderHeader 
- WHERE OrderDate = '2021-02-01';
-``` 
-
-**After**
-
-```sql
+-- Enable forced parameterization for ad hoc queries
 ALTER DATABASE [YourDatabase] SET PARAMETERIZATION = FORCED;
-GO;
-
--- SQL Server automatically rewrites to a parameterized form 
-EXEC sp_executesql 
- N'SELECT * FROM Sales.SalesOrderHeader WHERE OrderDate = @date', 
- N'@date date', 
- @date = '2021-01-01';
-
-EXEC sp_executesql 
- N'SELECT * FROM Sales.SalesOrderHeader WHERE OrderDate = @date', 
- N'@date date', 
- @date = '2021-02-01';
+-- Check if forced parameterization is enabled
+SELECT name, is_parameterization_forced FROM sys.databases WHERE name = 'YourDatabase';
 ``` 
 
 **Now both executions share a single cached plan instead of two separate ones.**
 
 <!-- ------------------------- ------------------------- -->
 
-#### `sp_configure 'optimize for adhoc workloads'`
+#### AUTO_CREATE_STATISTICS 
+...automatically builds basic stats for query columns to help SQL Server estimate row counts more accurately
 
-**By default, SQL Server caches the complete execution plan on the first run of any query, even if it never repeats.**
+By default, **AUTO_CREATE_STATISTICS** is **ON**, so SQL Server will generate lightweight, single‑column stats to help the optimizer with selectivity estimates. Disabling it can reduce overhead on very write‑heavy systems but risks poor cardinality estimates and suboptimal plans. 
 
-When you enable **Optimize for Adhoc Workloads**, SQL Server saves just a stub initially and promotes it to a full plan only upon a subsequent execution.
+<!-- ------------------------- -->
 
-This **reduces plan cache bloat** and **conserves memory** at the cost of delaying full plan caching until the query is reused.
+**Use When**... you want the optimizer to generate basic stats automatically for better row estimates in unpredictable or dynamic workloads.
+**Default Value**: `ON`  
+**Suggested Value**: Keep `ON` unless tuning for extremely write-heavy workloads  
 
 ```sql
-EXEC sp_configure 'show advanced options', 1; 
-RECONFIGURE;
-
-EXEC sp_configure 'optimize for adhoc workloads', 1; 
-RECONFIGURE;
+-- Enable auto-create statistics for single-column predicates
+ALTER DATABASE [YourDatabase] SET AUTO_CREATE_STATISTICS ON;
+-- Check if auto-create statistics is enabled
+SELECT name, is_auto_create_stats_on FROM sys.databases WHERE name = 'YourDatabase';
 ``` 
 
 <!-- ------------------------- ------------------------- -->
 
-#### AUTO_CREATE_STATISTICS  
-…controls whether SQL Server automatically builds single‑column statistics on columns used in predicates when no statistics exist.  
+#### AUTO_UPDATE_STATISTICS_ASYNC 
+...lets queries run while stats are being refreshed, so they don’t get blocked by maintenance
 
-By default, **AUTO_CREATE_STATISTICS** is **ON**, so SQL Server will generate lightweight, single‑column stats to help the optimizer with selectivity estimates. Disabling it can reduce overhead on very write‑heavy systems but risks poor cardinality estimates and suboptimal plans.  
+By default, **AUTO_UPDATE_STATISTICS_ASYNC** is **OFF**, meaning long‑running queries will wait for statistics to be refreshed before executing. Turning it **ON** can improve throughput for heavy reporting workloads but means queries might run with slightly stale statistics. 
 
-```sql
--- Disable automatic single‑column stats creation
-ALTER DATABASE [YourDatabase] SET AUTO_CREATE_STATISTICS OFF;
-GO
+**Use When**... you want to avoid blocking in read-heavy systems where queries might otherwise wait for stats updates.
+**Default Value**: `OFF`  
+**Suggested Value**: `ON` for reporting or read-heavy workloads where query blocking on stats updates is a problem  
 
--- Re‑enable it
-ALTER DATABASE [YourDatabase] SET AUTO_CREATE_STATISTICS ON;
-GO
-```  
-
-<!-- ------------------------- ------------------------- -->
-
-#### AUTO_UPDATE_STATISTICS_ASYNC  
-…lets statistics updates run asynchronously, so queries aren’t blocked waiting for stat maintenance.  
-
-By default, **AUTO_UPDATE_STATISTICS_ASYNC** is **OFF**, meaning long‑running queries will wait for statistics to be refreshed before executing. Turning it **ON** can improve throughput for heavy reporting workloads but means queries might run with slightly stale statistics.  
+<!-- ------------------------- -->
 
 ```sql
--- Turn on asynchronous stats updates
+-- Enable async updates for statistics
 ALTER DATABASE [YourDatabase] SET AUTO_UPDATE_STATISTICS_ASYNC ON;
-GO
-
--- Turn off asynchronous stats updates
-ALTER DATABASE [YourDatabase] SET AUTO_UPDATE_STATISTICS_ASYNC OFF;
-GO
-```  
+-- Check if async stats updates are enabled
+SELECT name, is_auto_update_stats_async_on FROM sys.databases WHERE name = 'YourDatabase';
+``` 
 
 <!-- ------------------------- ------------------------- -->
 
-#### LEGACY_CARDINALITY_ESTIMATION  
-…forces SQL Server to use the older cardinality estimator for all queries in the database, which can improve plan stability in certain upgrade scenarios.  
+#### LEGACY_CARDINALITY_ESTIMATION 
+...uses the old SQL Server math for estimating row counts to avoid surprises after an upgrade
 
-By default, databases at compatibility level 150+ use the modern estimator. Enabling **LEGACY_CARDINALITY_ESTIMATION** can avoid regressions after an upgrade but may miss improvements in multi‑column correlation handling.  
+By default, databases at compatibility level 150+ use the modern estimator. Enabling **LEGACY_CARDINALITY_ESTIMATION** can avoid regressions after an upgrade but may miss improvements in multi‑column correlation handling. 
+
+<!-- ------------------------- -->
+
+**Use When**... upgrading the compatibility level introduces plan regressions and you want to restore legacy estimation behavior temporarily.
+**Default Value**: `OFF` in compatibility level 150+  
+**Suggested Value**: `ON` only to restore plan behavior after regressions in upgraded systems  
 
 ```sql
--- Enable the legacy estimator at the database scope
-ALTER DATABASE SCOPED CONFIGURATION  
-  SET LEGACY_CARDINALITY_ESTIMATION = ON;
-GO
-
--- Revert to the modern estimator
-ALTER DATABASE SCOPED CONFIGURATION  
-  SET LEGACY_CARDINALITY_ESTIMATION = OFF;
-GO
+-- Enable legacy cardinality estimator
+ALTER DATABASE SCOPED CONFIGURATION SET LEGACY_CARDINALITY_ESTIMATION = ON;
+-- Check if legacy estimator is enabled
+SELECT name, is_legacy_cardinality_estimation_on FROM sys.database_scoped_configurations;
 ``` 
 
 <!-- ------------------------- ------------------------- -->
@@ -406,6 +463,7 @@ ORDER BY rs.avg_duration DESC;
 ```
 
 <!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
 
 ### Query-Level Hints
 Use hints to override the optimizer when its default plan doesn’t meet your performance needs.
@@ -466,143 +524,139 @@ Concurrency hints override SQL Server’s default locking behavior to minimize 
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
+
+### Indexing  
+Configure and maintain indexes to reduce I/O, support index seeks, and improve execution plan quality.
+
+| Focus Area | Pros | Cons | Why it Matters |
+| :--- | :--- | :--- | :--- |
+| Clustered Indexes | Define row order for fast range scans and ORDER BY queries | Only one per table; impacts insert performance | Drive physical layout and affect all nonclustered index performance |
+| Nonclustered Indexes | Accelerate filters, joins, and lookups | Increase write cost and plan complexity if overused | Allow targeted access to frequently queried columns |
+| Filtered Indexes | Improve query speed for common filtered subsets | Only useful for predictable filters | Reduce index size and maintenance for highly selective filters |
+| Covering Indexes | Avoid lookups by including all required columns | Consume more space and increase index size | Let SQL Server satisfy queries using only the index |
+| Missing Index DMVs | Suggest indexes based on actual query patterns | May overlap or miss multi-column interactions | Help surface opportunities from real workload activity |
+| Fragmentation Management | Rebuild/reorganize improves scan and seek performance | Maintenance overhead; needs automation | Prevents inefficient I/O and high CPU from fragmented access paths |
+| Fill Factor | Reduces page splits on insert-heavy tables | Uses more space; may slightly slow reads | Helps balance update speed and read efficiency |
+
+<!-- ------------------------- ------------------------- -->
+
+#### Clustered and Nonclustered Indexes  
+...define how rows are physically stored and accessed.
+
+- **Clustered Index**: determines row order; best for range queries and sort operations  
+- **Nonclustered Index**: separate structures targeting frequent filters and joins  
+- Use clustered indexes for **sorting or range retrieval**  
+- Use nonclustered indexes to **target narrow queries** on selective columns
+
+**Use this when...** queries scan or sort large tables and benefit from precise data access paths.
+
+<!-- ------------------------- ------------------------- -->
+
+#### Filtered and Covering Indexes  
+...optimize indexing for specific queries.
+
+- **Filtered Index**: indexes only rows matching a WHERE clause (e.g. `IsActive = 1`)  
+- **Covering Index**: includes all columns needed to satisfy a query without base-table access  
+
+**Use this when...** queries target common filters or need to eliminate lookups for better performance.
+
+<!-- ------------------------- ------------------------- -->
+
+#### Missing Index Recommendations  
+...identify indexing gaps based on actual query execution.
+
+- Query `sys.dm_db_missing_index_details` and `sys.dm_db_missing_index_group_stats`  
+- Evaluate `equality_columns`, `inequality_columns`, and `included_columns`  
+- Use `avg_user_impact` and `user_seeks` to prioritize value  
+- Always validate with **Query Store** or **A/B testing**
+
+**Use this when...** you want to base indexing changes on observed workload behavior.
+
+```sql
+-- View top recommended indexes by potential benefit
+SELECT TOP 5 migs.avg_user_impact, mid.equality_columns, mid.inequality_columns, mid.included_columns
+FROM sys.dm_db_missing_index_details AS mid
+JOIN sys.dm_db_missing_index_groups AS mig ON mid.index_handle = mig.index_handle
+JOIN sys.dm_db_missing_index_group_stats AS migs ON mig.index_group_handle = migs.group_handle
+ORDER BY migs.avg_user_impact DESC;
+```
+
+<!-- ------------------------- ------------------------- -->
+
+#### Index Maintenance and Fragmentation  
+...keep indexes efficient by reducing physical fragmentation.
+
+- **Rebuild** when fragmentation > 30%  
+- **Reorganize** when fragmentation is between 5–30%  
+- Use `sys.dm_db_index_physical_stats` to monitor health  
+- Adjust **fill factor** to reduce future page splits  
+- Schedule regular maintenance via SQL Agent or Azure Automation
+
+**Use this when...** index fragmentation is degrading seek speed and increasing CPU usage.
+
+```sql
+-- Rebuild all indexes on a table with a custom fill factor
+ALTER INDEX ALL ON Sales.SalesOrderHeader
+REBUILD WITH (FILLFACTOR = 90, ONLINE = ON);
+```
+
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
+### Storage Design  
+Optimize physical storage structures to support scale, reduce cost, and enhance query efficiency.
+
+#### Data Type Tuning  
+Right-size column types to reduce memory and I/O costs.
+
+- Use `int` instead of `bigint`, `date` instead of `datetime`, and trim `varchar`/`nvarchar` lengths  
+- Avoid `nvarchar(max)` unless needed; control precision for financial/statistical data  
+- Consistency avoids implicit conversions and simplifies joins
+
+#### Statistics Management  
+Ensure SQL Server has the metadata it needs to generate good plans.
+
+- **Column Statistics**: provide value distribution insight to the optimizer  
+- Update stats after major changes or loads with `UPDATE STATISTICS` or `sp_updatestats`  
+- Monitor for poor estimates in Query Store or execution plans
+
+#### Histograms and Cardinality Estimation  
+Support accurate row estimates that drive plan choices.
+
+- **Histograms**: show frequency of values (up to 200 steps)  
+- **Density Vectors**: help with multi-column selectivity  
+- **Modern vs. Legacy Estimators**: controlled by database compatibility level  
+- Use `FULLSCAN` for accuracy when needed; check stats age with `STATS_DATE`
+
+#### Row and Page Compression  
+Reduce the storage footprint of rowstore tables.
+
+- **Row Compression**: shrinks fixed-length data (e.g., `char`, `int`)  
+- **Page Compression**: adds prefix/dictionary compression  
+- Improves I/O and buffer cache use at minor CPU cost  
+- Use `sp_estimate_data_compression_savings` to preview benefit
+
+#### Columnstore and Archival Compression  
+Use columnar storage for massive analytic workloads.
+
+- **Columnstore Indexes**: highly compressed and scan-friendly  
+- **Clustered**: replaces base table; **Nonclustered**: overlays rowstore  
+- **Archival Compression**: maximizes storage savings on cold data  
+- Ideal for telemetry, history tables, and data warehouses
+
+#### File and Filegroup Placement Strategies  
+Spread data across storage for better I/O and recovery flexibility.
+
+- Separate data, log, and TempDB across different media  
+- Use filegroups to isolate workloads or improve backup strategies  
+- Align table and index placement with performance goals
+
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-### Automatic Tuning 
-...automates some performance tuning decisions based on collected telemetry 
-
-- **Automatic Plan Correction**: reverts to a previously good plan if a new one degrades performance 
-- **Automatic Indexing**: in Azure SQL, evaluates and applies index create/drop recommendations 
-- **Customizable Options**: can be configured to suggest changes, apply them automatically, or require manual approval 
-- **Azure Advantage**: only available in Azure SQL; not present in on-prem SQL Server 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-### Indexing and Storage Design
-
-#### Index Strategies 
-...improve query performance by allowing faster data access and more efficient execution plans 
-
-- **Clustered Indexes**: determine the physical order of rows in a table; best for range queries and columns frequently used in ORDER BY 
-- **Nonclustered Indexes**: separate from the base table; ideal for columns frequently filtered or joined on 
-- **Filtered Indexes**: index only a subset of rows; useful when a query targets a predictable WHERE clause (e.g., `IsActive = 1`) 
-- **Covering Indexes**: include all columns needed by a query, eliminating the need to access the base table (avoids lookups) 
-- **Design Tip**: avoid over-indexing—each index has a write penalty; index based on workload, not guesswork 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Data Type Tuning 
-...ensures that column definitions align with actual data usage to reduce memory and storage costs 
-
-- **Right-Sizing Types**: use `int` instead of `bigint`, `date` instead of `datetime`, and `money` instead of `decimal(18,4)` when appropriate 
-- **Impact on Performance**: smaller data types mean smaller indexes, more rows per page, and less memory usage in query execution 
-- **String Optimization**: avoid using `nvarchar(max)` or `varchar(max)` unless necessary; define appropriate lengths 
-- **Precision Control**: for financial or statistical data, ensure the scale and precision match business requirements—**DON'T** default to overly wide types 
-- **Schema Discipline**: enforce consistent type usage across tables to simplify query writing and avoid implicit conversions 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Statistics Management 
-...provides the optimizer with data distribution estimates to make better plan decisions 
-
-- **Column Statistics**: track the distribution of values within indexed and non-indexed columns 
-- **Why It Matters**: outdated statistics can cause the optimizer to misjudge row counts and pick inefficient plans 
-- **Auto Update**: SQL Server updates statistics automatically, but large changes in data or complex queries may require manual refresh 
-- **Manual Update**: use `UPDATE STATISTICS` or `sp_updatestats` after bulk loads or major data changes 
-- **Best Practice**: monitor for queries with poor estimates (e.g., large discrepancies between estimated and actual rows) 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Histograms and Cardinality Estimation 
-...ensures the optimizer can accurately predict row counts so it picks efficient plans 
-
-- **Histogram Buckets**: up to 200 equal‑height steps per column showing value distribution; used to estimate how many rows match a filter 
-- **Density Vectors**: stored multi‑column statistics that help estimate selectivity of combined predicates 
-- **Cardinality Estimator Versions**: SQL Server compatibility levels 120+ use the modern estimator with better handling of multi‑column correlations; legacy estimator still available via database compatibility setting 
-- **Sampling and Full Scan**: control accuracy with `FULLSCAN` for precise stats or sampled scans for speed; check last update with `STATS_DATE` 
-- **Impact on Plans**: mismatches between estimated and actual row counts lead to poor join choices and inappropriate memory grants 
-- **Azure SQL**: always uses the latest estimator by default, but you can alter behavior via the database compatibility level if you need to match on‑prem behavior 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Missing Index Recommendations 
-...leverages built‑in dynamic management views to identify index candidates based on workload patterns 
-
-- **Key DMVs**: 
- - `sys.dm_db_missing_index_details` shows which indexes could help specific queries 
- - `sys.dm_db_missing_index_groups` and `sys.dm_db_missing_index_group_stats` group related suggestions and provide impact metrics 
-- **Important Fields**: 
- - `equality_columns` and `inequality_columns` for filter predicates 
- - `included_columns` for covering queries 
- - `avg_user_impact` and `user_seeks`/`user_scans` to prioritize high‑value recommendations 
-- **Validation**: load test or use Query Store to confirm expected benefit before creating a new index 
-- **Limitations**: DMV suggestions can overlap or not account for multi‑column correlations; always review schema and workload 
-- **Platform Notes**: 
- - **SQL Server (On‑Premises)**: query the DMVs directly in SSMS or include in maintenance scripts 
- - **Azure SQL**: Performance Recommendations in the portal also surface missing‑index advice, backed by Query Store data 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Index Maintenance and Fragmentation 
-...ensures your indexes remain efficient over time by monitoring and correcting physical fragmentation 
-
-- **Fragmentation Metrics**: track fragmentation levels with `sys.dm_db_index_physical_stats` 
-- **Rebuild vs. Reorganize**: rebuild for > 30 percent fragmentation, reorganize for 5–30 percent 
-- **Online vs. Offline**: choose online rebuilds for minimal blocking in Enterprise/Azure tiers, offline when maintenance win**DO**ws allow 
-- **Fill Factor and Page Splits**: 
- - **Fill Factor**: sets the percentage of page fullness on rebuild (e.g. 80–90 percent) to leave free space for growth 
- - **Page Splits**: happen when a page is full and must split to accommodate inserts, causing extra I/O and fragmentation 
- - **Trade‑Offs**: lower fill factor reduces splits but increases storage and may slightly slow reads; adjust based on update frequency 
-- **Maintenance Scheduling**: automate via SQL Agent or Azure Automation to keep fragmentation and splits in check without manual intervention 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Row and Page Compression 
-...reduces the storage footprint of rowstore tables without altering schema or indexing 
-
-- **Row Compression**: eliminates unnecessary space in fixed-length data types (e.g., `char`, `int`) 
-- **Page Compression**: combines row compression with prefix and dictionary compression within data pages 
-- **Performance Tradeoff**: reduces I/O but adds slight CPU cost for compression and decompression 
-- **Best Fit**: transactional systems where storage and I/O savings outweigh minor CPU overhead 
-- **Usage Tip**: use `sp_estimate_data_compression_savings` to preview potential gains before enabling 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Columnstore and Archival Compression 
-...compress data vertically across columns for analytic workloads that scan large data sets 
-
-- **Columnstore Indexes**: ideal for fact tables with billions of rows; optimized for aggregation and scanning, not row-by-row access 
-- **Clustered vs. Nonclustered**: clustered columnstore replaces the base table; nonclustered overlays a rowstore 
-- **Archival Compression**: adds an extra layer of compression for cold data, saving space at the cost of CPU during decompression 
-- **Azure Benefit**: columnstore and archival compression are fully supported and often recommended for storage-optimized Azure SQL configurations 
-- **When to Use**: data warehouse scenarios, telemetry, and history tables with high read-to-write ratios 
-
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### File and Filegroup Placement Strategies 
-...ensures optimal I/O throughput and manageability by distributing data and log files across storage volumes 
-
-- **Filegroups**: group related tables and indexes into named containers to control where data lives and simplify backups 
-- **Data File Placement**: spread data files across separate disks or storage accounts to balance I/O and avoid hotspots 
-- **Log File Isolation**: place transaction log files on dedicated, low‑latency storage to speed commits and reduce contention 
-- **TempDB Separation**: use its own filegroup or even separate storage to keep temporary object I/O from impacting user databases 
-- **Design Tip**: align filegroup placement with workload characteristics (e.g. put large, read‑heavy tables on faster media) 
-
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
@@ -618,7 +672,6 @@ Concurrency hints override SQL Server’s default locking behavior to minimize 
 - **Best Practice**: balance system-wide settings with per-query overrides; monitor with `sys.dm_exec_requests` and `sys.dm_os_wait_stats` 
 
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
 
 #### TempDB Optimization 
 ...reduces contention and blocking in the shared temporary workspace used by all queries 
@@ -629,7 +682,6 @@ Concurrency hints override SQL Server’s default locking behavior to minimize 
 - **Monitoring**: track TempDB usage with DMVs like `sys.dm_db_file_space_usage` and `sys.dm_db_session_space_usage` 
 - **Workload Impact**: high concurrency environments (e.g., heavy reporting or temp tables) suffer most from poor TempDB setup 
 
-<!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
 #### Memory and Plan Cache Behavior 
@@ -642,7 +694,6 @@ Concurrency hints override SQL Server’s default locking behavior to minimize 
 - **Tuning Tools**: consider `OPTIMIZE_FOR_AD_HOC_WORKLOADS` and review execution memory in `sys.dm_exec_query_memory_grants` 
 
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
 
 #### Memory Grant Management and Spill Analysis 
 ...ensures queries receive the right amount of memory and avoids costly disk spills during execution 
@@ -654,7 +705,6 @@ Concurrency hints override SQL Server’s default locking behavior to minimize 
 - **Azure SQL Notes**: memory grant behavior is tied to your service tier; monitor grants via Query Store or `sys.resource_stats` and scale up/off as needed 
 
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
 
 #### Resource Governance 
 ...ensures that one workload does not overwhelm others by controlling CPU, memory, and I/O allocations 
@@ -664,6 +714,40 @@ Concurrency hints override SQL Server’s default locking behavior to minimize 
 - **Elastic Pools**: share resources across multiple databases with defined limits on CPU and memory per pool 
 - **Throttling Symptoms**: increased latency, query timeouts, and IO waits under peak load 
 - **Best Fit**: multi-tenant apps, mixed workload environments, and any system where noisy neighbors can impact critical queries 
+
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
+### Automatic Tuning  
+Automatically monitors performance and applies fixes for regressed plans or missing indexes—reducing manual tuning effort.
+
+Automatic Tuning uses query performance history to decide when a query has slowed down due to a plan change, or when a missing index could dramatically improve performance. You can configure it to either apply changes automatically or just recommend them for review.
+
+| Option | What It Does | Why It Matters |
+| :--- | :--- | :--- |
+| `FORCE_LAST_GOOD_PLAN` | Detects a regressed plan and reverts to the last fast one | Keeps queries stable even when the optimizer picks a worse plan |
+| `CREATE_INDEX` | Recommends or creates indexes for high-impact queries | Adds indexes only where proven to help real workloads |
+| `DROP_INDEX` | Drops unused indexes based on long-term usage | Reduces storage and write overhead from unused indexes |
+
+**Use When...** you want SQL Server or Azure SQL to automatically fix slowdowns and apply only high-value index changes without manual review.
+
+**Platform Notes**  
+- Fully available in **Azure SQL Database**  
+- Limited to **plan correction only** in **SQL Server (on-premises)** via Query Store forced plans  
+
+```sql
+-- Enable all automatic tuning options in Azure SQL
+ALTER DATABASE CURRENT 
+SET AUTOMATIC_TUNING = 
+( FORCE_LAST_GOOD_PLAN = ON, 
+  CREATE_INDEX = ON, 
+  DROP_INDEX = ON );
+
+-- Check tuning status
+SELECT * FROM sys.database_automatic_tuning_options;
+```
+
+> ⚠️ **Tip**: Always review tuning activity in the portal or logs. Automatic Tuning can be overridden or rolled back if it causes issues.
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
