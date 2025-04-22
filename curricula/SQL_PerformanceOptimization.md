@@ -16,11 +16,15 @@ The database team talks about the mission and settles on the following goals:
 
 ## Fundamentals
 
-1. **"Execution Plan"**: read estimated and actual plans to understand how SQL Server breaks down your queries 
-2. **"Live Query Statistics"**: monitor queries as they run to catch slow or blocked operations in real time 
-3. **Logic Optimization**: rewrite queries for set‑based processing, eliminate unnecessary work, and leverage indexes 
-4. **Query‑Level Hints**: use hints to guide the optimizer when you need more control 
-5. **Query Store**: collect and compare execution plans over time to prevent regressions
+1. **Basics**: Leverage SQL Server’s built‑in diagnostics to understand how queries are processed—comparing estimated vs. actual execution plans and observing real‑time execution progress
+
+2. **Database Configuration**: Adjust database‑level options to influence how queries are compiled, cached, and parameterized, and how statistics are maintained—ensuring stable, efficient execution plans
+
+3. **Query Store Usage**: Capture, compare and pin execution plans over time to detect regressions and enforce stability
+
+4. **Logic Optimization**: Refine your query structure to operate on whole data sets, eliminate redundant work, and express filters in a way that lets the optimizer choose the most efficient execution path
+
+5. **Query‑Level Hints**: Use targeted hints to nudge the optimizer when its default plan isn’t ideal—overriding join strategies, index choices, parallel execution, plan caching, or locking behavior
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -53,16 +57,19 @@ The database team talks about the mission and settles on the following goals:
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
 
-### Database Configuration (RESUME HERE!!!)
+### Database Configuration
 Configure database‑level settings to control plan caching and literal parameterization.
+
+| Setting | Impact |
+| :--- | :--- |
+| **Forced Parameterization**      | ✅ Increases plan reuse, reduces cache bloat<br>⚠️ May produce less‑optimal plans in edge cases   |
+| **Optimize for Adhoc Workloads** | ✅ Cuts ad‑hoc plan cache bloat, conserves memory<br>⚠️ Delays full plan caching until reuse    |
+| **Query Store Usage**            | ✅ Captures history, detects regressions, lets you pin good plans<br>⚠️ Minor capture overhead   |
+| **AUTO_CREATE_STATISTICS**       | ✅ Improves cardinality estimates for ad‑hoc predicates<br>⚠️ Overhead on very write‑heavy tables |
+| **AUTO_UPDATE_STATISTICS_ASYNC** | ✅ Prevents queries from waiting on stat updates<br>⚠️ Queries may run with slightly stale stats |
+| **LEGACY_CARDINALITY_ESTIMATION**| ✅ Avoids new‑estimator regressions after upgrades<br>⚠️ Misses modern CE improvements             |
+| **Compatibility Level**          | ✅ Unlocks new optimizer features and CE improvements<br>⚠️ Can introduce plan changes—test first|
 
 #### Forced Parameterization
 ...is a database‑level setting that tells SQL Server to replace literal values in your ad hoc queries with parameters at compile time so they can share execution plans.
@@ -144,12 +151,75 @@ ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WR
 
 <!-- ------------------------- ------------------------- -->
 
-#### Others... need to weave this in
+#### AUTO_CREATE_STATISTICS  
+…controls whether SQL Server automatically builds single‑column statistics on columns used in predicates when no statistics exist.  
 
-**AUTO_CREATE_STATISTICS** (controls automatic creation of single‑column stats)  
-**AUTO_UPDATE_STATISTICS_ASYNC** (lets stats updates run asynchronously)  
-**LEGACY_CARDINALITY_ESTIMATION** (forces the older CE via database scoped config)  
-**Database Compatibility Level** (e.g. `ALTER DATABASE … SET COMPATIBILITY_LEVEL = 150`)  
+By default, **AUTO_CREATE_STATISTICS** is **ON**, so SQL Server will generate lightweight, single‑column stats to help the optimizer with selectivity estimates. Disabling it can reduce overhead on very write‑heavy systems but risks poor cardinality estimates and suboptimal plans.  
+
+```sql
+-- Disable automatic single‑column stats creation
+ALTER DATABASE [YourDatabase] SET AUTO_CREATE_STATISTICS OFF;
+GO
+
+-- Re‑enable it
+ALTER DATABASE [YourDatabase] SET AUTO_CREATE_STATISTICS ON;
+GO
+```  
+
+<!-- ------------------------- ------------------------- -->
+
+#### AUTO_UPDATE_STATISTICS_ASYNC  
+…lets statistics updates run asynchronously, so queries aren’t blocked waiting for stat maintenance.  
+
+By default, **AUTO_UPDATE_STATISTICS_ASYNC** is **OFF**, meaning long‑running queries will wait for statistics to be refreshed before executing. Turning it **ON** can improve throughput for heavy reporting workloads but means queries might run with slightly stale statistics.  
+
+```sql
+-- Turn on asynchronous stats updates
+ALTER DATABASE [YourDatabase] SET AUTO_UPDATE_STATISTICS_ASYNC ON;
+GO
+
+-- Turn off asynchronous stats updates
+ALTER DATABASE [YourDatabase] SET AUTO_UPDATE_STATISTICS_ASYNC OFF;
+GO
+```  
+
+<!-- ------------------------- ------------------------- -->
+
+#### LEGACY_CARDINALITY_ESTIMATION  
+…forces SQL Server to use the older cardinality estimator for all queries in the database, which can improve plan stability in certain upgrade scenarios.  
+
+By default, databases at compatibility level 150+ use the modern estimator. Enabling **LEGACY_CARDINALITY_ESTIMATION** can avoid regressions after an upgrade but may miss improvements in multi‑column correlation handling.  
+
+```sql
+-- Enable the legacy estimator at the database scope
+ALTER DATABASE SCOPED CONFIGURATION  
+  SET LEGACY_CARDINALITY_ESTIMATION = ON;
+GO
+
+-- Revert to the modern estimator
+ALTER DATABASE SCOPED CONFIGURATION  
+  SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+GO
+```  
+
+<!-- ------------------------- ------------------------- -->
+
+#### Database Compatibility Level  
+…controls which version of the SQL Server optimizer and database engine behaviors your database uses.  
+
+Setting the **compatibility level** to a higher value unlocks new optimizer features, CE improvements, and T‑SQL enhancements. However, jumps in compatibility level can introduce plan regressions, so it’s best to test carefully when moving up.  
+
+```sql
+-- Raise compatibility level to SQL Server 2019 behavior
+ALTER DATABASE [YourDatabase]  
+  SET COMPATIBILITY_LEVEL = 150;
+GO
+
+-- Check current compatibility level
+SELECT name, compatibility_level  
+FROM sys.databases  
+WHERE name = 'YourDatabase';
+```  
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
