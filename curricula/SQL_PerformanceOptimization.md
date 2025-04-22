@@ -1027,7 +1027,7 @@ DROP INDEX IX_SOD_UnitPrice ON Sales.SalesOrderDetail;
 ##### Final Thought 
 By leveraging missing‑index Dynamic Management Views, you can pinpoint exactly which columns and included fields will yield the largest performance gains. This hands‑on method ensures you add only the indexes your workload truly needs, avoiding unnecessary maintenance overhead and write penalties.
 
-<!-- ------------------------- ------------------------- ------------------------- -->
+------------------------- ------------------------- -------------------------
 
 #### Exercise #2: Index Maintenance
 
@@ -1105,84 +1105,7 @@ By leveraging missing‑index Dynamic Management Views, you can pinpoint exactly
 ##### Final Thought 
 Regular index maintenance—using the right operation and fill factor—keeps your indexes healthy, minimizes I/O, and avoids unexpected performance drops. By combining physical stats with usage data, you focus effort where it delivers the greatest benefit.
 
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-#### Exercise #3: [Plan Cache and Memory Grant Analysis](https://learn.microsoft.com/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-memory-grants) 
-...uses dynamic management views to surface memory‑grant issues and plan‑cache bloat, then tunes a database‑scoped setting to improve stability 
-
-##### How? 
-- Queries `sys.dm_exec_query_memory_grants` to inspect requested vs. granted memory and any waits 
-- Uses `sys.dm_exec_cached_plans` joined with `sys.dm_exec_sql_text` to identify single‑use (“adhoc”) plans filling the cache 
-- Applies the `OPTIMIZE_FOR_AD_HOC_WORKLOADS` setting at the database scope to convert full plans into lightweight stubs on first execution 
-
-##### Let's get started!
-
-1. **Check current memory grants** 
- ```sql
- USE AdventureWorks2019; 
- SELECT 
- session_id, 
- requested_memory_kb, 
- granted_memory_kb, 
- grant_time, 
- requested_memory_kb - granted_memory_kb AS shortfall_kb, 
- sql_text.text 
- FROM sys.dm_exec_query_memory_grants AS mg 
- CROSS APPLY sys.dm_exec_sql_text(mg.plan_handle) AS sql_text 
- WHERE mg.requested_memory_kb > 0;
- ``` 
- *Review any queries waiting for memory or receiving less than requested* 
-
-2. **Identify ad‑hoc plan bloat** 
- ```sql
- SELECT 
- cp.cacheobjtype, 
- cp.objtype, 
- COUNT(*) AS plan_count, 
- SUM(cp.size_in_bytes)/1024 AS total_kb 
- FROM sys.dm_exec_cached_plans AS cp 
- WHERE cp.objtype = 'Adhoc' 
- GROUP BY cp.cacheobjtype, cp.objtype; 
- ``` 
- *High counts mean many single‑use plans are consuming memory* 
-
-3. **Enable optimize_for_adhoc_workloads** 
- ```sql
- ALTER DATABASE SCOPED CONFIGURATION 
- SET OPTIMIZE_FOR_AD_HOC_WORKLOADS = ON; 
- ``` 
-
-4. **Rerun a representative workload** 
- ```sql
- -- Execute some ad-hoc queries, e.g.:
- SELECT COUNT(*) FROM Person.Person WHERE LastName LIKE 'A%';
- SELECT TOP(5) * FROM Sales.SalesOrderHeader WHERE OrderDate > '2013-01-01';
- -- Repeat a few times with slight variations
- ``` 
-
-5. **Re‑check plan cache bloat** 
- ```sql
- SELECT 
- cp.cacheobjtype, 
- cp.objtype, 
- COUNT(*) AS plan_count, 
- SUM(cp.size_in_bytes)/1024 AS total_kb 
- FROM sys.dm_exec_cached_plans AS cp 
- WHERE cp.objtype = 'Adhoc' 
- GROUP BY cp.cacheobjtype, cp.objtype; 
- ``` 
- *You should see fewer full‑plan entries and more “stub” entries, lowering memory use* 
-
-6. **Verify improved memory‑grant behavior** 
- ```sql
- -- Rerun step 1 and confirm fewer or no memory‑wait rows 
- ``` 
-
-##### Final Thought 
-By combining memory‑grant and plan‑cache insights with the `OPTIMIZE_FOR_AD_HOC_WORKLOADS` setting, you can dramatically reduce memory bloat from ad‑hoc queries, leading to more consistent performance and reduced compile‑time pressure.
-
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+------------------------- ------------------------- ------------------------- -------------------------
 
 ### Quiz
 
