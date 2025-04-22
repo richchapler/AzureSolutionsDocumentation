@@ -25,13 +25,13 @@ The database team talks about the mission and settles on the following goals:
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
-### "Execution Plan"
+### Basics
+
+#### "Execution Plan"
 ...reveals how the SQL engine interprets and executes a query, enabling developers and database professionals to identify bottlenecks and improve performance 
 
-- **Estimated Execution Plan**: displays how SQL Server plans to run a query before it is executed; helps spot inefficient join orders, missing indexes, or inaccurate estimates without actually modifying data 
-- **Actual Execution Plan**: includes details collected during query execution, such as actual row counts and time spent on each operation; essential for finding real-world performance problems and mismatches between estimated and actual costs 
-- **Live Query Statistics**: offers a visual, real-time look at how a query is progressing as it runs; useful for troubleshooting slow or blocked queries 
-- **Execution Plan Operators**: provides insight into the individual steps of a query, such as Nested Loops, Hash Match, and Sort; recognizing these can help you understand why a query might be slow 
+- **Estimated Execution Plan**: displays **how SQL Server plans to run a query** before it is executed; helps spot inefficient join orders, missing indexes, or inaccurate estimates without actually modifying data 
+- **Actual Execution Plan**: includes details **collected during query execution**, such as actual row counts and time spent on each operation; essential for finding real-world performance problems and mismatches between estimated and actual costs 
 - **Plan Comparison**: allows you to compare execution plans **before and after changes** and helps confirm that: 1) a performance issue is fixed or 2) spot regressions after a change 
 
 **Use this when...** you need to pinpoint inefficient operators, missing indexes, or estimate inaccuracies **before and after changes**
@@ -39,9 +39,8 @@ The database team talks about the mission and settles on the following goals:
 <img src=".\images\SQL_PerformanceOptimization\ActualExecutionPlan.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
 
-### "Live Query Statistics"
+#### "Live Query Statistics"
 ...gives a live, visual view of query progress while it's running 
 
 - **Real-Time Insight**: shows operator-level progress and row counts during query execution 
@@ -54,8 +53,15 @@ The database team talks about the mission and settles on the following goals:
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
 
-### Database Configuration  
+### Database Configuration (RESUME HERE!!!)
 Configure database‑level settings to control plan caching and literal parameterization.
 
 #### Forced Parameterization
@@ -100,7 +106,7 @@ EXEC sp_executesql
 
 **Now both executions share a single cached plan instead of two separate ones.**
 
--------------------------
+<!-- ------------------------- ------------------------- -->
 
 #### Optimize for Adhoc Workloads
 
@@ -117,6 +123,33 @@ RECONFIGURE;
 EXEC sp_configure 'optimize for adhoc workloads', 1; 
 RECONFIGURE;
 ``` 
+
+<!-- ------------------------- ------------------------- -->
+
+### Query Store Usage 
+...lets you track, compare, and manage query performance over time 
+
+- **Captures Execution History**: stores actual execution plans, query text, and performance statistics 
+- **Detects Regressions**: identifies when a new plan performs worse than a previous one 
+- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions 
+- **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions 
+- **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server 
+
+Execute the following T-SQL to activate:
+```sql
+ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE, MAX_STORAGE_SIZE_MB = 100, INTERVAL_LENGTH_MINUTES = 30)
+```
+
+<img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
+
+<!-- ------------------------- ------------------------- -->
+
+#### Others... need to weave this in
+
+**AUTO_CREATE_STATISTICS** (controls automatic creation of single‑column stats)  
+**AUTO_UPDATE_STATISTICS_ASYNC** (lets stats updates run asynchronously)  
+**LEGACY_CARDINALITY_ESTIMATION** (forces the older CE via database scoped config)  
+**Database Compatibility Level** (e.g. `ALTER DATABASE … SET COMPATIBILITY_LEVEL = 150`)  
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -360,24 +393,6 @@ Concurrency hints override SQL Server’s default locking behavior to minimize 
 | `WITH (ROWLOCK)` | Forces row‑level locks only, avoiding broader lock escalation |
 
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-### Query Store Usage 
-...lets you track, compare, and manage query performance over time 
-
-- **Captures Execution History**: stores actual execution plans, query text, and performance statistics 
-- **Detects Regressions**: identifies when a new plan performs worse than a previous one 
-- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions 
-- **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions 
-- **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server 
-
-Execute the following T-SQL to activate:
-```sql
-ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE, MAX_STORAGE_SIZE_MB = 100, INTERVAL_LENGTH_MINUTES = 30)
-```
-
-<img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
-
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
