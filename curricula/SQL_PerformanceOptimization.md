@@ -1033,36 +1033,18 @@ By leveraging missing‑index Dynamic Management Views, you can pinpoint exactly
 
 <!-- ------------------------- ------------------------- -->
 
+Check current fragmentation
+```sql
+USE AdventureWorks2022; 
+SELECT OBJECT_NAME(ips.object_id) AS TableName, i.name AS IndexName, ips.index_type_desc, ips.avg_fragmentation_in_percent
+FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL, 'LIMITED') AS ips
+   JOIN sys.indexes AS i ON ips.object_id = i.object_id AND ips.index_id = i.index_id
+WHERE ips.database_id = DB_ID() AND ips.avg_fragmentation_in_percent > 5;
+```
 
+This query identifies indexes with fragmentation above 5 percent.
 
-
-
-
-
-
-
-
-
-
-
-1. **Check current fragmentation** 
- ```sql
- USE AdventureWorks2019; 
- SELECT 
- OBJECT_NAME(ips.object_id) AS TableName, 
- i.name AS IndexName, 
- ips.index_type_desc, 
- ips.avg_fragmentation_in_percent 
- FROM sys.dm_db_index_physical_stats(
- DB_ID(), NULL, NULL, NULL, 'LIMITED'
- ) AS ips 
- JOIN sys.indexes AS i 
- ON ips.object_id = i.object_id 
- AND ips.index_id = i.index_id 
- WHERE ips.database_id = DB_ID()
- AND ips.avg_fragmentation_in_percent > 5;
- ``` 
- *Identify indexes with fragmentation above 5 percent*
+<img src=".\images\SQL_PerformanceOptimization\IndexFragmentation.png" width="800" title="Snipped April, 2025" />
 
 2. **Review usage stats** 
  ```sql
