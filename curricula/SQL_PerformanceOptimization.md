@@ -58,20 +58,59 @@ The database team talks about the mission and settles on the following goals:
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
-### Database Configuration
+### Database-Level Configuration
 Configure database‑level settings to control plan caching and literal parameterization.
 
-| Setting | Impact |
-| :--- | :--- |
-| **Forced Parameterization**      | ✅ Increases plan reuse, reduces cache bloat<br>⚠️ May produce less‑optimal plans in edge cases   |
-| **Optimize for Adhoc Workloads** | ✅ Cuts ad‑hoc plan cache bloat, conserves memory<br>⚠️ Delays full plan caching until reuse    |
-| **Query Store Usage**            | ✅ Captures history, detects regressions, lets you pin good plans<br>⚠️ Minor capture overhead   |
-| **AUTO_CREATE_STATISTICS**       | ✅ Improves cardinality estimates for ad‑hoc predicates<br>⚠️ Overhead on very write‑heavy tables |
-| **AUTO_UPDATE_STATISTICS_ASYNC** | ✅ Prevents queries from waiting on stat updates<br>⚠️ Queries may run with slightly stale stats |
-| **LEGACY_CARDINALITY_ESTIMATION**| ✅ Avoids new‑estimator regressions after upgrades<br>⚠️ Misses modern CE improvements             |
-| **Compatibility Level**          | ✅ Unlocks new optimizer features and CE improvements<br>⚠️ Can introduce plan changes—test first|
+| Setting | Impact | Why it Matters |
+| :--- | :--- | :--- |
+| `COMPATIBILITY_LEVEL` | ✅ Unlocks new optimizer features and CE improvements<br>⚠️ Can introduce plan changes—test first | Determines entire optimizer behavior; moving up can yield big gains (or regressions) |
+| `QUERY_STORE` | ✅ Captures history, detects regressions, lets you pin good plans<br>⚠️ Minor capture overhead | Provides the data and tools to understand, compare, and stabilize real workload plans |
+| `PARAMETERIZATION = FORCED` | ✅ Increases plan reuse, reduces cache bloat<br>⚠️ May produce less‑optimal plans in edge cases | Converts literals to parameters automatically, cutting down on single‑use plans |
+| `sp_configure 'optimize for adhoc workloads'` | ✅ Cuts ad‑hoc plan cache bloat, conserves memory<br>⚠️ Delays full plan caching until reuse | Stubs initial plans for ad‑hoc queries, freeing memory for more frequently used workloads |
+| `AUTO_CREATE_STATISTICS` | ✅ Improves cardinality estimates for ad‑hoc predicates<br>⚠️ Overhead on very write‑heavy tables | Ensures basic stats exist so the optimizer can make informed row‑count estimates |
+| `AUTO_UPDATE_STATISTICS_ASYNC` | ✅ Prevents queries from waiting on stat updates<br>⚠️ Queries may run with slightly stale stats | Lets long‑running queries proceed while stats are refreshed asynchronously |
+| `LEGACY_CARDINALITY_ESTIMATION`| ✅ Avoids new‑estimator regressions after upgrades<br>⚠️ Misses modern CE improvements | Locks in the older estimator to preserve known‑good plans when upgrading compatibility |
 
-#### Forced Parameterization
+<!-- ------------------------- ------------------------- -->
+
+#### `COMPATIBILITY_LEVEL`  
+…controls which version of the SQL Server optimizer and database engine behaviors your database uses.  
+
+Setting the **compatibility level** to a higher value unlocks new optimizer features, CE improvements, and T‑SQL enhancements. However, jumps in compatibility level can introduce plan regressions, so it’s best to test carefully when moving up.  
+
+```sql
+-- Raise compatibility level to SQL Server 2019 behavior
+ALTER DATABASE [YourDatabase]  
+  SET COMPATIBILITY_LEVEL = 150;
+GO
+
+-- Check current compatibility level
+SELECT name, compatibility_level  
+FROM sys.databases  
+WHERE name = 'YourDatabase';
+``` 
+
+<!-- ------------------------- ------------------------- -->
+
+#### `QUERY_STORE` 
+...lets you track, compare, and manage query performance over time 
+
+- **Captures Execution History**: stores actual execution plans, query text, and performance statistics 
+- **Detects Regressions**: identifies when a new plan performs worse than a previous one 
+- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions 
+- **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions 
+- **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server 
+
+Execute the following T-SQL to activate:
+```sql
+ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE, MAX_STORAGE_SIZE_MB = 100, INTERVAL_LENGTH_MINUTES = 30)
+```
+
+<img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
+
+<!-- ------------------------- ------------------------- -->
+
+#### `PARAMETERIZATION = FORCED`
 ...is a database‑level setting that tells SQL Server to replace literal values in your ad hoc queries with parameters at compile time so they can share execution plans.
 
 By default, SQL Server uses **Simple Parameterization** only for very basic literals and leaves most ad hoc queries unparameterized.
@@ -115,7 +154,7 @@ EXEC sp_executesql
 
 <!-- ------------------------- ------------------------- -->
 
-#### Optimize for Adhoc Workloads
+#### `sp_configure 'optimize for adhoc workloads'`
 
 **By default, SQL Server caches the complete execution plan on the first run of any query, even if it never repeats.**
 
@@ -130,24 +169,6 @@ RECONFIGURE;
 EXEC sp_configure 'optimize for adhoc workloads', 1; 
 RECONFIGURE;
 ``` 
-
-<!-- ------------------------- ------------------------- -->
-
-### Query Store Usage 
-...lets you track, compare, and manage query performance over time 
-
-- **Captures Execution History**: stores actual execution plans, query text, and performance statistics 
-- **Detects Regressions**: identifies when a new plan performs worse than a previous one 
-- **Forces Stable Plans**: allows you to pin a known‑good plan for a given query to prevent further regressions 
-- **Configuration Settings**: tune key Query Store parameters—operation mode (`READ_WRITE` vs. `READ_ONLY`), maximum size (`MAX_STORAGE_SIZE_MB`), data flush interval, and statistics collection interval—to maintain continuous capture and avoid automatic read‑only transitions 
-- **Useful in Azure and On‑Premises**: enabled by default in Azure SQL; optional but highly recommended in SQL Server 
-
-Execute the following T-SQL to activate:
-```sql
-ALTER DATABASE AdventureWorks2022 SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE, MAX_STORAGE_SIZE_MB = 100, INTERVAL_LENGTH_MINUTES = 30)
-```
-
-<img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
 
@@ -200,26 +221,7 @@ GO
 ALTER DATABASE SCOPED CONFIGURATION  
   SET LEGACY_CARDINALITY_ESTIMATION = OFF;
 GO
-```  
-
-<!-- ------------------------- ------------------------- -->
-
-#### Database Compatibility Level  
-…controls which version of the SQL Server optimizer and database engine behaviors your database uses.  
-
-Setting the **compatibility level** to a higher value unlocks new optimizer features, CE improvements, and T‑SQL enhancements. However, jumps in compatibility level can introduce plan regressions, so it’s best to test carefully when moving up.  
-
-```sql
--- Raise compatibility level to SQL Server 2019 behavior
-ALTER DATABASE [YourDatabase]  
-  SET COMPATIBILITY_LEVEL = 150;
-GO
-
--- Check current compatibility level
-SELECT name, compatibility_level  
-FROM sys.databases  
-WHERE name = 'YourDatabase';
-```  
+``` 
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
