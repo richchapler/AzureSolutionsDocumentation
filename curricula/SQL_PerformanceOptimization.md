@@ -1154,186 +1154,76 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Azure
 
-### Exercise #1: Automatic Tuning 
-...leverages Azure's built‑in tuning engine to apply and monitor index and plan corrections without manual intervention 
+### Exercise: Automatic Tuning 
+Leverage Azure's built‑in tuning engine to apply and monitor index and plan corrections without manual intervention.
 
 <!-- ------------------------- ------------------------- -->
 
-1. **Enable automatic tuning** 
- ```sql
- ALTER DATABASE CURRENT 
- SET AUTOMATIC_TUNING = 
- ( FORCE_LAST_GOOD_PLAN = ON, 
- CREATE_INDEX = ON, 
- DROP_INDEX = ON );
- ``` 
+Navigate to Azure Portal >> SQL Server >> Intelligent Performance >> Automatic Tuning
 
-2. **Review recommendations in the portal** 
- - Open your Azure SQL database in the Azure portal 
- - Under **Intelligent Performance**, select **Automatic tuning** 
- - Observe any **automatic tuning actions** (index create/drop or plan corrections) and their status 
+<img src=".\images\SQL_PerformanceOptimization\AutomaticTuning.png" width="800" title="Snipped April, 2025" />
 
-3. **Trigger a recommendation** 
- - Run a sample query that would benefit from an index (e.g. a scan on SalesOrderDetail as in Exercise #1) 
- - Wait a few minutes for Query Store to collect telemetry and Automatic Tuning to propose an index 
+Review features:
+- **Inheritance From**: allows you to inherit tuning settings from server‑level Azure defaults or override them at the database level 
+- **FORCE PLAN**: automatically applies a known‑good execution plan when a new plan degrades performance 
+- **CREATE INDEX**: generates and **implements missing‑index recommendations** based on real workload telemetry 
+- **DROP INDEX**: **removes unused or low‑value indexes** to reduce storage and maintenance overhead 
 
-4. **Inspect and override** 
- - In the portal, under **Performance recommendations**, locate the suggested index 
- - Click **Apply** to have Azure create it automatically, or **Disable** to reject 
-
-5. **Validate impact** 
- - Re‑run your query and compare execution plans (SSMS) or use **Query Performance Insight** 
- - Optionally, roll back the automatic index via 
- ```sql
- EXEC sp_delete_database_automatic_tuning_recommendation 
- @resource_group_name = N'<rg>', 
- @server_name = N'<server>', 
- @database_name = N'<db>', 
- @recommendation_id = '<recommendation_guid>';
- ``` 
+Turn on all options and click "Apply".
 
 #### Final Thought 
-Automatic Tuning in Azure SQL can offload routine index and plan corrections, letting you focus on higher‑value tasks. Always review recommendations to ensure they align with your workload patterns and maintenance win**DO**ws. 
-
-<!-- ------------------------- ------------------------- -->
-
-### Exercise #2: Query Performance Insight 
-...provides a built‑in dashboard showing top resource‑consuming queries over time and helps prioritize tuning efforts 
-
-<!-- ------------------------- ------------------------- -->
-
-1. **Open Query Performance Insight** 
- - In the Azure portal, navigate to your Azure SQL database 
- - Select **Query Performance Insight** under **Intelligent Performance** 
-
-2. **Identify hot queries** 
- - Observe the top queries by CPU, duration, or count 
- - Click a query to view its **performance over time** and **plan comparison** 
-
-3. **Drill into details** 
- - View the execution plan history side‑by‑side to spot regressions 
- - Note any recommendations (e.g., missing indexes) surfaced 
-
-4. **Apply a tuning action** 
- - For a given query, click **Force Plan** to pin the last known good plan 
- - Alternatively, script a missing index from the recommendation pane 
-
-5. **Validate improvement** 
- - Refresh the dashboard after rerunning the workload 
- - Confirm a drop in CPU or duration for the tuned query 
-
-#### Final Thought 
-Query Performance Insight empowers you to focus on your real‑world workload, surfacing the queries that matter most and giving you actionable insights without manual Dynamic Management Views queries. 
+Automatic Tuning in Azure SQL can offload routine index and plan corrections, letting you focus on higher‑value tasks. Always review recommendations to ensure they align with your workload patterns and maintenance windows. 
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ### Quiz
 
-1. Which T‑SQL statement correctly enables automatic plan correction, index creation, and index dropping on an Azure SQL database? 
- A) `ALTER DATABASE CURRENT SET QUERY_STORE = ON;` 
- B) `ALTER SERVER CONFIGURATION SET AUTO_TUNING = ALL;` 
- C) 
- `ALTER DATABASE CURRENT 
- SET AUTOMATIC_TUNING = 
- ( FORCE_LAST_GOOD_PLAN = ON, 
- CREATE_INDEX = ON, 
- DROP_INDEX = ON );` 
- D) `EXEC sp_auto_tuning_start;` 
+1. Which portal path leads you to the Automatic Tuning settings for a given database? 
+ A) Azure Monitor → Logs 
+ B) SQL Databases → Intelligent Performance → Automatic tuning 
+ C) SQL Databases → Firewall settings 
+ D) SQL Servers → Virtual Network configuration 
 
-2. What **DO**es the Automatic Tuning option CREATE_INDEX **DO**? 
- A) Forces the last known good plan when a regression occurs 
- B) Automatically creates recommended missing indexes 
- C) Drops indexes that have not been used recently 
- D) Updates stale statistics automatically 
+2. What does the **Force Plan** option do? 
+ A) Automatically generates missing‑index recommendations 
+ B) Reverts to a known‑good execution plan when a regression is detected 
+ C) Drops unused indexes 
+ D) Updates statistics asynchronously 
 
-3. In the Azure portal, where **DO** you navigate to view and configure Automatic Tuning? 
- A) Azure Monitor → Alerts 
- B) SQL Databases → Activity Log 
- C) Intelligent Performance → Automatic tuning 
- D) Advisor Recommendations → Performance 
+3. What is the purpose of the **Create Index** setting? 
+ A) Removes indexes not used recently 
+ B) Forces queries to ignore indexes 
+ C) Automatically creates suggested nonclustered indexes based on real‑time telemetry 
+ D) Forces execution plans to be recompiled each time 
 
-4. Which button in the Automatic Tuning blade disables a specific tuning recommendation? 
- A) Apply 
- B) Force Plan 
- C) Disable 
- D) Refresh 
+4. After toggling Automatic Tuning options in the portal, what must you click to apply your changes? 
+ A) Save 
+ B) Apply 
+ C) Refresh 
+ D) Restart Database 
 
-5. Which stored procedure **DO** you use to remove a specific automatic tuning recommendation? 
- A) `sp_remove_tuning_recommendation` 
- B) `sp_drop_plan_guide` 
- C) `sp_delete_database_automatic_tuning_recommendation` 
- D) `sp_delete_index_suggestion` 
-
-6. Which Azure portal feature shows the top resource‑consuming queries over time? 
- A) Automatic Tuning 
- B) Query Performance Insight 
- C) SQL Analytics 
- D) Activity Log 
-
-7. In Query Performance Insight, which view lets you compare execution plans before and after a change? 
- A) CPU Analysis 
- B) Plan Comparison 
- C) Index Recommendations 
- D) Diagnostic Logs 
-
-8. To pin a stable plan for a query in Query Performance Insight, you click: 
- A) Apply 
- B) Force Plan 
- C) Pin Plan 
- D) Hold Plan 
-
-9. After applying a tuning action (plan force or index create), what is the recommended way to validate its impact? 
- A) Run `DBCC CHECKDB` 
- B) Compare pre‑ and post‑tuning execution plans or observe CPU/duration drops in Query Performance Insight 
- C) Query `sys.dm_db_missing_index_details` again 
- D) Restart the database 
-
-10. What underlying feature must be enabled for Query Performance Insight to display historical query data? 
- A) Automatic Tuning 
- B) Advanced Data Security 
- C) Query Store 
- D) Dynamic Data Masking 
-
-<!-- ------------------------- ------------------------- -->
+5. The **Inheritance From** setting in Automatic Tuning allows you to: 
+ A) Inherit settings from a database master key 
+ B) Inherit server‑level tuning defaults or override them at the database level 
+ C) Inherit data from a primary database 
+ D) Inherit firewall rules 
 
 #### Answers
 
-### Answers
+1. **B** – `SQL Databases → Intelligent Performance → Automatic tuning`  
+ *Opens the Automatic Tuning settings for the selected database* 
 
-1. **C** – `ALTER DATABASE CURRENT SET AUTOMATIC_TUNING = (FORCE_LAST_GOOD_PLAN = ON, CREATE_INDEX = ON, DROP_INDEX = ON);` 
- *Turns on all three Automatic Tuning options (plan correction, index create, and index drop) in one command.* 
+1. **B** – `Force Plan` reverts to the last known good execution plan when a regression is detected  
+ *Maintains query performance by automatically applying a stable plan* 
 
-2. **B** – `CREATE_INDEX` 
- *Automatically implements missing‑index recommendations based on Query Store telemetry.* 
+1. **C** – `Create Index` automatically creates recommended nonclustered indexes based on workload telemetry  
+ *Reduces manual index maintenance by implementing high‑impact index suggestions* 
 
-3. **A** – `FORCE_LAST_GOOD_PLAN` 
- *Reverts to the last known good execution plan when a new plan degrades performance.* 
+1. **B** – `Apply` commits your Automatic Tuning changes  
+ *Activates the toggled settings so Automatic Tuning begins using your configuration* 
 
-4. **C** – SQL Database → Intelligent Performance → Automatic tuning 
- *The portal path under your database settings where you view and configure Automatic Tuning.* 
-
-5. **C** – `Disable` 
- *Rejects the specific tuning recommendation so it will not be applied.* 
-
-6. **C** – `sp_delete_database_automatic_tuning_recommendation` 
- *Deletes the specified automatic tuning suggestion from the database.* 
-
-7. **A** – **Query Performance Insight** 
- *Surfaces the top resource‑consuming queries over time using Query Store data.* 
-
-8. **C** – **Execution count** 
- *Shows how many times each query has run, highlighting the most frequently executed.* 
-
-9. **B** – **Force Plan** 
- *Pins the selected execution plan so subsequent runs use that known‑good plan.* 
-
-10. **C** – **Query Store** 
- *Must be enabled to capture and store historical query and execution plan information.*
+1. **B** – `Inheritance From` lets the database inherit server‑level tuning defaults or override them  
+ *Allows centralized or per‑database control of Automatic Tuning options* 
