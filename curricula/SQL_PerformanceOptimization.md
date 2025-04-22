@@ -917,30 +917,9 @@ Leverage **built‑in automation to apply performance corrections without manual
 
 ## On‑Prem
 
-### Exercise
-
-#### Prepare Resources
-
-This exercise assumes a machine with:
-* SQL Server (hybrid Windows Authentication and SQL Authentication)
-* SQL Server Management Studio
-
-Open SQL Server Configuration Manager >> SQL Server Services and confirm that the SQL Server (MSSQLSERVER) service is running.
-
-Launch SQL Server Management Studio, connect to localhost, and then click "New Query". 
-
-Create a demonstration database:
-```sql
-CREATE DATABASE SecurityDemo;
-```
-
-Switch to the demonstration database:
-```sql
-USE SecurityDemo;
-```
 <!-- ------------------------- ------------------------- ------------------------- -->
 
-#### Exercise #1: "Missing Index" Recommendations 
+### Exercise #1: "Missing Index" Recommendations 
 Use built‑in Dynamic Management Views to identify index candidates based on actual workload patterns
 
 <!-- ------------------------- ------------------------- -->
@@ -1024,12 +1003,12 @@ Clean up the test index:
 DROP INDEX IX_SOD_UnitPrice ON Sales.SalesOrderDetail;
 ``` 
 
-##### Final Thought 
+#### Final Thought 
 By leveraging missing‑index Dynamic Management Views, you can pinpoint exactly which columns and included fields will yield the largest performance gains. This hands‑on method ensures you add only the indexes your workload truly needs, avoiding unnecessary maintenance overhead and write penalties.
 
 ------------------------- ------------------------- -------------------------
 
-#### Exercise #2: Index Maintenance
+### Exercise #2: Index Maintenance
 
 <!-- ------------------------- ------------------------- -->
 
@@ -1090,7 +1069,7 @@ WHERE OBJECT_NAME(ips.object_id)='SalesOrderDetail';
 • `SAMPLED` examines a sample of pages for a balance of speed and accuracy
 • `DETAILED` reads every page for the most accurate result but can be slow and resource‑intensive
 
-##### Final Thought 
+#### Final Thought 
 Regular index maintenance—using the right operation and fill factor—keeps your indexes healthy, minimizes I/O, and avoids unexpected performance drops. By combining physical stats with usage data, you focus effort where it delivers the greatest benefit.
 
 ------------------------- ------------------------- ------------------------- -------------------------
@@ -1183,17 +1162,11 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
 
 ## Azure
 
-### Exercises
-
-#### Exercise #1: Automatic Tuning 
+### Exercise #1: Automatic Tuning 
 ...leverages Azure's built‑in tuning engine to apply and monitor index and plan corrections without manual intervention 
 
-##### How? 
-- Enables automatic plan correction and automatic index create/drop on your database 
-- Generates tuning recommendations based on Query Store telemetry 
-- Applies, monitors, or rolls back changes via the Azure portal or T‑SQL 
+<!-- ------------------------- ------------------------- -->
 
-##### Let's get started! 
 1. **Enable automatic tuning** 
  ```sql
  ALTER DATABASE CURRENT 
@@ -1227,19 +1200,16 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  @recommendation_id = '<recommendation_guid>';
  ``` 
 
-##### Final Thought 
+#### Final Thought 
 Automatic Tuning in Azure SQL can offload routine index and plan corrections, letting you focus on higher‑value tasks. Always review recommendations to ensure they align with your workload patterns and maintenance win**DO**ws. 
 
 <!-- ------------------------- ------------------------- -->
 
-#### Exercise #2: Query Performance Insight 
+### Exercise #2: Query Performance Insight 
 ...provides a built‑in dashboard showing top resource‑consuming queries over time and helps prioritize tuning efforts 
 
-##### How? 
-- Uses Query Store data to visualize CPU, duration, and execution count trends 
-- Breaks down individual query performance and correlates plan changes 
+<!-- ------------------------- ------------------------- -->
 
-##### Let's get started! 
 1. **Open Query Performance Insight** 
  - In the Azure portal, navigate to your Azure SQL database 
  - Select **Query Performance Insight** under **Intelligent Performance** 
@@ -1260,7 +1230,7 @@ Automatic Tuning in Azure SQL can offload routine index and plan corrections, le
  - Refresh the dashboard after rerunning the workload 
  - Confirm a drop in CPU or duration for the tuned query 
 
-##### Final Thought 
+#### Final Thought 
 Query Performance Insight empowers you to focus on your real‑world workload, surfacing the queries that matter most and giving you actionable insights without manual Dynamic Management Views queries. 
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
