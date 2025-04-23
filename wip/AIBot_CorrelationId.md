@@ -2,7 +2,7 @@
 
 ### Use Case
 
-A user asks the AI bot a question and we want to **track every impacted technology** (for cost allocation, etc.).
+Solution team wants to be able to **track every technological interaction** arising from a bot prompt (for cost allocation, etc.)
 
 **Initial Interaction**: A user enters a question in **Teams Chat** and Teams passes that message to the **Bot Service**
 
@@ -339,9 +339,132 @@ Click **Save** at the top of the Configuration pane to apply your changes.
 
 <!-- ------------------------- -->
 
+### Teams
+
+Navigate to the Bot, then Settings >> **Channels**, then click to select **Microsoft Teams**.
+
+Select **Microsoft Teams Commercial** and then click **Apply**.
+
+Return to Settings >> **Channels** and you will see **Microsoft Teams** included in the "This bot is connected with..." list.
+
+<img src=".\images\AIBot_CorrelationId\Channels_Teams.png" width="800" title="Snipped April, 2025" />
+
+
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+
+
+
+
+
+
+
+
+
+#### Prepare App Manifest Package
+
+Since Teams doesn't host your bot, you need to provide a Teams App Package (a `.zip` file) that includes:
+
+- **manifest.json** – defines your bot's ID, endpoints, scopes, and capabilities  
+- **color icon (192x192)** – square PNG icon used in Teams  
+- **outline icon (32x32)** – white-on-transparent PNG for app bar  
+
+If you used the **Developer Portal for Teams** or the **Teams Toolkit** in VS Code, you can export the package directly.
+
+### 2. Generate the manifest.json  
+You can either:
+
+- Use the **Developer Portal for Teams** (https://dev.teams.microsoft.com)  
+  - Go to **Apps** → **Create new app**  
+  - Fill in basic info (name, bot ID = your Azure Bot’s App ID)  
+  - Under **Capabilities**, select **Bot** and point it at your bot’s App ID  
+  - Set **Scopes** (e.g. Personal, Team, GroupChat)  
+  - Export the app package  
+
+or
+
+- Create it manually using this pattern:
+  ```json
+  {
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.11",
+    "version": "1.0.0",
+    "id": "<YOUR-BOT-APP-ID>",
+    "packageName": "com.yourcompany.imbot",
+    "name": {
+      "short": "imBot",
+      "full": "Correlation ID Bot"
+    },
+    "description": {
+      "short": "Bot to demonstrate correlation ID tracing",
+      "full": "Sends prompts to OpenAI and returns results, with full correlation ID propagation"
+    },
+    "icons": {
+      "color": "color.png",
+      "outline": "outline.png"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+      {
+        "botId": "<YOUR-BOT-APP-ID>",
+        "scopes": [ "personal", "team", "groupchat" ],
+        "supportsFiles": false,
+        "isNotificationOnly": false
+      }
+    ],
+    "permissions": [ "identity", "messageTeamMembers" ],
+    "validDomains": []
+  }
+  ```
+
+### 3. Upload the app to Teams  
+In Microsoft Teams:
+
+- Click **Apps** (lower-left)  
+- Scroll to **Built for your org** or click **Upload a custom app** → **Upload for me or my org**  
+- Select your `.zip` package  
+
+Once uploaded, your **imBot** will appear in Teams—open a 1:1 chat and test it like a regular user.
+
+---
+
+When you send your test prompt from Teams, it will hit Azure Bot Service via a real production channel, triggering the diagnostics you enabled and fully exercising the correlation ID pipeline.
+
+
+
+
+
+
+
+
+
+
+
+<!-- ------------------------- -->
+
 ### Confirm Success
 
 Once your **imbs** is registered and pointed at your Logic App, you can verify end-to-end functionality directly in the Azure Portal:
+
+#### Bot
+
+Bot Diagnostic Settings capture only "Requests from the channels to the bot"
+
+Logs of category "Requests from the channels to the bot" (aka `ChannelOperationalLogs`) are added any time a configured channel makes an HTTP POST to your bot’s messaging endpoint.
+
+—whether that’s Teams, Direct Line, or the built-in Web Chat test pane in the Portal.
+
+“Test in Web Chat” uses a debug channel that may not trigger full diagnostic logging, especially in newer Bot Framework versions where telemetry is optimized for production channels like Teams, Direct Line, or Web Chat embedded in a live app.
+
+
+
+
+
+
+
 
 **Open the Bot resource** 
  - In the Azure Portal go to **Resource groups › im › imbs**. 
@@ -361,9 +484,9 @@ Once your **imbs** is registered and pointed at your Logic App, you can verify e
  test-001: What’s a quick soup recipe?
  ``` 
 
-2. **Open your Log Analytics workspace** 
+1. **Open your Log Analytics workspace** 
 
-3. **Query the Bot’s diagnostic logs** 
+2. **Query the Bot’s diagnostic logs** 
  Paste and run a query like this: 
  ```kusto
  AzureDiagnostics
@@ -374,7 +497,7 @@ Once your **imbs** is registered and pointed at your Logic App, you can verify e
  | project TimeGenerated, OperationName, Level, Message
  ``` 
 
-4. **Inspect the results** 
+1. **Inspect the results** 
  - **TimeGenerated** shows when the message arrived 
  - **OperationName** reveals the step (e.g. “ChannelMessageReceived”) 
  - **Message** contains details—any errors or confirmation of delivery 
