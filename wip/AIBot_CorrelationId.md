@@ -286,7 +286,7 @@ $clientSecret = az ad app credential reset --id $appId --append --end-date "2025
 ### Register Bot
 
 ```powershell
-az bot create --resource-group "im" --name "imbs" --kind registration --app-type SingleTenant --sku S1 --appid $appId --password $clientSecret --endpoint "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=IunxdWoa_VdKPTY7uxLE3B66t4mMHdmYSR_NLfporCs"
+az bot create --resource-group "im" --name "imbs" --kind registration --app-type SingleTenant --sku S1 --appid $appId --password $clientSecret --endpoint "<endpointURL>"
 ``` 
 
 <!-- ------------------------- -->
