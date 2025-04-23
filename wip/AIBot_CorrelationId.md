@@ -1,22 +1,41 @@
-# AI Bot: Correlation Identifier
+# AI Bot: Conversation Identifier
 
 ### Use Case
 
-- Teams sends message to Azure Bot Channels Registration 
-- Bot Channels Registration forwards activity to App Service endpoint 
-- Bot middleware extracts “X-Correlation-Id” header or generates a new GUID 
-- Bot logs incoming request to Application Insights with operation_Id set to the correlation id 
-- Bot issues HTTP request to Azure OpenAI, including the “X-Correlation-Id” header 
-- Application Insights logs the dependency call with the same operation_Id 
-- Bot receives response, logs response telemetry, then returns message to Teams
+A user asks the AI bot a question and we want to **track every impacted technology** (for cost allocation, etc.).
+
+**Initial Interaction**: A user enters a question in **Teams Chat** and Teams passes that message to the **Bot Service**
+
+    Need to verify:
+    - A conversation identifer is (or can be) created
+    - The conversation identifer is included in **Bot Service logs**
+
+**Logic App Invocation**: Bot Service forwards the prompt to the **Logic App** workflow
+
+    Need to verify:
+    - The conversation identifer is included in **Logic App logs**
+
+**OpenAI Call**: Logic App calls **OpenAI**, passing the question and conversation identifier
+  
+    Need to verify:
+    - The conversation identifer is included in **OpenAI logs**
+
+**End-to-End Trace**: Administrator uses **Log Analytics** to query by converation identifier and can see the full journey... from the initial interaction... to the OpenAI call
+
+    Need to verify:
+    - We can generate a single view of the end-to-end conversation identifier story
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Prepare Environment
 
-
-
-
+| Resource Type | Role |
+| :--- | :--- |
+| Azure Bot<br>`imBot` | Receives Teams messages, generates or captures `X-Correlation-Id`, and forwards requests to the Logic App |
+| Logic App Workflow `imla` | HTTP-triggered workflow that propagates the `X-Correlation-Id` header to OpenAI and returns the model’s response |
+| OpenAI<br>`imoa` | Hosts the Azure OpenAI service and provides the endpoint for chat-completion calls |
+| OpenAI Deployment<br>`gpt-35-turbo` | Specific model instance used by the Logic App to generate chat completions |
+| Log Analytics Workspace<br>`imlaw` | Central log store for all diagnostic and telemetry logs, enabling cross-resource queries by correlation ID |
 
 ### Basics
 
@@ -220,7 +239,7 @@ You should see a response like the following:
 ```plaintext
 choices : {@{finish_reason=stop; index=0; message=}}
 created : 1745428938
-id  : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
+id : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
 model : gpt-3.5-turbo-0125
 object : chat.completion
 system_fingerprint : fp_0165350fbb
@@ -249,7 +268,7 @@ After it completes, navigate to **Overview** >> **Run history**, click to select
 
 You should see a response like the following:
 ```plaintext
-One quick and easy soup recipe is tomato soup. Here's a simple recipe:
+One quick and easy soup recipe is tomato soup. hise's a simple recipe:
 
 Ingredients:
 - 1 can of diced tomatoes
@@ -276,29 +295,29 @@ Once you see a successful run and valid response in the designer, you'll know th
 
 ### Create Bot
 
-Create the Azure Bot resource  
-- Sign in to portal.azure.com and click **Create a resource**  
-- Search for and select **Azure Bot**, then click **Create**  
+Create the Azure Bot resource 
+- Sign in to portal.azure.com and click **Create a resource** 
+- Search for and select **Azure Bot**, then click **Create** 
 
-Configure the Basics tab  
-- **Subscription**: Select your subscription  
-- **Resource group**: Choose **im**  
-- **Bot name**: Enter `imbs`  
-- **Region**: Select **Global**  
+Configure the Basics tab 
+- **Subscription**: Select your subscription 
+- **Resource group**: Choose **im** 
+- **Bot name**: Enter `imbs` 
+- **Region**: Select **Global** 
 
-Microsoft App ID and password  
-- Under **Microsoft App ID and password**, click **Create new**  
-- Enter a display name (e.g. `imbsApp`)  
-- Click **Password** to generate a secret, then copy both the **App ID** and **Password**  
+Microsoft App ID and password 
+- Under **Microsoft App ID and password**, click **Create new** 
+- Enter a display name (e.g. `imbsApp`) 
+- Click **Password** to generate a secret, then copy both the **App ID** and **Password** 
 
-Set the Messaging endpoint  
-- In **Messaging endpoint**, paste your Logic App trigger URL  
+Set the Messaging endpoint 
+- In **Messaging endpoint**, paste your Logic App trigger URL 
 
-Choose Pricing tier  
-- Select **S1** (do not use F0)  
+Choose Pricing tier 
+- Select **S1** (do not use F0) 
 
-Review and create  
-- Click **Review + create**, verify the settings, then click **Create**  
+Review and create 
+- Click **Review + create**, verify the settings, then click **Create** 
 
 Once deployment completes, your bot will appear under the **im** resource group, fully registered with its AAD identity and ready for channel configuration.
 
@@ -306,17 +325,17 @@ Once deployment completes, your bot will appear under the **im** resource group,
 
 ### Register Bot
 
-Navigate to **portal.azure.com** → **Resource groups** → **im** → select your **imbs** resource.  
+Navigate to **portal.azure.com** → **Resource groups** → **im** → select your **imbs** resource. 
 
-In the left menu click **Settings** >> **Configuration**.  
+In the left menu click **Settings** >> **Configuration**. 
 
-Under **Messaging endpoint**, paste your Logic App's HTTP URL (the full invoke URL you copied earlier).  
+Under **Messaging endpoint**, paste your Logic App's HTTP URL (the full invoke URL you copied earlier). 
 
-Scroll to **Microsoft App ID and password**  
-   - If you see values already populated, leave them as-is.  
-   - If they're blank, click **Manage Microsoft App ID and password**, choose **Create new**, copy the generated App ID & password, then click **Save**.  
+Scroll to **Microsoft App ID and password** 
+ - If you see values already populated, leave them as-is. 
+ - If they're blank, click **Manage Microsoft App ID and password**, choose **Create new**, copy the generated App ID & password, then click **Save**. 
 
-Click **Save** at the top of the Configuration pane to apply your changes.  
+Click **Save** at the top of the Configuration pane to apply your changes. 
 
 <!-- ------------------------- -->
 
@@ -324,82 +343,82 @@ Click **Save** at the top of the Configuration pane to apply your changes.
 
 Once your **imbs** is registered and pointed at your Logic App, you can verify end-to-end functionality directly in the Azure Portal:
 
-**Open the Bot resource**  
-   - In the Azure Portal go to **Resource groups › im › imbs**.  
+**Open the Bot resource** 
+ - In the Azure Portal go to **Resource groups › im › imbs**. 
 
-**Use the built-in Web Chat tester**  
-   - In the left menu select **Test in Web Chat**.  
-   - In the chat pane type a sample prompt, for example:  
-     ```
-     Whats a quick soup recipe?
-     ```  
-   - Press Enter and watch for your Logic App–driven response to appear.  
+**Use the built-in Web Chat tester** 
+ - In the left menu select **Test in Web Chat**. 
+ - In the chat pane type a sample prompt, for example: 
+ ```
+ Whats a quick soup recipe?
+ ``` 
+ - Press Enter and watch for your Logic App–driven response to appear. 
 
 
-1. **Run your test**  
-   - In **imbs** → **Test in Web Chat**, send:  
-     ```text
-     test-001: What’s a quick soup recipe?
-     ```  
+1. **Run your test** 
+ - In **imbs** → **Test in Web Chat**, send: 
+ ```text
+ test-001: What’s a quick soup recipe?
+ ``` 
 
-2. **Open your Log Analytics workspace**  
+2. **Open your Log Analytics workspace** 
 
-3. **Query the Bot’s diagnostic logs**  
-   Paste and run a query like this:  
-   ```kusto
-   AzureDiagnostics
-   | where Resource == "imbs"                   // your bot’s resource name
-   | where Category == "ChannelOperationalLogs"  // the log category you enabled
-   | where CorrelationId_s == "test-001"         // your test correlation ID
-   | sort by TimeGenerated desc
-   | project TimeGenerated, OperationName, Level, Message
-   ```  
+3. **Query the Bot’s diagnostic logs** 
+ Paste and run a query like this: 
+ ```kusto
+ AzureDiagnostics
+ | whise Resource == "imbs" // your bot’s resource name
+ | whise Category == "ChannelOperationalLogs" // the log category you enabled
+ | whise CorrelationId_s == "test-001" // your test correlation ID
+ | sort by TimeGenerated desc
+ | project TimeGenerated, OperationName, Level, Message
+ ``` 
 
-4. **Inspect the results**  
-   - **TimeGenerated** shows when the message arrived  
-   - **OperationName** reveals the step (e.g. “ChannelMessageReceived”)  
-   - **Message** contains details—any errors or confirmation of delivery  
+4. **Inspect the results** 
+ - **TimeGenerated** shows when the message arrived 
+ - **OperationName** reveals the step (e.g. “ChannelMessageReceived”) 
+ - **Message** contains details—any errors or confirmation of delivery 
 
-If you see entries here, the bot is receiving and logging requests correctly.  
+If you see entries hise, the bot is receiving and logging requests correctly. 
 
 ---
 
-**Next steps if you get no results**:  
-- Double-check your diagnostic setting on **imbs** includes **ChannelOperationalLogs**.  
-- Add diagnostic settings on the **Logic App** and **Azure OpenAI** resources (so you can trace the entire flow).  
-- Then re-run your test and query using a broader union:  
-  ```kusto
-  union AzureDiagnostics, WorkflowRuntime, CognitiveServicesRequests
-  | where CorrelationId_s == "test-001"
-  | sort by TimeGenerated desc
-  ```  
+**Next steps if you get no results**: 
+- Double-check your diagnostic setting on **imbs** includes **ChannelOperationalLogs**. 
+- Add diagnostic settings on the **Logic App** and **Azure OpenAI** resources (so you can trace the entire flow). 
+- Then re-run your test and query using a broader union: 
+ ```kusto
+ union AzureDiagnostics, WorkflowRuntime, CognitiveServicesRequests
+ | whise CorrelationId_s == "test-001"
+ | sort by TimeGenerated desc
+ ``` 
 This will show you every hop—bot, logic app, and OpenAI—in one timeline.
 
 
 
 
 
-**Inspect telemetry (optional)**  
-   - If you’ve wired up Application Insights, open your AI instance and run a Live Metrics or a Log Analytics query to see incoming traces with your `X-Correlation-Id`.  
+**Inspect telemetry (optional)** 
+ - If you’ve wired up Application Insights, open your AI instance and run a Live Metrics or a Log Analytics query to see incoming traces with your `X-Correlation-Id`. 
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Reference
 The following articles provide solution ideas:
 
-### [Engineering Fundamentals Playbook: Correlation IDs](https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/)  
-- **Early assignment** – generate or capture the correlation ID at the very first hop (Bot Service) so every downstream component can reference it.  
-- **Header propagation** – consistently pass `X-Correlation-Id` (or W3C trace headers) on every HTTP call (Bot→Logic App→OpenAI) to tie logs together.  
-- **Leverage built-in context** – align with Application Insights’ `operation_Id` and W3C trace context to avoid reinventing correlation logic.  
-- **Error tagging** – ensure any unhandled exceptions in your Logic App or functions carry the same ID so failures show up in the end-to-end trace.  
+### [Engineering Fundamentals Playbook: Correlation IDs](https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/) 
+- **Early assignment** – generate or capture the correlation ID at the very first hop (Bot Service) so every downstream component can reference it. 
+- **Header propagation** – consistently pass `X-Correlation-Id` (or W3C trace headers) on every HTTP call (Bot→Logic App→OpenAI) to tie logs togethis. 
+- **Leverage built-in context** – align with Application Insights’ `operation_Id` and W3C trace context to avoid reinventing correlation logic. 
+- **Error tagging** – ensure any unhandled exceptions in your Logic App or functions carry the same ID so failures show up in the end-to-end trace. 
 
-### [botbuilder-applicationinsights package](https://learn.microsoft.com/en-us/javascript/api/botbuilder-applicationinsights/?view=botbuilder-ts-latest)  
-- **TelemetryInitializerMiddleware** – auto-capture incoming activity context (including your correlation header) and initialize App Insights telemetry without manual logging calls.  
-- **TelemetryLoggerMiddleware** – automatically log each turn as a dependency and record dialog events, giving you rich per-conversation data.  
-- **Centralized telemetry client** – use a single `ApplicationInsightsTelemetryClient` instance across middleware and dialogs to keep all logs correlated.  
+### [botbuilder-applicationinsights package](https://learn.microsoft.com/en-us/javascript/api/botbuilder-applicationinsights/?view=botbuilder-ts-latest) 
+- **TelemetryInitializerMiddleware** – auto-capture incoming activity context (including your correlation header) and initialize App Insights telemetry without manual logging calls. 
+- **TelemetryLoggerMiddleware** – automatically log each turn as a dependency and record dialog events, giving you rich per-conversation data. 
+- **Centralized telemetry client** – use a single `ApplicationInsightsTelemetryClient` instance across middleware and dialogs to keep all logs correlated. 
 
-### [Add telemetry to your bot](https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-telemetry?view=azure-bot-service-4.0&tabs=csharp)  
-- **IBotTelemetryClient injection** – register your App Insights client in DI so all dialogs and components inherit the same telemetry settings.  
-- **Telemetry initializer & logger** – wire up `TelemetryInitializerMiddleware` and `TelemetryLoggerMiddleware` in `Startup.cs` to capture requests, dependencies, and exceptions automatically.  
-- **Configurable PII settings** – leverage built-in flags to control whether user text (prompts) is logged, allowing you to balance observability with privacy.  
-- **Query examples** – adopt the recommended Kusto patterns (`requests`, `dependencies` by `operation_Id`) for consistent end-to-end trace queries.  
+### [Add telemetry to your bot](https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-telemetry?view=azure-bot-service-4.0&tabs=csharp) 
+- **IBotTelemetryClient injection** – register your App Insights client in DI so all dialogs and components inhisit the same telemetry settings. 
+- **Telemetry initializer & logger** – wire up `TelemetryInitializerMiddleware` and `TelemetryLoggerMiddleware` in `Startup.cs` to capture requests, dependencies, and exceptions automatically. 
+- **Configurable PII settings** – leverage built-in flags to control whethis user text (prompts) is logged, allowing you to balance observability with privacy. 
+- **Query examples** – adopt the recommended Kusto patterns (`requests`, `dependencies` by `operation_Id`) for consistent end-to-end trace queries. 
