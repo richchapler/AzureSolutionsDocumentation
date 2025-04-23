@@ -1,25 +1,7 @@
 # AI Bot: Correlation Identifier
 
-## Need to Review and Incorporate These...
+### Use Case
 
-https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/
-https://learn.microsoft.com/en-us/javascript/api/botbuilder-applicationinsights/?view=botbuilder-ts-latest
-https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-telemetry?view=azure-bot-service-4.0&tabs=csharp
-
-## Delete Me
-
-### Sandbox Architecture
-The following minimum resources are required to test this concept:
-
-| Resource | Why it’s needed to demonstrate correlation identifier |
-| :--- | :--- |
-| Azure Bot Channels Registration | entry point where the correlation id is generated |
-| App Service (Web App) | hosts the bot/Web API code that emits, forwards and logs the same id |
-| Function App | reads the propagated id, logs it and invokes the Azure OpenAI call |
-| Application Insights | captures and links operation_Id / W3C trace context across every service hop |
-| Azure OpenAI resource | external dependency used to validate end-to-end propagation of the correlation id |
-
-### Expected Flow 
 - Teams sends message to Azure Bot Channels Registration 
 - Bot Channels Registration forwards activity to App Service endpoint 
 - Bot middleware extracts “X-Correlation-Id” header or generates a new GUID 
@@ -32,7 +14,13 @@ The following minimum resources are required to test this concept:
 
 ## Prepare Environment
 
-### List Available Subscriptions
+
+
+
+
+### Basics
+
+#### List Available Subscriptions
 
 ```powershell
 az account list --output table
@@ -40,51 +28,111 @@ az account list --output table
 
 Review the resulting list and copy the `SubscriptionId` value for the subscription you want to use.
 
-### Set Active Subscription
+#### Set Active Subscription
 
 ```powershell
 az account set --subscription "<subscriptionId>"
 ``` 
 
-### Create Resource Group
+#### Create Resource Group
 
 ```powershell
 az group create --name "im" --location "westus"
 ```
 
-<!-- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
 
-### Instantiate OpenAI
+### Log Analytics
+
+Use Portal
+
+<!-- ------------------------- ------------------------- -->
+
+### OpenAI
+
+#### Instantiate OpenAI
 
 ```powershell
 az cognitiveservices account create --resource-group "im" --name "imoa" --kind OpenAI --sku S0 --location "westus"
 ``` 
 
-### Create Deployment
+#### Create Deployment
 
 Navigate to [Azure AI Foundry](https://ai.azure.com) and create a `gpt-35-turbo` deployment. Copy the Deployment Id value for later use.
 
-<!-- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
 
-### Configure Azure CLI
+### Logic App
+
+#### Configure Azure CLI
 ...for automatic extension installs
 
 ```powershell
 az config set extension.use_dynamic_install=yes_without_prompt
 ```
 
-### Install Logic App Extension
+#### Install Logic App Extension
 ...for Azure CLI
 
 ```powershell
 az extension add --name logic
 ``` 
 
-### Instantiate Logic App
+#### Instantiate Logic App
 
 ```powershell
 az logic workflow create --resource-group "im" --name "imla" --definition '{"definition":{"$schema":"https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json#","contentVersion":"1.0.0.0","triggers":{},"actions":{},"outputs":{}},"parameters":{}}' --location "westus"
 ```
+
+<!-- ------------------------- ------------------------- -->
+
+### Application Registration
+
+<!-- ------------------------- -->
+
+#### List Available Subscriptions
+
+```powershell
+az account list --output table
+``` 
+
+Review the resulting list and copy the `SubscriptionId` value for the subscription you want to use.
+
+<!-- ------------------------- -->
+
+#### Set Active Subscription
+
+```powershell
+az account set --subscription "<subscriptionId>"
+```
+
+<!-- ------------------------- -->
+
+#### Create Application
+
+```powershell
+$appId = az ad app create --display-name "imbs" --query appId -o tsv
+```
+
+An application defines the identity, permissions and configuration of your bot in the directory.
+
+<!-- ------------------------- -->
+
+#### Create Service Principal
+
+```powershell
+az ad sp create --id $appId
+```
+
+A Service Principal is the tenant-specific instance of that application that holds credentials (secrets or certificates) and can be assigned roles.
+
+<!-- ------------------------- -->
+
+#### Create Client Secret
+
+```powershell
+$clientSecret = az ad app credential reset --id $appId --append --end-date "2025-05-01T00:00:00Z" --query password -o tsv
+``` 
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
@@ -96,7 +144,7 @@ Navigate to Azure Portal >> Logic App `imla` >> Logic App Designer.
 
 Click **Add a trigger**, search for and select "HTTP", then Request >> "When an HTTP request is received".
 
-### Configure the trigger’s Request Body JSON Schema 
+### Configure the trigger's Request Body JSON Schema 
 
 On the **When an HTTP request is received** pane, in the **Request Body JSON Schema** textbox, paste: 
 ```json
@@ -220,57 +268,7 @@ Instructions:
 Enjoy your quick and delicious tomato soup!
 ```
 
-Once you see a successful run and valid response in the designer, you’ll know the endpoint is published and handling requests correctly.
-
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-
-## Application Registration
-
-<!-- ------------------------- -->
-
-### List Available Subscriptions
-
-```powershell
-az account list --output table
-``` 
-
-Review the resulting list and copy the `SubscriptionId` value for the subscription you want to use.
-
-<!-- ------------------------- -->
-
-### Set Active Subscription
-
-```powershell
-az account set --subscription "<subscriptionId>"
-```
-
-<!-- ------------------------- -->
-
-### Create Application
-
-```powershell
-$appId = az ad app create --display-name "imbs" --query appId -o tsv
-```
-
-An application defines the identity, permissions and configuration of your bot in the directory.
-
-<!-- ------------------------- -->
-
-### Create Service Principal
-
-```powershell
-az ad sp create --id $appId
-```
-
-A Service Principal is the tenant-specific instance of that application that holds credentials (secrets or certificates) and can be assigned roles.
-
-<!-- ------------------------- -->
-
-### Create Client Secret
-
-```powershell
-$clientSecret = az ad app credential reset --id $appId --append --end-date "2025-05-01T00:00:00Z" --query password -o tsv
-``` 
+Once you see a successful run and valid response in the designer, you'll know the endpoint is published and handling requests correctly.
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
@@ -278,28 +276,130 @@ $clientSecret = az ad app credential reset --id $appId --append --end-date "2025
 
 ### Create Bot
 
-```powershell
-```
+Create the Azure Bot resource  
+- Sign in to portal.azure.com and click **Create a resource**  
+- Search for and select **Azure Bot**, then click **Create**  
+
+Configure the Basics tab  
+- **Subscription**: Select your subscription  
+- **Resource group**: Choose **im**  
+- **Bot name**: Enter `imbs`  
+- **Region**: Select **Global**  
+
+Microsoft App ID and password  
+- Under **Microsoft App ID and password**, click **Create new**  
+- Enter a display name (e.g. `imbsApp`)  
+- Click **Password** to generate a secret, then copy both the **App ID** and **Password**  
+
+Set the Messaging endpoint  
+- In **Messaging endpoint**, paste your Logic App trigger URL  
+
+Choose Pricing tier  
+- Select **S1** (do not use F0)  
+
+Review and create  
+- Click **Review + create**, verify the settings, then click **Create**  
+
+Once deployment completes, your bot will appear under the **im** resource group, fully registered with its AAD identity and ready for channel configuration.
 
 <!-- ------------------------- -->
 
 ### Register Bot
 
-```powershell
-az bot create --resource-group "im" --name "imbs" --kind registration --app-type SingleTenant --sku S1 --appid $appId --password $clientSecret --endpoint "<endpointURL>"
-``` 
+Navigate to **portal.azure.com** → **Resource groups** → **im** → select your **imbs** resource.  
+
+In the left menu click **Settings** >> **Configuration**.  
+
+Under **Messaging endpoint**, paste your Logic App's HTTP URL (the full invoke URL you copied earlier).  
+
+Scroll to **Microsoft App ID and password**  
+   - If you see values already populated, leave them as-is.  
+   - If they're blank, click **Manage Microsoft App ID and password**, choose **Create new**, copy the generated App ID & password, then click **Save**.  
+
+Click **Save** at the top of the Configuration pane to apply your changes.  
 
 <!-- ------------------------- -->
 
+### Confirm Success
+
+Once your **imbs** is registered and pointed at your Logic App, you can verify end-to-end functionality directly in the Azure Portal:
+
+**Open the Bot resource**  
+   - In the Azure Portal go to **Resource groups › im › imbs**.  
+
+**Use the built-in Web Chat tester**  
+   - In the left menu select **Test in Web Chat**.  
+   - In the chat pane type a sample prompt, for example:  
+     ```
+     Whats a quick soup recipe?
+     ```  
+   - Press Enter and watch for your Logic App–driven response to appear.  
+
+
+1. **Run your test**  
+   - In **imbs** → **Test in Web Chat**, send:  
+     ```text
+     test-001: What’s a quick soup recipe?
+     ```  
+
+2. **Open your Log Analytics workspace**  
+
+3. **Query the Bot’s diagnostic logs**  
+   Paste and run a query like this:  
+   ```kusto
+   AzureDiagnostics
+   | where Resource == "imbs"                   // your bot’s resource name
+   | where Category == "ChannelOperationalLogs"  // the log category you enabled
+   | where CorrelationId_s == "test-001"         // your test correlation ID
+   | sort by TimeGenerated desc
+   | project TimeGenerated, OperationName, Level, Message
+   ```  
+
+4. **Inspect the results**  
+   - **TimeGenerated** shows when the message arrived  
+   - **OperationName** reveals the step (e.g. “ChannelMessageReceived”)  
+   - **Message** contains details—any errors or confirmation of delivery  
+
+If you see entries here, the bot is receiving and logging requests correctly.  
+
+---
+
+**Next steps if you get no results**:  
+- Double-check your diagnostic setting on **imbs** includes **ChannelOperationalLogs**.  
+- Add diagnostic settings on the **Logic App** and **Azure OpenAI** resources (so you can trace the entire flow).  
+- Then re-run your test and query using a broader union:  
+  ```kusto
+  union AzureDiagnostics, WorkflowRuntime, CognitiveServicesRequests
+  | where CorrelationId_s == "test-001"
+  | sort by TimeGenerated desc
+  ```  
+This will show you every hop—bot, logic app, and OpenAI—in one timeline.
 
 
 
 
-### Enable Microsoft Teams channel 
-```powershell
-az bot msteams create \
- --resource-group "im" \
- --name "imbs"
-``` 
 
-Your bot is now registered, pointed at your Logic App, and enabled for Teams.
+**Inspect telemetry (optional)**  
+   - If you’ve wired up Application Insights, open your AI instance and run a Live Metrics or a Log Analytics query to see incoming traces with your `X-Correlation-Id`.  
+
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+
+## Reference
+The following articles provide solution ideas:
+
+### [Engineering Fundamentals Playbook: Correlation IDs](https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/)  
+- **Early assignment** – generate or capture the correlation ID at the very first hop (Bot Service) so every downstream component can reference it.  
+- **Header propagation** – consistently pass `X-Correlation-Id` (or W3C trace headers) on every HTTP call (Bot→Logic App→OpenAI) to tie logs together.  
+- **Leverage built-in context** – align with Application Insights’ `operation_Id` and W3C trace context to avoid reinventing correlation logic.  
+- **Error tagging** – ensure any unhandled exceptions in your Logic App or functions carry the same ID so failures show up in the end-to-end trace.  
+
+### [botbuilder-applicationinsights package](https://learn.microsoft.com/en-us/javascript/api/botbuilder-applicationinsights/?view=botbuilder-ts-latest)  
+- **TelemetryInitializerMiddleware** – auto-capture incoming activity context (including your correlation header) and initialize App Insights telemetry without manual logging calls.  
+- **TelemetryLoggerMiddleware** – automatically log each turn as a dependency and record dialog events, giving you rich per-conversation data.  
+- **Centralized telemetry client** – use a single `ApplicationInsightsTelemetryClient` instance across middleware and dialogs to keep all logs correlated.  
+
+### [Add telemetry to your bot](https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-telemetry?view=azure-bot-service-4.0&tabs=csharp)  
+- **IBotTelemetryClient injection** – register your App Insights client in DI so all dialogs and components inherit the same telemetry settings.  
+- **Telemetry initializer & logger** – wire up `TelemetryInitializerMiddleware` and `TelemetryLoggerMiddleware` in `Startup.cs` to capture requests, dependencies, and exceptions automatically.  
+- **Configurable PII settings** – leverage built-in flags to control whether user text (prompts) is logged, allowing you to balance observability with privacy.  
+- **Query examples** – adopt the recommended Kusto patterns (`requests`, `dependencies` by `operation_Id`) for consistent end-to-end trace queries.  
