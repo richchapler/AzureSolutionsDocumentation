@@ -349,6 +349,7 @@ Return to Settings >> **Channels** and you will see **Microsoft Teams** included
 
 <img src=".\images\AIBot_CorrelationId\Channels_Teams.png" width="800" title="Snipped April, 2025" />
 
+Click **Open in Teams** and then **Launch it now** on the resulting page.
 
 <!-- ------------------------- -->
 <!-- ------------------------- -->
