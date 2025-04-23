@@ -347,7 +347,7 @@ Select **Microsoft Teams Commercial** and then click **Apply**.
 
 Return to Settings >> **Channels** and you will see **Microsoft Teams** included in the "This bot is connected with..." list.
 
-<img src=".\images\AIBot_CorrelationId\Channels_Teams.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AIBot_CorrelationId\Channels_Teams.png" width="800" title="Snipped April, 2025" />
 
 Click **Open in Teams** and then **Launch it now** on the resulting page.
 
