@@ -1,6 +1,14 @@
 # AI Bot: Correlation Identifier
 
-## Sandbox Architecture
+## Need to Review and Incorporate These...
+
+https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/
+https://learn.microsoft.com/en-us/javascript/api/botbuilder-applicationinsights/?view=botbuilder-ts-latest
+https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-telemetry?view=azure-bot-service-4.0&tabs=csharp
+
+## Delete Me
+
+### Sandbox Architecture
 The following minimum resources are required to test this concept:
 
 | Resource | Why it’s needed to demonstrate correlation identifier |
@@ -11,7 +19,7 @@ The following minimum resources are required to test this concept:
 | Application Insights | captures and links operation_Id / W3C trace context across every service hop |
 | Azure OpenAI resource | external dependency used to validate end-to-end propagation of the correlation id |
 
-## Expected Flow 
+### Expected Flow 
 - Teams sends message to Azure Bot Channels Registration 
 - Bot Channels Registration forwards activity to App Service endpoint 
 - Bot middleware extracts “X-Correlation-Id” header or generates a new GUID 
@@ -19,6 +27,8 @@ The following minimum resources are required to test this concept:
 - Bot issues HTTP request to Azure OpenAI, including the “X-Correlation-Id” header 
 - Application Insights logs the dependency call with the same operation_Id 
 - Bot receives response, logs response telemetry, then returns message to Teams
+
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Prepare Environment
 
@@ -33,7 +43,7 @@ Review the resulting list and copy the `SubscriptionId` value for the subscripti
 ### Set Active Subscription
 
 ```powershell
-az account set --subscription "ed7eaf77-d411-484b-92e6-5cba0b6d8098"
+az account set --subscription "<subscriptionId>"
 ``` 
 
 ### Create Resource Group
@@ -76,7 +86,7 @@ az extension add --name logic
 az logic workflow create --resource-group "im" --name "imla" --definition '{"definition":{"$schema":"https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json#","contentVersion":"1.0.0.0","triggers":{},"actions":{},"outputs":{}},"parameters":{}}' --location "westus"
 ```
 
-<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Setup Workflow
 
@@ -86,25 +96,25 @@ Navigate to Azure Portal >> Logic App `imla` >> Logic App Designer.
 
 Click **Add a trigger**, search for and select "HTTP", then Request >> "When an HTTP request is received".
 
-### Configure the trigger’s Request Body JSON Schema  
+### Configure the trigger’s Request Body JSON Schema 
 
-On the **When an HTTP request is received** pane, in the **Request Body JSON Schema** textbox, paste:  
+On the **When an HTTP request is received** pane, in the **Request Body JSON Schema** textbox, paste: 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "prompt":       { "type": "string" },
-    "correlationId":{ "type": "string" }
-  },
-  "required": [ "prompt" ]
+ "type": "object",
+ "properties": {
+ "prompt": { "type": "string" },
+ "correlationId":{ "type": "string" }
+ },
+ "required": [ "prompt" ]
 }
-```  
+``` 
 
 Click **Save** and then copy the **HTTP URL** value for later use.
 
 <!-- ------------------------- ------------------------- -->
 
-### Add Action: HTTP  
+### Add Action: HTTP 
 
 Click **+** underneath the **When an HTTP request is received** pane and then **Add an action**.
 
@@ -113,24 +123,23 @@ On the **Add an action** pane, search for and select **HTTP**.
 On the **HTTP** pane, complete the form:
 - URI: `https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15`
 - Method: POST
-- Headers: 
-- Headers: `Content-Type` : `application/json`, `api-key` : `[OpenAI KEY 1]`, and `X-Correlation-Id` : `@{triggerBody()?['correlationId']}`  
-- Body:  
-  ```json
-  {
-    "messages": [
-      {
-        "role": "user",
-        "content": "@triggerBody()?['prompt']"
-      }
-    ],
-    "temperature": 1,
-    "top_p": 1,
-    "stream": false,
-    "max_tokens": 4096,
-    "n": 1
-  }
-  ```  
+- Headers: `Content-Type` : `application/json`, `api-key` : `[OpenAI KEY 1]`, and `X-Correlation-Id` : `@{triggerBody()?['correlationId']}` 
+- Body: 
+ ```json
+ {
+ "messages": [
+ {
+ "role": "user",
+ "content": "@triggerBody()?['prompt']"
+ }
+ ],
+ "temperature": 1,
+ "top_p": 1,
+ "stream": false,
+ "max_tokens": 4096,
+ "n": 1
+ }
+ ``` 
 
 Click **Save**.
 
@@ -154,20 +163,20 @@ Click **Save**.
 
 Invoke OpenAI via REST call to confirm successful chat completion:
 ```powershell
-Invoke-RestMethod "https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15" -Method POST -Headers @{"api-key"="913c350fcad6448aae926613d9ba0ca0";"Content-Type"="application/json";"X-Correlation-Id"="test-123"} -Body '{"messages":[{"role":"user","content":"Whats a quick soup recipe?"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}'
+Invoke-RestMethod "https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15" -Method POST -Headers @{"api-key"="<apiKey>";"Content-Type"="application/json";"X-Correlation-Id"="test-123"} -Body '{"messages":[{"role":"user","content":"Whats a quick soup recipe?"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}'
 ```
 
 ##### Expected Response
 
 You should see a response like the following:
 ```plaintext
-choices            : {@{finish_reason=stop; index=0; message=}}
-created            : 1745428938
-id                 : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
-model              : gpt-3.5-turbo-0125
-object             : chat.completion
+choices : {@{finish_reason=stop; index=0; message=}}
+created : 1745428938
+id  : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
+model : gpt-3.5-turbo-0125
+object : chat.completion
 system_fingerprint : fp_0165350fbb
-usage              : @{completion_tokens=183; prompt_tokens=13; total_tokens=196}
+usage : @{completion_tokens=183; prompt_tokens=13; total_tokens=196}
 ```
 
 <!-- ------------------------- -->
@@ -179,8 +188,8 @@ Click the **Run** dropdown button and select **Run with payload** from the resul
 On the **Run with payload** pane, paste **Body** value:
 ```json
 {
-  "prompt":       "Whats a quick soup recipe?",
-  "correlationId":"test-001"
+ "prompt": "Whats a quick soup recipe?",
+ "correlationId":"test-001"
 }
 ```
 
@@ -212,3 +221,85 @@ Enjoy your quick and delicious tomato soup!
 ```
 
 Once you see a successful run and valid response in the designer, you’ll know the endpoint is published and handling requests correctly.
+
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+
+## Application Registration
+
+<!-- ------------------------- -->
+
+### List Available Subscriptions
+
+```powershell
+az account list --output table
+``` 
+
+Review the resulting list and copy the `SubscriptionId` value for the subscription you want to use.
+
+<!-- ------------------------- -->
+
+### Set Active Subscription
+
+```powershell
+az account set --subscription "<subscriptionId>"
+```
+
+<!-- ------------------------- -->
+
+### Create Application
+
+```powershell
+$appId = az ad app create --display-name "imbs" --query appId -o tsv
+```
+
+An application defines the identity, permissions and configuration of your bot in the directory.
+
+<!-- ------------------------- -->
+
+### Create Service Principal
+
+```powershell
+az ad sp create --id $appId
+```
+
+A Service Principal is the tenant-specific instance of that application that holds credentials (secrets or certificates) and can be assigned roles.
+
+<!-- ------------------------- -->
+
+### Create Client Secret
+
+```powershell
+$clientSecret = az ad app credential reset --id $appId --append --end-date "2025-05-01T00:00:00Z" --query password -o tsv
+``` 
+
+<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
+
+## Bot Service
+
+### Create Bot
+
+```powershell
+```
+
+<!-- ------------------------- -->
+
+### Register Bot
+
+```powershell
+az bot create --resource-group "im" --name "imbs" --kind registration --app-type SingleTenant --sku S1 --appid $appId --password $clientSecret --endpoint "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=IunxdWoa_VdKPTY7uxLE3B66t4mMHdmYSR_NLfporCs"
+``` 
+
+<!-- ------------------------- -->
+
+
+
+
+
+### Enable Microsoft Teams channel 
+```powershell
+az bot msteams create \
+ --resource-group "im" \
+ --name "imbs"
+``` 
+
+Your bot is now registered, pointed at your Logic App, and enabled for Teams.
