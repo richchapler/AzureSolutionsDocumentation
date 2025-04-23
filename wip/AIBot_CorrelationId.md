@@ -102,32 +102,113 @@ On the **When an HTTP request is received** pane, in the **Request Body JSON Sch
 
 Click **Save** and then copy the **HTTP URL** value for later use.
 
-### Add Action: OpenAI  
+<!-- ------------------------- ------------------------- -->
+
+### Add Action: HTTP  
 
 Click **+** underneath the **When an HTTP request is received** pane and then **Add an action**.
 
-On the **Add an action** pane, search for and select **Azure OpenAI** >> **Creates a completion for the chat message**.
+On the **Add an action** pane, search for and select **HTTP**.
 
-On the **Create connection** pane, complete the form:
-- Connection Name: `imoa`
-- Azure OpenAI Resource Name: `imoa`
-- Azure OpenAI API Key: `[OpenAI, KEY 1]`
-
-Leave the **Azure Cognitive Search**... fields blank. Click **Create new**.
-
-On the **Creates a completion for the chat message** pane, complete the form:
-- Deployment ID Of The Deployed Model: `gpt-35-turbo`
-- API Version: `2023-05-15`
-- Messages: click **+ Add new item** and then enter **Role**: `user` and **Content**: `triggerBody()?['prompt']` 
+On the **HTTP** pane, complete the form:
+- URI: `https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15`
+- Method: POST
+- Headers: 
+- Headers: `Content-Type` : `application/json`, `api-key` : `[OpenAI KEY 1]`, and `X-Correlation-Id` : `@{triggerBody()?['correlationId']}`  
+- Body:  
+  ```json
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "@triggerBody()?['prompt']"
+      }
+    ],
+    "temperature": 1,
+    "top_p": 1,
+    "stream": false,
+    "max_tokens": 4096,
+    "n": 1
+  }
+  ```  
 
 Click **Save**.
+
+<!-- ------------------------- ------------------------- -->
 
 ### Add Action: Response
 
-Click **+** underneath the **Creates a completion for the chat message** pane and then **Add an action**.
+Click **+** underneath the **HTTP** pane and then **Add an action**.
 
 On the **Response** pane, complete the form:
 - Status Code: `200`
-- Body: `body('Creates_a_completion_for_the_chat_message')['choices'][0]?['message']?['content']'
+- Body: `body('HTTP')?['choices'][0]?['message']?['content']'
 
 Click **Save**.
+
+<!-- ------------------------- ------------------------- -->
+
+### Confirm Success
+
+#### Test Open AI
+
+Invoke OpenAI via REST call to confirm successful chat completion:
+```powershell
+Invoke-RestMethod "https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15" -Method POST -Headers @{"api-key"="913c350fcad6448aae926613d9ba0ca0";"Content-Type"="application/json";"X-Correlation-Id"="test-123"} -Body '{"messages":[{"role":"user","content":"Whats a quick soup recipe?"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}'
+```
+
+##### Expected Response
+
+You should see a response like the following:
+```plaintext
+choices            : {@{finish_reason=stop; index=0; message=}}
+created            : 1745428938
+id                 : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
+model              : gpt-3.5-turbo-0125
+object             : chat.completion
+system_fingerprint : fp_0165350fbb
+usage              : @{completion_tokens=183; prompt_tokens=13; total_tokens=196}
+```
+
+<!-- ------------------------- -->
+
+#### Run with payload
+
+Click the **Run** dropdown button and select **Run with payload** from the resulting menu.
+
+On the **Run with payload** pane, paste **Body** value:
+```json
+{
+  "prompt":       "Whats a quick soup recipe?",
+  "correlationId":"test-001"
+}
+```
+
+Click **Run**. Allow time for processing.
+
+After it completes, navigate to **Overview** >> **Run history**, click to select the latest run, and confirm success.
+
+##### Expected Response
+
+You should see a response like the following:
+```plaintext
+One quick and easy soup recipe is tomato soup. Here's a simple recipe:
+
+Ingredients:
+- 1 can of diced tomatoes
+- 1 cup of vegetable broth
+- 1/2 cup of milk
+- 1/2 teaspoon of garlic powder
+- Salt and pepper to taste
+- Fresh basil leaves for garnish
+
+Instructions:
+1. In a saucepan, combine the diced tomatoes (undrained) and vegetable broth. Bring to a boil, then reduce heat to simmer for 10 minutes.
+2. Remove from heat and use an immersion blender to blend the tomato mixture until smooth.
+3. Add milk, garlic powder, salt, and pepper. Stir to combine and heat through.
+4. Serve the soup hot, garnished with fresh basil leaves.
+
+Enjoy your quick and delicious tomato soup!
+```
+
+Once you see a successful run and valid response in the designer, you’ll know the endpoint is published and handling requests correctly.
