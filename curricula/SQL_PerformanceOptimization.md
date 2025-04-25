@@ -16,7 +16,7 @@ The database team talks about the mission and settles on the following goals:
 
 ## Fundamentals
 
-1. **Basics**: Leverage SQL Server’s built‑in diagnostics to understand how queries are processed—comparing estimated vs. actual execution plans and observing real‑time execution progress
+1. **Basics**: Leverage SQL Server’s built‑in diagnostics to understand how queries are processed—comparing estimated vs. actual execution plans and observing real‑time execution progress
 
 2. **Database Configuration**: Adjust database‑level options to influence how queries are compiled, cached, and parameterized, and how statistics are maintained—ensuring stable, efficient execution plans
 
@@ -214,13 +214,13 @@ Configure server-wide settings that influence how queries are compiled, parallel
 
 ##### `max degree of parallelism`
 
-When you lower the **max degree of parallelism (MAXDOP)**, SQL Server limits how many CPUs a single query can use, which helps reduce contention and CPU spikes on busy OLTP systems. 
+When you lower the **max degree of parallelism (MAXDOP)**, SQL Server limits how many CPUs a single query can use, which helps reduce contention and CPU spikes on busy OLTP systems. 
 
 This **prevents excessive parallelism** and helps ensure more consistent throughput, especially in workloads with many concurrent queries.
 
 **Use When**... you want to reduce CPU pressure caused by parallel query bursts or uneven concurrency
 **Default Value**: `0` (use all available processors)
-SQL Server allows a query to use all available processors for parallel execution unless restricted by MAXDOP.
+SQL Server allows a query to use all available processors for parallel execution unless restricted by MAXDOP.
 **Suggested Value**: `4` to `8` for OLTP workloads; higher for data warehouse or reporting servers.
 
 ```sql
@@ -235,13 +235,13 @@ RECONFIGURE;
 
 ##### `cost threshold for parallelism`
 
-In most systems, this threshold is too low—causing even small queries to go parallel unnecessarily. Raising the value forces SQL Server to reserve parallelism for truly expensive queries.
+In most systems, this threshold is too low—causing even small queries to go parallel unnecessarily. Raising the value forces SQL Server to reserve parallelism for truly expensive queries.
 
 This **reduces CPU pressure** and helps avoid over-parallelizing lightweight workloads.
 
 **Use When**... you want to prevent short, low-cost queries from unnecessarily triggering parallel plans
 **Default Value**: `5` (triggers parallelism on even modest queries)
-SQL Server begins considering parallel plans when a query’s estimated cost exceeds this threshold.
+SQL Server begins considering parallel plans when a query’s estimated cost exceeds this threshold.
 **Suggested Value**: `20` to `50` in most production environments
 
 ```sql
@@ -259,13 +259,13 @@ RECONFIGURE;
 
 ##### `optimize for adhoc workloads`
 
-When you enable **Optimize for Adhoc Workloads**, SQL Server saves just a stub initially and promotes it to a full plan only upon a subsequent execution.
+When you enable **Optimize for Adhoc Workloads**, SQL Server saves just a stub initially and promotes it to a full plan only upon a subsequent execution.
 
 This **reduces plan cache bloat** and **conserves memory** at the cost of delaying full plan caching until the query is reused.
 
 **Use When**... you want to reduce plan cache bloat from rarely reused or one-time queries
 **Default Value**: `OFF` (full plan cached on first execution)
-SQL Server saves the full plan for every query—even those never reused—unless this setting is enabled.
+SQL Server saves the full plan for every query—even those never reused—unless this setting is enabled.
 **Suggested Value**: `ON` for workloads with high ad hoc query volume
 
 ```sql
@@ -320,7 +320,7 @@ SELECT actual_state_desc FROM sys.database_query_store_options WHERE database_id
 <!-- ------------------------- ------------------------- -->
 
 ##### `COMPATIBILITY_LEVEL` 
-...controls which version of the SQL Server engine your database uses, including how queries are optimized
+...controls which version of the SQL Server engine your database uses, including how queries are optimized
 
 Setting the **compatibility level** to a higher value unlocks new optimizer features, CE improvements, and T‑SQL enhancements. However, jumps in compatibility level can introduce plan regressions, so it’s best to test carefully when moving up. 
 
@@ -342,7 +342,7 @@ SELECT compatibility_level FROM sys.databases WHERE name = 'YourDatabase';
 ##### `PARAMETERIZATION = FORCED`
 ...automatically turns query literals into parameters so SQL Server can reuse plans and save memory
 
-By default, SQL Server uses **Simple Parameterization** only for very basic literals and leaves most ad hoc queries unparameterized.
+By default, SQL Server uses **Simple Parameterization** only for very basic literals and leaves most ad hoc queries unparameterized.
 
 When you set the database to **Forced Parameterization** every literal that can be safely parameterized is turned into a parameter.
 
@@ -368,7 +368,7 @@ SELECT name, is_parameterization_forced FROM sys.databases WHERE name = 'YourDat
 ##### AUTO_CREATE_STATISTICS 
 ...automatically builds basic stats for query columns to help SQL Server estimate row counts more accurately
 
-By default, **AUTO_CREATE_STATISTICS** is **ON**, so SQL Server will generate lightweight, single‑column stats to help the optimizer with selectivity estimates. Disabling it can reduce overhead on very write‑heavy systems but risks poor cardinality estimates and suboptimal plans. 
+By default, **AUTO_CREATE_STATISTICS** is **ON**, so SQL Server will generate lightweight, single‑column stats to help the optimizer with selectivity estimates. Disabling it can reduce overhead on very write‑heavy systems but risks poor cardinality estimates and suboptimal plans. 
 
 <!-- ------------------------- -->
 
@@ -408,7 +408,7 @@ SELECT name, is_auto_update_stats_async_on FROM sys.databases WHERE name = 'Your
 ##### LEGACY_CARDINALITY_ESTIMATION 
 ...uses the old SQL Server math for estimating row counts to avoid surprises after an upgrade
 
-By default, databases at compatibility level 150+ use the modern estimator. Enabling **LEGACY_CARDINALITY_ESTIMATION** can avoid regressions after an upgrade but may miss improvements in multi‑column correlation handling. 
+By default, databases at compatibility level 150+ use the modern estimator. Enabling **LEGACY_CARDINALITY_ESTIMATION** can avoid regressions after an upgrade but may miss improvements in multi‑column correlation handling. 
 
 <!-- ------------------------- -->
 
@@ -664,7 +664,7 @@ Index hints override the optimizer’s default index selection to force or avoid
 | `WITH (INDEX(index_list))` | Restricts optimizer to only the specified index(es) |
 
 ##### Parallelism
-Parallelism hints override SQL Server’s default degree of parallelism when you need to balance CPU utilization and query responsiveness for specific workloads
+Parallelism hints override SQL Server’s default degree of parallelism when you need to balance CPU utilization and query responsiveness for specific workloads
 
 | Hint | Impact |
 | :--- | :--- |
@@ -672,7 +672,7 @@ Parallelism hints override SQL Server’s default degree of parallelism when yo
 | `OPTION (FAST n)` | Optimizes plan to return the first *n* rows quickly, useful for interactive or paginated queries |
 
 ##### Plan Stability
-Plan stability hints override SQL Server’s plan generation and reuse policies when you require consistent or optimal execution plans across varying parameter values
+Plan stability hints override SQL Server’s plan generation and reuse policies when you require consistent or optimal execution plans across varying parameter values
 
 | Hint | Impact |
 | :--- | :--- |
@@ -680,16 +680,16 @@ Plan stability hints override SQL Server’s plan generation and reuse policies
 | `OPTION (RECOMPILE)` | Discards cached plan and compiles a fresh plan each execution, avoiding sniffing |
 
 ##### Plan‑Cache
-Plan‑cache hints override SQL Server’s plan caching behavior to control plan retention and reduce cache bloat when eviction or pollution hurts performance
+Plan‑cache hints override SQL Server’s plan caching behavior to control plan retention and reduce cache bloat when eviction or pollution hurts performance
 
 | Hint | Impact |
 | :--- | :--- |
-| `OPTION (OPTIMIZE FOR AD HOC WORKLOADS)` | Caches only a stub on first run of ad hoc queries, reducing cache bloat |
+| `OPTION (OPTIMIZE FOR AD HOC WORKLOADS)` | Caches only a stub on first run of ad hoc queries, reducing cache bloat |
 | `OPTION (KEEP PLAN)` | Prevents eviction under memory pressure, ensuring quick reuse |
 | `OPTION (KEEPFIXED PLAN)` | Pins plan across stats/index changes or upgrades |
 
 ##### Concurrency
-Concurrency hints override SQL Server’s default locking behavior to minimize blocking or deadlocks when high contention degrades throughput
+Concurrency hints override SQL Server’s default locking behavior to minimize blocking or deadlocks when high contention degrades throughput
 
 | Hint | Impact |
 | :--- | :--- |
@@ -904,7 +904,7 @@ Leverage **built‑in automation to apply performance corrections without manual
 7. **D** – OPTIMIZE_FOR_AD_HOC_WORKLOADS stubs single‑use plans until reused, reducing memory bloat 
  *It stores only a small plan stub on first execution and the full plan only if reused* 
 
-8. **C** – AUTO_UPDATE_STATISTICS_ASYNC lets queries run while statistics are being refreshed, avoiding blocking 
+8. **C** – AUTO_UPDATE_STATISTICS_ASYNC lets queries run while statistics are being refreshed, avoiding blocking 
 *Allows queries to execute with slightly stale statistics rather than waiting, improving concurrency in read‑heavy workloads*
 
 9. **B** – READ_COMMITTED_SNAPSHOT uses row versioning to prevent reader/writer blocking without code changes 
@@ -930,7 +930,7 @@ USE AdventureWorks2022;
 SET STATISTICS IO, TIME ON;
 ```
 
-`SET STATISTICS IO, TIME ON` tells SQL Server to report detailed I/O and timing info for each query, including logical reads, physical reads, read‑ahead reads, CPU time and elapsed time in the Messages pane of SQL Server Management Studio
+`SET STATISTICS IO, TIME ON` tells SQL Server to report detailed I/O and timing info for each query, including logical reads, physical reads, read‑ahead reads, CPU time and elapsed time in the Messages pane of SQL Server Management Studio
 
 Run a baseline query (and include Actual Execution Plan): 
  ```sql
@@ -962,7 +962,7 @@ CREATE NONCLUSTERED INDEX IX_SalesOrderDetail_UnitPrice
  INCLUDE (OrderQty, ProductID); -- from included_columns
 ``` 
 
-...because queries frequently filter on UnitPrice and then return OrderQty and ProductID.
+...because queries frequently filter on UnitPrice and then return OrderQty and ProductID.
 <br>Once created, that index will turn scans into seeks and reduce the avg_total_user_cost reported by the Dynamic Management Views.
 
 Create the recommended nonclustered index: 
@@ -1050,11 +1050,11 @@ REBUILD WITH (FILLFACTOR = 90, ONLINE = ON);
 
 | Action | Locking Behavior | Duration and Impact | Fill Factor | Recommended When |
 | :--- | :--- | :--- | :--- | :--- |
-| `REORGANIZE` | acquires low‑level page locks, works online | shorter operation, minimal blocking, defragments in place | uses existing fill factor | fragmentation 5–30 percent |
-| `REBUILD` | acquires schema‑modification lock, rebuilds index structure | longer operation, blocks (unless ONLINE = ON), reorder pages fully | you specify new fill factor | fragmentation above 30 percent 
+| `REORGANIZE` | acquires low‑level page locks, works online | shorter operation, minimal blocking, defragments in place | uses existing fill factor | fragmentation 5–30 percent |
+| `REBUILD` | acquires schema‑modification lock, rebuilds index structure | longer operation, blocks (unless ONLINE = ON), reorder pages fully | you specify new fill factor | fragmentation above 30 percent 
 
 Fill factor is an index‐level setting that specifies the percentage of each leaf-level page to fill with data when an index is created or rebuilt. 
-- A fill factor of 90 means SQL Server leaves 10 percent of each page empty for future growth, reducing page splits on inserts and updates 
+- A fill factor of 90 means SQL Server leaves 10 percent of each page empty for future growth, reducing page splits on inserts and updates 
 - Lowering fill factor can improve write performance at the cost of increased storage and potentially lower read density 
 
 Verify that fragmentation has been reduced
@@ -1107,10 +1107,10 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  D) `sys.dm_os_wait_stats` 
 
 6. According to best practice, you should rebuild an index when fragmentation exceeds what threshold? 
- A) 5 percent 
- B) 10 percent 
- C) 30 percent 
- D) 50 percent 
+ A) 5 percent 
+ B) 10 percent 
+ C) 30 percent 
+ D) 50 percent 
 
 7. Which Dynamic Management Views reveals how often an index is used for seeks, scans, and updates? 
  A) `sys.dm_db_missing_index_group_stats` 
@@ -1118,7 +1118,7 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
  C) `sys.dm_db_index_usage_stats` 
  D) `sys.dm_exec_cached_plans` 
 
-8. To reorganize lightly fragmented indexes (5–30 percent), which command would you run? 
+8. To reorganize lightly fragmented indexes (5–30 percent), which command would you run? 
  A) `ALTER INDEX ALL ON ... REBUILD` 
  B) `ALTER INDEX ALL ON ... REORGANIZE` 
  C) `DBCC INDEXDEFRAG` 
@@ -1143,8 +1143,8 @@ Regular index maintenance—using the right operation and fill factor—keeps yo
 5. **B** – `sys.dm_db_index_physical_stats` 
  *It reports fragmentation metrics like `avg_fragmentation_in_percent` for each index* 
 
-6. **C** – 30 percent 
- *Indexes over 30 percent fragmented are best rebuilt to restore page order* 
+6. **C** – 30 percent 
+ *Indexes over 30 percent fragmented are best rebuilt to restore page order* 
 
 7. **C** – `sys.dm_db_index_usage_stats` 
  *This Dynamic Management Views shows user_seeks, user_scans, and user_updates for each index* 
