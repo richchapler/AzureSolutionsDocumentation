@@ -970,95 +970,95 @@ Enable: yes
 ### Quiz
 
 1. What is the role of a firewall rule in Azure SQL Server?  
-   A) It encrypts client connections  
+   A) It restricts network access to specific IP ranges  
    B) It assigns public IPs to databases  
-   C) It restricts network access to specific IP ranges  
-   D) It disables internal logging  
+   C) It disables internal logging  
+   D) It encrypts client connections  
 
 2. What is the purpose of creating a Log Analytics workspace in this lab?  
-   A) To host SQL databases  
-   B) To serve as the private DNS zone  
-   C) To store and centralize audit logs  
-   D) To run SQL queries across regions  
+   A) To run SQL queries across regions  
+   B) To store and centralize audit logs  
+   C) To host SQL databases  
+   D) To serve as the private DNS zone  
 
 3. Which Azure identity feature was used to assign a centralized administrator to the SQL Server?  
-   A) SQL Server login  
-   B) Azure RBAC  
+   A) Managed Identity  
+   B) SQL Server login  
    C) Entra ID administrator  
-   D) Managed Identity  
+   D) Azure RBAC  
 
 4. What happens when `Update-AzSqlServerAdvancedThreatProtectionSetting` is executed in the lab?  
    A) TDE is enabled on all databases  
    B) A vulnerability assessment is triggered  
-   C) Threat detection is enabled on the SQL Server  
-   D) Connection strings are regenerated  
+   C) Connection strings are regenerated  
+   D) Threat detection is enabled on the SQL Server  
 
 5. What must be supplied when creating the Azure SQL Server using PowerShell?  
-   A) A Log Analytics Workspace ID  
+   A) Administrator credentials  
    B) A network security group  
-   C) Administrator credentials  
-   D) A SQL script file  
+   C) A SQL script file  
+   D) A Log Analytics Workspace ID  
 
 6. Why is `Get-Credential` used before creating the SQL Server?  
    A) To retrieve a private key for the workspace  
-   B) To generate an MFA token  
+   B) To validate the server name  
    C) To securely prompt for and store the SQL admin login  
-   D) To validate the server name  
+   D) To generate an MFA token  
 
 7. Which Azure SQL feature restricts public access while allowing internal VNet traffic only?  
    A) Server firewall rules  
    B) Private Endpoint  
-   C) Defender for SQL  
-   D) Geo-replication  
+   C) Geo-replication  
+   D) Defender for SQL  
 
 8. What does the `RequestedServiceObjectiveName "S0"` parameter do during database creation?  
-   A) Sets encryption level to Standard  
-   B) Applies masking to system views  
+   A) Applies masking to system views  
+   B) Enables support for failover groups  
    C) Defines performance tier for compute and storage  
-   D) Enables support for failover groups  
+   D) Sets encryption level to Standard  
 
 9. What cmdlet replaces the deprecated `Set-AzSqlServerThreatDetectionPolicy`?  
-   A) Enable-AzSqlThreatProtection  
-   B) Update-AzSqlServerAdvancedThreatProtectionSetting  
-   C) Set-AzSqlServerSecurityAlert  
+   A) Update-AzSqlServerAdvancedThreatProtectionSetting  
+   B) Set-AzSqlServerSecurityAlert  
+   C) Enable-AzSqlThreatProtection  
    D) Add-AzThreatDetectionBinding  
 
 10. Why is selecting the correct subscription at the beginning of the lab important?  
    A) It speeds up provisioning time  
-   B) It applies a resource lock to the group  
-   C) It ensures resources are created in an accessible, authorized context  
-   D) It links all resources to a managed disk  
+   B) It links all resources to a managed disk  
+   C) It applies a resource lock to the group  
+   D) It ensures resources are created in an accessible, authorized context  
 
 <!-- ------------------------- ------------------------- -->
 
-### Answers
+#### Answers
 
-1. **C** - It restricts network access to specific IP ranges  
+1. **A** – It restricts network access to specific IP ranges  
    *Firewall rules control which IPs are allowed to reach the Azure SQL endpoint.*
 
-2. **C** - To store and centralize audit logs  
+2. **B** – To store and centralize audit logs  
    *The Log Analytics workspace is used to collect and store diagnostic logs.*
 
-3. **C** - Entra ID administrator  
+3. **C** – Entra ID administrator  
    *This identity is assigned at the server level to allow Azure AD-based login.*
 
-4. **C** - Threat detection is enabled on the SQL Server  
+4. **D** – Threat detection is enabled on the SQL Server  
    *This cmdlet turns on Microsoft Defender for SQL at the server level.*
 
-5. **C** - Administrator credentials  
+5. **A** – Administrator credentials  
    *Admin login and password are required when provisioning a SQL server.*
 
-6. **C** - To securely prompt for and store the SQL admin login  
+6. **C** – To securely prompt for and store the SQL admin login  
    *Get-Credential collects and passes login info securely to the cmdlet.*
 
-7. **B** - Private Endpoint  
+7. **B** – Private Endpoint  
    *Private Endpoints remove public IP exposure and route traffic through the VNet.*
 
-8. **C** - Defines performance tier for compute and storage  
+8. **C** – Defines performance tier for compute and storage  
    *S0 specifies a standard tier with specific DTU and storage limits.*
 
-9. **B** - Update-AzSqlServerAdvancedThreatProtectionSetting  
+9. **A** – Update-AzSqlServerAdvancedThreatProtectionSetting  
    *This cmdlet replaced the older threat detection policy command.*
 
-10. **C** - It ensures resources are created in an accessible, authorized context  
+10. **D** – It ensures resources are created in an accessible, authorized context  
    *Without switching to the correct subscription, permissions and visibility may block deployment.*
