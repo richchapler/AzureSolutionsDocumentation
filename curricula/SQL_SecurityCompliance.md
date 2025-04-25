@@ -268,11 +268,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-Here’s the full section, written in the style and structure of the rest of your document:
-
----
-
-## Compliance
+### Compliance
 
 While this documentation focuses on security and operational best practices for SQL Server and Azure SQL, many of these features are directly applicable to regulatory compliance requirements. The table below maps key SQL implementations to major regulatory frameworks:
 
@@ -289,7 +285,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
 
 <!-- ------------------------- ------------------------- -->
 
-#### Platform Differences
+### Platform Differences
 
 #### **Azure SQL** Database
 - **Managed Security**:  
