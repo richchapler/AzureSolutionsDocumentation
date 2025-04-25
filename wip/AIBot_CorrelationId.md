@@ -81,6 +81,28 @@ Navigate to [Azure AI Foundry](https://ai.azure.com) and create a `gpt-35-turbo`
 
 <!-- ------------------------- ------------------------- -->
 
+#### Confirm Success
+
+Invoke OpenAI via REST call to confirm successful chat completion:
+```powershell
+Invoke-RestMethod "https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15" -Method POST -Headers @{"api-key"="<apiKey>";"Content-Type"="application/json";"X-Correlation-Id"="test-123"} -Body '{"messages":[{"role":"user","content":"Whats a quick soup recipe?"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}'
+```
+
+##### Expected Response
+
+You should see a response like the following:
+```plaintext
+choices : {@{finish_reason=stop; index=0; message=}}
+created : 1745428938
+id : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
+model : gpt-3.5-turbo-0125
+object : chat.completion
+system_fingerprint : fp_0165350fbb
+usage : @{completion_tokens=183; prompt_tokens=13; total_tokens=196}
+```
+
+<!-- ------------------------- ------------------------- -->
+
 ### Logic App
 
 #### Configure Azure CLI
@@ -101,6 +123,47 @@ az extension add --name logic
 
 ```powershell
 az logic workflow create --resource-group "im" --name "imla" --definition '{"definition":{"$schema":"https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json#","contentVersion":"1.0.0.0","triggers":{},"actions":{},"outputs":{}},"parameters":{}}' --location "westus"
+```
+
+<!-- ------------------------- ------------------------- -->
+
+#### Confirm Success
+
+Invoke OpenAI via REST call to confirm successful chat completion:
+```powershell
+$headers = @{ "Content-Type" = "application/json" }
+$body = @'
+{
+  "prompt": "Share a great soup recipe",
+  "correlationId": "test-123"
+}
+'@
+
+Invoke-RestMethod "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=IunxdWoa_VdKPTY7uxLE3B66t4mMHdmYSR_NLfporCs" -Method POST -Headers $headers -Body $body
+
+```
+
+##### Expected Response
+
+You should see a response like the following:
+```plaintext
+One quick and easy soup recipe is a classic tomato soup. 
+
+Ingredients:
+- 1 can of diced tomatoes
+- 1 cup of chicken or vegetable broth
+- 1/2 onion, diced
+- 2 cloves of garlic, minced
+- 1 tablespoon of olive oil
+- Salt and pepper to taste
+- Optional: fresh basil, grated Parmesan cheese, or croutons for garnish
+
+Instructions:
+1. In a large pot, heat the olive oil over medium heat. Add the diced onion and garlic and sauté until fragrant and onions are translucent.
+2. Add the diced tomatoes and broth to the pot and bring to a simmer. Let simmer for about 10-15 minutes.
+3. Use an immersion blender or transfer the soup to a blender to blend until smooth. Be careful when blending hot liquids.
+4. Season with salt and pepper to taste.
+5. Serve hot and garnish with fresh basil, Parmesan cheese, or croutons if desired. Enjoy!
 ```
 
 <!-- ------------------------- ------------------------- -->
@@ -152,6 +215,7 @@ A Service Principal is the tenant-specific instance of that application that hol
 ```powershell
 $clientSecret = az ad app credential reset --id $appId --append --end-date "2025-05-01T00:00:00Z" --query password -o tsv
 ``` 
+
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
@@ -225,28 +289,6 @@ Click **Save**.
 <!-- ------------------------- ------------------------- -->
 
 ### Confirm Success
-
-#### Test Open AI
-
-Invoke OpenAI via REST call to confirm successful chat completion:
-```powershell
-Invoke-RestMethod "https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15" -Method POST -Headers @{"api-key"="<apiKey>";"Content-Type"="application/json";"X-Correlation-Id"="test-123"} -Body '{"messages":[{"role":"user","content":"Whats a quick soup recipe?"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}'
-```
-
-##### Expected Response
-
-You should see a response like the following:
-```plaintext
-choices : {@{finish_reason=stop; index=0; message=}}
-created : 1745428938
-id : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
-model : gpt-3.5-turbo-0125
-object : chat.completion
-system_fingerprint : fp_0165350fbb
-usage : @{completion_tokens=183; prompt_tokens=13; total_tokens=196}
-```
-
-<!-- ------------------------- -->
 
 #### Run with payload
 
@@ -349,7 +391,7 @@ Return to Settings >> **Channels** and you will see **Microsoft Teams** included
 
 <img src="..\images\AIBot_CorrelationId\Channels_Teams.png" width="800" title="Snipped April, 2025" />
 
-Click **Open in Teams** and then **Launch it now** on the resulting page.
+Click **Open in Teams** and then **Use the web app instead** on the resulting page.
 
 <!-- ------------------------- -->
 <!-- ------------------------- -->
@@ -375,82 +417,11 @@ Since Teams doesn't host your bot, you need to provide a Teams App Package (a `.
 
 If you used the **Developer Portal for Teams** or the **Teams Toolkit** in VS Code, you can export the package directly.
 
-### 2. Generate the manifest.json  
-You can either:
-
-- Use the **Developer Portal for Teams** (https://dev.teams.microsoft.com)  
-  - Go to **Apps** → **Create new app**  
-  - Fill in basic info (name, bot ID = your Azure Bot’s App ID)  
-  - Under **Capabilities**, select **Bot** and point it at your bot’s App ID  
-  - Set **Scopes** (e.g. Personal, Team, GroupChat)  
-  - Export the app package  
-
-or
-
-- Create it manually using this pattern:
-  ```json
-  {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.11",
-    "version": "1.0.0",
-    "id": "<YOUR-BOT-APP-ID>",
-    "packageName": "com.yourcompany.imbot",
-    "name": {
-      "short": "imBot",
-      "full": "Correlation ID Bot"
-    },
-    "description": {
-      "short": "Bot to demonstrate correlation ID tracing",
-      "full": "Sends prompts to OpenAI and returns results, with full correlation ID propagation"
-    },
-    "icons": {
-      "color": "color.png",
-      "outline": "outline.png"
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [
-      {
-        "botId": "<YOUR-BOT-APP-ID>",
-        "scopes": [ "personal", "team", "groupchat" ],
-        "supportsFiles": false,
-        "isNotificationOnly": false
-      }
-    ],
-    "permissions": [ "identity", "messageTeamMembers" ],
-    "validDomains": []
-  }
-  ```
-
-### 3. Upload the app to Teams  
-In Microsoft Teams:
-
-- Click **Apps** (lower-left)  
-- Scroll to **Built for your org** or click **Upload a custom app** → **Upload for me or my org**  
-- Select your `.zip` package  
-
-Once uploaded, your **imBot** will appear in Teams—open a 1:1 chat and test it like a regular user.
-
----
-
-When you send your test prompt from Teams, it will hit Azure Bot Service via a real production channel, triggering the diagnostics you enabled and fully exercising the correlation ID pipeline.
-
-
-
-
-
-
-
-
-
-
-
-<!-- ------------------------- -->
-
-### Confirm Success
+#### Confirm Success
 
 Once your **imbs** is registered and pointed at your Logic App, you can verify end-to-end functionality directly in the Azure Portal:
 
-#### Bot
+##### Bot
 
 Bot Diagnostic Settings capture only "Requests from the channels to the bot"
 

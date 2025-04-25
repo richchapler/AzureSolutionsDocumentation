@@ -350,11 +350,12 @@ Complete steps in the "New SQL Managed Instance link" popup:
 
   - Link Endpoint
 
-- 
 
-- 
 
-- 
+
+
+
+RESUME HERE!!!
 
 - 
 
@@ -371,7 +372,6 @@ The system will initiate an initial snapshot of the selected data. Monitor the M
 These revised steps ensure that the necessary databases and schema are created before you configure Managed Instance Link, providing a clear and dependency‑aware process for setting up data replication.
 
 ------------------------- -------------------------
-
 
 ### Configure Managed Instance Link on the On‑Prem SQL Server
 
