@@ -44,7 +44,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-### Scope  
+#### Scope  
 ...defines what is secured by authorization  
 
 - **Server**: the entire SQL instance (logins, server roles)  
@@ -121,7 +121,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-### Key Management  
+#### Key Management  
 ...secure and rotate cryptographic keys that underpin encryption  
 
 - **Key Management**: manage keys for database encryption features  
@@ -168,7 +168,9 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-### Auditing  
+### Observability
+
+#### Auditing  
 ...record security‑relevant events for accountability  
 
 - **Auditing**: configure audit logs to capture actions such as schema changes, logins, and security policy modifications  
@@ -177,7 +179,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-### Monitoring  
+#### Monitoring  
 ...logs, metrics, alerts used to understand activity and exceptions
 
 - **Monitoring**: collect and review logs and metrics to understand normal activity  
@@ -188,7 +190,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-### Vulnerability Assessment  
+#### Vulnerability Assessment  
 ...automated security scanning to identify misconfigurations, missing patches, and insecure settings  
 
 - **Vulnerability Assessment**: built‑in scans that detect security issues and insecure configurations  
@@ -201,7 +203,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-### Threat Detection  
+#### Threat Detection  
 ...identify and alert on suspicious or malicious behavior  
 
 - **Advanced Threat Protection**: built‑in analytics that flag unusual activities before they become incidents  
