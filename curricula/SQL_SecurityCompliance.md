@@ -30,9 +30,9 @@ The database administration team at a midsized organization must ensure that cri
 ...controls what an identity can do
 
 - **Role-Based**: A role is a **named group of permissions**
-  - ****SQL Server****: Has builtin roles such as data **reader**, data **writer**, and database **owner** 
+  - **SQL Server**: Has builtin roles such as data **reader**, data **writer**, and database **owner** 
   - **Windows**: Create a SQL Login corresponding to a Windows user or group
-    - Assign that login to the appropriate **SQL Server** role
+    - Assign that login to the appropriate SQL Server role
     - Upshot: Active Directory manages membership 
 - **Row Level Security**: restrict access to table rows based on the executing user's context  
   - **SQL Server**: create an inline tablevalued function and enforce it via CREATE SECURITY POLICY ... ADD FILTER PREDICATE to apply rowlevel filters  
@@ -48,7 +48,7 @@ The database administration team at a midsized organization must ensure that cri
   - **Azure SQL**: logical server with limited builtin roles and an Entra ID administrator
 
 - **Database**: a single database (database roles, settings)  
-  - **SQL Server**: supports Windows Authentication and **SQL Server** Authentication for logins  
+  - **SQL Server**: supports Windows Authentication and SQL Server Authentication for logins  
   - **Azure SQL**: uses contained database users and databasescoped roles only  
 
 - **Schema**: a group of objects in a database  
@@ -94,17 +94,17 @@ The database administration team at a midsized organization must ensure that cri
 - **In Transit**: data moving across the network  
 
   - **Transport Layer Security (TLS)**: encrypts network traffic between client and server  
-    - **SQL Server**: install a valid server certificate, enable "Force Encryption" in **SQL Server** Configuration Manager, and require clients to use Encrypt=True in their connection strings  
+    - **SQL Server**: install a valid server certificate, enable "Force Encryption" in SQL Server Configuration Manager, and require clients to use Encrypt=True in their connection strings  
     - **Azure SQL**: TLS is enforced by default for all connections (minimum TLS 1.2); configure the minimum TLS version in the Azure portal under your SQL server's Security settings
 
   - **Secure Sockets Layer (SSL)**: legacy protocol that also encrypts network traffic (superseded by TLS)  
-    - **SQL Server**: older versions support SSL 3.0; enable or disable via **SQL Server** Configuration Manager or Windows registry, though it is disabled by default in recent releases for security  
+    - **SQL Server**: older versions support SSL 3.0; enable or disable via SQL Server Configuration Manager or Windows registry, though it is disabled by default in recent releases for security  
     - **Azure SQL**: does not support SSL; any legacy SSL connection attempts are rejected and only TLS 1.2 or higher is allowed
  
 - **In Use**: data loaded into memory for processing
 
-  - **Always Encrypted**: encrypts sensitive columns on the client so **SQL Server** only ever sees encrypted data  
-    - **SQL Server**: configure column master keys and column encryption keys using **SQL Server** Management Studio or PowerShell; enable clientside encryption by specifying Column Encryption Setting=Enabled in the connection string  
+  - **Always Encrypted**: encrypts sensitive columns on the client so SQL Server only ever sees encrypted data  
+    - **SQL Server**: configure column master keys and column encryption keys using SQL Server Management Studio or PowerShell; enable clientside encryption by specifying Column Encryption Setting=Enabled in the connection string  
     - **Azure SQL**: integrate with Azure Key Vault for key management; enable Always Encrypted through the Azure portal or PowerShell and set Column Encryption Setting=Enabled in the connection string
 
     - **Encryption types**  
@@ -155,7 +155,7 @@ The database administration team at a midsized organization must ensure that cri
   - **Azure SQL**: use temporal tables plus an Azure Automation runbook to clean up history or export snapshots to Blob storage  
 
 - **Purge Jobs**: schedule deletion tasks to remove stale or expired data  
-  - **SQL Server**: create **SQL Server** Agent jobs that run DELETE or EXEC stored procedures on a cadence  
+  - **SQL Server**: create SQL Server Agent jobs that run DELETE or EXEC stored procedures on a cadence  
   - **Azure SQL**: use Elastic Jobs or Azure Automation runbooks to execute purge scripts  
 
 - **Archival**: move historical data to lowercost storage for longterm retention  
@@ -171,7 +171,7 @@ The database administration team at a midsized organization must ensure that cri
 
 - **Auditing**: configure audit logs to capture actions such as schema changes, logins, and security policy modifications  
   - **SQL Server**: create a Server Audit and Server Audit Specification, target FILE or Windows Application log, then enable both  
-  - **Azure SQL**: enable **Azure SQL** Auditing at the server or database scope in the portal or via PowerShell, and send logs to Log Analytics, Storage, or Event Hubs  
+  - **Azure SQL**: enable Azure SQL Auditing at the server or database scope in the portal or via PowerShell, and send logs to Log Analytics, Storage, or Event Hubs  
 
 <!-- ------------------------- ------------------------- -->
 
@@ -203,7 +203,7 @@ The database administration team at a midsized organization must ensure that cri
 ...identify and alert on suspicious or malicious behavior  
 
 - **Advanced Threat Protection**: builtin analytics that flag unusual activities before they become incidents  
-  - **SQL Server**: deploy Extended Events and **SQL Server** Audit to capture and analyze suspect events  
+  - **SQL Server**: deploy Extended Events and SQL Server Audit to capture and analyze suspect events  
   - **Azure SQL**: enable "Microsoft Defender for SQL" to flag unusual activities before they become incidents
 
 - **Anomaly Detection**: automated identification of irregular patterns that may indicate threats  
@@ -211,7 +211,7 @@ The database administration team at a midsized organization must ensure that cri
   - **Azure SQL**: leverage anomaly detection in "Microsoft Defender for SQL" to automatically surface unusual behavior
  
 - **Alerting**: mechanisms to notify stakeholders when potential threats are detected  
-  - **SQL Server**: configure Database Mail and **SQL Server** Agent alerts to send notifications on threat events  
+  - **SQL Server**: configure Database Mail and SQL Server Agent alerts to send notifications on threat events  
   - **Azure SQL**: create Azure Monitor alerts on threat detection logs to send emails, SMS, or trigger automated responses
 
 <!-- ------------------------- ------------------------- -->
@@ -220,7 +220,7 @@ The database administration team at a midsized organization must ensure that cri
 ...regular activities to ensure continued security and compliance  
 
 - **Audit Reviews**: schedule regular examination of audit logs and role memberships  
-  - **SQL Server**: schedule **SQL Server** Agent jobs to export and review audit data via sys.fn_get_audit_file and check server role mappings  
+  - **SQL Server**: schedule SQL Server Agent jobs to export and review audit data via sys.fn_get_audit_file and check server role mappings  
   - **Azure SQL**: use Azure Automation runbooks or Logic Apps to retrieve audit logs from Azure Monitor and review databasescoped role assignments  
 
 - **Permission Reviews**: periodically verify user and group access  
@@ -228,7 +228,7 @@ The database administration team at a midsized organization must ensure that cri
   - **Azure SQL**: run PowerShell scripts against Entra ID and query contained database users to confirm assignments  
 
 - **Patch Scheduling**: apply security updates on a defined cadence  
-  - **SQL Server**: coordinate Windows Update or WSUS schedules with maintenance windows to apply **SQL Server** patches  
+  - **SQL Server**: coordinate Windows Update or WSUS schedules with maintenance windows to apply SQL Server patches  
   - **Azure SQL**: configure maintenance windows and update control in the Azure portal  
 
 - **Backup & Restore Tests**: validate backup and recovery procedures  
@@ -236,7 +236,7 @@ The database administration team at a midsized organization must ensure that cri
   - **Azure SQL**: perform pointintime restores or database copies to test recovery workflows  
 
 - **Security Drills**: conduct tabletop exercises and vulnerability scans regularly  
-  - **SQL Server**: run the builtin vulnerability assessment in **SQL Server** Management Studio and simulate attack scenarios  
+  - **SQL Server**: run the builtin vulnerability assessment in SQL Server Management Studio and simulate attack scenarios  
   - **Azure SQL**: leverage Microsoft Defender for SQL vulnerability assessment and simulate failover or breach exercises
 
 <!-- ------------------------- ------------------------- -->
@@ -253,7 +253,7 @@ The database administration team at a midsized organization must ensure that cri
   - **Surface Area Reduction**: disable unused features, services, and ports  
 
 - **Maintenance and Compliance**  
-  - **Patch Management**: schedule and apply operating system and **SQL Server** security updates on a defined cadence  
+  - **Patch Management**: schedule and apply operating system and SQL Server security updates on a defined cadence  
   - **Regular Permission Reviews**: audit role memberships and login mappings on a schedule to verify access remains appropriate  
   - **Regular Audits & Reviews**: schedule log and policy reviews to ensure ongoing compliance  
   - **Periodic Security Assessments**: run penetration tests and vulnerability scans regularly  
@@ -265,12 +265,6 @@ The database administration team at a midsized organization must ensure that cri
   - **Industry Benchmark Hardening**: apply guides from the Center for Internet Security and other standards
 
 <!-- ------------------------- ------------------------- -->
-
-### Compliance
-
-Here is the fully updated **Compliance** section with your requested content merged in — no unnecessary changes:
-
----
 
 ### Compliance
 
@@ -307,12 +301,12 @@ The use of these controls supports audit readiness and reduces compliance risk b
 
 #### **Azure SQL** Managed Instance
 - **Hybrid Control**:  
-  - Combines traditional **SQL Server** security features with Azure's managed environment  
+  - Combines traditional SQL Server security features with Azure's managed environment  
   - Supports both TDE and Always Encrypted with advanced key management via Azure Key Vault  
 - **Enhanced Auditing**:  
   - Offers robust audit capabilities that integrate with Azure Monitor and Log Analytics
 
-#### **SQL Server** on Azure VMs
+#### SQL Server on Azure VMs
 - **Full Control**:  
   - Apply traditional on-prem security hardening techniques  
   - Custom configuration of auditing, encryption, and network isolation  
