@@ -268,6 +268,27 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
+Here’s the full section, written in the style and structure of the rest of your document:
+
+---
+
+## Compliance
+
+While this documentation focuses on security and operational best practices for SQL Server and Azure SQL, many of these features are directly applicable to regulatory compliance requirements. The table below maps key SQL implementations to major regulatory frameworks:
+
+| Compliance Requirement | Relevant SQL Features | Notes |
+| :--- | :--- | :--- |
+| GDPR (Article 32): Protect personal data at rest and in transit | Transparent Data Encryption, Always Encrypted, TLS Enforcement | TDE encrypts stored data, Always Encrypted protects sensitive columns, TLS secures network traffic |
+| HIPAA (164.312(a)): Access control | Role-Based Access Control (RBAC), Row-Level Security, Entra ID Authentication | Enforces identity verification and restricts access based on user roles and context |
+| HIPAA (164.312(b)): Audit controls | SQL Server Audit, Azure SQL Auditing | Captures security events, data access, and schema modifications for accountability |
+| PCI-DSS (Requirement 3.4): Protect stored cardholder data | Dynamic Data Masking, Always Encrypted, Column-Level Encryption | Masks sensitive data in query results and encrypts critical fields |
+| PCI-DSS (Requirement 10.2): Audit access to cardholder data | SQL Server Audit, Azure SQL Auditing to Log Analytics | Records access to sensitive data and critical system activities |
+| SOX (Section 404): Internal control over financial reporting | Auditing, Role-Based Access Control, Multi-Factor Authentication | Enables traceability, enforces least privilege, and secures authentication flows |
+
+The use of these controls supports audit readiness and reduces compliance risk by aligning SQL security configurations with external regulatory obligations.
+
+<!-- ------------------------- ------------------------- -->
+
 #### Platform Differences
 
 #### **Azure SQL** Database
