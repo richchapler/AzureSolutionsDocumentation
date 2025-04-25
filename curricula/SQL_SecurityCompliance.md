@@ -18,7 +18,7 @@ The database administration team at a midsized organization must ensure that cri
 
 #### **Azure SQL** Database
 - **Managed Security**:  
-  - Builtin threat detection and automated patching  
+  - built-in threat detection and automated patching  
   - Limited direct configuration of underlying infrastructure  
 - **Entra ID Integration**:  
   - Native support for Entra ID authentication simplifies identity management
@@ -55,13 +55,13 @@ The database administration team at a midsized organization must ensure that cri
 ...controls what an identity can do
 
 - **Role-Based**: A role is a **named group of permissions**
-  - **SQL Server**: Has builtin roles such as data **reader**, data **writer**, and database **owner** 
+  - **SQL Server**: Has built-in roles such as data **reader**, data **writer**, and database **owner** 
   - **Windows**: Create a SQL Login corresponding to a Windows user or group
     - Assign that login to the appropriate SQL Server role
     - Upshot: Active Directory manages membership 
 - **Row Level Security**: restrict access to table rows based on the executing user's context  
   - **SQL Server**: create an inline tablevalued function and enforce it via CREATE SECURITY POLICY ... ADD FILTER PREDICATE to apply rowlevel filters  
-  - **Azure SQL**: use the same TSQL security policy approach, leveraging Entra ID principals or SESSION_CONTEXT to drive the filter logic
+  - **Azure SQL**: use the same T-SQL security policy approach, leveraging Entra ID principals or SESSION_CONTEXT to drive the filter logic
 
 <!-- ------------------------- ------------------------- -->
 
@@ -70,7 +70,7 @@ The database administration team at a midsized organization must ensure that cri
 
 - **Server**: the entire SQL instance (logins, server roles)
   - **SQL Server**: physical instance with full server roles such as "sysadmin" and "serveradmin"
-  - **Azure SQL**: logical server with limited builtin roles and an Entra ID administrator
+  - **Azure SQL**: logical server with limited built-in roles and an Entra ID administrator
 
 - **Database**: a single database (database roles, settings)
   - **SQL Server**: supports Windows Authentication and SQL Server Authentication for logins
@@ -113,8 +113,8 @@ The database administration team at a midsized organization must ensure that cri
     - **Azure SQL**: enabled by default; manage keys via Azure Key Vault or use servicemanaged keys in the Azure portal
 
   - **Column-Level Encryption**: encrypts specific sensitive columns  
-    - **SQL Server**: create a database master key, certificate, and symmetric key; use the ENCRYPTBYKEY and DECRYPTBYKEY functions in TSQL to secure column data  
-    - **Azure SQL**: use the same TSQL encryption functions with keys managed in Azure Key Vault or servicemanaged keys, configured via the Azure portal or PowerShell  
+    - **SQL Server**: create a database master key, certificate, and symmetric key; use the ENCRYPTBYKEY and DECRYPTBYKEY functions in T-SQL to secure column data  
+    - **Azure SQL**: use the same T-SQL encryption functions with keys managed in Azure Key Vault or servicemanaged keys, configured via the Azure portal or PowerShell  
 
 - **In Transit**: data moving across the network  
 
@@ -156,18 +156,18 @@ The database administration team at a midsized organization must ensure that cri
 
 - **Sensitivity Classification**: assign metadata to columns indicating their sensitivity  
   - **SQL Server**: use the sys.sp_add_sensitivity_classification stored procedure or SSMS Data Classification pane to label columns; query sys.sensitivity_classifications to review existing labels  
-  - **Azure SQL**: run "Data discovery & classification" scans in the Azure portal or call sys.sp_add_sensitivity_classification via TSQL; view and manage labels in the portal or via sys.sensitivity_classifications  
+  - **Azure SQL**: run "Data discovery & classification" scans in the Azure portal or call sys.sp_add_sensitivity_classification via T-SQL; view and manage labels in the portal or via sys.sensitivity_classifications  
 
 - **Dynamic Data Masking**: define masking rules to obscure sensitive column data **at query time**  
   - **SQL Server**: use ALTER TABLE ... ALTER COLUMN ... ADD MASKED WITH (FUNCTION = 'default()' or custom functions); manage masks in SSMS under Security > Dynamic Data Masking  
-  - **Azure SQL**: configure masks in the Azure portal "Dynamic Data Masking" blade or via the same TSQL ADD MASKED statements; supports default, email, and partial masks  
+  - **Azure SQL**: configure masks in the Azure portal "Dynamic Data Masking" blade or via the same T-SQL ADD MASKED statements; supports default, email, and partial masks  
 
 - **Microsoft Purview**: catalog and govern data assets with automated scanning and classification  
-  - **SQL Server**: register onpremises instances with Purview and deploy the scanning integration to discover and classify sensitive data; review scan results and export compliance reports in the Purview portal  
-  - **Azure SQL**: enable Purview scanning directly against Azure SQL servers in the portal; schedule recurring scans, validate or update classifications, and generate builtin compliance dashboards
+  - **SQL Server**: register on-prem instances with Purview and deploy the scanning integration to discover and classify sensitive data; review scan results and export compliance reports in the Purview portal  
+  - **Azure SQL**: enable Purview scanning directly against Azure SQL servers in the portal; schedule recurring scans, validate or update classifications, and generate built-in compliance dashboards
 
 - **Sensitivity Labels**: leverage Microsoft Information Protection to apply and enforce labels across databases and tables  
-  - **SQL Server**: install and configure the Azure Information Protection scanner or use MIP PowerShell cmdlets to label onpremises databases registered with Purview  
+  - **SQL Server**: install and configure the Azure Information Protection scanner or use MIP PowerShell cmdlets to label on-prem databases registered with Purview  
   - **Azure SQL**: integrate with Microsoft Information Protection in the Azure portal or via PowerShell to apply sensitivity labels at scale and ensure metadata flows through downstream services  
 
 <!-- ------------------------- ------------------------- -->
@@ -214,12 +214,12 @@ The database administration team at a midsized organization must ensure that cri
 #### Vulnerability Assessment  
 ...automated security scanning to identify misconfigurations, missing patches, and insecure settings  
 
-- **Vulnerability Assessment**: builtin scans that detect security issues and insecure configurations  
-  - **SQL Server**: run the builtin vulnerability assessment in SQL Server Management Studio or via TSQL, review results in the GUI  
+- **Vulnerability Assessment**: built-in scans that detect security issues and insecure configurations  
+  - **SQL Server**: run the built-in vulnerability assessment in SQL Server Management Studio or via T-SQL, review results in the GUI  
   - **Azure SQL**: enable as part of Advanced Data Security on the server or database (portal or PowerShell) and view findings under the Vulnerability Assessment blade
 
 - **Remediation**: actionable guidance and exportable scripts to fix detected issues  
-  - **SQL Server**: generate exportable reports (Excel or PDF) and apply recommended fixes manually or via TSQL  
+  - **SQL Server**: generate exportable reports (Excel or PDF) and apply recommended fixes manually or via T-SQL  
   - **Azure SQL**: download remediation scripts from the portal and automate remediation with Azure PowerShell or Azure CLI  
 
 <!-- ------------------------- ------------------------- -->
@@ -227,13 +227,13 @@ The database administration team at a midsized organization must ensure that cri
 #### Threat Detection  
 ...identify and alert on suspicious or malicious behavior  
 
-- **Advanced Threat Protection**: builtin analytics that flag unusual activities before they become incidents  
+- **Advanced Threat Protection**: built-in analytics that flag unusual activities before they become incidents  
   - **SQL Server**: deploy Extended Events and SQL Server Audit to capture and analyze suspect events  
-  - **Azure SQL**: enable "Microsoft Defender for SQL" to flag unusual activities before they become incidents
+  - **Azure SQL**: enable Microsoft Defender for SQL to flag unusual activities before they become incidents
 
 - **Anomaly Detection**: automated identification of irregular patterns that may indicate threats  
-  - **SQL Server**: run custom TSQL queries against dynamic management views or audit logs to spot patterns such as repeated login failures or unexpected queries  
-  - **Azure SQL**: leverage anomaly detection in "Microsoft Defender for SQL" to automatically surface unusual behavior
+  - **SQL Server**: run custom T-SQL queries against dynamic management views or audit logs to spot patterns such as repeated login failures or unexpected queries  
+  - **Azure SQL**: leverage anomaly detection in Microsoft Defender for SQL to automatically surface unusual behavior
  
 - **Alerting**: mechanisms to notify stakeholders when potential threats are detected  
   - **SQL Server**: configure Database Mail and SQL Server Agent alerts to send notifications on threat events  
@@ -249,7 +249,7 @@ The database administration team at a midsized organization must ensure that cri
   - **Azure SQL**: use Azure Automation runbooks or Logic Apps to retrieve audit logs from Azure Monitor and review databasescoped role assignments  
 
 - **Permission Reviews**: periodically verify user and group access  
-  - **SQL Server**: query sys.server_principals, sys.database_principals, and sp_helprotect with scheduled TSQL scripts  
+  - **SQL Server**: query sys.server_principals, sys.database_principals, and sp_helprotect with scheduled T-SQL scripts  
   - **Azure SQL**: run PowerShell scripts against Entra ID and query contained database users to confirm assignments  
 
 - **Patch Scheduling**: apply security updates on a defined cadence  
@@ -257,11 +257,11 @@ The database administration team at a midsized organization must ensure that cri
   - **Azure SQL**: configure maintenance windows and update control in the Azure portal  
 
 - **Backup & Restore Tests**: validate backup and recovery procedures  
-  - **SQL Server**: use maintenance plans or custom TSQL jobs to run BACKUP, RESTORE VERIFYONLY and test restores to sandbox instances  
+  - **SQL Server**: use maintenance plans or custom T-SQL jobs to run BACKUP, RESTORE VERIFYONLY and test restores to sandbox instances  
   - **Azure SQL**: perform pointintime restores or database copies to test recovery workflows  
 
 - **Security Drills**: conduct tabletop exercises and vulnerability scans regularly  
-  - **SQL Server**: run the builtin vulnerability assessment in SQL Server Management Studio and simulate attack scenarios  
+  - **SQL Server**: run the built-in vulnerability assessment in SQL Server Management Studio and simulate attack scenarios  
   - **Azure SQL**: leverage Microsoft Defender for SQL vulnerability assessment and simulate failover or breach exercises
 
 <!-- ------------------------- ------------------------- -->
@@ -270,7 +270,7 @@ The database administration team at a midsized organization must ensure that cri
 ...recommended guidelines to establish and maintain a secure and compliant SQL environment
 
 - **Access and Identity Management**  
-  - **LeastPrivilege Principle**: grant **only the permissions each user needs** by using builtin roles and assigning them to users or Active Directory groups  
+  - **Least-Privilege Principle**: grant **only the permissions each user needs** by using built-in roles and assigning them to users or Active Directory groups  
   - **Authentication Choice**: prefer **Windows Authentication** for domain users <s>and SQL Authentication for service or nondomain accounts</s>
 
 - **Data Protection**  
@@ -413,7 +413,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-## OnPrem
+## On-Prem
 
 ### Exercises
 
