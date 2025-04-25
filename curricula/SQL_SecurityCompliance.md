@@ -12,25 +12,23 @@ The database administration team at a midsized organization must ensure that cri
 
 <!-- ------------------------- ------------------------- -->
 
-## Fundamentals
+## Platform Differences
 
-### Platform Differences
-
-#### **Azure SQL** Database
+### **Azure SQL** Database
 - **Managed Security**:  
   - built-in threat detection and automated patching  
   - Limited direct configuration of underlying infrastructure  
 - **Entra ID Integration**:  
   - Native support for Entra ID authentication simplifies identity management
 
-#### **Azure SQL** Managed Instance
+### **Azure SQL** Managed Instance
 - **Hybrid Control**:  
   - Combines traditional SQL Server security features with Azure's managed environment  
   - Supports both TDE and Always Encrypted with advanced key management via Azure Key Vault  
 - **Enhanced Auditing**:  
   - Offers robust audit capabilities that integrate with Azure Monitor and Log Analytics
 
-#### SQL Server on Azure VMs
+### SQL Server on Azure VMs
 - **Full Control**:  
   - Apply traditional on-prem security hardening techniques  
   - Custom configuration of auditing, encryption, and network isolation  
@@ -38,6 +36,8 @@ The database administration team at a midsized organization must ensure that cri
   - Integrate thirdparty tools or tailored configurations as required
 
 <!-- ------------------------- ------------------------- -->
+
+## Fundamentals
 
 ### Authentication
 ...confirms an identity
@@ -60,7 +60,7 @@ The database administration team at a midsized organization must ensure that cri
     - Assign that login to the appropriate SQL Server role
     - Upshot: Active Directory manages membership 
 - **Row Level Security**: restrict access to table rows based on the executing user's context  
-  - **SQL Server**: create an inline tablevalued function and enforce it via CREATE SECURITY POLICY ... ADD FILTER PREDICATE to apply rowlevel filters  
+  - **SQL Server**: create an inline tablevalued function and enforce it via CREATE SECURITY POLICY ... ADD FILTER PREDICATE to apply row-level filters  
   - **Azure SQL**: use the same T-SQL security policy approach, leveraging Entra ID principals or SESSION_CONTEXT to drive the filter logic
 
 <!-- ------------------------- ------------------------- -->
@@ -215,7 +215,7 @@ The database administration team at a midsized organization must ensure that cri
 ...automated security scanning to identify misconfigurations, missing patches, and insecure settings  
 
 - **Vulnerability Assessment**: built-in scans that detect security issues and insecure configurations  
-  - **SQL Server**: run the built-in vulnerability assessment in SQL Server Management Studio or via T-SQL, review results in the GUI  
+  - **SQL Server**: run the built-in vulnerability assessment in SQL Server Management Studio or via T-SQL, review results in the user interface  
   - **Azure SQL**: enable as part of Advanced Data Security on the server or database (portal or PowerShell) and view findings under the Vulnerability Assessment blade
 
 - **Remediation**: actionable guidance and exportable scripts to fix detected issues  
@@ -297,7 +297,7 @@ Common regulatory frameworks influencing SQL security design include:
 
 - **General Data Protection Regulation (GDPR)**: European Union regulation protecting personal data and privacy  
 - **Health Insurance Portability and Accountability Act (HIPAA)**: United States law safeguarding patient health information  
-- **Payment Card Industry Data Security Standard (PCIDSS)**: Industry standards for protecting credit and debit card data  
+- **Payment Card Industry Data Security Standard (PCI-DSS)**: Industry standards for protecting credit and debit card data  
 - **SarbanesOxley Act (SOX)**: United States law enforcing strict financial reporting and internal controls to prevent fraud
 
 The table below maps key SQL implementations to major regulatory frameworks:
@@ -323,7 +323,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
     C) Authentication and authorization are the same process  
     D) Authentication encrypts data; authorization masks data  
 
-2. What is the primary benefit of rowlevel security?  
+2. What is the primary benefit of row-level security?  
     A) It encrypts individual columns within a table  
     B) It masks sensitive data at query time  
     C) It filters rows so users see only the data they are allowed to view  
@@ -363,7 +363,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
     A) To record security-relevant events for accountability and compliance  
     B) To automatically remediate misconfigurations  
     C) To mask data for unauthorized users  
-    D) To enforce rowlevel security policies  
+    D) To enforce row-level security policies  
 
 9. How does anomaly detection support threat detection?  
     A) It enforces encryption at rest  
@@ -397,7 +397,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
    *Dynamic Data Masking replaces actual data with masked output in query results for users lacking unmasking privileges.*
 
 6. **B** - Tagging of data with metadata to drive protection and reporting  
-   *Sensitivity classification labels columns or tables, enabling governance tools and reports to identify highrisk data.*
+   *Sensitivity classification labels columns or tables, enabling governance tools and reports to identify high-risk data.*
 
 7. **D** - It restricts client connectivity using firewalls, endpoints, and VPNs  
    *Network isolation limits access at the network layer, ensuring only approved paths and addresses can reach the database.*
@@ -524,7 +524,7 @@ Rowlevel security is a powerful way to enforce access boundaries directly within
 ------------------------- -------------------------
 
 #### Exercise #2: [Sensitivity Classification](https://learn.microsoft.com/en-us/sql/t-sql/statements/add-sensitivity-classification-transact-sql?view=sql-server-ver16)
-...marks columns with metadata indicating their sensitivity so that reporting, masking, encryption, and compliance tools can identify and protect highrisk data
+...marks columns with metadata indicating their sensitivity so that reporting, masking, encryption, and compliance tools can identify and protect high-risk data
 
 ##### How?  
 - Assigns each column a sensitivity label, information type, and classification level  
@@ -603,7 +603,7 @@ Select the `Customers` table, click "Load Columns" and verify the new labels on 
 
 ##### Final Thought
 Classification by itself does not change data or enforce anything; it is simply metadata that can be used to:
-- **Recommend masking** for sensitive columns using Data Classification UI  
+- **Recommend masking** for sensitive columns using Data Classification user interface  
 - **Flag highranked columns for encryption** (Always Encrypted or columnlevel)  
 - **Prioritize audit coverage** for labeled data using SQL Server Audit  
 - Filter or postprocess audit logs to focus on classified columns  
@@ -674,7 +674,7 @@ Masking does not protect data from privileged users—it's a displaylevel contro
 
 ### Quiz
 
-1. What must be created to enforce rowlevel security on a table?  
+1. What must be created to enforce row-level security on a table?  
    A) A security policy bound to a tablevalued function  
    B) A view that filters users by role  
    C) A CHECK constraint on the user name  
@@ -726,7 +726,7 @@ Masking does not protect data from privileged users—it's a displaylevel contro
    A) Hides query output from unauthorized users  
    B) Secures connections with TLS  
    C) Encrypts database files and backups at rest  
-   D) Enforces rowlevel security filters  
+   D) Enforces row-level security filters  
 
 10. How is masking different from encryption?  
    A) Masking is applied only to query output  
@@ -745,7 +745,7 @@ Masking does not protect data from privileged users—it's a displaylevel contro
    *USER_NAME() is used inside the predicate function to match the executing user to the OwnerLogin column, ensuring rows are filtered correctly.*
 
 3. **D** - Adds metadata for reporting and governance about sensitive columns  
-   *Sensitivity classification attaches labels to columns, enabling tools and reports to identify and protect highrisk data.*
+   *Sensitivity classification attaches labels to columns, enabling tools and reports to identify and protect high-risk data.*
 
 4. **B** - sys.sensitivity_classifications holds classification metadata  
    *This catalog view stores labels, information types, and ranks for each classified column.*
