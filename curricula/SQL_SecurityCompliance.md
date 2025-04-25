@@ -14,14 +14,14 @@ The database administration team at a midsized organization must ensure that cri
 
 ## Platform Differences
 
-### **Azure SQL** Database
+### Azure SQL Database
 - **Managed Security**:
   - built-in threat detection and automated patching  
   - Limited direct configuration of underlying infrastructure  
 - **Entra ID Integration**:
   - Native support for Entra ID authentication simplifies identity management
 
-### **Azure SQL** Managed Instance
+### Azure SQL Managed Instance
 - **Hybrid Control**:
   - Combines traditional SQL Server security features with Azure's managed environment  
   - Supports both TDE and Always Encrypted with advanced key management via Azure Key Vault  
