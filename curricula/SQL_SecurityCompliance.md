@@ -14,6 +14,31 @@ The database administration team at a midsized organization must ensure that cri
 
 ## Fundamentals
 
+### Platform Differences
+
+#### **Azure SQL** Database
+- **Managed Security**:  
+  - Builtin threat detection and automated patching  
+  - Limited direct configuration of underlying infrastructure  
+- **Entra ID Integration**:  
+  - Native support for Entra ID authentication simplifies identity management
+
+#### **Azure SQL** Managed Instance
+- **Hybrid Control**:  
+  - Combines traditional SQL Server security features with Azure's managed environment  
+  - Supports both TDE and Always Encrypted with advanced key management via Azure Key Vault  
+- **Enhanced Auditing**:  
+  - Offers robust audit capabilities that integrate with Azure Monitor and Log Analytics
+
+#### SQL Server on Azure VMs
+- **Full Control**:  
+  - Apply traditional on-prem security hardening techniques  
+  - Custom configuration of auditing, encryption, and network isolation  
+- **Custom Security Solutions**:  
+  - Integrate thirdparty tools or tailored configurations as required
+
+<!-- ------------------------- ------------------------- -->
+
 ### Authentication
 ...confirms an identity
 
@@ -41,31 +66,31 @@ The database administration team at a midsized organization must ensure that cri
 <!-- ------------------------- ------------------------- -->
 
 #### Scope  
-...defines what is secured by authorization  
+...defines what is secured by authorization
 
-- **Server**: the entire SQL instance (logins, server roles)  
-  - **SQL Server**: physical instance with full server roles such as "sysadmin" and "serveradmin"  
+- **Server**: the entire SQL instance (logins, server roles)
+  - **SQL Server**: physical instance with full server roles such as "sysadmin" and "serveradmin"
   - **Azure SQL**: logical server with limited builtin roles and an Entra ID administrator
 
-- **Database**: a single database (database roles, settings)  
-  - **SQL Server**: supports Windows Authentication and SQL Server Authentication for logins  
-  - **Azure SQL**: uses contained database users and databasescoped roles only  
+- **Database**: a single database (database roles, settings)
+  - **SQL Server**: supports Windows Authentication and SQL Server Authentication for logins
+  - **Azure SQL**: uses contained database users and database-scoped roles only
 
-- **Schema**: a group of objects in a database  
-  - **SQL Server** and **Azure SQL**: identical behavior for schemascoped permissions  
+- **Schema**: a group of objects in a database
+  - **SQL Server** and **Azure SQL**: identical behavior for schema-scoped permissions
 
-- **Object**: a table, view, or stored procedure  
-  - **SQL Server** and **Azure SQL**: identical behavior for objectlevel permissions  
+- **Object**: a table, view, or stored procedure
+  - **SQL Server** and **Azure SQL**: identical behavior for object-level permissions
 
-- **Column**: a field in a table (for example encryption or masking)  
-  - **SQL Server** and **Azure SQL**: identical behavior for columnlevel permissions  
+- **Column**: a field in a table (for example encryption or masking)
+  - **SQL Server** and **Azure SQL**: identical behavior for column-level permissions
 
-- **Row**: individual records (rowlevel security)  
-  - **SQL Server** and **Azure SQL**: both support security policies with FILTER PREDICATE definitions  
+- **Row**: individual records (row-level security)
+  - **SQL Server** and **Azure SQL**: both support security policies with FILTER PREDICATE definitions
 
-- **Network**: client connections  
-  - **SQL Server**: relies on operatingsystem or network firewall rules and TCP port configuration  
-  - **Azure SQL**: uses **Azure SQL** firewall rules, virtual network service endpoints, and private endpoints with TLS enforced by default
+- **Network**: client connections
+  - **SQL Server**: relies on operatingsystem or network firewall rules and TCP port configuration
+  - **Azure SQL**: uses Azure SQL firewall rules, virtual network service endpoints, and private endpoints with TLS enforced by default
 
 <!-- ------------------------- ------------------------- -->
 
@@ -74,7 +99,7 @@ The database administration team at a midsized organization must ensure that cri
 
 - **Network Isolation**: configure firewalls, service endpoints, private endpoints, virtual network rules and VPNs  
   - **SQL Server**: manage Windows firewall rules or network ACLs to limit access to the database port  
-  - **Azure SQL**: define serverlevel firewall rules, enable virtual network service endpoints or private endpoints  
+  - **Azure SQL**: define server-level firewall rules, enable virtual network service endpoints or private endpoints  
 
 <!-- ------------------------- ------------------------- -->
 
@@ -87,17 +112,17 @@ The database administration team at a midsized organization must ensure that cri
     - **SQL Server**: create a database master key and certificate, then run ALTER DATABASE ... SET ENCRYPTION ON  
     - **Azure SQL**: enabled by default; manage keys via Azure Key Vault or use servicemanaged keys in the Azure portal
 
-  - **ColumnLevel Encryption**: encrypts specific sensitive columns  
+  - **Column-Level Encryption**: encrypts specific sensitive columns  
     - **SQL Server**: create a database master key, certificate, and symmetric key; use the ENCRYPTBYKEY and DECRYPTBYKEY functions in TSQL to secure column data  
     - **Azure SQL**: use the same TSQL encryption functions with keys managed in Azure Key Vault or servicemanaged keys, configured via the Azure portal or PowerShell  
 
 - **In Transit**: data moving across the network  
 
-  - **Transport Layer Security (TLS)**: encrypts network traffic between client and server  
+  - **Transport Layer Security**: encrypts network traffic between client and server  
     - **SQL Server**: install a valid server certificate, enable "Force Encryption" in SQL Server Configuration Manager, and require clients to use Encrypt=True in their connection strings  
     - **Azure SQL**: TLS is enforced by default for all connections (minimum TLS 1.2); configure the minimum TLS version in the Azure portal under your SQL server's Security settings
 
-  - **Secure Sockets Layer (SSL)**: legacy protocol that also encrypts network traffic (superseded by TLS)  
+  - **Secure Sockets Layer**: legacy protocol that also encrypts network traffic (superseded by TLS)  
     - **SQL Server**: older versions support SSL 3.0; enable or disable via SQL Server Configuration Manager or Windows registry, though it is disabled by default in recent releases for security  
     - **Azure SQL**: does not support SSL; any legacy SSL connection attempts are rejected and only TLS 1.2 or higher is allowed
  
@@ -139,9 +164,9 @@ The database administration team at a midsized organization must ensure that cri
 
 - **Microsoft Purview**: catalog and govern data assets with automated scanning and classification  
   - **SQL Server**: register onpremises instances with Purview and deploy the scanning integration to discover and classify sensitive data; review scan results and export compliance reports in the Purview portal  
-  - **Azure SQL**: enable Purview scanning directly against **Azure SQL** servers in the portal; schedule recurring scans, validate or update classifications, and generate builtin compliance dashboards
+  - **Azure SQL**: enable Purview scanning directly against Azure SQL servers in the portal; schedule recurring scans, validate or update classifications, and generate builtin compliance dashboards
 
-- **Sensitivity labels integration**: leverage Microsoft Information Protection to apply and enforce labels across databases and tables  
+- **Sensitivity Labels**: leverage Microsoft Information Protection to apply and enforce labels across databases and tables  
   - **SQL Server**: install and configure the Azure Information Protection scanner or use MIP PowerShell cmdlets to label onpremises databases registered with Purview  
   - **Azure SQL**: integrate with Microsoft Information Protection in the Azure portal or via PowerShell to apply sensitivity labels at scale and ensure metadata flows through downstream services  
 
@@ -167,7 +192,7 @@ The database administration team at a midsized organization must ensure that cri
 ### Observability
 
 #### Auditing  
-...record securityrelevant events for accountability  
+...record security-relevant events for accountability  
 
 - **Auditing**: configure audit logs to capture actions such as schema changes, logins, and security policy modifications  
   - **SQL Server**: create a Server Audit and Server Audit Specification, target FILE or Windows Application log, then enable both  
@@ -290,31 +315,6 @@ The use of these controls supports audit readiness and reduces compliance risk b
 
 <!-- ------------------------- ------------------------- -->
 
-### Platform Differences
-
-#### **Azure SQL** Database
-- **Managed Security**:  
-  - Builtin threat detection and automated patching  
-  - Limited direct configuration of underlying infrastructure  
-- **Entra ID Integration**:  
-  - Native support for Entra ID authentication simplifies identity management
-
-#### **Azure SQL** Managed Instance
-- **Hybrid Control**:  
-  - Combines traditional SQL Server security features with Azure's managed environment  
-  - Supports both TDE and Always Encrypted with advanced key management via Azure Key Vault  
-- **Enhanced Auditing**:  
-  - Offers robust audit capabilities that integrate with Azure Monitor and Log Analytics
-
-#### SQL Server on Azure VMs
-- **Full Control**:  
-  - Apply traditional on-prem security hardening techniques  
-  - Custom configuration of auditing, encryption, and network isolation  
-- **Custom Security Solutions**:  
-  - Integrate thirdparty tools or tailored configurations as required
-
-<!-- ------------------------- ------------------------- -->
-
 ### Quiz
 
 1. Which statement best distinguishes authentication from authorization?  
@@ -360,7 +360,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
     D) It restricts client connectivity using firewalls, endpoints, and VPNs  
 
 8. What is the primary purpose of auditing in SQL environments?  
-    A) To record securityrelevant events for accountability and compliance  
+    A) To record security-relevant events for accountability and compliance  
     B) To automatically remediate misconfigurations  
     C) To mask data for unauthorized users  
     D) To enforce rowlevel security policies  
@@ -402,7 +402,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
 7. **D** - It restricts client connectivity using firewalls, endpoints, and VPNs  
    *Network isolation limits access at the network layer, ensuring only approved paths and addresses can reach the database.*
 
-8. **A** - To record securityrelevant events for accountability and compliance  
+8. **A** - To record security-relevant events for accountability and compliance  
    *Auditing captures actions like logins, schema changes, and policy modifications for later review and evidence.*
 
 9. **D** - It identifies unusual patterns or behaviors that may indicate a threat  
