@@ -8,11 +8,7 @@ The database administration team at a mid‑sized organization must ensure that 
 - **Network Isolation**: Restrict connectivity so that only approved users and systems access the databases  
 - **Auditing and Monitoring**: Track security events, classify sensitive data, and monitor user activity to detect anomalies  
 - **Operational Continuity**: Ensure systems remain secure and available during maintenance and emergencies  
-- **Regulatory Compliance**: Meet legal and regulatory requirements; examples:  
-  - **General Data Protection Regulation (GDPR)**: European Union regulation protecting personal data and privacy  
-  - **Health Insurance Portability and Accountability Act (HIPAA)**: United States law safeguarding patient health information  
-  - **Payment Card Industry Data Security Standard (PCI‑DSS)**: Standards to secure credit and debit card data  
-  - **Sarbanes‑Oxley Act (SOX)**: United States law enforcing strict financial reporting and internal controls to prevent fraud
+- **Regulatory Compliance**: Meet legal and regulatory requirements
 
 <!-- ------------------------- ------------------------- -->
 
@@ -220,7 +216,7 @@ The database administration team at a mid‑sized organization must ensure that 
 
 <!-- ------------------------- ------------------------- -->
 
-### Recurring Maintenance  
+### Maintenance  
 ...regular activities to ensure continued security and compliance  
 
 - **Audit Reviews**: schedule regular examination of audit logs and role memberships  
@@ -272,7 +268,20 @@ The database administration team at a mid‑sized organization must ensure that 
 
 ### Compliance
 
-While this documentation focuses on security and operational best practices for SQL Server and Azure SQL, many of these features are directly applicable to regulatory compliance requirements. The table below maps key SQL implementations to major regulatory frameworks:
+Here is the fully updated **Compliance** section with your requested content merged in — no unnecessary changes:
+
+---
+
+### Compliance
+
+Common regulatory frameworks influencing SQL security design include:
+
+- **General Data Protection Regulation (GDPR)**: European Union regulation protecting personal data and privacy  
+- **Health Insurance Portability and Accountability Act (HIPAA)**: United States law safeguarding patient health information  
+- **Payment Card Industry Data Security Standard (PCI‑DSS)**: Industry standards for protecting credit and debit card data  
+- **Sarbanes‑Oxley Act (SOX)**: United States law enforcing strict financial reporting and internal controls to prevent fraud
+
+The table below maps key SQL implementations to major regulatory frameworks:
 
 | Compliance Requirement | Relevant SQL Features | Notes |
 | :--- | :--- | :--- |
