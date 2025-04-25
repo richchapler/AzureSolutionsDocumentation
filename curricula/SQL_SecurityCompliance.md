@@ -616,7 +616,7 @@ Classification by itself does not change data or enforce anything; it is simply 
 
 ------------------------- -------------------------
 
-#### [Dynamic Data Masking](https://learn.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking)  
+#### Exercise #3: [Dynamic Data Masking](https://learn.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking)  
 ...obscures sensitive column values in query results for users who are not authorized to view the underlying data
 
 ##### How?  
