@@ -15,24 +15,24 @@ The database administration team at a midsized organization must ensure that cri
 ## Platform Differences
 
 ### **Azure SQL** Database
-- **Managed Security**:  
+- **Managed Security**:
   - built-in threat detection and automated patching  
   - Limited direct configuration of underlying infrastructure  
-- **Entra ID Integration**:  
+- **Entra ID Integration**:
   - Native support for Entra ID authentication simplifies identity management
 
 ### **Azure SQL** Managed Instance
-- **Hybrid Control**:  
+- **Hybrid Control**:
   - Combines traditional SQL Server security features with Azure's managed environment  
   - Supports both TDE and Always Encrypted with advanced key management via Azure Key Vault  
-- **Enhanced Auditing**:  
+- **Enhanced Auditing**:
   - Offers robust audit capabilities that integrate with Azure Monitor and Log Analytics
 
-### SQL Server on Azure VMs
-- **Full Control**:  
+### SQL Server (on-prem / Azure Virtual Machine)
+- **Full Control**:
   - Apply traditional on-prem security hardening techniques  
   - Custom configuration of auditing, encryption, and network isolation  
-- **Custom Security Solutions**:  
+- **Custom Security Solutions**:
   - Integrate thirdparty tools or tailored configurations as required
 
 <!-- ------------------------- ------------------------- -->
@@ -529,7 +529,7 @@ Rowlevel security is a powerful way to enforce access boundaries directly within
 ##### How?  
 - Assigns each column a sensitivity label, information type, and classification level  
 - Persists classification details in the system catalog for consistent retrieval and reporting  
-- Triggers automated workflows that:  
+- Triggers automated workflows that:
   - surface labels in management interfaces  
   - generate compliance reports and enforce labeling policies  
   - provide guidance on masking and encryption based on classifications
@@ -574,7 +574,7 @@ ADD SENSITIVITY CLASSIFICATION TO dbo.Customers.Email
 WITH ( LABEL = 'Confidential', INFORMATION_TYPE = 'Contact Information', RANK = HIGH );
 ```
 
-Classify `CreditCardNumber` column:  
+Classify `CreditCardNumber` column:
 ```sql
 ADD SENSITIVITY CLASSIFICATION TO dbo.Customers.CreditCardNumber
 WITH ( LABEL = 'Highly Confidential', INFORMATION_TYPE = 'Financial', RANK = CRITICAL );
@@ -665,7 +665,7 @@ b****@****m       | XXXX-XXXX-XXXX-0004
 
 ##### Final Thought
 
-Masking does not protect data from privileged users—it's a displaylevel control. To ensure masking is effective:  
+Masking does not protect data from privileged users—it's a displaylevel control. To ensure masking is effective:
 - Avoid granting the **UNMASK** permission to application users  
 - Combine masking with classification, auditing, and rolebased access control  
 - Use it to protect casual exposure in shared environments, dashboards, and support tools
