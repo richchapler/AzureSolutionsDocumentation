@@ -63,7 +63,7 @@ Which three configurations should you enable?
 <br>B) Add extended properties to the column 
 <br>C) Turn on Advanced Data Security (Microsoft Defender for SQL) on the server 
 <br>D) Apply a sensitivity label of "Highly Confidential" to the column 
-<br>E) Enable Azure Entravanced Threat Protection (Microsoft Defender for Cloud Recommendations) 
+<br>E) Enable Azure Advanced Threat Protection (Microsoft Defender for Cloud Recommendations) 
 
 ## Question 8
 A database user is a member of the db_datawriter role in DB1.
@@ -622,7 +622,7 @@ To repair the checksum corruption in DB1, you will execute `DBCC CHECKDB ('DB1',
 Which repair option allows the corruption to be fixed even if it results in data loss? 
 <br>A) PHYSICAL_ONLY 
 <br>B) REPAIR_FAST 
-<br>C) MOINDEX 
+<br>C) REPAIR_REBUILD 
 <br>D) REPAIR_ALLOW_DATA_LOSS 
 
 ## Question 65
