@@ -385,7 +385,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
    *Authentication confirms who you are, while authorization determines what you can do once identified.*
 
 2. **C** - It filters rows so users see only the data they are allowed to view  
-   *Rowlevel security applies predicates so each user sees only their permitted subset of data.*
+   *Row-level security applies predicates so each user sees only their permitted subset of data.*
 
 3. **B** - It encrypts data at rest to protect physical files and backups  
    *Transparent Data Encryption secures data on disk and in backups without changing application code.*
@@ -406,7 +406,7 @@ The use of these controls supports audit readiness and reduces compliance risk b
    *Auditing captures actions like logins, schema changes, and policy modifications for later review and evidence.*
 
 9. **D** - It identifies unusual patterns or behaviors that may indicate a threat  
-   *Anomaly detection spots deviations from normal activity—such as repeated failures or odd queries—that warrant investigation.*
+   *Anomaly detection spots deviations from normal activity - such as repeated failures or odd queries - that warrant investigation.*
 
 10. **B** - Continuous monitoring collects realtime metrics and alerts; scheduled reviews conduct periodic manual inspections  
    *Continuous monitoring provides ongoing visibility through metrics and alerts, while scheduled reviews involve deliberate, regular audits of logs and configurations.*
@@ -438,7 +438,7 @@ USE SecurityDemo;
 ```
 
 #### Exercise #1: [Row-Level Security](https://learn.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16)
-...enforces finegrained access control by limiting which rows in a table a given user can see or modify, restricting data at the row level based on the caller's identity or context rather than granting or denying access to the entire table.
+...enforces fine-grained access control by limiting which rows in a table a given user can see or modify, restricting data at the row level based on the caller's identity or context rather than granting or denying access to the entire table.
 
 ##### How?  
 - Uses an **inline tablevalued function** that returns a result set of allowed rows
@@ -519,7 +519,7 @@ REVERT;
 Expected output: Bob's row
 
 ##### Final Thought  
-Rowlevel security is a powerful way to enforce access boundaries directly within the database engine, ensuring that users see only the data they are meant to see—even when querying the same table. By combining simple user mappings with a reusable predicate function, policies can be implemented cleanly and maintained consistently without modifying application code or duplicating data across tables.
+Row-level security is a powerful way to enforce access boundaries directly within the database engine, ensuring that users see only the data they are meant to see - even when querying the same table. By combining simple user mappings with a reusable predicate function, policies can be implemented cleanly and maintained consistently without modifying application code or duplicating data across tables.
 
 ------------------------- -------------------------
 
@@ -604,7 +604,7 @@ Select the `Customers` table, click "Load Columns" and verify the new labels on 
 ##### Final Thought
 Classification by itself does not change data or enforce anything; it is simply metadata that can be used to:
 - **Recommend masking** for sensitive columns using Data Classification user interface  
-- **Flag highranked columns for encryption** (Always Encrypted or columnlevel)  
+- **Flag high-ranked columns for encryption** (Always Encrypted or columnlevel)  
 - **Prioritize audit coverage** for labeled data using SQL Server Audit  
 - Filter or postprocess audit logs to focus on classified columns  
 - **Generate compliance reports** showing classification coverage  
@@ -665,7 +665,7 @@ b****@****m       | XXXX-XXXX-XXXX-0004
 
 ##### Final Thought
 
-Masking does not protect data from privileged users—it's a displaylevel control. To ensure masking is effective:
+Masking does not protect data from privileged users - it's a displaylevel control. To ensure masking is effective:
 - Avoid granting the **UNMASK** permission to application users  
 - Combine masking with classification, auditing, and rolebased access control  
 - Use it to protect casual exposure in shared environments, dashboards, and support tools
@@ -739,7 +739,7 @@ Masking does not protect data from privileged users—it's a displaylevel contro
 #### Answers
 
 1. **A** - A security policy bound to a tablevalued function  
-   *Rowlevel security requires a predicate function in a security policy to enforce perrow visibility.*
+   *Row-level security requires a predicate function in a security policy to enforce perrow visibility.*
 
 2. **C** - USER_NAME() returns the database user name in the current execution context  
    *USER_NAME() is used inside the predicate function to match the executing user to the OwnerLogin column, ensuring rows are filtered correctly.*
