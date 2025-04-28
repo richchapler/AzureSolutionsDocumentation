@@ -58,13 +58,13 @@ You maintain a SQL Server database that uses clustered columnstore indexes, auto
 <br>D) Automatic tuning
 
 ### Question 7
-You manage an Azure SQL database that includes a column holding confidential data. You must record every time this column’s values are retrieved and retain those audit entries for 365 days.
+You manage an Azure SQL database that includes a column holding confidential data. You must record every time this column's values are retrieved and retain those audit entries for 365 days.
 
 Which three configurations should you enable? 
 <br>A) Enable Azure SQL auditing and send logs to an Azure Storage account 
 <br>B) Add extended properties to the column 
 <br>C) Turn on Advanced Data Security (Microsoft Defender for SQL) on the server 
-<br>D) Apply a sensitivity label of “Highly Confidential” to the column 
+<br>D) Apply a sensitivity label of "Highly Confidential" to the column 
 <br>E) Enable Azure Entravanced Threat Protection (Microsoft Defender for Cloud Recommendations) 
 
 ### Question 8
@@ -186,7 +186,7 @@ You have an Azure virtual machine running SQL Server. You need to set up automat
 <br>D) Register the virtual machine with the Microsoft.Sql resource provider
 
 ### Question 20
-You’re receiving excessive Azure Monitor alerts for an Azure SQL Database. You want to only trigger notifications when there’s a significant, sustained shift in usage patterns.
+You're receiving excessive Azure Monitor alerts for an Azure SQL Database. You want to only trigger notifications when there's a significant, sustained shift in usage patterns.
 
 Which two settings should you adjust? 
 <br>A) Set the alert logic threshold to Static 
@@ -211,7 +211,7 @@ Which approach should you use to investigate TempDB utilization?
 <br>A) Query Performance Insight 
 <br>B) Dynamic management view queries 
 <br>C) SQL Server Profiler traces 
-<br>D) Query Store–based queries 
+<br>D) Query Store-based queries 
 
 ### Question 23
 You attach two 1 TiB premium P30 disks (5,000 IOPS each) to an Azure Virtual Machine and need to support a database requiring 10,000 IOPS.
@@ -224,7 +224,7 @@ Which three storage objects should you create, in the correct order?
 <br>E) A volume
 
 ### Question 24
-You’re noticing that Query Store frequently switches itself to READ_ONLY because it’s filling up too quickly. To reduce the volume of captured data and delay hitting its storage limit, which setting should you change? 
+You're noticing that Query Store frequently switches itself to READ_ONLY because it's filling up too quickly. To reduce the volume of captured data and delay hitting its storage limit, which setting should you change? 
 <br>A) Halve the Query Store data flush interval 
 <br>B) Double the Query Store data flush interval 
 <br>C) Double the Query Store statistics collection interval 
@@ -252,7 +252,7 @@ Which function completes the WHERE clause to return data from one week ago to no
 <br>D) TODATETIMEOFFSET(day, -7, GETDATE())
 
 ### Question 28
-Your organization manages dozens of Azure SQL databases and must automatically notify each database’s owner whenever configuration settings (for example, service tier or storage size) change.
+Your organization manages dozens of Azure SQL databases and must automatically notify each database's owner whenever configuration settings (for example, service tier or storage size) change.
 
 Which Azure Monitor configuration should you use? 
 <br>A) Create a metric alert rule 
@@ -261,7 +261,7 @@ Which Azure Monitor configuration should you use?
 <br>D) Create an activity log alert rule
 
 ### Question 29
-You oversee several cloud-hosted SQL databases on a single logical server. You need to create an alert that fires whenever any database’s CPU utilization exceeds 80%, and the rule must automatically include any new databases added to that server. To which resource type should you scope your alert rule? 
+You oversee several cloud-hosted SQL databases on a single logical server. You need to create an alert that fires whenever any database's CPU utilization exceeds 80%, and the rule must automatically include any new databases added to that server. To which resource type should you scope your alert rule? 
 <br>A) SQL Databases 
 <br>B) Resource Groups 
 <br>C) SQL Servers 
@@ -318,7 +318,7 @@ Which two recommendations will reduce storage and improve performance?
 <br>E) Change LastHireDate to `date` 
 
 ### Question 34
-You’re troubleshooting a long-running query on your Azure SQL Database in SQL Server Management Studio and need to see real-time, operator-level progress to pinpoint the performance bottleneck.
+You're troubleshooting a long-running query on your Azure SQL Database in SQL Server Management Studio and need to see real-time, operator-level progress to pinpoint the performance bottleneck.
 
 Which feature should you use? 
 <br>A) Estimated execution plan 
@@ -366,7 +366,7 @@ ALTER DATABASE [DB1] SET AUTOMATIC_TUNING (____________________);
 <br>D) OFF
 
 ### Question 39
-You’ve migrated a database to an Azure SQL Managed Instance and notice that read operations are frequently blocking concurrent write operations.
+You've migrated a database to an Azure SQL Managed Instance and notice that read operations are frequently blocking concurrent write operations.
 
 Which database setting should you enable to allow readers to use row-versioned reads and avoid blocking writers? 
 <br>A) Set PARAMETERIZATION to FORCED 
@@ -430,7 +430,7 @@ Which feature should you use?
 <br>D) Query Performance Insight in the Azure portal
 
 ### Question 45
-You have a columnstore‐indexed table in your Azure SQL database that is queried only occasionally. You enable archival compression on the columnstore.
+You have a columnstore-indexed table in your Azure SQL database that is queried only occasionally. You enable archival compression on the columnstore.
 
 Which two outcomes are you likely to observe? 
 <br>A) Each query will perform more disk I/O 
@@ -473,22 +473,28 @@ You have two Azure SQL Database servers named S1 and S2, each hosting a database
 
 ### Question 50
 #### Question 50a
-You have two Azure SQL Database servers named S1 and S2. Each server contains a database named DB1. You need to overwrite DB1 on S2 with the version from S1. You run the PowerShell cmdlets `Remove-AzSqlDatabase –ResourceGroupName RG –ServerName S2 –DatabaseName DB1` followed by `Restore-AzSqlDatabase –ResourceGroupName RG –ServerName S2 –FromServerInstance S1 –DatabaseName DB1`. Does this sequence achieve the replacement? 
+You have two Azure SQL Database servers named S1 and S2. Each server contains a database named DB1. You need to overwrite DB1 on S2 with the version from S1. You run the PowerShell cmdlets `Remove-AzSqlDatabase -ResourceGroupName RG -ServerName S2 -DatabaseName DB1` followed by `Restore-AzSqlDatabase -ResourceGroupName RG -ServerName S2 -FromServerInstance S1 -DatabaseName DB1`.
+
+Does this sequence achieve the replacement? 
 <br>A) Yes 
 <br>B) No 
 
 #### Question 50b
-You manage Azure SQL Database servers S1 and S2, each with a DB1. You attempt to overwrite DB1 on S2 by executing a Transact-SQL `RESTORE DATABASE DB1 FROM URL = 'https://<storage>.blob.core.windows.net/<bacpac>.bacpac' WITH REPLACE`. Will this T-SQL RESTORE command successfully replace the existing database on S2? 
+You manage Azure SQL Database servers S1 and S2, each with a DB1. You attempt to overwrite DB1 on S2 by executing a Transact-SQL `RESTORE DATABASE DB1 FROM URL = 'https://<storage>.blob.core.windows.net/<bacpac>.bacpac' WITH REPLACE`.
+
+Will this T-SQL RESTORE command successfully replace the existing database on S2? 
 <br>A) Yes 
 <br>B) No 
 
 #### Question 50c
-You have Azure SQL servers S1 and S2, both hosting DB1. To refresh DB1 on S2, you rename the existing DB1 on S2 to Database2, then restore DB1 from S1 into S2 via the Azure portal, and finally delete Database2. Does this process result in DB1 on S2 matching the backup from S1? 
+You have Azure SQL servers S1 and S2, both hosting DB1. To refresh DB1 on S2, you rename the existing DB1 on S2 to Database2, then restore DB1 from S1 into S2 via the Azure portal, and finally delete Database2.
+
+Does this process result in DB1 on S2 matching the backup from S1? 
 <br>A) Yes 
 <br>B) No 
 
 ### Question 51
-You have a two-node Always On availability group for an on-premises SQL Server instance, with one node designated as primary and the other as secondary. You need to run a full backup of the database on the secondary replica without disturbing the primary replica’s backup chain.
+You have a two-node Always On availability group for an on-premises SQL Server instance, with one node designated as primary and the other as secondary. You need to run a full backup of the database on the secondary replica without disturbing the primary replica's backup chain.
 
 Which BACKUP DATABASE statement should you use? 
 <br>A) Use the DIFFERENTIAL option 
@@ -536,14 +542,14 @@ Which three backups should you restore, in the correct order?
 <br>E) Log backups from Tuesday 1:05 AM through 1:00 PM 
 
 ### Question 56
-You manage backups for a SQL Server database hosted on an Azure virtual machine. To ensure you can restore from backups even if an entire Azure region becomes unavailable—while keeping storage costs as low as possible—which redundancy option should you select for the storage account? 
+You manage backups for a SQL Server database hosted on an Azure virtual machine. To ensure you can restore from backups even if an entire Azure region becomes unavailable-while keeping storage costs as low as possible-which redundancy option should you select for the storage account? 
 <br>A) Geo-redundant storage (GRS) 
 <br>B) Zone-redundant storage (ZRS) 
 <br>C) Read-access geo-redundant storage (RA-GRS) 
 <br>D) Locally-redundant storage (LRS)
 
 ### Question 57
-You’re preparing to add an existing database to an Always On availability group. After taking a full backup, you need to apply it on the secondary replica so that the database stays non-recoverable and ready for log shipping.
+You're preparing to add an existing database to an Always On availability group. After taking a full backup, you need to apply it on the secondary replica so that the database stays non-recoverable and ready for log shipping.
 
 Which restore option should you use on the secondary? 
 <br>A) Restore with Standby 
@@ -634,7 +640,7 @@ Which `ALTER DATABASE [DB1] SET ___;` statement should you run?
 ### Question 66
 Which clause correctly specifies Azure Blob Storage as the backup destination for a database named Sales on an Azure SQL Managed Instance? 
 <br>A) TO DISK = 'X:\BAK\Sales.bak' 
-<br>B) TO '​Sales_Backup' 
+<br>B) TO 'Sales_Backup' 
 <br>C) TO URL = 'https://storage1.blob.core.windows.net/blob1/Sales.bak' 
 <br>D) TO DISK = '\\BackupSystem\BackupDisk1\Sales.bak' 
 
