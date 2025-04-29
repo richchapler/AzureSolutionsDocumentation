@@ -315,7 +315,7 @@ ALTER DATABASE [YourDatabase] SET QUERY_STORE = ON (OPERATION_MODE = READ_WRITE)
 SELECT actual_state_desc FROM sys.database_query_store_options WHERE database_id = DB_ID();
 ```
 
-<img src=".\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\SQL_PerformanceOptimization\QueryStore.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
 
@@ -442,7 +442,7 @@ SELECT name, is_legacy_cardinality_estimation_on FROM sys.database_scoped_config
 
 **Use When...** you need to pinpoint inefficient operators, missing indexes, or estimate inaccuracies **before and after changes**
 
-<img src=".\images\SQL_PerformanceOptimization\ActualExecutionPlan.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\SQL_PerformanceOptimization\ActualExecutionPlan.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
 
@@ -455,7 +455,7 @@ SELECT name, is_legacy_cardinality_estimation_on FROM sys.database_scoped_config
 
 **Use When...** you need to spot stalls, blocking, or unexpectedly slow operators **in real time**
 
-<img src=".\images\SQL_PerformanceOptimization\LiveQueryStatistics.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\SQL_PerformanceOptimization\LiveQueryStatistics.png" width="800" title="Snipped April, 2025" />
 
 <!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
@@ -1023,7 +1023,7 @@ WHERE ips.database_id = DB_ID() AND ips.avg_fragmentation_in_percent > 5;
 
 This query identifies indexes with fragmentation above 5%.
 
-<img src=".\images\SQL_PerformanceOptimization\IndexFragmentation.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\SQL_PerformanceOptimization\IndexFragmentation.png" width="800" title="Snipped April, 2025" />
 
 Review usage statistics:
 ```sql
@@ -1164,7 +1164,7 @@ Leverage Azure's built‑in tuning engine to apply and monitor index and plan co
 
 Navigate to Azure Portal >> SQL Server >> Intelligent Performance >> Automatic Tuning
 
-<img src=".\images\SQL_PerformanceOptimization\AutomaticTuning.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\SQL_PerformanceOptimization\AutomaticTuning.png" width="800" title="Snipped April, 2025" />
 
 Review features:
 - **Inheritance From**: allows you to inherit tuning settings from server‑level Azure defaults or override them at the database level 
