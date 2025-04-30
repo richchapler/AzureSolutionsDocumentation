@@ -26,7 +26,7 @@ A user uploads an **XLF file** to an internal system (manual for now), and that 
 
 ### Create Translator
 
-Login to Azure Portal, create and then navigate to a Translator resource named `prefixt`.
+Login to Azure Portal, create and then navigate to a Translator resource named `{prefix}t`.
 
 Navigate to **Resource Management** >> **Keys and Endpoint**.
 
@@ -45,7 +45,7 @@ $key = "<key>"
 
 ##### Set Translator "Document Translation" endpoint
 ```powershell
-$endpoint = "https://prefixt.cognitiveservices.azure.com/"
+$endpoint = "https://{prefix}t.cognitiveservices.azure.com/"
 ```
 
 ##### Specify Translator region
@@ -84,7 +84,7 @@ translations
 
 ### Prepare Sample
 
-Login to Azure Portal, create a Storage Account resource named `prefixs` and a container named `xlf`. 
+Login to Azure Portal, create a Storage Account resource named `{prefix}s` and a container named `xlf`. 
 
 Assign necessary firewall and permissions (e.g., `Storage Blob Data Contributor` container `xlf`).
 
@@ -124,7 +124,7 @@ $region = "westus"
 
 ##### Set Storage Account name
 ```powershell
-$storageAccount = "prefixs"
+$storageAccount = "{prefix}s"
 ```
 
 ##### Set Blob container name
