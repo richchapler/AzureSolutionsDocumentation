@@ -1,33 +1,24 @@
 # Lab: AI Speech
 
-<img src=".\images\AI_Speech\AI_Speech_Header.png" width="1000" />
+<img src="..\images\AI_Speech\AI_Speech_Header.png" width="1000" />
 
 ## Introduction
 
 Azure AI Speech is a cloud-based service from Microsoft that leverages advanced algorithms to process and understand spoken language, extracting valuable insights and enabling dynamic communication solutions. It encompasses a range of capabilities—from real-time speech-to-text transcription and speaker recognition to lifelike text-to-speech synthesis and multilingual translation—all designed to solve real-world problems quickly and effectively.
 
-## Sections
-
-### Prepare Resources  
-* Set up the necessary Azure services  
-* Configure your environment to securely manage API credentials using environment variables
-
-### Optical Character Recognition (OCR)
-* Learn how to extract text from images  
-* Analyze and interpret the JSON output to understand how text is detected and structured
-
-------------------------- -------------------------
-------------------------- -------------------------
+------------------------- ------------------------- ------------------------- -------------------------
 
 ## Exercise 1: Prepare Resources  
 
 ### Azure
-Instantiate Azure AI Services
 
-LOREM IPSUM
+- **Speech Services**: Pricing Tier `Standard S0`
 
-------------------------- -------------------------
-------------------------- -------------------------
+### On-Prem
+
+> Additional content (e.g., PowerShell, Visual Studio Code, etc.) pending work on **Low Code** sections
+
+<!-- ------------------------- ------------------------- -->
 
 ## Exercise 2: Speech Capabilities by Scenario
 
