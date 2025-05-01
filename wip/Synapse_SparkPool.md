@@ -247,7 +247,7 @@ Final step, not documented here... schedule this for "every 10 minutes"
 
 <!-- ------------------------- ------------------------- -->
 
-### Proposed Solution
+### Proposed Solution (VALIDATION PENDING)
 
 - **Convert Notebooks to Scripts**  
   Extract your core PySpark logic from notebooks into standalone `.py` files (for example, `process_data.py`) and store them in your workspace’s linked storage.  
@@ -281,5 +281,3 @@ Final step, not documented here... schedule this for "every 10 minutes"
 
 - **Integrate with CI/CD**  
   Store your `.py` scripts in a Git repo and automate deployment of job definitions via ARM templates or the Synapse CLI, ensuring script and definition versioning.  
-
-By submitting pure batch jobs instead of interactive notebooks, you eliminate notebook-startup overhead and shorten end-to-end latency—while still running on the same Synapse Spark pool and leveraging its autoscale, auto-pause, and dynamic-allocation features.
