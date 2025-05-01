@@ -26,25 +26,29 @@ Azure AI Speech is a cloud-based service from Microsoft that leverages advanced 
 
 ### Captioning with Speech to Text
 
+<!-- ------------------------- ------------------------- -->
+
 #### Low Code
 
 Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
 <img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
 
-Click "Captioning with speech to text".
+Click **Captioning with speech to text**.
 
 <img src="..\images\AI_Speech\SpeechStudio_Captioning_TryItOut.png" width="800" title="Snipped April, 2025" />
 
-On the "Try it out" >> "Sample videos" tabs, click "Real-time captioning", and then scroll down on the page.
+On the **Try it out** >> **Sample videos** tabs, click **Real-time captioning**, and then scroll down on the page.
 
 <img src="..\images\AI_Speech\SpeechStudio_Captioning_RealTime.png" width="800" title="Snipped April, 2025" />
 
 Click the Play button the video and observe captioning.
 
+<!-- ------------------------- -->
+
 ##### Captioning Settings
 
-The captioning settings shown on Speech Studio > Captioning > **Real-time captioning with "stable partial results"** are detailed on the right side of the interface and include the following parameters:
+...detailed on the right side of the interface and include the following parameters:
 
 - **Recognition event**: `--realTime`  
   Enables real-time mode, which returns stable partial results as audio is processed live.
@@ -63,6 +67,8 @@ The captioning settings shown on Speech Studio > Captioning > **Real-time captio
 
 - **Phrase list**: `--phrases "neural TTS;Cognitive Services"`  
   Custom phrase list to improve recognition of domain-specific terms or phrases. Items are semicolon-separated.
+
+<!-- ------------------------- -->
 
 ###### Example #1: Live Event Broadcasting 
 > For high-energy, fast-paced content where low latency matters (e.g., sports event).
@@ -91,9 +97,11 @@ The captioning settings shown on Speech Studio > Captioning > **Real-time captio
 > - `--profanity raw`: keeps educational integrity  
 > - Phrase list: lecture terms, instructor names, course-specific vocab
 
+<!-- ------------------------- ------------------------- -->
+
 #### Offline Captioning
 
-Scroll up on the page, and then click "Offline captioning"
+Scroll up on the page, and then click **Offline captioning**
 
 <img src="..\images\AI_Speech\SpeechStudio_Captioning_Offline.png" width="800" title="Snipped April, 2025" />
 
@@ -104,7 +112,7 @@ Click the Play button and observe captioning.
 Offline captioning differs from real-time captioning in **timing, processing, and result stability**.
 
 | Aspect | Real-Time Captioning | Offline Captioning |
-|--------|----------------------|---------------------|
+| :--- | :--- | :--- |
 | **Timing** | Captions are generated and displayed live as the person speaks | Captions are generated after the full audio/video is available |
 | **Result Type** | Partial results shown, may change mid-sentence | Final, stable transcript is used |
 | **Use Case** | Live broadcasts, streams, webinars | Pre-recorded videos, films, audio before release |
@@ -127,11 +135,11 @@ Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and l
 
 <img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
 
-Click "Post Call Transcription and Analytics".
+Click **Post Call Transcription and Analytics**.
 
 <img src="..\images\AI_Speech\SpeechStudio_Transcription_TryItOut.png" width="800" title="Snipped April, 2025" />
 
-On the "Try it out" >> "Try with samples" tabs, click "Apply for a loan", and then scroll down on the page. Default selection is the "Analyze sentences" tab.
+On the **Try it out** >> **Try with samples** tabs, click **Apply for a loan**, and then scroll down on the page. Default selection is the **Analyze sentences** tab.
 
 <img src="..\images\AI_Speech\SpeechStudio_Transcription_AnalyzeSentences.png" width="800" title="Snipped April, 2025" />
 
@@ -141,11 +149,11 @@ Review sample content:
 - **Transcript Content**: Simulated dialogue from a customer support call demonstrates live transcription, redaction, and sentiment tagging.
   - **Sentiment**: Each transcript line is tagged on the left with an evaluation of sentiment (e.g., Positive, Neutral, etc.)  
   - **Speakers**: Transcript lines are grouped and labeled by speaker (e.g., Speaker1, Speaker2) with timestamps
-  - **PII Masking**: Sensitive information (e.g., names) is redacted and replaced with asterisks (e.g., ****), with labels like "Name" underneath 
+  - **PII Masking**: Sensitive information (e.g., names) is redacted and replaced with asterisks (e.g., ****), with labels like **Name** underneath 
 - **Hide PII Toggle**: A switch in the upper right of the transcript section allows turning PII masking on or off
-- **Call Summary Tab**: A second tab, "Call summary", is visible but not selected, likely for higher-level insights
+- **Call Summary Tab**: A second tab, **Call summary**, is visible but not selected, likely for higher-level insights
 
-Try other Scenario Cards (e.g., "Signing up for Insurance").
+Try other Scenario Cards (e.g., **Signing up for Insurance**).
 
 #### Pro Code
 
@@ -155,19 +163,96 @@ LOREM IPSUM
 
 ### Live Chat Avatar
 
+<!-- ------------------------- ------------------------- -->
+
 #### Low Code
 
 Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
 <img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
 
-Click "Live Chat Avatar".
+Click **Live Chat Avatar**.
 
-<img src="..\images\AI_Speech\SpeechStudio_LiveChatAvatar.png" width="800" title="Snipped May, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_Avatar.png" width="800" title="Snipped May, 2025" />
 
-![alt text](image.png)
+<!-- ------------------------- -->
 
-On the "Try it out" >> "Try with samples" tabs, click "Apply for a loan", and then scroll down on the page. Default selection is the "Analyze sentences" tab.
+##### Try with sample
+
+On the **Try with sample** tabs, click the Play button the video and observe the live chat sample.
+
+<img src="..\images\AI_Speech\SpeechStudio_Avatar_TryWithSample.png" width="800" title="Snipped May, 2025" />
+
+###### Settings
+
+...detailed on the right side of the interface and include the following parameters:
+
+- **Language**: `English (United States)`  
+  Specifies the language used for speech synthesis and understanding during the interaction.
+
+- **Voice**: `Sara`  
+  Selects the synthetic voice used by the avatar for spoken responses. "Sara" is one of the standard voice personas available.
+
+- **Speaking style**: `Friendly`  
+  Modifies the tone and inflection of the voice to sound warm and approachable, appropriate for customer-facing scenarios.
+
+- **Conversation style**: `"You are a voice assistant, and when you answer questions, your response should not exceed 25 words."`  
+  Provides prompt-level control over the avatar’s response behavior—limiting verbosity and guiding tone to simulate a concise support agent.
+
+- **Avatar**: `Lisa-casual-sitting`  
+  Specifies the visual representation of the avatar, in this case a casual seated female persona used for customer support roles.
+
+- **Sample response**:  
+  `"Yes, Microsoft offers special discounts and pricing for students and educators on the Surface Go and other devices through their Education Store."`  
+  Demonstrates how the avatar responds to a question using the configured voice, style, and character.
+
+<!-- ------------------------- -->
+
+##### Try on your own
+
+On the **Try on your own** tab, try different questions, settings, voices, and avatars.
+
+<img src="..\images\AI_Speech\SpeechStudio_Avatar_TryOnYourOwn.png" width="800" title="Snipped May, 2025" />
+
+###### Settings
+
+...detailed on the right side of the interface and include the following parameters:
+
+- **Language**: `English (United States)`  
+  Sets the primary language for both input and synthesized speech. This determines pronunciation, transcription, and voice selection defaults.
+
+- **Multi-language**: Toggle is set to `Off`  
+  When enabled, this allows the avatar to automatically detect and respond in multiple languages during conversation.
+
+- **Voice**: `Ava Multilingual`  
+  Specifies the synthetic voice used by the avatar. “Ava Multilingual” supports dynamic language shifts when paired with multi-language input.
+
+- **Speaking style**: `Default`  
+  Sets the vocal tone and delivery style; can be adjusted to styles like cheerful, angry, or empathetic where supported.
+
+- **Model**: `GPT-4o` (grayed out but labeled)  
+  Indicates that the GPT-4o model is selected for language generation, though selection may be locked to this choice.
+
+- **Response style**: `Default`  
+  Governs the formatting and verbosity of the generated replies. Useful for tuning tone to formal, concise, or creative.
+
+- **Prompt / System Message**: `You are an intelligent assistant.`  
+  Provides the system prompt for controlling assistant behavior, tone, and personality.
+
+- **Avatar**: Three male avatars shown (e.g., business casual, bright red sweater, blue dress shirt)  
+  Allows the user to visually customize the avatar’s appearance to match different use cases or brand identities.
+
+- **Mic Interaction**: "Press the mic to start talking"  
+  Enables live voice input, letting the user speak naturally with the avatar using their microphone.
+
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+
+
+
+
+
+
 
 
 
