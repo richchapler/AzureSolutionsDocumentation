@@ -6,13 +6,15 @@
 
 Azure AI Speech is a cloud-based service from Microsoft that leverages advanced algorithms to process and understand spoken language, extracting valuable insights and enabling dynamic communication solutions. It encompasses a range of capabilities—from real-time speech-to-text transcription and speaker recognition to lifelike text-to-speech synthesis and multilingual translation—all designed to solve real-world problems quickly and effectively.
 
-------------------------- ------------------------- ------------------------- -------------------------
+<!-- ------------------------- ------------------------- -->
 
 ## Exercise 1: Prepare Resources  
 
 ### Azure
 
-- **Speech Services**: Pricing Tier `Standard S0`
+- **Speech Services**: 
+  - Pricing Tier `Standard S0`, 
+  - Supported Region (West US 2, West Europe, Southeast Asia, South Central US, Sweden Central, North Europe, East US 2)
 
 ### On-Prem
 
@@ -32,11 +34,11 @@ Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and l
 
 Click "Captioning with speech to text".
 
-<img src="..\images\AI_Speech\SpeechStudio_TryItOut_Captioning.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_Captioning_TryItOut.png" width="800" title="Snipped April, 2025" />
 
 On the "Try it out" >> "Sample videos" tabs, click "Real-time captioning", and then scroll down on the page.
 
-<img src="..\images\AI_Speech\SpeechStudio_RealTimeCaptioning.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_Captioning_RealTime.png" width="800" title="Snipped April, 2025" />
 
 Click the Play button the video and observe captioning.
 
@@ -93,7 +95,7 @@ The captioning settings shown on Speech Studio > Captioning > **Real-time captio
 
 Scroll up on the page, and then click "Offline captioning"
 
-<img src="..\images\AI_Speech\SpeechStudio_OfflineCaptioning.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_Captioning_Offline.png" width="800" title="Snipped April, 2025" />
 
 Click the Play button and observe captioning.
 
@@ -127,11 +129,11 @@ Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and l
 
 Click "Post Call Transcription and Analytics".
 
-<img src="..\images\AI_Speech\SpeechStudio_TryItOut_Transcription.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_Transcription_TryItOut.png" width="800" title="Snipped April, 2025" />
 
 On the "Try it out" >> "Try with samples" tabs, click "Apply for a loan", and then scroll down on the page. Default selection is the "Analyze sentences" tab.
 
-<img src="..\images\AI_Speech\SpeechStudio_AnalyzeSentences.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_Transcription_AnalyzeSentences.png" width="800" title="Snipped April, 2025" />
 
 Review sample content:
 
@@ -152,7 +154,23 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Live Chat Avatar
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+
+Click "Live Chat Avatar".
+
+<img src="..\images\AI_Speech\SpeechStudio_LiveChatAvatar.png" width="800" title="Snipped May, 2025" />
+
+![alt text](image.png)
+
+On the "Try it out" >> "Try with samples" tabs, click "Apply for a loan", and then scroll down on the page. Default selection is the "Analyze sentences" tab.
+
+
+
 #### Pro Code
 
 LOREM IPSUM
