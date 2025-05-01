@@ -245,16 +245,7 @@ On the **Try on your own** tab, try different questions, settings, voices, and a
 - **Mic Interaction**: "Press the mic to start talking"  
   Enables live voice input, letting the user speak naturally with the avatar using their microphone.
 
-<!-- ------------------------- -->
-<!-- ------------------------- -->
-
-
-
-
-
-
-
-
+<!-- ------------------------- ------------------------- -->
 
 #### Pro Code
 
