@@ -16,21 +16,8 @@ The database team talks about the mission and settles on the following goals:
 
 ## Fundamentals
 
-1. **Basics**: Leverage SQL Server’s built‑in diagnostics to understand how queries are processed—comparing estimated vs. actual execution plans and observing real‑time execution progress
-
-2. **Database Configuration**: Adjust database‑level options to influence how queries are compiled, cached, and parameterized, and how statistics are maintained—ensuring stable, efficient execution plans
-
-3. **Query Store Usage**: Capture, compare and pin execution plans over time to detect regressions and enforce stability
-
-4. **Logic Optimization**: Refine your query structure to operate on whole data sets, eliminate redundant work, and express filters in a way that lets the optimizer choose the most efficient execution path
-
-5. **Query‑Level Hints**: Use targeted hints to nudge the optimizer when its default plan isn’t ideal—overriding join strategies, index choices, parallel execution, plan caching, or locking behavior
-
-<!-- ------------------------- ------------------------- ------------------------- -->
-
 ### Infrastructure
 
-<!-- ------------------------- ------------------------- -->
 <!-- ------------------------- ------------------------- -->
 
 #### Processor 
