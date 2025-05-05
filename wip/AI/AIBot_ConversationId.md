@@ -37,7 +37,9 @@ Solution team wants to be able to **track every technological interaction** aris
 | OpenAI Deployment<br>`gpt-35-turbo` | Specific model instance used by the Logic App to generate chat completions |
 | Log Analytics Workspace<br>`imlaw` | Central log store for all diagnostic and telemetry logs, enabling cross-resource queries by correlation ID |
 
-### Basics
+<!-- ------------------------- ------------------------- -->
+
+### Resource Group
 
 #### List Available Subscriptions
 
@@ -50,7 +52,7 @@ Review the resulting list and copy the `SubscriptionId` value for the subscripti
 #### Set Active Subscription
 
 ```powershell
-az account set --subscription "<subscriptionId>"
+az account set --subscription "c4ea206c-9e4c-44a8-b6ee-756cea47f04e"
 ``` 
 
 #### Create Resource Group
@@ -63,21 +65,448 @@ az group create --name "im" --location "westus"
 
 ### Log Analytics
 
-Use Portal
+#### Instantiate Log Analytics
+```powershell
+az monitor log-analytics workspace create --resource-group "im" --workspace-name "imlaw" --location "westus" --sku "PerGB2018"
+```
+
+##### Expected Output
+```plaintext
+Resource provider 'Microsoft.OperationalInsights' used by this operation is not registered. We are registering for you.
+Registration succeeded.
+{
+  "createdDate": "2025-05-05T14:08:58.8762176Z",
+  "customerId": "c0fc52e0-3df6-42ef-a810-6f5d4a2d7087",
+  "etag": "\"060308e9-0000-0700-0000-6818c67a0000\"",
+  "features": {
+    "enableLogAccessUsingOnlyResourcePermissions": true
+  },
+  "id": "/subscriptions/c4ea206c-9e4c-44a8-b6ee-756cea47f04e/resourceGroups/im/providers/Microsoft.OperationalInsights/workspaces/imlaw",
+  "location": "westus",
+  "modifiedDate": "2025-05-05T14:08:58.8762176Z",
+  "name": "imlaw",
+  "provisioningState": "Creating",
+  "publicNetworkAccessForIngestion": "Enabled",
+  "publicNetworkAccessForQuery": "Enabled",
+  "resourceGroup": "im",
+  "retentionInDays": 30,
+  "sku": {
+    "lastSkuUpdate": "2025-05-05T14:08:58.8762176Z",
+    "name": "PerGB2018"
+  },
+  "type": "Microsoft.OperationalInsights/workspaces",
+  "workspaceCapping": {
+    "dailyQuotaGb": -1.0,
+    "dataIngestionStatus": "RespectQuota",
+    "quotaNextResetTime": "2025-05-06T12:00:00Z"
+  }
+}
+```
 
 <!-- ------------------------- ------------------------- -->
 
 ### OpenAI
 
 #### Instantiate OpenAI
-
 ```powershell
 az cognitiveservices account create --resource-group "im" --name "imoa" --kind OpenAI --sku S0 --location "westus"
 ``` 
 
-#### Create Deployment
+##### Expected Output
+```plaintext
+{
+  "etag": "\"5b0132c6-0000-0700-0000-6818c6c60000\"",
+  "id": "/subscriptions/c4ea206c-9e4c-44a8-b6ee-756cea47f04e/resourceGroups/im/providers/Microsoft.CognitiveServices/accounts/imoa",
+  "identity": null,
+  "kind": "OpenAI",
+  "location": "westus",
+  "name": "imoa",
+  "properties": {
+    "abusePenalty": null,
+    "allowedFqdnList": null,
+    "apiProperties": {
+      "aadClientId": null,
+      "aadTenantId": null,
+      "additionalProperties": null,
+      "eventHubConnectionString": null,
+      "qnaAzureSearchEndpointId": null,
+      "qnaAzureSearchEndpointKey": null,
+      "qnaRuntimeEndpoint": null,
+      "statisticsEnabled": null,
+      "storageAccountConnectionString": null,
+      "superUser": null,
+      "websiteName": null
+    },
+    "callRateLimit": {
+      "count": null,
+      "renewalPeriod": null,
+      "rules": [
+        {
+          "count": 30.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.dalle.post",
+          "matchPatterns": [
+            {
+              "method": "POST",
+              "path": "dalle/*"
+            },
+            {
+              "method": "POST",
+              "path": "openai/images/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        },
+        {
+          "count": 30.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.dalle.other",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "dalle/*"
+            },
+            {
+              "method": "*",
+              "path": "openai/operations/images/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        },
+        {
+          "count": 120.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.assistants.list",
+          "matchPatterns": [
+            {
+              "method": "GET",
+              "path": "openai/assistants"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 60.0
+        },
+        {
+          "count": 120.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.threads.list",
+          "matchPatterns": [
+            {
+              "method": "GET",
+              "path": "openai/threads"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 60.0
+        },
+        {
+          "count": 120.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.vectorstores.list",
+          "matchPatterns": [
+            {
+              "method": "GET",
+              "path": "openai/vector_stores"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 60.0
+        },
+        {
+          "count": 100000.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.assistants.default",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "openai/assistants"
+            },
+            {
+              "method": "*",
+              "path": "openai/assistants/*"
+            },
+            {
+              "method": "*",
+              "path": "openai/threads"
+            },
+            {
+              "method": "*",
+              "path": "openai/threads/*"
+            },
+            {
+              "method": "*",
+              "path": "openai/vector_stores"
+            },
+            {
+              "method": "*",
+              "path": "openai/vector_stores/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        },
+        {
+          "count": 100000.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.responses.default",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "openai/responses"
+            },
+            {
+              "method": "*",
+              "path": "openai/responses/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        },
+        {
+          "count": 30.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.batches.post",
+          "matchPatterns": [
+            {
+              "method": "POST",
+              "path": "openai/batches"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 60.0
+        },
+        {
+          "count": 500.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.batches.get",
+          "matchPatterns": [
+            {
+              "method": "GET",
+              "path": "openai/batches/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 60.0
+        },
+        {
+          "count": 100.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai.batches.list",
+          "matchPatterns": [
+            {
+              "method": "GET",
+              "path": "openai/batches"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 60.0
+        },
+        {
+          "count": 30.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "openai",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "openai/*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        },
+        {
+          "count": 30.0,
+          "dynamicThrottlingEnabled": null,
+          "key": "default",
+          "matchPatterns": [
+            {
+              "method": "*",
+              "path": "*"
+            }
+          ],
+          "minCount": null,
+          "renewalPeriod": 1.0
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "name": "VirtualNetworks",
+        "value": null
+      },
+      {
+        "name": "CustomerManagedKey",
+        "value": null
+      },
+      {
+        "name": "MaxFineTuneCount",
+        "value": "500"
+      },
+      {
+        "name": "MaxRunningFineTuneCount",
+        "value": "3"
+      },
+      {
+        "name": "MaxUserFileCount",
+        "value": "100"
+      },
+      {
+        "name": "MaxTrainingFileSize",
+        "value": "512000000"
+      },
+      {
+        "name": "MaxUserFileImportDurationInHours",
+        "value": "1"
+      },
+      {
+        "name": "MaxFineTuneJobDurationInHours",
+        "value": "720"
+      },
+      {
+        "name": "MaxEvaluationRunDurationInHours",
+        "value": "5"
+      },
+      {
+        "name": "MaxRunningEvaluationCount",
+        "value": "5"
+      },
+      {
+        "name": "TrustedServices",
+        "value": "Microsoft.CognitiveServices,Microsoft.MachineLearningServices,Microsoft.Search,Microsoft.VideoIndexer"
+      },
+      {
+        "name": "RaiMonitor",
+        "value": null
+      }
+    ],
+    "commitmentPlanAssociations": null,
+    "customSubDomainName": null,
+    "dateCreated": "2025-05-05T14:10:06.3708256Z",
+    "deletionDate": null,
+    "disableLocalAuth": null,
+    "dynamicThrottlingEnabled": null,
+    "encryption": null,
+    "endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "endpoints": {
+      "OpenAI Dall-E API": "https://westus.api.cognitive.microsoft.com/",
+      "OpenAI Language Model Instance API": "https://westus.api.cognitive.microsoft.com/",
+      "OpenAI Model Scaleset API": "https://westus.api.cognitive.microsoft.com/",
+      "OpenAI Moderations API": "https://westus.api.cognitive.microsoft.com/",
+      "OpenAI Realtime API": "https://westus.api.cognitive.microsoft.com/",
+      "OpenAI Sora API": "https://westus.api.cognitive.microsoft.com/",
+      "OpenAI Whisper API": "https://westus.api.cognitive.microsoft.com/",
+      "Token Service API": "https://westus.api.cognitive.microsoft.com/"
+    },
+    "internalId": "e3e7da52bab84a599e097ed33efc47a7",
+    "isMigrated": false,
+    "locations": null,
+    "migrationToken": null,
+    "networkAcls": null,
+    "privateEndpointConnections": [],
+    "provisioningState": "Succeeded",
+    "publicNetworkAccess": "Enabled",
+    "quotaLimit": null,
+    "restore": null,
+    "restrictOutboundNetworkAccess": null,
+    "scheduledPurgeDate": null,
+    "skuChangeInfo": null,
+    "userOwnedStorage": null
+  },
+  "resourceGroup": "im",
+  "sku": {
+    "capacity": null,
+    "family": null,
+    "name": "S0",
+    "size": null,
+    "tier": null
+  },
+  "systemData": {
+    "createdAt": "2025-05-05T14:10:05.794164+00:00",
+    "createdBy": "admin@MngEnvMCAP500976.onmicrosoft.com",
+    "createdByType": "User",
+    "lastModifiedAt": "2025-05-05T14:10:05.794164+00:00",
+    "lastModifiedBy": "admin@MngEnvMCAP500976.onmicrosoft.com",
+    "lastModifiedByType": "User"
+  },
+  "tags": null,
+  "type": "Microsoft.CognitiveServices/accounts"
+}
+```
 
-Navigate to [Azure AI Foundry](https://ai.azure.com) and create a `gpt-35-turbo` deployment. Copy the Deployment Id value for later use.
+<!-- ------------------------- ------------------------- -->
+
+### Generative Pre-trained Transformer (GPT)
+
+#### Create Deployment
+```powershell
+az cognitiveservices account deployment create --resource-group "im" --name "imoa" --deployment-name "gpt-35-turbo" --model-name "gpt-35-turbo" --model-version "0125" --model-format OpenAI --sku-name Standard --sku-capacity 240
+``` 
+
+##### Expected Output
+```plaintext
+{
+  "etag": "\"2e1a44b8-45a5-455c-81d8-7794510e182b\"",
+  "id": "/subscriptions/c4ea206c-9e4c-44a8-b6ee-756cea47f04e/resourceGroups/im/providers/Microsoft.CognitiveServices/accounts/imoa/deployments/gpt-35-turbo",
+  "name": "gpt-35-turbo",
+  "properties": {
+    "callRateLimit": null,
+    "capabilities": {
+      "assistants": "true",
+      "chatCompletion": "true",
+      "maxContextToken": "16385",
+      "maxOutputToken": "4096"
+    },
+    "model": {
+      "callRateLimit": null,
+      "format": "OpenAI",
+      "name": "gpt-35-turbo",
+      "source": null,
+      "version": "0125"
+    },
+    "provisioningState": "Succeeded",
+    "raiPolicyName": null,
+    "rateLimits": [
+      {
+        "count": 240.0,
+        "dynamicThrottlingEnabled": null,
+        "key": "request",
+        "matchPatterns": null,
+        "minCount": null,
+        "renewalPeriod": 10.0
+      },
+      {
+        "count": 240000.0,
+        "dynamicThrottlingEnabled": null,
+        "key": "token",
+        "matchPatterns": null,
+        "minCount": null,
+        "renewalPeriod": 60.0
+      }
+    ],
+    "scaleSettings": null,
+    "versionUpgradeOption": "OnceNewDefaultVersionAvailable"
+  },
+  "resourceGroup": "im",
+  "sku": {
+    "capacity": 240,
+    "family": null,
+    "name": "Standard",
+    "size": null,
+    "tier": null
+  },
+  "systemData": {
+    "createdAt": "2025-05-05T14:44:40.881375+00:00",
+    "createdBy": "admin@MngEnvMCAP500976.onmicrosoft.com",
+    "createdByType": "User",
+    "lastModifiedAt": "2025-05-05T14:44:40.881375+00:00",
+    "lastModifiedBy": "admin@MngEnvMCAP500976.onmicrosoft.com",
+    "lastModifiedByType": "User"
+  },
+  "type": "Microsoft.CognitiveServices/accounts/deployments"
+}
+```
 
 <!-- ------------------------- ------------------------- -->
 
@@ -85,45 +514,101 @@ Navigate to [Azure AI Foundry](https://ai.azure.com) and create a `gpt-35-turbo`
 
 Invoke OpenAI via REST call to confirm successful chat completion:
 ```powershell
-Invoke-RestMethod "https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15" -Method POST -Headers @{"api-key"="<apiKey>";"Content-Type"="application/json";"X-Correlation-Id"="test-123"} -Body '{"messages":[{"role":"user","content":"Whats a quick soup recipe?"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}'
+Invoke-RestMethod -Method Get -Uri "$((az cognitiveservices account show --resource-group im --name imoa --query properties.endpoint -o tsv).TrimEnd('/'))/openai/models?api-version=2023-10-01-preview" -Headers @{ 'api-key' = (az cognitiveservices account keys list --resource-group im --name imoa --query key1 -o tsv) }
 ```
 
 ##### Expected Response
-
-You should see a response like the following:
 ```plaintext
-choices : {@{finish_reason=stop; index=0; message=}}
-created : 1745428938
-id : chatcmpl-BPY5a9XvXiwLvQGh86BR4r7keGNTm
-model : gpt-3.5-turbo-0125
-object : chat.completion
-system_fingerprint : fp_0165350fbb
-usage : @{completion_tokens=183; prompt_tokens=13; total_tokens=196}
+data
+----
+{@{status=succeeded; capabilities=; lifecycle_status=generally-available; deprecation=; id=dall-e-3-3.0; created_at=1691712000; updated_at=1691712000; object=model}, @{…
 ```
 
 <!-- ------------------------- ------------------------- -->
 
 ### Logic App
 
-#### Configure Azure CLI
-...for automatic extension installs
-
+#### Configure Azure CLI for automatic extension installs
 ```powershell
 az config set extension.use_dynamic_install=yes_without_prompt
 ```
 
-#### Install Logic App Extension
-...for Azure CLI
+##### Expected Response
+```plaintext
+Command group 'config' is experimental and under development. Reference and support levels: https://aka.ms/CLI_refstatus
+```
 
+<!-- ------------------------- ------------------------- -->
+
+#### Install Logic App Extension
 ```powershell
 az extension add --name logic
-``` 
+```
+
+<!-- ------------------------- ------------------------- -->
 
 #### Instantiate Logic App
-
 ```powershell
 az logic workflow create --resource-group "im" --name "imla" --definition '{"definition":{"$schema":"https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json#","contentVersion":"1.0.0.0","triggers":{},"actions":{},"outputs":{}},"parameters":{}}' --location "westus"
 ```
+
+##### Expected Response
+```plaintext
+Resource provider 'Microsoft.Logic' used by this operation is not registered. We are registering for you.
+Registration succeeded.
+{
+  "accessEndpoint": "https://prod-113.westus.logic.azure.com:443/workflows/152752f42bab4073b11fb453a3d9558d",
+  "changedTime": "2025-05-05T15:40:09.3727798Z",
+  "createdTime": "2025-05-05T15:40:09.375635Z",
+  "definition": {
+    "$schema": "https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json#",
+    "actions": {},
+    "contentVersion": "1.0.0.0",
+    "outputs": {},
+    "triggers": {}
+  },
+  "endpointsConfiguration": {
+    "connector": {
+      "outgoingIpAddresses": [
+        {
+          "address": "<abridged>"
+        }
+      ]
+    },
+    "workflow": {
+      "accessEndpointIpAddresses": [
+        {
+          "address": "<abridged>"
+        }
+      ],
+      "outgoingIpAddresses": [
+        {
+          "address": "<abridged>"
+        }
+      ]
+    }
+  },
+  "id": "/subscriptions/c4ea206c-9e4c-44a8-b6ee-756cea47f04e/resourceGroups/im/providers/Microsoft.Logic/workflows/imla",
+  "location": "westus",
+  "name": "imla",
+  "parameters": {},
+  "provisioningState": "Succeeded",
+  "resourceGroup": "im",
+  "state": "Enabled",
+  "type": "Microsoft.Logic/workflows",
+  "version": "08584551472761213419"
+}
+```
+
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- ------------------------- -->
+
+RESUME HERE!!!!!
+
 
 <!-- ------------------------- ------------------------- -->
 
@@ -185,7 +670,7 @@ Review the resulting list and copy the `SubscriptionId` value for the subscripti
 #### Set Active Subscription
 
 ```powershell
-az account set --subscription "<subscriptionId>"
+az account set --subscription "c4ea206c-9e4c-44a8-b6ee-756cea47f04e"
 ```
 
 <!-- ------------------------- -->
