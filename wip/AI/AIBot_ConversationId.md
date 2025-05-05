@@ -49,11 +49,15 @@ az account list --output table
 
 Review the resulting list and copy the `SubscriptionId` value for the subscription you want to use.
 
+<!-- ------------------------- -->
+
 #### Set Active Subscription
 
 ```powershell
 az account set --subscription "c4ea206c-9e4c-44a8-b6ee-756cea47f04e"
 ``` 
+
+<!-- ------------------------- -->
 
 #### Create Resource Group
 
@@ -508,7 +512,7 @@ az cognitiveservices account deployment create --resource-group "im" --name "imo
 }
 ```
 
-<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- -->
 
 #### Confirm Success
 
@@ -538,14 +542,14 @@ az config set extension.use_dynamic_install=yes_without_prompt
 Command group 'config' is experimental and under development. Reference and support levels: https://aka.ms/CLI_refstatus
 ```
 
-<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- -->
 
 #### Install Logic App Extension
 ```powershell
 az extension add --name logic
 ```
 
-<!-- ------------------------- ------------------------- -->
+<!-- ------------------------- -->
 
 #### Instantiate Logic App
 ```powershell
@@ -601,112 +605,108 @@ Registration succeeded.
 ```
 
 <!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- -->
-
-RESUME HERE!!!!!
-
-
-<!-- ------------------------- ------------------------- -->
-
-#### Confirm Success
-
-Invoke OpenAI via REST call to confirm successful chat completion:
-```powershell
-$headers = @{ "Content-Type" = "application/json" }
-$body = @'
-{
-  "prompt": "Share a great soup recipe",
-  "correlationId": "test-123"
-}
-'@
-
-Invoke-RestMethod "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=IunxdWoa_VdKPTY7uxLE3B66t4mMHdmYSR_NLfporCs" -Method POST -Headers $headers -Body $body
-
-```
-
-##### Expected Response
-
-You should see a response like the following:
-```plaintext
-One quick and easy soup recipe is a classic tomato soup. 
-
-Ingredients:
-- 1 can of diced tomatoes
-- 1 cup of chicken or vegetable broth
-- 1/2 onion, diced
-- 2 cloves of garlic, minced
-- 1 tablespoon of olive oil
-- Salt and pepper to taste
-- Optional: fresh basil, grated Parmesan cheese, or croutons for garnish
-
-Instructions:
-1. In a large pot, heat the olive oil over medium heat. Add the diced onion and garlic and sauté until fragrant and onions are translucent.
-2. Add the diced tomatoes and broth to the pot and bring to a simmer. Let simmer for about 10-15 minutes.
-3. Use an immersion blender or transfer the soup to a blender to blend until smooth. Be careful when blending hot liquids.
-4. Season with salt and pepper to taste.
-5. Serve hot and garnish with fresh basil, Parmesan cheese, or croutons if desired. Enjoy!
-```
-
-<!-- ------------------------- ------------------------- -->
 
 ### Application Registration
 
-<!-- ------------------------- -->
+The application registration serves as the bot's identity and credentials:
 
-#### List Available Subscriptions
+- **Bot Authentication**: The client identifier and secret become the “Microsoft App ID and password” you enter on the Bot Service; Teams and the Bot Framework use those values to authenticate incoming requests and validate that calls really are coming from your bot
 
-```powershell
-az account list --output table
-``` 
-
-Review the resulting list and copy the `SubscriptionId` value for the subscription you want to use.
-
-<!-- ------------------------- -->
-
-#### Set Active Subscription
-
-```powershell
-az account set --subscription "c4ea206c-9e4c-44a8-b6ee-756cea47f04e"
-```
+- **Token Acquisition**: When your bot needs to call other services (e.g., pull information via Microsoft Graph or invoke Logic App), it uses its service principal to acquire tokens; assigning RBAC roles to that service principal allows control of exactly which resources the bot may access
 
 <!-- ------------------------- -->
 
 #### Create Application
 
+Applications define the identity, permissions and configuration of your bot in the directory.
+
 ```powershell
 $appId = az ad app create --display-name "imbs" --query appId -o tsv
 ```
-
-An application defines the identity, permissions and configuration of your bot in the directory.
 
 <!-- ------------------------- -->
 
 #### Create Service Principal
 
+Service Principals are the tenant-specific instance of that application that holds credentials (secrets or certificates) and can be assigned roles.
+
 ```powershell
 az ad sp create --id $appId
 ```
 
-A Service Principal is the tenant-specific instance of that application that holds credentials (secrets or certificates) and can be assigned roles.
+##### Expected Output
+```plaintext
+{      
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#servicePrincipals/$entity",
+  "accountEnabled": true,
+  "addIns": [],
+  "alternativeNames": [],
+  "appDescription": null,
+  "appDisplayName": "imbs",
+  "appId": "8b7df299-eeee-462b-83b0-22fda06843b4",
+  "appOwnerOrganizationId": "4a863f70-7a4a-42de-886b-220bf0e2abb2",
+  "appRoleAssignmentRequired": false,
+  "appRoles": [],
+  "applicationTemplateId": null,
+  "createdDateTime": null,
+  "deletedDateTime": null,
+  "description": null,
+  "disabledByMicrosoftStatus": null,
+  "displayName": "imbs",
+  "homepage": null,
+  "id": "7b4ce6dd-b055-46aa-94ca-5628bb95dc5d",
+  "info": {
+    "logoUrl": null,
+    "marketingUrl": null,
+    "privacyStatementUrl": null,
+    "supportUrl": null,
+    "termsOfServiceUrl": null
+  },
+  "keyCredentials": [],
+  "loginUrl": null,
+  "logoutUrl": null,
+  "notes": null,
+  "notificationEmailAddresses": [],
+  "oauth2PermissionScopes": [],
+  "passwordCredentials": [],
+  "preferredSingleSignOnMode": null,
+  "preferredTokenSigningKeyThumbprint": null,
+  "replyUrls": [],
+  "resourceSpecificApplicationPermissions": [],
+  "samlSingleSignOnSettings": null,
+  "servicePrincipalNames": [
+    "8b7df299-eeee-462b-83b0-22fda06843b4"
+  ],
+  "servicePrincipalType": "Application",
+  "signInAudience": "AzureADMyOrg",
+  "tags": [],
+  "tokenEncryptionKeyId": null,
+  "verifiedPublisher": {
+    "addedDateTime": null,
+    "displayName": null,
+    "verifiedPublisherId": null
+  }
+}
+```
 
 <!-- ------------------------- -->
 
 #### Create Client Secret
 
 ```powershell
-$clientSecret = az ad app credential reset --id $appId --append --end-date "2025-05-01T00:00:00Z" --query password -o tsv
+$clientSecret = az ad app credential reset --id $appId --append --end-date "2025-05-10T00:00:00Z" --query password -o tsv
 ``` 
 
+##### Expected Output
+```plaintext
+WARNING: The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials into your source control. For more information, see https://aka.ms/azadsp-cli
+```
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
 ## Setup Workflow
 
-Navigate to Azure Portal >> Logic App `imla` >> Logic App Designer.
+Navigate to Azure Portal >> Logic App `imla` >> Development Tools >> Logic App Designer.
 
 ### Add Trigger
 
@@ -815,6 +815,47 @@ Enjoy your quick and delicious tomato soup!
 ```
 
 Once you see a successful run and valid response in the designer, you'll know the endpoint is published and handling requests correctly.
+
+<!-- ------------------------- ------------------------- -->
+
+#### Confirm Success
+
+Invoke OpenAI via REST call to confirm successful chat completion:
+```powershell
+$headers = @{ "Content-Type" = "application/json" }
+$body = @'
+{
+  "prompt": "Share a great soup recipe",
+  "correlationId": "test-123"
+}
+'@
+
+Invoke-RestMethod "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=IunxdWoa_VdKPTY7uxLE3B66t4mMHdmYSR_NLfporCs" -Method POST -Headers $headers -Body $body
+
+```
+
+##### Expected Response
+
+You should see a response like the following:
+```plaintext
+One quick and easy soup recipe is a classic tomato soup. 
+
+Ingredients:
+- 1 can of diced tomatoes
+- 1 cup of chicken or vegetable broth
+- 1/2 onion, diced
+- 2 cloves of garlic, minced
+- 1 tablespoon of olive oil
+- Salt and pepper to taste
+- Optional: fresh basil, grated Parmesan cheese, or croutons for garnish
+
+Instructions:
+1. In a large pot, heat the olive oil over medium heat. Add the diced onion and garlic and sauté until fragrant and onions are translucent.
+2. Add the diced tomatoes and broth to the pot and bring to a simmer. Let simmer for about 10-15 minutes.
+3. Use an immersion blender or transfer the soup to a blender to blend until smooth. Be careful when blending hot liquids.
+4. Season with salt and pepper to taste.
+5. Serve hot and garnish with fresh basil, Parmesan cheese, or croutons if desired. Enjoy!
+```
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
