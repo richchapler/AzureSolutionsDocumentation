@@ -27,19 +27,21 @@ Solution team wants to be able to **track every technological interaction** aris
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-## Resources
+## Required Resources
 
 Instantiate the following Azure resources:
-- **Resource Group**: `im`
-- **OpenAI**: `imoa` with Deployment model `gpt-35-turbo`
-- **Logic App**: `imla`... Consumption with dependencies:
-  - **Log Analytics Workspace**: `imlaw`
-  - **Diagnostic Settings** connected to `imlaw` workspace
-- **API Management**: `imam`... Consumption
+- **Resource Group** `im`
+- **OpenAI** `imoa`: with Deployment model `gpt-35-turbo`
+- **Logic App** `imla`: Consumption with dependency **Log Analytics Workspace** `imlaw` and Diagnostic Setting
+- **API Management** `imam`: Consumption with dependency **Log Analytics Workspace** `imlaw`
+- **Bot** `imbot001`: Multi Tenant with dependency **App Registration**: `imbot001` and Secret
+- **Bot Framework Emulator**: Download latest {e.g., https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v4.15.1}
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-## OpenAI: Confirm Prompt-ability
+## Solution Instructions
+
+### OpenAI: Confirm Prompt-ability
 
 Invoke OpenAI via REST call to confirm successful chat completion:
 ```powershell
@@ -55,11 +57,11 @@ data
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-## Logic App: Create Workflow
+### Logic App: Create Prompt Workflow
 
 Navigate to Azure Portal >> Logic App `imla` >> **Development Tools** >> **Logic app designer**.
 
-### Add Trigger
+#### Add Trigger
 
 Click **Add a trigger**, search for and select **Request** >> **When an HTTP request is received**.
 
@@ -75,12 +77,12 @@ Click **Save** and then copy the **HTTP URL** value for later use.
 **Example HTTP URL**
 
 ```plaintext
-https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=nWo7QV6M0OAu1QalS9KCFiofRp6VX0d42ld-kAv5U4U
+https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=<sig>
 ```
 
 <!-- ------------------------- -->
 
-### Add Action: HTTP 
+#### Add Action: HTTP 
 
 Click **+** underneath the **When an HTTP request is received** trigger and then **Add an action**.
 
@@ -96,7 +98,7 @@ Click **Save**.
 
 <!-- ------------------------- -->
 
-### Add Action: Response
+#### Add Action: Response
 
 Click **+** underneath the **HTTP** action and then **Add an action**.
 
@@ -110,9 +112,9 @@ Click **Save**.
 
 <!-- ------------------------- ------------------------- -->
 
-### Confirm Success
+#### Confirm Success
 
-#### ...with Logic App interface
+##### ...with Logic App interface
 
 Click **Run** >> **Run with payload**, and on the resulting pane, paste **Body** value: `{"prompt":"Hello World"}`
 
@@ -131,7 +133,7 @@ Once you see a successful run and valid response in the designer, you'll know th
 
 <!-- ------------------------- ------------------------- -->
 
-#### ...with API call
+##### ...with API call
 
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
@@ -149,7 +151,9 @@ Hello! How can I assist you today?
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-## API Management: Route to Logic App
+### API Management: Produce Clean URL
+
+#### APIs
 
 Navigate to Azure Portal >> Logic App `imam` >> **APIs** >> **APIs**, then click **+ Add API** >> **HTTP**.
 
@@ -162,7 +166,9 @@ Setting | Value
 
 Click **Create**.
 
-### Operation
+<!-- ------------------------- -->
+
+##### Operation
 
 Click **+ Add Operation** and then complete the **Frontend** form:
 
@@ -170,12 +176,13 @@ Setting | Value
 :--- | :---
 **Display name** | `Bot Messages`
 **Name** | `bot-messages`
-**Display name** | `Bot Messages`
 **URL** | POST and `/api/messages`
 
 Click **Save**.
 
-### Inbound Processing
+<!-- ------------------------- -->
+
+###### Inbound Processing
 
 Click **Inbound processing** >> **...** >> **Code editor**.
 
@@ -217,7 +224,83 @@ Replace the default code with:
 
 Click **Save**.
 
-### Test Configuration
+<!-- ------------------------- -->
+
+###### Backend
+
+Replace the default code with:
+```xml
+<policies>
+    <inbound>
+        <base />
+        <set-header name="Content-Type" exists-action="override">
+            <value>application/json</value>
+        </set-header>
+        <set-header name="Authorization" exists-action="override">
+            <value>@(context.Request.Headers.GetValueOrDefault("Authorization",""))</value>
+        </set-header>
+        <set-backend-service base-url="https://prod-72.westus.logic.azure.com" />
+        <rewrite-uri template="/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke" />
+        <set-query-parameter name="api-version" exists-action="override">
+            <value>2016-10-01</value>
+        </set-query-parameter>
+        <set-query-parameter name="sp" exists-action="override">
+            <value>/triggers/When_a_HTTP_request_is_received/run</value>
+        </set-query-parameter>
+        <set-query-parameter name="sv" exists-action="override">
+            <value>1.0</value>
+        </set-query-parameter>
+        <set-query-parameter name="sig" exists-action="override">
+            <value>nWo7QV6M0OAu1QalS9KCFiofRp6VX0d42ld-kAv5U4U</value>
+        </set-query-parameter>
+    </inbound>
+    <backend>
+        <forward-request />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
+```
+
+Click **Save**.
+
+<!-- ------------------------- -->
+
+###### Settings
+
+Navigate to **Settings** tab >> **Subscription** section and uncheck **Subscription required**.
+
+Click **Save**.
+
+<!-- ------------------------- -->
+
+#### Products
+
+Navigate to Azure Portal >> Logic App `imam` >> **APIs** >> **Products**, then click **+ Add**.
+
+Complete the **Add product** form:
+
+Setting | Value
+:--- | :---
+**Display name**, **Id**, and **Description** | `imbot-product`
+**Published** | CHECKED
+**Requires Subscription** | UNCHECKED
+
+Click **Create**.
+
+Navigate to Product `imbot-product` then click **+ Add API**.
+
+On the **APIs** popout form, check `imbot-api` and then click **Select**.
+
+<!-- ------------------------- -->
+
+#### Confirm Success
+
+##### ...with API Management interface
 
 On the **Test** tab, enter **Request body**: `{ "prompt": "Hello World" }`, then click **Send**.
 
@@ -253,372 +336,62 @@ x-ms-workflow-system-id: /locations/westus/scaleunits/prod-72/workflows/6024321d
 x-ms-workflow-version: 08584550448306832703
 
 Hello! How can I assist you today?
+```
 
 Your APIM instance now provides a clean URL (`https://imam.azure-api.net/api/messages`) that integrates seamlessly with Azure Bot Service.
 
+##### ...with API call
 
-
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-<!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
-
-## Application Registration
-
-The application registration serves as the bot's identity and credentials:
-
-- **Bot Authentication**: The client identifier and secret become the "Microsoft App ID and password" you enter on the Bot Service; Teams and the Bot Framework use those values to authenticate incoming requests and validate that calls really are coming from your bot
-
-- **Token Acquisition**: When your bot needs to call other services (e.g., pull information via Microsoft Graph or invoke Logic App), it uses its service principal to acquire tokens; assigning RBAC roles to that service principal allows control of exactly which resources the bot may access
-
-<!-- ------------------------- -->
-
-### Create Application
-
-Applications define the identity, permissions and configuration of your bot in the directory.
 
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
 ```powershell
-$appId = az ad app create --display-name "imbot001" --query appId -o tsv
-```
-
-<!-- ------------------------- -->
-
-### Create Service Principal
-
-Service Principals are the tenant-specific instance of that application that holds credentials (secrets or certificates) and can be assigned roles.
-
-```powershell
-az ad sp create --id $appId
-```
-
-**Expected Output**
-```plaintext
-{      
-  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#servicePrincipals/$entity",
-  "accountEnabled": true,
-  "addIns": [],
-  "alternativeNames": [],
-  "appDescription": null,
-  "appDisplayName": "imbot001",
-  "appId": "8b7df299-eeee-462b-83b0-22fda06843b4",
-  "appOwnerOrganizationId": "4a863f70-7a4a-42de-886b-220bf0e2abb2",
-  "appRoleAssignmentRequired": false,
-  "appRoles": [],
-  "applicationTemplateId": null,
-  "createdDateTime": null,
-  "deletedDateTime": null,
-  "description": null,
-  "disabledByMicrosoftStatus": null,
-  "displayName": "imbot001",
-  "homepage": null,
-  "id": "7b4ce6dd-b055-46aa-94ca-5628bb95dc5d",
-  "info": {
-    "logoUrl": null,
-    "marketingUrl": null,
-    "privacyStatementUrl": null,
-    "supportUrl": null,
-    "termsOfServiceUrl": null
-  },
-  "keyCredentials": [],
-  "loginUrl": null,
-  "logoutUrl": null,
-  "notes": null,
-  "notificationEmailAddresses": [],
-  "oauth2PermissionScopes": [],
-  "passwordCredentials": [],
-  "preferredSingleSignOnMode": null,
-  "preferredTokenSigningKeyThumbprint": null,
-  "replyUrls": [],
-  "resourceSpecificApplicationPermissions": [],
-  "samlSingleSignOnSettings": null,
-  "servicePrincipalNames": [
-    "8b7df299-eeee-462b-83b0-22fda06843b4"
-  ],
-  "servicePrincipalType": "Application",
-  "signInAudience": "AzureADMyOrg",
-  "tags": [],
-  "tokenEncryptionKeyId": null,
-  "verifiedPublisher": {
-    "addedDateTime": null,
-    "displayName": null,
-    "verifiedPublisherId": null
-  }
-}
-```
-
-<!-- ------------------------- -->
-
-### Create Client Secret
-
-```powershell
-$clientSecret = az ad app credential reset --id $appId --append --end-date "2025-05-10T00:00:00Z" --query password -o tsv
-``` 
-
-**Expected Output**
-```plaintext
-WARNING: The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials into your source control. For more information, see https://aka.ms/azadsp-cli
+Invoke-RestMethod -Method Post -Uri 'https://imam.azure-api.net/api/messages/When_a_HTTP_request_is_received/paths/invoke' -Headers @{ 'Content-Type' = 'application/json' } -Body '{ "prompt": "Hello World" }'
 ```
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-## Bot Service
+### Bot: Configure and Test
 
-Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
+#### Configuration
 
-### Create Bot
-```powershell
-az bot create --resource-group im --name imbot001 --app-type SingleTenant --appid $appId --tenant-id $(az account show --query tenantId -o tsv) --endpoint "https://prod-113.westus.logic.azure.com:443/workflows/152752f42bab4073b11fb453a3d9558d/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=4k6VovKpFALtOtrAEKbDTZiQXMNcClcnFTl534amvUY" --display-name imbot001 --sku S1
-```
+Navigate to Azure Portal >> Bot `imbot001` >> **Settings** >> **Configuration** and complete the form.
 
-**Expected Output**
-```plaintext
-{
-  "etag": "\"80026944-0000-0200-0000-681a18c50000\"",
-  "id": "/subscriptions/<subscriptionId>/resourceGroups/im/providers/Microsoft.BotService/botServices/imbot001",
-  "kind": "azurebot",
-  "location": "global",
-  "name": "imbot001",
-  "properties": {
-    "allSettings": null,
-    "appPasswordHint": null,
-    "cmekEncryptionStatus": "Off",
-    "cmekKeyVaultUrl": null,
-    "configuredChannels": [
-      "webchat",
-      "directline"
-    ],
-    "description": null,
-    "developerAppInsightKey": null,
-    "developerAppInsightsApiKey": null,
-    "developerAppInsightsApplicationId": null,
-    "disableLocalAuth": false,
-    "displayName": "imbot001",
-    "enabledChannels": [
-      "webchat",
-      "directline"
-    ],
-    "endpoint": "https://prod-113.westus.logic.azure.com:443/workflows/152752f42bab4073b11fb453a3d9558d/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=4k6VovKpFALtOtrAEKbDTZiQXMNcClcnFTl534amvUY",
-    "endpointVersion": "3.0",
-    "iconUrl": "https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png",
-    "isCmekEnabled": false,
-    "isDeveloperAppInsightsApiKeySet": false,
-    "isStreamingSupported": false,
-    "luisAppIds": [],
-    "luisKey": null,
-    "manifestUrl": null,
-    "migrationToken": null,
-    "msaAppId": "01084e41-d992-43fa-bd03-0eba049831f4",
-    "msaAppMsiResourceId": null,
-    "msaAppTenantId": "4a863f70-7a4a-42de-886b-220bf0e2abb2",
-    "msaAppType": "SingleTenant",
-    "openWithHint": null,
-    "parameters": null,
-    "privateEndpointConnections": null,
-    "provisioningState": "Succeeded",
-    "publicNetworkAccess": "Enabled",
-    "publishingCredentials": null,
-    "schemaTransformationVersion": "1.3",
-    "storageResourceId": null,
-    "tenantId": "4a863f70-7a4a-42de-886b-220bf0e2abb2"
-  },
-  "resourceGroup": "im",
-  "sku": {
-    "name": "S1",
-    "tier": null
-  },
-  "tags": {},
-  "type": "Microsoft.BotService/botServices",
-  "zones": []
-}
-```
+Setting | Value
+:--- | :---
+**Messaging endpoint** | `https://imam.azure-api.net/api/messages`
+**Bot Type** | `Multi Tenant`
+
+Click **Apply**.
 
 <!-- ------------------------- -->
 
-### Register Bot
-```powershell
-az rest --method PATCH --uri "/subscriptions/$(az account show --query id -o tsv)/resourceGroups/im/providers/Microsoft.BotService/botServices/imbot001?api-version=2023-09-15-preview" --body "$(ConvertTo-Json @{properties=@{MicrosoftAppPassword=$clientSecret}})"
-```
+#### Lorem
 
-**Expected Output**
-```plaintext
-{
-  "etag": "\"80025e51-0000-0200-0000-681a1b840000\"",
-  "id": "/subscriptions/<subscriptionId>/resourceGroups/im/providers/Microsoft.BotService/botServices/imbot001",
-  "kind": "azurebot",
-  "location": "global",
-  "name": "imbot001",
-  "properties": {
-    "allSettings": null,
-    "appPasswordHint": null,
-    "cmekEncryptionStatus": "Off",
-    "cmekKeyVaultUrl": null,
-    "configuredChannels": [
-      "webchat",
-      "directline"
-    ],
-    "description": null,
-    "developerAppInsightKey": null,
-    "developerAppInsightsApplicationId": null,
-    "disableLocalAuth": false,
-    "displayName": "imbot001",
-    "enabledChannels": [
-      "webchat",
-      "directline"
-    ],
-    "endpoint": "https://prod-113.westus.logic.azure.com:443/workflows/152752f42bab4073b11fb453a3d9558d/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=4k6VovKpFALtOtrAEKbDTZiQXMNcClcnFTl534amvUY",
-    "endpointVersion": "3.0",
-    "iconUrl": "https://docs.botframework.com/static/devportal/client/images/bot-framework-default.png",
-    "isCmekEnabled": false,
-    "isDeveloperAppInsightsApiKeySet": false,
-    "isStreamingSupported": false,
-    "luisAppIds": [],
-    "manifestUrl": null,
-    "migrationToken": null,
-    "msaAppId": "99fa52f3-7ada-46ef-bb27-ac00eff6bd5d",
-    "msaAppMSIResourceId": null,
-    "msaAppTenantId": "4a863f70-7a4a-42de-886b-220bf0e2abb2",
-    "msaAppType": "SingleTenant",
-    "openWithHint": null,
-    "parameters": null,
-    "provisioningState": "Succeeded",
-    "publicNetworkAccess": "Enabled",
-    "publishingCredentials": null,
-    "schemaTransformationVersion": "1.3",
-    "storageResourceId": null,
-    "tenantId": "4a863f70-7a4a-42de-886b-220bf0e2abb2"
-  },
-  "sku": {
-    "name": "S1"
-  },
-  "tags": {},
-  "type": "Microsoft.BotService/botServices",
-  "zones": []
-}
-```
+Navigate to Azure Portal >> Bot `imbot001` >> **Settings** >> **Configuration** and complete the form.
 
-<!-- ------------------------- -->
 
-### Enable Direct Line Channel (v3)
+LOREM IPSUM
 
-Enables the Direct Line channel (v3) on your bot, allowing it to send and receive messages via the Direct Line protocol. The `--disablev1` flag disables the legacy v1 endpoint so only the current v3 endpoint is active.
 
-```powershell
-az bot directline create --resource-group im --name imbot001 --disablev1
-```
 
-**Expected Output**
-```plaintext
-Command group 'bot directline' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus
-[Warning] This output may compromise security by showing the following secrets: key, sites, properties, extensionKey1, siteId, extensionKey2, key2. Learn more at: https://go.microsoft.com/fwlink/?linkid=2258669
-{
-  "etag": "W/\"9a63a2394f708a60041d562c2d13d95f5/6/2025 3:57:54 PM\"",
-  "id": "/subscriptions/c4ea206c-9e4c-44a8-b6ee-756cea47f04e/resourceGroups/im/providers/Microsoft.BotService/botServices/imbot001/channels/DirectLineChannel",
-  "kind": null,
-  "location": "global",
-  "name": "imbot001/DirectLineChannel",
-  "properties": {
-    "channelName": "DirectLineChannel",
-    "etag": "W/\"9a63a2394f708a60041d562c2d13d95f5/6/2025 3:57:54 PM\"",
-    "location": "global",
-    "properties": {
-      "directLineEmbedCode": null,
-      "extensionKey1": "FUa2QniT4ovT79AvjvAs8ItycRlxNtZUh5euNyQGrwdxs3pJIGePJQQJ99BEACqBBLyAArohAAABAZBS3Gbk.BgWvDLAhJlICnbbmhWVt9bGPMqwIDEwQK9Ky9mgnGnQb2hphb4i5JQQJ99BEACqBBLyAArohAAABAZBS4JAb",
-      "extensionKey2": "FUa2QniT4ovT79AvjvAs8ItycRlxNtZUh5euNyQGrwdxs3pJIGePJQQJ99BEACqBBLyAArohAAABAZBS3Gbk.7F44lYbUKzpPFkHCQ1SljIi5A62Ju9fSIfB8S6DlvcTuXd608oVGJQQJ99BEACqBBLyAArohAAABAZBS1ay4",
-      "isEnabled": true,
-      "sites": [
-        {
-          "appId": null,
-          "isBlockUserUploadEnabled": false,
-          "isDetailedLoggingEnabled": null,
-          "isEnabled": true,
-          "isEndpointParametersEnabled": null,
-          "isNoStorageEnabled": null,
-          "isSecureSiteEnabled": false,
-          "isTokenEnabled": false,
-          "isV1Enabled": true,
-          "isV3Enabled": true,
-          "key": "3GXkmWWoy1KwxQ5gNDfmFft4XtEqjQ0Pk8MyY9InbjDFappjcvkgJQQJ99BEACqBBLyAArohAAABAZBS37s9.FijlpVjiWwlHstaCrXccwpK2Ihj8LAFAIWR4TvCWXXXyNIXOSrCUJQQJ99BEACqBBLyAArohAAABAZBS3E2h",
-          "key2": "3GXkmWWoy1KwxQ5gNDfmFft4XtEqjQ0Pk8MyY9InbjDFappjcvkgJQQJ99BEACqBBLyAArohAAABAZBS37s9.5pPaOz3OCV9PfUFxGcp7hIJ5OOq03lAQFcPWGPVJaPTlvVDfPEF6JQQJ99BEACqBBLyAArohAAABAZBS2sfc",
-          "siteId": "3GXkmWWoy1KwxQ5gNDfmFft4XtEqjQ0Pk8MyY9InbjDFappjcvkgJQQJ99BEACqBBLyAArohAAABAZBS37s9",
-          "siteName": "Default Site",
-          "tenantId": null,
-          "trustedOrigins": []
-        }
-      ]
-    },
-    "provisioningState": "Succeeded"
-  },
-  "resourceGroup": "im",
-  "sku": null,
-  "tags": null,
-  "type": "Microsoft.BotService/botServices/channels",
-  "zones": []
-}
-```
 
-<!-- ------------------------- -->
 
-### Disable Local Authentication
 
-Disables the Bot Service’s security token check so that your Logic App’s protected HTTP endpoint can receive requests without returning “Unauthorized” errors.
-
-```powershell
-az rest --method PATCH --uri "/subscriptions/$(az account show --query id -o tsv)/resourceGroups/im/providers/Microsoft.BotService/botServices/imbot001?api-version=2023-09-15-preview" --body '{"properties":{"disableLocalAuth":true}}'
-```
-
-<!-- ------------------------- -->
-
-### Add Diagnostic Setting
-```powershell
-az monitor diagnostic-settings create --name imbotDiag --resource "/subscriptions/$(az account show --query id -o tsv)/resourceGroups/im/providers/Microsoft.BotService/botServices/imbot001" --workspace imlaw --logs '[{"category":"BotRequest","enabled":true}]'
-```
-
-**Expected Output**
-```plaintext
-{
-  "id": "/subscriptions/<subscriptionId>/resourcegroups/im/providers/microsoft.botservice/botservices/imbot001/providers/microsoft.insights/diagnosticSettings/imbotDiag",
-  "logs": [
-    {
-      "category": "BotRequest",
-      "enabled": true,
-      "retentionPolicy": {
-        "days": 0,
-        "enabled": false
-      }
-    }
-  ],
-  "metrics": [],
-  "name": "imbotDiag",
-  "resourceGroup": "im",
-  "type": "Microsoft.Insights/diagnosticSettings",
-  "workspaceId": "/subscriptions/<subscriptionId>/resourceGroups/im/providers/microsoft.OperationalInsights/workspaces/imlaw"
-}
-```
 
 <!-- ------------------------- ------------------------- -->
 
-#### Confirm Success (with Bot Service interface)
+#### Confirm Success
+
+##### ...with Bot Service interface
 
 Navigate to `imbot001` >> **Settings** >> **Test in Web Chat**.
 
 In the **Type your message** box, try a prompt {e.g., `Hello World`}, then click the Send button.
 
-
-
-
-
-
-
-
-
 <!-- ------------------------- ------------------------- -->
 
-#### Confirm Success (with API call)
+##### ...with API call
 
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
@@ -648,7 +421,7 @@ If you see your bot’s reply in the activities list, your setup is confirmed.
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-## Teams
+### Teams
 
 Navigate to the Bot, then Settings >> **Channels**, then click to select **Microsoft Teams**.
 
@@ -673,7 +446,7 @@ Click **Open in Teams** and then **Use the web app instead** on the resulting pa
 
 
 
-### Prepare App Manifest Package
+#### Prepare App Manifest Package
 
 Since Teams doesn't host your bot, you need to provide a Teams App Package (a `.zip` file) that includes:
 
@@ -683,11 +456,11 @@ Since Teams doesn't host your bot, you need to provide a Teams App Package (a `.
 
 If you used the **Developer Portal for Teams** or the **Teams Toolkit** in VS Code, you can export the package directly.
 
-### Confirm Success
+#### Confirm Success
 
 Once your **imbot001** is registered and pointed at your Logic App, you can verify end-to-end functionality directly in the Azure Portal:
 
-#### Bot
+##### Bot
 
 Bot Diagnostic Settings capture only "Requests from the channels to the bot"
 
@@ -755,21 +528,21 @@ This will show you every hop—bot, logic app, and OpenAI—in one timeline.
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
 
-# Reference
+## Reference Articles
 The following articles provide solution ideas:
 
-## [Engineering Fundamentals Playbook: Correlation IDs](https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/) 
+### [Engineering Fundamentals Playbook: Correlation IDs](https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/) 
 - **Early assignment** – generate or capture the correlation ID at the very first hop (Bot Service) so every downstream component can reference it. 
 - **Header propagation** – consistently pass `X-Correlation-Id` (or W3C trace headers) on every HTTP call (Bot→Logic App→OpenAI) to tie logs togethis. 
 - **Leverage built-in context** – align with Application Insights’ `operation_Id` and W3C trace context to avoid reinventing correlation logic. 
 - **Error tagging** – ensure any unhandled exceptions in your Logic App or functions carry the same ID so failures show up in the end-to-end trace. 
 
-## [botbuilder-applicationinsights package](https://learn.microsoft.com/en-us/javascript/api/botbuilder-applicationinsights/?view=botbuilder-ts-latest) 
+### [botbuilder-applicationinsights package](https://learn.microsoft.com/en-us/javascript/api/botbuilder-applicationinsights/?view=botbuilder-ts-latest) 
 - **TelemetryInitializerMiddleware** – auto-capture incoming activity context (including your correlation header) and initialize App Insights telemetry without manual logging calls. 
 - **TelemetryLoggerMiddleware** – automatically log each turn as a dependency and record dialog events, giving you rich per-conversation data. 
 - **Centralized telemetry client** – use a single `ApplicationInsightsTelemetryClient` instance across middleware and dialogs to keep all logs correlated. 
 
-## [Add telemetry to your bot](https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-telemetry?view=azure-bot-service-4.0&tabs=csharp) 
+### [Add telemetry to your bot](https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-telemetry?view=azure-bot-service-4.0&tabs=csharp) 
 - **IBotTelemetryClient injection** – register your App Insights client in DI so all dialogs and components inhisit the same telemetry settings. 
 - **Telemetry initializer & logger** – wire up `TelemetryInitializerMiddleware` and `TelemetryLoggerMiddleware` in `Startup.cs` to capture requests, dependencies, and exceptions automatically. 
 - **Configurable PII settings** – leverage built-in flags to control whethis user text (prompts) is logged, allowing you to balance observability with privacy. 
