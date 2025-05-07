@@ -70,7 +70,7 @@ Complete the **When an HTTP request is received** popout form:
 Setting | Value
 :--- | :---
 Method | POST
-Request Body JSON Schema | `{"type":"object","properties":{"prompt":{"type":"string"}},"required":["prompt"]}`
+Request Body JSON Schema | `{"type":"object","properties":{"type":{"type":"string"},"text":{"type":"string"},"from":{"type":"object"},"conversation":{"type":"object"},"serviceUrl":{"type":"string"}},"required":["text"]}`
 
 Click **Save** and then copy the **HTTP URL** value for later use.
 
@@ -82,17 +82,29 @@ https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e
 
 <!-- ------------------------- -->
 
-#### Add Action: HTTP 
+#### Add Action: Extract Text 
 
 Click **+** underneath the **When an HTTP request is received** trigger and then **Add an action**.
 
-On the **Add an action** pane, search for and select **HTTP** >> **HTTP**.
+On the **Add an action** popout, search for and select **Data Operations** >> **Compose**.
 
-On the **HTTP** pane, complete the form:
+On the **Compose** popout form, enter **Inputs** value: `@{triggerBody()?['text']}'.
+
+Click **Save**.
+
+<!-- ------------------------- -->
+
+#### Add Action: HTTP 
+
+Click **+** underneath the **Compose** trigger and then **Add an action**.
+
+On the **Add an action** popout, search for and select **HTTP** >> **HTTP**.
+
+On the **HTTP** popout, complete the form:
 - URI: `https://westus.api.cognitive.microsoft.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2023-05-15`
 - Method: POST
 - Headers: `Content-Type` : `application/json` and `api-key` : `[OpenAI KEY 1]`
-- Body: `{"messages":[{"role":"user","content":"@{triggerBody()?['prompt']}"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}`
+- Body: `{"messages":[{"role":"user","content":"@{outputs('Compose')}"}],"temperature":1,"top_p":1,"stream":false,"max_tokens":4096,"n":1}`
 
 Click **Save**.
 
@@ -116,7 +128,7 @@ Click **Save**.
 
 ##### ...with Logic App interface
 
-Click **Run** >> **Run with payload**, and on the resulting pane, paste **Body** value: `{"prompt":"Hello World"}`
+Click **Run** >> **Run with payload**, and on the resulting pane, paste **Body** value: `{"type":"message","text":"Hello World"}`
 
 Click **Run**. Allow time for processing.
 
@@ -138,7 +150,7 @@ Once you see a successful run and valid response in the designer, you'll know th
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
 ```powershell
-Invoke-RestMethod "https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=nWo7QV6M0OAu1QalS9KCFiofRp6VX0d42ld-kAv5U4U" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"prompt":"Hello World"}'
+Invoke-RestMethod "https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=<sig>" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"prompt":"Hello World"}'
 ```
 
 **Expected Output**
@@ -346,7 +358,15 @@ Your APIM instance now provides a clean URL (`https://imam.azure-api.net/api/mes
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
 ```powershell
-Invoke-RestMethod -Method Post -Uri 'https://imam.azure-api.net/api/messages/When_a_HTTP_request_is_received/paths/invoke' -Headers @{ 'Content-Type' = 'application/json' } -Body '{ "prompt": "Hello World" }'
+Invoke-RestMethod -Method Post -Uri 'https://imam.azure-api.net/api/messages' -Headers @{ 'Content-Type' = 'application/json' } -Body '{ "prompt": "Hello World" }'
+```
+
+**Expected Output**
+
+You should see a response like the following:
+
+```plaintext
+Hello! How can I assist you today?
 ```
 
 <!-- ------------------------- ------------------------- ------------------------- ------------------------- -->
@@ -396,7 +416,7 @@ In the **Type your message** box, try a prompt {e.g., `Hello World`}, then click
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
 ```powershell
-Invoke-RestMethod "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=IunxdWoa_VdKPTY7uxLE3B66t4mMHdmYSR_NLfporCs" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"prompt":"Hello World"}'
+Invoke-RestMethod "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=<sig>" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"prompt":"Hello World"}'
 ```
 
 **Expected Output**
