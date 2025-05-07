@@ -77,7 +77,7 @@ Click **Save** and then copy the **HTTP URL** value for later use.
 **Example HTTP URL**
 
 ```plaintext
-https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=<sig>
+https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig={LogicApp_SigValue}
 ```
 
 <!-- ------------------------- -->
@@ -150,7 +150,7 @@ Once you see a successful run and valid response in the designer, you'll know th
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
 ```powershell
-Invoke-RestMethod "https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=<sig>" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"prompt":"Hello World"}'
+Invoke-RestMethod "https://prod-72.westus.logic.azure.com:443/workflows/6024321d5af541faa25473ee91e850c0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig={LogicApp_SigValue}" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{ "type":"message","text":"Hello World" }'
 ```
 
 **Expected Output**
@@ -219,7 +219,7 @@ Replace the default code with:
             <value>1.0</value>
         </set-query-parameter>
         <set-query-parameter name="sig" exists-action="override">
-            <value>nWo7QV6M0OAu1QalS9KCFiofRp6VX0d42ld-kAv5U4U</value>
+            <value>{LogicApp_SigValue}</value>
         </set-query-parameter>
     </inbound>
     <backend>
@@ -263,7 +263,7 @@ Replace the default code with:
             <value>1.0</value>
         </set-query-parameter>
         <set-query-parameter name="sig" exists-action="override">
-            <value>nWo7QV6M0OAu1QalS9KCFiofRp6VX0d42ld-kAv5U4U</value>
+            <value>{LogicApp_SigValue}</value>
         </set-query-parameter>
     </inbound>
     <backend>
@@ -314,7 +314,7 @@ On the **APIs** popout form, check `imbot-api` and then click **Select**.
 
 ##### ...with API Management interface
 
-On the **Test** tab, enter **Request body**: `{ "prompt": "Hello World" }`, then click **Send**.
+On the **Test** tab, enter **Request body**: `{ "type":"message","text":"Hello World" }`, then click **Send**.
 
 **Expected Output**
 
@@ -358,7 +358,7 @@ Your APIM instance now provides a clean URL (`https://imam.azure-api.net/api/mes
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
 ```powershell
-Invoke-RestMethod -Method Post -Uri 'https://imam.azure-api.net/api/messages' -Headers @{ 'Content-Type' = 'application/json' } -Body '{ "prompt": "Hello World" }'
+Invoke-RestMethod -Method Post -Uri 'https://imam.azure-api.net/api/messages' -Headers @{ 'Content-Type' = 'application/json' } -Body '{ "type":"message","text":"Hello World" }'
 ```
 
 **Expected Output**
@@ -416,7 +416,7 @@ In the **Type your message** box, try a prompt {e.g., `Hello World`}, then click
 Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
 
 ```powershell
-Invoke-RestMethod "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=<sig>" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{"prompt":"Hello World"}'
+Invoke-RestMethod "https://prod-162.westus.logic.azure.com:443/workflows/d61b0fc8cdab49208a7830aa521e3f0f/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig={LogicApp_SigValue}" -Method POST -Headers @{ "Content-Type" = "application/json" } -Body '{ "type":"message","text":"Hello World" }'
 ```
 
 **Expected Output**
