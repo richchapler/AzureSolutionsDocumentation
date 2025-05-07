@@ -14,7 +14,7 @@ Azure AI Speech is a cloud-based service from Microsoft that leverages advanced 
 
 - **Speech Services**: 
   - Pricing Tier `Standard S0`, 
-  - Supported Region (West US 2, West Europe, Southeast Asia, South Central US, Sweden Central, North Europe, East US 2)
+  - Supported Region (**West US 2**, West Europe, Southeast Asia, South Central US, Sweden Central, North Europe, East US 2)
 
 ### On-Prem
 
@@ -254,7 +254,36 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Language Learning
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+
+Click **Language Learning**.
+
+<img src="..\images\AI_Speech\SpeechStudio_Language.png" width="800" title="Snipped May, 2025" />
+
+<!-- ------------------------- -->
+
+##### Try it out
+
+<img src="..\images\AI_Speech\SpeechStudio_Language_TryItOut.png" width="800" title="Snipped May, 2025" />
+
+On the **Try it out** tab, chat with your language teacher, then click **Assess my response**, and then review the produced report:
+
+* **Pronunciation Score**: `78`
+  <br>Shown in a circular gauge with a legend color-coded for ranges 0 to 59 (red), 60 to 79 (yellow), and 80 to 100 (green).
+* **Pronunciation Breakdown**: `Accuracy Score 79 / 100`, `Fluency Score 81 / 100`, `Prosody Score 77 / 100`
+  <br>Progress bars detail the specific metrics contributing to the overall pronunciation score.
+* **Content Score**: `10`
+  <br>Displayed in a circular gauge using the same three-range color legend to indicate content performance.
+* **Content Breakdown**: `Grammar Score 10 / 100`, `Vocabulary Score 10 / 100`
+  <br>Progress bars highlight low performance in grammar and vocabulary aspects.
+* **Feedback Button**: `Get feedback on how to improve`
+  <br>Provides targeted suggestions and guidance to improve both pronunciation and content scores.
+
 #### Pro Code
 
 LOREM IPSUM
