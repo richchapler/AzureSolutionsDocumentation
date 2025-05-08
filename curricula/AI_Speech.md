@@ -216,8 +216,6 @@ On the **Try on your own** tab, try different questions, settings, voices, and a
 
 ###### Settings
 
-...detailed on the right side of the interface and include the following parameters:
-
 - **Language**: `English (United States)`  
   Sets the primary language for both input and synthesized speech. This determines pronunciation, transcription, and voice selection defaults.
 
@@ -225,7 +223,7 @@ On the **Try on your own** tab, try different questions, settings, voices, and a
   When enabled, this allows the avatar to automatically detect and respond in multiple languages during conversation.
 
 - **Voice**: `Ava Multilingual`  
-  Specifies the synthetic voice used by the avatar. “Ava Multilingual” supports dynamic language shifts when paired with multi-language input.
+  Specifies the synthetic voice used by the avatar. "Ava Multilingual" supports dynamic language shifts when paired with multi-language input.
 
 - **Speaking style**: `Default`  
   Sets the vocal tone and delivery style; can be adjusted to styles like cheerful, angry, or empathetic where supported.
@@ -273,16 +271,20 @@ Click **Language Learning**.
 
 On the **Try it out** tab, chat with your language teacher, then click **Assess my response**, and then review the produced report:
 
-* **Pronunciation Score**: `78`
-  <br>Shown in a circular gauge with a legend color-coded for ranges 0 to 59 (red), 60 to 79 (yellow), and 80 to 100 (green).
-* **Pronunciation Breakdown**: `Accuracy Score 79 / 100`, `Fluency Score 81 / 100`, `Prosody Score 77 / 100`
-  <br>Progress bars detail the specific metrics contributing to the overall pronunciation score.
-* **Content Score**: `10`
-  <br>Displayed in a circular gauge using the same three-range color legend to indicate content performance.
-* **Content Breakdown**: `Grammar Score 10 / 100`, `Vocabulary Score 10 / 100`
-  <br>Progress bars highlight low performance in grammar and vocabulary aspects.
-* **Feedback Button**: `Get feedback on how to improve`
-  <br>Provides targeted suggestions and guidance to improve both pronunciation and content scores.
+- **Pronunciation Score**: `78`
+  <br>Shown in a circular gauge with a legend color-coded for ranges 0 to 59 (red), 60 to 79 (yellow), and 80 to 100 (green)
+
+- **Pronunciation Breakdown**: `Accuracy Score 79 / 100`, `Fluency Score 81 / 100`, `Prosody Score 77 / 100`
+  <br>Progress bars detail the specific metrics contributing to the overall pronunciation score
+
+- **Content Score**: `10`
+  <br>Displayed in a circular gauge using the same three-range color legend to indicate content performance
+
+- **Content Breakdown**: `Grammar Score 10 / 100`, `Vocabulary Score 10 / 100`
+  <br>Progress bars highlight low performance in grammar and vocabulary aspects
+
+- **Feedback Button**: `Get feedback on how to improve`
+  <br>Provides targeted suggestions and guidance to improve both pronunciation and content scores
 
 #### Pro Code
 
@@ -291,7 +293,57 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Video Translation
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+
+Click **Video Translation**.
+
+<img src="..\images\AI_Speech\SpeechStudio_VideoTranslation.png" width="800" title="Snipped May, 2025" />
+
+Click **+ Create a project**
+
+###### New Project
+
+<img src="..\images\AI_Speech\SpeechStudio_VideoTranslation_NewProject.png" width="800" title="Snipped May, 2025" />
+
+Review / modify settings:
+
+- **Voice type**: `Prebuilt neural voice`
+  <br>Automatically matches prebuilt neural voices similar to the speakers in your video.
+  <br>Switch to **Personal voice** if you have access to create a custom voice for the original speakers.
+
+- **Video file**: drag-and-drop area or "Browse files…" (`.mp4`, `.mp3` or `.wav`; under 500 MB and 60 minutes)
+  <br>Uploads the source media to be transcribed, translated and dubbed.
+
+- **Project name**: `Enter a name for your file`
+  <br>Assigns a descriptive title to your translation project.
+
+- **Number of speakers**: `1` (Auto detect On)
+  <br>Specifies how many distinct voices appear in the file; automatic speaker count can be toggled on or off.
+
+- **Language of the video**: `Auto detect`
+  <br>Selects the input language for transcription; auto detect supports a limited set of languages.
+
+- **Translate to**: `English (United States)`
+  <br>Chooses the target language and locale for the translated audio output.
+
+- **I acknowledge that video translation will incur usage charges to my account, effective from June 2024**: checkbox
+  <br>Confirms you understand the billing implications before proceeding.
+
+- **Accept code of conduct for Azure AI Speech text to speech**: checkbox
+  <br>Indicates your agreement with the service’s usage policies.
+
+- **Next: Advanced settings**: button
+  <br>Opens an additional pane for fine-tuning recognition, translation and synthesis options.
+
+...and, then click **Create**. Allow time for upload and processing.
+
+<!-- ------------------------- -->
+
 #### Pro Code
 
 LOREM IPSUM
