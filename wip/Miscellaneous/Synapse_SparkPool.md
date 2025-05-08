@@ -33,7 +33,7 @@
 
 - **Auto-scale**: a setting that automatically increases or decreases the number of machines in your Spark pool based on how busy it is  
 - **Auto-pause**: a setting that shuts down your Spark pool after it’s been idle for a set time, so you don’t pay for unused machines  
-- **Regional quotas**: Synapse Spark pools support up to 200 nodes per pool, with a minimum of 3 nodes for dedicated pools in many regions. Check your region’s limits under “Apache Spark pool service limits” in the Synapse docs.
+- **Regional quotas**: Synapse Spark pools support up to 200 nodes per pool, with a minimum of 3 nodes for dedicated pools in many regions. Check your region’s limits under "Apache Spark pool service limits" in the Synapse docs.
 
 #### Pipeline Constructs
 
@@ -160,7 +160,7 @@ Click **Output** and you should see something like:
 		"isAutotuneEnabled": false,
 		"provisioningState": "Succeeded"
 	},
-	"id": "/subscriptions/ed7eaf77-d411-484b-92e6-5cba0b6d8098/resourceGroups/prefix/providers/Microsoft.Synapse/workspaces/prefixsaw/bigDataPools/prefixasp",
+	"id": "/subscriptions/<subscriptionId>/resourceGroups/prefix/providers/Microsoft.Synapse/workspaces/prefixsaw/bigDataPools/prefixasp",
 	"name": "prefixasp",
 	"type": "Microsoft.Synapse/workspaces/bigDataPools",
 	"location": "westus",
@@ -240,44 +240,125 @@ Final step, not documented here... schedule this for "every 10 minutes"
 
 ### Use Case
 
-- Today, every Spark workload—both scheduled pipelines and ad-hoc user jobs—is run through an interactive notebook, which incurs a 5–7 minute cold-start delay whenever a new Livy session spins up.  
-- Notebooks carry additional overhead (UI, notebook context initialization) beyond the pure Spark execution.  
-- Users need rapid, repeatable batch runs of PySpark code without waiting on notebook startup.  
-- Management is open to script-based submissions if they can shave off latency while still fitting into existing Synapse pipelines.
+- Bypass the Livy REST endpoint to submit jobs directly to the Synapse Spark Pool
+  - Quote from meeting: "So how about if we just bypass the Livy endpoint and then send the job to the Spark?"
+- Leverage the Spark driver’s native submission API within the Synapse Spark Pool
+  - Quote from meeting: "Look at the driver has its own endpoint, right? We can call the API for the driver, not the DB."
+- Eliminate notebook startup and Livy overhead to reduce cold-start latency in the Spark Pool
+  - Quote from meeting: "We can send the jobs directly to the Spark without the Livy."
 
 <!-- ------------------------- ------------------------- -->
 
-### Proposed Solution (VALIDATION PENDING)
+### Proposed Solution (WORK IN PROGRESS)
 
-- **Convert Notebooks to Scripts**  
-  Extract your core PySpark logic from notebooks into standalone `.py` files (for example, `process_data.py`) and store them in your workspace’s linked storage.  
+#### Required Resources
 
-- **Define Spark Job Definitions**  
-  In Synapse Studio’s **Manage → Apache Spark → Job definitions**, create one definition per script, specifying the file path, main class (for JVM jobs), parameters, and resource settings (dynamic allocation, driver/executor sizes).  
+* **Resource Group** `cnb`
 
-- **Submit via Pipeline Activity**  
-  Replace your Notebook activities with **Spark Job Definition** activities in Synapse pipelines—pointing at your new definitions. This invokes the Livy batch endpoint directly, skipping notebook context setup.  
+* **Synapse Workspace** `cnbsaw`
+  * **Managed Resource Group** `cnbmrg`
+  * **Data Lake Storage Gen2** `cnbdls`
+  * Data Lake Storage Gen2, **File System** `cnbdlsfs`
+  * Assigned-to-self **Storage Blob Contributor** role
+  * Authentication method: **Use both local and Microsoft Entra ID authentication** with admin `sqladminuser`
+  * Firewall rules: **Allow connections from all IP addresses**
 
-- **Or Submit via CLI/REST**  
-  Use the Azure CLI command  
-  ```bash
-  az synapse spark job submit \
-    --workspace-name <ws> \
-    --name process-data-job \
-    --file abfss://scripts@<storage>.dfs.core.windows.net/process_data.py \
-    --livy-only \
-    --arguments "--input","/data/in","--output","/data/out"
-  ```  
-  or call the equivalent REST endpoint (`POST /sparkJobDefinitions/{jobName}/submit`) from a Web activity—again bypassing the notebook layer.  
+* **Apache Spark Pool** `cnbasp`
+  * Node size: Small (4 vCores / 32 GB)
+  * Automatic pausing: Enabled
 
-- **Leverage Dynamic Allocation**  
-  In each job definition, enable  
-  ```text
-  spark.dynamicAllocation.enabled=true  
-  spark.dynamicAllocation.minExecutors=1  
-  spark.dynamicAllocation.maxExecutors=10
-  ```  
-  so your batch jobs only consume needed executors and release them when finished.  
+* **Application Registration** `cnbar` and secret
+  * Assigned **Contributor** role on Apache Spark Pool `cnbasp`
 
-- **Integrate with CI/CD**  
-  Store your `.py` scripts in a Git repo and automate deployment of job definitions via ARM templates or the Synapse CLI, ensuring script and definition versioning.  
+<!-- ------------------------- ------------------------- -->
+
+#### Step 1
+
+##### Prepare `sample.py`
+
+Use a text editor to create a file with the following Python:
+```python
+from pyspark.sql import SparkSession
+count = SparkSession.builder.getOrCreate().sparkContext.parallelize([1]).count()
+print(count)
+```
+
+Navigate to storage account `cnbdls` >> **Storage browser** >> **Blob containers** and click **+ Add container**.
+
+On the **New container** popout, enter name `scripts` and click **Create**.
+
+Navigate to the `scripts` container, then upload `sample.py`.
+
+<!-- ------------------------- -->
+
+##### Get Token
+
+Navigate to the **Cloud Shell**, configure as required, and select **Powershell**.
+
+```powershell
+$token=(Invoke-RestMethod `
+  -Method Post `
+  -Uri "https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token" `
+  -ContentType "application/x-www-form-urlencoded" `
+  -Body "grant_type=client_credentials&client_id=<clientId>&client_secret=<clientSecret>&scope=https%3A%2F%2Fdev.azuresynapse.net%2F.default"
+).access_token
+```
+
+<!-- ------------------------- -->
+
+##### Warm Pool
+
+In Synapse Studio, open any notebook, attach it to the `cnbasp` pool, and run a trivial command (e.g., `sc.parallelize([1]).count()`).
+
+Wait for the pool to fully spin up (you should see a 3–5 minute cold-start).
+
+<!-- ------------------------- -->
+
+##### Submit Job
+
+```powershell
+$response=Invoke-RestMethod -Method Post -Uri "https://cnbsaw.dev.azuresynapse.net/sparkPools/cnbasp/driver/submissions?api-version=2021-06-01" -Headers @{Authorization="Bearer $token"} -ContentType "application/json" -Body (@{file="abfss://scripts@cnbdls.dfs.core.windows.net/KeepAlive.py";args=@();conf=@{"spark.dynamicAllocation.enabled"="true";"spark.dynamicAllocation.minExecutors"="1";"spark.dynamicAllocation.maxExecutors"="10"}}|ConvertTo-Json -Depth 5); $submissionId=$response.submissionId
+```
+
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+<!-- ------------------------- -->
+
+##### Poll for Completion
+
+```powershell
+do {
+  Start-Sleep -Seconds 15
+  $status = Invoke-RestMethod -Method Get `
+    -Uri "https://<ws>.dev.azuresynapse.net/sparkPools/<pool>/driver/submissions/$submissionId?api-version=2021-06-01" `
+    -Headers @{ Authorization = "Bearer $token" }
+} while ($status.code -notin @("FINISHED","ERROR"))
+
+$status.code
+```
+
+##### (Optional) Pre-warm the Pool
+
+Run a trivial submission to keep executors hot, for example:
+
+```powershell
+Invoke-RestMethod -Method Post `
+  -Uri "https://<ws>.dev.azuresynapse.net/sparkPools/<pool>/driver/submissions?api-version=2021-06-01" `
+  -Headers @{ Authorization = "Bearer $token" } `
+  -Body @{
+    file = "abfss://scripts@<storage>.dfs.core.windows.net/KeepAlive.py"
+    args = @()
+  } | Out-Null
+```
+
+Schedule this with Azure Automation or a Logic App if desired.
+
+##### Monitor and Tune
+
+* View driver and executor metrics in Synapse Studio → **Monitor** → **Apache Spark applications**
+* Adjust pool node counts and dynamic-allocation settings based on observed utilization
+* Tag each submission in your payload (add a `"name": "MyJobName"` field) for cost tracking and auditing
+

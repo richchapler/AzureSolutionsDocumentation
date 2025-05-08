@@ -352,3 +352,5 @@ Setting | Value
 **Bot Type** | `Multi Tenant`
 
 Click **Apply**.
+
+> BLOCKED BY 401 ISSUES... GOING TO WORK ON CONVERSATION ID FOR FUNCTIONAL ARCHITECTURE
