@@ -32,7 +32,7 @@ Azure AI Speech is a cloud-based service from Microsoft that leverages advanced 
 
 Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
-<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
 
 Click **Captioning with speech to text**.
 
@@ -133,7 +133,7 @@ LOREM IPSUM
 
 Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
-<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
 
 Click **Post Call Transcription and Analytics**.
 
@@ -169,7 +169,7 @@ LOREM IPSUM
 
 Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
-<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
 
 Click **Live Chat Avatar**.
 
@@ -257,7 +257,7 @@ LOREM IPSUM
 
 Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
-<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
 
 Click **Language Learning**.
 
@@ -298,7 +298,7 @@ LOREM IPSUM
 
 Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
 
-<img src="..\images\AI_Speech\SpeechStudio_GetStarted.png" width="800" title="Snipped April, 2025" />
+<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
 
 Click **Video Translation**.
 
@@ -354,7 +354,59 @@ LOREM IPSUM
 ## Exercise 3: Speech to Text
 
 ### Real-Time Speech to Text
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
+
+Click **Speech to text** >> **Real-time speech to text**.
+
+<img src="..\images\AI_Speech\SpeechStudio_RealTimeSpeechToText.png" width="800" title="Snipped May, 2025" />
+
+##### Try it out
+
+On the **Try it out** tab, click the microphone, speak, and review the produced text.
+
+Review interface elements:
+
+* **Resource acknowledgement checkbox**: `I acknowledge that this application uses the resource {prefix}ss and will incur usage of my account` <br>Confirms you understand the billing implications for the selected Azure resource.
+
+* **Language dropdown**: `English (United States)`<br>Selects the input language for real-time transcription.
+
+* **Advanced options link**: `Show advanced options` <br>Expands additional settings:
+
+  * **Language identification**: `Off` toggle <br>Automatically detect the spoken language when enabled.
+
+  * **Language identification mode**: `At start` / `Continuous` radio buttons <br>Select whether detection runs once at the beginning or continuously throughout the session.
+
+  * **Speaker diarization**: `Off` toggle <br>Segment and label the transcript by speaker when enabled.
+
+  * **Custom endpoint dropdown**: `[None]` <br>Choose one of your custom speech-to-text endpoints to drive the transcription.
+
+  * **Output format dropdown**: `Detailed` <br>Select the JSON verbosity level: “Simple” for plain text or “Detailed” for word-level timestamps and confidence scores.
+
+  * **Phrase list**: `Off` toggle <br>Enable to supply domain-specific words or phrases to boost recognition accuracy.
+
+  * **Phrase list text field**: (disabled) <br>Once the phrase list is turned on, enter comma- or semicolon-separated terms here.
+
+  * **Hide advanced options link**: `Hide advanced options` <br>Collapse this panel to return to the basic view.
+
+* **Audio input panel**: `Drag and drop audio file(s) here` / `Browse files…` / `record audio with a microphone` <br>Allows you to upload or capture audio for transcription.
+
+* **Test results metadata**: `File name: 20250401_141328.wav`, `Language: English (United States)`, `Custom endpoint: [None]` <br>Shows details about the currently loaded audio sample.
+
+* **Playback controls**: Play button / progress slider / elapsed time display <br>Enables audio playback and lets you see the transcript timing.
+
+* **Transcript view tabs**: `Text`, `JSON` <br>Toggle between the human-readable transcript and the detailed JSON output.
+
+* **Live transcript display**: (live text area) <br>Shows recognized speech in real time as the audio is processed.
+
+* **Transcription settings indicators**: `Output format: Detailed`, `Phrase list: Off`, `Speaker diarization: No` <br>Summarizes the active configuration for your transcription.
+
+* **Download transcript icon**: download arrow <br>Lets you save the transcript or JSON results locally.
+
 #### Pro Code
 
 LOREM IPSUM
@@ -362,7 +414,44 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Whisper Model in Azure OpenAI Service
+
+> [Whisper](https://openai.com/index/whisper/) is OpenAI’s speech recognition solution. It is available in a limited number of Azure regions {e.g., East US 2}.
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
+
+Click **Speech to text** >> **Whisper Model in Azure OpenAI Service**.
+
+<img src="..\images\AI_Speech\SpeechStudio_WhisperModel.png" width="800" title="Snipped May, 2025" />
+
+
+##### Try it out
+
+On the **Try it out** tab, upload an audio file and review the produced text.
+
+Review interface elements:
+
+* **Resource dropdown**: `{prefix}oai (OpenAI, East US 2, S0)` <br>Select which Azure OpenAI resource to drive the demo.
+
+* **Deployment dropdown**: `whisper` <br>Pick the name of your Whisper-v2-large deployment under the selected resource.
+
+* **Cost acknowledgement**: checkbox `I acknowledge that running this demo will incur usage and may incur costs to my Azure resources.` <br>Must be checked to proceed, confirming you understand billing implications.
+
+* **Mode selector**: `Transcribe` / `Translate` (Transcribe selected) <br>Choose whether to get a transcript in the original language or a translation into English.
+
+* **Language identification**: toggle `On` <br>Automatically detect the spoken language before transcription.
+
+* **Language dropdown**: `English` (disabled) <br>Shows detected or selected language; locked when identification is on.
+
+* **Temperature slider**: `0.3` <br>Adjusts randomness in the model’s transcription output.
+
+* **Temperature value**: numeric input `0.3` <br>Precise numeric representation of the slider setting.
+
+* **Prompt text area**: placeholder “An optional text to guide the model’s style or continue a previous audio segment. The prompt should be in English.” <br>Supply context or domain cues to steer transcription style.
+
 #### Pro Code
 
 LOREM IPSUM
