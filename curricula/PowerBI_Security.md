@@ -7,7 +7,8 @@
 | Topic | Description | Technology Focus |
 | :--- | :--- | :--- |
 | Azure AD authentication & RBAC for data sources | Use Entra ID tokens and security groups to grant least-privilege access to source systems (e.g. Azure SQL) | SQL |
-| Source data protection policies | Classify sensitive columns and apply masking or client-side encryption before data reaches Power BI | SQL |
+| Static data masking | Replace sensitive data at rest in the database so non-privileged users only see masked values | SQL |
+| Dynamic data masking | Configure Azure SQL to mask column values at query time based on user roles, without altering underlying data | SQL |
 
 # Ingestion & Storage Security
 
@@ -16,7 +17,7 @@
 | Staging zones—bronze, silver, gold | Segregate raw, cleansed, and curated data into layers with distinct access controls | Fabric |
 | Secure pipelines & dataflows | Use managed identities or service principals and Azure AD OAuth for all ETL connections and secret management | ADF / Fabric |
 | Data lakehouse security | Enforce OneLake hierarchical ACLs and workspace permissions on Fabric Lakehouses or Gen2 storage | Fabric |
-| On-premises data gateway protection | Restrict gateway admins, encrypt stored credentials, keep gateway software patched and clustered | Gateway |
+| On-premises data gateway protection | Restrict gateway admins, encrypt stored credentials, and keep gateway software patched and clustered | Gateway |
 
 # Transformation Security
 
@@ -29,21 +30,23 @@
 
 | Topic | Description | Technology Focus |
 | :--- | :--- | :--- |
-| Row-level security | Define filter roles in Power BI Desktop tied to Entra ID groups so users see only their permitted rows | Power BI |
-| Object-level security | Hide tables or columns from unauthorized viewers by assigning deny-access roles | Power BI |
-| Customer-managed keys | (Premium only) Bring your own key from Azure Key Vault to control encryption of imported models | Power BI |
-| Dataset credential management | Store and rotate source credentials securely, preferring Azure AD OAuth over stored passwords | Power BI |
+| Row-level security (RLS) | Define filter roles in Power BI Desktop tied to Entra ID groups so users see only their permitted rows | Power BI |
+| Object-level security (OLS) | Hide entire tables or columns from unauthorized viewers by assigning deny-access roles | Power BI |
+| In-model data masking | Use DAX formulas to mask or truncate values in the report layer based on user role | Power BI |
+| Sensitivity labels | Apply Microsoft Purview labels to datasets so exports and downloads carry persistent protection | Power BI / Purview |
+| Customer-managed keys (BYOK) | (Premium only) Bring your own key from Azure Key Vault to control encryption of imported models | Power BI |
+| Dataset credential management | Store and rotate source credentials securely, preferring Azure AD OAuth over passwords | Power BI |
 
 # Presentation Security
 
 | Topic | Description | Technology Focus |
 | :--- | :--- | :--- |
-| Workspace & app access control | Assign Entra ID groups to workspace and app roles to manage who can view or edit content | Power BI |
-| Secure sharing practices | Share via security groups, disable publish-to-web, enforce tenant-level export restrictions | Power BI |
+| Workspace & app access control | Assign Entra ID groups to Admin, Member, Contributor, and Viewer roles in workspaces and Apps | Power BI |
+| Granular dashboard access | Enforce RLS/OLS on datasets and use workspace roles so dashboards display only authorized data | Power BI |
+| Secure sharing practices | Share via security groups, disable Publish-to-Web, and enforce tenant-level export restrictions | Power BI |
 | Service principal embedding | Use an AAD application identity for app-owns-data scenarios with controlled embed tokens | Power BI |
-| Sensitivity labels & data protection | Apply Purview labels to reports/datasets so exports carry encryption and usage policies | Power BI / Purview |
-| Custom visuals governance | Allow only certified or approved visuals to prevent unauthorized data exfiltration | Power BI |
-| Tenant settings & conditional access | Harden the tenant by disabling risky features and enforcing MFA or IP restrictions | Power BI |
+| Custom visuals governance | Allow only certified or approved organizational visuals to prevent unauthorized data exfiltration | Power BI |
+| Tenant settings & conditional access | Harden the tenant by disabling risky features, enforcing MFA, and limiting IP ranges | Power BI |
 
 # Governance & Monitoring
 
