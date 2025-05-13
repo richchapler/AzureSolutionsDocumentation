@@ -29,7 +29,7 @@ To ensure each backup is validated and corruption is detected during this migrat
 <br>D) WITH COPY_ONLY
 
 ## Question 4
-You need to replicate the Azure SQL Database server S1 and its DB1 database (schema and permissions defined in a SQL Server Data Tools database project) into a new resource group named A1Test, ensuring the same configuration as the source.
+You need to replicate the Azure SQL Database server S1 and its D1 database (schema and permissions defined in a SQL Server Data Tools database project) into a new resource group named A1Test, ensuring the same configuration as the source.
 
 Which four actions should you perform, in order?
 <br>A) Export the Azure Resource Manager templates from A1Dev 
@@ -66,7 +66,7 @@ Which three configurations should you enable?
 <br>E) Enable Azure Advanced Threat Protection (Microsoft Defender for Cloud Recommendations) 
 
 ## Question 8
-A database user is a member of the db_datawriter role in DB1.
+A database user is a member of the db_datawriter role in D1.
 
 Which operation can they perform on Table1? 
 <br>A) Add a column to Table1 
@@ -74,7 +74,7 @@ Which operation can they perform on Table1?
 <br>C) Delete Table1 
 
 ## Question 9
-You need to allow that same user to execute SELECT queries on DB1.
+You need to allow that same user to execute SELECT queries on D1.
 
 Which fixed database role should you grant? 
 <br>A) db_datareader 
@@ -83,36 +83,37 @@ Which fixed database role should you grant?
 <br>D) db_denydatawriter
 
 ## Question 10
-You have a new Azure SQL database named DB1 on an Azure SQL server named AzSQL1. The only user configured is the server administrator. You need to create a contained database user in DB1 who authenticates via Azure Active Directory.
+You have a new Azure SQL database named D1 on an Azure SQL server named S1. The only user configured is the server administrator. You need to create a contained database user in D1 who authenticates via Azure Active Directory.
 
 Which three actions should you perform, in the correct sequence?
-<br>A) Set the Active Directory admin for AzSQL1 
-<br>B) Connect to DB1 by using the server administrator account 
-<br>C) Connect to DB1 by using the Active Directory admin account 
-<br>D) Create a user in DB1 using the FROM EXTERNAL PROVIDER clause 
+<br>A) Set the Active Directory admin for S1 
+<br>B) Connect to D1 by using the server administrator account 
+<br>C) Connect to D1 by using the Active Directory admin account 
+<br>D) Create a user in D1 using the FROM EXTERNAL PROVIDER clause 
 <br>E) From the Azure portal, assign the SQL DB Contributor role to the user 
 <br>F) Create a login in the master database 
 
 ## Question 11
-For masking the `Customer_Phone` values (e.g. `555-555-0173`) so that the first six digits are hidden, the hyphens remain, and the last four digits are visible, what should the Exposed Prefix be set to? 
-<br>A) 0 
-<br>B) 1 
-<br>C) 3 
-<br>D) 5 
+For masking `Customer_Phone` values (for example, `555-555-0173`) with the function ```partial(prefix, 'padding', suffix)``` so that all characters before the final four digits are replaced by the padding string, what should `prefix` be set to?
+<br>A) 0
+<br>B) 1
+<br>C) 3
+<br>D) 6
 
 ## Question 12
-Which Padding String will correctly mask the first six numerals while preserving the hyphens (resulting in `xxx-xxx-0173`)? 
-<br>A) xxxxxx 
-<br>B) xxx-xxx 
-<br>C) x[3]-x[3] 
-<br>D) xxxx-xxxx 
+Which padding string will mask the first six numerals while retaining the hyphens to produce `xxx-xxx-0173` when used as ```
+partial(0, 'padding', 4)```?
+<br>A) xxxxxx
+<br>B) xxx-xxx
+<br>C) x[3]-x[3]
+<br>D) xxxx-xxxx
 
-## Question 13
-What should the Exposed Suffix be set to so that exactly the last four digits (e.g. `0173`) remain visible? 
-<br>A) 0 
-<br>B) 1 
-<br>C) 3 
-<br>D) 5 
+## Question 13  
+What should `suffix` be set to so that exactly the last four digits (e.g. `0173`) remain visible?
+<br>A) 0
+<br>B) 1
+<br>C) 3
+<br>D) 4
 
 ## Question 14
 You have an Azure SQL database that contains a table named Employees with a column Salary. You need to encrypt the Salary column so that even database administrators cannot read it, using the most secure encryption available. 
@@ -334,19 +335,19 @@ Which tool should you use?
 <br>D) Query Performance Insight 
 
 ## Question 36
-Your SQL Server instance runs in an Azure virtual machine and hosts a database named DB1. A report application issues a parameterized query against DB1, and you need to view the parameter values from the last execution of that query.
+Your SQL Server instance runs in an Azure virtual machine and hosts a database named D1. A report application issues a parameterized query against D1, and you need to view the parameter values from the last execution of that query.
 
 Which two actions should you perform? 
 <br>A) Enable Last_Query_Plan_Stats in the master database 
-<br>B) Enable Lightweight_Query_Profiling in DB1 
-<br>C) Enable Last_Query_Plan_Stats in DB1 
+<br>B) Enable Lightweight_Query_Profiling in D1 
+<br>C) Enable Last_Query_Plan_Stats in D1 
 <br>D) Enable Lightweight_Query_Profiling in the master database 
-<br>E) Enable PARAMETER_SNIFFING in DB1 
+<br>E) Enable PARAMETER_SNIFFING in D1 
 
 ## Question 37
-Which `ALTER DATABASE` statement should you run to enable Query Store in read-write mode for DB1?
+Which `ALTER DATABASE` statement should you run to enable Query Store in read-write mode for D1?
 ```
-ALTER DATABASE [DB1] SET QUERY_STORE = ____________________;
+ALTER DATABASE [D1] SET QUERY_STORE = ____________________;
 ```
 <br>A) OFF 
 <br>B) ON (OPERATION_MODE = READ_ONLY) 
@@ -356,7 +357,7 @@ ALTER DATABASE [DB1] SET QUERY_STORE = ____________________;
 ## Question 38
 Which ALTER DATABASE statement should you run to configure automatic tuning so that any plan regressions revert to the last known good plan?
 ```
-ALTER DATABASE [DB1] SET AUTOMATIC_TUNING (____________________);
+ALTER DATABASE [D1] SET AUTOMATIC_TUNING (____________________);
 ```
 <br>A) FORCE_LAST_GOOD_PLAN = OFF 
 <br>B) FORCE_LAST_GOOD_PLAN = ON 
@@ -465,29 +466,29 @@ You run a scheduled SQL Server Agent job on a cloud-hosted instance and need an 
 <br>D) Create an Azure Monitor action group with email/SMS/Push/Voice notifications
 
 ## Question 49
-You have two Azure SQL Database servers named S1 and S2, each hosting a database named DB1. You need to replace the existing DB1 on S2 with a backup of DB1 from S1. In the Azure portal, you delete DB1 from S2, then create a new database on S2 by restoring the backup from S1. Does this solution achieve the goal? 
+You have two Azure SQL Database servers named S1 and S2, each hosting a database named D1. You need to replace the existing D1 on S2 with a backup of D1 from S1. In the Azure portal, you delete D1 from S2, then create a new database on S2 by restoring the backup from S1. Does this solution achieve the goal? 
 <br>A) Yes 
 <br>B) No 
 
 ## Question 50
 ### Question 50a
-You have two Azure SQL Database servers named S1 and S2. Each server contains a database named DB1. You need to overwrite DB1 on S2 with the version from S1. You run the PowerShell cmdlets `Remove-AzSqlDatabase -ResourceGroupName RG -ServerName S2 -DatabaseName DB1` followed by `Restore-AzSqlDatabase -ResourceGroupName RG -ServerName S2 -FromServerInstance S1 -DatabaseName DB1`.
+You have two Azure SQL Database servers named S1 and S2. Each server contains a database named D1. You need to overwrite D1 on S2 with the version from S1. You run the PowerShell cmdlets `Remove-AzSqlDatabase -ResourceGroupName RG -ServerName S2 -DatabaseName D1` followed by `Restore-AzSqlDatabase -ResourceGroupName RG -ServerName S2 -FromServerInstance S1 -DatabaseName D1`.
 
 Does this sequence achieve the replacement? 
 <br>A) Yes 
 <br>B) No 
 
 ### Question 50b
-You manage Azure SQL Database servers S1 and S2, each with a DB1. You attempt to overwrite DB1 on S2 by executing a Transact-SQL `RESTORE DATABASE DB1 FROM URL = 'https://<storage>.blob.core.windows.net/<bacpac>.bacpac' WITH REPLACE`.
+You manage Azure SQL Database servers S1 and S2, each with a D1. You attempt to overwrite D1 on S2 by executing a Transact-SQL `RESTORE DATABASE D1 FROM URL = 'https://<storage>.blob.core.windows.net/<bacpac>.bacpac' WITH REPLACE`.
 
 Will this T-SQL RESTORE command successfully replace the existing database on S2? 
 <br>A) Yes 
 <br>B) No 
 
 ### Question 50c
-You have Azure SQL servers S1 and S2, both hosting DB1. To refresh DB1 on S2, you rename the existing DB1 on S2 to Database2, then restore DB1 from S1 into S2 via the Azure portal, and finally delete Database2.
+You have Azure SQL servers S1 and S2, both hosting D1. To refresh D1 on S2, you rename the existing D1 on S2 to Database2, then restore D1 from S1 into S2 via the Azure portal, and finally delete Database2.
 
-Does this process result in DB1 on S2 matching the backup from S1? 
+Does this process result in D1 on S2 matching the backup from S1? 
 <br>A) Yes 
 <br>B) No 
 
@@ -602,22 +603,22 @@ Which service should you recommend?
 You manage a cloud-hosted SQL database and need to grant a user permission to view database-level properties (such as compatibility level and scoped configurations) in SQL Server Management Studio without giving them broad data access.
 
 Which permission should you grant? 
-<br>A) GRANT SELECT ON DATABASE::DB1 TO [User] 
+<br>A) GRANT SELECT ON DATABASE::D1 TO [User] 
 <br>B) GRANT SHOWPLAN TO [User] 
 <br>C) GRANT VIEW DEFINITION TO [User] 
 <br>D) GRANT VIEW DATABASE STATE TO [User]
 
 ## Question 63
-Your SQL Server database DB1 has detected a CHECKSUM error and you plan to run a repair. Before executing the repair, you must force the database into single-user mode, immediately rolling back other connections.
+Your SQL Server database D1 has detected a CHECKSUM error and you plan to run a repair. Before executing the repair, you must force the database into single-user mode, immediately rolling back other connections.
 
-Which `ALTER DATABASE [DB1] SET ___ WITH ROLLBACK IMMEDIATE;` statement should you run? 
+Which `ALTER DATABASE [D1] SET ___ WITH ROLLBACK IMMEDIATE;` statement should you run? 
 <br>A) OFFLINE 
 <br>B) ONLINE 
 <br>C) SINGLE_USER 
 <br>D) TRUSTWORTHY 
 
 ## Question 64
-To repair the checksum corruption in DB1, you will execute `DBCC CHECKDB ('DB1', ___) WITH NO_INFOMSGS;`: 
+To repair the checksum corruption in D1, you will execute `DBCC CHECKDB ('D1', ___) WITH NO_INFOMSGS;`: 
 
 Which repair option allows the corruption to be fixed even if it results in data loss? 
 <br>A) PHYSICAL_ONLY 
@@ -626,9 +627,9 @@ Which repair option allows the corruption to be fixed even if it results in data
 <br>D) REPAIR_ALLOW_DATA_LOSS 
 
 ## Question 65
-After completing the DBCC repair, you need to allow all users to reconnect to DB1.
+After completing the DBCC repair, you need to allow all users to reconnect to D1.
 
-Which `ALTER DATABASE [DB1] SET ___;` statement should you run? 
+Which `ALTER DATABASE [D1] SET ___;` statement should you run? 
 
 <br>A) `MULTI_USER`
 <br>B) `ONLINE`
@@ -694,7 +695,7 @@ Which deployment option lets you group 30 single databases to share compute reso
 <br>C) An Azure SQL Database elastic pool
 
 ## Question 74
-You need to enable Azure Active Directory authentication for a contained user in a database named DB1.
+You need to enable Azure Active Directory authentication for a contained user in a database named D1.
 
 Which T-SQL statement should you run? 
 <br>A) CREATE USER [User] FROM EXTERNAL PROVIDER 
@@ -731,7 +732,7 @@ A different Azure Entra group is granted the Contributor role at the logical ser
 <br>B) No 
 
 ## Question 77
-You configure a diagnostic setting for an Azure SQL Database named DB1 and must collect performance metrics at all available scopes.
+You configure a diagnostic setting for an Azure SQL Database named D1 and must collect performance metrics at all available scopes.
 
 Which Collect metrics from option should you select? 
 <br>A) The database only 
@@ -740,7 +741,7 @@ Which Collect metrics from option should you select?
 <br>D) The server, the elastic pool, and the database 
 
 ## Question 78
-You need to stream the collected metrics from DB1 into a real-time event ingestion pipeline.
+You need to stream the collected metrics from D1 into a real-time event ingestion pipeline.
 
 Which Stream metrics to destination should you choose? 
 <br>A) Azure Storage 
