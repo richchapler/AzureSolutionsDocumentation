@@ -7,9 +7,9 @@
 
 ## Fundamentals
 
-### [Category Name]
+### [Category]
 
-#### [Subsection Title]
+#### [Sub-Category]
 
 Describe the purpose and key concepts of this subsection
 
@@ -22,9 +22,9 @@ Describe the purpose and key concepts of this subsection
 SELECT ...;
 ```
 
-### [Next Category Name]
+### [Next Category]
 
-#### [Subsection Title]
+#### [Sub-Category]
 
 Describe the purpose and key concepts of this subsection
 

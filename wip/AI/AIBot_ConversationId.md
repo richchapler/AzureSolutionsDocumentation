@@ -1,5 +1,7 @@
 # AI Bot: Conversation Identifier
 
+> NOTE: SUPPORT ENGINEER SAYS BOT SERVICE >> LOGIC APP IS NOT A SUPPORTED SCENARIO!!!
+
 ## Use Case
 
 Solution team wants to be able to **track every technological interaction** arising from a bot prompt (for cost allocation, etc.)

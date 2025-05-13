@@ -1193,10 +1193,10 @@ Automatic Tuning in Azure SQL can offload routine index and plan corrections, le
  D) Restart Database 
 
 5. The **Inheritance From** setting in Automatic Tuning allows you to: 
- A) Inherit settings from a database master key 
- B) Inherit server‑level tuning defaults or override them at the database level 
- C) Inherit data from a primary database 
- D) Inherit firewall rules 
+<br>A) Inherit settings from a database master key 
+<br>B) Inherit server‑level tuning defaults or override them at the database level 
+<br>C) Inherit data from a primary database 
+<br>D) Inherit firewall rules 
 
 #### Answers
 
