@@ -645,6 +645,8 @@ Choose a tongue twister, record, and see how you score.
 
 <img src="..\images\AI_Speech\SpeechStudio_PronunciationAssessment_Gaming.png" width="800" title="Snipped May, 2025" />
 
+##### Interface Elements
+
 * **Header banner**: `Tongue twister`
 * **Generate new twister**: button
 * **Twister text**: displayed sentence with audio-play icon
@@ -665,7 +667,51 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Speech Translation
+
+<!-- ------------------------- -->
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
+
+Click **Speech to text** >> **Speech Translation**.
+
+<img src="..\images\AI_Speech\SpeechStudio_SpeechTranslation.png" width="800" title="Snipped May, 2025" />
+
+Record a phrase and review translation (both text and audio).
+
+##### Interface Elements
+
+* **Usage acknowledgement**: checkbox (checked)
+  “I acknowledge that this application uses the resource prefixss and will incur usage of my account.” Includes a “Choose a different resource” link.
+
+* **Choose a spoken language**: `English (United States)`
+  Dropdown to select the input audio language for translation.
+
+* **Choose a target language**: `Filipino`
+  Dropdown to select the output translation language.
+
+* **Speak out translation**: toggle (On) with **Voice name**: `Blessica (fil-PH-BlessicaNeural)`
+  When enabled, plays back the translated audio using the selected neural voice.
+
+* **Choose audio files** pane:
+  * **Drag and drop area** or **Browse files…** link
+  * **Record audio with a microphone** button
+    Uploads or captures source audio for translation.
+
+* **Audio files list**: each entry shows a file name (e.g. `20250404_131638.wav`), a success checkmark, a retry icon, and a delete icon.
+
+* **Test results** pane:
+  * Metadata header: **File name**, **Target language**, **Language**, **Voice name**
+  * **Playback control**: play button, progress slider, elapsed time, download link
+  * **Result tabs**: `Translated text` / `Original text` / `JSON`
+  * **Translated text area**: displays the translated transcript
+  * **Play translation** button, download icon, and copy-to-clipboard icon beneath the transcript.
+
+<!-- ------------------------- -->
+
 #### Pro Code
 
 LOREM IPSUM
@@ -676,7 +722,21 @@ LOREM IPSUM
 ## Exercise 4: Text to Speech
 
 ### Voice Gallery
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech.png" width="800" title="Snipped May, 2025" />
+
+Click **Speech to text** >> **Voice Gallery**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_VoiceGallery.png" width="800" title="Snipped May, 2025" />
+
+Lorem Ipsum
+
+
+
 #### Pro Code
 
 LOREM IPSUM
