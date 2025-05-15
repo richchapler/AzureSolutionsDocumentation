@@ -733,9 +733,57 @@ Click **Speech to text** >> **Voice Gallery**.
 
 <img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_VoiceGallery.png" width="800" title="Snipped May, 2025" />
 
-Lorem Ipsum
+Browse available voices.
 
+##### Interface Elements
 
+* **Voice catalog**
+
+  * **Search box**: placeholder `Search`
+    Filters the gallery by voice name or keyword.
+
+  * **Language dropdown**: `English (United States)`
+    Selects which locale’s voices to display.
+
+  * **Sort by dropdown**: `Recommendation`
+    Ordering options (e.g. Recommendation, Alphabetical).
+
+  * **Show only pinned**: checkbox
+    Toggles display of your pinned favorites.
+
+  * **Voice count**: `97 voices`
+    Shows the number of matching voices.
+
+  * **Filter** (collapsible):
+    * **Gender**: `Female`, `Male`, `Neutral`
+    * **Age group**: `Child`, `Young Adult`, `Adult`, `Senior`
+    * **Capability**: `Context-aware`, `Multi-lingual`, `Multi-style`
+    * **Voice type**: `Neural`, `Neural HD`
+    * **Recommendation**: `Featured`, `Popular`
+    * **Speaking style**: tags like `Affectionate`, `Cheerful`, `Conversation`, etc., with a `More` link
+    * **Personality**: tags like `Animated`, `Approachable`, `Confident`, etc., with a `More` link
+    * **Tailored scenario**: tags like `Audiobook`, `Gaming`, `Podcast`, etc., with a `More` link
+    * **Source**: e.g. `OpenAI`, `Microsoft`
+
+  * **Voice cards grid**:
+    Each card displays a voice entry with:
+    * **Voice name** (e.g. `AriaNeural`)
+    * **Locale label** (e.g. `English (United States)`)
+    * **Play sample** button (▶️)
+    * **Pin** icon to favorite a voice
+
+* **Examples by use case**
+
+  Clickable cards for each scenario, for example:
+
+  * **English – Audiobook** (Emotional argument with angry, shouting, and sad styles)
+  * **English – Narrator** (Broadcaster introducing a book with a child’s space travel dreams)
+  * **English – News** (Weatherman recap in a newscast style)
+  * **English – Voice assistant** (Cheerful assistant helping set up a dinner reservation)
+  * **Chinese – Audiobook** (Multiple roles with varied emotions)
+  * **Chinese – Narrator** (Podcasters commenting on a news article)
+  * **Chinese – News** (Casual news reporting voice)
+  * **Chinese – Voice assistant** (Call center assistant answering delivery questions)
 
 #### Pro Code
 
