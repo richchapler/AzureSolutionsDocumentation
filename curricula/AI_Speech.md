@@ -286,6 +286,8 @@ On the **Try it out** tab, chat with your language teacher, then click **Assess 
 - **Feedback Button**: `Get feedback on how to improve`
   <br>Provides targeted suggestions and guidance to improve both pronunciation and content scores
 
+<!-- ------------------------- -->
+
 #### Pro Code
 
 LOREM IPSUM
@@ -305,6 +307,8 @@ Click **Video Translation**.
 <img src="..\images\AI_Speech\SpeechStudio_VideoTranslation.png" width="800" title="Snipped May, 2025" />
 
 Click **+ Create a project**
+
+<!-- ------------------------- -->
 
 ###### New Project
 
@@ -365,11 +369,11 @@ Click **Speech to text** >> **Real-time speech to text**.
 
 <img src="..\images\AI_Speech\SpeechStudio_RealTimeSpeechToText.png" width="800" title="Snipped May, 2025" />
 
-##### Try it out
-
 On the **Try it out** tab, click the microphone, speak, and review the produced text.
 
-Review interface elements:
+<!-- ------------------------- -->
+
+##### Interface Elements
 
 * **Resource acknowledgement checkbox**: `I acknowledge that this application uses the resource {prefix}ss and will incur usage of my account` <br>Confirms you understand the billing implications for the selected Azure resource.
 
@@ -407,6 +411,8 @@ Review interface elements:
 
 * **Download transcript icon**: download arrow <br>Lets you save the transcript or JSON results locally.
 
+<!-- ------------------------- -->
+
 #### Pro Code
 
 LOREM IPSUM
@@ -416,6 +422,8 @@ LOREM IPSUM
 ### Whisper Model in Azure OpenAI Service
 
 > [Whisper](https://openai.com/index/whisper/) is OpenAI’s speech recognition solution. It is available in a limited number of Azure regions {e.g., East US 2}.
+
+<!-- ------------------------- -->
 
 #### Low Code
 
@@ -427,12 +435,11 @@ Click **Speech to text** >> **Whisper Model in Azure OpenAI Service**.
 
 <img src="..\images\AI_Speech\SpeechStudio_WhisperModel.png" width="800" title="Snipped May, 2025" />
 
-
-##### Try it out
-
 On the **Try it out** tab, upload an audio file and review the produced text.
 
-Review interface elements:
+<!-- ------------------------- -->
+
+##### Interface Elements
 
 * **Resource dropdown**: `{prefix}oai (OpenAI, East US 2, S0)` <br>Select which Azure OpenAI resource to drive the demo.
 
@@ -452,6 +459,8 @@ Review interface elements:
 
 * **Prompt text area**: placeholder “An optional text to guide the model’s style or continue a previous audio segment. The prompt should be in English.” <br>Supply context or domain cues to steer transcription style.
 
+<!-- ------------------------- -->
+
 #### Pro Code
 
 LOREM IPSUM
@@ -459,22 +468,196 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Batch Speech to Text
+
+<!-- ------------------------- -->
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
+
+Click **Speech to text** >> **Batch speech to text**.
+
+<img src="..\images\AI_Speech\SpeechStudio_BatchSpeechToText.png" width="800" title="Snipped May, 2025" />
+
+On the **Try it out** tab, upload an audio file and review the produced transcription.
+
+<!-- ------------------------- -->
+
+##### Interface Elements
+
+* **Language of audio dropdown**: `Spanish (Mexico)`
+  Selects the input language for transcription.
+
+* **Model dropdown**: `20241203`
+  Chooses which speech model version to use.
+
+* **Model to compare (optional) dropdown**: `None`
+  Optionally select a second model for side-by-side accuracy comparison.
+
+* **"Show advanced options" link**
+  Toggles display of further configuration settings.
+
+  * **Language identification**: `Off`
+    When enabled, automatically detects multiple languages spoken in the audio; reveals a language-selection dropdown.
+
+  * **Speaker diarization**: `No`
+    Toggles whether the service separates and labels distinct speakers in the transcript.
+
+  * **Maximum number of speakers**: `2`
+    When speaker diarization is on, limits how many unique speakers to identify.
+
+  * **Profanity filter mode**: `Masked`
+    Controls handling of profane words (options include Masked, Removed, Raw).
+
+  * **Punctuation mode**: `DictatedAndAutomatic`
+    Determines whether to insert punctuation automatically in addition to honoring any dictated punctuation.
+
+  * **Display form word-level timestamps**: `Yes`
+    Includes start times and durations for each word in the output transcript.
+
+  * **Lexical form word-level timestamps**: `No`
+    Includes timing metadata for the lexical (normalized) form of each word.
+
+* **Use with your resource checkbox**: checked
+  Acknowledges that the selected Azure Speech resource (`prefixss (Speech Services, West US 2, S0)`) will incur billing; includes “Choose a different resource” link.
+
+* **Upload audio files pane**
+  Container for file inputs with two tabs:
+
+  * **Local file tab** (active)
+    Shows a drag-and-drop area plus “Browse files…” link.
+
+  * **Web URLs tab**
+    Allows you to paste one or more SAS-secured URLs.
+
+* **Drag-and-drop area**
+  “Drag and drop files Or Browse files…” for local upload (`.mp3`, `.wav`, etc.).
+
+* **Batch jobs list**
+  Displays existing job IDs as links (e.g. `20250515_120228`), each with:
+
+  * **Radio button** to select the job
+  * **Retry icon** (circular arrow)
+  * **Delete icon** (trash can)
+
+* **Clear all link**
+  Empties the batch jobs list.
+
+* **Job details pane**
+  When a job is selected, shows its status (e.g. “Transcribing …”) and the files included (e.g. `TryOutOriginal.mp4`).
+
+<!-- ------------------------- -->
+
 #### Pro Code
 
-LOREM IPSUM
 ------------------------- -------------------------
 
 ### Custom Speech
-#### Low Code
-#### Pro Code
 
-LOREM IPSUM
+With custom speech, you can evaluate and improve the accuracy of speech recognition for your applications and products.
+
+[What is custom speech?](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/custom-speech-overview)
+
+<!-- ------------------------- -->
+
+#### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
+
+Click **Speech to text** >> **Custom speech**.
+
+<img src="..\images\AI_Speech\SpeechStudio_CustomSpeech.png" width="800" title="Snipped May, 2025" />
+
+Review the documentation, linked content, and video.
+
+<!-- ------------------------- -->
+
+#### Pro Code
 
 ------------------------- -------------------------
 
 ### Pronunciation Assessment with Speech to Text
+
+<!-- ------------------------- -->
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
+
+<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
+
+Click **Speech to text** >> **Pronunciation Assessment with speech to text**.
+
+<img src="..\images\AI_Speech\SpeechStudio_PronunciationAssessment.png" width="800" title="Snipped May, 2025" />
+
+<!-- ------------------------- -->
+
+##### Reading
+
+Try the different samples and see how you score.
+
+<img src="..\images\AI_Speech\SpeechStudio_PronunciationAssessment_Reading.png" width="800" title="Snipped May, 2025" />
+
+##### Interface Elements
+
+* **Language dropdown**: `Choose a Pronunciation Assessment language`
+* **Show advanced options**: link
+  * **Enhanced add-on settings**: `Prosody assessment`
+    Enables the optional prosody module to score rhythm, stress and intonation in your reading.
+* **Sample text tabs**:
+
+  * `Sample 1`, `Sample 2`, `Sample 3`, `Sample 4`, `Enter your own`
+* **Script panel**: scrollable area showing the selected passage.
+* **Audio input pane** (two columns):
+
+  * **Record**: microphone button labeled “Record audio with a microphone”
+  * **Upload**: drag-and-drop area plus `Browse for a file`
+
+<!-- ------------------------- -->
+
+#### Speaking
+
+Choose a sample topic, record, and see how you score.
+
+<img src="..\images\AI_Speech\SpeechStudio_PronunciationAssessment_Speaking.png" width="800" title="Snipped May, 2025" />
+
+##### Interface Elements
+
+* **Language to assess**: `English (United States)`
+* **Sample topics**: 'Talk about your day today' + `Enter your own topic` link
+* **Show advanced options**: link
+  * **Enhanced add-on settings**: `Prosody assessment`, `Content assessment`
+
+* **Prompt banner**: title and instruction text
+* **Recording card**:
+  * Microphone button with “Press the mic to start talking”
+  * Recommended guidelines below (minimum seconds, words, sentences)
+
+<!-- ------------------------- -->
+
+#### Gaming
+
+Choose a tongue twister, record, and see how you score.
+
+<img src="..\images\AI_Speech\SpeechStudio_PronunciationAssessment_Gaming.png" width="800" title="Snipped May, 2025" />
+
+* **Header banner**: `Tongue twister`
+* **Generate new twister**: button
+* **Twister text**: displayed sentence with audio-play icon
+* **Recording button**: central microphone icon
+* **Playback scrub bar**: play control, timeline slider, elapsed time
+* **Assessment metrics**: labeled counters for
+  * Omissions
+  * Mispronunciations
+  * Insertions
+  * Unexpected break
+  * Missing break
+  * Monotone
+
 #### Pro Code
 
 LOREM IPSUM
