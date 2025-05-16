@@ -30,11 +30,7 @@ Azure AI Speech is a cloud-based service from Microsoft that leverages advanced 
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
-
-Click **Captioning with speech to text**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech capabilities by scenario** >> **Captioning with speech to text**.
 
 <img src="..\images\AI_Speech\SpeechStudio_Captioning_TryItOut.png" width="800" title="Snipped April, 2025" />
 
@@ -131,11 +127,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
-
-Click **Post Call Transcription and Analytics**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech capabilities by scenario** >> **Post Call Transcription and Analytics**.
 
 <img src="..\images\AI_Speech\SpeechStudio_Transcription_TryItOut.png" width="800" title="Snipped April, 2025" />
 
@@ -167,11 +159,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
-
-Click **Live Chat Avatar**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech capabilities by scenario** >>  **Live Chat Avatar**.
 
 <img src="..\images\AI_Speech\SpeechStudio_Avatar.png" width="800" title="Snipped May, 2025" />
 
@@ -255,11 +243,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
-
-Click **Language Learning**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech capabilities by scenario** >>  **Language Learning**.
 
 <img src="..\images\AI_Speech\SpeechStudio_Language.png" width="800" title="Snipped May, 2025" />
 
@@ -298,11 +282,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechCapabilities.png" width="800" title="Snipped May, 2025" />
-
-Click **Video Translation**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech capabilities by scenario** >> **Video Translation**.
 
 <img src="..\images\AI_Speech\SpeechStudio_VideoTranslation.png" width="800" title="Snipped May, 2025" />
 
@@ -361,11 +341,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
-
-Click **Speech to text** >> **Real-time speech to text**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech to text** >> **Real-time speech to text**.
 
 <img src="..\images\AI_Speech\SpeechStudio_RealTimeSpeechToText.png" width="800" title="Snipped May, 2025" />
 
@@ -427,11 +403,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
-
-Click **Speech to text** >> **Whisper Model in Azure OpenAI Service**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech to text** >> **Whisper Model in Azure OpenAI Service**.
 
 <img src="..\images\AI_Speech\SpeechStudio_WhisperModel.png" width="800" title="Snipped May, 2025" />
 
@@ -473,11 +445,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
-
-Click **Speech to text** >> **Batch speech to text**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech to text** >> **Batch speech to text**.
 
 <img src="..\images\AI_Speech\SpeechStudio_BatchSpeechToText.png" width="800" title="Snipped May, 2025" />
 
@@ -564,11 +532,7 @@ With custom speech, you can evaluate and improve the accuracy of speech recognit
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
-
-Click **Speech to text** >> **Custom speech**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech to text** >> **Custom speech**.
 
 <img src="..\images\AI_Speech\SpeechStudio_CustomSpeech.png" width="800" title="Snipped May, 2025" />
 
@@ -672,11 +636,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_SpeechToText.png" width="800" title="Snipped May, 2025" />
-
-Click **Speech to text** >> **Speech Translation**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Speech to text** >> **Speech Translation**.
 
 <img src="..\images\AI_Speech\SpeechStudio_SpeechTranslation.png" width="800" title="Snipped May, 2025" />
 
@@ -725,11 +685,7 @@ LOREM IPSUM
 
 #### Low Code
 
-Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal), and log in with your Azure credentials.
-
-<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech.png" width="800" title="Snipped May, 2025" />
-
-Click **Speech to text** >> **Voice Gallery**.
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Text to speech** >> **Voice Gallery**.
 
 <img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_VoiceGallery.png" width="800" title="Snipped May, 2025" />
 
@@ -792,7 +748,64 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Custom Voice
+*aka "Custom Neural Voice"*
+
+Custom Voice is not available by default; you must complete a form to register for limited access.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_RequestAccess.png" width="800" title="Snipped May, 2025" />
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Text to speech** >> **Custom Voice**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice.png" width="800" title="Snipped May, 2025" />
+
+Click **+ Create a project**
+
+<!-- ------------------------- -->
+
+###### New Project
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_NewProject_ProjectType.png" width="800" title="Snipped May, 2025" />
+
+Select **Custom Neural Voice Lite** then click **Next**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_NewProject_Form.png" width="800" title="Snipped May, 2025" />
+
+Complete the form and click **Create**. On the resulting **Select the project you want to work with** screen, click into the new project.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_RecordAndBuild.png" width="800" title="Snipped May, 2025" />
+
+Click **Get started** and complete the **Voice talent terms of use** popup form.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_NoiseCheck.png" width="800" title="Snipped May, 2025" />
+
+Click the microphone button, wait for assessment, then click **Done**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_RecordingTips.png" width="800" title="Snipped May, 2025" />
+
+Review **Recording tips**, then click **Got it**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_Samples.png" width="800" title="Snipped May, 2025" />
+
+Iteratively run through recording of samples, then click **Train model**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_TrainModel.png" width="800" title="Snipped May, 2025" />
+
+Complete the **Train model** form, then click **Create**. Allow time for processing:
+
+- **Professional Custom Neural Voice**: Training duration varies with data volume but averages **20–40 compute hours** per model ([Microsoft Learn][1])
+- **Custom Neural Voice Lite**: Designed for demos and evaluations, takes **less than one compute hour** to train ([Microsoft Learn][2])
+
+[1]: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/professional-voice-train-voice?utm_source=chatgpt.com "Train your professional voice model - Speech service - Azure AI ..."
+[2]: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/custom-neural-voice-lite?utm_source=chatgpt.com "Custom neural voice lite - Azure AI services - Learn Microsoft"
+
+When processing is complete, click into the project to review **Sample output**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_CustomVoice_SampleOutput.png" width="800" title="Snipped May, 2025" />
+
+<!-- ------------------------- -->
+
 #### Pro Code
 
 LOREM IPSUM
@@ -800,7 +813,44 @@ LOREM IPSUM
 ------------------------- -------------------------
 
 ### Personal Voice
+
 #### Low Code
+
+Navigate to [Azure AI Speech Studio](https://speech.microsoft.com/portal) >> **Text to speech** >> **Personal Voice**.
+
+<img src="..\images\AI_Speech\SpeechStudio_TextToSpeech_PersonalVoice.png" width="800" title="Snipped May, 2025" />
+
+Try sample voices and / or record your own.
+
+<!-- ------------------------- -->
+
+##### Interface Elements
+
+* **Personalization scenarios**: icon list with titles and descriptions
+
+  * **Voice assistant**: “Create a more personalized voice assistant experience…”
+  * **Gaming**: “Enable an immersive experience for gamers…”
+  * **Language dubbing**: “Expand your global reach and dub your content…”
+  * **Entertainment media**: “Create easy-to-use personal voices for stories, audiobooks…”
+  * **Accessibility**: “Enable people to build their own voice and use it for natural communications.”
+  * **Speech translation**: “Allow your meeting participants to be heard in various languages with their true voice.”
+
+* **“Try the samples” section**:
+
+  * **Tab selector**: `Scenario-specific` / `Emotional` / `Multi-lingual`
+  * **Sample cards**: for each scenario (e.g. Voice assistant, Broadcast, Conversation, Story) showing an illustration and two buttons:
+
+    * **Prompt**: ▶️ plays the original human prompt
+    * **Generated**: ▶️ plays the AI-replicated voice
+
+* **“Try your own voice” section**:
+
+  * Instruction text: “Record your voice and create an AI replica in seconds…” with a **this link** to apply for business access
+  * **Voice list** pane with a `+ New voice` button (your created voices will appear here)
+  * **Detail** pane showing an illustration and a `+ New voice` button when no voices exist
+
+<!-- ------------------------- -->
+
 #### Pro Code
 
 LOREM IPSUM
